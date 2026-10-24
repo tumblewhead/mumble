@@ -1,0 +1,62 @@
+{
+  "schema": "mumble_b002_mpmath_diagnostic_provenance_v1",
+  "source": {
+    "original_scratch_name": "mp_remainder_spotcheck.py",
+    "canonical_path": "tools/remainder_mpmath_spotcheck.py",
+    "sha256": "da374081d7fdc4d21f3461fae6771a8c031dc5aab967badbee3623953a91da2f",
+    "byte_identical": true,
+    "original_script_copy": "experiments/bounded_event_002/independent_precision/mp_remainder_spotcheck.py",
+    "portable_entrypoint_is_byte_identical": true
+  },
+  "artifact_copies": [
+    {
+      "original_scratch_name": "mp_remainder_worst_50.json",
+      "canonical_path": "experiments/bounded_event_002/independent_precision/mp_remainder_worst_50.json",
+      "sha256": "6b839259d0bc2352d8c797716c47cd99d1b129f2de0d1c9d36fe3e78f475258d",
+      "byte_identical": true
+    },
+    {
+      "original_scratch_name": "mp_remainder_worst_80.json",
+      "canonical_path": "experiments/bounded_event_002/independent_precision/mp_remainder_worst_80.json",
+      "sha256": "f0ad532f854af001d8a626155f8e06398b3e2624638e997ca5393da44f655d08",
+      "byte_identical": true
+    },
+    {
+      "original_scratch_name": "mp_remainder_conditional_50.json",
+      "canonical_path": "experiments/bounded_event_002/independent_precision/mp_remainder_conditional_50.json",
+      "sha256": "ffb0ae12e87105be80ef0d0151997a379243a5edf973de14ab5ff3c7c78991f4",
+      "byte_identical": true
+    },
+    {
+      "original_scratch_name": "mp_remainder_diagnostic_summary.json",
+      "canonical_path": "experiments/bounded_event_002/independent_precision/mp_remainder_diagnostic_summary.json",
+      "sha256": "6677477e51f62787f0548bf7f16c9f97bca4fc6967d70959b59e81fbc0acff08",
+      "byte_identical": true
+    }
+  ],
+  "mpmath": {
+    "version": "1.4.1",
+    "all_python_source_files_count": 93,
+    "aggregate_source_sha256": "340e0229377c4679c574bc1a2b9a1dd37a70729e79dd02b17d6734920fbdfe06",
+    "digest_method": "sha256(JSON compact array of sorted package-relative Python paths and each file SHA256)); __pycache__ excluded"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "original_core_receipt": "experiments/bounded_event_002/receipt/receipt.json",
+  "original_audit_preserved": true,
+  "original_failures_reclassified": false,
+  "reproduction": {
+    "dependency": "python3 -m pip install mpmath==1.4.1",
+    "prepare_new_output": "mkdir -p experiments/bounded_event_002/NEW_PRECISION",
+    "runs": [
+      "python3 tools/remainder_mpmath_spotcheck.py --repo . --output experiments/bounded_event_002/NEW_PRECISION/worst_50.json --run carry_1800_to_2100 --checkpoint split --candidate full_joint_step_over_128 --dps 50",
+      "python3 tools/remainder_mpmath_spotcheck.py --repo . --output experiments/bounded_event_002/NEW_PRECISION/worst_80.json --run carry_1800_to_2100 --checkpoint split --candidate full_joint_step_over_128 --dps 80",
+      "python3 tools/remainder_mpmath_spotcheck.py --repo . --output experiments/bounded_event_002/NEW_PRECISION/conditional_50.json --run carry_1800_to_2100 --checkpoint final --candidate conditional_SOC_Q_step --dps 50"
+    ],
+    "semantics": "Each run refuses an existing output; original B002 receipt files are read only. --repo accepts the checkout root and makes the copied diagnostic source portable."
+  },
+  "limits": [
+    "Fixed candidate replay only; no inference or optimizer reruns.",
+    "Converged arbitrary precision is diagnostic evidence, not outward-rounded certification.",
+    "The original binary64 audit remains654/672 with18 failed gates."
+  ]
+}

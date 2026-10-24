@@ -1,0 +1,128 @@
+{
+  "schema": "mumble_continuation_v2",
+  "task": "Continue bounded battery-estimator evidence research from current repository state",
+  "authority": {
+    "repository": "https://github.com/tumblewhead/mumble",
+    "work_branch": "experiment/bounded-event-001",
+    "main_reference_checkpoint": "0fd443b126579c625aea8c3772ddc28668aa242b",
+    "corrected_experiment_source": "82cfc121bd69f8615c62d66d68f6f9dcd07def88",
+    "commit_semantics": "Historical provenance; fetch current refs and preserve newer/dirty work; never reset to checkpoint",
+    "read_first": [
+      "AGENTS.md",
+      "README.md",
+      "PROJECT_STATE.json",
+      "handoff/CONTINUE.json"
+    ],
+    "prior_handoff": "handoff/archive/CONTINUE_reference_35hz.json",
+    "context_policy": "Selective reads; inspect summaries before raw factors/traces",
+    "corrected_experiment_source_local": "2ee068f47b814cd5846f0030e75f6120c908812b",
+    "publication_map": "provenance/bounded_event_001_publication.json",
+    "original_commit_bundle": "provenance/bounded_event_001_development.bundle",
+    "publication_semantics": "Published source trees equal original local trees; receipts retain original sourceSHA; map and verified bundle preserve exact provenance"
+  },
+  "objective": {
+    "rule": "Estimate what stimulus supports; carry earlier evidence and uncertainty; explicitly report unresolved quantities",
+    "nominal_Hz": 35,
+    "sample_contract": "Consecutive index; actual dt/current; voltage at interval END; positive current discharges",
+    "target": "Cortex-M23, approximately10KiB eventual subsystem goal; no firmware qualification",
+    "machine_communication": "Compact JSON/YAML"
+  },
+  "current_work": {
+    "design": "Fixed-chart augmented QR of whitened joint16D Jacobian plus residual;153 doubles/factor; complete residual constant retained",
+    "implementation": [
+      "include/scm_evidence.h",
+      "src/scm_evidence.c",
+      "tests/test_evidence.c"
+    ],
+    "host_audit": [
+      "tools/evidence_probe.c",
+      "tools/run_bounded_event.py",
+      "tools/measure_bounded_memory.py"
+    ],
+    "chronology": "One original-state chart and carried model/sensitivities; history+active event; no raw history, explicit Q basis or growing event list",
+    "events": "Actual I/dt change or256 samples; event factor merged once; current state never reset",
+    "integrity": "32-byte caller source identity and exact next index; staged atomic push/seal; no posterior-plus-replayed-data duplication",
+    "guards": [
+      "per-coordinate operating radius",
+      "physical supports and abs(u0)<=H",
+      "whole-path SOC domain via charge extrema",
+      "event anchor-residual RMS flag at4sigma; no deletion or variance inflation"
+    ],
+    "no_reanchor_API": true
+  },
+  "evidence": {
+    "human_report": "docs/BOUNDED_EVENT_001.md",
+    "plan": "experiments/bounded_event_001/plan.json",
+    "corrected": "experiments/bounded_event_001/receipt_scaled_givens/receipt.json",
+    "first_failure": "experiments/bounded_event_001/receipt/receipt.json",
+    "memory": "experiments/bounded_event_001/memory_accounting.json",
+    "independent_review": "experiments/bounded_event_001/independent_review.json",
+    "original_study": "results/streaming_results.json",
+    "original_weak_tail": "results/tail_only_result.json"
+  },
+  "results": {
+    "runs": 4,
+    "checks": "72/72 unchanged gates pass after Givens repair",
+    "unexcited400s": "rank14; gamma_minus unexcited;Q/SOC unresolved",
+    "informative900s": "rank16; fixed-chart Q/SOC diagnostics match retained reference",
+    "carry1800to2100s": {
+      "bootstrap": "Retrospective1800s fitted anchor; subsequent300s tail causal",
+      "Q_difference_from_full_percent": -6.6158998723864215e-06,
+      "SOC_difference_from_full_pp": -1.803996840799016e-07,
+      "excess_exact_NLL": 1.3045864761807024e-05
+    },
+    "nominal900s": "rank16 and narrow local ranges but155.7sigma residualRMS,214eventflags and rejected step; not cold-start success",
+    "inside_radius_witness": "At2100s inside_SOC_Q guard passes yet nonlinear-affineNLL=-133.9774 with1.73953uV predictionRMS; radius is not likelihood certificate",
+    "numerical_repair": "Scaled Givens normalization prevents subnormal pivots from corrupting ordinary residual energy;3500sample regression fails oldcode/passes fix; first23/72failedgates preserved"
+  },
+  "memory_host_bytes": {
+    "persistent_bank": 3336,
+    "update_workspace": 4176,
+    "ingestion_object_subtotal": 7512,
+    "snapshot": 1240,
+    "simultaneous_bank_update_snapshot_diagnostics_vectors": 18408,
+    "retained_duplicate_config": 472,
+    "incoming_sample": 24,
+    "whole_probe_static_objects": 31485,
+    "scope": "Own-source stack paths and external costs in memory receipt; no scratch overlay credit; full diagnostic path exceeds10KiB"
+  },
+  "nonclaims": [
+    "No bounded nonlinear cold start",
+    "No historical relinearization after data deletion",
+    "No global nonlinear sufficiency/identification or calibrated coverage",
+    "No radius/residual guard nonlinear remainder guarantee",
+    "No measuredOCV,aging,temperature,sensorbias,correlatednoise,modelmismatch,EOD validation",
+    "No Cortex-M23 SRAM/cycles/stack/flash/power qualification",
+    "No SCM/NAIA/D2/D2E proof; preserve scalar-potential vs likelihood-information vs solver-curvature distinctions"
+  ],
+  "next": {
+    "milestone": "Controlled nonlinear validity and bounded chart initialization/change",
+    "first_action": "Use the retained inside-radius witness to define and bound historical likelihood error over the factor-supported region; specify what bounded evidence permits chart changes before another sweep",
+    "constraints": [
+      "Treat reference-seeded local carry as local representation evidence only",
+      "Do not relabel factor recentering as nonlinear relinearization",
+      "Keep unknown entering states/parameter directions explicit",
+      "Separate surrogate solve, nonlinear convergence, local precision, truth error and validated coverage",
+      "Preserve old factors/source ranges without replaying their observations again as independent evidence"
+    ],
+    "later": [
+      "bounded bootstrap/excitation-window or finite-chart comparison with complete memory accounting",
+      "workspace reduction",
+      "sensor/model/drift and real-cell tests",
+      "target resource qualification"
+    ]
+  },
+  "resume_commands": [
+    "git status --short --branch",
+    "git fetch origin",
+    "git switch experiment/bounded-event-001",
+    "git pull --ff-only",
+    "make build/scm_evidence_probe test-evidence evidence-stack"
+  ],
+  "reproduction": {
+    "run": "OPENBLAS_NUM_THREADS=1 python3 tools/run_bounded_event.py --output-dir experiments/bounded_event_001/NEW_RECEIPT",
+    "memory": "python3 tools/measure_bounded_memory.py --probe-result experiments/bounded_event_001/NEW_RECEIPT/carry_1800_to_2100.json --output experiments/bounded_event_001/NEW_MEMORY.json",
+    "policy": "Helpers refuse existing output; no need to repeat original60fits/profiles to resume; use workbranch and preserve all evidence"
+  },
+  "first_response": "State fetched revision and bounded-local milestone, then continue from nonlinear-validity question; do not restart original study"
+}

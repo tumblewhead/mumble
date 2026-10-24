@@ -1,7 +1,7 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "bounded_fixed_chart_event_prototype_verified",
+  "stage": "bounded_analytic_remainder_prototype_with_precision_and_region_limits",
   "objective": "Learn quantities supported by available stimulus, carry evidence forward, expose unresolved targets, then reduce to bounded-memory Cortex-M23 execution.",
   "nominal_rate_Hz": 35,
   "current_model": {
@@ -25,7 +25,16 @@
     "bounded_event_original_failure": "experiments/bounded_event_001/receipt/receipt.json",
     "bounded_event_memory": "experiments/bounded_event_001/memory_accounting.json",
     "bounded_event_review": "experiments/bounded_event_001/independent_review.json",
-    "bounded_event_report": "docs/BOUNDED_EVENT_001.md"
+    "bounded_event_report": "docs/BOUNDED_EVENT_001.md",
+    "remainder_plan": "experiments/bounded_event_002/plan.json",
+    "remainder_receipt": "experiments/bounded_event_002/receipt/receipt.json",
+    "remainder_memory": "experiments/bounded_event_002/memory_accounting.json",
+    "remainder_report": "docs/BOUNDED_EVENT_002.md",
+    "remainder_precision_plan": "experiments/bounded_event_002/precision_diagnostic_plan.json",
+    "remainder_precision_diagnostic": "experiments/bounded_event_002/precision_audit/receipt.json",
+    "independent_review": "experiments/bounded_event_002/independent_review.json",
+    "precision_mpmath": "experiments/bounded_event_002/independent_precision/mp_remainder_diagnostic_summary.json",
+    "verification": "experiments/bounded_event_002/verification.json"
   },
   "completed": {
     "main_cases": 6,
@@ -51,12 +60,16 @@
     "No aging, temperature, sensor-bias, model-mismatch or EOD validation yet.",
     "Bounded factor is exact only in one frozen affine chart; no autonomous nonlinear cold-start or historical relinearization.",
     "Radius and anchor-residual guards do not certify nonlinear likelihood error; inside-radius counterexample retained.",
-    "Full local diagnostic path exceeds10KiB on host before external runtime/stack costs."
+    "Full local diagnostic path exceeds10KiB on host before external runtime/stack costs.",
+    "Sparse nonlinear remainder envelope is a real-arithmetic result evaluated with ordinary double; no outward-rounding certificate.",
+    "B002 retains18 prediction-norm audit failures near floating precision; original654/672 status is unchanged.",
+    "All tested whole-region guarantees exceed0.1NLL; a passing conditional trial does not establish global nonlinear validity."
   ],
   "next_work": [
-    "Bound nonlinear likelihood remainder over the factor-supported region; retain inside-radius failure witness.",
-    "Specify bounded initialization and chart change while carrying entering-state uncertainty and old evidence without double counting.",
-    "Reduce and schedule qualification/solve workspace only after nonlinear validity policy is concrete.",
+    "Retain signed residual/curvature correlation and bound higher-order error to address the full-step and region failures without relaxing0.1NLL.",
+    "Handle floating-point error explicitly; preserve observed near-stationary audit failures and separate higher-precision diagnosis.",
+    "Specify bounded initialization/chart transition with a carried-state error contract and disjoint old/new observation factors.",
+    "Reduce and schedule actual workspaces after validity policy is concrete; paired ingestion plus listed project stack already exceeds10KiB.",
     "Use measured OCV and evaluate sensor errors, correlated noise, model mismatch and evidence age/drift.",
     "Measure Cortex-M23 memory, stack, cycles and numeric precision after reference equivalence."
   ],
@@ -81,5 +94,46 @@
     "MCU_qualified": false,
     "published_source_revision": "82cfc121bd69f8615c62d66d68f6f9dcd07def88",
     "publication_provenance": "provenance/bounded_event_001_publication.json"
+  },
+  "bounded_remainder": {
+    "work_branch": "experiment/bounded-event-002",
+    "base_revision": "57f3293857d674096d9ed56d7fb875f16f1806b7",
+    "source_revision": "bcaec7e1b8225eab095aa9871da95045ebb10a00",
+    "scope": "Sparse19-entry fulljoint Hessian envelope and norm/Cauchy likelihood bound on unchanged originalchart; paired ancestry; no reanchor",
+    "runs": 4,
+    "checkpoints": 5,
+    "candidates": 120,
+    "inside_domain_candidates": 81,
+    "checks_passed": 654,
+    "checks_total": 672,
+    "failed_checks": 18,
+    "failure_scope": "900s/1800s nearstationary full/scaled steps prediction-norm audit floor; allNLLgates pass",
+    "nll_budget": 0.1,
+    "tail_conditional_nll_bound": 0.004119195530653909,
+    "tail_conditional_analytic_upper_cost_improvement": 0.13142688209336484,
+    "tail_full_step_nll_bound": 4.794214232767298,
+    "tail_region_nll_bound": 17367.970890031786,
+    "tail_eligible_trials": 6,
+    "new_remainder_bank_bytes": 1200,
+    "new_remainder_workspace_bytes": 1200,
+    "new_query_result_bytes": 48,
+    "paired_ingestion_objects_bytes": 9912,
+    "paired_ingestion_sample_project_stack_bytes": 10672,
+    "simultaneous_ingestion_query_snapshot_diagnostic_vector_bytes": 20856,
+    "arithmetic_validated": false,
+    "region_budget_qualified": false,
+    "updates_applied": false,
+    "cold_start_demonstrated": false,
+    "historical_relinearization_implemented": false,
+    "coverage_validated": false,
+    "MCU_qualified": false,
+    "precision_diagnosis": {
+      "longdouble_same18": "18/18 belowunchanged1e-10allowance;norm7.50e-14..4.63e-13;original654/672unchanged",
+      "independent_MP_worst_norm": 4.639351056408212e-20,
+      "worst_recorded_E_bound": 1.6232163605680737e-19,
+      "worst_original_double_norm": 4.865010381168873e-10,
+      "MP50_vs80_relative_difference": 1.9885158192173663e-25,
+      "conclusion": "Selectedfailure isarithmeticfloor; ordinaryCboundremainsunvalidated"
+    }
   }
 }

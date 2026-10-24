@@ -1,0 +1,203 @@
+{
+  "schema": "mumble_b002_independent_review_v1",
+  "reviewer": "bounded_design_review",
+  "created_utc": "2026-10-24T20:41:08.217850+00:00",
+  "source_revision": "bcaec7e1b8225eab095aa9871da95045ebb10a00",
+  "review_scope": "Independent mathematical and implementation review; fixed-candidate precision diagnosis only. No core edits, new fits, original receipt edits or threshold changes.",
+  "verdict": "The fixed-chart analytic envelope is mathematically coherent under its stated real-arithmetic assumptions, with a useful conditional trial. Original numerical verification remains incomplete at its preregistered allowance: 654/672 pass, 18 fail. Separate higher-precision evidence diagnoses an arithmetic floor and does not turn those failures into passes.",
+  "provenance": {
+    "original_receipt": {
+      "path": "experiments/bounded_event_002/receipt/receipt.json",
+      "sha256": "3264531b78c2b10f7bdc53e47b49400a821857bec0fd73e0d28b04625b1a904d"
+    },
+    "plan": {
+      "path": "experiments/bounded_event_002/plan.json",
+      "sha256": "456ee5cd1e60604b5b8e58de2a12e32ae5905684b0d3b8aa30a09b939703ce51"
+    },
+    "diagnostic_plan": {
+      "path": "experiments/bounded_event_002/precision_diagnostic_plan.json",
+      "sha256": "96556be8c363fef625538991cc050a27550c4ffa007619d5dc34d2b1ef4f8872"
+    },
+    "reviewed_core_sha256": {
+      "include/scm_remainder.h": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494",
+      "src/scm_remainder.c": "bfc560106e67771ecda11b5f28caee2925046133e79e298c905032a1c7b03e83",
+      "tests/test_remainder.c": "994553d15bab5765e680246b0097f11621c817c7fce16e30eb113d4b8f3a5fa1",
+      "tools/remainder_probe.c": "916641c8102ea747225f491befb0d4e72a591d4403edaaa2edf5e272d5996fa0",
+      "tools/run_remainder.py": "e70cf6db5078ac86a9b51267ae84e67a26e7e25a8a4cae1b7c5ec113f76bca28"
+    },
+    "original_source_files_still_match_recorded_hashes": true,
+    "observations_sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+    "long_double_receipt": {
+      "path": "experiments/bounded_event_002/precision_audit/receipt.json",
+      "sha256": "b74da3ada56e02a88ae53688773f21c640ecd89d4943712e670e0f212a3af926",
+      "diagnostic_source_revision": "a21f95b0c4fb79f91663aed816143a710e995ef4"
+    },
+    "mpmath_summary": {
+      "path": "experiments/bounded_event_002/independent_precision/mp_remainder_diagnostic_summary.json",
+      "sha256": "6677477e51f62787f0548bf7f16c9f97bca4fc6967d70959b59e81fbc0acff08"
+    },
+    "mpmath_reproduction": "experiments/bounded_event_002/independent_precision/provenance.json",
+    "portable_mpmath_source": {
+      "path": "tools/remainder_mpmath_spotcheck.py",
+      "sha256": "da374081d7fdc4d21f3461fae6771a8c031dc5aab967badbee3623953a91da2f",
+      "identical_to_executed_source": true
+    }
+  },
+  "real_arithmetic_review": {
+    "status": "No unresolved analytic underbound identified in the inspected model and declared box.",
+    "proof": "For each row, Taylor integral remainder over the full anchor-to-candidate segment is bounded by one half of the diagonal Hessian terms plus the upper off-diagonal terms. Minkowski over rows gives E(delta); expanding the complete whitened squared residual and applying Cauchy gives abs(L_nonlin-L_aff) <= sqrt(2*L_aff)*E + 0.5*E^2.",
+    "requirements": [
+      "The original immutable 16D box contains the whole segment; each scaled Hessian envelope is valid there.",
+      "Actual ordered dt/current and entering-state recurrences are preserved from the same empty origin.",
+      "Known common iid voltage sigma and the complete affine residual constant are retained.",
+      "Real arithmetic is assumed; ordinary double and libm do not provide outward rounding."
+    ],
+    "checked": [
+      "All 19 structurally possible Hessian entries: nine RC, seven hysteresis including mixed gamma signs and gamma-amplitude pairs, and three SOC/log-capacity pairs.",
+      "RC interval state, first and second log-time derivatives; entering-state decay derivatives.",
+      "Hysteresis derivatives through alternating sign chronology, including cross-rate effects and zero-dt transport.",
+      "SOC Hessian Hzz=U_second, Hzq=U_second*(D/Q), Hqq=U_second*(D/Q)^2-U_first*(D/Q), with earlier cumulative signed charge.",
+      "Global illustrative smooth OCV bounds abs(U_first)<=1.79 and abs(U_second)<=4; measured piecewise-linear OCV explicitly unsupported.",
+      "Alpha-only and R0 curvature are zero; unexcited gamma directions retain zero curvature without implying a learned parameter."
+    ],
+    "domain": "The envelope covers the entire original rectangular chart using the smooth OCV extension. Candidate physical support and complete historical SOC path are guarded separately. Outside-chart status means unavailable, not data exclusion.",
+    "arithmetic_validated": false
+  },
+  "findings_resolved_before_source_freeze": [
+    {
+      "id": "chronology_binding",
+      "defect": "Aggregate sample/time/charge metadata alone could accept independently ingested histories with equal totals and different current order.",
+      "resolution": "Paired-only ancestry from both fresh empty banks, exact evidence-object binding, sticky invalidation after successful standalone remainder ingestion, and matched immutable metadata. Reordered-positive-current, catchup/rejoin and foreign-bank tests reject.",
+      "contract": "Caller-owned public structs and source IDs are trusted; external mutation and shallow-copy/rebinding continuation are unsupported."
+    },
+    {
+      "id": "sublevel_reference_cost",
+      "defect": "A retained-eigenspace step under a numerical cutoff must not be labelled a proven global 16D affine minimum.",
+      "resolution": "Region and harness use the attained affine_step_cost; null directions remain unresolved and all original box radii remain in the uniform remainder bound."
+    }
+  ],
+  "experiment_integrity": {
+    "fixed_engineering_budget_NLL": 0.1,
+    "fixed_norm_audit_allowance": 1e-10,
+    "fixed_NLL_audit_allowance": 1e-08,
+    "truth_in_inference": false,
+    "new_nonlinear_fits": 0,
+    "updates_applied": false,
+    "evidence_double_counting_found": false,
+    "all_steps_from_original_anchor": true,
+    "history_policy": "The same source prefix is represented once; sealing an event does not reset physical or curvature state. No posterior is added as a fresh independent prior.",
+    "host_audit_disclosure": "Original probe uses C double physical states/Jacobian, with exact affine-amplitude reordering and long-double response/cost accumulation for every candidate. This differs from online inference arithmetic and still retains double state/OCV evaluation error.",
+    "local_precision_disclosure": "Reported Q/SOC widths are at the original fixed chart. They are not relinearized uncertainty at the trial candidate or validated coverage.",
+    "region_semantics": "Original box intersected with physical support and L_aff<=attained affine step cost+2. No global-minimum, all-box-low-loss or data-bounded-null claim."
+  },
+  "original_falsification": {
+    "checks_total": 672,
+    "checks_passed": 654,
+    "checks_failed": 18,
+    "all_preregistered_checks_passed": false,
+    "failures_retained": true,
+    "failed_gate_type": "Prediction-remainder norm only; no NLL-bound gate failed.",
+    "failed_cases": [
+      "informative_900/final full joint step and divisions 2 through 256",
+      "carry_1800_to_2100/split full joint step and divisions 2 through 256"
+    ],
+    "original_failed_norm_range": [
+      1.3922982407299654e-10,
+      4.865010381168873e-10
+    ],
+    "failure_pattern": "Quadratic analytic bounds decrease with step scale, while the observed C double prediction remainder stays near an irregular 1e-10 whitened norm floor. Long-double final summation alone cannot remove rounded model-state, OCV or displaced-parameter arithmetic.",
+    "original_failures_reclassified": false
+  },
+  "separate_precision_diagnostics": {
+    "long_double": {
+      "source_revision": "a21f95b0c4fb79f91663aed816143a710e995ef4",
+      "method": "Independent physical-state and analytic anchor-Jacobian replay of exactly all 18 saved failed candidates; original binary64 inputs and coefficients lifted before parameter displacement.",
+      "mantissa_bits": 64,
+      "norm_range": [
+        7.504370950265862e-14,
+        4.626821560659202e-13
+      ],
+      "original_norm_reduction_factor_range": [
+        821.0191619897392,
+        2689.143153844311
+      ],
+      "within_unchanged_original_bound_plus_allowance": 18,
+      "interpretation": "All 18 are below their original E plus the unchanged 1e-10 allowance under this independent higher-precision replay. Many still exceed the vanishing analytic E alone because a 64-bit mantissa retains its own arithmetic floor.",
+      "original_receipt_unchanged": true,
+      "arithmetic_validated": false
+    },
+    "mpmath": {
+      "version": "1.4.1",
+      "fixed_candidate_replays": 3,
+      "method": "Independent direct physical polarization and hysteresis-voltage states plus analytic anchor derivatives, at 50/80 digits. Every binary64 input, anchor, scale, displacement and C OCV literal is lifted exactly by integer ratios before arithmetic; actual chronology is unchanged.",
+      "worst_witness": {
+        "case": "carry_1800_to_2100/split/full_joint_step_over_128",
+        "original_C_double_norm": 4.865010381168873e-10,
+        "recorded_E": 1.6232163605680737e-19,
+        "MP80_norm": "0.000000000000000000046393510564082122950310623447091648782586471560050881794512285329899040359880621",
+        "MP80_signed_NLL_difference": "-0.00000000000000000000044398884761952364682532755084877241616302009265892891257198713082698719451375066",
+        "MP80_norm_to_recorded_E": "0.28581224099938151134546105850920070141959283854541706725330723855062749110459804",
+        "precision_convergence": {
+          "norm_relative_difference_50_vs_80_digits": "1.988515819217366389707869073266960998066461069664946235111194294460739602487304729005655502149777076E-25",
+          "signed_NLL_relative_difference_50_vs_80_digits": "5.504397499124429447863693916227296990307724836592084571024484378335361244777640982147942442832140097E-24"
+        },
+        "interpretation": "The selected worst failure is dominated by binary64 model-evaluation arithmetic; the converged real-model remainder lies inside the recorded analytic envelope."
+      },
+      "nontrivial_control": {
+        "case": "carry_1800_to_2100/final/conditional_SOC_Q_step",
+        "MP50_norm": "0.0000078832199737468924960880176019823403055831790088541",
+        "recorded_E": 1.517796880366237e-05,
+        "norm_to_recorded_E": "0.51938570145464456079757106816924350694873325076488",
+        "MP50_signed_NLL_difference": "-0.000000046276889488299572607177774333490837077511186995146"
+      },
+      "limits": [
+        "Selected witnesses only; this does not independently prove every one of the 18 real-valued remainders.",
+        "Converged arbitrary precision is diagnostic evidence, not directed rounding or a formal machine enclosure.",
+        "No inference, candidate choice, radius, budget, gate or original result changed."
+      ]
+    }
+  },
+  "substantive_results": {
+    "tail_conditional_SOC_Q": {
+      "E": 1.517796880366237e-05,
+      "B_NLL": 0.004119195530653909,
+      "conservative_descent_NLL": 0.13142688209336484,
+      "eligible_analytic_trial": true,
+      "scope": "Other 14 trial displacements are fixed at zero; their evidence and full joint uncertainty remain retained. This is an unapplied conditional trial, not proof that nuisance quantities are known."
+    },
+    "tail_full_joint": {
+      "B_NLL": 4.794214232767298,
+      "observed_signed_NLL_error": -5.0619722330025015e-05,
+      "qualifies_0_1_budget": false,
+      "meaning": "A conservative sufficient test fails despite a much smaller observed signed error; this does not prove the candidate inaccurate."
+    },
+    "tail_full_region": {
+      "B_NLL": 17367.970890031786,
+      "qualifies_0_1_budget": false,
+      "meaning": "Useful uniform validity over the configured factor-supported region remains unestablished."
+    },
+    "inside_SOC_Q_witness": {
+      "radius_pass": true,
+      "observed_signed_NLL_error": -133.9773816203341,
+      "B_NLL": 251.05640868172907,
+      "qualifies_0_1_budget": false
+    },
+    "unexcited_400": "Q and SOC local precision remain unresolved, and gamma-minus remains unexcited. A conditional trial does not change those joint unknowns.",
+    "nominal_chart": "Large anchor residual flags block all candidate eligibility. Rank and finite local ranges do not establish cold-start validity."
+  },
+  "memory_review": {
+    "receipt": "experiments/bounded_event_002/memory_accounting.json",
+    "remainder_bank_bytes": 1200,
+    "remainder_transaction_workspace_bytes": 1200,
+    "query_result_bytes": 48,
+    "paired_ingestion_banks_and_workspaces_bytes": 9912,
+    "scope": "Host ABI sizes include both staged atomic banks and ancestry pointer/flag. Query/diagnostics, stack, source/sample buffers, application/interrupt and library costs remain additional; simultaneous implemented diagnostics exceed 10 KiB.",
+    "MCU_qualified": false
+  },
+  "unresolved_and_next": [
+    "The original binary64 norm checks remain failed. Any operational certificate needs a separately justified arithmetic-error enclosure, not a retroactive tolerance increase.",
+    "The full original factor-supported region and quiet-tail joint step do not qualify the fixed 0.1-NLL budget. A tighter residual-cross-term statistic or justified region method needs fresh preregistered falsification.",
+    "A bound around the original chart does not supply a new historical Jacobian or exact physical state at a changed chart. A chart-change policy must account for transport error and earlier evidence once, without resetting the budget origin.",
+    "No measured-OCV support, autonomous bounded nonlinear estimator, cold-start success, global likelihood sufficiency, validated coverage or Cortex-M23 qualification is established."
+  ]
+}

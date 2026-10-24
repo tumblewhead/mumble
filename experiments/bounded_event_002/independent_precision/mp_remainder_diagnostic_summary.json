@@ -1,0 +1,59 @@
+{
+  "schema": "mumble_b002_independent_mpmath_diagnostic_v1",
+  "source_revision": "bcaec7e1b8225eab095aa9871da95045ebb10a00",
+  "original_audit_status": "18 prediction-norm failures remain recorded; no original gate reclassified",
+  "diagnostic_script": "mp_remainder_spotcheck.py",
+  "diagnostic_script_sha256": "da374081d7fdc4d21f3461fae6771a8c031dc5aab967badbee3623953a91da2f",
+  "mpmath_version": "1.4.1",
+  "inference_runs": 0,
+  "fixed_candidate_replays": 3,
+  "input_policy": "All binary64 inputs and C OCV literal coefficients converted exactly with float.as_integer_ratio; same ordered actual-dt/current observations",
+  "method": "Independent direct physical-state recurrences with analytic anchor Jacobian, arbitrary-precision arithmetic throughout",
+  "results": [
+    {
+      "file": "mp_remainder_worst_50.json",
+      "sha256": "6b839259d0bc2352d8c797716c47cd99d1b129f2de0d1c9d36fe3e78f475258d",
+      "checkpoint": "split",
+      "candidate": "full_joint_step_over_128",
+      "dps": 50,
+      "norm": "4.6393510564082122950310632672514615353116931458455e-20",
+      "NLL_difference": "-4.4398884761952364682532999473987489220637241628625e-22",
+      "recorded_E_bound": 1.6232163605680737e-19,
+      "norm_to_bound_ratio": "0.28581224099938151134546111534341695674324078723824"
+    },
+    {
+      "file": "mp_remainder_worst_80.json",
+      "sha256": "f0ad532f854af001d8a626155f8e06398b3e2624638e997ca5393da44f655d08",
+      "checkpoint": "split",
+      "candidate": "full_joint_step_over_128",
+      "dps": 80,
+      "norm": "0.000000000000000000046393510564082122950310623447091648782586471560050881794512285329899040359880621",
+      "NLL_difference": "-0.00000000000000000000044398884761952364682532755084877241616302009265892891257198713082698719451375066",
+      "recorded_E_bound": 1.6232163605680737e-19,
+      "norm_to_bound_ratio": "0.28581224099938151134546105850920070141959283854541706725330723855062749110459804"
+    },
+    {
+      "file": "mp_remainder_conditional_50.json",
+      "sha256": "ffb0ae12e87105be80ef0d0151997a379243a5edf973de14ab5ff3c7c78991f4",
+      "checkpoint": "final",
+      "candidate": "conditional_SOC_Q_step",
+      "dps": 50,
+      "norm": "0.0000078832199737468924960880176019823403055831790088541",
+      "NLL_difference": "-0.000000046276889488299572607177774333490837077511186995146",
+      "recorded_E_bound": 1.517796880366237e-05,
+      "norm_to_bound_ratio": "0.51938570145464456079757106816924350694873325076488"
+    }
+  ],
+  "precision_convergence": {
+    "norm_relative_difference_50_vs_80_digits": "1.988515819217366389707869073266960998066461069664946235111194294460739602487304729005655502149777076E-25",
+    "signed_NLL_relative_difference_50_vs_80_digits": "5.504397499124429447863693916227296990307724836592084571024484378335361244777640982147942442832140097E-24"
+  },
+  "original_double_norm_over_80digit_real_model_norm": "10486402779.21836295607592185569858813895798475632936165526620144109101920294708529294844952313305255",
+  "conclusion": "The worst selected tiny-step failure is dominated by binary64 model-evaluation arithmetic, not an observed failure of its real-valued Taylor enclosure. The independent nontrivial SOC/Q control also lies inside its recorded bound.",
+  "limits": [
+    "This is a selected-witness diagnosis, not a proof for all18 failures or a rigorous outward-rounded machine certificate.",
+    "The original double audit remains failed at its fixed1e-10 tolerance.",
+    "No budget, radius, candidate, evidence or original numerical gate was changed.",
+    "High-precision results do not qualify on-device arithmetic or confidence coverage."
+  ]
+}

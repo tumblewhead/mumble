@@ -6,13 +6,17 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The longer-term target
 is a streaming Cortex-M23 implementation. The original nonlinear fitting path
 retains and replays history. A new bounded event component preserves a fixed
-local affine likelihood; cold-start learning and historical relinearization
-remain open. Neither path is qualified Cortex-M23 firmware.
+local affine likelihood. A bounded nonlinear-remainder component now checks
+trial moves against a declared analytic error budget. Cold-start learning,
+historical relinearization and validated floating-point bounds remain open.
+These components are host references, without Cortex-M23 qualification.
 
 ## Start here
 
 | Resource | Contents |
 | --- | --- |
+| [Nonlinear remainder experiment](docs/BOUNDED_EVENT_002.md) | Sparse joint-parameter bound, useful conditional tail trial, conservative region failure, preserved arithmetic failures and full memory costs |
+| [Remainder receipt](experiments/bounded_event_002/receipt/receipt.json) | 654/672 unchanged checks pass; 18 near-roundoff prediction-norm failures retained and diagnosed separately |
 | [Bounded event experiment](docs/BOUNDED_EVENT_001.md) | Fixed-memory C evidence design, complete host memory accounting, successful local carry and explicit failure witnesses |
 | [Corrected bounded receipt](experiments/bounded_event_001/receipt_scaled_givens/receipt.json) | 72 passing checks; original failed receipt retained separately |
 | [Implementation guide](README.txt) | Model, units, constraints, interfaces, assumptions and reproduction commands |
@@ -120,6 +124,7 @@ belong in this repository; chat summaries are supporting context.
 - `src/scm_estimator.c`, `include/scm_estimator.h`: host variable-projection estimator.
 - `src/scm_assess.c`, `include/scm_assess.h`: fixed-workspace per-target qualification.
 - `src/scm_evidence.c`, `include/scm_evidence.h`: bounded fixed-chart event evidence and guards.
+- `src/scm_remainder.c`, `include/scm_remainder.h`: paired chronological ingestion and sparse analytic nonlinear-remainder budget checks.
 - `src/main.c`: CSV/JSON host CLI.
 - `tests/`: model, estimator, projection, constraint and qualification checks.
 - `tools/`: data generation, runners, independent scoring and report construction.
@@ -128,8 +133,9 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The current priority is controlled nonlinear validity and bounded chart
-initialization/change around the new fixed-chart evidence component.
+The current priority is a tighter likelihood-error bound that retains
+residual/curvature correlation, explicit floating-point error handling, and
+a bounded carried-state contract for chart initialization or change.
 Subsequent experiments should cover measured OCV, sensor
 offsets, filtered/correlated noise, model mismatch and parameter drift. The current
 study does not validate aging, temperature variation, EOD prediction, or Cortex-M23
@@ -170,6 +176,42 @@ Both helpers refuse existing outputs. The original 60-fit campaign is not
 needed to reproduce this small experiment. Read the
 [design and results](docs/BOUNDED_EVENT_001.md) before treating local evidence
 as a nonlinear estimate.
+
+## Nonlinear remainder prototype
+
+`scm_remainder` retains 19 sparse Hessian-envelope norms and bounded propagation
+state on the original joint chart. It advances through the same atomic paired
+ingestion as the evidence bank. It supports the smooth illustrative OCV and
+reports a real-arithmetic prediction/NLL error bound; ordinary double arithmetic
+is explicitly unvalidated.
+
+At the final quiet tail, the conditional SOC/capacity trial has an analytic
+NLL-error bound of 0.0041192 and an upper-cost improvement of 0.1314269 under
+the declared 0.1 budget. The full joint step and every whole-region guarantee
+remain over budget. Earlier unresolved directions remain unresolved; the
+nominal bad-chart control allows no update. No trial is applied or used to
+reset the chart.
+
+The four-run receipt retains 18 failed prediction-norm checks near machine
+precision at already fitted anchors. Separate higher-precision diagnostics
+investigate that floor without changing the original result or tolerances.
+All original NLL-error gates pass. The paired ingestion objects use 9,912 bytes,
+and the listed project stack plus input raises that partial total to 10,672
+bytes before external costs. The full diagnostic object set uses 20,856 bytes.
+
+```bash
+make test-remainder build/scm_remainder_probe
+python3 tools/run_remainder.py \
+  --output-dir experiments/bounded_event_002/my_new_receipt
+python3 tools/measure_remainder_memory.py \
+  --probe-result experiments/bounded_event_002/my_new_receipt/carry_1800_to_2100.json \
+  --output experiments/bounded_event_002/my_new_memory.json
+```
+
+The runner's nonzero exit records the preserved numerical failures on this
+host. Read the [remainder report](docs/BOUNDED_EVENT_002.md) and selective
+evidence links before interpreting an analytic-budget pass as qualified
+machine arithmetic, nonlinear convergence, or validated coverage.
 
 The original study release manifest is preserved in
 [`provenance/study_release.json`](provenance/study_release.json). The original

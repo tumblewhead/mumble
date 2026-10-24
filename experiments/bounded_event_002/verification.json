@@ -1,0 +1,98 @@
+{
+  "schema": "mumble_b002_verification_v1",
+  "created_utc": "2026-10-24T20:40:23.486663+00:00",
+  "experiment_source_revision": "bcaec7e1b8225eab095aa9871da95045ebb10a00",
+  "diagnostic_source_revision": "a21f95b0c4fb79f91663aed816143a710e995ef4",
+  "recorded_from_revision": "a21f95b0c4fb79f91663aed816143a710e995ef4",
+  "source_sha256": {
+    "Makefile": "3b8e2a6fbca513534446b579a3675d7ab21079d30bb644f672cc9059ce3b4418",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_assess.c": "6a8bcb0ce6dd3965b5ed8a7be60f38bc98a4cf83e46288513c15ee79f91de1ac",
+    "include/scm_assess.h": "87b4d26d512c51ebaec5a46d46588c6249f85d91a71b7dbaf2bf387163c4bff5",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "src/scm_evidence.c": "f82548e50419d58f6cac8d53ab7462bb23f7b7bc8070d005b64ca0dc2f7f3e5e",
+    "include/scm_evidence.h": "8ff50bb2e1e5f14bfb96aac766ce9005e85a1fbb16829fe1b5964a87596962d6",
+    "src/scm_remainder.c": "bfc560106e67771ecda11b5f28caee2925046133e79e298c905032a1c7b03e83",
+    "include/scm_remainder.h": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494",
+    "tests/test_remainder.c": "994553d15bab5765e680246b0097f11621c817c7fce16e30eb113d4b8f3a5fa1",
+    "tools/remainder_probe.c": "916641c8102ea747225f491befb0d4e72a591d4403edaaa2edf5e272d5996fa0",
+    "tools/run_remainder.py": "e70cf6db5078ac86a9b51267ae84e67a26e7e25a8a4cae1b7c5ec113f76bca28",
+    "experiments/bounded_event_002/plan.json": "456ee5cd1e60604b5b8e58de2a12e32ae5905684b0d3b8aa30a09b939703ce51"
+  },
+  "full_unit_suite": {
+    "command": "make test",
+    "result": "PASS",
+    "notes": "All discovered C tests plus12Python assessment tests; includes remainder and evidence regressions"
+  },
+  "focused_tests": {
+    "command": "make test-remainder test-evidence",
+    "result": "PASS"
+  },
+  "focused_sanitizers": {
+    "compile": "cc -Iinclude -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_evidence.c src/scm_remainder.c tests/test_remainder.c -lm -o /tmp/mumble_test_remainder_sanitized",
+    "run": "ASAN_OPTIONS=detect_leaks=0 /tmp/mumble_test_remainder_sanitized",
+    "result": "PASS",
+    "binary_sha256": "fedc1321193f422bed2e704bbe356752c4b36f927a8ea1c3d196054e92221768",
+    "scope": "Address and undefinedbehavior; not leak/rounding/MCU validation"
+  },
+  "falsification": {
+    "receipt": "experiments/bounded_event_002/receipt/receipt.json",
+    "sha256": "3264531b78c2b10f7bdc53e47b49400a821857bec0fd73e0d28b04625b1a904d",
+    "passed": 654,
+    "total": 672,
+    "original_failures_preserved": 18,
+    "all_failures_prediction_norm_only": true,
+    "all_preregistered_checks_passed": false,
+    "new_nonlinear_fits": 0
+  },
+  "precision_diagnosis": {
+    "receipt": "experiments/bounded_event_002/precision_audit/receipt.json",
+    "sha256": "b74da3ada56e02a88ae53688773f21c640ecd89d4943712e670e0f212a3af926",
+    "same_failed_candidates": 18,
+    "within_unchanged_norm_allowance": 18,
+    "original_gates_reclassified": false,
+    "arithmetic_validated": false
+  },
+  "memory": {
+    "receipt": "experiments/bounded_event_002/memory_accounting.json",
+    "sha256": "f20e64b4cca2e6a456177810c0c7428b16359f954fdbbb718c36b9ce168d7747",
+    "named_static_symbols_match_sizeof": true,
+    "unbounded_project_frames": []
+  },
+  "preservation": {
+    "compared_to": "57f3293857d674096d9ed56d7fb875f16f1806b7",
+    "paths": [
+      "data",
+      "results",
+      "reference_binaries",
+      "src/scm_model.c",
+      "src/scm_features.c",
+      "src/scm_estimator.c",
+      "src/scm_assess.c",
+      "src/scm_evidence.c",
+      "include/scm_model.h",
+      "include/scm_features.h",
+      "include/scm_estimator.h",
+      "include/scm_assess.h",
+      "include/scm_evidence.h",
+      "tests/test_evidence.c",
+      "tools/evidence_probe.c",
+      "tools/run_bounded_event.py",
+      "tools/measure_bounded_memory.py",
+      "experiments/bounded_event_001",
+      "provenance/bounded_event_001_publication.json",
+      "provenance/bounded_event_001_development.bundle"
+    ],
+    "changed_paths": [],
+    "prior_handoff_archive": "handoff/archive/CONTINUE_bounded_event_001.json",
+    "prior_handoff_sha256": "53e6284bd3966a980d1e1df172a54be5903bc072227d1f64189c9042809fe0fb",
+    "prior_handoff_byte_identical": true
+  },
+  "strict_JSON_files_checked": 19,
+  "limitations": [
+    "Independent precision spotchecks andanalyticproofreview stored separately",
+    "No fullfloating-point enclosure",
+    "No nonlinearconvergence,coldstart,charttransition,coverage or MCUqualification"
+  ]
+}
