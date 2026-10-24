@@ -15,11 +15,12 @@
     ],
     "prior_handoff": "handoff/archive/CONTINUE_bounded_event_001.json",
     "context_policy": "Read selective summaries; avoid bulk raw traces/results. Commits are provenance, never reset targets.",
-    "publication_status": "Tool interruption; local branch complete; publication retry authorized.",
+    "publication_status": "Published; fetch current refs and continue on experiment/bounded-event-002 while preserving newer or dirty work.",
     "publication_provenance": "provenance/bounded_event_002_publication.json",
     "original_commit_bundle": "provenance/bounded_event_002_development.bundle",
-    "publication_retry": "The user explicitly denied aborting. Continue the authorized publication; do not treat the tool error as revocation.",
-    "restore": "Fetch the B001 base from origin, then import the provided B002 Git bundle; preserve newer or dirty work."
+    "experiment_source": "95da0fc64925668e7f112be5e66fce3c752acfbf",
+    "precision_source": "56de16891104e131a5c303c99384c23e8f598d50",
+    "publication_semantics": "Published source trees equal original local trees. Receipts keep original source SHAs; publication map and verified bundles preserve exact provenance."
   },
   "objective": {
     "rule": "Estimate stimulus-supported quantities, carry earlier evidence/uncertainty, explicitly report unresolved targets",
@@ -129,5 +130,12 @@
     "memory": "python3 tools/measure_remainder_memory.py --probe-result experiments/bounded_event_002/NEW_RECEIPT/carry_1800_to_2100.json --output experiments/bounded_event_002/NEW_MEMORY.json",
     "policy": "Require new output paths. Original runner nonzero exit captures18 known precision failures. No60-fit/profile campaign is needed."
   },
-  "first_response": "Fetch current refs and inspect status; read selective handoff/evidence. State analytic progress and unresolved region/machine arithmetic, then continue the next bounded design."
+  "first_response": "Fetch current refs and inspect status; read selective handoff/evidence. State analytic progress and unresolved region/machine arithmetic, then continue the next bounded design.",
+  "resume_commands": [
+    "git status --short --branch",
+    "git fetch origin",
+    "git switch experiment/bounded-event-002",
+    "git pull --ff-only",
+    "make test-remainder build/scm_remainder_probe"
+  ]
 }
