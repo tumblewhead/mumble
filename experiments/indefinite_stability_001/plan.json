@@ -1,0 +1,29 @@
+{
+  "schema": "mumble_indefinite_stability_witness_plan_v1",
+  "purpose": "Small falsification witnesses for indefinite-runtime numeric-stability claims; no endurance campaign or full-estimator stability proof.",
+  "base_revision": "e478d0eda07b16cdf9121e391d06e2fb9917128b",
+  "frozen_implementation": ["src/scm_model.c", "src/scm_evidence.c", "src/scm_remainder.c", "include/scm_model.h", "include/scm_evidence.h", "include/scm_remainder.h"],
+  "machine_contract": {
+    "format": "binary64: FLT_RADIX=2, DBL_MANT_DIG=53, DBL_MAX_EXP=1024, sizeof(double)=8",
+    "rounding": "FE_TONEAREST; no fast-math; record FLT_EVAL_METHOD and IEC559 macro",
+    "compiler_flags": ["-std=c99", "-O2", "-Wall", "-Wextra", "-Wpedantic", "-fno-fast-math", "-ffp-contract=off", "-frounding-math"],
+    "libm": "hypot behavior is measured on this host, not assumed correctly rounded on all targets"
+  },
+  "witnesses": [
+    {"id": "unit_sum_absorption", "initial": "2^53", "update": "+1", "repetitions": 4096, "expected": "stored value unchanged; exact increment=4096"},
+    {"id": "bounded_zero_net_cycle", "initial": "1/2", "update": "+2^-54 then -2^-54", "repetitions": 1, "expected": "exact cycle returns to 1/2; rounded cycle returns 1/2-2^-54; no asymptotic drift-rate claim"},
+    {"id": "hypot_rss_absorption", "initial": "2^27", "update": "hypot(value,1)", "repetitions": 4096, "expected": "host rounded norm unchanged although exact squared norm increases by 4096"},
+    {"id": "production_qr_merge_absorption", "initial": "constructed history with first diagonal 2^27 and count 2^54; other entries zero", "update": "scm_evidence_seal with a unit first-diagonal event and count 1", "repetitions": 4096, "expected": "production factor diagonal unchanged while sample metadata increases; algebraic boundary-state witness, no claim of reachable physical history"},
+    {"id": "production_remainder_rss_absorption", "initial": "constructed remainder bank with initial-SOC curvature coefficient 2^36", "update": "scm_remainder_push at dt=1/35,current=0", "repetitions": 4096, "expected": "positive per-sample curvature bound; stored coefficient unchanged; standalone audit bank only, no inference ancestry or reachable-history claim"},
+    {"id": "production_elapsed_absorption", "initial": "constructed model state with elapsed=2^48 seconds", "update": "scm_model_step with dt=1/35,current=0", "repetitions": 1, "expected": "success with unchanged elapsed; constructed local transition, not a replayed lifetime"},
+    {"id": "production_counter_exhaustion", "initial": "constructed evidence and remainder banks with next_index=UINT64_MAX", "update": "actual push APIs at UINT64_MAX", "repetitions": 1, "expected": "overflow errors, byte-for-byte unchanged banks; fail-closed safety demonstrated, indefinite availability not demonstrated"}
+  ],
+  "interpretation": {
+    "success": "All preregistered failure mechanisms reproduced on this host; this is NOT a passing indefinite-stability qualification.",
+    "scope": "Bounded deterministic scalar calculations and constructed API boundary transitions; none demonstrates an observed deployed lifetime.",
+    "memory": "Witness executable is host test infrastructure; its object sizes are not a deployed subsystem memory claim.",
+    "source_policy": "No production numerical source or previous result may change. Receipt records source hashes before and after."
+  },
+  "reproduction": "python3 tools/run_stability_witnesses.py --output experiments/indefinite_stability_001/NEW_RECEIPT.json",
+  "output_policy": "Refuse existing output; keep original receipt unchanged; record compiler, command, platform, binary/source hashes and finite JSON."
+}
