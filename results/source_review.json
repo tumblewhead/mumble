@@ -1,0 +1,172 @@
+{
+  "schema": "scm_source_review_v2_35Hz_3RC",
+  "status": "review_and_scoped_tests_complete",
+  "identity": "Reconstructed source after workspace loss; earlier two-mode numerical evidence is not reused as validation of this version.",
+  "scope": {
+    "focus": [
+      "fixed-alpha equality constraints",
+      "fixed-current-SOC chain rule and exact target",
+      "constraint restoration after success and failure",
+      "undamped joint likelihood Gram matrix",
+      "singular zero-excitation QP",
+      "reporting null-space and constrained-chart guards"
+    ],
+    "physical_model": "Three continuous-time Foster modes (0.05,0.5,5 s), asymmetric current-throughput hysteresis, nonzero entering states, known illustrative 25 C OCV, actual current, endpoint voltage.",
+    "unit_trace": "3500 samples at35Hz, ten current dwells, noiseless and deterministic-noise variants; fixed nonlinear coordinates isolate linear profiling and envelope derivatives.",
+    "not_claimed": [
+      "global nonlinear optimality",
+      "complete SCM joint-relation implementation",
+      "posterior or nonlinear confidence coverage",
+      "embedded/M23 timing or fixed-point accuracy",
+      "bounded lifetime history memory"
+    ]
+  },
+  "public_API_test": {
+    "file": "tests/test_estimator.c",
+    "normal_build_command": "cc -std=c99 -O2 -Wall -Wextra -Wpedantic -Iinclude src/scm_model.c src/scm_features.c src/scm_estimator.c tests/test_estimator.c -lm -o /tmp/scm_profile_api_test",
+    "compiler_warnings": 0,
+    "result": {
+      "test": "scm_estimator_profile_API_3RC",
+      "failures": 0,
+      "samples": 3500,
+      "sample_rate_Hz": 35,
+      "noiseless_objective": 2.2025193688996955e-19,
+      "noisy_objective": 463.3592002638392,
+      "max_linear_parameter_error": 1.1337736305350177e-12,
+      "max_feasibility_violation": 0,
+      "constraint_restore_error": 0,
+      "profile_gradient_relative_error": 1.5894007147896628e-06,
+      "linked_SOC_gradient_relative_error": 1.5894007147896628e-06,
+      "joint_Gram_relative_error": 0,
+      "current_SOC_target_error": 0,
+      "zero_excitation_objective": 5.149069663852824e-19,
+      "zero_excitation_theta_mask": 24
+    },
+    "gradient_method": "Re-solve all constrained linear amplitudes at plus/minus1e-6 times the output coordinate scale. Compare the profile objective difference to the envelope gradient reconstructed independently through public model APIs. Current SOC target also receives a direct plus/minus1e-6 test.",
+    "linked_SOC_rule": "z0=z_target+q_end/Q. Therefore dmu/dlogQ at fixed target equals original dmu/dlogQ minus(q_end/Q)*dmu/dz0.",
+    "Gram_method": "Accumulate every scaled model Jacobian outer product directly in theta-then-alpha order, divided by known sigma. Compare to result.joint_normal before Schur reduction/damping; linked case uses its explicitly constrained derivative chart.",
+    "feasibility_cases": [
+      "fixed u0=.03465 V exceeds default inner starting H=.024 V but is physically feasible",
+      "fixed R0=.12,H=.04,u0=.04 tests redundant boundary/equality geometry",
+      "fixed H=.02,u0=.04 is mathematically inconsistent and rejected",
+      "same problem reused after both successful and failed profiles",
+      "all nine linear amplitudes fixed on zero-current singular data"
+    ],
+    "limits": "Fixed nonlinear coordinates make this a targeted profile API and derivative test, not a test of global nonlinear convergence from arbitrary starts."
+  },
+  "address_undefined_sanitizers": {
+    "build_command": [
+      "cc",
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-fno-omit-frame-pointer",
+      "-fsanitize=address,undefined",
+      "-Iinclude",
+      "src/scm_model.c",
+      "src/scm_features.c",
+      "src/scm_estimator.c",
+      "tests/test_estimator.c",
+      "-lm",
+      "-o",
+      "/tmp/scm_profile_api_sanitized"
+    ],
+    "build_returncode": 0,
+    "build_stderr": "",
+    "run_returncode": 0,
+    "run_stderr": "",
+    "result": {
+      "test": "scm_estimator_profile_API_3RC",
+      "failures": 0,
+      "samples": 3500,
+      "sample_rate_Hz": 35,
+      "noiseless_objective": 2.2025193688996955e-19,
+      "noisy_objective": 463.3592002638392,
+      "max_linear_parameter_error": 1.1337736305350177e-12,
+      "max_feasibility_violation": 0,
+      "constraint_restore_error": 0,
+      "profile_gradient_relative_error": 1.5894007147896628e-06,
+      "linked_SOC_gradient_relative_error": 1.5894007147896628e-06,
+      "joint_Gram_relative_error": 0,
+      "current_SOC_target_error": 0,
+      "zero_excitation_objective": 5.149069663852824e-19,
+      "zero_excitation_theta_mask": 24
+    },
+    "wall_seconds": 0.5507408659996145,
+    "official_binary_modified": false,
+    "ASAN_OPTIONS": "detect_leaks=0:halt_on_error=1",
+    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+    "leak_scope": "Leak detection intentionally disabled for this address/undefined-behavior pass; no LeakSanitizer or leak-freedom claim.",
+    "compiled_sources_unchanged_since_run": true,
+    "compiled_source_sha256": {
+      "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+      "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+      "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+      "src/scm_features.c": "2da1c946b93b622c95ee0482289561265c645207178bc0d453b0cb1c123b5315",
+      "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+      "tests/test_estimator.c": "f062d6b39195298c0c5128e3eac7a1558a7842121356fdab3a9b67d0f4c2f82e"
+    }
+  },
+  "assessment_tests": {
+    "file": "tests/test_assess.py",
+    "command": "python -m unittest discover -s tests -p test_assess.py -v",
+    "tests": 11,
+    "failures": 0,
+    "checks": [
+      "rest structural SOC/h ambiguity persists through1,1000,1e12 repeated measurements",
+      "null-space directions retain support rather than pseudoinverse certainty",
+      "proper current-SOC covariance cross-term and scaling",
+      "proper H/u0 ratio covariance cross-term and scaling",
+      "zero H leaves h0 unresolved",
+      "optimizer stall prevents qualification",
+      "active-bound ranges are not clipped",
+      "wide finite ranges remain unresolved",
+      "materially indefinite matrix guard",
+      "precise local directions remain provisional",
+      "linked-current-SOC derivative chart is not treated as unrestricted information"
+    ]
+  },
+  "findings": [
+    {
+      "id": "PROFILE-01",
+      "status": "verified",
+      "finding": "New linked-SOC chain rule, returned point target, constrained linear feasibility, and restoration across calls match the targeted public-API checks."
+    },
+    {
+      "id": "GRAM-01",
+      "status": "scope_explicit",
+      "finding": "Unrestricted-fit joint_normal is the original-coordinate undamped likelihood Gram. A fixed-current-SOC profile modifies logQ derivatives and therefore returns a constrained-chart Gram. Its objective is valid for the profile; its matrix cannot be interpreted as unrestricted covariance."
+    },
+    {
+      "id": "ASSESS-01",
+      "status": "fixed_and_tested",
+      "finding": "CLI uses fixed_current_soc metadata, whereas the initial assessment guard checked only has_current_soc. Assessment now detects both forms, preserves candidate points, and returns unresolved/full-support ranges for linked-chart matrices."
+    },
+    {
+      "id": "FAILURE-01",
+      "status": "reporting_requirement",
+      "finding": "A generic scm_fit operational failure does not prove a profile target impossible. Failed profile solves must remain missing/unresolved; the unit H/u0 contradiction is independently known from its explicit inequalities."
+    }
+  ],
+  "remaining_limits": [
+    "Finite profile grids and local nonlinear optimizers do not supply global confidence or coverage guarantees.",
+    "Projected/Kaufman Gauss-Newton curvature is an approximation to the optimized-residual Jacobian; the tested envelope objective gradient is the derivative used for descent.",
+    "Objective/step termination is distinct from projected-gradient stationarity; preserve termination_reason and final gradient.",
+    "The current unexcited_theta_mask tags absent positive/negative current signs; the likelihood null-space diagnostics retain additional unresolved directions.",
+    "Sampling and state ingestion at35Hz do not imply that an expensive estimation update runs on every sample.",
+    "Retained replay histories and explicit feature bases grow with data; no small fixed-memory implementation is certified."
+  ],
+  "source_sha256": {
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_features.c": "2da1c946b93b622c95ee0482289561265c645207178bc0d453b0cb1c123b5315",
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "src/main.c": "cec4717003873c9e8fdfc7adff0910a717c2949ff15806da2d220bc34339a104",
+    "tests/test_model.c": "02371aac16d8bbe6da39087a71d4df9fc6461739ec0361f7741aa6d2a267dae4",
+    "tests/test_canaries.c": "1622e1a6aae918ddcefa365f9a11fff01f59d3be72d6399e33ca3ada929701df",
+    "tests/test_estimator.c": "f062d6b39195298c0c5128e3eac7a1558a7842121356fdab3a9b67d0f4c2f82e",
+    "tools/assess.py": "77d71c6fcb725cad37a3d8227eee10697c9c9712d76aeb538232aab75697b93a",
+    "tests/test_assess.py": "5eb38ba97d7d4fa206cfd7a8be649f2354fbfd79e62df2fc7f0d1fc1b14917a7"
+  }
+}

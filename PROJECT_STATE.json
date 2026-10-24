@@ -1,0 +1,47 @@
+{
+  "schema": "mumble_project_state_v1",
+  "canonical_repository": "https://github.com/tumblewhead/mumble",
+  "stage": "35Hz_C_host_reference_completed",
+  "objective": "Learn quantities supported by available stimulus, carry evidence forward, expose unresolved targets, then reduce to bounded-memory Cortex-M23 execution.",
+  "nominal_rate_Hz": 35,
+  "current_model": {"RC_modes": 3, "fitted_quantities": 16, "temperature_C": 25, "OCV": "known_illustrative_curve; measured_table_API_available"},
+  "evidence": {
+    "main": "results/streaming_results.json",
+    "profiles": "results/profile_results.json",
+    "compression": "results/compression_results.json",
+    "weak_tail": "results/tail_only_result.json",
+    "independent_main_validation": "results/independent_validation.json",
+    "independent_profile_validation": "results/independent_profile_validation.json",
+    "C_reporting_integration": "results/c_integration_review.json",
+    "report": "report/SCM-35Hz-Results.html",
+    "original_release": "provenance/study_release.json"
+  },
+  "completed": {
+    "main_cases": 6,
+    "main_prefix_fits": 60,
+    "main_numerically_converged": 50,
+    "main_iteration_limits": 10,
+    "compression_fits": 6,
+    "target_profiles": 29,
+    "C_assessment_statuses": ["unexcited", "unresolved", "provisional"],
+    "SOC_error_under_0_5pp_all_six_from_checkpoint_s": 600,
+    "capacity_error_under_0_5percent_all_six_from_checkpoint_s": 900
+  },
+  "limits": [
+    "Accuracy crossings refer only to requested checkpoints and this stimulus.",
+    "Local ranges and finite-grid profiles are not coverage or global-identification certificates.",
+    "Matched synthetic model with exact current/time, known OCV and iid1mV voltage noise.",
+    "Full fit retains and replays history; allocation is about49.4MB at73500samples.",
+    "Explicit event projection bases cost memory and CPU; no MCU resource qualification.",
+    "No aging, temperature, sensor-bias, model-mismatch or EOD validation yet."
+  ],
+  "next_work": [
+    "Design bounded event evidence with controlled relinearization and residual guards.",
+    "Preserve conditional reporting and provenance across weak use without double counting.",
+    "Use measured OCV and evaluate sensor errors, correlated noise and model mismatch.",
+    "Add evidence age and inconsistency handling before claiming aging adaptation.",
+    "Measure actual Cortex-M23 memory, stack, cycles and numeric precision after reference equivalence."
+  ],
+  "handoff_format": "compact_JSON",
+  "repository_import": "Numerical sources/data/results preserved; documentation and verification-path portability adapted with separate provenance."
+}

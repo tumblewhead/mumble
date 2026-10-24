@@ -1,0 +1,50 @@
+{
+  "schema": "scm_c_conditional_learning_v2_35hz_fresh",
+  "scope": "Fresh portable C research execution at nominal35Hz,25C; measure elapsed-time learning while retaining earlier evidence; eventual Cortex-M23 target remains separate",
+  "recovery": "Old workspace data/results were lost; this specification and all resulting datasets are a fresh campaign, not recovery of old numerical evidence",
+  "model": {
+    "foster_modes": 3,
+    "transport": "Exact exponential transitions for actual piecewise-constant current; no state reset at event boundaries",
+    "hysteresis": "SCM asymmetric charge-throughput law with separate positive/negative rates; freezes at actual zero current",
+    "unknowns": ["R0", "R1", "R2", "R3", "tau1", "tau2", "tau3", "H", "gamma_plus", "gamma_minus", "Q_Ah", "initial_SOC", "initial_v1", "initial_v2", "initial_v3", "initial_h"],
+    "known_OCV": "Illustrative U25=3+1.15*z+0.08*tanh(8*(z-0.5)); user measured curve values unavailable",
+    "source": "Exact actual current and clock, actual core temperature25C; point voltage at END of interval; truth excluded from estimator inputs",
+    "noise": "Independent Gaussian1mV standard deviation per35Hz point observation; no claim about other rates under this model"
+  },
+  "common_bounds": {
+    "tau_s": [[0.015,0.15],[0.15,1.5],[1.5,30.0]],
+    "gamma_plus_minus_per_Ah": [5.0,1200.0],
+    "Q_Ah": [0.03,0.10],
+    "z0": [0.2,0.95],
+    "R0_Ri_ohm": [0.0,1.0],
+    "H_V": [0.0,0.1],
+    "vi0_V": [-0.08,0.08],
+    "h0": [-1.0,1.0],
+    "coupled_linear_constraint": "abs(u0)<=H with u0=H*h0",
+    "trajectory_domain": "Every candidate SOC must remain in supplied OCV domain"
+  },
+  "campaign": {
+    "cells": 2,
+    "noise_seeds_per_cell": 3,
+    "matched_cases": 6,
+    "duration_s": 2100,
+    "sampling_Hz": 35,
+    "samples_per_case": 73500,
+    "event_alignment": "Durations are exact multiples of1/7s and therefore align with35Hz; source is constant inside each sample interval",
+    "checkpoints_s": [10,40,220,400,600,900,1200,1500,1800,2100],
+    "first_negative_current_onset_s": 400,
+    "weak_tail_s": [1800,2100],
+    "meaning": "Early prefixes lack opposite-sign excitation; retain gamma_minus as unknown. Later reversals can constrain it. A weak late window must not erase earlier evidence.",
+    "rate_comparison": "Deferred; no universal assertion that35Hz is optimal or that20Hz/1kHz behavior has been reproduced",
+    "hardware_scope": "Synthetic numerical laboratory history, not a hardware pulse recommendation"
+  },
+  "assessment": {
+    "causality": "Each prefix fit uses only observations through its checkpoint. Current-SOC error is evaluated at that checkpoint. Retrospective SOC trajectory reconstruction is labeled separately.",
+    "time_to_estimate": "Report first sampled crossing and sustained-through-remaining-checkpoints crossing separately; no guarantee between checkpoints or beyond the observed history",
+    "targets": {"current_SOC_absolute_error_pp": [5.0,1.0,0.5], "capacity_relative_error_percent": [10.0,5.0,1.0]},
+    "uncertainty": "Convergence of a numerical optimizer is not parameter identification. Preserve earlier measurement constraints and explicitly label unsupported or unresolved parameters.",
+    "profiles": "Selected capacity and hysteresis-rate profile objectives across early/late prefixes; no default calibrated confidence coverage claim",
+    "performance": "Host wall/CPU time, complete workspace/history storage, process peak RSS where available; no Cortex-M23 timing or bounded lifetime-memory claim",
+    "validation": "Independent Python complete-dwell predictor plus selected independent constrained SciPy refinements; no reuse of C cached state or true OCV/SOC corrections"
+  }
+}

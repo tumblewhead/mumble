@@ -1,0 +1,528 @@
+{
+  "schema": "scm_c_assessment_integration_v1",
+  "failures": [],
+  "source_campaign_sha256": "b38c79b64cc42c5b3c411614c1d3f9fffede2cba7fa9aac444e47a5fe313c33d",
+  "recorded_paths_rebased": true,
+  "benchmark_executable": "reference_binaries/scm_estimator_benchmark",
+  "benchmark_executable_sha256": "eaada9ffc007b0a4198c87e13b53944ae2a0acc5ce80c41463dae1da65dbd527",
+  "integrated_executable": "build/scm_estimator",
+  "integrated_executable_sha256": "9c713216750150ddbf91c164ce0c4a29ee67168d4d0dcc9b0bad8f856a1f93e2",
+  "core_math_sources_unchanged": true,
+  "core_source_sha256_before": {
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+  },
+  "core_source_sha256_after": {
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+  },
+  "representative_checks": [
+    {
+      "checkpoint_s": 10,
+      "old_command": [
+        "/workspace/scratch/49a90ada48ba/mumble/reference_binaries/scm_estimator_benchmark",
+        "--data",
+        "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "--case",
+        "cell_a_35hz_s202610240",
+        "--method",
+        "full",
+        "--modes",
+        "3",
+        "--starts",
+        "3",
+        "--max-iter",
+        "120",
+        "--sigma",
+        "0.001",
+        "--prefix",
+        "350"
+      ],
+      "new_command": [
+        "/workspace/scratch/49a90ada48ba/mumble/build/scm_estimator",
+        "--data",
+        "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "--case",
+        "cell_a_35hz_s202610240",
+        "--method",
+        "full",
+        "--modes",
+        "3",
+        "--starts",
+        "3",
+        "--max-iter",
+        "120",
+        "--sigma",
+        "0.001",
+        "--prefix",
+        "350"
+      ],
+      "inference_fields_identical": true,
+      "preserved_executable_matches_stored_fit": true,
+      "old_process_wall_s": 0.020292549999794574,
+      "new_process_wall_s": 0.018519111000387056,
+      "optimizer_status": 0,
+      "selected_assessment": {
+        "Q_Ah": {
+          "point": 0.085,
+          "units": "Ah",
+          "status": "unresolved",
+          "local_range": [
+            0.03,
+            0.1
+          ],
+          "range_kind": "prior_support",
+          "prior_support": [
+            0.03,
+            0.1
+          ],
+          "null_projection": 1,
+          "local_standard_deviation": null,
+          "local_halfwidth": null,
+          "relative_halfwidth": null,
+          "passes_local_precision": false,
+          "eligible_for_profile_check": false,
+          "active_constraints_present": true,
+          "conditioned_fit": false,
+          "reason_flags": 272,
+          "reasons": [
+            "Target has a numerical likelihood null-space component; no pseudoinverse interval is reported.",
+            "Active constraints require a nonlinear profile check of the local approximation."
+          ]
+        },
+        "current_soc": {
+          "point": 0.8499970024342394,
+          "units": "SOC fraction",
+          "status": "unresolved",
+          "local_range": [
+            0.2,
+            0.95
+          ],
+          "range_kind": "prior_support",
+          "prior_support": [
+            0.2,
+            0.95
+          ],
+          "null_projection": 0.06275265843782843,
+          "local_standard_deviation": null,
+          "local_halfwidth": null,
+          "relative_halfwidth": null,
+          "passes_local_precision": false,
+          "eligible_for_profile_check": false,
+          "active_constraints_present": true,
+          "conditioned_fit": false,
+          "reason_flags": 272,
+          "reasons": [
+            "Target has a numerical likelihood null-space component; no pseudoinverse interval is reported.",
+            "Active constraints require a nonlinear profile check of the local approximation."
+          ]
+        },
+        "gamma_minus": {
+          "point": 30.000000000000004,
+          "units": "1/Ah",
+          "status": "unexcited",
+          "local_range": [
+            5,
+            1200
+          ],
+          "range_kind": "prior_support",
+          "prior_support": [
+            5,
+            1200
+          ],
+          "null_projection": 1,
+          "local_standard_deviation": null,
+          "local_halfwidth": null,
+          "relative_halfwidth": null,
+          "passes_local_precision": false,
+          "eligible_for_profile_check": false,
+          "active_constraints_present": true,
+          "conditioned_fit": false,
+          "reason_flags": 264,
+          "reasons": [
+            "The retained history supplies no excitation for this direction; physical support is retained.",
+            "Active constraints require a nonlinear profile check of the local approximation."
+          ]
+        }
+      }
+    },
+    {
+      "checkpoint_s": 600,
+      "old_command": [
+        "/workspace/scratch/49a90ada48ba/mumble/reference_binaries/scm_estimator_benchmark",
+        "--data",
+        "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "--case",
+        "cell_a_35hz_s202610240",
+        "--method",
+        "full",
+        "--modes",
+        "3",
+        "--starts",
+        "3",
+        "--max-iter",
+        "120",
+        "--sigma",
+        "0.001",
+        "--prefix",
+        "21000",
+        "--initial",
+        "-3.0092792022133663,-0.74069263298430321,1.5955813386571727,5.4151274779953189,6.6846117276679271,0.79443045502636045,-2.812424694174644"
+      ],
+      "new_command": [
+        "/workspace/scratch/49a90ada48ba/mumble/build/scm_estimator",
+        "--data",
+        "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "--case",
+        "cell_a_35hz_s202610240",
+        "--method",
+        "full",
+        "--modes",
+        "3",
+        "--starts",
+        "3",
+        "--max-iter",
+        "120",
+        "--sigma",
+        "0.001",
+        "--prefix",
+        "21000",
+        "--initial",
+        "-3.0092792022133663,-0.74069263298430321,1.5955813386571727,5.4151274779953189,6.6846117276679271,0.79443045502636045,-2.812424694174644"
+      ],
+      "inference_fields_identical": true,
+      "preserved_executable_matches_stored_fit": true,
+      "old_process_wall_s": 1.5578491360001863,
+      "new_process_wall_s": 1.3649657200003276,
+      "optimizer_status": 0,
+      "selected_assessment": {
+        "Q_Ah": {
+          "point": 0.059273865273840126,
+          "units": "Ah",
+          "status": "provisional",
+          "local_range": [
+            0.05632837867668298,
+            0.06237337532237035
+          ],
+          "range_kind": "untruncated_local_two_sigma",
+          "prior_support": [
+            0.03,
+            0.1
+          ],
+          "null_projection": 0,
+          "local_standard_deviation": 0.00151059500322386,
+          "local_halfwidth": 0.0030995100485302213,
+          "relative_halfwidth": 0.052291343481832224,
+          "passes_local_precision": true,
+          "eligible_for_profile_check": true,
+          "active_constraints_present": false,
+          "conditioned_fit": false,
+          "reason_flags": 0,
+          "reasons": [
+            "Local precision screen passed; nonlinear profile confirmation is still required."
+          ]
+        },
+        "current_soc": {
+          "point": 0.7715095853892705,
+          "units": "SOC fraction",
+          "status": "provisional",
+          "local_range": [
+            0.7692009293691647,
+            0.7738182414093763
+          ],
+          "range_kind": "untruncated_local_two_sigma",
+          "prior_support": [
+            0.14186507936504425,
+            0.9325595238095132
+          ],
+          "null_projection": 0,
+          "local_standard_deviation": 0.0011543280100528748,
+          "local_halfwidth": 0.0023086560201057704,
+          "relative_halfwidth": 0.0029923879933921003,
+          "passes_local_precision": true,
+          "eligible_for_profile_check": true,
+          "active_constraints_present": false,
+          "conditioned_fit": false,
+          "reason_flags": 0,
+          "reasons": [
+            "Local precision screen passed; nonlinear profile confirmation is still required."
+          ]
+        },
+        "gamma_minus": {
+          "point": 381.0528278726876,
+          "units": "1/Ah",
+          "status": "unresolved",
+          "local_range": [
+            337.8603979295938,
+            429.76702365700277
+          ],
+          "range_kind": "untruncated_local_two_sigma",
+          "prior_support": [
+            5,
+            1200
+          ],
+          "null_projection": 0,
+          "local_standard_deviation": 22.921325013840676,
+          "local_halfwidth": 48.714195784315166,
+          "relative_halfwidth": 0.12784105567795687,
+          "passes_local_precision": false,
+          "eligible_for_profile_check": false,
+          "active_constraints_present": false,
+          "conditioned_fit": false,
+          "reason_flags": 64,
+          "reasons": [
+            "Finite local range exceeds the declared precision threshold."
+          ]
+        }
+      }
+    },
+    {
+      "checkpoint_s": 2100,
+      "old_command": [
+        "/workspace/scratch/49a90ada48ba/mumble/reference_binaries/scm_estimator_benchmark",
+        "--data",
+        "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "--case",
+        "cell_a_35hz_s202610240",
+        "--method",
+        "full",
+        "--modes",
+        "3",
+        "--starts",
+        "3",
+        "--max-iter",
+        "120",
+        "--sigma",
+        "0.001",
+        "--prefix",
+        "73500",
+        "--initial",
+        "-3.0180132271118225,-0.71863451559294755,1.6022331007236468,5.3922101081942291,5.9155469262334091,0.79995199998228217,-2.8132477693961904"
+      ],
+      "new_command": [
+        "/workspace/scratch/49a90ada48ba/mumble/build/scm_estimator",
+        "--data",
+        "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "--case",
+        "cell_a_35hz_s202610240",
+        "--method",
+        "full",
+        "--modes",
+        "3",
+        "--starts",
+        "3",
+        "--max-iter",
+        "120",
+        "--sigma",
+        "0.001",
+        "--prefix",
+        "73500",
+        "--initial",
+        "-3.0180132271118225,-0.71863451559294755,1.6022331007236468,5.3922101081942291,5.9155469262334091,0.79995199998228217,-2.8132477693961904"
+      ],
+      "inference_fields_identical": true,
+      "preserved_executable_matches_stored_fit": true,
+      "old_process_wall_s": 2.5263585899992904,
+      "new_process_wall_s": 2.641632512999422,
+      "optimizer_status": 0,
+      "selected_assessment": {
+        "Q_Ah": {
+          "point": 0.060006471532823055,
+          "units": "Ah",
+          "status": "provisional",
+          "local_range": [
+            0.059984361649538985,
+            0.060028589565680204
+          ],
+          "range_kind": "untruncated_local_two_sigma",
+          "prior_support": [
+            0.03,
+            0.1
+          ],
+          "null_projection": 0,
+          "local_standard_deviation": 1.105697878502879e-05,
+          "local_halfwidth": 2.2118032857149084e-05,
+          "relative_halfwidth": 0.0003685941248028673,
+          "passes_local_precision": true,
+          "eligible_for_profile_check": true,
+          "active_constraints_present": false,
+          "conditioned_fit": false,
+          "reason_flags": 0,
+          "reasons": [
+            "Local precision screen passed; nonlinear profile confirmation is still required."
+          ]
+        },
+        "current_soc": {
+          "point": 0.5736901920038993,
+          "units": "SOC fraction",
+          "status": "provisional",
+          "local_range": [
+            0.5736341167780171,
+            0.5737462672297814
+          ],
+          "range_kind": "untruncated_local_two_sigma",
+          "prior_support": [
+            0,
+            0.8142261904762289
+          ],
+          "null_projection": 0,
+          "local_standard_deviation": 2.8037612941048217e-05,
+          "local_halfwidth": 5.6075225882135094e-05,
+          "relative_halfwidth": 9.774478745446979e-05,
+          "passes_local_precision": true,
+          "eligible_for_profile_check": true,
+          "active_constraints_present": false,
+          "conditioned_fit": false,
+          "reason_flags": 0,
+          "reasons": [
+            "Local precision screen passed; nonlinear profile confirmation is still required."
+          ]
+        },
+        "gamma_minus": {
+          "point": 370.9962714844923,
+          "units": "1/Ah",
+          "status": "provisional",
+          "local_range": [
+            368.94633212873157,
+            373.0576007118857
+          ],
+          "range_kind": "untruncated_local_two_sigma",
+          "prior_support": [
+            5,
+            1200
+          ],
+          "null_projection": 0,
+          "local_standard_deviation": 1.0278118866909767,
+          "local_halfwidth": 2.0613292273934007,
+          "relative_halfwidth": 0.005556199309349567,
+          "passes_local_precision": true,
+          "eligible_for_profile_check": true,
+          "active_constraints_present": false,
+          "conditioned_fit": false,
+          "reason_flags": 0,
+          "reasons": [
+            "Local precision screen passed; nonlinear profile confirmation is still required."
+          ]
+        }
+      }
+    }
+  ],
+  "linked_chart_check": {
+    "command": [
+      "/workspace/scratch/49a90ada48ba/mumble/build/scm_estimator",
+      "--data",
+      "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+      "--case",
+      "linked_chart_integration_check",
+      "--method",
+      "full",
+      "--modes",
+      "3",
+      "--starts",
+      "1",
+      "--max-iter",
+      "5",
+      "--prefix",
+      "350",
+      "--fixed-current-soc",
+      ".75"
+    ],
+    "all_targets_unresolved_with_support": true,
+    "coordinate_chart_supported": false,
+    "optimizer_status": 1
+  },
+  "assessment_memory": {
+    "caller_workspace_bytes": 4224,
+    "output_struct_bytes": 2488,
+    "options_bytes": 56,
+    "scope": "Reported host-ABI struct sizes; not whole-program or MCU stack high-water measurement."
+  },
+  "notes": [
+    "No 60-fit campaign rerun; recorded commands were copied and rebased without rewriting the source campaign.",
+    "Core numeric inference fields were compared exactly between the preserved benchmark and the current CLI.",
+    "CPU timing fields are deliberately excluded from equality; runtime varies with host conditions.",
+    "Finite C local uncertainty remains provisional and is not a confidence-coverage certificate."
+  ],
+  "repository_import_validation": {
+    "schema": "scm_repository_portability_validation_v1",
+    "study_manifest": "provenance/study_release.json",
+    "study_manifest_sha256": "057c021f0f010032924869e1c45fb760e9a8382f296f33a457014a81fee93763",
+    "adapted_files": {
+      "tests/check_c_integration.py": {
+        "study_sha256": "d6e7f30e1e2166c7ad5031de7bb1963c486c13fc4b92431693fc0d03e3efa62e",
+        "repository_sha256": "ddaba50151091c93f2d9f01c5fb2e9cfd9a5e3a85afe3c5f9802a33c73327bf9"
+      },
+      "tools/validate.py": {
+        "study_sha256": "1006c25f84c9589291c1c40e9875806bb0613cb611cbb48dd4665b2d0d1ebaad",
+        "repository_sha256": "f69114cf5fafecb111a176d51c0a147d00a036855e9e8ce8750f20bbaedbc9a6"
+      }
+    },
+    "unchanged_original_release_files": 53,
+    "unexpected_original_release_changes": [],
+    "build": {
+      "command": [
+        "make",
+        "-j2",
+        "all"
+      ],
+      "exit_code": 0,
+      "rebuilt_cli_sha256": "9c713216750150ddbf91c164ce0c4a29ee67168d4d0dcc9b0bad8f856a1f93e2",
+      "matches_preserved_final_cli": true
+    },
+    "benchmark_resolution": {
+      "selected_path": "reference_binaries/scm_estimator_benchmark",
+      "sha256": "eaada9ffc007b0a4198c87e13b53944ae2a0acc5ce80c41463dae1da65dbd527",
+      "matches_frozen_profile_metadata": true,
+      "verified_cases": [
+        "actual relocated checkout selects packaged benchmark",
+        "empty temporary root falls back to current build CLI",
+        "packaged benchmark selected when build benchmark is absent",
+        "build benchmark retains priority when both are present"
+      ]
+    },
+    "rebased_command_checks": [
+      {
+        "checkpoint_s": 10,
+        "command": "old_command",
+        "data_path": "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "passed": true
+      },
+      {
+        "checkpoint_s": 10,
+        "command": "new_command",
+        "data_path": "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "passed": true
+      },
+      {
+        "checkpoint_s": 600,
+        "command": "old_command",
+        "data_path": "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "passed": true
+      },
+      {
+        "checkpoint_s": 600,
+        "command": "new_command",
+        "data_path": "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "passed": true
+      },
+      {
+        "checkpoint_s": 2100,
+        "command": "old_command",
+        "data_path": "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "passed": true
+      },
+      {
+        "checkpoint_s": 2100,
+        "command": "new_command",
+        "data_path": "/workspace/scratch/49a90ada48ba/mumble/data/cell_a_35hz_s202610240.csv",
+        "passed": true
+      }
+    ],
+    "frozen_campaign_and_integration_receipt_preserved": true,
+    "scope": "One clean host build, binary-location checks, three representative preserved/current CLI comparisons and one linked-chart check. No full campaign or profile optimizations rerun."
+  }
+}
