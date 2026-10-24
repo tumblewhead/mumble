@@ -1,0 +1,95 @@
+{
+  "schema": "mumble_bounded_event_plan_v2",
+  "experiment": "bounded_event_002",
+  "base_revision": "57f3293857d674096d9ed56d7fb875f16f1806b7",
+  "branch": "experiment/bounded-event-002",
+  "scope": "Fixed-memory analytic nonlinear-remainder budget checks on the original joint chart; no new nonlinear fits, chart replacement, cold start or MCU qualification",
+  "preregistration": "Commit this plan before the four retained-trace comparisons. Commit tested implementation before creating a receipt. Preserve failures and all earlier results; do not tune budget, radii or acceptance thresholds from new results.",
+  "representation": {
+    "reference": "Unchanged bounded_event_001 augmented QR and retained-history C estimator",
+    "coordinates": "Original initial-state joint theta/alpha chart, existing 16 coordinate scales and radii",
+    "curvature": "19 structurally possible scaled Hessian entries: 9 RC, 7 hysteresis, 3 SOC/capacity",
+    "online_statistic": "C_ij = hypot(C_ij, sup_box(abs(scaled Hessian_ij))/sigma) for each observation",
+    "state": "Interval RC and hysteresis states, derivative envelopes, actual elapsed time and signed/unsigned charge; never reset at event seals",
+    "prediction_remainder": "E(delta)=sum_diagonal(0.5*C_ii*delta_i^2)+sum_upper_offdiagonal(C_ij*abs(delta_i*delta_j))",
+    "likelihood_remainder": "B(delta)=sqrt(2*L_affine(delta))*E(delta)+0.5*E(delta)^2, with the complete residual constant",
+    "claim": "Real-arithmetic Taylor and triangle/Cauchy inequalities give norm(nonlin-minus-affine prediction / sigma)<=E and abs(L_nonlinear-L_affine)<=B on the fixed box",
+    "arithmetic": "Ordinary C double and libm evaluation without outward rounding; arithmetic_validated=false. Falsification checks are numerical evidence, not a formal floating-point certificate.",
+    "model": "Existing smooth illustrative OCV only; derivative bounds abs(Uprime)<=1.79 and abs(Usecond)<=4. Measured PWL OCV is rejected as unsupported.",
+    "enclosure_domain": "Entire original rectangular chart, even infeasible parts, using the global smooth OCV extension. Candidate physical supports, coupled entering hysteresis and complete historical SOC endpoint path are checked separately.",
+    "noise": "Same known common iid 1mV voltage-noise likelihood as the frozen reference",
+    "evidence_integrity": "Matched immutable source/chart/count/time/charge and atomic paired ingestion; history and active-event factors contribute once each; no posterior prior and no fresh budget origin after substeps"
+  },
+  "budget": {
+    "nll_units": 0.1,
+    "rationale": "Engineering comparison budget equal to 5% of the existing DeltaNLL=2 local profile screen; not a probability or coverage statement",
+    "analytic_budget_pass": "Inside declared chart and physical support, finite bound B<=0.1",
+    "eligible_update": "Analytic budget pass AND zero flagged anchor-residual events AND L_affine+B<L_anchor",
+    "zero_step": "Can pass the error budget but is never counted as a descent update",
+    "failure_semantics": "Over-budget means the sufficient bound does not qualify the candidate. It does not establish that the actual candidate is inaccurate. Outside-chart means unavailable, not likelihood exclusion.",
+    "known_conservatism": "Existing quiet-tail full-step exact remainder norm alone implies a Cauchy bound about0.441NLL, despite observed signed error about-0.00005062NLL. This method cannot qualify that full step to0.1, even with a perfect remainder-norm bound."
+  },
+  "case": "cell_a_35hz_s202610240",
+  "runs": [
+    {"name": "unexcited_400", "anchor_config": "experiments/bounded_event_001/receipt_scaled_givens/unexcited_400_anchor.txt", "end_samples": 14000, "split_samples": 0, "claim": "retrospective_representation_only"},
+    {"name": "informative_900", "anchor_config": "experiments/bounded_event_001/receipt_scaled_givens/informative_900_anchor.txt", "end_samples": 31500, "split_samples": 0, "claim": "retrospective_representation_only"},
+    {"name": "carry_1800_to_2100", "anchor_config": "experiments/bounded_event_001/receipt_scaled_givens/carry_1800_to_2100_anchor.txt", "end_samples": 73500, "split_samples": 63000, "claim": "retrospective_prefix_compression_then_causal_tail_extension"},
+    {"name": "nominal_900", "anchor_config": "experiments/bounded_event_001/receipt_scaled_givens/nominal_900_anchor.txt", "end_samples": 31500, "split_samples": 0, "claim": "cold_chart_falsification_only"}
+  ],
+  "acquisition": {
+    "nominal_Hz": 35,
+    "chronology": "Use each actual dt, current and sample index in original order; voltage at interval end; positive current discharges",
+    "event_policy": "Unchanged current/dt boundary or256 samples; sealing the likelihood factor does not reset the remainder state",
+    "max_event_samples": 256,
+    "residual_event_RMS_limit_sigma": 4
+  },
+  "candidate_policy": {
+    "scaled_radii": [0.05,0.05,0.05,0.05,0.05,0.02,0.01,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05],
+    "count_per_checkpoint": 24,
+    "original_five": ["zero", "inside_R0:delta7=0.025", "inside_SOC_Q:delta5=0.005,delta6=0.0025", "outside_Q:delta6=0.3", "outside_SOC:delta5=0.1"],
+    "full_step": "Existing minimum-norm affine step with relative eigen cutoff1e-10; report discarded/null directions without assigning zero uncertainty",
+    "scaled_full_steps": "Full step divided by2,4,8,16,32,64,128,256; every displacement measured from the same original chart anchor",
+    "conditional_SOC_Q": "Solve the2x2 SOC/logQ normal-equation block while holding the other14 candidate displacements at0. This is a conditional trial update, not a claim that nuisance parameters are known. Retain the full16D evidence and uncertainty.",
+    "affine_sublevel_probes": "Eight deterministic trigonometric directions in the retained eigenspace, mapped to DeltaNLL=2 around the affine minimum. Rank-deficient cases explore only the retained space; null directions remain unresolved and physically supported.",
+    "unexcited_control": "Gamma-minus-only displacement equal to half its configured radius; before negative throughput its curvature is0 while its parameter remains unexcited",
+    "no_clipping": "Report out-of-domain candidates and exclude them from analytic-budget claims; do not silently project them or change the chart"
+  },
+  "region_check": {
+    "set": "Intersection of original coordinate box and physical support with L_affine<=L_affine_min+2",
+    "uniform_prediction_bound": "E_box obtained by substituting all configured radii in the nonnegative sparse remainder polynomial",
+    "uniform_NLL_bound": "sqrt(2*(L_affine_min+2))*E_box+0.5*E_box^2",
+    "interpretation": "Sufficient bound conditional on set membership, including physical extents along null directions. Does not assert the set is nonempty, that every box point is low-loss, or that points outside the box are excluded by evidence.",
+    "budget": "Report pass/fail at the same0.1NLL budget without retuning. Uniform failure is a substantive limitation of this design."
+  },
+  "checks": {
+    "observed_whitened_remainder_norm_absolute_tolerance": 1e-10,
+    "observed_absolute_NLL_error_bound_tolerance": 1e-8,
+    "tolerance_meaning": "Numerical audit allowance only; not added to the online0.1 budget or presented as a floating-point proof",
+    "factor_vs_direct_affine_relative_cost_tolerance": 1e-9,
+    "factor_vs_reference_relative_Gram_tolerance": 1e-9,
+    "zero_and_alpha_only": "Exact analytic E=B=0; audit uses the model's exact affine alpha form consistently for all candidates",
+    "unexcited": "400s gamma-minus curvature remains0, rank/null status is preserved, Q/SOC precision remains unresolved",
+    "known_bad_inside_point": "Existing inside_SOC_Q point at2100s must fail0.1NLL budget despite passing radius; its replay error remains exposed",
+    "nominal_chart": "Flagged residuals prevent eligible updates; do not relabel local rank or narrow ranges as cold-start success",
+    "matched_state": "Wrong source/order/nonfinite ingestion and mismatched chart/count query fail; paired banks are atomic",
+    "domain": "PWL OCV unsupported; candidate radius is not a likelihood certificate; no chart-change API",
+    "unit_scope": "Exercise current signs, zero dt, actual-dt variation, event partition, all19 structural pairs and alpha-only linearity",
+    "truth": "No synthetic truth in inference, chart, bounds, budget or candidate generation; any truth scoring occurs after inference",
+    "audit": "Reopen observations only in the separately named host validation pass; online objects retain no raw observations",
+    "claims_separate": ["affine numerical convergence", "nonlinear convergence", "point accuracy", "local precision", "validated coverage"],
+    "coverage_validated": false
+  },
+  "memory": {
+    "curvature_numeric_statistics_bytes_float64": 152,
+    "account_for": ["original evidence bank and workspace", "new remainder bank including config and audit fields", "new transactional workspace", "query result", "snapshot", "solve/assessment workspaces and outputs", "candidate vectors", "source and sample buffers", "stack callpaths", "OCV storage", "external library/application/interrupt costs separately unresolved"],
+    "lifetime": "Core state and scratch independent of observation/event count; no unaccounted full-bank atomic copy",
+    "target": "Approximately10KiB eventual subsystem goal is not met by assumption; no Cortex-M23 claim"
+  },
+  "outputs": {
+    "new_files": ["include/scm_remainder.h", "src/scm_remainder.c", "tests/test_remainder.c", "tools/remainder_probe.c", "tools/run_remainder.py"],
+    "evidence_root": "experiments/bounded_event_002",
+    "receipt": "Hash plan, implementation, binary, configs, observations and retained reference; refuse overwrite",
+    "frozen_policy": "Do not edit B001 numerical implementation, receipts or original35Hz results; no60-fit or profile campaign reruns"
+  },
+  "next_decision": "If full-region or useful joint-step validity remains unqualified, record that result and identify the next bounded statistic or carried-state contract needed. A bound on the old polynomial does not reconstruct a new historical Jacobian or exact nonlinear carried state."
+}
