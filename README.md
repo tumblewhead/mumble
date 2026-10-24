@@ -10,11 +10,16 @@ local affine likelihood. A bounded nonlinear-remainder component now checks
 trial moves against a declared analytic error budget. Cold-start learning,
 historical relinearization and validated floating-point bounds remain open.
 These components are host references, without Cortex-M23 qualification.
+Numerical stability for indefinite runtime is now an explicit proof gate.
+The current implementation does not satisfy it; conditional mathematical
+lemmas, finite-state limitations and small counterexamples are recorded below.
 
 ## Start here
 
 | Resource | Contents |
 | --- | --- |
+| [Indefinite numerical stability](docs/INDEFINITE_NUMERICAL_STABILITY_001.md) | Lifetime proof contract, conditional invariants, finite-state limitations and seven small counterexamples |
+| [Stability proof contract](proofs/indefinite_stability_001/contract.json) | Machine-readable acceptance gates and unresolved evidence/arithmetic choices |
 | [Nonlinear remainder experiment](docs/BOUNDED_EVENT_002.md) | Sparse joint-parameter bound, useful conditional tail trial, conservative region failure, preserved arithmetic failures and full memory costs |
 | [Remainder receipt](experiments/bounded_event_002/receipt/receipt.json) | 654/672 unchanged checks pass; 18 near-roundoff prediction-norm failures retained and diagnosed separately |
 | [Bounded event experiment](docs/BOUNDED_EVENT_001.md) | Fixed-memory C evidence design, complete host memory accounting, successful local carry and explicit failure witnesses |
@@ -133,14 +138,40 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The current priority is a tighter likelihood-error bound that retains
-residual/curvature correlation, explicit floating-point error handling, and
-a bounded carried-state contract for chart initialization or change.
+The current priority is an indefinite-runtime numerical-stability contract
+and proof: physical-state/charge invariants, explicitly defined finite
+historical-evidence semantics, and error-preserving event/chart transitions.
+The proposed signed residual/curvature summary remains a candidate within
+that contract. Neither finite-run accuracy nor bounded memory establishes
+a lifetime error bound. No forgetting, information cap, changed noise model
+or finite mission limit has been selected as a substitute.
 Subsequent experiments should cover measured OCV, sensor
 offsets, filtered/correlated noise, model mismatch and parameter drift. The current
 study does not validate aging, temperature variation, EOD prediction, or Cortex-M23
 latency, SRAM, flash or power. The requested 35 Hz operating point was tested;
 20 Hz and 1 kHz comparisons remain separate work.
+
+## Indefinite-runtime stability proof gate
+
+The new review separates numerical safety, fidelity, earlier-evidence
+retention and conditional usefulness. It proves conditional time-uniform
+error lemmas for dissipative states and bounded exact quantized charge,
+and finite-state obstructions to unrestricted all-history likelihood
+and empirical-mean accuracy. Those lemmas are not executable certificates
+for the current C/libm implementation.
+
+A preregistered small experiment reproduces seven mechanisms, including
+absorbed increments in the production QR and remainder updates and atomic
+rejection at the counter limit. These are scalar or deliberately constructed
+API boundary states; no deployed-lifetime or physical-history reachability
+claim is made. All seven reproduced mechanisms are counterexample evidence,
+not a passing indefinite-stability result.
+
+Read the [proof report](docs/INDEFINITE_NUMERICAL_STABILITY_001.md) and
+[claim ledger](proofs/indefinite_stability_001/claims.json).
+The existing 35 Hz, B001 and B002 results and their interpretations remain
+unchanged. A full lifetime invariant, selected evidence semantics, verified
+machine arithmetic and Cortex-M23 qualification remain open.
 
 ## Bounded event prototype
 

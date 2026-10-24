@@ -1,0 +1,160 @@
+{
+  "schema": "mumble_indefinite_stability_claims_v1",
+  "proof_kind": "Written algebraic proofs with independent review; not machine-checked C certificates.",
+  "claims": [
+    {
+      "id": "P1",
+      "name": "Damping-scaled defect",
+      "status": "proved under assumptions",
+      "assumptions": [
+        "x_next=a*x+(1-a)*b;0<=a<=1",
+        "Computed local defect abs(d)<=eta*(1-a) including coefficient/input errors",
+        "a=1 implies exact identity"
+      ],
+      "result": "abs(e_n)<=P_n*abs(e0)+(1-P_n)*eta<=max(abs(e0),eta), all finite n",
+      "proof": "Unroll e_next=a*e+d. Sum (1-a_j)*product_{l>j} a_l telescopes to 1-P_n.",
+      "implementation_status": "Current C/libm defect premise unproved",
+      "report_section": "5"
+    },
+    {
+      "id": "P2",
+      "name": "Uniform contraction",
+      "status": "proved under assumptions",
+      "assumptions": [
+        "abs(e_next)<=rho*abs(e)+eta",
+        "0<=rho<1 fixed"
+      ],
+      "result": "abs(e_n)<=rho^n*abs(e0)+eta*(1-rho^n)/(1-rho)",
+      "proof": "Geometric-series induction",
+      "implementation_status": "Nominal35Hz does not establish positive actual-dt lower bound; current API allows zero/arbitrarily small dt",
+      "report_section": "5"
+    },
+    {
+      "id": "P3",
+      "name": "Exact bounded quantized charge",
+      "status": "proved under assumptions",
+      "assumptions": [
+        "I=cI*m and dt=ct*t are exact represented input definitions",
+        "Integer product m*t fits proved width",
+        "Every accepted prefix P=sum(m*t) fits declared range",
+        "Overflow check occurs before unsafe signed arithmetic"
+      ],
+      "result": "Stored P equals exact represented-input sum for all accepted finite prefixes; bounded query conversion error independent of n",
+      "proof": "Exact multiplication/addition induction; bounded-P query evaluation",
+      "implementation_status": "Not implemented; ADC/timer ranges/scales and prefix-range justification open",
+      "report_section": "6"
+    },
+    {
+      "id": "P4",
+      "name": "Finite-state all-history likelihood-contrast obstruction",
+      "status": "proved under assumptions",
+      "assumptions": [
+        "Deterministic finite complete state",
+        "Arbitrary repeated admissible observation with fixed nonzero per-observation contrast c",
+        "Fixed query; no unbounded external time/count/storage"
+      ],
+      "result": "No uniform fixed absolute error epsilon for all n",
+      "proof": "Repeated state implies periodic identical query outputs. Exact contrast grows by kp*c; choose kp*abs(c)>2epsilon.",
+      "scope": "Unrestricted fixed-candidate all-history contrast; not every restricted local query or indefinite estimator",
+      "report_section": "4.1"
+    },
+    {
+      "id": "P5",
+      "name": "Finite-state arbitrary binary empirical-mean obstruction",
+      "status": "proved under assumptions",
+      "assumptions": [
+        "Deterministic finite complete state",
+        "Every arbitrary-length/order binary stream",
+        "Uniform absolute mean error epsilon<1/2",
+        "No unbounded external count/time/storage"
+      ],
+      "result": "The approximation guarantee is impossible",
+      "proof": "Repeated-one prefixes of lengths i and i+kp share state. Append m zeros, choosing i<<m<<i+kp. Exact means approach0 and1 while final states/outputs match.",
+      "scope": "Normalization/precision floor alone cannot preserve arbitrary all-history mean; restricted semantics may differ",
+      "report_section": "4.2"
+    },
+    {
+      "id": "P6",
+      "name": "Repeated transition defect composition",
+      "status": "conditional recurrence",
+      "assumptions": [
+        "E_next<=L*E+delta"
+      ],
+      "result": "L=1 and fixed positive delta gives bound E0+m*delta; separate per-transition budgets are not an all-time proof",
+      "proof": "Iterated recurrence; exact transformation, contraction, summable defect or other invariant needed",
+      "implementation_status": "No current reanchor API or transport certificate",
+      "report_section": "7"
+    },
+    {
+      "id": "P7",
+      "name": "Relative rank screen can mask unchanged information",
+      "status": "proved policy example",
+      "assumptions": [
+        "H=diag(1,N),N>=1",
+        "cutoff=N*r and retain eigenvalues strictly greater than cutoff"
+      ],
+      "result": "Old eigenvalue1 is no longer retained once N>=1/r; default r=1e-10 gives threshold1e10",
+      "proof": "Direct inequality",
+      "scope": "Exact-arithmetic qualification policy, not proof that QR factor lost the direction",
+      "implementation": "src/scm_assess.c:scm_assess and diagnose",
+      "report_section": "2"
+    },
+    {
+      "id": "P8",
+      "name": "Inductive enclosure",
+      "status": "proved theorem schema",
+      "assumptions": [
+        "s0 in Gamma(machine_state0)",
+        "All permitted transitions satisfy F(Gamma(s),u) subset Gamma(machine_transition(s,u))"
+      ],
+      "result": "Exact reference remains enclosed for all finite prefix lengths",
+      "proof": "Induction",
+      "implementation_status": "A sound and nonvacuously useful Gamma/transition invariant is not yet constructed",
+      "report_section": "7"
+    },
+    {
+      "id": "P9",
+      "name": "Current fixed-chart sufficient bound grows with sample count",
+      "status": "proved exact-arithmetic property of current formula",
+      "assumptions": [
+        "Every observation adds z0/z0 unscaled bound4",
+        "Fixed positive scale s_z and sigma",
+        "Fixed nonzero scaled delta_z"
+      ],
+      "result": "Czz=4*s_z^2/sigma*sqrt(N); E>=Czz*delta_z^2/2; B>=E^2/2 grows linearly withN",
+      "proof": "Repeated exact root-sum-square of a positive constant and substitution into nonnegative polynomial",
+      "scope": "Failure of current sufficient bound, not measured actual worst-case error or failure of every other query policy",
+      "implementation": "src/scm_remainder.c:add_bound,advance,scm_remainder_query",
+      "report_section": "2"
+    }
+  ],
+  "empirical": {
+    "receipt": "experiments/indefinite_stability_001/receipt.json",
+    "mechanisms_reproduced": "7/7",
+    "status": "falsification evidence only",
+    "source_revision": "0eff2339eefdbed6d8ff373a3c5b53122e357048",
+    "limitations": [
+      "Constructed boundary states are not claimed reachable battery histories",
+      "No endurance run",
+      "No whole-estimator proof",
+      "Host behavior is not target qualification"
+    ]
+  },
+  "references": [
+    {
+      "title": "Higham, The Accuracy of Floating Point Summation (1993)",
+      "url": "https://nhigham.com/wp-content/uploads/2023/10/high93s.pdf",
+      "role": "Finite-length error analysis and summation conditioning; not an indefinite estimator proof"
+    },
+    {
+      "title": "Goldberg, What Every Computer Scientist Should Know About Floating-Point Arithmetic",
+      "url": "https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html",
+      "role": "Arithmetic assumptions and rounding semantics"
+    },
+    {
+      "title": "Gappa documentation",
+      "url": "https://gappa.gitlabpages.inria.fr/gappa/index.html",
+      "role": "Potential local arithmetic proof tooling; not executed here"
+    }
+  ]
+}

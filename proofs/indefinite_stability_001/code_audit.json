@@ -1,0 +1,137 @@
+{
+  "schema": "mumble_indefinite_stability_code_audit_v1",
+  "base_revision": "e478d0eda07b16cdf9121e391d06e2fb9917128b",
+  "reviewer": "independent code-audit agent",
+  "scope": "Read-only production-path inspection; original numerical implementation unchanged.",
+  "conclusion": "Fixed storage, atomic failures and local safeguards do not establish indefinite numerical fidelity or availability.",
+  "inventory": [
+    {
+      "state": "elapsed",
+      "paths": [
+        "src/scm_model.c:scm_model_step",
+        "src/scm_remainder.c:advance"
+      ],
+      "update": "elapsed+=dt",
+      "issue": "Unbounded real magnitude; positive dt can be absorbed while result remains finite; used by entering-state curvature bounds.",
+      "obligation": "Bounded representation of needed elapsed-time functions with tail/error enclosure, not an unjustified reset."
+    },
+    {
+      "state": "net charge/extrema",
+      "paths": [
+        "src/scm_model.c:scm_model_step",
+        "src/scm_remainder.c:advance",
+        "src/scm_evidence.c:scm_evidence_check_candidate"
+      ],
+      "update": "charge+=I*dt/3600; min/max of rounded charge",
+      "issue": "Noncontractive integration. Identical accumulators agreeing is not exact-charge enclosure; extrema/domain checks inherit error.",
+      "obligation": "Useful uniform arithmetic enclosure or exact bounded quantized accumulation; separate sensor/calibration error."
+    },
+    {
+      "state": "RC state/sensitivities",
+      "paths": [
+        "src/scm_model.c:scm_model_step"
+      ],
+      "real_invariants": [
+        "f in convex hull of initial state and bounded I",
+        "0<=a<=1",
+        "fixed tau, f0=0: abs(df/dlogtau)<=2*Imax/e; abs(da/dlogtau)<=1/e"
+      ],
+      "issue": "Separate exp/expm1 values need not sum exactly to1; dt may be zero or arbitrarily small; coupled derivatives need their own proof.",
+      "obligation": "Machine local-defect and range invariant; exact identity or justified contraction conditions."
+    },
+    {
+      "state": "hysteresis",
+      "paths": [
+        "src/scm_model.c:scm_model_step",
+        "src/scm_remainder.c:advance"
+      ],
+      "real_invariants": [
+        "hb in[-1,1],ha in[0,1]",
+        "I=0 or dt=0 skips model hysteresis update"
+      ],
+      "issue": "Contraction depends on active throughput; no excitation floor can be inferred from35Hz.",
+      "obligation": "Throughput-sensitive invariant including derivative/envelope coupling and inactive identities."
+    },
+    {
+      "state": "positive/negative throughput",
+      "paths": [
+        "src/scm_remainder.c:advance"
+      ],
+      "update": "throughput[sign]+=abs(step_charge)",
+      "issue": "Unbounded under cycling despite bounded net charge; absorption before overflow.",
+      "obligation": "Represent required decay functions with sound bounded error; do not silently erase entering-state uncertainty."
+    },
+    {
+      "state": "event/history QR",
+      "paths": [
+        "src/scm_evidence.c:qr_row",
+        "src/scm_evidence.c:merge",
+        "src/scm_evidence.c:seal_staged"
+      ],
+      "existing_safeguards": [
+        "scaled rotations",
+        "disjoint source factors",
+        "event size cap"
+      ],
+      "issue": "History merges indefinitely; new rows may be absorbed; arbitrary dt jitter can cause a merge per sample.",
+      "obligation": "Lifetime directional factor/query error and preserved evidence semantics; finite-run backward stability alone insufficient."
+    },
+    {
+      "state": "curvature RSS",
+      "paths": [
+        "src/scm_remainder.c:add_bound",
+        "src/scm_remainder.c:advance"
+      ],
+      "update": "C=hypot(C,value)",
+      "issue": "Nearest rounding is not outward enclosure; positive values can be absorbed.",
+      "analytic_growth": "Czz=4*s_z^2/sigma*sqrt(N); fixed nonzero delta_z makes .5E^2 grow linearly even in exact arithmetic.",
+      "obligation": "Separate machine enclosure from all-history analytic discrepancy/query growth."
+    },
+    {
+      "state": "queries/normal extraction",
+      "paths": [
+        "src/scm_evidence.c:scm_evidence_factor_cost",
+        "src/scm_evidence.c:scm_evidence_factor_normal",
+        "src/scm_evidence.c:scm_evidence_factor_rms_sigma",
+        "src/scm_remainder.c:scm_remainder_query"
+      ],
+      "issue": "Dot-product cancellation, squared magnitudes/conditioning, large-cost differences, uint64-to-double inexactness above2^53.",
+      "obligation": "Enclose actual decision differences, ranks, alarms and domain margins, not just norm primitives."
+    },
+    {
+      "state": "assessment cutoff",
+      "paths": [
+        "src/scm_assess.c:scm_assess",
+        "src/scm_assess.c:diagnose"
+      ],
+      "exact_witness": "H=diag(C,N),N>=C; lambda_cut=N*1e-10; old C retained only for N<C*1e10.",
+      "issue": "Exact-arithmetic relative-rank policy can withhold earlier useful information due unrelated repetition; not necessarily factor corruption.",
+      "obligation": "Direction/target-aware numerical certification with actual error margins."
+    },
+    {
+      "state": "counters/source/persistence",
+      "paths": [
+        "src/scm_evidence.c:scm_evidence_push",
+        "src/scm_evidence.c:merge",
+        "src/scm_evidence.c:seal_staged",
+        "src/scm_remainder.c:advance",
+        "src/scm_remainder.c:matched"
+      ],
+      "issue": "uint64 limits terminate ingestion; paired object binding is in-process; no supported restore/migration/rollover.",
+      "obligation": "Explicit modular/epoch and bounded-replay delivery assumptions. Finite IDs cannot distinguish arbitrary infinite old duplicates."
+    }
+  ],
+  "missing_contract": [
+    "I/V/dt upper bounds",
+    "minimum whitening scale",
+    "actual ADC/timer resolution",
+    "zero/small dt behavior",
+    "parameter/OCV slope bounds",
+    "rounding/subnormal/compiler/FMA semantics",
+    "libm error bounds",
+    "alias/trusted-object assumptions",
+    "outside-contract lifecycle"
+  ],
+  "noise_scope": "Gaussian benchmark has unbounded support; deterministic range proof should concern bounded represented inputs with a separately declared sensor/statistical model.",
+  "source_limits": "No automatic fixed-point, rescaling, precision upgrade or reset remedy is claimed."
+}

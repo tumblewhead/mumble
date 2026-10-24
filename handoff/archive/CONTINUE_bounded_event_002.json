@@ -1,0 +1,141 @@
+{
+  "schema": "mumble_continuation_v3",
+  "task": "Continue bounded battery evidence research from current canonical refs; preserve newer/dirty work",
+  "authority": {
+    "repository": "https://github.com/tumblewhead/mumble",
+    "work_branch": "experiment/bounded-event-002",
+    "main_reference_checkpoint": "0fd443b126579c625aea8c3772ddc28668aa242b",
+    "base_bounded_reference": "57f3293857d674096d9ed56d7fb875f16f1806b7",
+    "experiment_source_local": "bcaec7e1b8225eab095aa9871da95045ebb10a00",
+    "read_first": [
+      "AGENTS.md",
+      "README.md",
+      "PROJECT_STATE.json",
+      "handoff/CONTINUE.json"
+    ],
+    "prior_handoff": "handoff/archive/CONTINUE_bounded_event_001.json",
+    "context_policy": "Read selective summaries; avoid bulk raw traces/results. Commits are provenance, never reset targets.",
+    "publication_status": "Published; fetch current refs and continue on experiment/bounded-event-002 while preserving newer or dirty work.",
+    "publication_provenance": "provenance/bounded_event_002_publication.json",
+    "original_commit_bundle": "provenance/bounded_event_002_development.bundle",
+    "experiment_source": "95da0fc64925668e7f112be5e66fce3c752acfbf",
+    "precision_source": "56de16891104e131a5c303c99384c23e8f598d50",
+    "publication_semantics": "Published source trees equal original local trees. Receipts keep original source SHAs; publication map and verified bundles preserve exact provenance."
+  },
+  "objective": {
+    "rule": "Estimate stimulus-supported quantities, carry earlier evidence/uncertainty, explicitly report unresolved targets",
+    "nominal_Hz": 35,
+    "sample_contract": "Preserve exact index/order and actual dt/current; voltage at interval END; positive current discharges.",
+    "target": "Approximately 10KiB eventual Cortex-M23 goal; current host reference is unqualified.",
+    "communication": "Compact JSON/YAML"
+  },
+  "current_work": {
+    "core": [
+      "include/scm_remainder.h",
+      "src/scm_remainder.c",
+      "tests/test_remainder.c"
+    ],
+    "host": [
+      "tools/remainder_probe.c",
+      "tools/run_remainder.py",
+      "tools/measure_remainder_memory.py"
+    ],
+    "method": "19 sparse joint Hessian RSS envelopes; Taylor/Minkowski prediction bound E; complete-residual Cauchy bound B=sqrt(2Laff)*E+0.5E^2.",
+    "history": "Original 16D chart; paired ingestion from empty state; exact evidence-object binding. Bound state is carried across events. Independent remainder ingestion invalidates query ancestry.",
+    "source_integrity": "Caller content ID binds immutable ordered source; paired ancestry/order checks. Public structs are trusted; shallow-copy rebinding and serialized restore are unsupported.",
+    "domain": "Original rectangle and physical support; smooth illustrative OCV only. PWL curves are unsupported.",
+    "budget": {
+      "NLL": 0.1,
+      "meaning": "5% of DeltaNLL=2 engineering comparison; no coverage claim.",
+      "eligible": "Nonzero inside point; B<=0.1; no residual flags; Laff+B<Lanchor. All fractions use the original anchor."
+    },
+    "arithmetic_validated": false,
+    "updates_applied": false,
+    "reanchor_API": false
+  },
+  "evidence": {
+    "report": "docs/BOUNDED_EVENT_002.md",
+    "plan": "experiments/bounded_event_002/plan.json",
+    "receipt": "experiments/bounded_event_002/receipt/receipt.json",
+    "memory": "experiments/bounded_event_002/memory_accounting.json",
+    "precision_plan": "experiments/bounded_event_002/precision_diagnostic_plan.json",
+    "B001": "experiments/bounded_event_001/receipt_scaled_givens/receipt.json",
+    "original_study": "results/streaming_results.json",
+    "precision_diagnostic": "experiments/bounded_event_002/precision_audit/receipt.json",
+    "independent_review": "experiments/bounded_event_002/independent_review.json",
+    "precision_mpmath": "experiments/bounded_event_002/independent_precision/mp_remainder_diagnostic_summary.json",
+    "verification": "experiments/bounded_event_002/verification.json"
+  },
+  "results": {
+    "original_checks": "654/672 pass; retain 18 prediction-norm failures. All NLL gates pass.",
+    "failure": "At 900s/1800s nearly stationary anchors, double replay norms remain 1.39e-10..4.87e-10 against fixed 1e-10 allowance while quadratic envelopes vanish. Precision diagnosis is separate, not a retroactive pass.",
+    "400s": "Rank14; gamma_minus unexcited; Q/SOC unresolved despite one tiny eligible conditional trial.",
+    "900s_and1800s": "Fitted anchors nearly stationary; no eligible trial; original-anchor local precision retained.",
+    "tail2100s": {
+      "conditional_B": 0.004119195530653909,
+      "conditional_upper_cost_improvement": 0.13142688209336484,
+      "conditional_Q_Ah": 0.06000883069273305,
+      "conditional_SOC": 0.5736967974075351,
+      "full_joint_B": 4.794214232767298,
+      "full_joint_observed_signed_NLL_error": -5.0619722330025015e-05,
+      "eligible": "Conditional SOC/Q trial plus joint step divided by16,32,64,128,256.",
+      "whole_region_B": 17367.970890031786,
+      "inside_radius_witness_B": 251.05640868172907,
+      "inside_radius_witness_observed_NLL_error": -133.9773816203341
+    },
+    "nominal900s": "214 residual flags; no eligible update. Full rank and narrow local ranges are insufficient.",
+    "whole_region": "All five conditional box/sublevel-set bounds exceed0.1. These are sufficient bounds, not measured worst errors or evidence exclusions.",
+    "local_uncertainty": "Diagnostics remain at the original anchor; no relinearized uncertainty at trial points.",
+    "precision_diagnosis": {
+      "longdouble_same18": "All18 below unchanged1e-10 allowance; norms7.50e-14..4.63e-13. Original654/672 status retained.",
+      "independent_MP_worst_norm": 4.639351056408212e-20,
+      "worst_recorded_E_bound": 1.6232163605680737e-19,
+      "worst_original_double_norm": 4.865010381168873e-10,
+      "MP50_vs80_relative_difference": 1.9885158192173663e-25,
+      "conclusion": "Selected worst failure is dominated by arithmetic; ordinary C bounds remain unvalidated."
+    }
+  },
+  "memory_host_bytes": {
+    "remainder_bank": 1200,
+    "remainder_workspace": 1200,
+    "query_result": 48,
+    "paired_ingestion_objects": 9912,
+    "paired_ingestion_sample_project_stack": 10672,
+    "simultaneous_diagnostic_objects": 20856,
+    "diagnostic_objects_assessment_project_stack": 21720,
+    "whole_probe_static_named": 36145,
+    "external_costs": "Library/application/interrupt/acquisition and target ABI costs unmeasured; complete10KiB target not met."
+  },
+  "nonclaims": [
+    "No formal floating-point enclosure",
+    "No whole-region validity, nonlinear convergence, cold start or chart transition",
+    "No updated posterior/coverage at selected trial",
+    "No measured-OCV, real-cell, sensor-bias, drift, aging, temperature or EOD validation",
+    "No MCU resource qualification; full host memory exceeds goal"
+  ],
+  "next": {
+    "milestone": "Tighter bounded likelihood error and explicit carried-state contract",
+    "first_action": "Inspect full-step Cauchy floor about0.441NLL even using exact remainder, and whole-region failure. Develop signed residual/curvature moments with bounded third-order remainder and complete added-memory accounting; test the same witnesses before a new campaign. Handle floating-point error separately.",
+    "constraints": [
+      "Do not relax0.1 budget or erase18 failed gates",
+      "Keep truth out of inference",
+      "Do not assign zero uncertainty to pseudoinverse null directions",
+      "Recentring/bounding the old polynomial does not reconstruct a new historical Jacobian or changed RC/hysteresis state",
+      "Keep old/new observation factors source-disjoint; no posterior prior plus replayed data",
+      "Preserve original35Hz/B001 results and provenance"
+    ]
+  },
+  "reproduction": {
+    "run": "make test-remainder build/scm_remainder_probe && python3 tools/run_remainder.py --output-dir experiments/bounded_event_002/NEW_RECEIPT",
+    "memory": "python3 tools/measure_remainder_memory.py --probe-result experiments/bounded_event_002/NEW_RECEIPT/carry_1800_to_2100.json --output experiments/bounded_event_002/NEW_MEMORY.json",
+    "policy": "Require new output paths. Original runner nonzero exit captures18 known precision failures. No60-fit/profile campaign is needed."
+  },
+  "first_response": "Fetch current refs and inspect status; read selective handoff/evidence. State analytic progress and unresolved region/machine arithmetic, then continue the next bounded design.",
+  "resume_commands": [
+    "git status --short --branch",
+    "git fetch origin",
+    "git switch experiment/bounded-event-002",
+    "git pull --ff-only",
+    "make test-remainder build/scm_remainder_probe"
+  ]
+}

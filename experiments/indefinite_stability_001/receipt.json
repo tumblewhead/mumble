@@ -1,0 +1,229 @@
+{
+  "schema": "mumble_indefinite_stability_witness_receipt_v1",
+  "started_utc": "2026-10-24T23:31:04.892462+00:00",
+  "interpretation": "Reproducing the mechanisms is counterexample evidence, not indefinite-stability qualification.",
+  "source_revision": "0eff2339eefdbed6d8ff373a3c5b53122e357048",
+  "work_branch": "research/indefinite-numerical-stability-001",
+  "plan": "experiments/indefinite_stability_001/plan.json",
+  "plan_and_sources_match_commit_before_run": {
+    "src/scm_model.c": true,
+    "src/scm_evidence.c": true,
+    "src/scm_remainder.c": true,
+    "include/scm_model.h": true,
+    "include/scm_evidence.h": true,
+    "include/scm_remainder.h": true,
+    "tools/stability_witness.c": true,
+    "tools/run_stability_witnesses.py": true,
+    "experiments/indefinite_stability_001/plan.json": true
+  },
+  "source_sha256_before": {
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_evidence.c": "f82548e50419d58f6cac8d53ab7462bb23f7b7bc8070d005b64ca0dc2f7f3e5e",
+    "src/scm_remainder.c": "bfc560106e67771ecda11b5f28caee2925046133e79e298c905032a1c7b03e83",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_evidence.h": "8ff50bb2e1e5f14bfb96aac766ce9005e85a1fbb16829fe1b5964a87596962d6",
+    "include/scm_remainder.h": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494",
+    "tools/stability_witness.c": "601bfa2d204c7ebdb695fb0b56e5fcb12997f18f8b759a52a624612f471c0e5e",
+    "tools/run_stability_witnesses.py": "3ab57ab54126f50adfccbdf3ed08497809c5e2e3654e04423b799957b0a0b2db",
+    "experiments/indefinite_stability_001/plan.json": "5ad61cca3eb1a6b2de95092a9a6205addf05e034585746733f6b2f584b4ee388"
+  },
+  "frozen_source_sha256_at_base": {
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_evidence.c": "f82548e50419d58f6cac8d53ab7462bb23f7b7bc8070d005b64ca0dc2f7f3e5e",
+    "src/scm_remainder.c": "bfc560106e67771ecda11b5f28caee2925046133e79e298c905032a1c7b03e83",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_evidence.h": "8ff50bb2e1e5f14bfb96aac766ce9005e85a1fbb16829fe1b5964a87596962d6",
+    "include/scm_remainder.h": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494"
+  },
+  "platform": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "release": "6.18.55",
+    "python": "3.12.14",
+    "libc": [
+      "glibc",
+      "2.39"
+    ]
+  },
+  "compiler_version": {
+    "command": [
+      "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": "",
+    "elapsed_seconds": 0.002543753999816545,
+    "timeout": false
+  },
+  "scope": {
+    "endurance_run": false,
+    "synthetic_truth_used": false,
+    "constructed_api_states_are_replayed_histories": false,
+    "deployed_subsystem_memory_claim": false
+  },
+  "compile": {
+    "command": [
+      "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "-std=c99",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-fno-fast-math",
+      "-ffp-contract=off",
+      "-frounding-math",
+      "-Iinclude",
+      "tools/stability_witness.c",
+      "src/scm_model.c",
+      "src/scm_evidence.c",
+      "src/scm_remainder.c",
+      "-lm",
+      "-o",
+      "/tmp/mumble-stability-witness-x_ysumj6/stability_witness"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "",
+    "elapsed_seconds": 0.663909171999876,
+    "timeout": false
+  },
+  "binary_sha256": "3bcf770db2035707e4554b1790c796b556ccd94df4c009ebfcd1ea1506f8ddab",
+  "execution": {
+    "command": [
+      "/tmp/mumble-stability-witness-x_ysumj6/stability_witness"
+    ],
+    "returncode": 0,
+    "stdout": "{\"schema\":\"mumble_stability_witness_output_v1\",\"machine\":{\"FLT_RADIX\":2,\"DBL_MANT_DIG\":53,\"DBL_MAX_EXP\":1024,\"FLT_EVAL_METHOD\":0,\"LDBL_MANT_DIG\":64,\"sizeof_double\":8,\"sizeof_uint64_t\":8,\"IEC559_macro\":1,\"fegetround\":0,\"FE_TONEAREST\":0},\"format_supported\":true,\"cases\":[{\"id\":\"unit_sum_absorption\",\"kind\":\"scalar_boundary\",\"before_hex\":\"0x1p+53\",\"after_hex\":\"0x1p+53\",\"iterations\":4096,\"exact_increment\":4096,\"mechanism_reproduced\":true},{\"id\":\"bounded_zero_net_cycle\",\"kind\":\"scalar_boundary\",\"before_hex\":\"0x1p-1\",\"increment_hex\":\"0x1p-54\",\"after_positive_hex\":\"0x1p-1\",\"after_cycle_hex\":\"0x1.fffffffffffffp-2\",\"exact_after_cycle_hex\":\"0x1p-1\",\"signed_error_hex\":\"-0x1p-54\",\"cycles\":1,\"asymptotic_drift_claim\":false,\"mechanism_reproduced\":true},{\"id\":\"hypot_rss_absorption\",\"kind\":\"scalar_boundary\",\"before_hex\":\"0x1p+27\",\"after_hex\":\"0x1p+27\",\"iterations\":4096,\"exact_squared_norm\":\"18014398509486080\",\"computed_squared_norm\":\"18014398509481984\",\"missing_squared_mass\":4096,\"libm_behavior_measured_only\":true,\"mechanism_reproduced\":true},{\"id\":\"production_qr_merge_absorption\",\"kind\":\"constructed_api_boundary\",\"api\":\"scm_evidence_seal\",\"reachable_battery_history_claim\":false,\"before_diagonal_hex\":\"0x1p+27\",\"after_diagonal_hex\":\"0x1p+27\",\"initial_count\":\"18014398509481984\",\"final_count\":\"18014398509486080\",\"iterations_completed\":4096,\"status\":0,\"exact_information_increment\":4096,\"mechanism_reproduced\":true},{\"id\":\"production_remainder_rss_absorption\",\"kind\":\"constructed_api_boundary\",\"api\":\"scm_remainder_push\",\"reachable_battery_history_claim\":false,\"used_for_inference\":false,\"pair\":[5,5],\"before_coefficient_hex\":\"0x1p+36\",\"after_coefficient_hex\":\"0x1p+36\",\"last_positive_bound_hex\":\"0x1.4000000000001p+5\",\"last_positive_bound\":40.000000000000007,\"iterations_completed\":4096,\"status\":0,\"mechanism_reproduced\":true},{\"id\":\"production_elapsed_absorption\",\"kind\":\"constructed_api_boundary\",\"api\":\"scm_model_step\",\"replayed_lifetime_claim\":false,\"before_seconds_hex\":\"0x1p+48\",\"after_seconds_hex\":\"0x1p+48\",\"dt_seconds_hex\":\"0x1.d41d41d41d41dp-6\",\"status\":0,\"mechanism_reproduced\":true},{\"id\":\"production_counter_exhaustion\",\"kind\":\"constructed_api_boundary\",\"index\":\"18446744073709551615\",\"evidence_status\":-16,\"remainder_status\":-36,\"evidence_unchanged\":true,\"remainder_unchanged\":true,\"meaning\":\"fail_closed_safety_not_indefinite_availability\",\"mechanism_reproduced\":true}],\"mechanisms_reproduced\":7,\"mechanisms_expected\":7,\"all_expected_mechanisms_reproduced\":true,\"indefinite_stability_proved\":false,\"endurance_run\":false}\n",
+    "stderr": "",
+    "elapsed_seconds": 0.009638461000577081,
+    "timeout": false
+  },
+  "witnesses": {
+    "schema": "mumble_stability_witness_output_v1",
+    "machine": {
+      "FLT_RADIX": 2,
+      "DBL_MANT_DIG": 53,
+      "DBL_MAX_EXP": 1024,
+      "FLT_EVAL_METHOD": 0,
+      "LDBL_MANT_DIG": 64,
+      "sizeof_double": 8,
+      "sizeof_uint64_t": 8,
+      "IEC559_macro": 1,
+      "fegetround": 0,
+      "FE_TONEAREST": 0
+    },
+    "format_supported": true,
+    "cases": [
+      {
+        "id": "unit_sum_absorption",
+        "kind": "scalar_boundary",
+        "before_hex": "0x1p+53",
+        "after_hex": "0x1p+53",
+        "iterations": 4096,
+        "exact_increment": 4096,
+        "mechanism_reproduced": true
+      },
+      {
+        "id": "bounded_zero_net_cycle",
+        "kind": "scalar_boundary",
+        "before_hex": "0x1p-1",
+        "increment_hex": "0x1p-54",
+        "after_positive_hex": "0x1p-1",
+        "after_cycle_hex": "0x1.fffffffffffffp-2",
+        "exact_after_cycle_hex": "0x1p-1",
+        "signed_error_hex": "-0x1p-54",
+        "cycles": 1,
+        "asymptotic_drift_claim": false,
+        "mechanism_reproduced": true
+      },
+      {
+        "id": "hypot_rss_absorption",
+        "kind": "scalar_boundary",
+        "before_hex": "0x1p+27",
+        "after_hex": "0x1p+27",
+        "iterations": 4096,
+        "exact_squared_norm": "18014398509486080",
+        "computed_squared_norm": "18014398509481984",
+        "missing_squared_mass": 4096,
+        "libm_behavior_measured_only": true,
+        "mechanism_reproduced": true
+      },
+      {
+        "id": "production_qr_merge_absorption",
+        "kind": "constructed_api_boundary",
+        "api": "scm_evidence_seal",
+        "reachable_battery_history_claim": false,
+        "before_diagonal_hex": "0x1p+27",
+        "after_diagonal_hex": "0x1p+27",
+        "initial_count": "18014398509481984",
+        "final_count": "18014398509486080",
+        "iterations_completed": 4096,
+        "status": 0,
+        "exact_information_increment": 4096,
+        "mechanism_reproduced": true
+      },
+      {
+        "id": "production_remainder_rss_absorption",
+        "kind": "constructed_api_boundary",
+        "api": "scm_remainder_push",
+        "reachable_battery_history_claim": false,
+        "used_for_inference": false,
+        "pair": [
+          5,
+          5
+        ],
+        "before_coefficient_hex": "0x1p+36",
+        "after_coefficient_hex": "0x1p+36",
+        "last_positive_bound_hex": "0x1.4000000000001p+5",
+        "last_positive_bound": 40.00000000000001,
+        "iterations_completed": 4096,
+        "status": 0,
+        "mechanism_reproduced": true
+      },
+      {
+        "id": "production_elapsed_absorption",
+        "kind": "constructed_api_boundary",
+        "api": "scm_model_step",
+        "replayed_lifetime_claim": false,
+        "before_seconds_hex": "0x1p+48",
+        "after_seconds_hex": "0x1p+48",
+        "dt_seconds_hex": "0x1.d41d41d41d41dp-6",
+        "status": 0,
+        "mechanism_reproduced": true
+      },
+      {
+        "id": "production_counter_exhaustion",
+        "kind": "constructed_api_boundary",
+        "index": "18446744073709551615",
+        "evidence_status": -16,
+        "remainder_status": -36,
+        "evidence_unchanged": true,
+        "remainder_unchanged": true,
+        "meaning": "fail_closed_safety_not_indefinite_availability",
+        "mechanism_reproduced": true
+      }
+    ],
+    "mechanisms_reproduced": 7,
+    "mechanisms_expected": 7,
+    "all_expected_mechanisms_reproduced": true,
+    "indefinite_stability_proved": false,
+    "endurance_run": false
+  },
+  "source_sha256_after": {
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_evidence.c": "f82548e50419d58f6cac8d53ab7462bb23f7b7bc8070d005b64ca0dc2f7f3e5e",
+    "src/scm_remainder.c": "bfc560106e67771ecda11b5f28caee2925046133e79e298c905032a1c7b03e83",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_evidence.h": "8ff50bb2e1e5f14bfb96aac766ce9005e85a1fbb16829fe1b5964a87596962d6",
+    "include/scm_remainder.h": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494",
+    "tools/stability_witness.c": "601bfa2d204c7ebdb695fb0b56e5fcb12997f18f8b759a52a624612f471c0e5e",
+    "tools/run_stability_witnesses.py": "3ab57ab54126f50adfccbdf3ed08497809c5e2e3654e04423b799957b0a0b2db",
+    "experiments/indefinite_stability_001/plan.json": "5ad61cca3eb1a6b2de95092a9a6205addf05e034585746733f6b2f584b4ee388"
+  },
+  "sources_unchanged_during_run": true,
+  "production_sources_match_frozen_base": true,
+  "counterexample_experiment_completed_as_planned": true,
+  "indefinite_stability_proved": false,
+  "finished_utc": "2026-10-24T23:31:05.573086+00:00"
+}

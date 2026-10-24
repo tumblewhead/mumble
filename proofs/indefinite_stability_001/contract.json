@@ -1,0 +1,132 @@
+{
+  "schema": "mumble_indefinite_stability_contract_v1",
+  "authority": {
+    "user_requirement": "Prove numeric stability for indefinite runtime",
+    "base_revision": "e478d0eda07b16cdf9121e391d06e2fb9917128b",
+    "work_branch": "research/indefinite-numerical-stability-001",
+    "report": "docs/INDEFINITE_NUMERICAL_STABILITY_001.md",
+    "claims": "proofs/indefinite_stability_001/claims.json"
+  },
+  "status": "required_gate_open; analytic lemmas and obstructions established; no full-estimator certificate",
+  "quantifier": "For every finite prefix n of an explicitly admissible stream; no bound may degrade merely with elapsed lifetime.",
+  "reference": "Real arithmetic on the same represented observations and declared parameters; sensor/physical/model error is separate.",
+  "requirements": [
+    {
+      "id": "S0",
+      "name": "Semantics and acquisition contract",
+      "required": [
+        "Define historical evidence/query semantics at finite precision",
+        "Bounded input codes/ranges and actual dt representation; zero/small dt handling",
+        "Arithmetic environment and local transcendental-function error contracts",
+        "Per-target numerical tolerance and useful resolution"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "S1",
+      "name": "Physical-state and charge invariant",
+      "required": [
+        "Range and error invariant for RC/hysteresis and coupled sensitivities",
+        "Exact freeze behavior or proved defect at zero/weak input",
+        "Bounded net-charge arithmetic under represented acquisition",
+        "Bounded representation of needed elapsed-time/throughput functions"
+      ],
+      "status": "conditional lemmas established; executable proof open"
+    },
+    {
+      "id": "S2",
+      "name": "Evidence/query/transition invariant",
+      "required": [
+        "Preserve declared earlier evidence without silent discounting/capping",
+        "Lifetime error composition for factor accumulation and queries",
+        "Retain weak-direction information despite unrelated repeated evidence",
+        "State/evidence/error transport across chart transitions",
+        "Bounded rollover and source-order protocol; restart/restore if supported"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "S3",
+      "name": "Executable refinement",
+      "required": [
+        "Bind proof to exact C source/compiler/options/ABI",
+        "Prove local arithmetic ranges and error enclosures, including library operations",
+        "Inductively compose every reachable transition"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "S4",
+      "name": "Falsification and usefulness",
+      "required": [
+        "Boundary counterexamples test proof/code correspondence",
+        "Conditional useful learning under explicit excitation, conditioning and evidence semantics",
+        "Weak-use retention and renewed-excitation cases"
+      ],
+      "status": "seven old-implementation mechanisms reproduced; new-design usefulness open"
+    },
+    {
+      "id": "S5",
+      "name": "Target and physical validation",
+      "required": [
+        "Complete M23 resources and numerical arithmetic qualification",
+        "Measured OCV, sensor/noise/mismatch/drift/coverage validation kept distinct"
+      ],
+      "status": "open"
+    }
+  ],
+  "invariants": {
+    "safety": "For every admissible prefix, all operations stay in the stated range and chronology; no unsupported numerical certificate.",
+    "fidelity": "Every certified quantity has a sound bound relative to its declared reference, uniform in runtime.",
+    "retention": "With unchanged valid parameters, weak use must preserve earlier certified constraints to declared resolution; arithmetic loss is not evidence aging.",
+    "usefulness": "Name informative stream/prefix conditions under which supported estimates or updates remain useful. Do not require uniform adaptation delay after arbitrary unbounded historical weight; do not count perpetual unavailable as success.",
+    "transition": "The same invariant covers ingestion, seal/merge, snapshot/query, chart change and supported recovery; error budgets are not restarted.",
+    "no_double_counting": "Old/new factors remain source-disjoint; no posterior-as-prior plus replay of its source observations."
+  },
+  "theorem_template": {
+    "initialization": "Exact reference s0 belongs to Gamma(machine_state0).",
+    "inductive_step": "For every admissible u, F(Gamma(machine_state),u) subset Gamma(machine_transition(machine_state,u)).",
+    "conclusion": "Containment for all finite n by induction, plus separately proved useful resolution under declared conditions.",
+    "nonvacuity": "Gamma equal to the entire domain forever or terminal failure alone does not satisfy the estimator goal."
+  },
+  "incompatible_unrestricted_contracts": [
+    "Fixed finite-bit deterministic state + arbitrary-length repetition + fixed absolute accuracy for a nonconstant all-history likelihood contrast.",
+    "Fixed finite-bit deterministic state + arbitrary binary streams + empirical-mean absolute error epsilon<1/2 at every prefix with no unbounded external count.",
+    "Uniform finite adaptation delay after every arbitrary prefix while preserving unweighted all-history statistics."
+  ],
+  "policy": {
+    "existing_NLL_budget": 0.1,
+    "existing_NLL_budget_scope": "Frozen B002 finite-experiment analytic trial criterion; not changed and not an all-time numerical guarantee.",
+    "forbidden_shortcuts": [
+      "Silent forgetting",
+      "Silent information cap",
+      "Replacing Gaussian likelihood with bounded-noise sets without declaring the model change",
+      "Unbounded metadata or archive excluded from memory accounting",
+      "Zero variance in numerical null directions",
+      "Reinitializing numerical error ledger at chart changes",
+      "Replacing actual dt with nominal period",
+      "Calling a long run a proof"
+    ],
+    "lifetime_semantics_selected": false,
+    "finite_horizon_substitution_authorized": false,
+    "existing_production_algorithm_changed": false
+  },
+  "established_evidence": {
+    "witness_plan": "experiments/indefinite_stability_001/plan.json",
+    "receipt": "experiments/indefinite_stability_001/receipt.json",
+    "counterexample_mechanisms": 7,
+    "witness_scope": "Scalar and constructed API boundary transitions; no physical-history reachability/endurance claim",
+    "full_estimator_proved": false,
+    "machine_checked_proof": false,
+    "coverage_validated": false,
+    "MCU_qualified": false
+  },
+  "next_action": "Specify one concrete finite evidence/query semantics compatible with user retention and indefinite operation; close physical-state and charge input/arithmetic invariants alongside it before extending signed-curvature statistics.",
+  "preserved": {
+    "B001": "72/72 corrected checks",
+    "B002": "654/672 original checks;18 failures retained",
+    "reference_nominal_Hz": 35,
+    "host_memory_target_met": false
+  }
+}
+
