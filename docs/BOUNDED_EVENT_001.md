@@ -31,6 +31,15 @@ data, original results and their provenance are unchanged. The corrected
 experiment records source revision `2ee068f` and exact source/binary/input
 hashes; subsequent documentation commits do not redefine its source identity.
 
+Publication through the connected GitHub app assigns different commit metadata
+while preserving each tree exactly. The canonical corrected-source commit is
+`82cfc121bd69f8615c62d66d68f6f9dcd07def88`, whose tree equals the recorded local
+`2ee068f` tree. The [publication map](../provenance/bounded_event_001_publication.json)
+records every correspondence. A verified
+[development bundle](../provenance/bounded_event_001_development.bundle)
+preserves the exact original commit objects, so receipt provenance remains
+recoverable without rewriting any frozen result.
+
 ## What the code inspection established
 
 For three RC modes the host reference caches 80 doubles for every sample:
