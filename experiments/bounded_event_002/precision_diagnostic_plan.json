@@ -1,0 +1,30 @@
+{
+  "schema": "mumble_precision_diagnostic_plan_v1",
+  "trigger": "18 of672 unchanged B002 checks failed for prediction-remainder norms at already fitted900s and1800s anchors; original receipt retained",
+  "source_revision": "bcaec7e1b8225eab095aa9871da95045ebb10a00",
+  "original_receipt": "experiments/bounded_event_002/receipt/receipt.json",
+  "hypothesis": "Double model-state/OCV evaluation and rounded displaced parameters dominate the true quadratic remainder for these tiny moves. Long-double final summation alone cannot remove that floor.",
+  "classification": "Post-run diagnosis of a concrete numerical failure; not a replacement preregistered experiment or a retroactive change in gates",
+  "preserve": ["Original18 failed checks and all observations", "Original0.1NLL engineering budget", "Original1e-10 norm audit allowance and1e-8 NLL allowance", "Original core/probe/runner and Makefile hashes"],
+  "diagnostics": [
+    {
+      "method": "Independent long-double model and analytic anchor Jacobian",
+      "candidates": "Exactly the18 saved failed candidates, with original observations and fixed anchor/scale/delta binary64 values lifted to long double before parameter displacement",
+      "arithmetic": "Long-double state, transcendental calls, prediction and residual accumulation; disclose LDBL_MANT_DIG and sizeof; no outward rounding",
+      "comparison": "Report each original double norm and bound beside the new norm and unchanged audit allowance; original status remainsfailed"
+    },
+    {
+      "method": "Independent arbitrary-precision spot check",
+      "primary": "carry_1800_to_2100/split/full_joint_step_over_128 at50 and80 decimal digits; exact binary64 inputs lifted via integer ratios",
+      "control": "If practical, carry_1800_to_2100/final/conditional_SOC_Q_step at50digits",
+      "comparison": "Report convergence across precisions and compare actual real-model remainder with the recorded analytic envelope; no new fitting or candidate selection"
+    }
+  ],
+  "conclusion_rules": [
+    "If higher precision removes the flat norm floor and preserves quadratic behavior, report evidence for arithmetic limitation in the original executable audit.",
+    "If higher precision still exceeds the envelope, investigate the analytic bound or derivative implementation without relaxing the tolerance.",
+    "Neither outcome establishes a directed-rounding C certificate, coverage, global nonlinear convergence or MCU qualification.",
+    "No candidate is applied and no chart, source factor or earlier uncertainty is reset."
+  ],
+  "outputs": "Separate precision_audit receipt and independent precision spot-check JSON, with hashes and explicit original-failure links"
+}

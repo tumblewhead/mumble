@@ -1,0 +1,2134 @@
+{
+  "schema": "mumble_remainder_memory_accounting_v1",
+  "created_utc": "2026-10-24T20:32:20.932631+00:00",
+  "source_revision": "bcaec7e1b8225eab095aa9871da95045ebb10a00",
+  "worktree_status_before_output": "?? experiments/bounded_event_002/receipt/\n",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "machine": "x86_64",
+  "pointer_bits": 64,
+  "source_sha256": {
+    "Makefile": "3b8e2a6fbca513534446b579a3675d7ab21079d30bb644f672cc9059ce3b4418",
+    "tools/remainder_probe.c": "916641c8102ea747225f491befb0d4e72a591d4403edaaa2edf5e272d5996fa0",
+    "src/scm_remainder.c": "bfc560106e67771ecda11b5f28caee2925046133e79e298c905032a1c7b03e83",
+    "include/scm_remainder.h": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494",
+    "src/scm_evidence.c": "f82548e50419d58f6cac8d53ab7462bb23f7b7bc8070d005b64ca0dc2f7f3e5e",
+    "include/scm_evidence.h": "8ff50bb2e1e5f14bfb96aac766ce9005e85a1fbb16829fe1b5964a87596962d6",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_assess.c": "6a8bcb0ce6dd3965b5ed8a7be60f38bc98a4cf83e46288513c15ee79f91de1ac",
+    "include/scm_assess.h": "87b4d26d512c51ebaec5a46d46588c6249f85d91a71b7dbaf2bf387163c4bff5",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4"
+  },
+  "accounting_helper_sha256": "98e0b54d08c9863778a8d61e626db932f6e8c8dbdfd11363e0be1a7fc1c898e8",
+  "probe_provenance": {
+    "probe_result": "experiments/bounded_event_002/receipt/carry_1800_to_2100.json",
+    "probe_sha256": "0070c7939524fdffdd44eee57f48565520f8c3118a508fb55ebfa46710a5ee3f",
+    "binary": "build/scm_remainder_probe",
+    "binary_sha256": "a11aeb580a6b201fd3464fc9162a757ecad411edc845b2498fe04acf47aefb4a",
+    "verification": "binary_source_and_result_match_companion_receipt",
+    "companion_receipt": "experiments/bounded_event_002/receipt/receipt.json",
+    "companion_sha256": "3264531b78c2b10f7bdc53e47b49400a821857bec0fd73e0d28b04625b1a904d",
+    "campaign_source_revision": "bcaec7e1b8225eab095aa9871da95045ebb10a00"
+  },
+  "compilation": {
+    "command": [
+      "make",
+      "--no-print-directory",
+      "-B",
+      "remainder-stack"
+    ],
+    "recipes": [
+      {
+        "argv": [
+          "cc",
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage",
+          "-c",
+          "src/scm_remainder.c",
+          "-o",
+          "build/remainder-stack/scm_remainder.o"
+        ],
+        "source": "src/scm_remainder.c",
+        "object": "build/remainder-stack/scm_remainder.o",
+        "compiler": [
+          "cc"
+        ],
+        "flags_before_source": [
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage"
+        ]
+      },
+      {
+        "argv": [
+          "cc",
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage",
+          "-c",
+          "src/scm_evidence.c",
+          "-o",
+          "build/remainder-stack/scm_evidence.o"
+        ],
+        "source": "src/scm_evidence.c",
+        "object": "build/remainder-stack/scm_evidence.o",
+        "compiler": [
+          "cc"
+        ],
+        "flags_before_source": [
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage"
+        ]
+      },
+      {
+        "argv": [
+          "cc",
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage",
+          "-c",
+          "src/scm_model.c",
+          "-o",
+          "build/remainder-stack/scm_model.o"
+        ],
+        "source": "src/scm_model.c",
+        "object": "build/remainder-stack/scm_model.o",
+        "compiler": [
+          "cc"
+        ],
+        "flags_before_source": [
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage"
+        ]
+      },
+      {
+        "argv": [
+          "cc",
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage",
+          "-c",
+          "src/scm_assess.c",
+          "-o",
+          "build/remainder-stack/scm_assess.o"
+        ],
+        "source": "src/scm_assess.c",
+        "object": "build/remainder-stack/scm_assess.o",
+        "compiler": [
+          "cc"
+        ],
+        "flags_before_source": [
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage"
+        ]
+      },
+      {
+        "argv": [
+          "cc",
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage",
+          "-c",
+          "tools/remainder_probe.c",
+          "-o",
+          "build/remainder-stack/remainder_probe.o"
+        ],
+        "source": "tools/remainder_probe.c",
+        "object": "build/remainder-stack/remainder_probe.o",
+        "compiler": [
+          "cc"
+        ],
+        "flags_before_source": [
+          "-Iinclude",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-fstack-usage"
+        ]
+      }
+    ],
+    "compiler_versions": {
+      "cc": {
+        "command": [
+          "cc",
+          "--version"
+        ],
+        "returncode": 0,
+        "stdout": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+        "stderr": ""
+      }
+    },
+    "stdout": "mkdir -p build\nmkdir -p build/remainder-stack\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_remainder.c -o build/remainder-stack/scm_remainder.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_evidence.c -o build/remainder-stack/scm_evidence.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_model.c -o build/remainder-stack/scm_model.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_assess.c -o build/remainder-stack/scm_assess.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c tools/remainder_probe.c -o build/remainder-stack/remainder_probe.o\n",
+    "stderr": "",
+    "meaning": "Fresh host compilation; does not rerun fitting or the probe"
+  },
+  "exact_probe_sizeof_breakdown": {
+    "bank_bytes": 3336,
+    "config_bytes": 472,
+    "factor_bytes": 1240,
+    "factor_numeric_payload_bytes": 1224,
+    "update_workspace_bytes": 4176,
+    "model_state_bytes": 280,
+    "model_row_bytes": 648,
+    "online_bank_plus_workspace_bytes": 7512,
+    "online_raw_history_bytes": 0,
+    "online_explicit_basis_bytes": 0,
+    "online_heap_bytes": 0,
+    "fit_result_bytes": 2504,
+    "assessment_bytes": 2488,
+    "assessment_workspace_bytes": 4224,
+    "assessment_options_bytes": 56,
+    "diagnostic_objects_bytes": 9272,
+    "snapshot_output_bytes": 1240,
+    "local_vector_arrays_bytes": 384,
+    "input_candidate_arrays_bytes": 4096,
+    "host_replay_arrays_bytes": 4344,
+    "csv_buffer_bytes": 4096,
+    "probe_static_objects_sum_bytes": 36145,
+    "remainder_bank_bytes": 1200,
+    "remainder_workspace_bytes": 1200,
+    "remainder_query_result_bytes": 48,
+    "remainder_incremental_objects_bytes": 2448,
+    "paired_ingestion_objects_bytes": 9912,
+    "candidate_metadata_bytes": 2052,
+    "host_precise_alpha_array_bytes": 144,
+    "host_long_double_bytes": 16,
+    "accounting": "Host ABI sizeof sums; linker padding, stack, stdio/libm runtime and external OCV storage are additional. Host replay/diagnostics are separate from bounded ingestion.",
+    "MCU_qualified": false
+  },
+  "object_totals": {
+    "evidence_bank_bytes": 3336,
+    "evidence_update_workspace_bytes": 4176,
+    "evidence_bank_plus_update_workspace_bytes": 7512,
+    "remainder_bank_bytes": 1200,
+    "remainder_transaction_workspace_bytes": 1200,
+    "remainder_query_result_bytes": 48,
+    "paired_ingestion_banks_plus_transaction_workspaces_bytes": 9912,
+    "incoming_sample_bytes": 24,
+    "incoming_sample_basis": "scm_sample is three doubles; host double size inferred from 153-double factor payload",
+    "paired_ingestion_plus_incoming_sample_bytes": 9936,
+    "paired_ingestion_query_result_plus_incoming_sample_bytes": 9984,
+    "paired_ingestion_query_result_plus_snapshot_bytes": 11200,
+    "simultaneous_ingestion_query_snapshot_diagnostics_vectors_bytes": 20856,
+    "same_with_separate_retained_input_config_bytes": 21328,
+    "same_with_input_config_and_incoming_sample_bytes": 21352,
+    "whole_host_probe_static_sizeof_sum_bytes": 36145,
+    "design_goal_bytes": 10240,
+    "paired_ingestion_objects_fit_10KiB_before_external_costs": true,
+    "implemented_simultaneous_diagnostic_objects_exceed_10KiB": true,
+    "model_state_and_model_row": "Already embedded in bank/update workspace; not added again",
+    "transactional_copy": "Evidence workspace contains a staged evidence bank; remainder workspace contains a staged remainder bank. Both are counted. Paired update stages remainder, calls atomic evidence push, then commits remainder; no third bank copy is credited or hidden.",
+    "query_snapshot": "The remainder query directly uses the matched evidence history/event factors and allocates no new snapshot. The implemented probe nevertheless retains its original snapshot for diagnostics, so that object remains fully counted.",
+    "paired_ancestry_binding": "Remainder state includes an evidence-object pointer and sticky paired-ancestry flag; both are counted by sizeof. Shallow-copy/rebinding continuation is unsupported.",
+    "workspace_aliasing_or_union": "Not implemented. No hypothetical phase reuse subtracted from actual totals"
+  },
+  "stack_files": [
+    {
+      "path": "build/remainder-stack/remainder_probe.su",
+      "sha256": "565ebde107289c92437fb0ba71e24604d090bcb05b64233b0b7d8c2c55c79c31",
+      "frames": [
+        {
+          "function": "space",
+          "source": "tools/remainder_probe.c",
+          "line": 60,
+          "column": 20,
+          "frame_bytes": 16,
+          "qualifier": "static"
+        },
+        {
+          "function": "parse_u64",
+          "source": "tools/remainder_probe.c",
+          "line": 65,
+          "column": 12,
+          "frame_bytes": 64,
+          "qualifier": "static"
+        },
+        {
+          "function": "open_data",
+          "source": "tools/remainder_probe.c",
+          "line": 119,
+          "column": 14,
+          "frame_bytes": 32,
+          "qualifier": "static"
+        },
+        {
+          "function": "number",
+          "source": "tools/remainder_probe.c",
+          "line": 52,
+          "column": 13,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "read_sample",
+          "source": "tools/remainder_probe.c",
+          "line": 130,
+          "column": 12,
+          "frame_bytes": 128,
+          "qualifier": "static"
+        },
+        {
+          "function": "array",
+          "source": "tools/remainder_probe.c",
+          "line": 56,
+          "column": 13,
+          "frame_bytes": 48,
+          "qualifier": "static"
+        },
+        {
+          "function": "target_diagnostic",
+          "source": "tools/remainder_probe.c",
+          "line": 224,
+          "column": 13,
+          "frame_bytes": 144,
+          "qualifier": "static"
+        },
+        {
+          "function": "emit_checkpoint",
+          "source": "tools/remainder_probe.c",
+          "line": 407,
+          "column": 12,
+          "frame_bytes": 576,
+          "qualifier": "dynamic,bounded"
+        },
+        {
+          "function": "main",
+          "source": "tools/remainder_probe.c",
+          "line": 504,
+          "column": 5,
+          "frame_bytes": 224,
+          "qualifier": "dynamic,bounded"
+        }
+      ],
+      "object_sha256": "852c5c4898107dc13b063c0165209409d94a0ac68b0162b27abd5f11cf4f61de"
+    },
+    {
+      "path": "build/remainder-stack/scm_assess.su",
+      "sha256": "fbcc677be060ac46430a10069d78991e952ca763beb385cc9f718429eb635310",
+      "frames": [
+        {
+          "function": "diagnose",
+          "source": "src/scm_assess.c",
+          "line": 79,
+          "column": 13,
+          "frame_bytes": 208,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_assess_options_default",
+          "source": "src/scm_assess.c",
+          "line": 8,
+          "column": 6,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_assess_status_name",
+          "source": "src/scm_assess.c",
+          "line": 15,
+          "column": 13,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_assess",
+          "source": "src/scm_assess.c",
+          "line": 136,
+          "column": 5,
+          "frame_bytes": 656,
+          "qualifier": "dynamic,bounded"
+        }
+      ],
+      "object_sha256": "8693b74f28589b93c0fdae90d8ec29c91b75abd23c0bac167922c983167673a9"
+    },
+    {
+      "path": "build/remainder-stack/scm_evidence.su",
+      "sha256": "4afcdcfa9d8c0f5c7c99ad067fcb9354d8c21120f41875991d87938aeaf1cf7a",
+      "frames": [
+        {
+          "function": "parameters_valid",
+          "source": "src/scm_evidence.c",
+          "line": 16,
+          "column": 12,
+          "frame_bytes": 176,
+          "qualifier": "static"
+        },
+        {
+          "function": "qr_row",
+          "source": "src/scm_evidence.c",
+          "line": 41,
+          "column": 12,
+          "frame_bytes": 96,
+          "qualifier": "static"
+        },
+        {
+          "function": "merge",
+          "source": "src/scm_evidence.c",
+          "line": 72,
+          "column": 12,
+          "frame_bytes": 80,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_packed_index",
+          "source": "src/scm_evidence.c",
+          "line": 5,
+          "column": 8,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_init",
+          "source": "src/scm_evidence.c",
+          "line": 107,
+          "column": 5,
+          "frame_bytes": 832,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_push",
+          "source": "src/scm_evidence.c",
+          "line": 133,
+          "column": 5,
+          "frame_bytes": 128,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_seal",
+          "source": "src/scm_evidence.c",
+          "line": 174,
+          "column": 5,
+          "frame_bytes": 96,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_snapshot",
+          "source": "src/scm_evidence.c",
+          "line": 183,
+          "column": 5,
+          "frame_bytes": 32,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_factor_cost",
+          "source": "src/scm_evidence.c",
+          "line": 194,
+          "column": 8,
+          "frame_bytes": 64,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_factor_rms_sigma",
+          "source": "src/scm_evidence.c",
+          "line": 207,
+          "column": 8,
+          "frame_bytes": 64,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_factor_normal",
+          "source": "src/scm_evidence.c",
+          "line": 216,
+          "column": 5,
+          "frame_bytes": 96,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_evidence_check_candidate",
+          "source": "src/scm_evidence.c",
+          "line": 241,
+          "column": 5,
+          "frame_bytes": 208,
+          "qualifier": "static"
+        }
+      ],
+      "object_sha256": "1a66378c552a488ae5d7ef193be0a309a86231dc9228c609333b5b7e555997ff"
+    },
+    {
+      "path": "build/remainder-stack/scm_model.su",
+      "sha256": "1596616ab74d663ef8acc911e58154bd333df403cea3f6bfa5e5e909b38967dd",
+      "frames": [
+        {
+          "function": "scm_model_ntheta",
+          "source": "src/scm_model.c",
+          "line": 5,
+          "column": 5,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_model_nalpha",
+          "source": "src/scm_model.c",
+          "line": 6,
+          "column": 5,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_ocv_validate",
+          "source": "src/scm_model.c",
+          "line": 8,
+          "column": 5,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_ocv_eval",
+          "source": "src/scm_model.c",
+          "line": 21,
+          "column": 5,
+          "frame_bytes": 48,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_model_init",
+          "source": "src/scm_model.c",
+          "line": 44,
+          "column": 5,
+          "frame_bytes": 368,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_model_step",
+          "source": "src/scm_model.c",
+          "line": 63,
+          "column": 5,
+          "frame_bytes": 480,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_model_predict",
+          "source": "src/scm_model.c",
+          "line": 104,
+          "column": 5,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_physical_step",
+          "source": "src/scm_model.c",
+          "line": 120,
+          "column": 5,
+          "frame_bytes": 240,
+          "qualifier": "static"
+        }
+      ],
+      "object_sha256": "e3b7dd83c01a1c73bd2546fd0878e22fcf2a87da52393521d0dcb9ad36222a9a"
+    },
+    {
+      "path": "build/remainder-stack/scm_remainder.su",
+      "sha256": "349d579edb0823c02302202bd2dace15b1215e7896de41fe8ea416c6add2e02f",
+      "frames": [
+        {
+          "function": "max_first",
+          "source": "src/scm_remainder.c",
+          "line": 99,
+          "column": 15,
+          "frame_bytes": 48,
+          "qualifier": "static"
+        },
+        {
+          "function": "max_second",
+          "source": "src/scm_remainder.c",
+          "line": 106,
+          "column": 15,
+          "frame_bytes": 48,
+          "qualifier": "static"
+        },
+        {
+          "function": "advance",
+          "source": "src/scm_remainder.c",
+          "line": 137,
+          "column": 12,
+          "frame_bytes": 256,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_remainder_init",
+          "source": "src/scm_remainder.c",
+          "line": 50,
+          "column": 5,
+          "frame_bytes": 1376,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_remainder_push",
+          "source": "src/scm_remainder.c",
+          "line": 239,
+          "column": 5,
+          "frame_bytes": 48,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_remainder_evidence_push",
+          "source": "src/scm_remainder.c",
+          "line": 251,
+          "column": 5,
+          "frame_bytes": 80,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_remainder_status_name",
+          "source": "src/scm_remainder.c",
+          "line": 266,
+          "column": 13,
+          "frame_bytes": 8,
+          "qualifier": "static"
+        },
+        {
+          "function": "scm_remainder_query",
+          "source": "src/scm_remainder.c",
+          "line": 276,
+          "column": 5,
+          "frame_bytes": 96,
+          "qualifier": "static"
+        }
+      ],
+      "object_sha256": "cbecfc30463d03de1e6ddabfc7c09dead2b902ce22d39505b4c8b2501b699560"
+    }
+  ],
+  "project_call_path_estimates": [
+    {
+      "name": "evidence_initialization_model",
+      "components": [
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_init",
+          "frame_bytes": 832,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_init",
+          "frame_bytes": 368,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 1200,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "evidence_initialization_support",
+      "components": [
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_init",
+          "frame_bytes": 832,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "parameters_valid",
+          "frame_bytes": 176,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "bounded",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 1008,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "remainder_initialization_support",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_init",
+          "frame_bytes": 1376,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "config_valid",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "bounded",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 1376,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "remainder_initialization_box",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_init",
+          "frame_bytes": 1376,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "exponential_box",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 1376,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "remainder_initialization_pair",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_init",
+          "frame_bytes": 1376,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "pair",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 1376,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_binding",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "matched",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "same_config",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_ntheta",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 88,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_advance_first_extremum",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "advance",
+          "frame_bytes": 256,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "max_first",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "q_exp",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 384,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_advance_second_extremum",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "advance",
+          "frame_bytes": 256,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "max_second",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "second_exp",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 384,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_advance_range",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "advance",
+          "frame_bytes": 256,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "range_step",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 336,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_advance_coefficient",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "advance",
+          "frame_bytes": 256,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "add_bound",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 336,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_evidence_model_OCV",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_push",
+          "frame_bytes": 128,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_step",
+          "frame_bytes": 480,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_ocv_eval",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 736,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_evidence_prediction",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_push",
+          "frame_bytes": 128,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_predict",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 216,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_evidence_event_merge_QR",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_push",
+          "frame_bytes": 128,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "seal_staged",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "merge",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "qr_row",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 392,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "paired_evidence_residual_monitor",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_push",
+          "frame_bytes": 128,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "seal_staged",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_factor_rms_sigma",
+          "frame_bytes": 64,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 280,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "independent_remainder_audit_push",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_push",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "advance",
+          "frame_bytes": 256,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "max_second",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "second_exp",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 352,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "query_binding",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_query",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "matched",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "same_config",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_ntheta",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 104,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "query_guard_support",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_query",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_check_candidate",
+          "frame_bytes": 208,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "parameters_valid",
+          "frame_bytes": 176,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "bounded",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 480,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "query_guard_OCV",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_query",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_check_candidate",
+          "frame_bytes": 208,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_ocv_eval",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 352,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "query_factor_cost",
+      "components": [
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_query",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_factor_cost",
+          "frame_bytes": 64,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 168,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "seal_event_merge_QR",
+      "components": [
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_seal",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "seal_staged",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "merge",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "qr_row",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 280,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "snapshot_merge_QR",
+      "components": [
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_snapshot",
+          "frame_bytes": 32,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "merge",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "qr_row",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 216,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "factor_normal",
+      "components": [
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_factor_normal",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 104,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "assessment_diagnose",
+      "components": [
+        {
+          "source": "src/scm_assess.c",
+          "function": "scm_assess",
+          "frame_bytes": 656,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_assess.c",
+          "function": "diagnose",
+          "frame_bytes": 208,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 864,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_candidate_model",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_candidate",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_step",
+          "frame_bytes": 480,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_ocv_eval",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 1328,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_candidate_query_guard",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_candidate",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_query",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_check_candidate",
+          "frame_bytes": 208,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_ocv_eval",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 1152,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_candidate_query_cost",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_candidate",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_query",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_factor_cost",
+          "frame_bytes": 64,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 968,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_moment_audit",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "audit_moments",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_step",
+          "frame_bytes": 480,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_ocv_eval",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 1328,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_candidate_generation",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "make_candidates",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "add_candidate",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 800,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_region_bound",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "region_json",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 800,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_assessment",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_assess.c",
+          "function": "scm_assess",
+          "frame_bytes": 656,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_assess.c",
+          "function": "diagnose",
+          "frame_bytes": 208,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 1664,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_evidence_initialization",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "read_anchor",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_init",
+          "frame_bytes": 832,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_init",
+          "frame_bytes": 368,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 1424,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_remainder_initialization_support",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "read_anchor",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_init",
+          "frame_bytes": 1376,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "config_valid",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "bounded",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 1600,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_remainder_initialization_box",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "read_anchor",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_init",
+          "frame_bytes": 1376,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "exponential_box",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 1600,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_paired_ingestion_model",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_push",
+          "frame_bytes": 128,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_model_step",
+          "frame_bytes": 480,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_model.c",
+          "function": "scm_ocv_eval",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 960,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_paired_ingestion_bound",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "advance",
+          "frame_bytes": 256,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "max_second",
+          "frame_bytes": 48,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "second_exp",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        }
+      ],
+      "project_frame_sum_bytes": 608,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_paired_ingestion_QR",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_remainder.c",
+          "function": "scm_remainder_evidence_push",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_push",
+          "frame_bytes": 128,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "seal_staged",
+          "frame_bytes": 0,
+          "status": "not_separately_reported_assumed_inlined_in_caller"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "merge",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "qr_row",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 616,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_read_csv",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "read_sample",
+          "frame_bytes": 128,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "space",
+          "frame_bytes": 16,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 368,
+      "external_library_stack_bytes": null
+    },
+    {
+      "name": "probe_snapshot",
+      "components": [
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "main",
+          "frame_bytes": 224,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "tools/remainder_probe.c",
+          "function": "emit_checkpoint",
+          "frame_bytes": 576,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_snapshot",
+          "frame_bytes": 32,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "merge",
+          "frame_bytes": 80,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "qr_row",
+          "frame_bytes": 96,
+          "status": "separate_reported_frame_added_conservatively"
+        },
+        {
+          "source": "src/scm_evidence.c",
+          "function": "scm_evidence_packed_index",
+          "frame_bytes": 8,
+          "status": "separate_reported_frame_added_conservatively"
+        }
+      ],
+      "project_frame_sum_bytes": 1016,
+      "external_library_stack_bytes": null
+    }
+  ],
+  "partial_live_bounds": {
+    "paired_ingestion_objects_sample_plus_paired_project_stack_bytes": 10672,
+    "paired_ingestion_query_objects_plus_query_project_stack_bytes": 10440,
+    "simultaneous_diagnostic_objects_plus_project_assessment_stack_bytes": 21720,
+    "whole_probe_sizeof_static_plus_largest_listed_project_path_bytes": 37809,
+    "whole_probe_linker_static_plus_largest_listed_project_path_bytes": 39272,
+    "qualification": "Partial accounting with known project frames; external frames and runtime allocation remain additional, so these are not complete runtime peak measurements"
+  },
+  "stack_interpretation": [
+    "Compiler .su frames are tied to the recorded host compiler and flags.",
+    "Listed paths conservatively add emitted frames even where calls may be inlined; inlined-only functions have no additional frame beyond caller accounting.",
+    "Dynamic,bounded qualifiers are retained. No function reported dynamic,unbounded is silently accepted as bounded.",
+    "Call paths are source-derived estimates, not measured stack high-water marks or an exhaustive external-library call graph.",
+    "Local helpers are keyed by source file and function to avoid combining unrelated same-named functions. Maximum emitted constprop/isra frame per source/function is used conservatively.",
+    "Paired-update remainder advancement and evidence advancement execute sequentially; their descendant frames are separate paths, not incorrectly summed as simultaneous callees."
+  ],
+  "host_linker": {
+    "binary_sha256": "a11aeb580a6b201fd3464fc9162a757ecad411edc845b2498fe04acf47aefb4a",
+    "runtime_peak_or_target_SRAM": false,
+    "size_command": [
+      "size",
+      "/workspace/scratch/359d7ee85d34/mumble/build/scm_remainder_probe"
+    ],
+    "size_stdout": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n  88730\t   1104\t  36504\t 126338\t  1ed82\t/workspace/scratch/359d7ee85d34/mumble/build/scm_remainder_probe\n",
+    "BSD_text_bytes_including_readonly_content": 88730,
+    "BSD_data_bytes": 1104,
+    "BSD_bss_bytes": 36504,
+    "data_plus_bss_bytes": 37608,
+    "data_plus_bss_minus_probe_sizeof_sum_bytes": 1463,
+    "section_table_stdout": "/workspace/scratch/359d7ee85d34/mumble/build/scm_remainder_probe  :\nsection                size     addr\n.interp                  28      792\n.note.gnu.property       48      824\n.note.gnu.build-id       36      872\n.note.ABI-tag            32      908\n.gnu.hash                48      944\n.dynsym                1032      992\n.dynstr                 503     2024\n.gnu.version             86     2528\n.gnu.version_r          176     2616\n.rela.dyn               744     2792\n.rela.plt               840     3536\n.init                    27     8192\n.plt                    576     8224\n.plt.got                 16     8800\n.plt.sec                560     8816\n.text                 73449     9376\n.fini                    13    82828\n.rodata                7064    86016\n.eh_frame_hdr           372    93080\n.eh_frame              3080    93456\n.init_array               8   101296\n.fini_array               8   101304\n.data.rel.ro            216   101312\n.dynamic                512   101528\n.got                    344   102040\n.data                    16   102400\n.bss                  36504   102432\n.comment                 43        0\nTotal                126381\n\n\n",
+    "nm_command": [
+      "nm",
+      "-S",
+      "--size-sort",
+      "--radix=d",
+      "/workspace/scratch/359d7ee85d34/mumble/build/scm_remainder_probe"
+    ],
+    "probe_named_static_objects": [
+      {
+        "name": "candidate_count",
+        "type": "b",
+        "bytes": 4,
+        "address": 102516
+      },
+      {
+        "name": "input_candidate_count",
+        "type": "b",
+        "bytes": 4,
+        "address": 102512
+      },
+      {
+        "name": "checkpoint_anchor_cost",
+        "type": "b",
+        "bytes": 8,
+        "address": 102496
+      },
+      {
+        "name": "nll_budget",
+        "type": "b",
+        "bytes": 8,
+        "address": 102504
+      },
+      {
+        "name": "remainder_query",
+        "type": "b",
+        "bytes": 48,
+        "address": 128416
+      },
+      {
+        "name": "audit_theta_jac",
+        "type": "b",
+        "bytes": 56,
+        "address": 106720
+      },
+      {
+        "name": "candidate_theta",
+        "type": "b",
+        "bytes": 56,
+        "address": 108960
+      },
+      {
+        "name": "diagnostic_options",
+        "type": "b",
+        "bytes": 56,
+        "address": 117856
+      },
+      {
+        "name": "source_hex",
+        "type": "b",
+        "bytes": 65,
+        "address": 102528
+      },
+      {
+        "name": "candidate_alpha",
+        "type": "b",
+        "bytes": 72,
+        "address": 108864
+      },
+      {
+        "name": "audit_jacobian",
+        "type": "b",
+        "bytes": 128,
+        "address": 109024
+      },
+      {
+        "name": "candidate_available",
+        "type": "b",
+        "bytes": 128,
+        "address": 111584
+      },
+      {
+        "name": "candidate_classes",
+        "type": "b",
+        "bytes": 128,
+        "address": 111712
+      },
+      {
+        "name": "direct_gradient",
+        "type": "b",
+        "bytes": 128,
+        "address": 109152
+      },
+      {
+        "name": "gradient",
+        "type": "b",
+        "bytes": 128,
+        "address": 117728
+      },
+      {
+        "name": "local_step",
+        "type": "b",
+        "bytes": 128,
+        "address": 117600
+      },
+      {
+        "name": "target_gradient",
+        "type": "b",
+        "bytes": 128,
+        "address": 117472
+      },
+      {
+        "name": "audit_alpha_precise",
+        "type": "b",
+        "bytes": 144,
+        "address": 108704
+      },
+      {
+        "name": "candidate_scales",
+        "type": "b",
+        "bytes": 256,
+        "address": 111328
+      },
+      {
+        "name": "audit_anchor",
+        "type": "b",
+        "bytes": 280,
+        "address": 108416
+      },
+      {
+        "name": "audit_candidate",
+        "type": "b",
+        "bytes": 280,
+        "address": 108128
+      },
+      {
+        "name": "input_config",
+        "type": "b",
+        "bytes": 472,
+        "address": 138464
+      },
+      {
+        "name": "audit_anchor_row",
+        "type": "b",
+        "bytes": 648,
+        "address": 107456
+      },
+      {
+        "name": "audit_candidate_row",
+        "type": "b",
+        "bytes": 648,
+        "address": 106784
+      },
+      {
+        "name": "remainder_bank",
+        "type": "b",
+        "bytes": 1200,
+        "address": 129696
+      },
+      {
+        "name": "remainder_work",
+        "type": "b",
+        "bytes": 1200,
+        "address": 128480
+      },
+      {
+        "name": "snapshot",
+        "type": "b",
+        "bytes": 1240,
+        "address": 127168
+      },
+      {
+        "name": "candidate_names",
+        "type": "b",
+        "bytes": 1536,
+        "address": 111840
+      },
+      {
+        "name": "direct_normal",
+        "type": "b",
+        "bytes": 2048,
+        "address": 109280
+      },
+      {
+        "name": "diagnostic_assessment",
+        "type": "b",
+        "bytes": 2488,
+        "address": 122144
+      },
+      {
+        "name": "diagnostic_fit",
+        "type": "b",
+        "bytes": 2504,
+        "address": 124640
+      },
+      {
+        "name": "online_bank",
+        "type": "b",
+        "bytes": 3336,
+        "address": 135104
+      },
+      {
+        "name": "csv_line",
+        "type": "b",
+        "bytes": 4096,
+        "address": 102624
+      },
+      {
+        "name": "input_candidates",
+        "type": "b",
+        "bytes": 4096,
+        "address": 113376
+      },
+      {
+        "name": "online_work",
+        "type": "b",
+        "bytes": 4176,
+        "address": 130912
+      },
+      {
+        "name": "diagnostic_work",
+        "type": "b",
+        "bytes": 4224,
+        "address": 117920
+      }
+    ],
+    "probe_named_static_bytes": 36145,
+    "other_named_host_static_objects": [
+      {
+        "name": "completed.0",
+        "type": "b",
+        "bytes": 1,
+        "address": 102472
+      },
+      {
+        "name": "stderr@GLIBC_2.2.5",
+        "type": "B",
+        "bytes": 8,
+        "address": 102464
+      },
+      {
+        "name": "stdout@GLIBC_2.2.5",
+        "type": "B",
+        "bytes": 8,
+        "address": 102432
+      },
+      {
+        "name": "tau_name.4",
+        "type": "d",
+        "bytes": 24,
+        "address": 101504
+      },
+      {
+        "name": "v_name.0",
+        "type": "d",
+        "bytes": 24,
+        "address": 101440
+      },
+      {
+        "name": "r_name.1",
+        "type": "d",
+        "bytes": 32,
+        "address": 101472
+      },
+      {
+        "name": "names.1",
+        "type": "d",
+        "bytes": 40,
+        "address": 101376
+      },
+      {
+        "name": "names.0",
+        "type": "d",
+        "bytes": 48,
+        "address": 101312
+      }
+    ],
+    "nm_matches_probe_sizeof_sum": true,
+    "interpretation": "Linker section sizes include padding and host startup/static objects. Text includes readonly content. These host ELF sections are not an MCU flash/SRAM budget, process RSS, dynamic-loader allocation or runtime peak."
+  },
+  "external_or_unmeasured_costs": [
+    "Compiler/ABI-dependent caller frames, interrupt context, task stack and scheduling overhead.",
+    "libm calls (hypot, exp, expm1, tanh, log and others) and libc/stdio frames and buffers.",
+    "FILE objects, dynamic loader, allocator bookkeeping and host runtime allocations.",
+    "Acquisition buffering, communications, persistent-checkpoint buffers and other application state.",
+    "External curve storage is zero in this run. B002 supports only the smooth illustrative OCV and explicitly rejects measured PWL tables; future curve/table storage and validated derivative enclosures are additional work.",
+    "Target instruction/text size, soft-float implementation, MCU stack, latency, flash and energy."
+  ],
+  "claims": {
+    "history_independent_core_object_sizes": true,
+    "no_core_heap_or_retained_raw_trace": true,
+    "remainder_formula_real_arithmetic_analytic": true,
+    "floating_point_outward_rounding_validated": false,
+    "mathematical_envelope_implies_firmware_qualification": false,
+    "complete_10KiB_estimator_demonstrated": false,
+    "Cortex_M23_qualified": false,
+    "MCU_runtime_peak_measured": false
+  },
+  "unbounded_project_frames": []
+}
