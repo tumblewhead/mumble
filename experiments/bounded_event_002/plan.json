@@ -18,7 +18,7 @@
     "model": "Existing smooth illustrative OCV only; derivative bounds abs(Uprime)<=1.79 and abs(Usecond)<=4. Measured PWL OCV is rejected as unsupported.",
     "enclosure_domain": "Entire original rectangular chart, even infeasible parts, using the global smooth OCV extension. Candidate physical supports, coupled entering hysteresis and complete historical SOC endpoint path are checked separately.",
     "noise": "Same known common iid 1mV voltage-noise likelihood as the frozen reference",
-    "evidence_integrity": "Matched immutable source/chart/count/time/charge and atomic paired ingestion; history and active-event factors contribute once each; no posterior prior and no fresh budget origin after substeps"
+    "evidence_integrity": "Paired-only ancestry from empty state, exact evidence-object binding and matching immutable source/chart/count/time/charge. Independent remainder ingestion is audit-only and invalidates paired-query eligibility. Trusted caller objects and source identity binding immutable ordered content are required. History and active-event factors contribute once each; no posterior prior and no fresh budget origin after substeps"
   },
   "budget": {
     "nll_units": 0.1,
@@ -50,14 +50,14 @@
     "full_step": "Existing minimum-norm affine step with relative eigen cutoff1e-10; report discarded/null directions without assigning zero uncertainty",
     "scaled_full_steps": "Full step divided by2,4,8,16,32,64,128,256; every displacement measured from the same original chart anchor",
     "conditional_SOC_Q": "Solve the2x2 SOC/logQ normal-equation block while holding the other14 candidate displacements at0. This is a conditional trial update, not a claim that nuisance parameters are known. Retain the full16D evidence and uncertainty.",
-    "affine_sublevel_probes": "Eight deterministic trigonometric directions in the retained eigenspace, mapped to DeltaNLL=2 around the affine minimum. Rank-deficient cases explore only the retained space; null directions remain unresolved and physically supported.",
+    "affine_sublevel_probes": "Eight deterministic trigonometric directions in the retained eigenspace, mapped to DeltaNLL=2 around the attained retained-eigenspace affine step. The1e-10 cutoff does not prove a global16D minimum. Rank-deficient cases explore only the retained space; null directions remain unresolved and physically supported.",
     "unexcited_control": "Gamma-minus-only displacement equal to half its configured radius; before negative throughput its curvature is0 while its parameter remains unexcited",
     "no_clipping": "Report out-of-domain candidates and exclude them from analytic-budget claims; do not silently project them or change the chart"
   },
   "region_check": {
-    "set": "Intersection of original coordinate box and physical support with L_affine<=L_affine_min+2",
+    "set": "Intersection of original coordinate box and physical support with L_affine<=L_affine_step+2; L_affine_step is the attained cost of the retained-eigenspace step, not a claimed global minimum",
     "uniform_prediction_bound": "E_box obtained by substituting all configured radii in the nonnegative sparse remainder polynomial",
-    "uniform_NLL_bound": "sqrt(2*(L_affine_min+2))*E_box+0.5*E_box^2",
+    "uniform_NLL_bound": "sqrt(2*(L_affine_step+2))*E_box+0.5*E_box^2",
     "interpretation": "Sufficient bound conditional on set membership, including physical extents along null directions. Does not assert the set is nonempty, that every box point is low-loss, or that points outside the box are excluded by evidence.",
     "budget": "Report pass/fail at the same0.1NLL budget without retuning. Uniform failure is a substantive limitation of this design."
   },
