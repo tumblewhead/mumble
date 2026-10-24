@@ -30,6 +30,12 @@ The work starts at B001 published revision
 implementation, original failed B001 receipt and corrected B001 receipt remain
 unchanged. The new work is on `experiment/bounded-event-002`.
 
+The GitHub publication call was interrupted with `aborted by user`. A subsequent
+read-only check found no remote B002 branch. The local branch is committed, and
+its original development commits are preserved in a verified Git bundle.
+Publication status and recovery provenance are recorded in
+[the publication record](../provenance/bounded_event_002_publication.json).
+
 | Evidence | Purpose |
 | --- | --- |
 | [Plan](../experiments/bounded_event_002/plan.json) | Committed budget, candidates, mathematical scope, failure semantics and gates |
