@@ -1,0 +1,48 @@
+{
+  "schema": "mumble_bounded_event_verification_v1",
+  "corrected_source_revision": "2ee068f47b814cd5846f0030e75f6120c908812b",
+  "original_reference_revision": "0fd443b126579c625aea8c3772ddc28668aa242b",
+  "protected_paths_unchanged": [
+    "data",
+    "results",
+    "provenance",
+    "report",
+    "reference_binaries",
+    "src/scm_model.c",
+    "src/scm_features.c",
+    "src/scm_estimator.c",
+    "src/scm_assess.c",
+    "src/main.c",
+    "include/scm_model.h",
+    "include/scm_features.h",
+    "include/scm_estimator.h",
+    "include/scm_assess.h"
+  ],
+  "original_handoff_archived_byte_identically": true,
+  "first_failure_preserved": true,
+  "unchanged_plan_and_gate_names": true,
+  "corrected_checks": {
+    "passed": 72,
+    "total": 72
+  },
+  "full_existing_suite": {
+    "command": "make test",
+    "result": "PASS",
+    "scope": "Original suite and initial bounded module; all original numerical sources/tests unchanged since this run"
+  },
+  "final_targeted_tests": {
+    "command": "make test-evidence",
+    "result": "PASS",
+    "includes": "3500sample subnormal Givens regression plus objective/Gram/gradient,state/source/domain/failure-atomicity canaries"
+  },
+  "final_sanitizer": {
+    "command": "cc -Iinclude -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_evidence.c tests/test_evidence.c -lm -o /tmp/mumble-test-evidence-sanitized && ASAN_OPTIONS=detect_leaks=0 /tmp/mumble-test-evidence-sanitized",
+    "result": "PASS",
+    "leak_audit": false
+  },
+  "warning_free_final_C_build": true,
+  "independent_factor_review": "experiments/bounded_event_001/independent_review.json",
+  "memory_accounting": "experiments/bounded_event_001/memory_accounting.json",
+  "long_campaign_rerun": false,
+  "new_nonlinear_optimizations": 0
+}

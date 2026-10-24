@@ -4,13 +4,17 @@ C research reference for battery estimation from a 35 Hz voltage/current stream.
 
 The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The longer-term target
-is a streaming Cortex-M23 implementation. The present fitting path retains and
-replays history; it is not yet bounded-memory firmware.
+is a streaming Cortex-M23 implementation. The original nonlinear fitting path
+retains and replays history. A new bounded event component preserves a fixed
+local affine likelihood; cold-start learning and historical relinearization
+remain open. Neither path is qualified Cortex-M23 firmware.
 
 ## Start here
 
 | Resource | Contents |
 | --- | --- |
+| [Bounded event experiment](docs/BOUNDED_EVENT_001.md) | Fixed-memory C evidence design, complete host memory accounting, successful local carry and explicit failure witnesses |
+| [Corrected bounded receipt](experiments/bounded_event_001/receipt_scaled_givens/receipt.json) | 72 passing checks; original failed receipt retained separately |
 | [Implementation guide](README.txt) | Model, units, constraints, interfaces, assumptions and reproduction commands |
 | [Study report](report/SCM-35Hz-Results.html) | Self-contained HTML report; download and open locally |
 | [Convergence figure](report/SCM-35Hz-Convergence.png) | Stimulus and six-run error versus elapsed physical time |
@@ -115,6 +119,7 @@ belong in this repository; chat summaries are supporting context.
 - `src/scm_features.c`, `include/scm_features.h`: orthogonal projections.
 - `src/scm_estimator.c`, `include/scm_estimator.h`: host variable-projection estimator.
 - `src/scm_assess.c`, `include/scm_assess.h`: fixed-workspace per-target qualification.
+- `src/scm_evidence.c`, `include/scm_evidence.h`: bounded fixed-chart event evidence and guards.
 - `src/main.c`: CSV/JSON host CLI.
 - `tests/`: model, estimator, projection, constraint and qualification checks.
 - `tools/`: data generation, runners, independent scoring and report construction.
@@ -123,14 +128,51 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The priority is a bounded event representation that preserves conditional learning
-and earlier evidence. Subsequent experiments should cover measured OCV, sensor
+The current priority is controlled nonlinear validity and bounded chart
+initialization/change around the new fixed-chart evidence component.
+Subsequent experiments should cover measured OCV, sensor
 offsets, filtered/correlated noise, model mismatch and parameter drift. The current
 study does not validate aging, temperature variation, EOD prediction, or Cortex-M23
 latency, SRAM, flash or power. The requested 35 Hz operating point was tested;
 20 Hz and 1 kHz comparisons remain separate work.
 
+## Bounded event prototype
+
+`scm_evidence` consumes each actual interval/current/voltage observation once,
+carries model state and sensitivities across events, and merges event-local
+augmented QR factors into one aggregate. It retains no sample history or
+explicit Q basis. Source/index checks prevent duplicate ingestion in a live
+bank. Parameter-radius, physical-domain and residual diagnostics expose
+unsupported updates without deleting evidence.
+
+The corrected small experiment preserves the reference's unresolved 400 s
+SOC/capacity status, reproduces informative 900 s local precision and carries
+earlier information through the final quiet tail. All 72 checks pass. The
+nominal-chart control fails: local rank/precision alone cannot qualify a
+poorly placed nonlinear model. A separate inside-radius witness shows that
+the current radius is not a nonlinear likelihood-error certificate.
+
+On this host, the persistent bank plus update workspace uses 7,512 bytes;
+the simultaneous snapshot/diagnostic/solve objects bring that subtotal to
+18,408 bytes before additional configuration, input, stack and runtime costs.
+The complete approximately 10 KiB subsystem target is not achieved.
+
+```bash
+make build/scm_evidence_probe test-evidence evidence-stack
+OPENBLAS_NUM_THREADS=1 python3 tools/run_bounded_event.py \
+  --output-dir experiments/bounded_event_001/my_new_receipt
+python3 tools/measure_bounded_memory.py \
+  --probe-result experiments/bounded_event_001/my_new_receipt/carry_1800_to_2100.json \
+  --output experiments/bounded_event_001/my_new_memory.json
+```
+
+Both helpers refuse existing outputs. The original 60-fit campaign is not
+needed to reproduce this small experiment. Read the
+[design and results](docs/BOUNDED_EVENT_001.md) before treating local evidence
+as a nonlinear estimate.
+
 The original study release manifest is preserved in
-[`provenance/study_release.json`](provenance/study_release.json). Repository
-adaptations are limited to documentation and relocation of verification helpers;
-the recorded study outputs and numerical C implementation are preserved.
+[`provenance/study_release.json`](provenance/study_release.json). The original
+import adapted documentation and verification-helper paths. The later bounded
+prototype is recorded separately; original study outputs and numerical
+reference sources remain preserved.

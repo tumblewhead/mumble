@@ -1,10 +1,15 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "35Hz_C_host_reference_completed",
+  "stage": "bounded_fixed_chart_event_prototype_verified",
   "objective": "Learn quantities supported by available stimulus, carry evidence forward, expose unresolved targets, then reduce to bounded-memory Cortex-M23 execution.",
   "nominal_rate_Hz": 35,
-  "current_model": {"RC_modes": 3, "fitted_quantities": 16, "temperature_C": 25, "OCV": "known_illustrative_curve; measured_table_API_available"},
+  "current_model": {
+    "RC_modes": 3,
+    "fitted_quantities": 16,
+    "temperature_C": 25,
+    "OCV": "known_illustrative_curve; measured_table_API_available"
+  },
   "evidence": {
     "main": "results/streaming_results.json",
     "profiles": "results/profile_results.json",
@@ -14,7 +19,13 @@
     "independent_profile_validation": "results/independent_profile_validation.json",
     "C_reporting_integration": "results/c_integration_review.json",
     "report": "report/SCM-35Hz-Results.html",
-    "original_release": "provenance/study_release.json"
+    "original_release": "provenance/study_release.json",
+    "bounded_event_plan": "experiments/bounded_event_001/plan.json",
+    "bounded_event_corrected": "experiments/bounded_event_001/receipt_scaled_givens/receipt.json",
+    "bounded_event_original_failure": "experiments/bounded_event_001/receipt/receipt.json",
+    "bounded_event_memory": "experiments/bounded_event_001/memory_accounting.json",
+    "bounded_event_review": "experiments/bounded_event_001/independent_review.json",
+    "bounded_event_report": "docs/BOUNDED_EVENT_001.md"
   },
   "completed": {
     "main_cases": 6,
@@ -23,7 +34,11 @@
     "main_iteration_limits": 10,
     "compression_fits": 6,
     "target_profiles": 29,
-    "C_assessment_statuses": ["unexcited", "unresolved", "provisional"],
+    "C_assessment_statuses": [
+      "unexcited",
+      "unresolved",
+      "provisional"
+    ],
     "SOC_error_under_0_5pp_all_six_from_checkpoint_s": 600,
     "capacity_error_under_0_5percent_all_six_from_checkpoint_s": 900
   },
@@ -33,16 +48,36 @@
     "Matched synthetic model with exact current/time, known OCV and iid1mV voltage noise.",
     "Full fit retains and replays history; allocation is about49.4MB at73500samples.",
     "Explicit event projection bases cost memory and CPU; no MCU resource qualification.",
-    "No aging, temperature, sensor-bias, model-mismatch or EOD validation yet."
+    "No aging, temperature, sensor-bias, model-mismatch or EOD validation yet.",
+    "Bounded factor is exact only in one frozen affine chart; no autonomous nonlinear cold-start or historical relinearization.",
+    "Radius and anchor-residual guards do not certify nonlinear likelihood error; inside-radius counterexample retained.",
+    "Full local diagnostic path exceeds10KiB on host before external runtime/stack costs."
   ],
   "next_work": [
-    "Design bounded event evidence with controlled relinearization and residual guards.",
-    "Preserve conditional reporting and provenance across weak use without double counting.",
-    "Use measured OCV and evaluate sensor errors, correlated noise and model mismatch.",
-    "Add evidence age and inconsistency handling before claiming aging adaptation.",
-    "Measure actual Cortex-M23 memory, stack, cycles and numeric precision after reference equivalence."
+    "Bound nonlinear likelihood remainder over the factor-supported region; retain inside-radius failure witness.",
+    "Specify bounded initialization and chart change while carrying entering-state uncertainty and old evidence without double counting.",
+    "Reduce and schedule qualification/solve workspace only after nonlinear validity policy is concrete.",
+    "Use measured OCV and evaluate sensor errors, correlated noise, model mismatch and evidence age/drift.",
+    "Measure Cortex-M23 memory, stack, cycles and numeric precision after reference equivalence."
   ],
   "handoff_format": "compact_JSON",
   "continuation_handoff": "handoff/CONTINUE.json",
-  "repository_import": "Numerical sources/data/results preserved; documentation and verification-path portability adapted with separate provenance."
+  "repository_import": "Numerical sources/data/results preserved; documentation and verification-path portability adapted with separate provenance.",
+  "reference_stage": "35Hz_C_host_reference_completed_and_preserved",
+  "bounded_event": {
+    "work_branch": "experiment/bounded-event-001",
+    "source_revision": "2ee068f47b814cd5846f0030e75f6120c908812b",
+    "scope": "Exact fixed-affine likelihood representation up to roundoff; retrospective fitted anchors plus causal weak-tail extension",
+    "runs": 4,
+    "checks_passed": 72,
+    "checks_total": 72,
+    "bank_bytes": 3336,
+    "update_workspace_bytes": 4176,
+    "simultaneous_ingestion_snapshot_diagnostic_vector_bytes": 18408,
+    "cold_start_demonstrated": false,
+    "historical_relinearization_implemented": false,
+    "nonlinear_remainder_bound": false,
+    "coverage_validated": false,
+    "MCU_qualified": false
+  }
 }

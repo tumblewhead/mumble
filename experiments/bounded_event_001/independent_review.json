@@ -1,0 +1,78 @@
+{
+  "schema": "mumble_bounded_event_independent_audit_v1",
+  "source_revision": "2ee068f47b814cd5846f0030e75f6120c908812b",
+  "receipt": "experiments/bounded_event_001/receipt_scaled_givens/receipt.json",
+  "verdict": "Accept bounded fixed-chart representation and conditional carry for one trace; autonomous bounded nonlinear estimator remains unestablished",
+  "blocking_findings": [],
+  "integrity": {
+    "plan_hash_matches_first_failed_run": true,
+    "runner_hash_matches_first_failed_run": true,
+    "input_and_frozen_reference_hashes_unchanged": true,
+    "check_names_unchanged": true,
+    "changed_numerical_sources": [
+      "src/scm_evidence.c",
+      "tests/test_evidence.c"
+    ],
+    "run_file_hashes_verified": 4,
+    "configuration_hashes_verified": 4,
+    "tolerances_relaxed": false,
+    "truth_leakage_found": false,
+    "double_counting_found": false,
+    "reviewer_campaign_reruns": 0
+  },
+  "independent_recalculation": {
+    "method": "Read-only NumPy reconstruction of all5 dense augmentedR matrices from recorded packed factors; recomputedR^TR,gradient and all candidate costs",
+    "snapshots": 5,
+    "worst_relative_discrepancy": 5.820493604562639e-16,
+    "sample_count_matches_next_index": true
+  },
+  "corrected_results": {
+    "checks_passed": 72,
+    "checks_total": 72,
+    "max_relative_Gram_error": 6.920188909153786e-14,
+    "max_normalized_gradient_error": 8.83050995514868e-11,
+    "max_relative_affine_cost_error": 4.581005098873518e-14,
+    "tail_Q_difference_from_full_percent": -6.6158998723864215e-06,
+    "tail_SOC_difference_from_full_pp": -1.803996840799016e-07,
+    "tail_exact_NLL_excess": 1.3045864761807024e-05
+  },
+  "inside_radius_counterexample": {
+    "probe": "inside_SOC_Q",
+    "checkpoint_s": 2100,
+    "guard_passed": true,
+    "nonlinear_minus_affine_NLL": -133.97738162151654,
+    "prediction_RMS_V": 1.7395317064143688e-06,
+    "prediction_max_V": 3.3521506499489817e-06,
+    "NLL_decomposition": {
+      "squared_error_term": 0.11120441799256754,
+      "residual_error_cross_term": -134.08858603950912
+    },
+    "implication": "Radius passing does not bound historical nonlinear likelihood error"
+  },
+  "nominal_chart_counterexample": {
+    "rank": 16,
+    "finite_local_Q_SOC_ranges": true,
+    "local_precision_screens_pass": true,
+    "anchor_residual_RMS_sigma": 155.69680554134013,
+    "flagged_events": 214,
+    "step_guard": "relinearization_required",
+    "step_affine_NLL": 15746.740818556675,
+    "step_nonlinear_NLL": 3305312.9611023045,
+    "implication": "Local rank/precision cannot qualify a poor nonlinear anchor"
+  },
+  "separation": [
+    "surrogate solve",
+    "nonlinear convergence",
+    "local precision",
+    "truth scoring",
+    "validated coverage"
+  ],
+  "nonclaims": [
+    "bounded nonlinear cold start",
+    "arbitrary historical relinearization",
+    "global nonlinear sufficiency",
+    "calibrated coverage",
+    "radius or residual remainder certificate",
+    "MCU qualification"
+  ]
+}
