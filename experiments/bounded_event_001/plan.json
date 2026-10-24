@@ -1,0 +1,58 @@
+{
+  "schema": "mumble_bounded_event_plan_v1",
+  "experiment": "bounded_event_001",
+  "base_revision": "0fd443b126579c625aea8c3772ddc28668aa242b",
+  "scope": "Fixed-chart bounded event likelihood representation and small falsification; not autonomous nonlinear cold start or MCU qualification.",
+  "representation": {
+    "coordinates": "Original global theta/alpha chart; reference scaling; carried model state and sensitivities",
+    "factor": "Packed augmented square-root QR of [J_scaled/sigma,(observed_V-mu)/sigma]",
+    "joint_dimension": 16,
+    "numeric_factor_bytes_float64": 1224,
+    "event_policy": "Seal at a change of actual current or dt, or 256 samples; merge disjoint events into one historical factor",
+    "persistent_history": "One aggregate plus one active event; no raw samples, input-history list or explicit Q basis",
+    "exact_claim": "Preserves the complete frozen affine least-squares objective, gradient and joint Gram, up to floating-point error",
+    "nonlinear_claim": "None without separate replay evidence; translating the polynomial is not relinearization",
+    "source_policy": "One fixed 256-bit caller source identity and contiguous sample counter; no posterior prior or duplicate sources",
+    "noise": "Known common iid1mV voltage noise; same assumptions as the retained reference"
+  },
+  "case": "cell_a_35hz_s202610240",
+  "runs": [
+    {"name": "unexcited_400", "anchor": "frozen400s_fit", "end_samples": 14000, "split_samples": 0, "claim": "retrospective_representation_only"},
+    {"name": "informative_900", "anchor": "frozen900s_fit", "end_samples": 31500, "split_samples": 0, "claim": "retrospective_representation_only"},
+    {"name": "carry_1800_to_2100", "anchor": "frozen1800s_fit", "end_samples": 73500, "split_samples": 63000, "claim": "retrospective_prefix_compression_then_causal_tail_extension"},
+    {"name": "nominal_900", "anchor": "reference_nominal_start0_and_nominal_alpha", "end_samples": 31500, "split_samples": 0, "claim": "cold_chart_falsification_only"}
+  ],
+  "candidate_policy": {
+    "scaled_radii": [0.05,0.05,0.05,0.05,0.05,0.02,0.01,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05],
+    "radius_meaning": "Declared operating restriction, not an analytical nonlinear remainder bound",
+    "predetermined_probes": [
+      {"name": "zero", "delta": "all0"},
+      {"name": "inside_R0", "delta": "delta7=0.025; otherwise0"},
+      {"name": "inside_SOC_Q", "delta": "delta5=0.005,delta6=0.0025; otherwise0"},
+      {"name": "outside_Q", "delta": "delta6=0.3; otherwise0"},
+      {"name": "outside_SOC", "delta": "delta5=0.1; otherwise0"}
+    ],
+    "computed_probe": "Minimum-norm fixed-affine step using existing1e-10 relative eigen cutoff; report discarded/null directions and never infer their precision",
+    "physical_checks": "Original parameter supports, coupled abs(u0)<=H and complete SOC path using charge extrema",
+    "rejected_update": "Retain original evidence and expose relinearization_required; no silent clipping, reset or prior multiplication"
+  },
+  "checks": {
+    "factor_vs_direct_affine_relative_cost_tolerance": 1e-9,
+    "factor_vs_reference_relative_Gram_tolerance": 1e-9,
+    "local_halfwidth_relative_tolerance": 1e-5,
+    "tail_candidate_vs_frozen_full_SOC_pp_tolerance": 0.01,
+    "tail_candidate_vs_frozen_full_Q_relative_percent_tolerance": 0.05,
+    "tail_candidate_excess_nonlinear_NLL_tolerance": 0.1,
+    "nonlinear_probe_errors": "Report every observed discrepancy; do not tune the domain to passing probes or equate radius pass with validity",
+    "integrity": ["duplicate/gap/reorder/source rejection is atomic", "event-partition invariance", "actual-dt jitter preserved", "unexcited gamma_minus stays absent", "no residual-energy loss"],
+    "conditional_status": "400s Q/SOC unresolved and gamma_minus unexcited;900s Q/SOC local precision retained; tail carries previous evidence",
+    "truth": "Only post-inference scoring; never config, objective, chart or guard input",
+    "coverage": "Not validated"
+  },
+  "memory": {
+    "required": ["persistent bank", "transactional update workspace", "snapshot", "local-solve/qualification workspace and output", "input sample and source identity", "OCV table", "compiler stack frames/callpaths", "host audit IO/reference arrays separately"],
+    "lifetime_scaling": "All bounded-core objects independent of observation/event count; uint64 exhaustion fails closed",
+    "target": "Approximately10KiB is an eventual subsystem goal, not an acceptance gate or attained firmware budget"
+  },
+  "frozen_evidence_policy": "Read original results; write all new evidence under experiments/bounded_event_001; do not rerun60fits or profiles"
+}
