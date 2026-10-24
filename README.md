@@ -16,6 +16,7 @@ replays history; it is not yet bounded-memory firmware.
 | [Convergence figure](report/SCM-35Hz-Convergence.png) | Stimulus and six-run error versus elapsed physical time |
 | [Knowledge figure](report/SCM-35Hz-Knowledge.png) | Per-target unexcited, unresolved and provisional statuses |
 | [Project state](PROJECT_STATE.json) | Compact machine-readable checkpoint and next work |
+| [Continuation handoff](handoff/CONTINUE.json) | Repository-based instructions and context for the next agent |
 | [Study specification](specification.json) | Experiment contract |
 | [Input manifest](data/manifest.json) | Six traces, truth for scoring, stimulus and input hashes |
 | [Results](results/) | Frozen fit outputs, profiles, compression comparison and verification receipts |

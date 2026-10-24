@@ -1,0 +1,126 @@
+{
+  "schema": "mumble_continuation_v1",
+  "role": "Continue this battery-estimator research and implementation from the repository.",
+  "authority": {
+    "repository": "https://github.com/tumblewhead/mumble",
+    "default_branch": "main",
+    "verified_study_import_commit": "ccf2e9570ced813ab23a3d156f837be3fcfd1b69",
+    "commit_semantics": "Historical anchor, not a reset target. Fetch current repository state; preserve subsequent work.",
+    "read_first": ["AGENTS.md", "README.md", "PROJECT_STATE.json", "handoff/CONTINUE.json"],
+    "context_policy": "Read linked summaries and relevant source selectively. Do not load every raw trace or large result file into context.",
+    "repository_is_canonical": true
+  },
+  "user_intent": {
+    "operating_rule": "Estimate what the available stimulus supports, when it supports it; carry earlier evidence and uncertainty forward; explicitly say what remains unknown.",
+    "nominal_sampling_Hz": 35,
+    "rate_context": "User reports severe observability degradation at20Hz and diminishing returns near1kHz in SCM. Those cross-rate findings were not reproduced in this study.",
+    "long_term_target": "Streaming Cortex-M23; establish correct behavior before optimizing memory or arithmetic.",
+    "prior_hardware_context": "Small approximately60mAh cell; Cortex-M23 without FPU; approximately10KiB subsystem SRAM goal from prior discussions. These are design goals, not qualified resource results.",
+    "cell_lifetime_view": "Learn the recurring behavior of one battery through varied use; retain knowledge through quiet use and eventually adapt to aging or regime changes.",
+    "measured_OCV_assumption": "A measured OCV-SOC curve at25C is available in principle, but its numerical table has not been supplied to this experiment.",
+    "communication": "Human explanations may be conversational; machine handoffs and agent instructions should be compact JSON/YAML. Explain math with practical consequences.",
+    "execution": "Use short local correctness checks. For long campaigns provide reproducible pull-run-push commands for the user's machine. Avoid unnecessary reruns."
+  },
+  "originating_ideas": [
+    "Sensitivity-aware projections retained7features from1200samples in an earlier illustrative global experiment; this is context, not the current benchmark.",
+    "Localize features to physical events while preserving entering state and chronology.",
+    "Explore recurring multi-event token strings or words and their conditional estimation value.",
+    "Attention or sparse selection may prioritize events, but no attention model is implemented here.",
+    "A useful-word catalog and information-density proof must specify model, parameter domain, entering state, prior evidence and noise; no universal context-free proof has been established.",
+    "Repeated independent observations improve precision in existing directions but cannot create an absent direction. Normalized pooling needs count/noise/correlation metadata; do not equate repeated sources with independent evidence."
+  ],
+  "current_implementation": {
+    "stage": "Working C99 host reference, explicit uncertainty reporting, event-local compression comparison and35Hz convergence study.",
+    "streaming_scope": "Model propagation is chronological and fixed-size. Parameter fits replay growing retained prefixes; this is not a bounded-memory online estimator.",
+    "model": "Known25C OCV + R0 +3FosterRC modes + asymmetric throughput hysteresis + SOC integration.",
+    "unknowns": 16,
+    "theta": ["log(tau1)", "log(tau2)", "log(tau3)", "log(gamma_plus)", "log(gamma_minus)", "initial_SOC", "log(capacity_Ah)"],
+    "alpha": ["R0", "R1", "R2", "R3", "H", "v10", "v20", "v30", "u0=H*h0"],
+    "solver": "Constrained linear-amplitude variable projection inside a multistart nonlinear damped projected Gauss-Newton/LM reference. Numerical convergence is not a global-optimum claim.",
+    "observation_contract": "Sample index orders observations. Each row has actual dt_s,current_A,voltage_V. Current is constant over that interval; voltage is sampled at its END. Positive current discharges. Never normalize input current by candidate capacity.",
+    "state_contract": "Carry polarization, SOC and hysteresis through events. At rest SOC and throughput hysteresis freeze while RC states relax.",
+    "curve": "Benchmark U(z)=3+1.15*z+0.08*tanh(8*(z-0.5))V; illustrative, not the user's measured curve. CLI --ocv accepts a monotone PWL table and rejects extrapolation.",
+    "statuses": ["unexcited", "unresolved", "provisional"],
+    "assessment": "Undamped joint local likelihood diagnostic with null-space withholding and target cross-covariance. Not a calibrated posterior or global confidence certificate.",
+    "default_screens": {"two_sigma_relative_halfwidth": 0.10, "SOC_halfwidth_fraction": 0.05},
+    "special_guards": [
+      "Do not assign zero uncertainty to null directions through a pseudoinverse.",
+      "Do not clip intervals to bounds to manufacture precision.",
+      "Nearzero H<=1e-8V makes h0 unavailable; skip division.",
+      "Fixed-current-SOC profile fits use a different derivative chart; do not reinterpret their Gram matrix as unrestricted covariance."
+    ],
+    "code": {
+      "physical_model": ["src/scm_model.c", "include/scm_model.h"],
+      "features": ["src/scm_features.c", "include/scm_features.h"],
+      "fit": ["src/scm_estimator.c", "include/scm_estimator.h"],
+      "qualification": ["src/scm_assess.c", "include/scm_assess.h"],
+      "CLI": "src/main.c"
+    }
+  },
+  "completed_evidence": {
+    "summary": "report/report_metrics.json",
+    "main": "results/streaming_results.json",
+    "cases": 6,
+    "case_design": "2synthetic cells x3noise seeds;73500samples and2100s per trace;10prefixes; iid1mV voltage noise; exact current/time; fixed parameters and matched model.",
+    "main_fits": {"total": 60, "numerically_converged": 50, "iteration_limits": 10},
+    "convergence_definition": "First requested checkpoint passing at that and every remaining requested checkpoint. No claim between checkpoints or beyond the horizon.",
+    "all_six_point_accuracy": {"current_SOC_below_0_5pp_from_s": 600, "capacity_below_0_5percent_from_s": 900, "all_R_and_tau_below_10percent_by_s": 220},
+    "all_six_local_precision": {"SOC_two_sigma_halfwidth_at_most_0_5pp_from_s": 600, "Q_relative_two_sigma_halfwidth_at_most_0_5percent_from_s": 900},
+    "final_worst_errors": {"current_SOC_pp": 0.003506424811816622, "capacity_relative_percent": 0.016335404289113953, "fastest_tau_relative_percent": 8.42300510},
+    "unknowns_example": "At400s first-cell Q point is60.059mAh but status remains unresolved with30-100mAh support. Gamma_minus is unexcited before the first negative-current observation at400.028571s. Some R0/fast-pole targets remain unresolved at2100s.",
+    "carry_forward": {"receipt": "results/tail_only_result.json", "finding": "Full history retains useful SOC/Q during the final3mA quiet tail. Tail-only fitting leaves them unresolved despite similar voltage RMSE; that fit also reached its iteration limit."},
+    "compression": {
+      "receipt": "results/compression_results.json",
+      "scope": "2full traces,106constant-current/dt blocks, same nominal initialization,3methods;6fits.",
+      "features": {"full": 73500, "one_anchor": 723, "five_anchor": 1442},
+      "retained_bytes": {"full": 49394072, "one_anchor": 9001296, "five_anchor": 24436808},
+      "finding": "Close point fits; hybrid closely reproduces full fits. Explicit basis storage and construction are expensive and slower. These are event blocks, not a learned multi-event vocabulary."
+    },
+    "profiles": {
+      "receipt": "results/profile_results.json",
+      "audit": "results/independent_profile_validation.json",
+      "targets": 29,
+      "returned_candidates": 369,
+      "optimizer_unresolved": 73,
+      "operational_missing": 1,
+      "scope": "Finite-grid local optimization with deltaNLL<=2 relative to best observed feasible cost; not a global exclusion or coverage certificate.",
+      "rule": "An attained low cost may be a witness; an unfinished high cost cannot supply an outside boundary.",
+      "roundoff": "Audit preserves one invalid raw nearzero-H u0/H ratio. Amplitudes meet numerical tolerance; accepted profile points are unaffected. Do not claim blanket exact physical-tuple validity."
+    },
+    "early_refinement": {"receipt": "results/refinement_220.json", "finding": "Same-prefix refinement lowers NLL by5.861 but Q remains near100mAh versus60mAh truth. Early uncertainty remains unresolved; original campaign was not rewritten."},
+    "validation": ["results/independent_validation.json", "results/assessment_c_review.json", "results/c_integration_review.json", "provenance/repository_validation.json", "provenance/repository_smoke_test.json"],
+    "provenance": "This is a fresh reconstructed3RC study after an earlier workspace loss. Do not combine it with old two-mode results or imply byte-identical recovery. Original release hashes are in provenance/study_release.json; repository adaptations are documented in provenance/repository_import.json."
+  },
+  "nonclaims": [
+    "No real-cell, measured-OCV, temperature, aging, drift, sensor-bias, filtered-noise or EOD validation.",
+    "No Cortex-M23 cycles, end-to-end SRAM, flash, stack or energy qualification; host CPU time is not per-sample MCU latency.",
+    "No global nonlinear sufficiency, complete useful-word proof, attention implementation or active-excitation policy.",
+    "This conventional reference does not establish SCM/NAIA/D2/D2E proofs. Preserve scalar-potential versus likelihood-information versus solver-curvature distinctions; do not steer D2/D2E prematurely to NGD/Fisher.",
+    "Synthetic stimulus amplitudes are not a prescription for hardware injection."
+  ],
+  "recommended_next_milestone": {
+    "goal": "Bounded event evidence that preserves conditional SOC/Q learning and earlier knowledge, compared against this retained-history reference.",
+    "first_action": "Inspect current row caching and explicit Q-basis construction. Propose one concrete bounded-memory design, with complete memory accounting and a minimal falsification experiment, before a long sweep.",
+    "candidate_directions": ["Analytical event accumulators within a declared fixed model chart", "Bounded retained excitation windows with controlled relinearization", "Residual guards and explicit evidence age/inconsistency handling"],
+    "required_checks": [
+      "Keep entering state, source identities and chronology.",
+      "Retain valid earlier information through weak use without treating repeated source data as independent.",
+      "Keep current-SOC versus initial/anchor-SOC semantics distinct.",
+      "Score truth accuracy separately from local precision and numerical convergence.",
+      "Count current-history, basis, reconstruction, workspace and stack costs, not only feature payload.",
+      "Test one informative prefix, one unexcited prefix and the weak tail before expanding the campaign.",
+      "Allow unknown states or parameter combinations; do not use them as an unexplained voltage-error sponge."
+    ],
+    "not_yet_decided": ["Exact bounded-history architecture", "Evidence aging or change-detection mechanism", "Word vocabulary and contextual information-density theorem", "Numeric precision for the eventual MCU"]
+  },
+  "resume_workflow": {
+    "fresh_checkout": ["git clone https://github.com/tumblewhead/mumble.git", "cd mumble"],
+    "existing_checkout": ["git status --short --branch", "git fetch origin", "git pull --ff-only"],
+    "checkout_guard": "Inspect branch/status before pulling. Preserve dirty or unrelated work; do not reset to the historical anchor. Use a work branch for experiments.",
+    "setup": ["python3 -m venv .venv", ". .venv/bin/activate", "python3 -m pip install -r requirements-reference.txt", "make", "make test"],
+    "optional_relocation_check": "OPENBLAS_NUM_THREADS=1 python3 tests/check_c_integration.py --output provenance/new_integration_check.json",
+    "receipt_guard": "Use explicit new --output paths with integration/validation helpers. Default runner outputs may overwrite frozen study receipts. Do not rerun60fits/profiles merely to resume.",
+    "new_work": "Record source revision, assumptions, exact commands, statuses and limitations with new evidence; commit source and results to this repository. Include pull-run-push instructions when handing long runs to the user.",
+    "first_response": "State the repository revision and current milestone briefly, then continue with a concrete next-step design grounded in the code. Do not restart the previous study or present unresolved quantities as known."
+  }
+}
