@@ -44,11 +44,19 @@ static int qr_row(scm_evidence_factor *f,double *row)
     for(i=0;i<n;i++)if(!isfinite(row[i]))return SCM_EVIDENCE_ERR_NONFINITE;
     for(i=0;i<n;i++) {
         size_t ii=scm_evidence_packed_index((size_t)i,(size_t)i);
-        double a=f->upper[ii],b=row[i],r,c,s;
+        double a=f->upper[ii],b=row[i],r,c,s,scale,aa,bb,h;
         if(b==0)continue;
-        r=hypot(a,b);
+        /* Normalize before forming the rotation. If a and b are subnormal,
+         * hypot(a,b) can round to a value with very few significant bits;
+         * dividing by that rounded value can make c*c+s*s materially differ
+         * from 1 and corrupt ordinary-size trailing columns/residuals.
+         * The rounded tiny diagonal is unavoidable, but the rotation need
+         * not inherit its relative error. No information is thresholded.
+         */
+        scale=fmax(fabs(a),fabs(b));aa=a/scale;bb=b/scale;
+        h=hypot(aa,bb);c=aa/h;s=bb/h;r=scale*h;
         if(!isfinite(r) || r==0)return SCM_EVIDENCE_ERR_NONFINITE;
-        c=a/r;s=b/r;f->upper[ii]=r;row[i]=0;
+        f->upper[ii]=r;row[i]=0;
         for(j=i+1;j<n;j++) {
             size_t ij=scm_evidence_packed_index((size_t)i,(size_t)j);
             double old=f->upper[ij],tail=row[j];

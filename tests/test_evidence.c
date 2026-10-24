@@ -1,4 +1,5 @@
 #include "scm_evidence.h"
+#include <float.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -219,12 +220,59 @@ static void check_zero_interval_current(void)
     CHECK(h[7*16+7]>0,"zero interval still observes ohmic current response");
 }
 
+/* At about 36 s the fastest entering-state response passes through the
+ * subnormal range. New events then contain subnormal QR pivots together with
+ * ordinary-size voltage residuals. Rotations must remain orthogonal even
+ * when the rounded hypotenuse itself has very few significant bits.
+ */
+static void check_subnormal_rotation(void)
+{
+    scm_evidence_config c=configuration(3,35);
+    scm_evidence e;
+    scm_evidence_workspace w;
+    scm_evidence_factor factor;
+    scm_model_state model;
+    scm_model_row row;
+    scm_sample sample={1./35.,.02,0};
+    double expected_h[256]={0},expected_g[16]={0},expected_cost=0;
+    double h[256],g[16],cost,jac[7],j[16],delta[16]={0};
+    int i,k,l,subnormal_rows=0;
+    CHECK(scm_evidence_init(&e,&c)==0,"subnormal rotation init");
+    CHECK(scm_model_init(&model,3,c.theta)==0,"subnormal direct model init");
+    for(k=0;k<3500;k++) {
+        double mu,residual;
+        CHECK(scm_model_step(&model,NULL,sample.dt,sample.current,&row)==0,"subnormal direct model step");
+        CHECK(scm_model_predict(&row,3,c.alpha,&mu,jac)==0,"subnormal direct prediction");
+        sample.voltage=mu+c.sigma*(cos(.43*k)+.2*sin(.11*k));
+        residual=(sample.voltage-mu)/c.sigma;
+        for(i=0;i<7;i++)j[i]=jac[i]*c.scale[i]/c.sigma;
+        for(i=0;i<9;i++)j[7+i]=row.X[i]*c.scale[7+i]/c.sigma;
+        if(j[12]!=0 && fabs(j[12])<DBL_MIN)subnormal_rows++;
+        expected_cost+=.5*residual*residual;
+        for(i=0;i<16;i++) {
+            expected_g[i]-=j[i]*residual;
+            for(l=0;l<16;l++)expected_h[i*16+l]+=j[i]*j[l];
+        }
+        CHECK(scm_evidence_push(&e,c.source_id,(uint64_t)k,&sample,&w)==0,"subnormal streaming row");
+    }
+    CHECK(subnormal_rows>10,"fixture exercises decaying subnormal entering-state column");
+    CHECK(scm_evidence_snapshot(&e,&factor,&w)==0,"subnormal factor snapshot");
+    CHECK(scm_evidence_factor_normal(&factor,h,g,&cost)==0,"subnormal normal extraction");
+    CHECK(near(cost,expected_cost,2e-12),"subnormal pivot preserves ordinary residual energy");
+    CHECK(near(scm_evidence_factor_cost(&factor,delta),expected_cost,2e-12),"subnormal whole affine cost");
+    for(i=0;i<16;i++) {
+        CHECK(near(g[i],expected_g[i],2e-10),"subnormal gradient matches direct rows");
+        for(l=0;l<16;l++)CHECK(near(h[i*16+l],expected_h[i*16+l],2e-11),"subnormal normal matches direct rows");
+    }
+}
+
 int main(void)
 {
     int n;
     for(n=1;n<=SCM_MAX_MODES;n++)check_affine_and_partition(n);
     check_errors();check_quiet_and_residual_constant();check_soc_path_guard();
     check_zero_interval_current();
+    check_subnormal_rotation();
     if(failures){fprintf(stderr,"%d evidence checks failed\n",failures);return 1;}
     printf("evidence checks passed; bank=%zu workspace=%zu factor=%zu packed=%zu bytes\n",
            sizeof(scm_evidence),sizeof(scm_evidence_workspace),sizeof(scm_evidence_factor),
