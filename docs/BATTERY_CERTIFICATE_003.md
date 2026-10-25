@@ -30,6 +30,10 @@ uses the model and observation premises, rather than the duration of the test.
 Branch: research/indefinite-numerical-stability-003.
 Base: d84db851955b3c3c686d0738939059dbcde3ea9b.
 
+[Publication provenance](../provenance/indefinite_stability_003_publication.json)
+maps the original source/research commits to identical published trees. The
+original development commits are preserved in the linked Git bundle.
+
 | Artifact | Role |
 | --- | --- |
 | [Contract](../proofs/indefinite_stability_003/contract.json) | Model, units, admissible ranges, semantics and open gates |
