@@ -11,9 +11,13 @@ REMAINDER_OBJECT = build/scm_remainder.o
 STABLE_OBJECT = build/scm_stable.o
 CERTIFICATE_OBJECT = build/scm_certificate.o
 CERTIFICATE_BOX_OBJECT = build/scm_certificate_box.o
+COMPACT_EVIDENCE_OBJECT = build/scm_compact_evidence.o
+COMPACT_REMAINDER_OBJECT = build/scm_compact_remainder.o
+COMPACT_ASSESS_OBJECT = build/scm_compact_assess.o
+COMPACT_OBJECTS = $(COMPACT_EVIDENCE_OBJECT) $(COMPACT_REMAINDER_OBJECT) $(COMPACT_ASSESS_OBJECT)
 TEST_NAMES = $(basename $(notdir $(wildcard tests/test_*.c)))
 TEST_BINS = $(addprefix build/,$(TEST_NAMES))
-.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box evidence-stack remainder-stack sanitize clean
+.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box test-compact compact-stack evidence-stack remainder-stack sanitize clean
 all: build/scm_estimator
 build:
 	mkdir -p build
@@ -41,6 +45,25 @@ test-evidence: build/test_evidence
 	./build/test_evidence
 test-remainder: build/test_remainder
 	./build/test_remainder
+build/test_compact: tests/test_compact.c tools/compact_compare.h $(COMPACT_OBJECTS) $(REMAINDER_OBJECT) $(EVIDENCE_OBJECT) $(MODEL_OBJECT) $(ASSESS_OBJECT) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(filter-out %.h,$^) $(LDLIBS) -o $@
+build/test_compact_assess: tests/test_compact_assess.c $(COMPACT_ASSESS_OBJECT) $(COMPACT_EVIDENCE_OBJECT) $(EVIDENCE_OBJECT) $(MODEL_OBJECT) $(ASSESS_OBJECT) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+build/scm_compact_probe: tools/compact_probe.c tools/compact_compare.h $(COMPACT_OBJECTS) $(REMAINDER_OBJECT) $(EVIDENCE_OBJECT) $(MODEL_OBJECT) $(ASSESS_OBJECT) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(filter-out %.h,$^) $(LDLIBS) -o $@
+test-compact: build/test_compact build/test_compact_assess
+	./build/test_compact
+	./build/test_compact_assess
+# Own-source host stack only. Library, caller, IRQ and target stack are extra.
+compact-stack: | build
+	mkdir -p build/compact-stack
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_compact_evidence.c -o build/compact-stack/scm_compact_evidence.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_compact_remainder.c -o build/compact-stack/scm_compact_remainder.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_compact_assess.c -o build/compact-stack/scm_compact_assess.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_evidence.c -o build/compact-stack/scm_evidence.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_model.c -o build/compact-stack/scm_model.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_assess.c -o build/compact-stack/scm_assess.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c tools/compact_probe.c -o build/compact-stack/compact_probe.o
 build/test_stable: tests/test_stable.c $(STABLE_OBJECT) | build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ -o $@
 test-stable: build/test_stable
@@ -82,7 +105,7 @@ endif
 # This checks address/undefined behavior only; it is not a leak audit.
 sanitize: | build
 	@set -e; for name in $(TEST_NAMES); do \
-	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
+	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c src/scm_compact_evidence.c src/scm_compact_remainder.c src/scm_compact_assess.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
 	  ASAN_OPTIONS=detect_leaks=0 ./build/$${name}_sanitized; \
 	done
 clean:

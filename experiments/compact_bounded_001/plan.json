@@ -1,0 +1,81 @@
+{
+  "schema": "mumble_compact_bounded_plan_v1",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "base_revision": "36ce8fb03538f17a1b33d08b02a9213edf3050c5",
+  "work_branch": "implementation/compact-bounded-001",
+  "decision": "Implement and check the proposed memory reductions before returning to M1 lifecycle integration; this is not a new model or fitting study.",
+  "scope": {
+    "reference": "Preserved B001/B002 fixed-chart Gaussian local evidence and analytic remainder",
+    "implementation": "Separate compact C APIs; original source and receipts unchanged",
+    "retained": [
+      "All joint coordinates and cross terms",
+      "History/event QR grouping and compressed-row merge order",
+      "Original chart, source identity, actual intervals, chronology, carried state",
+      "All sparse remainder coefficients, last-bound audit fields and pair maps",
+      "Atomic failed updates and paired ancestry"
+    ],
+    "reductions": [
+      "One immutable caller-owned configuration instead of duplicated values",
+      "Generate joint row directly instead of dense model-row and separate Jacobian temporaries",
+      "Stage only the changed QR factor, model and metadata",
+      "Compute only current SOC/capacity reports with full-joint eigensystem; share scratch across serialized phases"
+    ],
+    "stricter_guard": "Compact assessment returns -1 if the squared target-gradient norm overflows; the original can continue with a nonfinite norm. Rejected query never modifies evidence."
+  },
+  "primary": {
+    "case": "cell_a_35hz_s202610240",
+    "data": "data/cell_a_35hz_s202610240.csv",
+    "anchor": "experiments/bounded_event_001/receipt_scaled_givens/carry_1800_to_2100_anchor.txt",
+    "end_samples": 73500,
+    "checkpoints_samples": [
+      63000,
+      73500
+    ],
+    "max_event_samples": 256,
+    "nll_budget": 0.1,
+    "new_nonlinear_fits": 0,
+    "truth_access": false,
+    "anchor_scope": "Previously estimated 1800s anchor; prefix compressed retrospectively, final300s causal. No autonomous cold start demonstrated.",
+    "runs": 1,
+    "failure_rule": "Preserve first primary receipt and every failure. Any necessary correction is separately recorded, without relaxing gates."
+  },
+  "acceptance": {
+    "core_parity": "Exact numeric equality of all meaningful factor/state/metadata/remainder values and query statuses at every sample; signed-zero/bitwise differences reported separately",
+    "atomic_failure": "Each rejected call leaves its own public banks byte-for-byte unchanged",
+    "eigenvalues": {
+      "absolute": 1e-09,
+      "relative": 1e-12
+    },
+    "target_quantities": {
+      "absolute": 1e-11,
+      "relative": 1e-09
+    },
+    "diagnostic_discrete_fields": "Exact statuses/reasons/rank for non-boundary fixtures and primary trajectory",
+    "memory": "Actual sizeof each backing object and phase aggregate, compiler stack report, explicit external costs; no complete firmware claim",
+    "local_curvature": "On the primary trace compare raw full-joint SOC/logQ variances from both eigensystems under the same target tolerance, while keeping optimizer_status=1 and returned target ranges unresolved."
+  },
+  "targeted_tests": [
+    "One/two/three modes and original packing stride",
+    "Zero and varied actual intervals, current signs and PWL OCV evidence-only path",
+    "Source/order/nonfinite/domain/counter/seal and paired-ancestry rejection",
+    "Exact old QR grouping and single-row-event construction including zero/leading-zero cases",
+    "Full-joint rank/null-space and selected-target diagnostics; degenerate and near-cutoff matrices",
+    "Address/undefined-behavior sanitizer on changed path"
+  ],
+  "memory_estimate_before_implementation_bytes": {
+    "persistent_owned_config_and_banks": 4080,
+    "paired_ingestion_objects": 6576,
+    "query_phase": 6864,
+    "serialized_phases_with_sample_remainder_result_trial_delta": 7064,
+    "scope": "Host ABI estimate, not measurement; excludes library/caller/IRQ/runtime stack, acquisition backlog, persistent reporting copy and recovery staging"
+  },
+  "limits": [
+    "No reduced rank, quantization, event regrouping, codebook classifier or semi-Markov inference",
+    "Only SOC/Q diagnostic outputs; nuisance targets remain unassessed, not fixed",
+    "No historical relinearization, autonomous nonlinear learner, checkpoint portability or reset integration",
+    "No new all-prefix stability or outward-rounding/coverage guarantee",
+    "No Cortex-M23 qualification or runtime speedup promise"
+  ],
+  "next": "After one implementation/verification result, resume M1/A1-A3 from the delivery roadmap. Select later bounded learner using the same lifecycle harness."
+}
