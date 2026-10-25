@@ -33,6 +33,11 @@ hard voltage-error intervals and absence of drift/hysteresis remain premises.
 Branch: research/indefinite-numerical-stability-004.
 Base: 4a990cf923e2e56935a1ffb346215faad05bff66.
 
+Canonical source: `7c6f248f68638d632e297ff655da94652c09c0c2`. The original source and research
+commits are preserved in a verified bundle. Published source/research trees
+were compared against the original local trees using fetched Git objects; all
+matched. See the [publication provenance](../provenance/indefinite_stability_004_publication.json).
+
 | Artifact | Role |
 | --- | --- |
 | [Contract](../proofs/indefinite_stability_004/contract.json) | Continuous parameter box, units, input/domain assumptions and lifetime claims |
