@@ -15,9 +15,12 @@ COMPACT_EVIDENCE_OBJECT = build/scm_compact_evidence.o
 COMPACT_REMAINDER_OBJECT = build/scm_compact_remainder.o
 COMPACT_ASSESS_OBJECT = build/scm_compact_assess.o
 COMPACT_OBJECTS = $(COMPACT_EVIDENCE_OBJECT) $(COMPACT_REMAINDER_OBJECT) $(COMPACT_ASSESS_OBJECT)
+SESSION_OBJECT = build/scm_session.o
+SESSION_CHECKPOINT_OBJECT = build/scm_session_checkpoint.o
+SESSION_OBJECTS = $(SESSION_OBJECT) $(SESSION_CHECKPOINT_OBJECT) $(ESTIMATOR_OBJECT) $(MODEL_OBJECT) $(FEATURE_OBJECT) $(ASSESS_OBJECT)
 TEST_NAMES = $(basename $(notdir $(wildcard tests/test_*.c)))
 TEST_BINS = $(addprefix build/,$(TEST_NAMES))
-.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box test-compact compact-stack evidence-stack remainder-stack sanitize clean
+.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box test-compact test-session session-stack compact-stack evidence-stack remainder-stack sanitize clean
 all: build/scm_estimator
 build:
 	mkdir -p build
@@ -54,6 +57,22 @@ build/scm_compact_probe: tools/compact_probe.c tools/compact_compare.h $(COMPACT
 test-compact: build/test_compact build/test_compact_assess
 	./build/test_compact
 	./build/test_compact_assess
+build/test_session: tests/test_session.c $(SESSION_OBJECT) $(ESTIMATOR_OBJECT) $(MODEL_OBJECT) $(FEATURE_OBJECT) $(ASSESS_OBJECT) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+build/test_session_checkpoint: tests/test_session_checkpoint.c $(SESSION_OBJECTS) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+build/scm_session_probe: tools/session_probe.c $(SESSION_OBJECTS) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+test-session: build/test_session build/test_session_checkpoint
+	./build/test_session
+	./build/test_session_checkpoint
+# M1 is a desktop retained-history adapter; these host frames are not a target
+# SRAM bound and exclude library/runtime/caller costs and dynamic allocations.
+session-stack: | build
+	mkdir -p build/session-stack
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_session.c -o build/session-stack/scm_session.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_session_checkpoint.c -o build/session-stack/scm_session_checkpoint.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c tools/session_probe.c -o build/session-stack/session_probe.o
 # Own-source host stack only. Library, caller, IRQ and target stack are extra.
 compact-stack: | build
 	mkdir -p build/compact-stack
@@ -105,7 +124,7 @@ endif
 # This checks address/undefined behavior only; it is not a leak audit.
 sanitize: | build
 	@set -e; for name in $(TEST_NAMES); do \
-	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c src/scm_compact_evidence.c src/scm_compact_remainder.c src/scm_compact_assess.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
+	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c src/scm_compact_evidence.c src/scm_compact_remainder.c src/scm_compact_assess.c src/scm_session.c src/scm_session_checkpoint.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
 	  ASAN_OPTIONS=detect_leaks=0 ./build/$${name}_sanitized; \
 	done
 clean:

@@ -1,0 +1,123 @@
+{
+  "schema": "mumble_trajectory_integration_plan_v1",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "status": "frozen_before_primary",
+  "work_branch": "integration/two-cell-lifecycle-001",
+  "baseline_revision": "17ccdf5b656a30ada3dad5a859023a29440df6bb",
+  "milestone": "M1",
+  "decision": "Demonstrate the full retained-history C estimator lifecycle on the two existing short cells. Stop after the integrated result and name any concrete blocker; no automatic compression/proof study.",
+  "cases": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "path": "data/cell_a_35hz_s202610240.csv",
+      "samples": 73500,
+      "duration_s": 2100.0,
+      "sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8"
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "path": "data/cell_b_35hz_s202610240.csv",
+      "samples": 73500,
+      "duration_s": 2100.0,
+      "sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe"
+    }
+  ],
+  "execution": {
+    "fit_sample_counts": [
+      350,
+      31500,
+      63000,
+      73500
+    ],
+    "fit_nominal_seconds": [
+      10,
+      900,
+      1800,
+      2100
+    ],
+    "checkpoint_sample_counts": [
+      420,
+      31500,
+      42000,
+      64750,
+      73500
+    ],
+    "warm_segment_ends": [
+      420,
+      42000,
+      64750,
+      73500
+    ],
+    "cold_reset_sample": 31500,
+    "query_stride_samples": 350,
+    "fit_budget_total": 20,
+    "starts": 3,
+    "max_iterations": 120,
+    "sigma": 0.001,
+    "modes": 3,
+    "max_history_samples": 73500,
+    "case_workers": 2,
+    "control_fits_per_cell": 4,
+    "warm_fits_per_cell": 4,
+    "cold_new_fits_per_cell": 2,
+    "fit_initialization": "Reference public starts, then preceding estimated theta only as one start; no historical posterior factor",
+    "checkpoint_policy": "Complete canonical pointer-free record with journal and all required fit/schedule/config/ledger state; fresh-process restores do not recompute earlier fits",
+    "cold_policy": "Restore control900s checkpoint then explicitly discard estimator history/fit/starts while retaining source position and absolute clock. Plant continues through unchanged suffix; no true hidden state supplied.",
+    "output_policy": "Sparse10s nominal queries plus fit/reset/restore/checkpoint events. Fullfit details only atfit events; temporary fullcheckpoint files are hashed/sized and rebuilt from committed sources/data whenneeded.",
+    "primary_run_policy": "Runonce oncommitted clean numerical sources; preserve first outputs/failures. No new optimization outside20-call primarycap; tiny deterministicunitfits are separately disclosed."
+  },
+  "acceptance": {
+    "checkpoint_bytes": "Exact equality at matched control/warm positions. Allocationcapacity and deterministic requestedbytepeak counters are preserved; CPU/setup timing fields are omitted or canonicalized tozero.",
+    "integer_and_status": "Exact equality of index/epoch/schedule/recovery flags and query statuses/reasons",
+    "query_atol": 1e-12,
+    "query_rtol": 1e-10,
+    "fit_numeric": "Same tolerances as query; all parameter/objective/Gram/diagnostic fields compared except runtime timings. Requestedallocationcounts should match warm/control and remain separately reported.",
+    "warm_fit_schedule": "Exactlysame samplecounts and20combinedcallsatmost; no restore refits",
+    "functional": "Both selected cells complete their required lifecycle, fresh-process checkpoint parity and explicit fault semantics with no silent corruption, unknown gaps, truth input or double evidence",
+    "usefulness": {
+      "current_SOC_abs_error_pp_lt": 0.5,
+      "capacity_abs_relative_error_percent_lt": 0.5,
+      "uninterrupted_and_warm_checkpoints_samples": [
+        31500,
+        63000,
+        73500
+      ],
+      "cold_recovery_checkpoints_samples": [
+        63000,
+        73500
+      ],
+      "interpretation": "Truth scoring only after all inference; report accuracy, convergence, local precision and status separately. These synthetic thresholds are not product or coverage guarantees."
+    },
+    "failure_policy": "Functional and usefulness booleans separate; numerical failure or unknown targets recorded without parameter/tolerance retuning. Useful failure namesoneblocker instead of expanding campaigns."
+  },
+  "required_faults": [
+    "Duplicate and out-of-order samples reject without hidden replay",
+    "Nonfinite/negative intervals or unsupported inputs reject atomically",
+    "Sequence and allocation bounds reject without wrap",
+    "Unknown-input gap latches recovery_required until valid restore/replay or explicit cold reset",
+    "Missing voltage preserves knowninput/time propagation and journal, explicitly disables unsupported subsequent full-history fitting",
+    "Corrupt/truncated/incompatible/wrong-source checkpoints reject without changing live session",
+    "Coldreset clears previous estimate/uncertainty/warmstarts and reports unknowns immediately",
+    "Restored old valid checkpoint plus complete known intervening inputs reproduces the control state exactly once"
+  ],
+  "model_and_claims": {
+    "reference": "Original16-unknown 3RC+hysteresis full C replay; exact I/dt, knownillustrativeOCV, fixed25C, iid1mVsynthetic noise",
+    "temperature_and_EOD": "Unimplemented outputs explicit",
+    "memory": "Growing retainedjournal and transient solver allocation; count actual session backing storage/restore peak/solver memory, do not apply compact7064B claim toM1",
+    "certificate004": "Separate restricted model, not substituted or truth-conditioned into these data",
+    "uncertainty": "Gaussian local likelihood diagnostics, not hard certificate/validated coverage",
+    "lifetime": "Finite lifecycle demonstration; not a new indefinite-runtime arithmetic proof",
+    "prediction_freshness": "Current propagated point/inputposition and lastfit/evidenceposition distinguished; stale evidence remains explicit"
+  },
+  "evidence_preservation": "All prior numerical source and frozen evidence retained; new sources/receipts onthisworkbranch only",
+  "deliverables": [
+    "C session API",
+    "Versionedcompletecheckpoint format",
+    "Deterministic lifecycle/fault tests",
+    "Two-cell primary receipt and post-inference scores",
+    "Trajectory/reset figure/report",
+    "Compactupdatedhandoff"
+  ],
+  "next": "If M1functional passes, selectone autonomous bounded-work/storage backend onthe sameharness (A4); use measured usefulness blockers, optionalattention onlyifitcanchange the decision."
+}

@@ -1,0 +1,191 @@
+{
+  "schema": "mumble_m1_preflight_v1",
+  "passed": true,
+  "commands": [
+    {
+      "command": [
+        "make",
+        "-j2",
+        "test",
+        "build/scm_session_probe",
+        "session-stack",
+        "CFLAGS=-std=c99 -O3 -Wall -Wextra -Wpedantic -Werror"
+      ],
+      "returncode": 0,
+      "wall_s": 1.7269746130000385,
+      "log": "experiments/trajectory_integration_001/preflight_1.txt"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "py_compile",
+        "tools/run_trajectory_integration.py",
+        "tools/score_trajectory_integration.py"
+      ],
+      "returncode": 0,
+      "wall_s": 0.0385238109997772,
+      "log": "experiments/trajectory_integration_001/preflight_2.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "returncode": 0,
+      "wall_s": 0.0027211830001760973,
+      "log": "experiments/trajectory_integration_001/preflight_3.txt"
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Iinclude",
+        "tests/test_session.c",
+        "src/scm_session.c",
+        "src/scm_estimator.c",
+        "src/scm_model.c",
+        "src/scm_features.c",
+        "src/scm_assess.c",
+        "-lm",
+        "-o",
+        "build/test_session_san"
+      ],
+      "returncode": 0,
+      "wall_s": 3.339912667000135,
+      "log": "experiments/trajectory_integration_001/session_sanitize_1.txt"
+    },
+    {
+      "command": [
+        "env",
+        "ASAN_OPTIONS=detect_leaks=0",
+        "./build/test_session_san"
+      ],
+      "returncode": 0,
+      "wall_s": 0.008493424999869603,
+      "log": "experiments/trajectory_integration_001/session_sanitize_2.txt"
+    }
+  ],
+  "tiny_session_optimizer_calls_per_suite_run": 2,
+  "checkpoint_optimizer_calls": 0,
+  "primary_optimizer_calls": 0,
+  "smoke": {
+    "session_cli_smoke": {
+      "checkpoints_exact": true,
+      "queries": {
+        "passed": true,
+        "compared_records": 6,
+        "compared_scalar_fields": 168,
+        "maximum_absolute_difference": 0.0,
+        "failure_count": 0,
+        "first_failures": []
+      },
+      "resources": {
+        "passed": true,
+        "compared_records": 6,
+        "compared_scalar_fields": 30,
+        "maximum_absolute_difference": 0.0,
+        "failure_count": 0,
+        "first_failures": []
+      },
+      "cold_unknown": true,
+      "fit_calls": 0,
+      "all_passed": true
+    },
+    "session_runner_smoke": {
+      "name": "control",
+      "kind": "control",
+      "start_index": 0,
+      "end_index": 200,
+      "command": [
+        "/workspace/scratch/359d7ee85d34/mumble/build/scm_session_probe",
+        "--data",
+        "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+        "--source",
+        "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+        "--end",
+        "200",
+        "--checkpoint-prefix",
+        "/tmp/mumble_m1_runner_smoke_k7ri9hq1/control",
+        "--save-at",
+        "100,200",
+        "--query-stride",
+        "50",
+        "--fit-budget",
+        "0"
+      ],
+      "stdout_jsonl": "smoke__control.jsonl",
+      "stderr": "smoke__control.stderr.txt",
+      "timeout_s": 1200,
+      "returncode": 0,
+      "operational_failures": [],
+      "checkpoint_records": [
+        {
+          "next_index": 100,
+          "epoch_begin": 0,
+          "path_during_run": "/tmp/mumble_m1_runner_smoke_k7ri9hq1/control-100.bin",
+          "bytes": 5308,
+          "sha256": "ae637169e05cc380618496c7accf98072d8b6326695350521d5079617df9ec02"
+        },
+        {
+          "next_index": 200,
+          "epoch_begin": 0,
+          "path_during_run": "/tmp/mumble_m1_runner_smoke_k7ri9hq1/control-200.bin",
+          "bytes": 7808,
+          "sha256": "213647f006c4ae6353fb1e1b055790087a3ff213f5e22fd088e6905b00b355de"
+        }
+      ],
+      "process_wall_s": 0.0035571170001276187,
+      "stdout_sha256": "6351b5c14105a2ead502b6c99b4b82bb70248a43bc0fc750cdeadf6767e2f631",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 4808,
+      "stderr_bytes": 0,
+      "actual_fit_calls": 0,
+      "fit_positions": [],
+      "validations": {
+        "successful_exit": true,
+        "run_identity": true,
+        "fit_schedule": true,
+        "fit_completions": true,
+        "completion": true,
+        "checkpoint_schedule": true,
+        "no_error_events": true
+      },
+      "passed": true,
+      "observed_global_fit_calls": 0
+    }
+  },
+  "strict_driver_build_review": {
+    "passed": true,
+    "warnings": 0,
+    "command": "cc -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -Iinclude tools/session_probe.c src/scm_session.c src/scm_session_checkpoint.c src/scm_estimator.c src/scm_model.c src/scm_features.c src/scm_assess.c -lm -o build/scm_session_probe_strict"
+  },
+  "checkpoint_review": {
+    "checks": 365,
+    "rejected_faults": 19,
+    "optimizer_calls": 0,
+    "strict_build_passed": true,
+    "ASan_UBSan_passed": true,
+    "scope": "Focused checkpoint test gate run by checkpoint owner; independent root full suite also passed."
+  },
+  "review": {
+    "source_and_claims": "Root reviewed session, checkpoint, runner, scorer and test paths. Checkpoint owner independently reviewed session/CLI; campaign owner reviewed scorer and runner. CSV-directory defect fixed before source freeze.",
+    "remaining_blockers": []
+  },
+  "host_stack_frames": {
+    "scm_session.su": "src/scm_session.c:175:12:finite_fit\t176\tstatic\nsrc/scm_session.c:16:6:scm_session_config_default\t8\tstatic\nsrc/scm_session.c:25:5:scm_session_config_valid\t16\tstatic\nsrc/scm_session.c:38:5:scm_session_config_equal\t32\tstatic\nsrc/scm_session.c:50:8:scm_session_owned_bytes\t8\tstatic\nsrc/scm_session.c:65:5:scm_session_init\t3216\tstatic\nsrc/scm_session.c:74:6:scm_session_destroy\t16\tstatic\nsrc/scm_session.c:106:5:scm_session_fit_due\t32\tstatic\nsrc/scm_session.c:113:5:scm_session_ingest\t1168\tstatic\nsrc/scm_session.c:151:5:scm_session_advance\t48\tstatic\nsrc/scm_session.c:194:5:scm_session_fit\t3856\tstatic\nsrc/scm_session.c:228:13:scm_session_status_name\t8\tstatic\nsrc/scm_session.c:238:5:scm_session_query\t2576\tstatic\nsrc/scm_session.c:268:5:scm_session_mark_unknown_gap\t32\tstatic\nsrc/scm_session.c:274:5:scm_session_cold_reset\t96\tstatic\nsrc/scm_session.c:288:5:scm_session_rebuild\t1088\tstatic\n",
+    "session_probe.su": "tools/session_probe.c:20:13:string\t32\tstatic\ntools/session_probe.c:170:12:error\t32\tstatic\ntools/session_probe.c:32:13:array\t48\tstatic\ntools/session_probe.c:38:12:count\t64\tstatic\ntools/session_probe.c:99:13:emit_target\t32\tstatic\ntools/session_probe.c:115:12:emit_query\t64\tdynamic,bounded\ntools/session_probe.c:185:5:main\t4640\tdynamic,bounded\n",
+    "scm_session_checkpoint.su": "src/scm_session_checkpoint.c:49:13:bytes.constprop\t32\tstatic\nsrc/scm_session_checkpoint.c:61:13:u32\t48\tstatic\nsrc/scm_session_checkpoint.c:79:13:integer\t48\tstatic\nsrc/scm_session_checkpoint.c:104:13:size_value\t48\tstatic\nsrc/scm_session_checkpoint.c:211:13:header.constprop\t80\tstatic\nsrc/scm_session_checkpoint.c:112:13:real\t48\tstatic\nsrc/scm_session_checkpoint.c:168:13:payload.part.0\t96\tstatic\nsrc/scm_session_checkpoint.c:168:13:payload\t96\tstatic\nsrc/scm_session_checkpoint.c:261:5:scm_session_checkpoint_save\t208\tstatic\nsrc/scm_session_checkpoint.c:295:5:scm_session_checkpoint_restore\t3712\tstatic\n"
+  },
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "binary_sha256": "d73460de8ed5f0aa641ee89eea51a2252ec0e5026f1633997cf238b63a7ed466"
+}
