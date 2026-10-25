@@ -54,6 +54,7 @@ experiment work to specific delivery decisions.
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
 | [First bounded online result](docs/BOUNDED_ONLINE_001.md) | One frozen candidate, exact lifecycle, measured memory, capacity and local-uncertainty failures, and next action |
 | [Bounded online summary](experiments/bounded_online_001/summary.json) | Compact result and selective links; read before raw outputs |
+| [Bounded online publication](provenance/bounded_online_001_publication.json) | Verified canonical trees and preserved original execution commits |
 | [M1 full-belief audit](experiments/m1_belief_audit_001/REPORT.md) | Full sixteen-quantity errors, current-state transport and supplemental target scores without rerunning M1 |
 | [M1 lifecycle report](docs/TRAJECTORY_INTEGRATION_001.md) | Two-cell operation, exact warm continuation, cold reset, preserved usefulness failure and next blocker |
 | [M1 compact summary](experiments/trajectory_integration_001/summary.json) | Functional/usefulness outcomes, resource costs and selective evidence links |

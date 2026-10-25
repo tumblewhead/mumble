@@ -72,7 +72,9 @@ target qualification follows from this short integration result.
 
 The first A4 candidate is now implemented at source revision
 `b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201` (identical published source
-`28a543e163273975dd782b60fd803649955073a7`), with result publication pending.
+`28a543e163273975dd782b60fd803649955073a7`). The first result is published at
+`bd2661336e72e84828b274010056ea5ea0b149b1`; original execution commits and
+identical tree mappings are preserved in the [publication provenance](../provenance/bounded_online_001_publication.json).
 It is a sixteen-coordinate joint square-root EKF that learns from
 public priors, carries full state/parameter correlation, and retains no raw
 history. Its [frozen plan](../experiments/bounded_online_001/plan.json),
