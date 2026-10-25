@@ -1,0 +1,94 @@
+{
+  "schema": "mumble_bounded_online_design_review_v1",
+  "reviewer": "separate design-review agent",
+  "phase": "Pre-primary algebra, API and implementation review; numerical gates owned by root.",
+  "plan_sha256_at_review": "495ad064e0276d31a9daf5443dda7445a6cfafe8c7618079e572ca24a0d11c2e",
+  "header_sha256_at_review": "62363232d28e03796838f0eba3a88faeedb3c59c65c3dae40a0937c78085f173",
+  "decision": "Accept the full-square-factor design for a small frozen falsification, subject to the listed numerical/fault gates. No performance, coverage, lifetime or M23 conclusion yet.",
+  "changes_from_initial_recommendation": {
+    "initial": "Triangular square-root covariance EKF with QR",
+    "selected": "Full16x16 square factor, sparse F*S prediction and scalar rank-one factor correction",
+    "reason": "An arbitrary square factor still represents P=S*S^T. It uses960B more than the packed136-double triangle but avoids per-sample QR; only5 physical-state rows change during prediction."
+  },
+  "representation": {
+    "coordinates": "Static11 first: logtau1..3,loggamma+/-,logQ,R0,R1..3,H; current z,v1..3,h last.",
+    "mean_bytes": 128,
+    "full_factor_bytes": 2048,
+    "meaning": "Local prior-conditioned Gaussian approximation. No rawhistory, exact historical nonlinear likelihood, hard support or validated coverage claim."
+  },
+  "algebra": {
+    "definitions": "P=S*S^T; w=S^T*h; v=w^T*w; r=sigma^2>0; s=r+v; p=S*w=P*h; G=lambda*p/s;0<=lambda<=1.",
+    "Joseph_expansion": "(I-G*h^T)*P*(I-G*h^T)^T+r*G*G^T = P-[lambda*(2-lambda)/s]*p*p^T.",
+    "factor_expansion": "For Snew=S-beta*p*w^T, Snew*Snew^T=P-(2*beta-beta^2*v)*p*p^T.",
+    "coefficient": "c=lambda*(2-lambda); delta=(r+(1-lambda)^2*v)/s=1-c*v/s; beta=(c/s)/(1+sqrt(delta)). Then2*beta-beta^2*v=c/s.",
+    "normalized_form": "innovation_sd=hypot(sigma,w0,...,w15); u=w/innovation_sd; g=S*u; delta=(sigma/innovation_sd)^2+(1-lambda)^2*dot(u,u); a=c/(1+sqrt(delta)); Snew=S-a*g*u^T; mean_new=mean+lambda*g*(innovation/innovation_sd). This is the frozen plan formula.",
+    "edge_cases": "lambda0 must be an exact mean/factor no-op after prediction. For h=0 or v=0, g=0 and the factor/mean are unchanged. Withsigma>0 and finite admitted arithmetic, innovation_sd>0 even for a rank-deficient S.",
+    "prediction": "Ppred=F*P*F^T=(F*S)*(F*S)^T, so direct sparse factor propagation is sufficient without QR or inversion.",
+    "conclusion": "The selected factor formula equals the dense Joseph expression for the selected gain in real arithmetic."
+  },
+  "qualifications": [
+    "When lambda depends on the observed innovation through domain limiting, the Joseph algebra remains valid for that chosen gain, but it does not establish exact Bayesian conditional covariance or coverage for the constrained nonlinear estimate.",
+    "Mean-domain checks do not truncate the Gaussian covariance or certify its support. Local intervals and product hard-error acceptance thresholds remain different concepts.",
+    "Initial Gaussian scales derived from public support widths are declared priors, not evidence-based precision or uniform support guarantees.",
+    "Preserving P asS*S^T provides structural real-arithmetic PSD. It does not prove floating-point all-prefix accuracy, prevention of factor underflow, availability, or lifetime stability.",
+    "Current-state coordinates differ from M1 entering-state coordinates. Fullbelief comparisons must transport M1 fitted v/h to the scoring time or explicitly retain their different semantics."
+  ],
+  "numerical_risks": [
+    "One nuisance parameter near a support boundary can make the common lambda nearlyzero and stall all updates. Record limited/zero-gain counters and minimumlambda; preserve the first result.",
+    "Normalized u/g arithmetic avoids forming p*w products and s*(1+sqrt(delta)) but cannot eliminate nonfinite intermediate products, precision loss or subnormal collapse. Reject correction explicitly while retaining known physical prediction.",
+    "For highly informative observations, S-a*g*u^T may subtract nearly equal values. Rationalized a avoids coefficient cancellation; a dense Joseph comparison must still cover large innovation-variance/noise ratios.",
+    "No static process noise/fading means earlier approximate evidence remains. Broad-prior nonlinear cold start can still collapse to a wrong local Gaussian mode. Do not conceal failure by after-result prior or noise tuning.",
+    "Known-input propagation loss must consume the declared ledger position and expose recovery, as the header specifies; a failed voltage correction must not discard known dt/current."
+  ],
+  "required_verification": [
+    "Independent dense Joseph comparison on nontriangular correlated factors, rank-deficient factors, mixed coordinate scales, h=0, lambda=0/interior/1 and large/small v/r ratios inside the admitted numerical domain.",
+    "Compare direct sparse F*S propagation with independent dense F*P*F^T; verify physical F and voltage h by finite differences at interior admissible states.",
+    "Check domain-limited mean and factor use the same lambda, including exact zero-gain retention; do not apply full-gain covariance reduction to a limited mean.",
+    "Check missingV, unknown-input gap, nonfinite/out-of-domain input, ordering/source mismatch, counter limits, failed correction and propagation-loss semantics.",
+    "Check complete fixed-size persistence and exact fresh-process warm continuation; no inference operation during restore.",
+    "Measure sizeof persistent/config/workspace/query objects, complete simultaneous staging costs and own-source stack separately. Verify sizes do not depend on trajectory length."
+  ],
+  "finite_experiment": "One frozen public prior/config, two existing35min cells, uninterrupted/warm/cold paths, 378000 input deliveries and zero batchoptimizer calls. Score capacity<=5% and SOC<=10pp hard limits,0.5%/0.5pp preferred region; preserve first outcomes and all rejected/limited updates.",
+  "concrete_preimplementation_blockers": [],
+  "implementation_review": {
+    "status": "accepted for frozen falsification; no concrete source blocker found, subject to root numerical/fault gates",
+    "source_sha256_at_review": {
+      "src/scm_online.c": "e41398e44827d8636a01ef9223885fe314de9a8b860792901f8ecc347e6aa744",
+      "src/scm_online_checkpoint.c": "a3036bc7afdd5a184d34fe00d092400e457bbf603eed4bf353356fd5860e4b0e",
+      "include/scm_online.h": "62363232d28e03796838f0eba3a88faeedb3c59c65c3dae40a0937c78085f173"
+    },
+    "findings": [
+      "Sparse F*S dynamics match the analytic current-state Jacobian; static rows and all cross-correlations are retained.",
+      "The normalized correction applies the same lambda to mean and factor; factor coefficients match the reviewed Joseph algebra.",
+      "Finite/domain checks precede modifying predicted mean/factor. Corrected observation evaluation is within bounded valid mean/input supports.",
+      "Known-input propagation loss consumes known clock/index while latching recovery and withholding current-state availability. Failed voltage correction retains predicted state/factor.",
+      "Checkpoint encodes complete fixed state/config/factor/ledger with explicit fields and CRC; restore uses prospective caller workspace and commits only after validation."
+    ],
+    "minor_exact_noop_note": "Resolved before source freeze: mean and factor write loops both skip lambda0. Reviewer inspected the correction.",
+    "numerical_test_status": "Root reports full strict suite and focused ASAN/UBSAN gates passed before primary; online2377/checkpoint64 checks. This reviewer ran no tests or observations."
+  },
+  "actions": {
+    "optimizer_calls": 0,
+    "primary_runs": 0,
+    "source_edits": 0,
+    "frozen_evidence_changes": 0
+  },
+  "size_inventory": {
+    "state_bytes": 2408,
+    "workspace_bytes": 2920,
+    "query_bytes": 520,
+    "external_config_bytes": 56,
+    "sample_bytes": 24,
+    "canonical_checkpoint_bytes": 2440,
+    "state_workspace_query_bytes": 5848,
+    "with_external_config_sample_bytes": 5928,
+    "method": "Host C99 sizeof-only probe; no inference or optimizer calls, no persistent source edits."
+  },
+  "work_inventory": {
+    "prediction": "Copy fixed state, then sparse multiplication updates five of sixteen factor rows. Static parameter factor rows remain carried.",
+    "voltage_correction": "Two dense16x16 matrix-vector products, one16-element innovation norm, two fixed16x16 factor passes (validation and commit), fixed16-coordinate domain checks. No sample-history loop, QR, optimization or unbounded inner iteration.",
+    "query": "Sixteen fixed16-element row norms plus scalar target transforms.",
+    "scope": "Source-level work structure; not instruction/cycle count or Cortex-M23 timing."
+  },
+  "plan_metadata_refresh": "Timezone metadata corrected from America/Los_Angeles to Etc/UTC before source freeze; no candidate, gate, experiment or numerical policy change."
+}

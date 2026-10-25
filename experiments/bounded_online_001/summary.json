@@ -1,0 +1,258 @@
+{
+ "schema": "mumble_bounded_online_summary_v1",
+ "created_utc": "2026-10-25T21:48:44.478007+00:00",
+ "status": "completed_failed_accuracy_preserved",
+ "report": "docs/BOUNDED_ONLINE_001.md",
+ "source": {
+  "repository": "https://github.com/tumblewhead/mumble",
+  "branch": "implementation/bounded-online-001",
+  "execution_revision": "b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201",
+  "published_source_revision": "28a543e163273975dd782b60fd803649955073a7",
+  "identical_tree": "c12b77dd28f000095825015aff24136a9f499b14",
+  "M1_base": "8acc87b1e8eb1b92acd7f0f9c1b643d1cfb79658",
+  "research_publication": "pending"
+ },
+ "requirements": {
+  "hard_capacity_relative_percent_le": 5,
+  "hard_SOC_absolute_pp_le": 10,
+  "preferred_capacity_percent_le": 0.5,
+  "preferred_SOC_pp_le": 0.5,
+  "meaning": "Truth-scored point-error requirements, not certified estimator bounds/coverage. No universal nuisance-parameter subpercent goal."
+ },
+ "candidate": "Mean 16/full square factor 256, P=S*S^T; static 11 and current z/v/h. Fixed O(16^2); no raw history/replay/fading/process noise. Local prior-conditioned Gaussian; common support-limited gain consistent in mean and factor.",
+ "run": {
+  "cells": 2,
+  "samples_each": 73500,
+  "duration_s_each": 2100,
+  "nominal_Hz": 35,
+  "actual_dt_order_preserved": true,
+  "processes": 12,
+  "deliveries": 378000,
+  "batch_optimizer_calls": 0,
+  "primary_runs": 1,
+  "after_result_tuning": false,
+  "truth_in_inference": false,
+  "finished_utc": "2026-10-25T18:51:54.509115+00:00",
+  "host_wall_s": 0.4192517930005124,
+  "timing_scope": "Whole paired run/two workers, not kernel or M23 time."
+ },
+ "gates": {
+  "functional": true,
+  "resource": true,
+  "hard_accuracy": false,
+  "preferred_accuracy": false,
+  "provisional_hard_error_audit": false,
+  "checkpoints": 16,
+  "SOC_hard_passes": 16,
+  "Q_and_joint_hard_passes": 6,
+  "joint_preferred_passes": 0,
+  "promotion_allowed": false
+ },
+ "lifecycle": {
+  "exact_warm_queries": 430,
+  "unique_queries_each_cell": 212,
+  "equal_checkpoint_hash_pairs": 10,
+  "cold_reset_index": 31500,
+  "cold_suffix_updates_each": 42000,
+  "cold_mean_SD_equal_public_prior": true,
+  "counters": "Cumulative; subtract reset values for suffix behavior.",
+  "checkpoint_scope": "Temporary binaries; retained hashes/sizes compared independently."
+ },
+ "memory_bytes": {
+  "state": 2408,
+  "workspace": 2920,
+  "query": 520,
+  "core": 5848,
+  "core_gate": 8192,
+  "host_named_objects": 7016,
+  "reviewed_own_source_max_stack_path": 1120,
+  "objects_plus_reviewed_stack_partial": 8136,
+  "support_arrays_target_placement_required": 256,
+  "checkpoint": 2440,
+  "whole_checkpoint_RAM_buffer": 0,
+  "two_external_persistence_records": 4880,
+  "eventual_complete_M23_target": 10240,
+  "M23_qualified": false,
+  "exclusions": "Library/runtime; acquisition/interrupts; target ABI/linker/float cost; flash persistence."
+ },
+ "memory_comparison": {
+  "M1_session_plus_fit": 49470676,
+  "M1_cached_rows": 47040000,
+  "cached_doubles_per_sample": 80,
+  "samples": 73500,
+  "M1_residuals": 588000,
+  "M1_session_journal": 1840604,
+  "M1_fixed_problem": 2072,
+  "old_compact_owned": 7064,
+  "meaning": "M1 keeps raw history/cached nonlinear reevaluation. Old compact subsystem provides fixed-chart conditional evidence, not autonomous broad-prior learning. New savings trade historical reevaluation for Gaussian approximation; functionality and accuracy differ."
+ },
+ "M1": {
+  "supplement": "experiments/m1_belief_audit_001/summary.json",
+  "new_optimizer_calls": 0,
+  "original_usefulness_passed": false,
+  "frozen_results_unchanged": true,
+  "joint_hard_and_preferred": 14,
+  "checkpoints": 16,
+  "failure": "B900 control/warm Q +26.6298%, SOC -3.96355 pp.",
+  "control_times_s": [
+   10,
+   900,
+   1800,
+   2100
+  ],
+  "scaled_RMS": [
+   {
+    "cell": "cell_a",
+    "control": [
+     1.0830006895164248,
+     0.030027361610490487,
+     0.02479057582846287,
+     0.023706328512525576
+    ],
+    "cold_final": 0.021984201852637674
+   },
+   {
+    "cell": "cell_b",
+    "control": [
+     1.1121789199267622,
+     1.0873440218112636,
+     0.010897340164029802,
+     0.011202510909733874
+    ],
+    "cold_final": 0.033325654194495985
+   }
+  ],
+  "RMS_scope": "Engineering-scaled entering-state chart with H*h0; not percent/posterior distance or directly comparable to new current-state RMS.",
+  "final_largest_static_percent": {
+   "A_tau2": -2.126673,
+   "B_tau1": -1.391695
+  },
+  "cold_B_errors": {
+   "R0_percent": 10.275221,
+   "R1_percent": -7.02792,
+   "Q_percent": 0.12653,
+   "SOC_pp": -0.031367
+  },
+  "qualification": "Rest rank 6/16 A, 7/16 B; B900 full rank but iteration limit/all unresolved. Final A R0/tau1 unresolved. Coverage unvalidated."
+ },
+ "final_errors": [
+  {
+   "cell": "cell_a",
+   "arm": "control",
+   "SOC_error_pp": -0.06997737892028288,
+   "Q_error_percent": -2.5313036509692077,
+   "Q_status": "provisional",
+   "current_vector_scaled_RMS": 0.40574347723631043,
+   "joint_hard": true,
+   "joint_preferred": false
+  },
+  {
+   "cell": "cell_a",
+   "arm": "cold",
+   "SOC_error_pp": -0.4781935383651792,
+   "Q_error_percent": -7.485014213226404,
+   "Q_status": "provisional",
+   "current_vector_scaled_RMS": 0.5497166072309569,
+   "joint_hard": false,
+   "joint_preferred": false
+  },
+  {
+   "cell": "cell_b",
+   "arm": "control",
+   "SOC_error_pp": -0.37846971862506296,
+   "Q_error_percent": 9.389285719755591,
+   "Q_status": "unresolved",
+   "current_vector_scaled_RMS": 0.8932618642097797,
+   "joint_hard": false,
+   "joint_preferred": false
+  },
+  {
+   "cell": "cell_b",
+   "arm": "cold",
+   "SOC_error_pp": -0.4935711300792178,
+   "Q_error_percent": 3.1724318403177465,
+   "Q_status": "provisional",
+   "current_vector_scaled_RMS": 0.16496563869229208,
+   "joint_hard": true,
+   "joint_preferred": false
+  }
+ ],
+ "failures": {
+  "B_control_common_gain_stall": {
+   "zero_gain": 71928,
+   "updates": 73500,
+   "fraction": 0.9786122448979592,
+   "final_evidence_age_samples": 14774,
+   "witness": "Tau3 upper 30 s at 10 s; gamma-minus upper 1200 at final query. Outward nuisance direction blocks common gain."
+  },
+  "provisional_Q_hard_breaches": {
+   "A_control": 54,
+   "A_warm_duplicate": 54,
+   "A_cold": 113,
+   "B_control": 0,
+   "B_warm_duplicate": 0,
+   "B_cold": 51
+  },
+  "wrong_narrow_A_cold": {
+   "Q_Ah": 0.05550899147206415,
+   "truth_Ah": 0.06,
+   "local_2SD_Ah": [
+    0.05542131985726812,
+    0.055596801775582516
+   ],
+   "innovation_EWMA": 1.0449289790392617
+  },
+  "post_reset_zero_gain": {
+   "A": 1434,
+   "B": 295,
+   "suffix_updates_each": 42000
+  },
+  "qualification": "A cold stays biased with 3.41% suffix zero gain. Removing common-gain stall alone is not established as sufficient for calibrated uncertainty."
+ },
+ "verification": {
+  "strict_full_suite": true,
+  "focused_ASAN_UBSAN": true,
+  "core_checks": 2377,
+  "checkpoint_checks": 64,
+  "scoring_checks": 104,
+  "scoring_audit_passed": true,
+  "auditor_primary_reruns": 0,
+  "indefinite_stability_proven": false,
+  "coverage_validated": false
+ },
+ "next": {
+  "change": "One boundary-aware active-set gain retaining admissible SOC/Q corrections when a nuisance direction points outward.",
+  "constraints": "Same model/prior/data/gates; same chosen gain for mean and valid Joseph square-root covariance; full correlations/fixed memory/once-only evidence.",
+  "experiment": "Freeze separately; same short paired run once. Compare stall, hard accuracy and provisional breaches; fewer zero gains alone is insufficient.",
+  "stop": "Preserve failure and identify cause. No automatic annual/attention/M23 campaign.",
+  "implemented_or_run": false
+ },
+ "unresolved": [
+  "Accuracy after limiter change",
+  "Local-Gaussian calibration/wrong narrow Q",
+  "All-prefix stability/availability/coverage",
+  "Temperature-noise-load variation and one year",
+  "Complete M23 memory/deadline/persistence"
+ ],
+ "evidence_sha256": {
+  "experiments/bounded_online_001/plan.json": "495ad064e0276d31a9daf5443dda7445a6cfafe8c7618079e572ca24a0d11c2e",
+  "experiments/bounded_online_001/primary/receipt.json": "eeda012449b0c81c09022a0d5e8d645df5042198c4e819440846ed48cb9458e2",
+  "experiments/bounded_online_001/scores.json": "55108f6e56f19e2d562e69fe3aeaa1a92e93da775f6d60df45cb845c92161896",
+  "experiments/bounded_online_001/memory_accounting.json": "9b7a0ed08b3e8d30bb7e9005eceee62670e6b16ac24333b30e1907c7c2a0c293",
+  "experiments/bounded_online_001/independent_review.json": "de9ee59902de6f30ae4872d86e60da450777af1273b20643c3d79c30d6306fcb",
+  "experiments/bounded_online_001/scoring_audit.json": "f63da5b8ccf7f766365df2f3ca21f914ddff94ef11076fdd1fe201df000cb7d3",
+  "experiments/bounded_online_001/build_checks.json": "7f7b77ac1807e1373cbda915d57a964ce302e939985bbcd07066654e9fde4638",
+  "experiments/bounded_online_001/design_review.json": "84e686b932fc589d03016712baeeec5a8d163c2d0eedcbf90ef134b0ce75efd8",
+  "experiments/m1_belief_audit_001/summary.json": "fe008d5f8eca360c563ed251dcc6086c2a84c4eb98436a22d37e13ad93542040",
+  "experiments/m1_belief_audit_001/records.json": "db21384d78764574edf2a540a968a928bc39fa4e2ceced20f955953ad7428f43",
+  "plans/estimation_targets_001.json": "6b8797c32eb432c206cc03543eb310209181be11f8ab90b4915244d856fe1993",
+  "reference_binaries/scm_online_probe_bounded_001": "5f97fc56e12fc55c36ac90a530095574a7b3e9d7582f0ad1bb63ed1fc72a9c4d",
+  "report/Bounded-Online-001.png": "aeaaa8d5f56de0ed8988c664de6518edc97c038018f3da371c595b900ca0b652"
+ },
+ "artifact_export": {
+  "original_PNG_and_numeric_scores_preserved": true,
+  "SVG_recovery_record": "experiments/bounded_online_001/artifact_integrity/svg_recovery.json",
+  "post_inference_render_repetition": 1,
+  "inference_runs_added": 0
+ }
+}

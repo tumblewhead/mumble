@@ -9,12 +9,24 @@ a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
 end-to-end desktop demonstration, a desktop performance campaign including
 about one year per selected cell, and the embedded implementation.
-[M1 lifecycle integration is complete](docs/TRAJECTORY_INTEGRATION_001.md):
-both cells pass the lifecycle, checkpoint/restore, cold-reset and delivery
-gates, using 20 scheduled fits. The separate usefulness gate failed at the
-900-second checkpoint for cell B and remains recorded. The next work is
-**M2/A4: one autonomous bounded learner with timely, reliable SOC/capacity
-learning**, evaluated through the completed lifecycle harness.
+[M1 lifecycle integration is complete](docs/TRAJECTORY_INTEGRATION_001.md).
+The [first autonomous bounded learner](docs/BOUNDED_ONLINE_001.md) now also
+completes both cells, exact warm continuation and cold reset, using a full
+16-coordinate mean/covariance factor with no retained sample history. It owns
+5,848 bytes of core objects and 7,016 bytes of fixed host objects; complete
+runtime and target costs remain additional.
+
+**The first bounded candidate fails the capacity accuracy gate and is not
+promoted.** Under the [current user targets](plans/estimation_targets_001.json),
+SOC passes all 16 declared hard-limit checkpoints, but capacity passes only
+6/16. A common gain limiter can stop all learning when one parameter reaches
+a boundary; wrong, narrow local capacity ranges are a separate failure.
+The next action is one boundary-aware gain change with consistent covariance,
+followed by the same small test. Longer campaigns follow candidate qualification.
+
+The [supplemental M1 belief audit](experiments/m1_belief_audit_001/REPORT.md)
+reports all sixteen fitted quantities and applies the new targets to the frozen
+M1 outputs, without new fits. M1's original failed gate remains preserved.
 
 The [compact bounded implementation](docs/COMPACT_BOUNDED_001.md) now reduces
 the B001/B002 paired-ingestion objects from 9,912 to 6,576 bytes. Its serialized
@@ -39,6 +51,10 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
+| [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
+| [First bounded online result](docs/BOUNDED_ONLINE_001.md) | One frozen candidate, exact lifecycle, measured memory, capacity and local-uncertainty failures, and next action |
+| [Bounded online summary](experiments/bounded_online_001/summary.json) | Compact result and selective links; read before raw outputs |
+| [M1 full-belief audit](experiments/m1_belief_audit_001/REPORT.md) | Full sixteen-quantity errors, current-state transport and supplemental target scores without rerunning M1 |
 | [M1 lifecycle report](docs/TRAJECTORY_INTEGRATION_001.md) | Two-cell operation, exact warm continuation, cold reset, preserved usefulness failure and next blocker |
 | [M1 compact summary](experiments/trajectory_integration_001/summary.json) | Functional/usefulness outcomes, resource costs and selective evidence links |
 | [M1 independent scores](experiments/trajectory_integration_001/scores.json) | Post-inference accuracy, convergence, local qualification and reset recovery |

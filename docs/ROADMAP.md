@@ -2,12 +2,13 @@
 
 ## Decision
 
-**M1's two-cell end-to-end desktop lifecycle is functionally complete.** Its
-separate usefulness gate failed at cell B's 900-second checkpoint and remains
-preserved. The next action is **M2/A4: select one autonomous bounded learner
-that learns reliably and in time**, using the completed M1 harness. After that
-decision, evaluate varied trajectories and two one-year streams, then deliver
-a runnable Cortex-M23 C subsystem near **10 KiB total SRAM**.
+**M1's desktop lifecycle is complete, and the first autonomous bounded learner
+has completed its small falsification.** Both have preserved performance
+failures. The bounded learner passes functionality and its initial storage
+gate, but fails capacity accuracy and uncertainty qualification; it is not
+promoted. The next action is **one boundary-aware gain design and one repeat
+of the same small two-cell harness**. Longer trajectories follow a qualified
+candidate, then a runnable Cortex-M23 C subsystem near **10 KiB total SRAM**.
 
 The original priority change put integration ahead of another uncertain-RC
 refinement. That completed integration now supports the learner decision.
@@ -16,16 +17,27 @@ specific correctness obligation or design decision. They do not form an
 open-ended sequence that must finish before the application can run.
 
 This roadmap preserves the user's direction and original plan from 2026-10-24,
-America/Los_Angeles, with the completed M1 outcome added on 2026-10-25 UTC.
+America/Los_Angeles, with the M1 and first A4 outcomes added on 2026-10-25 UTC.
 The M2 duration campaign and Cortex-M23 target work have not run.
 The executable work order is [trajectory_to_m23_001.json](../plans/trajectory_to_m23_001.json).
+
+The active [estimation targets](../plans/estimation_targets_001.json) prioritize
+capacity error at most **5% relative** and current SOC error at most
+**10 percentage points**, then the preferred region of **0.5% capacity** and
+**0.5 percentage points SOC**. Gains below that preferred region have diminishing
+priority against memory, processing and robustness. There is no universal
+0.5% goal for nuisance parameters. These product requirements are separate
+from local covariance widths and validated coverage. M1's original 0.5%/0.5 pp
+benchmark and its failed outcome remain unchanged; the
+[full-belief supplement](../experiments/m1_belief_audit_001/summary.json)
+applies the new interpretation without replacing the frozen M1 scores.
 
 ## Three deliverables and their finish lines
 
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — A4 next** | An autonomous streaming candidate, short load/cell/noise comparisons, then about one year per selected cell | Chosen candidate meets frozen usefulness and resource gates; no unexplained age-driven failure; numerical proofs and finite endurance evidence reported separately |
+| **M2: Desktop performance — first A4 candidate rejected** | One bounded successor on the small harness, then short load/cell/noise comparisons and about one year per selected cell | Chosen candidate meets hard target, lifecycle, resource and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -58,6 +70,39 @@ close A1-A3. The remaining decision is an autonomous learner with timely,
 reliable learning and a declared bounded storage/work budget. No annual or
 target qualification follows from this short integration result.
 
+The first A4 candidate is now implemented at source revision
+`b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201` (identical published source
+`28a543e163273975dd782b60fd803649955073a7`), with result publication pending.
+It is a sixteen-coordinate joint square-root EKF that learns from
+public priors, carries full state/parameter correlation, and retains no raw
+history. Its [frozen plan](../experiments/bounded_online_001/plan.json),
+[primary receipt](../experiments/bounded_online_001/primary/receipt.json) and
+[independent review](../experiments/bounded_online_001/independent_review.json)
+record one 12-process lifecycle experiment with 378,000 input deliveries and
+no batch optimizer calls. Warm continuation is exact and functional/resource
+gates pass. Across 16 scheduled arm/checkpoint pairs, SOC meets its hard limit
+in **16/16**, capacity and joint hard limits in **6/16**, and both preferred
+targets in **0/16**. Warm duplicates are paired continuity checks, not
+independent accuracy evidence.
+
+The [memory account](../experiments/bounded_online_001/memory_accounting.json)
+reports **5,848 bytes** for state/workspace/query, **7,016 bytes** for the
+named fixed host objects and **2,440 bytes** per complete checkpoint. These
+are different scopes from M1's **49,470,676-byte** session-plus-fit ownership
+and the earlier fixed-chart component's **7,064 bytes**. The new learner
+compresses history into a local Gaussian belief; it no longer supports the
+reference's nonlinear reevaluation of every retained observation. Host
+storage and stack evidence do not qualify a complete M23 subsystem.
+
+Two measured blockers remain. A single outward correction at a nuisance
+boundary can set the common gain to zero for all coordinates: cell B's
+control run has 71,928 zero-gain updates out of 73,500. Separately, capacity can
+be wrong while the local uncertainty is narrow. Cell A's cold branch finishes
+at **-7.485% capacity error** with a narrow local interval and a provisional
+label, despite only **1,434/42,000** post-reset updates having zero gain. Fixing
+the boundary stall is therefore not established as a cure for local-Gaussian
+overconfidence. Both failures block promotion; no annual run follows this result.
+
 The user-requested compact-layout step is now implemented and checked in
 [compact_bounded_001](COMPACT_BOUNDED_001.md). Its fixed-chart component owns
 7,064 bytes, preserves the original evidence/remainder values on the focused
@@ -76,6 +121,7 @@ learning or safe historical chart changes. M1 was built from a descendant of
 | [Bounded certificate004](UNCERTAIN_RC_004.md) | Fixed-memory SOC/capacity support; conditional all-prefix containment and availability | Restricted model; three preserved strict-learning failures; no full-model or target qualification |
 | [Bounded event/remainder work](BOUNDED_EVENT_002.md) | Sensitivity-aware summaries and concrete limits of local evidence compression | Nonlinear cold start, historical chart changes and validated arithmetic remain open |
 | [Compact bounded layout](COMPACT_BOUNDED_001.md) | Shared config, selective atomic staging and SOC/Q reports from the full joint matrix; 33.7% smaller ingestion objects | Same fixed-chart/lifetime limitations; complete recovery, solver and target costs remain open |
+| [First autonomous bounded learner](../experiments/bounded_online_001/independent_review.json) | Public cold start, fixed full state/parameter factor, complete checkpoint, exact warm continuation; functional/resource gates pass | Capacity fails 10/16 scheduled hard checks; common-gain stalls and wrong narrow capacity beliefs block promotion |
 
 The original two-cell traces contain hysteresis and multiple unknown RC modes.
 They are outside certificate004's known-other-dynamics/no-hysteresis contract.
@@ -177,26 +223,38 @@ A new framework or a comprehensive fault Cartesian product is not required.
 
 ## M2 action plan: establish desktop performance, then extend duration
 
-### A4. Select one actual streaming learner — next
+### A4. Qualify one autonomous bounded learner — one successor next
 
-The full C replay reference remains the short-run comparison. Before an annual
-run, choose a candidate that learns from public priors, carries its own state
-and evidence, and has a declared finite storage/work budget. This is a real
-remaining algorithmic gap; the session wrapper alone does not solve it.
+The first full-factor candidate is complete and rejected for performance and
+qualification. Preserve it, its plan and its first result. The next bounded
+change addresses the measured common-gain stall: a **boundary-aware active-set
+gain** should allow feasible coordinates to learn when a nuisance correction
+points out of its permitted domain.
 
-First freeze one concrete candidate's public cold-start strategy, update and
-historical-evidence semantics, total storage/scheduled-work budget, and short
-comparison gates. Implement and falsify that candidate on the M1 harness
-before adding trajectory variations or duration. Its selection must address
-the measured failure to obtain timely, reliable learning at cell B's
-900-second checkpoint, while retaining earlier evidence through weak use.
-Keep the original failed receipt intact; do not tune its gate or rerun M1 to
-replace the outcome.
+Freeze the exact gain rule and a numerically valid square-root implementation
+before the next inference run. The chosen gain must be used consistently in
+both the mean and the full Joseph covariance update, with cross-correlations
+preserved. A coordinate-dependent gain cannot automatically reuse the old
+single-scale factor formula. First account for all simultaneously live state,
+workspace, staging and stack, and identify the fixed work per observation.
+Then implement only the deterministic numerical and boundary tests needed
+to establish this changed update and preserve the existing lifecycle contract.
 
-Use the M1 harness to make that decision. Desktop memory and arithmetic can be
-more generous than the final target, but their costs and eventual target path
-must be visible. Preserve the same input, public assumptions and scoring when
-comparing candidates. Warm starts are not independent evidence.
+Hold the public priors, noise/model assumptions, observation streams, reset
+schedule and target thresholds fixed. Freeze one successor plan and run the
+same small two-cell harness once. Compare hard target errors, availability,
+local qualification, boundary stalls and resource costs against the preserved
+first A4 result and frozen M1 reference. Fewer zero gains alone are not success.
+Wrong narrow capacity beliefs remain an independent rejection reason; do not
+promise that the gain change fixes them or retune priors/noise after scoring.
+
+The finish line is a keep/change/drop decision from that one run. Promotion
+requires the declared hard targets, lifecycle and resource gates and honest
+uncertainty qualification. Report the preferred 0.5%/0.5 pp region separately;
+do not pursue smaller errors while those practical gates remain unmet. If a
+gate fails, stop, preserve the failure and name one measured blocker for the
+next decision. No automatic attention search, extra proof program, parameter
+sweep or duration campaign follows.
 
 The desktop result is an empirical performance reference for the stated
 models and scenarios. Calling it "ultimate performance" does not establish a
@@ -204,7 +262,7 @@ global optimum or measured-cell coverage.
 
 ### Keep attention as one decision experiment
 
-First obtain the plain pipeline. Then compare the same candidate with a
+First qualify the plain candidate on the small harness. Then compare it with a
 regular/no-attention work schedule and one concrete attention policy. Include
 the existing sensitivity/event-summary method when its model/chart assumptions
 match; keep the full retained-history C result as an external reference.
@@ -223,6 +281,10 @@ the simpler baseline and close that comparison. No broad architecture search
 is implied.
 
 ### Use a short variation matrix and a duration ladder
+
+These steps are blocked until a candidate passes the small-harness hard
+targets, lifecycle, resources and qualification gates. Neither M1 nor the
+first A4 result authorizes increasing duration by itself.
 
 | Step | Purpose | Scope control |
 | --- | --- | --- |
@@ -304,7 +366,10 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Create `integration/two-cell-lifecycle-001` from the latest canonical planning
-checkpoint. Implement A1 and A2 with their small deterministic checks, then run
-A3. Use the frozen reference and certificate evidence selectively. Publish the
-integrated result before selecting the next estimator refinement.
+Create a successor work branch from the latest completed A4 descendant.
+Specify one boundary-aware active-set gain and its matching full Joseph
+square-root update, with complete memory accounting and a small deterministic
+verification contract. Freeze its plan, implement the change, then replay the
+same two-cell harness once with unchanged public priors/model/data. Keep the
+first result and decide against hard target and qualification gates. Day,
+week and year runs remain blocked until that candidate qualifies.

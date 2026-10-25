@@ -1,10 +1,10 @@
 {
   "schema": "mumble_delivery_roadmap_v1",
-  "status": "M1_functional_complete_M2_candidate_selection_next",
+  "status": "M1_functional_complete_A4_first_candidate_rejected_successor_next",
   "date_local": "2026-10-24",
   "timezone": "America/Los_Angeles",
   "repository": "https://github.com/tumblewhead/mumble",
-  "work_branch": "integration/two-cell-lifecycle-001",
+  "work_branch": "implementation/bounded-online-001",
   "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
   "goal": {
     "deliverable": "Runnable Cortex-M23 C estimator subsystem",
@@ -17,20 +17,23 @@
       "Expose unsupported/unresolved/inconsistent quantities",
       "Preserve actual intervals, order and physical state",
       "Conditional indefinite-runtime stability remains a proof gate"
-    ]
+    ],
+    "estimation_target_contract": "plans/estimation_targets_001.json",
+    "target_priority": "Capacity absolute relative error <= 5% and current SOC absolute error <= 10 percentage points first; preferred <= 0.5% capacity and <= 0.5 percentage points SOC next. Gains below preferred have diminishing priority versus memory, processing and robustness. These are product point-error requirements, not local-covariance or coverage guarantees; no universal nuisance-parameter accuracy goal."
   },
   "priority_change": {
-    "now": "M2/A4: select one autonomous bounded-work/storage learner with timely reliable SOC/capacity learning through the completed M1 harness",
+    "now": "M2/A4: one boundary-aware active-set gain successor after the first autonomous bounded candidate failed capacity accuracy and local qualification. Freeze the precise design and accounting, then repeat the same small harness once.",
     "former_next_action": "Fixed partition of uncertain R/tau box",
     "former_action_status": "Optional targeted remedy after a measured target-quality blocker; no longer the automatic next milestone",
-    "frozen_evidence": "All earlier receipts and failures unchanged, including three004 usefulness failures"
+    "frozen_evidence": "All prior receipts, gates and failures unchanged, including three certificate004 usefulness failures, original M1 sparse-fit failure and the first A4 capacity/qualification failure."
   },
   "reference_roles": {
     "full_C": "Existing16-unknown three-RC/hysteresis retained-history estimator: M1 desktop baseline and selected short causal comparisons. Growing history is explicit; not the annual per-update engine.",
     "certificate004": "Restricted static one-uncertain-RC/hard-voltage lane and reusable numerical evidence. Original two-cell traces are outside this contract; no truth supplied to make them fit.",
-    "desktop_streaming": "Next selection: autonomous learning from public priors, finite declared storage and bounded per-update/scheduled work, explicit evidence semantics. Must address the observed sparse-schedule learning failure. Desktop resource budget may exceed target.",
+    "desktop_streaming": "First implementation is a fixed 16-coordinate joint square-root EKF with public cold start and full state/parameter correlation. Functional/resource gates pass; capacity and provisional-error audit fail. Preserve as a rejected comparison, then test one bounded successor. No annual or target promotion.",
     "truth": "Generator/scorer only. No truth in initialization, correction, reset, attention, priors or inference checkpoint.",
-    "ultimate_performance": "Best measured performance among declared candidates/scenarios, not a global-optimality or physical-coverage claim"
+    "ultimate_performance": "Best measured performance among declared candidates/scenarios, not a global-optimality or physical-coverage claim",
+    "M1_fullbelief_supplement": "experiments/m1_belief_audit_001/summary.json: supplemental current user thresholds and the full 16-coordinate point-error audit; original M1 acceptance and frozen scores unchanged."
   },
   "milestones": [
     {
@@ -141,14 +144,15 @@
     {
       "id": "M2",
       "name": "Desktop performance and one-year trajectory campaign",
-      "status": "next_A4_candidate_selection",
+      "status": "A4_first_falsification_complete_not_promoted_successor_design_next",
       "entry": [
         "M1 functional lifecycle passes",
-        "One autonomous streaming candidate works on the same short harness without oracle parameters or growing history",
+        "A chosen autonomous bounded candidate passes the same small harness hard target, lifecycle, resource and honest-qualification gates without truth parameters or growing history",
         "Freeze candidate model/domain, resource budget, quality thresholds, seeds, reset schedule and logging budget",
         "Classify which static/voltage/input assumptions support hard claims and which cases are mismatch diagnostics"
       ],
       "steps": [
+        "Freeze one boundary-aware active-set gain with matching full Joseph square-root update and complete memory/work account; deterministic update tests, then one unchanged two-cell falsification before further promotion",
         "Small paired load/cell/noise matrix; choose one no-attention candidate",
         "Optional one-policy attention comparison; keep only for predeclared practical benefit",
         "One-day then one-week throughput/recovery pilots",
@@ -179,7 +183,7 @@
       },
       "storage_and_reference": "Generate deterministically in chunks, keep bounded streaming metrics/checkpoints and failure excerpts with entering state; preserve seed/source/config hashes. Full retained-history C fits only selected short causal histories. A window reference declares missing prior history and independent entering-state treatment; no truth-seeded operational reference.",
       "gates": [
-        "Selected candidate meets frozen target usefulness/availability and runtime budgets",
+        "Chosen candidate meets frozen hard capacity/SOC target, availability, uncertainty-qualification and resource gates; preferred 0.5%/0.5 pp performance reported separately",
         "No unexplained numerical failure, state divergence after valid restore, chronology corruption or age-driven resource growth",
         "Mismatch behavior and unresolved estimates reported honestly",
         "Year evidence and all-prefix numerical proof ledger both reported; neither substitutes for the other"
@@ -194,21 +198,34 @@
       ],
       "next_action": {
         "action_id": "A4",
-        "scope": "One concrete autonomous bounded learner, one short paired falsification, then a keep/change/drop decision using the M1 harness.",
-        "freeze_before_run": [
-          "Public cold-start strategy",
-          "Update and historical-evidence semantics",
-          "Total storage and per-update/scheduled-work budget",
-          "Short comparison schedule and usefulness/status gates"
+        "scope": "One boundary-aware active-set gain successor. Let feasible coordinates learn when one nuisance correction points outward; retain full state/parameter covariance and exactly-once chronology.",
+        "design_before_run": [
+          "Specify the finite active-set gain rule and mean-domain handling; no after-result parameter, prior, noise or threshold retuning",
+          "Derive a valid square-root implementation of the full Joseph covariance for the actual chosen gain; the old common-scalar factor formula is not automatically valid for component-dependent gain",
+          "Account for every simultaneously live state, workspace, immutable RAM config, staging, checkpoint and own-source stack cost, plus explicit unresolved target/runtime extras",
+          "State fixed source work per sample and meaningful deterministic numerical/boundary checks; no optional theorem or fault-campaign expansion"
         ],
-        "measured_blocker": "Timely reliable learning: cell B fails the 900 s SOC/Q benchmark under the sparse retained-history schedule and remains unresolved until 1800 s.",
+        "freeze_before_run": [
+          "One successor source/plan and its gain, covariance, rejection and qualification semantics",
+          "Unchanged public priors, model, noise, observations, acquisition chronology and lifecycle/reset schedule",
+          "Unchanged hard target thresholds and the existing provisional hard-error audit, with preferred performance separate",
+          "Declared fixed storage/work budget and one same-harness replay with first-result preservation"
+        ],
+        "first_candidate_evidence": "experiments/bounded_online_001/independent_review.json",
+        "measured_blocker": "Cell B control/warm has 71,928 zero-gain updates in 73,500; a nuisance-bound outward correction makes the single common gain zero and also blocks feasible SOC/capacity correction.",
+        "independent_blocker": "Wrong narrow local Gaussian capacity beliefs. Cell A cold finishes at -7.485014% capacity error with a provisional narrow interval, despite only 1,434 of 42,000 post-reset updates having zero gain. Gain-stall removal is not established as a cure.",
+        "experiment": "Run the same two-cell control/warm/cold harness once after the design and tests are frozen. Preserve first outputs; compare hard target errors, availability/qualification, stalls and resources against first A4 and frozen M1.",
+        "finish_line": "Keep/change/drop after one run. Promotion requires hard target, lifecycle/resource and honest-qualification gates. Fewer zero gains alone are insufficient. If a gate fails, stop and name one measured blocker; no automatic tuning, attention, variation or duration campaign.",
         "guardrails": [
-          "Preserve the original failed M1 receipt and thresholds",
-          "Keep truth out of initialization, updates, reset and scheduling",
-          "Carry earlier evidence without replay/posterior double counting",
-          "No annual run until candidate and day/week pilot gates pass",
-          "Attention remains one optional decision experiment after the plain candidate"
-        ]
+          "Preserve original M1 gates, first A4 source/plan and all failed outcomes",
+          "Keep synthetic truth out of initialization, gain design/tuning, inference, reset and scheduling",
+          "Carry earlier evidence through the chosen local approximation without replay/posterior double counting",
+          "Use the actual chosen gain consistently for mean and full Joseph covariance; no mean-only clipping or unearned covariance shrinkage",
+          "Local precision, actual point error, numerical health and validated coverage remain separate",
+          "Day/week/year follow only a qualified small-harness candidate; finite endurance is not an indefinite-runtime proof",
+          "Attention remains one optional decision experiment after plain-candidate qualification"
+        ],
+        "implemented_or_run": false
       }
     },
     {
@@ -267,15 +284,16 @@
     },
     {
       "id": "A4",
-      "deliver": "Select one autonomous bounded-work/storage backend using the same harness. Address only the demonstrated blocker; evaluate one attention policy only if its benefit can change selection.",
+      "deliver": "Qualify one autonomous bounded learner. First full-factor candidate is implemented and falsified; next specify/test one boundary-aware active-set gain with matching full Joseph covariance and complete accounting, then one unchanged small-harness run.",
       "depends_on": [
         "A3"
       ],
-      "status": "next"
+      "status": "first_candidate_complete_rejected_successor_next",
+      "completion_note": "First A4 functionality/resources pass. Scheduled SOC hard checks 16/16, capacity/joint hard checks 6/16, joint preferred 0/16. Common-gain stalls and independently wrong narrow capacity beliefs prevent promotion."
     }
   ],
   "attention_decision": {
-    "timing": "After plain M1 works; optional for M2 selection",
+    "timing": "Only after the plain bounded candidate qualifies on the small harness; optional practical-benefit decision before longer M2 campaigns",
     "arms": [
       "Same candidate with no attention/regular work schedule",
       "One deterministic attention/scheduling policy",
@@ -294,9 +312,10 @@
       "Universal identification of every nuisance parameter",
       "Broad attention architecture search",
       "Further theorem refinement beyond the chosen implementation/claim scope"
-    ]
+    ],
+    "stop_after_failure": "Preserve each first result and select one measured blocker. Active-set gain tests do not authorize prior/noise retuning, additional candidate sweeps, an uncertainty theorem expansion or day/week/year runs."
   },
-  "next_work_branch": null,
+  "next_work_branch": "implementation/bounded-online-002",
   "evidence": [
     "README.md",
     "specification.json",
@@ -313,7 +332,18 @@
     "docs/TRAJECTORY_INTEGRATION_001.md",
     "experiments/trajectory_integration_001/summary.json",
     "experiments/trajectory_integration_001/primary/receipt.json",
-    "experiments/trajectory_integration_001/scores.json"
+    "experiments/trajectory_integration_001/scores.json",
+    "plans/estimation_targets_001.json",
+    "experiments/m1_belief_audit_001/summary.json",
+    "experiments/m1_belief_audit_001/REPORT.md",
+    "include/scm_online.h",
+    "include/scm_online_checkpoint.h",
+    "experiments/bounded_online_001/plan.json",
+    "experiments/bounded_online_001/primary/receipt.json",
+    "experiments/bounded_online_001/scores.json",
+    "experiments/bounded_online_001/independent_review.json",
+    "experiments/bounded_online_001/design_review.json",
+    "experiments/bounded_online_001/memory_accounting.json"
   ],
   "review": {
     "status": "passed",
@@ -347,7 +377,7 @@
     "note": "Original M1 schedules, cases, budgets, gates and action deliverables remain unchanged; status/outcome fields record completion without retuning."
   },
   "updated_utc": "2026-10-25",
-  "next_work_branch_note": "Create a work branch from the latest completed M1 descendant after the A4 implementation scope is frozen.",
+  "next_work_branch_note": "Proposed successor work branch from the latest published/completed A4 descendant; not created by this roadmap update. Freeze the precise design and successor plan before the next inference run.",
   "latest_lifecycle_checkpoint": {
     "date_utc": "2026-10-25",
     "branch": "integration/two-cell-lifecycle-001",
@@ -360,5 +390,48 @@
     "M23_qualified": false,
     "indefinite_runtime_proof_for_full_estimator_complete": false,
     "decision": "Close A1-A3. Proceed to A4 using the completed lifecycle harness; address timely reliable learning while bounding storage/work."
+  },
+  "latest_bounded_learner_checkpoint": {
+    "date_utc": "2026-10-25",
+    "branch": "implementation/bounded-online-001",
+    "source_revision": "b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201",
+    "publication_status": "source published with identical tree; result publication pending",
+    "plan": "experiments/bounded_online_001/plan.json",
+    "receipt": "experiments/bounded_online_001/primary/receipt.json",
+    "scores": "experiments/bounded_online_001/scores.json",
+    "review": "experiments/bounded_online_001/independent_review.json",
+    "memory_accounting": "experiments/bounded_online_001/memory_accounting.json",
+    "first_candidate_implemented": true,
+    "primary_campaigns_executed": 1,
+    "processes": 12,
+    "input_deliveries": 378000,
+    "batch_optimizer_calls": 0,
+    "functional_passed": true,
+    "resource_passed": true,
+    "point_accuracy_passed": false,
+    "provisional_hard_error_audit_passed": false,
+    "scheduled_checks": {
+      "arm_checkpoint_pairs": 16,
+      "SOC_hard_passes": 16,
+      "capacity_and_joint_hard_passes": 6,
+      "joint_preferred_passes": 0,
+      "scope": "Warm pairs duplicate numerical accuracy and test continuation; not 16 independent trajectories."
+    },
+    "owned_bytes": {
+      "core_state_workspace_query": 5848,
+      "host_named_fixed_objects": 7016,
+      "serialized_checkpoint": 2440,
+      "scope": "Fixed host scopes; complete stack/library/acquisition/runtime and target qualification remain separate."
+    },
+    "failures": [
+      "Common scalar gain stalls feasible coordinates when a nuisance coordinate is at an outward-facing bound",
+      "Capacity may be biased beyond 5% while local covariance is narrow and the query is provisional; independently observed after cold reset with few stalled updates"
+    ],
+    "autonomous_bounded_learner_qualified": false,
+    "annual_campaign_complete": false,
+    "M23_qualified": false,
+    "indefinite_runtime_proof_for_full_estimator_complete": false,
+    "decision": "Preserve the first result; one boundary-aware active-set gain successor with matched full Joseph covariance, unchanged priors/model/data and one short frozen falsification. Do not promote or extend duration yet.",
+    "published_source_revision": "28a543e163273975dd782b60fd803649955073a7"
   }
 }

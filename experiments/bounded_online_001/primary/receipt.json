@@ -1,0 +1,1338 @@
+{
+  "schema": "mumble_bounded_online_receipt_v1",
+  "started_utc": "2026-10-25T18:51:54.075989+00:00",
+  "source_revision": "b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201",
+  "branch": "implementation/bounded-online-001",
+  "source_sha256": {
+    "Makefile": "5d97287379df5e034a1d0a903a400b1ff4be33aa6a9c7b402ab87cce7c047739",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_online.h": "62363232d28e03796838f0eba3a88faeedb3c59c65c3dae40a0937c78085f173",
+    "src/scm_online.c": "e41398e44827d8636a01ef9223885fe314de9a8b860792901f8ecc347e6aa744",
+    "include/scm_online_checkpoint.h": "810c2b04d5c5810623680a13fbe98ad10e62cacb43f6b1a5162cd8a81e9db4c1",
+    "src/scm_online_checkpoint.c": "a3036bc7afdd5a184d34fe00d092400e457bbf603eed4bf353356fd5860e4b0e",
+    "tests/test_online.c": "1e4031407b8c81d137fb5b01d04edb67a7928a74797ca81f446ec7ebdd3430a5",
+    "tests/test_online_checkpoint.c": "85916d95f239942ab7b30d6f5e47bff0c40b43cb59a2fa521e2553026be2d94d",
+    "tools/online_probe.c": "df2d5ab0a9e835a009a53f719b69e45717f54cb74079d1dc604d3c4d615fa84f",
+    "tools/run_bounded_online.py": "8806965a5457112f60231361d5fc6c6cb819ab1a6e0af1e120f585901f759e11",
+    "tools/run_trajectory_integration.py": "abc6f6f4da9c99af1a385d06770a5be5c125a33eff06ba63d5ffba7907494bd1",
+    "plans/estimation_targets_001.json": "6b8797c32eb432c206cc03543eb310209181be11f8ab90b4915244d856fe1993",
+    "experiments/bounded_online_001/plan.json": "495ad064e0276d31a9daf5443dda7445a6cfafe8c7618079e572ca24a0d11c2e"
+  },
+  "plan": "experiments/bounded_online_001/plan.json",
+  "plan_sha256": "495ad064e0276d31a9daf5443dda7445a6cfafe8c7618079e572ca24a0d11c2e",
+  "binary_sha256": "5f97fc56e12fc55c36ac90a530095574a7b3e9d7582f0ad1bb63ed1fc72a9c4d",
+  "binary": "/workspace/scratch/359d7ee85d34/mumble/reference_binaries/scm_online_probe_bounded_001",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "execution": {
+    "checkpoint_sample_counts": [
+      420,
+      31500,
+      42000,
+      64750,
+      73500
+    ],
+    "warm_segment_ends": [
+      420,
+      42000,
+      64750,
+      73500
+    ],
+    "cold_reset_sample": 31500,
+    "query_stride_samples": 350,
+    "case_workers": 2,
+    "expected_processes": 12,
+    "expected_input_deliveries": 378000,
+    "new_batch_optimizer_calls": 0,
+    "primary_run_policy": "Run once after source/plan commit. Preserve first outputs and any failures. No full-cell learning during development. Tiny deterministic numerical/fault fixtures are separately disclosed.",
+    "truth_policy": "Inference runner/CLI receives observations and public configuration only. Separate scorer loads truth after every inference process has finished.",
+    "checkpoint": "Fixed-size complete canonical state, no pointer/rawjournal. Warmrestore makes no numerical updates and preserves state/factor/config/counters exactly.",
+    "cold": "Restorecontrol900s then discardbelief and initialize the declared public prior while plant continues. Source position and known absoluteclock retained; no true hidden state."
+  },
+  "acceptance": {
+    "functional": "Every declared process/delivery completes with explicit finite-state/ordering/lifecycle semantics; exact warmcheckpoint and queryparity excludingruntime timings. No silently lost physical updates or duplicated observation evidence.",
+    "resource": "No heap in inference kernel, no rawhistory, owned persistent/workspace/query bytes constant from first tolast observation; practical initial owned budget8192B before stack/runtime/persistence extras. Record all additional simultaneous costs.",
+    "point_accuracy": {
+      "control_and_warm_samples": [
+        31500,
+        63000,
+        73500
+      ],
+      "cold_samples": [
+        63000,
+        73500
+      ],
+      "hard_capacity_abs_relative_percent_le": 5.0,
+      "hard_current_SOC_abs_error_pp_le": 10.0,
+      "preferred_capacity_percent_le": 0.5,
+      "preferred_current_SOC_pp_le": 0.5
+    },
+    "qualification": "Report prior-conditioned localSD, excitation/reasons/constraints and actual point errors separately. Local2sigma widths are not a hard-error guarantee. Count hard-limit breaches among provisional savedqueries; report first/sustained and fraction unavailable/unresolved.",
+    "comparison_reference": "Frozen M1 outputs at samepositions, plus supplemental new-threshold and fullbelief audit. No rerun of M1 solver.",
+    "decision": "Keep as a candidate only if hard target/lifecycle/resource gates pass without hidden numerical faults; record preferred-region performance separately. If it fails, stop and name one measured cause for the next bounded change. Do not launch annual/attention/multistart experiments automatically.",
+    "core_owned_bytes_max": 8192
+  },
+  "truth_access": false,
+  "batch_optimizer_calls": 0,
+  "inference_completed": true,
+  "functional_passed": true,
+  "resource_passed": true,
+  "cases": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "data": "data/cell_a_35hz_s202610240.csv",
+      "data_sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+      "processes": [
+        {
+          "name": "control",
+          "kind": "control",
+          "start_index": 0,
+          "end_index": 73500,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+            "--source",
+            "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+            "--end",
+            "73500",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control",
+            "--save-at",
+            "420,31500,42000,64750,73500",
+            "--query-stride",
+            "350"
+          ],
+          "stdout_jsonl": "cell_a_35hz_s202610240__control.jsonl",
+          "stderr": "cell_a_35hz_s202610240__control.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-420.bin",
+              "bytes": 2440,
+              "sha256": "f6ffac17b562a5879236d52e2dd268aa8c48f4391cdcda59bf7042a7f334ea32"
+            },
+            {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-31500.bin",
+              "bytes": 2440,
+              "sha256": "a8052ad116ffa970deb526aebede4b183bdd8a7681c56e62d484f800033b25bf"
+            },
+            {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-42000.bin",
+              "bytes": 2440,
+              "sha256": "06d50e641cf0ff8558fc77b90f0d8837c99d2d7bf757939c6ad521c8463e9b1b"
+            },
+            {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-64750.bin",
+              "bytes": 2440,
+              "sha256": "4c6a419ec9747f3608b20a6924f98ec2f1b5f86c485e8655c95f93cd0ea1eea1"
+            },
+            {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-73500.bin",
+              "bytes": 2440,
+              "sha256": "8ce56bf9b22100f084c0a9582654962852b596af028488fbc6077d958bfcc4a8"
+            }
+          ],
+          "process_wall_s": 0.135805084999447,
+          "stdout_sha256": "033c7e8496e60c64fcd13ba50a176d06fe376fe9184a40b9bf93ce5c32bf49c8",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 440617,
+          "stderr_bytes": 0,
+          "input_deliveries": 73500,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_1",
+          "kind": "warm",
+          "start_index": 0,
+          "end_index": 420,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+            "--source",
+            "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+            "--end",
+            "420",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_1",
+            "--save-at",
+            "420",
+            "--query-stride",
+            "350"
+          ],
+          "stdout_jsonl": "cell_a_35hz_s202610240__warm_1.jsonl",
+          "stderr": "cell_a_35hz_s202610240__warm_1.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_1-420.bin",
+              "bytes": 2440,
+              "sha256": "f6ffac17b562a5879236d52e2dd268aa8c48f4391cdcda59bf7042a7f334ea32"
+            }
+          ],
+          "process_wall_s": 0.0027149810002811137,
+          "stdout_sha256": "451c0819a1835e6abe19521e361ecad6c58c84cd1333f3a3d4ff3fc19d99d0dd",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 6675,
+          "stderr_bytes": 0,
+          "input_deliveries": 420,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_2",
+          "kind": "warm",
+          "start_index": 420,
+          "end_index": 42000,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+            "--source",
+            "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+            "--end",
+            "42000",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_2",
+            "--save-at",
+            "31500,42000",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_1-420.bin"
+          ],
+          "stdout_jsonl": "cell_a_35hz_s202610240__warm_2.jsonl",
+          "stderr": "cell_a_35hz_s202610240__warm_2.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_2-31500.bin",
+              "bytes": 2440,
+              "sha256": "a8052ad116ffa970deb526aebede4b183bdd8a7681c56e62d484f800033b25bf"
+            },
+            {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_2-42000.bin",
+              "bytes": 2440,
+              "sha256": "06d50e641cf0ff8558fc77b90f0d8837c99d2d7bf757939c6ad521c8463e9b1b"
+            }
+          ],
+          "process_wall_s": 0.0776686540002629,
+          "stdout_sha256": "29bdc6f7be76bfd4b1599207f449d65f0b09448e6125b45a9938b597291a1f9b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 249312,
+          "stderr_bytes": 0,
+          "input_deliveries": 41580,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_3",
+          "kind": "warm",
+          "start_index": 42000,
+          "end_index": 64750,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+            "--source",
+            "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+            "--end",
+            "64750",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_3",
+            "--save-at",
+            "64750",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_2-42000.bin"
+          ],
+          "stdout_jsonl": "cell_a_35hz_s202610240__warm_3.jsonl",
+          "stderr": "cell_a_35hz_s202610240__warm_3.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_3-64750.bin",
+              "bytes": 2440,
+              "sha256": "4c6a419ec9747f3608b20a6924f98ec2f1b5f86c485e8655c95f93cd0ea1eea1"
+            }
+          ],
+          "process_wall_s": 0.05153702000006888,
+          "stdout_sha256": "95f79142a04f3aac5cb0076a839eedd6aa4fd898ae9aaa4032311330f0e4458f",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 138140,
+          "stderr_bytes": 0,
+          "input_deliveries": 22750,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_4",
+          "kind": "warm",
+          "start_index": 64750,
+          "end_index": 73500,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+            "--source",
+            "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+            "--end",
+            "73500",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_4",
+            "--save-at",
+            "73500",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_3-64750.bin"
+          ],
+          "stdout_jsonl": "cell_a_35hz_s202610240__warm_4.jsonl",
+          "stderr": "cell_a_35hz_s202610240__warm_4.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_4-73500.bin",
+              "bytes": 2440,
+              "sha256": "8ce56bf9b22100f084c0a9582654962852b596af028488fbc6077d958bfcc4a8"
+            }
+          ],
+          "process_wall_s": 0.03748762299983355,
+          "stdout_sha256": "6a95b60e97a1e4c712bacfef045c4db2e51dc00feaf851b1726c5513ccb008a4",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 54949,
+          "stderr_bytes": 0,
+          "input_deliveries": 8750,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "cold",
+          "kind": "cold",
+          "start_index": 31500,
+          "end_index": 73500,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+            "--source",
+            "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+            "--end",
+            "73500",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/cold",
+            "--save-at",
+            "",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-31500.bin",
+            "--cold-reset"
+          ],
+          "stdout_jsonl": "cell_a_35hz_s202610240__cold.jsonl",
+          "stderr": "cell_a_35hz_s202610240__cold.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [],
+          "process_wall_s": 0.09066666499984422,
+          "stdout_sha256": "c7e1da27bbc4499453a9df17910c2679ba2bec38729f0e95ecbe34cc38bc72b0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 251410,
+          "stderr_bytes": 0,
+          "input_deliveries": 42000,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        }
+      ],
+      "operational_failures": [],
+      "functional_passed": true,
+      "resource_passed": true,
+      "comparisons": {
+        "checkpoints": [
+          {
+            "next_index": 420,
+            "control": {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-420.bin",
+              "bytes": 2440,
+              "sha256": "f6ffac17b562a5879236d52e2dd268aa8c48f4391cdcda59bf7042a7f334ea32"
+            },
+            "warm": {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_1-420.bin",
+              "bytes": 2440,
+              "sha256": "f6ffac17b562a5879236d52e2dd268aa8c48f4391cdcda59bf7042a7f334ea32"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 31500,
+            "control": {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-31500.bin",
+              "bytes": 2440,
+              "sha256": "a8052ad116ffa970deb526aebede4b183bdd8a7681c56e62d484f800033b25bf"
+            },
+            "warm": {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_2-31500.bin",
+              "bytes": 2440,
+              "sha256": "a8052ad116ffa970deb526aebede4b183bdd8a7681c56e62d484f800033b25bf"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 42000,
+            "control": {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-42000.bin",
+              "bytes": 2440,
+              "sha256": "06d50e641cf0ff8558fc77b90f0d8837c99d2d7bf757939c6ad521c8463e9b1b"
+            },
+            "warm": {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_2-42000.bin",
+              "bytes": 2440,
+              "sha256": "06d50e641cf0ff8558fc77b90f0d8837c99d2d7bf757939c6ad521c8463e9b1b"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 64750,
+            "control": {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-64750.bin",
+              "bytes": 2440,
+              "sha256": "4c6a419ec9747f3608b20a6924f98ec2f1b5f86c485e8655c95f93cd0ea1eea1"
+            },
+            "warm": {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_3-64750.bin",
+              "bytes": 2440,
+              "sha256": "4c6a419ec9747f3608b20a6924f98ec2f1b5f86c485e8655c95f93cd0ea1eea1"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 73500,
+            "control": {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/control-73500.bin",
+              "bytes": 2440,
+              "sha256": "8ce56bf9b22100f084c0a9582654962852b596af028488fbc6077d958bfcc4a8"
+            },
+            "warm": {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_a_35hz_s202610240/warm_4-73500.bin",
+              "bytes": 2440,
+              "sha256": "8ce56bf9b22100f084c0a9582654962852b596af028488fbc6077d958bfcc4a8"
+            },
+            "passed": true
+          }
+        ],
+        "queries": {
+          "passed": true,
+          "compared_records": 215,
+          "compared_scalar_fields": 16555,
+          "maximum_absolute_difference": 0.0,
+          "failure_count": 0,
+          "first_failures": []
+        },
+        "excluded_fields": [
+          "query event/reason",
+          "process wall time"
+        ]
+      },
+      "cold_reset_check": {
+        "immediate_query": {
+          "event": "query",
+          "next_index": 31500,
+          "epoch_begin": 31500,
+          "reason": "cold_reset",
+          "state": {
+            "soc_status": "unknown",
+            "capacity_status": "unknown",
+            "soc_status_code": 0,
+            "capacity_status_code": 0,
+            "flags": 1,
+            "excitation": 0,
+            "epoch_begin": 31500,
+            "next_index": 31500,
+            "evidence_next_index": 31500,
+            "evidence_age_samples": 0,
+            "prediction_count": 31500,
+            "voltage_count": 31500,
+            "missing_voltage_count": 0,
+            "rejected_voltage_count": 0,
+            "limited_gain_count": 6613,
+            "zero_gain_count": 6069,
+            "cold_resets": 1,
+            "elapsed_s": 900.0000000004121,
+            "epoch_elapsed_s": 0,
+            "current_soc": 0,
+            "capacity_Ah": 0,
+            "predicted_voltage_V": 0,
+            "soc_local_lower": 0,
+            "soc_local_upper": 0,
+            "capacity_local_lower_Ah": 0,
+            "capacity_local_upper_Ah": 0,
+            "last_innovation_V": 0,
+            "last_innovation_variance_V2": 0,
+            "last_gain_scale": 1,
+            "minimum_gain_scale": 1,
+            "innovation_ewma": 0,
+            "point_available": 0,
+            "capacity_available": 0,
+            "prediction_available": 0,
+            "local_ranges_available": 0,
+            "soc_local_precision_hard": 0,
+            "capacity_local_precision_hard": 0,
+            "soc_local_precision_preferred": 0,
+            "capacity_local_precision_preferred": 0,
+            "mean": [
+              -3.0484125313829042,
+              -0.7458274383888583,
+              1.90333124488516,
+              5.0106352940962555,
+              5.703782474656201,
+              -2.8134107167600364,
+              0.1,
+              0.1,
+              0.1,
+              0.1,
+              0.024,
+              0.68,
+              0,
+              0,
+              0,
+              0
+            ],
+            "coordinate_sd": [
+              0.664699061636066,
+              0.664699061636066,
+              0.8647934172782233,
+              1.5821241788613198,
+              1.5821241788613198,
+              0.347557011337284,
+              0.2886751345948129,
+              0.2886751345948129,
+              0.2886751345948129,
+              0.2886751345948129,
+              0.02886751345948129,
+              0.21650635094610968,
+              0.046188021535170064,
+              0.046188021535170064,
+              0.046188021535170064,
+              0.5773502691896258
+            ]
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          }
+        },
+        "passed": true
+      },
+      "input_deliveries": 189000
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "data": "data/cell_b_35hz_s202610240.csv",
+      "data_sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+      "processes": [
+        {
+          "name": "control",
+          "kind": "control",
+          "start_index": 0,
+          "end_index": 73500,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+            "--source",
+            "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+            "--end",
+            "73500",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control",
+            "--save-at",
+            "420,31500,42000,64750,73500",
+            "--query-stride",
+            "350"
+          ],
+          "stdout_jsonl": "cell_b_35hz_s202610240__control.jsonl",
+          "stderr": "cell_b_35hz_s202610240__control.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-420.bin",
+              "bytes": 2440,
+              "sha256": "fa702fa0b53ca49f79566089a8d4dde501a88c6e2f74c44b456c2569e4b6774f"
+            },
+            {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-31500.bin",
+              "bytes": 2440,
+              "sha256": "31d4c368829cce2a0abf4cfa96fe6c85cef46c5eea9579247cc91e50840791f9"
+            },
+            {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-42000.bin",
+              "bytes": 2440,
+              "sha256": "151d7b5246eb0f06634972352df1296d817991b2da237d56af7ccecbbabfdbfe"
+            },
+            {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-64750.bin",
+              "bytes": 2440,
+              "sha256": "57768c61916aeea2fe3864697e9c8739c975319ce84c2fcb517b636f1f62a86c"
+            },
+            {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-73500.bin",
+              "bytes": 2440,
+              "sha256": "4366295d7cb20f616ec870f651877ff6fa4156364896f30718027daeb8b4cb12"
+            }
+          ],
+          "process_wall_s": 0.12663142400015204,
+          "stdout_sha256": "2af4037b3f4f06ccf59f35a7c245c07ba45cead87cc5a627616deb5a5d34486d",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 435917,
+          "stderr_bytes": 0,
+          "input_deliveries": 73500,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_1",
+          "kind": "warm",
+          "start_index": 0,
+          "end_index": 420,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+            "--source",
+            "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+            "--end",
+            "420",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_1",
+            "--save-at",
+            "420",
+            "--query-stride",
+            "350"
+          ],
+          "stdout_jsonl": "cell_b_35hz_s202610240__warm_1.jsonl",
+          "stderr": "cell_b_35hz_s202610240__warm_1.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_1-420.bin",
+              "bytes": 2440,
+              "sha256": "fa702fa0b53ca49f79566089a8d4dde501a88c6e2f74c44b456c2569e4b6774f"
+            }
+          ],
+          "process_wall_s": 0.0027298940003674943,
+          "stdout_sha256": "a309cb968be2cc18ebc0401e7d853af12ec0762444e509350d17c25f2a5a9f03",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 6669,
+          "stderr_bytes": 0,
+          "input_deliveries": 420,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_2",
+          "kind": "warm",
+          "start_index": 420,
+          "end_index": 42000,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+            "--source",
+            "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+            "--end",
+            "42000",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_2",
+            "--save-at",
+            "31500,42000",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_1-420.bin"
+          ],
+          "stdout_jsonl": "cell_b_35hz_s202610240__warm_2.jsonl",
+          "stderr": "cell_b_35hz_s202610240__warm_2.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_2-31500.bin",
+              "bytes": 2440,
+              "sha256": "31d4c368829cce2a0abf4cfa96fe6c85cef46c5eea9579247cc91e50840791f9"
+            },
+            {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_2-42000.bin",
+              "bytes": 2440,
+              "sha256": "151d7b5246eb0f06634972352df1296d817991b2da237d56af7ccecbbabfdbfe"
+            }
+          ],
+          "process_wall_s": 0.06413382800019463,
+          "stdout_sha256": "c06ec716b5160bc571289681771b8bd1b36ef8456ef988216ae75cb66942b979",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 247178,
+          "stderr_bytes": 0,
+          "input_deliveries": 41580,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_3",
+          "kind": "warm",
+          "start_index": 42000,
+          "end_index": 64750,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+            "--source",
+            "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+            "--end",
+            "64750",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_3",
+            "--save-at",
+            "64750",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_2-42000.bin"
+          ],
+          "stdout_jsonl": "cell_b_35hz_s202610240__warm_3.jsonl",
+          "stderr": "cell_b_35hz_s202610240__warm_3.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_3-64750.bin",
+              "bytes": 2440,
+              "sha256": "57768c61916aeea2fe3864697e9c8739c975319ce84c2fcb517b636f1f62a86c"
+            }
+          ],
+          "process_wall_s": 0.054915640000217536,
+          "stdout_sha256": "4678ba4a2e80ff24ebd78c172f2fd03353d57caf2dd09d10b1b28fc2c0ffb7b0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 135969,
+          "stderr_bytes": 0,
+          "input_deliveries": 22750,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "warm_4",
+          "kind": "warm",
+          "start_index": 64750,
+          "end_index": 73500,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+            "--source",
+            "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+            "--end",
+            "73500",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_4",
+            "--save-at",
+            "73500",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_3-64750.bin"
+          ],
+          "stdout_jsonl": "cell_b_35hz_s202610240__warm_4.jsonl",
+          "stderr": "cell_b_35hz_s202610240__warm_4.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [
+            {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_4-73500.bin",
+              "bytes": 2440,
+              "sha256": "4366295d7cb20f616ec870f651877ff6fa4156364896f30718027daeb8b4cb12"
+            }
+          ],
+          "process_wall_s": 0.04218273300011788,
+          "stdout_sha256": "c9858841b224dccff9de2250f9a112cc3b48a16f7c92a0a47a9d4488094652b2",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 54520,
+          "stderr_bytes": 0,
+          "input_deliveries": 8750,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        },
+        {
+          "name": "cold",
+          "kind": "cold",
+          "start_index": 31500,
+          "end_index": 73500,
+          "command": [
+            "/tmp/mumble_online_primary_3ivuf0wy/scm_online_probe",
+            "--data",
+            "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+            "--source",
+            "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+            "--end",
+            "73500",
+            "--checkpoint-prefix",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/cold",
+            "--save-at",
+            "",
+            "--query-stride",
+            "350",
+            "--restore",
+            "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-31500.bin",
+            "--cold-reset"
+          ],
+          "stdout_jsonl": "cell_b_35hz_s202610240__cold.jsonl",
+          "stderr": "cell_b_35hz_s202610240__cold.stderr.txt",
+          "returncode": 0,
+          "timeout_s": 1200,
+          "operational_failures": [],
+          "checkpoint_records": [],
+          "process_wall_s": 0.09009230299943738,
+          "stdout_sha256": "a6d50be4e765bc0e92b26cf777398875916d9b53feadadf1d0e209a29e819001",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stdout_bytes": 251711,
+          "stderr_bytes": 0,
+          "input_deliveries": 42000,
+          "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+          "validations": {
+            "successful_exit": true,
+            "run_identity_and_config": true,
+            "query_schedule": true,
+            "completion": true,
+            "checkpoint_schedule": true,
+            "no_error_events": true,
+            "no_batch_fit_events": true,
+            "query_ledger": true
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          },
+          "resource_passed": true,
+          "passed": true
+        }
+      ],
+      "operational_failures": [],
+      "functional_passed": true,
+      "resource_passed": true,
+      "comparisons": {
+        "checkpoints": [
+          {
+            "next_index": 420,
+            "control": {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-420.bin",
+              "bytes": 2440,
+              "sha256": "fa702fa0b53ca49f79566089a8d4dde501a88c6e2f74c44b456c2569e4b6774f"
+            },
+            "warm": {
+              "next_index": 420,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_1-420.bin",
+              "bytes": 2440,
+              "sha256": "fa702fa0b53ca49f79566089a8d4dde501a88c6e2f74c44b456c2569e4b6774f"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 31500,
+            "control": {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-31500.bin",
+              "bytes": 2440,
+              "sha256": "31d4c368829cce2a0abf4cfa96fe6c85cef46c5eea9579247cc91e50840791f9"
+            },
+            "warm": {
+              "next_index": 31500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_2-31500.bin",
+              "bytes": 2440,
+              "sha256": "31d4c368829cce2a0abf4cfa96fe6c85cef46c5eea9579247cc91e50840791f9"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 42000,
+            "control": {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-42000.bin",
+              "bytes": 2440,
+              "sha256": "151d7b5246eb0f06634972352df1296d817991b2da237d56af7ccecbbabfdbfe"
+            },
+            "warm": {
+              "next_index": 42000,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_2-42000.bin",
+              "bytes": 2440,
+              "sha256": "151d7b5246eb0f06634972352df1296d817991b2da237d56af7ccecbbabfdbfe"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 64750,
+            "control": {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-64750.bin",
+              "bytes": 2440,
+              "sha256": "57768c61916aeea2fe3864697e9c8739c975319ce84c2fcb517b636f1f62a86c"
+            },
+            "warm": {
+              "next_index": 64750,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_3-64750.bin",
+              "bytes": 2440,
+              "sha256": "57768c61916aeea2fe3864697e9c8739c975319ce84c2fcb517b636f1f62a86c"
+            },
+            "passed": true
+          },
+          {
+            "next_index": 73500,
+            "control": {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/control-73500.bin",
+              "bytes": 2440,
+              "sha256": "4366295d7cb20f616ec870f651877ff6fa4156364896f30718027daeb8b4cb12"
+            },
+            "warm": {
+              "next_index": 73500,
+              "epoch_begin": 0,
+              "path_during_run": "/tmp/mumble_online_primary_3ivuf0wy/cell_b_35hz_s202610240/warm_4-73500.bin",
+              "bytes": 2440,
+              "sha256": "4366295d7cb20f616ec870f651877ff6fa4156364896f30718027daeb8b4cb12"
+            },
+            "passed": true
+          }
+        ],
+        "queries": {
+          "passed": true,
+          "compared_records": 215,
+          "compared_scalar_fields": 16555,
+          "maximum_absolute_difference": 0.0,
+          "failure_count": 0,
+          "first_failures": []
+        },
+        "excluded_fields": [
+          "query event/reason",
+          "process wall time"
+        ]
+      },
+      "cold_reset_check": {
+        "immediate_query": {
+          "event": "query",
+          "next_index": 31500,
+          "epoch_begin": 31500,
+          "reason": "cold_reset",
+          "state": {
+            "soc_status": "unknown",
+            "capacity_status": "unknown",
+            "soc_status_code": 0,
+            "capacity_status_code": 0,
+            "flags": 1,
+            "excitation": 0,
+            "epoch_begin": 31500,
+            "next_index": 31500,
+            "evidence_next_index": 31500,
+            "evidence_age_samples": 0,
+            "prediction_count": 31500,
+            "voltage_count": 31500,
+            "missing_voltage_count": 0,
+            "rejected_voltage_count": 0,
+            "limited_gain_count": 30251,
+            "zero_gain_count": 29965,
+            "cold_resets": 1,
+            "elapsed_s": 900.0000000004121,
+            "epoch_elapsed_s": 0,
+            "current_soc": 0,
+            "capacity_Ah": 0,
+            "predicted_voltage_V": 0,
+            "soc_local_lower": 0,
+            "soc_local_upper": 0,
+            "capacity_local_lower_Ah": 0,
+            "capacity_local_upper_Ah": 0,
+            "last_innovation_V": 0,
+            "last_innovation_variance_V2": 0,
+            "last_gain_scale": 1,
+            "minimum_gain_scale": 1,
+            "innovation_ewma": 0,
+            "point_available": 0,
+            "capacity_available": 0,
+            "prediction_available": 0,
+            "local_ranges_available": 0,
+            "soc_local_precision_hard": 0,
+            "capacity_local_precision_hard": 0,
+            "soc_local_precision_preferred": 0,
+            "capacity_local_precision_preferred": 0,
+            "mean": [
+              -3.0484125313829042,
+              -0.7458274383888583,
+              1.90333124488516,
+              5.0106352940962555,
+              5.703782474656201,
+              -2.8134107167600364,
+              0.1,
+              0.1,
+              0.1,
+              0.1,
+              0.024,
+              0.68,
+              0,
+              0,
+              0,
+              0
+            ],
+            "coordinate_sd": [
+              0.664699061636066,
+              0.664699061636066,
+              0.8647934172782233,
+              1.5821241788613198,
+              1.5821241788613198,
+              0.347557011337284,
+              0.2886751345948129,
+              0.2886751345948129,
+              0.2886751345948129,
+              0.2886751345948129,
+              0.02886751345948129,
+              0.21650635094610968,
+              0.046188021535170064,
+              0.046188021535170064,
+              0.046188021535170064,
+              0.5773502691896258
+            ]
+          },
+          "resources": {
+            "state_bytes": 2408,
+            "workspace_bytes": 2920,
+            "query_bytes": 520,
+            "core_owned_bytes": 5848,
+            "host_fixed_owned_bytes": 7016,
+            "checkpoint_bytes": 2440
+          }
+        },
+        "passed": true
+      },
+      "input_deliveries": 189000
+    }
+  ],
+  "operational_failures": [],
+  "usefulness": "Separate post-inference scoring; never used for inference or tuning",
+  "checkpoint_artifacts": "Temporary complete fixed state files; hashes/sizes and commands preserved",
+  "memory_scope": "Fixed core state/workspace/query and enumerated host buffers; stack and libc/FILE/runtime extra",
+  "timing_scope": "Host process wall time, including input parsing/output/checkpoints; not isolated kernel or M23 timing",
+  "binary_snapshot_unchanged": true,
+  "input_deliveries": 378000,
+  "processes_completed": 12,
+  "process_wall_s": 0.4192517930005124,
+  "integrity": {
+    "source_unchanged": true,
+    "source_revision_unchanged": true,
+    "binary_unchanged": true,
+    "data_unchanged": true,
+    "binary_snapshot_unchanged": true
+  },
+  "finished_utc": "2026-10-25T18:51:54.509115+00:00"
+}

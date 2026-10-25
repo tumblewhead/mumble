@@ -1,0 +1,198 @@
+{
+  "schema": "mumble_bounded_online_independent_review_v1",
+  "reviewed_utc": "2026-10-25T18:55:28.265756+00:00",
+  "scope": "Post-run result audit of the frozen primary and selected saved queries; no new inference, primary rerun, source edit or test execution.",
+  "reviewer_role": "Core implementation owner reviewing frozen results; separate pre-run algebra/source review is design_review.json.",
+  "source_revision": "b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201",
+  "hashes": {
+    "plan_sha256": "495ad064e0276d31a9daf5443dda7445a6cfafe8c7618079e572ca24a0d11c2e",
+    "primary_receipt_sha256": "eeda012449b0c81c09022a0d5e8d645df5042198c4e819440846ed48cb9458e2",
+    "scores_sha256": "55108f6e56f19e2d562e69fe3aeaa1a92e93da775f6d60df45cb845c92161896",
+    "build_checks_sha256": "7f7b77ac1807e1373cbda915d57a964ce302e939985bbcd07066654e9fde4638",
+    "binary_sha256": "5f97fc56e12fc55c36ac90a530095574a7b3e9d7582f0ad1bb63ed1fc72a9c4d",
+    "source_sha256": {
+      "include/scm_online.h": "62363232d28e03796838f0eba3a88faeedb3c59c65c3dae40a0937c78085f173",
+      "src/scm_online.c": "e41398e44827d8636a01ef9223885fe314de9a8b860792901f8ecc347e6aa744",
+      "src/scm_online_checkpoint.c": "a3036bc7afdd5a184d34fe00d092400e457bbf603eed4bf353356fd5860e4b0e",
+      "tools/online_probe.c": "df2d5ab0a9e835a009a53f719b69e45717f54cb74079d1dc604d3c4d615fa84f"
+    },
+    "selected_raw_sha256": {
+      "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__control.jsonl": "033c7e8496e60c64fcd13ba50a176d06fe376fe9184a40b9bf93ce5c32bf49c8",
+      "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__cold.jsonl": "c7e1da27bbc4499453a9df17910c2679ba2bec38729f0e95ecbe34cc38bc72b0",
+      "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__control.jsonl": "2af4037b3f4f06ccf59f35a7c245c07ba45cead87cc5a627616deb5a5d34486d",
+      "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__cold.jsonl": "a6d50be4e765bc0e92b26cf777398875916d9b53feadadf1d0e209a29e819001"
+    }
+  },
+  "integrity": {
+    "receipt_source_hashes_match_current_files": true,
+    "scorer_receipt_hash_matches": true,
+    "selected_raw_hashes_match_receipt": true,
+    "recorded_integrity_flags": {
+      "source_unchanged": true,
+      "source_revision_unchanged": true,
+      "binary_unchanged": true,
+      "data_unchanged": true,
+      "binary_snapshot_unchanged": true
+    },
+    "inference_finished_before_scoring_started": true,
+    "truth_in_inference": false,
+    "new_optimizer_calls": 0,
+    "new_runs_by_reviewer": 0
+  },
+  "gate_conclusions": {
+    "functional": {
+      "passed": true,
+      "deliveries": 378000,
+      "processes": 12,
+      "comment": "Recorded warm checkpoints and queries agree exactly; cold reset clears belief while preserving index/time; no operational failures. Zero gain still advances known physical state and chronology."
+    },
+    "resource": {
+      "passed": true,
+      "core_owned_bytes": 5848,
+      "host_fixed_owned_bytes": 7016,
+      "checkpoint_serialized_bytes": 2440,
+      "comment": "Constant-size host objects and no raw history; budget excludes complete stack, libm/libc/FILE, acquisition, interrupts and target runtime. Serialized checkpoint size is not a second simultaneous RAM buffer."
+    },
+    "numerical": {
+      "reported_focused_core_checks": 2377,
+      "reported_checkpoint_checks": 64,
+      "strict_and_sanitizers_passed": true,
+      "comment": "No sampled nonfinite/model-recovery failure; this supports tested arithmetic/lifecycle correctness, not indefinite availability or numerical convergence to the correct nonlinear belief."
+    },
+    "accuracy": {
+      "SOC_hard_passes": 16,
+      "capacity_and_joint_hard_passes": 6,
+      "joint_preferred_passes": 0,
+      "scheduled_arm_checkpoint_pairs": 16,
+      "overall_passed": false
+    },
+    "provisional_hard_error_audit_passed": false,
+    "promotion": "Do not promote this candidate to the variation/year campaign or call it M23-qualified."
+  },
+  "final_target_errors": [
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "SOC_error_pp": -0.06997737892028288,
+      "capacity_error_percent": -2.5313036509692077,
+      "capacity_status": "provisional"
+    },
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "arm": "cold",
+      "SOC_error_pp": -0.4781935383651792,
+      "capacity_error_percent": -7.485014213226404,
+      "capacity_status": "provisional"
+    },
+    {
+      "cell": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "SOC_error_pp": -0.37846971862506296,
+      "capacity_error_percent": 9.389285719755591,
+      "capacity_status": "unresolved"
+    },
+    {
+      "cell": "cell_b_35hz_s202610240",
+      "arm": "cold",
+      "SOC_error_pp": -0.4935711300792178,
+      "capacity_error_percent": 3.1724318403177465,
+      "capacity_status": "provisional"
+    }
+  ],
+  "measured_failures": [
+    {
+      "id": "common_gain_stall",
+      "cell": "cell_b_35hz_s202610240",
+      "arm": "control; warm identical",
+      "zero_gain_updates": 71928,
+      "present_voltage_updates": 73500,
+      "zero_gain_fraction": 0.9786122448979592,
+      "first_selected_witness": {
+        "sample": 350,
+        "time_s": 10,
+        "tau3_upper_bound_s": 30,
+        "last_positive_gain_evidence_next_index": 47,
+        "zero_gain_count": 303
+      },
+      "later_selected_witness": {
+        "sample": 73500,
+        "gamma_minus_upper_bound": 1200,
+        "last_positive_gain_evidence_next_index": 58726,
+        "evidence_age_samples": 14774,
+        "evidence_age_s_nominal": 422.1142857142857,
+        "capacity_error_percent": 9.389285719755591,
+        "capacity_status": "unresolved"
+      },
+      "source_cause": "correct() chooses the minimum support-admissible scale over all 16 coordinates. An outward correction at one nuisance bound sets common lambda to zero and blocks SOC/Q observation correction as well. Source and selected queries agree; this is the declared policy, not a physical sample-order failure.",
+      "limit": "Bounds and zero-gain counters are observed at saved queries; no claim that every intervening limiting coordinate was identified."
+    },
+    {
+      "id": "wrong_narrow_capacity",
+      "counts_by_arm": [
+        {
+          "case_id": "cell_a_35hz_s202610240",
+          "arm": "control",
+          "kind": "provisional_point_exceeds_hard_error",
+          "SOC_queries": 0,
+          "capacity_queries": 54
+        },
+        {
+          "case_id": "cell_a_35hz_s202610240",
+          "arm": "warm",
+          "kind": "provisional_point_exceeds_hard_error",
+          "SOC_queries": 0,
+          "capacity_queries": 54
+        },
+        {
+          "case_id": "cell_a_35hz_s202610240",
+          "arm": "cold",
+          "kind": "provisional_point_exceeds_hard_error",
+          "SOC_queries": 0,
+          "capacity_queries": 113
+        },
+        {
+          "case_id": "cell_b_35hz_s202610240",
+          "arm": "cold",
+          "kind": "provisional_point_exceeds_hard_error",
+          "SOC_queries": 0,
+          "capacity_queries": 51
+        }
+      ],
+      "first_saved_breaches_s": {
+        "A_control_and_warm": 350,
+        "A_cold": 980,
+        "B_cold": 1020
+      },
+      "selected_witness": {
+        "cell": "cell_a_35hz_s202610240",
+        "arm": "cold",
+        "sample": 73500,
+        "truth_capacity_Ah": 0.06,
+        "capacity_Ah": 0.05550899147206415,
+        "capacity_error_percent": -7.485014213226404,
+        "local_2SD_interval_Ah": [
+          0.05542131985726812,
+          0.055596801775582516
+        ],
+        "innovation_ewma": 1.0449289790392617
+      },
+      "interpretation": "The local Gaussian width screen can be precise around a biased capacity point. Provisional labels and local_precision_hard flags do not certify hard accuracy or coverage; even near-unit innovation EWMA does not validate capacity uncertainty.",
+      "cold_counter_correction": {
+        "A_post_reset_zero_gain_updates": 1434,
+        "B_post_reset_zero_gain_updates": 295,
+        "post_reset_deliveries_per_cell": 42000,
+        "comment": "Counters survive reset. Subtract A 6069 and B 29965 at reset from final counters; using cumulative counts would overstate post-reset stalls."
+      },
+      "limit": "Removing common-gain stall alone is not established as sufficient: A cold remains biased with only 3.41% post-reset zero-gain updates."
+    }
+  ],
+  "belief_vector_scope": "The16-coordinate scored RMS is an engineering-scale point-error summary, not a percent or posterior distance. This learner tracks current z/v/h, unlike the retained-history entering-state parameter vector. Full parameter truth accuracy is not implied by acceptable SOC point error.",
+  "lifetime_scope": "The primary contains two 2100-second trajectories with duplicated warm/cold delivery paths, not an annual or indefinite experiment. Fixed storage, PSD square-factor algebra and finite-value/counter guards do not prove all-prefix accuracy, coverage, availability or floating-point stability.",
+  "one_next_bounded_change": {
+    "proposal": "Replace the single common support-limited gain with a boundary-aware active-set gain that can retain admissible SOC/Q updates when one nuisance correction points outward.",
+    "constraints": "Use the same chosen gain for mean and a valid Joseph square-root covariance update; preserve full cross-correlations, fixed memory, chronology and once-only observation handling. Hold data, public prior, model and acceptance gates fixed in a separately frozen short follow-up.",
+    "falsification": "Check whether the measured Cell B stall decreases and scheduled hard accuracy improves, while retaining the existing provisional hard-error audit. Do not claim success from fewer zero gains alone.",
+    "remaining_blocker": "Wrong narrow capacity beliefs remain an independent rejection reason; no uncertainty or target guarantee is established by this proposed change.",
+    "implemented_or_run": false
+  }
+}

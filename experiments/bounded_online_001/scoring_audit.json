@@ -1,0 +1,805 @@
+{
+  "schema": "mumble_bounded_online_scoring_audit_v1",
+  "audit_finished_utc": "2026-10-25T18:53:46.670704+00:00",
+  "source_revision": "b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201",
+  "scope": "Independent post-inference scoring/lifecycle audit; saved scores reused. Zero inference, optimization or primary reruns. Only this supplemental JSON written.",
+  "method": "Independent Python scalar math truth propagation at actual CSV intervals to selected positions; no imports of estimator, generator or scorer. Explicit coordinate mapping and physical error formulas compared with saved scores. All warm query state/resource records compared exactly.",
+  "tolerances": {
+    "default_absolute_error_difference": 1e-09,
+    "truth_chart_and_scaled_RMS_difference": 1e-10,
+    "relative_tolerance": 1e-12,
+    "warm_query_fields": "exact"
+  },
+  "coverage_claim": false,
+  "passed": true,
+  "checks_passed": 104,
+  "checks_total": 104,
+  "blockers": [],
+  "input_sha256": {
+    "data/cell_a_35hz_s202610240.csv": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+    "data/cell_b_35hz_s202610240.csv": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+    "data/manifest.json": "06eef741fa7d7f4477a2bc25b969ab2baed537187fd631dac864e6212b0cefe1",
+    "experiments/bounded_online_001/plan.json": "495ad064e0276d31a9daf5443dda7445a6cfafe8c7618079e572ca24a0d11c2e",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__cold.jsonl": "c7e1da27bbc4499453a9df17910c2679ba2bec38729f0e95ecbe34cc38bc72b0",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__cold.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__control.jsonl": "033c7e8496e60c64fcd13ba50a176d06fe376fe9184a40b9bf93ce5c32bf49c8",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__control.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_1.jsonl": "451c0819a1835e6abe19521e361ecad6c58c84cd1333f3a3d4ff3fc19d99d0dd",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_1.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_2.jsonl": "29bdc6f7be76bfd4b1599207f449d65f0b09448e6125b45a9938b597291a1f9b",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_2.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_3.jsonl": "95f79142a04f3aac5cb0076a839eedd6aa4fd898ae9aaa4032311330f0e4458f",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_3.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_4.jsonl": "6a95b60e97a1e4c712bacfef045c4db2e51dc00feaf851b1726c5513ccb008a4",
+    "experiments/bounded_online_001/primary/cell_a_35hz_s202610240__warm_4.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__cold.jsonl": "a6d50be4e765bc0e92b26cf777398875916d9b53feadadf1d0e209a29e819001",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__cold.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__control.jsonl": "2af4037b3f4f06ccf59f35a7c245c07ba45cead87cc5a627616deb5a5d34486d",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__control.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_1.jsonl": "a309cb968be2cc18ebc0401e7d853af12ec0762444e509350d17c25f2a5a9f03",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_1.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_2.jsonl": "c06ec716b5160bc571289681771b8bd1b36ef8456ef988216ae75cb66942b979",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_2.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_3.jsonl": "4678ba4a2e80ff24ebd78c172f2fd03353d57caf2dd09d10b1b28fc2c0ffb7b0",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_3.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_4.jsonl": "c9858841b224dccff9de2250f9a112cc3b48a16f7c92a0a47a9d4488094652b2",
+    "experiments/bounded_online_001/primary/cell_b_35hz_s202610240__warm_4.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/bounded_online_001/primary/receipt.json": "eeda012449b0c81c09022a0d5e8d645df5042198c4e819440846ed48cb9458e2",
+    "experiments/bounded_online_001/scores.json": "55108f6e56f19e2d562e69fe3aeaa1a92e93da775f6d60df45cb845c92161896",
+    "include/scm_online.h": "62363232d28e03796838f0eba3a88faeedb3c59c65c3dae40a0937c78085f173",
+    "plans/estimation_targets_001.json": "6b8797c32eb432c206cc03543eb310209181be11f8ab90b4915244d856fe1993",
+    "src/scm_online.c": "e41398e44827d8636a01ef9223885fe314de9a8b860792901f8ecc347e6aa744",
+    "tools/generate_cases.py": "f519aa58f1ef4e06a61a1bb35f5d3204160d9658cafefa30f6b6113833eb5733",
+    "tools/score_bounded_online.py": "51f466428f4de70d60749d0149f57d4471565402f5122fd348ac67412a8f0a84"
+  },
+  "lifecycle": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "warm_query_records": 215,
+      "unique_control_queries": 212,
+      "exact_warm_query_fields": true,
+      "checkpoint_hash_pairs": 5,
+      "checkpoint_hash_pairs_equal": true,
+      "cold_reset_prior_exact": true,
+      "cold_start_prediction_count": 31500,
+      "cold_end_prediction_count": 73500,
+      "cold_suffix_updates": 42000,
+      "checkpoint_verification_scope": "Independent comparison of recorded hashes/sizes; temporary binary checkpoint files were not retained."
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "warm_query_records": 215,
+      "unique_control_queries": 212,
+      "exact_warm_query_fields": true,
+      "checkpoint_hash_pairs": 5,
+      "checkpoint_hash_pairs_equal": true,
+      "cold_reset_prior_exact": true,
+      "cold_start_prediction_count": 31500,
+      "cold_end_prediction_count": 73500,
+      "cold_suffix_updates": 42000,
+      "checkpoint_verification_scope": "Independent comparison of recorded hashes/sizes; temporary binary checkpoint files were not retained."
+    }
+  ],
+  "selected_score_checks": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "next_index": 350,
+      "independent_truth_max_coordinate_difference": 6.830473686658678e-18,
+      "scaled_RMS_difference": 0.0,
+      "SOC_error_pp": 1.3616262090160536,
+      "Q_error_percent": 0.0,
+      "current_RC_error_mV": [
+        1.8191733757794994e-45,
+        4.122307244382445e-09,
+        13.34261598059729
+      ],
+      "current_h_error": -0.020170507700714713,
+      "largest_static_relative_error": [
+        "tau3",
+        500.0000000000001
+      ],
+      "point_available": 1,
+      "capacity_available": 0
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "next_index": 31500,
+      "independent_truth_max_coordinate_difference": 1.815214645262131e-13,
+      "scaled_RMS_difference": 2.503552920529728e-14,
+      "SOC_error_pp": 0.8222738129438634,
+      "Q_error_percent": 8.450034250342187,
+      "current_RC_error_mV": [
+        3.353858328445416,
+        -0.4652428117813759,
+        -5.4172309693576715
+      ],
+      "current_h_error": 0.3852363771088615,
+      "largest_static_relative_error": [
+        "tau2",
+        200.0
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "next_index": 63000,
+      "independent_truth_max_coordinate_difference": 3.806954751439662e-13,
+      "scaled_RMS_difference": 1.0547118733938987e-15,
+      "SOC_error_pp": -0.13751457692934288,
+      "Q_error_percent": -2.8103737000332862,
+      "current_RC_error_mV": [
+        3.131696006767446,
+        0.7646274397870977,
+        -7.424278634751539
+      ],
+      "current_h_error": 0.1960464712234561,
+      "largest_static_relative_error": [
+        "tau2",
+        200.0
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "next_index": 73500,
+      "independent_truth_max_coordinate_difference": 9.076073226310655e-13,
+      "scaled_RMS_difference": 3.552713678800501e-15,
+      "SOC_error_pp": -0.06997737882952215,
+      "Q_error_percent": -2.5313036509692077,
+      "current_RC_error_mV": [
+        0.13652270278959436,
+        0.07622741489698395,
+        -0.3734292092390339
+      ],
+      "current_h_error": 0.1854768893337665,
+      "largest_static_relative_error": [
+        "tau2",
+        199.0270466645798
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 31500,
+      "independent_truth_max_coordinate_difference": 1.815214645262131e-13,
+      "scaled_RMS_difference": 8.26561041833429e-14,
+      "SOC_error_pp": null,
+      "Q_error_percent": 0.0,
+      "current_RC_error_mV": [
+        -8.100000000000001,
+        -9.900000000000015,
+        -12.600000472647734
+      ],
+      "current_h_error": -0.36590925847741373,
+      "largest_static_relative_error": [
+        "R3",
+        -64.28571428571428
+      ],
+      "point_available": 0,
+      "capacity_available": 0
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 63000,
+      "independent_truth_max_coordinate_difference": 3.806954751439662e-13,
+      "scaled_RMS_difference": 2.786659791809143e-14,
+      "SOC_error_pp": -0.42507022918198967,
+      "Q_error_percent": -7.4943559925882415,
+      "current_RC_error_mV": [
+        1.199898509421541,
+        -1.3557669513603563,
+        -2.532235883759672
+      ],
+      "current_h_error": -0.30987474046998276,
+      "largest_static_relative_error": [
+        "tau1",
+        188.74217171362613
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 73500,
+      "independent_truth_max_coordinate_difference": 9.076073226310655e-13,
+      "scaled_RMS_difference": 5.750955267558311e-14,
+      "SOC_error_pp": -0.47819353827441846,
+      "Q_error_percent": -7.485014213226404,
+      "current_RC_error_mV": [
+        0.07396394696191223,
+        -0.08467752819702302,
+        -0.14234706715555956
+      ],
+      "current_h_error": -0.3306458577078079,
+      "largest_static_relative_error": [
+        "tau1",
+        196.83160003603874
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 350,
+      "independent_truth_max_coordinate_difference": 2.2551405187698492e-17,
+      "scaled_RMS_difference": 0.0,
+      "SOC_error_pp": -5.676219752486222,
+      "Q_error_percent": -7.264296754250377,
+      "current_RC_error_mV": [
+        2.483699644956499e-58,
+        -8.28408071950793e-07,
+        -34.05966431274471
+      ],
+      "current_h_error": -0.5568925792373354,
+      "largest_static_relative_error": [
+        "tau3",
+        300.0000000000001
+      ],
+      "point_available": 1,
+      "capacity_available": 0
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 31500,
+      "independent_truth_max_coordinate_difference": 2.0616841567289157e-13,
+      "scaled_RMS_difference": 1.6986412276764895e-14,
+      "SOC_error_pp": -1.4832988986702378,
+      "Q_error_percent": 9.400041452726304,
+      "current_RC_error_mV": [
+        -1.2612865764053178,
+        1.7786255444400614,
+        -13.87471548089773
+      ],
+      "current_h_error": -1.304877405964711,
+      "largest_static_relative_error": [
+        "gamma_minus",
+        140.0
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 63000,
+      "independent_truth_max_coordinate_difference": 1.0702549957386509e-13,
+      "scaled_RMS_difference": 9.880984919163893e-15,
+      "SOC_error_pp": -0.4116357492228606,
+      "Q_error_percent": 9.389285719755591,
+      "current_RC_error_mV": [
+        -1.6813275716488028,
+        2.3711956172426696,
+        -18.503862161813192
+      ],
+      "current_h_error": -1.412680627860404,
+      "largest_static_relative_error": [
+        "gamma_minus",
+        140.0
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 73500,
+      "independent_truth_max_coordinate_difference": 7.416289804496046e-14,
+      "scaled_RMS_difference": 3.552713678800501e-15,
+      "SOC_error_pp": -0.37846971861764667,
+      "Q_error_percent": 9.389285719755591,
+      "current_RC_error_mV": [
+        -0.08406637858244029,
+        0.1185597808621323,
+        -0.9251930438468178
+      ],
+      "current_h_error": -1.4139885360312578,
+      "largest_static_relative_error": [
+        "gamma_minus",
+        140.0
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 31500,
+      "independent_truth_max_coordinate_difference": 2.0616841567289157e-13,
+      "scaled_RMS_difference": 4.218847493575595e-14,
+      "SOC_error_pp": null,
+      "Q_error_percent": -7.264296754250377,
+      "current_RC_error_mV": [
+        -9.9,
+        -12.15000000000002,
+        -14.85011538005063
+      ],
+      "current_h_error": -0.5753922794652178,
+      "largest_static_relative_error": [
+        "R3",
+        -69.6969696969697
+      ],
+      "point_available": 0,
+      "capacity_available": 0
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 63000,
+      "independent_truth_max_coordinate_difference": 1.0702549957386509e-13,
+      "scaled_RMS_difference": 4.274358644806853e-15,
+      "SOC_error_pp": -0.5159228907378632,
+      "Q_error_percent": 3.0280967576137074,
+      "current_RC_error_mV": [
+        -1.076936482780188,
+        -1.0555981641441943,
+        -0.019934518851696947
+      ],
+      "current_h_error": -0.09306210945463822,
+      "largest_static_relative_error": [
+        "gamma_minus",
+        73.96348790529812
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 73500,
+      "independent_truth_max_coordinate_difference": 7.416289804496046e-14,
+      "scaled_RMS_difference": 1.4405143744511406e-14,
+      "SOC_error_pp": -0.49357113007180153,
+      "Q_error_percent": 3.1724318403177465,
+      "current_RC_error_mV": [
+        -0.05374937994814409,
+        -0.04371340869563963,
+        -0.005833034846220537
+      ],
+      "current_h_error": -0.08593474756478792,
+      "largest_static_relative_error": [
+        "gamma_minus",
+        73.6833780207194
+      ],
+      "point_available": 1,
+      "capacity_available": 1
+    }
+  ],
+  "threshold_tally": {
+    "declared_arm_checkpoints": 16,
+    "SOC_hard_passes": 16,
+    "Q_hard_passes": 6,
+    "both_hard_passes": 6,
+    "both_preferred_passes": 0
+  },
+  "checks": [
+    {
+      "check": "Completed primary and score identities",
+      "passed": true
+    },
+    {
+      "check": "Scoring starts after all inference finishes",
+      "passed": true
+    },
+    {
+      "check": "Twelve processes and 378000 deliveries; no optimizer",
+      "passed": true
+    },
+    {
+      "check": "Primary functional and resource gates",
+      "passed": true
+    },
+    {
+      "check": "Scorer and declared dependencies match score receipt",
+      "passed": true
+    },
+    {
+      "check": "Frozen inference sources remain unchanged",
+      "passed": true
+    },
+    {
+      "check": "Explicit 16-coordinate current-state chart and engineering scales",
+      "passed": true
+    },
+    {
+      "check": "User hard/preferred thresholds and inclusive semantics",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 input identity",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_1 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_1 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_2 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_2 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_3 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_3 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_4 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm_4 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 delivery total",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 exact raw warm query parity",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 complete checkpoint hash/size parity in receipt",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold public-prior reset and carried counters",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold suffix exactly once",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 350 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 350 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 31500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 31500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 63000 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 63000 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 73500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 73500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 31500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 31500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 63000 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 63000 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 73500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 73500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 31500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 63000 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control 73500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm 31500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm 63000 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm 73500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 63000 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold 73500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control provisional capacity breach counts",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 control deduplicated query counts",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm provisional capacity breach counts",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm deduplicated query counts",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 warm/control scored aggregate parity",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold provisional capacity breach counts",
+      "passed": true
+    },
+    {
+      "check": "cell_a_35hz_s202610240 cold deduplicated query counts",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 input identity",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_1 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_1 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_2 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_2 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_3 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_3 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_4 output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm_4 complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold output identity/completion",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold complete ledger",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 delivery total",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 exact raw warm query parity",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 complete checkpoint hash/size parity in receipt",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold public-prior reset and carried counters",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold suffix exactly once",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 350 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 350 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 31500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 31500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 63000 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 63000 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 73500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 73500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 31500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 31500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 63000 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 63000 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 73500 full-vector independent scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 73500 named query coordinate extraction",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 31500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 63000 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control 73500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm 31500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm 63000 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm 73500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 63000 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold 73500 benchmark threshold scoring",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control provisional capacity breach counts",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 control deduplicated query counts",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm provisional capacity breach counts",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm deduplicated query counts",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 warm/control scored aggregate parity",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold provisional capacity breach counts",
+      "passed": true
+    },
+    {
+      "check": "cell_b_35hz_s202610240 cold deduplicated query counts",
+      "passed": true
+    },
+    {
+      "check": "Overall hard/preferred outcome follows all declared checkpoints",
+      "passed": true
+    },
+    {
+      "check": "Frozen sources and score dependencies remain unchanged after audit",
+      "passed": true
+    }
+  ],
+  "qualification": "Passing this audit confirms that the saved failure results are scored consistently; it does not make the candidate pass accuracy or uncertainty qualification."
+}
