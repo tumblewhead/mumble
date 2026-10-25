@@ -1,0 +1,306 @@
+{
+  "schema": "mumble_m1_memory_accounting_v1",
+  "scope": "Observed host retained-history M1 ownership and checkpoint accounting; not complete process peak, RSS, bounded-memory firmware, or Cortex-M23 qualification.",
+  "provenance": {
+    "primary_receipt": "primary/receipt.json",
+    "primary_receipt_sha256": "83c6de4a879b37cf747b57147ad1397fd7831c8b9857acb02b62e99f4970f4b6",
+    "source_revision": "0cde298a204ff3a3347830c0fac0ba99e10918c8",
+    "binary_sha256": "d73460de8ed5f0aa641ee89eea51a2252ec0e5026f1633997cf238b63a7ed466",
+    "plan_sha256": "15ccee7bf6b02a0b59f8773f43abaacc2e7c439ff2ab43da35b333346079c03b",
+    "build_measurements": "build_checks.json",
+    "build_measurements_sha256": "0290ad3da529d5be6a68ba43c7cb39174122f87bee3d97dc7f0dfd4365ca8c96",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "derivation": "Read completed primary JSONL query/resources and successful fit records plus checkpoint receipts. Aggregate per-cell/path maxima; use existing sizeof and -fstack-usage measurements. No new inference or test execution."
+  },
+  "host_sizes_bytes": {
+    "scm_session": 3104,
+    "scm_sample": 24,
+    "voltage_presence_per_allocated_sample": 1,
+    "scm_fit_result": 2504,
+    "scm_model_state": 280,
+    "enumerated_cli_fixed_objects_subtotal": 14280
+  },
+  "enumerated_cli_subtotal_scope": "The 14280 B emitted subtotal includes session, assessment, assessment workspace, query, CSV buffer, config and one sample. It omits other locals/runtime storage; some named objects reside in the caller frame, so adding whole stack frames would double count them.",
+  "formulas": {
+    "symbols": "N is retained observations in current epoch; C is allocated journal capacity; C_old and C_new denote overlapping capacities during replacement.",
+    "session_steady_requested_bytes": "3104 + 25*C",
+    "journal_only_requested_bytes": "25*C",
+    "journal_growth_requested_bytes_including_session": "3104 + 25*(C_old + C_new)",
+    "successful_full_solver_auxiliary_bytes": "fit.retained_bytes - fit.data_bytes; subtract borrowed observations already owned by the session.",
+    "observed_3RC_full_solver_auxiliary_bytes": "2072 + 648*N = 2072 + 640*N workspace + 8*N residual payload; basis bytes were zero in every primary fit.",
+    "successful_fit_requested_bytes": "3104 + 25*C + successful_full_solver_auxiliary_bytes",
+    "checkpoint_file_bytes": "2808 + 25*N; 32-byte header + 2772-byte fixed payload + 25-byte records + 4-byte CRC32.",
+    "fresh_restore_requested_journal_bytes": "25*C_new; add existing destination object and restore stack/stdio costs.",
+    "nonempty_restore_requested_journal_peak_bytes": "25*(C_old + C_new); old ownership is retained until prospective state validation completes.",
+    "restore_stack_relation": "The 3104-byte candidate session is inside the measured 3712-byte restore frame, not an additional allocation. Nested rebuild/model/caller frames and library costs remain additional.",
+    "save_requested_heap_bytes": "Destination path length + 12 bytes for unique temporary filename, plus stdio/allocator internals. No whole-file serialization buffer."
+  },
+  "distinct_transients": {
+    "control_warm_max_growth": {
+      "old_capacity": 65536,
+      "new_capacity": 73500,
+      "session_plus_both_journals_bytes": 3479004
+    },
+    "cold_max_growth": {
+      "old_capacity": 32768,
+      "new_capacity": 65536,
+      "session_plus_both_journals_bytes": 2460704
+    },
+    "restore": "Primary warm/cold processes restore into zeroed session storage. Nonempty transactional restore is an API formula here, not a measured primary process peak.",
+    "cumulative_counter_semantics": "peak_owned_bytes and peak_fit_owned_bytes persist through warm restore and cold reset. They describe historical stream/fit requested storage, not resident storage after reset or extra restore transaction costs.",
+    "combination_rule": "Growth, fit, and restore are separate lifecycle operations. Do not sum their independently recorded maxima as if all occurred concurrently; complete process peak was not measured."
+  },
+  "successful_fit_allocation_rows": [
+    {
+      "retained_samples": 350,
+      "borrowed_sample_bytes": 8400,
+      "reported_workspace_bytes": 224000,
+      "reported_payload_bytes": 2800,
+      "problem_auxiliary_bytes": 228872
+    },
+    {
+      "retained_samples": 31500,
+      "borrowed_sample_bytes": 756000,
+      "reported_workspace_bytes": 20160000,
+      "reported_payload_bytes": 252000,
+      "problem_auxiliary_bytes": 20414072
+    },
+    {
+      "retained_samples": 42000,
+      "borrowed_sample_bytes": 1008000,
+      "reported_workspace_bytes": 26880000,
+      "reported_payload_bytes": 336000,
+      "problem_auxiliary_bytes": 27218072
+    },
+    {
+      "retained_samples": 63000,
+      "borrowed_sample_bytes": 1512000,
+      "reported_workspace_bytes": 40320000,
+      "reported_payload_bytes": 504000,
+      "problem_auxiliary_bytes": 40826072
+    },
+    {
+      "retained_samples": 73500,
+      "borrowed_sample_bytes": 1764000,
+      "reported_workspace_bytes": 47040000,
+      "reported_payload_bytes": 588000,
+      "problem_auxiliary_bytes": 47630072
+    }
+  ],
+  "cells": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "data_sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+      "paths": {
+        "control": {
+          "new_fit_calls": 4,
+          "successful_fit_results": 4,
+          "final_retained_samples": 73500,
+          "final_capacity_samples": 73500,
+          "maxima_bytes": {
+            "owned_bytes": 1840604,
+            "peak_owned_bytes": 3479004,
+            "last_problem_auxiliary_bytes": 47630072,
+            "peak_fit_owned_bytes": 49470676
+          }
+        },
+        "warm": {
+          "new_fit_calls": 4,
+          "successful_fit_results": 4,
+          "final_retained_samples": 73500,
+          "final_capacity_samples": 73500,
+          "maxima_bytes": {
+            "owned_bytes": 1840604,
+            "peak_owned_bytes": 3479004,
+            "last_problem_auxiliary_bytes": 47630072,
+            "peak_fit_owned_bytes": 49470676
+          }
+        },
+        "cold": {
+          "new_fit_calls": 2,
+          "successful_fit_results": 2,
+          "final_retained_samples": 42000,
+          "final_capacity_samples": 65536,
+          "maxima_bytes": {
+            "owned_bytes": 1641504,
+            "peak_owned_bytes": 2460704,
+            "last_problem_auxiliary_bytes": 27218072,
+            "peak_fit_owned_bytes": 28859576
+          },
+          "immediately_after_reset": {
+            "owned_bytes": 3104,
+            "retained_samples": 0,
+            "inherited_peak_owned_bytes": 1231904,
+            "inherited_peak_fit_owned_bytes": 21236376
+          }
+        }
+      },
+      "control_checkpoint_sizes": [
+        {
+          "next_index": 420,
+          "retained_samples": 420,
+          "bytes": 13308
+        },
+        {
+          "next_index": 31500,
+          "retained_samples": 31500,
+          "bytes": 790308
+        },
+        {
+          "next_index": 42000,
+          "retained_samples": 42000,
+          "bytes": 1052808
+        },
+        {
+          "next_index": 64750,
+          "retained_samples": 64750,
+          "bytes": 1621558
+        },
+        {
+          "next_index": 73500,
+          "retained_samples": 73500,
+          "bytes": 1840308
+        }
+      ],
+      "warm_checkpoint_sizes_and_hashes_match_control": true,
+      "warm_resources_match_control": true,
+      "cold_checkpoint_files_written": 0,
+      "primary_case_receipt": "primary/cell_a_35hz_s202610240__case.json"
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "data_sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+      "paths": {
+        "control": {
+          "new_fit_calls": 4,
+          "successful_fit_results": 4,
+          "final_retained_samples": 73500,
+          "final_capacity_samples": 73500,
+          "maxima_bytes": {
+            "owned_bytes": 1840604,
+            "peak_owned_bytes": 3479004,
+            "last_problem_auxiliary_bytes": 47630072,
+            "peak_fit_owned_bytes": 49470676
+          }
+        },
+        "warm": {
+          "new_fit_calls": 4,
+          "successful_fit_results": 4,
+          "final_retained_samples": 73500,
+          "final_capacity_samples": 73500,
+          "maxima_bytes": {
+            "owned_bytes": 1840604,
+            "peak_owned_bytes": 3479004,
+            "last_problem_auxiliary_bytes": 47630072,
+            "peak_fit_owned_bytes": 49470676
+          }
+        },
+        "cold": {
+          "new_fit_calls": 2,
+          "successful_fit_results": 2,
+          "final_retained_samples": 42000,
+          "final_capacity_samples": 65536,
+          "maxima_bytes": {
+            "owned_bytes": 1641504,
+            "peak_owned_bytes": 2460704,
+            "last_problem_auxiliary_bytes": 27218072,
+            "peak_fit_owned_bytes": 28859576
+          },
+          "immediately_after_reset": {
+            "owned_bytes": 3104,
+            "retained_samples": 0,
+            "inherited_peak_owned_bytes": 1231904,
+            "inherited_peak_fit_owned_bytes": 21236376
+          }
+        }
+      },
+      "control_checkpoint_sizes": [
+        {
+          "next_index": 420,
+          "retained_samples": 420,
+          "bytes": 13308
+        },
+        {
+          "next_index": 31500,
+          "retained_samples": 31500,
+          "bytes": 790308
+        },
+        {
+          "next_index": 42000,
+          "retained_samples": 42000,
+          "bytes": 1052808
+        },
+        {
+          "next_index": 64750,
+          "retained_samples": 64750,
+          "bytes": 1621558
+        },
+        {
+          "next_index": 73500,
+          "retained_samples": 73500,
+          "bytes": 1840308
+        }
+      ],
+      "warm_checkpoint_sizes_and_hashes_match_control": true,
+      "warm_resources_match_control": true,
+      "cold_checkpoint_files_written": 0,
+      "primary_case_receipt": "primary/cell_b_35hz_s202610240__case.json"
+    }
+  ],
+  "existing_own_stack_frame_measurements": {
+    "source": "build_checks.json#host_stack_frames",
+    "flags": "-std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage",
+    "frames": {
+      "scm_session_init": {
+        "bytes": 3216,
+        "compiler_classification": "static"
+      },
+      "scm_session_ingest": {
+        "bytes": 1168,
+        "compiler_classification": "static"
+      },
+      "scm_session_fit": {
+        "bytes": 3856,
+        "compiler_classification": "static"
+      },
+      "scm_session_query": {
+        "bytes": 2576,
+        "compiler_classification": "static"
+      },
+      "scm_session_rebuild": {
+        "bytes": 1088,
+        "compiler_classification": "static"
+      },
+      "main": {
+        "bytes": 4640,
+        "compiler_classification": "dynamic,bounded"
+      },
+      "scm_session_checkpoint_save": {
+        "bytes": 208,
+        "compiler_classification": "static"
+      },
+      "scm_session_checkpoint_restore": {
+        "bytes": 3712,
+        "compiler_classification": "static"
+      }
+    },
+    "scope": "Individual own function frames, not simultaneously summed complete call trees. Full solver, model, assessment, callers and library stack paths are not bounded by these entries."
+  },
+  "extraction_consistency": {
+    "successful_fit_records": 20,
+    "receipt_fit_calls": 20,
+    "session_formula_matches_every_query": true,
+    "solver_auxiliary_formula_matches_every_successful_fit": true,
+    "checkpoint_formula_matches_every_record": true,
+    "enumerated_cli_subtotal_constant": true
+  },
+  "excluded_or_unresolved": [
+    "Allocator metadata and fragmentation, libc/stdio buffers, OS mappings and measured RSS.",
+    "Complete full-solver/model/assessment/caller/libc call-stack peak; only selected compiler function frames are recorded.",
+    "Failed-fit or failed-allocation peak accounting; all primary fit calls returned success.",
+    "Checkpoint file-system cache and crash/power-loss directory durability.",
+    "Cortex-M23 SRAM layout, flash persistence, cycle/energy costs and long-runtime boundedness."
+  ],
+  "compact_model_separation": "The earlier 7064 B compact working-set result is a different backend/measurement scope and does not apply to this M1 retained-history model."
+}

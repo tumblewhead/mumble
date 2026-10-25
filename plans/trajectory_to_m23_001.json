@@ -1,10 +1,10 @@
 {
   "schema": "mumble_delivery_roadmap_v1",
-  "status": "planned_not_executed",
+  "status": "M1_functional_complete_M2_candidate_selection_next",
   "date_local": "2026-10-24",
   "timezone": "America/Los_Angeles",
   "repository": "https://github.com/tumblewhead/mumble",
-  "work_branch": "planning/trajectory-to-m23-001",
+  "work_branch": "integration/two-cell-lifecycle-001",
   "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
   "goal": {
     "deliverable": "Runnable Cortex-M23 C estimator subsystem",
@@ -20,7 +20,7 @@
     ]
   },
   "priority_change": {
-    "now": "M1 two-cell desktop lifecycle demonstration",
+    "now": "M2/A4: select one autonomous bounded-work/storage learner with timely reliable SOC/capacity learning through the completed M1 harness",
     "former_next_action": "Fixed partition of uncertain R/tau box",
     "former_action_status": "Optional targeted remedy after a measured target-quality blocker; no longer the automatic next milestone",
     "frozen_evidence": "All earlier receipts and failures unchanged, including three004 usefulness failures"
@@ -28,7 +28,7 @@
   "reference_roles": {
     "full_C": "Existing16-unknown three-RC/hysteresis retained-history estimator: M1 desktop baseline and selected short causal comparisons. Growing history is explicit; not the annual per-update engine.",
     "certificate004": "Restricted static one-uncertain-RC/hard-voltage lane and reusable numerical evidence. Original two-cell traces are outside this contract; no truth supplied to make them fit.",
-    "desktop_streaming": "To be selected after M1: autonomous learning from public priors, finite declared storage and bounded per-update/scheduled work, explicit evidence semantics. Desktop resource budget may exceed target.",
+    "desktop_streaming": "Next selection: autonomous learning from public priors, finite declared storage and bounded per-update/scheduled work, explicit evidence semantics. Must address the observed sparse-schedule learning failure. Desktop resource budget may exceed target.",
     "truth": "Generator/scorer only. No truth in initialization, correction, reset, attention, priors or inference checkpoint.",
     "ultimate_performance": "Best measured performance among declared candidates/scenarios, not a global-optimality or physical-coverage claim"
   },
@@ -36,7 +36,7 @@
     {
       "id": "M1",
       "name": "Two-cell end-to-end desktop demonstration",
-      "status": "next",
+      "status": "functional_complete_usefulness_failed",
       "scope": "One existing seed per cell,35minutes each, no-attention full C baseline. Lifecycle correctness and useful-target reporting; not bounded firmware.",
       "cases": [
         {
@@ -103,12 +103,45 @@
         "experiments/trajectory_integration_001/summary.json",
         "Human trajectory and reset report"
       ],
-      "proof_scope": "Only new ordering, transaction, complete-state and restore obligations required for this integration; inherit existing proofs where their premises hold."
+      "proof_scope": "Only new ordering, transaction, complete-state and restore obligations required for this integration; inherit existing proofs where their premises hold.",
+      "outcome": {
+        "functional_passed": true,
+        "usefulness_passed": false,
+        "control_and_warm_usefulness_passed": false,
+        "cold_usefulness_passed": true,
+        "actual_primary_fit_calls": 20,
+        "primary_campaigns_executed": 1,
+        "source_revision": "0cde298a204ff3a3347830c0fac0ba99e10918c8",
+        "warm_continuation": "Both cells: exact numerical query/fit and canonical checkpoint parity; timing fields excluded.",
+        "preserved_failure": {
+          "case_id": "cell_b_35hz_s202610240",
+          "arms": [
+            "control",
+            "warm"
+          ],
+          "sample_count": 31500,
+          "nominal_time_s": 900,
+          "optimizer_status": 1,
+          "SOC_error_pp": -3.9635506484400285,
+          "capacity_error_percent": 26.629799869520767,
+          "SOC_status": "unresolved",
+          "capacity_status": "unresolved",
+          "trusted_local_ranges": false
+        },
+        "later_accuracy": "Both control/warm cells meet original SOC/Q thresholds at 1800 s and 2100 s; both cold branches meet their two recovery checkpoints.",
+        "cold_unknown_period": "Inference cleared at 900 s; no point before first scheduled post-reset fit at 1800 s. Plant/source position and absolute clock preserved.",
+        "promotion": "M1 functional demonstration complete. The sparse full-reference schedule is not promoted as a long-run performance candidate.",
+        "summary": "experiments/trajectory_integration_001/summary.json",
+        "receipt": "experiments/trajectory_integration_001/primary/receipt.json",
+        "scores": "experiments/trajectory_integration_001/scores.json",
+        "report": "docs/TRAJECTORY_INTEGRATION_001.md",
+        "figure": "report/M1-Two-Cell-Lifecycle.png"
+      }
     },
     {
       "id": "M2",
       "name": "Desktop performance and one-year trajectory campaign",
-      "status": "after_M1",
+      "status": "next_A4_candidate_selection",
       "entry": [
         "M1 functional lifecycle passes",
         "One autonomous streaming candidate works on the same short harness without oracle parameters or growing history",
@@ -158,7 +191,25 @@
         "Numerical invariant/range diagnostics",
         "Memory/latency/checkpoint-write counts",
         "Reproducible failures and explicit claim boundaries"
-      ]
+      ],
+      "next_action": {
+        "action_id": "A4",
+        "scope": "One concrete autonomous bounded learner, one short paired falsification, then a keep/change/drop decision using the M1 harness.",
+        "freeze_before_run": [
+          "Public cold-start strategy",
+          "Update and historical-evidence semantics",
+          "Total storage and per-update/scheduled-work budget",
+          "Short comparison schedule and usefulness/status gates"
+        ],
+        "measured_blocker": "Timely reliable learning: cell B fails the 900 s SOC/Q benchmark under the sparse retained-history schedule and remains unresolved until 1800 s.",
+        "guardrails": [
+          "Preserve the original failed M1 receipt and thresholds",
+          "Keep truth out of initialization, updates, reset and scheduling",
+          "Carry earlier evidence without replay/posterior double counting",
+          "No annual run until candidate and day/week pilot gates pass",
+          "Attention remains one optional decision experiment after the plain candidate"
+        ]
+      }
     },
     {
       "id": "M3",
@@ -194,28 +245,33 @@
     {
       "id": "A1",
       "deliver": "Freeze the small M1 API, sparse fit/fault schedule and numerical comparison tolerances while implementing the desktop adapter. One implementation-sized change; no new theory branch.",
-      "depends_on": []
+      "depends_on": [],
+      "status": "complete"
     },
     {
       "id": "A2",
       "deliver": "Implement complete pointer-free checkpoint/journal plus restore, cold reset and delivery/error semantics; add meaningful deterministic lifecycle tests.",
       "depends_on": [
         "A1"
-      ]
+      ],
+      "status": "complete"
     },
     {
       "id": "A3",
       "deliver": "Run the two selected cells and paired restart path, score only after inference, publish functional/usefulness statuses and a short blocker list.",
       "depends_on": [
         "A2"
-      ]
+      ],
+      "status": "complete",
+      "completion_note": "One 20-fit primary campaign completed; functional acceptance true and usefulness false reported separately. Failure preserved; no retune or repeat."
     },
     {
       "id": "A4",
       "deliver": "Select one autonomous bounded-work/storage backend using the same harness. Address only the demonstrated blocker; evaluate one attention policy only if its benefit can change selection.",
       "depends_on": [
         "A3"
-      ]
+      ],
+      "status": "next"
     }
   ],
   "attention_decision": {
@@ -240,7 +296,7 @@
       "Further theorem refinement beyond the chosen implementation/claim scope"
     ]
   },
-  "next_work_branch": "integration/two-cell-lifecycle-001",
+  "next_work_branch": null,
   "evidence": [
     "README.md",
     "specification.json",
@@ -251,7 +307,13 @@
     "include/scm_certificate_box.h",
     "tools/run_streaming.py",
     "docs/UNCERTAIN_RC_004.md",
-    "experiments/indefinite_stability_004/summary.json"
+    "experiments/indefinite_stability_004/summary.json",
+    "include/scm_session.h",
+    "include/scm_session_checkpoint.h",
+    "docs/TRAJECTORY_INTEGRATION_001.md",
+    "experiments/trajectory_integration_001/summary.json",
+    "experiments/trajectory_integration_001/primary/receipt.json",
+    "experiments/trajectory_integration_001/scores.json"
   ],
   "review": {
     "status": "passed",
@@ -260,7 +322,8 @@
       "Count repeated scheduled fits within20-call cap",
       "Freeze held-out annual seeds before scoring; select scenarios by coverage, not favorable results"
     ],
-    "new_tests_or_trajectories_executed": false
+    "new_tests_or_trajectories_executed": false,
+    "scope": "Historical planning review before M1 execution; its no-run statement applies to that planning checkpoint."
   },
   "latest_component_checkpoint": {
     "date_local": "2026-10-25",
@@ -270,6 +333,32 @@
     "decision": "Compact fixed-chart layout accepted after exact core parity and focused diagnostic checks; resume M1 without another compression campaign",
     "M1_complete": false,
     "autonomous_bounded_learner_complete": false,
-    "start_M1_from": "Latest compact implementation branch or newer descendant"
+    "start_M1_from": "Latest compact implementation branch or newer descendant",
+    "scope": "Historical compact-layout checkpoint before M1; retained unchanged as component provenance."
+  },
+  "planning_checkpoint": {
+    "status": "planned_not_executed",
+    "date_local": "2026-10-24",
+    "timezone": "America/Los_Angeles",
+    "work_branch": "planning/trajectory-to-m23-001",
+    "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
+    "priority_at_planning": "M1 two-cell desktop lifecycle demonstration",
+    "next_work_branch_at_planning": "integration/two-cell-lifecycle-001",
+    "note": "Original M1 schedules, cases, budgets, gates and action deliverables remain unchanged; status/outcome fields record completion without retuning."
+  },
+  "updated_utc": "2026-10-25",
+  "next_work_branch_note": "Create a work branch from the latest completed M1 descendant after the A4 implementation scope is frozen.",
+  "latest_lifecycle_checkpoint": {
+    "date_utc": "2026-10-25",
+    "branch": "integration/two-cell-lifecycle-001",
+    "source_revision": "0cde298a204ff3a3347830c0fac0ba99e10918c8",
+    "summary": "experiments/trajectory_integration_001/summary.json",
+    "M1_functional_complete": true,
+    "M1_usefulness_passed": false,
+    "autonomous_bounded_learner_complete": false,
+    "annual_campaign_complete": false,
+    "M23_qualified": false,
+    "indefinite_runtime_proof_for_full_estimator_complete": false,
+    "decision": "Close A1-A3. Proceed to A4 using the completed lifecycle harness; address timely reliable learning while bounding storage/work."
   }
 }

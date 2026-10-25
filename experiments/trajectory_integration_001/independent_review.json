@@ -1,0 +1,308 @@
+{
+  "schema": "mumble_m1_independent_review_v1",
+  "reviewed_utc": "2026-10-25T18:17:30.540730+00:00",
+  "reviewer": "separate campaign agent; author of CLI/runner, reviewer of root scorer and completed outputs",
+  "scope": "Read-only audit of the single completed primary. No optimizer calls, inference replay, parameter changes or tolerance changes. Independent scalar charge/SOC arithmetic; no scorer/generator functions imported.",
+  "primary_source_revision": "0cde298a204ff3a3347830c0fac0ba99e10918c8",
+  "evidence_sha256": {
+    "primary_receipt": "83c6de4a879b37cf747b57147ad1397fd7831c8b9857acb02b62e99f4970f4b6",
+    "plan": "15ccee7bf6b02a0b59f8773f43abaacc2e7c439ff2ab43da35b333346079c03b",
+    "scores": "d2742ad4d939fbadcbdc503dcf974d5be774b7777046b4a1068a158b87910aad",
+    "scorer": "0bf7b8bb4dd241c5913932b0539ef59ca169a8bb4f2d73040ea2a7fb61ebd4d8"
+  },
+  "checks": {
+    "source_worktree_hash": 18,
+    "source_commit_hash": 18,
+    "source_revision": 1,
+    "plan_hash": 1,
+    "binary_hash": 1,
+    "receipt_hash_in_scores": 1,
+    "scorer_hash": 1,
+    "scoring_dependency_hash": 3,
+    "figure_hash": 2,
+    "frozen_acceptance": 1,
+    "frozen_execution": 1,
+    "score_after_inference": 1,
+    "input_hash": 2,
+    "input_sample_count": 2,
+    "input_order_intervals": 2,
+    "stdout_hash": 12,
+    "stderr_hash": 12,
+    "stdout_length": 12,
+    "empty_stderr": 12,
+    "first_process_record": 12,
+    "complete_JSONL": 12,
+    "run_identity": 12,
+    "source_only_command": 12,
+    "actual_fit_schedule": 12,
+    "fit_count": 12,
+    "successful_completion": 12,
+    "no_truth_or_extra_prior": 12,
+    "checkpoint_event_schedule": 12,
+    "initialization_policy": 20,
+    "fit_window_count": 20,
+    "sparse_query_schedule": 12,
+    "fit_point_without_hidden_correction": 20,
+    "case_receipt_copy": 2,
+    "warm_query_exact": 430,
+    "warm_resource_exact": 430,
+    "warm_fit_exact": 8,
+    "canonical_checkpoint_pair": 10,
+    "checkpoint_manifest_in_raw": 10,
+    "cold_unknown": 2,
+    "cold_waits_for_scheduled_refit": 2,
+    "first_and_sustained_accuracy": 6,
+    "independent_benchmark_numbers": 16,
+    "benchmark_gate": 16,
+    "case_usefulness_gate": 2,
+    "nonconvergence_visible": 2,
+    "20_primary_calls": 1,
+    "top_usefulness_gate": 1,
+    "no_truth_module_in_runner": 1
+  },
+  "failed_checks": [],
+  "review_passed": true,
+  "primary_optimizer_calls_observed": 20,
+  "new_optimizer_calls_in_review": 0,
+  "control_warm_exact_comparisons": {
+    "query_records": 430,
+    "query_scalar_fields": 31728,
+    "resource_records": 430,
+    "resource_scalar_fields": 2150,
+    "fit_records": 8,
+    "fit_scalar_fields": 2640
+  },
+  "canonical_checkpoint_pairs": 10,
+  "checkpoint_scope": "All10 recorded SHA256/length pairs match, and checkpoint events match raw logs. Temporary full files were deliberately removed after inference; this audit cannot re-read their bytes. Original runner compared their content hashes while files existed.",
+  "cases": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "processes": [
+        {
+          "name": "control",
+          "fits": [
+            350,
+            31500,
+            63000,
+            73500
+          ],
+          "queries": 212,
+          "stdout_sha256": "f9dcbb247b1878d865be740a59f6cd8bd4ef5e20ee4328aa3d773149062392b1"
+        },
+        {
+          "name": "warm_1",
+          "fits": [
+            350
+          ],
+          "queries": 3,
+          "stdout_sha256": "4c47f0231fb50dd744990961e6320a3df184c1bb734f5ff904c97111a8abc482"
+        },
+        {
+          "name": "warm_2",
+          "fits": [
+            31500
+          ],
+          "queries": 120,
+          "stdout_sha256": "23f070a300fa520bfe42c9e2c81206adc2065a7d4784ae516e94a1f572b28b50"
+        },
+        {
+          "name": "warm_3",
+          "fits": [
+            63000
+          ],
+          "queries": 66,
+          "stdout_sha256": "eea7225e9986afd750f3a8ad09d6e67e4ded960818d0329e27fff4e134d763b1"
+        },
+        {
+          "name": "warm_4",
+          "fits": [
+            73500
+          ],
+          "queries": 26,
+          "stdout_sha256": "eb356d27b05ae228a16e00f329aabb2119f92599015590d6c89693e930731c59"
+        },
+        {
+          "name": "cold",
+          "fits": [
+            63000,
+            73500
+          ],
+          "queries": 121,
+          "stdout_sha256": "b272583dc5ac61e6d18ff1e3ca1525395bb42891e9c839566a45166f13b1a9f5"
+        }
+      ],
+      "arms": {
+        "control": {
+          "unique_queries": 212,
+          "first_both_accuracy_benchmarks_s": 900.0000000004121,
+          "sustained_both_accuracy_benchmarks_from_s": 900.0000000004121
+        },
+        "warm": {
+          "unique_queries": 212,
+          "first_both_accuracy_benchmarks_s": 900.0000000004121,
+          "sustained_both_accuracy_benchmarks_from_s": 900.0000000004121
+        },
+        "cold": {
+          "unique_queries": 121,
+          "first_both_accuracy_benchmarks_s": 1800.0000000016398,
+          "sustained_both_accuracy_benchmarks_from_s": 1800.0000000016398
+        }
+      },
+      "declared_benchmarks": 8,
+      "passed_benchmarks": 8,
+      "canonical_checkpoint_pairs": 5
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "processes": [
+        {
+          "name": "control",
+          "fits": [
+            350,
+            31500,
+            63000,
+            73500
+          ],
+          "queries": 212,
+          "stdout_sha256": "bdfda048544dce0c713ce9703e57e4d12b8e6acbd18cfc1c3eee0c3e804fcf06"
+        },
+        {
+          "name": "warm_1",
+          "fits": [
+            350
+          ],
+          "queries": 3,
+          "stdout_sha256": "3786cffd8f69105d06049dfbe9f0e3480f957758e18beb9276f8c8acebfb3aa3"
+        },
+        {
+          "name": "warm_2",
+          "fits": [
+            31500
+          ],
+          "queries": 120,
+          "stdout_sha256": "c4f9f2ae10dff0efc42b26ca76aa3ec57bb5d3f72367a329ba61cc306a0ec317"
+        },
+        {
+          "name": "warm_3",
+          "fits": [
+            63000
+          ],
+          "queries": 66,
+          "stdout_sha256": "1034fc4ae9eb02c997124020406b690ee04b1539abdd9bcd894d80d1ffcb6025"
+        },
+        {
+          "name": "warm_4",
+          "fits": [
+            73500
+          ],
+          "queries": 26,
+          "stdout_sha256": "f670a3e0f87b1c628d31bc403a469ac71783b840070fc1a2cbc86e4c8ee93216"
+        },
+        {
+          "name": "cold",
+          "fits": [
+            63000,
+            73500
+          ],
+          "queries": 121,
+          "stdout_sha256": "edf1c5850c13a49e344623ba44d438effbf19eda52e77ea2ef8c2046f7159261"
+        }
+      ],
+      "arms": {
+        "control": {
+          "unique_queries": 212,
+          "first_both_accuracy_benchmarks_s": 1800.0000000016398,
+          "sustained_both_accuracy_benchmarks_from_s": 1800.0000000016398
+        },
+        "warm": {
+          "unique_queries": 212,
+          "first_both_accuracy_benchmarks_s": 1800.0000000016398,
+          "sustained_both_accuracy_benchmarks_from_s": 1800.0000000016398
+        },
+        "cold": {
+          "unique_queries": 121,
+          "first_both_accuracy_benchmarks_s": 1800.0000000016398,
+          "sustained_both_accuracy_benchmarks_from_s": 1800.0000000016398
+        }
+      },
+      "declared_benchmarks": 8,
+      "passed_benchmarks": 6,
+      "canonical_checkpoint_pairs": 5
+    }
+  ],
+  "score_audit": {
+    "method": "SOC_truth(n)=z0-fsum(I_i*dt_i/3600)/Q_true; SOC_fit(n)=theta_z0-fsum(epoch I_i*dt_i/3600)/exp(theta_logQ). Capacity error uses exp(theta_logQ)/Q_true. Truth was read only after all C inference finished.",
+    "benchmarks_checked": 16,
+    "benchmarks_passed": 14,
+    "maximum_error_discrepancy_pp_or_percent": 4.551914400963142e-13,
+    "maximum_fit_query_endpoint_SOC_discrepancy": 7.394085344003543e-14,
+    "functional_passed": true,
+    "usefulness_passed": false,
+    "control_and_warm_usefulness_passed": false,
+    "cold_usefulness_passed": true,
+    "failed_benchmarks": [
+      {
+        "arm": "control",
+        "next_index": 31500,
+        "passed": false,
+        "SOC_error_pp": -3.963550648439984,
+        "capacity_error_percent": 26.629799869520767,
+        "case_id": "cell_b_35hz_s202610240"
+      },
+      {
+        "arm": "warm",
+        "next_index": 31500,
+        "passed": false,
+        "SOC_error_pp": -3.963550648439984,
+        "capacity_error_percent": 26.629799869520767,
+        "case_id": "cell_b_35hz_s202610240"
+      }
+    ]
+  },
+  "nonconverged_results_preserved": [
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 31500,
+      "status": 1,
+      "termination_reason": 2,
+      "iterations_all_starts": 360,
+      "starts": 3,
+      "converged_starts": 0,
+      "SOC_status": "unresolved",
+      "capacity_status": "unresolved"
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "warm",
+      "next_index": 31500,
+      "status": 1,
+      "termination_reason": 2,
+      "iterations_all_starts": 360,
+      "starts": 3,
+      "converged_starts": 0,
+      "SOC_status": "unresolved",
+      "capacity_status": "unresolved"
+    }
+  ],
+  "cold_truth_separation": {
+    "all_cold_first_fit_starts_public": true,
+    "prior_factor_added": false,
+    "cold_epoch_begin": 31500,
+    "cold_fit_counts": [
+      63000,
+      73500
+    ],
+    "immediate_and_until_first_refit_unknown": true,
+    "scoring_truth_enters_C": false,
+    "source_review": "scm_session_fit rebuilds only the current-epoch sample problem; previous theta is an optional optimizer start. Scorer imports truth only after receipt completion and shifts entering truth only for independent suffix scoring."
+  },
+  "limits": [
+    "Finite35-minute host lifecycle result, not bounded-memory firmware or an indefinite-runtime proof.",
+    "Functional success is separate from usefulness; the900s cellB failure remains a blocker.",
+    "Point accuracy, optimizer convergence, local likelihood precision and validated coverage are distinct; no coverage claim.",
+    "Cold first estimate appears at1800s because the next scheduled fit is there; no earlier recovery claim.",
+    "Exact comparison means equality of parsed numerical values and checkpoint hash receipts, excluding declared timing fields; raw JSON labels/reasons differ at restore.",
+    "Review is independent of scorer arithmetic but not independent authorship of the lifecycle runner."
+  ]
+}

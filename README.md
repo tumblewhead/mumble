@@ -8,16 +8,21 @@ a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
 The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
 end-to-end desktop demonstration, a desktop performance campaign including
-about one year per selected cell, and the embedded implementation. The next
-work is the two-cell lifecycle integration: estimation, checkpoint/restore,
-cold reset, chronological delivery and honest uncertainty/status reporting.
+about one year per selected cell, and the embedded implementation.
+[M1 lifecycle integration is complete](docs/TRAJECTORY_INTEGRATION_001.md):
+both cells pass the lifecycle, checkpoint/restore, cold-reset and delivery
+gates, using 20 scheduled fits. The separate usefulness gate failed at the
+900-second checkpoint for cell B and remains recorded. The next work is
+**M2/A4: one autonomous bounded learner with timely, reliable SOC/capacity
+learning**, evaluated through the completed lifecycle harness.
 
 The [compact bounded implementation](docs/COMPACT_BOUNDED_001.md) now reduces
 the B001/B002 paired-ingestion objects from 9,912 to 6,576 bytes. Its serialized
 SOC/capacity diagnostic path owns 7,064 bytes, with a 7,984-byte host object and
 own-source-stack partial peak. A single existing 73,500-sample replay preserves
 the tested evidence and remainder bit-for-bit. External runtime, acquisition,
-recovery and target costs remain additional; M1 is still the next milestone.
+recovery and target costs remain additional. This fixed-chart component is
+available for the next learner decision; it is not an autonomous estimator.
 
 The completed full C study supplies the initial desktop reference. It retains
 and replays history. Separate bounded event and integer certificate components
@@ -34,6 +39,9 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
+| [M1 lifecycle report](docs/TRAJECTORY_INTEGRATION_001.md) | Two-cell operation, exact warm continuation, cold reset, preserved usefulness failure and next blocker |
+| [M1 compact summary](experiments/trajectory_integration_001/summary.json) | Functional/usefulness outcomes, resource costs and selective evidence links |
+| [M1 independent scores](experiments/trajectory_integration_001/scores.json) | Post-inference accuracy, convergence, local qualification and reset recovery |
 | [Compact bounded implementation](docs/COMPACT_BOUNDED_001.md) | Shared configuration, selective transactions and full-joint SOC/Q diagnostics; measured storage and exact core comparison |
 | [Compact result summary](experiments/compact_bounded_001/summary.json) | One fixed-anchor replay, first outcome, source identity, memory and remaining limits |
 | [Bounded uncertain RC mode](docs/UNCERTAIN_RC_004.md) | Continuous parameter box, all-prefix width/containment proofs, retained learning and three preserved usefulness failures |
@@ -71,8 +79,8 @@ experiment work to specific delivery decisions.
 | Milestone | Status and finish line |
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
-| **M1: Two-cell end-to-end desktop demonstration** | **Next.** Join estimation, delivery, checkpoint/restore, cold reset and status handling on one existing short trace per cell |
-| **M2: Desktop performance and year-scale behavior** | Select an autonomous streaming candidate; short load/cell/noise comparisons, optional attention decision, day/week pilots, then two selected annual streams |
+| **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
+| **M2: Desktop performance and year-scale behavior** | **Next: A4 candidate selection.** Demonstrate timely, reliable learning with bounded storage/work on the M1 harness before variations, optional attention, day/week pilots and annual streams |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality
@@ -114,6 +122,37 @@ voltage is sampled at the end of each constant-current interval.
 Use `--ocv path/to/ocv.csv` for a measured 25 C curve with columns `z,voltage`.
 The included benchmark uses a known illustrative curve because the numerical
 measured curve was not supplied. It must not be described as real-cell validation.
+
+## Completed M1 lifecycle demonstration
+
+The [frozen primary receipt](experiments/trajectory_integration_001/primary/receipt.json)
+records one 20-fit campaign on the two existing 35-minute traces. Fresh-process
+warm restores reproduce the uninterrupted numerical queries, fitted results
+and canonical checkpoint bytes exactly, excluding timing fields. Cold reset at
+900 seconds clears inferred knowledge while preserving the known input position
+and clock; both cells relearn useful SOC/capacity by the first scheduled
+post-reset fit at 1,800 seconds. Small API tests cover missing voltage,
+unknown-input gaps, invalid persistence, ordering and counter failures.
+
+**Functional acceptance passed; overall usefulness acceptance failed.** With
+the frozen sparse fit schedule, cell B reaches the iteration limit at 900
+seconds, with SOC error of -3.96355 percentage points and capacity error of
++26.6298%. Both targets remain explicitly unresolved, without trusted local
+ranges. Both cells pass the inherited SOC/capacity accuracy thresholds at
+1,800 and 2,100 seconds; the cold branches also pass their two recovery
+checkpoints. These [independent scores](experiments/trajectory_integration_001/scores.json)
+preserve the failed checkpoint and the unknown period after reset.
+
+![M1 two-cell lifecycle](report/M1-Two-Cell-Lifecycle.png)
+
+The session retains complete history and constructs the original full fitting
+problem on demand. The measured final successful-fit subtotal is 49,470,676
+requested bytes, before additional process, stack and persistence costs.
+M1 supplies the comparison harness for a bounded learner. It does not qualify
+this sparse schedule for long-run performance, prove indefinite stability or
+establish Cortex-M23 suitability. See the
+[integrated report](docs/TRAJECTORY_INTEGRATION_001.md) for the memory boundary
+and separate numerical, accuracy and uncertainty results.
 
 ## Completed 35 Hz study
 
@@ -177,6 +216,8 @@ belong in this repository; chat summaries are supporting context.
 - `src/scm_features.c`, `include/scm_features.h`: orthogonal projections.
 - `src/scm_estimator.c`, `include/scm_estimator.h`: host variable-projection estimator.
 - `src/scm_assess.c`, `include/scm_assess.h`: fixed-workspace per-target qualification.
+- `src/scm_session.c`, `include/scm_session.h`: desktop retained-history lifecycle, ordered ingestion, scheduled fitting, freshness and reset semantics.
+- `src/scm_session_checkpoint.c`, `include/scm_session_checkpoint.h`: versioned named-field persistence, complete journal and staged restore without refitting.
 - `src/scm_evidence.c`, `include/scm_evidence.h`: bounded fixed-chart event evidence and guards.
 - `src/scm_remainder.c`, `include/scm_remainder.h`: paired chronological ingestion and sparse analytic nonlinear-remainder budget checks.
 - `src/scm_compact_*.c`, `include/scm_compact_*.h`: smaller alternative evidence/remainder layout and focused SOC/Q diagnostics retaining the full joint matrix; original APIs remain the comparator.
@@ -191,18 +232,20 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-Implement the [two-cell lifecycle action plan](plans/trajectory_to_m23_001.json)
-on `integration/two-cell-lifecycle-001`: a desktop session adapter around the
-full C reference, complete checkpoint/journal and recovery semantics, followed
-by the paired uninterrupted/restart experiment. Use the existing two selected
-35-minute traces and publish functional and usefulness acceptance separately.
-Do not rerun the completed 60-fit campaign.
+Proceed to [M2/A4](plans/trajectory_to_m23_001.json): select one autonomous
+learner with explicit bounded storage and scheduled work, public cold start,
+and preserved historical evidence. Use the M1 harness and full C reference to
+test timely, reliable SOC/capacity learning on a small paired case before
+extending duration. The cell B 900-second failure is a concrete selection
+gate. Preserve it without retuning or repeating the completed M1 campaign;
+the original 60-fit study also remains frozen.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to
 make that provider applicable. A general bounded streaming learner remains a
-real gap after the first desktop integration. Attention and RC partitioning
-are focused decision experiments when needed, not prerequisites for M1.
+real gap after the completed desktop integration. Attention and RC partitioning
+remain focused decision experiments when their result can change the next
+learner choice.
 
 Physical error bounds, uncertain current/time/OCV, drift and target resources
 remain open. Hard certificate support, Gaussian local precision, point accuracy,
