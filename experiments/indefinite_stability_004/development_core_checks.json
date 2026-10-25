@@ -1,0 +1,90 @@
+{
+  "schema": "mumble_uncertain_rc_development_core_checks_v1",
+  "logs": {
+    "strict_build_run_001": {
+      "source_sha256": {
+        "include/scm_certificate_box.h": "58a3ff28bd875af48ff1933449e02589334d0bf3b839f82d702e70cb8090a1cf",
+        "src/scm_certificate_box.c": "e1bf5e5b07fb951186f198623afb7c82873b7141f25043649359889b1c32467c",
+        "tests/test_certificate_box.c": "c1624a13a03e84bb29b4e5b4c638f6fe4a05751724c7819d18b5b80a87cdcee4"
+      },
+      "checks": [
+        {
+          "command": [
+            "cc",
+            "-Iinclude",
+            "-std=c99",
+            "-O2",
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic",
+            "-Werror",
+            "src/scm_stable.c",
+            "src/scm_certificate.c",
+            "src/scm_certificate_box.c",
+            "tests/test_certificate_box.c",
+            "-o",
+            "build/stability004-dev/test_certificate_box_strict"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "build/stability004-dev/test_certificate_box_strict"
+          ],
+          "returncode": 0,
+          "stdout": "certificate box tests passed; config=896 bank=600 workspace=600 sample=24 result=32 bytes\n",
+          "stderr": ""
+        }
+      ]
+    },
+    "sanitized_build_run_001": {
+      "source_sha256": {
+        "include/scm_certificate_box.h": "58a3ff28bd875af48ff1933449e02589334d0bf3b839f82d702e70cb8090a1cf",
+        "src/scm_certificate_box.c": "e1bf5e5b07fb951186f198623afb7c82873b7141f25043649359889b1c32467c",
+        "tests/test_certificate_box.c": "c1624a13a03e84bb29b4e5b4c638f6fe4a05751724c7819d18b5b80a87cdcee4"
+      },
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=0"
+      },
+      "checks": [
+        {
+          "command": [
+            "cc",
+            "-Iinclude",
+            "-std=c99",
+            "-O1",
+            "-g",
+            "-Wall",
+            "-Wextra",
+            "-Wpedantic",
+            "-Werror",
+            "-fsanitize=address,undefined",
+            "-fno-omit-frame-pointer",
+            "src/scm_stable.c",
+            "src/scm_certificate.c",
+            "src/scm_certificate_box.c",
+            "tests/test_certificate_box.c",
+            "-o",
+            "build/stability004-dev/test_certificate_box_sanitized"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "command": [
+            "build/stability004-dev/test_certificate_box_sanitized"
+          ],
+          "returncode": 0,
+          "stdout": "certificate box tests passed; config=896 bank=600 workspace=600 sample=24 result=32 bytes\n",
+          "stderr": ""
+        }
+      ]
+    }
+  },
+  "failed_checks": 0,
+  "primary": false,
+  "scope": "Pre-freeze strict C99 and targeted address/undefined checks; detect_leaks=0; no primary or endurance claim."
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "mumble_uncertain_rc_contract_v1",
+  "base_revision": "4a990cf923e2e56935a1ffb346215faad05bff66",
+  "scope": "One fixed but uncertain RC mode in the conditional integer battery provider. Continuous real resistance/time-constant values inside a declared box; other modes, R0 and encoded OCV remain known. No drift, hysteresis or uncertain current/time in this milestone.",
+  "inherits": {
+    "battery_contract": "proofs/indefinite_stability_003/contract.json",
+    "battery_lemmas": "proofs/indefinite_stability_003/lemmas.json",
+    "integer_contract": "proofs/indefinite_stability_002/contract.json",
+    "integer_lemmas": "proofs/indefinite_stability_002/lemmas.json",
+    "rule": "Original source and evidence stay byte-identical. New provider adapts certificate003 with explicit lineage; all inherited assumptions apply except the selected known-R/tau premise replaced below."
+  },
+  "artifacts": {
+    "header": "include/scm_certificate_box.h",
+    "source": "src/scm_certificate_box.c",
+    "tests": "tests/test_certificate_box.c",
+    "lemmas": "proofs/indefinite_stability_004/lemmas.json",
+    "plan": "experiments/indefinite_stability_004/plan.json",
+    "audit": "tools/audit_certificate_box.py",
+    "reference_probe": "tools/provider_box_reference_probe.c"
+  },
+  "model": {
+    "equations": [
+      "v_i,n = a_i,n*v_i,n-1 + (1-a_i,n)*I_n*R_i, a_i,n = exp(-ticks_n/tau_i_ticks)",
+      "P_n = sum(I_microA,k*ticks_k); z_n = z0-P_n/(126000000*Q_microAh)",
+      "V_n = U(z_n)-I_n*R0-sum(v_i,n)"
+    ],
+    "units": "Current microA, R milliohm, voltage and RC state nV, time ticks at35000Hz; I_microA*R_milliohm gives nV. Q microAh. Physical SOC z is a fraction; stored SOC coordinates x=65536*z.",
+    "input_order": "Actual intervals once in acquisition order; current is constant within each interval and voltage is measured at its endpoint. Nominal35Hz does not replace actual intervals.",
+    "uncertain_mode": "For each mode, R lies in [r_lower_mOhm,r_upper_mOhm] and tau_ticks in [tau_lower_ticks,tau_upper_ticks]. At most one mode has unequal endpoints in either coordinate; zero uncertain modes is admitted for degeneration tests. A mode with both uncertain R and tau counts once.",
+    "continuum": "Actual R and tau can be real between the encoded integer endpoints. They are fixed across the entire certified episode and need not be grid points.",
+    "common_domains": "Every immutable capacity cell crosses the common initial-SOC interval, initial-RC box and fixed RC parameter box. Q and z0 are static. SOC stays in[0,1].",
+    "observation_premise": "Each supplied voltage interval contains the exact terminal voltage for the complete static configuration. The declared hard bound is not justified by a Gaussian sigma or prior local precision.",
+    "box_validity": "The uncertain box is supplied before initialization and stays immutable. Enlarging, moving or recentering it after exclusions requires a separate history/transport proof and is not authorized by this API."
+  },
+  "machine_ranges": {
+    "R_endpoints": "uint32,0<=Rlo<=Rhi<=1000 milliohm",
+    "tau_endpoints": "uint32,0<tau_lo<=tau_hi<=UINT32_MAX ticks",
+    "current": "int32 input with configured absolute limit<=200000 microA",
+    "state": "Integer endpoints inside[-B,B],0<=B<=2^30 nV; configuration requires current_limit*Rhi<=B for every mode",
+    "force_product": "Both I*R endpoint products are formed in int64, ordered by sign and range-checked before int32 conversion; magnitude<=200000000 nV",
+    "attenuation": "Q32 interval with0<=Alo<=Ahi<=D=2^32, inherited outward endpoint kernel",
+    "corner_arithmetic": "Inherited corner magnitude<=D*B<=2^62; no new runtime product exceeds the frozen scalar-kernel range",
+    "charge_and_query": "Same exact int64 net-charge limit2^44, SOC ratio/PWL inverse ranges and outward target operations as certificate003",
+    "width_certificate_arithmetic": "The symbolic width numerator may exceed fixed-width integer ranges in a generic domain. The audit evaluates it using arbitrary-precision Python integers/Fraction; it is not computed by the bounded C provider."
+  },
+  "new_primitives": {
+    "attenuation_box": "Validate positive ordered tau endpoints. Lower endpoint is the frozen attenuation lower certificate at tau_lo; upper endpoint is the frozen upper certificate at tau_hi. Equal tau endpoints use the frozen kernel once. No assumption that rounded kernel outputs are monotone is needed for soundness.",
+    "forcing_interval": "T=[min(I*Rlo,I*Rhi),max(I*Rlo,I*Rhi)]; negative current reverses endpoint order.",
+    "state_step": "Use two copies of the SAME original state. Apply frozen point-target interval step at Tlo and Thi; select lower endpoint from Tlo and upper endpoint from Thi because1-a>=0. Singleton forcing may use the old step directly.",
+    "atomicity": "Negative errors leave destination state/coefficient unchanged. Validate state, coefficient and BOTH target endpoints/order before exact-unity no-write identity. No floats, libm, heap or lifetime counter."
+  },
+  "width_theorem": {
+    "definitions": "W=state interval diameter, F=target interval diameter, D=2^32; state and all targets lie in[-B,B].",
+    "one_step": "W_next <= (Ahi*W+(D-Alo)*F+2B*(Ahi-Alo))/D+2; exact[Alo,Ahi]=[D,D] instead leaves W unchanged with no rounding term.",
+    "future_premise": "A certified future active alphabet or other uniform proof supplies g>0 with Ahi<=D-g, b>=D-Alo and h>=Ahi-Alo for every active update; F<=Fmax. Arbitrarily many validated exact identities may intervene.",
+    "all_prefix": "W_n <= min(2B,max(W0,(b*Fmax+2B*h+2D)/g)) for every finite prefix.",
+    "parameter_and_rounding_terms": "b*Fmax/g is the resistance-forcing contribution;2B*h/g includes time-constant ambiguity and coefficient enclosure error;2D/g is the endpoint-rounding allowance. h is not purely numerical when tau is uncertain.",
+    "failure_of_contraction_premise": "Without a certified positive g, the refined width bound is unavailable. Convex-domain containment and the2B bound still hold; finite observed contraction cannot replace the future premise."
+  },
+  "evidence_and_query": {
+    "representation": "Up to64 immutable closed capacity bins with monotonically contracting integer SOC0 intervals; shared3RC outer intervals, exact net charge and monotone active mask. Full backing configuration is counted.",
+    "compatible_set": "F_n contains full static configurations (R_uncertain,tau_uncertain,z0,Q,initial_RC) consistent with every observation and the physical-domain constraints through n.",
+    "retention": "Every point of F_n survives in EVERY original capacity cell containing its Q, including overlapping and shared-boundary cells; its SOC0 remains inside that cell's retained strip.",
+    "targets": "Same persistent outward currentSOC and capacity hulls as certificate003. Equal-charge nonwidening and no reappearing excluded cell. CurrentSOC width can grow when net charge changes.",
+    "uncertain_parameters": "The supplied R/tau box is not contracted. They remain unresolved within that box; no nuisance-parameter learning claim.",
+    "correlation_limit": "Shared interval propagation forgets parameter-state and cross-time correlations. It can admit fictitious time-varying nuisance choices and other false positives while remaining sound for every fixed actual parameter pair. Nonempty outer support does not prove exact feasibility."
+  },
+  "transaction_and_availability": {
+    "transaction": "Same whole-bank caller-owned staging as003. Negative status leaves the bank unchanged and does not propagate the sample. Valid contradiction commits charge/RC evolution and sticky empty support.",
+    "availability_corollary": "For actual Q<=100000 microAh and true z0,z_n in[0,1], |P_n|<=12600000000000<2^44. New target validation and convex interval propagation preserve the same state/range invariants. A true compatible static configuration retains support; every admitted finite-prefix push returns OK, independently of age/total absolute throughput.",
+    "execution_premises": "Trusted initialized objects, valid disjoint bank/config/sample/workspace/output storage, immutable live configuration, conforming exact-width C99 integer semantics, no concurrent mutation or hardware faults, and caller-supplied admitted chronology."
+  },
+  "conditional_nominal_comparison": {
+    "premises": "Same original capacity cells, SOC0 prior, known R0/OCV, represented input scales/current/time, starting RC intervals and domains. A represented fixed nominal R/tau point is admitted by its own configuration and lies in the box. Both streams have numerically admitted pushes. Its computed attenuation enclosure is a subset of the box enclosure for every admitted future tick; finite alphabet enumeration certifies this extra numerical premise.",
+    "claim": "At every prefix, nominal RC intervals, active-cell support and meaningful SOC0/query outer sets are contained in boxed support. SOC0 strip inclusion is claimed only for active nominal cells; frozen fields of excluded cells have no support semantics. A nominal empty set is trivially contained. No positive contraction margin is needed for this nesting theorem.",
+    "scope": "Soundness for the full continuous parameter box is U1-U5 and does not depend on this comparison premise."
+  },
+  "reference_coordinate_mapping": {
+    "reason": "Frozen3RC reference slowtau support ends at30s, below part of the predeclared uncertainty box. Preserve the old core and use an explicitly declared public unit transformation in the new comparison harness.",
+    "map": "dt'=dt/2,I'=2I,R0'=R0/2,Ri'=Ri/2,taui'=taui/2; Q,z0,V,initialRC unchanged. H=u0=0.",
+    "identities": "dt'/tau'=dt/tau, I'R'=IR and I' dt'=I dt preserve exact model predictions and objective. This is a real-arithmetic identity, not a floating-point bitwise-equivalence theorem.",
+    "supports": "Free reference slowtau maps to physical[3,60]s and R to[0,2]ohm, broader than provider[27,33]s/[.054,.066]ohm. Q prior is unchanged. Known physical taus .05/.5 map to .025/.25 within frozen solver bounds.",
+    "starts_and_reporting": "Use predeclared public solver-coordinate starts; their physical tau values change with the unit map and contain no truth. Convert fit tau,R and elapsed time back by2. Raw scaled resistance coordinate R'/.2 is physicalR/.4; raw Gram is local, not coverage or marginal SOC/Q precision."
+  },
+  "proof_kind": "Written source-level mathematics and independent review; not proof-assistant, compiler or Cortex-M23 certification. Finite audits can falsify correspondence but do not supply the all-prefix quantifier.",
+  "open": [
+    "Empirical validity of RC/error boxes",
+    "Learning uncertain R/tau",
+    "Other unknown dynamics and hysteresis",
+    "Uncertain current/time and OCV",
+    "Drift and static-box transport",
+    "Chronology/delivery and persistence/recovery",
+    "Gaussian-equivalent all-history evidence",
+    "Validated statistical coverage",
+    "Complete target resources and arithmetic qualification"
+  ]
+}

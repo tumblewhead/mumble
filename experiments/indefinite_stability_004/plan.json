@@ -1,0 +1,413 @@
+{
+  "schema": "mumble_uncertain_RC_certificate_audit_plan_v1",
+  "base_revision": "4a990cf923e2e56935a1ffb346215faad05bff66",
+  "purpose": "Small source-frozen independent falsification of one fixed continuous R/tau box, retained SOC/capacity learning and source-level all-prefix width premises; separately interpreted frozen SCM_FULL comparison.",
+  "model_scope": "At most one uncertain RC mode with fixed real R/tau anywhere in integer-endpoint boxes. Other RC/R0 and encoded monotone PWL OCV are known. Exact represented current/time, static unknown SOC0/Q, hard supplied voltage interval; no hysteresis or drift. Shared interval propagation discards nuisance correlations and does not learn R/tau.",
+  "sources": [
+    "proofs/indefinite_stability_004/contract.json",
+    "proofs/indefinite_stability_004/lemmas.json",
+    "include/scm_certificate_box.h",
+    "src/scm_certificate_box.c",
+    "tests/test_certificate_box.c",
+    "tools/provider_box_reference_probe.c",
+    "tools/audit_certificate_box.py",
+    "experiments/indefinite_stability_004/plan.json",
+    "proofs/indefinite_stability_003/contract.json",
+    "proofs/indefinite_stability_003/lemmas.json",
+    "include/scm_certificate.h",
+    "src/scm_certificate.c",
+    "tests/test_certificate.c",
+    "include/scm_stable.h",
+    "src/scm_stable.c",
+    "tools/audit_stable.py",
+    "include/scm_model.h",
+    "include/scm_estimator.h",
+    "include/scm_features.h",
+    "src/scm_model.c",
+    "src/scm_estimator.c",
+    "src/scm_features.c",
+    "tools/provider_reference_probe.c",
+    "tools/audit_certificate.py",
+    "experiments/indefinite_stability_003/plan.json"
+  ],
+  "compiler_flags": [
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror"
+  ],
+  "public_configuration": {
+    "tick_frequency_Hz": 35000,
+    "soc_one": 65536,
+    "charge_per_microAh": 126000000,
+    "charge_limit": 17592186044416,
+    "current_limit_microA": 200000,
+    "capacity_cells": 64,
+    "capacity_domain_microAh": [
+      30000,
+      100000
+    ],
+    "capacity_edges": "30000+floor(70000*k/64), k=0..64; adjacent closed bins overlap at their boundary",
+    "initial_SOC_grid_bounds": [
+      13107,
+      62260
+    ],
+    "support_difference": "The integer SOC prior outwardly encloses the frozen reference prior[0.2,0.95] with at most one grid-unit expansion. Reference capacity support[0.03,0.10]Ah matches.",
+    "R0_milliohm": 20,
+    "Ri_milliohm": [
+      30,
+      40,
+      60
+    ],
+    "tau_ticks": [
+      1750,
+      17500,
+      1050000
+    ],
+    "RC_bound_nV": 16777216,
+    "initial_RC_nV": [
+      0,
+      0,
+      0
+    ],
+    "OCV_nodes_SOCgrid_nV": [
+      [
+        0,
+        2920053656
+      ],
+      [
+        8192,
+        3064145620
+      ],
+      [
+        16384,
+        3210377794
+      ],
+      [
+        24576,
+        3370322468
+      ],
+      [
+        32768,
+        3575000000
+      ],
+      [
+        40960,
+        3779677532
+      ],
+      [
+        49152,
+        3939622206
+      ],
+      [
+        57344,
+        4085854380
+      ],
+      [
+        65536,
+        4229946344
+      ]
+    ],
+    "OCV_origin": "Nodes rounded once from the public illustration3+1.15*z+0.08*tanh(8*(z-0.5)) at z=k/8. The listed encoded PWL itself is the exact declared model; no approximation-to-tanh guarantee is used.",
+    "observation_error_nV": 1000000,
+    "actual_tick_pattern": [
+      1000,
+      999,
+      1001,
+      1002,
+      998
+    ],
+    "uncertain_mode_index": 2,
+    "R_milliohm_boxes": [
+      [
+        30,
+        30
+      ],
+      [
+        40,
+        40
+      ],
+      [
+        54,
+        66
+      ]
+    ],
+    "tau_tick_boxes": [
+      [
+        1750,
+        1750
+      ],
+      [
+        17500,
+        17500
+      ],
+      [
+        945000,
+        1155000
+      ]
+    ],
+    "uncertainty_origin": "Predeclared +/-10% stress uncertainty around stability003 PUBLIC slow mode R60mOhm,tau30s, chosen before numerical development. Not calibrated and not built from hidden synthetic truth. The listed degenerate nominal model remains the public control."
+  },
+  "main_stimulus": [
+    {
+      "name": "unexcited_rest",
+      "samples": 175,
+      "current_microA": 0
+    },
+    {
+      "name": "informative_charge",
+      "samples": 1225,
+      "current_microA": -120000
+    },
+    {
+      "name": "quiet_rest",
+      "samples": 1050,
+      "current_microA": 0
+    },
+    {
+      "name": "renewed_charge",
+      "samples": 1225,
+      "current_microA": -120000
+    }
+  ],
+  "stimulus_scope": "3675 samples,105s, nominal35Hz, four phase endpoints. Synthetic numerical laboratory use;120mA charging is not a hardware pulse recommendation.",
+  "generator_and_scorer_only": {
+    "initial_SOC": [
+      53,
+      100
+    ],
+    "capacity_microAh": 64700,
+    "boundary_capacity_microAh": 65000,
+    "truth_rule": "Truth is used only to generate observations and score containment/error. It is absent from inference configuration, cell bounds, centers, starts and state corrections.",
+    "noise_recipe_nV": "(((sample_index*48271+17)%1801)-900)*1000; deterministic amplitude<=900000nV. Round the midpoint of the independent noiseless-voltage enclosure to the nearest integer nV, ties upward, then add this perturbation. Certify the full noiseless enclosure lies inside center+-1000000nV.",
+    "oracle": "Exact Fraction charge/SOC/PWL plus independent positive-series exponential bounds from audit_stable.py, outward quantized to a2^-128 coefficient/state grid. No C provider state or synthetic true correction enters inference.",
+    "raw_trace_policy": "The committed deterministic recipe reconstructs every observation; record canonical input hashes and small checkpoints rather than storing a redundant raw trace.",
+    "selected_R_tau_truth_rule": "Each case uses its listed exact rational constant R/tau solely inside the independent observation generator and scorer. They do not change the public uncertain provider configuration, cells, starts or corrections."
+  },
+  "required_audits": [
+    "At every main-case sample: all closed bins containing truth remain active; retained SOC0 intervals, currentSOC hull and capacity hull contain truth; charge equals the exact represented sum; independent RC states are enclosed; generated voltage interval contains independent noiseless voltage.",
+    "Active masks are subsets of their predecessors; active retained SOC0 intervals never widen; inactive intervals remain frozen.",
+    "At zero-current rest, charge is unchanged and persistent currentSOC/capacity query widths do not increase.",
+    "Unexcited zero-charge prefix retains the full capacity domain; informative and renewed phases strictly narrow capacity width and the persistent evidence measure compared with their preceding phase.",
+    "Boundary truth at Q=65000microAh retains both adjacent closed capacity bins; same observation protocol, shortened deterministic exercise.",
+    "Positive, negative and return-to-zero charge; PWL knots and plateaus; SOC-domain clipping; invalid full-transaction atomicity; explicit contradictory voltage and sticky inconsistency.",
+    "A deliberately uninformative quiet interval preserves all earlier mask/SOC0 evidence while RC states relax.",
+    "Outward query endpoints agree with an independent exact rational hull of the stored per-bin state; query reads no latest-only voltage shortcut.",
+    "Public midpoint and all four R/tau box corners each receive the complete predeclared four-phase sequence. Every exact truth-containing capacity bin survives, every retained SOC0/query and RC interval encloses the independent Fraction/dyadic oracle at every sample.",
+    "One short fractional interior R/tau trace certifies continuous parameter semantics; one fixed true parameter pair per trajectory, without parameter learning or truth-supplied corrections.",
+    "Degenerate public midpoint box control consumes exactly the same midpoint observations as the uncertain provider and matches the frozen003 C provider numerical state, result and status after every sample. No old campaign is rerun.",
+    "Direct attenuation/helper canaries include signed forcing, eight exact rational corners, identity after validation, reversed targets invalid even at identity, tau endpoints1 andUINT32_MAX, q>=32 across tau endpoints and atomic destination failure.",
+    "Invalid boxes, reversed R/tau endpoints, zero tau, physical forcing bound failures and more than one nondegenerate mode reject complete initialization atomically.",
+    "All-time width coefficients and separate arithmetic/model contributions are derived from the declared future tick/current alphabet, using exact unbounded integer/Fraction arithmetic rather than a finite-trace extrapolation.",
+    "Independently verify the exact public unit-transform identities over the declared tick/current alphabet and public RC parameter endpoints, including charge/currentSOC and predicted RC forcing/attenuation equivalence. No synthetic truth supplied.",
+    "For each declared positive tick and zero, certify midpoint degenerate attenuation is contained in the boxed enclosure. At every midpoint trace prefix, the nominal provider RC/mask/activeSOC0/currentSOC/capacity support is contained in the uncertain provider support; this conditional coefficient-alphabet check is not assumed globally."
+  ],
+  "full_phase_cases": [
+    {
+      "name": "public_midpoint",
+      "actual_R_mOhm": [
+        60,
+        1
+      ],
+      "actual_tau_ticks": [
+        1050000,
+        1
+      ]
+    },
+    {
+      "name": "corner_Rlo_taulo",
+      "actual_R_mOhm": [
+        54,
+        1
+      ],
+      "actual_tau_ticks": [
+        945000,
+        1
+      ]
+    },
+    {
+      "name": "corner_Rlo_tauhi",
+      "actual_R_mOhm": [
+        54,
+        1
+      ],
+      "actual_tau_ticks": [
+        1155000,
+        1
+      ]
+    },
+    {
+      "name": "corner_Rhi_taulo",
+      "actual_R_mOhm": [
+        66,
+        1
+      ],
+      "actual_tau_ticks": [
+        945000,
+        1
+      ]
+    },
+    {
+      "name": "corner_Rhi_tauhi",
+      "actual_R_mOhm": [
+        66,
+        1
+      ],
+      "actual_tau_ticks": [
+        1155000,
+        1
+      ]
+    }
+  ],
+  "small_fractional_case": {
+    "actual_R_mOhm": [
+      241,
+      4
+    ],
+    "actual_tau_ticks": [
+      4200001,
+      4
+    ],
+    "samples": 30,
+    "current_recipe_microA": [
+      20000,
+      -20000,
+      50000,
+      -50000,
+      0
+    ],
+    "tick_recipe": [
+      1000,
+      999,
+      1001,
+      1002,
+      998,
+      0
+    ]
+  },
+  "usefulness_gates": {
+    "capacity_unexcited": "Capacity width equals the complete declared prior after the initial zero-charge phase.",
+    "informative_phases": "Strict capacity-hull narrowing and strict decrease of total active SOC0 interval widths after each informative phase relative to the immediately preceding phase endpoint. No post hoc threshold selection.",
+    "quiet_phase": "Persistent cell/SOC0 evidence and currentSOC/capacity hull widths do not widen at zero current.",
+    "precision_policy": "Report actual ranges. No new arbitrary SOC/Q target threshold and no Gaussian confidence interpretation. A failed usefulness gate remains recorded and is not repaired by silently changing the plan.",
+    "per_case": "Apply every four-phase gate separately to public midpoint and each corner. Preserve/report each failure with actual widths and width ratios relative to the main public degenerate control; no retuning to pass."
+  },
+  "width_analysis": {
+    "recurrence": "W_next <= Ahi*W/D + (D-Alo)*F/D + 2B*(Ahi-Alo)/D + 2, with W<=2B and exact unity identities unchanged.",
+    "definitions": "D=2^32; g=min(D-Ahi)>0; h=max(Ahi-Alo); b=max(D-Alo); Fmax=max_current |I|*(Rhi-Rlo); W0=initial interval width.",
+    "all_prefix_bound": "min(2B,max(W0,(b*Fmax+2B*h+2D)/g)). All numerators are exact Python integers/Fractions.",
+    "future_tick_alphabet": [
+      1000,
+      999,
+      1001,
+      1002,
+      998
+    ],
+    "future_current_alphabet_microA": [
+      -200000,
+      0,
+      200000
+    ],
+    "current_scope": "Endpoint enumeration certifies all integer represented currents in[-200000,200000] by monotonicity of |I|. The trace itself uses only0 and-120000.",
+    "uncertainty_decomposition": "Report coefficient model-span enclosures from an independent exact positive-series oracle, endpoint-kernel overenclosure, forcing-width contribution, coefficient-span contribution and integer endpoint-rounding contribution separately. Degenerate model contribution is zero. The finite observed width is distinct from the analytic all-prefix bound.",
+    "nominal_containment": "If uncertain-vs-degenerate nesting is reported, explicitly check coefficient containment on every declared active tick and exact zero-time identity; generic numerical kernel nesting is not assumed.",
+    "scope": "The theorem requires the unchanged model/domain and future alphabet. No empirical lifetime extrapolation or physical error validation."
+  },
+  "retained_history_comparison": {
+    "source": "Unchanged src/scm_estimator.c with SCM_FULL and same public OCV/known parameters/observations.",
+    "prefix_samples": [
+      175,
+      1400,
+      2450,
+      3675
+    ],
+    "fixed_theta_mask": 27,
+    "fixed_alpha_mask": 503,
+    "fixed_gamma_plus_minus": 100,
+    "starts": 3,
+    "max_iterations": 80,
+    "sigma_scale_V": 0.001,
+    "known_parameters": "Fix other twoRC R/tau, R0, all supplied initialRC states, H=u0=0, irrelevant gammas100. Selected R/tau plusSOC0/logQ remain free; no synthetic truth reaches solver inputs or initial guesses.",
+    "public_starts": "Three unchanged scm_default_theta starts; no supplied selected R/tau starting values. Linear R is fitted through existing variable projection. These are unchanged internal solver-coordinate starts; physical tau starts change by the public scale2 transform.",
+    "feasible_set_difference": {
+      "certificate_selected_R_mOhm": [
+        54,
+        66
+      ],
+      "reference_internal_selected_R_mOhm": [
+        0,
+        1000
+      ],
+      "reference_physical_selected_R_mOhm": [
+        0,
+        2000
+      ],
+      "certificate_selected_tau_s": [
+        27,
+        33
+      ],
+      "reference_internal_selected_tau_s": [
+        1.5,
+        30
+      ],
+      "reference_physical_selected_tau_s": [
+        3,
+        60
+      ],
+      "reason": "Frozen API exposes fixed masks but no adjustable bounds. Public exact unit transform scales time/current and known RC parameters so its broader physical support contains the complete certificate R/tau box. The supports remain unequal; this is a retained-history diagnostic, not an equivalent constrained fit."
+    },
+    "cases": "Main public midpoint observations only; corner traces test certificate soundness, not reference support.",
+    "outputs": "Numerical convergence/termination separately from call return; selected R/tau,SOC0/currentSOC/Q points and post-fit scorer errors; objective/projected gradient; raw conditional scaled4x4 Gram in coordinates[logtau_slow,SOC0,logQ,R_slow]; scales, symmetric eigenvalues, rank and condition; memory and CPU.",
+    "local_diagnostic": "4x4 Gram conditions on fixed known parameters. Eigenvalues/conditioning are ordinary floating point at returned local fit, not global identification, provider coverage, a posterior or uncertainty propagation. Internal linear R scale0.2ohm corresponds to physical0.4ohm; logtau offset is constant so its differential is unchanged. No marginal SOC/Q precision is inferred from its subblock while R/tau remain free.",
+    "rank_rule": "Eigenvalue rank relative threshold1e-12*max_abs_eigenvalue; nonpositive/singular condition is reported explicitly, never as finite precision.",
+    "interpretation": "Return success and numerical convergence are separate. Point inclusion in a hard outer hull is descriptive, not a provider-soundness gate. Local precision and statistical coverage remain separate; no Gaussian coverage on the bounded trace is claimed.",
+    "public_unit_transform": {
+      "scale": 2,
+      "dt_internal": "dt_physical/2",
+      "current_internal": "2*current_physical",
+      "R_internal": "R_physical/2",
+      "tau_internal": "tau_physical/2",
+      "SOC_and_Q": "unchanged",
+      "voltage_and_initial_RC": "unchanged",
+      "identities": [
+        "I_internal*dt_internal=I_physical*dt_physical",
+        "dt_internal/tau_internal=dt_physical/tau_physical",
+        "I_internal*R_internal=I_physical*R_physical"
+      ],
+      "physical_output_conversion": "Reported fit R/tau and elapsed physical time multiply internal values by2. Charge,capacity,SOC and objective unchanged. Raw Gram remains in explicitly labelled internal scaled coordinates."
+    }
+  },
+  "resource_accounting": "sizeof complete caller-owned configuration, bank, staged workspace, input and output; all core compiler stack frames; static object sections; undefined imports; no heap/libm in provider. Include configuration backing storage. Report host own-source subtotal and unresolved target/runtime/interrupt costs separately. Compare complete provider-owned objects and own-source stack/sections/imports against frozen retained-history allocation fields with explicit different scopes; complete firmware resources remain unqualified.",
+  "execution_policy": {
+    "development": "Allowed only to a new output outside the repository, explicitly labeled development; development checks precede the primary source freeze.",
+    "primary": "Only after root supplies --source-revision and all listed source/plan files byte-match that committed source revision. Refuse an existing output; check all old source/tools/proofs/results/evidence hashes before and after. Preserve failed usefulness or reference gates.",
+    "timeout_seconds_per_command": 60,
+    "frozen_evidence": "No old source, result or experiment may change. No old campaign rerun.",
+    "source_freeze": "Numerical choices and gates are frozen in this plan before numerical development; final source and proof files freeze before one primary run. Development adaptations and failures are disclosed separately.",
+    "result_semantics": "Execution completion, mandatory soundness, usefulness, reference completion, and overall acceptance are distinct receipt fields. A failed usefulness gate does not erase completed evidence or authorize tuning."
+  },
+  "nonclaims": [
+    "Full16-unknown battery estimator",
+    "Gaussian likelihood equivalence",
+    "Physical sensor/model validation",
+    "Statistical coverage",
+    "Parameter drift or aging",
+    "Persistence and recovery",
+    "End-to-end bounded chronology",
+    "Cortex-M23 qualification",
+    "Empirical proof of infinite duration",
+    "Calibrated R/tau uncertainty",
+    "R/tau parameter learning",
+    "Equivalent certificate/reference feasible sets",
+    "All exact feasible correlations retained"
+  ],
+  "reproduction": "python3 tools/audit_certificate_box.py --source-revision FROZEN_SOURCE_SHA --output experiments/indefinite_stability_004/NEW_RECEIPT.json",
+  "design_decisions_before_development": [
+    {
+      "decision": "Public scale2 reference unit transform covers entire selected parameter box within unchanged frozen solver bounds.",
+      "reason": "Initial direct physical-coordinate proposal would have excluded tau>30s. Chosen before numerical development; no failed numerical result or test-driven tuning."
+    }
+  ]
+}

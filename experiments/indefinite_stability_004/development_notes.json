@@ -1,0 +1,61 @@
+{
+  "schema": "mumble_uncertain_rc_development_notes_v1",
+  "base_revision": "4a990cf923e2e56935a1ffb346215faad05bff66",
+  "scope": "Development checks preceded final source freeze. Primary remains a separate one-shot frozen run. No numerical/model/learning-gate tuning after observed outcomes.",
+  "development_receipt": "experiments/indefinite_stability_004/development_001.json",
+  "development_receipt_sha256": "fa1053a9cbcce723968fb0710847613255d41a16ebaa74d56ad43a20fb9fd1af",
+  "original_audit_source": "experiments/indefinite_stability_004/development_source/audit_certificate_box.py",
+  "original_audit_source_sha256": "b26818fe0459aee48a2b25ff92c4686835ec8e64abfa73ecc4d37d2432a1c572",
+  "recovery": "Exact source bytes recovered by reversing two known additions and accepted only after matching the SHA256 recorded before development. Other listed source/plan/proof bytes remain unchanged.",
+  "pre_numerical_decision": "Public scale2 reference coordinate transform makes its fixed solver support cover the selected RC box; supports remain broader and physical default starts differ. Chosen before any numerical audit.",
+  "post_development_changes": [
+    {
+      "change": "Explicit top-level/nested failure counts added to receipt reporting",
+      "effect": "Reports the same failed checks more clearly; no experiment or acceptance semantics changed."
+    },
+    {
+      "change": "Resource inspection made fail-closed: successful nm/size plus nonempty static stack report required per component",
+      "reason": "Independent reviewer found empty stdout from a failed inspection could otherwise look like no imports.",
+      "effect": "Development had all inspection commands succeed and all15 reported frames static. No model/stimulus/numerical/learning change."
+    },
+    {
+      "change": "Removed extra blank lines at end of active audit source before source freeze",
+      "effect": "Formatting only. Exact development source snapshot retains its original bytes and EOF whitespace; that immutable snapshot is excluded from the ordinary whitespace-style check."
+    }
+  ],
+  "preserved_outcomes": {
+    "execution_completed": true,
+    "soundness_passed": true,
+    "usefulness_passed": false,
+    "reference_completed": true,
+    "top_level_checks": 11501,
+    "top_level_failed_usefulness_summaries": 2,
+    "nested_checks": 234658,
+    "nested_failed_usefulness_leaf_checks": 3,
+    "count_scope": "Nested leaf failures are summarized by top-level gates; combined counts overlap.",
+    "failed_leaf_checks": [
+      {
+        "case": "corner_Rlo_tauhi",
+        "phase": "renewed_charge",
+        "quantity": "capacity_width_microAh",
+        "before": 3281,
+        "after": 3281
+      },
+      {
+        "case": "corner_Rlo_tauhi",
+        "phase": "renewed_charge",
+        "quantity": "sum_active_SOC0_widths_grid",
+        "before": 27,
+        "after": 27
+      },
+      {
+        "case": "corner_Rhi_taulo",
+        "phase": "renewed_charge",
+        "quantity": "capacity_width_microAh",
+        "before": 3281,
+        "after": 3281
+      }
+    ],
+    "interpretation": "Failed strict narrowing remains failed. It does not contradict soundness or prove that physical capacity is unidentifiable; finite cells and discarded correlations can retain false positives."
+  }
+}

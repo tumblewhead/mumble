@@ -1,0 +1,83 @@
+{
+  "schema": "mumble_uncertain_rc_lemma_ledger_v1",
+  "contract": "proofs/indefinite_stability_004/contract.json",
+  "inherits": [
+    "proofs/indefinite_stability_002/lemmas.json",
+    "proofs/indefinite_stability_003/lemmas.json"
+  ],
+  "notation": "D=2^32; X=[l,u], T=[Tl,Tu] subset[-B,B],0<=B<=2^30; A=[Al,Au]/D subset[0,1]. W=u-l and F=Tu-Tl. Physical SOC z is a fraction; x=65536*z is the stored-grid coordinate.",
+  "lemmas": [
+    {
+      "id": "U1",
+      "claim": "Endpoint attenuation and signed forcing enclose every real parameter pair in the fixed RC box.",
+      "proof": "For dt>=0 and tau>0, d exp(-dt/tau)/d tau = dt*exp(-dt/tau)/tau^2 >=0. The frozen lower certificate at tau_lo is therefore <= every true attenuation; the upper certificate at tau_hi is >= every true attenuation. Forcing I*R is affine in R, with endpoint order reversed when I<0. Both products are exact int64 before their validated int32 conversion. No rounded-kernel monotonicity assumption is required.",
+      "source": [
+        "scm_certificate_box_attenuation",
+        "scm_certificate_box_push: signed target products"
+      ],
+      "limit": "R and tau remain static and inside the predeclared box. Quantized endpoints enclose a continuum; they do not require actual parameters to equal an encoded endpoint."
+    },
+    {
+      "id": "U2",
+      "claim": "Interval-forcing propagation is outward, domain invariant, failure atomic and exactly identical for validated unity attenuation.",
+      "proof": "f(a,x,t)=a*x+(1-a)*t is nondecreasing in t because1-a>=0. The minimum over the full rectangle therefore occurs at Tl and the maximum at Tu. Applying the frozen four-corner point-target enclosure twice to copies of the same original X encloses these extrema; selecting the respective lower/upper endpoints encloses the full image. Every corner is a convex combination inside[-B,B], and floor/ceil at integer domain endpoints stays inside that domain. Magnitudes of inherited integer corners are <=D*B<=2^62. Local staging defers writes until all checks succeed. After validating both forcing endpoints, state and coefficient, [D,D] gives exact no-write identity.",
+      "source": [
+        "scm_certificate_box_interval_step",
+        "scm_stable_interval_step (unchanged)"
+      ],
+      "limit": "State, forcing and attenuation correlations are discarded; this creates a conservative superset, not equality with the fixed-parameter trajectory set."
+    },
+    {
+      "id": "U3",
+      "claim": "A certified future contraction margin gives an interval-width bound independent of elapsed lifetime.",
+      "one_step": "W_next <= (Au*W+(D-Al)*F+2B*(Au-Al))/D+2",
+      "proof": "For two image points, f(a,x,t)-f(a',x',t') = a(x-x')+(1-a)(t-t')+(a-a')(x'-t'). Bound the three absolute terms by(Au/D)*W,((D-Al)/D)*F and2B*(Au-Al)/D. Outward lower/upper integer rounding adds less than2 units, so <=2 is safe. This argument requires no independence of the actual physical parameters; it bounds the larger rectangle.",
+      "future_premises": "For every active future update, Au<=D-g with g>0, D-Al<=b, Au-Al<=h and F<=Fmax. These are uniform declared-domain bounds, not observed-prefix maxima. Exact identity updates are skipped.",
+      "induction": "Let rho=1-g/D and c=(b*Fmax+2B*h)/D+2. Then W_m<=rho^m*W0+c*(1-rho^m)/(1-rho)<=max(W0,(b*Fmax+2B*h+2D)/g). Combine with U2's2B invariant. Arbitrarily many no-write identities preserve the bound at every finite prefix.",
+      "all_prefix_bound": "min(2B,max(W0,(b*Fmax+2B*h+2D)/g))",
+      "arithmetic_scope": "The theorem and audit certificate use mathematical or arbitrary-precision integers. Its generic numerator is not asserted to fit a C integer type, and the bounded runtime does not evaluate it.",
+      "limit": "h includes parameter ambiguity as well as coefficient approximation. Without g>0 only the domain bound is available. A bounded width can remain too large for useful SOC/capacity inference."
+    },
+    {
+      "id": "U4",
+      "claim": "Every complete compatible static configuration survives in every original capacity cell containing it, with all prior exclusions retained.",
+      "proof": "Let F_n contain static(R,tau,z0,Q,initialRC) configurations consistent with the complete prefix and physical domain. These sets are nested. For a point in F_n, U1-U2 inductively enclose its true RC state. Inherited corrected-voltage and PWL-inverse lemmas enclose its current SOC. Exact signed charge-ratio enclosure gives its depletion, so x0=x_n+P_n*65536/(126000000*Q) lies in the new implied SOC0 strip. By prefix nesting it also lies in the stored previous strip for every original capacity cell containing Q. Intersecting retains it in every such cell, including overlaps and shared closed boundaries. Empty intersections soundly exclude whole cells, and bits never return.",
+      "source": [
+        "scm_certificate_box_push",
+        "inherited C1-C4 operations"
+      ],
+      "limit": "A single shared RC box does not retain fixed-parameter/cross-time correlations or learn R/tau. False positives, including fictitious time-varying nuisance choices, may survive. Nonempty outer support does not prove exact feasibility. The immutable box cannot later be enlarged while retaining exclusions without a new transport argument."
+    },
+    {
+      "id": "U5",
+      "claim": "Outward targets, bounded evidence, whole-observation transactions and conditional all-prefix availability compose for the uncertain-mode provider.",
+      "proof": "Given U4, inherited C5 projects each retained SOC0/capacity rectangle outward and encloses every compatible currentSOC/Q target. Retained integer endpoints only contract and active bits only clear; at equal P the depletion map is unchanged, so target hulls cannot widen. The new RC updates occur inside the same staged whole bank as charge and evidence; negative returns precede final assignment, while valid contradiction commits propagation and empty support. For actualQ<=100000microAh with z0,z_n in[0,1], |P_n|=126000000*Q*|z0-z_n|<=12600000000000<2^44. U1-U2 and validated target ranges preserve the other bank/arithmetic invariants. U4 preserves a true-containing cell. Induction therefore yields an OK return at every admitted finite prefix, with no age-driven range failure or inconsistency.",
+      "source": [
+        "scm_certificate_box_config_validate",
+        "scm_certificate_box_init",
+        "scm_certificate_box_push",
+        "scm_certificate_box_query"
+      ],
+      "premises": "The complete contract, including a true static compatible point, hard-voltage containment, represented ordered input, immutable live configuration, disjoint valid storage and source execution semantics.",
+      "limit": "The broad generic API still permits representable configurations/input sequences outside the physical availability corollary. Useful target precision, physical validity, delivery, persistence and drift are separate obligations."
+    },
+    {
+      "id": "U6",
+      "claim": "With certified coefficient nesting, adding the declared RC box cannot make this representation more precise than its nominal singleton control on the same stream.",
+      "premises": "Same original capacity cells, SOC0 prior, known R0/OCV, represented input scales/current/time, starting RC intervals and domains. A represented fixed nominal R/tau point is admitted by its own configuration and lies in the box. Both streams have numerically admitted pushes. Its computed attenuation enclosure is a subset of the box enclosure for every admitted future tick; finite alphabet enumeration certifies this extra numerical premise.",
+      "proof": "Nominal forcing is inside box forcing. Exact interval-map extrema and directed floor/ceil are monotone with respect to input-set inclusion, so nested previous RC intervals give nested propagated intervals. Corrected-voltage addition and the segmentwise outward PWL preimage preserve inclusion. Net charge/depletion agree. Intersections preserve SOC0 strip inclusion for every active nominal cell, and every such cell remains active in the box bank. Identical outward target projection preserves SOC/capacity hull inclusion. Induct from common initialization. Frozen intervals of excluded nominal cells carry no support claim; empty nominal support is trivially contained and stays empty. No g>0 premise is required.",
+      "source": [
+        "scm_certificate_box_interval_step",
+        "inherited PWL/strip/query operations",
+        "audit finite-alphabet coefficient nesting certificate"
+      ],
+      "limit": "Physical parameter-box inclusion alone does not prove nesting of two rounded attenuation enclosures. U1-U5 soundness holds without U6; do not extend this comparison claim to an uncertified alphabet."
+    }
+  ],
+  "comparison_identity": {
+    "map": "dt'=dt/2,I'=2I,R'=R/2,tau'=tau/2; Q,z0,V,initialRC fixed",
+    "proof": "dt'/tau'=dt/tau keeps attenuation identical; I'R'=IR keeps forcing and ohmic voltage identical; I' dt'=I dt keeps charge/SOC identical. Induction gives the same exact predicted voltage and objective. H=u0=0 removes hysteresis in this comparison.",
+    "interpretation": "A public unit change makes the unchanged reference's slow-tau support cover the whole certificate box. It does not make reference nuisance support equal to the box, preserve physical default starts, or prove bitwise floating-point equality."
+  },
+  "proof_status": "Written source-level arguments, subject to independent review and a frozen finite correspondence audit. Not machine checked or compiler/target certified."
+}
