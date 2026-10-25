@@ -64,7 +64,8 @@ static void public_belief(scm_online *s)
     s->has_voltage=0;s->prediction_valid=0;s->excitation=0;
     s->last_current_A=s->last_prediction_V=s->last_innovation_V=0;
     s->last_innovation_variance_V2=s->innovation_ewma=0;
-    s->last_gain_scale=s->minimum_gain_scale=1.;
+    s->last_gain_scale=s->last_max_gain_scale=s->minimum_gain_scale=1.;
+    s->last_limited_mask=s->last_blocked_mask=0;
 }
 
 int scm_online_init(scm_online *s,const scm_online_config *c)
@@ -77,7 +78,7 @@ int scm_online_init(scm_online *s,const scm_online_config *c)
 
 int scm_online_validate(const scm_online *s)
 {
-    int i;
+    int i,j;
     const unsigned allowed=SCM_ONLINE_FLAG_HISTORY_LOST|SCM_ONLINE_FLAG_RECOVERY_REQUIRED|
         SCM_ONLINE_FLAG_MODEL_UNAVAILABLE|SCM_ONLINE_FLAG_MISSING_VOLTAGE|
         SCM_ONLINE_FLAG_UPDATE_REJECTED|SCM_ONLINE_FLAG_GAIN_LIMITED;
@@ -86,7 +87,7 @@ int scm_online_validate(const scm_online *s)
        s->prediction_count!=s->next_index||s->voltage_count>s->prediction_count||
        s->missing_voltage_count!=s->prediction_count-s->voltage_count||
        s->rejected_voltage_count>s->voltage_count||s->limited_gain_count>s->voltage_count||
-       s->zero_gain_count>s->limited_gain_count||s->has_voltage<0||s->has_voltage>1||
+       s->zero_gain_count>s->voltage_count||s->has_voltage<0||s->has_voltage>1||
        s->prediction_valid<0||s->prediction_valid>1)return SCM_ONLINE_ERR_STATE;
     if((s->cold_resets!=0)!=((s->flags&SCM_ONLINE_FLAG_HISTORY_LOST)!=0)||
        (!s->has_voltage&&s->evidence_next_index!=s->epoch_begin)||
@@ -99,10 +100,14 @@ int scm_online_validate(const scm_online *s)
        !isfinite(s->last_prediction_V)||!isfinite(s->last_innovation_V)||
        !isfinite(s->last_innovation_variance_V2)||s->last_innovation_variance_V2<0||
        !isfinite(s->last_gain_scale)||s->last_gain_scale<0||s->last_gain_scale>1||
+       !isfinite(s->last_max_gain_scale)||s->last_max_gain_scale<s->last_gain_scale||s->last_max_gain_scale>1||
        !isfinite(s->minimum_gain_scale)||s->minimum_gain_scale<0||s->minimum_gain_scale>1||
        !isfinite(s->innovation_ewma)||s->innovation_ewma<0||s->innovation_ewma>1e12)return SCM_ONLINE_ERR_STATE;
+    if((s->last_limited_mask|s->last_blocked_mask)&~((1u<<D)-1u)||
+       (s->last_blocked_mask&~s->last_limited_mask))return SCM_ONLINE_ERR_STATE;
     for(i=0;i<D;i++)if(!isfinite(s->mean[i])||s->mean[i]<lower[i]||s->mean[i]>upper[i])return SCM_ONLINE_ERR_STATE;
-    for(i=0;i<D*D;i++)if(!isfinite(s->factor[i]))return SCM_ONLINE_ERR_STATE;
+    for(i=0;i<D;i++)for(j=0;j<D;j++)if(!isfinite(s->factor[AT(i,j)])||
+        (j>i&&s->factor[AT(i,j)]!=0)||(i==j&&s->factor[AT(i,j)]<0))return SCM_ONLINE_ERR_STATE;
     return SCM_ONLINE_OK;
 }
 
@@ -143,56 +148,83 @@ static int observation(const scm_online *s,double current,double *voltage,double
     return isfinite(*voltage)?0:-1;
 }
 
-/* S is allowed to be nontriangular. The normalized rank-one update is the
- * scalar square-root form of Joseph covariance with the SAME limited gain
- * used for the mean. P is never formed or subtracted. No variance floor,
- * process noise, forgetting, or re-use of an observation is added. */
-static int correct(scm_online *s,double voltage,scm_online_workspace *w)
+/* Right orthogonal rotations of [[sigma,h^T L],[0,L]], in descending column
+ * order, produce [[sd,0],[g,Lopt]] without a second matrix. Descending order
+ * preserves lower shape because the accumulated noise column is zero above
+ * the current pivot. For the chosen normalized gain t, Joseph covariance is
+ * Lopt*Lopt^T+(g-t)*(g-t)^T. An ascending appended-column rotation pass restores
+ * a lower factor. No subtraction of covariance matrices, rank threshold,
+ * variance floor, process noise, forgetting, or observation re-use is added.
+ * s is a disposable candidate; predicted is the committed valid prediction. */
+static int correct(const scm_online *predicted,scm_online *s,double voltage,scm_online_workspace *w)
 {
-    int i,j;double prediction,innovation,sd,standard,vnorm=0,lambda=1.,c,root,a;
+    int i,j,active=0,any_gain=0;unsigned limited=0,blocked=0;
+    double prediction,innovation,sd,standard,minimum=1.,maximum=0.;
     if(observation(s,s->last_current_A,&prediction,w->observation_gradient))return -1;
     innovation=voltage-prediction;if(!isfinite(innovation))return -1;
-    sd=s->config.sigma_V;
     for(j=0;j<D;j++) {
         double value=0;
-        for(i=0;i<D;i++)value+=s->factor[AT(i,j)]*w->observation_gradient[i];
+        for(i=j;i<D;i++)value+=s->factor[AT(i,j)]*w->observation_gradient[i];
         if(!isfinite(value))return -1;
-        w->projected_gradient[j]=value;sd=hypot(sd,value);
+        w->projected_gradient[j]=value;w->covariance_gradient[j]=0.;
     }
-    if(!isfinite(sd)||sd<=0||sd>sqrt(DBL_MAX))return -1;
+    sd=s->config.sigma_V;
+    for(j=D-1;j>=0;j--) {
+        double r=hypot(sd,w->projected_gradient[j]),c,rotation;
+        if(!isfinite(r)||r<=0||r>sqrt(DBL_MAX))return -1;
+        c=sd/r;rotation=w->projected_gradient[j]/r;sd=r;
+        for(i=j;i<D;i++) {
+            double x=w->covariance_gradient[i],y=s->factor[AT(i,j)];
+            double gain=c*x+rotation*y,factor=-rotation*x+c*y;
+            if(!isfinite(gain)||!isfinite(factor))return -1;
+            w->covariance_gradient[i]=gain;s->factor[AT(i,j)]=factor;
+        }
+    }
     standard=innovation/sd;if(!isfinite(standard))return -1;
-    for(j=0;j<D;j++){w->projected_gradient[j]/=sd;vnorm+=w->projected_gradient[j]*w->projected_gradient[j];}
     for(i=0;i<D;i++) {
-        double value=0,change,limit;
-        for(j=0;j<D;j++)value+=s->factor[AT(i,j)]*w->projected_gradient[j];
-        change=value*standard;
-        if(!isfinite(value)||!isfinite(change))return -1;
-        w->covariance_gradient[i]=value;w->correction[i]=change;
+        double gain=w->covariance_gradient[i],change=gain*standard,lambda=1.,limit,t,value;
+        if(!isfinite(change))return -1;
         if(change>0){limit=(upper[i]-s->mean[i])/change;if(limit<lambda)lambda=limit;}
         else if(change<0){limit=(lower[i]-s->mean[i])/change;if(limit<lambda)lambda=limit;}
-    }
-    lambda=fmax(0.,fmin(1.,lambda));if(lambda<1.)lambda*=1.-1e-9;
-    c=lambda*(2.-lambda);
-    root=hypot(s->config.sigma_V/sd,(1.-lambda)*sqrt(vnorm));
-    a=c/(1.+root);
-    if(!isfinite(a)||a<0||a>1.)return -1;
-    /* Validate the complete correction before modifying the predicted belief.
-     * This also makes a numerically rejected voltage a prediction-only step. */
-    for(i=0;i<D;i++) {
-        double value=s->mean[i]+lambda*w->correction[i];
+        lambda=fmax(0.,fmin(1.,lambda));if(lambda<1.)lambda*=1.-1e-9;
+        t=lambda*gain;w->correction[i]=t;
+        if(gain!=0) {
+            active=1;minimum=fmin(minimum,lambda);maximum=fmax(maximum,lambda);
+            if(lambda<1.)limited|=1u<<i;
+            if(t==0)blocked|=1u<<i;
+        }
+        if(t!=0)any_gain=1;
+        value=s->mean[i]+t*standard;
         if(!isfinite(value)||value<lower[i]||value>upper[i])return -1;
+        if(t!=0&&standard!=0)s->mean[i]=value;
     }
-    if(lambda!=0)for(i=0;i<D;i++)for(j=0;j<D;j++) {
-        double value=s->factor[AT(i,j)]-a*w->covariance_gradient[i]*w->projected_gradient[j];
-        if(!isfinite(value))return -1;
+    if(!active)maximum=1.;
+    if(!any_gain) {
+        memcpy(s->mean,predicted->mean,sizeof(s->mean));
+        memcpy(s->factor,predicted->factor,sizeof(s->factor));
+    } else {
+        for(i=0;i<D;i++)w->covariance_gradient[i]-=w->correction[i];
+        for(j=0;j<D;j++) {
+            double r,c,rotation;
+            if(w->covariance_gradient[j]==0)continue; /* Includes a zero pivot. */
+            r=hypot(s->factor[AT(j,j)],w->covariance_gradient[j]);
+            if(!isfinite(r)||r<=0)return -1;
+            c=s->factor[AT(j,j)]/r;rotation=w->covariance_gradient[j]/r;
+            s->factor[AT(j,j)]=r;w->covariance_gradient[j]=0.;
+            for(i=j+1;i<D;i++) {
+                double x=s->factor[AT(i,j)],y=w->covariance_gradient[i];
+                double factor=c*x+rotation*y,remainder=-rotation*x+c*y;
+                if(!isfinite(factor)||!isfinite(remainder))return -1;
+                s->factor[AT(i,j)]=factor;w->covariance_gradient[i]=remainder;
+            }
+        }
     }
-    if(lambda!=0)for(i=0;i<D;i++)s->mean[i]+=lambda*w->correction[i];
-    if(lambda!=0)for(i=0;i<D;i++)for(j=0;j<D;j++)
-        s->factor[AT(i,j)]-=a*w->covariance_gradient[i]*w->projected_gradient[j];
-    s->last_innovation_V=innovation;s->last_innovation_variance_V2=sd*sd;s->last_gain_scale=lambda;
-    if(lambda<s->minimum_gain_scale)s->minimum_gain_scale=lambda;
-    if(lambda<1.){s->limited_gain_count++;s->flags|=SCM_ONLINE_FLAG_GAIN_LIMITED;}
-    if(lambda==0)s->zero_gain_count++;
+    s->last_innovation_V=innovation;s->last_innovation_variance_V2=sd*sd;
+    s->last_gain_scale=minimum;s->last_max_gain_scale=maximum;
+    s->last_limited_mask=limited;s->last_blocked_mask=blocked;
+    if(minimum<s->minimum_gain_scale)s->minimum_gain_scale=minimum;
+    if(limited){s->limited_gain_count++;s->flags|=SCM_ONLINE_FLAG_GAIN_LIMITED;}
+    if(!any_gain)s->zero_gain_count++;
     else {s->has_voltage=1;s->evidence_next_index=s->next_index;}
     {
         double clipped=fmin(fabs(standard),1e6),nis=clipped*clipped;
@@ -201,7 +233,7 @@ static int correct(scm_online *s,double voltage,scm_online_workspace *w)
     /* The query voltage is evaluated at the corrected current point. The
      * innovation above remains the pre-correction innovation. */
     if(observation(s,s->last_current_A,&s->last_prediction_V,NULL))return -1;
-    return 0;
+    return scm_online_validate(s)?-1:0;
 }
 
 int scm_online_ingest(scm_online *s,const unsigned char id[SCM_ONLINE_SOURCE_BYTES],
@@ -240,10 +272,13 @@ int scm_online_ingest(scm_online *s,const unsigned char id[SCM_ONLINE_SOURCE_BYT
         *s=*next;return SCM_ONLINE_ACCEPTED_RECOVERY;
     }
     next->prediction_valid=1;
-    if(voltage_present&&correct(next,input->voltage,w)) {
-        next->rejected_voltage_count++;next->flags|=SCM_ONLINE_FLAG_UPDATE_REJECTED;
+    *s=*next; /* The disposable correction cannot overwrite this prediction. */
+    if(voltage_present) {
+        if(correct(s,next,input->voltage,w)) {
+            s->rejected_voltage_count++;s->flags|=SCM_ONLINE_FLAG_UPDATE_REJECTED;
+        } else *s=*next;
     }
-    *s=*next;return SCM_ONLINE_OK;
+    return SCM_ONLINE_OK;
 }
 
 const char *scm_online_status_name(scm_online_status status)
@@ -265,7 +300,8 @@ int scm_online_query(const scm_online *s,scm_online_query_result *out)
     COPY(epoch_begin);COPY(next_index);COPY(evidence_next_index);COPY(prediction_count);COPY(voltage_count);
     COPY(missing_voltage_count);COPY(rejected_voltage_count);COPY(limited_gain_count);COPY(zero_gain_count);COPY(cold_resets);
     COPY(elapsed_s);COPY(epoch_elapsed_s);COPY(last_innovation_V);COPY(last_innovation_variance_V2);
-    COPY(last_gain_scale);COPY(minimum_gain_scale);COPY(innovation_ewma);
+    COPY(last_gain_scale);COPY(last_max_gain_scale);COPY(minimum_gain_scale);COPY(innovation_ewma);
+    COPY(last_limited_mask);COPY(last_blocked_mask);
 #undef COPY
     out->evidence_age_samples=s->next_index-s->evidence_next_index;
     out->state_bytes=sizeof(*s);out->workspace_bytes=sizeof(scm_online_workspace);

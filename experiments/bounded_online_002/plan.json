@@ -1,0 +1,156 @@
+{
+  "schema": "mumble_bounded_online_plan_v2",
+  "status": "frozen_before_primary",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "work_branch": "implementation/bounded-online-002",
+  "baseline_revision": "7ae7740d3a4961a7219a733ac2054730be03a6ba",
+  "milestone": "A4 boundary-aware gain successor, one small falsification",
+  "requirements": "plans/estimation_targets_001.json",
+  "predecessor": {
+    "experiment": "experiments/bounded_online_001/summary.json",
+    "first_failure_preserved": true,
+    "model_source_revision": "28a543e163273975dd782b60fd803649955073a7",
+    "result_revision": "bd2661336e72e84828b274010056ea5ea0b149b1",
+    "measured_blockers": "B control71928/73500 zero gains; A cold wrong narrow capacity despite1434/42000 postreset zero gains. Treat these as separate failures.",
+    "reference_policy": "Use frozen001 and M1 results only; no reference/primary rerun."
+  },
+  "cases": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "path": "data/cell_a_35hz_s202610240.csv",
+      "samples": 73500,
+      "duration_s": 2100.0,
+      "sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8"
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "path": "data/cell_b_35hz_s202610240.csv",
+      "samples": 73500,
+      "duration_s": 2100.0,
+      "sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe"
+    }
+  ],
+  "candidate": {
+    "name": "scm_online",
+    "coordinates": [
+      "log_tau1",
+      "log_tau2",
+      "log_tau3",
+      "log_gamma_plus",
+      "log_gamma_minus",
+      "log_Q_Ah",
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "H",
+      "current_z",
+      "current_v1",
+      "current_v2",
+      "current_v3",
+      "current_h"
+    ],
+    "representation": "Mean16 plus lower-triangular L in existing full256-double array, P=L*L^T; exact numeric zeros above diagonal, nonnegative diagonal, rank deficiency allowed. No history cache.",
+    "belief_semantics": "Local Gaussian, prior-conditioned approximation to sequential nonlinear inference. Historical information is carried in mean/full factor and dynamics; no exact nonlinear historical likelihood or hard support/coverage claim.",
+    "prior_means": "Original public defaulttheta start0: geometric-mid tau bands, gamma150/300,Q.06,z.68. Legacy linear-QP public seed R0/R1/R2/R3=.1,H=.024; currentv1/v2/v3/h=0. No fitted M1 estimates or true values.",
+    "prior_standard_deviations": "Support-coordinate width/sqrt12: log tau bands [.015,.15],[.15,1.5],[1.5,30]; loggamma[5,1200]; logQ[.03,.10]; R[0,1],H[0,.1],enteringz[.2,.95],enteringv[-.08,.08],h[-1,1]. Diagonal initial factor; this is a declared Gaussian scale, not a uniform-support guarantee.",
+    "prediction": "Same actual-interval physical dynamics and sparse F*L. Static-first coordinate order makes F lower-triangular, so initial diagonal L remains lower-triangular; no QR, process noise or forgetting.",
+    "correction": "One Joseph covariance for the actual component-wise selected gain K=t/innovation_sd, full correlations retained; each voltage enters once.",
+    "domain_policy": "For active g_i!=0, compute raw_i=g_i*(innovation/sd). lambda_i starts1 and is independently reduced to available mean distance/raw_i only if raw_i points past a bound; clamp[0,1], apply existing1-1e-9 interior backoff only when lambda_i<1. Set t_i=lambda_i*g_i. Commit mean increment t_i*(innovation/sd), validate it without an independent mean clip.",
+    "factor_formula": "Conceptual A=[[sigma,h^T L],[0,L]]. Descending right rotations j15..0 between noise column and Lcolumn j yield [[sd,0],[g,Lopt]], so Lopt*Lopt^T=P-g*g^T. Then Pnew=Lopt*Lopt^T+(g-t)*(g-t)^T. Ascending rotations j0..15 between lower column j and appended d=g-t produce the full chosen-gain Joseph lower factor.",
+    "mean_support": "Static original supports; current z[0,1],v_i[-.25,.25]V,h[-1,1]. Support checking constrains means; covariance remains local approximate, not truncated posterior.",
+    "input_domain": {
+      "dt_s_min": 0,
+      "dt_s_max": 1,
+      "abs_current_A_max": 0.25,
+      "sigma_V": 0.001,
+      "modes": 3,
+      "temperature_C": 25,
+      "OCV": "existing illustrative known curve"
+    },
+    "work": "At most136 gradient multiply-accumulate terms,16 descending rotations/136 row-pair updates,16 ascending rotations/120 below-pivot row-pair updates and32hypot; fixedO(16^2) plus existing prediction/copies/validation. Not a target cycle bound.",
+    "model_version": 2,
+    "rank_deficiency": "First rotation norm>=sigma>0; second uses hypot(L_jj,d_j), skips identity when d_j==0 and never divides by a bare diagonal. No rank threshold, floor or injected variance.",
+    "transactions": "Validate input and stage physical prediction/known ledger first; commit valid prediction to live state, then mutate only existing workspace.candidate during correction. Commit corrected candidate only after all finite/domain/triangular/metadata/observation checks pass. Any correction failure keeps live prediction and records rejected voltage. Negative input failures remain atomic.",
+    "exact_noop": "If all actual t_i==0, copy the retained predicted mean/factor bytes exactly; do not rely on a round-trip of rotations. Zero innovation with nonzero gain still conditions covariance and advances evidence.",
+    "diagnostics": {
+      "last_gain_scale": "Minimum lambda_i over active g_i!=0;1 if none.",
+      "last_max_gain_scale": "Maximum lambda_i over active g_i!=0;1 if none.",
+      "minimum_gain_scale": "Minimum of last_gain_scale during this belief epoch; coldreset starts1.",
+      "last_limited_mask": "16-bit bit i for active coordinate with lambda_i<1.",
+      "last_blocked_mask": "16-bit bit i for active coordinate with actual selected t_i==0; includes any numerical vanishing of a limited component.",
+      "limited_gain_count": "Cumulative voltage updates with nonzero limited mask.",
+      "zero_gain_count": "Cumulative voltage updates for which all actual t_i are zero, including zero sensitivity; not equivalent to min lambda==0.",
+      "evidence": "Advance only if some t_i is nonzero. No-sensitivity observation adds no belief availability. All counters survive coldreset; suffix counts subtract reset values."
+    },
+    "checkpoint": {
+      "version": 2,
+      "expected_bytes": 2456,
+      "identity": "SCMONLN2 magic, model A4SREKF2; reject v1/nontriangular state explicitly. No conversion/import of predecessor posterior."
+    },
+    "expected_host_objects_bytes": {
+      "state": 2424,
+      "workspace": 2936,
+      "query": 536,
+      "core": 5896,
+      "host_named_fixed": 7064,
+      "note": "Forecast before compile;16B diagnostics appear in state, candidate and query. No new fullmatrix or vector; complete own-stack and runtime/target extras measured separately."
+    }
+  },
+  "execution": {
+    "checkpoint_sample_counts": [
+      420,
+      31500,
+      42000,
+      64750,
+      73500
+    ],
+    "warm_segment_ends": [
+      420,
+      42000,
+      64750,
+      73500
+    ],
+    "cold_reset_sample": 31500,
+    "query_stride_samples": 350,
+    "case_workers": 2,
+    "expected_processes": 12,
+    "expected_input_deliveries": 378000,
+    "new_batch_optimizer_calls": 0,
+    "primary_run_policy": "Run once after source/plan commit. Preserve first outputs and any failures. No full-cell learning during development. Tiny deterministic numerical/fault fixtures are separately disclosed.",
+    "truth_policy": "Inference runner/CLI receives observations and public configuration only. Separate scorer loads truth after every inference process has finished.",
+    "checkpoint": "Fixed2456B version2 complete lower factor/config/diagnostics/ledger. Exact warm restore, no observation assimilation; reject v1.",
+    "cold": "Restorecontrol900s then discardbelief and initialize the declared public prior while plant continues. Source position and known absoluteclock retained; no true hidden state."
+  },
+  "acceptance": {
+    "functional": "Every declared process/delivery completes with explicit finite-state/ordering/lifecycle semantics; exact warmcheckpoint and queryparity excludingruntime timings. No silently lost physical updates or duplicated observation evidence.",
+    "resource": "No heap in inference kernel, no rawhistory, owned persistent/workspace/query bytes constant from first tolast observation; practical initial owned budget8192B before stack/runtime/persistence extras. Record all additional simultaneous costs.",
+    "point_accuracy": {
+      "control_and_warm_samples": [
+        31500,
+        63000,
+        73500
+      ],
+      "cold_samples": [
+        63000,
+        73500
+      ],
+      "hard_capacity_abs_relative_percent_le": 5.0,
+      "hard_current_SOC_abs_error_pp_le": 10.0,
+      "preferred_capacity_percent_le": 0.5,
+      "preferred_current_SOC_pp_le": 0.5
+    },
+    "qualification": "Keep the same local status thresholds and semantics as001. Count all saved-query provisional SOC errors>10pp or capacity errors>5%; promotion requires zero such breaches. This diagnostic is not validated coverage. Report unavailable/unresolved periods and first/sustained point performance separately.",
+    "comparison_reference": "Frozen bounded_online_001 and M1 scores at same positions; no inference reruns. Current-vector chart matches001; M1 entering-state aggregate is separate.",
+    "decision": "Keep/promote only if lifecycle,resource,numerical-health,hard target and provisional-hard-error audit gates all pass. Preferred .5/.5 is reported separately. Fewer stalls alone is not sufficient. Preserve first failure and stop with one measured next blocker; no postscore retuning or duration extension.",
+    "core_owned_bytes_max": 8192,
+    "primary_rejected_voltage_updates_max": 0,
+    "provisional_hard_error_breaches_max": 0
+  },
+  "scope_of_change": "One component-wise feasible measurement gain and its matching general Joseph factor. Representation becomes lower-triangular; diagnostics/checkpoint identity change. Prior means/scales, physical model, supports, data, no-process-noise/no-forgetting policy and local status thresholds unchanged.",
+  "development": "Only decisive deterministic algebra, fault and checkpoint tests plus zero-stream driver smoke before source/plan commit. No full-cell inference before the single primary.",
+  "artifact_io": "Write completed JSON/plot/log artifacts atomically where practical; preserve first outputs and any failure; no streaming rewrite of frozen receipts.",
+  "risk": "Removing global limiter stall may not repair nonlinear Gaussian bias/overconfidence. Orthogonal factor arithmetic has finite tests, not all-prefix stability/coverage or M23 qualification.",
+  "proof_scope": "Independent algebra for chosen-gain Joseph and triangular ordering, meaningful dense-oracle/rank-deficient/fault tests. No new general theorem program."
+}

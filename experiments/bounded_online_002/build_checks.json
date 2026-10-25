@@ -1,0 +1,48 @@
+{
+  "schema": "mumble_bounded_online_build_checks_v2",
+  "verified_utc": "2026-10-25T22:32:00.967775+00:00",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "strict_gate": "experiments/bounded_online_002/strict_gate.json",
+  "strict_command": [
+    "make",
+    "-B",
+    "-j2",
+    "test",
+    "build/scm_online_probe",
+    "online-stack",
+    "CFLAGS=-std=c99 -O3 -Wall -Wextra -Wpedantic -Werror"
+  ],
+  "strict_returncode": 0,
+  "full_suite_passed": true,
+  "focused_address_undefined_sanitizers_passed": true,
+  "sanitizer_commands": "experiments/bounded_online_002/sanitizer_commands.json",
+  "sanitizer_scope": "New online core and checkpoint fixtures only; detect_leaks=0; no leak audit.",
+  "python_compile_passed": true,
+  "diff_check_passed": true,
+  "zero_stream_smoke": {
+    "agent_report": "All eight driver functional validations, fixed-resource and numerical-health gates pass; self-parity 80 scalar fields exact; zero deliveries, observation updates and optimizer calls.",
+    "raw_smoke_in_ignored_build": "build/online_002_zero_smoke_fwg_zdzm/cell_a_35hz_s202610240__zero.jsonl"
+  },
+  "truth_policy": "Only deterministic numerical/fault fixtures before primary; no actual-cell learning or tuning before source freeze.",
+  "optimizer_scope": "One strict full-suite execution includes two tiny legacy session fit calls. New online core/checkpoint/smoke fixtures and the primary use zero batch optimizer calls.",
+  "log_integrity": "Subprocess output captured fully, then written once through fsync and atomic rename; no optional repeat of the test suite.",
+  "host_binary": {
+    "path": "reference_binaries/scm_online_probe_bounded_002",
+    "bytes": 56272,
+    "sha256": "8f5f455f6e61f744a31cbf13888cb2a70e4e670f226f706718aca1d2673e39dd"
+  },
+  "prior_immutable_files": {
+    "count": 385,
+    "changed": 0,
+    "base_revision": "7ae7740d3a4961a7219a733ac2054730be03a6ba"
+  },
+  "artifact_sha256": {
+    "experiments/bounded_online_002/strict_build_test.log": "1de71e54b8c4b0a4f40b80804f9827bc7b39ce606de9819794e1ae3769186da6",
+    "experiments/bounded_online_002/strict_gate.json": "b866ce96c5210691e1a143900d49042f450b9e6035f43138507b8a35ecead0da",
+    "experiments/bounded_online_002/focused_sanitizers.log": "078393a6e39ae093b4a3addc3fad9ea57d3da5fd13ca9da1bb37de763349995a",
+    "experiments/bounded_online_002/sanitizer_commands.json": "56d3e7135c534b2965c283b963793e40c6770dc091b8850c03b8a80f5410f748",
+    "experiments/bounded_online_002/host_stack/online_probe.su": "6f2c745005369075136618c37058419f88e39cd709a770bf2702bee03f579385",
+    "experiments/bounded_online_002/host_stack/scm_online.su": "ff5c70ad47d154066a6d3daaffdb496db6e6420386e7dd33f2ef88e053000358",
+    "experiments/bounded_online_002/host_stack/scm_online_checkpoint.su": "0e9841929f97ede7d25d9c22ef336a4cc6ee083bc8b6f32b8184df6d330a912e"
+  }
+}

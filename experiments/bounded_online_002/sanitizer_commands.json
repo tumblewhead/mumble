@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "command": [
+        "cc",
+        "-Iinclude",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "src/scm_online.c",
+        "src/scm_model.c",
+        "tests/test_online.c",
+        "-lm",
+        "-o",
+        "/tmp/mumble_002_online_sanitized"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/tmp/mumble_002_online_sanitized"
+      ],
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=0"
+      },
+      "returncode": 0
+    },
+    {
+      "command": [
+        "cc",
+        "-Iinclude",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "src/scm_online.c",
+        "src/scm_model.c",
+        "src/scm_online_checkpoint.c",
+        "tests/test_online_checkpoint.c",
+        "-lm",
+        "-o",
+        "/tmp/mumble_002_online_checkpoint_sanitized"
+      ],
+      "returncode": 0
+    },
+    {
+      "command": [
+        "/tmp/mumble_002_online_checkpoint_sanitized"
+      ],
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=0"
+      },
+      "returncode": 0
+    }
+  ],
+  "scope": "Only deterministic online core and checkpoint unit fixtures; no primary streams; address/undefined behavior, not a leak audit.",
+  "log_sha256": "078393a6e39ae093b4a3addc3fad9ea57d3da5fd13ca9da1bb37de763349995a"
+}

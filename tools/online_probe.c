@@ -11,6 +11,7 @@
 
 #define CSV_CAPACITY 256u
 #define MAX_CHECKPOINTS 8u
+#define ALGORITHM_ID "componentwise_feasible_gain_joseph_lower_v2"
 static scm_online state;
 static scm_online_workspace workspace;
 static scm_online_query_result query;
@@ -87,6 +88,7 @@ static int emit_query(const char *reason)
     string(reason);fputs(",\"state\":{\"soc_status\":",stdout);string(scm_online_status_name(query.soc_status));
     fputs(",\"capacity_status\":",stdout);string(scm_online_status_name(query.capacity_status));
     printf(",\"soc_status_code\":%d,\"capacity_status_code\":%d,\"flags\":%u,\"excitation\":%u",query.soc_status,query.capacity_status,query.flags,query.excitation);
+    printf(",\"last_limited_mask\":%u,\"last_blocked_mask\":%u",query.last_limited_mask,query.last_blocked_mask);
 #define U(field) printf(",\"" #field "\":%" PRIu64,query.field)
     U(epoch_begin);U(next_index);U(evidence_next_index);U(evidence_age_samples);
     U(prediction_count);U(voltage_count);U(missing_voltage_count);U(rejected_voltage_count);
@@ -95,7 +97,7 @@ static int emit_query(const char *reason)
 #define R(field) named(#field,query.field)
     R(elapsed_s);R(epoch_elapsed_s);R(current_soc);R(capacity_Ah);R(predicted_voltage_V);
     R(soc_local_lower);R(soc_local_upper);R(capacity_local_lower_Ah);R(capacity_local_upper_Ah);
-    R(last_innovation_V);R(last_innovation_variance_V2);R(last_gain_scale);R(minimum_gain_scale);R(innovation_ewma);
+    R(last_innovation_V);R(last_innovation_variance_V2);R(last_gain_scale);R(last_max_gain_scale);R(minimum_gain_scale);R(innovation_ewma);
 #undef R
 #define I(field) printf(",\"" #field "\":%d",query.field)
     I(point_available);I(capacity_available);I(prediction_available);I(local_ranges_available);
@@ -144,10 +146,10 @@ int main(int argc,char **argv)
     if(code)return error(restore?"restore":"init",code);
     start=state.next_index;if(start>end)return error("end_before_resume",-1);
     for(j=0;j<(int)save_count;j++)if(save_at[j]<=start||save_at[j]>end)return error("checkpoint_outside_segment",-1);
-    printf("{\"event\":\"run\",\"schema\":\"mumble_online_jsonl_v1\",\"source_id\":");string(source);
+    printf("{\"event\":\"run\",\"schema\":\"mumble_online_jsonl_v2\",\"model_version\":%u,\"algorithm\":\"%s\",\"source_id\":",SCM_ONLINE_MODEL_VERSION,ALGORITHM_ID);string(source);
     printf(",\"start_index\":%" PRIu64 ",\"end_index\":%" PRIu64 ",\"restored\":%s,\"cold_reset\":%s,\"query_stride_samples\":%" PRIu64 ",\"dimension\":%d",start,end,restore?"true":"false",cold?"true":"false",stride,SCM_ONLINE_DIM);
     named("sigma_V",config.sigma_V);named("max_dt_s",config.max_dt_s);named("max_abs_current_A",config.max_abs_current_A);
-    printf(",\"host_fixed_owned_bytes\":%zu,\"CSV_line_bytes\":%zu,\"CSV_buffer_bytes\":%zu,\"checkpoint_path_bytes\":%zu,\"checkpoint_count_bytes\":%zu,\"checkpoint_bytes\":%u,\"batch_optimizer_calls\":0,\"truth_input\":false,\"raw_history_retained\":false,\"covariance\":\"P=S*S^T; full square factor; local prior-conditioned Gaussian\",\"temperature\":\"unsupported\",\"EOD\":\"unsupported\"}\n",
+    printf(",\"host_fixed_owned_bytes\":%zu,\"CSV_line_bytes\":%zu,\"CSV_buffer_bytes\":%zu,\"checkpoint_path_bytes\":%zu,\"checkpoint_count_bytes\":%zu,\"checkpoint_bytes\":%u,\"batch_optimizer_calls\":0,\"truth_input\":false,\"raw_history_retained\":false,\"covariance\":\"P=L*L^T; lower triangular factor; local prior-conditioned Gaussian\",\"temperature\":\"unsupported\",\"EOD\":\"unsupported\"}\n",
         fixed_owned_bytes(),sizeof(csv_line),sizeof(csv_buffer),sizeof(checkpoint_path),sizeof(save_at),SCM_ONLINE_CHECKPOINT_BYTES);
     if(cold&&(code=scm_online_cold_reset(&state)))return error("cold_reset",code);
     if((code=emit_query(cold?"cold_reset":restore?"resume":"initial")))return error("query",code);

@@ -11,11 +11,11 @@
 
 #define HEADER_BYTES 32u
 #define PAYLOAD_BYTES (SCM_ONLINE_CHECKPOINT_BYTES-HEADER_BYTES-4u)
-#define MODEL_TAG UINT64_C(0x41345352454b4631) /* A4SREKF1 */
-#if SCM_ONLINE_MODEL_VERSION != 1u
+#define MODEL_TAG UINT64_C(0x41345352454b4632) /* A4SREKF2 */
+#if SCM_ONLINE_MODEL_VERSION != 2u
 #error "Update the online checkpoint model tag for a new model version"
 #endif
-static const unsigned char magic[8]={'S','C','M','O','N','L','N','1'};
+static const unsigned char magic[8]={'S','C','M','O','N','L','N','2'};
 typedef struct {FILE *file;uint32_t crc;size_t count;int reading,error;} codec;
 
 static int binary64_supported(void)
@@ -105,8 +105,9 @@ static void payload(codec *c,scm_online *s)
 #undef U
 #define R(field) real(c,&s->field)
     R(elapsed_s);R(epoch_elapsed_s);R(last_current_A);R(last_prediction_V);R(last_innovation_V);
-    R(last_innovation_variance_V2);R(last_gain_scale);R(minimum_gain_scale);R(innovation_ewma);
+    R(last_innovation_variance_V2);R(last_gain_scale);R(minimum_gain_scale);R(last_max_gain_scale);R(innovation_ewma);
 #undef R
+    natural(c,&s->last_limited_mask);natural(c,&s->last_blocked_mask);
     natural(c,&s->flags);natural(c,&s->excitation);
     integer(c,&s->initialized);integer(c,&s->has_voltage);integer(c,&s->prediction_valid);
 }
@@ -159,9 +160,12 @@ int scm_online_checkpoint_restore(scm_online *s,const scm_online_config *expecte
     f=fopen(path,"rb");if(!f)return SCM_ONLINE_CHECKPOINT_ERR_IO;
     if(setvbuf(f,(char*)work->observation_gradient,_IOFBF,sizeof(work->observation_gradient)))goto done;
     if(fstat(fileno(f),&st)||!S_ISREG(st.st_mode))goto done;
+    if(st.st_size<(off_t)HEADER_BYTES){rc=SCM_ONLINE_CHECKPOINT_ERR_FORMAT;goto done;}
+    c=(codec){f,UINT32_MAX,0,1,0};header(&c);
+    rc=c.error;if(rc)goto done;
     if(st.st_size!=(off_t)SCM_ONLINE_CHECKPOINT_BYTES){rc=SCM_ONLINE_CHECKPOINT_ERR_FORMAT;goto done;}
     memset(&work->candidate,0,sizeof(work->candidate));
-    c=(codec){f,UINT32_MAX,0,1,0};header(&c);payload(&c,&work->candidate);
+    payload(&c,&work->candidate);
     rc=c.error;if(rc)goto done;
     if(c.count!=SCM_ONLINE_CHECKPOINT_BYTES-4){rc=SCM_ONLINE_CHECKPOINT_ERR_FORMAT;goto done;}
     rc=checksum(f,c.crc,1);if(rc)goto done;

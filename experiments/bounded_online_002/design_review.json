@@ -1,0 +1,162 @@
+{
+  "schema": "mumble_bounded_online_002_design_review_v1",
+  "reviewer": "separate design-review agent",
+  "phase": "Pre-primary plan, algebra, core/checkpoint/CLI and runner implementation review complete; root final numerical gates pending.",
+  "plan": "experiments/bounded_online_002/plan.json",
+  "plan_sha256_at_review": "b20b728f1328b14838c8d7aa23d11fbdcd1b2a832d250d4d35d62d90af49ecae",
+  "baseline_revision": "7ae7740d3a4961a7219a733ac2054730be03a6ba",
+  "branch": "implementation/bounded-online-002",
+  "decision": "Accept one component-wise bounded gain with a lower-triangular two-pass square-root array update for the frozen small falsification, subject to implementation and numerical/fault gates. No performance promotion or lifetime/coverage/target claim.",
+  "plan_consistency": {
+    "agreed_algebra_and_semantics": true,
+    "unchanged_predecessor_fields": {
+      "coordinates": true,
+      "prior_means": true,
+      "prior_standard_deviations": true,
+      "mean_support": true,
+      "input_domain": true,
+      "cases": true,
+      "point_accuracy": true,
+      "core_owned_bytes_max": true
+    },
+    "status_thresholds": "Plan explicitly retains predecessor local status thresholds and semantics; source equality to be checked when implementation is ready.",
+    "scope": "One chosen-gain change with the factor representation/diagnostics/checkpoint changes necessary to implement it. No prior, noise, process-noise, forgetting or local-status retuning.",
+    "publication": "Predecessor source versions remain in baseline git history and the bounded_online_001 provenance bundle. Frozen predecessor results are not edited."
+  },
+  "representation": {
+    "coordinates": "Static 11 first: log tau1..3, log gamma+/-, log Q, R0, R1..3, H; current z, v1..3, h last.",
+    "factor": "P=L*L^T with L lower triangular, exactly zero numeric entries above the diagonal, nonnegative diagonal, and zero/rank-deficient pivots admitted. Store in the existing full 256-double array.",
+    "initial": "Same public means and support-width-derived diagonal Gaussian scales as 001; no posterior imported from the predecessor or truth.",
+    "prediction": "The sparse physical Jacobian F is lower triangular in this ordering. F*L is lower triangular, with nonnegative diagonal because dynamic diagonal entries are positive exponential attenuation or one. Finite/domain validation remains mandatory."
+  },
+  "algebra": {
+    "definitions": "P=L*L^T, h=voltage gradient, sigma>0, w=L^T*h, s=sigma^2+w^T*w, sd=sqrt(s), innovation=e.",
+    "measurement_array": "A=[[sigma,w^T],[0,L]]. Then A*A^T=[[s,h^T*P],[P*h,P]].",
+    "first_pass": "Descending right orthogonal rotations j=15..0 eliminate top-row w_j and yield B=[[sd,0],[g,Lopt]]. Since B*B^T=A*A^T, g=P*h/sd and Lopt*Lopt^T=P-g*g^T.",
+    "component_gain": "Set standard=e/sd. Independently choose lambda_i in [0,1] from each coordinate admissible mean movement, with the inherited 1-1e-9 backoff only when constrained. Set t_i=lambda_i*g_i. Compute mean_i_new=mean_i+t_i*standard from this same t_i; no separate final mean clipping.",
+    "actual_gain": "K=t/sd, so the mean update is K*e.",
+    "Joseph_expansion": "(I-K*h^T)*P*(I-K*h^T)^T+sigma^2*K*K^T = P-t*g^T-g*t^T+t*t^T.",
+    "sum_of_squares": "With d=g-t, Joseph Pnew=Lopt*Lopt^T+d*d^T. There is no covariance subtraction or downdate in the implemented factor construction.",
+    "second_pass": "Ascending right rotations j=0..15 compress [Lopt,d] to [Lnew,0]. Orthogonality gives Lnew*Lnew^T=Lopt*Lopt^T+d*d^T, the full Joseph covariance for the actual chosen component gain.",
+    "old_formula": "The predecessor common-scalar rank-one factor formula is not used. A component-dependent gain cannot be substituted into that scalar coefficient.",
+    "scope": "Real-arithmetic chosen-gain identity; floating-point agreement is a separate finite numerical gate."
+  },
+  "shape_and_rank": {
+    "descending_invariant": "Before column j, the carried state noise column g is zero above row j+1; lower column j is zero above row j. Rotating only rows i>=j preserves all previous upper zeros. After rotation the noise column is supported only from row j downward. Its row-j entry was zero, so the new L_jj=c*old_L_jj remains nonnegative.",
+    "descending_rotation": "a starts sigma. r=hypot(a,w_j), c=a/r, q=w_j/r. For i>=j, using both old values, (g_i,L_ij) becomes (c*g_i+q*L_ij, c*L_ij-q*g_i). Set a=r. The eliminated top-row value is conceptual; each original w_j is read once. Current implementation evaluates identity rotations when w_j=0, remaining within the fixed 16-rotation bound.",
+    "ascending_invariant": "Before column j, d_i=0 for i<j and L_ij=0 for i<j. Rotation of column j with d cannot alter those zeros. Set L_jj=hypot(L_jj,d_j)>=0 and d_j=0; rotate only rows i>j.",
+    "singular_safe": "First-pass norm is at least sigma>0. The second pass skips identity when d_j=0, including a zero/zero pivot, and otherwise divides only by hypot(L_jj,d_j)>0. No inverse, bare-diagonal division, rank threshold or variance floor is required.",
+    "rank_increase_witness": "For P=[[1,1],[1,1]], h=(1,0), sigma=1 and t=(0,1/sqrt(2)), the rank-one prior becomes Pnew=[[1,0.5],[0.5,0.5]], which has rank two. The blocked coordinate variance stays one; feasible-coordinate learning and changed correlations are retained. Embed this example in 16 dimensions for a decisive singular test.",
+    "legacy_state": "Version-1 nontriangular factors are incompatible. Version-2 checkpoint identity and lower-factor validation must reject them explicitly; no silent upper-entry discard or posterior conversion."
+  },
+  "transaction_and_noop": {
+    "prediction": "Validate input before mutation. Stage and validate physical prediction and the known-input ledger, then commit that prediction to live state.",
+    "correction": "Mutate only the existing workspace.candidate during both factor passes, mean limiting and diagnostics. Commit corrected candidate only after finite/domain/triangular/metadata and post-correction observation checks succeed.",
+    "failure": "Any correction-stage failure preserves the committed physical prediction and chronology, adds one rejected-voltage count/flag, and discards the prospective correction. Negative invalid-input returns remain atomic; known propagation-loss recovery keeps its declared separate behavior.",
+    "all_gain_zero": "If every actual t_i is zero, copy the retained predicted mean/factor bytes and skip mean writes. Orthogonal round-trip covariance equality is not enough for exact bytewise retention.",
+    "zero_innovation": "An exactly zero innovation with nonzero selected gain still changes covariance and advances evidence. Do not confuse no mean displacement with no information.",
+    "storage": "Prediction and prospective correction occupy the existing live state and candidate state; no third state or full factor is required."
+  },
+  "diagnostics": {
+    "min_max": "last_gain_scale and last_max_gain_scale are the minimum/maximum lambda over active g_i!=0, both one when none. A zero minimum does not imply total stall.",
+    "masks": "limited_mask identifies active lambda_i<1. blocked_mask identifies active actual t_i==0, including numerical disappearance of a limited component.",
+    "counts": "limited_gain_count counts nonempty limited masks. zero_gain_count counts all-zero actual t, including zero sensitivity. Thus zero_gain_count may exceed limited_gain_count; the predecessor inequality must be removed, while each count remains bounded by voltage_count.",
+    "evidence": "Advance the evidence position and availability only if some t_i is nonzero. A no-sensitivity observation does not manufacture availability. Operational counters survive cold reset; post-reset rates subtract the reset counters.",
+    "cold_reset": "Reset belief-epoch minimum gain, last scales/masks and availability consistently with the new public prior; preserve cumulative operational counters."
+  },
+  "necessary_tests": [
+    "Independent dense Joseph versus Lnew*Lnew^T for correlated lower factors, partial zero/interior/full component gains, mixed signs/scales and all-free Kalman equivalence.",
+    "Independent dense prediction covariance and physical/voltage finite differences only where needed for changed representation; verify sparse F preserves exact upper zeros.",
+    "The explicit partial-gain rank-increase witness, singular/zero pivots, zero sensitivity, zero innovation, and exact all-zero-gain mean/factor retention.",
+    "A nuisance coordinate at an outward boundary while SOC/Q remain feasible; verify the final mean and covariance use the same t, including the backoff and near-bound rounding.",
+    "A correction fault after physical prediction commit, including failure in either rotation pass or final validation: retain prediction/ledger and reject only the voltage.",
+    "Version-2 complete checkpoint and fresh-process continuation, new masks/scales/counters, nontriangular/legacy-version rejection and unchanged cold-reset ownership.",
+    "No-sensitivity diagnostics where zero_gain_count exceeds limited_gain_count, zero gain with previously retained evidence, and overflow guards for every cumulative counter."
+  ],
+  "fixed_work_forecast": {
+    "dimension": 16,
+    "gradient_multiply_accumulate_terms_max": 136,
+    "descending_rotations_max": 16,
+    "descending_state_row_pair_updates_max": 136,
+    "ascending_rotations_max": 16,
+    "ascending_below_pivot_row_pair_updates_max": 120,
+    "hypot_calls_max": 32,
+    "other": "Fixed state copies, sparse physical prediction, mean-domain checks and factor/metadata validation remain O(16 squared). Zero-elimination rotations may skip; no history-sized loop, QR of a dense general array, optimizer or adaptive inner iteration.",
+    "scope": "Source-level operation structure, not measured Cortex-M23 instruction count, worst-case time, energy or deadline proof."
+  },
+  "storage_forecast_bytes": {
+    "state": 2424,
+    "workspace": 2936,
+    "query": 536,
+    "core_state_workspace_query": 5896,
+    "host_named_fixed": 7064,
+    "checkpoint": 2456,
+    "additional_full_matrices": 0,
+    "additional_vectors_required": 0,
+    "delta_from_001": "The 16 B of additional diagnostics occur in state, candidate and query, adding 48 B to core/host named storage. The serialized state adds 16 B.",
+    "reuse": "Existing four 16-double vectors hold h, w, g and d; prospective means are staged directly in candidate. Existing persistence buffer reuse remains available.",
+    "scope": "Forecast before compilation; final sizeof, linker placement, own-source stack, library/runtime/acquisition/interrupt/persistence staging and target costs require the separate final memory account. Serialized checkpoint bytes are not a second whole-file RAM buffer.",
+    "owner_measurement_status": "Forecast agrees with checkpoint/driver owner reported measurements: 5896 B core, 7064 B named host, 2456 B checkpoint. Full stack/runtime accounting remains separate."
+  },
+  "limitations": [
+    "Gain limiting depends on the observed innovation. The Joseph identity holds for the chosen gain, but does not prove exact Bayesian constrained covariance, truncated support or calibrated coverage.",
+    "Orthogonal factor arithmetic avoids subtracting covariance matrices but still has finite rounding, cancellation and underflow risks. Validate finite rotations and outputs; use old pair values for both updates. No lifetime stability or availability theorem follows.",
+    "Local Gaussian bias and wrong narrow capacity beliefs remain independent blockers. Cell A cold failed capacity with little post-reset stall in 001; fewer zero gains alone is not success.",
+    "No process noise, variance floor, uncertainty inflation, prior/status retuning or hidden evidence reuse is introduced.",
+    "One frozen 35-minute two-cell harness is a finite falsification. Annual endurance, measured-cell coverage, temperature/aging behavior and full Cortex-M23 qualification remain open."
+  ],
+  "implementation_review": {
+    "status": "accepted for the frozen small falsification; no concrete source blocker found, subject to root final numerical/fault gates",
+    "source_hashes": {
+      "include/scm_online.h": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+      "src/scm_online.c": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+      "tests/test_online.c": "4c11d5fb67539481a374ccacfa12b7aed41ffc2c4a8ff6e4a7709b95fcb8bb2b",
+      "include/scm_online_checkpoint.h": "49b559aa1b4d87887770c018da8b76273e0d6283e3a34fd5f22bddd6ea44c0ee",
+      "src/scm_online_checkpoint.c": "6bf79069d129e9cea668e17b3cffee9472de8661a5f16eacf0a573ad019dd204",
+      "tests/test_online_checkpoint.c": "bfdb14b4d4f021a198ac319250451e10b7aba7aaced3b3bca1e1e280b5050134",
+      "tools/online_probe.c": "d2dab28a9abcefe437ab020f868ee2c9517337bf73c8093c310d742b7e60dffe",
+      "tools/run_bounded_online_002.py": "11799c0d702fcc29806c14997423bde05d5ca2d02d34ef6959061971714dcccf"
+    },
+    "concrete_blockers": [],
+    "findings": [
+      "Descending first and ascending second rotations use saved old pairs and preserve lower shape. Positive sigma and hypot pivots avoid inverse/rank assumptions.",
+      "The exact selected t is used for both staged mean movement and d=g-t. Independent coordinate limiting keeps feasible updates when another coordinate is blocked; no scalar formula or mean-only final clip remains.",
+      "The valid predicted state is committed before correct() touches candidate. Every correction failure returns to the caller which retains that prediction and records only rejected voltage; final observation and full state validation precede correction commit.",
+      "All-zero selected gain restores predicted mean/factor bytes; zero residual with nonzero gain still learns covariance. No-sensitivity diagnostics are unit min/max, zero masks, increased zero_gain_count and no manufactured evidence.",
+      "Upper-zero/nonnegative-diagonal factor validation is explicit. Removed obsolete zero_gain_count<=limited_gain_count; blocked-mask subset limited-mask is sound for active nonzero g.",
+      "Source diff retains prior means/scales, physical equations, supports, noise and local status thresholds. Only new diagnostics/public-reset values, factor/gain/transaction logic and representation validation change.",
+      "Version-2 codec encodes last maximum gain and both masks in 16 additional payload bytes; header magic/model/version and fixed 2456 B record distinguish the new lower-factor semantics. Restore reads and validates the bounded header before size/payload and never mutates the destination before complete integrity/configuration/state validation.",
+      "Checkpoint tests include a complete reconstructed version-1 record with matching old CRC and a version-2 nonlower factor with valid CRC, so semantic rejection is exercised independently of corruption detection. Existing workspace candidate and 128 B stdio vector are reused.",
+      "CLI identifies model 2 and the componentwise feasible Joseph algorithm, emits new masks/extrema, and reports fixed named storage and 2456 B persistence. Its observation-only inputs, source/delivery handling and lifecycle schedule remain inherited.",
+      "Separate 002 runner preserves the original runner. It verifies plan/input/model identities and clean source before inference, refuses existing output directories, snapshots/hashes the binary, runs the same 12-process control/warm/cold schedule and performs no truth access or batch optimization.",
+      "Runner compares complete query state/resources and checkpoint hashes for warm parity, records cold availability reset, checks cumulative rejected-voltage counters and recovery flags, and verifies source/binary/data identities after execution. JSON receipts are atomically replaced; raw first-process output remains streamed and preserved."
+    ],
+    "tests_inspected": "The dense oracle explicitly forms P, independently chosen K, (I-KH)P(I-KH)^T+K R K^T and compares the output covariance and mean. Fixtures cover component bounds, rank deficiency/rank increase, all-zero exact retention, zero residual/sensitivity and a correction fault after trial-factor mutation.",
+    "fault_scope": "The fault fixture exercises rejection after first-pass mutation. Source review verifies every later failure uses the same prediction-preserving caller transaction; no exhaustive branch-fault injection claim.",
+    "reported_core_gate": {
+      "reported_by": "core implementation owner",
+      "checks": 5569,
+      "failures": 0,
+      "max_dense_Joseph_error": 1.3322676295501878e-15,
+      "max_physical_mean_error": 0,
+      "max_factor_derivative_error": 2.211459904088997e-10
+    },
+    "numerical_gate_status": "Implementation owners report focused core and checkpoint checks plus a zero-delivery driver smoke; root owns the final strict suite, ASAN/UBSAN and primary. Reviewer inspected code/tests without executing tests or observations.",
+    "reported_checkpoint_gate": {
+      "reported_by": "checkpoint/CLI/runner owner via root",
+      "checks": 76,
+      "core_bytes": 5896,
+      "host_named_fixed_bytes": 7064,
+      "checkpoint_bytes": 2456,
+      "zero_stream_input_deliveries": 0
+    },
+    "runner_scope": "Read-only inspection of the new runner and its changes from the preserved predecessor. Post-inference scoring is a separate root-owned review; no scorer or primary executed here."
+  },
+  "actions": {
+    "source_edits": 0,
+    "tests": 0,
+    "observations": 0,
+    "primary_runs": 0,
+    "frozen_evidence_edits": 0
+  }
+}

@@ -5,7 +5,9 @@
  * integers and IEEE-754 binary64 values. Version/model/config/source and CRC32
  * detect incompatible or accidentally corrupted records, not malicious edits.
  *
- * Version 1 is 2440 bytes, independent of runtime/history length. No raw journal,
+ * Version 2 is 2456 bytes, independent of runtime/history length. It requires
+ * model 2's lower-triangular factor and rejects version 1 without conversion.
+ * No raw journal,
  * pointers, C padding or timing fields are serialized. Restore decodes into
  * workspace->candidate and validates before replacing the live state. The
  * workspace may change on failure; the destination does not.
@@ -23,8 +25,8 @@
 extern "C" {
 #endif
 
-#define SCM_ONLINE_CHECKPOINT_VERSION 1u
-#define SCM_ONLINE_CHECKPOINT_BYTES 2440u
+#define SCM_ONLINE_CHECKPOINT_VERSION 2u
+#define SCM_ONLINE_CHECKPOINT_BYTES 2456u
 #define SCM_ONLINE_CHECKPOINT_PATH_CAPACITY 512u
 enum {
     SCM_ONLINE_CHECKPOINT_OK=0,
