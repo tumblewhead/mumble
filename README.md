@@ -19,20 +19,33 @@ declared static model, capacity domain and admitted physical trajectory, a
 composed proof establishes successful operation at every finite prefix without
 age-driven range failure or loss of true support.
 
-The small frozen experiment learns capacity, retains it through quiet use and
-learns further after renewed excitation. It passes 45,408 top-level checks and
-7,615 nested assertions, with overlapping summary gates disclosed. Its complete
-owned objects and loose own-source stack total 3,248 host bytes. These results
-assume known fixed RC/OCV, exact represented current/time and supplied hard
-voltage bounds. Physical error validation, the original sixteen-unknown
-estimator, drift/recovery and complete Cortex-M23 qualification remain open.
+The known-RC checkpoint learns capacity, retains it through quiet use and learns
+further after renewed excitation. The current extension admits one fixed
+continuous R/tau box. Six reviewed arguments preserve conditional all-prefix
+containment/availability and bound interval width under a declared future input
+alphabet. The five-case frozen audit passes every sampled soundness check but
+retains **three failed renewed-learning assertions in two corner cases**.
+Overall experimental acceptance remains **false**; the box and learning gates
+were not tuned after observing the failures.
+
+The uncertain provider owns 2,152 host bytes plus a loose 1,320-byte own-source
+stack subtotal, totaling 3,472 bytes. The supplied R/tau box remains unresolved;
+other RC parameters and OCV are known, current/time are exactly represented,
+and voltage errors have supplied hard bounds. Physical premise validation,
+the original sixteen-unknown estimator, drift/recovery and complete Cortex-M23
+qualification remain open.
 
 ## Start here
 
 | Resource | Contents |
 | --- | --- |
+| [Bounded uncertain RC mode](docs/UNCERTAIN_RC_004.md) | Continuous parameter box, all-prefix width/containment proofs, retained learning and three preserved usefulness failures |
+| [Current uncertain-RC contract](proofs/indefinite_stability_004/contract.json) | Fixed nuisance box, interval forcing, immutable evidence semantics and explicit open gates |
+| [Uncertain-RC lemma ledger](proofs/indefinite_stability_004/lemmas.json) | U1-U6 plus the retained-reference coordinate identity |
+| [Compact current outcome summary](experiments/indefinite_stability_004/summary.json) | Selective results, failures, memory and next work; read before the full receipt |
+| [Uncertain-RC primary receipt](experiments/indefinite_stability_004/receipt.json) | Complete frozen evidence; completed with all soundness gates passing and overall acceptance false |
 | [Conditional battery provider](docs/BATTERY_CERTIFICATE_003.md) | Composed all-prefix proof, retained SOC/capacity learning, comparison and complete owned-memory accounting |
-| [Current provider contract](proofs/indefinite_stability_003/contract.json) | Restricted model, integer units, ranges, observation semantics and open gates |
+| [Known-RC provider contract](proofs/indefinite_stability_003/contract.json) | Restricted model, integer units, ranges, observation semantics and historical open gates |
 | [Provider lemma ledger](proofs/indefinite_stability_003/lemmas.json) | Eight arguments plus composed conditional availability |
 | [Provider audit receipt](experiments/indefinite_stability_003/receipt.json) | Frozen short experiment, exact oracle, boundary canaries, retained-history comparison and resources |
 | [Implemented stability contract and lemmas](docs/STABILITY_CONTRACT_002.md) | Exact integer kernels, all-prefix induction arguments, conditional finite evidence semantics and scoped host memory |
@@ -64,15 +77,16 @@ estimator, drift/recovery and complete Cortex-M23 qualification remain open.
 | Bounded Gaussian event summaries | Fixed affine evidence and conditional nonlinear remainder implemented; historical relinearization and floating-point validation remain open |
 | Indefinite-runtime arithmetic contract | Integer charge, attenuation and state enclosures proved under declared inputs; finite-state limitations recorded |
 | Conditional battery certificate provider | Implemented and reviewed; retained capacity learning, outward queries and composed conditional availability demonstrated |
-| Bounded model uncertainty | Next: one uncertain RC mode with a fixed R/tau box, sound forcing/coefficient bounds and a useful all-prefix width recurrence |
+| One bounded uncertain RC mode | Implemented and reviewed; containment/availability and width theorem hold; three renewed-learning assertions remain failed |
+| Static-parameter conditioning | Next: a small fixed partition of the same box with carried state/evidence per subbox, complete cover proof and memory accounting |
 | Complete deployment | Full unknown model, input-error validity, drift, delivery/recovery and target resources remain open |
 
 ## Build and run
 
 The C executable needs a C99 compiler, `make` and `libm`. Python is only needed
 for the combined test target, orchestration, independent validation and plots.
-The separate integer provider test, `make test-certificate`, links without
-libm and is also included in `make test`.
+The separate integer provider targets, `make test-certificate` and
+`make test-certificate-box`, link without libm and are included in `make test`.
 
 ```bash
 git clone https://github.com/tumblewhead/mumble.git
@@ -166,6 +180,7 @@ belong in this repository; chat summaries are supporting context.
 - `src/scm_remainder.c`, `include/scm_remainder.h`: paired chronological ingestion and sparse analytic nonlinear-remainder budget checks.
 - `src/scm_stable.c`, `include/scm_stable.h`: proved integer charge, attenuation, scalar-state and finite-mask kernels.
 - `src/scm_certificate.c`, `include/scm_certificate.h`: conditional battery certificates, contracting SOC0 intervals and outward SOC/capacity queries.
+- `src/scm_certificate_box.c`, `include/scm_certificate_box.h`: one fixed uncertain RC mode with outward forcing/attenuation and the same retained target semantics.
 - `src/main.c`: CSV/JSON host CLI.
 - `tests/`: model, estimator, projection, constraint and qualification checks.
 - `tools/`: data generation, runners, independent scoring and report construction.
@@ -174,14 +189,19 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The current priority is extending the [conditional provider](docs/BATTERY_CERTIFICATE_003.md)
-to one fixed uncertain RC mode. Its R/tau box needs outward forcing and
-coefficient bounds, a width recurrence valid for every finite prefix, and a
-small test that exposes any loss of SOC/capacity precision. The present provider
-already supplies sound target queries, retained conditional learning and an
-in-memory observation transaction under its known-parameter and hard-error
-contract. Physical justification of those premises, full-model composition,
-chronology/delivery, recovery and chart/parameter transport remain open.
+The current priority is investigating the precision plateau in the
+[uncertain-RC provider](docs/UNCERTAIN_RC_004.md). A small fixed partition of the
+same R/tau box can retain more of the relationship between static parameters,
+carried RC state and SOC/capacity evidence. It needs a complete-cover and
+every-containing-cell retention proof plus full storage/staging/stack accounting.
+The original box, five-case stimulus and failed004 learning gates remain the
+comparison baseline; no domain shrink or reset is implied.
+
+The present provider already supplies outward targets, historical retention,
+whole-observation transactions and conditional all-prefix availability under
+its fixed-box and hard-error contract. Physical justification of those premises,
+full-model composition, chronology/delivery, recovery and chart/parameter
+transport remain open. The supplied R/tau box is not learned or adapted.
 
 Finite certified constraints do not claim Gaussian likelihood equivalence.
 The Gaussian reference and earlier local evidence remain unchanged. A finite
@@ -230,9 +250,12 @@ learning while keeping unexcited capacity explicitly unresolved.
 The existing 35 Hz, B001 and B002 results and their interpretations remain
 unchanged. Full-model uncertainty, physical premise validation, delivery and
 recovery, coverage and Cortex-M23 qualification remain open. The historical
-68-byte primitive subtotal is superseded for this provider by 2,128 bytes of
-complete owned objects plus 1,120 bytes of loose own-source stack, still short
-of a complete firmware memory account.
+68-byte primitive subtotal was extended in003 to 2,128 bytes of owned objects
+plus 1,120 bytes of loose own-source stack. The
+[fourth checkpoint](docs/UNCERTAIN_RC_004.md) admits one continuous fixed RC box
+and totals 2,152 plus 1,320 bytes. It proves the conditional lifetime invariants
+while retaining three failed strict-learning assertions from the small audit.
+These subtotals remain short of a complete firmware memory account.
 
 ## Bounded event prototype
 

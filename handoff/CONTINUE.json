@@ -1,11 +1,11 @@
 {
-  "schema": "mumble_continuation_v6",
-  "task": "Continue from the proved conditional battery certificate provider toward full-model indefinite-runtime stability",
+  "schema": "mumble_continuation_v7",
+  "task": "Continue from the bounded uncertain-RC provider; preserve three usefulness failures and improve static-parameter conditioning",
   "authority": {
     "repository": "https://github.com/tumblewhead/mumble",
-    "work_branch": "research/indefinite-numerical-stability-003",
-    "base_revision": "d84db851955b3c3c686d0738939059dbcde3ea9b",
-    "source_revision": "b3ea96e23896c8909f007e878785e479d5957b56",
+    "work_branch": "research/indefinite-numerical-stability-004",
+    "base_revision": "4a990cf923e2e56935a1ffb346215faad05bff66",
+    "source_revision": "beaf30e6da0445c5220701d239b336c6805dacab",
     "main_reference_checkpoint": "0fd443b126579c625aea8c3772ddc28668aa242b",
     "read_first": [
       "AGENTS.md",
@@ -13,110 +13,124 @@
       "PROJECT_STATE.json",
       "handoff/CONTINUE.json"
     ],
-    "prior_handoff": "handoff/archive/CONTINUE_indefinite_stability_002.json",
-    "context_policy": "Fetch current refs; preserve newer/dirty work. Historical commits are provenance, not reset targets. Read selective summaries, not bulk traces.",
-    "publication_status": "Published; fetch current branch refs and preserve newer/dirty work.",
-    "published_source_revision": "21029195cbba79ae0eecee5956f0590cdbce71a7",
-    "published_research_revision": "7c38effe5645cd753a1ced4f81f0509ceaf8cf14",
-    "publication_provenance": "provenance/indefinite_stability_003_publication.json",
-    "original_development_bundle": "provenance/indefinite_stability_003_development.bundle",
-    "publication_semantics": "Published source/research trees equal original local trees. Frozen receipt keeps original source SHA, mapped and bundled in provenance."
+    "prior_handoff": "handoff/archive/CONTINUE_indefinite_stability_003.json",
+    "context_policy": "Fetch current refs; preserve newer/dirty/unrelated work. Historical commits are provenance, not reset targets. Read summary before full receipt; never bulk traces to resume.",
+    "publication_status": "Source/primary complete locally; canonical publication pending."
   },
   "objective": {
     "core": "Estimate stimulus-supported quantities, retain earlier evidence/uncertainty, expose unresolved targets",
     "nominal_Hz": 35,
-    "sample_contract": "Actual represented intervals/current, endpoint voltage, acquisition order and carried physical state",
-    "indefinite_runtime": "Every admitted finite prefix without fixed lifetime horizon; safety, fidelity, retention and conditional usefulness are separate.",
-    "target": "Approximately 10 KiB Cortex-M23; complete system not qualified",
+    "input": "Actual represented intervals/current, endpoint voltage, acquisition order and carried physical state",
+    "lifetime": "Every admitted finite prefix without fixed horizon; safety, fidelity, retention and conditional usefulness remain distinct.",
+    "target": "Approximately10KiB Cortex-M23; complete system not qualified",
     "communication": "Compact JSON/YAML handoffs"
   },
   "evidence": {
-    "report": "docs/BATTERY_CERTIFICATE_003.md",
-    "contract": "proofs/indefinite_stability_003/contract.json",
-    "lemmas": "proofs/indefinite_stability_003/lemmas.json",
-    "header": "include/scm_certificate.h",
-    "source": "src/scm_certificate.c",
-    "plan": "experiments/indefinite_stability_003/plan.json",
-    "receipt": "experiments/indefinite_stability_003/receipt.json",
-    "review": "proofs/indefinite_stability_003/independent_review.json",
-    "build_checks": "experiments/indefinite_stability_003/build_checks.json",
-    "verification": "experiments/indefinite_stability_003/verification.json",
-    "inherited_integer_proof": "docs/STABILITY_CONTRACT_002.md",
-    "prior_obstructions": "docs/INDEFINITE_NUMERICAL_STABILITY_001.md",
+    "summary": "experiments/indefinite_stability_004/summary.json",
+    "report": "docs/UNCERTAIN_RC_004.md",
+    "contract": "proofs/indefinite_stability_004/contract.json",
+    "lemmas": "proofs/indefinite_stability_004/lemmas.json",
+    "header": "include/scm_certificate_box.h",
+    "source": "src/scm_certificate_box.c",
+    "plan": "experiments/indefinite_stability_004/plan.json",
+    "receipt": "experiments/indefinite_stability_004/receipt.json",
+    "review": "proofs/indefinite_stability_004/independent_review.json",
+    "build_checks": "experiments/indefinite_stability_004/build_checks.json",
+    "verification": "experiments/indefinite_stability_004/verification.json",
+    "development_notes": "experiments/indefinite_stability_004/development_notes.json",
+    "known_RC_provider": "docs/BATTERY_CERTIFICATE_003.md",
+    "integer_proof": "docs/STABILITY_CONTRACT_002.md",
+    "obstructions": "docs/INDEFINITE_NUMERICAL_STABILITY_001.md",
     "Gaussian_bounded_comparison": "docs/BOUNDED_EVENT_002.md",
     "retained_history_reference": "report/SCM-35Hz-Results.html"
   },
   "established": {
-    "model": "Known fixed R0 and 3 RC R/tau, exact encoded monotone PWL OCV, exact represented current/time, static unknown SOC0/Q, entering RC box, hard voltage intervals; no hysteresis/drift.",
-    "representation": "64 immutable closed capacity bins; each retains contracting integer SOC0 interval. Shared carried RC, exact net charge, monotone mask; no sample history or lifetime count.",
-    "C1_C3": "Outward signed charge ratio, inherited RC/corrected voltage enclosure, sound PWL inverse including plateaus/knots.",
-    "C4_C5": "Retain every globally compatible point in EVERY original containing cell, including overlaps; outward current SOC/Q hulls.",
-    "C6_C8": "Finite monotone evidence, equal-charge target nonwidening, whole-observation staging/atomic rejection, conditional strip-based capacity learning.",
-    "availability": "For actual Q<=100000microAh and true SOC in[0,1], |P|<=12600000000000<2^44. Under all model/input/storage premises every admitted push succeeds for arbitrary prefix length; age alone causes no range failure/inconsistency.",
-    "primary": "45408 top-level and 7615 nested assertions pass; nested summary overlap disclosed. Source/plan frozen, primary once, no source/gate tuning after freeze.",
-    "learning_microAh": [
+    "model": "At most1 fixed continuous uncertainRC pair; public stress box slowR[54,66]mOhm,tau[27,33]s. OtherRC/R0/OCV known, exact current/time, hard voltage interval, staticSOC0/Q/enteringRC; no drift/hysteresis.",
+    "runtime": "Shared3RC intervals, exact net charge,64 immutable capacity bins with contracting SOC0 strips, outward target queries and whole-bank staged observations; no heap/libm/history/lifetime counter.",
+    "U1_U2": "Endpoint exponential certificates plus signed I*R intervals; monotone target endpoints reuse frozen point-target kernel. Both updates start from SAME original state; validation precedes no-write unity.",
+    "U3": "Wnext<=(AhiW+(D-Alo)F+2Bspan)/D+2. Uniform futureg>0,h,b,Fmax imply W<=min(2B,max(W0,(bFmax+2Bh+2D)/g)); exact identities skipped. Bound computed offline with arbitrary precision.",
+    "U4_U5": "Every full static compatible point survives in EVERY containing capacity cell; inherited retention/query/transaction and Q<=100000microAh,SOC[0,1] charge bound give all-prefix availability.",
+    "U6": "Nominal support remains inside box support when computed coefficient nesting is certified for all admitted ticks; active nominal strips only. Finite alphabet certificate passes.",
+    "primary": "One frozen run, completed as planned, exit1. All soundness gates pass; overall acceptance false because3 usefulness leaf failures in2 corner cases. Counts11501 top-level with2 failed summaries,234658 nested with3 failed leaves; overlap explicit.",
+    "midpoint_Q_microAh": [
       [
         30000,
         100000
       ],
       [
-        63906,
-        66093
+        61718,
+        67187
       ],
       [
-        63906,
-        66093
+        62812,
+        67187
       ],
       [
-        63906,
-        65000
+        62812,
+        66093
       ]
     ],
-    "SOC_widths_grid": [
+    "midpoint_SOC_width_grid": [
       9,
-      46,
-      46,
-      50
+      105,
+      87,
+      131
     ],
-    "reference": "Four restricted SCM_FULL fits converge; at zero charge Q point 60000 microAh has zero logQ Gram row while certificate correctly retains full prior.",
-    "RC_width_nV": "All-time bounds 5.32055,37.06620,2162.77485 for fixed model/domain and active tick alphabet [1000,999,1001,1002,998], arbitrary exact identities.",
-    "memory": "Config 872 + bank 600 + workspace 600 + sample 24 + result 32 = 2128 B; loose own-source stack 1120 B; subtotal 3248 B on host. External/target costs open.",
-    "proof_kind": "Independent written/source-operation review; not machine checked, compiler verified or target certified"
+    "failures": [
+      "R54/tau33 renewed Qwidth3281->3281 and SOC0widthsum27->27",
+      "R66/tau27 renewed Qwidth3281->3281; SOC0widthsum23->22 does improve"
+    ],
+    "width": {
+      "slow_all_prefix_bound_nV_exact": {
+        "numerator": "38689169047040",
+        "denominator": "3709543"
+      },
+      "observed_nV": 1669448,
+      "known_point_observed_nV": 1027,
+      "meaning": "Model ambiguity/correlation loss plus rounding, not numerical drift alone."
+    },
+    "memory": "Config896+bank600+workspace600+input24+output32=2152B; loose own-stack1320B; subtotal3472B host. Complete runtime/acquisition/persistence/target costs open.",
+    "reference": "Frozen SCM_FULL leaves slowR/tau,SOC0/Q free. Public scale2 unit map preserves exact predictions; physical supportR[0,2000]mOhm,tau[3,60]s broader than provider.4/4 converge; zero-charge Gram rank1; later local conditions remain separate from coverage.",
+    "proof_kind": "Independent written/source-operation review; no proof-assistant/compiler/target certification"
   },
   "critical_boundaries": [
-    "Hard voltage interval is a declared premise, not Gaussian sigma or an empirically validated cell guarantee. No truth in inference/config centering/starts/corrections.",
-    "Capacity bins remain fixed; retained SOC0 strips carry finite outer constraints. Nonempty support may contain false positives. No Gaussian likelihood equivalence or multiplicity preservation.",
-    "An all-zero-charge prefix cannot distinguish capacity. Returning to zero after informative history retains exclusions. Current SOC width may grow during charge while history contracts.",
-    "Negative errors leave the complete bank unchanged and do not propagate the sample. Valid contradiction advances physical state and commits sticky empty support. Recovery is not implicit.",
-    "Generic API capacity domain is the union of bins; gaps are not feasible just because the query returns a hull. Availability corollary has the stated capacity upper bound.",
-    "Live immutable config, disjoint storage, ordered admitted input and no concurrent mutation/hardware fault are premises. Delivery, persistence, uncertaincurrent and drift need explicit proofs.",
-    "No silent forgetting, reset error ledger, double counting, unbounded external counter or finite-endurance substitute."
+    "The R/tau box is immutable and remains unresolved; shared intervals can admit fictitious time-varying nuisance choices. Nonempty outer support does not prove exact feasibility.",
+    "Failed strict narrowing remains failed. Plateau does not prove physical unidentifiability or absence of information; finite cells and discarded correlations may be responsible.",
+    "No truth in inference, centering, starts or corrections. Stress box is not calibration; Gaussian sigma is not a hard voltage bound.",
+    "Changing/enlarging/repartitioning the box after exclusions needs a history/transport proof. No silent reset, forgetting, evidence double counting or unbounded external counter.",
+    "Exact current/time and source order remain premises. Current-bias lifetime ambiguity, delivery, persistence and drift are unresolved.",
+    "Future width constants cover ticks998..1002 and abs current<=200000microA, with exact zero-time identities. Generic containment does not require this refined-width premise.",
+    "Negative status does not propagate the observation and leaves bank unchanged; valid contradiction commits dynamics and sticky empty support."
   ],
   "next": {
-    "first_action": "Extend one fixed uncertain RC mode using a declared R/tau box. Derive outward forcing/attenuation and an all-prefix width recurrence; preserve all compatible parameters without resetting evidence.",
-    "small_experiment": "Reuse the short informative/quiet/renewed-excitation shape with predeclared uncertainty. Expose loss of target precision, test truth containment at parameter box boundaries, and compare the unchanged retained-history reference. Keep all failures.",
-    "remaining_gates": [
-      "Validated input/model bounds",
-      "Other unknown dynamics/hysteresis/OCV",
-      "Conditional useful target precision",
-      "Current-bias lifetime ambiguity",
-      "Chronology/persistence/recovery/drift/cover transport",
-      "Complete target resources and proof correspondence",
-      "Physical validation and coverage"
+    "first_action": "Design a small fixed partition of the SAME R/tau box with per-subbox carried RC state and SOC0/capacity evidence. Prove complete-cover/every-containing-cell retention and outward target union; count shared config, all banks, full staging and stack before code.",
+    "small_experiment": "Use the unchanged004 five-case phase traces and failed gates. Compare with004 support and unchanged retained-history reference, expose partial gains and remaining plateaus, preserve every failure. No smaller box or truth-selected subboxes.",
+    "restriction": "Initialize the full partition before the first observation; no in-place upgrade of an already-excluding004 bank without separate proof.",
+    "remaining": [
+      "Conditional useful precision",
+      "Learning nuisance parameters/correlations",
+      "Physical error bounds",
+      "Other unknown modes/hysteresis/OCV",
+      "Current-error lifetime argument",
+      "Drift/transport/delivery/persistence",
+      "Complete target resources and coverage"
     ]
   },
   "preserved": {
-    "reference": "Completed 35 Hz retained-history C study; no campaign rerun",
-    "B001": "Corrected 72/72, fixed affine chart only",
-    "B002": "Original 654/672 and 18 failures retained ; 0.1 NLL unchanged; no updates/reanchor",
-    "stability001": "7/7 mechanisms and finite-state obstructions",
-    "stability002": "3588/3588 arithmetic audit and six lemmas unchanged",
+    "reference": "Completed35Hz C study, no long rerun",
+    "B001": "72/72 fixed affine only",
+    "B002": "654/672 original,18 failures,0.1NLL unchanged",
+    "stability001": "7/7 mechanisms/finite-state obstructions",
+    "stability002": "3588/3588 and six lemmas",
+    "stability003": "45408 top-level+7615 nested, known-RC proof unchanged",
+    "stability004": "3 usefulness failures retained in development and primary; exact development auditor snapshot archived",
     "full_original_estimator_proved": false,
     "coverage_validated": false,
     "Cortex_M23_qualified": false
   },
   "reproduction": {
-    "command": "python3 tools/audit_certificate.py --output experiments/indefinite_stability_003/NEW_RECEIPT.json",
-    "policy": "Refuses existing output; keep primary receipt and frozen sources intact. Finite audits test correspondence; induction supplies the lifetime quantifier."
+    "command": "python3 tools/audit_certificate_box.py --source-revision beaf30e6da0445c5220701d239b336c6805dacab --output experiments/indefinite_stability_004/NEW_RECEIPT.json",
+    "expected_exit": 1,
+    "policy": "Refuses existing output. Keep frozen source and primary intact. Read compact summary first; no rerun needed to resume. Exit1 records preserved usefulness failures, not interrupted execution."
   }
 }

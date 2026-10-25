@@ -1,0 +1,95 @@
+{
+  "schema": "mumble_uncertain_rc_independent_review_v1",
+  "reviewer": "uncertain_rc_proof",
+  "status": "pass_under_declared_contract",
+  "blocking_findings": [],
+  "source_revision": "beaf30e6da0445c5220701d239b336c6805dacab",
+  "method": "Independent derivation and read-only source-operation review. Reviewer read inherited contracts/kernels and new provider, proofs, plan, auditor and reference harness. No edits, tests, builds, primary execution, commits or publication by reviewer. Root separately inspected new operations and selected audit sections.",
+  "theorem_findings": {
+    "U1": "Sound for every real static R/tau inside the declared box. Exact exponential monotonicity selects lower certificate at tau_lo and upper at tau_hi without assuming numerical kernel monotonicity. Signed current reverses R endpoints.",
+    "U2": "Matches C: forcing monotonicity permits two frozen point-target updates from the SAME entering interval. Selected endpoints give the outward rectangle hull; convexity preserves[-B,B], and inherited corner magnitude<=D*B<=2^62. Validation precedes no-write unity and all destination writes.",
+    "U3": "The exact difference decomposition into state, forcing and attenuation terms yields the stated recurrence and geometric all-prefix bound. Uniform future g>0,h,b,Fmax are required; arbitrary exact identities add no rounding. The generic certificate numerator may exceed C integer ranges and correctly uses arbitrary-precision offline arithmetic.",
+    "U4": "Every full static compatible point(R,tau,z0,Q,initialRC) survives in EVERY original capacity cell containing Q, including shared boundaries. RC/voltage/PWL and depletion containment place its initial SOC in both old and new strips. Lost parameter-state/time correlations can retain false positives; R/tau are not learned.",
+    "U5": "Inherited outward targets, equal-charge nonwidening, monotone retained evidence and full-bank transactions transfer. Capacity/SOC-domain-derived charge bound plus convex RC domains and true support give conditional all-prefix OK returns under the complete input/model/storage/execution contract.",
+    "U6": "Sound with the explicit computed-coefficient nesting premise certified over the future alphabet. Rectangle inclusion, directed rounding, PWL inversion and strip intersection preserve active nominal support inside boxed support. Only active nominal SOC0 fields have this semantics; empty support is trivial. No positive contraction margin is required."
+  },
+  "source_findings": [
+    "At most one uncertain mode is counted using OR across R and tau endpoint inequalities.",
+    "Positive ordered tau, ordered bounded R and current_limit*Rhi state-domain admission are validated.",
+    "Signed forcing products use int64, reverse for negative current and are checked before int32 narrowing.",
+    "Both target calls start from the original state and all inputs are validated before unity identity.",
+    "All charge/RC/SOC/evidence updates occur in disjoint staging before final bank assignment.",
+    "Valid contradiction commits propagated dynamics with sticky empty support.",
+    "Charge, PWL, SOC0, mask and query operations match certificate003 modulo names/types."
+  ],
+  "reference_mapping": {
+    "status": "sound_algebraically_and_correctly_implemented",
+    "map": "dt'=dt/2,I'=2I,R'=R/2,tau'=tau/2; Q,z0,V,initialRC unchanged.",
+    "identities": [
+      "dt'/tau'=dt/tau",
+      "I'R'=IR",
+      "I' dt'=I dt"
+    ],
+    "verified": [
+      "Masks leave selected tau/R plusSOC0/Q free and fix only public known quantities.",
+      "Physical tau, R and elapsed physical time multiply internal values by2; CPU time is unchanged.",
+      "Mapped free support physical tau[3,60]s and R[0,2]ohm covers but exceeds the certificate box.",
+      "Free Gram coordinate scales correspond to[1,.1,1,.4] for[logtau,SOC0,logQ,physical R].",
+      "Changed physical default tau starts, broader nuisance support and local-curvature scope are disclosed."
+    ],
+    "limit": "The invariance is real arithmetic, not bitwise floating-point equality. The raw SOC/Q subblock is not marginal precision while R/tau are free."
+  },
+  "audit_findings": {
+    "oracle": "Independent positive-series Fraction exponential enclosure and outward2^-128 state recursion; true continuous R/tau remain fixed per trace. Exact charge/SOC/PWL generation and scoring are separated from provider/solver inputs and starts.",
+    "canaries": "Exact eight-corner helper, signed/current/domain/identity/error cases, every-containing-cell retention, fractional parameters, degenerate003 numerical equality and per-prefix nominal nesting are appropriate finite correspondence checks.",
+    "width": "Exact future-alphabet g,h,b,Fmax enumeration and conservative physical-span/kernel-excess decomposition implement U3. Finite observed width is reported separately.",
+    "freeze": "Primary requires the root-supplied committed source SHA and every listed source/plan/proof byte match. Existing output is refused. Preserved pre004 files are hashed before/after.",
+    "resource_finding": {
+      "issue": "Failed nm/size inspection could yield empty stdout and appear to show no heap/libm imports.",
+      "resolution": "Audit now requires successful inspection commands plus nonempty static stack reports for both core components before accepting resource verification.",
+      "effect": "No stimulus, uncertainty box, numerical threshold or learning gate changed. The earlier development inspection commands had actually succeeded."
+    },
+    "failure_interpretation": "Three development renewed-learning leaf failures remain failures. They are compatible with sound containment and cannot be reclassified as successful useful precision."
+  },
+  "reviewed_sha256": {
+    "include/scm_certificate_box.h": "58a3ff28bd875af48ff1933449e02589334d0bf3b839f82d702e70cb8090a1cf",
+    "src/scm_certificate_box.c": "e1bf5e5b07fb951186f198623afb7c82873b7141f25043649359889b1c32467c",
+    "proofs/indefinite_stability_004/contract.json": "3dd2ccd1eab6aea001cf52ef1e936f8e0c52cd00d085f55f9b4594a62198e853",
+    "proofs/indefinite_stability_004/lemmas.json": "f6627aa62a0898bf2212534791e7f610973314d126ab01752256a0a6baa7f6fd",
+    "tools/audit_certificate_box.py": "fd1cce53d06dd46774b3b6a17258baffd0aefb26972101a93776e607bc4fa74a",
+    "tools/provider_box_reference_probe.c": "cfe901b627af98ed34308d35a427c9d0d776872c739233865828e642242051f4",
+    "experiments/indefinite_stability_004/plan.json": "9be3339e1fa917c18c11c9e338681b965b148c5f954ac4c520c1478f318da0c9"
+  },
+  "format_only_after_review": {
+    "file": "tools/audit_certificate_box.py",
+    "change": "Root removed extra blank lines at EOF before source freeze; all operations unchanged.",
+    "frozen_sha256": "1259e693824cb4e67014800538e2d1b58bbdeb93bdcc33a491137e4d98f46a04",
+    "development_snapshot": "The byte-identical original development source, including original EOF whitespace, remains archived separately."
+  },
+  "primary_outcomes_attested": false,
+  "primary_outcome_evidence": "experiments/indefinite_stability_004/receipt.json",
+  "remaining_limits": [
+    "Written/source-level proof under explicit premises, not proof-assistant, compiler or target certification.",
+    "Finite checks can falsify correspondence but cannot establish the universal prefix quantifier.",
+    "The supplied RC and voltage bounds are research assumptions, not physical calibration or statistical coverage.",
+    "Static nuisance correlation loss, finite capacity resolution, full-model uncertainty, drift/transport and complete firmware resources remain open."
+  ],
+  "outcome_reporting_review": {
+    "status": "Passed with two nonblocking clarifications resolved by root.",
+    "method": "Read-only comparison of human report, README, state, handoff, compact summary and review attribution against primary/build receipts; no tests or primary rerun.",
+    "confirmed": [
+      "Overall acceptance false despite sampled soundness/resource/build passes",
+      "Exactly3 failed usefulness leaves and2 overlapping summaries",
+      "Phase intervals and RC model/rounding width interpretation",
+      "Exact width numerator38689169047040/denominator3709543nV and conservative upward human display",
+      "3472B provider and2562968B final reference owned subtotals with scopes",
+      "Reference broader support, physical output map, local Gram and no coverage claim",
+      "Fixed full-box partition is proposed, not implemented or guaranteed",
+      "Independent-review attribution accurate"
+    ],
+    "resolved_notes": [
+      "The human report now states P=0 at EVERY observation for the no-capacity-discrimination claim.",
+      "Summary/state/handoff include exact rational width or explicitly approximate scalar fields."
+    ]
+  }
+}
