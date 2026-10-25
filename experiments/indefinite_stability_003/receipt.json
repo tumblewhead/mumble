@@ -1,0 +1,1381 @@
+{
+  "schema": "mumble_battery_certificate_audit_receipt_v1",
+  "mode": "primary",
+  "started_utc": "2026-10-25T01:35:01.486019+00:00",
+  "source_revision": "b3ea96e23896c8909f007e878785e479d5957b56",
+  "branch": "research/indefinite-numerical-stability-003",
+  "plan": "experiments/indefinite_stability_003/plan.json",
+  "source_sha256_before": {
+    "proofs/indefinite_stability_003/contract.json": "a2a5f0740b27e491913de73042914ee2e3219ebc1aa1129e0d77aef86b885694",
+    "proofs/indefinite_stability_003/lemmas.json": "e0fa697c566846cdcca3f01c5ec101ee277c92c20ca73de55427c401efa8333a",
+    "include/scm_certificate.h": "2281e779967257dba8938f843b7f7ec8775ebd941bd698146d0184128ed903dd",
+    "src/scm_certificate.c": "911b1360860add6c77d4b58d9a53267ee9a82ee95b545d3f9eb30eb210dc9414",
+    "tests/test_certificate.c": "bfa4fb197540a6ecc5270b9b0035837d4437fa4cccaeb6ab66093dd4ea9d4130",
+    "include/scm_stable.h": "783ca8042850d4ccc5449de31122b7ab2da50280702ad5871e35fc489890415b",
+    "src/scm_stable.c": "b37c688dd15513f3aec59d1d8c0155ef0073ffd1aca7293b32924fb730ce6dad",
+    "tools/audit_stable.py": "e7faf02d1cdb55da6b2c65364dee5528947eb605657781efe39dcd6ecb872424",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "include/scm_features.h": "f5f859cd54fc02290d5deca3795b811f9cfe14a4eeb34e4eb7da5f7fb23842b6",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "src/scm_features.c": "2da1c946b93b622c95ee0482289561265c645207178bc0d453b0cb1c123b5315",
+    "tools/provider_reference_probe.c": "fd98bf7735ca648bade114fe2fee75b1540ad72aa2733dc74cc8cc2101fef10b",
+    "tools/audit_certificate.py": "e0c753595a0e4b75b5aa881c8e09123f8ef2991433d76167b6a4ec80e61d22c4",
+    "experiments/indefinite_stability_003/plan.json": "f215f33dcc62af58cd5bd326c0e4f811ec4f121dcfd29b7dac4e4ef09e514ac4"
+  },
+  "sources_match_commit_before_run": {
+    "proofs/indefinite_stability_003/contract.json": true,
+    "proofs/indefinite_stability_003/lemmas.json": true,
+    "include/scm_certificate.h": true,
+    "src/scm_certificate.c": true,
+    "tests/test_certificate.c": true,
+    "include/scm_stable.h": true,
+    "src/scm_stable.c": true,
+    "tools/audit_stable.py": true,
+    "include/scm_model.h": true,
+    "include/scm_estimator.h": true,
+    "include/scm_features.h": true,
+    "src/scm_model.c": true,
+    "src/scm_estimator.c": true,
+    "src/scm_features.c": true,
+    "tools/provider_reference_probe.c": true,
+    "tools/audit_certificate.py": true,
+    "experiments/indefinite_stability_003/plan.json": true
+  },
+  "old_numerical_source_matches_base": {
+    "include/scm_assess.h": true,
+    "include/scm_estimator.h": true,
+    "include/scm_evidence.h": true,
+    "include/scm_features.h": true,
+    "include/scm_model.h": true,
+    "include/scm_remainder.h": true,
+    "include/scm_stable.h": true,
+    "src/main.c": true,
+    "src/scm_assess.c": true,
+    "src/scm_estimator.c": true,
+    "src/scm_evidence.c": true,
+    "src/scm_features.c": true,
+    "src/scm_model.c": true,
+    "src/scm_remainder.c": true,
+    "src/scm_stable.c": true
+  },
+  "old_evidence_changed": [],
+  "platform": {
+    "system": "Linux",
+    "machine": "x86_64",
+    "release": "6.18.55",
+    "python": "3.12.14",
+    "libc": [
+      "glibc",
+      "2.39"
+    ]
+  },
+  "compiler_version": {
+    "command": [
+      "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": "",
+    "timeout": false,
+    "seconds": 0.0011902490005013533
+  },
+  "commands": {
+    "provider_shared_compile": {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-Iinclude",
+        "-shared",
+        "-fPIC",
+        "src/scm_stable.c",
+        "src/scm_certificate.c",
+        "/tmp/mumble-certificate-audit-na23etxn/abi.c",
+        "-o",
+        "/tmp/mumble-certificate-audit-na23etxn/provider.so"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.19468102500104578
+    },
+    "provider_unit_compile": {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-Iinclude",
+        "src/scm_stable.c",
+        "src/scm_certificate.c",
+        "tests/test_certificate.c",
+        "-o",
+        "/tmp/mumble-certificate-audit-na23etxn/test_certificate"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.2552380159995664
+    },
+    "reference_compile": {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-Iinclude",
+        "src/scm_model.c",
+        "src/scm_features.c",
+        "src/scm_estimator.c",
+        "tools/provider_reference_probe.c",
+        "-lm",
+        "-o",
+        "/tmp/mumble-certificate-audit-na23etxn/provider_reference_probe"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.8678816739993636
+    },
+    "certificate_core_compile": {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-Iinclude",
+        "-fstack-usage",
+        "-c",
+        "src/scm_certificate.c",
+        "-o",
+        "/tmp/mumble-certificate-audit-na23etxn/certificate.o"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.09173071099939989
+    },
+    "stable_core_compile": {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-Iinclude",
+        "-fstack-usage",
+        "-c",
+        "src/scm_stable.c",
+        "-o",
+        "/tmp/mumble-certificate-audit-na23etxn/stable.o"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.06005818099947646
+    },
+    "provider_unit_run": {
+      "command": [
+        "/tmp/mumble-certificate-audit-na23etxn/test_certificate"
+      ],
+      "returncode": 0,
+      "stdout": "certificate tests passed; config=872 bank=600 workspace=600 sample=24 result=32 bytes\n",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.000854947000334505
+    },
+    "certificate_undefined": {
+      "command": [
+        "nm",
+        "-u",
+        "/tmp/mumble-certificate-audit-na23etxn/certificate.o"
+      ],
+      "returncode": 0,
+      "stdout": "                 U __stack_chk_fail\n                 U scm_stable_attenuation_ratio\n                 U scm_stable_charge_push\n                 U scm_stable_interval_step\n                 U scm_stable_mask_apply\n",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.001642612000068766
+    },
+    "certificate_sections": {
+      "command": [
+        "size",
+        "-A",
+        "/tmp/mumble-certificate-audit-na23etxn/certificate.o"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/mumble-certificate-audit-na23etxn/certificate.o  :\nsection              size   addr\n.text                2892      0\n.data                   0      0\n.bss                    0      0\n.rodata.cst16          16      0\n.comment               44      0\n.note.GNU-stack         0      0\n.note.gnu.property     32      0\n.eh_frame             360      0\nTotal                3344\n\n\n",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.0012100479998480296
+    },
+    "stable_undefined": {
+      "command": [
+        "nm",
+        "-u",
+        "/tmp/mumble-certificate-audit-na23etxn/stable.o"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.0015948800009937258
+    },
+    "stable_sections": {
+      "command": [
+        "size",
+        "-A",
+        "/tmp/mumble-certificate-audit-na23etxn/stable.o"
+      ],
+      "returncode": 0,
+      "stdout": "/tmp/mumble-certificate-audit-na23etxn/stable.o  :\nsection              size   addr\n.text                1313      0\n.data                   0      0\n.bss                    0      0\n.rodata                32      0\n.rodata.cst16          32      0\n.comment               44      0\n.note.GNU-stack         0      0\n.note.gnu.property     32      0\n.eh_frame             256      0\nTotal                1709\n\n\n",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.00121247199967911
+    }
+  },
+  "audits": {
+    "chronological_main": {
+      "checks": 45327,
+      "failures": [],
+      "passed": true,
+      "samples": 3675,
+      "checkpoints": [
+        {
+          "charge_code_ticks": "0",
+          "active_mask": "0xffffffffffffffff",
+          "active_cells": 64,
+          "has_support": true,
+          "current_SOC_grid": [
+            34730,
+            34739
+          ],
+          "current_SOC": [
+            0.529937744140625,
+            0.5300750732421875
+          ],
+          "current_SOC_width_grid": 9,
+          "capacity_microAh": [
+            30000,
+            100000
+          ],
+          "capacity_width_microAh": 70000,
+          "sum_active_SOC0_widths_grid": 576,
+          "retained_SOC0_by_active_bin": [
+            [
+              0,
+              34730,
+              34739
+            ],
+            [
+              1,
+              34730,
+              34739
+            ],
+            [
+              2,
+              34730,
+              34739
+            ],
+            [
+              3,
+              34730,
+              34739
+            ],
+            [
+              4,
+              34730,
+              34739
+            ],
+            [
+              5,
+              34730,
+              34739
+            ],
+            [
+              6,
+              34730,
+              34739
+            ],
+            [
+              7,
+              34730,
+              34739
+            ],
+            [
+              8,
+              34730,
+              34739
+            ],
+            [
+              9,
+              34730,
+              34739
+            ],
+            [
+              10,
+              34730,
+              34739
+            ],
+            [
+              11,
+              34730,
+              34739
+            ],
+            [
+              12,
+              34730,
+              34739
+            ],
+            [
+              13,
+              34730,
+              34739
+            ],
+            [
+              14,
+              34730,
+              34739
+            ],
+            [
+              15,
+              34730,
+              34739
+            ],
+            [
+              16,
+              34730,
+              34739
+            ],
+            [
+              17,
+              34730,
+              34739
+            ],
+            [
+              18,
+              34730,
+              34739
+            ],
+            [
+              19,
+              34730,
+              34739
+            ],
+            [
+              20,
+              34730,
+              34739
+            ],
+            [
+              21,
+              34730,
+              34739
+            ],
+            [
+              22,
+              34730,
+              34739
+            ],
+            [
+              23,
+              34730,
+              34739
+            ],
+            [
+              24,
+              34730,
+              34739
+            ],
+            [
+              25,
+              34730,
+              34739
+            ],
+            [
+              26,
+              34730,
+              34739
+            ],
+            [
+              27,
+              34730,
+              34739
+            ],
+            [
+              28,
+              34730,
+              34739
+            ],
+            [
+              29,
+              34730,
+              34739
+            ],
+            [
+              30,
+              34730,
+              34739
+            ],
+            [
+              31,
+              34730,
+              34739
+            ],
+            [
+              32,
+              34730,
+              34739
+            ],
+            [
+              33,
+              34730,
+              34739
+            ],
+            [
+              34,
+              34730,
+              34739
+            ],
+            [
+              35,
+              34730,
+              34739
+            ],
+            [
+              36,
+              34730,
+              34739
+            ],
+            [
+              37,
+              34730,
+              34739
+            ],
+            [
+              38,
+              34730,
+              34739
+            ],
+            [
+              39,
+              34730,
+              34739
+            ],
+            [
+              40,
+              34730,
+              34739
+            ],
+            [
+              41,
+              34730,
+              34739
+            ],
+            [
+              42,
+              34730,
+              34739
+            ],
+            [
+              43,
+              34730,
+              34739
+            ],
+            [
+              44,
+              34730,
+              34739
+            ],
+            [
+              45,
+              34730,
+              34739
+            ],
+            [
+              46,
+              34730,
+              34739
+            ],
+            [
+              47,
+              34730,
+              34739
+            ],
+            [
+              48,
+              34730,
+              34739
+            ],
+            [
+              49,
+              34730,
+              34739
+            ],
+            [
+              50,
+              34730,
+              34739
+            ],
+            [
+              51,
+              34730,
+              34739
+            ],
+            [
+              52,
+              34730,
+              34739
+            ],
+            [
+              53,
+              34730,
+              34739
+            ],
+            [
+              54,
+              34730,
+              34739
+            ],
+            [
+              55,
+              34730,
+              34739
+            ],
+            [
+              56,
+              34730,
+              34739
+            ],
+            [
+              57,
+              34730,
+              34739
+            ],
+            [
+              58,
+              34730,
+              34739
+            ],
+            [
+              59,
+              34730,
+              34739
+            ],
+            [
+              60,
+              34730,
+              34739
+            ],
+            [
+              61,
+              34730,
+              34739
+            ],
+            [
+              62,
+              34730,
+              34739
+            ],
+            [
+              63,
+              34730,
+              34739
+            ]
+          ],
+          "interpretation": "Outer support ranges; no point-estimate accuracy or confidence-coverage claim.",
+          "samples": 175,
+          "stage": "unexcited_rest",
+          "elapsed_s": 5.0,
+          "scorer_only_true_current_SOC": 0.53,
+          "scorer_only_true_capacity_microAh": 64700.0
+        },
+        {
+          "charge_code_ticks": "-147000000000",
+          "active_mask": "0x0000000180000000",
+          "active_cells": 2,
+          "has_support": true,
+          "current_SOC_grid": [
+            35890,
+            35936
+          ],
+          "current_SOC": [
+            0.547637939453125,
+            0.54833984375
+          ],
+          "current_SOC_width_grid": 46,
+          "capacity_microAh": [
+            63906,
+            66093
+          ],
+          "capacity_width_microAh": 2187,
+          "sum_active_SOC0_widths_grid": 14,
+          "retained_SOC0_by_active_bin": [
+            [
+              31,
+              34730,
+              34739
+            ],
+            [
+              32,
+              34734,
+              34739
+            ]
+          ],
+          "interpretation": "Outer support ranges; no point-estimate accuracy or confidence-coverage claim.",
+          "samples": 1400,
+          "stage": "informative_charge",
+          "elapsed_s": 40.0,
+          "scorer_only_true_current_SOC": 0.5480319422977846,
+          "scorer_only_true_capacity_microAh": 64700.0
+        },
+        {
+          "charge_code_ticks": "-147000000000",
+          "active_mask": "0x0000000180000000",
+          "active_cells": 2,
+          "has_support": true,
+          "current_SOC_grid": [
+            35890,
+            35936
+          ],
+          "current_SOC": [
+            0.547637939453125,
+            0.54833984375
+          ],
+          "current_SOC_width_grid": 46,
+          "capacity_microAh": [
+            63906,
+            66093
+          ],
+          "capacity_width_microAh": 2187,
+          "sum_active_SOC0_widths_grid": 14,
+          "retained_SOC0_by_active_bin": [
+            [
+              31,
+              34730,
+              34739
+            ],
+            [
+              32,
+              34734,
+              34739
+            ]
+          ],
+          "interpretation": "Outer support ranges; no point-estimate accuracy or confidence-coverage claim.",
+          "samples": 2450,
+          "stage": "quiet_rest",
+          "elapsed_s": 70.0,
+          "scorer_only_true_current_SOC": 0.5480319422977846,
+          "scorer_only_true_capacity_microAh": 64700.0
+        },
+        {
+          "charge_code_ticks": "-294000000000",
+          "active_mask": "0x0000000080000000",
+          "active_cells": 1,
+          "has_support": true,
+          "current_SOC_grid": [
+            37082,
+            37132
+          ],
+          "current_SOC": [
+            0.565826416015625,
+            0.56658935546875
+          ],
+          "current_SOC_width_grid": 50,
+          "capacity_microAh": [
+            63906,
+            65000
+          ],
+          "capacity_width_microAh": 1094,
+          "sum_active_SOC0_widths_grid": 9,
+          "retained_SOC0_by_active_bin": [
+            [
+              31,
+              34730,
+              34739
+            ]
+          ],
+          "interpretation": "Outer support ranges; no point-estimate accuracy or confidence-coverage claim.",
+          "samples": 3675,
+          "stage": "renewed_charge",
+          "elapsed_s": 105.0,
+          "scorer_only_true_current_SOC": 0.5660638845955693,
+          "scorer_only_true_capacity_microAh": 64700.0
+        }
+      ],
+      "truth_bins": [
+        31
+      ],
+      "max_observed_RC_width_nV": [
+        3,
+        18,
+        1027
+      ],
+      "minimum_measurement_containment_margin_nV": {
+        "numerator": "275202325239788505879285710733729984300880987053",
+        "denominator": "2752033642473089823260042137604425410150400"
+      },
+      "observations_sha256": "35bfbd24a3c5904343025d96a46fe5c03741edd1bb166084df4982d8500b782b"
+    },
+    "conditional_usefulness": {
+      "checks": 7,
+      "failures": [],
+      "passed": true,
+      "precision_threshold_selected": false,
+      "scope": "Predeclared strict narrowing and retention gates; actual finite-grid widths remain explicit."
+    },
+    "inherited_RC_width": {
+      "checks": 21,
+      "failures": [],
+      "passed": true,
+      "modes": [
+        {
+          "mode": 0,
+          "tau_ticks": 1750,
+          "tau_seconds": 0.05,
+          "state_bound_nV": 16777216,
+          "coefficient_enumeration": [
+            {
+              "ticks": 1000,
+              "lower": 2425445840,
+              "upper": 2425445880
+            },
+            {
+              "ticks": 999,
+              "lower": 2426832207,
+              "upper": 2426832246
+            },
+            {
+              "ticks": 1001,
+              "lower": 2424060277,
+              "upper": 2424060315
+            },
+            {
+              "ticks": 1002,
+              "lower": 2422675483,
+              "upper": 2422675523
+            },
+            {
+              "ticks": 998,
+              "lower": 2428219363,
+              "upper": 2428219403
+            }
+          ],
+          "h": 40,
+          "g": 1866747893,
+          "all_time_width_bound_nV": {
+            "numerator": "9932111872",
+            "denominator": "1866747893"
+          },
+          "all_time_width_bound_nV_approx": 5.3205426984778175,
+          "max_observed_width_nV": 3
+        },
+        {
+          "mode": 1,
+          "tau_ticks": 17500,
+          "tau_seconds": 0.5,
+          "state_bound_nV": 16777216,
+          "coefficient_enumeration": [
+            {
+              "ticks": 1000,
+              "lower": 4056421103,
+              "upper": 4056421110
+            },
+            {
+              "ticks": 999,
+              "lower": 4056652905,
+              "upper": 4056652912
+            },
+            {
+              "ticks": 1001,
+              "lower": 4056189313,
+              "upper": 4056189320
+            },
+            {
+              "ticks": 1002,
+              "lower": 4055957537,
+              "upper": 4055957544
+            },
+            {
+              "ticks": 998,
+              "lower": 4056884719,
+              "upper": 4056884726
+            }
+          ],
+          "h": 7,
+          "g": 238082570,
+          "all_time_width_bound_nV": {
+            "numerator": "4412407808",
+            "denominator": "119041285"
+          },
+          "all_time_width_bound_nV_approx": 37.06619773131649,
+          "max_observed_width_nV": 18
+        },
+        {
+          "mode": 2,
+          "tau_ticks": 1050000,
+          "tau_seconds": 30.0,
+          "state_bound_nV": 16777216,
+          "coefficient_enumeration": [
+            {
+              "ticks": 1000,
+              "lower": 4290878794,
+              "upper": 4290878801
+            },
+            {
+              "ticks": 999,
+              "lower": 4290882881,
+              "upper": 4290882888
+            },
+            {
+              "ticks": 1001,
+              "lower": 4290874708,
+              "upper": 4290874715
+            },
+            {
+              "ticks": 1002,
+              "lower": 4290870622,
+              "upper": 4290870629
+            },
+            {
+              "ticks": 998,
+              "lower": 4290886968,
+              "upper": 4290886975
+            }
+          ],
+          "h": 7,
+          "g": 4080321,
+          "all_time_width_bound_nV": {
+            "numerator": "8824815616",
+            "denominator": "4080321"
+          },
+          "all_time_width_bound_nV_approx": 2162.774844430132,
+          "max_observed_width_nV": 1027
+        }
+      ],
+      "premise": "Every future active interval uses a positive tick count from the declared pattern and the same fixed RC model/domain; arbitrary exact zero-time identities may intervene. Current remains within the configuration limit.",
+      "proof_source": "proofs/indefinite_stability_002/lemmas.json:L4",
+      "method": "Finite enumeration certifies g and h over the admitted ratio alphabet; L4 gives all-prefix width. This is not extrapolation from the finite trace.",
+      "unit": "One RC state grid unit is exactly1nV under the represented model; sensor/model error and physical validation remain separate."
+    },
+    "boundary_canaries": {
+      "checks": 53,
+      "failures": [],
+      "passed": true,
+      "cases": {
+        "boundary": {
+          "checks": 7377,
+          "failures": [],
+          "passed": true,
+          "samples": 600,
+          "checkpoints": [],
+          "truth_bins": [
+            31,
+            32
+          ],
+          "max_observed_RC_width_nV": [
+            3,
+            18,
+            359
+          ],
+          "minimum_measurement_containment_margin_nV": {
+            "numerator": "3455979628299718086945655633440883082461811339151",
+            "denominator": "34559927890407812695498983567288958976000000"
+          },
+          "observations_sha256": "97f5bad8d41ca61d3bc00cd2baefcd05fa2eb3e37d9899363d67212cd59680e6"
+        },
+        "signed_charge": {
+          "checks": 52,
+          "failures": [],
+          "passed": true,
+          "samples": 4,
+          "checkpoints": [],
+          "truth_bins": [
+            31,
+            32
+          ],
+          "max_observed_RC_width_nV": [
+            3,
+            3,
+            3
+          ],
+          "minimum_measurement_containment_margin_nV": {
+            "numerator": "24191944355950447778931639934903325628297030609",
+            "denominator": "24191949523285468886849288497102271283200"
+          },
+          "observations_sha256": "10a52cc53540cf071feafd19aa03430e5425a1685a01c11e4cb28252cec36d5c"
+        },
+        "initial_RC_box": {
+          "checks": 146,
+          "failures": [],
+          "passed": true,
+          "samples": 12,
+          "checkpoints": [],
+          "truth_bins": [
+            31
+          ],
+          "max_observed_RC_width_nV": [
+            11301,
+            18891,
+            19982
+          ],
+          "minimum_measurement_containment_margin_nV": {
+            "numerator": "7043514711746942577896501707467275008906962799009",
+            "denominator": "60200735929098839883813421760096805847040000"
+          },
+          "observations_sha256": "35afd84b70ae59878d0e701fa03909f7d57ad778a390c43e53eca3106d7464c0"
+        },
+        "plateau_and_knots": [
+          {
+            "voltage_nV": 3000000000,
+            "expected_SOC_grid": [
+              0,
+              0
+            ],
+            "actual_SOC_grid": [
+              0,
+              0
+            ]
+          },
+          {
+            "voltage_nV": 3400000000,
+            "expected_SOC_grid": [
+              16384,
+              49152
+            ],
+            "actual_SOC_grid": [
+              16384,
+              49152
+            ]
+          },
+          {
+            "voltage_nV": 4000000000,
+            "expected_SOC_grid": [
+              65536,
+              65536
+            ],
+            "actual_SOC_grid": [
+              65536,
+              65536
+            ]
+          }
+        ],
+        "extreme_encoding": {
+          "checks": 40,
+          "failures": [],
+          "passed": true,
+          "samples": 3,
+          "checkpoints": [],
+          "truth_bins": [
+            0
+          ],
+          "max_observed_RC_width_nV": [
+            0,
+            0,
+            0
+          ],
+          "minimum_measurement_containment_margin_nV": {
+            "numerator": "62999996",
+            "denominator": "63"
+          },
+          "observations_sha256": "17b9ab35e133e6655afec0576a7b7c64a1bba6ed88eea6b76722b85b693bc2e1"
+        },
+        "invalid_transition_statuses": [
+          -51,
+          -51,
+          -51,
+          -51,
+          -51
+        ],
+        "uninformative_rest_updates": 32
+      },
+      "constructed_state_scope": "Invalid-query and alias guards use explicit API boundary objects; no physical-history reachability assertion."
+    }
+  },
+  "nonclaims": [
+    "Full16-unknown battery estimator",
+    "Gaussian likelihood equivalence",
+    "Physical sensor/model validation",
+    "Statistical coverage",
+    "Parameter drift or aging",
+    "Persistence and recovery",
+    "End-to-end bounded chronology",
+    "Cortex-M23 qualification",
+    "Empirical proof of infinite duration"
+  ],
+  "development_checks_preceded_primary_freeze": true,
+  "binary_sha256": {
+    "provider.so": "2bb46c35a4f07d3005526c4e5f8052e57ae99a195fe4aaeffe73b2fe7bed1d1a",
+    "test_certificate": "a06376b01a5f329f85302c952bd17dd92ebea8f6efd3b0962aa9ee0bf1e20ad4",
+    "provider_reference_probe": "5bb2302061ef0d62614111f0ee0e04debe2c92bce391a1f660fc9ca8712e6d1c",
+    "certificate.o": "e400a367e012526c46e8ffab2d2214c3d70bef446ee6872a32ee458812d3f998",
+    "stable.o": "102ffffdff1b4c01b27b4f8c026b6293df12e1dedf40b14b724fc9480dee107a"
+  },
+  "retained_history_reference": {
+    "command": {
+      "command": [
+        "/tmp/mumble-certificate-audit-na23etxn/provider_reference_probe",
+        "/tmp/mumble-certificate-audit-na23etxn/public_model.txt",
+        "/tmp/mumble-certificate-audit-na23etxn/observations.txt",
+        "175",
+        "1400",
+        "2450",
+        "3675"
+      ],
+      "returncode": 0,
+      "stdout": "{\"schema\":\"mumble_certificate_retained_reference_v1\",\"method\":\"SCM_FULL\",\"sigma_scale_V\":0.001,\"starts\":3,\"max_iterations\":80,\"fixed_theta_mask\":31,\"fixed_alpha_mask\":511,\"truth_supplied\":false,\"Gaussian_coverage_claim\":false,\"fits\":[{\"samples\":175,\"return_code\":0,\"status\":0,\"termination_reason\":1,\"converged_starts\":3,\"initial_SOC\":0.53000443574402156,\"current_SOC\":0.53000443574402156,\"capacity_Ah\":0.059999999999999998,\"objective\":23.81682395428566,\"objective_full\":23.81682395428566,\"voltage_rmse_V\":0.00052172049390767153,\"projected_gradient\":4.1532792056774947e-10,\"iterations\":12,\"evaluations\":15,\"elapsed_physical_s\":4.9999999999999893,\"charge_Ah\":0,\"elapsed_cpu_s\":0.00078399999999999997,\"data_bytes\":4200,\"payload_bytes\":1400,\"workspace_bytes\":112000,\"retained_bytes\":119672,\"setup_peak_bytes\":119672,\"conditional_raw_Gram_scaled_z0_logQ\":[4692003.9158284441,0,0,0]},{\"samples\":1400,\"return_code\":0,\"status\":0,\"termination_reason\":1,\"converged_starts\":3,\"initial_SOC\":0.5299977516398684,\"current_SOC\":0.54803010655438966,\"capacity_Ah\":0.064698519533195067,\"objective\":189.27496101716989,\"objective_full\":189.27496101716335,\"voltage_rmse_V\":0.00051999307827421183,\"projected_gradient\":3.4785035403108889e-10,\"iterations\":16,\"evaluations\":18,\"elapsed_physical_s\":40.000000000000163,\"charge_Ah\":-0.0011666666666666579,\"elapsed_cpu_s\":0.0078879999999999992,\"data_bytes\":33600,\"payload_bytes\":11200,\"workspace_bytes\":896000,\"retained_bytes\":942872,\"setup_peak_bytes\":942872,\"conditional_raw_Gram_scaled_z0_logQ\":[37536031.32662712,-2963694.1304124868,-2963694.1304124868,356428.04330948635]},{\"samples\":2450,\"return_code\":0,\"status\":0,\"termination_reason\":0,\"converged_starts\":3,\"initial_SOC\":0.52999709561363095,\"current_SOC\":0.54803197930306102,\"capacity_Ah\":0.064689447781158538,\"objective\":331.30223419709637,\"objective_full\":331.30223419709256,\"voltage_rmse_V\":0.00052004884715399382,\"projected_gradient\":7.6446063470841831e-08,\"iterations\":16,\"evaluations\":18,\"elapsed_physical_s\":69.999999999999901,\"charge_Ah\":-0.0011666666666666579,\"elapsed_cpu_s\":0.014213999999999999,\"data_bytes\":58800,\"payload_bytes\":19600,\"workspace_bytes\":1568000,\"retained_bytes\":1648472,\"setup_peak_bytes\":1648472,\"conditional_raw_Gram_scaled_z0_logQ\":[65688054.821596801,-8041294.4388497844,-8041294.4388497844,1272192.3721707405]},{\"samples\":3675,\"return_code\":0,\"status\":0,\"termination_reason\":0,\"converged_starts\":3,\"initial_SOC\":0.52999645157672992,\"current_SOC\":0.56606762107212694,\"capacity_Ah\":0.064686933248201503,\"objective\":496.8027137870879,\"objective_full\":496.8027137870817,\"voltage_rmse_V\":0.00051997002204906431,\"projected_gradient\":1.685516200511319e-07,\"iterations\":16,\"evaluations\":18,\"elapsed_physical_s\":104.99999999999542,\"charge_Ah\":-0.0023333333333333066,\"elapsed_cpu_s\":0.021860999999999998,\"data_bytes\":88200,\"payload_bytes\":29400,\"workspace_bytes\":2352000,\"retained_bytes\":2471672,\"setup_peak_bytes\":2471672,\"conditional_raw_Gram_scaled_z0_logQ\":[98532082.232403502,-16929444.388289783,-16929444.388289783,3766435.7633530577]}],\"completed\":true}\n",
+      "stderr": "",
+      "timeout": false,
+      "seconds": 0.04689377400063677
+    },
+    "input_hashes": {
+      "public_model_sha256": "759a374f0095dc435f70d75e3f42248e88d106bd4442ddc6675472626477ae47",
+      "reference_observations_sha256": "c1852585d20d5b2e6dd3e1afb36fe7f244ea245fa14e2ec0e0dbbd99e1ff0e84",
+      "truth_columns_or_parameters_present": false
+    },
+    "completed": true,
+    "output": {
+      "schema": "mumble_certificate_retained_reference_v1",
+      "method": "SCM_FULL",
+      "sigma_scale_V": 0.001,
+      "starts": 3,
+      "max_iterations": 80,
+      "fixed_theta_mask": 31,
+      "fixed_alpha_mask": 511,
+      "truth_supplied": false,
+      "Gaussian_coverage_claim": false,
+      "fits": [
+        {
+          "samples": 175,
+          "return_code": 0,
+          "status": 0,
+          "termination_reason": 1,
+          "converged_starts": 3,
+          "initial_SOC": 0.5300044357440216,
+          "current_SOC": 0.5300044357440216,
+          "capacity_Ah": 0.06,
+          "objective": 23.81682395428566,
+          "objective_full": 23.81682395428566,
+          "voltage_rmse_V": 0.0005217204939076715,
+          "projected_gradient": 4.1532792056774947e-10,
+          "iterations": 12,
+          "evaluations": 15,
+          "elapsed_physical_s": 4.999999999999989,
+          "charge_Ah": 0,
+          "elapsed_cpu_s": 0.000784,
+          "data_bytes": 4200,
+          "payload_bytes": 1400,
+          "workspace_bytes": 112000,
+          "retained_bytes": 119672,
+          "setup_peak_bytes": 119672,
+          "conditional_raw_Gram_scaled_z0_logQ": [
+            4692003.915828444,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "samples": 1400,
+          "return_code": 0,
+          "status": 0,
+          "termination_reason": 1,
+          "converged_starts": 3,
+          "initial_SOC": 0.5299977516398684,
+          "current_SOC": 0.5480301065543897,
+          "capacity_Ah": 0.06469851953319507,
+          "objective": 189.2749610171699,
+          "objective_full": 189.27496101716335,
+          "voltage_rmse_V": 0.0005199930782742118,
+          "projected_gradient": 3.478503540310889e-10,
+          "iterations": 16,
+          "evaluations": 18,
+          "elapsed_physical_s": 40.00000000000016,
+          "charge_Ah": -0.0011666666666666579,
+          "elapsed_cpu_s": 0.007888,
+          "data_bytes": 33600,
+          "payload_bytes": 11200,
+          "workspace_bytes": 896000,
+          "retained_bytes": 942872,
+          "setup_peak_bytes": 942872,
+          "conditional_raw_Gram_scaled_z0_logQ": [
+            37536031.32662712,
+            -2963694.130412487,
+            -2963694.130412487,
+            356428.04330948635
+          ]
+        },
+        {
+          "samples": 2450,
+          "return_code": 0,
+          "status": 0,
+          "termination_reason": 0,
+          "converged_starts": 3,
+          "initial_SOC": 0.529997095613631,
+          "current_SOC": 0.548031979303061,
+          "capacity_Ah": 0.06468944778115854,
+          "objective": 331.30223419709637,
+          "objective_full": 331.30223419709256,
+          "voltage_rmse_V": 0.0005200488471539938,
+          "projected_gradient": 7.644606347084183e-08,
+          "iterations": 16,
+          "evaluations": 18,
+          "elapsed_physical_s": 69.9999999999999,
+          "charge_Ah": -0.0011666666666666579,
+          "elapsed_cpu_s": 0.014214,
+          "data_bytes": 58800,
+          "payload_bytes": 19600,
+          "workspace_bytes": 1568000,
+          "retained_bytes": 1648472,
+          "setup_peak_bytes": 1648472,
+          "conditional_raw_Gram_scaled_z0_logQ": [
+            65688054.8215968,
+            -8041294.438849784,
+            -8041294.438849784,
+            1272192.3721707405
+          ]
+        },
+        {
+          "samples": 3675,
+          "return_code": 0,
+          "status": 0,
+          "termination_reason": 0,
+          "converged_starts": 3,
+          "initial_SOC": 0.5299964515767299,
+          "current_SOC": 0.5660676210721269,
+          "capacity_Ah": 0.0646869332482015,
+          "objective": 496.8027137870879,
+          "objective_full": 496.8027137870817,
+          "voltage_rmse_V": 0.0005199700220490643,
+          "projected_gradient": 1.685516200511319e-07,
+          "iterations": 16,
+          "evaluations": 18,
+          "elapsed_physical_s": 104.99999999999542,
+          "charge_Ah": -0.0023333333333333066,
+          "elapsed_cpu_s": 0.021861,
+          "data_bytes": 88200,
+          "payload_bytes": 29400,
+          "workspace_bytes": 2352000,
+          "retained_bytes": 2471672,
+          "setup_peak_bytes": 2471672,
+          "conditional_raw_Gram_scaled_z0_logQ": [
+            98532082.2324035,
+            -16929444.388289783,
+            -16929444.388289783,
+            3766435.7633530577
+          ]
+        }
+      ],
+      "completed": true
+    },
+    "comparisons": [
+      {
+        "samples": 175,
+        "stage": "unexcited_rest",
+        "numerically_converged": true,
+        "current_SOC_point": 0.5300044357440216,
+        "capacity_point_microAh": 60000.0,
+        "scorer_only_current_SOC_error_pp": 0.00044357440215359034,
+        "scorer_only_capacity_error_percent": -7.264296754250388,
+        "reference_point_in_certificate_SOC_hull": true,
+        "reference_point_in_certificate_capacity_hull": true
+      },
+      {
+        "samples": 1400,
+        "stage": "informative_charge",
+        "numerically_converged": true,
+        "current_SOC_point": 0.5480301065543897,
+        "capacity_point_microAh": 64698.51953319507,
+        "scorer_only_current_SOC_error_pp": -0.0001835743394962286,
+        "scorer_only_capacity_error_percent": -0.0022882021714520917,
+        "reference_point_in_certificate_SOC_hull": true,
+        "reference_point_in_certificate_capacity_hull": true
+      },
+      {
+        "samples": 2450,
+        "stage": "quiet_rest",
+        "numerically_converged": true,
+        "current_SOC_point": 0.548031979303061,
+        "capacity_point_microAh": 64689.44778115854,
+        "scorer_only_current_SOC_error_pp": 3.700527639871609e-06,
+        "scorer_only_capacity_error_percent": -0.016309457251095782,
+        "reference_point_in_certificate_SOC_hull": true,
+        "reference_point_in_certificate_capacity_hull": true
+      },
+      {
+        "samples": 3675,
+        "stage": "renewed_charge",
+        "numerically_converged": true,
+        "current_SOC_point": 0.5660676210721269,
+        "capacity_point_microAh": 64686.9332482015,
+        "scorer_only_current_SOC_error_pp": 0.0003736476557603119,
+        "scorer_only_capacity_error_percent": -0.02019590695285789,
+        "reference_point_in_certificate_SOC_hull": true,
+        "reference_point_in_certificate_capacity_hull": true
+      }
+    ],
+    "interpretation": "Same observations/known model, separately interpreted Gaussian objective and hard outer intervals. Local solver convergence, truth error, precision and coverage are distinct."
+  },
+  "memory": {
+    "host_object_bytes": {
+      "config": 872,
+      "bank": 600,
+      "workspace": 600,
+      "sample": 24,
+      "result": 32
+    },
+    "simultaneous_config_bank_workspace_sample_result_bytes": 2128,
+    "compiler_stack_frames": [
+      {
+        "component": "certificate",
+        "function": "depletion.isra",
+        "bytes": 8,
+        "kind": "static"
+      },
+      {
+        "component": "certificate",
+        "function": "scm_certificate_config_validate",
+        "bytes": 32,
+        "kind": "static"
+      },
+      {
+        "component": "certificate",
+        "function": "bank_valid",
+        "bytes": 24,
+        "kind": "static"
+      },
+      {
+        "component": "certificate",
+        "function": "scm_certificate_init",
+        "bytes": 640,
+        "kind": "static"
+      },
+      {
+        "component": "certificate",
+        "function": "scm_certificate_push",
+        "bytes": 160,
+        "kind": "static"
+      },
+      {
+        "component": "certificate",
+        "function": "scm_certificate_query",
+        "bytes": 144,
+        "kind": "static"
+      },
+      {
+        "component": "stable",
+        "function": "scm_stable_charge_init",
+        "bytes": 8,
+        "kind": "static"
+      },
+      {
+        "component": "stable",
+        "function": "scm_stable_charge_push",
+        "bytes": 8,
+        "kind": "static"
+      },
+      {
+        "component": "stable",
+        "function": "scm_stable_mask_init",
+        "bytes": 8,
+        "kind": "static"
+      },
+      {
+        "component": "stable",
+        "function": "scm_stable_mask_apply",
+        "bytes": 8,
+        "kind": "static"
+      },
+      {
+        "component": "stable",
+        "function": "scm_stable_attenuation_ratio",
+        "bytes": 56,
+        "kind": "static"
+      },
+      {
+        "component": "stable",
+        "function": "scm_stable_interval_init",
+        "bytes": 8,
+        "kind": "static"
+      },
+      {
+        "component": "stable",
+        "function": "scm_stable_interval_step",
+        "bytes": 16,
+        "kind": "static"
+      }
+    ],
+    "largest_reported_core_frame_bytes": 640,
+    "conservative_sum_all_reported_core_frames_bytes": 1120,
+    "objects_plus_loose_own_stack_subtotal_bytes": 3248,
+    "stack_scope": "Loose sum of all nonrecursive own-source frames, including initialization and all branches; not measured stack high-water. External runtime/interrupt/caller stack is not qualified.",
+    "undefined_symbols": {
+      "certificate": "                 U __stack_chk_fail\n                 U scm_stable_attenuation_ratio\n                 U scm_stable_charge_push\n                 U scm_stable_interval_step\n                 U scm_stable_mask_apply\n",
+      "stable": ""
+    },
+    "heap_imports": [],
+    "libm_imports": [],
+    "object_sections": {
+      "certificate": "/tmp/mumble-certificate-audit-na23etxn/certificate.o  :\nsection              size   addr\n.text                2892      0\n.data                   0      0\n.bss                    0      0\n.rodata.cst16          16      0\n.comment               44      0\n.note.GNU-stack         0      0\n.note.gnu.property     32      0\n.eh_frame             360      0\nTotal                3344\n\n\n",
+      "stable": "/tmp/mumble-certificate-audit-na23etxn/stable.o  :\nsection              size   addr\n.text                1313      0\n.data                   0      0\n.bss                    0      0\n.rodata                32      0\n.rodata.cst16          32      0\n.comment               44      0\n.note.GNU-stack         0      0\n.note.gnu.property     32      0\n.eh_frame             256      0\nTotal                1709\n\n\n"
+    },
+    "complete_backing_configuration_included": true,
+    "scope": "The implemented provider's complete public configuration, live state, staged transaction workspace, input, output and conservative own-source stack subtotal. Acquisition, persistence, delivery protocol and target compiler/runtime remain separate.",
+    "Cortex_M23_qualified": false
+  },
+  "source_sha256_after": {
+    "proofs/indefinite_stability_003/contract.json": "a2a5f0740b27e491913de73042914ee2e3219ebc1aa1129e0d77aef86b885694",
+    "proofs/indefinite_stability_003/lemmas.json": "e0fa697c566846cdcca3f01c5ec101ee277c92c20ca73de55427c401efa8333a",
+    "include/scm_certificate.h": "2281e779967257dba8938f843b7f7ec8775ebd941bd698146d0184128ed903dd",
+    "src/scm_certificate.c": "911b1360860add6c77d4b58d9a53267ee9a82ee95b545d3f9eb30eb210dc9414",
+    "tests/test_certificate.c": "bfa4fb197540a6ecc5270b9b0035837d4437fa4cccaeb6ab66093dd4ea9d4130",
+    "include/scm_stable.h": "783ca8042850d4ccc5449de31122b7ab2da50280702ad5871e35fc489890415b",
+    "src/scm_stable.c": "b37c688dd15513f3aec59d1d8c0155ef0073ffd1aca7293b32924fb730ce6dad",
+    "tools/audit_stable.py": "e7faf02d1cdb55da6b2c65364dee5528947eb605657781efe39dcd6ecb872424",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "include/scm_features.h": "f5f859cd54fc02290d5deca3795b811f9cfe14a4eeb34e4eb7da5f7fb23842b6",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "src/scm_features.c": "2da1c946b93b622c95ee0482289561265c645207178bc0d453b0cb1c123b5315",
+    "tools/provider_reference_probe.c": "fd98bf7735ca648bade114fe2fee75b1540ad72aa2733dc74cc8cc2101fef10b",
+    "tools/audit_certificate.py": "e0c753595a0e4b75b5aa881c8e09123f8ef2991433d76167b6a4ec80e61d22c4",
+    "experiments/indefinite_stability_003/plan.json": "f215f33dcc62af58cd5bd326c0e4f811ec4f121dcfd29b7dac4e4ef09e514ac4"
+  },
+  "sources_unchanged_during_run": true,
+  "audit_seconds": 2.268161070000133,
+  "assertion_counts": {
+    "top_level": 45408,
+    "nested_trace_checks": 7615,
+    "total_including_nested_and_their_summary_gates": 53023,
+    "scope": "The top-level boundary checks include summary gates over nested traces. Counts are finite correspondence evidence, not a lifetime quantifier."
+  },
+  "sampled_provider_soundness_checks_passed": true,
+  "conditional_usefulness_gates_passed": true,
+  "reference_comparison_completed": true,
+  "experiment_completed_as_planned": true,
+  "full_battery_estimator_indefinite_stability_proved": false,
+  "finished_utc": "2026-10-25T01:35:03.757110+00:00"
+}

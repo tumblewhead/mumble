@@ -10,20 +10,34 @@ local affine likelihood. A bounded nonlinear-remainder component now checks
 trial moves against a declared analytic error budget. Cold-start learning,
 historical relinearization and validated floating-point bounds remain open.
 These components are host references, without Cortex-M23 qualification.
-Numerical stability for indefinite runtime is now an explicit proof gate.
-The complete estimator does not yet satisfy it. A concrete contract now has
-implemented integer kernels for exact bounded charge, outward exponential and
-state enclosures, and finite certified-exclusion retention. Six written lemmas
-and a 3,588-check exact-reference audit support this isolated component;
-a sound battery certificate provider and full-system composition remain open.
+Numerical stability for indefinite runtime is an explicit proof gate. A new
+conditional battery provider now combines exact integer charge, outward RC and
+OCV enclosures, fixed capacity bins with contracting initial-SOC intervals,
+and outward current-SOC/capacity queries. Eight reviewed arguments establish
+containment, evidence retention and whole-observation transactions. For the
+declared static model, capacity domain and admitted physical trajectory, a
+composed proof establishes successful operation at every finite prefix without
+age-driven range failure or loss of true support.
+
+The small frozen experiment learns capacity, retains it through quiet use and
+learns further after renewed excitation. It passes 45,408 top-level checks and
+7,615 nested assertions, with overlapping summary gates disclosed. Its complete
+owned objects and loose own-source stack total 3,248 host bytes. These results
+assume known fixed RC/OCV, exact represented current/time and supplied hard
+voltage bounds. Physical error validation, the original sixteen-unknown
+estimator, drift/recovery and complete Cortex-M23 qualification remain open.
 
 ## Start here
 
 | Resource | Contents |
 | --- | --- |
+| [Conditional battery provider](docs/BATTERY_CERTIFICATE_003.md) | Composed all-prefix proof, retained SOC/capacity learning, comparison and complete owned-memory accounting |
+| [Current provider contract](proofs/indefinite_stability_003/contract.json) | Restricted model, integer units, ranges, observation semantics and open gates |
+| [Provider lemma ledger](proofs/indefinite_stability_003/lemmas.json) | Eight arguments plus composed conditional availability |
+| [Provider audit receipt](experiments/indefinite_stability_003/receipt.json) | Frozen short experiment, exact oracle, boundary canaries, retained-history comparison and resources |
 | [Implemented stability contract and lemmas](docs/STABILITY_CONTRACT_002.md) | Exact integer kernels, all-prefix induction arguments, conditional finite evidence semantics and scoped host memory |
-| [Current stability contract](proofs/indefinite_stability_002/contract.json) | Concrete inputs, arithmetic, retention semantics and open integration gates |
-| [Lemma ledger](proofs/indefinite_stability_002/lemmas.json) | Six claims, premises, source correspondence and limits |
+| [Inherited arithmetic contract](proofs/indefinite_stability_002/contract.json) | Concrete inputs, arithmetic, retention semantics and historical integration gates |
+| [Arithmetic lemma ledger](proofs/indefinite_stability_002/lemmas.json) | Six claims, premises, source correspondence and limits |
 | [Integer audit receipt](experiments/indefinite_stability_002/receipt.json) | 3,588 passing exact-reference checks; finite falsification, not an endurance proof |
 | [Indefinite numerical stability](docs/INDEFINITE_NUMERICAL_STABILITY_001.md) | Lifetime proof contract, conditional invariants, finite-state limitations and seven small counterexamples |
 | [Earlier proof contract](proofs/indefinite_stability_001/contract.json) | Preserved initial acceptance gates and evidence/arithmetic questions |
@@ -42,10 +56,23 @@ a sound battery certificate provider and full-system composition remain open.
 | [Results](results/) | Frozen fit outputs, profiles, compression comparison and verification receipts |
 | [Import provenance](provenance/) | Original release hashes and repository portability checks |
 
+## Current roadmap
+
+| Milestone | Status and next boundary |
+| --- | --- |
+| Retained-history 35 Hz reference | Completed and preserved; sixteen unknown quantities, synthetic matched-model evidence |
+| Bounded Gaussian event summaries | Fixed affine evidence and conditional nonlinear remainder implemented; historical relinearization and floating-point validation remain open |
+| Indefinite-runtime arithmetic contract | Integer charge, attenuation and state enclosures proved under declared inputs; finite-state limitations recorded |
+| Conditional battery certificate provider | Implemented and reviewed; retained capacity learning, outward queries and composed conditional availability demonstrated |
+| Bounded model uncertainty | Next: one uncertain RC mode with a fixed R/tau box, sound forcing/coefficient bounds and a useful all-prefix width recurrence |
+| Complete deployment | Full unknown model, input-error validity, drift, delivery/recovery and target resources remain open |
+
 ## Build and run
 
 The C executable needs a C99 compiler, `make` and `libm`. Python is only needed
 for the combined test target, orchestration, independent validation and plots.
+The separate integer provider test, `make test-certificate`, links without
+libm and is also included in `make test`.
 
 ```bash
 git clone https://github.com/tumblewhead/mumble.git
@@ -137,6 +164,8 @@ belong in this repository; chat summaries are supporting context.
 - `src/scm_assess.c`, `include/scm_assess.h`: fixed-workspace per-target qualification.
 - `src/scm_evidence.c`, `include/scm_evidence.h`: bounded fixed-chart event evidence and guards.
 - `src/scm_remainder.c`, `include/scm_remainder.h`: paired chronological ingestion and sparse analytic nonlinear-remainder budget checks.
+- `src/scm_stable.c`, `include/scm_stable.h`: proved integer charge, attenuation, scalar-state and finite-mask kernels.
+- `src/scm_certificate.c`, `include/scm_certificate.h`: conditional battery certificates, contracting SOC0 intervals and outward SOC/capacity queries.
 - `src/main.c`: CSV/JSON host CLI.
 - `tests/`: model, estimator, projection, constraint and qualification checks.
 - `tools/`: data generation, runners, independent scoring and report construction.
@@ -145,17 +174,19 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The current priority is a sound battery certificate provider and target query
-under the [concrete lifetime contract](proofs/indefinite_stability_002/contract.json).
-Exact represented charge and outward scalar-state arithmetic now have written
-all-prefix proofs tied to isolated C kernels. The finite-evidence candidate
-retains certified exclusions at an explicit spatial resolution; its consumer
-is proved conditional on the producer retaining every compatible cell.
-This candidate does not claim Gaussian likelihood equivalence. The Gaussian
-reference and earlier local evidence remain unchanged. The producer's error
-model, useful SOC/capacity queries, chronology, recovery and chart/parameter
-transport remain open. A finite replay or memory bound cannot replace these
-proof obligations; no lifetime horizon is substituted for indefinite operation.
+The current priority is extending the [conditional provider](docs/BATTERY_CERTIFICATE_003.md)
+to one fixed uncertain RC mode. Its R/tau box needs outward forcing and
+coefficient bounds, a width recurrence valid for every finite prefix, and a
+small test that exposes any loss of SOC/capacity precision. The present provider
+already supplies sound target queries, retained conditional learning and an
+in-memory observation transaction under its known-parameter and hard-error
+contract. Physical justification of those premises, full-model composition,
+chronology/delivery, recovery and chart/parameter transport remain open.
+
+Finite certified constraints do not claim Gaussian likelihood equivalence.
+The Gaussian reference and earlier local evidence remain unchanged. A finite
+replay or memory bound cannot replace proof obligations; no lifetime horizon
+is substituted for indefinite operation.
 Subsequent experiments should cover measured OCV, sensor
 offsets, filtered/correlated noise, model mismatch and parameter drift. The current
 study does not validate aging, temperature variation, EOD prediction, or Cortex-M23
@@ -188,11 +219,20 @@ historical cell retention and conditional eventual refinement. The audit checks
 these against exact rational/integer references. Written proofs are independently
 reviewed, without a machine-checked C or compiler-correctness claim.
 
+The [third checkpoint](docs/BATTERY_CERTIFICATE_003.md) supplies the restricted
+battery producer and target query that were open at stability002. It composes
+the integer kernels with immutable capacity bins and contracting SOC0 ranges,
+proves whole-observation transactions, and closes conditional all-prefix
+availability and containment for its declared static physical domain. A frozen
+informative/quiet/renewed-excitation experiment demonstrates retained capacity
+learning while keeping unexcited capacity explicitly unresolved.
+
 The existing 35 Hz, B001 and B002 results and their interpretations remain
-unchanged. Full battery-provider soundness, useful target qualification,
-integrated lifetime invariants, validated coverage and Cortex-M23 qualification
-remain open. The isolated host object subtotal of 68 bytes is not a full
-estimator memory figure.
+unchanged. Full-model uncertainty, physical premise validation, delivery and
+recovery, coverage and Cortex-M23 qualification remain open. The historical
+68-byte primitive subtotal is superseded for this provider by 2,128 bytes of
+complete owned objects plus 1,120 bytes of loose own-source stack, still short
+of a complete firmware memory account.
 
 ## Bounded event prototype
 

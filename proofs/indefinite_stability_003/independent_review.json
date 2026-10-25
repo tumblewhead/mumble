@@ -1,0 +1,82 @@
+{
+  "schema": "mumble_certificate_independent_review_v1",
+  "reviewer": "provider_proof_review",
+  "status": "no_blocking_findings_under_declared_contract",
+  "source_revision": "b3ea96e23896c8909f007e878785e479d5957b56",
+  "review_method": "Independent read-only mathematical and source-operation review, with root review of the implementation and audit. Reviewer did not edit files, run tests, execute the primary audit or commit changes.",
+  "reviewed_artifacts": [
+    "include/scm_certificate.h",
+    "src/scm_certificate.c",
+    "proofs/indefinite_stability_003/contract.json",
+    "proofs/indefinite_stability_003/lemmas.json",
+    "docs/BATTERY_CERTIFICATE_003.md",
+    "tools/audit_certificate.py",
+    "tools/provider_reference_probe.c",
+    "experiments/indefinite_stability_003/plan.json"
+  ],
+  "blocking_findings": [],
+  "provider_findings": {
+    "C1": "Signed depletion division uses the correct capacity endpoint for each sign and outward quotient/remainder correction. All numerator, denominator and intermediate ranges fit the declared integer types.",
+    "C2": "Known fixed R/tau makes the shared RC enclosure valid for all SOC0/capacity cells. The corrected OCV interval adds the correct signed ohmic term and RC endpoints using bounded exact integer sums.",
+    "C3": "Segmentwise PWL inversion rounds outward, includes equal knots/endpoints and retains the full SOC interval of an admitted plateau. The generic OCV premise is continuous and nondecreasing.",
+    "C4": "Nested complete compatible configurations include initial RC state. The SOC0 intersection retains every compatible point in every original cell containing it, including overlaps and shared boundaries. SOC is affine within a constant-current interval, so admitted endpoints cover the continuous interval.",
+    "C5": "The query projects retained SOC0/capacity outer sets with directed depletion bounds and physical-domain clipping. Its hulls are sound outer ranges; nonempty support does not establish exact feasibility.",
+    "C6": "Capacity cells are immutable; active bits only clear and retained SOC0 endpoints only contract. At equal net charge, depletion intervals agree and target hulls cannot widen. All evidence fields have finite fixed ranges and require no lifetime counter.",
+    "C7": "Complete-bank staging and a final assignment give whole-observation failure atomicity under disjoint valid storage and no concurrent mutation. A valid contradiction commits physical propagation and sticky empty support, distinct from a rejected input.",
+    "C8": "Disjoint implied SOC0 strips soundly reject capacity cells. An all-zero-charge prefix applies identical SOC0 constraints to every cell and adds no capacity discrimination. Returning to zero after nonzero-charge history preserves prior exclusions. No convergence time or minimum useful precision is asserted."
+  },
+  "composed_availability_corollary": {
+    "status": "Reviewed and confirmed under explicit premises.",
+    "basis": "For actual Q<=100000 microAh and true z0,z_n in[0,1], |P_n|=126000000*Q*|z0-z_n|<=12600000000000<2^44. The physical domain therefore implies the accumulator range independently of total throughput. Sound state/observation enclosures and the retention induction preserve a true-containing cell and all bank invariants at every admitted prefix.",
+    "conclusion": "Every admitted push succeeds for arbitrarily many observations in this restricted static model. Age alone causes neither range failure nor committed inconsistency.",
+    "premises": [
+      "Valid immutable live configuration and disjoint initialized storage, with no concurrent mutation or hardware faults.",
+      "Exact represented current/time, acquisition order and supplied initial-state/parameter domains.",
+      "Known fixed dynamic parameters and encoded OCV, with true SOC remaining in the declared domain.",
+      "Every supplied voltage interval contains the exact model terminal voltage.",
+      "Available exact-width integer types and conforming C99 source semantics."
+    ]
+  },
+  "audit_findings": {
+    "independent_oracle": "The inherited positive-series rational exponential oracle is independent of the C alternating-polynomial implementation. Outward quantization to2^-128 and exact integer corner transport preserve enclosure for both signs. Charge, SOC and encoded PWL calculations use exact integers/Fractions.",
+    "generated_observations": "Before inference, each generated observation is checked to contain the entire independent noiseless voltage enclosure. Truth remains in generation/scoring.",
+    "exact_query": "An independent four-corner rational projection checks the C target hull, directed rounding, charge signs and physical-domain clipping.",
+    "boundary_retention": "Every capacity cell containing generated truth is checked at every prefix, including its retained SOC0 interval. The65000 microAh boundary must retain both cells31 and32. An uncertain initial-RC canary exercises admitted box endpoints and midpoint.",
+    "inherited_RC_width": "Enumeration covers every tick count in the declared future alphabet. Exact maximum span h and minimum contraction gap g are correctly composed with stability002 L4. The all-time statement explicitly requires that future alphabet and fixed model/domain; observed finite widths remain separate.",
+    "reference_isolation": "The retained-history probe receives public model and observation files without true SOC0 or capacity. Fixed masks leave exactly SOC0/logQ free; starts are public defaults. Main-case initial RC states are publicly fixed zero. The slight outward SOC-prior grid expansion is disclosed.",
+    "freeze": "Primary mode rejects uncommitted listed sources and existing output, records before/after source hashes and preserves old numerical sources/evidence. Development checks are disclosed. Top-level and nested assertions are counted separately because summary gates overlap nested evidence.",
+    "memory_scope": "The provider accounting includes backing configuration and owned bank/workspace/input/output. Arbitrary-precision oracle objects and caches belong only to the host generator/scorer, outside provider execution. External runtime and target costs remain open."
+  },
+  "resolved_review_points": [
+    "State the live immutable configuration and disjoint initialization-storage premises explicitly.",
+    "Distinguish fraction SOC z,z0 from grid coordinates x=Z*z,x0=Z*z0; T, S and R use grid units.",
+    "Define the generic capacity domain as the union of bins, including possible overlaps/gaps; its min/max hull does not fill feasible gaps.",
+    "Distinguish a prefix with zero charge at every observation from a return to zero after informative history.",
+    "Separate generic bounded-prefix arithmetic from the stronger Q<=100000 microAh physical-domain availability corollary."
+  ],
+  "primary_outcomes_attested": false,
+  "primary_outcome_evidence": "experiments/indefinite_stability_003/receipt.json",
+  "proof_kind": "Written mathematical and source-level proof with independent review; not proof-assistant, compiler or target certification.",
+  "remaining_limits": [
+    "Finite checks exercise selected configurations and can falsify correspondence; the universal prefix quantifier comes from induction and range arguments.",
+    "The restricted known-parameter model and hard error bounds are declared premises, not empirical physical-cell guarantees.",
+    "The representation can retain false positives and lose correlations; arbitrary useful precision and exact Gaussian evidence equivalence are not proved.",
+    "The original16-unknown estimator, hysteresis, uncertain OCV, drift, current bias, chronology/delivery, persistence and parameter transport remain separate work.",
+    "Complete Cortex-M23 resources, timing, power and statistical coverage remain unqualified."
+  ],
+  "outcome_reporting_review": {
+    "method": "Read-only comparison of report, README, state, handoff and review attribution against primary/build receipts; no independent primary execution.",
+    "numerical_or_scope_blockers": [],
+    "verified": [
+      "Phase capacity/SOC hulls and conditional retention interpretation",
+      "45408 top-level and7615 nested assertions with overlap disclosed",
+      "2128B objects+1120B loose own-source stack=3248B and external exclusions",
+      "RC all-time width versus finite observed width and tick-alphabet premise",
+      "Restricted convergence-versus-identification comparison",
+      "One uncertain-RC mode as next extension",
+      "Review attribution and no primary-execution attestation"
+    ],
+    "documentation_finding": "Two older README roadmap paragraphs still called the provider and integrated conditional invariant current open work.",
+    "resolution": "Root replaced those paragraphs with the stability003 restricted closure and current uncertain-RC next step; the older stability002 limitations are explicitly historical. No frozen source/plan/gate/receipt changes."
+  }
+}

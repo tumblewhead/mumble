@@ -1,7 +1,7 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "integer_stability_lemmas_closed_provider_and_composition_open",
+  "stage": "conditional_battery_provider_all_prefix_proof_and_small_learning_audit_complete_full_model_open",
   "objective": "Learn quantities supported by available stimulus, carry evidence forward, expose unresolved targets, then reduce to bounded-memory Cortex-M23 execution.",
   "nominal_rate_Hz": 35,
   "current_model": {
@@ -48,7 +48,14 @@
     "stability_002_audit": "experiments/indefinite_stability_002/receipt.json",
     "stability_002_review": "proofs/indefinite_stability_002/independent_review.json",
     "stability_002_build_checks": "experiments/indefinite_stability_002/build_checks.json",
-    "stability_002_verification": "experiments/indefinite_stability_002/verification.json"
+    "stability_002_verification": "experiments/indefinite_stability_002/verification.json",
+    "stability_003_report": "docs/BATTERY_CERTIFICATE_003.md",
+    "stability_003_contract": "proofs/indefinite_stability_003/contract.json",
+    "stability_003_lemmas": "proofs/indefinite_stability_003/lemmas.json",
+    "stability_003_audit": "experiments/indefinite_stability_003/receipt.json",
+    "stability_003_review": "proofs/indefinite_stability_003/independent_review.json",
+    "stability_003_build_checks": "experiments/indefinite_stability_003/build_checks.json",
+    "stability_003_verification": "experiments/indefinite_stability_003/verification.json"
   },
   "completed": {
     "main_cases": 6,
@@ -68,7 +75,7 @@
   "limits": [
     "Accuracy crossings refer only to requested checkpoints and this stimulus.",
     "Local ranges and finite-grid profiles are not coverage or global-identification certificates.",
-    "Matched synthetic model with exact current/time, known OCV and iid1mV voltage noise.",
+    "Original35Hz study: matched synthetic model with exact current/time, known OCV and iid1mV voltage noise. Certificate003 instead declares a separate hard bounded-voltage contract.",
     "Full fit retains and replays history; allocation is about49.4MB at73500samples.",
     "Explicit event projection bases cost memory and CPU; no MCU resource qualification.",
     "No aging, temperature, sensor-bias, model-mismatch or EOD validation yet.",
@@ -84,17 +91,20 @@
     "Seven new counterexample mechanisms use scalar or constructed API boundary states; no physical-history reachability or endurance claim.",
     "Relative rank cutoff can hide unchanged old finite information as unrelated information grows, even in exact arithmetic.",
     "Finite-certificate semantics retain certified cell exclusions at fixed spatial resolution; they are an explicit research alternative, not Gaussian likelihood equivalence.",
-    "The certificate provider, physical error model, useful SOC/capacity query and static-to-drifting parameter transport remain open. Gaussian sigma is not a hard residual bound.",
-    "The new 68-byte primitive-object subtotal and host stack reports exclude the provider, cell geometry, complete estimator and target runtime; no full-system fit is claimed."
+    "Certificate003 now proves a known-RC/OCV provider and outward SOC/capacity query under explicit hard-error premises; physical error validation, full16-unknown inference and static-to-drifting transport remain open. Gaussian sigma is not a hard residual bound.",
+    "Historical stability002 primitive subtotal68B excluded provider/configuration. Certificate003 includes those objects:2128B plus loose own-source stack1120B=3248B on host; complete firmware/runtime remains unqualified.",
+    "Certificate003 capacity bins carry contracting SOC0 intervals. Support can retain false positives; nonempty outer support does not prove exact feasibility.",
+    "Composed conditional availability follows for Q<=100000microAh and true SOC in[0,1]: represented net charge stays below2^44 regardless of lifetime throughput. Every admitted push retains true support under the fixed-model and hard-voltage premises.",
+    "All-time useful RC width additionally uses a certified active tick alphabet. Useful target precision has no universal deadline or arbitrarily small width guarantee; currentSOC width can grow as capacity uncertainty propagates."
   ],
   "next_work": [
-    "Develop one concrete finite battery parameter cover, sound certificate provider and outward SOC/capacity query under the selected explicit certificate semantics. Retain every cell intersecting the compatible set; justify observation error assumptions without converting old Gaussian precision into hard exclusions.",
-    "Close unit conversion, uncertain forcing targets and parameter-ratio enclosures; prove required full-model state/sensitivity invariants and conditional useful target tolerances.",
-    "Demonstrate nonvacuous informative/quiet/renewed-excitation learning with earlier certified constraints retained; compare with the frozen retained-history Gaussian reference while disclosing semantic differences.",
-    "Prove per-observation transaction, bounded chronology/delivery, persistence/recovery and parameter/chart transport. Include all external metadata in complete memory accounting.",
-    "Extend source-level proof correspondence to the selected compiler and target; retain B002 0.1NLL criterion and original18 failures unchanged.",
-    "Reduce and schedule complete workspaces; validate measured OCV, sensor errors, correlated noise, mismatch, temperature/drift/age and coverage.",
-    "Qualify Cortex-M23 SRAM, stack, arithmetic, cycles, flash and power; finite campaigns do not replace all-prefix induction."
+    "Extend one fixed uncertain RC mode with a bounded R/tau box, outward forcing/coefficient intervals and an all-prefix width recurrence. Retain every compatible configuration and test the same informative/quiet/renewed-excitation phases without retuning away failures.",
+    "Develop experimentally justified voltage/current/model error contracts. A per-sample current bound alone does not bound lifetime charge ambiguity; do not convert Gaussian sigma or prior local precision into hard exclusions.",
+    "Extend conditional SOC/capacity learning to unknown dynamics, hysteresis and uncertain OCV while quantifying finite-grid and lost-correlation conservatism.",
+    "Prove bounded chronology/delivery, persistence/recovery and static-to-drifting parameter or cover transport. The new provider closes only the in-memory whole-observation transaction under source-delivery premises.",
+    "Preserve frozen Gaussian/reference evidence and B002 original18 failures and0.1NLL criterion. New finite-certificate semantics do not imply Gaussian likelihood equivalence.",
+    "Extend written source proofs to chosen compiler/target and qualify complete Cortex-M23 SRAM, caller/interrupt/runtime stack, arithmetic, timing, flash and power.",
+    "Validate measured OCV, sensor errors, correlated noise, mismatch, temperature, drift/age and coverage; finite experiments do not replace the all-prefix argument."
   ],
   "handoff_format": "compact_JSON",
   "continuation_handoff": "handoff/CONTINUE.json",
@@ -231,5 +241,86 @@
     "published_source_revision": "354ed1f430cd31af453b68c52dd8af9db4fa9945",
     "published_research_revision": "e22a347d794d8ea4eee47cc5f1487f29a3f397ff",
     "publication_provenance": "provenance/indefinite_stability_002_publication.json"
+  },
+  "indefinite_stability_003": {
+    "work_branch": "research/indefinite-numerical-stability-003",
+    "base_revision": "d84db851955b3c3c686d0738939059dbcde3ea9b",
+    "source_revision": "b3ea96e23896c8909f007e878785e479d5957b56",
+    "scope": "Known fixed R0/threeRC/encodedPWL OCV, exact represented current/time, static unknown initialSOC/Q and supplied initialRC box, hard bounded voltage; no hysteresis/drift.",
+    "representation": "Up to64 immutable capacity bins with monotonically contracting outward SOC0 intervals; shared carriedRC state, exact bounded netcharge and target hulls.",
+    "lemmas": [
+      "C1 signed charge ratio",
+      "C2 RC/voltage enclosure",
+      "C3 PWL inverse",
+      "C4 every-compatible-point retention",
+      "C5 outward targets",
+      "C6 finite monotone evidence/equal-charge nonwidening",
+      "C7 whole-observation transaction",
+      "C8 conditional learning"
+    ],
+    "composed_conditional_availability_proved": true,
+    "availability_scope": "For actual Q<=100000microAh and SOC trajectory[0,1], |P|<=12600000000000<2^44. All declared input/model/storage premises required. No age-driven range failure or loss of true support.",
+    "proof_kind": "Written independently reviewed mathematics and source operations; not machine checked, compiler verified or target certified.",
+    "primary_receipt_sha256": "8c119ba09227d80a9ac1e7bfec883b89e7722756b36622326f4da456ad5ed475",
+    "top_level_checks": 45408,
+    "nested_trace_checks": 7615,
+    "failed_checks": 0,
+    "count_scope": "Some top-level gates summarize nested checks; finite correspondence evidence, not a lifetime quantifier.",
+    "samples": 3675,
+    "physical_seconds": 105,
+    "phase_capacity_hulls_microAh": [
+      [
+        30000,
+        100000
+      ],
+      [
+        63906,
+        66093
+      ],
+      [
+        63906,
+        66093
+      ],
+      [
+        63906,
+        65000
+      ]
+    ],
+    "phase_SOC_widths_grid": [
+      9,
+      46,
+      46,
+      50
+    ],
+    "capacity_unexcited_control_passed": true,
+    "quiet_retention_passed": true,
+    "renewed_learning_passed": true,
+    "retained_history_fits_converged": 4,
+    "zero_charge_logQ_Gram_row_zero": true,
+    "all_time_RC_width_bounds_nV_approx": [
+      5.3205426984778175,
+      37.06619773131649,
+      2162.774844430132
+    ],
+    "RC_width_premise": "Fixed model/domain and future active ticks in[1000,999,1001,1002,998], with arbitrary exact zero-time identities; actual declared current bound.",
+    "host_complete_owned_objects_bytes": 2128,
+    "host_largest_core_frame_bytes": 640,
+    "host_loose_sum_core_frames_bytes": 1120,
+    "host_objects_and_own_stack_subtotal_bytes": 3248,
+    "memory_scope": "Includes full backing configuration, bank, stagedworkspace, input, output and loose source-stack sum. Acquisition/protocol/persistence/caller/interrupt/runtime and target codegen additional.",
+    "unit_suite_passed": true,
+    "targeted_address_undefined_sanitizers_passed": true,
+    "certificate_provider_proved": true,
+    "outward_battery_query_implemented": true,
+    "full_original_estimator_proved": false,
+    "Gaussian_likelihood_equivalent": false,
+    "physical_error_bounds_validated": false,
+    "coverage_validated": false,
+    "MCU_qualified": false,
+    "reference_and_frozen_results_unchanged": true,
+    "publication_status": "local_committed_source_primary_complete_publication_pending",
+    "report": "docs/BATTERY_CERTIFICATE_003.md",
+    "contract": "proofs/indefinite_stability_003/contract.json",
+    "lemmas_path": "proofs/indefinite_stability_003/lemmas.json"
   }
 }

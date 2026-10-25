@@ -20,6 +20,13 @@ The source-level guarantees quantify over every finite prefix satisfying these
 assumptions. Physical validity of the assumptions, compiler correctness,
 recovery and target qualification remain separate obligations.
 
+The primary experiment passed its declared soundness and usefulness gates.
+Capacity narrowed from 30-100 mAh to 63.906-66.093 mAh, retained that range through
+quiet use, and narrowed to 63.906-65.000 mAh after renewed excitation. A composed
+availability argument now proves that age alone cannot exhaust this provider's
+arithmetic or eliminate true support on an admitted stream. This conclusion
+uses the model and observation premises, rather than the duration of the test.
+
 Branch: research/indefinite-numerical-stability-003.
 Base: d84db851955b3c3c686d0738939059dbcde3ea9b.
 
@@ -32,6 +39,9 @@ Base: d84db851955b3c3c686d0738939059dbcde3ea9b.
 | [Tests](../tests/test_certificate.c) | Boundary, plateau, transaction and retention checks |
 | [Audit plan](../experiments/indefinite_stability_003/plan.json) | Source-frozen small falsification specification |
 | [Primary receipt](../experiments/indefinite_stability_003/receipt.json) | Exact-reference checks, target ranges, comparison fits and memory |
+| [Independent review](../proofs/indefinite_stability_003/independent_review.json) | Provider proofs, availability corollary, source operations and audit review |
+| [Build checks](../experiments/indefinite_stability_003/build_checks.json) | Integration suite and targeted address/undefined-behavior checks |
+| [Verification](../experiments/indefinite_stability_003/verification.json) | Frozen-source, receipt, archive and earlier-evidence integrity |
 | [Earlier arithmetic proof](STABILITY_CONTRACT_002.md) | Charge, exponential and scalar-state kernels inherited unchanged |
 
 ## 1. The representation and why it changed
@@ -333,21 +343,159 @@ same encoded PWL model and observations. Its Gaussian objective scale does not
 turn the bounded-error trace into Gaussian evidence, and its point estimates
 and convergence status are reported separately from certificate widths.
 
-Detailed primary outcomes, comparisons and complete owned-object memory costs
-are recorded after the source freeze. Full application and target-runtime costs
-remain outside this host qualification.
+### Frozen primary experiment
+
+Source and plan were committed at
+`b3ea96e23896c8909f007e878785e479d5957b56` before primary execution. The primary
+receipt SHA-256 is
+`8c119ba09227d80a9ac1e7bfec883b89e7722756b36622326f4da456ad5ed475`.
+All 17 listed source, proof and plan files matched that commit and remained
+unchanged during the run. The audit completed once in about 2.27 seconds.
+
+The 3,675-observation trace spans 105 seconds. Its actual tick pattern is
+1000, 999, 1001, 1002, 998 at 35,000 ticks/s, preserving nominal 35 Hz and the
+individual intervals. It begins with 5 seconds of zero current, uses 35 seconds
+at -120,000 microA, rests for 30 seconds, then repeats the 35-second charge.
+This is a synthetic laboratory stimulus, not hardware operating guidance.
+
+The public model uses R0=20 milliohm, R=[30,40,60] milliohm,
+tau=[0.05,0.5,30] seconds, an exact nine-knot encoded PWL OCV, and known zero
+entering RC voltages for the main comparison. Each observation supplies a
+hard +/-1 mV interval. The deterministic generator perturbation is at most
+0.9 mV, and the independent oracle checks the complete noiseless enclosure
+against every supplied interval. This is an explicit bounded-error assumption;
+the original study's Gaussian 1 mV scale does not justify it.
+
+The 64 capacity bins partition 30-100 mAh with shared closed endpoints.
+The provider SOC0 prior [13107,62260]/65536 outward-encloses the reference
+prior [0.2,0.95] by less than one grid unit at each endpoint. This small support
+difference is included in the comparison interpretation.
+
+| Phase endpoint | Time (s) | Active bins | Capacity hull (mAh) | Current-SOC grid hull | SOC width (percentage points) |
+| --- | ---: | ---: | --- | --- | ---: |
+| Unexcited rest | 5 | 64 | [30,100] | [34730,34739]/65536 | 0.01373 |
+| Informative charge | 40 | 2 | [63.906,66.093] | [35890,35936]/65536 | 0.07019 |
+| Quiet rest | 70 | 2 | [63.906,66.093] | [35890,35936]/65536 | 0.07019 |
+| Renewed charge | 105 | 1 | [63.906,65.000] | [37082,37132]/65536 | 0.07629 |
+
+Both informative phases pass the predeclared strict capacity-narrowing and
+persistent-evidence-narrowing gates. Quiet use preserves both target hulls.
+Current-SOC width can grow during charging because uncertain capacity affects
+the conversion of accumulated charge into SOC. Historical SOC0 constraints
+still contract, and capacity cells never return. Monotone historical evidence
+does not require monotone width for a changing physical target.
+
+The source-level arguments are supported by 45,408 passing top-level assertions
+and 7,615 passing assertions inside nested canary traces, with no failures.
+Some top-level gates summarize those nested traces; these counts are not
+independent experiments. Checks include shared capacity boundaries, signed
+charge and return to zero, uncertain entering RC states, OCV plateaus and
+knots, extreme legal integer encodings, partial versus complete SOC-domain
+exit, rejected-input atomicity, sticky contradiction and uninformative rest.
+All tested modeled truth states remain enclosed. Universal containment follows
+from C1-C7, not from the number of sampled cases.
+
+Development checks preceded the freeze. The first reference-harness compilation
+reported a misleading-indentation warning under strict flags; formatting was
+corrected before numerical execution. The development numerical run then passed.
+No provider arithmetic, numerical tolerance or usefulness gate was tuned in
+response to a failed numerical run. The primary receipt is preserved unchanged.
+
+### Retained-history comparison
+
+All four restricted SCM_FULL fits converged numerically. Their capacity point
+estimates were 60.000000, 64.698520, 64.689448 and 64.686933 mAh. All point SOC and
+capacity estimates lay inside the provider hulls, a descriptive observation
+rather than a hard-set soundness gate.
+
+The first fit is an important control: at zero charge its conditional log-Q
+Gram row and column are exactly zero, although it reports convergence and a
+60 mAh capacity point. The provider leaves the complete 30-100 mAh range
+unresolved. Convergence therefore cannot be used as capacity identification.
+After excitation, the reference point estimates are useful comparisons, while
+their local curvature remains distinct from hard interval support or validated
+coverage.
+
+Synthetic scoring truth is SOC0=0.53 and Q=64.7 mAh. It is absent from both
+inference inputs and all starts. The final reference current SOC is
+0.5660676211, with scoring error 0.00037365 percentage points, and its capacity
+error is -0.02020 percent. Those errors describe this matched synthetic case;
+they do not establish physical accuracy or interval coverage.
+
+### Width bounds that do not grow with runtime
+
+For every future active interval in the declared tick alphabet, finite exact
+coefficient enumeration supplies the contraction gap g and coefficient span h
+required by stability002 lemma L4. Arbitrarily many exact zero-time identities
+may intervene. With the same RC model/domain and admitted current, the theorem
+gives the following widths for every finite prefix:
+
+| RC time constant (s) | Proved numerical interval width bound (nV, approximate) | Maximum observed width in the finite trace (nV) |
+| ---: | ---: | ---: |
+| 0.05 | 5.32055 | 3 |
+| 0.5 | 37.06620 | 18 |
+| 30 | 2162.77485 | 1027 |
+
+The exact rational bounds are in the receipt. These are represented-model
+numerical widths in 1 nV grid units. Sensor error, model mismatch and parameter
+uncertainty require their own budgets. The bounds are not extrapolated from
+the 105-second trace and do not apply to arbitrary future tick alphabets
+without checking the contraction premise.
+
+### Complete owned objects and scoped host stack
+
+| Simultaneous object | Host bytes |
+| --- | ---: |
+| Full backing configuration, including capacity bins and OCV knots | 872 |
+| Persistent bank | 600 |
+| Staged observation workspace | 600 |
+| Input sample | 24 |
+| Query result | 32 |
+| **Owned-object subtotal** | **2128** |
+| Loose sum of every reported nonrecursive core stack frame | 1120 |
+| **Objects plus own-source stack subtotal** | **3248** |
+
+The largest reported individual frame is 640 bytes during initialization.
+Summing every reported frame, including mutually exclusive branches and
+initialization, is a deliberately loose own-source bound; it is not a measured
+stack high-water mark. The new provider and inherited integer core import no
+heap allocation or libm functions and contain no mutable global data. Their
+host object files have 4,205 bytes of text and 80 bytes of read-only constants;
+these are not target flash measurements. The compiler adds an external
+`__stack_chk_fail` failure path whose runtime cost is not qualified here.
+
+For comparison, the retained-history API reports 119,672, 942,872, 1,648,472
+and 2,471,672 retained bytes at the four prefixes. Those are that API's reported
+problem allocations, not complete process memory, and the inference semantics
+differ. The fixed provider subtotal includes its full configuration rather
+than counting only a pointer to caller-owned bins or OCV data.
+
+Acquisition buffers, source-delivery protocol, persistence, caller/interrupt
+stack, linked runtime and target-specific code generation remain additional
+costs. The approximately 10 KiB system target is not qualified by this component
+subtotal. The complete integration suite and targeted ASAN/UBSAN checks passed;
+the sanitizer run disables leak detection and does not constitute a leak audit.
 
 ## 9. Remaining work
 
 This provider closes a useful restricted inference path under explicit
 assumptions. It does not justify those assumptions for a real cell.
 
-The next requirements are experimentally justified voltage/current/model
-uncertainty, unknown dynamic parameters and hysteresis, OCV uncertainty,
-temperature and drift handling, and a proof for any refinement/transport that
-changes the finite cells. Persistence and source-delivery semantics remain open.
-Complete Cortex-M23 memory, stack, arithmetic timing, flash and power still need
-target measurements.
+The next concrete extension is one bounded uncertain RC mode: a fixed R/tau
+box with outward forcing and attenuation intervals, an all-prefix width
+recurrence, and the same informative/quiet/renewed-excitation test. This removes
+one known-parameter premise while making any loss of useful SOC/capacity
+precision visible. It must retain true configurations for every parameter in
+the declared box and cannot reset earlier evidence when uncertainty grows.
+
+Beyond that extension, the requirements are experimentally justified
+voltage/current/model uncertainty, other unknown dynamic parameters and
+hysteresis, OCV uncertainty, temperature and drift handling, and a proof for
+any refinement/transport that changes the finite cells. A per-sample current
+error bound alone does not prevent accumulated charge ambiguity from growing;
+its treatment needs an explicit lifetime argument. Persistence and
+source-delivery semantics remain open. Complete Cortex-M23 memory, stack,
+arithmetic timing, flash and power still need target measurements.
 
 The original 35Hz reference, B001/B002 results, their failures and provenance
 remain comparison evidence. No long campaign is rerun merely to resume.
