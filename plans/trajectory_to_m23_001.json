@@ -1,0 +1,265 @@
+{
+  "schema": "mumble_delivery_roadmap_v1",
+  "status": "planned_not_executed",
+  "date_local": "2026-10-24",
+  "timezone": "America/Los_Angeles",
+  "repository": "https://github.com/tumblewhead/mumble",
+  "work_branch": "planning/trajectory-to-m23-001",
+  "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
+  "goal": {
+    "deliverable": "Runnable Cortex-M23 C estimator subsystem",
+    "SRAM_planning_ceiling_bytes": 10240,
+    "SRAM_scope": "All simultaneously live estimator state, RAM-resident configuration, workspaces, acquisition/delivery buffers, checkpoint staging and attributable stack/runtime/interrupt use. Flash and external persistence measured separately.",
+    "nominal_Hz": 35,
+    "requirements": [
+      "Estimate only stimulus-supported quantities",
+      "Carry earlier evidence and uncertainty",
+      "Expose unsupported/unresolved/inconsistent quantities",
+      "Preserve actual intervals, order and physical state",
+      "Conditional indefinite-runtime stability remains a proof gate"
+    ]
+  },
+  "priority_change": {
+    "now": "M1 two-cell desktop lifecycle demonstration",
+    "former_next_action": "Fixed partition of uncertain R/tau box",
+    "former_action_status": "Optional targeted remedy after a measured target-quality blocker; no longer the automatic next milestone",
+    "frozen_evidence": "All earlier receipts and failures unchanged, including three004 usefulness failures"
+  },
+  "reference_roles": {
+    "full_C": "Existing16-unknown three-RC/hysteresis retained-history estimator: M1 desktop baseline and selected short causal comparisons. Growing history is explicit; not the annual per-update engine.",
+    "certificate004": "Restricted static one-uncertain-RC/hard-voltage lane and reusable numerical evidence. Original two-cell traces are outside this contract; no truth supplied to make them fit.",
+    "desktop_streaming": "To be selected after M1: autonomous learning from public priors, finite declared storage and bounded per-update/scheduled work, explicit evidence semantics. Desktop resource budget may exceed target.",
+    "truth": "Generator/scorer only. No truth in initialization, correction, reset, attention, priors or inference checkpoint.",
+    "ultimate_performance": "Best measured performance among declared candidates/scenarios, not a global-optimality or physical-coverage claim"
+  },
+  "milestones": [
+    {
+      "id": "M1",
+      "name": "Two-cell end-to-end desktop demonstration",
+      "status": "next",
+      "scope": "One existing seed per cell,35minutes each, no-attention full C baseline. Lifecycle correctness and useful-target reporting; not bounded firmware.",
+      "cases": [
+        {
+          "case_id": "cell_a_35hz_s202610240",
+          "path": "data/cell_a_35hz_s202610240.csv",
+          "samples": 73500,
+          "duration_s": 2100.0,
+          "sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8"
+        },
+        {
+          "case_id": "cell_b_35hz_s202610240",
+          "path": "data/cell_b_35hz_s202610240.csv",
+          "samples": 73500,
+          "duration_s": 2100.0,
+          "sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe"
+        }
+      ],
+      "execution": {
+        "fit_checkpoints_s": [
+          10,
+          900,
+          1800,
+          2100
+        ],
+        "fit_schedule_note": "New sparse policy; compare restart with its own uninterrupted control. Old10-checkpoint warm-start results remain context, not a bitwise-equivalence target.",
+        "runs_per_cell": [
+          "uninterrupted",
+          "one paired run with warm restores after12s,1200s,1850s",
+          "one cold-reset branch at900s with at most2 later fits"
+        ],
+        "main_fit_budget": 20,
+        "fault_checks": "Small deterministic API probes without extra optimizations; no Cartesian sweep.",
+        "estimator_prior": "Public starts and preceding estimated theta as a start only; replayed observations do not also enter as a posterior prior.",
+        "fit_budget_rule": "Warm checkpoints retain complete fit/schedule state. Any recomputed scheduled fit counts against the same20-call cap; choose small replay probes accordingly."
+      },
+      "required_behaviors": [
+        "Initialize, ordered ingest, state advance, query with reason/freshness/uncertainty semantics",
+        "Complete versioned checkpoint and fresh-process restore with matching configuration/history identity",
+        "Warm restore replays known intervening inputs exactly once",
+        "Cold reset keeps plant running, drops unsupported knowledge explicitly and measures relearning",
+        "Duplicate/out-of-order delivery, corrupt/truncated/incompatible checkpoint and sequence exhaustion fail explicitly",
+        "Unknown-input gap returns recovery_required or an implemented valid uncertainty envelope; no invented zero current",
+        "Missing voltage never deletes known current/time propagation; unsupported backend handling is explicit"
+      ],
+      "gates": {
+        "functional": [
+          "Both input streams complete the declared lifecycle without silent corruption",
+          "Deterministic restored integer/serialized state and input ledger match uninterrupted control; floating numerical comparisons exclude timing and use tolerances frozen before results",
+          "No truth or duplicate evidence enters inference",
+          "Lost history, unsupported outputs and invalid assumptions remain visible",
+          "Every scheduled estimate records convergence, point error, uncertainty type, status and resource cost"
+        ],
+        "usefulness": [
+          "On informative suffix checkpoints report whether SOCerror<0.5percentage_points and Qrelative_error<0.5percent; these are inherited synthetic benchmark targets, not physical product guarantees",
+          "Evaluate retention during weak use and reacquisition after reset separately; unresolved nuisance parameters are acceptable",
+          "Functional and usefulness acceptance are separate booleans; usefulness failure prevents promotion of that estimator as the long-run candidate, not an honest lifecycle demonstration"
+        ],
+        "exit": "Publish compact receipt, trajectory plot/report and a bounded list of blockers. Stop M1 once required functionality is demonstrated; choose one blocker to fix if usefulness fails."
+      },
+      "artifacts": [
+        "C-facing desktop session/lifecycle adapter",
+        "Versioned checkpoint/journal contract and implementation",
+        "experiments/trajectory_integration_001/plan.json",
+        "experiments/trajectory_integration_001/summary.json",
+        "Human trajectory and reset report"
+      ],
+      "proof_scope": "Only new ordering, transaction, complete-state and restore obligations required for this integration; inherit existing proofs where their premises hold."
+    },
+    {
+      "id": "M2",
+      "name": "Desktop performance and one-year trajectory campaign",
+      "status": "after_M1",
+      "entry": [
+        "M1 functional lifecycle passes",
+        "One autonomous streaming candidate works on the same short harness without oracle parameters or growing history",
+        "Freeze candidate model/domain, resource budget, quality thresholds, seeds, reset schedule and logging budget",
+        "Classify which static/voltage/input assumptions support hard claims and which cases are mismatch diagnostics"
+      ],
+      "steps": [
+        "Small paired load/cell/noise matrix; choose one no-attention candidate",
+        "Optional one-policy attention comparison; keep only for predeclared practical benefit",
+        "One-day then one-week throughput/recovery pilots",
+        "Two selected365-day streams, one per cell, with predefined load/noise regimes and carried state"
+      ],
+      "variation_matrix": {
+        "cells": "Existing two cells first; additional parameter differences only for a stated unresolved decision",
+        "loads": [
+          "Informative changes and reversals",
+          "Repetitive weak use",
+          "Long rest and renewed excitation"
+        ],
+        "noise": [
+          "Baseline declared noise",
+          "Higher amplitude",
+          "Correlated/noise-outlier diagnostic"
+        ],
+        "mismatch": "Sensor bias, OCV error, temperature and parameter drift are separate declared plant variations. Static hard-bound claims do not carry over automatically. Do not call a static annual run aging validation.",
+        "design": "A few paired comparisons, not a full Cartesian product. Select annual scenarios by declared regime/stress coverage; freeze held-out annual noise seeds before scoring. Short screening selects algorithms and failure regimes, never seeds for favorable accuracy."
+      },
+      "sizing": {
+        "nominal_updates_day": 3024000,
+        "nominal_updates_week": 21168000,
+        "nominal_updates_year_per_stream": 1103760000,
+        "nominal_updates_two_year_streams": 2207520000,
+        "year_days": 365,
+        "rule": "Publish measured wall-time/output-size estimate before annual execution. Process actual intervals and chronology; faster wall-clock execution is allowed, sample skipping/closed-form fast-forward requires separate equivalence evidence."
+      },
+      "storage_and_reference": "Generate deterministically in chunks, keep bounded streaming metrics/checkpoints and failure excerpts with entering state; preserve seed/source/config hashes. Full retained-history C fits only selected short causal histories. A window reference declares missing prior history and independent entering-state treatment; no truth-seeded operational reference.",
+      "gates": [
+        "Selected candidate meets frozen target usefulness/availability and runtime budgets",
+        "No unexplained numerical failure, state divergence after valid restore, chronology corruption or age-driven resource growth",
+        "Mismatch behavior and unresolved estimates reported honestly",
+        "Year evidence and all-prefix numerical proof ledger both reported; neither substitutes for the other"
+      ],
+      "outputs": [
+        "SOC/Q errors and uncertainty by regime",
+        "First and sustained convergence; fraction useful/unresolved/inconsistent",
+        "Retention and recovery time",
+        "Numerical invariant/range diagnostics",
+        "Memory/latency/checkpoint-write counts",
+        "Reproducible failures and explicit claim boundaries"
+      ]
+    },
+    {
+      "id": "M3",
+      "name": "Runnable Cortex-M23 C subsystem near10KiB",
+      "status": "after_desktop_candidate_selection",
+      "early_parallel_task": "Establish target-build skeleton and memory categories during M1/M2; no premature hand optimization.",
+      "entry": [
+        "Chosen desktop algorithm and supported model/error domain frozen",
+        "Identify actual M23 device, clock, compiler/ABI and scheduling budget",
+        "Account for each unresolved lifetime obligation on the deployed path"
+      ],
+      "steps": [
+        "Port/refine chosen arithmetic and memory layout",
+        "Measure complete simultaneous SRAM, stack, flash and latency",
+        "Replay M1 and selected M2 failure/excerpt cases through target build",
+        "Run reset/restore/input-error behavior on target hardware or explicitly qualified execution environment"
+      ],
+      "gates": [
+        "Complete agreed subsystem SRAM within10240-byte planning boundary; overruns reported, not omitted",
+        "Actual execution on declared M23 target/environment, not compile-only",
+        "Output/status/recovery parity within frozen arithmetic tolerances",
+        "Worst-case update and scheduled-work timing meets actual system budget",
+        "Relevant arithmetic, evidence-retention and lifecycle invariants closed under stated deployment assumptions; open physical assumptions explicit"
+      ],
+      "nonclaims": [
+        "Host memory measurement is not target qualification",
+        "One annual simulation is not an indefinite-runtime proof",
+        "Unmeasured physical sensor/OCV/drift behavior is not validated coverage"
+      ]
+    }
+  ],
+  "immediate_actions": [
+    {
+      "id": "A1",
+      "deliver": "Freeze the small M1 API, sparse fit/fault schedule and numerical comparison tolerances while implementing the desktop adapter. One implementation-sized change; no new theory branch.",
+      "depends_on": []
+    },
+    {
+      "id": "A2",
+      "deliver": "Implement complete pointer-free checkpoint/journal plus restore, cold reset and delivery/error semantics; add meaningful deterministic lifecycle tests.",
+      "depends_on": [
+        "A1"
+      ]
+    },
+    {
+      "id": "A3",
+      "deliver": "Run the two selected cells and paired restart path, score only after inference, publish functional/usefulness statuses and a short blocker list.",
+      "depends_on": [
+        "A2"
+      ]
+    },
+    {
+      "id": "A4",
+      "deliver": "Select one autonomous bounded-work/storage backend using the same harness. Address only the demonstrated blocker; evaluate one attention policy only if its benefit can change selection.",
+      "depends_on": [
+        "A3"
+      ]
+    }
+  ],
+  "attention_decision": {
+    "timing": "After plain M1 works; optional for M2 selection",
+    "arms": [
+      "Same candidate with no attention/regular work schedule",
+      "One deterministic attention/scheduling policy",
+      "Existing sensitivity/event summary where model/chart compatible; retain full C as external comparison"
+    ],
+    "fairness": "Identical public priors, data/order, physical updates, reset schedule and fixed per-arm resource budget; report quality and cost. Freeze before held-out evaluation.",
+    "invariant": "Every arm advances charge and dynamics on every actual interval. Evidence selection/weighting/compression requires its own validity and history semantics; no truth-guided selection or fabricated confidence.",
+    "stop": "Keep attention only if it delivers the predeclared useful performance/CPU/memory benefit. Otherwise keep the simpler baseline; no automatic wider search."
+  },
+  "research_rule": {
+    "admission": "Every proof/experiment names a milestone gate or algorithm decision it resolves. Safety/containment defects are blockers; a precision plateau is investigated only when it blocks declared target usefulness.",
+    "loop": "One concrete design, one small falsification, one keep/change/drop decision; expand only for a specific remaining question.",
+    "preservation": "Do not retune archived gates, reset ledgers, shrink domains around truth or rerun old campaigns merely to resume.",
+    "parking_lot": [
+      "Uncertain-RC fixed partition absent a demonstrated target blocker",
+      "Universal identification of every nuisance parameter",
+      "Broad attention architecture search",
+      "Further theorem refinement beyond the chosen implementation/claim scope"
+    ]
+  },
+  "next_work_branch": "integration/two-cell-lifecycle-001",
+  "evidence": [
+    "README.md",
+    "specification.json",
+    "data/manifest.json",
+    "include/scm_estimator.h",
+    "include/scm_model.h",
+    "include/scm_assess.h",
+    "include/scm_certificate_box.h",
+    "tools/run_streaming.py",
+    "docs/UNCERTAIN_RC_004.md",
+    "experiments/indefinite_stability_004/summary.json"
+  ],
+  "review": {
+    "status": "passed",
+    "method": "Two independent read-only reviews of integration feasibility and campaign/resource/claim scope; no numerical runs.",
+    "resolved_clarifications": [
+      "Count repeated scheduled fits within20-call cap",
+      "Freeze held-out annual seeds before scoring; select scenarios by coverage, not favorable results"
+    ],
+    "new_tests_or_trajectories_executed": false
+  }
+}

@@ -3,42 +3,30 @@
 C research reference for battery estimation from a 35 Hz voltage/current stream.
 
 The goal is to **estimate what the available stimulus supports, retain earlier
-evidence, and explicitly report what remains unknown**. The longer-term target
-is a streaming Cortex-M23 implementation. The original nonlinear fitting path
-retains and replays history. A new bounded event component preserves a fixed
-local affine likelihood. A bounded nonlinear-remainder component now checks
-trial moves against a declared analytic error budget. Cold-start learning,
-historical relinearization and validated floating-point bounds remain open.
-These components are host references, without Cortex-M23 qualification.
-Numerical stability for indefinite runtime is an explicit proof gate. A new
-conditional battery provider now combines exact integer charge, outward RC and
-OCV enclosures, fixed capacity bins with contracting initial-SOC intervals,
-and outward current-SOC/capacity queries. Eight reviewed arguments establish
-containment, evidence retention and whole-observation transactions. For the
-declared static model, capacity domain and admitted physical trajectory, a
-composed proof establishes successful operation at every finite prefix without
-age-driven range failure or loss of true support.
+evidence, and explicitly report what remains unknown**. The delivery target is
+a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
-The known-RC checkpoint learns capacity, retains it through quiet use and learns
-further after renewed excitation. The current extension admits one fixed
-continuous R/tau box. Six reviewed arguments preserve conditional all-prefix
-containment/availability and bound interval width under a declared future input
-alphabet. The five-case frozen audit passes every sampled soundness check but
-retains **three failed renewed-learning assertions in two corner cases**.
-Overall experimental acceptance remains **false**; the box and learning gates
-were not tuned after observing the failures.
+The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
+end-to-end desktop demonstration, a desktop performance campaign including
+about one year per selected cell, and the embedded implementation. The next
+work is the two-cell lifecycle integration: estimation, checkpoint/restore,
+cold reset, chronological delivery and honest uncertainty/status reporting.
 
-The uncertain provider owns 2,152 host bytes plus a loose 1,320-byte own-source
-stack subtotal, totaling 3,472 bytes. The supplied R/tau box remains unresolved;
-other RC parameters and OCV are known, current/time are exactly represented,
-and voltage errors have supplied hard bounds. Physical premise validation,
-the original sixteen-unknown estimator, drift/recovery and complete Cortex-M23
-qualification remain open.
+The completed full C study supplies the initial desktop reference. It retains
+and replays history. Separate bounded event and integer certificate components
+supply useful evidence and implementation pieces. Certificate004 proves
+conditional all-prefix containment/availability for one uncertain RC mode,
+while preserving three failed strict-learning assertions. These components
+are not yet an integrated full-model streaming estimator or qualified firmware.
+The [action plan](plans/trajectory_to_m23_001.json) ties further proof and
+experiment work to specific delivery decisions.
 
 ## Start here
 
 | Resource | Contents |
 | --- | --- |
+| [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
+| [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Bounded uncertain RC mode](docs/UNCERTAIN_RC_004.md) | Continuous parameter box, all-prefix width/containment proofs, retained learning and three preserved usefulness failures |
 | [Current uncertain-RC contract](proofs/indefinite_stability_004/contract.json) | Fixed nuisance box, interval forcing, immutable evidence semantics and explicit open gates |
 | [Uncertain-RC lemma ledger](proofs/indefinite_stability_004/lemmas.json) | U1-U6 plus the retained-reference coordinate identity |
@@ -71,15 +59,19 @@ qualification remain open.
 
 ## Current roadmap
 
-| Milestone | Status and next boundary |
+| Milestone | Status and finish line |
 | --- | --- |
-| Retained-history 35 Hz reference | Completed and preserved; sixteen unknown quantities, synthetic matched-model evidence |
-| Bounded Gaussian event summaries | Fixed affine evidence and conditional nonlinear remainder implemented; historical relinearization and floating-point validation remain open |
-| Indefinite-runtime arithmetic contract | Integer charge, attenuation and state enclosures proved under declared inputs; finite-state limitations recorded |
-| Conditional battery certificate provider | Implemented and reviewed; retained capacity learning, outward queries and composed conditional availability demonstrated |
-| One bounded uncertain RC mode | Implemented and reviewed; containment/availability and width theorem hold; three renewed-learning assertions remain failed |
-| Static-parameter conditioning | Next: a small fixed partition of the same box with carried state/evidence per subbox, complete cover proof and memory accounting |
-| Complete deployment | Full unknown model, input-error validity, drift, delivery/recovery and target resources remain open |
+| Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
+| **M1: Two-cell end-to-end desktop demonstration** | **Next.** Join estimation, delivery, checkpoint/restore, cold reset and status handling on one existing short trace per cell |
+| **M2: Desktop performance and year-scale behavior** | Select an autonomous streaming candidate; short load/cell/noise comparisons, optional attention decision, day/week pilots, then two selected annual streams |
+| **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
+
+The fixed R/tau partition is a possible remedy for a demonstrated target-quality
+blocker. It is no longer the automatic next study. The full replay reference
+and restricted hard-bound provider have different model/evidence semantics;
+the [roadmap](docs/ROADMAP.md) keeps their roles explicit. One finite year of
+simulation adds endurance evidence and does not replace the indefinite-runtime
+proof requirement.
 
 ## Build and run
 
@@ -189,29 +181,28 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The current priority is investigating the precision plateau in the
-[uncertain-RC provider](docs/UNCERTAIN_RC_004.md). A small fixed partition of the
-same R/tau box can retain more of the relationship between static parameters,
-carried RC state and SOC/capacity evidence. It needs a complete-cover and
-every-containing-cell retention proof plus full storage/staging/stack accounting.
-The original box, five-case stimulus and failed004 learning gates remain the
-comparison baseline; no domain shrink or reset is implied.
+Implement the [two-cell lifecycle action plan](plans/trajectory_to_m23_001.json)
+on `integration/two-cell-lifecycle-001`: a desktop session adapter around the
+full C reference, complete checkpoint/journal and recovery semantics, followed
+by the paired uninterrupted/restart experiment. Use the existing two selected
+35-minute traces and publish functional and usefulness acceptance separately.
+Do not rerun the completed 60-fit campaign.
 
-The present provider already supplies outward targets, historical retention,
-whole-observation transactions and conditional all-prefix availability under
-its fixed-box and hard-error contract. Physical justification of those premises,
-full-model composition, chronology/delivery, recovery and chart/parameter
-transport remain open. The supplied R/tau box is not learned or adapted.
+The original two-cell traces include hysteresis and multiple unknown RC modes.
+They are outside certificate004's restricted contract; do not insert truth to
+make that provider applicable. A general bounded streaming learner remains a
+real gap after the first desktop integration. Attention and RC partitioning
+are focused decision experiments when needed, not prerequisites for M1.
 
-Finite certified constraints do not claim Gaussian likelihood equivalence.
-The Gaussian reference and earlier local evidence remain unchanged. A finite
-replay or memory bound cannot replace proof obligations; no lifetime horizon
-is substituted for indefinite operation.
-Subsequent experiments should cover measured OCV, sensor
-offsets, filtered/correlated noise, model mismatch and parameter drift. The current
-study does not validate aging, temperature variation, EOD prediction, or Cortex-M23
-latency, SRAM, flash or power. The requested 35 Hz operating point was tested;
-20 Hz and 1 kHz comparisons remain separate work.
+Physical error bounds, uncertain current/time/OCV, drift and target resources
+remain open. Hard certificate support, Gaussian local precision, point accuracy,
+solver convergence and validated coverage are different claims. No reset or
+parameter change may silently discard the evidence semantics.
+
+Follow the [delivery roadmap](docs/ROADMAP.md) for campaign sizing, complete
+10 KiB accounting and the rule that every new proof or experiment must serve
+a named milestone gate. The older evidence below is preserved as supporting
+work rather than a serial queue of mandatory refinements.
 
 ## Indefinite-runtime stability proof gate
 

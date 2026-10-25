@@ -1,142 +1,78 @@
 {
-  "schema": "mumble_continuation_v7",
-  "task": "Continue from the bounded uncertain-RC provider; preserve three usefulness failures and improve static-parameter conditioning",
+  "schema": "mumble_continuation_v8",
+  "task": "Implement the two-cell end-to-end desktop lifecycle demonstration; follow the delivery roadmap rather than another automatic local proof refinement.",
   "authority": {
     "repository": "https://github.com/tumblewhead/mumble",
-    "work_branch": "research/indefinite-numerical-stability-004",
-    "base_revision": "4a990cf923e2e56935a1ffb346215faad05bff66",
-    "source_revision": "beaf30e6da0445c5220701d239b336c6805dacab",
-    "main_reference_checkpoint": "0fd443b126579c625aea8c3772ddc28668aa242b",
+    "work_branch": "planning/trajectory-to-m23-001",
+    "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
+    "prior_handoff": "handoff/archive/CONTINUE_indefinite_stability_004.json",
     "read_first": [
       "AGENTS.md",
       "README.md",
       "PROJECT_STATE.json",
-      "handoff/CONTINUE.json"
+      "handoff/CONTINUE.json",
+      "docs/ROADMAP.md",
+      "plans/trajectory_to_m23_001.json"
     ],
-    "prior_handoff": "handoff/archive/CONTINUE_indefinite_stability_003.json",
-    "context_policy": "Fetch current refs; preserve newer/dirty/unrelated work. Historical commits are provenance, not reset targets. Read summary before full receipt; never bulk traces to resume.",
-    "publication_status": "Published on the research branch; source/research trees verified from fetched canonical objects.",
-    "published_source_revision": "7c6f248f68638d632e297ff655da94652c09c0c2",
-    "published_research_revision_before_metadata": "69ab834c696b9a3962efd82bbe7b425005c29152",
-    "publication_provenance": "provenance/indefinite_stability_004_publication.json",
-    "original_development_bundle": "provenance/indefinite_stability_004_development.bundle",
-    "source_identity": "Original source_revision remains the frozen receipt identity; published_source_revision has the identical tree. Bundle preserves original source/research commits."
+    "context_policy": "Fetch current refs and preserve newer/dirty/unrelated work. Historical commits are provenance, not reset targets. Read selective summaries; no raw trace/result bulk load or long rerun merely to resume."
   },
-  "objective": {
-    "core": "Estimate stimulus-supported quantities, retain earlier evidence/uncertainty, expose unresolved targets",
+  "goal": {
+    "target": "Runnable Cortex-M23 C estimator subsystem near10240B complete SRAM",
+    "sequence": [
+      "M1 two-cell lifecycle",
+      "M2 desktop variation and two selected annual streams",
+      "M3 target execution/resources"
+    ],
+    "core": "Learn supported quantities, carry evidence/uncertainty, expose unknowns",
     "nominal_Hz": 35,
-    "input": "Actual represented intervals/current, endpoint voltage, acquisition order and carried physical state",
-    "lifetime": "Every admitted finite prefix without fixed horizon; safety, fidelity, retention and conditional usefulness remain distinct.",
-    "target": "Approximately10KiB Cortex-M23; complete system not qualified",
-    "communication": "Compact JSON/YAML handoffs"
+    "lifetime": "All admitted finite prefixes remains a conditional proof requirement; one-year testing is separate finite evidence."
+  },
+  "current": {
+    "stage": "M1 ready to implement, not executed",
+    "reusable": "Working16-unknown full C replay reference, C dynamics/assessment and separately restricted bounded certificate",
+    "missing": "Complete session/checkpoint/reset/delivery integration; later autonomous bounded-work/storage learner",
+    "scope_trap": "Two original cells include hysteresis and multiple unknown RC modes. Do not feed generator truth into certificate004 to force applicability.",
+    "old_next_action": "R/tau partition is parked unless it fixes a measured target-usefulness blocker.",
+    "attention": "Optional controlled comparison after the plain pipeline; always propagate all current/time intervals."
+  },
+  "next": {
+    "work_branch": "integration/two-cell-lifecycle-001",
+    "A1": "Implement desktop session around full C with init/ingest/advance/query/status and sparse fit schedule; freeze comparison tolerances before running.",
+    "A2": "Complete pointer-free checkpoint/journal and restore/cold-reset/error behavior. Preserve plant continuity, config identity, all required evidence/state and exactly-once input.",
+    "A3": "Two existing2100s traces, one seed per cell; uninterrupted and paired warm-restore paths, one cold-reset branch and small fault probes. Planned cap20fit calls; see action plan.",
+    "A4": "After integrated report, select one autonomous bounded-work/storage candidate using the same harness. Fix one measured blocker; attention only if it can change selection.",
+    "inputs": [
+      "data/cell_a_35hz_s202610240.csv",
+      "data/cell_b_35hz_s202610240.csv"
+    ],
+    "outputs": "Compact receipt plus trajectory/reset report; functional and usefulness acceptance separate. Do not claim M1 completed from planning docs."
   },
   "evidence": {
-    "summary": "experiments/indefinite_stability_004/summary.json",
-    "report": "docs/UNCERTAIN_RC_004.md",
-    "contract": "proofs/indefinite_stability_004/contract.json",
-    "lemmas": "proofs/indefinite_stability_004/lemmas.json",
-    "header": "include/scm_certificate_box.h",
-    "source": "src/scm_certificate_box.c",
-    "plan": "experiments/indefinite_stability_004/plan.json",
-    "receipt": "experiments/indefinite_stability_004/receipt.json",
-    "review": "proofs/indefinite_stability_004/independent_review.json",
-    "build_checks": "experiments/indefinite_stability_004/build_checks.json",
-    "verification": "experiments/indefinite_stability_004/verification.json",
-    "development_notes": "experiments/indefinite_stability_004/development_notes.json",
-    "known_RC_provider": "docs/BATTERY_CERTIFICATE_003.md",
-    "integer_proof": "docs/STABILITY_CONTRACT_002.md",
-    "obstructions": "docs/INDEFINITE_NUMERICAL_STABILITY_001.md",
-    "Gaussian_bounded_comparison": "docs/BOUNDED_EVENT_002.md",
-    "retained_history_reference": "report/SCM-35Hz-Results.html",
-    "publication": "provenance/indefinite_stability_004_publication.json"
-  },
-  "established": {
-    "model": "At most1 fixed continuous uncertainRC pair; public stress box slowR[54,66]mOhm,tau[27,33]s. OtherRC/R0/OCV known, exact current/time, hard voltage interval, staticSOC0/Q/enteringRC; no drift/hysteresis.",
-    "runtime": "Shared3RC intervals, exact net charge,64 immutable capacity bins with contracting SOC0 strips, outward target queries and whole-bank staged observations; no heap/libm/history/lifetime counter.",
-    "U1_U2": "Endpoint exponential certificates plus signed I*R intervals; monotone target endpoints reuse frozen point-target kernel. Both updates start from SAME original state; validation precedes no-write unity.",
-    "U3": "Wnext<=(AhiW+(D-Alo)F+2Bspan)/D+2. Uniform futureg>0,h,b,Fmax imply W<=min(2B,max(W0,(bFmax+2Bh+2D)/g)); exact identities skipped. Bound computed offline with arbitrary precision.",
-    "U4_U5": "Every full static compatible point survives in EVERY containing capacity cell; inherited retention/query/transaction and Q<=100000microAh,SOC[0,1] charge bound give all-prefix availability.",
-    "U6": "Nominal support remains inside box support when computed coefficient nesting is certified for all admitted ticks; active nominal strips only. Finite alphabet certificate passes.",
-    "primary": "One frozen run, completed as planned, exit1. All soundness gates pass; overall acceptance false because3 usefulness leaf failures in2 corner cases. Counts11501 top-level with2 failed summaries,234658 nested with3 failed leaves; overlap explicit.",
-    "midpoint_Q_microAh": [
-      [
-        30000,
-        100000
-      ],
-      [
-        61718,
-        67187
-      ],
-      [
-        62812,
-        67187
-      ],
-      [
-        62812,
-        66093
-      ]
-    ],
-    "midpoint_SOC_width_grid": [
-      9,
-      105,
-      87,
-      131
-    ],
-    "failures": [
-      "R54/tau33 renewed Qwidth3281->3281 and SOC0widthsum27->27",
-      "R66/tau27 renewed Qwidth3281->3281; SOC0widthsum23->22 does improve"
-    ],
-    "width": {
-      "slow_all_prefix_bound_nV_exact": {
-        "numerator": "38689169047040",
-        "denominator": "3709543"
-      },
-      "observed_nV": 1669448,
-      "known_point_observed_nV": 1027,
-      "meaning": "Model ambiguity/correlation loss plus rounding, not numerical drift alone."
-    },
-    "memory": "Config896+bank600+workspace600+input24+output32=2152B; loose own-stack1320B; subtotal3472B host. Complete runtime/acquisition/persistence/target costs open.",
-    "reference": "Frozen SCM_FULL leaves slowR/tau,SOC0/Q free. Public scale2 unit map preserves exact predictions; physical supportR[0,2000]mOhm,tau[3,60]s broader than provider.4/4 converge; zero-charge Gram rank1; later local conditions remain separate from coverage.",
-    "proof_kind": "Independent written/source-operation review; no proof-assistant/compiler/target certification"
-  },
-  "critical_boundaries": [
-    "The R/tau box is immutable and remains unresolved; shared intervals can admit fictitious time-varying nuisance choices. Nonempty outer support does not prove exact feasibility.",
-    "Failed strict narrowing remains failed. Plateau does not prove physical unidentifiability or absence of information; finite cells and discarded correlations may be responsible.",
-    "No truth in inference, centering, starts or corrections. Stress box is not calibration; Gaussian sigma is not a hard voltage bound.",
-    "Changing/enlarging/repartitioning the box after exclusions needs a history/transport proof. No silent reset, forgetting, evidence double counting or unbounded external counter.",
-    "Exact current/time and source order remain premises. Current-bias lifetime ambiguity, delivery, persistence and drift are unresolved.",
-    "Future width constants cover ticks998..1002 and abs current<=200000microA, with exact zero-time identities. Generic containment does not require this refined-width premise.",
-    "Negative status does not propagate the observation and leaves bank unchanged; valid contradiction commits dynamics and sticky empty support."
-  ],
-  "next": {
-    "first_action": "Design a small fixed partition of the SAME R/tau box with per-subbox carried RC state and SOC0/capacity evidence. Prove complete-cover/every-containing-cell retention and outward target union; count shared config, all banks, full staging and stack before code.",
-    "small_experiment": "Use the unchanged004 five-case phase traces and failed gates. Compare with004 support and unchanged retained-history reference, expose partial gains and remaining plateaus, preserve every failure. No smaller box or truth-selected subboxes.",
-    "restriction": "Initialize the full partition before the first observation; no in-place upgrade of an already-excluding004 bank without separate proof.",
-    "remaining": [
-      "Conditional useful precision",
-      "Learning nuisance parameters/correlations",
-      "Physical error bounds",
-      "Other unknown modes/hysteresis/OCV",
-      "Current-error lifetime argument",
-      "Drift/transport/delivery/persistence",
-      "Complete target resources and coverage"
-    ]
+    "roadmap": "docs/ROADMAP.md",
+    "actions": "plans/trajectory_to_m23_001.json",
+    "full_reference": "report/SCM-35Hz-Results.html",
+    "full_C": "include/scm_estimator.h",
+    "runner": "tools/run_streaming.py",
+    "input_manifest": "data/manifest.json",
+    "certificate_summary": "experiments/indefinite_stability_004/summary.json",
+    "certificate_report": "docs/UNCERTAIN_RC_004.md",
+    "certificate_contract": "proofs/indefinite_stability_004/contract.json",
+    "certificate_publication": "provenance/indefinite_stability_004_publication.json"
   },
   "preserved": {
-    "reference": "Completed35Hz C study, no long rerun",
-    "B001": "72/72 fixed affine only",
-    "B002": "654/672 original,18 failures,0.1NLL unchanged",
-    "stability001": "7/7 mechanisms/finite-state obstructions",
-    "stability002": "3588/3588 and six lemmas",
-    "stability003": "45408 top-level+7615 nested, known-RC proof unchanged",
-    "stability004": "3 usefulness failures retained in development and primary; exact development auditor snapshot archived",
-    "full_original_estimator_proved": false,
-    "coverage_validated": false,
-    "Cortex_M23_qualified": false
+    "study": "Completed35Hz60fit reference unchanged",
+    "B002": "Original18 near-roundoff failures retained",
+    "certificate004": "Conditional all-prefix containment/availability reviewed;3 usefulness leaf failures in2 corners, overall acceptance false;3472B scoped host subtotal, no full-system qualification",
+    "full_estimator_indefinite_stability_proved": false,
+    "physical_coverage_validated": false,
+    "M23_qualified": false
   },
-  "reproduction": {
-    "command": "python3 tools/audit_certificate_box.py --source-revision 7c6f248f68638d632e297ff655da94652c09c0c2 --output experiments/indefinite_stability_004/NEW_RECEIPT.json",
-    "expected_exit": 1,
-    "policy": "Refuses existing output. Keep frozen source and primary intact. Read compact summary first; no rerun needed to resume. Exit1 records preserved usefulness failures, not interrupted execution."
-  }
+  "rules": [
+    "Truth only in generation/scoring, never inference/recovery/attention",
+    "No double-counted replay/posterior evidence, silent forgetting or unknown-gap zero input",
+    "Hard bounds, local precision, point accuracy, convergence and coverage remain separate",
+    "One concrete design/falsification/decision per measured blocker; no automatic wider sweep",
+    "Annual engine must have finite storage/bounded work; full-history reference remains short and causal",
+    "Keep handoffs compact JSON/YAML and all canonical evidence in the repository"
+  ]
 }
