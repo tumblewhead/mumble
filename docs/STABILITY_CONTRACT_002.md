@@ -34,6 +34,7 @@ Base: a8f02b1402735a7f2f9be2dec54dedcc11ec2f8b.
 | [Independent review](../proofs/indefinite_stability_002/independent_review.json) | Mathematical, semantic and source-correspondence review |
 | [Build checks](../experiments/indefinite_stability_002/build_checks.json) | Unit-suite integration and targeted address/undefined behavior checks |
 | [Verification](../experiments/indefinite_stability_002/verification.json) | Artifact integrity, preserved evidence and handoff checks |
+| [Publication provenance](../provenance/indefinite_stability_002_publication.json) | Equal local/published trees, original commit map and preserved development bundle |
 | [Prior obstruction report](INDEFINITE_NUMERICAL_STABILITY_001.md) | Why unrestricted finite-state all-history claims need a different contract |
 
 ## 1. The contract
