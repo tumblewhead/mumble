@@ -1,0 +1,107 @@
+{
+  "schema": "mumble_battery_certificate_contract_v1",
+  "base_revision": "d84db851955b3c3c686d0738939059dbcde3ea9b",
+  "branch": "research/indefinite-numerical-stability-003",
+  "parent_contract": "proofs/indefinite_stability_002/contract.json",
+  "scope": "Concrete conditional battery certificate provider and outward SOC/capacity query using the frozen integer kernels.",
+  "quantifier": "Every finite admitted prefix of a static certified episode, without a selected lifetime horizon.",
+  "model": {
+    "terminal_voltage": "V=U(z)-I*R0-sum(v_i), i=1..3",
+    "RC": "v_i_next=exp(-dt/tau_i)*v_i+(1-exp(-dt/tau_i))*I*R_i",
+    "SOC": "z=z0-P/(K*Q_uAh), P=sum(I_uA*ticks), K=126000000",
+    "known": ["Fixed R0 and three R/tau pairs", "Exact encoded nondecreasing piecewise-linear OCV", "Represented current and actual interval scales"],
+    "unknown": ["Static real capacity inside declared capacity cells", "Static real initial SOC inside the declared interval", "Initial RC voltages inside the declared common box"],
+    "restrictions": ["No hysteresis", "No temperature dependence or parameter drift", "Current constant during each represented interval", "SOC remains in [0,1]"],
+    "comparison_scope": "A conditional submodel of the retained-history C reference, not the original full 16-quantity identification task."
+  },
+  "observations": {
+    "nominal_Hz": 35,
+    "ticks_per_second": 35000,
+    "input": "Signed integer microampere current, unsigned actual ticks, closed integer-nanovolt endpoint-voltage interval.",
+    "hard_premise": "For every observation, the supplied voltage interval contains the exact model terminal voltage for the actual admitted configuration.",
+    "semantics": "Deterministic bounded-error feasibility. Existing Gaussian sigma is not used as a hard bound, and no Gaussian likelihood or coverage equivalence is claimed.",
+    "statistical_coverage_validated": false,
+    "chronology": "Caller supplies each actual observation once and in order. No source-delivery or missing-sample detection is implemented by this bank.",
+    "truth_rule": "Synthetic truth is available only to generation and scoring, never inference, configuration centering, initial guesses or state corrections."
+  },
+  "integer_ranges": {
+    "SOC_ONE": 65536,
+    "SOC_coordinates": "Physical z,z0 are in [0,1]; x=Z*z and x0=Z*z0 are SOC-grid coordinates. Stored T_j, current preimage S and depletion R_j all use grid coordinates, so x0=x+P*Z/(K*Q).",
+    "capacity_endpoints": "Positive uint32 microAh; exact capacity may be real between endpoints.",
+    "charge": "int64 P in [-2^44,2^44], initially zero; exact signed current-code/tick integration.",
+    "SOC_ratio": "N=P*65536 has |N|<=2^60. Positive denominator126000000*Q_endpoint<2^59. Directed signed quotient/remainder division encloses N/(K*Q). Keep endpoints int64 until clipping.",
+    "current": "Configured positive limit<=200000 microA; every input lies within that signed limit.",
+    "resistance": "Integer R0/R_i in [0,1000] milliohm. Current times resistance is exact nanovolts; compute in int64.",
+    "RC_domain": "Each configured integer interval lies in [-B_i,B_i], B_i<=2^30. Configuration validates current_limit*R_i<=B_i.",
+    "time_constant": "Positive uint32 tau_ticks; actual uint32 ticks divided by tau_ticks supplies the frozen attenuation kernel.",
+    "OCV_and_observation_voltage": "Each endpoint within [-8000000000,8000000000]nV. OCV segment span times SOC_ONE<=16000000000*65536<2^50.",
+    "corrected_voltage": "Observation plus exact R0 drop plus three RC interval endpoints is far inside int64; magnitude<=8000000000+200000000+3*2^30."
+  },
+  "representation": {
+    "maximum_capacity_cells": 64,
+    "maximum_OCV_knots": 17,
+    "immutable_cell": "Closed capacity interval crossed with the common initial-SOC interval and initial-RC box. Adjacent/overlapping cells retain their original meaning.",
+    "admitted_capacity_domain": "Union of the supplied closed cells. The generic API permits gaps; a query hull does not assert those gaps are covered or feasible. The experiment explicitly uses contiguous closed bins.",
+    "persistent_state": ["Exact net charge", "Three shared outward RC intervals", "Domain and active masks", "One outward initial-SOC interval per original cell", "Pointer to immutable live backing configuration"],
+    "extension_from_002": "Per-cell initial-SOC intervals add bounded retained evidence beyond the bare exclusion mask. They contract monotonically while the immutable capacity cells stay fixed.",
+    "absent": ["Stored sample history", "Floating point", "libm", "Heap allocation", "Lifetime counter", "Growing likelihood/normalization weight"],
+    "memory_rule": "Count the complete backing configuration, state, caller-owned transaction workspace, input/output objects, source-owned stack and read-only data; identify external runtime/platform costs separately."
+  },
+  "update": {
+    "physical": "Stage the complete bank. Integrate exact charge and propagate all three RC intervals using actual dt and exact I*R targets.",
+    "correct_voltage": "[Vlo+I*R0+sum(RClo), Vhi+I*R0+sum(RChi)] encloses exact OCV.",
+    "SOC_preimage": "Scan all nondecreasing PWL segments. Positive-slope inverse endpoints are divided outward; an admitted flat segment contributes its entire SOC span. Include knot/end-point equalities. No segment means empty support.",
+    "per_cell": "T_j_next=T_j intersect (S_current+R_j(P)), where R_j encloses SOC-grid depletion for the complete original capacity interval.",
+    "exclusion": "Clear a cell bit only when this initial-SOC intersection is empty. Inactive cells never reappear. Their old stored endpoints are ignored.",
+    "compatible_set": "F_n contains complete static configurations (z0,Q,initial_RC) compatible with all admitted observations and SOC-domain constraints through n. F_n is nested.",
+    "guarantee": "For every configuration in F_n and every original cell containing it, that cell remains active and its retained interval contains x0=Z*z0."
+  },
+  "query": {
+    "SOC": "Hull across active cells of (T_j-R_j(P)) intersect [0,SOC_ONE].",
+    "capacity": "Hull of original capacity endpoints across active cells.",
+    "retention": "Queries use persistent per-cell constraints only, without replacing an earlier target constraint by a latest-only constraint.",
+    "quiet_property": "When P does not change, contraction of T_j and removal of cells cannot widen either target hull. RC state may still relax.",
+    "empty": "Positive inconsistency with has_support=0; numerical bound fields are not estimates.",
+    "limits": ["Nonempty outer support need not imply exact feasibility", "Intrabin and nuisance-state correlations can retain false positives", "Broad ranges remain unresolved", "Finite cell/SOC resolution is explicit"]
+  },
+  "transaction": {
+    "workspace": "Caller-owned staged complete bank, with disjoint bank/configuration/input/workspace storage.",
+    "negative_status": "Entire bank remains byte-identical; observation was not propagated. Workspace may change.",
+    "valid_contradiction": "Commit advanced charge/RC state and empty evidence, return positive inconsistency.",
+    "initialization": "Declared entering RC and SOC bounds must be sound; no truth-derived correction or implicit settled-state assumption.",
+    "trusted_execution": "Conforming C99 exact-width arithmetic, initialized trusted objects, immutable live configuration, no concurrent mutation or hardware fault during the call.",
+    "recovery_and_drift": "Not implemented. Resetting a mask, changing cell meanings or renewing error budgets is not an admitted recovery operation."
+  },
+  "conditional_usefulness": {
+    "capacity": "Separated charge levels can exclude a capacity cell when their outward implied initial-SOC strips become disjoint. No universal elapsed-time bound is claimed.",
+    "zero_charge_control": "If P is zero at every observation and all cells share the same initial-SOC prior, every nonempty cell has identical SOC0 contraction; observations add no capacity discrimination and support stays at its initial declared union unless inconsistent.",
+    "return_to_zero": "After prior nonzero-charge evidence, returning to P=0 retains learned capacity exclusions; a zero final net charge does not erase the intervening information.",
+    "RC_width": "The inherited uniform-width lemma needs explicit active-update contraction and coefficient-span bounds. Nominal35Hz alone is insufficient.",
+    "precision_thresholds": "No new hard SOC/capacity accuracy threshold is introduced; report actual target widths, numerical status and truth scoring separately."
+  },
+  "composed_availability_corollary": {
+    "additional_domain_premise": "All admitted actual capacities are at most100000microAh; actual initialSOC/RC lie in their declared domains, and a true compatible configuration exists at every prefix.",
+    "derived_charge_bound": "|P_n|=K*Q*|z0-z_n|<=12600000000000<2^44 because z0,z_n are in[0,1]. The range follows from the static model/domain, not an elapsed-time limit.",
+    "conclusion": "Under admitted observations/input ranges and trusted execution/chronology, every push returns OK, the bank remains valid, and every true-containing cell survives for every finite prefix. Age alone cannot cause a range error or committed inconsistency.",
+    "limits": "Conditional availability/containment/retention for this restricted provider; useful width and physical validity of the model/error assumptions remain separate."
+  },
+  "remaining": [
+    "Empirically justified acquisition/model error bounds or simultaneous probabilistic coverage",
+    "Unknown R/tau/R0, hysteresis, OCV uncertainty and temperature dependence",
+    "Tighter preservation of intrabin correlations or a proved cell-refinement/transport operation",
+    "Source chronology verification, persistence, recovery, aging and parameter drift",
+    "Complete application/target runtime memory, cycles and power qualification",
+    "Physical-cell validation and the original full-estimator indefinite-runtime goal"
+  ],
+  "artifacts": {
+    "report": "docs/BATTERY_CERTIFICATE_003.md",
+    "lemmas": "proofs/indefinite_stability_003/lemmas.json",
+    "header": "include/scm_certificate.h",
+    "source": "src/scm_certificate.c",
+    "tests": "tests/test_certificate.c",
+    "plan": "experiments/indefinite_stability_003/plan.json",
+    "audit": "tools/audit_certificate.py",
+    "reference_probe": "tools/provider_reference_probe.c",
+    "primary_receipt": "experiments/indefinite_stability_003/receipt.json"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "mumble_battery_certificate_audit_plan_v1",
+  "base_revision": "d84db851955b3c3c686d0738939059dbcde3ea9b",
+  "purpose": "Small independent falsification of a conditional battery certificate provider and its persistent SOC/capacity queries, with the unchanged retained-history C estimator as a separately interpreted comparison.",
+  "model_scope": "Known fixed three-RC/R0 and encoded nondecreasing PWL OCV, known initial zero RC states in the main case, static capacity and initial SOC, no hysteresis. The certified observation interval contains exact model voltage. This is a bounded-error research model, not the frozen iid-Gaussian campaign.",
+  "sources": [
+    "proofs/indefinite_stability_003/contract.json", "proofs/indefinite_stability_003/lemmas.json",
+    "include/scm_certificate.h", "src/scm_certificate.c", "tests/test_certificate.c",
+    "include/scm_stable.h", "src/scm_stable.c", "tools/audit_stable.py",
+    "include/scm_model.h", "include/scm_estimator.h", "include/scm_features.h",
+    "src/scm_model.c", "src/scm_estimator.c", "src/scm_features.c",
+    "tools/provider_reference_probe.c", "tools/audit_certificate.py",
+    "experiments/indefinite_stability_003/plan.json"
+  ],
+  "compiler_flags": ["-std=c99", "-O2", "-Wall", "-Wextra", "-Wpedantic", "-Werror"],
+  "public_configuration": {
+    "tick_frequency_Hz": 35000,
+    "soc_one": 65536,
+    "charge_per_microAh": 126000000,
+    "charge_limit": 17592186044416,
+    "current_limit_microA": 200000,
+    "capacity_cells": 64,
+    "capacity_domain_microAh": [30000, 100000],
+    "capacity_edges": "30000+floor(70000*k/64), k=0..64; adjacent closed bins overlap at their boundary",
+    "initial_SOC_grid_bounds": [13107, 62260],
+    "support_difference": "The integer SOC prior outwardly encloses the frozen reference prior[0.2,0.95] with at most one grid-unit expansion. Reference capacity support[0.03,0.10]Ah matches.",
+    "R0_milliohm": 20,
+    "Ri_milliohm": [30, 40, 60],
+    "tau_ticks": [1750, 17500, 1050000],
+    "RC_bound_nV": 16777216,
+    "initial_RC_nV": [0, 0, 0],
+    "OCV_nodes_SOCgrid_nV": [[0,2920053656],[8192,3064145620],[16384,3210377794],[24576,3370322468],[32768,3575000000],[40960,3779677532],[49152,3939622206],[57344,4085854380],[65536,4229946344]],
+    "OCV_origin": "Nodes rounded once from the public illustration3+1.15*z+0.08*tanh(8*(z-0.5)) at z=k/8. The listed encoded PWL itself is the exact declared model; no approximation-to-tanh guarantee is used.",
+    "observation_error_nV": 1000000,
+    "actual_tick_pattern": [1000, 999, 1001, 1002, 998]
+  },
+  "main_stimulus": [
+    {"name":"unexcited_rest","samples":175,"current_microA":0},
+    {"name":"informative_charge","samples":1225,"current_microA":-120000},
+    {"name":"quiet_rest","samples":1050,"current_microA":0},
+    {"name":"renewed_charge","samples":1225,"current_microA":-120000}
+  ],
+  "stimulus_scope": "3675 samples,105s, nominal35Hz, four phase endpoints. Synthetic numerical laboratory use;120mA charging is not a hardware pulse recommendation.",
+  "generator_and_scorer_only": {
+    "initial_SOC": [53,100],
+    "capacity_microAh": 64700,
+    "boundary_capacity_microAh": 65000,
+    "truth_rule": "Truth is used only to generate observations and score containment/error. It is absent from inference configuration, cell bounds, centers, starts and state corrections.",
+    "noise_recipe_nV": "(((sample_index*48271+17)%1801)-900)*1000; deterministic amplitude<=900000nV. Round the midpoint of the independent noiseless-voltage enclosure to the nearest integer nV, ties upward, then add this perturbation. Certify the full noiseless enclosure lies inside center+-1000000nV.",
+    "oracle": "Exact Fraction charge/SOC/PWL plus independent positive-series exponential bounds from audit_stable.py, outward quantized to a2^-128 coefficient/state grid. No C provider state or synthetic true correction enters inference.",
+    "raw_trace_policy": "The committed deterministic recipe reconstructs every observation; record canonical input hashes and small checkpoints rather than storing a redundant raw trace."
+  },
+  "required_audits": [
+    "At every main-case sample: all closed bins containing truth remain active; retained SOC0 intervals, currentSOC hull and capacity hull contain truth; charge equals the exact represented sum; independent RC states are enclosed; generated voltage interval contains independent noiseless voltage.",
+    "Active masks are subsets of their predecessors; active retained SOC0 intervals never widen; inactive intervals remain frozen.",
+    "At zero-current rest, charge is unchanged and persistent currentSOC/capacity query widths do not increase.",
+    "Unexcited zero-charge prefix retains the full capacity domain; informative and renewed phases strictly narrow capacity width and the persistent evidence measure compared with their preceding phase.",
+    "Boundary truth at Q=65000microAh retains both adjacent closed capacity bins; same observation protocol, shortened deterministic exercise.",
+    "Positive, negative and return-to-zero charge; PWL knots and plateaus; SOC-domain clipping; invalid full-transaction atomicity; explicit contradictory voltage and sticky inconsistency.",
+    "A deliberately uninformative quiet interval preserves all earlier mask/SOC0 evidence while RC states relax.",
+    "Outward query endpoints agree with an independent exact rational hull of the stored per-bin state; query reads no latest-only voltage shortcut."
+  ],
+  "usefulness_gates": {
+    "capacity_unexcited": "Capacity width equals the complete declared prior after the initial zero-charge phase.",
+    "informative_phases": "Strict capacity-hull narrowing and strict decrease of total active SOC0 interval widths after each informative phase relative to the immediately preceding phase endpoint. No post hoc threshold selection.",
+    "quiet_phase": "Persistent cell/SOC0 evidence and currentSOC/capacity hull widths do not widen at zero current.",
+    "precision_policy": "Report actual ranges. No new arbitrary SOC/Q target threshold and no Gaussian confidence interpretation. A failed usefulness gate remains recorded and is not repaired by silently changing the plan."
+  },
+  "inherited_RC_width_analysis": {
+    "construction": "For each fixed RC mode enumerate the declared actual_tick_pattern; h=max(Ahi-Alo),g=min(D-Ahi)>0 over positive tick counts. Apply stability002 L4: min(2B,max(W0,(2B*h+2D)/g)).",
+    "future_input_premise": "All future active tick counts belong to this finite declared pattern, with unchanged knownRC model/domain and admitted current. Arbitrary exact zero-time identities may intervene.",
+    "units": "The represented RC state quantum is exactly1nV. Report exact rational all-time widths and finite observed maxima separately; no physical sensor/model-accuracy claim.",
+    "role": "Finite coefficient enumeration supplies the theorem premises. The all-time statement is not extrapolated from the3675sample trace."
+  },
+  "retained_history_comparison": {
+    "source": "Unchanged src/scm_estimator.c with SCM_FULL, shared observations and encoded PWL model",
+    "prefix_samples": [175, 1400, 2450, 3675],
+    "fixed_theta_mask": 31,
+    "fixed_alpha_mask": 511,
+    "fixed_gamma_plus_minus": 100,
+    "starts": 3,
+    "max_iterations": 80,
+    "sigma_scale_V": 0.001,
+    "known_parameters": "Known RC/R0 and initial RC values equal the public model contract; H=u0=0. OnlySOC0/logQ remain free. No truth supplied.",
+    "outputs": "Points, errors scored afterward, objective, convergence status, projected gradient, raw conditional2x2 Gram, iterations, evaluations, host memory and CPU time.",
+    "interpretation": "Return success and numerical convergence are separate. Point inclusion in a hard outer hull is descriptive, not a provider-soundness gate. Local precision and statistical coverage remain separate; no Gaussian coverage on the bounded trace is claimed."
+  },
+  "resource_accounting": "sizeof complete caller-owned configuration, bank, staged workspace, input and output; all core compiler stack frames; static object sections; undefined imports; no heap/libm in provider. Include configuration backing storage. Report host own-source subtotal and unresolved target/runtime/interrupt costs separately.",
+  "execution_policy": {
+    "development": "Allowed only to a new output outside the repository, explicitly labeled development; development checks precede the primary source freeze.",
+    "primary": "Only after all listed source/plan files match a committed source revision. Refuse an existing output. Preserve failures and compare source hashes before and after execution.",
+    "timeout_seconds_per_command": 60,
+    "frozen_evidence": "No old source, result or experiment may change. No old campaign rerun."
+  },
+  "nonclaims": ["Full16-unknown battery estimator", "Gaussian likelihood equivalence", "Physical sensor/model validation", "Statistical coverage", "Parameter drift or aging", "Persistence and recovery", "End-to-end bounded chronology", "Cortex-M23 qualification", "Empirical proof of infinite duration"],
+  "reproduction": "python3 tools/audit_certificate.py --output experiments/indefinite_stability_003/NEW_RECEIPT.json"
+}

@@ -1,0 +1,64 @@
+{
+  "schema": "mumble_battery_certificate_lemmas_v1",
+  "contract": "proofs/indefinite_stability_003/contract.json",
+  "proof_kind": "Written mathematical and source-operation arguments; no machine-checked compiler proof.",
+  "dependencies": "Frozen L1-L6 in proofs/indefinite_stability_002/lemmas.json; new provider extends retained evidence beyond a bare mask.",
+  "SOC_coordinates": "Physical z,z0 use fraction units; x=Z*z,x0=Z*z0 use grid units. T_j,S_n,R_j and their arithmetic all use grid units.",
+  "lemmas": [
+    {
+      "id": "C1",
+      "claim": "Exact charge and outward SOC depletion for every real capacity in a cell.",
+      "proof": "Frozen L1 preserves exact P under its bounded-prefix contract. N=P*Z fits int64 because |P|<=2^44 and Z=2^16. Each positive denominator K*Q_endpoint<2^59. For N>=0 use floor(N/d_hi),ceil(N/d_lo); for N<0 use floor(N/d_lo),ceil(N/d_hi). Monotonicity in positive Q and directed quotient/remainder rounding enclose the full ratio. All quotient and endpoint sums stay int64 until domain clipping.",
+      "scope": "Represented current/time and static real Q; physical current bias is outside this exact-input contract."
+    },
+    {
+      "id": "C2",
+      "claim": "Shared RC intervals and corrected voltage enclose every admitted nuisance trajectory and its OCV.",
+      "proof": "Known R/tau make RC propagation independent of z0 and Q. Initialization encloses the common entering-RC box. Frozen L2-L3 and exact I_microA*R_milliohm targets enclose each subsequent RC voltage. From V=U(z)-I*R0-sum(v_i), adding the exact ohmic drop and outward RC sum to an admitted voltage interval encloses U(z). Configured current/target bounds and the declared voltage limits make all new sums/products representable.",
+      "scope": "Known static parameters, no hysteresis, admitted voltage interval."
+    },
+    {
+      "id": "C3",
+      "claim": "Outward PWL preimage includes every admitted current SOC, including plateau and knot cases.",
+      "proof": "On a positive-slope segment, clip corrected voltage to the segment range and evaluate the affine inverse with floor for the lower endpoint and ceil for the upper endpoint. Nonnegative numerator is bounded by16000000000*65536<2^50. A flat segment contributes its complete SOC interval iff its voltage is admitted. Inclusive segment intersections and the hull of all contributions retain every preimage point. No contribution proves emptiness of the exact preimage.",
+      "scope": "Exact known continuous nondecreasing PWL map; no arbitrary inverse selection on plateaus."
+    },
+    {
+      "id": "C4",
+      "claim": "Every globally compatible point survives in every original cell containing it, for all finite prefixes.",
+      "proof": "Let F_n include (z0,Q,initial_RC) consistent with the entire prefix and SOC domain. For a point in F_n and cell j, nesting plus induction places x0=Z*z0 in the old T_j. C2-C3 place x_n=Z*z_n in S_n; C1 places its grid depletion in R_j(P_n). Therefore x0=x_n+P_n*Z/(K*Q) belongs to S_n+R_j, and hence to T_j intersect(S_n+R_j). An empty intersection cannot contain a globally compatible point. This argument applies to every containing cell, including overlapping closed boundaries.",
+      "domain_argument": "For fixed positive Q and constant current during an interval, SOC is affine in time. Initial and endpoint-domain containment cover the continuous interval. Repeated outer contractions retain these constraints conservatively.",
+      "limit": "False positives may persist because a box loses intrabin and nuisance correlations."
+    },
+    {
+      "id": "C5",
+      "claim": "Current-SOC and capacity query hulls enclose every globally compatible target value.",
+      "proof": "C4 places each compatible point in an active original cell and its initial SOC in T_j. C1 gives its depletion in R_j, so currentSOC belongs to(T_j-R_j) intersect[0,Z]. Its capacity belongs to the cell's original interval. Taking the hull across active cells preserves both target enclosures. Empty support is returned as explicit inconsistency, not as a zero-width estimate.",
+      "limit": "A nonempty outer hull does not establish exact feasibility or validated statistical coverage."
+    },
+    {
+      "id": "C6",
+      "claim": "Retained evidence and query behavior have no age-dependent accumulator; unchanged charge cannot widen target hulls.",
+      "proof": "While active, each integer SOC0 lower endpoint only increases and each upper endpoint only decreases inside[0,Z]. Excluded bits never return; inactive bounds are ignored. There are finitely many representable bound changes, with no need to store their count. For unchanged P, each R_j(P) is unchanged, so contracting T_j or removing cells can only contract the projected SOC intervals and capacity hull. Shared RC states still propagate positive-time relaxation. Exact charge and inherited RC enclosure invariants hold at every admitted prefix.",
+      "composed_availability_corollary": "For an actual capacity in the declared union with Q<=100000microAh and z0,z_n in[0,1], |P_n|=K*Q*|z0-z_n|<=12600000000000<2^44. Thus the charge range is automatic for the admitted physical model. Valid immutable configuration, admitted inputs, C1-C4 and an actual compatible entering state preserve all bank invariants and at least every true-containing cell. Every admitted push returns OK at arbitrary prefix length; age alone causes neither range error nor inconsistency. Useful precision and empirical validity are separate.",
+      "limit": "Finite evidence has finite resolution. This is exact retention of the declared outer constraints, not of arbitrary all-history likelihood values."
+    },
+    {
+      "id": "C7",
+      "claim": "One observation is a complete failure-atomic transaction, with explicit committed inconsistency.",
+      "proof": "Validate input and trusted-state preconditions, copy the bank into the disjoint caller workspace, and perform all physical and evidence updates on that staged bank. Negative returns occur before the final bank assignment. A valid contradictory observation instead commits advanced charge/RC and an empty mask, then returns positive inconsistency. Later intersection cannot restore a removed cell.",
+      "premises": "Disjoint storage, immutable live configuration, no concurrent mutation or hardware fault, caller-verified observation order.",
+      "limit": "Persistence, missing-sample detection and recovery are not supplied by in-memory atomicity."
+    },
+    {
+      "id": "C8",
+      "claim": "Conditional capacity refinement follows from separated implied initial-SOC strips; all-zero-charge histories cannot distinguish capacity.",
+      "proof": "A sufficient exclusion condition is that a new strip S_n+R_j(P_n) is disjoint from the stored T_j; equivalently a new lower bound exceeds the retained upper bound or vice versa. Thus finitely many sound whole-cell exclusions yield eventual finite refinement by frozen L6. If P_k=0 at every observation, every R_j=[0,0]; with common initial priors all cells receive identical SOC0 intersections, so capacity support stays at its initial declared union unless the whole model becomes inconsistent. Observations add no capacity discrimination.",
+      "return_to_zero": "A history with nonzero intermediate P may identify Q even when its final P is zero. Earlier exclusions remain retained.",
+      "limits": "No universal convergence time, guaranteed excitation, below-cell resolution or physical accuracy threshold follows."
+    }
+  ],
+  "full_original_estimator_proved": false,
+  "validated_coverage": false,
+  "target_qualified": false
+}

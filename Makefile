@@ -9,9 +9,10 @@ ASSESS_OBJECT = build/scm_assess.o
 EVIDENCE_OBJECT = build/scm_evidence.o
 REMAINDER_OBJECT = build/scm_remainder.o
 STABLE_OBJECT = build/scm_stable.o
+CERTIFICATE_OBJECT = build/scm_certificate.o
 TEST_NAMES = $(basename $(notdir $(wildcard tests/test_*.c)))
 TEST_BINS = $(addprefix build/,$(TEST_NAMES))
-.PHONY: all test test-assess test-evidence test-remainder test-stable evidence-stack remainder-stack sanitize clean
+.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate evidence-stack remainder-stack sanitize clean
 all: build/scm_estimator
 build:
 	mkdir -p build
@@ -43,6 +44,10 @@ build/test_stable: tests/test_stable.c $(STABLE_OBJECT) | build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ -o $@
 test-stable: build/test_stable
 	./build/test_stable
+build/test_certificate: tests/test_certificate.c $(CERTIFICATE_OBJECT) $(STABLE_OBJECT) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ -o $@
+test-certificate: build/test_certificate
+	./build/test_certificate
 # Separate objects preserve the reference executable. These reports describe
 # this host/compiler; library stack and Cortex-M23 stack remain unmeasured.
 evidence-stack: | build
@@ -72,7 +77,7 @@ endif
 # This checks address/undefined behavior only; it is not a leak audit.
 sanitize: | build
 	@set -e; for name in $(TEST_NAMES); do \
-	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
+	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
 	  ASAN_OPTIONS=detect_leaks=0 ./build/$${name}_sanitized; \
 	done
 clean:
