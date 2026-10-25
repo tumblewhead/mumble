@@ -1,0 +1,24 @@
+{
+  "schema": "mumble_estimation_targets_v1",
+  "status": "active_user_requirements",
+  "date_local": "2026-10-25",
+  "source": "User: capacity hard limit5% with diminishing gains after0.5%; SOC hard limit10% with diminishing returns at0.5%.",
+  "metrics": {
+    "capacity": {
+      "metric": "absolute relative point error versus actual capacity",
+      "hard_limit_percent": 5.0,
+      "preferred_percent": 0.5
+    },
+    "current_SOC": {
+      "metric": "absolute point error in SOC percentage points",
+      "hard_limit_pp": 10.0,
+      "preferred_pp": 0.5,
+      "interpretation": "SOC percent interpreted as percentage points of full charge, consistent with the existing M1 SOC metric."
+    }
+  },
+  "priority": "Meet hard target limits and report unavailable/unresolved periods, then obtain preferred region; improvements below preferred values have diminishing priority versus memory/processing/robustness. No universal0.5% nuisance-parameter goal.",
+  "semantics": "Product accuracy requirements. These are not certified estimator bounds, expected posterior error guarantees, local covariance coverage or global observability claims. Point error, local precision, numerical health and validated coverage remain separate.",
+  "experimental_application": "Evaluate declared informative checkpoints and every saved query with explicit availability and local qualification. Startup and unresolved periods remain visible; no claim about unobserved times or real-cell coverage.",
+  "preservation": "Original M1 plan, thresholds, scores, failures and acceptance stay frozen; supplemental rescore is experiments/m1_belief_audit_001.",
+  "supplement": "experiments/m1_belief_audit_001/summary.json"
+}

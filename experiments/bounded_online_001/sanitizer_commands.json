@@ -1,0 +1,61 @@
+[
+  {
+    "stage": "build",
+    "name": "test_online",
+    "command": [
+      "cc",
+      "-Iinclude",
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "src/scm_online.c",
+      "src/scm_model.c",
+      "tests/test_online.c",
+      "-lm",
+      "-o",
+      "build/test_online_focused_sanitized"
+    ],
+    "returncode": 0
+  },
+  {
+    "stage": "run",
+    "name": "test_online",
+    "returncode": 0
+  },
+  {
+    "stage": "build",
+    "name": "test_online_checkpoint",
+    "command": [
+      "cc",
+      "-Iinclude",
+      "-std=c99",
+      "-O1",
+      "-g",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "src/scm_online.c",
+      "src/scm_online_checkpoint.c",
+      "src/scm_model.c",
+      "tests/test_online_checkpoint.c",
+      "-lm",
+      "-o",
+      "build/test_online_checkpoint_focused_sanitized"
+    ],
+    "returncode": 0
+  },
+  {
+    "stage": "run",
+    "name": "test_online_checkpoint",
+    "returncode": 0
+  }
+]

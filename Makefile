@@ -18,9 +18,12 @@ COMPACT_OBJECTS = $(COMPACT_EVIDENCE_OBJECT) $(COMPACT_REMAINDER_OBJECT) $(COMPA
 SESSION_OBJECT = build/scm_session.o
 SESSION_CHECKPOINT_OBJECT = build/scm_session_checkpoint.o
 SESSION_OBJECTS = $(SESSION_OBJECT) $(SESSION_CHECKPOINT_OBJECT) $(ESTIMATOR_OBJECT) $(MODEL_OBJECT) $(FEATURE_OBJECT) $(ASSESS_OBJECT)
+ONLINE_OBJECT = build/scm_online.o
+ONLINE_CHECKPOINT_OBJECT = build/scm_online_checkpoint.o
+ONLINE_OBJECTS = $(ONLINE_OBJECT) $(ONLINE_CHECKPOINT_OBJECT) $(MODEL_OBJECT)
 TEST_NAMES = $(basename $(notdir $(wildcard tests/test_*.c)))
 TEST_BINS = $(addprefix build/,$(TEST_NAMES))
-.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box test-compact test-session session-stack compact-stack evidence-stack remainder-stack sanitize clean
+.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box test-compact test-session test-online online-stack session-stack compact-stack evidence-stack remainder-stack sanitize clean
 all: build/scm_estimator
 build:
 	mkdir -p build
@@ -66,6 +69,20 @@ build/scm_session_probe: tools/session_probe.c $(SESSION_OBJECTS) | build
 test-session: build/test_session build/test_session_checkpoint
 	./build/test_session
 	./build/test_session_checkpoint
+build/test_online: tests/test_online.c $(ONLINE_OBJECT) $(MODEL_OBJECT) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+build/test_online_checkpoint: tests/test_online_checkpoint.c $(ONLINE_OBJECTS) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+build/scm_online_probe: tools/online_probe.c $(ONLINE_OBJECTS) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+test-online: build/test_online build/test_online_checkpoint
+	./build/test_online
+	./build/test_online_checkpoint
+online-stack: | build
+	mkdir -p build/online-stack
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_online.c -o build/online-stack/scm_online.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_online_checkpoint.c -o build/online-stack/scm_online_checkpoint.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c tools/online_probe.c -o build/online-stack/online_probe.o
 # M1 is a desktop retained-history adapter; these host frames are not a target
 # SRAM bound and exclude library/runtime/caller costs and dynamic allocations.
 session-stack: | build
@@ -124,7 +141,7 @@ endif
 # This checks address/undefined behavior only; it is not a leak audit.
 sanitize: | build
 	@set -e; for name in $(TEST_NAMES); do \
-	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c src/scm_compact_evidence.c src/scm_compact_remainder.c src/scm_compact_assess.c src/scm_session.c src/scm_session_checkpoint.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
+	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c src/scm_compact_evidence.c src/scm_compact_remainder.c src/scm_compact_assess.c src/scm_session.c src/scm_session_checkpoint.c src/scm_online.c src/scm_online_checkpoint.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
 	  ASAN_OPTIONS=detect_leaks=0 ./build/$${name}_sanitized; \
 	done
 clean:

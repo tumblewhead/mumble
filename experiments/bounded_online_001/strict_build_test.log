@@ -1,0 +1,43 @@
+mkdir -p build
+python3 tests/test_assess.py
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_assess.c -o build/scm_assess.o
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.011s
+
+OK
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_model.c -o build/scm_model.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_certificate.c -o build/scm_certificate.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_stable.c -o build/scm_stable.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_certificate_box.c -o build/scm_certificate_box.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_compact_evidence.c -o build/scm_compact_evidence.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_compact_remainder.c -o build/scm_compact_remainder.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_compact_assess.c -o build/scm_compact_assess.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_remainder.c -o build/scm_remainder.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_evidence.c -o build/scm_evidence.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_estimator.c -o build/scm_estimator.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_features.c -o build/scm_features.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_evidence.c build/scm_evidence.o build/scm_model.o -lm -o build/test_evidence
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_features.c build/scm_features.o -lm -o build/test_features
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_model.c build/scm_model.o -lm -o build/test_model
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_online.c -o build/scm_online.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_online_checkpoint.c -o build/scm_online_checkpoint.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_remainder.c build/scm_remainder.o build/scm_evidence.o build/scm_model.o -lm -o build/test_remainder
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_session.c -o build/scm_session.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -MMD -MP -c src/scm_session_checkpoint.c -o build/scm_session_checkpoint.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_stable.c build/scm_stable.o -o build/test_stable
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tools/online_probe.c build/scm_online.o build/scm_online_checkpoint.o build/scm_model.o -lm -o build/scm_online_probe
+mkdir -p build/online-stack
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -fstack-usage -c src/scm_online.c -o build/online-stack/scm_online.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_assess_c.c build/scm_assess.o -lm -o build/test_assess_c
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_canaries.c build/scm_model.o -lm -o build/test_canaries
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -fstack-usage -c src/scm_online_checkpoint.c -o build/online-stack/scm_online_checkpoint.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_certificate.c build/scm_certificate.o build/scm_stable.o -o build/test_certificate
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_certificate_box.c build/scm_certificate_box.o build/scm_certificate.o build/scm_stable.o -o build/test_certificate_box
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -fstack-usage -c tools/online_probe.c -o build/online-stack/online_probe.o
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_compact.c build/scm_compact_evidence.o build/scm_compact_remainder.o build/scm_compact_assess.o build/scm_remainder.o build/scm_evidence.o build/scm_model.o build/scm_assess.o -lm -o build/test_compact
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_compact_assess.c build/scm_compact_assess.o build/scm_compact_evidence.o build/scm_evidence.o build/scm_model.o build/scm_assess.o -lm -o build/test_compact_assess
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_estimator.c build/scm_estimator.o build/scm_model.o build/scm_features.o -lm -o build/test_estimator
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_online.c build/scm_online.o build/scm_model.o -lm -o build/test_online
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_online_checkpoint.c build/scm_online.o build/scm_online_checkpoint.o build/scm_model.o -lm -o build/test_online_checkpoint
+cc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror  tests/test_session.c build/scm_session.o build/scm_estimator.o build/scm_model.o build/scm_features.o build/scm_assess.o -lm -o build/test_session

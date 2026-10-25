@@ -1,0 +1,127 @@
+{
+  "schema": "mumble_bounded_online_plan_v1",
+  "status": "frozen_before_primary",
+  "date_local": "2026-10-25",
+  "timezone": "Etc/UTC",
+  "work_branch": "implementation/bounded-online-001",
+  "baseline_revision": "8acc87b1e8eb1b92acd7f0f9c1b643d1cfb79658",
+  "milestone": "A4 first autonomous bounded learner falsification",
+  "decision": "Implement one16-coordinate joint square-root EKF, preserve full state/parameter correlation, then one small paired lifecycle run. No hyperparameter sweep or after-result tuning.",
+  "requirements": "plans/estimation_targets_001.json",
+  "cases": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "path": "data/cell_a_35hz_s202610240.csv",
+      "samples": 73500,
+      "duration_s": 2100.0,
+      "sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8"
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "path": "data/cell_b_35hz_s202610240.csv",
+      "samples": 73500,
+      "duration_s": 2100.0,
+      "sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe"
+    }
+  ],
+  "candidate": {
+    "name": "scm_online",
+    "coordinates": [
+      "log_tau1",
+      "log_tau2",
+      "log_tau3",
+      "log_gamma_plus",
+      "log_gamma_minus",
+      "log_Q_Ah",
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "H",
+      "current_z",
+      "current_v1",
+      "current_v2",
+      "current_v3",
+      "current_h"
+    ],
+    "representation": "Mean16 plus full square covariance factorS16x16, P=S*S^T; factor is not required triangular. Fixed state/workspace; no rawhistory or cached rows.",
+    "belief_semantics": "Local Gaussian, prior-conditioned approximation to sequential nonlinear inference. Historical information is carried in mean/full factor and dynamics; no exact nonlinear historical likelihood or hard support/coverage claim.",
+    "prior_means": "Original public defaulttheta start0: geometric-mid tau bands, gamma150/300,Q.06,z.68. Legacy linear-QP public seed R0/R1/R2/R3=.1,H=.024; currentv1/v2/v3/h=0. No fitted M1 estimates or true values.",
+    "prior_standard_deviations": "Support-coordinate width/sqrt12: log tau bands [.015,.15],[.15,1.5],[1.5,30]; loggamma[5,1200]; logQ[.03,.10]; R[0,1],H[0,.1],enteringz[.2,.95],enteringv[-.08,.08],h[-1,1]. Diagonal initial factor; this is a declared Gaussian scale, not a uniform-support guarantee.",
+    "prediction": "Every actual interval updates physical z/v/h and S_pred=F*S using sparse analytic F; static parameter rows identity. No process noise, fading or forgetting in matched static model.",
+    "correction": "Each available voltage enters once at interval end. Full-factor scalar Joseph-equivalent update with normalized innovation, preserving correlations. No replay/optimizer/posterior factor added.",
+    "domain_policy": "Common gain multiplier lambda in[0,1] keeps corrected means in declared supports. If limited, tiny fixed interior backoff1-1e-9. Covariance uses the same scaled gain via Joseph-equivalent factor update. lambda0 preserves predicted belief exactly. Report all limited/zero-gain corrections. Prediction/domain/numerical loss is explicit, never replaced by invented current/state.",
+    "factor_formula": "w=S^T*h; innovation_sd=hypot(sigma,w_0,...,w_15); u=w/innovation_sd; g=S*u; c=lambda*(2-lambda); delta=(sigma/innovation_sd)^2+(1-lambda)^2*dot(u,u); a=c/(1+sqrt(delta)); mean+=lambda*g*(innovation/innovation_sd); S_new=S-a*g*u^T.",
+    "mean_support": "Static original supports; current z[0,1],v_i[-.25,.25]V,h[-1,1]. Support checking constrains means; covariance remains local approximate, not truncated posterior.",
+    "input_domain": {
+      "dt_s_min": 0,
+      "dt_s_max": 1,
+      "abs_current_A_max": 0.25,
+      "sigma_V": 0.001,
+      "modes": 3,
+      "temperature_C": 25,
+      "OCV": "existing illustrative known curve"
+    },
+    "work": "Fixed O(16\u00b2) per sample; sparse dynamics, no per-sample QR, no age-dependent iterations. Measure actual kernel/storage/host cost; no M23 claim."
+  },
+  "execution": {
+    "checkpoint_sample_counts": [
+      420,
+      31500,
+      42000,
+      64750,
+      73500
+    ],
+    "warm_segment_ends": [
+      420,
+      42000,
+      64750,
+      73500
+    ],
+    "cold_reset_sample": 31500,
+    "query_stride_samples": 350,
+    "case_workers": 2,
+    "expected_processes": 12,
+    "expected_input_deliveries": 378000,
+    "new_batch_optimizer_calls": 0,
+    "primary_run_policy": "Run once after source/plan commit. Preserve first outputs and any failures. No full-cell learning during development. Tiny deterministic numerical/fault fixtures are separately disclosed.",
+    "truth_policy": "Inference runner/CLI receives observations and public configuration only. Separate scorer loads truth after every inference process has finished.",
+    "checkpoint": "Fixed-size complete canonical state, no pointer/rawjournal. Warmrestore makes no numerical updates and preserves state/factor/config/counters exactly.",
+    "cold": "Restorecontrol900s then discardbelief and initialize the declared public prior while plant continues. Source position and known absoluteclock retained; no true hidden state."
+  },
+  "acceptance": {
+    "functional": "Every declared process/delivery completes with explicit finite-state/ordering/lifecycle semantics; exact warmcheckpoint and queryparity excludingruntime timings. No silently lost physical updates or duplicated observation evidence.",
+    "resource": "No heap in inference kernel, no rawhistory, owned persistent/workspace/query bytes constant from first tolast observation; practical initial owned budget8192B before stack/runtime/persistence extras. Record all additional simultaneous costs.",
+    "point_accuracy": {
+      "control_and_warm_samples": [
+        31500,
+        63000,
+        73500
+      ],
+      "cold_samples": [
+        63000,
+        73500
+      ],
+      "hard_capacity_abs_relative_percent_le": 5.0,
+      "hard_current_SOC_abs_error_pp_le": 10.0,
+      "preferred_capacity_percent_le": 0.5,
+      "preferred_current_SOC_pp_le": 0.5
+    },
+    "qualification": "Report prior-conditioned localSD, excitation/reasons/constraints and actual point errors separately. Local2sigma widths are not a hard-error guarantee. Count hard-limit breaches among provisional savedqueries; report first/sustained and fraction unavailable/unresolved.",
+    "comparison_reference": "Frozen M1 outputs at samepositions, plus supplemental new-threshold and fullbelief audit. No rerun of M1 solver.",
+    "decision": "Keep as a candidate only if hard target/lifecycle/resource gates pass without hidden numerical faults; record preferred-region performance separately. If it fails, stop and name one measured cause for the next bounded change. Do not launch annual/attention/multistart experiments automatically.",
+    "core_owned_bytes_max": 8192
+  },
+  "risk": "One Gaussian may collapse into a wrong nonlinear mode. Common domain-limited gain can stall allcoordinates at one nuisancebound. Preserve counters and firstfailure; no after-score processnoise/priorretuning.",
+  "proof_scope": "Review square-factor algebra and finite numerical kernel/fault tests. A factor representation preserves real-arithmetic PSD; it does not prove full-model all-prefix accuracy/coverage, clock/counter availability or target lifetime stability.",
+  "prior_evidence_preserved": "All M1/reference/compact/certificate sources and frozen evidence unchanged. New supplemental thresholds do not rewrite old acceptance.",
+  "deliverables": [
+    "product-target contract",
+    "M1 fullbelief audit",
+    "bounded C core and fixedcheckpoint",
+    "one two-cell lifecycle falsification",
+    "complete owned memory/work report",
+    "compact continuation handoff"
+  ],
+  "research_source": "https://ipnpr.jpl.nasa.gov/progress_report/42-233/42-233A.pdf; general square-root filtering context, own scalar Joseph-equivalent algebra separately reviewed."
+}

@@ -1,0 +1,186 @@
+{
+  "schema": "mumble_bounded_online_build_checks_v1",
+  "verified_utc": "2026-10-25T18:49:59.606704+00:00",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "strict_command": [
+    "make",
+    "-B",
+    "-j2",
+    "test",
+    "build/scm_online_probe",
+    "online-stack",
+    "CFLAGS=-std=c99 -O3 -Wall -Wextra -Wpedantic -Werror"
+  ],
+  "strict_returncode": 0,
+  "full_suite_passed": true,
+  "parseable_unit_records": [
+    {
+      "test": "scm_assess_c",
+      "checks": 114,
+      "failures": 0,
+      "workspace_bytes": 4224,
+      "output_bytes": 2488,
+      "options_bytes": 56
+    },
+    {
+      "test": "scm_canaries_reconstructed",
+      "failures": 0,
+      "collision_prefix_max_difference_V": 4.440892098500626e-16,
+      "collision_rest_1s_difference_V": -3.9061605930701404e-05,
+      "rest_10h_max_difference_V": 0,
+      "rest_candidate_B_h": 0.5388471783928495,
+      "rest_suffix_difference_V": -0.011562965123653068,
+      "chronology_polarization_difference_V": 0.01011081539701545,
+      "chronology_expected_difference_V": 0.010110815397015452,
+      "chronology_SOC_difference": 0
+    },
+    {
+      "schema": "mumble_compact_unit_v1",
+      "checks": 12163,
+      "failed": 0,
+      "numeric_comparisons": 1981860,
+      "scalar_comparisons": 115274,
+      "numeric_mismatches": 0,
+      "bit_differences": 0,
+      "max_absolute_difference": 0,
+      "first_mismatch": ""
+    },
+    {
+      "test": "scm_compact_assess",
+      "checks": 3464,
+      "failures": 0,
+      "workspace_bytes": 2432,
+      "output_bytes": 296,
+      "options_bytes": 56,
+      "max_eigen_abs_error": 0,
+      "max_target_abs_error": 5.551115123125783e-17,
+      "tolerances": {
+        "eigen_atol": 1e-09,
+        "eigen_rtol": 1e-12,
+        "target_atol": 1e-11,
+        "target_rtol": 1e-09
+      }
+    },
+    {
+      "test": "scm_estimator_profile_API_3RC",
+      "failures": 0,
+      "samples": 3500,
+      "sample_rate_Hz": 35,
+      "noiseless_objective": 2.2025193688996955e-19,
+      "noisy_objective": 463.3592002638392,
+      "max_linear_parameter_error": 1.1337736305350177e-12,
+      "max_feasibility_violation": 0,
+      "constraint_restore_error": 0,
+      "profile_gradient_relative_error": 1.5894007147896628e-06,
+      "linked_SOC_gradient_relative_error": 1.5894007147896628e-06,
+      "joint_Gram_relative_error": 0,
+      "current_SOC_target_error": 0,
+      "zero_excitation_objective": 5.149069663852824e-19,
+      "zero_excitation_theta_mask": 24
+    },
+    {
+      "test": "features_reconstructed",
+      "checks": 60,
+      "failures": 0,
+      "max_pair_log_likelihood_ratio_error": 2.842170943040401e-14,
+      "repetition_count_ratio": 100.00000000000001
+    },
+    {
+      "test": "scm_model_reconstructed_3RC",
+      "failures": 0,
+      "modes_tested": [
+        1,
+        2,
+        3
+      ],
+      "max_physical_design_difference_V": 8.881784197001252e-16,
+      "max_derivative_absolute_error": 3.3750313654934416e-10,
+      "35Hz_endpoint_difference_V": 3.552713678800501e-14,
+      "model_state_bytes": 280,
+      "row_bytes": 648
+    },
+    {
+      "test": "bounded_online_core",
+      "checks": 2377,
+      "failures": 0,
+      "max_prediction_error": 0,
+      "max_factor_derivative_error": 2.211459904088997e-10,
+      "max_dense_Joseph_error": 8.881784197001252e-16,
+      "state_bytes": 2408,
+      "workspace_bytes": 2920,
+      "query_bytes": 520,
+      "config_bytes": 56,
+      "optimizer_calls": 0,
+      "primary_streams": 0
+    },
+    {
+      "test": "online_checkpoint",
+      "checks": 64,
+      "failures": 0,
+      "checkpoint_bytes": 2440,
+      "observation_updates": 0,
+      "optimizer_calls": 0
+    },
+    {
+      "test": "session_lifecycle",
+      "checks": 1185,
+      "failures": 0,
+      "tiny_numerical_fit_calls": 2,
+      "primary_fit_calls": 0,
+      "session_bytes": 3104,
+      "config_bytes": 136,
+      "query_bytes": 208,
+      "sample_bytes": 24,
+      "fit_result_bytes": 2504,
+      "model_bytes": 280,
+      "assessment_bytes": 2488,
+      "assessment_workspace_bytes": 4224
+    },
+    {
+      "test": "scm_session_checkpoint",
+      "checks": 365,
+      "failures": 0,
+      "rejected_faults": 19,
+      "optimizer_calls": 0,
+      "checkpoint_fixed_bytes": 2808,
+      "journal_bytes_per_sample": 25,
+      "scope": "host persistence and continuation; constructed fit fixture, no estimation or coverage claim"
+    }
+  ],
+  "focused_address_undefined_sanitizers_passed": true,
+  "sanitizer_commands": "experiments/bounded_online_001/sanitizer_commands.json",
+  "sanitizer_scope": "New online core and checkpoint tests; detect_leaks=0, not a leak audit.",
+  "python_compile_passed": true,
+  "diff_check_passed": true,
+  "zero_stream_smoke": {
+    "agent_report": "Checkpoint/CLI owner reported all8 run validations plus constant-resource check passed; self-parity77 scalars exact. No deliveries or optimizer calls.",
+    "raw_smoke_in_ignored_build": "build/online_zero_smoke_sfjywmyg/cell_a_35hz_s202610240__zero.jsonl"
+  },
+  "truth_policy": "Only deterministic numerical/fault fixtures before primary; no full-cell learning or tuning.",
+  "optimizer_scope": "Each of the strict full suite and provenance-only make test repetition calls2 tiny legacy session fits (4 total for these root gates). New online core/checkpoint/smoke tests and primary use0 batch optimizer calls; no primary has run.",
+  "host_binary": {
+    "path": "reference_binaries/scm_online_probe_bounded_001",
+    "bytes": 60408,
+    "sha256": "5f97fc56e12fc55c36ac90a530095574a7b3e9d7582f0ad1bb63ed1fc72a9c4d"
+  },
+  "artifact_sha256": {
+    "experiments/bounded_online_001/strict_build_test.log": "cc177a55376c456aea78f6ad2bb59ca0a09e8d4c168aac771b5ef0d9c5822f2c",
+    "experiments/bounded_online_001/focused_sanitizers.log": "2d2b1634471c902cdb8ec7a4e5ac0bb1ae7532556e558afb8e37c45059746a34",
+    "experiments/bounded_online_001/sanitizer_commands.json": "3160ad75d6664392d7bfff3ec8770253cfa5382131034af9a406c8cfd0f542e7",
+    "experiments/bounded_online_001/host_stack/online_probe.su": "a1f78f5093cb4546cb513ab9902e07f4d40d253ab2f724e687c8120ad38498fa",
+    "experiments/bounded_online_001/host_stack/scm_online.su": "21a0dee7eafdae0029ff4381c157ce3c8981de884c2c72d1439f851056f94b6d",
+    "experiments/bounded_online_001/host_stack/scm_online_checkpoint.su": "3070f96ea62ec779b4d9c9a6fe9627242f34fe4e105e7d8ec7ad9d5119769e57",
+    "experiments/bounded_online_001/final_unit_tests.log": "56d2865affbd56defc8e8c6be2c2f316694affad88b7f0784b3a3b6979b13a8c"
+  },
+  "log_preservation_note": {
+    "first_strict_command_returncode": 0,
+    "first_completed_log_sha256_seen_in_tool_result": "b06620df2bc1f203e1da9e89fbfa8e292dc36e4b4c50bf861d9671396fcd7700",
+    "subsequent_disk_log": "strict_build_test.log retained only the compilation prefix; cause unestablished. Preserve this prefix without reconstructing it.",
+    "verification_followup": "Repeated only make test on already built binaries to save a complete final test log; no full trajectory or primary run."
+  },
+  "final_unit_command": [
+    "make",
+    "test"
+  ],
+  "final_unit_returncode": 0
+}

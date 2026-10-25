@@ -1,0 +1,947 @@
+{
+  "schema": "mumble_m1_belief_audit_v1",
+  "created_utc": "2026-10-25T18:34:54.472529+00:00",
+  "primary_source_revision": "0cde298a204ff3a3347830c0fac0ba99e10918c8",
+  "published_M1_revision": "8acc87b1e8eb1b92acd7f0f9c1b643d1cfb79658",
+  "inference_completed_utc": "2026-10-25T18:14:39.818909+00:00",
+  "new_optimizer_calls": 0,
+  "primary_reruns": 0,
+  "original_M1_usefulness_passed": false,
+  "frozen_M1_result_unchanged": true,
+  "product_thresholds": {
+    "hard": {
+      "capacity_percent": 5.0,
+      "SOC_pp": 10.0
+    },
+    "preferred": {
+      "capacity_percent": 0.5,
+      "SOC_pp": 0.5
+    }
+  },
+  "threshold_semantics": "User-supplied point-error requirements. SOC percent means absolute percentage points of SOC. Hard limits use <=; preferred thresholds mark diminishing returns. These are acceptance requirements, not estimator-certified error bounds or coverage.",
+  "physical_vector": {
+    "names": [
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "tau1",
+      "tau2",
+      "tau3",
+      "H",
+      "gamma_plus",
+      "gamma_minus",
+      "Q_Ah",
+      "z0",
+      "v10",
+      "v20",
+      "v30",
+      "h0"
+    ],
+    "dimension": 16,
+    "scope": "11 static parameters plus entering SOC, three entering RC voltages and entering hysteresis state for the fitted epoch. Current hidden-state errors are separately reconstructed at each endpoint.",
+    "error_units": "Positive parameters: relative percent; z0: percentage points; entering RC voltages: mV; h0: absolute dimensionless. No raw mixed-unit total is reported."
+  },
+  "aggregate_definition": {
+    "chart": [
+      "log_tau1",
+      "log_tau2",
+      "log_tau3",
+      "log_gamma_plus",
+      "log_gamma_minus",
+      "z0",
+      "log_Q_Ah",
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "H",
+      "v10",
+      "v20",
+      "v30",
+      "u0=H*h0"
+    ],
+    "formula": "e_i=(estimated_x_i-truth_x_i)/fit.coordinate_scales_i; RMS=sqrt(sum(e_i^2)/16); L2=sqrt(sum(e_i^2)); max=max(abs(e_i))",
+    "scope": "Dimensionless error under the reference's declared engineering coordinate scales. Log coordinates for tau/gamma/Q; z0 linear; alpha contains R/H/entering voltages/u0=H*h0. This score is scale-dependent, not a percentage, posterior distance or coverage statistic.",
+    "uncertainty": "Existing offline local assessor recomputed from the frozen joint Gram, without truth. Original diagnostic precision thresholds remain unchanged. Numerical rank and provisional ranges are not global identifiability or validated coverage."
+  },
+  "cases": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arms": {
+        "control": {
+          "query_count": 212,
+          "tier_counts": {
+            "unknown": 1,
+            "over_hard": 90,
+            "within_preferred": 121
+          },
+          "hard": {
+            "first_s": 900.0000000004121,
+            "sustained_from_s": 900.0000000004121,
+            "queries_within": 121
+          },
+          "preferred": {
+            "first_s": 900.0000000004121,
+            "sustained_from_s": 900.0000000004121,
+            "queries_within": 121
+          },
+          "maximum_available_SOC_abs_error_pp": 7.509037311585387,
+          "maximum_available_capacity_abs_error_percent": 41.66666666666667,
+          "SOC_status_counts": {
+            "unknown": 1,
+            "unresolved": 90,
+            "provisional": 121
+          },
+          "capacity_status_counts": {
+            "unknown": 1,
+            "unresolved": 90,
+            "provisional": 121
+          }
+        },
+        "warm": {
+          "query_count": 212,
+          "tier_counts": {
+            "unknown": 1,
+            "over_hard": 90,
+            "within_preferred": 121
+          },
+          "hard": {
+            "first_s": 900.0000000004121,
+            "sustained_from_s": 900.0000000004121,
+            "queries_within": 121
+          },
+          "preferred": {
+            "first_s": 900.0000000004121,
+            "sustained_from_s": 900.0000000004121,
+            "queries_within": 121
+          },
+          "maximum_available_SOC_abs_error_pp": 7.509037311585387,
+          "maximum_available_capacity_abs_error_percent": 41.66666666666667,
+          "SOC_status_counts": {
+            "unknown": 1,
+            "unresolved": 90,
+            "provisional": 121
+          },
+          "capacity_status_counts": {
+            "unknown": 1,
+            "unresolved": 90,
+            "provisional": 121
+          }
+        },
+        "cold": {
+          "query_count": 121,
+          "tier_counts": {
+            "unknown": 90,
+            "within_preferred": 31
+          },
+          "hard": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "preferred": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "maximum_available_SOC_abs_error_pp": 0.015580072095844333,
+          "maximum_available_capacity_abs_error_percent": 0.007026882555494218,
+          "SOC_status_counts": {
+            "unknown": 90,
+            "provisional": 31
+          },
+          "capacity_status_counts": {
+            "unknown": 90,
+            "provisional": 31
+          }
+        }
+      },
+      "fit_summaries": [
+        {
+          "arm": "control",
+          "next_index": 350,
+          "time_s": 9.99999999999997,
+          "optimizer_status": 0,
+          "numerical_rank": 6,
+          "physical_status_counts": {
+            "unexcited": 7,
+            "unresolved": 9
+          },
+          "current_state_errors": {
+            "SOC_error_pp": 4.999700243423932,
+            "RC_voltage_error_mV": [
+              -4.151689580210213e-87,
+              -0.03306103582510394,
+              -0.4375784074748066
+            ],
+            "hysteresis_state_error": 1.45
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau2",
+              "relative_error_percent": 200.0
+            },
+            {
+              "name": "gamma_plus",
+              "relative_error_percent": 172.72727272727272
+            },
+            {
+              "name": "gamma_minus",
+              "relative_error_percent": -91.89189189189189
+            }
+          ],
+          "product_tier_at_fit": "over_hard",
+          "coordinate_scaled_RMS": 1.0830006895164248,
+          "coordinate_scaled_max_abs": 2.5123056239761143
+        },
+        {
+          "arm": "control",
+          "next_index": 31500,
+          "time_s": 900.0000000004121,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 2,
+            "provisional": 14
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -0.0011147489820895196,
+            "RC_voltage_error_mV": [
+              -0.10963427558245524,
+              -0.03581057345065572,
+              0.1697985186331248
+            ],
+            "hysteresis_state_error": 0.0027614139209748423
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau2",
+              "relative_error_percent": -5.170850965380436
+            },
+            {
+              "name": "tau1",
+              "relative_error_percent": -3.260392677864654
+            },
+            {
+              "name": "tau3",
+              "relative_error_percent": -1.4332450185030488
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.030027361610490487,
+          "coordinate_scaled_max_abs": 0.08967244483298747
+        },
+        {
+          "arm": "control",
+          "next_index": 63000,
+          "time_s": 1800.0000000016398,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 2,
+            "provisional": 14
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -0.001180860697957975,
+            "RC_voltage_error_mV": [
+              -0.09180508365152877,
+              0.00885653893128134,
+              0.13408042946970455
+            ],
+            "hysteresis_state_error": -0.0009768866651256314
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau2",
+              "relative_error_percent": -2.5165278425530846
+            },
+            {
+              "name": "tau1",
+              "relative_error_percent": -2.203457941246567
+            },
+            {
+              "name": "R1",
+              "relative_error_percent": -0.8500470708475039
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.02479057582846287,
+          "coordinate_scaled_max_abs": 0.08390957092687243
+        },
+        {
+          "arm": "control",
+          "next_index": 73500,
+          "time_s": 2100.000000002049,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 2,
+            "provisional": 14
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -0.00201254564804465,
+            "RC_voltage_error_mV": [
+              -0.005448161403003504,
+              0.0003714551376903267,
+              0.005386459310194281
+            ],
+            "hysteresis_state_error": -0.0008055797659811681
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau2",
+              "relative_error_percent": -2.1266730204868467
+            },
+            {
+              "name": "tau1",
+              "relative_error_percent": -1.5016621907084304
+            },
+            {
+              "name": "R1",
+              "relative_error_percent": -1.0089187783339781
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.023706328512525576,
+          "coordinate_scaled_max_abs": 0.08206092992889576
+        },
+        {
+          "arm": "cold",
+          "next_index": 63000,
+          "time_s": 1800.0000000016398,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 4,
+            "provisional": 12
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -0.01222721861392495,
+            "RC_voltage_error_mV": [
+              0.08216991751605271,
+              0.4828250692967967,
+              -0.03321410221890017
+            ],
+            "hysteresis_state_error": -0.005185604242651132
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "R0",
+              "relative_error_percent": -7.200286171621051
+            },
+            {
+              "name": "tau1",
+              "relative_error_percent": -7.082930985578395
+            },
+            {
+              "name": "R2",
+              "relative_error_percent": 3.6577656764908983
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.02834977548098321,
+          "coordinate_scaled_max_abs": 0.07346282169119478
+        },
+        {
+          "arm": "cold",
+          "next_index": 73500,
+          "time_s": 2100.000000002049,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 4,
+            "provisional": 12
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -0.015580072096588182,
+            "RC_voltage_error_mV": [
+              -0.016251944284741658,
+              0.011464727234090206,
+              -0.004955430891089799
+            ],
+            "hysteresis_state_error": -0.005172143693393694
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau1",
+              "relative_error_percent": 3.3951789825815037
+            },
+            {
+              "name": "R1",
+              "relative_error_percent": -3.009619311989198
+            },
+            {
+              "name": "R0",
+              "relative_error_percent": 2.835127208572863
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.021984201852637674,
+          "coordinate_scaled_max_abs": 0.06500873926388573
+        }
+      ]
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arms": {
+        "control": {
+          "query_count": 212,
+          "tier_counts": {
+            "unknown": 1,
+            "over_hard": 180,
+            "within_preferred": 31
+          },
+          "hard": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "preferred": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "maximum_available_SOC_abs_error_pp": 9.053149355828193,
+          "maximum_available_capacity_abs_error_percent": 26.629799869520767,
+          "SOC_status_counts": {
+            "unknown": 1,
+            "unresolved": 180,
+            "provisional": 31
+          },
+          "capacity_status_counts": {
+            "unknown": 1,
+            "unresolved": 180,
+            "provisional": 31
+          }
+        },
+        "warm": {
+          "query_count": 212,
+          "tier_counts": {
+            "unknown": 1,
+            "over_hard": 180,
+            "within_preferred": 31
+          },
+          "hard": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "preferred": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "maximum_available_SOC_abs_error_pp": 9.053149355828193,
+          "maximum_available_capacity_abs_error_percent": 26.629799869520767,
+          "SOC_status_counts": {
+            "unknown": 1,
+            "unresolved": 180,
+            "provisional": 31
+          },
+          "capacity_status_counts": {
+            "unknown": 1,
+            "unresolved": 180,
+            "provisional": 31
+          }
+        },
+        "cold": {
+          "query_count": 121,
+          "tier_counts": {
+            "unknown": 90,
+            "within_preferred": 31
+          },
+          "hard": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "preferred": {
+            "first_s": 1800.0000000016398,
+            "sustained_from_s": 1800.0000000016398,
+            "queries_within": 31
+          },
+          "maximum_available_SOC_abs_error_pp": 0.03136711971865047,
+          "maximum_available_capacity_abs_error_percent": 0.13494599291614673,
+          "SOC_status_counts": {
+            "unknown": 90,
+            "provisional": 31
+          },
+          "capacity_status_counts": {
+            "unknown": 90,
+            "provisional": 31
+          }
+        }
+      },
+      "fit_summaries": [
+        {
+          "arm": "control",
+          "next_index": 350,
+          "time_s": 9.99999999999997,
+          "optimizer_status": 0,
+          "numerical_rank": 7,
+          "physical_status_counts": {
+            "unexcited": 7,
+            "unresolved": 6,
+            "provisional": 3
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -8.43337800576297,
+            "RC_voltage_error_mV": [
+              2.4836996449563873e-58,
+              0.00012888200388617613,
+              -0.4725263877372388
+            ],
+            "hysteresis_state_error": -1.35
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "H",
+              "relative_error_percent": 202.48856793435567
+            },
+            {
+              "name": "R3",
+              "relative_error_percent": -69.6969696969697
+            },
+            {
+              "name": "R2",
+              "relative_error_percent": -62.96296296296296
+            }
+          ],
+          "product_tier_at_fit": "over_hard",
+          "coordinate_scaled_RMS": 1.1121789199267622,
+          "coordinate_scaled_max_abs": 3.374885679343557
+        },
+        {
+          "arm": "control",
+          "next_index": 31500,
+          "time_s": 900.0000000004121,
+          "optimizer_status": 1,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 16
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -3.9635506484374528,
+            "RC_voltage_error_mV": [
+              1.3940155893601374,
+              6.5790323292449076,
+              -2.93667489447535
+            ],
+            "hysteresis_state_error": -1.0071937594594154
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau3",
+              "relative_error_percent": 300.0000000000001
+            },
+            {
+              "name": "H",
+              "relative_error_percent": 233.33333333333331
+            },
+            {
+              "name": "tau2",
+              "relative_error_percent": 130.76923076923075
+            }
+          ],
+          "product_tier_at_fit": "over_hard",
+          "coordinate_scaled_RMS": 1.0873440218112636,
+          "coordinate_scaled_max_abs": 2.4153294510216567
+        },
+        {
+          "arm": "control",
+          "next_index": 63000,
+          "time_s": 1800.0000000016398,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "provisional": 16
+          },
+          "current_state_errors": {
+            "SOC_error_pp": 0.002294802935542961,
+            "RC_voltage_error_mV": [
+              0.13877508664797075,
+              -0.08197621867078037,
+              -0.01710885145377386
+            ],
+            "hysteresis_state_error": 0.0008797688335812071
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau1",
+              "relative_error_percent": -1.142380039411528
+            },
+            {
+              "name": "R1",
+              "relative_error_percent": 1.0513264139997647
+            },
+            {
+              "name": "R2",
+              "relative_error_percent": -0.5060260411776651
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.010897340164029802,
+          "coordinate_scaled_max_abs": 0.03164227539000266
+        },
+        {
+          "arm": "control",
+          "next_index": 73500,
+          "time_s": 2100.000000002049,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "provisional": 16
+          },
+          "current_state_errors": {
+            "SOC_error_pp": 0.0002562993489663157,
+            "RC_voltage_error_mV": [
+              0.0054688070103684795,
+              -0.003536323720154796,
+              -0.0007049138935344423
+            ],
+            "hysteresis_state_error": 0.0009234980628551881
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "tau1",
+              "relative_error_percent": -1.3916949093278008
+            },
+            {
+              "name": "R1",
+              "relative_error_percent": 0.8286071227830982
+            },
+            {
+              "name": "R2",
+              "relative_error_percent": -0.4365831753277538
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.011202510909733874,
+          "coordinate_scaled_max_abs": 0.032743377038260545
+        },
+        {
+          "arm": "cold",
+          "next_index": 63000,
+          "time_s": 1800.0000000016398,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 3,
+            "provisional": 13
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -0.024361006048179146,
+            "RC_voltage_error_mV": [
+              -0.7557220408246843,
+              -0.09772969419544544,
+              -0.15250405028230732
+            ],
+            "hysteresis_state_error": 0.0003994976197231326
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "R0",
+              "relative_error_percent": 10.091633228169083
+            },
+            {
+              "name": "R1",
+              "relative_error_percent": -5.725166975944573
+            },
+            {
+              "name": "tau2",
+              "relative_error_percent": 4.07537506488902
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.03364482403426785,
+          "coordinate_scaled_max_abs": 0.08073306582535258
+        },
+        {
+          "arm": "cold",
+          "next_index": 73500,
+          "time_s": 2100.000000002049,
+          "optimizer_status": 0,
+          "numerical_rank": 16,
+          "physical_status_counts": {
+            "unresolved": 3,
+            "provisional": 13
+          },
+          "current_state_errors": {
+            "SOC_error_pp": -0.03136711971944983,
+            "RC_voltage_error_mV": [
+              -0.04638427511328492,
+              0.0008356713489106283,
+              -0.006153309737705597
+            ],
+            "hysteresis_state_error": 0.00011335410448898298
+          },
+          "largest_positive_parameter_errors": [
+            {
+              "name": "R0",
+              "relative_error_percent": 10.275221162447545
+            },
+            {
+              "name": "R1",
+              "relative_error_percent": -7.027920471709848
+            },
+            {
+              "name": "gamma_minus",
+              "relative_error_percent": 3.052878837120354
+            }
+          ],
+          "product_tier_at_fit": "within_preferred",
+          "coordinate_scaled_RMS": 0.033325654194495985,
+          "coordinate_scaled_max_abs": 0.08220176929958037
+        }
+      ]
+    }
+  ],
+  "revised_declared_benchmarks": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "next_index": 31500,
+      "time_s": 900.0000000004121,
+      "SOC_error_pp": -0.0011147489821450307,
+      "capacity_error_percent": -0.011883032591297749,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "next_index": 63000,
+      "time_s": 1800.0000000016398,
+      "SOC_error_pp": -0.0011808606981356107,
+      "capacity_error_percent": 0.016296063997711663,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "next_index": 73500,
+      "time_s": 2100.000000002049,
+      "SOC_error_pp": -0.002012545648233388,
+      "capacity_error_percent": 0.01078588803842262,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "warm",
+      "next_index": 31500,
+      "time_s": 900.0000000004121,
+      "SOC_error_pp": -0.0011147489821450307,
+      "capacity_error_percent": -0.011883032591297749,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "warm",
+      "next_index": 63000,
+      "time_s": 1800.0000000016398,
+      "SOC_error_pp": -0.0011808606981356107,
+      "capacity_error_percent": 0.016296063997711663,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "warm",
+      "next_index": 73500,
+      "time_s": 2100.000000002049,
+      "SOC_error_pp": -0.002012545648233388,
+      "capacity_error_percent": 0.01078588803842262,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 63000,
+      "time_s": 1800.0000000016398,
+      "SOC_error_pp": -0.012227218613169999,
+      "capacity_error_percent": 0.001519352512424632,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 73500,
+      "time_s": 2100.000000002049,
+      "SOC_error_pp": -0.015580072095844333,
+      "capacity_error_percent": 0.007026882555494218,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 31500,
+      "time_s": 900.0000000004121,
+      "SOC_error_pp": -3.963550648437164,
+      "capacity_error_percent": 26.629799869520767,
+      "tier": "over_hard",
+      "SOC_status": "unresolved",
+      "capacity_status": "unresolved",
+      "SOC_within_hard": true,
+      "capacity_within_hard": false
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 63000,
+      "time_s": 1800.0000000016398,
+      "SOC_error_pp": 0.0022948029353209165,
+      "capacity_error_percent": 0.007550199146755254,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 73500,
+      "time_s": 2100.000000002049,
+      "SOC_error_pp": 0.0002562993488219867,
+      "capacity_error_percent": 0.00010544033879344994,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "warm",
+      "next_index": 31500,
+      "time_s": 900.0000000004121,
+      "SOC_error_pp": -3.963550648437164,
+      "capacity_error_percent": 26.629799869520767,
+      "tier": "over_hard",
+      "SOC_status": "unresolved",
+      "capacity_status": "unresolved",
+      "SOC_within_hard": true,
+      "capacity_within_hard": false
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "warm",
+      "next_index": 63000,
+      "time_s": 1800.0000000016398,
+      "SOC_error_pp": 0.0022948029353209165,
+      "capacity_error_percent": 0.007550199146755254,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "warm",
+      "next_index": 73500,
+      "time_s": 2100.000000002049,
+      "SOC_error_pp": 0.0002562993488219867,
+      "capacity_error_percent": 0.00010544033879344994,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 63000,
+      "time_s": 1800.0000000016398,
+      "SOC_error_pp": -0.024361006047368683,
+      "capacity_error_percent": 0.13494599291614673,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "arm": "cold",
+      "next_index": 73500,
+      "time_s": 2100.000000002049,
+      "SOC_error_pp": -0.03136711971865047,
+      "capacity_error_percent": 0.1265304215007257,
+      "tier": "within_preferred",
+      "SOC_status": "provisional",
+      "capacity_status": "provisional",
+      "SOC_within_hard": true,
+      "capacity_within_hard": true
+    }
+  ],
+  "revised_benchmark_totals": {
+    "count": 16,
+    "SOC_within_hard": 16,
+    "capacity_within_hard": 14,
+    "both_within_hard": 14,
+    "both_within_preferred": 14
+  },
+  "query_scope": "Sparse saved nominal10-second queries plus lifecycle events, deduplicated by sample position. First/sustained times and maxima are sampled metrics, not all-sample bounds.",
+  "validation": {
+    "checks": 117,
+    "failures": [],
+    "passed": true
+  },
+  "input_sha256": {
+    "experiments/trajectory_integration_001/primary/receipt.json": "83c6de4a879b37cf747b57147ad1397fd7831c8b9857acb02b62e99f4970f4b6",
+    "data/manifest.json": "06eef741fa7d7f4477a2bc25b969ab2baed537187fd631dac864e6212b0cefe1",
+    "tools/generate_cases.py": "f519aa58f1ef4e06a61a1bb35f5d3204160d9658cafefa30f6b6113833eb5733",
+    "tools/assess.py": "5d279367d0ef87873db7b137ea0f8fff1cd2edc04d4a60232656ad3a93e47727",
+    "experiments/trajectory_integration_001/scores.json": "d2742ad4d939fbadcbdc503dcf974d5be774b7777046b4a1068a158b87910aad",
+    "data/cell_a_35hz_s202610240.csv": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+    "experiments/trajectory_integration_001/primary/cell_a_35hz_s202610240__control.jsonl": "f9dcbb247b1878d865be740a59f6cd8bd4ef5e20ee4328aa3d773149062392b1",
+    "experiments/trajectory_integration_001/primary/cell_a_35hz_s202610240__warm_1.jsonl": "4c47f0231fb50dd744990961e6320a3df184c1bb734f5ff904c97111a8abc482",
+    "experiments/trajectory_integration_001/primary/cell_a_35hz_s202610240__warm_2.jsonl": "23f070a300fa520bfe42c9e2c81206adc2065a7d4784ae516e94a1f572b28b50",
+    "experiments/trajectory_integration_001/primary/cell_a_35hz_s202610240__warm_3.jsonl": "eea7225e9986afd750f3a8ad09d6e67e4ded960818d0329e27fff4e134d763b1",
+    "experiments/trajectory_integration_001/primary/cell_a_35hz_s202610240__warm_4.jsonl": "eb356d27b05ae228a16e00f329aabb2119f92599015590d6c89693e930731c59",
+    "experiments/trajectory_integration_001/primary/cell_a_35hz_s202610240__cold.jsonl": "b272583dc5ac61e6d18ff1e3ca1525395bb42891e9c839566a45166f13b1a9f5",
+    "data/cell_b_35hz_s202610240.csv": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+    "experiments/trajectory_integration_001/primary/cell_b_35hz_s202610240__control.jsonl": "bdfda048544dce0c713ce9703e57e4d12b8e6acbd18cfc1c3eee0c3e804fcf06",
+    "experiments/trajectory_integration_001/primary/cell_b_35hz_s202610240__warm_1.jsonl": "3786cffd8f69105d06049dfbe9f0e3480f957758e18beb9276f8c8acebfb3aa3",
+    "experiments/trajectory_integration_001/primary/cell_b_35hz_s202610240__warm_2.jsonl": "c4f9f2ae10dff0efc42b26ca76aa3ec57bb5d3f72367a329ba61cc306a0ec317",
+    "experiments/trajectory_integration_001/primary/cell_b_35hz_s202610240__warm_3.jsonl": "1034fc4ae9eb02c997124020406b690ee04b1539abdd9bcd894d80d1ffcb6025",
+    "experiments/trajectory_integration_001/primary/cell_b_35hz_s202610240__warm_4.jsonl": "f670a3e0f87b1c628d31bc403a469ac71783b840070fc1a2cbc86e4c8ee93216",
+    "experiments/trajectory_integration_001/primary/cell_b_35hz_s202610240__cold.jsonl": "edf1c5850c13a49e344623ba44d438effbf19eda52e77ea2ef8c2046f7159261"
+  },
+  "script_sha256": "62795061a63226708fb222fa5ec8d15430afe38bd2c2a86996aa8fc622f5e662",
+  "records": "experiments/m1_belief_audit_001/records.json",
+  "records_sha256": "db21384d78764574edf2a540a968a928bc39fa4e2ceced20f955953ad7428f43"
+}
