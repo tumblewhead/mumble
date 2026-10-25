@@ -1,0 +1,118 @@
+{
+  "schema": "mumble_continuation_v4",
+  "task": "Prove indefinite-runtime numerical stability before qualifying repeated bounded estimator updates",
+  "authority": {
+    "repository": "https://github.com/tumblewhead/mumble",
+    "work_branch": "research/indefinite-numerical-stability-001",
+    "base_revision": "e478d0eda07b16cdf9121e391d06e2fb9917128b",
+    "main_reference_checkpoint": "0fd443b126579c625aea8c3772ddc28668aa242b",
+    "witness_source_revision": "0eff2339eefdbed6d8ff373a3c5b53122e357048",
+    "read_first": [
+      "AGENTS.md",
+      "README.md",
+      "PROJECT_STATE.json",
+      "handoff/CONTINUE.json"
+    ],
+    "prior_handoff": "handoff/archive/CONTINUE_bounded_event_002.json",
+    "context_policy": "Fetch current refs; preserve newer/dirty work. Read selective proof/report/receipt summaries; no bulk traces. Historical commits are provenance, not reset targets.",
+    "publication_status": "Published; fetch current branch refs and preserve newer/dirty work.",
+    "published_witness_source_revision": "01e94f237acb81dc8017e1e8afd3fbaf9d82a9cb",
+    "published_research_revision": "6e0b1cb5083a60674866e36d6f3b9ecb2e14b93f",
+    "publication_provenance": "provenance/indefinite_stability_001_publication.json",
+    "original_development_bundle": "provenance/indefinite_stability_001_development.bundle",
+    "publication_semantics": "Canonical source trees equal original local trees; frozen receipt retains local source SHA, mapped and bundled in provenance."
+  },
+  "objective": {
+    "core": "Estimate stimulus-supported quantities; carry earlier evidence/uncertainty; expose unresolved quantities",
+    "nominal_Hz": 35,
+    "sample_contract": "Actual dt/current, endpoint voltage, exact sample order and carried physical state",
+    "target": "Approximately10KiB Cortex-M23; not achieved or qualified",
+    "new_requirement": "Numeric stability for indefinite runtime: every finite prefix, with safety/fidelity/retention and conditional usefulness; not a finite endurance claim",
+    "communication": "Compact JSON/YAML for machine handoffs"
+  },
+  "evidence": {
+    "report": "docs/INDEFINITE_NUMERICAL_STABILITY_001.md",
+    "contract": "proofs/indefinite_stability_001/contract.json",
+    "claims": "proofs/indefinite_stability_001/claims.json",
+    "code_audit": "proofs/indefinite_stability_001/code_audit.json",
+    "plan": "experiments/indefinite_stability_001/plan.json",
+    "receipt": "experiments/indefinite_stability_001/receipt.json",
+    "prior_report": "docs/BOUNDED_EVENT_002.md",
+    "prior_receipt": "experiments/bounded_event_002/receipt/receipt.json",
+    "prior_memory": "experiments/bounded_event_002/memory_accounting.json",
+    "independent_review": "proofs/indefinite_stability_001/independent_review.json",
+    "verification": "experiments/indefinite_stability_001/verification.json"
+  },
+  "established": {
+    "paper_proofs": [
+      "Damping-scaled defect: abs(d)<=eta*(1-a) gives abs(e_n)<=max(abs(e0),eta), all n",
+      "Uniform contraction alternative requires justified rho<1",
+      "Quantized bounded exact charge is possible under integer product/prefix range assumptions",
+      "Finite-state fixed-absolute all-history likelihood contrast is impossible for arbitrary lengths",
+      "Finite-state arbitrary binary empirical mean error<1/2 is impossible for arbitrary lengths/order without unbounded external count"
+    ],
+    "witnesses": "7/7 counterexample mechanisms reproduced; scalar and constructed API boundary states; no physical-history reachability or endurance proof",
+    "existing_code": "Fixed storage and atomic failures; no lifetime error invariant. No production numerical source changed"
+  },
+  "obstructions": [
+    "Naive elapsed/charge/throughput accumulation; lifetime QR and curvature RSS absorption",
+    "uint64 terminal counters stop assimilation; no rollover/restore protocol",
+    "Relative rank cutoff can hide unchanged old finite information as unrelated information grows",
+    "Fixed original-chart curvature bound grows with N even in exact arithmetic",
+    "Finite-state limits concern specific unrestricted all-history queries, not every useful indefinite estimator",
+    "A numerical floor/normalization/saturation alone does not resolve all-history semantics",
+    "Repeated chart changes cannot renew numerical error budgets"
+  ],
+  "open": [
+    "Selected lifetime historical-evidence/query semantics",
+    "Useful numerical tolerances and represented acquisition ranges",
+    "Executable local defects/ranges including libm",
+    "Coupled state/sensitivity/envelope invariant",
+    "Evidence/query/chart/chronology/recovery composition",
+    "Nonvacuous conditional usefulness and eventual target qualification"
+  ],
+  "next": {
+    "first_action": "Specify one concrete finite evidence/query semantics compatible with retention and indefinite operation; close physical-state/charge input and arithmetic contracts. Prove invariants before extending signed-curvature statistics.",
+    "proof_sequence": [
+      "S0 semantics/acquisition/arithmetic",
+      "S1 physical-state/charge invariants",
+      "S2 evidence/query/transition invariants",
+      "S3 bind to C/compiler/library",
+      "S4 small falsification and usefulness",
+      "S5 target/physical validation"
+    ],
+    "constraints": [
+      "No silent forgetting or information cap",
+      "No statistical-model substitution",
+      "No finite mission horizon substituted for indefinite requirement",
+      "No external unbounded metadata hidden from memory",
+      "No zero uncertainty for unresolved/numerical-null directions",
+      "No posterior prior plus replayed source observations",
+      "Preserve actual intervals and original uncertainty",
+      "Fail-closed forever is not useful stability",
+      "Do not assert a uniform finite adaptation delay after arbitrary unbounded prior weight"
+    ]
+  },
+  "preserved": {
+    "reference": "Completed35Hz matched synthetic C retained-history study",
+    "B001": "Corrected72/72; fixed local chart only",
+    "B002": "Original654/672;18 failures retained;0.1NLL analytic criterion unchanged; no updates/reanchor",
+    "tail_conditional_bound": 0.004119195530653909,
+    "tail_full_step_bound": 4.794214232767298,
+    "memory_bytes": {
+      "ingestion_with_input_and_project_stack": 10672,
+      "diagnostic_objects": 20856
+    },
+    "nonclaims": [
+      "No full indefinite numerical proof",
+      "No machine-checked certificate",
+      "No validated coverage",
+      "No bounded cold start/chart transitions",
+      "No Cortex-M23 qualification"
+    ]
+  },
+  "reproduction": {
+    "command": "python3 tools/run_stability_witnesses.py --output experiments/indefinite_stability_001/NEW_RECEIPT.json",
+    "policy": "New output path required; all-reproduced means counterexamples confirmed, not stability passed; no original campaign rerun."
+  }
+}

@@ -31,6 +31,9 @@ Base: a8f02b1402735a7f2f9be2dec54dedcc11ec2f8b.
 | [C tests](../tests/test_stable.c) | Boundary and failure-atomicity checks |
 | [Audit plan](../experiments/indefinite_stability_002/plan.json) | Frozen small experiment specification |
 | [Audit receipt](../experiments/indefinite_stability_002/receipt.json) | Independent rational oracles, outcomes, hashes and host memory evidence |
+| [Independent review](../proofs/indefinite_stability_002/independent_review.json) | Mathematical, semantic and source-correspondence review |
+| [Build checks](../experiments/indefinite_stability_002/build_checks.json) | Unit-suite integration and targeted address/undefined behavior checks |
+| [Verification](../experiments/indefinite_stability_002/verification.json) | Artifact integrity, preserved evidence and handoff checks |
 | [Prior obstruction report](INDEFINITE_NUMERICAL_STABILITY_001.md) | Why unrestricted finite-state all-history claims need a different contract |
 
 ## 1. The contract
@@ -543,7 +546,98 @@ estimator fits the approximately 10 KiB target.
 Any external delivery or chronology state must be counted in that full-system
 accounting; the proof does not assume a hidden unbounded counter.
 
-Detailed outcomes are appended after the frozen primary audit.
+### 9.1 Frozen primary outcome
+
+The primary audit used source commit
+646543443e38108a4cefa3a5bf886f26b5cf9912. All five audited files matched that
+commit before execution and had unchanged SHA-256 hashes afterward. The receipt
+SHA-256 is
+883fe32772ce1fef445235eb109c344b1f9aaf5a7e6b44ca5df7a852645cc2ac.
+The publication map preserves the relation between this original local commit
+and the canonical published source tree.
+
+| Audit | Checks | Outcome |
+| --- | ---: | --- |
+| Attenuation, including 202 input ratios and invalid-denominator atomicity | 203 | Passed |
+| State intervals, including 520 cases, interior points and invalid inputs | 2,084 | Passed |
+| Exact charge and rejection behavior | 584 | Passed |
+| Certificate masks and deliberate weak-premise negative control | 261 | Passed |
+| Chronological variable-interval streams and width bounds | 456 | Passed |
+| **Total** | **3,588** | **No correspondence counterexample found** |
+
+The core compiled as C99 with -O2, warnings treated as errors, and no libm
+linkage. Its object had no undefined symbols on this host. The full unit suite
+passed through make test, and the new kernel passed targeted AddressSanitizer
+and UndefinedBehaviorSanitizer checks. Leak detection was disabled for the
+hosted executor; this is not a leak-audit result.
+
+The mask example retained eight cells initially, four after informative
+certificates, the same four through repeated uninformative/duplicate
+certificates, and one after renewed information. These were constructed
+certificates testing consumer behavior, not a battery identification result.
+
+The overlapping-cell negative control produced the expected empty mask under
+the deliberately insufficient premise. That is evidence against the weak
+premise, not a defect in the intersection kernel.
+
+### 9.2 Width example with actual intervals
+
+The illustrative clock has 35,000 ticks/s and nominal 1,000-tick intervals.
+The actual ordered pattern is 1,000, 999, 1,001, 1,000, 0, 1,000 ticks; every
+supplied interval is used. Each case has 96 updates, including 16 exact
+zero-time identities. The state domain is [-2^20,2^20] grid units and the
+initial interval is exactly zero.
+
+| Time constant, s | Maximum coefficient span h | Minimum active gap g | All-time width bound, grid units | Maximum width observed in 96 updates |
+| ---: | ---: | ---: | ---: | ---: |
+| 0.05 | 40 | 1,868,135,050 | 4.6430372751 | 3 |
+| 0.5 | 7 | 238,314,384 | 36.1061489935 | 18 |
+| 5 | 7 | 24,448,276 | 351.9517963557 | 64 |
+| 30 | 7 | 4,084,408 | 2,106.6981202661 | 77 |
+
+The all-time column follows from L4 for any admitted continuation satisfying
+the same B, g and h bounds; it is not an extrapolation of the 96 observed
+updates. The receipt stores each bound as an exact rational. For 30 s it is
+1075576832/510551 grid units. All independent rational reference states were
+contained in the C intervals.
+
+These widths have no physical accuracy interpretation until a physical quantum,
+model, sensor uncertainty and target tolerance are justified. They demonstrate
+a bounded numerical enclosure on this declared arithmetic grid.
+
+### 9.3 Host memory accounting for the isolated kernels
+
+Measured on Linux x86_64 with GCC 13.3.0 and the frozen -O2 flags:
+
+| Storage | Bytes | Scope |
+| --- | ---: | --- |
+| Charge object | 24 | Value and two admitted bounds |
+| Evidence-mask object | 16 | Domain and active masks |
+| Attenuation object | 16 | Two Q32 endpoints |
+| State-interval object | 12 | Two endpoints and domain bound |
+| **One of each object** | **68** | Persistent-object subtotal only |
+| Largest reported core stack frame | 56 | Attenuation function on this host |
+| Sum of all reported core frames | 112 | Loose own-source stack subtotal, not measured high-water |
+| Mutable static data and BSS | 0 | No mutable globals |
+| Read-only object data | 64 | 32-byte factorial table plus 32 compiler-generated constant bytes |
+| Object text | 1,313 | Host machine code, not target flash use |
+
+The object-file section total is 1,709 bytes, including metadata and unwind
+sections; it is not an SRAM figure. No allocation import was present. The
+68-byte object subtotal and stack subtotals must not be presented as a complete
+estimator memory result. Repeated instances, finite-cell geometry, the producer,
+queries, acquisition and recovery state still need complete accounting.
+
+### 9.4 Reproduction
+
+```bash
+make test-stable
+python3 tools/audit_stable.py --output experiments/indefinite_stability_002/NEW_RECEIPT.json
+```
+
+The auditor refuses an existing output file. Keep the original primary receipt
+and frozen source/plan; a later run is a separate receipt. No original 35 Hz
+campaign was rerun to obtain this checkpoint.
 
 ## 10. Next milestone
 

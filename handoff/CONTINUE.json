@@ -1,118 +1,89 @@
 {
-  "schema": "mumble_continuation_v4",
-  "task": "Prove indefinite-runtime numerical stability before qualifying repeated bounded estimator updates",
+  "schema": "mumble_continuation_v5",
+  "task": "Continue indefinite-runtime stability from implemented integer kernels and the conditional finite-certificate contract",
   "authority": {
     "repository": "https://github.com/tumblewhead/mumble",
-    "work_branch": "research/indefinite-numerical-stability-001",
-    "base_revision": "e478d0eda07b16cdf9121e391d06e2fb9917128b",
+    "work_branch": "research/indefinite-numerical-stability-002",
+    "base_revision": "a8f02b1402735a7f2f9be2dec54dedcc11ec2f8b",
+    "source_revision": "646543443e38108a4cefa3a5bf886f26b5cf9912",
     "main_reference_checkpoint": "0fd443b126579c625aea8c3772ddc28668aa242b",
-    "witness_source_revision": "0eff2339eefdbed6d8ff373a3c5b53122e357048",
     "read_first": [
       "AGENTS.md",
       "README.md",
       "PROJECT_STATE.json",
       "handoff/CONTINUE.json"
     ],
-    "prior_handoff": "handoff/archive/CONTINUE_bounded_event_002.json",
-    "context_policy": "Fetch current refs; preserve newer/dirty work. Read selective proof/report/receipt summaries; no bulk traces. Historical commits are provenance, not reset targets.",
-    "publication_status": "Published; fetch current branch refs and preserve newer/dirty work.",
-    "published_witness_source_revision": "01e94f237acb81dc8017e1e8afd3fbaf9d82a9cb",
-    "published_research_revision": "6e0b1cb5083a60674866e36d6f3b9ecb2e14b93f",
-    "publication_provenance": "provenance/indefinite_stability_001_publication.json",
-    "original_development_bundle": "provenance/indefinite_stability_001_development.bundle",
-    "publication_semantics": "Canonical source trees equal original local trees; frozen receipt retains local source SHA, mapped and bundled in provenance."
+    "prior_handoff": "handoff/archive/CONTINUE_indefinite_stability_001.json",
+    "context_policy": "Fetch current refs; preserve newer/dirty work. Historical commits are provenance, not reset targets. Read selective summaries, never bulk traces to resume.",
+    "publication_status": "Local source and result commits pending publication"
   },
   "objective": {
-    "core": "Estimate stimulus-supported quantities; carry earlier evidence/uncertainty; expose unresolved quantities",
+    "core": "Estimate stimulus-supported quantities; carry earlier evidence/uncertainty; expose unresolved targets",
     "nominal_Hz": 35,
-    "sample_contract": "Actual dt/current, endpoint voltage, exact sample order and carried physical state",
+    "sample_contract": "Actual represented dt/current, endpoint voltage, acquisition order and carried physical state",
+    "indefinite_runtime": "Every admitted finite prefix, without a fixed lifetime horizon. Require safety, fidelity, retention and conditional usefulness.",
     "target": "Approximately10KiB Cortex-M23; not achieved or qualified",
-    "new_requirement": "Numeric stability for indefinite runtime: every finite prefix, with safety/fidelity/retention and conditional usefulness; not a finite endurance claim",
-    "communication": "Compact JSON/YAML for machine handoffs"
+    "communication": "Compact JSON/YAML handoffs"
   },
   "evidence": {
-    "report": "docs/INDEFINITE_NUMERICAL_STABILITY_001.md",
-    "contract": "proofs/indefinite_stability_001/contract.json",
-    "claims": "proofs/indefinite_stability_001/claims.json",
-    "code_audit": "proofs/indefinite_stability_001/code_audit.json",
-    "plan": "experiments/indefinite_stability_001/plan.json",
-    "receipt": "experiments/indefinite_stability_001/receipt.json",
-    "prior_report": "docs/BOUNDED_EVENT_002.md",
-    "prior_receipt": "experiments/bounded_event_002/receipt/receipt.json",
-    "prior_memory": "experiments/bounded_event_002/memory_accounting.json",
-    "independent_review": "proofs/indefinite_stability_001/independent_review.json",
-    "verification": "experiments/indefinite_stability_001/verification.json"
+    "report": "docs/STABILITY_CONTRACT_002.md",
+    "contract": "proofs/indefinite_stability_002/contract.json",
+    "lemmas": "proofs/indefinite_stability_002/lemmas.json",
+    "header": "include/scm_stable.h",
+    "source": "src/scm_stable.c",
+    "plan": "experiments/indefinite_stability_002/plan.json",
+    "receipt": "experiments/indefinite_stability_002/receipt.json",
+    "review": "proofs/indefinite_stability_002/independent_review.json",
+    "build_checks": "experiments/indefinite_stability_002/build_checks.json",
+    "verification": "experiments/indefinite_stability_002/verification.json",
+    "prior_obstructions": "docs/INDEFINITE_NUMERICAL_STABILITY_001.md",
+    "Gaussian_bounded_comparison": "docs/BOUNDED_EVENT_002.md",
+    "retained_history_reference": "report/SCM-35Hz-Results.html"
   },
   "established": {
-    "paper_proofs": [
-      "Damping-scaled defect: abs(d)<=eta*(1-a) gives abs(e_n)<=max(abs(e0),eta), all n",
-      "Uniform contraction alternative requires justified rho<1",
-      "Quantized bounded exact charge is possible under integer product/prefix range assumptions",
-      "Finite-state fixed-absolute all-history likelihood contrast is impossible for arbitrary lengths",
-      "Finite-state arbitrary binary empirical mean error<1/2 is impossible for arbitrary lengths/order without unbounded external count"
-    ],
-    "witnesses": "7/7 counterexample mechanisms reproduced; scalar and constructed API boundary states; no physical-history reachability or endurance proof",
-    "existing_code": "Fixed storage and atomic failures; no lifetime error invariant. No production numerical source changed"
+    "L1": "Exact int32 current times uint32 ticks accumulated in bounded int64 prefixes; no age-dependent rounding.",
+    "L2": "libm-free Q32 enclosure of exp(-num/den); exact zero, analytic tail, outward Taylor/reduction/squaring; all intermediates bounded.",
+    "L3": "Four exact corners and outward division enclose x_next=a*x+(1-a)*target inside [-B,B], B<=2^30; validated unity returns without writing.",
+    "L4": "If active Ahi<=D-g, g>0, and span<=h, W_n<=min(2B,max(W0,(2Bh+2D)/g)); arbitrary exact identities add no width.",
+    "L5": "Fixed-cell masks intersect sound certificates and preserve every earlier exclusion. Require J(F_n) subset C_n, including EVERY cell intersecting compatible F_n; union coverage alone fails for overlaps.",
+    "L6": "If every unwanted cell gets a finite sound whole-cell exclusion, finite refinement follows; no uniform delay or informative-event existence claim.",
+    "audit": "3588/3588 primary exact-reference checks passed; source and plan frozen before run; development checks disclosed; unit suite and targeted ASAN/UBSAN passed.",
+    "memory": "Host one-of-each objects68B; largest core frame56B; loose sum112B; readonly64B. Provider/cells/complete runtime excluded.",
+    "proof_kind": "Written and independently reviewed source-level proofs, not proof-assistant, compiler or target certification"
   },
-  "obstructions": [
-    "Naive elapsed/charge/throughput accumulation; lifetime QR and curvature RSS absorption",
-    "uint64 terminal counters stop assimilation; no rollover/restore protocol",
-    "Relative rank cutoff can hide unchanged old finite information as unrelated information grows",
-    "Fixed original-chart curvature bound grows with N even in exact arithmetic",
-    "Finite-state limits concern specific unrestricted all-history queries, not every useful indefinite estimator",
-    "A numerical floor/normalization/saturation alone does not resolve all-history semantics",
-    "Repeated chart changes cannot renew numerical error budgets"
-  ],
-  "open": [
-    "Selected lifetime historical-evidence/query semantics",
-    "Useful numerical tolerances and represented acquisition ranges",
-    "Executable local defects/ranges including libm",
-    "Coupled state/sensitivity/envelope invariant",
-    "Evidence/query/chart/chronology/recovery composition",
-    "Nonvacuous conditional usefulness and eventual target qualification"
+  "critical_boundaries": [
+    "Finite certified exclusions are an explicit research candidate, not Gaussian likelihood equivalence; no historical local precision is a hard exclusion.",
+    "Battery certificate provider, error model and useful target query remain unproved. Gaussian sigma1mV is not a deterministic residual bound.",
+    "Nonempty mask need not imply feasibility; empty mask is sticky inconsistency. Cells/model are immutable during a certified static episode.",
+    "All-time charge exactness requires bounded represented prefixes; physical bias, unit conversion and SOC calculations remain separate.",
+    "Positive q can give Ahi=D; no useful contraction claim then. State quantum and tolerance must make L4 nonvacuous.",
+    "Kernel failures are individually atomic; composed observation transaction, chronology, missing samples, restore, drift and chart transport remain open.",
+    "Every external counter/protocol and provider workspace must enter complete memory/proof accounting.",
+    "No finite-horizon substitute, silent forgetting/information cap, double-counted observations or reset error ledger."
   ],
   "next": {
-    "first_action": "Specify one concrete finite evidence/query semantics compatible with retention and indefinite operation; close physical-state/charge input and arithmetic contracts. Prove invariants before extending signed-curvature statistics.",
-    "proof_sequence": [
-      "S0 semantics/acquisition/arithmetic",
-      "S1 physical-state/charge invariants",
-      "S2 evidence/query/transition invariants",
-      "S3 bind to C/compiler/library",
-      "S4 small falsification and usefulness",
-      "S5 target/physical validation"
-    ],
-    "constraints": [
-      "No silent forgetting or information cap",
-      "No statistical-model substitution",
-      "No finite mission horizon substituted for indefinite requirement",
-      "No external unbounded metadata hidden from memory",
-      "No zero uncertainty for unresolved/numerical-null directions",
-      "No posterior prior plus replayed source observations",
-      "Preserve actual intervals and original uncertainty",
-      "Fail-closed forever is not useful stability",
-      "Do not assert a uniform finite adaptation delay after arbitrary unbounded prior weight"
+    "first_action": "Choose one concrete battery certificate producer and finite cover; prove that rejected cells cannot intersect the compatible set under explicit observation/model assumptions. Implement an outward SOC/capacity query and use the integer state kernels.",
+    "small_experiment": "Informative prefix, weak/quiet use, then renewed excitation: retain earlier certified constraints and expose unresolved target ranges. Compare practical usefulness with retained-history Gaussian reference and disclose semantic differences.",
+    "remaining_gates": [
+      "Producer and query soundness",
+      "Physical scale/uncertain-target/ratio enclosures",
+      "Nonvacuous conditional target precision",
+      "Transaction/chronology/recovery/transport",
+      "Complete memory and target arithmetic",
+      "Physical validation and statistical coverage"
     ]
   },
   "preserved": {
-    "reference": "Completed35Hz matched synthetic C retained-history study",
-    "B001": "Corrected72/72; fixed local chart only",
-    "B002": "Original654/672;18 failures retained;0.1NLL analytic criterion unchanged; no updates/reanchor",
-    "tail_conditional_bound": 0.004119195530653909,
-    "tail_full_step_bound": 4.794214232767298,
-    "memory_bytes": {
-      "ingestion_with_input_and_project_stack": 10672,
-      "diagnostic_objects": 20856
-    },
-    "nonclaims": [
-      "No full indefinite numerical proof",
-      "No machine-checked certificate",
-      "No validated coverage",
-      "No bounded cold start/chart transitions",
-      "No Cortex-M23 qualification"
-    ]
+    "reference": "Completed35Hz retained-history C study; no campaign rerun",
+    "B001": "Corrected72/72, fixed affine chart only",
+    "B002": "Original654/672 and18 failures retained;0.1NLL unchanged; no updates/reanchor",
+    "stability001": "7/7 counterexample mechanisms and finite-state obstructions preserved",
+    "full_estimator_indefinite_stability_proved": false,
+    "coverage_validated": false,
+    "Cortex_M23_qualified": false
   },
   "reproduction": {
-    "command": "python3 tools/run_stability_witnesses.py --output experiments/indefinite_stability_001/NEW_RECEIPT.json",
-    "policy": "New output path required; all-reproduced means counterexamples confirmed, not stability passed; no original campaign rerun."
+    "command": "python3 tools/audit_stable.py --output experiments/indefinite_stability_002/NEW_RECEIPT.json",
+    "policy": "Refuses existing output; keep primary receipt and sources frozen. Finite audit supports correspondence, not the all-prefix quantifier."
   }
 }

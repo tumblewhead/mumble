@@ -1,0 +1,89 @@
+{
+  "schema": "mumble_stability_independent_review_v2",
+  "reviewer": "stable_contract_review",
+  "review": "indefinite_stability_002_final_contract_and_source",
+  "status": "no_blocking_findings_under_declared_contract",
+  "source_revision": "646543443e38108a4cefa3a5bf886f26b5cf9912",
+  "blocking_findings": [],
+  "review_method": "Read-only mathematical and source-operation review. No edits, commits, or primary audit execution by this reviewer.",
+  "reviewed_artifacts": [
+    "proofs/indefinite_stability_002/contract.json",
+    "proofs/indefinite_stability_002/lemmas.json",
+    "docs/STABILITY_CONTRACT_002.md",
+    "include/scm_stable.h",
+    "src/scm_stable.c",
+    "tools/audit_stable.py",
+    "experiments/indefinite_stability_002/plan.json"
+  ],
+  "proof_findings": [
+    {
+      "lemma": "L1",
+      "finding": "Correct under the bounded-prefix premise.",
+      "basis": "Every int32-by-uint32 product fits int64. Both overflow guard subtractions are representable, the guarded addition is exact, and application-range rejection precedes commitment. Induction establishes exactness for every admitted finite prefix without a lifetime counter."
+    },
+    {
+      "lemma": "L2",
+      "finding": "The exponential enclosure and intermediate range arguments are sound.",
+      "basis": "The Taylor integral remainder gives P7<=exp(-x)<=P6. Directed interval powers, signed term selection, factorial division, range intersection, and monotone outward squaring preserve containment. Unity handling prevents a D-by-D uint64 overflow. At most eight reductions suffice because the initial upper endpoint is at most 32D."
+    },
+    {
+      "lemma": "L3",
+      "finding": "The four-corner enclosure, closed domain, and arbitrary-prefix induction are correct.",
+      "basis": "Bilinear extrema occur at rectangle corners. Each product and corner sum lies within the proved int64 range, and signed division corrections implement floor and ceiling. Integer domain boundaries preserve [-B,B] after outward rounding.",
+      "identity_resolution": "The reviewed source validates inputs and returns immediately for [D,D] attenuation before any destination write. This supports the stronger whole-object identity claim, including ABI padding."
+    },
+    {
+      "lemma": "L4",
+      "finding": "The useful-width theorem is correct and correctly conditional.",
+      "basis": "The image diameter is at most a_hi*W+2B*(a_hi-a_lo); outward endpoint rounding adds less than two grid units. Certified bounds A_hi<=D-g and A_hi-A_lo<=h therefore yield W_n<=min(2B,max(W_0,(2B*h+2D)/g)). Arbitrarily many exact identities may intervene.",
+      "essential_limit": "Positive elapsed time or positive q alone does not establish g>0. If A_hi=D on an active update, this contraction theorem is unavailable. Physical usefulness additionally requires a declared state quantum and justified application tolerance."
+    },
+    {
+      "lemma": "L5",
+      "finding": "Historical exclusion retention is sound under the corrected certificate premise.",
+      "basis": "Nested compatible sets imply nested intersecting-cell index sets. Requiring every certificate to retain every intersecting cell permits the induction J(F_n) subset A_n. Exact AND preserves all prior exclusions, duplicate idempotence, and sticky inconsistency.",
+      "essential_limit": "Union coverage alone is insufficient for overlapping cells. The included two-cell counterexample correctly demonstrates this failure. A nonempty mask does not establish feasibility."
+    },
+    {
+      "lemma": "L6",
+      "finding": "Conditional eventual refinement is correct.",
+      "basis": "There are finitely many unwanted cells. If each has a finite sound whole-cell exclusion event, the maximum of those event indices is finite; monotone retention prevents reappearance. The empty unwanted-set case takes N=0.",
+      "essential_limit": "This proves neither existence of informative events nor a uniform convergence time. Sound target ranges across surviving cells remain necessary for SOC or capacity precision."
+    }
+  ],
+  "C99_findings": {
+    "status": "No blocking mismatch found between the reviewed operations and their range arguments.",
+    "required_assumptions": [
+      "Available exact-width integer types and conforming C99 semantics.",
+      "Initialized trusted objects, valid storage, and nonoverlapping coefficient/state objects.",
+      "No concurrent mutation or hardware fault during a primitive call."
+    ],
+    "qualification": "Source-level proof under these assumptions, not a compiler correctness theorem or Cortex-M23 qualification.",
+    "mask_identity_note": "Mask idempotence is a mathematical field-value property. The host audit's byte comparisons corroborate the tested ABI and are not an additional portable padding-preservation claim."
+  },
+  "independent_oracle_findings": {
+    "status": "The exact rational oracle is mathematically correct.",
+    "tail_argument": "For S_n=sum(q^j/j!,j<=n), the first omitted term is t_(n+1). When q<n+2, every subsequent tail ratio is at most q/(n+2), so the geometric tail bounds exp(q) from above. Inverting the positive endpoints correctly encloses exp(-q).",
+    "implementation_check": "Loop indices, positive denominators, inversion order, exact Fraction arithmetic, and comparison of the entire oracle interval against the C enclosure are correct.",
+    "independence": "For 0<q<32 the oracle uses a positive series on the original argument and does not reuse the C alternating polynomial or range reduction. For q>=32 both use the stated analytic e>2 bound; those cases exercise the branch and enclosure rather than independently evaluating the exponential.",
+    "finite_test_scope": "The planned charge, state, mask, and chronological variable-tick checks can falsify implementation correspondence. They do not establish the all-prefix quantifier."
+  },
+  "resolved_review_points": [
+    "Whole-object unity identity uses an explicit early return after validation.",
+    "Every intersecting parameter cell must survive a sound certificate, including overlaps.",
+    "All chronology/delivery storage must be counted; no hidden unbounded external counter.",
+    "Primary source and plan were committed before the audit; development checks preceding the freeze are disclosed."
+  ],
+  "primary_outcome_attested_by_this_review": false,
+  "primary_outcome_evidence": "experiments/indefinite_stability_002/receipt.json",
+  "precise_supported_claim": "For every finite prefix admitted by the stated contract, the isolated kernels preserve their exact-arithmetic, enclosure, range, and conditional exclusion-retention invariants without an age-dependent storage requirement.",
+  "not_established": [
+    "A sound battery certificate provider or complete finite parameter cover.",
+    "Equivalence to the retained-history Gaussian likelihood.",
+    "Conversion of prior local precision or Gaussian residual scale into hard exclusions.",
+    "Nonvacuous conditional SOC/capacity learning for actual stimulus.",
+    "Integrated transaction, chronology, persistence, recovery, drift, or chart-transport correctness.",
+    "Full-estimator memory fit, target timing, power, or firmware qualification.",
+    "Physical truth accuracy or validated statistical coverage."
+  ]
+}

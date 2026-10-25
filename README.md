@@ -11,15 +11,22 @@ trial moves against a declared analytic error budget. Cold-start learning,
 historical relinearization and validated floating-point bounds remain open.
 These components are host references, without Cortex-M23 qualification.
 Numerical stability for indefinite runtime is now an explicit proof gate.
-The current implementation does not satisfy it; conditional mathematical
-lemmas, finite-state limitations and small counterexamples are recorded below.
+The complete estimator does not yet satisfy it. A concrete contract now has
+implemented integer kernels for exact bounded charge, outward exponential and
+state enclosures, and finite certified-exclusion retention. Six written lemmas
+and a 3,588-check exact-reference audit support this isolated component;
+a sound battery certificate provider and full-system composition remain open.
 
 ## Start here
 
 | Resource | Contents |
 | --- | --- |
+| [Implemented stability contract and lemmas](docs/STABILITY_CONTRACT_002.md) | Exact integer kernels, all-prefix induction arguments, conditional finite evidence semantics and scoped host memory |
+| [Current stability contract](proofs/indefinite_stability_002/contract.json) | Concrete inputs, arithmetic, retention semantics and open integration gates |
+| [Lemma ledger](proofs/indefinite_stability_002/lemmas.json) | Six claims, premises, source correspondence and limits |
+| [Integer audit receipt](experiments/indefinite_stability_002/receipt.json) | 3,588 passing exact-reference checks; finite falsification, not an endurance proof |
 | [Indefinite numerical stability](docs/INDEFINITE_NUMERICAL_STABILITY_001.md) | Lifetime proof contract, conditional invariants, finite-state limitations and seven small counterexamples |
-| [Stability proof contract](proofs/indefinite_stability_001/contract.json) | Machine-readable acceptance gates and unresolved evidence/arithmetic choices |
+| [Earlier proof contract](proofs/indefinite_stability_001/contract.json) | Preserved initial acceptance gates and evidence/arithmetic questions |
 | [Nonlinear remainder experiment](docs/BOUNDED_EVENT_002.md) | Sparse joint-parameter bound, useful conditional tail trial, conservative region failure, preserved arithmetic failures and full memory costs |
 | [Remainder receipt](experiments/bounded_event_002/receipt/receipt.json) | 654/672 unchanged checks pass; 18 near-roundoff prediction-norm failures retained and diagnosed separately |
 | [Bounded event experiment](docs/BOUNDED_EVENT_001.md) | Fixed-memory C evidence design, complete host memory accounting, successful local carry and explicit failure witnesses |
@@ -138,13 +145,17 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The current priority is an indefinite-runtime numerical-stability contract
-and proof: physical-state/charge invariants, explicitly defined finite
-historical-evidence semantics, and error-preserving event/chart transitions.
-The proposed signed residual/curvature summary remains a candidate within
-that contract. Neither finite-run accuracy nor bounded memory establishes
-a lifetime error bound. No forgetting, information cap, changed noise model
-or finite mission limit has been selected as a substitute.
+The current priority is a sound battery certificate provider and target query
+under the [concrete lifetime contract](proofs/indefinite_stability_002/contract.json).
+Exact represented charge and outward scalar-state arithmetic now have written
+all-prefix proofs tied to isolated C kernels. The finite-evidence candidate
+retains certified exclusions at an explicit spatial resolution; its consumer
+is proved conditional on the producer retaining every compatible cell.
+This candidate does not claim Gaussian likelihood equivalence. The Gaussian
+reference and earlier local evidence remain unchanged. The producer's error
+model, useful SOC/capacity queries, chronology, recovery and chart/parameter
+transport remain open. A finite replay or memory bound cannot replace these
+proof obligations; no lifetime horizon is substituted for indefinite operation.
 Subsequent experiments should cover measured OCV, sensor
 offsets, filtered/correlated noise, model mismatch and parameter drift. The current
 study does not validate aging, temperature variation, EOD prediction, or Cortex-M23
@@ -153,12 +164,12 @@ latency, SRAM, flash or power. The requested 35 Hz operating point was tested;
 
 ## Indefinite-runtime stability proof gate
 
-The new review separates numerical safety, fidelity, earlier-evidence
+The initial review separates numerical safety, fidelity, earlier-evidence
 retention and conditional usefulness. It proves conditional time-uniform
 error lemmas for dissipative states and bounded exact quantized charge,
 and finite-state obstructions to unrestricted all-history likelihood
-and empirical-mean accuracy. Those lemmas are not executable certificates
-for the current C/libm implementation.
+and empirical-mean accuracy. The existing Gaussian C/libm estimator remains
+outside a full lifetime proof.
 
 A preregistered small experiment reproduces seven mechanisms, including
 absorbed increments in the production QR and remainder updates and atomic
@@ -169,9 +180,19 @@ not a passing indefinite-stability result.
 
 Read the [proof report](docs/INDEFINITE_NUMERICAL_STABILITY_001.md) and
 [claim ledger](proofs/indefinite_stability_001/claims.json).
+The [second checkpoint](docs/STABILITY_CONTRACT_002.md) selects a concrete
+finite-certificate research contract and implements libm-free integer kernels.
+Its source-level proofs cover exact bounded charge, outward attenuation,
+invariant scalar-state enclosures, conditional uniform interval width, exact
+historical cell retention and conditional eventual refinement. The audit checks
+these against exact rational/integer references. Written proofs are independently
+reviewed, without a machine-checked C or compiler-correctness claim.
+
 The existing 35 Hz, B001 and B002 results and their interpretations remain
-unchanged. A full lifetime invariant, selected evidence semantics, verified
-machine arithmetic and Cortex-M23 qualification remain open.
+unchanged. Full battery-provider soundness, useful target qualification,
+integrated lifetime invariants, validated coverage and Cortex-M23 qualification
+remain open. The isolated host object subtotal of 68 bytes is not a full
+estimator memory figure.
 
 ## Bounded event prototype
 
