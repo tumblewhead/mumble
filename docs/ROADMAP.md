@@ -17,7 +17,7 @@ specific correctness obligation or design decision. They do not form an
 open-ended sequence that must finish before the application can run.
 
 This roadmap preserves the user's direction and original plan from 2026-10-24,
-America/Los_Angeles, with the M1 and first A4 outcomes added on 2026-10-25 UTC.
+America/Los_Angeles, with M1 and both A4 candidate outcomes added on 2026-10-25.
 The M2 duration campaign and Cortex-M23 target work have not run.
 The executable work order is [trajectory_to_m23_001.json](../plans/trajectory_to_m23_001.json).
 
@@ -37,7 +37,7 @@ applies the new interpretation without replacing the frozen M1 scores.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — first A4 candidate rejected** | One bounded successor on the small harness, then short load/cell/noise comparisons and about one year per selected cell | Chosen candidate meets hard target, lifecycle, resource and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
+| **M2: Desktop performance — two A4 candidates evaluated** | One small boundary/transaction diagnostic and a separate biased-uncertainty decision, then a qualified bounded learner, short variations and selected annual streams | Chosen candidate meets hard target, lifecycle, resource, numerical-health and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -96,14 +96,34 @@ compresses history into a local Gaussian belief; it no longer supports the
 reference's nonlinear reevaluation of every retained observation. Host
 storage and stack evidence do not qualify a complete M23 subsystem.
 
-Two measured blockers remain. A single outward correction at a nuisance
+The first result exposed two blockers. A single outward correction at a nuisance
 boundary can set the common gain to zero for all coordinates: cell B's
 control run has 71,928 zero-gain updates out of 73,500. Separately, capacity can
 be wrong while the local uncertainty is narrow. Cell A's cold branch finishes
 at **-7.485% capacity error** with a narrow local interval and a provisional
 label, despite only **1,434/42,000** post-reset updates having zero gain. Fixing
 the boundary stall is therefore not established as a cure for local-Gaussian
-overconfidence. Both failures block promotion; no annual run follows this result.
+overconfidence. Both failures prevented promotion of that first candidate.
+
+The [component-wise successor, bounded_online_002](../experiments/bounded_online_002/REPORT.md),
+is now complete at original source `4c59c2363bf8ebe81238b30af7b03d802a5e3e13`
+and identical published source `bdfa692584911fb536b08c5f496188ec42d93ca2`.
+It uses independent feasible coordinate gains with the matching full Joseph
+covariance in a lower-triangular factor. One frozen run preserves exact warm
+continuation, removes all observed global zero-gain updates and passes the
+functional/resource gates. Core storage is **5,896 bytes**, named fixed host
+storage **7,064 bytes**, and the host objects plus reviewed own-source stack
+partial total **8,184 bytes**. Complete M23 costs remain unqualified.
+
+The candidate still fails promotion: **16/16** scheduled SOC hard checks pass,
+but only **8/16** capacity/joint hard checks and **0/16** joint preferred checks.
+Excluding duplicate warm checks, joint hard passes are **6/10**. Cell B control
+finishes at **-7.53789%** capacity error with a narrow provisional local range
+despite no rejected corrections. Separately, cold-reset suffixes reject **7**
+and **10** corrections. The saved queries associate those windows with R3 near
+zero but do not identify the failed internal operation. The
+[behavior review](../experiments/bounded_online_002/behavior_review.json) keeps
+that cause unresolved. No annual run follows this result.
 
 The user-requested compact-layout step is now implemented and checked in
 [compact_bounded_001](COMPACT_BOUNDED_001.md). Its fixed-chart component owns
@@ -225,38 +245,42 @@ A new framework or a comprehensive fault Cartesian product is not required.
 
 ## M2 action plan: establish desktop performance, then extend duration
 
-### A4. Qualify one autonomous bounded learner — one successor next
+### A4. Qualify one autonomous bounded learner — diagnostic next
 
-The first full-factor candidate is complete and rejected for performance and
-qualification. Preserve it, its plan and its first result. The next bounded
-change addresses the measured common-gain stall: a **boundary-aware active-set
-gain** should allow feasible coordinates to learn when a nuisance correction
-points out of its permitted domain.
+Both frozen candidates are complete and preserved. Keep the successor's useful
+component-wise gain mechanism; reject its promotion. The independently checked
+two-pass factor update preserves the full Joseph covariance for the actual
+chosen gain in fixed memory and fixed source-level work. It resolves the
+observed global-stall mechanism, while the numerical and qualification gates
+expose separate remaining defects.
 
-Freeze the exact gain rule and a numerically valid square-root implementation
-before the next inference run. The chosen gain must be used consistently in
-both the mean and the full Joseph covariance update, with cross-correlations
-preserved. A coordinate-dependent gain cannot automatically reuse the old
-single-scale factor formula. First account for all simultaneously live state,
-workspace, staging and stack, and identify the fixed work per observation.
-Then implement only the deterministic numerical and boundary tests needed
-to establish this changed update and preserve the existing lifecycle contract.
+The [next action](../plans/boundary_transaction_diagnostic_001.json) is one tiny
+deterministic boundary-arithmetic/transaction fixture with explicit failed-stage
+and coordinate capture. Cover zero, adjacent representable and subnormal
+distances, both correction signs, and the production floating-point operation
+order. A source-level hypothesis is that the limiting calculation and applied
+mean step round differently near zero while the relative backoff becomes
+ineffective. The current primary does not establish that as the cause of its
+17 rejected corrections.
 
-Hold the public priors, noise/model assumptions, observation streams, reset
-schedule and target thresholds fixed. Freeze one successor plan and run the
-same small two-cell harness once. Compare hard target errors, availability,
-local qualification, boundary stalls and resource costs against the preserved
-first A4 result and frozen M1 reference. Fewer zero gains alone are not success.
-Wrong narrow capacity beliefs remain an independent rejection reason; do not
-promise that the gain change fixes them or retune priors/noise after scoring.
+Stop at a minimal reproducible witness and a keep/change decision, or record
+the missing datum if the mechanism is not reproduced. Preserve prediction on
+rejection, exactly-once input accounting and the same actual gain in the mean
+and full covariance. Account for any added diagnostic storage before adding it
+to the live model. This diagnostic needs no trajectory replay, optimizer,
+parameter sweep or new proof program.
 
-The finish line is a keep/change/drop decision from that one run. Promotion
-requires the declared hard targets, lifecycle and resource gates and honest
-uncertainty qualification. Report the preferred 0.5%/0.5 pp region separately;
-do not pursue smaller errors while those practical gates remain unmet. If a
-gate fails, stop, preserve the failure and name one measured blocker for the
-next decision. No automatic attention search, extra proof program, parameter
-sweep or duration campaign follows.
+Before another small-harness primary, freeze the numerical remedy and a
+separate decision for biased local-Gaussian uncertainty. Cell B control's wrong
+narrow capacity has zero rejected corrections; fixing the boundary transaction
+alone cannot explain or qualify that behavior. Preserve public priors, model,
+noise, target thresholds and all first outcomes unless a later frozen design
+explicitly declares a justified change.
+
+Promotion still requires hard targets, lifecycle, resources, numerical health
+and honest uncertainty qualification. Report the preferred 0.5%/0.5 pp region
+separately. Each experiment must close one named delivery decision; attention,
+variations and duration campaigns follow a qualified small candidate.
 
 The desktop result is an empirical performance reference for the stated
 models and scenarios. Calling it "ultimate performance" does not establish a
@@ -285,8 +309,8 @@ is implied.
 ### Use a short variation matrix and a duration ladder
 
 These steps are blocked until a candidate passes the small-harness hard
-targets, lifecycle, resources and qualification gates. Neither M1 nor the
-first A4 result authorizes increasing duration by itself.
+targets, lifecycle, resources, numerical-health and qualification gates.
+M1 and both A4 results retain failed gates that prevent a duration increase.
 
 | Step | Purpose | Scope control |
 | --- | --- | --- |
@@ -368,10 +392,10 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Create a successor work branch from the latest completed A4 descendant.
-Specify one boundary-aware active-set gain and its matching full Joseph
-square-root update, with complete memory accounting and a small deterministic
-verification contract. Freeze its plan, implement the change, then replay the
-same two-cell harness once with unchanged public priors/model/data. Keep the
-first result and decide against hard target and qualification gates. Day,
-week and year runs remain blocked until that candidate qualifies.
+Create `diagnostic/online-boundary-001` from the latest published
+`implementation/bounded-online-002` descendant. Execute the
+[boundary/transaction diagnostic plan](../plans/boundary_transaction_diagnostic_001.json)
+to identify a minimal numerical witness with failed-stage/coordinate capture.
+Stop there and record the remedy decision. Biased narrow capacity remains a
+separate design blocker before another small-harness primary. Day, week and
+year runs follow only a qualified candidate.

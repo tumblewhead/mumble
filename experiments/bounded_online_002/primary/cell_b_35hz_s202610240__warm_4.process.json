@@ -1,0 +1,71 @@
+{
+  "name": "warm_4",
+  "kind": "warm",
+  "start_index": 64750,
+  "end_index": 73500,
+  "command": [
+    "/tmp/mumble_online_002_primary_kg_8bi7z/scm_online_probe",
+    "--data",
+    "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+    "--source",
+    "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+    "--end",
+    "73500",
+    "--checkpoint-prefix",
+    "/tmp/mumble_online_002_primary_kg_8bi7z/cell_b_35hz_s202610240/warm_4",
+    "--save-at",
+    "73500",
+    "--query-stride",
+    "350",
+    "--restore",
+    "/tmp/mumble_online_002_primary_kg_8bi7z/cell_b_35hz_s202610240/warm_3-64750.bin"
+  ],
+  "stdout_jsonl": "cell_b_35hz_s202610240__warm_4.jsonl",
+  "stderr": "cell_b_35hz_s202610240__warm_4.stderr.txt",
+  "returncode": 0,
+  "timeout_s": 1200,
+  "operational_failures": [],
+  "checkpoint_records": [
+    {
+      "next_index": 73500,
+      "epoch_begin": 0,
+      "path_during_run": "/tmp/mumble_online_002_primary_kg_8bi7z/cell_b_35hz_s202610240/warm_4-73500.bin",
+      "bytes": 2456,
+      "sha256": "e382472ffbe0a7ae2d716b4303c5cb819cf3f01c3820772e8ef86836039cd5c7"
+    }
+  ],
+  "process_wall_s": 0.0640992449989426,
+  "stdout_sha256": "a046239557dcafb65fcddd684f6fa1808a4dae6c2ffc798fd07b82a1c26bc746",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 56727,
+  "stderr_bytes": 0,
+  "input_deliveries": 8750,
+  "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+  "validations": {
+    "successful_exit": true,
+    "run_identity_and_config": true,
+    "query_schedule": true,
+    "completion": true,
+    "checkpoint_schedule": true,
+    "no_error_events": true,
+    "no_batch_fit_events": true,
+    "query_ledger": true
+  },
+  "resources": {
+    "state_bytes": 2424,
+    "workspace_bytes": 2936,
+    "query_bytes": 536,
+    "core_owned_bytes": 5896,
+    "host_fixed_owned_bytes": 7064,
+    "checkpoint_bytes": 2456
+  },
+  "resource_passed": true,
+  "numerical_health": {
+    "rejected_voltage_count_start": 0,
+    "rejected_voltage_count_end": 0,
+    "rejected_voltage_updates_max": 0,
+    "scope": "Cumulative counters survive warm/cold restart; primary permits zero rejected corrections."
+  },
+  "numerical_health_passed": true,
+  "passed": true
+}

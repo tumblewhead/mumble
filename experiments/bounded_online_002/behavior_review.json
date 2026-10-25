@@ -1,0 +1,334 @@
+{
+  "schema": "mumble_bounded_online_behavior_review_v2",
+  "reviewed_utc": "2026-10-25T22:37:27.553917+00:00",
+  "source_revision": "4c59c2363bf8ebe81238b30af7b03d802a5e3e13",
+  "scope": "Read-only post-run diagnosis of one frozen primary, programmatic saved-query summaries and selected scorer vectors. No inference, replay, optimizer, tests or source edits.",
+  "hashes": {
+    "receipt_sha256": "ff91490dc5635021876504d78f17d2a0c85fb91600631fe410cf39cb687668c0",
+    "scores_sha256": "19c961be80cecc451f44121282e8e8376a1c1b035828a71b11a07eb4873104a8",
+    "plan_sha256": "b20b728f1328b14838c8d7aa23d11fbdcd1b2a832d250d4d35d62d90af49ecae",
+    "core_source_sha256": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+    "binary_sha256": "8f5f455f6e61f744a31cbf13888cb2a70e4e670f226f706718aca1d2673e39dd",
+    "selected_raw_sha256": {
+      "experiments/bounded_online_002/primary/cell_a_35hz_s202610240__control.jsonl": "1225bf3efe4cff0a24fa2214e390f52f666fc3b8f41e19f3d1332fecf7a28b51",
+      "experiments/bounded_online_002/primary/cell_a_35hz_s202610240__cold.jsonl": "ccf73f6646f1793f6865fb78d9ec362fbcda2c8bc54aa6f038e6f667288e613f",
+      "experiments/bounded_online_002/primary/cell_b_35hz_s202610240__control.jsonl": "61be5fbfcf3e286ef53bcac774c152594ff265977da953ebecd5f1e0cb6d6cda",
+      "experiments/bounded_online_002/primary/cell_b_35hz_s202610240__cold.jsonl": "c389170432b0bdb15ed358d39ff67f399a70782061b8edf66aa24a4fee279a87"
+    }
+  },
+  "integrity": {
+    "source_hashes_match_receipt": true,
+    "receipt_hash_matches_scorer": true,
+    "selected_raw_hashes_match_receipt": true,
+    "new_runs": 0,
+    "new_tests": 0
+  },
+  "measured_segments": [
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "arm": "control",
+      "delivered": 73500,
+      "accepted_limited_corrections": 69,
+      "recorded_all_zero_gain_corrections": 0,
+      "rejected_corrections": 0,
+      "maximum_saved_query_evidence_age_samples": 0,
+      "saved_partially_blocked_but_learning_queries": 0
+    },
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "arm": "cold",
+      "delivered": 42000,
+      "accepted_limited_corrections": 5981,
+      "recorded_all_zero_gain_corrections": 0,
+      "rejected_corrections": 7,
+      "maximum_saved_query_evidence_age_samples": 0,
+      "saved_partially_blocked_but_learning_queries": 13
+    },
+    {
+      "cell": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "delivered": 73500,
+      "accepted_limited_corrections": 23991,
+      "recorded_all_zero_gain_corrections": 0,
+      "rejected_corrections": 0,
+      "maximum_saved_query_evidence_age_samples": 0,
+      "saved_partially_blocked_but_learning_queries": 68
+    },
+    {
+      "cell": "cell_b_35hz_s202610240",
+      "arm": "cold",
+      "delivered": 42000,
+      "accepted_limited_corrections": 7343,
+      "recorded_all_zero_gain_corrections": 0,
+      "rejected_corrections": 10,
+      "maximum_saved_query_evidence_age_samples": 0,
+      "saved_partially_blocked_but_learning_queries": 15
+    }
+  ],
+  "coordinate_separation": {
+    "worked_for_observed_stall_mechanism": true,
+    "predecessor_B_control_zero_gain_count": 71928,
+    "current_B_control_zero_gain_count": 0,
+    "witness": {
+      "cell": "cell_b_35hz_s202610240",
+      "arm": "control",
+      "next_index": 16100,
+      "nominal_time_s": 460,
+      "blocked_coordinate": "log_gamma_minus",
+      "coordinate_value": 7.090076835776092,
+      "physical_upper_bound": 1200,
+      "last_gain_scale": 0,
+      "last_max_gain_scale": 1,
+      "last_limited_mask": 16,
+      "last_blocked_mask": 16,
+      "evidence_next_index": 16100,
+      "zero_gain_count": 0
+    },
+    "interpretation": "A blocked gamma-minus component coexists with current observation evidence in other coordinates. Partial limiting no longer forces a global no-op. The short experiment does not establish useful learning in every coordinate.",
+    "evidence_recency_scope": "Every post-initial saved query reports zero evidence age. This does not mean every intervening voltage was assimilated: the 17 cold-arm rejected corrections are explicitly counted and later updates resumed. Initial/reset queries have zero age but no learned point."
+  },
+  "rejection_windows": [
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        33600,
+        33950
+      ],
+      "nominal_time_interval_s": [
+        960,
+        970
+      ],
+      "new_rejections": 2,
+      "R3_at_bracketing_queries": [
+        3.9025795331167256e-138,
+        0
+      ],
+      "limited_masks_at_bracketing_queries": [
+        513,
+        513
+      ]
+    },
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        34300,
+        34650
+      ],
+      "nominal_time_interval_s": [
+        980,
+        990
+      ],
+      "new_rejections": 1,
+      "R3_at_bracketing_queries": [
+        3.2695650528037857e-219,
+        1.72282362248435e-228
+      ],
+      "limited_masks_at_bracketing_queries": [
+        513,
+        513
+      ]
+    },
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        36050,
+        36400
+      ],
+      "nominal_time_interval_s": [
+        1030,
+        1040
+      ],
+      "new_rejections": 2,
+      "R3_at_bracketing_queries": [
+        0,
+        4.561821950454393e-120
+      ],
+      "limited_masks_at_bracketing_queries": [
+        513,
+        513
+      ]
+    },
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        36400,
+        36750
+      ],
+      "nominal_time_interval_s": [
+        1040,
+        1050
+      ],
+      "new_rejections": 1,
+      "R3_at_bracketing_queries": [
+        4.561821950454393e-120,
+        0
+      ],
+      "limited_masks_at_bracketing_queries": [
+        513,
+        513
+      ]
+    },
+    {
+      "cell": "cell_a_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        36750,
+        37100
+      ],
+      "nominal_time_interval_s": [
+        1050,
+        1060
+      ],
+      "new_rejections": 1,
+      "R3_at_bracketing_queries": [
+        0,
+        1.6721203262849032e-202
+      ],
+      "limited_masks_at_bracketing_queries": [
+        513,
+        513
+      ]
+    },
+    {
+      "cell": "cell_b_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        34300,
+        34650
+      ],
+      "nominal_time_interval_s": [
+        980,
+        990
+      ],
+      "new_rejections": 6,
+      "R3_at_bracketing_queries": [
+        3.542073927949544e-49,
+        5.734317997374337e-103
+      ],
+      "limited_masks_at_bracketing_queries": [
+        512,
+        544
+      ]
+    },
+    {
+      "cell": "cell_b_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        34650,
+        35000
+      ],
+      "nominal_time_interval_s": [
+        990,
+        1000
+      ],
+      "new_rejections": 3,
+      "R3_at_bracketing_queries": [
+        5.734317997374337e-103,
+        5.12031089346226e-85
+      ],
+      "limited_masks_at_bracketing_queries": [
+        544,
+        544
+      ]
+    },
+    {
+      "cell": "cell_b_35hz_s202610240",
+      "next_index_interval_left_open_right_closed": [
+        39200,
+        39550
+      ],
+      "nominal_time_interval_s": [
+        1120,
+        1130
+      ],
+      "new_rejections": 1,
+      "R3_at_bracketing_queries": [
+        1.2302831708668092e-23,
+        3.513204340528632e-166
+      ],
+      "limited_masks_at_bracketing_queries": [
+        526,
+        519
+      ]
+    }
+  ],
+  "rejection_diagnosis": {
+    "measured": "Seven rejected corrections in A cold and ten in B cold; none in either control. All 17 are bracketed by saved queries between 960 and 1130 s and do not persist to the next saved query as stale evidence.",
+    "transaction_source": "ingest() commits the valid prediction before correct() mutates workspace.candidate. A correction failure leaves the live mean/factor prediction in place, increments rejected_voltage_count and sets UPDATE_REJECTED. Failed-trial gain/innovation diagnostics are not committed.",
+    "boundary_evidence": "R3 (coordinate 9, mask 512) is limited around every recorded rejection window; selected bracketing means range from very small positives to exact zero. Other active bounds include tau1 (A), logQ (B) and tau bands (late B). These are query-level associations, not identification of each failing coordinate.",
+    "mechanism_hypothesis": "The feasibility calculation uses raw=g*standard to select lambda, then applies (lambda*g)*standard. Different rounding, especially as a positive distance approaches zero/subnormal scale, can defeat an unrepresentable relative 1e-9 backoff and trigger the final mean-domain check. This is a plausible source-level mechanism, not an established explanation of the 17 events.",
+    "unresolved": "The primary stores neither rejection stage/coordinate nor the rejected candidate gain, proposed mean or full factor. Source failures share one return value. The exact branch and floating operands for these 17 rejections cannot be reconstructed from the saved queries.",
+    "not_claimed": "No evidence establishes that NaNs, matrix overflow, loss of PSD or malformed input caused these rejections. Numerical-health failure means the declared zero-rejection gate was breached."
+  },
+  "accuracy_and_qualification": {
+    "scheduled_pairs": 16,
+    "SOC_hard_passes": 16,
+    "joint_hard_passes": 8,
+    "joint_preferred_passes": 0,
+    "provisional_hard_error_failures": [
+      {
+        "case_id": "cell_a_35hz_s202610240",
+        "arm": "control",
+        "kind": "provisional_point_exceeds_hard_error",
+        "SOC_queries": 0,
+        "capacity_queries": 113
+      },
+      {
+        "case_id": "cell_a_35hz_s202610240",
+        "arm": "warm",
+        "kind": "provisional_point_exceeds_hard_error",
+        "SOC_queries": 0,
+        "capacity_queries": 113
+      },
+      {
+        "case_id": "cell_b_35hz_s202610240",
+        "arm": "control",
+        "kind": "provisional_point_exceeds_hard_error",
+        "SOC_queries": 0,
+        "capacity_queries": 191
+      },
+      {
+        "case_id": "cell_b_35hz_s202610240",
+        "arm": "warm",
+        "kind": "provisional_point_exceeds_hard_error",
+        "SOC_queries": 0,
+        "capacity_queries": 191
+      },
+      {
+        "case_id": "cell_b_35hz_s202610240",
+        "arm": "cold",
+        "kind": "provisional_point_exceeds_hard_error",
+        "SOC_queries": 0,
+        "capacity_queries": 26
+      }
+    ],
+    "B_control_final_witness": {
+      "capacity_Ah": 0.05982298523069587,
+      "truth_capacity_Ah": 0.0647,
+      "capacity_error_percent": -7.537889906188755,
+      "capacity_local_2SD_interval_Ah": [
+        0.059802800826793734,
+        0.059843176447157864
+      ],
+      "capacity_status": "provisional",
+      "capacity_local_precision_preferred": true,
+      "SOC_error_pp": -3.4082137316769345,
+      "innovation_EWMA": 1.0234954945422476,
+      "current_hysteresis_error": -1.7941591611077772
+    },
+    "interpretation": "B control has no rejected or all-zero corrections yet retains biased, narrow capacity belief. A control likewise has wrong provisional capacity earlier. Thus the 17 rejects cannot explain the independent accuracy/qualification failures, and eliminating global stall did not qualify this learner."
+  },
+  "gate_decision": {
+    "functional_passed": true,
+    "resource_passed": true,
+    "numerical_health_passed": false,
+    "hard_accuracy_passed": false,
+    "provisional_hard_error_audit_passed": false,
+    "promotion_passed": false,
+    "decision": "Preserve this failed successor and stop; no variation/year campaign or tolerance retuning."
+  },
+  "one_bounded_next_action": {
+    "action": "Resolve correction rejection as a bounded arithmetic diagnostic before another learner revision: add compact rejection-stage/coordinate capture and exercise zero, adjacent representable and subnormal boundary distances in a tiny deterministic scalar-gain/transaction fixture.",
+    "why": "The experiment demonstrates real correction rejections, but current diagnostics cannot identify their branch; selected boundary activity and source multiplication order provide a concrete falsifiable hypothesis.",
+    "constraint": "No parameter sweep, prior/noise/threshold change, or repeat of this primary. Preserve the same selected-gain/mean/Joseph consistency requirement.",
+    "separate_open_gate": "A subsequent numerical fix would still leave measured biased, overconfident capacity as an independent promotion blocker.",
+    "performed": false
+  }
+}

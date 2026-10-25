@@ -1,22 +1,14 @@
 {
-  "schema": "mumble_continue_v11",
-  "task": "Continue after one failed-accuracy bounded online candidate. Preserve first result and design one boundary-aware gain successor; do not restart completed studies.",
+  "schema": "mumble_continue_v12",
+  "task": "Continue from the completed component-wise bounded learner experiment; do not rerun it merely to resume.",
   "repository": {
     "url": "https://github.com/tumblewhead/mumble",
-    "work_branch": "implementation/bounded-online-001",
-    "original_source_revision": "b1004c16fcc4d8ee2acddb0a28e73c9b9e00f201",
-    "published_source_revision": "28a543e163273975dd782b60fd803649955073a7",
-    "historical_main_checkpoint": "0fd443b126579c625aea8c3772ddc28668aa242b",
-    "prior_handoff": "handoff/archive/CONTINUE_trajectory_integration_001.json",
-    "handoff_url": "https://github.com/tumblewhead/mumble/blob/implementation/bounded-online-001/handoff/CONTINUE.json",
-    "bootstrap": [
-      "Fetch latest state and inspect status; preserve newer/dirty/unrelated work. Historical commits are provenance, never reset targets.",
-      "Read AGENTS.md, README.md, PROJECT_STATE.json and this handoff; follow summary/report/API links selectively, not all raw outputs.",
-      "Use a successor work branch after freezing the precise gain design and experiment; preserve every original source/result."
-    ],
-    "original_research_revision": "367eb333e24f21aa7e84bcbce49614b75f969058",
-    "published_research_revision_before_metadata": "bd2661336e72e84828b274010056ea5ea0b149b1",
-    "publication_status": "source_and_research_trees_verified"
+    "work_branch": "implementation/bounded-online-002",
+    "historical_main_handoff_commit": "0fd443b126579c625aea8c3772ddc28668aa242b",
+    "source_revision": "4c59c2363bf8ebe81238b30af7b03d802a5e3e13",
+    "published_source_revision": "bdfa692584911fb536b08c5f496188ec42d93ca2",
+    "latest_checkpoint": "Fetch branch tip; publication mapping records original execution and identical published trees.",
+    "handoff_url": "https://github.com/tumblewhead/mumble/blob/implementation/bounded-online-002/handoff/CONTINUE.json"
   },
   "goal": {
     "target": "Runnable Cortex-M23 C estimator near10240B complete SRAM",
@@ -25,45 +17,83 @@
     "delivery": "M1 complete; A4 candidate qualification; short variations/day/week/selected annual streams; M3 target/lifetime qualification."
   },
   "current": {
-    "M1": "Functional complete, original usefulness failure preserved. Supplemental new-target audit passes14/16 joint checkpoints and reports all16 coordinates; no new fits.",
-    "online": "One full16-coordinate mean/square covariance-factor EKF, fixed state/work; no rawhistory. Public starts, actualdt/order, full correlations, each voltage used once; local Gaussian approximation.",
-    "execution": "1 primary,12processes,378000 deliveries,0batch fits; functional/resource true;10checkpoint pairs and430query records/33110scalars exactly match.",
-    "accuracy": "SOC16/16hard; Q/joint6/16hard; jointpreferred0/16; provisional-hard-error audit false. Failed candidate not promoted.",
-    "final_errors": "Control A SOC-.0699774pp/Q-2.53130%; B-.378470pp/+9.38929%. Cold A-.478194pp/-7.48501%; B-.493571pp/+3.17243%.",
-    "memory": "5848Bcore;7016Bnamedhost;2440Bcheckpoint. Namedobjects+reviewedownstack8136B, ELFdata/bss+ownstack8280B; runtime/acquisition/persistence/IRQ/target extras open.",
-    "stall": "Bcontrol71928/73500zero-gain (97.86%), nuisancebound can blockallcoordinates. Coldcounters cumulative: postresetA1434/42000,B295/42000.",
-    "qualification": "AcoldQ-7.485% despite narrow provisional range and innovationEWMA1.045: overconfidence is separate from common-gain stalling.",
-    "indefinite": "No full-model all-prefix proof, coverage, annual or M23 qualification. Restricted integer-provider proofs remain under their original premises."
+    "milestone": "M2/A4 small candidate qualification",
+    "completed": "M1 lifecycle and two one-run bounded candidates; source/reference/proof results preserved.",
+    "002_decision": "Keep the component-wise gain mechanism; reject candidate promotion. One bounded numerical-transaction diagnostic next; biased narrow capacity remains a separate blocker.",
+    "002_gates": {
+      "functional_passed": true,
+      "resource_passed": true,
+      "numerical_health_passed": false,
+      "hard_accuracy_passed": false,
+      "preferred_accuracy_passed": false,
+      "provisional_hard_error_audit_passed": false,
+      "promotion_passed": false
+    },
+    "002_benchmark_counts": {
+      "arm_checkpoint_pairs": 16,
+      "SOC_hard": 16,
+      "capacity_hard": 8,
+      "joint_hard": 8,
+      "joint_preferred": 0,
+      "excluding_duplicate_warm_pairs": 10,
+      "joint_hard_excluding_duplicate_warm": 6,
+      "qualification_scope": "Scheduled checkpoints on two synthetic cells; neither hard guarantees nor validated coverage. Warm duplicates test continuity."
+    },
+    "002_memory_bytes": {
+      "core": 5896,
+      "named_host_fixed": 7064,
+      "canonical_checkpoint": 2456,
+      "reviewed_own_source_stack": 1120,
+      "named_host_plus_reviewed_stack_partial": 8184,
+      "host_ELF_data_bss_plus_reviewed_stack_partial": 8296,
+      "delta_core_and_named_host_vs_001": 48,
+      "complete_M23_subsystem_qualified": false
+    },
+    "restart": "430 query records/34400 scalar fields and10 checkpoint pairs exact. Cold reset starts from public prior; counters remain cumulative.",
+    "failure_evidence": [
+      "All-zero gains removed; B control learns through23991 component-limited updates.",
+      "Cold suffix rejects A7/B10 corrections. Near-zero R3 arithmetic is a hypothesis, exact cause unrecorded.",
+      "B control has0 rejected corrections but finalQ-7.53789%, SOC-3.40821pp, narrow provisional localQ range excluding truth. Numeric rejection and biased uncertainty are distinct."
+    ],
+    "no_campaign_escalation": true
   },
   "next": {
-    "milestone": "M2/A4 successor",
-    "first_action": "Design one boundary-aware active-set measurement gain that allows feasible coordinates to learn, with matching full Joseph covariance/factor. Keep model,publicpriors,data,thresholds unchanged.",
-    "freeze": "Document gain/factor algebra, complete storage/work and fault semantics; add only independent tests needed for changed gain; then one paired two-cell falsification on the existing harness.",
-    "acceptance": "HardSOC/Q,lifecycle,resource and honest qualification gates. Preserve wrong narrow capacity as a rejection reason; reducing stalls alone is insufficient.",
-    "stop_rule": "One successor design and one frozen experiment, then keep/change/drop. No covariance/prior/process-noise tuning to first results, optional campaigns or annual run.",
-    "attention_tokens": "Semi-Markov/codebook/embedding ideas remain optional when a measured memory/processing decision needs them; do not substitute predictor confidence for observation evidence."
+    "milestone": "M2/A4 numerical transaction diagnostic",
+    "plan": "plans/boundary_transaction_diagnostic_001.json",
+    "start": [
+      "Fetch current repository; inspect git status and preserve newer/dirty/unrelated work. Historical checkpoints are not reset targets.",
+      "Read AGENTS.md, README.md, PROJECT_STATE.json, this handoff and selective002 summary/reviews.",
+      "Use diagnostic/online-boundary-001 from latest002 descendant; archive both failed candidates."
+    ],
+    "action": [
+      "Construct a tiny deterministic C fixture from the production limiting/mean-domain transaction, independent of the cell traces and synthetic truth.",
+      "Exercise zero, adjacent representable and subnormal distances to a nonnegative parameter boundary, both correction signs, and the actual floating-point operation order.",
+      "Add bounded diagnostic capture of rejection stage and coordinate for the fixture; account for any proposed live-state additions before implementation.",
+      "Verify that any candidate gain uses the same value for mean and full Joseph covariance, preserves domain, and retains the committed prediction on rejection."
+    ],
+    "finish_line": "One minimal reproducible numerical witness and a keep/change decision for the boundary transaction, or an explicit unreproduced mechanism with the next missing datum. Stop the diagnostic there.",
+    "before_another_primary": "Freeze the numerical remedy and a separate decision about biased local-Gaussian uncertainty; retain prior candidate scores. No automatic third full trajectory merely because rejection handling is fixed."
   },
   "evidence": {
+    "report": "experiments/bounded_online_002/REPORT.md",
+    "plan": "experiments/bounded_online_002/plan.json",
+    "primary": "experiments/bounded_online_002/primary/receipt.json",
+    "scores": "experiments/bounded_online_002/scores.json",
+    "behavior": "experiments/bounded_online_002/behavior_review.json",
+    "independent_review": "experiments/bounded_online_002/independent_review.json",
+    "scoring_audit": "experiments/bounded_online_002/scoring_audit.json",
+    "memory": "experiments/bounded_online_002/memory_accounting.json",
+    "build": "experiments/bounded_online_002/build_checks.json",
+    "figure": "report/Bounded-Online-002.png",
+    "publication": "provenance/bounded_online_002_publication.json",
+    "predecessor": "experiments/bounded_online_001/summary.json",
+    "summary": "experiments/bounded_online_002/summary.json",
+    "next_plan": "plans/boundary_transaction_diagnostic_001.json",
     "roadmap": "docs/ROADMAP.md",
     "action_plan": "plans/trajectory_to_m23_001.json",
-    "targets": "plans/estimation_targets_001.json",
-    "online_summary": "experiments/bounded_online_001/summary.json",
-    "online_report": "docs/BOUNDED_ONLINE_001.md",
-    "online_plan": "experiments/bounded_online_001/plan.json",
-    "online_primary": "experiments/bounded_online_001/primary/receipt.json",
-    "online_scores": "experiments/bounded_online_001/scores.json",
-    "online_memory": "experiments/bounded_online_001/memory_accounting.json",
-    "online_review": "experiments/bounded_online_001/independent_review.json",
-    "scoring_audit": "experiments/bounded_online_001/scoring_audit.json",
-    "online_API": "include/scm_online.h",
-    "checkpoint_API": "include/scm_online_checkpoint.h",
-    "M1_belief_audit": "experiments/m1_belief_audit_001/summary.json",
-    "M1_belief_report": "experiments/m1_belief_audit_001/REPORT.md",
-    "M1_reference": "experiments/trajectory_integration_001/summary.json",
-    "compact_fixed_chart": "experiments/compact_bounded_001/summary.json",
-    "restricted_RC": "experiments/indefinite_stability_004/summary.json",
-    "publication": "provenance/bounded_online_001_publication.json",
-    "verification": "experiments/bounded_online_001/verification.json"
+    "M1_audit": "experiments/m1_belief_audit_001/summary.json",
+    "uncertain_RC": "experiments/indefinite_stability_004/summary.json",
+    "prior_handoff": "handoff/archive/CONTINUE_bounded_online_001.json"
   },
   "guardrails": [
     "35Hz nominal; actual intervals, order and carried state preserved.",
@@ -73,6 +103,9 @@
     "Currentstate and enteringstate metrics differ. Cold operational counters survive reset; subtract boundary counts for suffix rates.",
     "Host reference only; EOD/temperature/aging/full-model lifetime and target qualification open.",
     "Machine handoffs compact JSON/YAML. Repository is mumble, separate from SpanishCastleMagic.",
-    "Frozen report/summary publication fields describe creation time; current commit mapping and original-execution bundle are in publication provenance."
+    "Frozen report/summary publication fields describe creation time; current commit mapping and original-execution bundle are in publication provenance.",
+    "Model/checkpoint version2 requires lower-triangular factor; v1 is rejected explicitly. Component-limited means must use the same actual gain in full Joseph covariance.",
+    "The two-cell primary ran once with12 processes/378000 deliveries/0 batch fits. Do not rerun long studies or raw histories to resume.",
+    "Finite gates and preserved PSD do not prove indefinite full-model numerical stability; M23, annual, temperature and calibrated-coverage work remain gated."
   ]
 }

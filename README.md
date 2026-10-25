@@ -10,19 +10,26 @@ The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
 end-to-end desktop demonstration, a desktop performance campaign including
 about one year per selected cell, and the embedded implementation.
 [M1 lifecycle integration is complete](docs/TRAJECTORY_INTEGRATION_001.md).
-The [first autonomous bounded learner](docs/BOUNDED_ONLINE_001.md) now also
-completes both cells, exact warm continuation and cold reset, using a full
-16-coordinate mean/covariance factor with no retained sample history. It owns
-5,848 bytes of core objects and 7,016 bytes of fixed host objects; complete
-runtime and target costs remain additional.
+The [component-wise gain successor](experiments/bounded_online_002/REPORT.md)
+has now completed one frozen two-cell experiment. It carries a full
+16-coordinate mean/covariance factor with no retained sample history, owns
+5,896 bytes of core objects and 7,064 bytes of fixed host objects, and preserves
+exact warm continuation. Complete runtime and target costs remain additional.
 
-**The first bounded candidate fails the capacity accuracy gate and is not
-promoted.** Under the [current user targets](plans/estimation_targets_001.json),
-SOC passes all 16 declared hard-limit checkpoints, but capacity passes only
-6/16. A common gain limiter can stop all learning when one parameter reaches
-a boundary; wrong, narrow local capacity ranges are a separate failure.
-The next action is one boundary-aware gain change with consistent covariance,
-followed by the same small test. Longer campaigns follow candidate qualification.
+**The gain change removes the observed global stalls, but the candidate is
+not promoted.** Under the [current user targets](plans/estimation_targets_001.json),
+SOC passes all 16 declared hard-limit checkpoints; capacity and joint passes
+improve from 6/16 to 8/16. Cell B control still finishes at -7.54% capacity
+error with a narrow provisional local interval. The two cold-reset arms also
+reject 7 and 10 corrections. These are separate failures: the inaccurate
+control arm rejects none. Both the [first result](docs/BOUNDED_ONLINE_001.md)
+and this successor's first outputs remain preserved.
+
+The [next bounded action](plans/boundary_transaction_diagnostic_001.json) is
+one tiny boundary-arithmetic/transaction diagnostic that records the failed
+stage and coordinate. Its stop rule is a minimal numerical witness or an
+explicit missing datum. A separate decision about biased local uncertainty
+is required before another primary; longer campaigns follow qualification.
 
 The [supplemental M1 belief audit](experiments/m1_belief_audit_001/REPORT.md)
 reports all sixteen fitted quantities and applies the new targets to the frozen
@@ -52,9 +59,11 @@ experiment work to specific delivery decisions.
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
-| [First bounded online result](docs/BOUNDED_ONLINE_001.md) | One frozen candidate, exact lifecycle, measured memory, capacity and local-uncertainty failures, and next action |
-| [Bounded online summary](experiments/bounded_online_001/summary.json) | Compact result and selective links; read before raw outputs |
-| [Bounded online publication](provenance/bounded_online_001_publication.json) | Verified canonical trees and preserved original execution commits |
+| [Current bounded online result](experiments/bounded_online_002/REPORT.md) | Component-wise gain removes global stalls; capacity, local qualification and 17 cold correction rejections still block promotion |
+| [Bounded online summary](experiments/bounded_online_002/summary.json) | Compact result and selective links; read before raw outputs |
+| [Bounded online publication](provenance/bounded_online_002_publication.json) | Verified canonical trees and preserved original execution commits |
+| [Next numerical diagnostic](plans/boundary_transaction_diagnostic_001.json) | Small boundary/transaction fixture, explicit failure capture and a strict stop rule |
+| [First bounded online result](docs/BOUNDED_ONLINE_001.md) | Preserved predecessor, common-gain stalls and separate wrong narrow capacity beliefs |
 | [M1 full-belief audit](experiments/m1_belief_audit_001/REPORT.md) | Full sixteen-quantity errors, current-state transport and supplemental target scores without rerunning M1 |
 | [M1 lifecycle report](docs/TRAJECTORY_INTEGRATION_001.md) | Two-cell operation, exact warm continuation, cold reset, preserved usefulness failure and next blocker |
 | [M1 compact summary](experiments/trajectory_integration_001/summary.json) | Functional/usefulness outcomes, resource costs and selective evidence links |
@@ -97,7 +106,7 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
 | **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
-| **M2: Desktop performance and year-scale behavior** | **Next: A4 candidate selection.** Demonstrate timely, reliable learning with bounded storage/work on the M1 harness before variations, optional attention, day/week pilots and annual streams |
+| **M2: Desktop performance and year-scale behavior** | **A4: two candidates evaluated; neither promoted.** Diagnose the successor's cold correction transaction, then resolve biased local uncertainty before another small candidate gate; variations and duration increases remain gated |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality
@@ -249,13 +258,13 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-Proceed to [M2/A4](plans/trajectory_to_m23_001.json): select one autonomous
-learner with explicit bounded storage and scheduled work, public cold start,
-and preserved historical evidence. Use the M1 harness and full C reference to
-test timely, reliable SOC/capacity learning on a small paired case before
-extending duration. The cell B 900-second failure is a concrete selection
-gate. Preserve it without retuning or repeating the completed M1 campaign;
-the original 60-fit study also remains frozen.
+Proceed to the [small M2/A4 diagnostic](plans/boundary_transaction_diagnostic_001.json)
+from the latest `implementation/bounded-online-002` descendant. Its single
+purpose is to identify the exact rejected-correction operation near a parameter
+boundary. Preserve both bounded candidates, the completed M1 campaign and the
+original 60-fit study. The successor removes global stalls, but biased narrow
+capacity remains an independent learner-selection blocker. Freeze the numerical
+remedy and the separate uncertainty decision before another primary run.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to

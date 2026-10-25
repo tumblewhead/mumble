@@ -1,0 +1,69 @@
+{
+  "name": "warm_1",
+  "kind": "warm",
+  "start_index": 0,
+  "end_index": 420,
+  "command": [
+    "/tmp/mumble_online_002_primary_kg_8bi7z/scm_online_probe",
+    "--data",
+    "/workspace/scratch/359d7ee85d34/mumble/data/cell_b_35hz_s202610240.csv",
+    "--source",
+    "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+    "--end",
+    "420",
+    "--checkpoint-prefix",
+    "/tmp/mumble_online_002_primary_kg_8bi7z/cell_b_35hz_s202610240/warm_1",
+    "--save-at",
+    "420",
+    "--query-stride",
+    "350"
+  ],
+  "stdout_jsonl": "cell_b_35hz_s202610240__warm_1.jsonl",
+  "stderr": "cell_b_35hz_s202610240__warm_1.stderr.txt",
+  "returncode": 0,
+  "timeout_s": 1200,
+  "operational_failures": [],
+  "checkpoint_records": [
+    {
+      "next_index": 420,
+      "epoch_begin": 0,
+      "path_during_run": "/tmp/mumble_online_002_primary_kg_8bi7z/cell_b_35hz_s202610240/warm_1-420.bin",
+      "bytes": 2456,
+      "sha256": "d3beaa1d728447ffd4b886a78eb3d44aa394ee9bf895f447944b5fef28d7558e"
+    }
+  ],
+  "process_wall_s": 0.003205543998774374,
+  "stdout_sha256": "9ebb01c01d3a4ff1bf1800d64b664c4dab01a916e4f4587d61043c034042083a",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 6968,
+  "stderr_bytes": 0,
+  "input_deliveries": 420,
+  "delivery_count_scope": "Complete-event accepted updates; on failure, consumed input position inferred from last event",
+  "validations": {
+    "successful_exit": true,
+    "run_identity_and_config": true,
+    "query_schedule": true,
+    "completion": true,
+    "checkpoint_schedule": true,
+    "no_error_events": true,
+    "no_batch_fit_events": true,
+    "query_ledger": true
+  },
+  "resources": {
+    "state_bytes": 2424,
+    "workspace_bytes": 2936,
+    "query_bytes": 536,
+    "core_owned_bytes": 5896,
+    "host_fixed_owned_bytes": 7064,
+    "checkpoint_bytes": 2456
+  },
+  "resource_passed": true,
+  "numerical_health": {
+    "rejected_voltage_count_start": 0,
+    "rejected_voltage_count_end": 0,
+    "rejected_voltage_updates_max": 0,
+    "scope": "Cumulative counters survive warm/cold restart; primary permits zero rejected corrections."
+  },
+  "numerical_health_passed": true,
+  "passed": true
+}

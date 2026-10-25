@@ -1,0 +1,662 @@
+{
+  "schema": "mumble_bounded_online_002_memory_accounting_v1",
+  "scope": "Fixed host ownership, source-level work, preserved compiler stack reports and persistence for the boundary-aware gain successor. No new tests, observations or rebuilds by this reviewer. Not complete process peak, Cortex-M23 memory/timing or indefinite-runtime qualification.",
+  "provenance": {
+    "source_revision": "4c59c2363bf8ebe81238b30af7b03d802a5e3e13",
+    "source_tree": "2973bd8199f544401307818dd61fffde8b69833f",
+    "source_identity": "Frozen source revision supplied by root before primary execution.",
+    "source_and_evidence_sha256": {
+      "Makefile": "5d97287379df5e034a1d0a903a400b1ff4be33aa6a9c7b402ab87cce7c047739",
+      "include/scm_online.h": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+      "include/scm_online_checkpoint.h": "49b559aa1b4d87887770c018da8b76273e0d6283e3a34fd5f22bddd6ea44c0ee",
+      "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+      "src/scm_online.c": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+      "src/scm_online_checkpoint.c": "6bf79069d129e9cea668e17b3cffee9472de8661a5f16eacf0a573ad019dd204",
+      "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+      "tools/online_probe.c": "d2dab28a9abcefe437ab020f868ee2c9517337bf73c8093c310d742b7e60dffe",
+      "reference_binaries/scm_online_probe_bounded_002": "8f5f455f6e61f744a31cbf13888cb2a70e4e670f226f706718aca1d2673e39dd",
+      "experiments/bounded_online_002/plan.json": "b20b728f1328b14838c8d7aa23d11fbdcd1b2a832d250d4d35d62d90af49ecae",
+      "experiments/bounded_online_002/build_checks.json": "19efcede91ccffb856a6ceb202f483db59373b72b3963c716320bcf0dcff1090",
+      "experiments/bounded_online_002/strict_gate.json": "b866ce96c5210691e1a143900d49042f450b9e6035f43138507b8a35ecead0da",
+      "experiments/bounded_online_002/strict_build_test.log": "1de71e54b8c4b0a4f40b80804f9827bc7b39ce606de9819794e1ae3769186da6",
+      "experiments/bounded_online_002/focused_sanitizers.log": "078393a6e39ae093b4a3addc3fad9ea57d3da5fd13ca9da1bb37de763349995a",
+      "experiments/bounded_online_002/sanitizer_commands.json": "56d3e7135c534b2965c283b963793e40c6770dc091b8850c03b8a80f5410f748",
+      "experiments/bounded_online_001/memory_accounting.json": "9b7a0ed08b3e8d30bb7e9005eceee62670e6b16ac24333b30e1907c7c2a0c293",
+      "experiments/trajectory_integration_001/memory_accounting.json": "8bdffdf6c7da2ad9331254d5038985a3fc25e5fcc5267fe3082a47648b17e218",
+      "experiments/compact_bounded_001/memory_accounting.json": "91b5ce393bcbf4ee24caeaae6d279d80714f530dc9a0fc019358da662213a5f5"
+    },
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "platform": "Linux x86_64; double 8 B, pointer 8 B",
+    "strict_build_command": [
+      "make",
+      "-B",
+      "-j2",
+      "test",
+      "build/scm_online_probe",
+      "online-stack",
+      "CFLAGS=-std=c99 -O3 -Wall -Wextra -Wpedantic -Werror"
+    ],
+    "strict_returncode": 0,
+    "full_suite_passed": true,
+    "focused_sanitizers_passed": true,
+    "gate_scope": "Read from frozen build account; reviewer executed no tests. ASAN/UBSAN scope excludes a leak audit.",
+    "methods": [
+      "Read frozen source/headers and build reports.",
+      "Read archived .su reports and the preserved unchanged shared-model frame.",
+      "Inspect frozen ELF with nm and size; these do not execute the model.",
+      "Cross-check object/static-buffer sizes from ELF symbols against reported 5896 B/7064 B measurements.",
+      "Read predecessor accounts without rerunning inference."
+    ],
+    "new_tests_by_reviewer": 0,
+    "new_observations_by_reviewer": 0,
+    "new_primary_runs_by_reviewer": 0,
+    "source_edits_by_reviewer": 0
+  },
+  "owned_objects_bytes": {
+    "persistent_state": 2424,
+    "workspace": 2936,
+    "query_result": 536,
+    "core_state_workspace_query": 5896,
+    "external_config": 56,
+    "one_sample": 24,
+    "core_plus_external_config_and_sample": 5976,
+    "host_csv_line": 256,
+    "host_csv_stdio_buffer": 256,
+    "host_checkpoint_path": 512,
+    "host_checkpoint_positions_8x_uint64": 64,
+    "host_named_fixed_objects": 7064,
+    "internal_layout": {
+      "mean_16_doubles": 128,
+      "factor_256_doubles": 2048,
+      "state_other_fields_and_padding": 248,
+      "workspace_candidate_state": 2424,
+      "workspace_four_16_double_vectors": 512,
+      "state_contains_config": true,
+      "external_config_is_additional_host_copy": true
+    },
+    "scope": "All driver objects are disjoint static storage. Live prediction and prospective correction occupy the existing live state/candidate pair. Candidate also stages checkpoint restore; no third state, scratch full matrix, new vector or whole-record serialization buffer. Query storage is counted simultaneously.",
+    "trajectory_dependence": "Fixed dimensions, no inference heap, raw journal, age-growing cached rows or history-length loop. The lower factor uses the existing full 16x16 array; packing its unused upper entries is not part of this experiment."
+  },
+  "readonly_configuration": {
+    "lower_support_16_doubles": 128,
+    "upper_support_16_doubles": 128,
+    "support_array_total": 256,
+    "checkpoint_magic_source_bytes": 8,
+    "logical_array_total": 264,
+    "host_placement": "nm reports lower and upper in read-only storage. The checkpoint magic may be folded into compiler constants; do not add its logical 8 B again to measured .rodata.",
+    "other_constants": "Math constants, status/format strings, code and host link tables are additional; whole-host ELF section inventory is separate.",
+    "target_rule": "Readonly arrays require explicit flash/SRAM placement in a target linker map. If both support arrays are copied into SRAM, add 256 B to the owned RAM subtotal. Custom OCV tables would be additional; this candidate uses the built-in illustrative OCV with no backing table."
+  },
+  "stack": {
+    "reports": [
+      {
+        "path": "experiments/bounded_online_002/host_stack/online_probe.su",
+        "sha256": "6f2c745005369075136618c37058419f88e39cd709a770bf2702bee03f579385",
+        "frames": [
+          {
+            "function": "string",
+            "bytes": 32,
+            "classification": "static"
+          },
+          {
+            "function": "error",
+            "bytes": 32,
+            "classification": "static"
+          },
+          {
+            "function": "named",
+            "bytes": 32,
+            "classification": "static"
+          },
+          {
+            "function": "count",
+            "bytes": 64,
+            "classification": "static"
+          },
+          {
+            "function": "emit_query",
+            "bytes": 80,
+            "classification": "dynamic,bounded"
+          },
+          {
+            "function": "main",
+            "bytes": 304,
+            "classification": "dynamic,bounded"
+          }
+        ],
+        "scope": "Frozen strict-build compiler report, archived before primary; host ABI only."
+      },
+      {
+        "path": "experiments/bounded_online_002/host_stack/scm_online.su",
+        "sha256": "ff5c70ad47d154066a6d3daaffdb496db6e6420386e7dd33f2ef88e053000358",
+        "frames": [
+          {
+            "function": "public_belief",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_bounds",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_config_default",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_config_valid",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_config_equal",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_init",
+            "bytes": 80,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_validate",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_ingest",
+            "bytes": 272,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_status_name",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_query",
+            "bytes": 128,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_mark_unknown_gap",
+            "bytes": 8,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_cold_reset",
+            "bytes": 8,
+            "classification": "static"
+          }
+        ],
+        "scope": "Frozen strict-build compiler report, archived before primary; host ABI only."
+      },
+      {
+        "path": "experiments/bounded_online_002/host_stack/scm_online_checkpoint.su",
+        "sha256": "0e9841929f97ede7d25d9c22ef336a4cc6ee083bc8b6f32b8184df6d330a912e",
+        "frames": [
+          {
+            "function": "bytes.constprop",
+            "bytes": 32,
+            "classification": "static"
+          },
+          {
+            "function": "u32",
+            "bytes": 48,
+            "classification": "static"
+          },
+          {
+            "function": "header.constprop",
+            "bytes": 64,
+            "classification": "static"
+          },
+          {
+            "function": "real",
+            "bytes": 48,
+            "classification": "static"
+          },
+          {
+            "function": "payload",
+            "bytes": 80,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_checkpoint_save",
+            "bytes": 656,
+            "classification": "static"
+          },
+          {
+            "function": "scm_online_checkpoint_restore",
+            "bytes": 256,
+            "classification": "static"
+          }
+        ],
+        "scope": "Frozen strict-build compiler report, archived before primary; host ABI only."
+      },
+      {
+        "path": "experiments/bounded_online_001/host_stack/scm_model_reference.su",
+        "sha256": "1596616ab74d663ef8acc911e58154bd333df403cea3f6bfa5e5e909b38967dd",
+        "frames": [
+          {
+            "function": "scm_ocv_eval",
+            "bytes": 48,
+            "classification": "static"
+          }
+        ],
+        "preserved_in": "experiments/bounded_online_001/memory_accounting.json#stack/reports",
+        "preserving_artifact_sha256": "9b7a0ed08b3e8d30bb7e9005eceee62670e6b16ac24333b30e1907c7c2a0c293",
+        "scope": "Only scm_ocv_eval is reached by online core. This preserved shared-model host report supplies the 48 B frame; current scm_model.c hash matches the source in the 001 account. No rebuild or new model-stack measurement."
+      }
+    ],
+    "reviewed_paths": [
+      {
+        "name": "core_ingest",
+        "functions": [
+          "scm_online_ingest",
+          "scm_ocv_eval"
+        ],
+        "frame_bytes": [
+          272,
+          48
+        ],
+        "sum_bytes": 320
+      },
+      {
+        "name": "host_ingest",
+        "functions": [
+          "main",
+          "scm_online_ingest",
+          "scm_ocv_eval"
+        ],
+        "frame_bytes": [
+          304,
+          272,
+          48
+        ],
+        "sum_bytes": 624
+      },
+      {
+        "name": "host_query",
+        "functions": [
+          "main",
+          "emit_query",
+          "scm_online_query",
+          "scm_online_validate",
+          "scm_online_config_valid"
+        ],
+        "frame_bytes": [
+          304,
+          80,
+          128,
+          8,
+          8
+        ],
+        "sum_bytes": 528
+      },
+      {
+        "name": "host_checkpoint_save_payload",
+        "functions": [
+          "main",
+          "scm_online_checkpoint_save",
+          "payload",
+          "real_or_u32",
+          "bytes.constprop"
+        ],
+        "frame_bytes": [
+          304,
+          656,
+          80,
+          48,
+          32
+        ],
+        "sum_bytes": 1120
+      },
+      {
+        "name": "host_checkpoint_save_header",
+        "functions": [
+          "main",
+          "scm_online_checkpoint_save",
+          "header.constprop",
+          "u32",
+          "bytes.constprop"
+        ],
+        "frame_bytes": [
+          304,
+          656,
+          64,
+          48,
+          32
+        ],
+        "sum_bytes": 1104
+      },
+      {
+        "name": "host_checkpoint_restore_payload",
+        "functions": [
+          "main",
+          "scm_online_checkpoint_restore",
+          "payload",
+          "real_or_u32",
+          "bytes.constprop"
+        ],
+        "frame_bytes": [
+          304,
+          256,
+          80,
+          48,
+          32
+        ],
+        "sum_bytes": 720
+      }
+    ],
+    "largest_reviewed_own_source_path_bytes": 1120,
+    "all_new_frames_plus_reached_model_frame_loose_sum_bytes": 2328,
+    "loose_sum_components": {
+      "online_frames": 552,
+      "checkpoint_frames": 1184,
+      "driver_frames": 544,
+      "reached_ocv_frame": 48
+    },
+    "interpretation": "Conservative source call-chain sums retain small helper/tail frames that may be inlined or eliminated; inlined locals are already in callers. The 2328 B alternative sums mutually exclusive own function frames and the reached OCV frame; it is deliberately loose, not a simultaneous measured peak. No own-source recursion or variable-length automatic array.",
+    "exclusions": "Libm/libc/formatting/parsing/syscall-wrapper stack, external callers, startup, interrupts and target compiler/ABI effects. No complete machine call-graph or runtime worst-case stack proof."
+  },
+  "partial_subtotals_bytes": {
+    "core_objects_plus_core_ingest_path": 6216,
+    "host_named_objects_plus_reviewed_largest_own_source_path": 8184,
+    "host_named_objects_plus_loose_all_frames_sum": 9392,
+    "host_ELF_data_bss_plus_reviewed_largest_own_source_path": 8296,
+    "notes": "Alternative scopes, not addends. Named objects are globals, so adding own-source frames does not double count them. Remaining link sections, shared-library/runtime stack and allocations, acquisition/interrupt/persistence/target requirements remain additional. No subtotal qualifies a complete 10240 B subsystem."
+  },
+  "persistence": {
+    "canonical_checkpoint_bytes": 2456,
+    "header_bytes": 32,
+    "explicit_payload_bytes": 2420,
+    "CRC32_bytes": 4,
+    "model_version": 2,
+    "checkpoint_version": 2,
+    "identity": "SCMONLN2 / A4SREKF2; version 1 rejected without conversion.",
+    "whole_checkpoint_RAM_buffer_bytes": 0,
+    "restore_candidate": "Existing 2424 B workspace.candidate receives prospective decoded state, already included in 2936 B workspace. Destination replacement follows complete validation.",
+    "stdio_buffer": "Reuse existing 128 B observation_gradient vector for save/restore. Persistence cannot overlap ingestion/correction with the same workspace.",
+    "temporary_filename_stack_bytes": 524,
+    "temporary_filename_scope": "Already inside the compiler-reported 656 B save frame; do not add again.",
+    "field_codec_buffers": "Fixed 4/8 B codec locals are inside reported helper/caller frames. The 256 B restore frame includes codec/stat locals; no entire payload is staged on stack.",
+    "atomic_replacement_two_records_bytes": 4912,
+    "external_storage_scope": "Current and temporary records may coexist during replacement: 2x2456 B of persistent record data, plus filesystem metadata or deliberately retained archives. This is not SRAM.",
+    "unqualified": "FILE objects, fopen/fdopen/mkstemp/stdio internals, filesystem cache and full library stack remain additional. Directory power-loss durability, MCU flash staging/erase/program protocol and wear are outside host codec qualification."
+  },
+  "host_executable": {
+    "path": "reference_binaries/scm_online_probe_bounded_002",
+    "file_bytes": 56272,
+    "sha256": "8f5f455f6e61f744a31cbf13888cb2a70e4e670f226f706718aca1d2673e39dd",
+    "ELF_sections_bytes": {
+      ".interp": 28,
+      ".note.gnu.property": 48,
+      ".note.gnu.build-id": 36,
+      ".note.ABI-tag": 32,
+      ".gnu.hash": 48,
+      ".dynsym": 1104,
+      ".dynstr": 524,
+      ".gnu.version": 92,
+      ".gnu.version_r": 192,
+      ".rela.dyn": 240,
+      ".rela.plt": 912,
+      ".init": 27,
+      ".plt": 624,
+      ".plt.got": 16,
+      ".plt.sec": 608,
+      ".text": 31870,
+      ".fini": 13,
+      ".rodata": 3680,
+      ".eh_frame_hdr": 308,
+      ".eh_frame": 1792,
+      ".init_array": 8,
+      ".fini_array": 8,
+      ".dynamic": 512,
+      ".got": 368,
+      ".data": 16,
+      ".bss": 7160,
+      ".comment": 43
+    },
+    "selected_symbols": [
+      {
+        "name": "completed.0",
+        "address_hex": "000000000000d048",
+        "bytes": 1,
+        "type": "b"
+      },
+      {
+        "name": "stderr@GLIBC_2.2.5",
+        "address_hex": "000000000000d040",
+        "bytes": 8,
+        "type": "B"
+      },
+      {
+        "name": "stdout@GLIBC_2.2.5",
+        "address_hex": "000000000000d020",
+        "bytes": 8,
+        "type": "B"
+      },
+      {
+        "name": "sample",
+        "address_hex": "000000000000d4a0",
+        "bytes": 24,
+        "type": "b"
+      },
+      {
+        "name": "config",
+        "address_hex": "000000000000d4c0",
+        "bytes": 56,
+        "type": "b"
+      },
+      {
+        "name": "save_at",
+        "address_hex": "000000000000d060",
+        "bytes": 64,
+        "type": "b"
+      },
+      {
+        "name": "lower",
+        "address_hex": "000000000000ade0",
+        "bytes": 128,
+        "type": "r"
+      },
+      {
+        "name": "upper",
+        "address_hex": "000000000000ad60",
+        "bytes": 128,
+        "type": "r"
+      },
+      {
+        "name": "csv_buffer",
+        "address_hex": "000000000000d2a0",
+        "bytes": 256,
+        "type": "b"
+      },
+      {
+        "name": "csv_line",
+        "address_hex": "000000000000d3a0",
+        "bytes": 256,
+        "type": "b"
+      },
+      {
+        "name": "checkpoint_path",
+        "address_hex": "000000000000d0a0",
+        "bytes": 512,
+        "type": "b"
+      },
+      {
+        "name": "query",
+        "address_hex": "000000000000d500",
+        "bytes": 536,
+        "type": "b"
+      },
+      {
+        "name": "state",
+        "address_hex": "000000000000e2a0",
+        "bytes": 2424,
+        "type": "b"
+      },
+      {
+        "name": "workspace",
+        "address_hex": "000000000000d720",
+        "bytes": 2936,
+        "type": "b"
+      }
+    ],
+    "data_plus_bss_bytes": 7176,
+    "bss_minus_named_driver_objects_bytes": 96,
+    "bss_difference": "96 B comprises 17 B of named stdout/stderr/runtime flags plus 79 B of layout/alignment. Separate .data is 16 B of host runtime data; other dynamic/link sections and shared libraries also consume memory.",
+    "scope": "Whole host executable includes CSV/JSON/persistence plumbing and the shared model object. File/text/read-only sizes are not M23 flash forecasts or complete resident-memory measurements."
+  },
+  "comparisons": {
+    "retained_history_M1": {
+      "evidence": "experiments/trajectory_integration_001/memory_accounting.json",
+      "at_retained_samples": 73500,
+      "session_object_and_journal_bytes": 1840604,
+      "sample_journal_payload_bytes": 1764000,
+      "voltage_presence_bytes": 73500,
+      "cached_design_rows_80_doubles_per_sample_bytes": 47040000,
+      "residual_payload_bytes": 588000,
+      "solver_fixed_problem_bytes": 2072,
+      "solver_auxiliary_bytes": 47630072,
+      "session_plus_solver_requested_bytes": 49470676,
+      "checkpoint_bytes_at_73500": 1840308,
+      "scope": "Observed requested session-plus-fit ownership, not total process RSS or complete stack. Most storage is 640 B of cached design rows per sample, allowing historical nonlinear reevaluation; the belief mean itself is small. New online memory savings exchange exact retained-history access for a local sequential Gaussian approximation."
+    },
+    "earlier_fixed_chart_compact": {
+      "evidence": "experiments/compact_bounded_001/memory_accounting.json",
+      "persistent_config_and_banks_bytes": 4080,
+      "serialized_phase_union_bytes": 2784,
+      "sample_result_delta_bytes": 200,
+      "complete_owned_objects_bytes": 7064,
+      "reviewed_own_source_stack_bytes": 920,
+      "owned_plus_reviewed_stack_bytes": 7984,
+      "scope": "Fixed-chart evidence/remainder subsystem with a different ownership and inference contract; not an autonomous broad-prior nonlinear learner and not complete firmware. It preserves conditional information within a declared chart rather than retaining raw nonlinear history. Do not infer equivalent accuracy, uncertainty guarantees or functionality from the similar byte count."
+    },
+    "new_candidate": "002 owns 5896 B core and 7064 B named host objects, including autonomous component-gain learning, full state/parameter correlation and complete fixed persistence. Its estimation quality and qualification are decided separately by the first frozen falsification; memory eligibility is insufficient.",
+    "same_number_note": "The new 7064 B named host subtotal happens to equal the older fixed-chart 7064 B subsystem total. Different objects, inference semantics and recovery functionality make this numerical equality incidental."
+  },
+  "fixed_work": {
+    "dimension": 16,
+    "prediction": "Same sparse F*L on five physical-state rows; source loops visit 16 entries per changed row. Static rows and full correlations are carried. No historical nonlinear relinearization.",
+    "gradient_multiply_accumulate_terms_max": 136,
+    "descending_rotations_max": 16,
+    "descending_state_row_pair_updates_max": 136,
+    "ascending_rotations_max": 16,
+    "ascending_below_pivot_row_pair_updates_max": 120,
+    "rotation_hypot_calls_max": 32,
+    "rotation_scope": "First pass forms the optimal local factor and normalized gain; second appends d=g-t and restores a lower factor for the actual component gain. Second-pass identity rotations skip. No general dense QR, inverse, rank threshold or covariance floor.",
+    "state_copies": "Source has three fixed 2424 B state assignments on a successful voltage step: into candidate, prediction commit, correction commit. Missing voltage or rejected correction uses two. This is copied-byte work, not extra simultaneously owned RAM; compiler implementation may differ.",
+    "zero_gain_work": "All-zero selected gain additionally restores 128 B mean and 2048 B factor from committed prediction for exact bytes; the factor round-trip is not used as a numerical no-op.",
+    "query": "Fixed 16 row norms over 16 entries, scalar target transforms and status checks.",
+    "persistence": "Fixed 2456 B canonical record and bounded codec loops; filesystem latency is not bounded by source loop lengths.",
+    "scope": "Fixed source work independent of trajectory age. No M23 cycle, worst-case execution time, throughput or energy measurement."
+  },
+  "excluded_or_unresolved": [
+    "libm/libc internals and complete caller/library/system stack; host FILE objects, allocator metadata/fragmentation, stdout/stderr buffers, process mappings and RSS.",
+    "Acquisition ring buffers/DMA/interrupt state, sensor/calibration/configuration storage, output queues and task scheduling for actual hardware.",
+    "Target compiler/ABI/linker placement, software binary64 arithmetic cost, exact SRAM/flash layout, interrupt nesting and worst-case 35 Hz deadline.",
+    "Persistent flash/NVM implementation, journaling/power-loss protocol and wear; the host filesystem codec is not a target flash port.",
+    "All-prefix numerical stability, factor underflow/cancellation, counter and elapsed-time longevity, local-Gaussian consistency, hard accuracy guarantees and validated uncertainty coverage.",
+    "Support arrays in RAM if target placement requires it; custom OCV tables and other immutable model/calibration data.",
+    "Python experiment orchestration, trace files, scoring/truth arrays, plots and logs are host research artifacts outside the per-estimator storage scope."
+  ],
+  "budget": {
+    "candidate_core_gate_bytes": 8192,
+    "measured_core_bytes": 5896,
+    "core_gate_passes": true,
+    "eventual_complete_subsystem_target_bytes": 10240,
+    "target_qualified": false,
+    "full_firmware_memory_qualified": false
+  },
+  "comparison_to_001": {
+    "evidence": "experiments/bounded_online_001/memory_accounting.json",
+    "evidence_sha256": "9b7a0ed08b3e8d30bb7e9005eceee62670e6b16ac24333b30e1907c7c2a0c293",
+    "rows": [
+      {
+        "scope": "state",
+        "001_bytes": 2408,
+        "002_bytes": 2424,
+        "delta_bytes": 16
+      },
+      {
+        "scope": "workspace",
+        "001_bytes": 2920,
+        "002_bytes": 2936,
+        "delta_bytes": 16
+      },
+      {
+        "scope": "query",
+        "001_bytes": 520,
+        "002_bytes": 536,
+        "delta_bytes": 16
+      },
+      {
+        "scope": "core objects",
+        "001_bytes": 5848,
+        "002_bytes": 5896,
+        "delta_bytes": 48
+      },
+      {
+        "scope": "host named fixed objects",
+        "001_bytes": 7016,
+        "002_bytes": 7064,
+        "delta_bytes": 48
+      },
+      {
+        "scope": "serialized checkpoint",
+        "001_bytes": 2440,
+        "002_bytes": 2456,
+        "delta_bytes": 16
+      },
+      {
+        "scope": "own ingest function frame",
+        "001_bytes": 592,
+        "002_bytes": 272,
+        "delta_bytes": -320
+      },
+      {
+        "scope": "own restore function frame",
+        "001_bytes": 240,
+        "002_bytes": 256,
+        "delta_bytes": 16
+      },
+      {
+        "scope": "largest reviewed own-source path",
+        "001_bytes": 1120,
+        "002_bytes": 1120,
+        "delta_bytes": 0
+      },
+      {
+        "scope": "host named plus reviewed own-source stack partial",
+        "001_bytes": 8136,
+        "002_bytes": 8184,
+        "delta_bytes": 48
+      },
+      {
+        "scope": "ELF data+bss plus reviewed own-source stack partial",
+        "001_bytes": 8280,
+        "002_bytes": 8296,
+        "delta_bytes": 16
+      },
+      {
+        "scope": "host ELF text",
+        "001_bytes": 34334,
+        "002_bytes": 31870,
+        "delta_bytes": -2464
+      },
+      {
+        "scope": "host ELF rodata",
+        "001_bytes": 3520,
+        "002_bytes": 3680,
+        "delta_bytes": 160
+      }
+    ],
+    "fixed_storage_reason": "The new 16 B of maximum-scale/mask diagnostics occurs in state, candidate and query; only one state copy is serialized. Factor and vector allocation sizes are unchanged.",
+    "stack_layout_reason": "Compiler code generation changes the ingest frame; this is a host measurement, not an equivalent M23 improvement. ELF alignment absorbs 32 B of the 48 B named-object increase, so .bss grows 16 B.",
+    "work_change": "001 uses two dense matrix-vector products and a scalar-lambda factor correction. 002 uses one triangular gradient product and two triangular orthogonal passes for the actual component gain. Both are fixed O(16 squared); operation structure and state-copy counts differ, so no speedup is inferred from asymptotic order.",
+    "quality_separation": "Resource comparisons do not establish that 002 fixes capacity bias or local overconfidence. Its first frozen scoring/qualification result is separate."
+  }
+}

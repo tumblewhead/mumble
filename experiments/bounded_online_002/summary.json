@@ -1,0 +1,195 @@
+{
+  "schema": "mumble_bounded_online_summary_v2",
+  "created_utc": "2026-10-25T22:43:32.268778+00:00",
+  "experiment": "bounded_online_002",
+  "branch": "implementation/bounded-online-002",
+  "base_revision": "7ae7740d3a4961a7219a733ac2054730be03a6ba",
+  "source_revision": "4c59c2363bf8ebe81238b30af7b03d802a5e3e13",
+  "published_source_revision": "bdfa692584911fb536b08c5f496188ec42d93ca2",
+  "source_tree": "2973bd8199f544401307818dd61fffde8b69833f",
+  "publication_status_at_creation": "source_published_and_tree_verified_results_pending",
+  "algorithm": "componentwise_feasible_gain_joseph_lower_v2",
+  "decision": "Keep the component-wise gain mechanism; reject candidate promotion. One bounded numerical-transaction diagnostic next; biased narrow capacity remains a separate blocker.",
+  "execution": {
+    "primary_runs": 1,
+    "processes": 12,
+    "input_deliveries": 378000,
+    "batch_optimizer_calls": 0,
+    "cell_count": 2,
+    "samples_per_cell": 73500,
+    "nominal_Hz": 35,
+    "duration_s_per_control": 2100,
+    "process_wall_s_two_workers": 0.6561925159985549,
+    "timing_scope": "Host lifecycle harness including I/O and parallel processes; not cycle/WCET/target throughput or a controlled speed comparison."
+  },
+  "gates": {
+    "functional_passed": true,
+    "resource_passed": true,
+    "numerical_health_passed": false,
+    "hard_accuracy_passed": false,
+    "preferred_accuracy_passed": false,
+    "provisional_hard_error_audit_passed": false,
+    "promotion_passed": false
+  },
+  "benchmark_counts": {
+    "arm_checkpoint_pairs": 16,
+    "SOC_hard": 16,
+    "capacity_hard": 8,
+    "joint_hard": 8,
+    "joint_preferred": 0,
+    "excluding_duplicate_warm_pairs": 10,
+    "joint_hard_excluding_duplicate_warm": 6,
+    "qualification_scope": "Scheduled checkpoints on two synthetic cells; neither hard guarantees nor validated coverage. Warm duplicates test continuity."
+  },
+  "restart": {
+    "query_records_compared": 430,
+    "scalar_fields_compared": 34400,
+    "checkpoint_pairs": 10,
+    "maximum_numeric_difference": 0,
+    "restore_assimilation": false,
+    "cold_reset_public_prior": true
+  },
+  "memory_bytes": {
+    "core": 5896,
+    "named_host_fixed": 7064,
+    "canonical_checkpoint": 2456,
+    "reviewed_own_source_stack": 1120,
+    "named_host_plus_reviewed_stack_partial": 8184,
+    "host_ELF_data_bss_plus_reviewed_stack_partial": 8296,
+    "delta_core_and_named_host_vs_001": 48,
+    "complete_M23_subsystem_qualified": false
+  },
+  "mechanism": {
+    "all_zero_gain_count_all_arms": 0,
+    "B_control_limited_updates": 23991,
+    "B_control_saved_partly_blocked_current_evidence_queries": 68,
+    "evidence_age_at_saved_post_initial_queries": 0,
+    "scope": "Saved-query recency does not erase the 17 rejected intervening corrections."
+  },
+  "numerical_rejections": {
+    "A_control": 0,
+    "B_control": 0,
+    "A_cold_suffix": 7,
+    "B_cold_suffix": 10,
+    "cause": "Unresolved; saved outputs lack the rejection stage, coordinate and trial factor/gain. Near-zero R3 arithmetic is a hypothesis."
+  },
+  "final_comparison": [
+    {
+      "case_id": "cell_a_35hz_s202610240",
+      "final": [
+        {
+          "arm": "control",
+          "next_index": 73500,
+          "point_available_after": 1,
+          "capacity_available_after": 1,
+          "SOC_error_pp_before": -0.06997737892028288,
+          "SOC_error_pp_after": 0.026276042804085353,
+          "capacity_error_percent_before": -2.5313036509692077,
+          "capacity_error_percent_after": 1.0201153511396388,
+          "scaled_current_vector_RMS_before": 0.40574347723631043,
+          "scaled_current_vector_RMS_after": 0.13309583110617357
+        },
+        {
+          "arm": "cold",
+          "next_index": 73500,
+          "point_available_after": 1,
+          "capacity_available_after": 1,
+          "SOC_error_pp_before": -0.4781935383651792,
+          "SOC_error_pp_after": -0.3343578385757495,
+          "capacity_error_percent_before": -7.485014213226404,
+          "capacity_error_percent_after": -0.6681453120538028,
+          "scaled_current_vector_RMS_before": 0.5497166072309569,
+          "scaled_current_vector_RMS_after": 0.3370627406121799
+        }
+      ],
+      "provisional_capacity_hard_breaches_before": {
+        "control": 54,
+        "warm": 54,
+        "cold": 113
+      },
+      "provisional_capacity_hard_breaches_after": {
+        "control": 113,
+        "warm": 113,
+        "cold": 0
+      },
+      "zero_gain_control_before": 30721,
+      "zero_gain_control_after": 0
+    },
+    {
+      "case_id": "cell_b_35hz_s202610240",
+      "final": [
+        {
+          "arm": "control",
+          "next_index": 73500,
+          "point_available_after": 1,
+          "capacity_available_after": 1,
+          "SOC_error_pp_before": -0.37846971862506296,
+          "SOC_error_pp_after": -3.4082137316769345,
+          "capacity_error_percent_before": 9.389285719755591,
+          "capacity_error_percent_after": -7.537889906188755,
+          "scaled_current_vector_RMS_before": 0.8932618642097797,
+          "scaled_current_vector_RMS_after": 0.8625790700856026
+        },
+        {
+          "arm": "cold",
+          "next_index": 73500,
+          "point_available_after": 1,
+          "capacity_available_after": 1,
+          "SOC_error_pp_before": -0.4935711300792178,
+          "SOC_error_pp_after": 2.831984498060336,
+          "capacity_error_percent_before": 3.1724318403177465,
+          "capacity_error_percent_after": -2.618359958296601,
+          "scaled_current_vector_RMS_before": 0.16496563869229208,
+          "scaled_current_vector_RMS_after": 0.5139457629212965
+        }
+      ],
+      "provisional_capacity_hard_breaches_before": {
+        "control": 0,
+        "warm": 0,
+        "cold": 51
+      },
+      "provisional_capacity_hard_breaches_after": {
+        "control": 191,
+        "warm": 191,
+        "cold": 26
+      },
+      "zero_gain_control_before": 71928,
+      "zero_gain_control_after": 0
+    }
+  ],
+  "verification": {
+    "strict_full_suite": true,
+    "core_checks": 5569,
+    "checkpoint_checks": 76,
+    "max_independent_dense_Joseph_covariance_error": 1.3322676295501878e-15,
+    "focused_address_undefined_sanitizers": true,
+    "independent_scoring_checks": 139,
+    "prior_immutable_files_unchanged": 385,
+    "extra_primary_or_reference_runs": 0
+  },
+  "claims": {
+    "fixed_storage_and_source_work": true,
+    "full_model_indefinite_stability_proved": false,
+    "hard_error_bounds_validated": false,
+    "coverage_validated": false,
+    "annual_runs_executed": false,
+    "M23_qualified": false,
+    "temperature_behavior_implemented": false,
+    "EOD_implemented": false
+  },
+  "next_action": "plans/boundary_transaction_diagnostic_001.json",
+  "evidence": {
+    "report": "experiments/bounded_online_002/REPORT.md",
+    "plan": "experiments/bounded_online_002/plan.json",
+    "primary": "experiments/bounded_online_002/primary/receipt.json",
+    "scores": "experiments/bounded_online_002/scores.json",
+    "behavior": "experiments/bounded_online_002/behavior_review.json",
+    "independent_review": "experiments/bounded_online_002/independent_review.json",
+    "scoring_audit": "experiments/bounded_online_002/scoring_audit.json",
+    "memory": "experiments/bounded_online_002/memory_accounting.json",
+    "build": "experiments/bounded_online_002/build_checks.json",
+    "figure": "report/Bounded-Online-002.png",
+    "publication": "provenance/bounded_online_002_publication.json",
+    "predecessor": "experiments/bounded_online_001/summary.json"
+  }
+}
