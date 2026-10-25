@@ -1,0 +1,151 @@
+{
+  "schema": "mumble_compact_receipt_v1",
+  "started_utc": "2026-10-25T07:34:12.821784+00:00",
+  "source_revision": "ed7262879c867cf99583aa435ec681f44bc87fd4",
+  "branch": "implementation/compact-bounded-001",
+  "source_sha256": {
+    "Makefile": "08512ba46b2ab5e8ca88da50d3aaa4710f0fae98dbaf1db7ab0a391565a4a061",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_evidence.c": "f82548e50419d58f6cac8d53ab7462bb23f7b7bc8070d005b64ca0dc2f7f3e5e",
+    "include/scm_evidence.h": "8ff50bb2e1e5f14bfb96aac766ce9005e85a1fbb16829fe1b5964a87596962d6",
+    "src/scm_remainder.c": "bfc560106e67771ecda11b5f28caee2925046133e79e298c905032a1c7b03e83",
+    "include/scm_remainder.h": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494",
+    "src/scm_assess.c": "6a8bcb0ce6dd3965b5ed8a7be60f38bc98a4cf83e46288513c15ee79f91de1ac",
+    "include/scm_assess.h": "87b4d26d512c51ebaec5a46d46588c6249f85d91a71b7dbaf2bf387163c4bff5",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "src/scm_compact_evidence.c": "37bfb06d6b33b63b33633cc1146a62c10bad1d4557f71e5c202b93243473ea35",
+    "include/scm_compact_evidence.h": "2b2eaa7a6734c460d4b3326c59a95c91cd0321516c8c435249bf58a6973082ec",
+    "src/scm_compact_remainder.c": "1943c652db52495f3d7ffa973ffed33f0ea61af2c6f0b45fa21bf944af3cb307",
+    "include/scm_compact_remainder.h": "289604bff5e7e23df6b3724b132e876d05497eb5595b6a6f1394fea40088bd3e",
+    "src/scm_compact_assess.c": "bad3372604863bf4930efe9369bed63865db80bb0c841f16ff01ef871f8bd862",
+    "include/scm_compact_assess.h": "d8a9ae4d4fe2e9948f9b68b3c26731e130ba839dd7e07fb2be6a56558eda5aa8",
+    "tests/test_compact.c": "23f05181086a8703368299792886c90de62a0f02e9ad8a25762e1235652ce9b6",
+    "tests/test_compact_assess.c": "b49f3b0b94c13112da8da0ef56c19651ebb4a3017a83ca635e3d912d0794d63c",
+    "tools/compact_compare.h": "90ce0d0e1912d1f051ee8f54271d4cd77091be24c7d712d5551357130f554fea",
+    "tools/compact_probe.c": "18d297cb35dea68167ffb4377a4921b40d2cec495be0ad2ea4aa005f1a5b3f33",
+    "tools/run_compact.py": "70ad6f1231c5a2b8ce498de45b4992e3852061561bdab109aaede1f21a22bdd7",
+    "tools/measure_compact_memory.py": "a742c598fa74c960f07b5b281ad2afd5b83ae324dd4f52f6bdc0721919d4ab2a",
+    "experiments/compact_bounded_001/plan.json": "321d66773839619d34e2942d6f628a8ddd980de0fe408143b9a32977e0a1e9c1"
+  },
+  "plan_sha256": "321d66773839619d34e2942d6f628a8ddd980de0fe408143b9a32977e0a1e9c1",
+  "data": "data/cell_a_35hz_s202610240.csv",
+  "data_sha256": "aef66a9fc13e521cba86f6f0ee68c788383582f5c23a9b301d78dd6ee5c072d8",
+  "anchor": "experiments/bounded_event_001/receipt_scaled_givens/carry_1800_to_2100_anchor.txt",
+  "anchor_sha256": "8d672774ab8c36ac74a8b471ae62883649df00b3da5eee55b6a5996aad3729db",
+  "binary_sha256": "fd1d95b884e586f4a158a6c0ff25813c52ace86f2aed333f8a78a24d5913fe92",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "command": [
+    "/workspace/scratch/359d7ee85d34/mumble/build/scm_compact_probe",
+    "/workspace/scratch/359d7ee85d34/mumble/data/cell_a_35hz_s202610240.csv",
+    "/workspace/scratch/359d7ee85d34/mumble/experiments/compact_bounded_001/primary/anchor.txt",
+    "73500",
+    "63000",
+    "256"
+  ],
+  "new_nonlinear_fits": 0,
+  "truth_access": false,
+  "anchor_scope": "Previously estimated 1800s anchor; prefix compressed retrospectively, final300s causal. No autonomous cold start demonstrated.",
+  "acceptance": {
+    "core_parity": "Exact numeric equality of all meaningful factor/state/metadata/remainder values and query statuses at every sample; signed-zero/bitwise differences reported separately",
+    "atomic_failure": "Each rejected call leaves its own public banks byte-for-byte unchanged",
+    "eigenvalues": {
+      "absolute": 1e-09,
+      "relative": 1e-12
+    },
+    "target_quantities": {
+      "absolute": 1e-11,
+      "relative": 1e-09
+    },
+    "diagnostic_discrete_fields": "Exact statuses/reasons/rank for non-boundary fixtures and primary trajectory",
+    "memory": "Actual sizeof each backing object and phase aggregate, compiler stack report, explicit external costs; no complete firmware claim",
+    "local_curvature": "On the primary trace compare raw full-joint SOC/logQ variances from both eigensystems under the same target tolerance, while keeping optimizer_status=1 and returned target ranges unresolved."
+  },
+  "limits": [
+    "No reduced rank, quantization, event regrouping, codebook classifier or semi-Markov inference",
+    "Only SOC/Q diagnostic outputs; nuisance targets remain unassessed, not fixed",
+    "No historical relinearization, autonomous nonlinear learner, checkpoint portability or reset integration",
+    "No new all-prefix stability or outward-rounding/coverage guarantee",
+    "No Cortex-M23 qualification or runtime speedup promise"
+  ],
+  "operational_failures": [],
+  "process_wall_s": 0.5059142289974261,
+  "returncode": 0,
+  "comparison_sha256": "189214957fd57cad8bd8be7957f0ef7b37440eda2c7fe5b0658b783698766608",
+  "summary": {
+    "exact_comparison": {
+      "scalar_checks": 1837544,
+      "double_checks": 31458346,
+      "mismatches": 0,
+      "bit_differences": 0,
+      "max_absolute_difference": 0,
+      "first_mismatch": ""
+    },
+    "diagnostic_comparison": {
+      "checks": 206,
+      "failures": 0,
+      "max_eigen_absolute_difference": 0,
+      "max_target_absolute_difference": 1.3877787807814457e-16
+    },
+    "owned_objects_bytes": 7064,
+    "checkpoints": [
+      {
+        "samples": 63000,
+        "rank": 16,
+        "local_curvature_diagnostic": [
+          {
+            "target": "current_soc",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 1.848257043451541e-09,
+            "reference_coordinate_variance": 1.8482570434515375e-09,
+            "null_projection": 0,
+            "physical_standard_deviation": 4.299136010236872e-05,
+            "local_direction_resolved": true
+          },
+          {
+            "target": "log_Q",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 7.392009248570115e-08,
+            "reference_coordinate_variance": 7.392009248570115e-08,
+            "null_projection": 0,
+            "physical_standard_deviation": 1.6315608223044804e-05,
+            "local_direction_resolved": true
+          }
+        ]
+      },
+      {
+        "samples": 73500,
+        "rank": 16,
+        "local_curvature_diagnostic": [
+          {
+            "target": "current_soc",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 7.871442310518591e-10,
+            "reference_coordinate_variance": 7.871442310518599e-10,
+            "null_projection": 0,
+            "physical_standard_deviation": 2.8056090801319043e-05,
+            "local_direction_resolved": true
+          },
+          {
+            "target": "log_Q",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 3.4030354092651225e-08,
+            "reference_coordinate_variance": 3.4030354092651225e-08,
+            "null_projection": 0,
+            "physical_standard_deviation": 1.1070194504464425e-05,
+            "local_direction_resolved": true
+          }
+        ]
+      }
+    ]
+  },
+  "integrity": {
+    "source_unchanged": true,
+    "binary_unchanged": true,
+    "data_unchanged": true,
+    "anchor_unchanged": true
+  },
+  "all_checks_passed": true,
+  "finished_utc": "2026-10-25T07:34:13.338055+00:00"
+}

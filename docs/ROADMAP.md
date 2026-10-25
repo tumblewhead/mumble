@@ -34,6 +34,15 @@ This keeps portability visible without forcing every desktop experiment into
 We are at the entrance to M1. The repository already supplies substantial
 pieces, but they have not been assembled into a complete estimator lifecycle.
 
+The user-requested compact-layout step is now implemented and checked in
+[compact_bounded_001](COMPACT_BOUNDED_001.md). Its fixed-chart component owns
+7,064 bytes, preserves the original evidence/remainder values on the focused
+replay, and reports SOC/Q through the complete joint null space. This is an
+available component for the later streaming-backend decision. It does not
+complete M1 or change its first action. Start integration from the latest
+`implementation/compact-bounded-001` branch or a newer descendant so this work
+and its preserved reference remain available.
+
 | Existing piece | What it supplies | What remains |
 | --- | --- | --- |
 | [Completed 35 Hz C study](../report/SCM-35Hz-Results.html) | Two cells, three noise seeds each; sixteen-quantity estimation, SOC/capacity learning and weak-use comparison | Growing-history replay; no complete persistent streaming session |
@@ -41,6 +50,7 @@ pieces, but they have not been assembled into a complete estimator lifecycle.
 | [Target assessment](../include/scm_assess.h) | Unexcited, unresolved and provisional outputs with reasons | Product-level availability/freshness and recovery semantics |
 | [Bounded certificate004](UNCERTAIN_RC_004.md) | Fixed-memory SOC/capacity support; conditional all-prefix containment and availability | Restricted model; three preserved strict-learning failures; no full-model or target qualification |
 | [Bounded event/remainder work](BOUNDED_EVENT_002.md) | Sensitivity-aware summaries and concrete limits of local evidence compression | Nonlinear cold start, historical chart changes and validated arithmetic remain open |
+| [Compact bounded layout](COMPACT_BOUNDED_001.md) | Shared config, selective atomic staging and SOC/Q reports from the full joint matrix; 33.7% smaller ingestion objects | Same fixed-chart/lifetime limitations; complete recovery, solver and target costs remain open |
 
 The original two-cell traces contain hysteresis and multiple unknown RC modes.
 They are outside certificate004's known-other-dynamics/no-hysteresis contract.

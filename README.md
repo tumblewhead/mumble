@@ -12,6 +12,13 @@ about one year per selected cell, and the embedded implementation. The next
 work is the two-cell lifecycle integration: estimation, checkpoint/restore,
 cold reset, chronological delivery and honest uncertainty/status reporting.
 
+The [compact bounded implementation](docs/COMPACT_BOUNDED_001.md) now reduces
+the B001/B002 paired-ingestion objects from 9,912 to 6,576 bytes. Its serialized
+SOC/capacity diagnostic path owns 7,064 bytes, with a 7,984-byte host object and
+own-source-stack partial peak. A single existing 73,500-sample replay preserves
+the tested evidence and remainder bit-for-bit. External runtime, acquisition,
+recovery and target costs remain additional; M1 is still the next milestone.
+
 The completed full C study supplies the initial desktop reference. It retains
 and replays history. Separate bounded event and integer certificate components
 supply useful evidence and implementation pieces. Certificate004 proves
@@ -27,6 +34,8 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
+| [Compact bounded implementation](docs/COMPACT_BOUNDED_001.md) | Shared configuration, selective transactions and full-joint SOC/Q diagnostics; measured storage and exact core comparison |
+| [Compact result summary](experiments/compact_bounded_001/summary.json) | One fixed-anchor replay, first outcome, source identity, memory and remaining limits |
 | [Bounded uncertain RC mode](docs/UNCERTAIN_RC_004.md) | Continuous parameter box, all-prefix width/containment proofs, retained learning and three preserved usefulness failures |
 | [Current uncertain-RC contract](proofs/indefinite_stability_004/contract.json) | Fixed nuisance box, interval forcing, immutable evidence semantics and explicit open gates |
 | [Uncertain-RC lemma ledger](proofs/indefinite_stability_004/lemmas.json) | U1-U6 plus the retained-reference coordinate identity |
@@ -170,6 +179,7 @@ belong in this repository; chat summaries are supporting context.
 - `src/scm_assess.c`, `include/scm_assess.h`: fixed-workspace per-target qualification.
 - `src/scm_evidence.c`, `include/scm_evidence.h`: bounded fixed-chart event evidence and guards.
 - `src/scm_remainder.c`, `include/scm_remainder.h`: paired chronological ingestion and sparse analytic nonlinear-remainder budget checks.
+- `src/scm_compact_*.c`, `include/scm_compact_*.h`: smaller alternative evidence/remainder layout and focused SOC/Q diagnostics retaining the full joint matrix; original APIs remain the comparator.
 - `src/scm_stable.c`, `include/scm_stable.h`: proved integer charge, attenuation, scalar-state and finite-mask kernels.
 - `src/scm_certificate.c`, `include/scm_certificate.h`: conditional battery certificates, contracting SOC0 intervals and outward SOC/capacity queries.
 - `src/scm_certificate_box.c`, `include/scm_certificate_box.h`: one fixed uncertain RC mode with outward forcing/attenuation and the same retained target semantics.

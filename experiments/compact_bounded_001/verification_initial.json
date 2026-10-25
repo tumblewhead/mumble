@@ -1,0 +1,53 @@
+{
+  "schema": "mumble_compact_verification_v1",
+  "source_revision": "ed7262879c867cf99583aa435ec681f44bc87fd4",
+  "primary_executed_once": true,
+  "primary_all_checks_passed": true,
+  "frozen_numerical_sources_match_primary": true,
+  "all_build_checks_passed": true,
+  "fresh_rebuild": {
+    "command": [
+      "make",
+      "-B",
+      "build/scm_compact_probe",
+      "compact-stack"
+    ],
+    "returncode": 0,
+    "binary_sha256_before": "fd1d95b884e586f4a158a6c0ff25813c52ace86f2aed333f8a78a24d5913fe92",
+    "binary_sha256_after": "fd1d95b884e586f4a158a6c0ff25813c52ace86f2aed333f8a78a24d5913fe92",
+    "identical_binary": true,
+    "stdout": "mkdir -p build\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -MMD -MP -c src/scm_compact_evidence.c -o build/scm_compact_evidence.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -MMD -MP -c src/scm_compact_remainder.c -o build/scm_compact_remainder.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -MMD -MP -c src/scm_compact_assess.c -o build/scm_compact_assess.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -MMD -MP -c src/scm_remainder.c -o build/scm_remainder.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -MMD -MP -c src/scm_evidence.c -o build/scm_evidence.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -MMD -MP -c src/scm_model.c -o build/scm_model.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -MMD -MP -c src/scm_assess.c -o build/scm_assess.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic  tools/compact_probe.c build/scm_compact_evidence.o build/scm_compact_remainder.o build/scm_compact_assess.o build/scm_remainder.o build/scm_evidence.o build/scm_model.o build/scm_assess.o -lm -o build/scm_compact_probe\nmkdir -p build/compact-stack\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_compact_evidence.c -o build/compact-stack/scm_compact_evidence.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_compact_remainder.c -o build/compact-stack/scm_compact_remainder.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_compact_assess.c -o build/compact-stack/scm_compact_assess.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_evidence.c -o build/compact-stack/scm_evidence.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_model.c -o build/compact-stack/scm_model.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c src/scm_assess.c -o build/compact-stack/scm_assess.o\ncc -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage -c tools/compact_probe.c -o build/compact-stack/compact_probe.o\n",
+    "stderr": ""
+  },
+  "stack_records_reproduced": false,
+  "baseline_preservation": {
+    "schema": "mumble_preserved_baseline_v1",
+    "baseline_revision": "36ce8fb03538f17a1b33d08b02a9213edf3050c5",
+    "checked_existing_files": 215,
+    "expected_path_blob_manifest_sha256": "c38a1dab8109114ab89fe062dbd55ad5f878b2564d1d2a58d72b8feb2781b5d6",
+    "changed_preserved_files": [],
+    "allowed_existing_edits": [
+      "Makefile",
+      "PROJECT_STATE.json",
+      "README.md",
+      "docs/ROADMAP.md",
+      "handoff/CONTINUE.json",
+      "plans/trajectory_to_m23_001.json"
+    ],
+    "git_tree_reference": "All expected original blob identities are recoverable from baseline_revision."
+  },
+  "artifacts_sha256": {
+    "experiments/compact_bounded_001/build_checks.json": "f218fe3c85a65e571e89fef701f675d9b279162dcb54a63307608b56645f10cd",
+    "experiments/compact_bounded_001/independent_review.json": "f0808c543a9a19ce0c29097bc9cb847e2a4a9bb6d08a415e8f88ebe85035a16e",
+    "experiments/compact_bounded_001/memory_accounting.json": "91b5ce393bcbf4ee24caeaae6d279d80714f530dc9a0fc019358da662213a5f5",
+    "experiments/compact_bounded_001/plan.json": "321d66773839619d34e2942d6f628a8ddd980de0fe408143b9a32977e0a1e9c1",
+    "experiments/compact_bounded_001/primary/anchor.txt": "8d672774ab8c36ac74a8b471ae62883649df00b3da5eee55b6a5996aad3729db",
+    "experiments/compact_bounded_001/primary/comparison.json": "189214957fd57cad8bd8be7957f0ef7b37440eda2c7fe5b0658b783698766608",
+    "experiments/compact_bounded_001/primary/receipt.json": "1d627486b68121b828dbe29f087113e3204c46b2c22f69bd313e2b1334c75c34",
+    "experiments/compact_bounded_001/primary/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "experiments/compact_bounded_001/primary/stdout.txt": "2fed91756b1d91acab8d7b8ee23991e375679b0895bcb12c2ba0326afae15d07",
+    "experiments/compact_bounded_001/summary.json": "4a170aa34351f8ff9426cc6ea4c29a9ff29d3b6e899333afd45c7b42dab29f38"
+  },
+  "all_verification_checks_passed": false,
+  "limits": "Parity is finite evidence on the scoped fixed chart. No all-prefix arithmetic or complete target/lifecycle qualification."
+}

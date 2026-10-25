@@ -1,0 +1,134 @@
+{
+  "schema": "mumble_compact_summary_v1",
+  "status": "implemented_and_primary_parity_passed",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "work_branch": "implementation/compact-bounded-001",
+  "baseline_revision": "36ce8fb03538f17a1b33d08b02a9213edf3050c5",
+  "source_revision": "ed7262879c867cf99583aa435ec681f44bc87fd4",
+  "outcome": "Smaller fixed-chart B001/B002 implementation preserves tested numerical evidence and remainder exactly; selected full-joint SOC/Q diagnostics match within frozen tolerances.",
+  "primary": {
+    "executed_once": true,
+    "new_fits": 0,
+    "samples": 73500,
+    "returncode": 0,
+    "all_checks_passed": true,
+    "source_unchanged": true,
+    "exact": {
+      "scalar_checks": 1837544,
+      "double_checks": 31458346,
+      "mismatches": 0,
+      "bit_differences": 0,
+      "max_absolute_difference": 0,
+      "first_mismatch": ""
+    },
+    "diagnostics": {
+      "checks": 206,
+      "failures": 0,
+      "max_eigen_absolute_difference": 0,
+      "max_target_absolute_difference": 1.3877787807814457e-16
+    },
+    "checkpoints": [
+      {
+        "samples": 63000,
+        "rank": 16,
+        "local_curvature_diagnostic": [
+          {
+            "target": "current_soc",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 1.848257043451541e-09,
+            "reference_coordinate_variance": 1.8482570434515375e-09,
+            "null_projection": 0,
+            "physical_standard_deviation": 4.299136010236872e-05,
+            "local_direction_resolved": true
+          },
+          {
+            "target": "log_Q",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 7.392009248570115e-08,
+            "reference_coordinate_variance": 7.392009248570115e-08,
+            "null_projection": 0,
+            "physical_standard_deviation": 1.6315608223044804e-05,
+            "local_direction_resolved": true
+          }
+        ]
+      },
+      {
+        "samples": 73500,
+        "rank": 16,
+        "local_curvature_diagnostic": [
+          {
+            "target": "current_soc",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 7.871442310518591e-10,
+            "reference_coordinate_variance": 7.871442310518599e-10,
+            "null_projection": 0,
+            "physical_standard_deviation": 2.8056090801319043e-05,
+            "local_direction_resolved": true
+          },
+          {
+            "target": "log_Q",
+            "semantics": "fixed_chart_curvature_only_no_optimizer_or_coverage_claim",
+            "coordinate_variance": 3.4030354092651225e-08,
+            "reference_coordinate_variance": 3.4030354092651225e-08,
+            "null_projection": 0,
+            "physical_standard_deviation": 1.1070194504464425e-05,
+            "local_direction_resolved": true
+          }
+        ]
+      }
+    ],
+    "receipt": "experiments/compact_bounded_001/primary/receipt.json",
+    "receipt_sha256": "1d627486b68121b828dbe29f087113e3204c46b2c22f69bd313e2b1334c75c34",
+    "scope": "Previously estimated 1800s anchor; prefix compressed retrospectively, final300s causal. No autonomous cold start demonstrated."
+  },
+  "unit": {
+    "compact_checks": 12163,
+    "focused_assessment_checks": 3464,
+    "failures": 0,
+    "numeric_comparisons": 1981860,
+    "bit_differences": 0,
+    "max_diagnostic_difference": 5.551115123125783e-17,
+    "receipt": "experiments/compact_bounded_001/build_checks.json"
+  },
+  "memory_bytes": {
+    "old_paired_ingestion": 9912,
+    "compact_paired_ingestion": 6576,
+    "reduction": 3336,
+    "reduction_percent": 33.65617433414044,
+    "persistent": 4080,
+    "phase_union": 2784,
+    "sample_result_delta": 200,
+    "owned_aggregate": 7064,
+    "largest_reviewed_own_source_stack": 920,
+    "largest_partial_subtotal": 7984,
+    "remaining_to10240_before_external_costs": 2256
+  },
+  "preserved": [
+    "Original numerical sources and every prior frozen result",
+    "All joint coordinates, history/event grouping, actual intervals, order, state and source identity",
+    "Original remainder coefficients, audit maps/lastbounds and immutablechart semantics"
+  ],
+  "limitations": [
+    "OnlySOC/Q targetreports; nuisance directions included but outputs unassessed",
+    "No autonomous nonlinear coldstart or historical relinearization",
+    "No new indefinite-runtime or outward-rounding/coverage proof",
+    "No complete portablecheckpoint/lifecycle integration",
+    "No measuredM23 code/latency/complete SRAM; external library/runtime/caller/acquisition/recovery costs remain"
+  ],
+  "decision": "Accept this compact layout as an available bounded component; stop this reduction step and resume M1 lifecycle integration. Do not rerun the completed campaign.",
+  "next": {
+    "milestone": "M1",
+    "branch": "integration/two-cell-lifecycle-001",
+    "start_from": "Latest canonical implementation/compact-bounded-001 or newer descendant, preserving dirty/newer work",
+    "action_plan": "plans/trajectory_to_m23_001.json",
+    "task": "Full C desktop session, complete journal/checkpoint, paired recovery and two existing cell traces; compact backend available for later A4 selection."
+  },
+  "evidence": {
+    "plan": "experiments/compact_bounded_001/plan.json",
+    "report": "docs/COMPACT_BOUNDED_001.md",
+    "memory": "experiments/compact_bounded_001/memory_accounting.json",
+    "review": "experiments/compact_bounded_001/independent_review.json",
+    "verification": "experiments/compact_bounded_001/verification.json"
+  }
+}

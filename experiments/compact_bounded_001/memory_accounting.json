@@ -1,0 +1,1026 @@
+{
+  "schema": "mumble_compact_memory_v1",
+  "source_revision": "ed7262879c867cf99583aa435ec681f44bc87fd4",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "compile_flags": "make compact-stack default: -Iinclude -std=c99 -O3 -Wall -Wextra -Wpedantic -fstack-usage",
+  "binary_sha256": "fd1d95b884e586f4a158a6c0ff25813c52ace86f2aed333f8a78a24d5913fe92",
+  "sizeof_bytes": {
+    "schema": "mumble_compact_sizes_v1",
+    "pointer": 8,
+    "double": 8,
+    "config": 472,
+    "reference_evidence": 3336,
+    "reference_evidence_workspace": 4176,
+    "reference_remainder": 1200,
+    "reference_remainder_workspace": 1200,
+    "factor": 1240,
+    "compact_evidence": 2872,
+    "compact_evidence_workspace": 1760,
+    "compact_remainder": 736,
+    "compact_remainder_workspace": 736,
+    "compact_assess_workspace": 2432,
+    "compact_assessment": 296,
+    "assess_options": 56,
+    "sample": 24,
+    "remainder_result": 48,
+    "caller_delta": 128,
+    "ingest_phase": 2496,
+    "query_phase": 2784,
+    "serialized_phase_union": 2784,
+    "complete_owned_objects": 7064
+  },
+  "lifetimes": {
+    "owned_immutable_RAM_configuration": 472,
+    "persistent_configuration_and_banks": 4080,
+    "ingestion_phase_scratch": 2496,
+    "query_phase_workspace_report_options": 2784,
+    "actual_serialized_phase_union": 2784,
+    "sample_remainder_result_caller_delta": 200,
+    "aggregate_padding": 0,
+    "complete_owned_objects": 7064,
+    "ordinary_ingestion_objects": 6576,
+    "query_objects_before_input_result_delta": 6864,
+    "old_paired_ingestion_objects": 9912,
+    "paired_ingestion_reduction_bytes": 3336,
+    "paired_ingestion_reduction_percent": 33.65617433414044,
+    "remaining_before_stack_external_to_10240B": 3176,
+    "phase_contract": "Ingestion and target diagnostics cannot overlap. Query report/options/eigenvalues live inside the phase union and must be consumed or copied before the next ingest; copied output costs extra RAM.",
+    "included": "One RAM config, both live QR factors, carried model/metadata, full remainder state/audit fields, actual largest phase union, one sample, one remainder result, one16-double trial vector.",
+    "backing_OCV_bytes": 0,
+    "OCV_scope": "This paired remainder model uses the built-in illustrative OCV. A PWL evidence-only caller must separately account for immutable OCV arrays."
+  },
+  "stack": {
+    "records": [
+      {
+        "object": "scm_assess",
+        "function": "diagnose",
+        "bytes": 208,
+        "qualifier": "static",
+        "location": "src/scm_assess.c:79:13:diagnose"
+      },
+      {
+        "object": "scm_assess",
+        "function": "scm_assess_options_default",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_assess.c:8:6:scm_assess_options_default"
+      },
+      {
+        "object": "scm_assess",
+        "function": "scm_assess_status_name",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_assess.c:15:13:scm_assess_status_name"
+      },
+      {
+        "object": "scm_assess",
+        "function": "scm_assess",
+        "bytes": 656,
+        "qualifier": "dynamic,bounded",
+        "location": "src/scm_assess.c:136:5:scm_assess"
+      },
+      {
+        "object": "scm_compact_assess",
+        "function": "diagnose",
+        "bytes": 128,
+        "qualifier": "static",
+        "location": "src/scm_compact_assess.c:107:13:diagnose"
+      },
+      {
+        "object": "scm_compact_assess",
+        "function": "scm_compact_assess",
+        "bytes": 352,
+        "qualifier": "dynamic,bounded",
+        "location": "src/scm_compact_assess.c:156:5:scm_compact_assess"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "parameters_valid",
+        "bytes": 176,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:13:12:parameters_valid"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "qr_row",
+        "bytes": 128,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:38:12:qr_row"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "stage_seal",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:170:12:stage_seal"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_init",
+        "bytes": 352,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:225:5:scm_compact_evidence_init"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_push",
+        "bytes": 256,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:250:5:scm_compact_evidence_push"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_seal",
+        "bytes": 32,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:297:5:scm_compact_evidence_seal"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_snapshot",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:309:5:scm_compact_evidence_snapshot"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_snapshot_into",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:319:5:scm_compact_evidence_snapshot_into"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_check_candidate",
+        "bytes": 208,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:326:5:scm_compact_evidence_check_candidate"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "max_first",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:101:15:max_first"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "max_second",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:108:15:max_second"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "advance",
+        "bytes": 272,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:139:12:advance"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_init",
+        "bytes": 912,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:52:5:scm_compact_remainder_init"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_push",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:241:5:scm_compact_remainder_push"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_evidence_push",
+        "bytes": 96,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:253:5:scm_compact_remainder_evidence_push"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_query",
+        "bytes": 96,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:268:5:scm_compact_remainder_query"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "parameters_valid",
+        "bytes": 176,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:16:12:parameters_valid"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "qr_row",
+        "bytes": 96,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:41:12:qr_row"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "merge",
+        "bytes": 80,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:72:12:merge"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_packed_index",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:5:8:scm_evidence_packed_index"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_init",
+        "bytes": 832,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:107:5:scm_evidence_init"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_push",
+        "bytes": 128,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:133:5:scm_evidence_push"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_seal",
+        "bytes": 96,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:174:5:scm_evidence_seal"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_snapshot",
+        "bytes": 32,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:183:5:scm_evidence_snapshot"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_factor_cost",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:194:8:scm_evidence_factor_cost"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_factor_rms_sigma",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:207:8:scm_evidence_factor_rms_sigma"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_factor_normal",
+        "bytes": 96,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:216:5:scm_evidence_factor_normal"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_check_candidate",
+        "bytes": 208,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:241:5:scm_evidence_check_candidate"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_ntheta",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_model.c:5:5:scm_model_ntheta"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_nalpha",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_model.c:6:5:scm_model_nalpha"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_ocv_validate",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_model.c:8:5:scm_ocv_validate"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_ocv_eval",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_model.c:21:5:scm_ocv_eval"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_init",
+        "bytes": 368,
+        "qualifier": "static",
+        "location": "src/scm_model.c:44:5:scm_model_init"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_step",
+        "bytes": 480,
+        "qualifier": "static",
+        "location": "src/scm_model.c:63:5:scm_model_step"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_predict",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_model.c:104:5:scm_model_predict"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_physical_step",
+        "bytes": 240,
+        "qualifier": "static",
+        "location": "src/scm_model.c:120:5:scm_physical_step"
+      }
+    ],
+    "file_sha256": {
+      "scm_assess.su": "fbcc677be060ac46430a10069d78991e952ca763beb385cc9f718429eb635310",
+      "scm_compact_assess.su": "ee9eea6a149eb4bd15708cc7719b169907a5de3280ed324d1c6636a2813ccfdc",
+      "scm_compact_evidence.su": "7996a0eb250227744dbc4518937ff511ca512800d6ea86c7874e172bfe957b2f",
+      "scm_compact_remainder.su": "9a99d4d1eac3fda7a7f8919ce56a0803867ab03991ed07823e4f0d7b78877cc6",
+      "scm_evidence.su": "4afcdcfa9d8c0f5c7c99ad067fcb9354d8c21120f41875991d87938aeaf1cf7a",
+      "scm_model.su": "1596616ab74d663ef8acc911e58154bd333df403cea3f6bfa5e5e909b38967dd"
+    },
+    "selected_compact_and_shared_records": [
+      {
+        "object": "scm_assess",
+        "function": "scm_assess_options_default",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_assess.c:8:6:scm_assess_options_default"
+      },
+      {
+        "object": "scm_compact_assess",
+        "function": "diagnose",
+        "bytes": 128,
+        "qualifier": "static",
+        "location": "src/scm_compact_assess.c:107:13:diagnose"
+      },
+      {
+        "object": "scm_compact_assess",
+        "function": "scm_compact_assess",
+        "bytes": 352,
+        "qualifier": "dynamic,bounded",
+        "location": "src/scm_compact_assess.c:156:5:scm_compact_assess"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "parameters_valid",
+        "bytes": 176,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:13:12:parameters_valid"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "qr_row",
+        "bytes": 128,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:38:12:qr_row"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "stage_seal",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:170:12:stage_seal"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_init",
+        "bytes": 352,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:225:5:scm_compact_evidence_init"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_push",
+        "bytes": 256,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:250:5:scm_compact_evidence_push"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_seal",
+        "bytes": 32,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:297:5:scm_compact_evidence_seal"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_snapshot",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:309:5:scm_compact_evidence_snapshot"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_snapshot_into",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:319:5:scm_compact_evidence_snapshot_into"
+      },
+      {
+        "object": "scm_compact_evidence",
+        "function": "scm_compact_evidence_check_candidate",
+        "bytes": 208,
+        "qualifier": "static",
+        "location": "src/scm_compact_evidence.c:326:5:scm_compact_evidence_check_candidate"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "max_first",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:101:15:max_first"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "max_second",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:108:15:max_second"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "advance",
+        "bytes": 272,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:139:12:advance"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_init",
+        "bytes": 912,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:52:5:scm_compact_remainder_init"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_push",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:241:5:scm_compact_remainder_push"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_evidence_push",
+        "bytes": 96,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:253:5:scm_compact_remainder_evidence_push"
+      },
+      {
+        "object": "scm_compact_remainder",
+        "function": "scm_compact_remainder_query",
+        "bytes": 96,
+        "qualifier": "static",
+        "location": "src/scm_compact_remainder.c:268:5:scm_compact_remainder_query"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_packed_index",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:5:8:scm_evidence_packed_index"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_factor_cost",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:194:8:scm_evidence_factor_cost"
+      },
+      {
+        "object": "scm_evidence",
+        "function": "scm_evidence_factor_rms_sigma",
+        "bytes": 64,
+        "qualifier": "static",
+        "location": "src/scm_evidence.c:207:8:scm_evidence_factor_rms_sigma"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_ntheta",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_model.c:5:5:scm_model_ntheta"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_nalpha",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_model.c:6:5:scm_model_nalpha"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_ocv_validate",
+        "bytes": 8,
+        "qualifier": "static",
+        "location": "src/scm_model.c:8:5:scm_ocv_validate"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_ocv_eval",
+        "bytes": 48,
+        "qualifier": "static",
+        "location": "src/scm_model.c:21:5:scm_ocv_eval"
+      },
+      {
+        "object": "scm_model",
+        "function": "scm_model_init",
+        "bytes": 368,
+        "qualifier": "static",
+        "location": "src/scm_model.c:44:5:scm_model_init"
+      }
+    ],
+    "largest_selected_frame_bytes": 912,
+    "loose_sum_selected_frames_bytes": 3912,
+    "objects_plus_loose_sum_bytes": 10976,
+    "reviewed_phase_callpaths": {
+      "initialization": {
+        "reviewed_paths": [
+          {
+            "frames": [
+              {
+                "object": "scm_compact_remainder",
+                "function": "scm_compact_remainder_init",
+                "bytes": 912,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:52:5:scm_compact_remainder_init"
+              },
+              {
+                "object": "scm_model",
+                "function": "scm_model_ntheta",
+                "bytes": 8,
+                "qualifier": "static",
+                "location": "src/scm_model.c:5:5:scm_model_ntheta"
+              }
+            ],
+            "bytes": 920
+          },
+          {
+            "frames": [
+              {
+                "object": "scm_compact_evidence",
+                "function": "scm_compact_evidence_init",
+                "bytes": 352,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:225:5:scm_compact_evidence_init"
+              },
+              {
+                "object": "scm_model",
+                "function": "scm_model_init",
+                "bytes": 368,
+                "qualifier": "static",
+                "location": "src/scm_model.c:44:5:scm_model_init"
+              }
+            ],
+            "bytes": 720
+          },
+          {
+            "frames": [
+              {
+                "object": "scm_compact_evidence",
+                "function": "scm_compact_evidence_init",
+                "bytes": 352,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:225:5:scm_compact_evidence_init"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "parameters_valid",
+                "bytes": 176,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:13:12:parameters_valid"
+              },
+              {
+                "object": "scm_model",
+                "function": "scm_model_ntheta",
+                "bytes": 8,
+                "qualifier": "static",
+                "location": "src/scm_model.c:5:5:scm_model_ntheta"
+              }
+            ],
+            "bytes": 536
+          }
+        ],
+        "maximum_own_source_bytes": 920,
+        "objects_plus_own_source_bytes": 7984
+      },
+      "paired_ingestion": {
+        "reviewed_paths": [
+          {
+            "frames": [
+              {
+                "object": "scm_compact_remainder",
+                "function": "scm_compact_remainder_evidence_push",
+                "bytes": 96,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:253:5:scm_compact_remainder_evidence_push"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "scm_compact_evidence_push",
+                "bytes": 256,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:250:5:scm_compact_evidence_push"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "stage_seal",
+                "bytes": 64,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:170:12:stage_seal"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "qr_row",
+                "bytes": 128,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:38:12:qr_row"
+              },
+              {
+                "object": "scm_evidence",
+                "function": "scm_evidence_packed_index",
+                "bytes": 8,
+                "qualifier": "static",
+                "location": "src/scm_evidence.c:5:8:scm_evidence_packed_index"
+              }
+            ],
+            "bytes": 552
+          },
+          {
+            "frames": [
+              {
+                "object": "scm_compact_remainder",
+                "function": "scm_compact_remainder_evidence_push",
+                "bytes": 96,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:253:5:scm_compact_remainder_evidence_push"
+              },
+              {
+                "object": "scm_compact_remainder",
+                "function": "advance",
+                "bytes": 272,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:139:12:advance"
+              },
+              {
+                "object": "scm_compact_remainder",
+                "function": "max_first",
+                "bytes": 48,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:101:15:max_first"
+              }
+            ],
+            "bytes": 416
+          },
+          {
+            "frames": [
+              {
+                "object": "scm_compact_remainder",
+                "function": "scm_compact_remainder_evidence_push",
+                "bytes": 96,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:253:5:scm_compact_remainder_evidence_push"
+              },
+              {
+                "object": "scm_compact_remainder",
+                "function": "advance",
+                "bytes": 272,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:139:12:advance"
+              },
+              {
+                "object": "scm_compact_remainder",
+                "function": "max_second",
+                "bytes": 48,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:108:15:max_second"
+              }
+            ],
+            "bytes": 416
+          }
+        ],
+        "maximum_own_source_bytes": 552,
+        "objects_plus_own_source_bytes": 7616
+      },
+      "focused_target_query": {
+        "reviewed_paths": [
+          {
+            "frames": [
+              {
+                "object": "scm_compact_assess",
+                "function": "scm_compact_assess",
+                "bytes": 352,
+                "qualifier": "dynamic,bounded",
+                "location": "src/scm_compact_assess.c:156:5:scm_compact_assess"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "scm_compact_evidence_snapshot_into",
+                "bytes": 48,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:319:5:scm_compact_evidence_snapshot_into"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "qr_row",
+                "bytes": 128,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:38:12:qr_row"
+              },
+              {
+                "object": "scm_evidence",
+                "function": "scm_evidence_packed_index",
+                "bytes": 8,
+                "qualifier": "static",
+                "location": "src/scm_evidence.c:5:8:scm_evidence_packed_index"
+              }
+            ],
+            "bytes": 536
+          },
+          {
+            "frames": [
+              {
+                "object": "scm_compact_assess",
+                "function": "scm_compact_assess",
+                "bytes": 352,
+                "qualifier": "dynamic,bounded",
+                "location": "src/scm_compact_assess.c:156:5:scm_compact_assess"
+              },
+              {
+                "object": "scm_compact_assess",
+                "function": "diagnose",
+                "bytes": 128,
+                "qualifier": "static",
+                "location": "src/scm_compact_assess.c:107:13:diagnose"
+              }
+            ],
+            "bytes": 480
+          }
+        ],
+        "maximum_own_source_bytes": 536,
+        "objects_plus_own_source_bytes": 7600
+      },
+      "remainder_query": {
+        "reviewed_paths": [
+          {
+            "frames": [
+              {
+                "object": "scm_compact_remainder",
+                "function": "scm_compact_remainder_query",
+                "bytes": 96,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:268:5:scm_compact_remainder_query"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "scm_compact_evidence_check_candidate",
+                "bytes": 208,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:326:5:scm_compact_evidence_check_candidate"
+              },
+              {
+                "object": "scm_compact_evidence",
+                "function": "parameters_valid",
+                "bytes": 176,
+                "qualifier": "static",
+                "location": "src/scm_compact_evidence.c:13:12:parameters_valid"
+              },
+              {
+                "object": "scm_model",
+                "function": "scm_model_ntheta",
+                "bytes": 8,
+                "qualifier": "static",
+                "location": "src/scm_model.c:5:5:scm_model_ntheta"
+              }
+            ],
+            "bytes": 488
+          },
+          {
+            "frames": [
+              {
+                "object": "scm_compact_remainder",
+                "function": "scm_compact_remainder_query",
+                "bytes": 96,
+                "qualifier": "static",
+                "location": "src/scm_compact_remainder.c:268:5:scm_compact_remainder_query"
+              },
+              {
+                "object": "scm_evidence",
+                "function": "scm_evidence_factor_cost",
+                "bytes": 64,
+                "qualifier": "static",
+                "location": "src/scm_evidence.c:194:8:scm_evidence_factor_cost"
+              },
+              {
+                "object": "scm_evidence",
+                "function": "scm_evidence_packed_index",
+                "bytes": 8,
+                "qualifier": "static",
+                "location": "src/scm_evidence.c:5:8:scm_evidence_packed_index"
+              }
+            ],
+            "bytes": 168
+          }
+        ],
+        "maximum_own_source_bytes": 488,
+        "objects_plus_own_source_bytes": 7552
+      }
+    },
+    "largest_reviewed_callpath_bytes": 920,
+    "objects_plus_largest_reviewed_callpath_bytes": 7984,
+    "callpath_review": "Independent source/.su/objdump -dr review of the current host objects. Competing paths shown; sequential frames are not added together. Tail calls conservatively included. Re-review if source, flags or compiler changes. This remains own-source estimation, not full worst-case runtime measurement.",
+    "scope": "Compiler-reported own-source frames, including init. The sum includes mutually exclusive APIs and is deliberately loose, not the measured simultaneous stack. Shared helpers are selected by compact-path reachability. Inlined locals belong to their caller frame. dynamic,bounded records retain the compiler's maximum label.",
+    "unmeasured": "libm/libc, external callers, interrupts, runtime and target compiler/ABI stack; no complete worst-case stack proof."
+  },
+  "host_comparison_harness": {
+    "ELF_sections_bytes": {
+      ".interp": 28,
+      ".note.gnu.property": 48,
+      ".note.gnu.build-id": 36,
+      ".note.ABI-tag": 32,
+      ".gnu.hash": 48,
+      ".dynsym": 912,
+      ".dynstr": 468,
+      ".gnu.version": 76,
+      ".gnu.version_r": 176,
+      ".rela.dyn": 480,
+      ".rela.plt": 720,
+      ".init": 27,
+      ".plt": 496,
+      ".plt.got": 16,
+      ".plt.sec": 480,
+      ".text": 96857,
+      ".fini": 13,
+      ".rodata": 3624,
+      ".eh_frame_hdr": 500,
+      ".eh_frame": 4184,
+      ".init_array": 8,
+      ".fini_array": 8,
+      ".data.rel.ro": 88,
+      ".dynamic": 512,
+      ".got": 304,
+      ".data": 16,
+      ".bss": 36216,
+      ".comment": 43
+    },
+    "ELF_data_plus_bss_bytes": 36232,
+    "named_writable_symbols": [
+      {
+        "name": "completed.0",
+        "bytes": 1,
+        "type": "b"
+      },
+      {
+        "name": "candidate_count",
+        "bytes": 4,
+        "type": "b"
+      },
+      {
+        "name": "diagnostic_checks",
+        "bytes": 8,
+        "type": "b"
+      },
+      {
+        "name": "diagnostic_failures",
+        "bytes": 8,
+        "type": "b"
+      },
+      {
+        "name": "max_eigen_absolute_difference",
+        "bytes": 8,
+        "type": "b"
+      },
+      {
+        "name": "max_target_absolute_difference",
+        "bytes": 8,
+        "type": "b"
+      },
+      {
+        "name": "stderr@GLIBC_2.2.5",
+        "bytes": 8,
+        "type": "B"
+      },
+      {
+        "name": "stdout@GLIBC_2.2.5",
+        "bytes": 8,
+        "type": "B"
+      },
+      {
+        "name": "tau_name.4",
+        "bytes": 24,
+        "type": "d"
+      },
+      {
+        "name": "v_name.0",
+        "bytes": 24,
+        "type": "d"
+      },
+      {
+        "name": "r_name.1",
+        "bytes": 32,
+        "type": "d"
+      },
+      {
+        "name": "comparison",
+        "bytes": 48,
+        "type": "b"
+      },
+      {
+        "name": "reference_result",
+        "bytes": 48,
+        "type": "b"
+      },
+      {
+        "name": "source_hex",
+        "bytes": 65,
+        "type": "b"
+      },
+      {
+        "name": "reference_gradient",
+        "bytes": 128,
+        "type": "b"
+      },
+      {
+        "name": "reference_r",
+        "bytes": 1200,
+        "type": "b"
+      },
+      {
+        "name": "reference_rw",
+        "bytes": 1200,
+        "type": "b"
+      },
+      {
+        "name": "reference_snapshot",
+        "bytes": 1240,
+        "type": "b"
+      },
+      {
+        "name": "reference_assessment",
+        "bytes": 2488,
+        "type": "b"
+      },
+      {
+        "name": "reference_fit",
+        "bytes": 2504,
+        "type": "b"
+      },
+      {
+        "name": "reference_e",
+        "bytes": 3336,
+        "type": "b"
+      },
+      {
+        "name": "candidates",
+        "bytes": 4096,
+        "type": "b"
+      },
+      {
+        "name": "csv_line",
+        "bytes": 4096,
+        "type": "b"
+      },
+      {
+        "name": "reference_ew",
+        "bytes": 4176,
+        "type": "b"
+      },
+      {
+        "name": "reference_aw",
+        "bytes": 4224,
+        "type": "b"
+      },
+      {
+        "name": "compact",
+        "bytes": 7064,
+        "type": "b"
+      }
+    ],
+    "scope": "Includes original reference, old diagnostics, CSV/candidate arrays and host runtime symbols; do not mislabel the whole comparison executable as the compact subsystem."
+  },
+  "remaining_costs": [
+    "Known-input acquisition backlog while target query is running and any output retained across ingestion",
+    "Exactly-once delivery ledger beyond the bank/source/index API and complete checkpoint/recovery staging",
+    "Autonomous nonlinear solver state/workspace, if selected later",
+    "Library/caller/interrupt/runtime stack and actual Cortex-M23 code generation",
+    "Flash/NVM and immutable configuration placement require a target-specific separate account"
+  ],
+  "target_qualified": false,
+  "full_firmware_memory_qualified": false
+}
