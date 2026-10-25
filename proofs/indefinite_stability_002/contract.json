@@ -1,0 +1,134 @@
+{
+  "schema": "mumble_indefinite_stability_contract_v2",
+  "status": "concrete_research_contract_with_isolated_integer_kernels",
+  "base_revision": "a8f02b1402735a7f2f9be2dec54dedcc11ec2f8b",
+  "branch": "research/indefinite-numerical-stability-002",
+  "parent_contract": "proofs/indefinite_stability_001/contract.json",
+  "purpose": "Prove age-independent arithmetic and enclosure invariants for explicit finite representations, while preserving unresolved inference and integration obligations.",
+  "quantifier": "For every finite prefix of every stream satisfying the stated contract, regardless of prefix length. Finite tests corroborate implementation correspondence; they do not establish this quantifier.",
+  "numerical_reference": "Exact integer or real arithmetic on the same represented input codes, tick intervals, ratios, state domain and certificate semantics.",
+  "acquisition": {
+    "nominal_Hz": 35,
+    "intervals": "Use actual represented intervals; do not replace them with nominal 1/35 s.",
+    "order": "Caller delivers observations in acquisition order and carries physical state across them.",
+    "zero_interval": "An admitted zero interval produces exact identity attenuation; its observation meaning is a caller obligation.",
+    "caller_obligations": [
+      "Stable declared physical units and code interpretation",
+      "Missing-sample and discontinuity detection",
+      "Chronology and a delivery protocol whose complete storage is explicitly accounted; no hidden unbounded external counter",
+      "Atomic composition of all updates belonging to one observation",
+      "No report of a rejected observation as propagated state"
+    ]
+  },
+  "execution_model": {
+    "language": "C99 with available int32_t, uint32_t, int64_t, uint64_t",
+    "assumptions": [
+      "Conforming compiler and C integer execution semantics",
+      "Initialized trusted objects and valid nonoverlapping storage as required by the API",
+      "No concurrent mutation, memory corruption, power-loss recovery or hardware fault during a primitive call"
+    ],
+    "absent_from_kernels": ["floating_point", "libm", "heap", "variable_length_arrays", "mutable_globals", "lifetime_sample_counter"],
+    "failure_semantics": {
+      "negative_return": "Destination remains byte-identical; the requested transition did not occur.",
+      "empty_evidence_intersection": "Commit empty active mask and return positive SCM_STABLE_INCONSISTENT; later certificates do not restore cells.",
+      "composed_transaction": "Not implemented. Several individually atomic calls are not automatically an atomic observation update."
+    },
+    "machine_checked_C_proof": false,
+    "compiler_correctness_proved": false,
+    "Cortex_M23_qualified": false
+  },
+  "charge": {
+    "representation": "int64 value, lower, upper; int32 current_code; uint32 ticks",
+    "exact_quantity": "P_n=P_0+sum(current_code_k*ticks_k)",
+    "admission": "P_0 and every exact prefix lie in the fixed int64 application interval [lower,upper].",
+    "physical_interpretation": "I_k=c_I*current_code_k; dt_k=c_t*ticks_k; charge_Ah=(c_I*c_t/3600)*P_n, with declared exact scales.",
+    "guarantee": "Exact represented-input integral for every admitted prefix; no rounding term or age-only exhaustion.",
+    "excluded_claims": ["Unbounded positive lifetime throughput", "Bias-free physical coulomb counting", "Implemented SOC or unit-conversion enclosure"],
+    "implementation": ["scm_stable_charge_init", "scm_stable_charge_push"],
+    "lemma": "L1"
+  },
+  "attenuation": {
+    "D": 4294967296,
+    "input": "q=num/den; num and den uint32; den>0",
+    "output": "uint64 endpoints 0<=A_lo<=A_hi<=D with A_lo/D<=exp(-q)<=A_hi/D",
+    "construction": "Exact zero; analytic [0,1]/D for q>=32; outward ratio and at most eight halvings, P7/P6 interval bounds, then outward squaring.",
+    "unity": "D requires 33 bits; multiplication by this endpoint is handled before uint64 multiplication.",
+    "limits": [
+      "The ratio encodes the argument exactly; continuous parameter and acquisition conversion remain separate.",
+      "Positive q can yield A_hi=D; numerical contraction must be checked rather than assumed."
+    ],
+    "implementation": ["scm_stable_attenuation_ratio"],
+    "lemma": "L2"
+  },
+  "dissipative_state": {
+    "reference": "x_next=a*x+(1-a)*b",
+    "representation": "int32 lower, upper, bound; integer forcing target b in the same declared quantum; real exact state may lie between grid points",
+    "admission": "0<=B<=2^30; -B<=lower<=x<=upper<=B; -B<=b<=B; a in [A_lo/D,A_hi/D] subset [0,1]",
+    "guarantees": [
+      "Four exact int64 corner numerators and directed division produce a containing interval.",
+      "The output stays in [-B,B] at every finite execution length.",
+      "A_lo=A_hi=D leaves the full state object unchanged, with zero width growth."
+    ],
+    "conditional_usefulness": {
+      "premises": "On active updates A_hi<=D-g with g>0 and A_hi-A_lo<=h. Exact identities may occur arbitrarily often between active updates.",
+      "bound_grid_units": "W_n<=min(2B,max(W_0,(2B*h+2D)/g))",
+      "gate": "Multiply by the physical state quantum and compare with a justified application tolerance. Domain-wide containment alone is not useful precision.",
+      "tolerance_selected_here": false
+    },
+    "implementation": ["scm_stable_interval_init", "scm_stable_interval_step"],
+    "lemmas": ["L3", "L4"]
+  },
+  "finite_evidence": {
+    "candidate_semantics": "Retention of certified cell exclusions at a declared finite spatial resolution.",
+    "representation": "uint64 immutable domain and active masks; at most 64 fixed parameter cells",
+    "static_episode": "Each bit has one immutable cell interpretation and one fixed model/error contract. Parameter drift, chart changes and restored state require separate transport proof.",
+    "compatible_sets": "F_n is the exact compatible static-parameter set after prefix n; F_n subset F_(n-1). Cells B_j cover the admitted domain.",
+    "cell_index_definition": "J(F)={j:B_j intersects F}",
+    "certificate_requirement": "J(F_n) subset C_n for EVERY supplied certificate. Every cell intersecting the compatible set must be retained, including overlapping cells.",
+    "insufficient_premise": "Merely requiring the union of retained overlapping cells to cover F_n is unsound under mask intersection.",
+    "initialization_and_update": "A_0 is the complete domain; A_n=A_(n-1) intersect C_n.",
+    "guarantees": [
+      "J(F_n) subset A_n for every finite prefix under the certificate premise.",
+      "Earlier certified exclusions never reappear.",
+      "All-domain and duplicate certificates are exact identities or idempotent updates.",
+      "At most K strict cell removals occur for K cells; no weight or count grows.",
+      "An empty mask reports inconsistency. A nonempty mask can contain false positives and does not prove feasibility."
+    ],
+    "conditional_learning": "For a target cell set T, if each unwanted cell receives a sound whole-cell excluding certificate at a finite event, finitely many such events yield A_n subset T forever afterward. No uniform event time or existence guarantee is supplied.",
+    "query_requirement": "Return sound outer target ranges over all surviving cells; report unknown if the range is too wide. No SOC/capacity query kernel is implemented here.",
+    "provider_status": "not_implemented_or_proved",
+    "observation_error_model": "Unresolved for the battery provider. Existing Gaussian sigma=1mV is not a deterministic finite error bound. A bounded-error or simultaneous probabilistic certificate model must be justified explicitly.",
+    "not_preserved": ["All-history Gaussian likelihood values", "Observation multiplicity", "Unbounded confidence weight", "Subcell resolution"],
+    "historical_evidence_rule": "Keep old likelihood/precision results as their original evidence. Do not convert them into hard exclusions, add a posterior prior to replayed raw factors, or claim semantic equivalence.",
+    "implementation": ["scm_stable_mask_init", "scm_stable_mask_apply"],
+    "lemmas": ["L5", "L6"]
+  },
+  "acceptance": {
+    "closed_at_this_checkpoint": [
+      "Source-level range and induction arguments for isolated kernels",
+      "Conditional finite-evidence soundness and refinement proofs",
+      "Small exact-reference falsification and explicitly scoped host memory accounting"
+    ],
+    "separate_dimensions": ["Numerical convergence", "Truth accuracy", "Local precision", "Validated coverage"],
+    "full_estimator_indefinite_stability_proved": false,
+    "open_gates": [
+      "Concrete finite parameter cover and sound battery certificate producer",
+      "Nonvacuous conditional SOC/capacity learning under justified stimulus and error assumptions",
+      "Outward query, unit conversion, uncertain target and parameter-ratio arithmetic",
+      "Coupled sensitivities and any model-state transport required by the chosen provider",
+      "Chronology, per-observation transaction, persistence, recovery and parameter drift",
+      "Complete integrated memory, latency and target compiler/platform qualification",
+      "Statistical coverage and physical-cell validation"
+    ]
+  },
+  "artifacts": {
+    "report": "docs/STABILITY_CONTRACT_002.md",
+    "lemmas": "proofs/indefinite_stability_002/lemmas.json",
+    "header": "include/scm_stable.h",
+    "source": "src/scm_stable.c",
+    "tests": "tests/test_stable.c",
+    "audit_plan": "experiments/indefinite_stability_002/plan.json",
+    "audit_runner": "tools/audit_stable.py",
+    "primary_receipt": "experiments/indefinite_stability_002/receipt.json"
+  }
+}

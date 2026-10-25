@@ -1,0 +1,99 @@
+{
+  "schema": "mumble_stability_kernel_audit_plan_v1",
+  "purpose": "Small independent falsification of integer primitive lemma-to-C correspondence; not a full estimator or endurance proof.",
+  "base_revision": "a8f02b1402735a7f2f9be2dec54dedcc11ec2f8b",
+  "seed": 2026102502,
+  "sources": [
+    "include/scm_stable.h",
+    "src/scm_stable.c",
+    "tests/test_stable.c",
+    "tools/audit_stable.py",
+    "experiments/indefinite_stability_002/plan.json"
+  ],
+  "compiler_flags": [
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror"
+  ],
+  "audit": {
+    "attenuation": {
+      "random_ratios": 160,
+      "critical_ratios": "Zero, tiny, unity, range-reduction boundaries, near32, and q>=32; all num/den within uint32.",
+      "oracle": "Exact Fraction positive Taylor sum for exp(q), geometric-tail upper bound after decreasing terms, inversion. Stop when reciprocal enclosure width<=2^-160; at most512 terms. For q>=32 use analytic exp(-q)<2^-32. C interval must contain whole rational oracle interval.",
+      "note": "Independent from C alternating polynomial and reduction/squaring. The sampled audit corroborates the analytic all-input proof; it is not an exhaustive uint32 sweep."
+    },
+    "state": {
+      "random_cases": 512,
+      "critical_cases": "Zero/max domain, negative floor/ceil, exact unity/zero attenuation, full coefficient uncertainty and endpoints.",
+      "oracle": "Independent Fraction convex expression at bilinear corners plus interior points; exact outward integer endpoints and physical-domain containment."
+    },
+    "charge": {
+      "random_transitions": 512,
+      "critical_cases": "Extreme signed-code/unsigned-tick products; INT64 boundaries; admitted-prefix rejects; exact cycling; negative return leaves object unchanged.",
+      "oracle": "Python unbounded integer product and sum with explicit representable/admitted interval predicates."
+    },
+    "mask": {
+      "exhaustive_four_cell_pairs": 256,
+      "quiet_repetitions": 64,
+      "oracle": "Python set intersection, exact duplicate/uninformative retention and explicit empty inconsistency.",
+      "demo": "Eight cells: informative certificates, quiet identities, renewed refinement. Constructed certificates, no battery-certificate soundness claim.",
+      "negative_control": "Overlapping cells [0,2] and [1,3], true parameter3/2, certificates keeping different single cells each cover truth by union but intersect empty. Expected inconsistency refutes weak union-cover premise, not kernel arithmetic."
+    },
+    "nominal_stream": {
+      "tick_frequency_Hz": 35000,
+      "nominal_ticks": 1000,
+      "actual_tick_pattern": [
+        1000,
+        999,
+        1001,
+        1000,
+        0,
+        1000
+      ],
+      "tau_ticks": [
+        1750,
+        17500,
+        175000,
+        1050000
+      ],
+      "steps_per_tau": 96,
+      "state_bound": 1048576,
+      "targets": [
+        262144,
+        -131072,
+        0,
+        131072,
+        -262144,
+        0
+      ],
+      "reference_grid_bits": 128,
+      "oracle": "Sound rational exp(-actual_dt/tau) enclosures and independent rational state interval transport, outward quantized only onto a 2^-128 oracle grid to bound audit cost.",
+      "scope": "Illustrative arithmetic grid, not a claim about ADC hardware, calibrated current, physical parameters or frozen benchmark trace.",
+      "width_bound": "Report exact rational (2B*h+2D)/g for active updates, h=max(A_upper-A_lower), g=min(D-A_upper)>0; zero-time exact identities excluded from contraction. This is conditional arithmetic width, not physical accuracy."
+    }
+  },
+  "verification": {
+    "unit_test": true,
+    "compiler_stack_report": true,
+    "host_abi_sizes": true,
+    "undefined_symbol_inventory": true,
+    "no_libm_linkage": true,
+    "source_hashes_before_after": true,
+    "sources_match_commit_before_run": true,
+    "frozen_numerical_sources_and_evidence_unchanged": true
+  },
+  "output_policy": "Refuse an existing receipt. Preserve failures. Primary receipt only after source/plan commit. Record commands, platform, exact source revision and source/binary hashes. No production algorithm replacement.",
+  "nonclaims": [
+    "Full battery estimator stability",
+    "Certificate producer soundness",
+    "Gaussian confidence coverage",
+    "Physical sensor/model accuracy",
+    "Parameter drift or chart transition support",
+    "Cortex-M23 resource qualification",
+    "Unbounded-run empirical verification"
+  ],
+  "reproduction": "python3 tools/audit_stable.py --output experiments/indefinite_stability_002/NEW_RECEIPT.json"
+}
