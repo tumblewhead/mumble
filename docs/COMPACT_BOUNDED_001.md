@@ -34,6 +34,11 @@ the receipt is authoritative for measured outcomes.
 | Focus diagnostic output | Report current SOC and capacity while diagonalizing the full joint matrix | Nuisance and entering-state null directions remain represented; other target reports are unassessed |
 | Share phase scratch | An explicit union alternates ingestion and diagnostic storage | Calls are serialized; consume or copy a report before the next ingestion overwrites it |
 
+The source and result trees are published on `implementation/compact-bounded-001`.
+The [publication record](../provenance/compact_bounded_001_publication.json) maps
+the original experiment commits to the matching published trees. A verified Git
+bundle preserves the original commit identities used by the frozen receipts.
+
 The new APIs are in [scm_compact_evidence.h](../include/scm_compact_evidence.h),
 [scm_compact_remainder.h](../include/scm_compact_remainder.h), and
 [scm_compact_assess.h](../include/scm_compact_assess.h). They preserve the old
