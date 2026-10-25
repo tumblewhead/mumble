@@ -27,7 +27,9 @@ The compact evidence entry points are the [summary](../experiments/trajectory_in
 and [independent audit](../experiments/trajectory_integration_001/independent_review.json).
 The source revision used by the run is `0cde298a204ff3a3347830c0fac0ba99e10918c8`;
 its published equivalent is `1221298bd89730df7c6adb5e11d4d3669c22cbae`, with
-the same Git tree. Publication provenance preserves the original source identity.
+the same Git tree. The [publication record](../provenance/trajectory_integration_001_publication.json)
+maps original and published commits and links the verified development bundle.
+It preserves the original source identity referenced by the frozen receipts.
 The exact [Linux host executable](../reference_binaries/scm_session_probe_m1_001)
 is retained with the receipt's binary hash; it is not an MCU image.
 
