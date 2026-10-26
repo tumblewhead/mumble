@@ -6,6 +6,21 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The three-checkpoint conditional-belief probe is complete.** Five of six
+component snapshots have nonlinear voltage-mean corrections of only
+1.15–1.22 microvolts against 1,000-microvolt observation-noise SD. At 8,400 s,
+component 0 has h=1 with positive variance, which is incompatible with any
+distribution supported on the physical interval [-1,1]; sixteen of its 32 nodes
+are outside the domain. All 4,056 reconstruction checks and the independent
+result review pass. See the
+[probe report](experiments/conditional_belief_adequacy_001/REPORT.md),
+[summary](experiments/conditional_belief_adequacy_001/summary.json),
+[decision](experiments/conditional_belief_adequacy_001/decision.json) and
+[result review](experiments/conditional_belief_adequacy_001/result_review.json).
+The next finite decision concerns joint support-consistent conditional
+correction. Historical SOC/Q undercoverage and the cause of the earlier weight
+switch remain unresolved. Current branch: `design/conditional-belief-adequacy-001`.
+
 **The saved-evidence weighting/interval audit is complete.** It checked
 50,401 scalar rows and 1,445 full queries with no tested accounting or formula
 mismatch. The observed SOC jump is almost entirely a change in mixture weights;
@@ -16,9 +31,8 @@ conditional beliefs can still be narrow and wrong. See the
 [summary](experiments/weighting_output_diagnostic_001/summary.json),
 [decision](experiments/weighting_output_diagnostic_001/decision.json) and
 [independent review](experiments/weighting_output_diagnostic_001/independent_review.json).
-No estimator source or SRAM changed. The next bounded decision examines the
-conditional beliefs at three saved checkpoints; its nonlinear/domain probe has
-not run. The current branch is `planning/weighting-output-diagnostic-001`.
+No estimator source or SRAM changed. The subsequent three-checkpoint probe is
+now complete and linked above. Its result advances the next design decision.
 
 **The frozen continuous learning/retention experiment is complete.** The
 unchanged learner processed all **661,500 deliveries** in four valid arms, with
@@ -144,9 +158,12 @@ experiment work to specific delivery decisions.
 
 | Resource | Contents |
 | --- | --- |
-| [Current weighting/interval audit](experiments/weighting_output_diagnostic_001/REPORT.md) | Saved-record chronology, predictive scores, output-motion attribution and own-point/truth interval distinction; no learner rerun |
-| [Current bounded decision](experiments/weighting_output_diagnostic_001/decision.json) | Close arithmetic investigation; specify a three-checkpoint conditional-belief adequacy contract |
-| [Current independent review](experiments/weighting_output_diagnostic_001/independent_review.json) | Rehashed archived inputs, verified raw witnesses and numerical interpretation |
+| [Current conditional-belief probe](experiments/conditional_belief_adequacy_001/REPORT.md) | Three saved checkpoints, nonlinear voltage moments, physical-domain and bounded-moment consistency |
+| [Current probe decision](experiments/conditional_belief_adequacy_001/decision.json) | Joint support-consistent conditional-correction design; historical uncertainty remains unresolved |
+| [Current probe review](experiments/conditional_belief_adequacy_001/result_review.json) | Independent node, covariance, moment, identity and resource accounting |
+| [Weighting/interval audit](experiments/weighting_output_diagnostic_001/REPORT.md) | Saved-record chronology, predictive scores, output-motion attribution and own-point/truth interval distinction; no learner rerun |
+| [Weighting audit decision](experiments/weighting_output_diagnostic_001/decision.json) | Close arithmetic investigation; specify a three-checkpoint conditional-belief adequacy contract |
+| [Weighting audit review](experiments/weighting_output_diagnostic_001/independent_review.json) | Rehashed archived inputs, verified raw witnesses and numerical interpretation |
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
@@ -218,7 +235,7 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
 | **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
-| **M2: Desktop performance and year-scale behavior** | **A4: split candidate retained; continuous diagnostic and weighting audit complete.** The next three-checkpoint decision examines conditional-belief adequacy. Uncertainty, broader performance and lifetime behavior remain open |
+| **M2: Desktop performance and year-scale behavior** | **A4: split candidate retained; continuous diagnostic, weighting audit and conditional-belief probe complete.** Joint support-consistent correction design is next. Uncertainty, broader performance and lifetime behavior remain open |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality
@@ -370,25 +387,27 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The latest canonical work branch is `planning/weighting-output-diagnostic-001`.
-The continuous-learning experiment and its saved-evidence weighting/interval
-audit are complete. Read the current [handoff](handoff/CONTINUE.json) and
-[decision](experiments/weighting_output_diagnostic_001/decision.json); preserve
-all prior results and source identities.
+The latest canonical work branch is `design/conditional-belief-adequacy-001`.
+The continuous experiment, saved-evidence weighting audit and three-checkpoint
+conditional-belief probe are complete. Read the current
+[handoff](handoff/CONTINUE.json) and
+[decision](experiments/conditional_belief_adequacy_001/decision.json); preserve
+all previous results and do not repeat completed work to recover context.
 
-The next finite task is to freeze the three-checkpoint conditional-belief
-adequacy contract, using the saved 7,200, 8,100 and 8,400 s states and next
-archived observations. The proposed host probe has at most 192 positive-weight
-nonlinear node propagations plus six centers. Check physical-domain admission
-before evaluation; do not clip, drop, renormalize or replace invalid nodes.
-The probe is not yet executed and is not a new online estimator or coverage
-qualification. Select one conditional-belief assumption for the next bounded
-repair decision, or identify the precise insufficiency of these snapshots.
+The next finite task is a joint support-consistent conditional-correction
+design, using an analytically solvable active h bound as a reference. Define
+physical moments, joint SOC/logQ correlations, support and voltage evidence
+accounting, subsequent prediction, and the complete memory/workspace cost.
+Specify three later qualification cases: interior linear behavior, an outward
+correlated h-bound case, and zero-information preservation of an already
+supported belief. Finish with one reviewed representation go/no-go decision.
 
-No tested normalization or interval-centering repair is indicated. Both
-conditional beliefs can miss truth despite tiny local widths. Keep truth out of
-weights and inference, and do not derive uncertainty multipliers from observed
-truth-error ratios. No longer run or annual campaign follows automatically.
+The probe establishes a bounded-moment incompatibility and small present
+one-step changes at the five admitted snapshots. It does not establish the
+cause of the earlier weight switch or explain all SOC/Q undercoverage. Keep
+historical uncertainty loss open; support consistency alone cannot recover
+an earlier discarded nonlinear likelihood. No covariance inflation, forced
+zero h variance, silent clipping, weight change or longer campaign follows.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to

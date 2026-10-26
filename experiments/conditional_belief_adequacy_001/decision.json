@@ -1,0 +1,100 @@
+{
+  "schema": "mumble_conditional_belief_adequacy_decision_v1",
+  "status": "probe_closed_joint_support_consistent_design_selected",
+  "base_revision": "66fabc24476b668e358c5aa6995308c52ac8f751",
+  "contract_revision": "7ee11761abbc0990ea44df265b60004f63481565",
+  "probe_source_revision": "b0be4adeedc26dc3617f32282ff4c949635757fa",
+  "canonical_probe_invocations": 1,
+  "execution_valid": true,
+  "arithmetic_checks_passed": true,
+  "established": [
+    {
+      "id": "bounded_moment_incompatibility",
+      "checkpoint_seconds": 8400,
+      "component": 0,
+      "coordinate": "h",
+      "mean": 1,
+      "variance": 8.200468039193499e-11,
+      "necessary_variance_cap": 0,
+      "comparison_allowance": 1.1368683772161603e-13,
+      "invalid_nodes": 16,
+      "meaning": "This saved mean/variance pair cannot represent a distribution supported on the declared h interval [-1,1]. It is a constraint/representation inconsistency under that interpretation, not a newly identified arithmetic bug."
+    },
+    {
+      "id": "local_moment_shift",
+      "admitted_components": 5,
+      "maximum_absolute_mean_change_V": 1.2187679670483398e-06,
+      "maximum_absolute_variance_change_V2": 1.2313896406190924e-11,
+      "material_shift_components": 0,
+      "meaning": "Deprioritize immediate one-step nonlinear moment approximation at these five states under the fixed quadrature rule and scales."
+    },
+    {
+      "id": "static_parameter_variance_retention",
+      "meaning": "Unchanged prediction preserves static parameter rows. Full Joseph coordinate gain limiting gives Pplus_ii=Pminus_ii-lambda_i*(2-lambda_i)*g_i^2. Thus static parameter marginal variances cannot grow during ordinary ingestion in real arithmetic; historical nonlinear likelihood is not retained for reevaluation. This is a source property, not proof of the particular bias cause."
+    }
+  ],
+  "not_established": [
+    "A cause of the earlier 7811.171429 s dominance switch; the boundary witness is later and in the then-downweighted alternative component.",
+    "A complete explanation of SOC/Q undercoverage or the time at which historical uncertainty became inadequate.",
+    "Calibrated coverage, hard joint support, improved point accuracy or a remedy obtained by covariance inflation.",
+    "Negligible accumulated score effects from small local differences, or exact nonlinear moments outside this finite rule."
+  ],
+  "selected_next_work": {
+    "name": "joint_support_consistent_conditional_correction_design",
+    "proposed_branch": "design/support-consistent-conditional-001",
+    "question": "Can one conditional correction carry physical support and full joint uncertainty without converting contact with a bound into unjustified certainty?",
+    "first_action": "Specify a compact conditional-moment and update contract using a single active h-bound Gaussian/linear-voltage reference; distinguish physical moments from distribution parameters and define evidence ownership.",
+    "scope": "One 16D component, one voltage likelihood, joint SOC/logQ correlations and public physical support. Analytical reference and storage/operation accounting; no trajectory or production patch.",
+    "joint_reference": {
+      "Gaussian_voltage_moments": [
+        "m_G",
+        "P_G"
+      ],
+      "conditional_direction": "b=P_G[:,h]/P_G[h,h] for positive P_G[h,h]",
+      "truncated_scalar_moments": [
+        "m_T",
+        "v_T"
+      ],
+      "joint_mean": "m_G+b*(m_T-m_G[h])",
+      "joint_covariance": "P_G+b*b^T*(v_T-P_G[h,h])",
+      "limitations": "Handle zero variance, support/voltage normalizers, full box support and subsequent nonlinear propagation explicitly. These are a reference, not an update applied to the saved checkpoint."
+    },
+    "required_deliverables": [
+      "Equations and semantics for distribution parameters, physical means/covariances and reported SOC/Q uncertainty.",
+      "An account of support and voltage evidence entering once, including already supported beliefs and subsequent prediction.",
+      "A complete state/workspace and operation estimate against the existing complete-subsystem SRAM goal.",
+      "Three fixed future qualification cases: interior linear, outward h-bound with SOC/logQ correlations, and zero-information preservation of an already supported belief.",
+      "One independently reviewed go/no-go decision for the representation and a finite qualification contract."
+    ],
+    "finish_line": "One reviewed design decision. Reject mean clipping, forced zero h variance, loss of joint dependence, duplicate evidence or unbudgeted persistent/workspace state. State what remains unknown rather than expanding the campaign.",
+    "historical_uncertainty": "Explicitly unresolved. Support consistency cannot reconstruct an earlier discarded nonlinear likelihood or by itself calibrate the SOC/Q intervals. Any historical-evidence recovery requires a separate evidence-ownership/storage contract.",
+    "current_status": "next_design_not_yet_frozen_or_executed",
+    "automatic_new_learner_runs": 0,
+    "automatic_new_source_generations": 0,
+    "automatic_weight_changes": false
+  },
+  "preserved": {
+    "production_sources_changed": false,
+    "new_estimator_SRAM_bytes": 0,
+    "new_learner_ingests": 0,
+    "new_source_generations": 0,
+    "old_scorer_runs": 0,
+    "prior_studies_unchanged": true,
+    "later_capacity_learning_and_retention": "preserved",
+    "candidate_promoted": false,
+    "coverage_validated": false,
+    "capacity_startup_deadline": null,
+    "old_supervisor_RSS_gap": "still_unverified"
+  },
+  "evidence": {
+    "contract": "../../plans/conditional_belief_adequacy_001.json",
+    "raw_probe": "attempt001/raw_probe.json",
+    "reduction": "attempt001/result.json",
+    "execution_receipt": "attempt001/receipt.json",
+    "summary": "summary.json",
+    "report": "REPORT.md",
+    "source_review": "source_review.json",
+    "result_review": "result_review.json"
+  },
+  "finish_line_reached": "The one prescribed local moment/domain probe is complete. No additional checkpoint, replay or automatic corrective experiment follows from this result."
+}

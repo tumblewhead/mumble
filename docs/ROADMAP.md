@@ -2,12 +2,21 @@
 
 ## Decision
 
+**The three-checkpoint conditional-belief probe is complete.** Five admitted
+component snapshots show only 1.15–1.22-microvolt nonlinear mean corrections.
+At 8,400 s, component 0 has an h mean/variance pair incompatible with the
+physical interval [-1,1], and half the prescribed nodes are outside that bound.
+The next finite decision is a joint support-consistent conditional-correction
+design. Historical SOC/Q uncertainty and the earlier weight-switch cause remain
+open. See the [probe report](../experiments/conditional_belief_adequacy_001/REPORT.md),
+[decision](../experiments/conditional_belief_adequacy_001/decision.json) and
+[independent result review](../experiments/conditional_belief_adequacy_001/result_review.json).
+
 **The saved-evidence weighting/interval audit is complete.** The 50,401-row,
 1,445-query audit found no tested arithmetic, chronology or reporting mismatch.
 The SOC output switch is driven by changed component weights, while narrow
-wrong conditional beliefs remain. Close the bookkeeping investigation and move
-to the three-checkpoint conditional-belief adequacy decision. Its proposed
-192-node/six-center host probe has not run. See the
+wrong conditional beliefs remain. Its bookkeeping investigation is closed;
+the subsequent three-checkpoint probe is now complete and linked above. See the
 [current report](../experiments/weighting_output_diagnostic_001/REPORT.md),
 [decision](../experiments/weighting_output_diagnostic_001/decision.json) and
 [independent review](../experiments/weighting_output_diagnostic_001/independent_review.json).
@@ -80,7 +89,7 @@ not improve capacity, and accurate points do not validate uncertainty ranges.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — candidate retained for qualification** | Continuous diagnostic and weighting audit complete; conditional-belief adequacy decision next | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
+| **M2: Desktop performance — candidate retained for qualification** | Continuous diagnostic, weighting audit and conditional-belief probe complete; joint support-consistent correction design next | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -477,29 +486,34 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Fetch the latest `planning/weighting-output-diagnostic-001` descendant and read
-its [summary](../experiments/weighting_output_diagnostic_001/summary.json),
-[report](../experiments/weighting_output_diagnostic_001/REPORT.md),
-[decision](../experiments/weighting_output_diagnostic_001/decision.json) and
-[independent review](../experiments/weighting_output_diagnostic_001/independent_review.json).
-The completed primary and once-only saved-evidence audit remain preserved.
-Do not repeat either study to recover context.
+Fetch the current `design/conditional-belief-adequacy-001` work branch and read
+its [summary](../experiments/conditional_belief_adequacy_001/summary.json),
+[report](../experiments/conditional_belief_adequacy_001/REPORT.md),
+[decision](../experiments/conditional_belief_adequacy_001/decision.json),
+[independent review](../experiments/conditional_belief_adequacy_001/result_review.json)
+and [handoff](../handoff/CONTINUE.json). The original primary, weighting audit
+and canonical checkpoint probe are complete and preserved.
 
-Use `design/conditional-belief-adequacy-001` for the next finite contract:
-existing 7,200/8,100/8,400 s packed component checkpoints and each next archived
-observation; at most 192 spherical-radial node propagations and six centers.
-Freeze the exact node rule, domain admission, comparison scales and resources
-before execution. A failed node is evidence about the retained Gaussian's
-physical compatibility; silently clipping or renormalizing would change the
-question. This diagnostic is not calibrated coverage or hard support.
+Use `design/support-consistent-conditional-001` for the next finite design
+contract: one conditional component, one voltage likelihood, public support,
+full joint correlations and an exact single-active-h-bound reference. Define
+which distribution quantities are carried and reported, how support/evidence
+enter once, how prediction works, and the complete storage/workspace cost.
 
-The finish line is one prioritized conditional-belief assumption or a precise
-statement of what these snapshots cannot distinguish. The h-boundary
-witness at 8,400 s motivates the domain check and does not establish a cause of
-the earlier weight switch. Do not select components or uncertainty multipliers
-from truth. No seed/horizon/component-count sweep or annual campaign is queued.
+Specify three fixed later qualification cases: an interior linear case, an
+outward h-bound case with SOC/logQ correlations, and zero-information
+preservation of an already supported belief. Finish with one independently
+reviewed representation go/no-go decision. This is a design task; no new
+trajectory, automatic estimator change or weight adjustment is queued.
 
-The old supervisor RSS high-water gap remains open; explicitly record it in a
-future harness revision rather than rerunning the completed primary. Capacity
-has no startup deadline. Useful point accuracy, local precision, coverage,
-complete Cortex-M23 resources and indefinite operation remain separate gates.
+Do not manufacture certainty by setting the h variance to zero or silently
+clipping a mean. The later downweighted boundary witness does not establish
+the earlier dominance-switch cause. Small current local moment corrections
+do not validate historical uncertainty or bound accumulated score effects.
+Support consistency alone cannot recover discarded historical evidence.
+
+The old supervisor RSS measurement gap remains open. This probe records its
+own supervisor and exact-child resources but does not repair that historical
+measurement. Capacity has no startup deadline. Useful point accuracy, local
+precision, physical support, calibrated coverage, complete Cortex-M23 resources
+and indefinite operation remain separate obligations.

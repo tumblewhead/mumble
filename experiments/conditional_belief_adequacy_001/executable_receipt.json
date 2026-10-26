@@ -1,0 +1,77 @@
+{
+  "schema": "mumble_conditional_probe_executable_receipt_v1",
+  "status": "qualified_before_canonical_probe",
+  "source_revision": "b0be4adeedc26dc3617f32282ff4c949635757fa",
+  "source_tree": "0c2436e23591a5d5d2d1963005378f00732ebb06",
+  "plan_revision": "7ee11761abbc0990ea44df265b60004f63481565",
+  "local_contract_freeze_before_restoration": "1dd77689f27a9a17ce01bd08d36313651149428a",
+  "plan_sha256": "49ebd3fb609f9fa739076c14979265a7b50e93025c3692999a6b6747e9c9778e",
+  "binary_path": "experiments/conditional_belief_adequacy_001/qualification/conditional_belief_probe.bin",
+  "binary_bytes": 73648,
+  "binary_sha256": "80ebc729d651639f9b2e541dc68f3de618e52fc29f4ad82b24b383a691d3ce1d",
+  "source_sha256": {
+    "tools/conditional_belief_probe.c": "5b7055f4001d2858f59896e9da129825f5ee076a21740ab47746067bab0cb763",
+    "tools/run_conditional_belief_probe.py": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a",
+    "tools/restore_conditional_evidence.py": "d7efb672e17be412881f0b4e45fed31fbea401d372391759c68f11dd141e0717",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+    "src/scm_hypothesis_checkpoint.c": "88ec1c229b395b5bdd02faf39fcc1183786a6b0da0c6ff05edeb9718204a5339",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+    "include/scm_hypothesis_checkpoint.h": "1e1743300cf17635828c8d8cf2d95aa6fc00066b377e3238de880dcb284b5545",
+    "include/scm_online.h": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "experiments/conditional_belief_adequacy_001/implementation_review.json": "016d7c660c98fe3a927fe616a9745dee5b84cda63e434a33f7312e399139cfdc",
+    "experiments/conditional_belief_adequacy_001/qualification/c_qualification.json": "8a317a0d1b44acf0c9b2c80c7f0dc723f0e6afc3f765ee4d69f1702fa4f2a500",
+    "experiments/conditional_belief_adequacy_001/qualification/supervisor_checks.json": "469a6eeb7442ebe256a06bc086ded0c647534b7ee10ea5b76b7ae66b3bcfe2e0",
+    "experiments/conditional_belief_adequacy_001/qualification/conditional_belief_probe.bin": "80ebc729d651639f9b2e541dc68f3de618e52fc29f4ad82b24b383a691d3ce1d"
+  },
+  "compile_command": [
+    "cc",
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Iinclude",
+    "tools/conditional_belief_probe.c",
+    "src/scm_hypothesis.c",
+    "src/scm_hypothesis_checkpoint.c",
+    "src/scm_model.c",
+    "-lm",
+    "-o",
+    "/workspace/scratch/d8e043c88fda/weighting_audit/probe-preflight/conditional_belief_probe"
+  ],
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "compile_working_directory": "/workspace/scratch/d8e043c88fda/mumble-repo",
+  "binary_preservation": "Qualified executable copied byte-for-byte from recorded compile destination and included in published source tree. No recompile or new model calls for this copy.",
+  "qualification": {
+    "passed": true,
+    "C_fixture_receipt": "experiments/conditional_belief_adequacy_001/qualification/c_qualification.json",
+    "C_checks": {
+      "linear_voltage_moments": true,
+      "zero_covariance": true,
+      "pre_domain_boundary": true,
+      "post_domain_SOC": true,
+      "dense_factor_node_mean_covariance": true,
+      "positive_negative_zero_current_derivatives_and_dense_covariance": true,
+      "wrong_observation_index_rejected_without_propagation": true,
+      "saved_component_unchanged": true
+    },
+    "supervisor_fixture_receipt": "experiments/conditional_belief_adequacy_001/qualification/supervisor_checks.json",
+    "supervisor_check_count": 12,
+    "independent_review": "experiments/conditional_belief_adequacy_001/implementation_review.json",
+    "independent_review_status": "pass",
+    "canonical_probe_invocations_before_receipt": 0
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "libc": [
+      "glibc",
+      "2.39"
+    ]
+  },
+  "original_estimator_changed": false,
+  "new_learner_runs": 0
+}
