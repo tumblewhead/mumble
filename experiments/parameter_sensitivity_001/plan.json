@@ -1,0 +1,227 @@
+{
+  "schema": "mumble_parameter_sensitivity_plan_v1",
+  "status": "frozen_before_primary_offline_analysis",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "work_branch": "analysis/parameter-sensitivity-001",
+  "base_published_revision": "7ae54b728fa717aa46b3c8691a3d4406a1f3e447",
+  "user_request": "Sensitivity analysis of each parameter to understand the practical importance of its estimation error.",
+  "question": "Under specified future inputs, how much does each saved parameter/state error change predicted terminal voltage and propagated SOC, and how do errors cancel or interact?",
+  "saved_evidence": {
+    "path": "experiments/nonlinear_hypothesis_001/scores.json",
+    "sha256": "a04fcbc11d6519bd6bdbe387ad63d5e53617a4a54f75f1878f5648a448b5d84a",
+    "arm": "public_logQ_split",
+    "view": "aggregate",
+    "original_estimator_source_revision": "74ce065dc2263c36db38c06a91c125cc42511369",
+    "publication_map": "provenance/nonlinear_hypothesis_001_publication.json"
+  },
+  "anchor_samples": [
+    31500,
+    63000,
+    73500
+  ],
+  "anchor_times_s": [
+    900,
+    1800,
+    2100
+  ],
+  "coordinate_order": [
+    "log_tau1",
+    "log_tau2",
+    "log_tau3",
+    "log_gamma_plus",
+    "log_gamma_minus",
+    "log_Q_Ah",
+    "R0",
+    "R1",
+    "R2",
+    "R3",
+    "H",
+    "current_z",
+    "current_v1",
+    "current_v2",
+    "current_v3",
+    "current_h"
+  ],
+  "model": {
+    "modes": 3,
+    "temperature_C": 25,
+    "OCV": "Existing supplied illustrative U(z)=3+1.15z+0.08tanh(8(z-0.5)); no curve or temperature estimation.",
+    "positive_current": "discharge",
+    "parameter_evolution": "Fixed for each forward trajectory; only z,v1-v3,h propagate.",
+    "production_reference": "src/scm_model.c:scm_physical_step",
+    "sample_rate_Hz": 35,
+    "interval_s": "1/35",
+    "noisy_measurements_generated": false
+  },
+  "protocols": [
+    {
+      "id": "rest_300s",
+      "label": "Rest, 300 s",
+      "segments": [
+        {
+          "current_A": 0.0,
+          "samples": 10500
+        }
+      ],
+      "samples": 10500,
+      "duration_s": 300.0,
+      "net_charge_Ah": 0.0
+    },
+    {
+      "id": "weak_300s",
+      "label": "+3 mA, 300 s",
+      "segments": [
+        {
+          "current_A": 0.003,
+          "samples": 10500
+        }
+      ],
+      "samples": 10500,
+      "duration_s": 300.0,
+      "net_charge_Ah": 0.00025
+    },
+    {
+      "id": "load_step_130s",
+      "label": "Rest / +60 mA / rest, 130 s",
+      "segments": [
+        {
+          "current_A": 0.0,
+          "samples": 350
+        },
+        {
+          "current_A": 0.06,
+          "samples": 2100
+        },
+        {
+          "current_A": 0.0,
+          "samples": 2100
+        }
+      ],
+      "samples": 4550,
+      "duration_s": 130.0,
+      "net_charge_Ah": 0.0009999999999999998
+    },
+    {
+      "id": "charge_600s",
+      "label": "-30 mA charge, 600 s",
+      "segments": [
+        {
+          "current_A": -0.03,
+          "samples": 21000
+        }
+      ],
+      "samples": 21000,
+      "duration_s": 600.0,
+      "net_charge_Ah": -0.005
+    },
+    {
+      "id": "reversal_600s",
+      "label": "+60 / -30 mA, 600 s",
+      "segments": [
+        {
+          "current_A": 0.06,
+          "samples": 10500
+        },
+        {
+          "current_A": -0.03,
+          "samples": 10500
+        }
+      ],
+      "samples": 21000,
+      "duration_s": 600.0,
+      "net_charge_Ah": 0.0025
+    },
+    {
+      "id": "discharge_1800s",
+      "label": "+60 mA, 1800 s",
+      "segments": [
+        {
+          "current_A": 0.06,
+          "samples": 63000
+        }
+      ],
+      "samples": 63000,
+      "duration_s": 1800.0,
+      "net_charge_Ah": 0.03
+    }
+  ],
+  "semantics": {
+    "scope": "Future, state-conditioned open-loop deterministic point sensitivity; no estimator execution or voltage assimilation.",
+    "anchoring": "Every protocol independently starts at each saved current-state anchor. This is six hypothetical follow-ups, not a new concatenated use history.",
+    "historical_effects": "Holding current states fixed while changing a parameter excludes its effect on the preceding trajectory. Zero sensitivity here does not imply historical irrelevance or identifiability.",
+    "local_sensitivity": "Analytic derivatives dV/dx and dz/dx with respect to the sixteen native entering coordinates, evaluated at both saved truth and estimated vectors.",
+    "normalization": "Positive physical parameters use a1percent fractional DIFFERENTIAL at the relevant anchor: native log increment0.01 for first6 coordinates and0.01*p for linear positive R/H. This is a derivative scale, not an exact+1percent finite perturbation. All selected physical parameters must be positive; no relative-normalization floor.",
+    "state_units": "Current SOC1percentage point (0.01 fraction), RC entering voltages1mV, h0.01 dimensionless. Relative parameter and absolute state units are labeled separately.",
+    "known_error_injection": "For each coordinate, start from the saved scoring-truth vector and replace exactly that coordinate by its saved estimate. Other parameters/current states are held at scoring truth. Evaluate exact nonlinear trajectory difference.",
+    "counterfactual_repair": "Start from complete estimated vector and replace one coordinate by scoring truth. Difference from unrepaired estimate is conditional marginal effect; it is not unique causal attribution or an implemented correction. Stored repair effect is V_original_estimate minus V_one_coordinate_repaired: the modeled error contribution removed, not repaired-minus-original. A large change need not improve total error.",
+    "joint_error": "Complete estimated trajectory minus complete scoring-truth trajectory. Errors remain signed until peak/RMS reduction.",
+    "interaction": "Joint error minus sum of exact isolated errors is the cross-coordinate remainder for this decomposition. Joint minus J_truth*error is total first-order approximation error. Neither is a certified interval bound. Joint_RMS/RMS(sum absolute isolated effects) is a scale diagnostic with no guaranteed[0,1]range; it is not a calibrated or bounded cancellation fraction.",
+    "SOC_outputs": "Actual propagated SOC changes only with entering SOC and Q in this model. Other parameters can influence estimator SOC through voltage correction, which this offline forward calculation does not simulate.",
+    "SOC_proxy": "Pointwise100*deltaV/OCV_slope(z_truth) is an OCV-equivalent SOC displacement with other voltage terms fixed. Peak taken after this division. It is not actual SOC error, estimator response or an error bound.",
+    "reference_voltage": "1mV is only the inherited per-sample noise scale used for reading effects, not an acceptance threshold. Repeated sub-noise effects may be informative; large responses may remain confounded.",
+    "sample_metrics": "Peak includes t0 under the first protocol current; other values are end-of-interval samples. Later instantaneous current-switch limits are not inserted. RMS excludes t0 and weights all equal1/35s intervals equally. Peaks are grid-sampled, not continuous-time maxima.",
+    "plot_views": "Metrics use every sample. Compact plot views retain each dwell first10s densely plus401 uniformly spaced indices and boundaries; final anchor only.",
+    "mixture": "Propagation of the reported aggregate mean is a deterministic point diagnostic, not the predictive distribution or transported covariance of the full mixture.",
+    "ranking": "Report per protocol and anchor. A maximum across the six declared protocols may summarize this fixed set, but is not a universal importance ranking, probability-weighted utility or certified bound."
+  },
+  "metrics": [
+    "Normalized local peak/RMS mV at truth and estimate anchors.",
+    "Exact known-error isolated peak/RMS/signed final voltage, time of peak, OCV-equivalent SOC proxy and actual propagated SOC.",
+    "Conditional one-coordinate repair effect and linearization residual.",
+    "Complete joint voltage/SOC errors, exact isolated signed sum, absolute-magnitude sum diagnostic, first-order sum and nonlinear interaction.",
+    "Changes from900 to1800 to2100s anchors; no monotonicity or capacity startup deadline."
+  ],
+  "prerequisites": {
+    "checker": "tools/check_parameter_sensitivity.py",
+    "reference": "Unchanged production C physical model plus independent closed forms and central differences on short public fixtures; no saved CellB truth/estimate used in prerequisites.",
+    "qualification_path": "experiments/parameter_sensitivity_001/development/qualification.json"
+  },
+  "qualification_path": "experiments/parameter_sensitivity_001/development/qualification.json",
+  "source_files": [
+    "tools/parameter_sensitivity.py",
+    "tools/check_parameter_sensitivity.py",
+    "tools/plot_parameter_sensitivity.py",
+    "src/scm_model.c",
+    "include/scm_model.h",
+    "experiments/parameter_sensitivity_001/plan.json",
+    "plans/estimation_targets_001.json",
+    "plans/capacity_learning_horizon_001.json"
+  ],
+  "execution": {
+    "anchor_count": 3,
+    "protocols_per_anchor": 6,
+    "forward_trajectories_per_anchor_protocol": 34,
+    "expected_forward_calls": 612,
+    "expected_diagnostic_interval_evaluations": 13316100,
+    "expected_metric_records": 288,
+    "primary_repetitions": 1,
+    "estimator_runs": 0,
+    "optimizer_calls": 0,
+    "old_study_reruns": 0,
+    "primary_command": [
+      "python3",
+      "tools/parameter_sensitivity.py",
+      "--output",
+      "experiments/parameter_sensitivity_001/primary"
+    ],
+    "plot_command": [
+      "python3",
+      "tools/plot_parameter_sensitivity.py",
+      "--input",
+      "experiments/parameter_sensitivity_001/primary",
+      "--output-dir",
+      "experiments/parameter_sensitivity_001/figures"
+    ]
+  },
+  "guards": [
+    "Freeze source, protocol plan, qualification and saved-evidence hash before evaluating the prescribed follow-ups.",
+    "Use saved truth only for post-inference comparisons; never change estimator initialization, inference, priors, noise, weights or existing results.",
+    "Check physical domains for every trajectory; preserve started receipt and execution failure, stop on invalid input/domain/nonfinite results. No clipping or adaptive shortening.",
+    "Preserve original35Hz observations, timing and state; this analysis never alters or assimilates them. New diagnostic protocols have their own declared uniform intervals.",
+    "No inference that sensitivity equals observability, Fisher information, coverage or a posterior probability. No independent-precision addition or repeated-observation assimilation.",
+    "No estimator SRAM added; analysis arrays and plots are offline costs, not an embedded implementation or target qualification."
+  ],
+  "finish_line": "One frozen offline analysis and one evidence-backed interpretation of which remaining errors matter for voltage/SOC under each declared use regime, including cancellations and unresolved downstream effects. Stop without parameter pruning, tuning, new learner runs or a horizon sweep.",
+  "afterward": "Use sensitivity findings to sharpen the continuous learning/retention validation contract. The previously proposed24h pilot is not executed or qualified by this analysis."
+}

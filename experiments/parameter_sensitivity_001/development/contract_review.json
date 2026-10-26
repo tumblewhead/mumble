@@ -1,0 +1,70 @@
+{
+  "schema": "mumble_parameter_sensitivity_contract_review_v1",
+  "status": "accepted_no_implementation_blocker",
+  "reviewer": "hypothesis_core",
+  "source": "tools/parameter_sensitivity.py",
+  "source_sha256": "289591462e92cdff77579ccb2b32b5ccd954b18b729ffb700a3bc9acadd5a47a",
+  "scope": {
+    "source_read_only": true,
+    "files_written": [
+      "experiments/parameter_sensitivity_001/development/contract_review.json"
+    ],
+    "model_runs": 0,
+    "estimator_runs": 0,
+    "scoring_runs": 0,
+    "test_runs": 0,
+    "plan_status_at_review": "Final plan not yet present; the proposed contract and source semantics were reviewed. Root will freeze the plan before execution."
+  },
+  "existing_independent_qualification": {
+    "path": "experiments/parameter_sensitivity_001/development/qualification.json",
+    "sha256": "1dcad4844d85fe125e442097208bda4f0eabc2d595370cdf4aee1908de3c9793",
+    "passed": true,
+    "assertions": 188,
+    "failures": [],
+    "reviewed_source_matches_qualification": true,
+    "scope": "Finite public physical/Jacobian fixtures only; no saved Cell B vectors, estimator or primary diagnostic protocols.",
+    "not_rerun_by_reviewer": true
+  },
+  "prior_contract_clarifications": {
+    "conditioning": "Each protocol independently starts from a saved current-state vector. Varying a parameter holds entering z, v1-v3 and h fixed and excludes its pre-anchor history effect. These are future open-loop response sensitivities, not retrospective identification or estimator adaptation.",
+    "normalization": "The first eleven physical parameters use an infinitesimal 1% fractional differential. Log coordinates use native increment 0.01; linear positive coordinates use 0.01 times that anchor value. This is explicitly not an exact finite +1% perturbation. Current SOC uses 0.01 fraction, RC states 0.001 V and h 0.01.",
+    "strict_positive_premise": "The frozen plan requires all eleven physical parameter anchors to be strictly positive. Zero-relative normalization is outside this analysis contract; no artificial floor is introduced.",
+    "SOC_proxy": "Actual propagated SOC differences remain separate from the voltage divided by local OCV slope proxy. The latter is not a physical SOC error, bound, estimator response or coverage statement.",
+    "interactions": "Compute signed per-time effects and sums before peak/RMS reduction; distinguish exact isolated effects, full joint effects, cross-coordinate interaction and first-order residual.",
+    "grid": "Exactly 35 Hz end-of-interval observations, plus t=0 under the first current. Instantaneous switch outputs after t=0 are omitted. Peak means a maximum on this declared grid.",
+    "domain": "Invalid or nonfinite paths stop with an exception; no clipping or adaptive protocol shortening. A failed analysis is not promised an exact first-invalid index.",
+    "capacity": "No capacity acquisition deadline is added. These physical propagation protocols do not run or qualify continued estimator learning."
+  },
+  "source_review": {
+    "derivative_shapes": "Trajectory arrays use T+1 samples, voltage/SOC Jacobians (T+1,16), and carried RC derivatives (3,16). Broadcasting and column-wise multiplication by native coordinate error have the intended shapes.",
+    "propagation": "Closed-form constant-current dwells carry entering physical states and derivatives into the next dwell. Direct log-tau, resistance, active log-gamma and log-capacity terms agree with the reviewed production equations. Previously acquired sensitivity to the other gamma is retained through the carried h derivative.",
+    "parameter_units": "Logs map to seconds, inverse Ah and Ah; linear resistance, H and entering RC states remain ohm or volt as labeled. Multiplication by 1000 yields mV and by 100 yields SOC percentage points.",
+    "normalization_at_each_anchor": "unit_scales(truth) and unit_scales(estimate) are intentionally separate. Their comparison changes both the derivative and the physical size of a 1% unit for linear parameters; report this when comparing the two sensitivities.",
+    "exact_known_error_paths": "An isolated injection replaces one truth coordinate with its estimated coordinate. A conditional repair replaces one estimated coordinate with truth. All other coordinates and the common protocol remain fixed. These are not refits or uniquely attributable causes of estimation bias.",
+    "error_orientation": "All full and isolated errors use estimated/injected minus truth. Both truth- and estimate-anchor linearizations multiply by estimate-minus-truth in the native chart, consistently approximating that error orientation.",
+    "repair_orientation": "one_coordinate_repair_effect_mV is original estimated voltage minus repaired voltage. It represents the removed signed prediction contribution; the signed change after applying the repair has the opposite sign. A positive repair effect does not alone establish reduced absolute error.",
+    "OCV_proxy": "The source divides each signed voltage-error sample by the truth-baseline OCV slope at that sample before taking metrics. It does not divide a peak by a separate peak slope. The illustrative curve has positive slope on the valid domain.",
+    "RMS_and_peak": "RMS uses all end-of-interval samples and excludes t=0. Peak, signed-at-peak, initial and final values include t=0 where applicable. Fixed dt makes the RMS a uniform time-grid measure.",
+    "joint_interaction": "nonlinear_interaction is full joint voltage error minus the signed sum of exact isolated errors. joint_linearization_residual is full error minus the signed sum of truth Jacobian contributions. These distinct residuals correctly separate cross-coordinate interaction from total first-order error.",
+    "cancellation_ratio": "joint_RMS_over_sum_absolute_isolated_RMS uses the RMS of the pointwise sum of absolute isolated effects. It is not a bounded cancellation fraction, an error bound or a sum of individual RMS values; nonlinear interaction can affect its magnitude.",
+    "profiles": "All 35 Hz samples enter metrics. Reduced plot profiles retain only the final anchor and do not determine the numerical summaries.",
+    "provenance_and_execution": "Execution verifies committed source bytes, saved-evidence hash and qualified-source hashes, refuses an existing output directory, and preserves a started receipt before computing protocols. No estimator or optimizer is called.",
+    "application_limits": "Propagation of the saved aggregate mean is a deterministic point diagnostic. It is not predictive mixture integration, posterior covariance propagation, observability, coverage, hard support or a pruning criterion."
+  },
+  "nonblocking_output_limit": {
+    "item": "soc_jacobian is computed and independently qualified, but execute exports exact isolated/joint SOC-error effects rather than normalized SOC derivative metrics.",
+    "report_resolution": "State the analytic relation z(t)=z_anchor-C_Ah(t)/Q, dz/dlogQ=C_Ah(t)/Q and dz/dz_anchor=1. The other fourteen coordinates have zero actual SOC derivatives under this conditioning. Do not claim the output file contains normalized SOC derivative tables.",
+    "source_change_required": false
+  },
+  "report_requirements": [
+    "Keep results separate by anchor and protocol; there is no unique protocol-independent parameter ranking.",
+    "Separate normalized sensitivity from response to the actual saved error.",
+    "State repair orientation and the unbounded diagnostic meaning of the cancellation ratio.",
+    "Use the 1 mV noise level only as a per-sample reference, never as an identifiability or parameter-importance threshold.",
+    "Treat simulated currents as model-analysis protocols rather than hardware operating recommendations.",
+    "Preserve original inference, truth isolation and the capacity no-deadline amendment."
+  ],
+  "implementation_blockers": [],
+  "source_edits_requested": [],
+  "stop": "Review complete. Freeze the declared plan, run only the predetermined offline analysis, preserve its first result, then stop at interpretation without tuning or estimator reruns."
+}
