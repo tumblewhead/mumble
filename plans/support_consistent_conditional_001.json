@@ -1,0 +1,95 @@
+{
+  "schema": "mumble_support_consistent_conditional_contract_v1",
+  "status": "frozen_before_reference_execution",
+  "base_revision": "6e56a2498858ffaf112f717465afa4edb15e21a2",
+  "work_branch": "design/support-consistent-conditional-001",
+  "authorization": "User: lets move on to solve the overly narrow SOC and capacity intervals. Complete the saved support-consistent design decision and qualify its finite mathematical reference.",
+  "question": "Can a supported conditional correction be coherent, and can it by itself remedy the observed SOC/Q overconfidence?",
+  "finish_line": "One executable affine reference, three fixed qualification families, analytic obstructions, complete resource account and independent go/no-go review. No battery learner run or production patch in this study.",
+  "representation": {
+    "dimension": 16,
+    "q_index": 5,
+    "z_index": 11,
+    "h_index": 15,
+    "h_support": [-1, 1],
+    "density": "p(x)=1_{a<=h<=b} N(x;m,K)/Z(m,K); m,K are Gaussian kernel parameters, not supported physical moments.",
+    "scope": "Only the h coordinate has restricted support in this analytic reference. No full-box or nonlinear-prediction closure claim.",
+    "likelihood": "y=c+J^T x+epsilon, epsilon~N(0,R), R>0, with a fixed affine J,c.",
+    "evidence": "Normal(y;c+J^T m,R+J^T K J)*Z_posterior/Z_prior.",
+    "reporting": "Supported moments are computed without overwriting kernel parameters. Marginal quantiles, not two-SD moment ranges, define nominal probability intervals. This study qualifies moments and evidence, not hardware coverage."
+  },
+  "qualification": {
+    "other_coordinates": "The other 13 coordinates are independent N(0,0.01) and absent from voltage; this is a mathematical fixture, not a public battery prior.",
+    "interior": {
+      "h_mean": 0,
+      "h_variance": 0.04,
+      "z_mean": 0.5,
+      "z_variance": 0.0004,
+      "q_mean": "log(0.06)",
+      "q_variance": 0.0009,
+      "cross_covariances": 0,
+      "c": 2.97,
+      "J_z": 1.5,
+      "J_h": 0,
+      "R": 0.0001,
+      "y": 3.8,
+      "required": "Exact ordinary Gaussian z correction, unchanged q and supported h law, support normalizer ratio one. Finite h bounds are retained, never called exactly inactive."
+    },
+    "outward": {
+      "h_mean": 1,
+      "h_variance": 0.04,
+      "z": "0.5+0.1*(h-1)+eps_z; independent eps_z variance0.0004",
+      "q": "log(0.06)-0.3*(h-1)+eps_q; independent eps_q variance0.0009",
+      "c": 2.97,
+      "J_z": 1.5,
+      "J_h": -0.02,
+      "R": 0.0001,
+      "y": 3.8,
+      "required": "Updated kernel h center exceeds1, while supported mean is strictly inside[-1,1] with positive variance. Full joint moments and evidence agree with independent scalar integration."
+    },
+    "zero_information": {
+      "prior": "outward posterior kernel and unchanged support",
+      "J": 0,
+      "c": 3.7,
+      "y": 3.8,
+      "R": 0.0001,
+      "repetitions": 2,
+      "required": "Byte-identical kernel, unchanged physical moments, log evidence equal constant Gaussian likelihood. Moment-retruncation negative control must change the law, demonstrating why it is rejected."
+    },
+    "branches": [
+      "Zero h variance and zero h cross row at h=1: valid deterministic h, no division by zero.",
+      "Zero h variance at h=1.01: zero-mass prior rejected before observation; nonzero cross row with zero diagonal rejected.",
+      "Two distinct observations y1=3.8,y2=3.72 using outward c,J,R: sequential and batch kernel/evidence identity, including telescoping support normalizers.",
+      "Scalar h prior kernel N(1,1), support[-1,1], observation y=-1,J_h=1,c=0,R=1: supported posterior variance may increase relative to the prior supported variance.",
+      "Two supported priors with the same mean0 and variance1/2: A mass1/2 at +/-1/sqrt(2); B mass1/2 at0 and1/4 at+/-1. At y=0 for y=x+epsilon, sigma=0.1, posterior variances differ. This is a sufficiency counterexample, not a battery-data attribution.",
+      "Public-start independent Gaussian H,h product variance and split-logQ reciprocal moment: record exact moments and omitted linearized terms without battery propagation or truth. A degree-three axis rule is not an exact fourth-moment variance oracle."
+    ]
+  },
+  "numerics": {
+    "arithmetic": "binary64, fixed fixture inputs, no clipping, probability floors or covariance inflation",
+    "reference": "Independent one-dimensional integration conditioning on h before voltage; compare with Gaussian-product/truncation formulas.",
+    "integration_eps_multiplier": 64,
+    "integration_limit": 200,
+    "reconstruction_operation_budget": 16384,
+    "comparison": "Report raw absolute discrepancies. Reconstruction allowance is gamma(16384)*max(1,reference norm), gamma(n)=n*eps/(1-n*eps), plus16 times reported quadrature error where relevant. This qualifies these arithmetic identities only; it is not a formal quadrature enclosure or an application accuracy gate.",
+    "no_information": "Kernel identity checked exactly, not by an application tolerance.",
+    "interpretation": "No 100uV or other voltage-difference materiality cutoff. Confidence content is not established by numerical tolerance."
+  },
+  "resources": {
+    "reference_wall_s_max": 60,
+    "reference_CPU_s_max": 30,
+    "reference_RSS_bytes_max": 268435456,
+    "output_bytes_max": 1048576,
+    "canonical_data_model_calls": 0,
+    "production_source_changes": 0,
+    "target_subsystem_planning_ceiling_bytes": 10240,
+    "existing_design_budget_bytes": 10032,
+    "existing_budget_has_unmeasured_reserves": true
+  },
+  "decision_rules": {
+    "reference_go": "All declared identities pass, normalizers and joint moments are coherent, and limitations remain explicit.",
+    "streaming_remedy_no_go": "A single h restriction cannot recover discarded likelihood, repair arbitrary h-independent narrow target marginals, close the full physical box or nonlinear prediction. Do not adopt it as the SOC/Q repair.",
+    "next_if_no_go": "Use a separately frozen one-prefix retained-history likelihood control to determine whether reevaluating the actual nonlinear evidence changes the target estimates and local precision. Never combine replayed likelihood with the recursive posterior as independent evidence."
+  },
+  "preservation": "All previous experiments, production sources, archived observations and checkpoints remain unchanged. No automatic old-study rerun, new source generation or truth-tuned uncertainty multiplier."
+}

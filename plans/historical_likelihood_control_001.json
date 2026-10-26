@@ -1,0 +1,99 @@
+{
+  "schema": "mumble_historical_likelihood_control_contract_v1",
+  "status": "frozen_before_new_fit_or_target_extraction",
+  "base_revision": "6e56a2498858ffaf112f717465afa4edb15e21a2",
+  "authorization": "Continue solving the overly narrow SOC and capacity intervals; a boundary-only repair has a structural no-go as a general remedy.",
+  "question": "At the fixed7200s prefix, what target estimates and local likelihood precision are obtained when the existing full nonlinear history is reevaluated, and how do fits constrained to the recursive target points compare?",
+  "finish_line": "One free fit and at most two predeclared target-constrained fits, independent result review and one evidence-retention decision. No retuning, extra starts, alternate prefix or retry.",
+  "inputs": {
+    "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+    "observation_member": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+    "observation_member_bytes": 16128000,
+    "observation_member_sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+    "observation_format": "little-endian <Qddd sample_index,dt_s,current_A,voltage_V>,32B",
+    "archived_records": 504000,
+    "prefix_records": 252000,
+    "nominal_endpoint_seconds": 7200,
+    "witness_path": "experiments/weighting_output_diagnostic_001/attempt001/witness_queries.jsonl",
+    "target_selector": "Exactly the aggregate query with next_index252000; capacity_Ah and current_soc only, no truth or error fields. Require exactly one matching query.",
+    "truth_in_inference": false,
+    "conversion": "Write only the selected prefix to scratch CSV with the existing CLI header and17-significant-digit floats. Every row must round-trip bit-for-bit to its original32B observation. Hash source before/after and both binary-prefix and CSV representations; no resampling, regenerated noise or sample omission."
+  },
+  "model": {
+    "existing_reference": "Unchanged scm_estimator.c, scm_model.c, scm_features.c, scm_assess.c and main.c from the published base.",
+    "modes": 3,
+    "method": "full",
+    "sigma_V": 0.001,
+    "prior": "Existing public physical parameter/entering-state bounds. This is a bounded likelihood fit, not the online Gaussian-mixture posterior and not a new calibrated Bayesian interval.",
+    "initial_state": "Fit entering SOC, RC voltages and u0=H*h0 with the existing full-history model; never use the latest corrected online state as entering state.",
+    "evidence": "Use every selected observation exactly once in the objective. Repeated optimizer evaluations are evaluations of that objective, not additional observations. Do not add the recursive posterior or prequential score as independent evidence."
+  },
+  "fits": [
+    {
+      "id": "free",
+      "starts": 3,
+      "max_iterations_per_start": 120,
+      "initial": "The existing fixed public scm_default_theta starts0,1,2.",
+      "constraint": null
+    },
+    {
+      "id": "fixed_recursive_Q",
+      "starts": 3,
+      "max_iterations_per_start": 120,
+      "initial": "Free fit theta as start0; existing CLI then uses public starts0,1 because scm_fit shifts the index when has_initial is true. Apply the existing fixed-target/link behavior.",
+      "constraint": "CLI arguments --fixed 6 log(saved_recursive_aggregate_capacity_Ah); reoptimize all remaining nuisance/initial quantities."
+    },
+    {
+      "id": "fixed_recursive_SOC",
+      "starts": 3,
+      "max_iterations_per_start": 120,
+      "initial": "Free fit theta as start0; existing CLI then uses public starts0,1 because scm_fit shifts the index when has_initial is true. Apply the existing fixed-target/link behavior.",
+      "constraint": "--fixed-current-soc saved_recursive_aggregate_current_soc; reoptimize nuisance and capacity."
+    }
+  ],
+  "execution": {
+    "fit_invocations_max": 3,
+    "parallel_fit_processes": 1,
+    "retries": 0,
+    "source": "Compile unchanged reference with cc -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -Iinclude src/main.c src/scm_estimator.c src/scm_model.c src/scm_features.c src/scm_assess.c -lm. Pin compiler, complete source/header/supervisor hashes and exact executable bytes before invocation.",
+    "preflight": "Independent contract/source review; verify existing reference hashes against base; executable --help only; verify conversion and argument wiring. No new optimizer qualification run or hidden warm-up fit.",
+    "failure": "Malformed/nonfinite output, nonzero executable exit, input mutation or resource breach stops the remaining calls, preserving all outputs and receipt. Finite nonconverged fit output remains a candidate witness and allows the two already specified calls; it never becomes an exclusion or promotion claim.",
+    "output": "Exclusive attempt001 directory, strict JSON, all raw stdout/stderr, per-child wait4 resources, before/after input identities, exact commands and source revision. Preserve prelaunch failures."
+  },
+  "resources": {
+    "child_CPU_s_max": 120,
+    "child_wall_s_max": 180,
+    "child_address_space_bytes_max": 536870912,
+    "child_RSS_bytes_max": 536870912,
+    "supervisor_RSS_bytes_max": 134217728,
+    "supervisor_total_wall_s_max": 600,
+    "child_combined_output_bytes_max": 1048576,
+    "closed_output_bytes_max": 8388608,
+    "scratch_CSV_bytes_max": 33554432,
+    "source_requested_storage_estimate_bytes": 169344000,
+    "scope": "Bounded desktop reference only. These host resources are not an embedded implementation budget."
+  },
+  "interpretation": {
+    "primary": "Report the actual free/constrained objective values and signed differences, fitted Q and endpoint SOC, optimizer statuses, raw undamped joint normal matrix/scales and numerical conditioning.",
+    "local_precision": "A positive-definite undamped full likelihood Gram may supply explicitly local linearized target SDs; no eigenvalue clipping, pseudoinverse cutoff or claim of posterior coverage. Report numerical failure/conditioning instead of inventing a null-space variance.",
+    "statistical_threshold": null,
+    "no_voltage_cutoff": true,
+    "no_repair_by_widening": true,
+    "comparison_limits": [
+      "Pure likelihood and prior-conditioned online beliefs are different inferential objects.",
+      "Recursive prequential scores cannot be subtracted from the batch residual objective.",
+      "A low-cost feasible fit is a witness; a failed or high-cost local fit does not globally exclude its target.",
+      "If a constrained fit has lower cost than the free fit, the free baseline is incomplete. Preserve this outcome; do not retry.",
+      "Finite fits and local curvature do not establish calibrated SOC/Q intervals or explain a unique historical approximation error.",
+      "No observation source, existing learner, old scorer, duration campaign or production estimator is rerun or modified. This is a new one-prefix full-history reference calculation."
+    ]
+  },
+  "pre_execution_clarifications": [
+    {
+      "basis": "Static inspection of src/scm_estimator.c:scm_fit, before any fit execution",
+      "change": "Constrained --initial plus --starts3 means free-fit theta then public starts0,1, not public starts1,2. Preserve the unchanged solver and clarify the two human CLI/source shorthands.",
+      "fit_or_optimizer_calls_before_amendment": 0,
+      "prior_contract_commit": "3b9cf66"
+    }
+  ]
+}
