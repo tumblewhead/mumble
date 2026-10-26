@@ -1,0 +1,138 @@
+{
+  "schema": "mumble_nonlinear_evidence_design_v1",
+  "status": "frozen_design_not_implemented_or_accuracy_qualified",
+  "date_UTC": "2026-10-26",
+  "work_branch": "design/online-nonlinear-evidence-001",
+  "basis_revision": "921b19d934b5d4b13932168dbddf0a0c740ca67e",
+  "decision": "Retain exactly two persistent nonlinear conditional components from public initialization, with separate full joint local factors and causal predictive weights. Implement only as a new candidate after this design checkpoint.",
+  "purpose": "Test whether a second causally carried capacity alternative avoids the wrong narrow belief seen with one local Gaussian. No cause of bias or sufficient remedy is established.",
+  "finish_line": "One mechanism, evidence and transaction contract, complete resource budget, and one frozen small falsification. No estimator inference in this design study.",
+  "evidence": {
+    "prior_failure": "experiments/bounded_online_002/summary.json",
+    "uncertainty_policy": "plans/local_uncertainty_decision_001.json",
+    "numerical_remedy": "experiments/boundary_transaction_diagnostic_001/decision.json",
+    "selective_audit": "experiments/nonlinear_evidence_design_001/primary/evidence_audit.json",
+    "report": "experiments/nonlinear_evidence_design_001/REPORT.md"
+  },
+  "representation": {
+    "components": 2,
+    "dimension_per_component": 16,
+    "coordinates": "Unchanged scm_online log tau[3], log gamma[2], log Q, R[4], H, current SOC, RC voltage[3], h.",
+    "conditional_belief": "A full local mean and lower factor P_j=L_j*L_j^T, with separate nonlinear physical propagation for each component.",
+    "mixture": "p(x|history) approximately equals sum_j w_j p_j(x|history). Retain the components; never feed a moment-collapsed mixture back into inference.",
+    "historical_evidence_limit": "Each component still compresses its past locally. Two trajectories do not retain or reconstruct the original historical nonlinear likelihood, ensure physical reachability, or establish a distinct accurate basin.",
+    "packing": "Store all 136 entries of the 16 by 16 lower factor. Preserve arithmetic order over the same nonzero entries. Packing is a proposed layout change, not a diagonal/block covariance approximation.",
+    "bank_header_fields": "32 bytes: uint64 generation and bank_evidence_next_index; uint32 flags (including initialization mode and has_joint_voltage_evidence), active_components (=2), last_rejection_stage and last_rejection_component. Physical source/clock/index in both components must agree; conditional evidence cursors may differ. Generation overflow requires explicit recovery; no lifetime claim."
+  },
+  "public_initialization": {
+    "axis": "log Q only",
+    "old_mean": "The inherited public log Q mean, -2.8134107167600364.",
+    "old_sd": "(upper_logQ-lower_logQ)/3.4641016151377545871 from the inherited public support [0.03,0.10] Ah.",
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "component_logQ_means": "mu_Q +/- sqrt(2/pi)*sigma_Q; component 0 is the lower mean.",
+    "component_logQ_sd": "sigma_Q*sqrt(1-2/pi)",
+    "other_coordinates": "All inherited public means and diagonal variances unchanged. No truth, saved fit or cell-specific initialization.",
+    "identity": "Equal-weight within plus between covariance recovers the inherited log-state mean/covariance in real arithmetic.",
+    "density_caveat": "Gaussian moment approximations to the two exact half-Gaussian conditionals change the prior density and higher moments. Components overlap and are not permanently disjoint Q supports. The experiment tests this representation change together with the nonlinear paths; it does not uniquely isolate historical evidence retention.",
+    "choice_reason": "Capacity is the named failing target and enters transport through 1/Q. Freeze this public rule without searching axes, offsets, counts or starts against scores."
+  },
+  "observation_accounting": {
+    "predictive_score": "Before correcting component j, compute innovation r_j and variance S_j from that component's physical prediction. ell_j=-0.5*(log(S_j)+r_j*r_j/S_j); the common 2*pi constant cancels.",
+    "weight_update": "Normalize log_w_j_old+ell_j with stable log-sum-exp after all components' corrections and arithmetic checks succeed.",
+    "single_use": "p(j,x|y)=p(j|y)*p(x|j,y). Conditional updates and component evidence normalization are factors of one joint observation update. Alternatives combine by a sum, never by multiplying posteriors or adding precisions.",
+    "weight_meaning": "Approximate predictive preferences under each local Gaussian and constrained update. Not exact marginal likelihood, physical exclusion, hard support, or coverage.",
+    "retention": "No pruning, merging, reseeding, rejuvenation, covariance inflation, forgetting, noise changes or posterior replay in this candidate.",
+    "underflow": "Retain both states and finite normalized log weights even when exp(log_w) underflows for display. Linear zero is not physical exclusion. Nonfinite score/weight arithmetic rejects the whole voltage transaction explicitly; no hidden floor or clipping.",
+    "missing_voltage": "Predict both components, leave weights unchanged, consume the known interval once and retain missing-voltage status.",
+    "score_arithmetic": "Use the pre-correction square-root innovation sd_j and standardized residual u_j=r_j/sd_j already computed by the scalar update: ell_j=-log(sd_j)-(0.5*u_j)*u_j. This is the same mathematical score without forming r_j*r_j first. Check every intermediate for finite values; no innovation clipping or variance floor for weights."
+  },
+  "transaction": {
+    "ownership": "One immutable live bank, one complete staged bank and shared vector scratch. Serialized ingest/query/save/restore; acquisition ISR accesses only its separate ring.",
+    "input_validation": "Validate source, order, interval, current and common bank invariants before mutation. Negative API return leaves the live bank byte-unchanged. Duplicate deliveries never advance any ledger.",
+    "normal_path": "Copy live to stage; predict each component from its immutable live counterpart; record pre-correction score; correct staged component; normalize weights; validate the complete bank; commit once.",
+    "mean_covariance": "The same final selected gain updates the mean and the full Joseph covariance. Integrate the already frozen finite out-of-domain actual-mean coordinate zero-gain remedy in both future arms.",
+    "all_zero_gain": "Restore both mean and packed factor from immutable live and perform the identical physical prediction. Preserve correction diagnostics by restoring numeric arrays only. Re-predicting an already rotated factor is invalid. No extra predicted-state object.",
+    "correction_failure": "If either correction, likelihood, normalization or final corrected-bank validation fails, regenerate both physical predictions from immutable live with this same input; retain old weights; reject the voltage for the whole bank and record stage/component. A failed component is not pruned or assigned zero weight.",
+    "prediction_failure": "If an initial or required regenerated prediction is unusable, consume the known interval once, retain the last valid bank belief/weights, set whole-bank ACCEPTED_RECOVERY/model-unavailable, and require explicit recovery. Retained means are not reported as current points.",
+    "ledger": "All staged/regenerated counters derive from immutable old+1, never from already advanced stage. Physical source, epoch, clock, next_index and common input/rejection counters agree across components; one external interval/voltage event, not two independent samples. Per-component evidence_next_index and has_voltage retain inherited nonzero-selected-gain semantics and may differ.",
+    "diagnostics": "Common rejected/missing/voltage counts are bank events. Limited/zero gains and innovations remain per-component diagnostics. Do not sum component observations into information counts.",
+    "work_cap_per_input": {
+      "physical_predictions": 6,
+      "conditional_corrections": 2,
+      "predictive_likelihoods": 2
+    },
+    "work_cap_reason": "Two initial predictions, up to two all-zero restorations, then up to two whole-bank rejection restorations. No iteration to convergence. A lower cap needs a separately demonstrated error ordering.",
+    "bank_evidence_cursor": "The counted bank header carries bank_evidence_next_index and has_joint_voltage_evidence. On a successful whole-bank voltage transaction, advance/set these if any component has a nonzero final selected gain, or if ell_0 != ell_1 AND at least one normalized log weight changes numerically. With all-zero gains and unchanged relative weights, leave the bank cursor/flag unchanged. Missing/rejected voltage never advances evidence cursors. Cold reset puts all cursors at epoch_begin and clears evidence flags. The bank cursor marks a represented joint update; it is not every component's conditional-evidence age or an independent-sample count."
+  },
+  "queries": {
+    "arena": "One 592 B serialized output arena: union of component and aggregate views within 536 B, plus two log weights, two component flags and four all-component target-hull endpoints. No simultaneous second query allocation.",
+    "capacity_point": "exp(sum_j w_j*mean_logQ_j), the geometric center of component point estimates. It is neither a physical-space posterior expectation nor a mixture median.",
+    "SOC_point": "sum_j w_j*mean_SOC_j",
+    "local_moments": "mu_bar=sum_j w_j*mu_j; diag(P_bar)=sum_j w_j*(diag(P_j)+(mu_j-mu_bar)^2). Full joint factors remain in inference.",
+    "local_ranges": "SOC mu_bar +/-2 SD; Q exp(mu_bar_logQ +/-2 SD_logQ). Label mixture-moment local diagnostics, not mixture quantiles or validated intervals.",
+    "all_component_hull": "Min lower and max upper of each component's local two-SD SOC and Q ranges, including both components regardless of weight underflow. This is a local diagnostic, not hard support.",
+    "component_access": "Expose both complete component queries sequentially, including local precision, gain diagnostics and log weights. Aggregate view reports only defined common-ledger and moment fields, not fabricated averages of component diagnostics.",
+    "qualification": "Application SOC/Q accuracy remains uniformly unresolved; coverage unvalidated and hard support absent. Preserve raw local precision and point-error gates. Withholding outputs or changing labels cannot count as accuracy improvement.",
+    "predicted_voltage_point": "When both component current predictions are available, sum_j w_j*V_j. Do not substitute the nonlinear observation function evaluated at the averaged coordinates.",
+    "availability_and_freshness": "Aggregate points require bank has_joint_voltage_evidence and no recovery/model-unavailable flag; capacity additionally requires inherited nonzero-current excitation. Per-component availability retains inherited has_voltage semantics. Aggregate evidence age is next_index-bank_evidence_next_index; expose each conditional evidence cursor separately. A weight-only update can make the aggregate available while component conditional-learning flags remain false. Current voltage availability requires valid physical predictions in both components.",
+    "internal_hull_evaluation": "Compute all-component local hulls from retained means/factors even if a component has_voltage flag is false. Legacy unavailable-query placeholders are not numeric bounds. Serialize output using the one counted arena; no inference feedback."
+  },
+  "resources_bytes": {
+    "status": "Proposed C layout plus explicit complete-subsystem reserves. Layout probe is host-only; no implemented packed learner or measured Cortex-M23 total.",
+    "packed_component": 1464,
+    "bank_header": 32,
+    "live_bank": 2976,
+    "staged_bank": 2976,
+    "shared_vector_and_score_scratch": 528,
+    "serialized_query_arena": 592,
+    "external_config": 56,
+    "current_input": 24,
+    "owned_subtotal": 7152,
+    "checkpoint_codec_buffer": 128,
+    "acquisition_ring_and_metadata": 448,
+    "RAM_support_arrays": 256,
+    "all_stack_math_caller_ISR_reserve": 2048,
+    "complete_design_budget": 10032,
+    "headroom_to_10240": 208,
+    "heap_and_raw_history": 0,
+    "acquisition_contract": "16 sample triples use 384 B plus 64 B metadata. At nominal 35 Hz an empty ring spans 16/35 s. All delivery/persistence stalls must fit its actual remaining capacity; actual intervals and order are preserved.",
+    "target_gate": "Measure target layout, linker RAM, stack high-water/static paths including software math/caller/ISR, acquisition and persistence. Exceeding a reserve or complete 10240 B cap fails; excluded buffers cannot be silently omitted or replaced by host RSS.",
+    "host_adapter": "Existing desktop line/stdio/path/checkpoint-position buffers add 1088 B beyond config/input if retained. They are a separate host environment, not an additional uncharged embedded implementation."
+  },
+  "persistence": {
+    "record_bytes_planned": 3004,
+    "derivation": "32 outer header +2*1460 packed component fields +16 log weights +32 bank header +4 CRC.",
+    "NVM_two_slots_bytes": 6008,
+    "atomic_restore": "Decode complete new-format bank into the counted stage, validate CRC/model/format/components/log weights/common physical ledger and distinct bank/conditional evidence cursors, then commit. Error leaves the old destination byte-unchanged. No assimilation or replay during restore.",
+    "format": "Use a new distinct bank model/format identity. Reject old single-component checkpoints explicitly; no implicit conversion, reset or partial component restore in the first candidate.",
+    "cold_reset": "Recreate both public components and equal weights; preserve known source position/clock and cumulative lifecycle counters; explicitly mark all old belief/evidence lost.",
+    "save": "Stream a canonical named-field record with the counted codec buffer to an inactive NVM slot, checksum and commit marker. Check power interruption and ring-delivery timing. No filesystem or hidden full-record RAM buffer in the target contract."
+  },
+  "alternatives_not_selected": [
+    {
+      "mechanism": "Iterated single-observation correction",
+      "reason": "Can repair the current local linearization but cannot reopen historical alternatives after the arrival Gaussian has collapsed."
+    },
+    {
+      "mechanism": "Small raw fixed-lag replay",
+      "reason": "64 samples span only 1.83 s at 35 Hz and cost 1536 B per raw bank before solver/arrival state. It can relinearize that window, not recover older nonlinear likelihood from the arrival Gaussian; no sufficient capacity remedy established."
+    },
+    {
+      "mechanism": "Input-only hysteresis hull",
+      "reason": "The audit finds a real model-consistency violation, but the final broad bound trims only about 0.0126 in h. This is useful evidence, not a demonstrated capacity remedy. No second inference mechanism is added in this design."
+    },
+    {
+      "mechanism": "Three or more components or tuned hysteresis starts",
+      "reason": "Additional storage or truth-informed choices are not justified by this evidence. Exactly two public capacity components is the one falsifiable choice."
+    }
+  ],
+  "next": {
+    "branch": "implementation/nonlinear-hypothesis-001",
+    "action": "Implement the packed two-component candidate with the frozen numerical remedy; pass targeted algebra/transaction/persistence checks; freeze source and resource receipt before the planned comparison.",
+    "test_plan": "plans/nonlinear_hypothesis_falsification_001.json",
+    "no_automatic_expansion": "No third full two-cell primary, alternate starts, component sweep, duration expansion, annual campaign or claim of full-model indefinite stability."
+  }
+}

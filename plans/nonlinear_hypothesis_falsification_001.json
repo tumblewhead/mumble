@@ -1,0 +1,101 @@
+{
+  "schema": "mumble_nonlinear_hypothesis_falsification_v1",
+  "status": "frozen_plan_not_executed",
+  "date_UTC": "2026-10-26",
+  "design": "plans/nonlinear_evidence_design_001.json",
+  "work_branch": "implementation/nonlinear-hypothesis-001",
+  "question": "Does the one public logQ split preserve a useful alternative and give a useful causally weighted SOC/Q point by the inherited 900 s timely-learning gate?",
+  "decision_boundary": "Keep or reject this exact two-component mechanism for further qualification. No candidate promotion or coverage conclusion follows this comparison.",
+  "case": {
+    "id": "cell_b_35hz_s202610240",
+    "path": "data/cell_b_35hz_s202610240.csv",
+    "whole_file_sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+    "start_index": 0,
+    "stop_before_index": 31500,
+    "nominal_duration_s": 900,
+    "nominal_rate_Hz": 35,
+    "intervals": "Use original dt/current/voltage values in original order. No thinning, resampling, resets or seeded fitted state."
+  },
+  "arms": [
+    {
+      "name": "coincident_control",
+      "components": 2,
+      "initialization": "Both components exactly equal the inherited public single Gaussian, each weight 1/2. Same packed kernel, wrapper, gain remedy, memory and query conventions as split arm."
+    },
+    {
+      "name": "public_logQ_split",
+      "components": 2,
+      "initialization": "Exactly the frozen half-Gaussian moment rule in the design; no cell-specific choice."
+    }
+  ],
+  "limits": {
+    "primary_processes": 2,
+    "primary_input_deliveries": 63000,
+    "batch_optimizers": 0,
+    "original_study_reruns": 0,
+    "full_two_cell_lifecycle_primaries": 0,
+    "starts_or_parameter_sweeps": 0,
+    "interpretation": "The reference itself was unresolved at 900 s. Failure rejects this proposed timely-learning mechanism, not physical identifiability or every possible bounded representation. Do not extend to 1800/2100 s after seeing the outcome."
+  },
+  "before_primary": [
+    "Freeze source revision and binary/source hashes, exact commands, compiler/math flags, plan hash and complete owned-object accounting.",
+    "Check packed full-factor arithmetic against dense covariance on fixed finite fixtures, including rank deficiency, zero residual, component gain limits and the prior minimal boundary witness. Same actual gain in mean/full Joseph.",
+    "Check two coincident components produce equal points/factors/weights and do not halve covariance or double evidence counts; check the initial split recovers public log-state moments within declared floating tolerance.",
+    "Check duplicate/order/source rejection, missing voltage, one-component failure and whole-bank prediction retention, all-zero byte preservation, ACCEPTED_RECOVERY ledger, and log-weight underflow/nonfinite behavior with tiny deterministic fixtures.",
+    "Check one-component all-zero gain, two all-zero gains with relative weight learning, all-zero with equal scores/unchanged relative weights, and rejected voltage: distinct conditional and bank evidence cursors/availability follow the frozen rules without counting extra samples.",
+    "Check complete new-format warm restore byte-equivalence on a short deterministic stream, corrupt/truncated/wrong-format atomic rejection, and cold reset with explicit history loss. Do not repeat the completed cell lifecycle primary.",
+    "Record layout and reviewed call-chain work/storage. Target 35 Hz and complete SRAM gates remain separately unqualified until actual Cortex-M23 measurements; no omitted target cost can be described as passed."
+  ],
+  "observation_and_reporting": {
+    "sigma_V": 0.001,
+    "model_supports_noise": "Inherited production public model, bounds, OCV, exact-current/time benchmark and noise unchanged; public prior density approximation is the explicit arm difference.",
+    "query_times_s": [
+      0,
+      10,
+      60,
+      120,
+      220,
+      400,
+      460,
+      600,
+      640,
+      900
+    ],
+    "query_indices": [
+      0,
+      350,
+      2100,
+      4200,
+      7700,
+      14000,
+      16100,
+      21000,
+      22400,
+      31500
+    ],
+    "query_payload": "Aggregate and each component point, local SD/ranges, all-component local hull, log weights, pre-correction innovation/variance, gain/numerical counters, shared ledger and application qualification.",
+    "score_capture": "Stream per-sample component pre-correction log scores/log weights to a hashed host artifact if needed for weight-path diagnosis; no retained target history or inference feedback. Summaries read fixed checkpoints first.",
+    "truth_boundary": "Inference processes receive only dt/current/voltage and public config. Freeze outputs before the separate scorer opens truth. No true hidden state at initialization, reset, correction, weighting or tuning.",
+    "scoring": "Score fixed aggregate point and each component after inference. Report oracle-best component only as an analysis of representation versus weighting, never as runtime selection. Preserve raw local precision qualification failures even when application labels are unresolved."
+  },
+  "keep_gates": {
+    "available_SOC_and_Q_at_900s": true,
+    "absolute_capacity_error_percent_max": 5,
+    "absolute_SOC_error_pp_max": 10,
+    "preferred_capacity_error_percent": 0.5,
+    "preferred_SOC_error_pp": 0.5,
+    "numerical_rejections_or_recovery_events": 0,
+    "functional_and_evidence_gates": "All targeted algebra, exactly-once, duplicate-control, transaction and persistence checks pass; component or mixture covariance never treated as hard support.",
+    "resource_gate": "Owned layout fits the frozen design; measured/unknown costs are reported separately. A known excess over a reserve or 10240 B fails. Unmeasured target timing/stack is an open embedded gate, not a fabricated pass.",
+    "comparison_gate": "Report both arms and change versus coincident control. If both pass, credit no split-specific improvement without a declared discriminating difference; record mechanism attribution unresolved. No post-result score threshold.",
+    "coverage_gate": "Unvalidated throughout this test. Available point success is necessary for retaining this candidate, never sufficient for application qualification."
+  },
+  "failure_interpretation": [
+    "Neither component useful: this initial two-component representation did not carry an adequate alternative.",
+    "Useful component but aggregate fails: causal approximate weighting/point convention did not provide a useful output.",
+    "Both components converge to the same wrong narrow belief: common local approximation bias remains undetected.",
+    "Only relabeling, wider diagnostic ranges or withheld points improves reported status: no point-accuracy success.",
+    "Numerical/accounting/resource invariant fails: reject the implementation; preserve first output and diagnose only the concrete failed gate."
+  ],
+  "stop": "One frozen two-arm prefix comparison, then keep/reject/attribution-unresolved with the missing datum named. No alternative split, pruning policy, count, horizon, noise or prior sweep after results. Preserve both original bounded candidates and every failed gate."
+}

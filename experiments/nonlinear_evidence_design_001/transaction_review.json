@@ -1,0 +1,108 @@
+{
+  "schema": "mumble_nonlinear_evidence_transaction_review_v1",
+  "status": "design_review_pass_with_explicit_requirements",
+  "scope": "Read-only algorithm/resource review and owned layout-only probe source. No filtering implementation, probe execution, inference or primary by this reviewer.",
+  "mechanism": "Exactly two persistent moment-matched Q-split approximate conditional components; complete live and staged banks.",
+  "transaction": {
+    "live_bank_immutable_until_commit": true,
+    "stage": "Copy live to stage; predict both components from immutable live and the same snapshotted input. Obtain both predictive log likelihoods before their conditional corrections. Reuse four16-double vectors between conditional corrections.",
+    "weight_update": "Use the two pre-correction likelihoods exactly once in log-space normalization. Do not derive mixture weights from corrected residuals, clipped innovation EWMA, or repeated prediction evaluations.",
+    "all_zero_component": "Restore both mean and packed factor arrays from the immutable live component, then apply the identical physical prediction. Preserve the successfully computed staged metadata/diagnostics. Calling prediction on an already rotated staged factor is insufficient.",
+    "correction_or_weight_failure": "Regenerate both stage predictions from immutable live and the same input, retain old mixture weights, and record one whole-bank rejected voltage. Failed conditional corrections and failed weight normalization do not partially commit.",
+    "initial_prediction_failure": "If either initial component prediction fails, use whole-bank ACCEPTED_RECOVERY: consume the known input interval once, retain both last valid component beliefs and mixture weights, and mark the current model unavailable/recovery required.",
+    "no_implicit_exclusion": "A numerical or mean-domain prediction failure does not prove physical exclusion. Do not prune or assign zero weight to that component as a consequence.",
+    "ledger": "Every staged initial prediction and regeneration derives chronology/counters from immutable old+1. It never increments an already advanced staged or external ledger a second time. Physical source, epoch, clock, next_index and common input/rejection event counts agree across components. The inherited per-component evidence_next_index and has_voltage retain conditional nonzero-selected-gain semantics and may differ.",
+    "bank_evidence_cursor": "The bank header separately owns bank_evidence_next_index and a has_joint_voltage_evidence flag. On successful whole-bank voltage assimilation, advance/set them if any component has nonzero final selected gain, or if ell_0 differs from ell_1 and at least one normalized log weight changes numerically. All-zero gains with equal likelihoods or unchanged relative weights leave the joint cursor/flag unchanged. Missing or rejected voltages never advance evidence cursors. Cold reset sets every cursor to epoch_begin and clears all evidence flags. The joint cursor describes a represented joint update, not every conditional component's evidence age or an independent-sample count.",
+    "commit": "Validate all staged components, weights, shared physical chronology and bank metadata, preserving distinct conditional/joint evidence cursors, then perform one serialized bank commit. Acquisition ISR accesses only the separate delivery ring; no observer reads the bank during commit.",
+    "extra_predicted_component_required": false,
+    "assumptions": "Fixed floating-point environment and unchanged input/configuration during the transaction. Recomputed prediction uses the same operation order and immutable inputs. Packing must preserve the intended arithmetic and implicit zero upper factor entries."
+  },
+  "bank_header": {
+    "bytes": 32,
+    "fields_in_order": [
+      "uint64_t generation",
+      "uint64_t bank_evidence_next_index",
+      "uint32_t flags",
+      "uint32_t active_components",
+      "uint32_t last_rejection_stage",
+      "uint32_t last_rejection_component"
+    ],
+    "flags": "Include initialization mode and has_joint_voltage_evidence.",
+    "active_components": 2,
+    "generation_overflow": "Requires explicit recovery; no lifetime claim."
+  },
+  "conservative_work_cap_per_delivery": {
+    "initial_predictions": 2,
+    "conditional_corrections_max": 2,
+    "pre_correction_log_likelihood_evaluations_max": 2,
+    "all_zero_prediction_regenerations_max": 2,
+    "whole_bank_rejection_prediction_regenerations_max": 2,
+    "total_predictions_max": 6,
+    "worst_case": "Both components first require all-zero reconstruction, then a later weight or bank validation failure requires regenerating both predictions again.",
+    "lower_bound_on_claims": "Do not advertise a4-prediction maximum without explicitly restructuring the order and proving that later fallible operations cannot trigger the additional bank reconstruction.",
+    "target_timing": "Unmeasured; this fixed work bound is not a35Hz deadline qualification."
+  },
+  "restore": {
+    "method": "Decode the complete proposed3004-byte checkpoint into the already charged staged bank, using a128-byte codec buffer. Validate format, all components, weights, shared physical chronology, separate conditional/joint evidence cursors and CRC before committing.",
+    "live_state_preserved_on_failure": true,
+    "additional_full_record_RAM_buffer": false,
+    "immutable_file_two_pass_dependency": false,
+    "planned_single_NVM_slot_bytes": 3004,
+    "planned_two_NVM_slots_bytes": 6008,
+    "codec_size_derivation": "2*1460 component payload +16 weights +32 bank header +32 format header +4 CRC; ABI padding is not serialized.",
+    "codec_status": "Proposed field budget only; codec is not implemented or validated."
+  },
+  "resource_design_bytes": {
+    "packed_component": 1464,
+    "bank": 2976,
+    "live_bank": 2976,
+    "staged_bank": 2976,
+    "shared_scratch_and_two_log_likelihoods": 528,
+    "single_query_arena": 592,
+    "external_config": 56,
+    "one_input": 24,
+    "owned_subtotal": 7152,
+    "checkpoint_codec_buffer": 128,
+    "acquisition_samples16": 384,
+    "acquisition_metadata": 64,
+    "acquisition_total": 448,
+    "RAM_support_arrays": 256,
+    "all_stack_software_math_callers_IRQ_reserve": 2048,
+    "total_design_budget": 10032,
+    "ceiling": 10240,
+    "headroom": 208
+  },
+  "query_ownership": {
+    "base_arena": "Union of the existing536-byte component query and a smaller aggregate common-ledger/moment view. Only one view is live at a time.",
+    "additional_bytes": "16 weights +8 component flags +32 all-component SOC/Q hull endpoints.",
+    "component_diagnostics": "Read through a serialized component accessor. Component-only gain extrema, masks and related fields are not misleadingly summed or averaged into the aggregate view.",
+    "availability_and_freshness": "Aggregate point availability requires bank has_joint_voltage_evidence and no recovery/model-unavailable flag. Capacity additionally requires inherited nonzero-current excitation. Conditional component availability retains its inherited has_voltage flag. Aggregate evidence age is next_index-bank_evidence_next_index; conditional cursors are exposed separately. A weight-only update can make the aggregate available while both conditional-learning flags remain false. Current voltage availability requires valid predictions in both components.",
+    "caller_obligation": "Consume the report before the next accessor overwrites its union. A second simultaneous query copy requires additional charged storage."
+  },
+  "resource_qualification": {
+    "layout_probe": "tools/nonlinear_evidence_layout_probe.c",
+    "probe_executed_by_reviewer": false,
+    "packing_implemented": false,
+    "target_stack_runtime_measured": false,
+    "target_acquisition_and_persistence_measured": false,
+    "target_qualified": false,
+    "reserves": "2048B all-stack/runtime and448B acquisition are explicit requirements, not measured costs. Fail the gate if actual costs or any additional simultaneous objects exceed the budget.",
+    "delivery_timing": "Save/restore and other serialized pauses must fit available ring capacity. An empty16-sample ring spans about0.457142857s at nominal35Hz; actual occupancy and arrival intervals determine the remaining time.",
+    "headroom_interpretation": "208B is proposed layout headroom, not certified target margin."
+  },
+  "prior_and_evidence_caveat": {
+    "split": "Use public prior logQ parameters to moment-match the two exact half-Gaussian conditionals. No synthetic truth selects starts, covariance or split location.",
+    "preserved": "The original unconditional logQ mean and variance are preserved by the equal-weight moment construction in real arithmetic.",
+    "not_preserved": "Replacing the exact truncated conditionals by Gaussians changes prior density and higher moments. These are approximate conditional components, not an exact density-preserving split or permanently disjoint Q supports.",
+    "comparison_interpretation": "Split versus two coincident components tests this representation change and its nonlinear filtering paths. Improvement cannot be uniquely attributed to retained historical nonlinearity by that comparison alone.",
+    "no_double_counting": "Conditional likelihoods define alternative mixture components. They are combined by weighted sum for the predictive mixture and used once for each component's conditional update, never multiplied as independent evidence from two sensors.",
+    "uncertainty": "Full mixture moments must include between-component dispersion. Neither mixture moments nor local hulls establish hard support, calibrated coverage or indefinite stability."
+  },
+  "actions": {
+    "filtering_implementation": false,
+    "probe_executions_by_reviewer": 0,
+    "new_inference_runs": 0,
+    "new_primary_runs": 0,
+    "frozen_results_modified": false
+  }
+}

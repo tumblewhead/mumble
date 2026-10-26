@@ -1,0 +1,29 @@
+{
+  "schema": "mumble_nonlinear_evidence_design_audit_plan_v1",
+  "status": "frozen_before_design_audit_execution",
+  "basis_revision": "921b19d934b5d4b13932168dbddf0a0c740ca67e",
+  "date_UTC": "2026-10-26",
+  "design": "plans/nonlinear_evidence_design_001.json",
+  "future_comparison": "plans/nonlinear_hypothesis_falsification_001.json",
+  "execution_scope": {
+    "saved_evidence_audits": 1,
+    "host_layout_probe_runs": 1,
+    "new_estimator_inference_runs": 0,
+    "raw_trace_replays": 0,
+    "optimizer_calls": 0,
+    "primary_runs": 0
+  },
+  "commands": [
+    "python3 tools/audit_nonlinear_evidence_design.py --source-revision FROZEN_SOURCE_REVISION --output experiments/nonlinear_evidence_design_001/primary/evidence_audit.json",
+    "cc -std=c99 -O2 -Wall -Wextra -Werror -pedantic -Iinclude tools/nonlinear_evidence_layout_probe.c -o build/nonlinear_evidence_layout_probe",
+    "build/nonlinear_evidence_layout_probe > experiments/nonlinear_evidence_design_001/primary/layout_probe.json"
+  ],
+  "checks": [
+    "Saved source-contract consistency; public split mean-domain and moment reconstruction; selective retrospective evidence hashes.",
+    "Proposed host C object sizes and arithmetic against declared10032B complete planning budget; target reserves remain unmeasured.",
+    "Independent design, transaction, evidence-cursor and qualification review; preserve all prior tracked files except current navigation/state."
+  ],
+  "stop": "Freeze one design and next-test contract after these finite read-only evidence/layout checks. No implementation or primary comparison in this design study.",
+  "output_policy": "Preserve first outputs and any failures. Never overwrite a prior receipt to create a passing result.",
+  "limits": "An executable layout declaration is not a learner implementation or complete target memory measurement; endpoint equation evaluation is not inference or a trajectory replay."
+}

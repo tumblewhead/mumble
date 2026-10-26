@@ -1,0 +1,147 @@
+{
+  "schema": "mumble_nonlinear_evidence_mechanism_review_v1",
+  "role": "Independent adversarial mechanism choice review",
+  "decision": "Conditionally support one frozen two-component falsification; no inference or promotion authorized by this review.",
+  "review_actions": {"inference_runs": 0, "replays": 0, "builds": 0, "source_edits": 0},
+  "evidence": {
+    "failure": "experiments/bounded_online_002/independent_review.json",
+    "qualification": "plans/local_uncertainty_decision_001.json",
+    "state_and_update": ["include/scm_online.h", "src/scm_online.c"],
+    "numerical_remedy": "experiments/boundary_transaction_diagnostic_001/decision.json"
+  },
+  "mechanism": {
+    "components": 2,
+    "state": "Each component retains a full joint16-coordinate local mean/covariance and its own nonlinear physical trajectory from public initialization.",
+    "representation": "Persistent mixture alternatives, not independent measurements or a product of posterior information.",
+    "potential_benefit": "A second trajectory can preserve a nonlinear alternative after one local approximation commits to a wrong basin.",
+    "not_established": "Existing evidence does not show that the capacity error is a competing basin, that a second chart will escape it, or that hysteresis error caused capacity bias. Both components can inherit the same error."
+  },
+  "initialization": {
+    "split_coordinate": "public initial logQ",
+    "weights": [0.5, 0.5],
+    "means": "mu_Q +/- sqrt(2/pi)*sigma_Q",
+    "within_variance": "sigma_Q^2*(1-2/pi)",
+    "other_coordinates": "Retain public means and covariance; initial covariance is diagonal, so only the logQ factor diagonal changes.",
+    "moment_property": "The mixture recovers the original public Gaussian first two moments in real arithmetic.",
+    "density_caveat": "Moment matching does not preserve the original prior density. Gaussian approximations to the two half-Gaussian conditionals define a new mixture approximation; do not describe it as exactly the same prior distribution.",
+    "rationale": "Capacity is the declared failing target and affects transport through1/Q. Placement is a deterministic public-moment rule, independent of cell identity and scoring truth; it is not a proven cause-specific remedy.",
+    "constraint": "Freeze this placement. No alternative directions, offsets, priors, noise, thresholds or component counts may be selected after inspecting test truth."
+  },
+  "control": {
+    "type": "coincident_two_component_control",
+    "construction": "Two identical copies of the original public local prior, each with weight0.5, using the same bank implementation as the split arm.",
+    "benefit": "Keeps component count, storage, common update implementation and bounded work envelope equal. Identical alternatives should reproduce the single-component mathematical result rather than square its likelihood.",
+    "required_check": "Component trajectories remain identical and weights remain equal within the declared arithmetic contract. Compare permitted saved-query values with frozen reference evidence without executing a separate full primary.",
+    "timing_limit": "Equal component count and source work bound do not imply identical actual branch counts or measured cycle time. Record reconstruction counts where relevant."
+  },
+  "evidence_contract": {
+    "weight_update": "Use each component's pre-correction predictive innovation and variance. Normalize prior log weights plus the corresponding Gaussian predictive log likelihood.",
+    "no_double_counting": "Each observation enters each conditional component once; alternatives combine by a mixture sum. Do not add component precision matrices, multiply their posteriors, or assimilate the aggregate output again.",
+    "identity": "p(j,x|y)=p(j|y)*p(x|j,y); predictive normalization and conditional update are factors of the same joint update, not two independent uses ofy.",
+    "likelihood_limit": "Predictive densities remain local Gaussian approximations. Linearization, constrained gains and biased covariance can mis-rank components; these weights are not exact nonlinear evidence.",
+    "retention": "No pruning, merging, reseeding, rejuvenation, resets, covariance inflation or weight floors in the first candidate. Both components remain exposed even at negligible linear weight.",
+    "numerical_weight_limit": "Retain finite normalized log weights and component states when linear weights underflow. Numerical zero is not physical exclusion. Nonfinite arithmetic must be reported; indefinite log-weight stability is not established."
+  },
+  "output_contract": {
+    "capacity_point": "exp(sum_j w_j*mu_logQ_j)",
+    "capacity_point_meaning": "Geometric average of component capacity point estimates; not generally the physical-capacity expectation or mode of the mixture.",
+    "SOC_point": "sum_j w_j*z_j",
+    "local_moments": "Include within-component covariance and between-component mean separation in each reported target moment variance.",
+    "range_limit": "Ranges derived from aggregate local moments are moment-based local diagnostics, not mixture quantiles, hard support or calibrated coverage.",
+    "component_visibility": "Expose both component points, local ranges and weights even when one weight is negligible.",
+    "qualification": "Preserve uniformly unresolved application accuracy and unvalidated coverage until separately justified. Renaming or suppressing statuses cannot repair point error or pass useful-availability gates."
+  },
+  "transaction_review": {
+    "required_structure": "Keep the complete live bank unchanged while constructing the complete staged bank. Commit the common input position and candidate bank atomically only after the declared bank checks.",
+    "rejected_correction": "A numerical failure cannot silently delete a component or count as physical exclusion. Preserve the committed physical prediction and common observation-evidence semantics as specified by the final bank contract.",
+    "gain_consistency": "Apply the frozen boundary remedy and use the same final selected gain for mean and full Joseph covariance in each component.",
+    "exactly_once": "Duplicate input must be refused before live-bank mutation. Any recomputation of prediction starts from the same old state and does not constitute another assimilation.",
+    "restoration": "The full stage must also prevent exposing a partially validated mixed-generation restore. All component states, weights and the common ledger are required for warm continuation without replay.",
+    "work_bound_supplied_by_root": {"predictions_per_input_max": 6, "corrections_per_input_max": 2},
+    "work_limit": "The proposed bound requires implementation-level loop/path verification; it is not Cortex-M23 timing evidence."
+  },
+  "resource_contract": {
+    "status": "Final explicit design budget supplied by root; not a new compiled layout or measured target peak.",
+    "bytes": {
+      "live_bank": 2976,
+      "full_stage": 2976,
+      "scratch": 528,
+      "query": 592,
+      "external_config": 56,
+      "one_input": 24,
+      "owned_subtotal": 7152,
+      "reserved_additional_costs": 2880,
+      "planned_total": 10032,
+      "target": 10240,
+      "remaining_headroom": 208,
+      "new_serialized_codec": 3004
+    },
+    "packing": "Each16x16 covariance factor stores136 lower-triangular doubles instead of256; the full joint covariance is retained.",
+    "superseded_projection": "The reviewer's earlier1464*k+3680 shared-workspace projection and inherited1120B stack comparison are superseded by this explicit complete staged-bank layout. Do not combine their subtotals or claim their margins for this design.",
+    "adversarial_caution": "208B headroom is small. The2880B reserve is a planning allocation, not evidence that all stack, libm, acquisition, interrupt, caller and persistence costs fit. Reject or revise the layout if actual accounted costs exceed it.",
+    "codec_limit": "Serialized size3004B is not an additional full RAM buffer unless the implementation actually allocates one; streaming codec and full-stage ownership must be checked."
+  },
+  "alternative_comparison": [
+    {
+      "mechanism": "Single-chart iterated correction",
+      "advantage": "Low persistent-memory cost; can improve the current observation's nonlinear linearization.",
+      "limit": "Must retain the same pre-measurement prior across iterations and assimilate once. It does not reconstruct historical nonlinear evidence or reliably reopen an already narrow wrong basin."
+    },
+    {
+      "mechanism": "Fixed-lag raw replay",
+      "advantage": "Can relinearize recent joint dynamics against a prior at the beginning of the window.",
+      "limit": "At24B/sample and35Hz, one second costs840B before states and solver workspace. An affordable short window need not contain the slow evidence that determined capacity, and its arrival Gaussian may retain the old bias."
+    }
+  ],
+  "frozen_test_direction": {
+    "execution_status": "not_run",
+    "input": "Existing Cell B chronological prefix through900s,31500 samples",
+    "arms": ["coincident two-component control", "public logQ split two-component candidate"],
+    "sparse_checkpoints_s": [60, 120, 220, 400, 600, 900],
+    "timely_gate": "900s is the inherited timely-learning decision point. The full M1 reference was itself unresolved there; candidate failure rejects this timely mechanism and does not establish physical unidentifiability.",
+    "truth_rule": "Truth is post-inference scoring only. An oracle-best component can distinguish representation failure from weight-ranking failure after the run, but cannot select runtime output.",
+    "falsifiers": [
+      "Neither component reaches useful capacity under the declared gate.",
+      "A useful component exists but causal predictive weighting favors a wrong narrow one.",
+      "Both components converge to the same wrong narrow estimate.",
+      "The aggregate appears to pass only because outputs are withheld or labels changed.",
+      "A numerical, accounting, continuation or declared resource invariant fails."
+    ],
+    "interpretation_of_success": "Retain the mechanism for subsequent qualification only; no full-model coverage, M23 or indefinite-runtime claim.",
+    "stop_rule": "One frozen comparison and keep/reject decision. No initial-placement, component-count, pruning-policy or duration sweep afterward."
+  },
+  "missing_datum": {
+    "question": "Does a useful alternative nonlinear trajectory survive from the public split, and can prediction-based evidence select it without truth?",
+    "why_missing": "Existing wrong narrow output cannot distinguish a competing basin from a bias shared by every local summary.",
+    "if_negative": "Do not automatically add components or time. Record the failed mechanism and identify the missing nonlinear-evidence capability."
+  },
+  "blocking_findings_for_design_freeze": [],
+  "final_plan_review": {
+    "status": "pass_for_design_freeze_no_execution_or_candidate_qualification",
+    "files_read": [
+      "plans/nonlinear_evidence_design_001.json",
+      "plans/nonlinear_hypothesis_falsification_001.json",
+      "tools/nonlinear_evidence_layout_probe.c",
+      "experiments/nonlinear_evidence_design_001/mechanism_review.json"
+    ],
+    "actions": {"layout_probe_runs": 0, "audit_script_runs": 0, "inference_runs": 0, "source_edits": 0},
+    "resolved_issue": {
+      "original": "Requiring every component's evidence cursor to agree conflicts with inherited conditional all-zero-gain semantics and weight-only mixture learning.",
+      "resolution": "Physical chronology and bank event counts agree; conditional evidence cursors/has_voltage may differ. A separate cursor and joint-evidence flag in the counted32B header advance on a successful joint transaction with a nonzero selected component gain, or unequal predictive scores plus a represented normalized log-weight change. All-zero/unchanged-relative-weight, missing and rejected observations do not advance that bank evidence cursor.",
+      "coverage": "Updated plans specify aggregate availability/freshness, conditional visibility, cold reset, restore validation and targeted fixtures for each case. No extra storage was credited."
+    },
+    "consistent_contracts": [
+      "Exactly two public logQ moment-split components versus a coincident two-component control; prior-density change and unresolved mechanism attribution remain explicit.",
+      "Pre-correction predictive weights and conditional updates belong to one mixture observation transaction; neither posteriors nor precision matrices are multiplied across alternatives.",
+      "Full staged-bank ownership covers correction rejection and atomic restore; at most six predictions/two corrections is a proposed source work cap pending implementation verification.",
+      "Capacity point is exp(weighted logQ mean), SOC is weighted SOC, voltage is weighted component voltage, and local moment ranges/hulls are not mixture quantiles or validated coverage.",
+      "Static probe declarations match the proposed packed factors, complete live/staged ownership, shared scratch and serialized query arena. The10032B budget includes unmeasured reserves;208B headroom is not target qualification.",
+      "Design source freeze precedes root's reproducibility audits. Running a host layout probe or reading frozen evidence is distinct from estimator inference; this review executed neither. Future inference requires its own frozen source, hashes, commands and prerequisite receipts.",
+      "The future test is exactly two31500-input B-prefix arms, with declared sparse checkpoints and900s timely-learning gate. It cannot expand after the outcome or imply physical unidentifiability on failure.",
+      "Available point accuracy, numerical health and functional/resource requirements remain separate from unresolved application accuracy and coverage. If both arms pass, split-specific benefit remains unattributed without a declared discriminating difference."
+    ],
+    "implementation_caution": "A weight-only update may make the aggregate available while both conditional-learning flags remain false. Compute all-component local hulls from retained means/factors and aggregate voltage from physical prediction_valid fields; legacy unavailable-query zero placeholders are not actual component ranges or predictions.",
+    "blocking_findings_remaining": [],
+    "limits": "This is source/contract inspection. No layout measurement, implementation algebra test, primary result, deadline measurement, calibrated coverage or full-model lifetime result is added."
+  }
+}

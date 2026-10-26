@@ -1,0 +1,47 @@
+{
+  "schema": "mumble_nonlinear_evidence_independent_review_v1",
+  "basis_revision": "921b19d934b5d4b13932168dbddf0a0c740ca67e",
+  "scope": "Independent read-only interpretation of frozen saved outputs and public source; reproducible audit script authored but not executed by this reviewer.",
+  "script": "tools/audit_nonlinear_evidence_design.py",
+  "actions": {"new_inference_runs": 0, "optimizer_calls": 0, "trace_replays": 0, "raw_voltage_trace_reads": 0, "audit_script_executions": 0},
+  "findings": [
+    {
+      "finding": "Wrong narrow capacity predates the first current reversal.",
+      "evidence": "At 120 s, B control capacity error is approximately -6.99926% while the local two-SD halfwidth is 4.57354%; at 400 s, error is +14.99351% with 1.08461% local halfwidth. The first negative input starts at 400 s.",
+      "source": "experiments/bounded_online_002/primary/cell_b_35hz_s202610240__control.jsonl",
+      "limit": "Later reversal clipping cannot be the sole origin, but may amplify a previously wrong branch."
+    },
+    {
+      "finding": "The final hidden state has strong SOC–hysteresis voltage compensation.",
+      "evidence": "At 2100 s, saved SOC is 0.5360665342 versus scored truth 0.5701486715, and h is -0.9607819339 versus 0.8333772272. Endpoint OCV error -57.44054 mV and hysteresis contribution +57.58047 mV nearly cancel; all voltage terms total approximately -0.18175 mV.",
+      "source": "experiments/bounded_online_002/scores.json#/cases/1/selected_full_vectors",
+      "limit": "A quiet-tail voltage match and innovation EWMA near one do not distinguish the correct hidden branch. This decomposition is retrospective evaluation, not a fit."
+    },
+    {
+      "finding": "The saved late hysteresis mean is outside an input-only reachable hull.",
+      "evidence": "From 1500 s, current is positive for the remaining trace. For any entering h in [-1,1] and inherited gamma_plus at least approximately 5, h >= 1 - 2 exp(-gamma_plus_lower * positive_charge_Ah). At 1800 s the lower bound is approximately -0.9506198241, above saved -0.9547411570. At 2100 s the lower bound is approximately -0.9481830726, above saved -0.9607819339.",
+      "sources": ["src/scm_online.c:lower and predict", "tools/generate_cases.py:profile", "experiments/bounded_online_002/scores.json#/cases/1/selected_full_vectors"],
+      "limit": "Analytic real arithmetic evaluated in ordinary double; not an outward-rounded C certificate. It identifies physical-history inconsistency without identifying a unique cause or proving a capacity remedy. The public hull remains broad."
+    },
+    {
+      "finding": "The existing full-history reference eventually identifies the hidden branch on the same trace.",
+      "evidence": "M1 B control fails at 900 s with an iteration limit and unresolved targets. Its existing 1800 s and 2100 s fits converge with capacity errors approximately +0.00755% and +0.00010544%, and hysteresis-state errors below 0.001.",
+      "sources": ["experiments/trajectory_integration_001/summary.json", "experiments/m1_belief_audit_001/summary.json"],
+      "limit": "This argues against declaring the final trace uninformative; it does not prove that any particular bounded representation will recover the result."
+    }
+  ],
+  "causal_hypotheses_not_established": [
+    "A curved SOC–H–h ambiguity may collapse too early into one local Gaussian branch.",
+    "Discarded nonlinear historical reevaluation may prevent later excitation from repairing that branch.",
+    "Component-limited nuisance corrections may affect the practical path through reversals while their Joseph covariance algebra remains internally consistent.",
+    "The public initialization transient may interact with these effects."
+  ],
+  "public_split_design_arithmetic": {
+    "status": "Included in the audit source; no design arithmetic execution by this reviewer after source creation.",
+    "definition": "Use public logQ mean mu and support-width/root12 sigma. Set alpha=sqrt(2/pi), beta=sqrt(1-2/pi), equal component weights, means mu plus or minus alpha*sigma, and component SD beta*sigma. Reconstruct and report the original logQ mean and variance; require component means inside the inherited mean domain.",
+    "truth_used": false,
+    "limits": "One fixed public placement, not a search or accuracy result. Matching two logQ moments does not preserve the full original Gaussian density or provide hard support."
+  },
+  "discriminating_evidence_requirement": "A proposed bounded mechanism must distinguish the compensated wrong branch using chronological nonlinear evidence with single-use observation semantics. Local widths and final innovations alone do not supply that distinction. The input-only reachability witness is a useful independent consistency check, but its broad hull alone is insufficient to establish capacity accuracy.",
+  "preservation": "No old output, source, score, status, threshold or failed gate is changed. No third primary is run or authorized by this read-only audit."
+}
