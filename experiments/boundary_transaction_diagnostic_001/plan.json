@@ -1,0 +1,70 @@
+{
+  "schema": "mumble_boundary_transaction_fixture_plan_v1",
+  "experiment": "boundary_transaction_diagnostic_001",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "branch": "diagnostic/online-boundary-001",
+  "base_revision": "3177f499d3c23c0586504864ba22b9eca9050a47",
+  "parent_plan": "plans/boundary_transaction_diagnostic_001.json",
+  "decision": "Determine whether production-ordered boundary arithmetic admits a negative nonnegative coordinate; freeze a bounded actual-gain remedy if reproduced.",
+  "scope": "One fixed C fixture, built as frozen production baseline and a diagnostic-only finite coordinate zero-gain fallback. No cell histories, inference campaigns, optimizer calls or truth input.",
+  "production_source": {
+    "path": "src/scm_online.c",
+    "sha256": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+    "published_source_revision": "bdfa692584911fb536b08c5f496188ec42d93ca2",
+    "original_execution_revision": "4c59c2363bf8ebe81238b30af7b03d802a5e3e13",
+    "mapping": "provenance/bounded_online_002_publication.json",
+    "live_source_change": false
+  },
+  "fixture": {
+    "scalar_cases": [
+      "lower_zero_outward", "lower_zero_inward",
+      "lower_adjacent_outward", "lower_adjacent_inward",
+      "lower_second_subnormal_outward",
+      "lower_largest_subnormal_outward", "lower_largest_subnormal_inward",
+      "lower_min_normal_outward", "lower_min_normal_inward",
+      "upper_zero_distance_outward", "upper_adjacent_outward", "upper_adjacent_inward",
+      "zero_innovation_at_adjacent", "negative_zero_outward"
+    ],
+    "scalar_source": "Selector loop extracted byte-for-byte from each generated production variant; no independent transcription of limiter.",
+    "expected_minimal_witness": {
+      "mean": "2^-1074", "gain": 1, "standard": -1.5,
+      "rounded_scale_and_selected_gain": "2^-1074",
+      "rounded_proposed_mean": "-2^-1074"
+    },
+    "full_transaction_witness": {
+      "mean_R3": "7 * 2^-1074", "L_9_9": 0.25, "L_12_9": -1,
+      "other_factor_entries": 0, "other_means": "public initialization",
+      "sigma_V": "unchanged default 0.001", "dt_s": 0, "current_A": 0,
+      "voltage": "predicted_voltage - 8*hypot(0.001,1)",
+      "note": "Constructed API-valid numerical state/input, not a physically reached battery trajectory or prior change."
+    },
+    "transaction_controls": [
+      "Independent innovation-SD rejection after nonzero dt/current prediction and partial trial-factor mutation.",
+      "Rejected correction retains advanced physical mean/factor, counters and evidence position.",
+      "Duplicate input is rejected byte-atomically; next distinct known interval advances once.",
+      "All-zero selected gain retains exact predicted mean/factor including signed zero."
+    ]
+  },
+  "candidate_remedy": {
+    "rule": "After actual rounded proposed mean is finite but outside support, set only this coordinate's selected normalized gain and multiplier to zero; retain its predicted mean. Other rejection stages remain unchanged.",
+    "consistency": "Store final selected gain before masks/extrema and use exactly it for both mean and full Joseph covariance.",
+    "cost": "Constant work per coordinate, no search, persistent fields or checkpoint changes; fixture-only caller capture is measured separately.",
+    "status": "Diagnostic variant only; production source and both frozen candidates remain unchanged."
+  },
+  "acceptance": [
+    "Expected baseline scalar and full-ingest mean-domain failures reproduce, with stage, coordinate and exact hexadecimal operands.",
+    "Remedy accepts the constructed observation, preserves nonnegative R3, and allows another coordinate to learn.",
+    "Full covariance agrees with independent dense Joseph using actual selected K=t/sd; maximum element error <= 3e-13*max(1,abs(expected)).",
+    "Unrelated innovation-SD failure still rejects and preserves the advanced prediction; exactly-once and all-zero controls pass.",
+    "Record binary64, nearest-even, gradual underflow, declared evaluation precision and compiler flags without fast-math or contraction.",
+    "Frozen production source and source hashes stay unchanged during execution."
+  ],
+  "command": "python3 tools/run_boundary_transaction_diagnostic.py --output-dir experiments/boundary_transaction_diagnostic_001/primary",
+  "stopping_rule": "Stop after one minimal witness and frozen remedy decision, or name the missing datum if unreproduced. No new cell primary. Historical attribution still requires an actual rejected step's stage, coordinate and operands.",
+  "independent_blocker": "plans/local_uncertainty_decision_001.json",
+  "limits": [
+    "Expected baseline rejection is a reproduced defect, not a passing estimator numerical-health claim.",
+    "Finite fixtures do not attribute the original 17 rejections, repair capacity bias, establish coverage, or qualify indefinite runtime or Cortex-M23 behavior."
+  ]
+}

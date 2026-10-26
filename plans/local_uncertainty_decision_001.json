@@ -1,0 +1,60 @@
+{
+  "schema": "mumble_local_uncertainty_decision_v1",
+  "status": "frozen_decision_no_inference",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "basis_revision": "3177f499d3c23c0586504864ba22b9eca9050a47",
+  "scope": "Separate qualification decision for the full-model bounded learner; not a remedy for biased capacity or permission for another primary.",
+  "witness": {
+    "case": "bounded_online_002/cell_b_35hz_s202610240/control/final",
+    "next_index": 73500,
+    "capacity_Ah": 0.05982298523069587,
+    "truth_capacity_Ah_scoring_only": 0.0647,
+    "capacity_error_percent": -7.537889906188755,
+    "capacity_local_2SD_Ah": [0.059802800826793734, 0.059843176447157864],
+    "capacity_status": "provisional",
+    "innovation_EWMA": 1.0234954945422476,
+    "rejected_corrections": 0,
+    "all_zero_selected_gains": 0,
+    "interpretation": "Narrow local uncertainty and nominal innovation statistics coexist with a capacity hard-limit breach. The 17 cold-arm rejection events cannot explain this zero-rejection control failure; the bias mechanism remains unidentified."
+  },
+  "decision": {
+    "retain": "Full covariance, local range widths, point estimates, freshness, numerical-health diagnostics and raw research statuses.",
+    "local_uncertainty_semantics": "Local prior-conditioned Gaussian precision diagnostics only.",
+    "application_SOC_Q_accuracy_qualification": "unresolved",
+    "coverage": "unvalidated",
+    "hard_support": "not_provided_by_local_Gaussian",
+    "reason": "nonlinear_bias_unresolved",
+    "application": "Uniform for this learner, independent of cell identity, known truth or whether a saved point happens to be accurate.",
+    "implementation_boundary": "Decision metadata only; no live API, inference, status-field or checkpoint change in this diagnostic."
+  },
+  "preservation": {
+    "frozen_001_002_outputs_statuses_scores_failed_gates": "unchanged",
+    "hard_point_accuracy_and_useful_availability_gates": "unchanged",
+    "local_provisional_error_audit": "Preserve the original breaches and failed gate. Suppressing or renaming labels cannot count as a qualification improvement.",
+    "prior_noise_threshold_support_changes": false,
+    "covariance_inflation": false,
+    "truth_in_inference_or_policy": false
+  },
+  "resource_delta_bytes": {"runtime": 0, "checkpoint": 0},
+  "before_another_primary": "A numerical remedy and this reporting decision are insufficient. Select and freeze one concrete bounded learner/nonlinear-evidence remedy and a discriminating finish-line test; preserve the original accuracy, availability, numerical-health and qualification failures.",
+  "next_substantive_action": {
+    "type": "narrow_design_decision",
+    "question": "What bounded mechanism can retain or check enough nonlinear evidence to address the observed capacity bias and justify useful SOC/Q qualification?",
+    "current_evidence_limit": "No cause or remedy is established by the frozen control failure. Do not select a mechanism by assuming that boundary repair, local precision or nominal innovations solve it.",
+    "finish_line": "One explicit mechanism proposal with evidence semantics, full resource costs and a discriminating bounded test, or a precise missing datum. Stop before a new primary until that contract is frozen.",
+    "reporting_only_experiment": "Not queued as an estimator remedy."
+  },
+  "evidence": {
+    "independent_review": "experiments/bounded_online_002/independent_review.json",
+    "behavior_review": "experiments/bounded_online_002/behavior_review.json",
+    "summary": "experiments/bounded_online_002/summary.json",
+    "targets": "plans/estimation_targets_001.json",
+    "query_policy": "src/scm_online.c:scm_online_query",
+    "local_belief_contract": "include/scm_online.h",
+    "publication_mapping": "provenance/bounded_online_002_publication.json",
+    "numerical_diagnostic_plan": "plans/boundary_transaction_diagnostic_001.json"
+  },
+  "actions": {"new_inference_runs": 0, "optimizer_calls": 0, "primary_replays": 0},
+  "limits": "Finite correlated synthetic results establish a qualification failure, not validated coverage, a full-model hard bound, a cause of bias or Cortex-M23 qualification."
+}
