@@ -6,6 +6,23 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The new two-component candidate learns capacity with later use on the first
+declared comparison.** Its Cell B capacity error improves from **+13.16% at
+900 seconds** to **+0.75% at 1800 seconds** and **+0.095% at 2100 seconds**;
+the coincident control still ends at **−7.54%**. SOC meets the hard limit at
+every available saved query from one second, and the preferred 0.5-point target
+at all saved queries from 580 seconds. Both arms complete with zero rejected
+corrections. See the [new report](experiments/nonlinear_hypothesis_001/REPORT.md)
+and [compact result](experiments/nonlinear_hypothesis_001/summary.json).
+
+The [user's timing clarification](plans/capacity_learning_horizon_001.json)
+removes a capacity startup deadline while keeping prompt SOC and the declared
+accuracy targets. The candidate is retained for further qualification;
+**it is not promoted**. Its local ranges still miss truth, including at the
+final accurate point. Complete target memory, broader performance, uncertainty
+coverage and indefinite operation remain open. The next task is one
+[continuous learning/retention validation contract](experiments/nonlinear_hypothesis_001/decision.json).
+
 The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
 end-to-end desktop demonstration, a desktop performance campaign including
 about one year per selected cell, and the embedded implementation.
@@ -34,14 +51,15 @@ unchanged, and the original 17 rejections still lack individual failure records.
 The [separate uncertainty decision](plans/local_uncertainty_decision_001.json)
 keeps local precision as a diagnostic and application SOC/Q accuracy unresolved.
 The [nonlinear-evidence design decision](experiments/nonlinear_evidence_design_001/REPORT.md)
-is now frozen: retain exactly two public capacity alternatives with separate
-nonlinear states, full joint local factors and predictive weights. One saved
-evidence audit and 15 host layout checks pass; no new estimator inference ran.
-The complete proposed allocation is 10,032 bytes including unmeasured target
-reserves. The learner is not implemented or accuracy-qualified. Next implement
-the contract and its targeted checks, then use the
-[one frozen Cell B 900-second comparison](plans/nonlinear_hypothesis_falsification_001.json).
-Longer campaigns follow qualification.
+is implemented in a separate C module: two public capacity alternatives retain
+separate nonlinear states, full packed joint factors and predictive weights.
+The numerical remedy is integrated in both new arms. **7,386 core and 188
+checkpoint checks pass**; the owned subtotal is **7,152 bytes**. The complete
+proposed allocation remains **10,032 bytes**, including unmeasured target
+reserves. The original [900-second plan](plans/nonlinear_hypothesis_falsification_001.json)
+is preserved; the [2100-second comparison](experiments/nonlinear_hypothesis_001/plan.json)
+was frozen before inference in response to the timing clarification. Its one
+declared execution is complete. Longer campaigns require a new bounded contract.
 
 The [supplemental M1 belief audit](experiments/m1_belief_audit_001/REPORT.md)
 reports all sixteen fitted quantities and applies the new targets to the frozen
@@ -71,9 +89,15 @@ experiment work to specific delivery decisions.
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
-| [Current nonlinear-evidence design](experiments/nonlinear_evidence_design_001/summary.json) | Two persistent public capacity components selected; saved-evidence audit and proposed 10,032-byte allocation; no learner inference |
+| [Current learner result](experiments/nonlinear_hypothesis_001/summary.json) | Two-arm 2100 s comparison complete; later capacity learning supported, local uncertainty still fails, candidate retained for qualification |
+| [Learning report and figure](experiments/nonlinear_hypothesis_001/REPORT.md) | Prompt SOC, later capacity, first versus retained target attainment, component weights and remaining limits |
+| [Capacity timing amendment](plans/capacity_learning_horizon_001.json) | No capacity startup deadline; prompt SOC, unchanged hard/preferred accuracy targets, continuous long-trajectory requirement |
+| [Current mechanism decision](experiments/nonlinear_hypothesis_001/decision.json) | Keep public split for controlled qualification; next freeze one continuous learning/retention validation contract |
+| [Learner publication](provenance/nonlinear_hypothesis_001_publication.json) | Original execution versus published commit identities and preserved development bundle |
+| [Prior nonlinear-evidence design](experiments/nonlinear_evidence_design_001/summary.json) | Two persistent public capacity components selected; saved-evidence audit and proposed 10,032-byte allocation; no inference in that design study |
 | [Two-component contract](plans/nonlinear_evidence_design_001.json) | Public moment split, single-use mixture evidence, complete staging, distinct evidence cursors, resource and query semantics |
-| [Next bounded comparison](plans/nonlinear_hypothesis_falsification_001.json) | One existing B 900 s prefix, coincident control versus public split; targeted prerequisites and fixed stop rule; not executed |
+| [Completed bounded comparison plan](experiments/nonlinear_hypothesis_001/plan.json) | Two existing B 2100 s arms; 900 s diagnostic, late capacity learning and weak-tail retention; frozen before execution |
+| [Historical 900 s plan](plans/nonlinear_hypothesis_falsification_001.json) | Preserved unexecuted plan; timing and stopping rule superseded by the user's pre-inference clarification |
 | [Design publication](provenance/nonlinear_evidence_design_001_publication.json) | Original execution versus published source/result identities and preserved bundle |
 | [Completed boundary diagnostic](experiments/boundary_transaction_diagnostic_001/summary.json) | Minimal numerical witness, 625 passing fixture assertions, selected remedy and preserved transaction invariants; no cell replay |
 | [Boundary remedy decision](experiments/boundary_transaction_diagnostic_001/decision.json) | Finite actual-mean coordinate zero-gain fallback tested in a diagnostic variant; production source unchanged |
@@ -126,7 +150,7 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
 | **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
-| **M2: Desktop performance and year-scale behavior** | **A4: two candidates evaluated; neither promoted.** Two-component nonlinear-evidence design frozen; implement and check it before one B 900 s comparison. Variations and duration increases remain gated |
+| **M2: Desktop performance and year-scale behavior** | **A4: new split candidate retained for qualification.** One B 2100 s pair supports later capacity learning; uncertainty, generalization and lifetime behavior remain open. Next freeze one continuous validation contract |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality

@@ -2,15 +2,18 @@
 
 ## Decision
 
-**M1's desktop lifecycle is complete; both bounded candidates remain unpromoted.
-The boundary remedy and two-component nonlinear-evidence design are frozen.**
-The next action is to implement exactly two public capacity alternatives with
-separate nonlinear states and full joint local factors, then pass targeted
-transaction, covariance and persistence checks before the one declared
-Cell B 900-second comparison. Production inference remains unchanged by these
-design/diagnostic studies. The proposed complete allocation is **10,032 bytes**;
-target reserves are unmeasured. Longer trajectories follow a qualified
-candidate, then a runnable Cortex-M23 C subsystem near **10 KiB total SRAM**.
+**M1's desktop lifecycle is complete. The new two-component candidate supports
+later capacity learning on one frozen Cell B comparison and is retained for
+further qualification.** Capacity error improves from +13.16% at 900 seconds
+to +0.095% at 2100 seconds; SOC stays within 0.5 points on all saved queries
+from 580 seconds. Both arms complete without rejected corrections. Local
+uncertainty remains overconfident, so the candidate is not promoted. The next
+task is to freeze one continuous learning/retention validation contract, with
+an honest uncertainty assessment and finite work/stopping rules. See the
+[result and decision](../experiments/nonlinear_hypothesis_001/REPORT.md).
+The measured owned subtotal is **7152 bytes**; the proposed complete target
+allocation is **10,032 bytes**, including unmeasured reserves. Complete
+Cortex-M23 qualification near **10 KiB total SRAM** remains open.
 
 The original priority change put integration ahead of another uncertain-RC
 refinement. That completed integration now supports the learner decision.
@@ -20,8 +23,11 @@ open-ended sequence that must finish before the application can run.
 
 This roadmap preserves the user's direction and original plan from 2026-10-24,
 America/Los_Angeles, with M1 and both A4 candidate outcomes added on 2026-10-25.
-The nonlinear-evidence design was frozen on 2026-10-26 UTC. The M2 duration
-campaign and Cortex-M23 target work have not run.
+The nonlinear-evidence design and its first implementation comparison completed
+on 2026-10-26 UTC. Before inference, the user clarified that capacity need not
+be discovered immediately. The [timing amendment](../plans/capacity_learning_horizon_001.json)
+therefore replaced the unexecuted 900-second stop with a predeclared 2100-second
+comparison. The M2 duration campaign and Cortex-M23 target work have not run.
 The executable work order is [trajectory_to_m23_001.json](../plans/trajectory_to_m23_001.json).
 
 The active [estimation targets](../plans/estimation_targets_001.json) prioritize
@@ -34,13 +40,17 @@ from local covariance widths and validated coverage. M1's original 0.5%/0.5 pp
 benchmark and its failed outcome remain unchanged; the
 [full-belief supplement](../experiments/m1_belief_audit_001/summary.json)
 applies the new interpretation without replacing the frozen M1 scores.
+Capacity has **no startup deadline**. SOC should become useful as soon as the
+observations support it; capacity learning, weak-use retention and later renewed
+learning are assessed separately. Time without distinguishing information need
+not improve capacity, and accurate points do not validate uncertainty ranges.
 
 ## Three deliverables and their finish lines
 
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — two-component design frozen** | Implement and falsify the selected public capacity components, then qualify a bounded learner before short variations and selected annual streams | Chosen candidate meets hard target, lifecycle, resource, numerical-health and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
+| **M2: Desktop performance — candidate retained for qualification** | Preserve the first public-split learning result, freeze continuous validation, then qualify broader short cases and duration pilots | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -141,16 +151,16 @@ and [separate uncertainty decision](../plans/local_uncertainty_decision_001.json
 are frozen. Neither repairs or qualifies the measured capacity bias.
 
 The [nonlinear-evidence design](../experiments/nonlinear_evidence_design_001/REPORT.md)
-now selects two persistent components from one public log-capacity moment
-split. A selective saved-result audit exposes OCV/hysteresis compensation and
-a public input-only reachability violation; neither identifies a unique bias
-cause. Full staged-bank transactions and a complete 10,032-byte planning
-allocation are explicit. Fifteen host layout checks pass, with no new inference
-or primary run. The first test is the
-[frozen two-arm B 900 s prefix](../plans/nonlinear_hypothesis_falsification_001.json),
-after implementation and targeted invariants. It compares a coincident control
-with the fixed public split. No accuracy or coverage improvement has yet been
-demonstrated, and complete target memory/timing remains open.
+selected two persistent components from one public log-capacity moment split.
+Its saved-result audit exposed OCV/hysteresis compensation and a public
+input-only reachability violation without identifying a unique bias cause.
+The [new implementation](../experiments/nonlinear_hypothesis_001/REPORT.md) now
+passes 7386 core and 188 checkpoint checks, then one frozen two-arm B 2100 s
+comparison. Split capacity errors at 900/1800/2100 s are +13.16356%, +0.75176%
+and +0.09523%; the control remains −7.53789% at the endpoint. This supports
+continued learning, but 79 saved local-provisional capacity queries breach the
+hard error target and final local ranges still miss truth. Complete target
+memory/timing and trustworthy uncertainty remain open.
 
 The user-requested compact-layout step is now implemented and checked in
 [compact_bounded_001](COMPACT_BOUNDED_001.md). Its fixed-chart component owns
@@ -272,7 +282,7 @@ A new framework or a comprehensive fault Cartesian product is not required.
 
 ## M2 action plan: establish desktop performance, then extend duration
 
-### A4. Qualify one autonomous bounded learner — nonlinear-evidence decision next
+### A4. Qualify one autonomous bounded learner — later learning observed
 
 Both frozen candidates remain complete and preserved. Keep the successor's
 component-wise gain mechanism and the selected numerical remedy; reject
@@ -287,12 +297,12 @@ representable effect. Stage/coordinate capture identifies the constructed
 failure as `mean_domain`, R3. This does not attribute the original 17 events,
 whose actual failure operands were not saved.
 
-The remedy is tested in a diagnostic variant only. It adds no production
-state or checkpoint bytes. A fixture capture record is 80 bytes, with two
-named records coexisting in transaction controls; neither the capture nor
-the host oracle is part of the embedded implementation. Preserve the committed
-prediction on rejection, exactly-once input accounting and all-zero-gain byte
-identity when a subsequent learner revision integrates the remedy.
+The original remedy study changed a diagnostic variant only. The subsequent
+two-component candidate integrates that remedy in both new arms; the prior
+online candidates remain unchanged. Committed prediction on rejection,
+exactly-once accounting and all-zero-gain identity are tested. The diagnostic
+fixture's 80-byte capture records and host oracle remain outside the embedded
+implementation; new learner storage is accounted separately.
 
 The [local uncertainty decision](../plans/local_uncertainty_decision_001.json)
 keeps the full covariance and local ranges as precision diagnostics.
@@ -302,17 +312,17 @@ Original raw statuses, failed qualification audits, point-error limits and
 useful-availability gates stay unchanged. An all-unresolved reporting policy
 cannot manufacture a performance pass.
 
-That design decision is complete. Follow the
-[frozen two-component contract](../plans/nonlinear_evidence_design_001.json)
-on `implementation/nonlinear-hypothesis-001`: implement packed full factors,
-the prior numerical remedy, causal weights, complete staging, distinct bank
-and conditional evidence cursors, and a new atomic checkpoint format. Pass
-targeted algebra/lifecycle fixtures and freeze source/resources before the
-single planned B 900 s comparison. Keep the public split fixed; no source
-initialization may read truth or a saved fit. The comparison stops at its
-declared keep/reject/attribution-unresolved decision. Do not repeat completed
-studies, expand the horizon or component count after results, or use reporting
-changes as an accuracy improvement.
+The frozen contract is implemented on `implementation/nonlinear-hypothesis-001`.
+Packed factors, causal weights, full staging, separate evidence cursors and
+the 3004-byte atomic checkpoint format pass targeted tests. Source and resource
+hashes were committed before either primary arm. The user's timing amendment
+was also frozen before inference; the original 900 s test remains unexecuted.
+The [one declared 2100 s comparison](../experiments/nonlinear_hypothesis_001/summary.json)
+is complete. Keep the fixed public split for further qualification, while
+preserving local uncertainty failures and the historical candidates. At 900 s
+a useful alternative has negligible predictive weight; late aggregate gains
+come from the dominant component continuing to learn. Two-component necessity
+and trustworthy weighting/coverage remain unresolved.
 
 Promotion still requires hard targets, lifecycle, resources, numerical health
 and honest uncertainty qualification. Report the preferred 0.5%/0.5 pp region
@@ -345,9 +355,12 @@ is implied.
 
 ### Use a short variation matrix and a duration ladder
 
-These steps are blocked until a candidate passes the small-harness hard
-targets, lifecycle, resources, numerical-health and qualification gates.
-M1 and both A4 results retain failed gates that prevent a duration increase.
+The new candidate has one favorable finite learning result; it has not passed
+broader performance, lifecycle or uncertainty qualification. A single bounded
+continuous-validation design is the next task. It must decide the short
+second-cell/lifecycle prerequisites and what one duration pilot can establish.
+Historical failures remain preserved, and no day/week/annual campaign starts
+automatically from the favorable endpoint. Capacity has no startup deadline.
 
 | Step | Purpose | Scope control |
 | --- | --- | --- |
@@ -429,12 +442,14 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Continue from the latest `diagnostic/online-boundary-001` descendant and read
-the [completed diagnostic](../experiments/boundary_transaction_diagnostic_001/summary.json)
-without rerunning it. A suggested next work branch is
-`design/online-nonlinear-evidence-001`. Follow the
-[separate uncertainty decision](../plans/local_uncertainty_decision_001.json)
-to select one concrete bounded mechanism and discriminating test for biased
-capacity, or record the missing datum. The numerical remedy and reporting
-policy alone do not permit another primary. Day, week and year runs follow
-only a qualified candidate.
+Fetch the latest `implementation/nonlinear-hypothesis-001` descendant and read
+the [completed comparison](../experiments/nonlinear_hypothesis_001/summary.json)
+and [decision](../experiments/nonlinear_hypothesis_001/decision.json), without
+rerunning either arm. Use `design/continuous-learning-validation-001` to freeze
+one continuous learning/retention contract for the unchanged candidate. Specify
+carried plant/estimator/noise state, a finite horizon, weak and renewed
+informative use, prompt SOC and later capacity metrics, uncertainty diagnostics,
+resource limits and failure stops. Decide any short second-cell/lifecycle
+prerequisite explicitly. Stop with one frozen contract or a named missing datum;
+this design task runs no primary. Annual behavior and full-model indefinite
+operation remain separate open obligations.

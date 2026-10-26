@@ -1,0 +1,145 @@
+{
+  "schema": "mumble_nonlinear_hypothesis_mechanism_review_v1",
+  "status": "completed_saved_evidence_review_no_new_inference",
+  "reviewer": "hypothesis_core_author_result_interpretation_not_independent_implementation_review",
+  "source_revision": "74ce065dc2263c36db38c06a91c125cc42511369",
+  "evidence": {
+    "experiments/nonlinear_hypothesis_001/scores.json": "a04fcbc11d6519bd6bdbe387ad63d5e53617a4a54f75f1878f5648a448b5d84a",
+    "experiments/nonlinear_hypothesis_001/plan.json": "834dbd91ad0a6ac7dff7442ffa7098a5978f558e3609c5757b3f4591788a9213",
+    "plans/capacity_learning_horizon_001.json": "6d3b6d3d4127bab80b46c36be1846b358628421fe579beac8379b9d106e233b6"
+  },
+  "scope": {
+    "new_estimator_runs": 0,
+    "new_scoring_runs": 0,
+    "new_test_runs": 0,
+    "read": "Compact scored summaries, selected checkpoints and selected final full-vector coordinates; no raw trace loaded.",
+    "case": "One matched synthetic Cell B trace, original 73500 ordered inputs through 2100 s; two frozen initialization arms.",
+    "capacity_startup_deadline": null,
+    "superseded_900s_deadline": "Preserved historical plan is not an active gate; 900 s is diagnostic only.",
+    "truth": "Existing post-inference scores only; no initialization, inference, tuning or component selection changed."
+  },
+  "decision": "Retain the public split as a promising research candidate for one further bounded continued-learning qualification decision; do not promote the estimator or its local intervals to validated accuracy claims.",
+  "paired_observations": {
+    "times_s": [
+      900,
+      1800,
+      2100
+    ],
+    "coincident_control_capacity_error_percent": [
+      -22.522864339788008,
+      -7.559293912390464,
+      -7.537889906188755
+    ],
+    "public_split_capacity_error_percent": [
+      13.163557959821626,
+      0.7517591578450888,
+      0.09523113281821871
+    ],
+    "public_split_SOC_error_pp": [
+      0.42408759776494387,
+      0.0790970916393463,
+      -0.008062126651964263
+    ],
+    "capacity_absolute_error_reduction_percent_points": {
+      "900_to_1800": {
+        "control": 14.963570427397544,
+        "split": 12.411798801976538
+      },
+      "1800_to_2100_weak_tail": {
+        "control": 0.021404006201708903,
+        "split": 0.6565280250268701
+      }
+    },
+    "split_observed_retained_target_times_s": {
+      "SOC_hard": 1,
+      "SOC_preferred": 580,
+      "capacity_hard": 1130,
+      "capacity_preferred": 1850
+    },
+    "grid_limit": "Retained means every later saved query through this endpoint passes; queries are 1 s apart through 10 s and 10 s apart thereafter. It does not assert continuous-time or future accuracy.",
+    "early_SOC": "Both arms pass the hard SOC target at all 219 available saved queries starting at 1 s. Preferred SOC is first observed at 6 s but is not retained immediately.",
+    "early_capacity": "Both arms first cross the hard target at 20 s, then leave it. The split first crosses the preferred target at 570 s, then leaves it. First hits alone do not establish learning completion.",
+    "functional_numerical_owned_resource_gates": "All pass in the saved scores; complete target qualification and candidate promotion remain false."
+  },
+  "longer_learning_interpretation": {
+    "supported": "With the carried split state and later observations, capacity accuracy improves materially after a failed 900 s diagnostic, reaches the hard and then preferred region, and remains there on the saved grid through the predetermined endpoint. This directly supports allowing delayed capacity acquisition while assessing SOC promptly.",
+    "stimulus_condition": "The 900-to-1800 s interval includes later varied input. The prescribed 1800-to-2100 s weak tail adds observations and physical relaxation and still improves the split estimate; weak is not equivalent to zero information.",
+    "counterexample_to_duration_alone": "The coincident control sees the same elapsed time and observations but remains about 7.54% low, with only 0.0214 percentage point absolute-error improvement in the weak tail. Its narrow local precision does not imply sufficient capacity accuracy.",
+    "not_established": [
+      "Monotone capacity convergence.",
+      "Eventual convergence under arbitrary or indefinitely repeated use.",
+      "A universal capacity acquisition deadline.",
+      "Annual behavior, full-model all-prefix stability, or complete Cortex-M23 qualification.",
+      "Accuracy or coverage across cells, noise realizations, model mismatch, temperature, current/time error or aging."
+    ]
+  },
+  "weighting_and_representation": {
+    "split_component_capacity_error_percent": {
+      "component0": [
+        13.163557959821626,
+        0.7517591578450888,
+        0.09523113281821871
+      ],
+      "component1": [
+        -2.435841362164437,
+        1.3358213381805095,
+        0.2926336236279914
+      ]
+    },
+    "split_component1_log_weight": [
+      -1497.0248432347873,
+      -339.4984595921453,
+      -2187.9880858660554
+    ],
+    "late_mechanism": "At 900, 1800 and 2100 s the aggregate point equals component 0 at stored precision. The observed late improvement is within that conditional trajectory, not a late switch to component 1. Component 1 also improves while retained with very small finite log weight.",
+    "weighting_witness_at_900s": "Component 1 is within the hard capacity target at -2.43584%, but its log weight is -1497.02484; the aggregate follows component 0 at +13.16356%. Predictive voltage weight concentration does not certify target-quantity accuracy. The best-component label uses truth only after inference and is not an admissible selection rule.",
+    "earlier_weight_change": "At 60 and 120 s component 1 has log weights -0.00663931 and -0.14827761. By the selected 220 s checkpoint component 0 dominates, with component 1 log weight -250.90074. The bank does represent and revise alternatives before the later concentrated phase.",
+    "what_paired_control_isolates": "The common implementation and stimulus compare the complete fixed public split initialization against coincident initialization. The split changes conditional log-capacity means and conditional variance while preserving the aggregate prior first two moments; it also changes the prior density and subsequent nonlinear trajectories.",
+    "not_isolated": [
+      "Contribution of shifted public means versus narrower conditional covariance.",
+      "Need for two simultaneous components rather than one predeclared public conditional initialization.",
+      "General correctness of predictive weighting under nonlinear local approximation."
+    ],
+    "two_component_need": "Not established by this case. Both conditional split components finish inside the preferred capacity region, and the reported late aggregate essentially uses one. No post-hoc truth-selected component may replace the frozen design. Retaining both preserves an alternative without proving that it was necessary for this late success.",
+    "predecessor": "The coincident control reproduces the saved predecessor capacity errors at 900, 1800 and 2100 s. No predecessor rerun or separate causal claim for the boundary remedy is needed."
+  },
+  "uncertainty_limits": {
+    "aggregate_capacity_local_provisional_hard_breaches": {
+      "coincident_control": 191,
+      "public_split": 79
+    },
+    "split_component_capacity_local_provisional_hard_breaches": {
+      "component0": 79,
+      "component1": 59
+    },
+    "denominator": "220 saved queries per view; 11 capacity-unavailable queries. These correlated queries are diagnostic counts, not coverage trials.",
+    "final_split_aggregate": {
+      "capacity_error_percent": 0.09523113281821871,
+      "capacity_local_2SD_halfwidth_percent_of_estimate": 0.02965095029675011,
+      "capacity_local_interval_covers_truth": false,
+      "SOC_error_pp": -0.008062126651964263,
+      "SOC_local_interval_covers_truth": false
+    },
+    "final_split_component1": {
+      "capacity_error_percent": 0.2926336236279914,
+      "capacity_local_2SD_halfwidth_percent_of_estimate": 0.03975987743830196,
+      "capacity_local_interval_covers_truth": false
+    },
+    "final_control": {
+      "capacity_error_percent": -7.537889906188755,
+      "capacity_local_2SD_halfwidth_percent_of_estimate": 0.033751602973561654,
+      "capacity_local_interval_covers_truth": false
+    },
+    "interpretation": "Preferred point accuracy at the endpoint coexists with local intervals that miss truth. Keep numerical health, point targets, local precision, hard support and validated coverage separate. A two-component local hull is still a diagnostic and must not be called hard support.",
+    "application_status": "Uniform accuracy-unresolved and coverage-unvalidated reporting remains appropriate; no local-provisional status is promoted to an application guarantee."
+  },
+  "bounded_next_decision": {
+    "question": "Can the unchanged candidate retain useful SOC and renew capacity learning after an extended weak-use interval followed by later informative use, with all physical and evidence state carried continuously?",
+    "action_now": "Freeze one compact continuous-use qualification plan before any further inference. Select one finite horizon and stimulus schedule independently of target attainment, with acquisition, weak retention and renewed-informative phases. Use the current result to state the hypothesis, not to tune a favored capacity prior or stopping time.",
+    "comparison": "Keep the split and coincident control paired on identical new ordered inputs if both are carried into the plan. Preserve and report both conditional paths, log weights, mixture diagnostics and component-wise capacity/SOC behavior; do not discard the weakly weighted alternative.",
+    "continuity_contract": "Any extension must continue the physical plant, actual intervals, sample order, estimator checkpoints and noise-stream provenance. Do not concatenate the existing CSV with an implicit physical reset or reuse observations as independent evidence.",
+    "required_separation": "A later pass supports finite renewed learning; a miss or plateau at the fixed endpoint remains a finite failure and does not prove eventual impossibility. Report the same local-interval failures separately from point accuracy.",
+    "stop_rule": "Stop the present work at this review and a single frozen plan decision; execute no additional experiment here. A subsequent authorized comparison must stop at its declared finite endpoint or a declared numerical/accounting failure, preserve the first result, and make one continue/revise decision without horizon extension or retuning.",
+    "deferred": "The minimal component count and source of split benefit require a separately predeclared initialization/representation decision; this result alone does not justify either pruning to one or adding more components."
+  }
+}

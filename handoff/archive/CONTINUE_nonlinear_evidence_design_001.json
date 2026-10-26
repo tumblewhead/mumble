@@ -1,0 +1,90 @@
+{
+  "schema": "mumble_continue_v14",
+  "task": "Continue from the frozen two-component nonlinear-evidence design. Design audit is complete; next implement the contract and its targeted gates.",
+  "repository": {
+    "url": "https://github.com/tumblewhead/mumble",
+    "work_branch": "design/online-nonlinear-evidence-001",
+    "latest_checkpoint": "Fetch current branch tip; historical IDs are not reset targets.",
+    "base_checkpoint": "921b19d934b5d4b13932168dbddf0a0c740ca67e",
+    "design_original_source_revision": "4c451ac1d1844c09b5be2cc281c02373efa9bef7",
+    "handoff_url": "https://github.com/tumblewhead/mumble/blob/design/online-nonlinear-evidence-001/handoff/CONTINUE.json",
+    "publication_mapping": "provenance/nonlinear_evidence_design_001_publication.json",
+    "prior_mappings": [
+      "provenance/boundary_transaction_diagnostic_001_publication.json",
+      "provenance/bounded_online_002_publication.json"
+    ],
+    "design_published_source_revision": "b0a0bdca18530b9998fc34c0beaf83286c4f57bd",
+    "original_research_revision": "f90b3ca7d359b58de081edc1525f14147d1c6c69",
+    "published_research_revision_before_metadata": "a086ace66b660f37c90e59365ca290b85a635da7",
+    "publication_status": "published_source_and_research_trees_verified",
+    "original_development_bundle": "provenance/nonlinear_evidence_design_001_development.bundle"
+  },
+  "bootstrap": [
+    "Fetch current repository, inspect status and preserve newer, dirty or unrelated work. Follow pull-run-push and a work branch.",
+    "Read AGENTS.md, README.md, PROJECT_STATE.json and this handoff; follow selective summary/design/test links. Do not load all traces or rerun completed studies.",
+    "Use publication maps for original execution versus published commit identities. Keep repository as canonical memory."
+  ],
+  "goal": {
+    "implementation": "Runnable Cortex-M23 C near10240B complete subsystem SRAM",
+    "estimation": "Estimate stimulus-supported quantities, carry earlier evidence/uncertainty and expose unresolved quantities; nominal35Hz with actual intervals/order.",
+    "capacity_error_percent": {
+      "hard": 5,
+      "preferred": 0.5
+    },
+    "SOC_error_pp": {
+      "hard": 10,
+      "preferred": 0.5
+    }
+  },
+  "current": {
+    "milestone": "M2/A4 candidate work; M1 lifecycle complete; neither bounded candidate promoted",
+    "production": "bounded_online_002 unchanged; numerical remedy remains diagnostic-only",
+    "design": "Exactly2 persistent public logQ-split components, separate nonlinear physical states/full packed lower factors, causal pre-correction log weights. No pruning, merging, reseeding or moment-collapse feedback.",
+    "public_split": "Equal weights; logQ means mu +/-sqrt(2/pi)*sigma; component SD sigma*sqrt(1-2/pi). All other public coordinates unchanged. Initial log moments match; density/higher moments change.",
+    "checks": "One saved-evidence audit and one C layout probe;15 layout checks pass;0 new estimator inference/primary runs.",
+    "new_evidence": "Saved B final OCV error-57.44mV is offset by hysteresis+57.58mV. Wrong narrow Q precedes first reversal. Final h lies0.01259886 below a broad public input-only reachable bound; ordinary-double analytic witness, not a certificate or proven bias cause.",
+    "memory": "Proposed owned7152B, complete budget10032B including unmeasured reserves;208B headroom; planned new checkpoint3004B. Learner/target timing and memory unqualified.",
+    "transaction": "Full live/staged banks; max6 predictions/2 corrections/2 scores per interval. Any component correction/weight failure rejects wholebank voltage and regenerates both predictions from immutable live. Prediction failure consumes known interval once and requires recovery.",
+    "freshness": "Common physical input ledger; distinct percomponent conditional evidence cursors; separate bank evidence cursor for conditional or represented weight-only learning. See exact design rules.",
+    "uncertainty": "Application SOC/Q accuracy unresolved uniformly; local/mixture precision diagnostic only; no hard support or validated coverage. Labels/withholding cannot manufacture a pass.",
+    "open": [
+      "17 original cold rejections remain unattributed.",
+      "Two components may share bias or weights may favor the wrong component; no measured capacity remedy yet.",
+      "Complete Cortex-M23, annual behavior and full-model indefinite stability remain open."
+    ]
+  },
+  "next": {
+    "work_branch": "implementation/nonlinear-hypothesis-001",
+    "design": "plans/nonlinear_evidence_design_001.json",
+    "test": "plans/nonlinear_hypothesis_falsification_001.json",
+    "action": "Implement the exact packed two-component contract plus the already frozen numerical remedy in both arms. Pass targeted algebra/transactions/weights/evidence cursors/persistence fixtures; freeze source, commands, binary and resources before inference.",
+    "comparison": "One existing Cell B prefix0..31499, nominal900s: two coincident public components versus two public logQ-split components;63000 total primary deliveries. No truth in inference.",
+    "keep_condition": "Available aggregateQ within5% andSOC within10pp at900s, numerical/accounting gates pass, no known resource-budget excess. This retains a candidate for later qualification only.",
+    "stop": "One comparison then keep/reject/attribution-unresolved. B900 is the inherited timely-learning gate; M1 also failed it, so failure is not physical unidentifiability. No horizon/count/start sweep or full two-cell primary."
+  },
+  "evidence": {
+    "design": "plans/nonlinear_evidence_design_001.json",
+    "audit_plan": "experiments/nonlinear_evidence_design_001/plan.json",
+    "receipt": "experiments/nonlinear_evidence_design_001/primary/receipt.json",
+    "audit": "experiments/nonlinear_evidence_design_001/primary/evidence_audit.json",
+    "layout": "experiments/nonlinear_evidence_design_001/primary/layout_probe.json",
+    "report": "experiments/nonlinear_evidence_design_001/REPORT.md",
+    "independent_review": "experiments/nonlinear_evidence_design_001/independent_review.json",
+    "verification": "experiments/nonlinear_evidence_design_001/verification.json",
+    "publication": "provenance/nonlinear_evidence_design_001_publication.json",
+    "numerical_remedy": "experiments/boundary_transaction_diagnostic_001/decision.json",
+    "uncertainty_decision": "plans/local_uncertainty_decision_001.json",
+    "bounded002": "experiments/bounded_online_002/summary.json",
+    "prior_handoff": "handoff/archive/CONTINUE_boundary_transaction_diagnostic_001.json",
+    "roadmap": "docs/ROADMAP.md"
+  },
+  "guardrails": [
+    "Truth only in generation/post-inference scoring; never starts/reset/inference/weights/tuning.",
+    "Keep actual intervals/order and carried states. Conditional alternatives combine by a sum, not independent precisions. No posterior or observation double counting.",
+    "Use identical actual gain for mean/full Joseph; preserve physical prediction on rejected correction; preserve duplicate atomicity.",
+    "Distinguish numerical health, point error, local precision, hard support and coverage. Keep original failed gates.",
+    "Preserve bounded001/002, diagnostic artifacts, original execution bundles and all provenance.",
+    "No automatic completed-study reruns, extra primary, duration expansion or reporting-only accuracy claim.",
+    "Machine handoffs compact JSON/YAML; mumble remains distinct from SpanishCastleMagic, NAIA and D2/D2E proof claims."
+  ]
+}
