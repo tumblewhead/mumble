@@ -1,0 +1,132 @@
+{
+  "schema": "mumble_boundary_transaction_diagnostic_summary_v1",
+  "experiment": "boundary_transaction_diagnostic_001",
+  "branch": "diagnostic/online-boundary-001",
+  "base_revision": "3177f499d3c23c0586504864ba22b9eca9050a47",
+  "source_revision": "cded053a4160a9b5f3726062235d7a200009ab6f",
+  "source_tree": "ee9d4eabcb68dfb59b7759e694bbac6e25519f61",
+  "status": "completed_once_witness_reproduced_remedy_decision_frozen",
+  "decision": "Keep component-wise gain selection; select a finite actual-mean coordinate zero-gain fallback for a subsequent learner revision.",
+  "production_integration": "not_applied; frozen src/scm_online.c and estimator model/checkpoint version 2 remain unchanged",
+  "execution": {
+    "runner_invocations": 1,
+    "fixture_variants": 2,
+    "scalar_cases_per_variant": 14,
+    "ingest_calls_per_variant": 9,
+    "accepted_constructed_inputs_per_variant": 7,
+    "duplicate_calls_per_variant": 2,
+    "cell_trace_deliveries": 0,
+    "new_two_cell_primary_runs": 0,
+    "optimizer_calls": 0,
+    "truth_input": false,
+    "clean_working_tree_at_execution": true
+  },
+  "results": {
+    "baseline_assertions": 105,
+    "remedy_assertions": 520,
+    "total_assertions": 625,
+    "failed_assertions": 0,
+    "baseline_boundary_defect_reproduced": true,
+    "remedy_full_observation_accepted": true,
+    "same_actual_gain_mean_and_Joseph": true,
+    "max_dense_Joseph_error": 2.220446049250313e-16,
+    "advanced_prediction_preserved_on_rejection": true,
+    "input_exactly_once": true,
+    "duplicate_byte_atomic": true,
+    "all_zero_gain_bytes_preserved": true,
+    "original_numerical_health_gate_reclassified": false,
+    "candidate_promoted": false
+  },
+  "minimal_witness": {
+    "mean": "2^-1074",
+    "normalized_gain": 1,
+    "standardized_innovation": -1.5,
+    "rounded_scale_and_selected_gain": "2^-1074",
+    "rounded_applied_change": "-2*2^-1074",
+    "proposed_mean": "-2^-1074",
+    "failure_stage": "mean_domain",
+    "coordinate": 9
+  },
+  "full_witness": {
+    "return": 0,
+    "default_sigma_V": 0.001,
+    "mean_R3_before_hex": "0x0.0000000000007p-1022",
+    "mean_R3_after_hex": "0x0.0000000000007p-1022",
+    "voltage_V": -4.146508181822691,
+    "rejected_corrections": 1,
+    "evidence_next_index": 0,
+    "capture": {
+      "stage": "mean_domain",
+      "coordinate": 9,
+      "column": -1,
+      "fallback_mask": 0,
+      "boundary_coordinate": 9,
+      "mean_before_hex": "0x0.0000000000007p-1022",
+      "raw_gain_hex": "0x1.ffffef3909326p-3",
+      "standard_hex": "-0x1p+3",
+      "raw_change_hex": "-0x1.ffffef3909326p+0",
+      "scale_hex": "0x0.0000000000004p-1022",
+      "attempted_selected_gain_hex": "0x0.0000000000001p-1022",
+      "proposed_mean_hex": "-0x0.0000000000001p-1022"
+    }
+  },
+  "memory_bytes": {
+    "state": 2424,
+    "workspace": 2936,
+    "query": 536,
+    "fixture_capture": 80,
+    "production_added": 0,
+    "checkpoint_added": 0,
+    "core_state_workspace_query": 5896,
+    "maximum_named_fixture_capture_records": 2,
+    "maximum_named_fixture_capture_bytes": 160,
+    "inherited_named_host_objects": 7064,
+    "inherited_host_objects_plus_own_stack_partial": 8184,
+    "complete_M23_subsystem_qualified": false
+  },
+  "uncertainty_decision": {
+    "path": "plans/local_uncertainty_decision_001.json",
+    "application_SOC_Q_accuracy": "unresolved_uniformly_for_this_learner",
+    "local_precision": "retained_as_diagnostic",
+    "coverage": "unvalidated",
+    "hard_support": "not_provided_by_local_Gaussian",
+    "historical_gates_and_statuses": "unchanged",
+    "capacity_bias_repaired": false
+  },
+  "historical_rejections": {
+    "attribution": "unresolved",
+    "missing_datum": "One actual rejected step with stage, coordinate/column, input, predicted mean/factor and gain/innovation operands. Query endpoints do not contain these.",
+    "new_replay_authorized_by_this_decision": false
+  },
+  "preservation": {
+    "production_source_sha256": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+    "production_hash_unchanged_after_execution": true,
+    "fixture_source_hashes_unchanged_after_execution": true,
+    "source_revision_frozen_before_execution": true,
+    "original_execution_publication_mapping": "provenance/bounded_online_002_publication.json"
+  },
+  "next": {
+    "action": "One bounded design decision on nonlinear evidence and biased capacity; choose one concrete mechanism with evidence semantics, complete resources and a discriminating small test, or name the missing datum.",
+    "plan": "plans/local_uncertainty_decision_001.json",
+    "no_automatic_primary_or_duration_extension": true
+  },
+  "evidence": {
+    "plan": "experiments/boundary_transaction_diagnostic_001/plan.json",
+    "receipt": "experiments/boundary_transaction_diagnostic_001/primary/receipt.json",
+    "report": "experiments/boundary_transaction_diagnostic_001/REPORT.md",
+    "decision": "experiments/boundary_transaction_diagnostic_001/decision.json",
+    "baseline": "experiments/boundary_transaction_diagnostic_001/primary/baseline.json",
+    "remedy": "experiments/boundary_transaction_diagnostic_001/primary/remedy.json",
+    "independent_review": "experiments/boundary_transaction_diagnostic_001/independent_review.json",
+    "verification": "experiments/boundary_transaction_diagnostic_001/verification.json"
+  },
+  "claims": {
+    "finite_host_arithmetic_witness": true,
+    "original_17_causes_identified": false,
+    "production_numerical_fix_applied": false,
+    "full_model_indefinite_stability": false,
+    "hard_accuracy": false,
+    "coverage_validated": false,
+    "M23_qualified": false
+  }
+}

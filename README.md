@@ -25,11 +25,16 @@ reject 7 and 10 corrections. These are separate failures: the inaccurate
 control arm rejects none. Both the [first result](docs/BOUNDED_ONLINE_001.md)
 and this successor's first outputs remain preserved.
 
-The [next bounded action](plans/boundary_transaction_diagnostic_001.json) is
-one tiny boundary-arithmetic/transaction diagnostic that records the failed
-stage and coordinate. Its stop rule is a minimal numerical witness or an
-explicit missing datum. A separate decision about biased local uncertainty
-is required before another primary; longer campaigns follow qualification.
+The [boundary transaction diagnostic](experiments/boundary_transaction_diagnostic_001/REPORT.md)
+is complete. A minimal subnormal witness reproduces a negative R3 trial;
+a diagnostic-only coordinate zero-gain fallback passes 625 combined assertions
+with the same actual gain in the mean and full Joseph covariance. Prediction
+preservation and exactly-once accounting pass. Production source remains
+unchanged, and the original 17 rejections still lack individual failure records.
+The [separate uncertainty decision](plans/local_uncertainty_decision_001.json)
+keeps local precision as a diagnostic and application SOC/Q accuracy unresolved.
+The next task is one bounded nonlinear-evidence design decision addressing
+biased capacity before another primary; longer campaigns follow qualification.
 
 The [supplemental M1 belief audit](experiments/m1_belief_audit_001/REPORT.md)
 reports all sixteen fitted quantities and applies the new targets to the frozen
@@ -59,10 +64,13 @@ experiment work to specific delivery decisions.
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
+| [Completed boundary diagnostic](experiments/boundary_transaction_diagnostic_001/summary.json) | Minimal numerical witness, 625 passing fixture assertions, selected remedy and preserved transaction invariants; no cell replay |
+| [Boundary remedy decision](experiments/boundary_transaction_diagnostic_001/decision.json) | Finite actual-mean coordinate zero-gain fallback tested in a diagnostic variant; production source unchanged |
+| [Separate uncertainty decision](plans/local_uncertainty_decision_001.json) | Local precision retained; application accuracy unresolved uniformly; capacity bias and original failed gates remain open |
 | [Current bounded online result](experiments/bounded_online_002/REPORT.md) | Component-wise gain removes global stalls; capacity, local qualification and 17 cold correction rejections still block promotion |
 | [Bounded online summary](experiments/bounded_online_002/summary.json) | Compact result and selective links; read before raw outputs |
 | [Bounded online publication](provenance/bounded_online_002_publication.json) | Verified canonical trees and preserved original execution commits |
-| [Next numerical diagnostic](plans/boundary_transaction_diagnostic_001.json) | Small boundary/transaction fixture, explicit failure capture and a strict stop rule |
+| [Original numerical diagnostic plan](plans/boundary_transaction_diagnostic_001.json) | Preserved queued plan; completed outcome is in the boundary diagnostic summary above |
 | [First bounded online result](docs/BOUNDED_ONLINE_001.md) | Preserved predecessor, common-gain stalls and separate wrong narrow capacity beliefs |
 | [M1 full-belief audit](experiments/m1_belief_audit_001/REPORT.md) | Full sixteen-quantity errors, current-state transport and supplemental target scores without rerunning M1 |
 | [M1 lifecycle report](docs/TRAJECTORY_INTEGRATION_001.md) | Two-cell operation, exact warm continuation, cold reset, preserved usefulness failure and next blocker |
@@ -106,7 +114,7 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
 | **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
-| **M2: Desktop performance and year-scale behavior** | **A4: two candidates evaluated; neither promoted.** Diagnose the successor's cold correction transaction, then resolve biased local uncertainty before another small candidate gate; variations and duration increases remain gated |
+| **M2: Desktop performance and year-scale behavior** | **A4: two candidates evaluated; neither promoted.** Boundary fixture complete and remedy selected; decide a bounded nonlinear-evidence mechanism for biased capacity before another small candidate gate. Variations and duration increases remain gated |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality
@@ -258,13 +266,16 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-Proceed to the [small M2/A4 diagnostic](plans/boundary_transaction_diagnostic_001.json)
-from the latest `implementation/bounded-online-002` descendant. Its single
-purpose is to identify the exact rejected-correction operation near a parameter
-boundary. Preserve both bounded candidates, the completed M1 campaign and the
-original 60-fit study. The successor removes global stalls, but biased narrow
-capacity remains an independent learner-selection blocker. Freeze the numerical
-remedy and the separate uncertainty decision before another primary run.
+The [small M2/A4 diagnostic](experiments/boundary_transaction_diagnostic_001/REPORT.md)
+has reached its finish line on `diagnostic/online-boundary-001`: a reproducible
+mean-domain failure at R3 and a tested coordinate-only remedy decision. It does
+not identify the causes of the original 17 rejected steps or change live
+inference. Preserve both candidates, the completed M1 campaign and the original
+60-fit study. Next, follow the
+[nonlinear-evidence decision boundary](plans/local_uncertainty_decision_001.json)
+to address biased narrow capacity with one concrete mechanism and discriminating
+test. The numerical remedy and reporting decision alone do not qualify accuracy
+or authorize another primary run.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to

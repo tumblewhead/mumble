@@ -1,0 +1,252 @@
+{
+  "schema": "mumble_boundary_transaction_diagnostic_receipt_v1",
+  "created_utc": "2026-10-25T23:14:14.001049+00:00",
+  "source_revision": "cded053a4160a9b5f3726062235d7a200009ab6f",
+  "source_tree": "ee9d4eabcb68dfb59b7759e694bbac6e25519f61",
+  "branch": "diagnostic/online-boundary-001",
+  "working_tree_status_at_start": "",
+  "host": {
+    "system": "Linux",
+    "release": "6.18.55",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "compiler": {
+    "requested": "cc",
+    "resolved": "/usr/bin/cc",
+    "version_process": {
+      "command": [
+        "/usr/bin/cc",
+        "--version"
+      ],
+      "returncode": 0,
+      "timeout_s": 60,
+      "stdout": "compiler_version.txt",
+      "stderr": "compiler_version.stderr.txt",
+      "stdout_sha256": "e412d6c932acaaea35c743bc158d4ba2400ca0e3df66df406a872b2ce0f8601b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "version": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n"
+  },
+  "source_hashes": {
+    "src/scm_online.c": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_online.h": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "tools/boundary_transaction_diagnostic.c": "7d4ea18a4871b9036d8cca7eab0ae5288034b134b6f9e6db0274b6a8c1f05b5e",
+    "tools/run_boundary_transaction_diagnostic.py": "5dfcb0c206061408bbba913b2600376e328f8c573638b89c96e4ff49477180cc",
+    "tools/boundary_transaction_capture.h": "22a472f7c14afc97343c4606b1affcb9300b5e4691faea4ecd6eaddcabbe02a7"
+  },
+  "frozen_production_source_sha256": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+  "generated_sources": {
+    "baseline": {
+      "path": "baseline.instrumented.c",
+      "sha256": "d371371f8c680332fca29fec38b83725a7cdf9568a0fcc12fee9f5d6bc418a5f",
+      "scalar_loop_sha256": "bd87d66f91c2e740f6cd749d6b8410a8c299e93b7b4e412036c353819b281815"
+    },
+    "remedy": {
+      "path": "remedy.instrumented.c",
+      "sha256": "e1f7d655993e700d0ed0790e12d2703f0f791197f9c8f0df70d78c919795db3c",
+      "scalar_loop_sha256": "055924fde87248b0d3ffafc4f0ca90e0c131f9877fe5f9e53074e492ff37c2d5"
+    }
+  },
+  "asserted_instrumentation_edits": [
+    {
+      "label": "correction_capture_argument",
+      "matches": 1
+    },
+    {
+      "label": "stage_observation",
+      "matches": 1
+    },
+    {
+      "label": "stage_innovation",
+      "matches": 1
+    },
+    {
+      "label": "stage_projection",
+      "matches": 1
+    },
+    {
+      "label": "stage_innovation_sd",
+      "matches": 1
+    },
+    {
+      "label": "stage_optimal_rotation",
+      "matches": 1
+    },
+    {
+      "label": "stage_standard",
+      "matches": 1
+    },
+    {
+      "label": "stage_raw_change",
+      "matches": 1
+    },
+    {
+      "label": "stage_mean_domain_and_attempt_capture",
+      "matches": 1
+    },
+    {
+      "label": "stage_joseph_sd",
+      "matches": 1
+    },
+    {
+      "label": "stage_joseph_rotation",
+      "matches": 1
+    },
+    {
+      "label": "stage_final_observation",
+      "matches": 1
+    },
+    {
+      "label": "stage_validation",
+      "matches": 1
+    },
+    {
+      "label": "capture_header",
+      "matches": 1
+    },
+    {
+      "label": "fixture_ingest_name_and_capture_argument",
+      "matches": 1
+    },
+    {
+      "label": "ingest_capture_reset",
+      "matches": 1
+    },
+    {
+      "label": "pass_capture_to_correct",
+      "matches": 1
+    }
+  ],
+  "asserted_remedy_edits": [
+    {
+      "label": "finite_actual_mean_coordinate_fallback",
+      "matches": 1
+    },
+    {
+      "label": "remove_old_mean_check_after_masks",
+      "matches": 1
+    }
+  ],
+  "remedy_diff": {
+    "path": "remedy.diff",
+    "sha256": "74448f4901965e9cb3cd050ac48a62147f18c68ef15618805450f96a792b563a"
+  },
+  "production_source_modified": false,
+  "persistent_state_or_checkpoint_ABI_modified": false,
+  "cell_histories_opened": 0,
+  "primary_runs": 0,
+  "truth_input": false,
+  "processes": [
+    {
+      "variant": "baseline",
+      "build": {
+        "command": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-Werror",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-Iinclude",
+          "-Itools",
+          "-DFIXTURE_REMEDY=0",
+          "/workspace/scratch/98915f4fc1a4/mumble/experiments/boundary_transaction_diagnostic_001/primary/baseline.instrumented.c",
+          "/workspace/scratch/98915f4fc1a4/mumble/tools/boundary_transaction_diagnostic.c",
+          "src/scm_model.c",
+          "-lm",
+          "-o",
+          "/tmp/mumble-boundary-001-z7dj0i6y/baseline"
+        ],
+        "returncode": 0,
+        "timeout_s": 60,
+        "stdout": "baseline.build.stdout.txt",
+        "stderr": "baseline.build.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "passed": true,
+      "binary_sha256": "b4d8e44976c74ebfd1aa2cd9157f5358e513f8e85c7bae151adaefd62a6e9450",
+      "run": {
+        "command": [
+          "/tmp/mumble-boundary-001-z7dj0i6y/baseline"
+        ],
+        "returncode": 0,
+        "timeout_s": 60,
+        "stdout": "baseline.json",
+        "stderr": "baseline.stderr.txt",
+        "stdout_sha256": "270e3698a68acf229071b0e079534ccdf23bb8f46e919d831fb16683037c2e4e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "summary": {
+        "schema": "mumble_boundary_transaction_fixture_v1",
+        "checks": 105,
+        "failed_checks": 0,
+        "result": "expected_outcomes_reproduced"
+      }
+    },
+    {
+      "variant": "remedy",
+      "build": {
+        "command": [
+          "/usr/bin/cc",
+          "-std=c99",
+          "-O3",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-Werror",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-Iinclude",
+          "-Itools",
+          "-DFIXTURE_REMEDY=1",
+          "/workspace/scratch/98915f4fc1a4/mumble/experiments/boundary_transaction_diagnostic_001/primary/remedy.instrumented.c",
+          "/workspace/scratch/98915f4fc1a4/mumble/tools/boundary_transaction_diagnostic.c",
+          "src/scm_model.c",
+          "-lm",
+          "-o",
+          "/tmp/mumble-boundary-001-z7dj0i6y/remedy"
+        ],
+        "returncode": 0,
+        "timeout_s": 60,
+        "stdout": "remedy.build.stdout.txt",
+        "stderr": "remedy.build.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "passed": true,
+      "binary_sha256": "0bf43fbfc5e82c5605407eed6fc32da3d2bde17a22b50ea4a18ad3e040b11ec7",
+      "run": {
+        "command": [
+          "/tmp/mumble-boundary-001-z7dj0i6y/remedy"
+        ],
+        "returncode": 0,
+        "timeout_s": 60,
+        "stdout": "remedy.json",
+        "stderr": "remedy.stderr.txt",
+        "stdout_sha256": "fc57ad80a4df8bb318c19fb2e126082dbbda5d4668ba61f90d092b0c6714285d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "summary": {
+        "schema": "mumble_boundary_transaction_fixture_v1",
+        "checks": 520,
+        "failed_checks": 0,
+        "result": "expected_outcomes_reproduced"
+      }
+    }
+  ],
+  "limitations": [
+    "Constructed finite host fixtures; historical rejection attribution remains open.",
+    "No full-model indefinite-stability, accuracy, coverage or Cortex-M23 qualification."
+  ],
+  "production_hash_unchanged_after": true,
+  "source_hashes_unchanged_after": true,
+  "passed": true,
+  "completed_utc": "2026-10-25T23:14:15.291123+00:00"
+}

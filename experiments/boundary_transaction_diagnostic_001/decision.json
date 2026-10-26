@@ -1,0 +1,62 @@
+{
+  "schema": "mumble_boundary_transaction_remedy_decision_v1",
+  "status": "frozen_after_one_diagnostic",
+  "source_revision": "cded053a4160a9b5f3726062235d7a200009ab6f",
+  "decision": "Keep component-wise gain selection; select a finite actual-mean coordinate zero-gain fallback for a subsequent learner revision.",
+  "production_integration": "not_applied; frozen src/scm_online.c and estimator model/checkpoint version 2 remain unchanged",
+  "rule": [
+    "Compute t=lambda*gain and the actual rounded proposed mean in the production operation order.",
+    "Reject nonfinite results as before. If the proposed mean is finite but outside its coordinate support, set t=0 and lambda=0 and retain the committed predicted coordinate.",
+    "Store final t and compute masks/extrema from that selection; use exactly the same t in the mean and full Joseph covariance.",
+    "Retain the all-zero-gain byte-preservation path, prediction-before-correction transaction and exactly-once ledgers."
+  ],
+  "why": "Rounded feasibility division and ineffective relative backoff admit a one-subnormal-unit negative trial. A coordinate-only fallback provides a finite support-preserving choice without suppressing other coordinates or clipping mean independently of covariance.",
+  "bounded_work": "One actual-mean feasibility branch per coordinate; no retries, search, variance floor, process noise, forgetting or observation reuse.",
+  "cost": {
+    "new_persistent_bytes": 0,
+    "new_checkpoint_bytes": 0,
+    "new_gain_vectors": 0,
+    "capture_record_bytes": 80,
+    "capture_scope": "fixture only; two named records may coexist (160 bytes). No full fixture-process or target-stack claim."
+  },
+  "witness": {
+    "scalar_case": "lower_adjacent_outward",
+    "baseline_stage": "mean_domain",
+    "coordinate": 9,
+    "coordinate_name": "R3",
+    "minimal_mean_hex": "0x0.0000000000001p-1022",
+    "proposed_mean_hex": "-0x0.0000000000001p-1022",
+    "full_transaction": "API-valid constructed state using default noise; not established as a physically reachable battery state/input"
+  },
+  "verification": {
+    "baseline_assertions": 105,
+    "remedy_assertions": 520,
+    "failed_assertions": 0,
+    "max_dense_Joseph_error": 2.220446049250313e-16,
+    "transaction_and_duplicate_controls_passed": true,
+    "other_failure_stage_preserved": "innovation_sd,column0"
+  },
+  "historical_17_rejections": {
+    "attribution": "unresolved",
+    "missing_datum": "One actual rejected step with stage, coordinate/column, input, predicted mean/factor and gain/innovation operands. Query endpoints do not contain these.",
+    "new_replay_authorized_by_this_decision": false
+  },
+  "separate_uncertainty_decision": "plans/local_uncertainty_decision_001.json",
+  "before_another_primary": "Freeze a concrete bounded learner/nonlinear-evidence mechanism addressing biased local uncertainty and one discriminating test. Numerical repair and reporting policy alone do not qualify accuracy or permit campaign escalation.",
+  "stopping_rule_satisfied": true,
+  "evidence": {
+    "plan": "experiments/boundary_transaction_diagnostic_001/plan.json",
+    "receipt": "experiments/boundary_transaction_diagnostic_001/primary/receipt.json",
+    "baseline": "experiments/boundary_transaction_diagnostic_001/primary/baseline.json",
+    "remedy": "experiments/boundary_transaction_diagnostic_001/primary/remedy.json",
+    "variant_difference": "experiments/boundary_transaction_diagnostic_001/primary/remedy.diff",
+    "independent_review": "experiments/boundary_transaction_diagnostic_001/independent_review.json"
+  },
+  "not_claimed": [
+    "Historical rejection attribution",
+    "Full-model indefinite stability",
+    "Capacity bias repaired",
+    "Validated uncertainty coverage",
+    "Cortex-M23 qualification"
+  ]
+}

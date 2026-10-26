@@ -2,13 +2,15 @@
 
 ## Decision
 
-**M1's desktop lifecycle is complete, and the first autonomous bounded learner
-has completed its small falsification.** Both have preserved performance
-failures. The bounded learner passes functionality and its initial storage
-gate, but fails capacity accuracy and uncertainty qualification; it is not
-promoted. The next action is **one boundary-aware gain design and one repeat
-of the same small two-cell harness**. Longer trajectories follow a qualified
-candidate, then a runnable Cortex-M23 C subsystem near **10 KiB total SRAM**.
+**M1's desktop lifecycle is complete; both bounded candidates remain unpromoted,
+and the boundary transaction diagnostic has reached its finish line.** A
+minimal subnormal witness reproduces a mean-domain failure, and a diagnostic
+coordinate zero-gain fallback preserves the transaction and full covariance.
+Production inference remains unchanged. The next action is **one bounded
+nonlinear-evidence design decision addressing biased capacity and local
+qualification**. A concrete mechanism and discriminating test must be frozen
+before another primary. Longer trajectories follow a qualified candidate, then
+a runnable Cortex-M23 C subsystem near **10 KiB total SRAM**.
 
 The original priority change put integration ahead of another uncertain-RC
 refinement. That completed integration now supports the learner decision.
@@ -37,7 +39,7 @@ applies the new interpretation without replacing the frozen M1 scores.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — two A4 candidates evaluated** | One small boundary/transaction diagnostic and a separate biased-uncertainty decision, then a qualified bounded learner, short variations and selected annual streams | Chosen candidate meets hard target, lifecycle, resource, numerical-health and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
+| **M2: Desktop performance — boundary diagnostic complete** | One bounded nonlinear-evidence design decision for biased capacity, then a qualified bounded learner, short variations and selected annual streams | Chosen candidate meets hard target, lifecycle, resource, numerical-health and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -124,6 +126,18 @@ and **10** corrections. The saved queries associate those windows with R3 near
 zero but do not identify the failed internal operation. The
 [behavior review](../experiments/bounded_online_002/behavior_review.json) keeps
 that cause unresolved. No annual run follows this result.
+
+The [boundary transaction diagnostic](../experiments/boundary_transaction_diagnostic_001/REPORT.md)
+is now complete. One fixed fixture reproduces the mean-domain defect at R3 and
+checks a finite coordinate-only zero-gain fallback. All 625 baseline/remedy
+assertions pass; the baseline success means its expected defect reproduced.
+The maximum remedy-versus-dense-Joseph covariance error is 2.22e-16. A positive-dt
+failure preserves the advanced prediction, duplicate inputs are byte-atomic,
+and no cell histories or new two-cell primaries ran. Production source remains
+unchanged; the historical 17 rejection causes still lack actual failed-step
+records. The [numerical remedy](../experiments/boundary_transaction_diagnostic_001/decision.json)
+and [separate uncertainty decision](../plans/local_uncertainty_decision_001.json)
+are frozen. Neither repairs or qualifies the measured capacity bias.
 
 The user-requested compact-layout step is now implemented and checked in
 [compact_bounded_001](COMPACT_BOUNDED_001.md). Its fixed-chart component owns
@@ -245,37 +259,44 @@ A new framework or a comprehensive fault Cartesian product is not required.
 
 ## M2 action plan: establish desktop performance, then extend duration
 
-### A4. Qualify one autonomous bounded learner — diagnostic next
+### A4. Qualify one autonomous bounded learner — nonlinear-evidence decision next
 
-Both frozen candidates are complete and preserved. Keep the successor's useful
-component-wise gain mechanism; reject its promotion. The independently checked
-two-pass factor update preserves the full Joseph covariance for the actual
-chosen gain in fixed memory and fixed source-level work. It resolves the
-observed global-stall mechanism, while the numerical and qualification gates
-expose separate remaining defects.
+Both frozen candidates remain complete and preserved. Keep the successor's
+component-wise gain mechanism and the selected numerical remedy; reject
+candidate promotion. The full factor must continue to use the actual selected
+gain in both the mean and full Joseph covariance.
 
-The [next action](../plans/boundary_transaction_diagnostic_001.json) is one tiny
-deterministic boundary-arithmetic/transaction fixture with explicit failed-stage
-and coordinate capture. Cover zero, adjacent representable and subnormal
-distances, both correction signs, and the production floating-point operation
-order. A source-level hypothesis is that the limiting calculation and applied
-mean step round differently near zero while the relative backoff becomes
-ineffective. The current primary does not establish that as the cause of its
-17 rejected corrections.
+The [boundary diagnostic](../experiments/boundary_transaction_diagnostic_001/summary.json)
+has stopped at its declared finish line: one minimal binary64 witness and a
+frozen finite-mean zero-gain fallback. The fixture confirms that a subnormal
+feasibility multiplier can round upward while its relative backoff has no
+representable effect. Stage/coordinate capture identifies the constructed
+failure as `mean_domain`, R3. This does not attribute the original 17 events,
+whose actual failure operands were not saved.
 
-Stop at a minimal reproducible witness and a keep/change decision, or record
-the missing datum if the mechanism is not reproduced. Preserve prediction on
-rejection, exactly-once input accounting and the same actual gain in the mean
-and full covariance. Account for any added diagnostic storage before adding it
-to the live model. This diagnostic needs no trajectory replay, optimizer,
-parameter sweep or new proof program.
+The remedy is tested in a diagnostic variant only. It adds no production
+state or checkpoint bytes. A fixture capture record is 80 bytes, with two
+named records coexisting in transaction controls; neither the capture nor
+the host oracle is part of the embedded implementation. Preserve the committed
+prediction on rejection, exactly-once input accounting and all-zero-gain byte
+identity when a subsequent learner revision integrates the remedy.
 
-Before another small-harness primary, freeze the numerical remedy and a
-separate decision for biased local-Gaussian uncertainty. Cell B control's wrong
-narrow capacity has zero rejected corrections; fixing the boundary transaction
-alone cannot explain or qualify that behavior. Preserve public priors, model,
-noise, target thresholds and all first outcomes unless a later frozen design
-explicitly declares a justified change.
+The [local uncertainty decision](../plans/local_uncertainty_decision_001.json)
+keeps the full covariance and local ranges as precision diagnostics.
+Application SOC/Q accuracy stays unresolved uniformly for this learner,
+coverage stays unvalidated, and the local Gaussian supplies no hard support.
+Original raw statuses, failed qualification audits, point-error limits and
+useful-availability gates stay unchanged. An all-unresolved reporting policy
+cannot manufacture a performance pass.
+
+Next, make one narrowly scoped design decision: what bounded mechanism can
+retain or check enough nonlinear evidence to address the observed capacity
+bias? Freeze its evidence semantics, complete resource costs and one
+falsifying small test, or identify the missing datum. Cell B control's wrong
+narrow capacity has zero rejected corrections, so this requires a separate
+learner/uncertainty mechanism. Do not automatically repeat the diagnostic or
+primary, integrate the numerical variant, tune noise/priors/thresholds, or
+queue reporting-only work as a substitute for the accuracy decision.
 
 Promotion still requires hard targets, lifecycle, resources, numerical health
 and honest uncertainty qualification. Report the preferred 0.5%/0.5 pp region
@@ -392,10 +413,12 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Create `diagnostic/online-boundary-001` from the latest published
-`implementation/bounded-online-002` descendant. Execute the
-[boundary/transaction diagnostic plan](../plans/boundary_transaction_diagnostic_001.json)
-to identify a minimal numerical witness with failed-stage/coordinate capture.
-Stop there and record the remedy decision. Biased narrow capacity remains a
-separate design blocker before another small-harness primary. Day, week and
-year runs follow only a qualified candidate.
+Continue from the latest `diagnostic/online-boundary-001` descendant and read
+the [completed diagnostic](../experiments/boundary_transaction_diagnostic_001/summary.json)
+without rerunning it. A suggested next work branch is
+`design/online-nonlinear-evidence-001`. Follow the
+[separate uncertainty decision](../plans/local_uncertainty_decision_001.json)
+to select one concrete bounded mechanism and discriminating test for biased
+capacity, or record the missing datum. The numerical remedy and reporting
+policy alone do not permit another primary. Day, week and year runs follow
+only a qualified candidate.

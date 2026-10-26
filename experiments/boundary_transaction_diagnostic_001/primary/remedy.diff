@@ -1,0 +1,60 @@
+--- baseline.instrumented.c
++++ remedy.instrumented.c
+@@ -212,18 +212,22 @@
+         if(change>0){limit=(upper[i]-s->mean[i])/change;if(limit<lambda)lambda=limit;}
+         else if(change<0){limit=(lower[i]-s->mean[i])/change;if(limit<lambda)lambda=limit;}
+         lambda=fmax(0.,fmin(1.,lambda));if(lambda<1.)lambda*=1.-1e-9;
+-        t=lambda*gain;w->correction[i]=t;
++        t=lambda*gain;
++        value=s->mean[i]+t*standard;
++        if(i==9||!isfinite(value)||value<lower[i]||value>upper[i])
++            fixture_record_boundary(capture,i,s->mean[i],gain,standard,change,lambda,t,value);
++        if(!isfinite(value))return fixture_capture_fail(capture,BOUNDARY_STAGE_MEAN_DOMAIN,i,-1);
++        if(value<lower[i]||value>upper[i]) {
++            if(capture)capture->fallback_mask|=1u<<i;
++            lambda=0.;t=0.;value=s->mean[i];
++        }
++        w->correction[i]=t;
+         if(gain!=0) {
+             active=1;minimum=fmin(minimum,lambda);maximum=fmax(maximum,lambda);
+             if(lambda<1.)limited|=1u<<i;
+             if(t==0)blocked|=1u<<i;
+         }
+         if(t!=0)any_gain=1;
+-        value=s->mean[i]+t*standard;
+-        if(i==9||!isfinite(value)||value<lower[i]||value>upper[i])
+-            fixture_record_boundary(capture,i,s->mean[i],gain,standard,change,lambda,t,value);
+-        if(!isfinite(value)||value<lower[i]||value>upper[i])
+-            return fixture_capture_fail(capture,BOUNDARY_STAGE_MEAN_DOMAIN,i,-1);
+         if(t!=0&&standard!=0)s->mean[i]=value;
+     }
+     if(!active)maximum=1.;
+@@ -385,18 +389,22 @@
+         if(change>0){limit=(upper[i]-s->mean[i])/change;if(limit<lambda)lambda=limit;}
+         else if(change<0){limit=(lower[i]-s->mean[i])/change;if(limit<lambda)lambda=limit;}
+         lambda=fmax(0.,fmin(1.,lambda));if(lambda<1.)lambda*=1.-1e-9;
+-        t=lambda*gain;w->correction[i]=t;
++        t=lambda*gain;
++        value=s->mean[i]+t*standard;
++        if(i==9||!isfinite(value)||value<lower[i]||value>upper[i])
++            fixture_record_boundary(capture,i,s->mean[i],gain,standard,change,lambda,t,value);
++        if(!isfinite(value))return fixture_capture_fail(capture,BOUNDARY_STAGE_MEAN_DOMAIN,i,-1);
++        if(value<lower[i]||value>upper[i]) {
++            if(capture)capture->fallback_mask|=1u<<i;
++            lambda=0.;t=0.;value=s->mean[i];
++        }
++        w->correction[i]=t;
+         if(gain!=0) {
+             active=1;minimum=fmin(minimum,lambda);maximum=fmax(maximum,lambda);
+             if(lambda<1.)limited|=1u<<i;
+             if(t==0)blocked|=1u<<i;
+         }
+         if(t!=0)any_gain=1;
+-        value=s->mean[i]+t*standard;
+-        if(i==9||!isfinite(value)||value<lower[i]||value>upper[i])
+-            fixture_record_boundary(capture,i,s->mean[i],gain,standard,change,lambda,t,value);
+-        if(!isfinite(value)||value<lower[i]||value>upper[i])
+-            return fixture_capture_fail(capture,BOUNDARY_STAGE_MEAN_DOMAIN,i,-1);
+         if(t!=0&&standard!=0)s->mean[i]=value;
+     }
+     if(!active)maximum=1.;
