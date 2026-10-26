@@ -1,0 +1,57 @@
+{
+  "schema": "mumble_continuous_generator_implementation_v1",
+  "status": "implemented_and_bounded_toy_checks_passed",
+  "owned_files": [
+    "tools/continuous_source.py",
+    "tests/test_continuous_source.py"
+  ],
+  "source_sha256": "4437c0abc7875cb17ec0ec1ad8d2b05a0c9bf1e3b513f815515bab1dc698cf87",
+  "test_sha256": "7da35f63a64ae7ac34fa127098dda6c6ac07f7b64bc60103f1d90286f49c568d",
+  "contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+  "test_receipt": "experiments/continuous_learning_validation_001/implementation/development/generator/attempt_001/receipt.json",
+  "test_command": "python tests/test_continuous_source.py --output-dir experiments/continuous_learning_validation_001/implementation/development/generator/attempt_001",
+  "checks_passed": 45,
+  "toy_noise_draws": 319,
+  "primary_noise_draws": 0,
+  "learner_deliveries": 0,
+  "primary_runs": 0,
+  "test_wall_s": 0.6821358879969921,
+  "interfaces": {
+    "manifest": "make_source_manifest(plan,contract_sha256,cell,fixture_events=None,fixture_seed=None); source_id(manifest)",
+    "source": "StatefulSource(manifest,allow_primary=False); next_record()->(observation32,truth32); truth_query(); snapshot(); StatefulSource.from_state(snapshot,expected_manifest=None,allow_primary=False)",
+    "files": "generate_files(source,end_index,output_dir,query_indices=...,checkpoint_indices=...,chunk_size=35,max_output_bytes=...) -> receipt; exclusive output_dir",
+    "arbitrary_failure_state": "snapshot_at(source_states.bin,next_index,manifest,expected_sha256=None,allow_primary=False)->complete snapshot envelope; zero RNG draws and zero history replay",
+    "CLI": "--manifest --output-dir --end --query-indices <JSON-list-or-whitespace-file> --checkpoint-indices <file> --restore <source-cp JSON> --allow-primary"
+  },
+  "files": [
+    "observations.bin",
+    "truth.bin",
+    "truth.jsonl",
+    "source_states.bin",
+    "source-cp-<next_index>.json",
+    "source_final.json",
+    "source_manifest.json",
+    "receipt.json"
+  ],
+  "binary_formats": {
+    "observations": "<Qddd sample_index,dt,I,Vobs;32B",
+    "scalar_truth": "<Qddd next_index,Q,SOC,Vclean;32B",
+    "journal": "72B CRC-protected header;208B CRC-protected records including exact event-entering state/clock/charge+compensations/PCG64/cache/hash-chain"
+  },
+  "max_primary_journal_bytes": 128856840,
+  "semantics": [
+    "Primary seeds require explicit allow_primary=True after root executable freeze; constructing manifests or initial snapshots consumes no noise.",
+    "One scalar PCG64 Generator.normal draw per global index; queries/checkpoints/journal lookup consume none.",
+    "Event-entering closed forms carry z/v/h across events; host chunk size does not change bytes.",
+    "Source cumulative charge uses compensated summation with all compensations saved; actual_elapsed_s uses ordinary chronological dt addition.",
+    "NumPy2.3.5 Generator.__getstate__ is null; complete PCG64 state sufficiency is tested with odd/interior/boundary and fresh-process resume future-byte parity.",
+    "Journal reconstructs current states by one identical closed-form evaluation per lookup, not chronological plant propagation; all73 toy states match original full JSON snapshot exactly.",
+    "Inference must see only observations.bin and immutable source ID; truth/generator are separate."
+  ],
+  "limits": [
+    "No primary generation, new learner inference, or performance result in this subtask.",
+    "Root must freeze executable hashes before primary, enforce joint host/output budgets, and couple generator/learner checkpoints by matching source/index.",
+    "Independent implementation review remains required before the primary."
+  ],
+  "first_failures": []
+}

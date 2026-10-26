@@ -1,0 +1,99 @@
+{
+  "schema": "mumble_continuous_preflight_qualification_v1",
+  "status": "passed",
+  "learner_deliveries": 928,
+  "learner_delivery_limit": 4096,
+  "execution_wall_s": 11.225292853001156,
+  "wall_semantics": "Sum of recorded qualification executions including build; adapter signal-only whole-run duration uses the stated conservative bound. Development authoring/review/publication time is separate.",
+  "execution_wall_limit_s": 600,
+  "toy_noise_draws": 833,
+  "primary_noise_draws": 0,
+  "primary_learner_deliveries": 0,
+  "records": [
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/receipt.json",
+      "sha256": "99f1338c90af376d2dd10013d359c60ea5f20a0c1c9805accdcf47d0e13e8f69",
+      "learner_deliveries": 217,
+      "execution_wall_s_or_conservative_bound": 0.7220777530019404,
+      "wall_basis": "elapsed_s"
+    },
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/adapter/signal_r2/receipt.json",
+      "sha256": "7de8a41e4383defa8c3ed2ff317f056c92bc1fd39ba4308adcac09795047a6f4",
+      "learner_deliveries": 64,
+      "execution_wall_s_or_conservative_bound": 6.1,
+      "wall_basis": "conservative6.1s bound:5s readiness deadline plus1s communicate plus0.1s local receipt overhead"
+    },
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/generator/attempt_001/receipt.json",
+      "sha256": "bb84c85c935793d8de53e5813b2b8ad56f75ad082651d396f0f0260a974cfbf7",
+      "learner_deliveries": 0,
+      "execution_wall_s_or_conservative_bound": 0.6821358879969921,
+      "wall_basis": "wall_time_s"
+    },
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/generator/attempt_002_signal_safety/receipt.json",
+      "sha256": "f1692f9eb1ca802bba8f1dc5fa69532b01313edec8cc55c98a4b91084027178c",
+      "learner_deliveries": 0,
+      "execution_wall_s_or_conservative_bound": 0.12255223499960266,
+      "wall_basis": "wall_time_s"
+    },
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/scorer/run_001/receipt.json",
+      "sha256": "822eea2302394c7c1a6db1a6b7e213765be98f1152e22e22984c768345e698f0",
+      "learner_deliveries": 0,
+      "execution_wall_s_or_conservative_bound": 0.14949762499600183,
+      "wall_basis": "wall_s"
+    },
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/scorer/run_002/receipt.json",
+      "sha256": "62e545b55ecf039b6e6d2327ce00533d1480e96119d6f222b60b90c0c35b1911",
+      "learner_deliveries": 0,
+      "execution_wall_s_or_conservative_bound": 0.3157147960009752,
+      "wall_basis": "wall_time_s"
+    },
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_001/receipt.json",
+      "sha256": "9e80f2ff1179c85fbeb81fadbefada9236d08a67bffbbdaa2346029eb0ccb478",
+      "learner_deliveries": 647,
+      "execution_wall_s_or_conservative_bound": 2.213318865004112,
+      "wall_basis": "execution_wall_s"
+    },
+    {
+      "receipt": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_002_metadata/receipt.json",
+      "sha256": "dfa11aed89e6cec307ac3360b46b16589c0fccf187294406f8becfc57857475c",
+      "learner_deliveries": 0,
+      "execution_wall_s_or_conservative_bound": 0.003016376002051402,
+      "wall_basis": "execution_wall_s"
+    }
+  ],
+  "build_receipt": "experiments/continuous_learning_validation_001/implementation/build_receipt.json",
+  "build_receipt_sha256": "43a53f56417027a8949cfb35e0ab42e774423bfd9ee6d164f791e1a02b1ec0c3",
+  "source_sha256": {
+    "Makefile": "fbaddc441d8f27c93ae6f96d95159ec908b4b0fb68f42d97ecba4eb93d41afd8",
+    "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+    "include/scm_hypothesis_checkpoint.h": "1e1743300cf17635828c8d8cf2d95aa6fc00066b377e3238de880dcb284b5545",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_online.h": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+    "plans/continuous_learning_validation_001.json": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+    "src/scm_hypothesis_checkpoint.c": "88ec1c229b395b5bdd02faf39fcc1183786a6b0da0c6ff05edeb9718204a5339",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "tests/test_continuous_integration.py": "c36fcecf251be933bba0146eb17862e37b81230bbea99b60b732cab36726319a",
+    "tests/test_continuous_probe.py": "37a32088168dc7e4215e562b76d5c858f936bc0992144c7626d2d3f286b86119",
+    "tests/test_continuous_scoring.py": "fd6dd21c03a377a42b6bcb6d44e4da0175c06d6f9b2da30457be4989579695b6",
+    "tests/test_continuous_source.py": "9d3d858d1dda7b8352d4a06efb7271ae649e2a8ae21c71bf7ba01da749e491a7",
+    "tools/continuous_probe.c": "6353081ee5e00bf24b4d65e03ee408ed102f6a2d2aa5c3960c3f49f5c5d140d9",
+    "tools/continuous_source.py": "b5edc4f82d58383d3a23409258648fc117ad962cec461a35a97e01361546ea02",
+    "tools/generate_cases.py": "f519aa58f1ef4e06a61a1bb35f5d3204160d9658cafefa30f6b6113833eb5733",
+    "tools/run_continuous_learning.py": "872a9b7aa88d92aedce0af5e0d8931454c59b48abc3c0fc38dec26524a725552",
+    "tools/score_continuous_learning.py": "4af2d17ba013a2d0b3d065080e21a70fa7f33ef64a4af3fed0b475c15faa825b",
+    "tools/validate_continuous_learning_contract.py": "d141d23a31841d0800b6362ce4e663c9d234d17e197527b1e6c0341fd8134e50"
+  },
+  "binary_sha256": "01065f4443031df93df33ce9dafff6672aa741240c913b588c88792a00295427",
+  "retained_history": "Original receipts and initial review findings retained. Targeted signal/scorer/failure-metadata corrections recorded separately; no old primary studies rerun.",
+  "source_qualification": "Full coupled fixture passed33 checks on its recorded runner/test hashes. Subsequent runner-only malformed metadata and secondary-capture handling passed11 zero-draw/zero-learner checks on final hashes. Generator62 signal checks complement original45; adapter36 signal checks complement original140. Scorer14 fabricated methods include original9.",
+  "inherited_core_evidence": "experiments/nonlinear_hypothesis_001/development/qualification.json",
+  "core_tests_rerun": false,
+  "known_core_owned_bytes": 7152
+}

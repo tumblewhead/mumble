@@ -1,0 +1,24 @@
+{
+  "label": "parent_error",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-c",
+    "import time; time.sleep(10)"
+  ],
+  "pid": 16,
+  "returncode": -2,
+  "wall_s": 0.012136263998399954,
+  "peak_RSS_bytes": 30019584,
+  "sampled_peak_RSS_bytes": 0,
+  "stop_cause": "supervisor_exception",
+  "cooperative_stop_requested": true,
+  "hard_killed": false,
+  "supervisor_error": {
+    "type": "OSError",
+    "message": "injected supervisor logging error",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/df37870c5570/mumble/tools/run_continuous_learning.py\", line 188, in monitor\n    emit('process_started', label=label, pid=process.pid)\n  File \"/workspace/scratch/df37870c5570/mumble/tests/test_continuous_integration.py\", line 129, in injected\n    if event=='process_started':raise OSError('injected supervisor logging error')\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: injected supervisor logging error\n"
+  },
+  "capture_policy": "SIGINT at safe worker boundary; at most1s diagnostic flush, then hard kill. A cap breach fails regardless of exit status; hard kill may leave no entering checkpoint.",
+  "stdout": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_001/supervisor/parent_error.stdout",
+  "stderr": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_001/supervisor/parent_error.stderr"
+}

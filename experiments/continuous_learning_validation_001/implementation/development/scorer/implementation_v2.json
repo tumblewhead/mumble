@@ -1,0 +1,53 @@
+{
+  "schema": "mumble_continuous_scorer_implementation_v2",
+  "status": "review_corrections_implemented_14_fabricated_tests_pass_final_review_pending",
+  "supersedes_without_overwriting": "experiments/continuous_learning_validation_001/implementation/development/scorer/implementation.json",
+  "source_files": [
+    {
+      "path": "tools/score_continuous_learning.py",
+      "bytes": 50562,
+      "sha256": "4af2d17ba013a2d0b3d065080e21a70fa7f33ef64a4af3fed0b475c15faa825b"
+    },
+    {
+      "path": "tests/test_continuous_scoring.py",
+      "bytes": 19056,
+      "sha256": "fd6dd21c03a377a42b6bcb6d44e4da0175c06d6f9b2da30457be4989579695b6"
+    }
+  ],
+  "API": "score_arm(*,metrics,truth,queries,full_truth,plan,cell,arm,start_index,end_index,output,observations=None,observations_start_index=None,expected_complete=True,required_query_indices=None,supplemental_full_truth=None,max_output_bytes=536870912)",
+  "plan_forms": [
+    "mapping",
+    "JSON path"
+  ],
+  "summary_completion_key": "completed_valid_arm",
+  "corrections": {
+    "S1": "Asserted available nonfinite outputs invalidate transaction; binary64 elapsed must equal prior valid clock plus actual dt. Masked unavailable voltage placeholders remain unavailable.",
+    "S2": "Exact intended query grid is required for completed_valid_arm; observed prefix plus its endpoint must be present; out-of-arm/future/unexpected/duplicate rows cannot establish completion.",
+    "S3": "Nonfinite/malformed required16 estimates or truths and asserted-available nonfinite/reversed local ranges or invalid SDs invalidate full-query data. Unavailable placeholders remain permitted. A finite hull is an independent local diagnostic even at public/cold entry.",
+    "S4": "Passing learned entry is included in first attainment; first_interval_end_hit remains explicit. Public/cold prior entries are excluded.",
+    "supplemental_truth": "Two sorted truth streams merge in constant lookahead space; duplicate indices require equal records. No combined truth copy.",
+    "output_budget": "One cap counts actual compressed gzip framing/data and JSON bytes before every write;4096 bytes reserved for failure summary. Exclusive paths and partial artifacts are retained.",
+    "validity_scope": "Windows extending beyond the first validity failure cannot claim completed retention or finite-end sustained attainment; raw observed-prefix error statistics remain available."
+  },
+  "tests": {
+    "receipt": "experiments/continuous_learning_validation_001/implementation/development/scorer/run_002/receipt.json",
+    "methods_passed": 14,
+    "scope": "Nine original methods plus five targeted regression methods; parameterized subcases cover required corrections.",
+    "failed_test_runs": 0,
+    "prior_run_001_preserved": true
+  },
+  "execution": {
+    "learner_deliveries": 0,
+    "primary_runs": 0,
+    "primary_noise_draws": 0,
+    "toy_noise_draws": 0,
+    "generator_imports_or_invocations": 0
+  },
+  "root_requirements": [
+    "Retain frozen intended end_index on incomplete arms.",
+    "Pass exact full intended required_query_indices and remaining per-arm global output allowance.",
+    "Pass the reconstructed supplemental JSONL path only when first-failure truth is absent or duplicated identically on the scheduled grid.",
+    "Run all arms sequentially within the one allowed scorer helper process.",
+    "Review final source/receipt and complete coupled preflight before primary."
+  ]
+}

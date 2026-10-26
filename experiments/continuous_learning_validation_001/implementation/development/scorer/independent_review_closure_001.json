@@ -1,0 +1,79 @@
+{
+  "schema": "mumble_continuous_scoring_independent_closure_v1",
+  "created_utc": "2026-10-26T04:06:24.168143+00:00",
+  "reviewer": "/root/continuous_generator_impl",
+  "status": "passed_targeted_closure",
+  "scope": "Read-only review of S1-S4 corrections and the supplemental-truth/shared-output-budget interfaces. No test execution or scorer edits.",
+  "source_sha256": {
+    "tools/score_continuous_learning.py": "4af2d17ba013a2d0b3d065080e21a70fa7f33ef64a4af3fed0b475c15faa825b",
+    "tests/test_continuous_scoring.py": "fd6dd21c03a377a42b6bcb6d44e4da0175c06d6f9b2da30457be4989579695b6"
+  },
+  "initial_review": {
+    "path": "experiments/continuous_learning_validation_001/implementation/development/scorer/independent_review_initial.json",
+    "sha256": "fae8f2848d5d4d96033daeb9d741027a1a0eacbd8c5c27ba99efdcc506ca7e70"
+  },
+  "findings": [
+    {
+      "id": "S1",
+      "status": "closed",
+      "source_evidence": [
+        "score_arm validates every asserted available scalar output and invalidates its transaction on a nonfinite value.",
+        "The binary64 clock is required to equal the preceding valid chronological clock plus actual dt. Mismatched time does not seed subsequent expected time."
+      ],
+      "test_evidence": "test_asserted_available_nonfinite_voltage_and_exact_clock_invalidate covers both voltage fields, an incorrect finite clock, and legitimate masked NaN placeholders."
+    },
+    {
+      "id": "S2",
+      "status": "closed",
+      "source_evidence": [
+        "expected_grid requires the sorted unique intended grid with arm entry/end and the declared record bound.",
+        "full_query_scores verifies its prefix through the consumed endpoint, additionally requires the stopped endpoint, and records missing/out-of-arm/future/unexpected query issues.",
+        "No supplied grid cannot yield completed_valid_arm=true; full-query integrity issues invalidate arm completion and later window claims."
+      ],
+      "test_evidence": "test_required_query_grid_missing_future_duplicate_and_absent_contract covers an initial-only query file, future rows on an incomplete scalar prefix, duplicate indices and absent required grid."
+    },
+    {
+      "id": "S3",
+      "status": "closed",
+      "source_evidence": [
+        "natural validates finite16 coordinates and finite positive transformed log parameters; invalid required estimate/truth vectors produce indexed integrity issues.",
+        "Asserted available local ranges require finite ordered bounds and valid16 nonnegative SDs.",
+        "Unavailable interval/SD placeholders remain allowed and explicitly unavailable. Invalid full data cannot silently preserve valid arm or retention completion."
+      ],
+      "test_evidence": "test_nonfinite_required_vectors_and_asserted_ranges_invalidate covers estimate/truth vectors, reversed local range, invalid available SD and legitimate unavailable placeholders."
+    },
+    {
+      "id": "S4",
+      "status": "closed",
+      "source_evidence": [
+        "Target.result includes a passing learned entry in first_observed_hit and separately preserves first_interval_end_hit.",
+        "Entry metadata distinguishes learned phase/restore evidence from initial/cold raw priors, which remain excluded."
+      ],
+      "test_evidence": "test_retention_entry_and_within_preferred_drift verifies learned entry, interval-only first hit, preferred retention and initial-prior exclusion."
+    }
+  ],
+  "additional_interfaces_reviewed": {
+    "supplemental_truth": "merged_truth_rows holds one pending row per stream, preserves sorted global indices and rejects conflicting duplicates. The existing full truth is reused rather than copied.",
+    "output_cap": "OutputBudget counts actual gzip writes/framing plus summary bytes under one per-arm allowance, checks before write, and reserves4096 bytes for failure capture.",
+    "runner_call_sites": "tools/run_continuous_learning.py currently supplies required_query_indices, remaining max_output_bytes and supplemental_full_truth when present.",
+    "window_validity": "After integrity issues, valid_through_index prevents any later incomplete/invalid window from claiming full retention or sustained-to-end accuracy; raw prefix statistics remain labeled available."
+  },
+  "owner_test_receipt": {
+    "path": "experiments/continuous_learning_validation_001/implementation/development/scorer/run_002/receipt.json",
+    "sha256": "62e545b55ecf039b6e6d2327ce00533d1480e96119d6f222b60b90c0c35b1911",
+    "reported_status": "passed",
+    "reported_returncode": 0,
+    "reported_methods_passed": 14,
+    "reported_wall_time_s": 0.3157147960009752,
+    "source_hashes_match_review": true
+  },
+  "review_execution": {
+    "tests_run": 0,
+    "toy_noise_draws": 0,
+    "primary_noise_draws": 0,
+    "learner_deliveries": 0,
+    "primary_runs": 0
+  },
+  "remaining_blockers_in_reviewed_scope": [],
+  "scope_limit": "This closes the specific scorer findings by static review and inspection of the owner qualification receipt. It is not a primary-result claim or a replacement for the root coupled preflight/resource gates."
+}

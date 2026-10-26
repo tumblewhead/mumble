@@ -1,0 +1,55 @@
+{
+  "schema": "mumble_continuous_scorer_implementation_v1",
+  "status": "implemented_nine_fabricated_tests_pass_independent_review_pending",
+  "source_files": [
+    {
+      "path": "tools/score_continuous_learning.py",
+      "sha256": "d6ca085e3c9a99916d049321f4feff6138f4c4211bccb1bdcb6b5920159691b4",
+      "bytes": 39446
+    },
+    {
+      "path": "tests/test_continuous_scoring.py",
+      "sha256": "6b3cc84657d9441194ffe996f6c84cdf75bccde2d96c3993a410953e2136c276",
+      "bytes": 11987
+    }
+  ],
+  "API": "score_arm(*,metrics,truth,queries,full_truth,plan,cell,arm,start_index,end_index,output,observations=None,observations_start_index=None,expected_complete=True)",
+  "CLI": "python tools/score_continuous_learning.py --metrics PATH --truth PATH --queries PATH --full-truth PATH --plan PATH --cell cell_a|cell_b --arm ID --start-index N --end-index N --output PATH [--observations PATH --observations-start-index N] [--incomplete]",
+  "formats": {
+    "metrics": "<Q7dQiI;80 bytes; SOC1,Q2,causal4,postfit8 availability bits",
+    "truth": "<Qddd;32 bytes; next_index,Q,SOC,cleanV",
+    "observations": "<Qddd;32 bytes; sample_index,dt,I,V",
+    "full_queries": "mumble_continuous_query_v1; aggregate+components,mean[16],SD,local ranges/status/availability,log_weights,hull",
+    "full_truth": "next_index,mean[16],SOC,Q_Ah,clean_voltage_V"
+  },
+  "outputs": {
+    "summary": "Exclusive output JSON",
+    "full_scores": "output.with_suffix(.full_scores.jsonl.gz); deterministic gzip mtime0; streamed per-query natural-unit/relative errors, component target diagnostics and original local-range/weight fields"
+  },
+  "boundedness": "History-independent reducers for prescribed windows and regimes; at most24000 full-query rows streamed. Only declared endpoint full-query details remain in summary. No estimator/generator/RNG import or invocation.",
+  "semantics": [
+    "Raw unavailable centers from mean[11]/exp(mean[5]), never convenience zeros.",
+    "Useful target passing requires reported availability plus no failed/rejected transaction.",
+    "All interval-end denominators, missing-tail censoring, first versus finite-window sustained hits, entry-required retention.",
+    "Within-target drift does not fail a retained preferred target.",
+    "Causal clean forecast, noisy innovation and filtered-fit clean voltage errors are separate.",
+    "Full16 natural-unit and positive-parameter relative errors; no nuisance tolerances.",
+    "Raw local-provisional breaches, range/hull inclusion and component-oracle diagnostics are descriptive; no coverage or runtime truth selection.",
+    "Global-index suffix joins use the original physical truth; cold/public epoch-relative times remain explicit."
+  ],
+  "test_receipt": "experiments/continuous_learning_validation_001/implementation/development/scorer/run_001/receipt.json",
+  "tests_passed": 9,
+  "first_run_exit_code": 0,
+  "execution": {
+    "learner_deliveries": 0,
+    "primary_runs": 0,
+    "primary_noise_draws": 0,
+    "generated_plant_trajectories": 0
+  },
+  "review_notes": [
+    "Root must retain intended frozen end_index when scoring partial runs.",
+    "Root provides --observations for noisy residual and charge summaries.",
+    "Root should provide supplemental full16 truth at first failure if absent from planned query grid; scorer flags missing full truth.",
+    "Primary validity remains the joint adapter/source/orchestrator gate; scoring alone is not runtime qualification."
+  ]
+}

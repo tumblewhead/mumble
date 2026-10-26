@@ -1,0 +1,22 @@
+{
+  "schema": "mumble_continuous_adapter_signal_closure_v1",
+  "status": "passed",
+  "source": "tools/continuous_probe.c",
+  "test": "tests/test_continuous_probe.py",
+  "receipt": "experiments/continuous_learning_validation_001/implementation/development/adapter/signal_r2/receipt.json",
+  "handler": "SIGINT and SIGTERM only store volatile sig_atomic_t; no handler I/O, allocation, estimator mutation or longjmp.",
+  "boundary": "Complete the active ingest/output transaction; stop before the next ingestion. If a signal arrives after a complete record read but before ingest, leave that record unassimilated and include it in the35-record ring. Entering failure checkpoint equals current live bank at the safe boundary.",
+  "outputs": "Nonzero exit and receipt operation=supervisor_stop, code=-200-signum, supervisor_signal field. Existing canonical entering/current snapshots, raw-state fallback, input ring and failure JSON preserved. No automatic reset or retry.",
+  "root_monitor_policy": "Request SIGINT on cap breach; permit at most1s diagnostic flush, then SIGKILL if needed. Root records cap violation regardless of child status; hard kill has explicitly unavailable cooperative capture.",
+  "input_deliveries_this_fixture": 64,
+  "cumulative_adapter_toy_deliveries": 281,
+  "stop_to_exit_s": 0.0021516790002351627,
+  "checks_passed": 36,
+  "primary_runs": 0,
+  "primary_noise_draws": 0,
+  "prior_full_adapter_receipt": "experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/receipt.json",
+  "prior_full_suite_rerun": false,
+  "adapter_sha256": "6353081ee5e00bf24b4d65e03ee408ed102f6a2d2aa5c3960c3f49f5c5d140d9",
+  "test_sha256": "37a32088168dc7e4215e562b76d5c858f936bc0992144c7626d2d3f286b86119",
+  "binary_sha256": "01065f4443031df93df33ce9dafff6672aa741240c913b588c88792a00295427"
+}

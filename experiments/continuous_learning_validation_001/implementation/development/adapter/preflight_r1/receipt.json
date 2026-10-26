@@ -1,0 +1,2155 @@
+{
+  "schema": "mumble_continuous_adapter_preflight_v1",
+  "status": "passed",
+  "checks_passed": 140,
+  "checks": [
+    {
+      "name": "compile_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "compile_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "compile",
+        "command": [
+          "cc",
+          "-std=c99",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Wpedantic",
+          "-Werror",
+          "-Iinclude",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/fixture.c",
+          "src/scm_hypothesis.c",
+          "src/scm_hypothesis_checkpoint.c",
+          "src/scm_model.c",
+          "-lm",
+          "-o",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/fixture"
+        ],
+        "returncode": 0,
+        "elapsed_s": 0.6242462549998891,
+        "expected_success": true
+      }
+    },
+    {
+      "name": "fixtures_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "fixtures_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "fixtures",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/fixture",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper"
+        ],
+        "returncode": 0,
+        "elapsed_s": 0.007623601006343961,
+        "expected_success": true,
+        "input_deliveries": 3,
+        "receipt": {
+          "checks": 8,
+          "input_deliveries": 3,
+          "query_byte_purity": true,
+          "source_order_atomicity": true,
+          "fixtures_created": 3
+        }
+      }
+    },
+    {
+      "name": "API_queries_pure_and_source_order_atomic",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "70",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner",
+          "--checkpoint-indices",
+          "0,35,70"
+        ],
+        "returncode": 0,
+        "elapsed_s": 0.01281362900044769,
+        "expected_success": true,
+        "input_deliveries": 70,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "complete",
+          "operation": "none",
+          "code": 0,
+          "start_index": 0,
+          "end_index": 70,
+          "next_index": 70,
+          "input_deliveries": 70,
+          "consumed_intervals": 70,
+          "metric_records": 70,
+          "query_records": 71,
+          "checkpoint_records": 4,
+          "output_bytes": 465547,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 32,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "whole_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "one_metric_per_exactly_once_interval",
+      "passed": true
+    },
+    {
+      "name": "core_owned_7152_and_observers_separate",
+      "passed": true
+    },
+    {
+      "name": "full_queries_fit_frozen_record_limit",
+      "passed": true
+    },
+    {
+      "name": "query_indices_deduplicated_and_complete",
+      "passed": true
+    },
+    {
+      "name": "initial_API_unavailable_placeholders_present",
+      "passed": true
+    },
+    {
+      "name": "raw_prior_centers_not_zero_placeholders",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_0",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_1",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_2",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_3",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_4",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_5",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_6",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_7",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_8",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_9",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_10",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_11",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_12",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_13",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_14",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_15",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_16",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_17",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_18",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_19",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_20",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_21",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_22",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_23",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_24",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_25",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_26",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_27",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_28",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_29",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_30",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_31",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_32",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_33",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_34",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_35",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_36",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_37",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_38",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_39",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_40",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_41",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_42",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_43",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_44",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_45",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_46",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_47",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_48",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_49",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_50",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_51",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_52",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_53",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_54",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_55",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_56",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_57",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_58",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_59",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_60",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_61",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_62",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_63",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_64",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_65",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_66",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_67",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_68",
+      "passed": true
+    },
+    {
+      "name": "scalar_schema_and_forecast_availability_69",
+      "passed": true
+    },
+    {
+      "name": "causal_forecast_matches_independent_preupdate_physics",
+      "passed": true,
+      "detail": 8.881784197001252e-16
+    },
+    {
+      "name": "preupdate_forecast_distinct_from_filtered_fit",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "70",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/learner",
+          "--checkpoint-indices",
+          "70"
+        ],
+        "returncode": 0,
+        "elapsed_s": 0.004214344000502024,
+        "expected_success": true,
+        "input_deliveries": 70,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "complete",
+          "operation": "none",
+          "code": 0,
+          "start_index": 0,
+          "end_index": 70,
+          "next_index": 70,
+          "input_deliveries": 70,
+          "consumed_intervals": 70,
+          "metric_records": 70,
+          "query_records": 2,
+          "checkpoint_records": 2,
+          "output_bytes": 23336,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 32,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "sparse_queries_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "query_frequency_does_not_change_canonical_state",
+      "passed": true
+    },
+    {
+      "name": "query_frequency_does_not_change_scalar_outputs",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/observations.bin",
+          "--data-start-index",
+          "35",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "70",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/learner",
+          "--checkpoint-indices",
+          "70",
+          "--restore",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner-35.bin"
+        ],
+        "returncode": 0,
+        "elapsed_s": 0.007362347998423502,
+        "expected_success": true,
+        "input_deliveries": 35,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "complete",
+          "operation": "none",
+          "code": 0,
+          "start_index": 35,
+          "end_index": 70,
+          "next_index": 70,
+          "input_deliveries": 35,
+          "consumed_intervals": 35,
+          "metric_records": 35,
+          "query_records": 36,
+          "checkpoint_records": 2,
+          "output_bytes": 237589,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 32,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "warm_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "fresh_process_warm_final_checkpoint_byte_parity",
+      "passed": true
+    },
+    {
+      "name": "warm_scalar_suffix_byte_parity",
+      "passed": true
+    },
+    {
+      "name": "warm_subsequent_full_query_parity",
+      "passed": true
+    },
+    {
+      "name": "resume_scratch_marked_unavailable",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/observations.bin",
+          "--data-start-index",
+          "35",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "70",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/learner",
+          "--checkpoint-indices",
+          "70",
+          "--restore",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner-35.bin",
+          "--cold-reset"
+        ],
+        "returncode": 0,
+        "elapsed_s": 0.00719229799869936,
+        "expected_success": true,
+        "input_deliveries": 35,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "complete",
+          "operation": "none",
+          "code": 0,
+          "start_index": 35,
+          "end_index": 70,
+          "next_index": 70,
+          "input_deliveries": 35,
+          "consumed_intervals": 35,
+          "metric_records": 35,
+          "query_records": 36,
+          "checkpoint_records": 2,
+          "output_bytes": 236375,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 1,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "cold_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "cold_retains_clock_cursor_and_records_history_loss",
+      "passed": true
+    },
+    {
+      "name": "cold_loses_knowledge_and_resets_public_weights",
+      "passed": true
+    },
+    {
+      "name": "cold_uses_public_prior_not_scoring_truth",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "1",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/learner",
+          "--checkpoint-indices",
+          "1",
+          "--restore",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/rejection.bin"
+        ],
+        "returncode": 1,
+        "elapsed_s": 0.006196889000420924,
+        "expected_success": false,
+        "input_deliveries": 1,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "failed",
+          "operation": "voltage_transaction",
+          "code": -1,
+          "start_index": 0,
+          "end_index": 1,
+          "next_index": 1,
+          "input_deliveries": 1,
+          "consumed_intervals": 1,
+          "metric_records": 1,
+          "query_records": 2,
+          "checkpoint_records": 3,
+          "output_bytes": 23461,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 1,
+          "last_rejection_stage_code": 4,
+          "flags": 16,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "rejected_voltage_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "zero_ingest_return_rejection_still_stops",
+      "passed": true
+    },
+    {
+      "name": "rejected_transaction_has_no_causal_forecast",
+      "passed": true
+    },
+    {
+      "name": "rejection_preserves_exact_entering_checkpoint",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "1",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/learner",
+          "--checkpoint-indices",
+          "1",
+          "--restore",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/recovery.bin"
+        ],
+        "returncode": 1,
+        "elapsed_s": 0.006294095001067035,
+        "expected_success": false,
+        "input_deliveries": 1,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "failed",
+          "operation": "recovery",
+          "code": 1,
+          "start_index": 0,
+          "end_index": 1,
+          "next_index": 1,
+          "input_deliveries": 1,
+          "consumed_intervals": 1,
+          "metric_records": 1,
+          "query_records": 2,
+          "checkpoint_records": 3,
+          "output_bytes": 23058,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 1,
+          "last_rejection_stage_code": 1,
+          "flags": 22,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "recovery_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "accepted_recovery_stops_and_withholds_current_output",
+      "passed": true
+    },
+    {
+      "name": "recovery_first_failure_capture",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/observations.bin",
+          "--data-start-index",
+          "1",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "2",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/learner",
+          "--checkpoint-indices",
+          "2",
+          "--restore",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/lag.bin"
+        ],
+        "returncode": 0,
+        "elapsed_s": 0.0050990820018341765,
+        "expected_success": true,
+        "input_deliveries": 1,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "complete",
+          "operation": "none",
+          "code": 0,
+          "start_index": 1,
+          "end_index": 2,
+          "next_index": 2,
+          "input_deliveries": 1,
+          "consumed_intervals": 1,
+          "metric_records": 1,
+          "query_records": 2,
+          "checkpoint_records": 2,
+          "output_bytes": 17691,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 0,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "lagging_evidence_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "legitimate_conditional_cursor_lag_is_accepted",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "1",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/learner",
+          "--checkpoint-indices",
+          "1"
+        ],
+        "returncode": 1,
+        "elapsed_s": 0.004857590000028722,
+        "expected_success": false,
+        "input_deliveries": 0,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "failed",
+          "operation": "input_index",
+          "code": -101,
+          "start_index": 0,
+          "end_index": 1,
+          "next_index": 0,
+          "input_deliveries": 0,
+          "consumed_intervals": 0,
+          "metric_records": 0,
+          "query_records": 1,
+          "checkpoint_records": 3,
+          "output_bytes": 17626,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 0,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "wrong_index_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "wrong_input_index_stops_before_assimilation",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "2",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/learner",
+          "--checkpoint-indices",
+          "2"
+        ],
+        "returncode": 1,
+        "elapsed_s": 0.009755651000887156,
+        "expected_success": false,
+        "input_deliveries": 1,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "failed",
+          "operation": "input_index",
+          "code": -101,
+          "start_index": 0,
+          "end_index": 2,
+          "next_index": 1,
+          "input_deliveries": 1,
+          "consumed_intervals": 1,
+          "metric_records": 1,
+          "query_records": 2,
+          "checkpoint_records": 3,
+          "output_bytes": 24005,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 0,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "duplicate_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "duplicate_never_assimilated_twice",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "1",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/learner",
+          "--checkpoint-indices",
+          "1"
+        ],
+        "returncode": 1,
+        "elapsed_s": 0.0052327429948491044,
+        "expected_success": false,
+        "input_deliveries": 0,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "failed",
+          "operation": "input_domain",
+          "code": -104,
+          "start_index": 0,
+          "end_index": 1,
+          "next_index": 0,
+          "input_deliveries": 0,
+          "consumed_intervals": 0,
+          "metric_records": 0,
+          "query_records": 1,
+          "checkpoint_records": 3,
+          "output_bytes": 17627,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 0,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "zero_interval_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "zero_dt_boundary_observation_refused",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/observations.bin",
+          "--data-start-index",
+          "35",
+          "--source",
+          "2222222222222222222222222222222222222222222222222222222222222222",
+          "--end",
+          "70",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/learner",
+          "--checkpoint-indices",
+          "70",
+          "--restore",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner-35.bin"
+        ],
+        "returncode": 1,
+        "elapsed_s": 0.0010867510063690133,
+        "expected_success": false,
+        "input_deliveries": 0,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "failed",
+          "operation": "restore",
+          "code": -124,
+          "start_index": 0,
+          "end_index": 70,
+          "next_index": 0,
+          "input_deliveries": 0,
+          "consumed_intervals": 0,
+          "metric_records": 0,
+          "query_records": 0,
+          "checkpoint_records": 0,
+          "output_bytes": 0,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 0,
+          "source_id": "2222222222222222222222222222222222222222222222222222222222222222"
+        }
+      }
+    },
+    {
+      "name": "wrong_restore_source_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "restore_source_identity_is_enforced",
+      "passed": true
+    },
+    {
+      "name": "run_within_delivery_budget",
+      "passed": true
+    },
+    {
+      "name": "run_expected_exit",
+      "passed": true,
+      "detail": {
+        "name": "run",
+        "command": [
+          "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+          "--data",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/observations.bin",
+          "--data-start-index",
+          "0",
+          "--source",
+          "1111111111111111111111111111111111111111111111111111111111111111",
+          "--end",
+          "1",
+          "--metrics",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/metrics.bin",
+          "--queries",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/queries.jsonl",
+          "--query-indices",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/queries.txt",
+          "--checkpoint-prefix",
+          "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/learner",
+          "--checkpoint-indices",
+          "1",
+          "--max-output-bytes",
+          "32768"
+        ],
+        "returncode": 1,
+        "elapsed_s": 0.003749767995032016,
+        "expected_success": false,
+        "input_deliveries": 0,
+        "receipt": {
+          "schema": "mumble_continuous_adapter_receipt_v1",
+          "status": "failed",
+          "operation": "initial_checkpoint",
+          "code": -1,
+          "start_index": 0,
+          "end_index": 1,
+          "next_index": 0,
+          "input_deliveries": 0,
+          "consumed_intervals": 0,
+          "metric_records": 0,
+          "query_records": 1,
+          "checkpoint_records": 2,
+          "output_bytes": 14595,
+          "owned_subtotal_bytes": 7152,
+          "host_observer_named_bytes": 13617,
+          "host_runtime_stack_additional": true,
+          "scalar_record_bytes": 80,
+          "scalar_format": "little-endian <Q7dQiI; headerless version1",
+          "availability_bits": {
+            "SOC": 1,
+            "Q": 2,
+            "causal_forecast": 4,
+            "filtered_fit": 8
+          },
+          "truth_input": false,
+          "batch_optimizer_calls": 0,
+          "failure_capture_ok": true,
+          "rejected_voltage_count": 0,
+          "last_rejection_stage_code": 0,
+          "flags": 0,
+          "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+        }
+      }
+    },
+    {
+      "name": "output_cap_receipt_parse",
+      "passed": true
+    },
+    {
+      "name": "budget_stop_retains_reserved_failure_artifacts",
+      "passed": true
+    },
+    {
+      "name": "total_fixture_delivery_budget",
+      "passed": true,
+      "detail": 217
+    }
+  ],
+  "input_deliveries": 217,
+  "delivery_budget": 1024,
+  "primary_runs": 0,
+  "primary_noise_draws": 0,
+  "elapsed_s": 0.7220777530019404,
+  "binary_sha256": "c72998918d00ed898518bcb788e42f1f17768fb067650d921415df2009a1b607",
+  "adapter_sha256": "008140f3c58de671986830c483c8bc85ef058a322226aa096eabe63a8d0c44ae",
+  "invocations": [
+    {
+      "name": "compile",
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-Iinclude",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/fixture.c",
+        "src/scm_hypothesis.c",
+        "src/scm_hypothesis_checkpoint.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/fixture"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.6242462549998891,
+      "expected_success": true
+    },
+    {
+      "name": "fixtures",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/fixture",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.007623601006343961,
+      "expected_success": true,
+      "input_deliveries": 3,
+      "receipt": {
+        "checks": 8,
+        "input_deliveries": 3,
+        "query_byte_purity": true,
+        "source_order_atomicity": true,
+        "fixtures_created": 3
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "70",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner",
+        "--checkpoint-indices",
+        "0,35,70"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.01281362900044769,
+      "expected_success": true,
+      "input_deliveries": 70,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "complete",
+        "operation": "none",
+        "code": 0,
+        "start_index": 0,
+        "end_index": 70,
+        "next_index": 70,
+        "input_deliveries": 70,
+        "consumed_intervals": 70,
+        "metric_records": 70,
+        "query_records": 71,
+        "checkpoint_records": 4,
+        "output_bytes": 465547,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 32,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "70",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/sparse_queries/learner",
+        "--checkpoint-indices",
+        "70"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.004214344000502024,
+      "expected_success": true,
+      "input_deliveries": 70,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "complete",
+        "operation": "none",
+        "code": 0,
+        "start_index": 0,
+        "end_index": 70,
+        "next_index": 70,
+        "input_deliveries": 70,
+        "consumed_intervals": 70,
+        "metric_records": 70,
+        "query_records": 2,
+        "checkpoint_records": 2,
+        "output_bytes": 23336,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 32,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/observations.bin",
+        "--data-start-index",
+        "35",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "70",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/warm/learner",
+        "--checkpoint-indices",
+        "70",
+        "--restore",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner-35.bin"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.007362347998423502,
+      "expected_success": true,
+      "input_deliveries": 35,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "complete",
+        "operation": "none",
+        "code": 0,
+        "start_index": 35,
+        "end_index": 70,
+        "next_index": 70,
+        "input_deliveries": 35,
+        "consumed_intervals": 35,
+        "metric_records": 35,
+        "query_records": 36,
+        "checkpoint_records": 2,
+        "output_bytes": 237589,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 32,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/observations.bin",
+        "--data-start-index",
+        "35",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "70",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/cold/learner",
+        "--checkpoint-indices",
+        "70",
+        "--restore",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner-35.bin",
+        "--cold-reset"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.00719229799869936,
+      "expected_success": true,
+      "input_deliveries": 35,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "complete",
+        "operation": "none",
+        "code": 0,
+        "start_index": 35,
+        "end_index": 70,
+        "next_index": 70,
+        "input_deliveries": 35,
+        "consumed_intervals": 35,
+        "metric_records": 35,
+        "query_records": 36,
+        "checkpoint_records": 2,
+        "output_bytes": 236375,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 1,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "1",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/rejected_voltage/learner",
+        "--checkpoint-indices",
+        "1",
+        "--restore",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/rejection.bin"
+      ],
+      "returncode": 1,
+      "elapsed_s": 0.006196889000420924,
+      "expected_success": false,
+      "input_deliveries": 1,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "failed",
+        "operation": "voltage_transaction",
+        "code": -1,
+        "start_index": 0,
+        "end_index": 1,
+        "next_index": 1,
+        "input_deliveries": 1,
+        "consumed_intervals": 1,
+        "metric_records": 1,
+        "query_records": 2,
+        "checkpoint_records": 3,
+        "output_bytes": 23461,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 1,
+        "last_rejection_stage_code": 4,
+        "flags": 16,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "1",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/recovery/learner",
+        "--checkpoint-indices",
+        "1",
+        "--restore",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/recovery.bin"
+      ],
+      "returncode": 1,
+      "elapsed_s": 0.006294095001067035,
+      "expected_success": false,
+      "input_deliveries": 1,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "failed",
+        "operation": "recovery",
+        "code": 1,
+        "start_index": 0,
+        "end_index": 1,
+        "next_index": 1,
+        "input_deliveries": 1,
+        "consumed_intervals": 1,
+        "metric_records": 1,
+        "query_records": 2,
+        "checkpoint_records": 3,
+        "output_bytes": 23058,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 1,
+        "last_rejection_stage_code": 1,
+        "flags": 22,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/observations.bin",
+        "--data-start-index",
+        "1",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "2",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/lagging_evidence/learner",
+        "--checkpoint-indices",
+        "2",
+        "--restore",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/helper/lag.bin"
+      ],
+      "returncode": 0,
+      "elapsed_s": 0.0050990820018341765,
+      "expected_success": true,
+      "input_deliveries": 1,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "complete",
+        "operation": "none",
+        "code": 0,
+        "start_index": 1,
+        "end_index": 2,
+        "next_index": 2,
+        "input_deliveries": 1,
+        "consumed_intervals": 1,
+        "metric_records": 1,
+        "query_records": 2,
+        "checkpoint_records": 2,
+        "output_bytes": 17691,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 0,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "1",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_index/learner",
+        "--checkpoint-indices",
+        "1"
+      ],
+      "returncode": 1,
+      "elapsed_s": 0.004857590000028722,
+      "expected_success": false,
+      "input_deliveries": 0,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "failed",
+        "operation": "input_index",
+        "code": -101,
+        "start_index": 0,
+        "end_index": 1,
+        "next_index": 0,
+        "input_deliveries": 0,
+        "consumed_intervals": 0,
+        "metric_records": 0,
+        "query_records": 1,
+        "checkpoint_records": 3,
+        "output_bytes": 17626,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 0,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "2",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/duplicate/learner",
+        "--checkpoint-indices",
+        "2"
+      ],
+      "returncode": 1,
+      "elapsed_s": 0.009755651000887156,
+      "expected_success": false,
+      "input_deliveries": 1,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "failed",
+        "operation": "input_index",
+        "code": -101,
+        "start_index": 0,
+        "end_index": 2,
+        "next_index": 1,
+        "input_deliveries": 1,
+        "consumed_intervals": 1,
+        "metric_records": 1,
+        "query_records": 2,
+        "checkpoint_records": 3,
+        "output_bytes": 24005,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 0,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "1",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/zero_interval/learner",
+        "--checkpoint-indices",
+        "1"
+      ],
+      "returncode": 1,
+      "elapsed_s": 0.0052327429948491044,
+      "expected_success": false,
+      "input_deliveries": 0,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "failed",
+        "operation": "input_domain",
+        "code": -104,
+        "start_index": 0,
+        "end_index": 1,
+        "next_index": 0,
+        "input_deliveries": 0,
+        "consumed_intervals": 0,
+        "metric_records": 0,
+        "query_records": 1,
+        "checkpoint_records": 3,
+        "output_bytes": 17627,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 0,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/observations.bin",
+        "--data-start-index",
+        "35",
+        "--source",
+        "2222222222222222222222222222222222222222222222222222222222222222",
+        "--end",
+        "70",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/wrong_restore_source/learner",
+        "--checkpoint-indices",
+        "70",
+        "--restore",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/whole/learner-35.bin"
+      ],
+      "returncode": 1,
+      "elapsed_s": 0.0010867510063690133,
+      "expected_success": false,
+      "input_deliveries": 0,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "failed",
+        "operation": "restore",
+        "code": -124,
+        "start_index": 0,
+        "end_index": 70,
+        "next_index": 0,
+        "input_deliveries": 0,
+        "consumed_intervals": 0,
+        "metric_records": 0,
+        "query_records": 0,
+        "checkpoint_records": 0,
+        "output_bytes": 0,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 0,
+        "source_id": "2222222222222222222222222222222222222222222222222222222222222222"
+      }
+    },
+    {
+      "name": "run",
+      "command": [
+        "/workspace/scratch/df37870c5570/mumble/build/continuous_probe",
+        "--data",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/observations.bin",
+        "--data-start-index",
+        "0",
+        "--source",
+        "1111111111111111111111111111111111111111111111111111111111111111",
+        "--end",
+        "1",
+        "--metrics",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/metrics.bin",
+        "--queries",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/queries.jsonl",
+        "--query-indices",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/queries.txt",
+        "--checkpoint-prefix",
+        "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/output_cap/learner",
+        "--checkpoint-indices",
+        "1",
+        "--max-output-bytes",
+        "32768"
+      ],
+      "returncode": 1,
+      "elapsed_s": 0.003749767995032016,
+      "expected_success": false,
+      "input_deliveries": 0,
+      "receipt": {
+        "schema": "mumble_continuous_adapter_receipt_v1",
+        "status": "failed",
+        "operation": "initial_checkpoint",
+        "code": -1,
+        "start_index": 0,
+        "end_index": 1,
+        "next_index": 0,
+        "input_deliveries": 0,
+        "consumed_intervals": 0,
+        "metric_records": 0,
+        "query_records": 1,
+        "checkpoint_records": 2,
+        "output_bytes": 14595,
+        "owned_subtotal_bytes": 7152,
+        "host_observer_named_bytes": 13617,
+        "host_runtime_stack_additional": true,
+        "scalar_record_bytes": 80,
+        "scalar_format": "little-endian <Q7dQiI; headerless version1",
+        "availability_bits": {
+          "SOC": 1,
+          "Q": 2,
+          "causal_forecast": 4,
+          "filtered_fit": 8
+        },
+        "truth_input": false,
+        "batch_optimizer_calls": 0,
+        "failure_capture_ok": true,
+        "rejected_voltage_count": 0,
+        "last_rejection_stage_code": 0,
+        "flags": 0,
+        "source_id": "1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    }
+  ],
+  "error": null
+}

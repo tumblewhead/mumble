@@ -1,0 +1,69 @@
+{
+  "schema": "mumble_continuous_adapter_implementation_v1",
+  "status": "implemented_bounded_preflight_passed",
+  "source": "tools/continuous_probe.c",
+  "test": "tests/test_continuous_probe.py",
+  "binary": "build/continuous_probe",
+  "source_sha256": "008140f3c58de671986830c483c8bc85ef058a322226aa096eabe63a8d0c44ae",
+  "test_sha256": "fc531197f7e63226a2cb6dcd7b6c8cec3ef3678ebc0e02581dabf4d727483017",
+  "binary_sha256": "c72998918d00ed898518bcb788e42f1f17768fb067650d921415df2009a1b607",
+  "qualification": "experiments/continuous_learning_validation_001/implementation/development/adapter/preflight_r1/receipt.json",
+  "checks_passed": 140,
+  "toy_input_deliveries": 217,
+  "owned_estimator_bytes": 7152,
+  "host_observer_named_bytes": 13617,
+  "host_runtime_stack_additional": true,
+  "max_observed_full_query_bytes": 6424,
+  "max_causal_forecast_abs_error_V": 8.881784197001252e-16,
+  "formats": {
+    "observations": "headerless little endian <Qddd,32B: global sample index,dt,I,V",
+    "scalar": "headerless little endian <Q7dQiI,80B; final receipt version1 documents availability bits1/2/4/8",
+    "query": "mumble_continuous_query_v1; existing aggregate/components fields plus raw_soc/raw_capacity_Ah"
+  },
+  "compile": [
+    "cc",
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Iinclude",
+    "tools/continuous_probe.c",
+    "src/scm_hypothesis.c",
+    "src/scm_hypothesis_checkpoint.c",
+    "src/scm_model.c",
+    "-lm",
+    "-o",
+    "build/continuous_probe"
+  ],
+  "development_history": [
+    {
+      "stage": "initial_compile",
+      "exit_code": 0,
+      "warnings": [
+        "Two misleading-indentation warnings; no learner executed."
+      ]
+    },
+    {
+      "stage": "warning_cleanup_compile",
+      "exit_code": 0,
+      "warnings": []
+    },
+    {
+      "stage": "preflight_r1",
+      "status": "passed",
+      "first_outputs_preserved": true
+    }
+  ],
+  "frozen_learner_blobs_unchanged": true,
+  "primary_runs": 0,
+  "primary_noise_draws": 0,
+  "remote_mutations": 0,
+  "runtime_supervision": "Root runner owns cross-process global output/RSS/wall caps and coupled generator/learner envelope. Adapter bounds local output, query records/record bytes, deliveries and first-failure snapshot capture.",
+  "review_notes": [
+    "Adapter saves first-failure entering/current canonical snapshots plus raw host-state fallback and35-record input ring; initial snapshot always saved.",
+    "A simultaneous metric-I/O failure and numerical rejection would name metric_output first, but preserves bank rejection stage/flags and entering snapshot; independent reviewer may assess priority.",
+    "External hard process termination cannot execute C first-failure capture. Root supervisor should account explicitly for its interruption/capture policy before primary."
+  ]
+}

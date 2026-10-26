@@ -1,0 +1,134 @@
+{
+  "schema": "mumble_continuous_scoring_independent_review_v1",
+  "created_utc": "2026-10-26T03:56:32.212947+00:00",
+  "reviewer": "/root/continuous_generator_impl",
+  "review_type": "Independent static source and test review; no implementation edits or execution.",
+  "status": "changes_required",
+  "reviewed_source_sha256": {
+    "tools/score_continuous_learning.py": "d6ca085e3c9a99916d049321f4feff6138f4c4211bccb1bdcb6b5920159691b4",
+    "tests/test_continuous_scoring.py": "6b3cc84657d9441194ffe996f6c84cdf75bccde2d96c3993a410953e2136c276",
+    "plans/continuous_learning_validation_001.json": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851"
+  },
+  "source_sha256_at_report_write": {
+    "tools/score_continuous_learning.py": "d6ca085e3c9a99916d049321f4feff6138f4c4211bccb1bdcb6b5920159691b4",
+    "tests/test_continuous_scoring.py": "6b3cc84657d9441194ffe996f6c84cdf75bccde2d96c3993a410953e2136c276",
+    "plans/continuous_learning_validation_001.json": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851"
+  },
+  "unchanged_since_review": true,
+  "execution": {
+    "tests_run": 0,
+    "toy_noise_draws": 0,
+    "primary_noise_draws": 0,
+    "learner_input_deliveries": 0,
+    "primary_runs": 0
+  },
+  "findings": [
+    {
+      "id": "S1",
+      "severity": "blocking",
+      "locations": [
+        "tools/score_continuous_learning.py:614-631"
+      ],
+      "contract": [
+        "failure_stops.immediate: nonfinite required available output",
+        "failure_stops.immediate: clock inconsistency"
+      ],
+      "finding": "A causal/postfit availability bit paired with a nonfinite forecast/fit merely removes that voltage diagnostic. The row can remain transaction_valid and completed_valid_arm can remain true. The elapsed clock is only required to increase, so an incorrect finite time increment is accepted.",
+      "source_evidence": "transaction_valid excludes only return/flags, unknown mask and nonfinite SOC/Q/old weights. causal_ok and fit_ok separately test finite outputs without invalidating the transaction. elapsed<=last_elapsed is the only clock relationship check.",
+      "concrete_fix": "Record an invalid-transaction issue when an asserted available voltage field is nonfinite. Require each accepted chronological clock value to equal the previous clock plus actual dt using the same binary64 addition semantics; preserve the bad row and first issue.",
+      "targeted_qualification": "Extend a fabricated scoring fixture with an asserted available NaN forecast/fit and a finite but incorrect elapsed increment; both must fail complete-valid accounting."
+    },
+    {
+      "id": "S2",
+      "severity": "blocking",
+      "locations": [
+        "tools/score_continuous_learning.py:414-525",
+        "tools/score_continuous_learning.py:656-679"
+      ],
+      "contract": [
+        "logging_and_budgets.full_query_grid",
+        "measurements.full_vector",
+        "failure_stops.immediate: incomplete log/record"
+      ],
+      "finding": "Scalar completeness does not require the mandatory full-query grid or its endpoint. An initial-only query file with a complete scalar stream can be labeled completed_valid_arm=true. Queries beyond the consumed cursor are also accepted and scored if matching truth exists.",
+      "source_evidence": "full_query_scores iterates whatever rows json_rows returns, checks monotonicity and a record cap, but never compares row indices to a required grid or last_consumed_index. last_consumed_index is used only for selecting a summary detail.",
+      "concrete_fix": "Accept exact required_query_indices from the root or derive the frozen grid. Require each scheduled index through the actual consumed endpoint plus initial/restore and required failure entry; explicitly reject out-of-arm/future rows. Preserve the intended arm horizon for incomplete scalar windows.",
+      "targeted_qualification": "Fabricated tests should remove a required interior/final query and add a query beyond the observed cursor; neither input may retain complete-valid status."
+    },
+    {
+      "id": "S3",
+      "severity": "blocking",
+      "locations": [
+        "tools/score_continuous_learning.py:344-352",
+        "tools/score_continuous_learning.py:408-413",
+        "tools/score_continuous_learning.py:445-487"
+      ],
+      "contract": [
+        "measurements.full_vector",
+        "measurements.uncertainty",
+        "failure_stops.immediate: nonfinite state or required available output"
+      ],
+      "finding": "A nonfinite nuisance state coordinate with finite Q/SOC silently suppresses the entire natural-vector contribution. A malformed/nonfinite mean in an existing full-truth row similarly yields full_truth_available=false but is not classified as missing full16 truth. Asserted available local ranges with nonfinite or reversed bounds are silently reclassified as unavailable. These cases can leave completed_valid_arm=true.",
+      "source_evidence": "raw_centers validates only length, then uses coordinates5/11. natural returns None for any nonfinite coordinate; full_query_scores skips nd without adding an integrity issue. RangeAudit.add ignores invalid available bounds. Only absent full-truth rows populate missing_full.",
+      "concrete_fix": "Validate all16 mandatory state and full-truth coordinates and flag malformed required vectors as scoring-invalid. Require finite ordered interval bounds when local_ranges_available is asserted. Keep legitimate unavailable interval/SD placeholders explicitly unavailable instead of imposing finiteness on unavailable outputs.",
+      "targeted_qualification": "Use fabricated corrupt query/truth vectors and an asserted available malformed interval; none may produce completed_valid_arm=true or silently lose an expected vector score."
+    },
+    {
+      "id": "S4",
+      "severity": "clarification_required",
+      "locations": [
+        "tools/score_continuous_learning.py:151-184",
+        "tools/score_continuous_learning.py:230-237"
+      ],
+      "contract": [
+        "measurements.attainment.first",
+        "measurements.retention",
+        "measurements.renewal"
+      ],
+      "finding": "For a learned phase entry already available and inside target, first_observed_hit skips the entry and reports the next passing interval. In the same case sustained can correctly point to the entry. This makes the two onset fields inconsistent unless first_observed_hit is intentionally interval-only.",
+      "concrete_fix": "Expose entry-inclusive first attainment for learned phase boundaries, or retain the interval-only field with an explicit additional entry-inclusive result. Initial and cold-reset raw priors must remain excluded from learned attainment."
+    }
+  ],
+  "reviewed_as_sound": [
+    "Raw SOC/Q centers come from mean[11] and exp(mean[5]); unavailable convenience zeros are not used as estimates.",
+    "Every observed scalar interval enters targets; unavailable/invalid rows cannot pass, and scheduled-sample denominators include the unobserved tail.",
+    "Tail-pass logic implements sustained accuracy through the declared finite endpoint and censors incomplete windows.",
+    "Retention checks both entry and later interval ends. Preferred accuracy may drift inside the target and still count as retained.",
+    "Weak/rest B subphases are entry-aware, and scoring retains the frozen intended endpoints after an early stop.",
+    "Causal forecast error against clean voltage, observed-minus-forecast innovation, and filtered postfit error are distinct reducers with correct signs.",
+    "Binary truth/observation joins use global indices and support nonzero suffixes with a whole A truth file.",
+    "Natural-unit mapping exponentiates the first6 coordinates and retains physical units for the remaining10; positive-parameter relative errors cover coordinates0..10.",
+    "Component comparison and oracle-best diagnostics are post-scoring only; runtime output selection is not altered.",
+    "Range inclusion is explicitly descriptive serial-sample inclusion, without calibrated coverage or hard-support claims.",
+    "Normal scoring uses constant-size reducers, indexed binary reads and streamed deterministic gzip, with only selected query details retained.",
+    "Malformed/truncated indexed binary records, duplicate/nonmonotone JSON indices, rejected flags even on return0, and exclusive output policy are handled explicitly."
+  ],
+  "test_review": {
+    "existing_test_methods": 9,
+    "scope": "Small fabricated fixtures with no generator, RNG or learner calls.",
+    "covered": [
+      "weighted means/RMS and first tied peak",
+      "unavailable breaks sustained attainment",
+      "missing tail and intended endpoint",
+      "entry retention and drift inside preferred",
+      "raw prior vs placeholders and three voltage diagnostics",
+      "natural-vector and provisional interval audit",
+      "rejected flag with return0",
+      "partial metric record and output exclusivity",
+      "nonzero global suffix joins"
+    ],
+    "coverage_gaps_for_findings": [
+      "S1 available nonfinite voltage and incorrect finite clock",
+      "S2 required full-query grid, endpoint, out-of-range queries",
+      "S3 corrupt mandatory full vectors and asserted available malformed ranges",
+      "S4 learned-entry first-hit semantics"
+    ],
+    "execution_statement": "No tests were run as part of this independent review."
+  },
+  "bounded_memory_note": "The ordinary valid-input path is streaming. Detailed issue and missing-full lists can grow for corrupt inputs, up to fixed study record bounds; this review does not establish a measured RSS claim. The root resource monitor remains responsible for the frozen process/output limits.",
+  "disposition": "Address S1-S3 before executable freeze or primary scoring qualification. Resolve S4 semantics explicitly. Suggested fabricated qualifications are recommendations to the owner, not additional executed tests.",
+  "messages_sent_to": [
+    "/root",
+    "/root/continuous_scoring_impl"
+  ]
+}

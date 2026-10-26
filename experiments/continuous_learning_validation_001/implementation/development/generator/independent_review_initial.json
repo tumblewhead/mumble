@@ -1,0 +1,72 @@
+{
+  "schema": "mumble_continuous_generator_runner_independent_review_v1",
+  "status": "changes_required_before_freeze",
+  "reviewer": "/root/continuous_adapter_impl",
+  "review_mode": "Read-only source review; no generator, learner, primary, fixture or noise execution.",
+  "contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+  "source_sha256": {
+    "tools/continuous_source.py": "4437c0abc7875cb17ec0ec1ad8d2b05a0c9bf1e3b513f815515bab1dc698cf87",
+    "tests/test_continuous_source.py": "7da35f63a64ae7ac34fa127098dda6c6ac07f7b64bc60103f1d90286f49c568d",
+    "tools/run_continuous_learning.py": "33dcfb36926079bdf6fc9e1c72e70fdc74def6162a6d474c968ba279bc97e659"
+  },
+  "snapshot_note": "Runner was under active integration. This initial review binds the last observed draft hash above; it is not final executable approval. Root will provide final hashes for closure.",
+  "review_execution": {"learner_deliveries": 0, "toy_noise_draws": 0, "primary_noise_draws": 0, "primary_runs": 0, "source_edits": 0},
+  "accepted_source_properties": [
+    "Only canonical index/dt/current/measured-voltage records and immutable source ID are passed to the separate C process; truth stays in generator/root/scorer processes.",
+    "Constant-current closed forms use carried event-entering state and integer within-event counts; chunks do not restart physical dwells.",
+    "One scalar normal call occurs per source record. Queries/checkpoints/journal reconstruction do not draw noise. Full PCG64 state, charge compensation, actual clock and rolling observation hash are serialized.",
+    "Manifest identity excludes future-output digests and includes schedule, seed, contract and runtime/source hashes. Warm restore validates the manifest and snapshot envelope; cold consumes the baseline suffix without plant/RNG restart.",
+    "Journal records retain exact entering state, PCG64 fields, compensated charge and hash-chain bytes with CRCs; arbitrary-index reconstruction reuses the same deterministic closed form and validates the reconstructed snapshot.",
+    "Existing generator tests cover independent physical/charge formulas, interior and event-boundary restore, different chunk sizes, all toy journal snapshots, corruption rejection and fresh-process suffix parity.",
+    "Observed R1-R5 integrations add pre-C source digest/count/grid/charge/clock checks, prelaunch arm registration, partial learner accounting, supplemental truth forwarding, deadline checks and metadata/scorer caps. Those earlier draft gaps are not repeated as new findings."
+  ],
+  "prior_test_evidence_not_rerun": {
+    "receipt": "experiments/continuous_learning_validation_001/implementation/development/generator/attempt_001/receipt.json",
+    "reported_checks_passed": 45,
+    "reported_toy_noise_draws": 319,
+    "reported_learner_deliveries": 0
+  },
+  "findings": [
+    {
+      "id": "G1",
+      "priority": "high",
+      "status": "open_in_reviewed_snapshot",
+      "locations": ["tools/continuous_source.py:294-317", "tools/continuous_source.py:618-625", "tools/run_continuous_learning.py:579-585"],
+      "issue": "Generator SIGINT uses Python's default KeyboardInterrupt. It can arrive after the RNG advances or during sequential physical/hash/charge assignments, before next_index is committed. The failure handler then serializes a partially updated source and reports next_index-start as the exact noise count. Runner currently treats presence of that failure file as exact accounting.",
+      "consequence": "A cooperative resource stop can preserve an inconsistent snapshot or undercount draws while claiming exact state/counts.",
+      "requested_fix": "Use deferred signal handling and stop at a complete source-record boundary. If state or count is not recoverable, mark it unavailable/unknown rather than exact. Keep hard-kill journal counts explicitly lower bounds.",
+      "root_response": "Assigned to generator author for safe-boundary signal handling."
+    },
+    {
+      "id": "R6",
+      "priority": "high",
+      "status": "open_in_reviewed_snapshot",
+      "locations": ["tools/run_continuous_learning.py:184", "tools/run_continuous_learning.py:200-203"],
+      "issue": "monitor combines os.wait4 with Popen.send_signal/kill. The installed Python implementation calls poll()->waitpid inside send_signal; if the child exits between wait4(WNOHANG) and signaling, Popen can reap it, and the next wait4 raises ChildProcessError.",
+      "consequence": "The stop path loses the exact wait4 resource result and normal execution receipt even when the worker has exited.",
+      "requested_fix": "Keep wait4 as the sole reaper and signal the known unreaped child directly with os.kill, handling ProcessLookupError, including escalation.",
+      "root_response": "Direct os.kill fix in progress."
+    },
+    {
+      "id": "R7",
+      "priority": "high",
+      "status": "open_in_reviewed_snapshot",
+      "locations": ["tools/run_continuous_learning.py:180-225"],
+      "issue": "After Popen succeeds, monitor has no exception cleanup. A parent KeyboardInterrupt or I/O exception from progress/log/output monitoring exits monitor while a live child may continue generating or ingesting. run_study catches BaseException and can proceed to failure reporting/scoring.",
+      "consequence": "The first-stop and one-worker rules can be violated; primary work continues without supervision or exact accounting.",
+      "requested_fix": "Every exceptional monitor exit must stop and reap the child, allow at most one second for cooperative capture, escalate if needed, and preserve the original error plus execution/capture-unavailable status.",
+      "root_response": "Stop/reap cleanup in progress."
+    },
+    {
+      "id": "R8",
+      "priority": "medium",
+      "status": "open_in_reviewed_snapshot",
+      "locations": ["tools/run_continuous_learning.py:494-514", "tools/run_continuous_learning.py:540-551"],
+      "issue": "The warm source audit verifies files against their own generation receipt, but comparison with the baseline observation suffix and carried generator state first occurs after all warm C deliveries. An internally checksummed divergent continuation therefore reaches C before the available source mismatch is detected.",
+      "consequence": "Warm source failure is detected later than necessary, after up to42000 additional learner deliveries.",
+      "requested_fix": "Move source-only warm parity checks for observation suffix, source checkpoints/final state and chain endpoint before warm C launch. Keep learner metric/query/checkpoint parity after C.",
+      "root_response": "Reported to root; closure pending."
+    }
+  ],
+  "next_action": "Close these findings against final source hashes and perform the independent executable-receipt/conformance review before any primary generation. This initial review grants no execution admission."
+}

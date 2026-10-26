@@ -1,0 +1,20 @@
+{
+  "label": "hard_stop",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-c",
+    "import signal,time; signal.signal(signal.SIGINT,signal.SIG_IGN); time.sleep(10)"
+  ],
+  "pid": 17,
+  "returncode": -9,
+  "wall_s": 1.3187961250005173,
+  "peak_RSS_bytes": 30019584,
+  "sampled_peak_RSS_bytes": 0,
+  "stop_cause": "wall_time_budget",
+  "cooperative_stop_requested": true,
+  "hard_killed": true,
+  "supervisor_error": null,
+  "capture_policy": "SIGINT at safe worker boundary; at most1s diagnostic flush, then hard kill. A cap breach fails regardless of exit status; hard kill may leave no entering checkpoint.",
+  "stdout": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_001/supervisor/hard_stop.stdout",
+  "stderr": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_001/supervisor/hard_stop.stderr"
+}

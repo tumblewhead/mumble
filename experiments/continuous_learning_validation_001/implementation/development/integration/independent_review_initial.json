@@ -1,0 +1,98 @@
+{
+  "schema": "mumble_continuous_independent_initial_source_review_v1",
+  "reviewer": "continuous_scoring_impl",
+  "status": "changes_required_before_executable_freeze",
+  "contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+  "scope": [
+    "tools/continuous_source.py",
+    "tests/test_continuous_source.py",
+    "tools/run_continuous_learning.py"
+  ],
+  "review_method": "Read-only source and existing fabricated-fixture receipt review. Runner was being edited concurrently; findings identify the initial inspected sections and require a final integrated review. No generator, noise, learner, scorer, or test execution occurred in this review.",
+  "review_activity": {
+    "primary_noise_draws": 0,
+    "toy_noise_draws": 0,
+    "learner_deliveries": 0,
+    "tests_executed": 0,
+    "source_edits": 0
+  },
+  "generator_assessment": {
+    "status": "no_source_blocker_identified",
+    "source_sha256": "4437c0abc7875cb17ec0ec1ad8d2b05a0c9bf1e3b513f815515bab1dc698cf87",
+    "test_sha256": "7da35f63a64ae7ac34fa127098dda6c6ac07f7b64bc60103f1d90286f49c568d",
+    "reviewed_properties": [
+      "Pinned inherited cell constants and current protocol are read without running the old generator.",
+      "Event states carry across current transitions; closed-form within-event propagation uses integer sample count times binary64 dt. Voltage observes the interval-end physical state.",
+      "Exactly one scalar PCG64 normal draw follows a successful physical-domain check per generated interval; query/checkpoint/journal lookup does not draw noise.",
+      "Snapshot includes physical entry/current state, event and stream cursors, actual clock, compensated charge, full PCG64 state, source identity and rolling input chain. Restore validates into a separate object.",
+      "A 208-byte source-state journal preserves exact event-entry values, clock, charge compensations, PCG64 state and chain. Arbitrary-index reconstruction uses one deterministic closed-form evaluation and no history replay or RNG draw.",
+      "Binary observations contain only index, dt, current and measured voltage; scalar and full16 truth are distinct artifacts.",
+      "Output creation is exclusive, finite payload writes check remaining allowance, failure metadata has reserved space, and partial files are retained."
+    ],
+    "existing_fixture_evidence": {
+      "path": "experiments/continuous_learning_validation_001/implementation/development/generator/attempt_001/receipt.json",
+      "status": "passed",
+      "checks_passed": 45,
+      "toy_noise_draws_total": 319,
+      "primary_noise_draws": 0,
+      "learner_deliveries": 0,
+      "source_and_test_hashes_match_reviewed_files": true,
+      "coverage": "Independent dwell/charge formulas; interior and transition restores; chunk independence; all 73 toy journal snapshots exact; zero-draw journal lookup; corrupt snapshot/journal rejection; fresh-process future-byte parity; primary guard."
+    }
+  },
+  "runner_findings": [
+    {
+      "id": "R1",
+      "severity": "blocker",
+      "section": "run_study source_receipt gate; capture_source_failure journal binding",
+      "finding": "The initial draft loaded a source receipt without checking complete status, immutable source identity, expected record/noise counts, output extents or digests before launching C. Failure journal reconstruction omitted the receipt SHA256 binding.",
+      "required_resolution": "Validate generated artifact status, identity, expected start/end/count, required query indices and all artifact digests before inference; bind journal lookup to the verified source receipt SHA256.",
+      "latest_observation": "Root acknowledged. verify_source_files helper and expected_sha256 journal argument appeared during review; integrated call sites and final behavior remain to be reviewed."
+    },
+    {
+      "id": "R2",
+      "severity": "blocker",
+      "section": "run_study arm registration, subprocess receipt parsing and accounting",
+      "finding": "The initial draft parsed learner stdout before registering the arm and generated source. An empty/malformed receipt after timeout or hard kill omitted the failed arm from prefix scoring and could undercount generated noise and consumed deliveries.",
+      "required_resolution": "Register the intended arm and generated source before launch; preserve stdout and prefix artifacts even without a complete receipt; label exact counts unavailable when they cannot be recovered. Track B launch and generator activity independently of successful learner receipt parsing. Do not turn a journal-prefix lower bound into an exact noise-draw count after an ungraceful kill.",
+      "latest_observation": "Root acknowledged and moved source registration earlier; cooperative SIGINT followed by a bounded hard-kill fallback was added. Complete arm registration and incomplete receipt accounting still require integrated review."
+    },
+    {
+      "id": "R3",
+      "severity": "blocker",
+      "section": "capture_source_failure and score_job full_truth handoff",
+      "finding": "The initial draft wrote supplemental first-failure full16 truth but continued passing only the original scheduled full_truth path to the scorer.",
+      "required_resolution": "Create a separate ordered, deduplicated merge of scheduled and reconstructed truth, verify equality at coincident indices, and pass that merged path for the failed arm. Preserve original files and report any capture failure without erasing the original learner failure.",
+      "latest_observation": "Root acknowledged. Ordered merged full_truth_with_failure.jsonl construction with equality checking appeared during review; final scoring handoff remains to be reviewed."
+    },
+    {
+      "id": "R4",
+      "severity": "blocker",
+      "section": "monitor and end-of-arm validity gate",
+      "finding": "The initial monitor checked deadlines only while a child was still running. It could launch after the deadline or accept a child that exited between polls after the deadline. Post-learner parity/hash/checkpoint work also lacked an arm-deadline gate.",
+      "required_resolution": "Check deadline before child launch, when reaping, and after all arm verification before admission of the next stage. Preserve and report the reason when a bounded cooperative flush extends past the stop request.",
+      "latest_observation": "Root acknowledged; an end-of-arm deadline check appeared during review. Pre-launch and post-reap checks remain for final integrated review."
+    },
+    {
+      "id": "R5",
+      "severity": "blocker",
+      "section": "shared output-budget enforcement and score_job",
+      "finding": "The initial draft only detected total output after it exceeded the 512 MiB limit. The scorer had no write-time allowance, and root metadata/failure writes were outside child output counters.",
+      "required_resolution": "Reserve final/failure metadata, allocate the scorer a remaining-output allowance, and enforce the allowance before each emitted compressed/detail/summary write. Retain supervisor monitoring as an additional check, not the only before-cap control.",
+      "latest_observation": "Root notified; requires integrated review after implementation."
+    }
+  ],
+  "integration_requirements_not_yet_qualified": [
+    "Aggregate preflight receipt must bind current source and binary hashes and enforce total preflight delivery/wall limits before freeze. An old passed receipt alone is insufficient after source changes.",
+    "Source/learner coupled continuation must be tested at both an interior event and a transition, with exact future observations and canonical learner checkpoints; the source-only fixture does not establish coupled learner parity.",
+    "Required query-grid identity and scalar/query record completeness must be checked before admitting B, not only by an after-study scorer.",
+    "Final executable receipt and final integrated implementation need the independent pre-primary review mandated by the frozen contract. This initial review is not that approval."
+  ],
+  "positive_runner_design_observations": [
+    "A precedes conditional B, and A accuracy does not control admission.",
+    "Warm restores the baseline learner/source checkpoint in fresh helpers and compares suffix observations, metrics, queries and canonical checkpoints.",
+    "Cold consumes the original A source and calls the dedicated reset path after restoring the known cursor; no new cold generator is launched.",
+    "All arms run sequentially; one post-inference scorer helper processes the arm list.",
+    "Truth files are not passed to the C adapter; source/config identity and four-field observations are its only source inputs."
+  ]
+}

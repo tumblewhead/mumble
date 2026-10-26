@@ -89,6 +89,11 @@ build/test_hypothesis_checkpoint: tests/test_hypothesis_checkpoint.c $(HYPOTHESI
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
 build/scm_hypothesis_probe: tools/hypothesis_probe.c $(HYPOTHESIS_OBJECTS) | build
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+# Separate host adapter; pin its strict binary64 build independently of old objects.
+CONTINUOUS_CFLAGS ?= -std=c99 -O2 -Wall -Wextra -Wpedantic -Werror
+CONTINUOUS_SOURCES = tools/continuous_probe.c src/scm_hypothesis.c src/scm_hypothesis_checkpoint.c src/scm_model.c
+build/continuous_probe: $(CONTINUOUS_SOURCES) include/scm_hypothesis.h include/scm_hypothesis_checkpoint.h include/scm_model.h include/scm_online.h | build
+	$(CC) $(CPPFLAGS) $(CONTINUOUS_CFLAGS) $(CONTINUOUS_SOURCES) $(LDLIBS) -o $@
 test-hypothesis: build/test_hypothesis build/test_hypothesis_checkpoint
 	./build/test_hypothesis
 	./build/test_hypothesis_checkpoint

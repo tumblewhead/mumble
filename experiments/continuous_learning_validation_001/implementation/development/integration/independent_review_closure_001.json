@@ -1,0 +1,82 @@
+{
+  "schema": "mumble_continuous_independent_runner_closure_v1",
+  "reviewer": "continuous_scoring_impl",
+  "status": "pass",
+  "scope": "Targeted read-only closure of initial runner findings R1-R5; no new broad review or execution.",
+  "initial_review": "experiments/continuous_learning_validation_001/implementation/development/integration/independent_review_initial.json",
+  "contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+  "reviewed_source_sha256": {
+    "tools/run_continuous_learning.py": "872a9b7aa88d92aedce0af5e0d8931454c59b48abc3c0fc38dec26524a725552",
+    "tests/test_continuous_integration.py": "c36fcecf251be933bba0146eb17862e37b81230bbea99b60b732cab36726319a",
+    "tools/continuous_source.py": "b5edc4f82d58383d3a23409258648fc117ad962cec461a35a97e01361546ea02",
+    "tools/continuous_probe.c": "6353081ee5e00bf24b4d65e03ee408ed102f6a2d2aa5c3960c3f49f5c5d140d9",
+    "tools/score_continuous_learning.py": "4af2d17ba013a2d0b3d065080e21a70fa7f33ef64a4af3fed0b475c15faa825b"
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "status": "closed",
+      "evidence": "run_study invokes verify_source_files before each C launch. The gate verifies complete status, source/manifest identities, expected indices/counts, file extents and digests, full-query grid, final chain, charge and binary64 clock. Warm source bytes and complete checkpoint/final-state parity are checked before warm learner launch. Failure journal lookup supplies the verified whole-file SHA256. generate_job independently checks the frozen executable receipt and review."
+    },
+    {
+      "id": "R2",
+      "status": "closed",
+      "evidence": "Sources and intended learner arms are registered before worker launch; B source start and B learner start are separately reported. read_learner_receipt validates schema, status, source and nonnegative integer counters and falls back to exact_consumption_unknown with persisted record extents. generation_accounting tolerates absent, truncated or malformed metadata and leaves exact totals null; journal extents remain explicitly unverified diagnostics. Partial artifacts stay available to post-inference scoring."
+    },
+    {
+      "id": "R3",
+      "status": "closed",
+      "evidence": "Source reconstruction produces only supplemental failure truth; score_job passes supplemental_full_truth to the streaming scorer merge, whose duplicates require equality. preserve_failure_source records a secondary capture error on the arm while retaining the original learner-stop failure. No large merged truth copy, RNG draw or trajectory replay is introduced."
+    },
+    {
+      "id": "R4",
+      "status": "closed",
+      "evidence": "monitor checks an expired deadline before launch and checks time again after reaping. Stop requests use SIGINT with at most1s flush before SIGKILL, and exceptional parent paths also stop and reap the worker. Arm verification deadlines precede A admission; final primary and primary-plus-scoring totals are checked. Coupled preflight exercises prelaunch rejection, parent-error cleanup and uncooperative-worker termination."
+    },
+    {
+      "id": "R5",
+      "status": "closed",
+      "evidence": "Root metadata and query-index writes check remaining global output before writing. Generator, learner and scorer receive remaining allowance after a1MiB metadata reserve; the scorer counts actual compressed/JSON bytes before writes and reserves4096 bytes for its failure summary. Emergency metadata is checked against the absolute limit, with supervisor monitoring retained. Failure truth writes are capped before writing."
+    }
+  ],
+  "execution_evidence": [
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_001/receipt.json",
+      "sha256": "9e80f2ff1179c85fbeb81fadbefada9236d08a67bffbbdaa2346029eb0ccb478",
+      "status": "passed",
+      "checks_passed": 33,
+      "learner_deliveries": 647,
+      "toy_noise_draws": 507,
+      "primary_noise_draws": 0,
+      "execution_wall_s": 2.213318865004112,
+      "runner_sha256": "68466368aadfa04639528a180636df18279f4909a34f733cd4a112002edab578",
+      "qualification": "Original coupled integration at its recorded revision; preserved unchanged. Covers interior and boundary continuation, source/learner/query parity, cold reset, scorer join and supervisor behavior."
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/development/integration/attempt_002_metadata/receipt.json",
+      "sha256": "dfa11aed89e6cec307ac3360b46b16589c0fccf187294406f8becfc57857475c",
+      "status": "passed",
+      "checks_passed": 11,
+      "learner_deliveries": 0,
+      "toy_noise_draws": 0,
+      "primary_noise_draws": 0,
+      "execution_wall_s": 0.003016376002051402,
+      "runner_sha256": "872a9b7aa88d92aedce0af5e0d8931454c59b48abc3c0fc38dec26524a725552",
+      "qualification": "Current revision targeted malformed-metadata and secondary-capture checks. Current reviewed source hashes match this receipt. The successful integration path is inherited from the unchanged first-stage logic; the coupled experiment was not rerun."
+    }
+  ],
+  "revision_distinction": {
+    "original_integration_runner": "68466368aadfa04639528a180636df18279f4909a34f733cd4a112002edab578",
+    "current_runner": "872a9b7aa88d92aedce0af5e0d8931454c59b48abc3c0fc38dec26524a725552",
+    "intervening_change": "Only the residual R2/R3 failure metadata parsing and secondary-capture preservation helpers/call sites, plus their zero-input regression mode, were added after the coupled run."
+  },
+  "review_activity": {
+    "tests_run": 0,
+    "learner_deliveries": 0,
+    "primary_noise_draws": 0,
+    "toy_noise_draws": 0,
+    "code_edits": 0
+  },
+  "remaining_blockers_in_scope": [],
+  "boundary": "This closes R1-R5 against the named source revision and preserved execution evidence. The final source/executable receipt still requires the separate mandatory pre-primary review; no primary execution is authorized by this closure alone."
+}
