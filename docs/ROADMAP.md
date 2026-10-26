@@ -2,6 +2,17 @@
 
 ## Decision
 
+**The saved-evidence weighting/interval audit is complete.** The 50,401-row,
+1,445-query audit found no tested arithmetic, chronology or reporting mismatch.
+The SOC output switch is driven by changed component weights, while narrow
+wrong conditional beliefs remain. Close the bookkeeping investigation and move
+to the three-checkpoint conditional-belief adequacy decision. Its proposed
+192-node/six-center host probe has not run. See the
+[current report](../experiments/weighting_output_diagnostic_001/REPORT.md),
+[decision](../experiments/weighting_output_diagnostic_001/decision.json) and
+[independent review](../experiments/weighting_output_diagnostic_001/independent_review.json).
+The estimator source and owned SRAM remain unchanged.
+
 **M1's desktop lifecycle is complete. The continuous learning/retention
 diagnostic has now completed once under the unchanged two-component learner.**
 All four arms are valid with 661,500 learner deliveries, zero rejected updates,
@@ -15,8 +26,9 @@ switch around 7,811 seconds. Cell A preferred capacity remains unresolved at
 the finite endpoint, and local uncertainty remains unvalidated. The
 [result report](../experiments/continuous_learning_validation_001/implementation/REPORT.md)
 and [decision](../experiments/continuous_learning_validation_001/implementation/decision.json)
-close this bounded experiment. The next question is a small weighting/output
-diagnosis using preserved evidence; a longer campaign is not an automatic remedy.
+close this bounded experiment. Its weighting/output diagnosis is now complete;
+the conditional-belief decision above is next. A longer campaign is not an
+automatic remedy.
 
 The owned core subtotal remains **7,152 bytes**. Recorded worker RSS and runtime
 output limits passed, but the supervisor's own peak RSS was not saved. The
@@ -68,7 +80,7 @@ not improve capacity, and accurate points do not validate uncertainty ranges.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — candidate retained for qualification** | Continuous validation contract frozen; implement its host harness and run the staged diagnostic before further qualification decisions | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
+| **M2: Desktop performance — candidate retained for qualification** | Continuous diagnostic and weighting audit complete; conditional-belief adequacy decision next | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -465,23 +477,29 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Fetch the latest `implementation/continuous-learning-validation-001` descendant
-and read the [result summary](../experiments/continuous_learning_validation_001/implementation/summary.json),
-[report](../experiments/continuous_learning_validation_001/implementation/REPORT.md),
-[decision](../experiments/continuous_learning_validation_001/implementation/decision.json)
-and independent reviews. The source, qualified executable and single primary
-are preserved. Do not rerun completed studies to resume or extend this run.
+Fetch the latest `planning/weighting-output-diagnostic-001` descendant and read
+its [summary](../experiments/weighting_output_diagnostic_001/summary.json),
+[report](../experiments/weighting_output_diagnostic_001/REPORT.md),
+[decision](../experiments/weighting_output_diagnostic_001/decision.json) and
+[independent review](../experiments/weighting_output_diagnostic_001/independent_review.json).
+The completed primary and once-only saved-evidence audit remain preserved.
+Do not repeat either study to recover context.
 
-The next bounded question is the component-weight/output episode around
-7,811 seconds: the aggregate leaves preferred SOC while a retained component
-still passes, and at 8,400 seconds that component passes both preferred targets
-while the aggregate misses both. Start with existing scalar crossings, full
-queries and checkpoints; specify a finite diagnostic before any new execution.
-No truth-based component selection, pruning, seed search or horizon extension
-is authorized by this result. The supervisor's own RSS high-water measurement
-also needs an explicit future correction before claiming all-process memory
-qualification.
+Use `design/conditional-belief-adequacy-001` for the next finite contract:
+existing 7,200/8,100/8,400 s packed component checkpoints and each next archived
+observation; at most 192 spherical-radial node propagations and six centers.
+Freeze the exact node rule, domain admission, comparison scales and resources
+before execution. A failed node is evidence about the retained Gaussian's
+physical compatibility; silently clipping or renormalizing would change the
+question. This diagnostic is not calibrated coverage or hard support.
 
-Capacity has no startup deadline. Local precision, point accuracy, coverage,
-full target resources and indefinite operation remain separate obligations.
-No day/week/annual promotion or automatic sweep is queued.
+The finish line is one prioritized conditional-belief assumption or a precise
+statement of what these snapshots cannot distinguish. The h-boundary
+witness at 8,400 s motivates the domain check and does not establish a cause of
+the earlier weight switch. Do not select components or uncertainty multipliers
+from truth. No seed/horizon/component-count sweep or annual campaign is queued.
+
+The old supervisor RSS high-water gap remains open; explicitly record it in a
+future harness revision rather than rerunning the completed primary. Capacity
+has no startup deadline. Useful point accuracy, local precision, coverage,
+complete Cortex-M23 resources and indefinite operation remain separate gates.

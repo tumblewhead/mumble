@@ -6,6 +6,20 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The saved-evidence weighting/interval audit is complete.** It checked
+50,401 scalar rows and 1,445 full queries with no tested accounting or formula
+mismatch. The observed SOC jump is almost entirely a change in mixture weights;
+the sampled predictive preference is driven by voltage-residual differences.
+All matching local intervals contain their own point estimate, while both
+conditional beliefs can still be narrow and wrong. See the
+[audit report](experiments/weighting_output_diagnostic_001/REPORT.md),
+[summary](experiments/weighting_output_diagnostic_001/summary.json),
+[decision](experiments/weighting_output_diagnostic_001/decision.json) and
+[independent review](experiments/weighting_output_diagnostic_001/independent_review.json).
+No estimator source or SRAM changed. The next bounded decision examines the
+conditional beliefs at three saved checkpoints; its nonlinear/domain probe has
+not run. The current branch is `planning/weighting-output-diagnostic-001`.
+
 **The frozen continuous learning/retention experiment is complete.** The
 unchanged learner processed all **661,500 deliveries** in four valid arms, with
 exact warm continuation, valid cold-reset semantics and zero rejected updates.
@@ -29,8 +43,9 @@ The run and scorer took 51.23 seconds, with 391,584,188 bytes of closed runtime
 outputs. Worker peak RSS was recorded within limit; the supervisor's own peak
 was not saved, so full all-process memory qualification remains open. The
 owned estimator subtotal remains 7,152 bytes, with no estimator source change.
-The next question is a bounded diagnosis of the 7,811-second weighting/output
-episode using preserved evidence. No primary retry or longer campaign is queued.
+The 7,811-second weighting/output episode has now been audited using its
+preserved evidence. The next conditional-belief decision is linked above;
+no primary retry or longer campaign is queued.
 The [frozen contract](plans/continuous_learning_validation_001.json) and
 [design report](experiments/continuous_learning_validation_001/REPORT.md) remain
 preserved alongside the once-only execution.
@@ -129,6 +144,9 @@ experiment work to specific delivery decisions.
 
 | Resource | Contents |
 | --- | --- |
+| [Current weighting/interval audit](experiments/weighting_output_diagnostic_001/REPORT.md) | Saved-record chronology, predictive scores, output-motion attribution and own-point/truth interval distinction; no learner rerun |
+| [Current bounded decision](experiments/weighting_output_diagnostic_001/decision.json) | Close arithmetic investigation; specify a three-checkpoint conditional-belief adequacy contract |
+| [Current independent review](experiments/weighting_output_diagnostic_001/independent_review.json) | Rehashed archived inputs, verified raw witnesses and numerical interpretation |
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
@@ -200,7 +218,7 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
 | **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
-| **M2: Desktop performance and year-scale behavior** | **A4: split candidate retained; continuous validation contract frozen.** Implement/qualify its host harness, then execute the staged diagnostic once. Uncertainty, broader performance and lifetime behavior remain open |
+| **M2: Desktop performance and year-scale behavior** | **A4: split candidate retained; continuous diagnostic and weighting audit complete.** The next three-checkpoint decision examines conditional-belief adequacy. Uncertainty, broader performance and lifetime behavior remain open |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality
@@ -352,27 +370,31 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The [two-component learner comparison](experiments/nonlinear_hypothesis_001/REPORT.md)
-and the [parameter sensitivity analysis](experiments/parameter_sensitivity_001/REPORT.md)
-are complete. Preserve the completed M1 campaign, both older bounded candidates,
-the original 60-fit study, failed uncertainty diagnostics and all source identities.
-The latest canonical work branch is `design/continuous-learning-validation-001`.
+The latest canonical work branch is `planning/weighting-output-diagnostic-001`.
+The continuous-learning experiment and its saved-evidence weighting/interval
+audit are complete. Read the current [handoff](handoff/CONTINUE.json) and
+[decision](experiments/weighting_output_diagnostic_001/decision.json); preserve
+all prior results and source identities.
 
-The [frozen continuous validation contract](plans/continuous_learning_validation_001.json)
-closes the sensitivity decision's next design task, with zero primary runs.
-On `implementation/continuous-learning-validation-001`, implement only the new
-stateful generator, continuous host adapter, scorer and bounded preflight fixtures.
-Preserve the seven pinned learner source blobs and the old 73,500-sample probe.
-Freeze/review executable source and binary identities before inference, then run
-the A lifecycle gate and conditional four-hour B diagnostic once. Accuracy misses
-remain visible and do not invent a capacity startup deadline; validity failures
-stop the study. No day/week/annual campaign or full qualification follows
-automatically. See the [design decision](experiments/continuous_learning_validation_001/decision.json).
+The next finite task is to freeze the three-checkpoint conditional-belief
+adequacy contract, using the saved 7,200, 8,100 and 8,400 s states and next
+archived observations. The proposed host probe has at most 192 positive-weight
+nonlinear node propagations plus six centers. Check physical-domain admission
+before evaluation; do not clip, drop, renormalize or replace invalid nodes.
+The probe is not yet executed and is not a new online estimator or coverage
+qualification. Select one conditional-belief assumption for the next bounded
+repair decision, or identify the precise insufficiency of these snapshots.
+
+No tested normalization or interval-centering repair is indicated. Both
+conditional beliefs can miss truth despite tiny local widths. Keep truth out of
+weights and inference, and do not derive uncertainty multipliers from observed
+truth-error ratios. No longer run or annual campaign follows automatically.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to
-make that provider applicable. A general bounded streaming learner remains a
-real gap after the completed desktop integration. Attention and RC partitioning
+make that provider applicable. General conditional support, calibrated uncertainty and full-estimator
+indefinite stability remain open after the completed bounded learner studies.
+Attention and RC partitioning
 remain focused decision experiments when their result can change the next
 learner choice.
 

@@ -1,0 +1,116 @@
+{
+  "schema": "mumble_weighting_output_decision_v1",
+  "status": "diagnostic_closed_conditional_belief_adequacy_selected",
+  "base_revision": "b4c57239f163ed0a9a48cf39acf18117915aa4bf",
+  "audit_source_revision": "c0d9ee7c64335e3dc1105553b6fa1c3b7b03f27f",
+  "audit_attempts": 1,
+  "accounting_and_reconstruction": "passed_in_frozen_scope",
+  "production_bug_established": false,
+  "findings": [
+    {
+      "id": "weight_arithmetic",
+      "result": "No tested normalization, chronology, score-recurrence or aggregate-moment mismatch in 152,995 comparisons."
+    },
+    {
+      "id": "output_motion",
+      "result": "The dominance flip at index 273391 / 7811.171429 s coincides with preferred SOC exit. Midpoint attribution assigns 99.9633056 percent of the 7811-to-7812 s signed SOC error change to output weights."
+    },
+    {
+      "id": "score_preference",
+      "result": "At 1,444 context queries, the residual-term sum is 1094.016502 nats and the log-variance-term sum is -0.0055481 nats. Sampled terms do not decompose all 50,401 steps; a small variance difference does not establish calibrated variance."
+    },
+    {
+      "id": "conditional_uncertainty",
+      "result": "All 8,670 selected matching intervals contain their own point. Both conditional SOC intervals miss truth at all 1,445 selected queries. All 24 matching arm endpoint intervals miss truth. Reweighting alone does not establish calibrated uncertainty."
+    },
+    {
+      "id": "constraint_witness",
+      "result": "At 8400 s, component 0 has h=1, SD=9.055643565861842e-6 and blocked_mask=32768. This later boundary contact motivates domain admission checks; it does not establish the cause of the earlier switch."
+    }
+  ],
+  "selected_next_work": {
+    "name": "three_checkpoint_conditional_belief_adequacy",
+    "proposed_branch": "design/conditional-belief-adequacy-001",
+    "first_action": "Freeze one compact contract distinguishing current nonlinear/constraint treatment from retained historical uncertainty before diagnostic evaluation.",
+    "snapshot_seconds": [
+      7200,
+      8100,
+      8400
+    ],
+    "snapshot_next_indices": [
+      252000,
+      283500,
+      294000
+    ],
+    "archived_inputs": [
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/learner-252000.bin",
+        "bytes": 3004,
+        "sha256": "1d1560bc217544c7ac5a7c0a45f1d10c45c463e5dc52a66729ddf6b952d89c08",
+        "git_blob_sha1": "1324b469478e30c75da1b018c5b27a02dc2b9d72",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/learner-283500.bin",
+        "bytes": 3004,
+        "sha256": "09d99568b597174fb2156100fb4d72fdd61b500c59e28f4f5c86296745511ad7",
+        "git_blob_sha1": "87a882434ab2068f9d7434bb1fc22dbcf0c54009",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/learner-294000.bin",
+        "bytes": 3004,
+        "sha256": "a3f29e1abec1586467b9421e40cfa1253a4699f708b5fc1afc5620f7379b9ebb",
+        "git_blob_sha1": "c8bd1a8dc5a08da578c1072e42cf003564a74a0a",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+        "bytes": 16128000,
+        "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+        "git_blob_sha1": "df785789cb5b7e2873e15f57fe6a18a86deb194c",
+        "mode": "100644"
+      }
+    ],
+    "proposed_node_rule": "For each 16D component with saved mean mu and factor L, use 32 positive equal-weight points mu +/- sqrt(16)*L[:,k], with weight 1/32. Propagate each admissible point through exactly the next archived dt/current and evaluate voltage; evaluate six centers separately. Freeze the exact transform, comparison scales and code before executing.",
+    "maximum_node_propagations": 192,
+    "maximum_center_propagations": 6,
+    "inputs": "Existing packed factors and means, next original dt/current/voltage, public physical bounds, unchanged observation model and declared sigmaV. Truth only for post-inference context.",
+    "domain_rule": "Check all node coordinates and physical propagation domain. Any invalid node makes the complete intended moment rule inadmissible at that snapshot; report failures, do not clip, drop, renormalize or replace nodes.",
+    "outputs": [
+      "Linearized versus nonlinear predicted-voltage mean/variance for each admitted snapshot.",
+      "Separate deterministic mean shift, variance shift and domain/constraint failures.",
+      "Comparison scales frozen from declared model/noise rather than observed truth-error ratios.",
+      "Exactly one next conditional-belief assumption prioritized or precise evidence insufficiency; no coverage claim."
+    ],
+    "finish_line": "A finite conditional-belief adequacy decision. If admitted local nonlinear moments barely change, deprioritize one-step moment approximation at these snapshots and examine retained historical uncertainty; if nodes are invalid or moments change materially under frozen scales, prioritize a constraint/nonlinear conditional treatment. Neither outcome proves a unique global cause.",
+    "current_status": "specified_next_decision_not_executed",
+    "new_full_learner_runs": 0,
+    "new_source_generations": 0,
+    "fitting_or_tuning": false
+  },
+  "preserved": {
+    "previous_primary": "completed_once_unchanged",
+    "later_capacity_learning_and_final_retention": "preserved",
+    "candidate_promoted": false,
+    "coverage_validated": false,
+    "estimator_source_changed": false,
+    "estimator_SRAM_added_bytes": 0,
+    "capacity_startup_deadline": null,
+    "prior_supervisor_RSS_gap": "still_unverified"
+  },
+  "excluded": [
+    "No truth-selected output or truth-tuned weights.",
+    "No arbitrary covariance/noise multiplier or ratio-based inflation.",
+    "No clipping/renormalizing invalid diagnostic nodes.",
+    "No pruning/reseeding, component-count/seed/horizon sweep, annual campaign or M23 promotion.",
+    "No claim that labels or withholding estimates improves accuracy."
+  ],
+  "evidence": {
+    "summary": "summary.json",
+    "report": "REPORT.md",
+    "primary_audit": "attempt001/result.json",
+    "review": "independent_review.json",
+    "plan": "../../plans/weighting_output_diagnostic_001.json"
+  }
+}

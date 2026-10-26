@@ -1,0 +1,80 @@
+{
+  "schema": "mumble_continue_v18",
+  "task": "Continue after the single completed continuous-learning diagnostic. Read preserved evidence and define the bounded weighting/output question; do not rerun or extend the completed study.",
+  "repository": {
+    "url": "https://github.com/tumblewhead/mumble",
+    "work_branch": "implementation/continuous-learning-validation-001",
+    "latest_checkpoint": "Fetch current branch tip; historical IDs are not reset targets.",
+    "source_commit": "f73f39f276b84bcb76be8d5dc177c55191d34ff1",
+    "executable_authority_commit": "dd877e717b143a859bef8d119e6ddd40bf454012",
+    "contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+    "handoff_url": "https://github.com/tumblewhead/mumble/blob/implementation/continuous-learning-validation-001/handoff/CONTINUE.json",
+    "publication": "provenance/continuous_learning_validation_001_publication.json",
+    "published_result_revision_before_metadata": "eb7509a1d0e2ac0daf8e9413117c3fa739987a1c",
+    "published_result_tree": "02edae61dd595b3a4d81e65bf7e0d2595eecac42"
+  },
+  "bootstrap": [
+    "Fetch current repository; inspect status and preserve newer/dirty/unrelated work. Use a work branch; no force-push.",
+    "Read AGENTS.md,README.md,PROJECT_STATE.json,this handoff, then the new summary/contract/decision and selective evidence. No rawtrace loading or completed-study reruns to resume.",
+    "Repository is canonical memory. Resolve executed/published historical identities through the preserved maps; new design is based directly on the published parent."
+  ],
+  "goal": {
+    "implementation": "Runnable Cortex-M23 C near10240B complete subsystem SRAM.",
+    "estimation": "Stimulus-supported quantities, carried evidence/uncertainty, explicit unknowns;35Hz preserving actual intervals/order.",
+    "Q_error_percent": {
+      "hard": 5,
+      "preferred": 0.5
+    },
+    "SOC_error_pp": {
+      "hard": 10,
+      "preferred": 0.5
+    },
+    "capacity_startup_deadline": null,
+    "priority": "PromptSOC; capacity can learn during later informative use."
+  },
+  "current": {
+    "milestone": "M1 complete; M2/A4 continuous diagnostic complete; candidate retained without promotion.",
+    "execution": "One primary attempt;4learner arms;661500deliveries;619500source draws incl warm parity;577500unique observations;1scorer;0rejections;0retries. Frozen learner unchanged.",
+    "A": "Validity gate and exact warm continuity pass. EndQ+1.081343percent baseline/warm,+1.690304percent cold; SOC+0.163462/+0.371131pp. Weak tails retainQhard/SOCpreferred; Qpreferrednotacquired, no startupdeadline.",
+    "B": "FinalQ−0.408454percent/SOC−0.0118574pp. PreferredQ sustained9784.8s;SOC8584.142857s. Entry and all126000finalweak intervals retain both preferred targets.",
+    "regression": "PreferredSOClost index273391/t7811.171429s for27054samples/772.971429s; recovered index300445/t8584.142857s. Peak0.808669pp; allrowsavailablevalid; hardtargetsretained.",
+    "weight_symptom": "7811–7812s dominance switch toward component missing preferredSOC while retained alternative passes;8400scomp0passes bothpreferred whileaggregate misses. Diagnostic observation, no runtimeoracle or uniquecausalclaim.",
+    "uncertainty": "Baggregate localintervaltruth inclusion119/14653SOC,231/14653Q;906local-provisionalQhardbreaches; final aggregateintervalsbothmisstruth. Coverageunvalidated; applicationaccuracyunresolved.",
+    "resources": "Closedprimary391584188B;primary17.2194s+scorer33.9928s;workersHWM33976320B. SupervisorHWMnotrecorded, allprocessRSSunqualified. Core7152B;proposed10032B includes2880Bunmeasured reserves;M23unqualified.",
+    "history": "Prior17cold rejections and original uncertainty failures remain unchanged; no completed-study reruns."
+  },
+  "next": {
+    "start_ref": "implementation/continuous-learning-validation-001",
+    "proposed_work_branch": "planning/weighting-output-diagnostic-001",
+    "action": "Use existing crossing metrics, saved component/weight queries and checkpoints to specify a bounded weighting/output diagnosis; define finite scope before new execution.",
+    "parallel_prerequisite": "Record supervisorRSSHWM explicitly in futureharnessrevision; do not rerunprimary torepairmeasurementgap.",
+    "finish_line": "A concrete diagnostic decision/design based on preserved evidence; no automaticduration,seed,componentcount,day/week/annualcampaign.",
+    "automatic_new_runs": false
+  },
+  "evidence": {
+    "summary": "experiments/continuous_learning_validation_001/implementation/summary.json",
+    "report": "experiments/continuous_learning_validation_001/implementation/REPORT.md",
+    "decision": "experiments/continuous_learning_validation_001/implementation/decision.json",
+    "primary": "experiments/continuous_learning_validation_001/implementation/primary/receipt.json",
+    "scores": "experiments/continuous_learning_validation_001/implementation/primary/scoring/scores.json",
+    "validity_review": "experiments/continuous_learning_validation_001/implementation/independent_run_review.json",
+    "interpretation_review": "experiments/continuous_learning_validation_001/implementation/interpretation_review.json",
+    "executable_receipt": "experiments/continuous_learning_validation_001/implementation/executable_receipt.json",
+    "executable_review": "experiments/continuous_learning_validation_001/implementation/executable_review.json",
+    "lossless_archive": "experiments/continuous_learning_validation_001/implementation/evidence/index.json",
+    "archive_restore": "experiments/continuous_learning_validation_001/implementation/evidence/restore_primary.py",
+    "B_plot": "experiments/continuous_learning_validation_001/implementation/reporting/B_learning_retention.png",
+    "A_plot": "experiments/continuous_learning_validation_001/implementation/reporting/A_lifecycle.png",
+    "contract": "plans/continuous_learning_validation_001.json",
+    "previous_handoff": "handoff/archive/CONTINUE_continuous_learning_design_001.json",
+    "roadmap": "docs/ROADMAP.md"
+  },
+  "guardrails": [
+    "Truth only in generation/domain validation or post-inference scoring; never initialization, inference, weights, runtime selection or tuning.",
+    "Actual intervals/order, carried state and exactly-once evidence accounting; same actual mean/full-Joseph gains; preserve valid prediction on rejected voltage.",
+    "Local precision, point accuracy, numerical health, hard support and coverage are separate. Raw status cannot hide point scores.",
+    "Retained preferred accuracy needs no further improvement; within-target drift is not failure. A4h miss is unresolved at this endpoint, not eventual failure.",
+    "No nuisance pruning, sensitivity rerun, seed/horizon/start/component-count sweep, day/week/annual promotion or proof transfer.",
+    "Machine handoffs compactJSON/YAML; mumble distinct from SCM,NAIA,D2/D2E proof claims."
+  ]
+}
