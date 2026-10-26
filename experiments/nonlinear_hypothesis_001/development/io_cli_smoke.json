@@ -1,0 +1,160 @@
+{
+  "schema": "mumble_hypothesis_IO_development_cli_v1",
+  "status": "pass_first_execution",
+  "recorded_UTC": "2026-10-26T02:00:44.289438+00:00",
+  "development_base_revision": "218d40e1804644052364d9c891eadda737f99516",
+  "build_command": [
+    "cc",
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-Iinclude",
+    "src/scm_hypothesis.c",
+    "src/scm_hypothesis_checkpoint.c",
+    "src/scm_model.c",
+    "tools/hypothesis_probe.c",
+    "-lm",
+    "-o",
+    "build/scm_hypothesis_probe_io_dev"
+  ],
+  "binary_sha256": "8427870a2545e5ac0c38f7341572e4787917e70629870d2232386b69c28dbd5b",
+  "commands": [
+    {
+      "name": "whole",
+      "command": [
+        "build/scm_hypothesis_probe_io_dev",
+        "--mode",
+        "split",
+        "--data",
+        "build/hypothesis-io-development/tiny.csv",
+        "--source",
+        "60e4f671a7d3266c3e1435da3de3496eacf16942a0aa99956a718882c8059129",
+        "--end",
+        "70",
+        "--checkpoint-prefix",
+        "build/hypothesis-io-development/whole",
+        "--save-at",
+        "35",
+        "--query-stride",
+        "350"
+      ],
+      "stdout_sha256": "c4ddb3c28b1af40ec0d36ab92632bd5c0a310ae97bb6c3ceecb45e83bf68cd04",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "prefix",
+      "command": [
+        "build/scm_hypothesis_probe_io_dev",
+        "--mode",
+        "split",
+        "--data",
+        "build/hypothesis-io-development/tiny.csv",
+        "--source",
+        "60e4f671a7d3266c3e1435da3de3496eacf16942a0aa99956a718882c8059129",
+        "--end",
+        "35",
+        "--checkpoint-prefix",
+        "build/hypothesis-io-development/prefix",
+        "--save-at",
+        "35",
+        "--query-stride",
+        "350"
+      ],
+      "stdout_sha256": "28fcf0cfd7ddf7b5894a7b33b722a182c779d6d0bab6a811ca7dee49be3dbe4a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "suffix",
+      "command": [
+        "build/scm_hypothesis_probe_io_dev",
+        "--mode",
+        "split",
+        "--data",
+        "build/hypothesis-io-development/tiny.csv",
+        "--source",
+        "60e4f671a7d3266c3e1435da3de3496eacf16942a0aa99956a718882c8059129",
+        "--end",
+        "70",
+        "--checkpoint-prefix",
+        "build/hypothesis-io-development/suffix",
+        "--save-at",
+        "",
+        "--query-stride",
+        "350",
+        "--restore",
+        "build/hypothesis-io-development/prefix-35.bin"
+      ],
+      "stdout_sha256": "444ffbf5940d2321e1ec21acc26522f80ed58831adcdcd4de69bc47d7c8361f7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "coincident_initial",
+      "command": [
+        "build/scm_hypothesis_probe_io_dev",
+        "--mode",
+        "coincident",
+        "--data",
+        "build/hypothesis-io-development/tiny.csv",
+        "--source",
+        "60e4f671a7d3266c3e1435da3de3496eacf16942a0aa99956a718882c8059129",
+        "--end",
+        "0",
+        "--checkpoint-prefix",
+        "build/hypothesis-io-development/coincident_initial",
+        "--save-at",
+        "",
+        "--query-stride",
+        "350"
+      ],
+      "stdout_sha256": "03f7fb5a133d094ad7ce987cdb921b7de90b481876079cb8b0a6425d948d5855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "result": {
+    "status": "pass",
+    "schema": "mumble_hypothesis_cli_smoke_v1",
+    "processes": 4,
+    "constructed_sample_count": 70,
+    "input_deliveries": 140,
+    "cell_trace_deliveries": 0,
+    "query_indices": [
+      0,
+      35,
+      70
+    ],
+    "fresh_process_warm_continuation_equal": true,
+    "owned_bytes": 7152,
+    "host_fixed_bytes": 8368,
+    "record_bytes": 3004
+  },
+  "first_receipt_sha256": "5d8e19ab4a1290585c62d4386659048a14d01405989cfa0460b06c5716155b42",
+  "constructed_input_sha256": "60e4f671a7d3266c3e1435da3de3496eacf16942a0aa99956a718882c8059129",
+  "constructed_input_rule": "70 samples indexed0..69; dt=1/35, current=0.002 A before index35 then-0.001 A, voltage=3.75+1e-5*index V; decimal17-digit CSV. This is a deterministic IO fixture, not a simulated battery truth trajectory.",
+  "comparison_fields": [
+    "aggregate",
+    "components",
+    "log_weights",
+    "all_component_hull",
+    "bank_flags",
+    "bank_evidence_next_index",
+    "generation"
+  ],
+  "comparison_scope": "Whole70-input output versus a separate35-input prefix and fresh-process35-input restore continuation. Scores on resume are intentionally unavailable and excluded from equality; inference bank outputs match. Fourth process checks coincident initial query with0inputs.",
+  "current_source_sha256_at_persistence": {
+    "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+    "include/scm_hypothesis_checkpoint.h": "1e1743300cf17635828c8d8cf2d95aa6fc00066b377e3238de880dcb284b5545",
+    "include/scm_online.h": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_hypothesis.c": "e839c9016a092ed838181a176e1ebfd02174361737747bdb13227dba5cfc2c83",
+    "src/scm_hypothesis_checkpoint.c": "88ec1c229b395b5bdd02faf39fcc1183786a6b0da0c6ff05edeb9718204a5339",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "tools/hypothesis_probe.c": "009e59b2f9dd26e00f9c100a4d335f9ac4dc83657c27533b555ebb67da6d3a67",
+    "tests/test_hypothesis_checkpoint.c": "0c2ea3da05eaa9e020013a22d9e8135b9a2d1957aba6de7de9797e16b0221716"
+  },
+  "source_identity_limit": "The first development run did not snapshot source hashes. These are review-time hashes, not a claim that later-edited core bytes built the earlier binary. Integrated qualification freezes exact sources and binary separately before primary.",
+  "rerun_for_this_record": false,
+  "cell_trace_deliveries": 0
+}

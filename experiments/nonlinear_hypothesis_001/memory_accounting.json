@@ -1,0 +1,73 @@
+{
+  "schema": "mumble_hypothesis_memory_account_v1",
+  "status": "owned_host_sizes_confirmed_target_total_unqualified",
+  "owned_bytes": {
+    "bank": 2976,
+    "workspace_including_staged_bank": 3504,
+    "serialized_query_arena": 592,
+    "config": 56,
+    "input": 24,
+    "subtotal": 7152
+  },
+  "target_budget_bytes": {
+    "owned": 7152,
+    "codec_buffer": 128,
+    "acquisition_reserved": 448,
+    "RAM_support_reserved": 256,
+    "all_stack_math_caller_IRQ_reserved": 2048,
+    "total": 10032,
+    "ceiling": 10240,
+    "headroom": 208
+  },
+  "host_named_bytes": {
+    "owned": 7152,
+    "codec_stdio_buffer": 128,
+    "CSV_line": 256,
+    "CSV_stdio_buffer": 256,
+    "checkpoint_path": 512,
+    "save_index_array": 64,
+    "subtotal": 8368
+  },
+  "host_own_source_partial_stack_bytes": {
+    "core_ingest_conservative_path": 528,
+    "query_frame": 192,
+    "callback_only_encode_before_external_callback": 320,
+    "callback_only_decode_before_external_callback": 352,
+    "host_enabled_public_decode_before_external_callback": 368,
+    "host_save_before_libc": 936,
+    "host_restore_before_libc": 552,
+    "main": 320,
+    "main_plus_host_save": 1256,
+    "main_plus_host_restore": 872,
+    "named_plus_main_plus_host_save": 9624
+  },
+  "stack_evidence": {
+    "experiments/nonlinear_hypothesis_001/development/stack/hypothesis_probe.su": "f9cde465b0826c0b99cbb2b4d355551de516430d62468468254591d232b727c3",
+    "experiments/nonlinear_hypothesis_001/development/stack/scm_hypothesis.su": "d6d580b6e8207c9a5b8db81ebbcf83aa0d14dd9dd4d9dd996edb6042cae00880",
+    "experiments/nonlinear_hypothesis_001/development/stack/scm_hypothesis_checkpoint_core.su": "ee0f9b03046223242c885e8ab6f3456bf1f2200427cca948e95abb42cf31041c",
+    "experiments/nonlinear_hypothesis_001/development/stack/scm_hypothesis_checkpoint_host.su": "72fd2b0ea076e28b28564f7b606bfb5931a540ce931a8de1f3b266946ef6b5a9",
+    "experiments/nonlinear_hypothesis_001/development/stack/scm_model.su": "1596616ab74d663ef8acc911e58154bd333df403cea3f6bfa5e5e909b38967dd"
+  },
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "stack_compile_flags": [
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-fstack-usage"
+  ],
+  "stack_account_rule": "Frame sums are partial own-source host call paths, not observed complete peaks. Temporary paths and codec contexts already in frames are not counted twice.",
+  "checkpoint_record_bytes": 3004,
+  "checkpoint_record_is_SRAM_buffer": false,
+  "no_heap_or_raw_history_in_core": true,
+  "open": [
+    "Actual Cortex-M23 ABI, complete stack/software math/runtime and interrupt high-water marks.",
+    "Acquisition and RAM-support allocations, callback costs, target deadlines and recovery integration.",
+    "Embedded inactive-slot NVM commit and power-loss qualification.",
+    "Host libc/libm/callback and hidden runtime allocations excluded from partial stack sum."
+  ],
+  "target_compiler_available": false,
+  "complete_target_memory_qualified": false
+}

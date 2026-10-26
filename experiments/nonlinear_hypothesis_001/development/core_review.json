@@ -1,0 +1,377 @@
+{
+  "schema": "mumble_hypothesis_core_independent_review_v1",
+  "status": "pass_for_primary_source_freeze",
+  "attempts": [
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_sha256": {
+        "tests/test_hypothesis.c": "546071f5c0019996c7afd47fa2b7f903e19a6b532bff481e509dce4e60c8b55c",
+        "src/scm_hypothesis.c": "b292adc50b8b9fda487c8c8a1b623ad7092d9cb8e97ac1588f6e91882ad9856a",
+        "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+      }
+    },
+    {
+      "command": [
+        "build/test_hypothesis"
+      ],
+      "returncode": 1,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7363,\"failures\":501,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":0.026698623167139404,\"max_predictive_score_error\":94.474928765588274,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": "FAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 46: independent OCV evaluates\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 181: conditional evidence follows actual gain\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 191: all-zero gain preserves signed mean bytes\nFAIL line 192: all-zero gain preserves signed factor bytes\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 181: conditional evidence follows actual gain\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 191: all-zero gain preserves signed mean bytes\nFAIL line 192: all-zero gain preserves signed factor bytes\nFAIL line 204: coincident bank evidence matches conditional update\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 195: zero residual preserves mean bytes\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 195: zero residual preserves mean bytes\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 180: component gain counters\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 198: constrained Joseph can increase rank through zero pivot\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 198: constrained Joseph can increase rank through zero pivot\nFAIL line 46: independent OCV evaluates\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 178: gain extrema match dense oracle\nFAIL line 179: gain masks match dense oracle\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 183: same selected gain for mean\nFAIL line 183: same selected gain for mean\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 187: full covariance matches independent dense Joseph\nFAIL line 46: independent OCV evaluates\nFAIL line 46: independent OCV evaluates\nFAIL line 46: independent OCV evaluates\nFAIL line 258: weight likelihood uses pre-correction full predictive covariance\nFAIL line 259: causal log weights match independent normalization\nFAIL line 258: weight likelihood uses pre-correction full predictive covariance\nFAIL line 259: causal log weights match independent normalization\nFAIL line 46: independent OCV evaluates\n"
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_sha256": {
+        "tests/test_hypothesis.c": "087f29cf1acfc2405630e118e444f205910bb7549843029a020dd04d333a66b3",
+        "src/scm_hypothesis.c": "b292adc50b8b9fda487c8c8a1b623ad7092d9cb8e97ac1588f6e91882ad9856a",
+        "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+      }
+    },
+    {
+      "command": [
+        "build/test_hypothesis"
+      ],
+      "returncode": 0,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7363,\"failures\":0,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":1.3322676295501878e-15,\"max_predictive_score_error\":0,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis_sanitized"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "build/test_hypothesis_sanitized"
+      ],
+      "environment": {
+        "ASAN_OPTIONS": "detect_leaks=0"
+      },
+      "returncode": 0,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7363,\"failures\":0,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":1.3322676295501878e-15,\"max_predictive_score_error\":0,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_sha256": {
+        "tests/test_hypothesis.c": "1bedc59cf6b1bb1e2c8a6f19fddbd927f7c8043e47392c19d921ec51eb0ce9f5",
+        "src/scm_hypothesis.c": "e839c9016a092ed838181a176e1ebfd02174361737747bdb13227dba5cfc2c83",
+        "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+      }
+    },
+    {
+      "command": [
+        "build/test_hypothesis"
+      ],
+      "returncode": 0,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7378,\"failures\":0,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":1.3322676295501878e-15,\"max_predictive_score_error\":0,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis_sanitized"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_sha256": {
+        "tests/test_hypothesis.c": "1bedc59cf6b1bb1e2c8a6f19fddbd927f7c8043e47392c19d921ec51eb0ce9f5",
+        "src/scm_hypothesis.c": "e839c9016a092ed838181a176e1ebfd02174361737747bdb13227dba5cfc2c83",
+        "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+      }
+    },
+    {
+      "command": [
+        "build/test_hypothesis_sanitized"
+      ],
+      "returncode": 0,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7378,\"failures\":0,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":1.3322676295501878e-15,\"max_predictive_score_error\":0,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis_development"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_sha256": {
+        "tests/test_hypothesis.c": "3c2bb065d54e4a3c95812ab0324538c80cbf1f4e88bbc9cfdf74c4a5aaa44b4e",
+        "src/scm_hypothesis.c": "e839c9016a092ed838181a176e1ebfd02174361737747bdb13227dba5cfc2c83",
+        "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+      }
+    },
+    {
+      "command": [
+        "build/test_hypothesis_development"
+      ],
+      "returncode": 1,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7382,\"failures\":1,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":1.3322676295501878e-15,\"max_predictive_score_error\":0,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": "FAIL line 257: representable weighted covariance survives linear weight underflow\n"
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis_development"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_sha256": {
+        "tests/test_hypothesis.c": "6c61438c978c02c14b318ee14611392d22633bb5c4ff09c61357bd3f57ca5245",
+        "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+        "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+      }
+    },
+    {
+      "command": [
+        "build/test_hypothesis_development"
+      ],
+      "returncode": 0,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7386,\"failures\":0,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":1.3322676295501878e-15,\"max_predictive_score_error\":0,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O1",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tests/test_hypothesis.c",
+        "src/scm_hypothesis.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "build/test_hypothesis_development_sanitized"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "source_sha256": {
+        "tests/test_hypothesis.c": "6c61438c978c02c14b318ee14611392d22633bb5c4ff09c61357bd3f57ca5245",
+        "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+        "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+      }
+    },
+    {
+      "command": [
+        "build/test_hypothesis_development_sanitized"
+      ],
+      "returncode": 0,
+      "stdout": "{\"test\":\"nonlinear_hypothesis_core\",\"checks\":7386,\"failures\":0,\"max_prediction_error\":0,\"max_factor_derivative_error\":2.2114599040889971e-10,\"max_dense_Joseph_error\":1.3322676295501878e-15,\"max_predictive_score_error\":0,\"state_bytes\":2976,\"workspace_bytes\":3504,\"query_bytes\":592,\"primary_streams\":0,\"optimizer_calls\":0}\n",
+      "stderr": ""
+    }
+  ],
+  "primary_runs": 0,
+  "development_repairs": [
+    {
+      "first_run_failures": 501,
+      "cause": "Test-only helper passed NULL slope to scm_ocv_eval, whose documented implementation requires both output pointers. Invalid independent observations cascaded through Joseph and score expectations.",
+      "repair": "Pass a valid local slope output. No production source or numerical tolerance changed."
+    }
+  ],
+  "common_score_review": {
+    "problem": "Adding a huge finite common log score before normalization erases carried log odds or causes avoidable overflow.",
+    "isolated_old_formula_witness": {
+      "old_log_weights": [
+        -1.6094379124341003,
+        -0.2231435513142097
+      ],
+      "equal_score": -5e+307,
+      "old_formula_result": [
+        -0.6931471805599453,
+        -0.6931471805599453
+      ],
+      "expected_result": [
+        -1.6094379124341003,
+        -0.2231435513142097
+      ]
+    },
+    "repair": "Core now subtracts max(score) before adding prior log weights and preserves exactly equal scores byte-exact. This is algebra-equivalent stabilization, not a likelihood floor or tuning.",
+    "test_change": "Added two common-score identity fixtures; prior overflow fixture now uses different predictive variances so relative-score plus prior odds genuinely overflows."
+  },
+  "underflow_moment_review": {
+    "problem": "Computing sqrt(exp(log_weight)) and skipping a component when exp(log_weight)==0 can erase a representable weighted covariance contribution.",
+    "isolated_formula_witness": {
+      "log_weight": -1000.0,
+      "factor": 1e+150,
+      "old_weighted_SD": 0.0,
+      "expected_weighted_SD": 7.124576406741285e-68
+    },
+    "required_fix": "Derive square-root weights directly from log weights and use their representability for moment terms; linear mean weights and retained components/hulls remain unchanged.",
+    "stronger_witness": {
+      "log_weight": -2000.0,
+      "factor": 1e+308,
+      "old_weighted_SD": 0.0,
+      "expected_weighted_SD": 5.0759588975495256e-127
+    },
+    "fix": "Core computes normalized log-root weights directly, includes covariance/between terms even if linear weight underflows, and uses log-magnitude evaluation when the root weight itself is subnormal/zero. No new persistent/workspace storage.",
+    "fixture_tolerance": "2e-13 relative for independent log/multiply evaluation order; checks target representable weighted SD, not underflowed linear weight."
+  },
+  "decision": "The tested core implements the frozen two-component numerical/transaction contract after two algebraic robustness corrections. No current blocking defect found in this scope.",
+  "final_targeted_result": {
+    "test": "nonlinear_hypothesis_core",
+    "checks": 7386,
+    "failures": 0,
+    "max_prediction_error": 0,
+    "max_factor_derivative_error": 2.211459904088997e-10,
+    "max_dense_Joseph_error": 1.3322676295501878e-15,
+    "max_predictive_score_error": 0,
+    "state_bytes": 2976,
+    "workspace_bytes": 3504,
+    "query_bytes": 592,
+    "primary_streams": 0,
+    "optimizer_calls": 0
+  },
+  "final_source_sha256": {
+    "tests/test_hypothesis.c": "6c61438c978c02c14b318ee14611392d22633bb5c4ff09c61357bd3f57ca5245",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+    "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+  },
+  "executions": {
+    "development_suite_runs": 8,
+    "last_strict_run_passed": true,
+    "last_address_undefined_sanitizer_run_passed": true,
+    "cell_trace_runs": 0,
+    "primary_runs": 0,
+    "optimizer_calls": 0
+  },
+  "independent_review": {
+    "full_covariance": "Packed lower factor retains all136 joint entries. Physical transition matches the independent model and finite-difference transport; scalar correction matches a separately formed dense Joseph matrix using the same actual feasible gains. Rank deficiency/zero pivot/zero residual and constrained updates pass.",
+    "transaction": "Live bank remains immutable through candidate corrections and normalization. Any component correction or relative-weight failure discards both trials and regenerates predictions from old numeric state. Prediction failure consumes known input once and withholds current points. All-zero regeneration restores both mean and factor first.",
+    "evidence": "Conditional evidence cursors can differ, while physical chronology and bank event counts agree. Weight-only updates advance bank evidence only when a relative score produces a represented weight change; missing/rejected/all-zero unchanged observations do not manufacture freshness. Equal likelihood evidence preserves prior odds exactly.",
+    "queries": "Mixture SD includes within and between components without collapsing inference state. Log-magnitude scaling retains representable weighted covariance even when linear and square-root weights underflow. All-component local hulls use both factors regardless of conditional availability or display weight. Geometric capacity point is not a physical posterior mean or coverage quantile.",
+    "public_initialization": "One public logQ moment split preserves original full log-state mean/covariance within roundoff, without truth-derived placement. Its Gaussian-mixture density differs from the original Gaussian.",
+    "resources": "Actual sizeof bank2976+workspace3504+query592+config56+input24=7152B. Source review found no heap allocation, hidden dense matrix, extra full predicted state or raw history in the core. Complete target costs and software math remain separately unmeasured.",
+    "failure_capture": "Rejection stage and component identify whole-bank numerical rejection. The original historical17 rejects remain unattributed by these constructed fixtures.",
+    "work_bound": "Initial2 predictions +up to2 all-zero reconstructions +up to2 rejection reconstructions; at most2 corrections and2 scores. No loop to convergence."
+  },
+  "remaining_limits": [
+    "These finite numerical fixtures do not demonstrate capacity or SOC accuracy on the cell stream.",
+    "No validated uncertainty coverage, hard full-model support, global physical-history consistency or indefinite-time learning guarantee.",
+    "Large finite cumulative log odds can still lose small relative increments or overflow under genuine differential evidence; explicit failure semantics are tested, not an all-prefix proof.",
+    "Cortex-M23 full SRAM, stack/software math, deadline and interrupt behavior remain unqualified.",
+    "Checkpoint implementation is reviewed and tested separately by the IO agent."
+  ],
+  "blocking_findings": []
+}

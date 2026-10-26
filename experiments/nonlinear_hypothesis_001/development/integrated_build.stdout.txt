@@ -1,0 +1,10 @@
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic -MMD -MP -c src/scm_hypothesis.c -o build/scm_hypothesis.o
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic  tests/test_hypothesis.c build/scm_hypothesis.o build/scm_online.o build/scm_model.o -lm -o build/test_hypothesis
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic  tests/test_hypothesis_checkpoint.c build/scm_hypothesis.o build/scm_hypothesis_checkpoint.o build/scm_model.o -lm -o build/test_hypothesis_checkpoint
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic  tools/hypothesis_probe.c build/scm_hypothesis.o build/scm_hypothesis_checkpoint.o build/scm_model.o -lm -o build/scm_hypothesis_probe
+mkdir -p build/hypothesis-stack
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic -fstack-usage -c src/scm_hypothesis.c -o build/hypothesis-stack/scm_hypothesis.o
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic -DSCM_HYPOTHESIS_NO_HOST_IO -fstack-usage -c src/scm_hypothesis_checkpoint.c -o build/hypothesis-stack/scm_hypothesis_checkpoint_core.o
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic -fstack-usage -c src/scm_hypothesis_checkpoint.c -o build/hypothesis-stack/scm_hypothesis_checkpoint_host.o
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic -fstack-usage -c tools/hypothesis_probe.c -o build/hypothesis-stack/hypothesis_probe.o
+cc -Iinclude -std=c99 -O2 -Wall -Wextra -Werror -pedantic -fstack-usage -c src/scm_model.c -o build/hypothesis-stack/scm_model.o

@@ -1,0 +1,58 @@
+{
+  "schema": "mumble_hypothesis_IO_development_checkpoint_v1",
+  "status": "pass_first_execution",
+  "recorded_UTC": "2026-10-26T02:00:44.289438+00:00",
+  "development_base_revision": "218d40e1804644052364d9c891eadda737f99516",
+  "command": [
+    "cc",
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic",
+    "-Iinclude",
+    "src/scm_hypothesis.c",
+    "src/scm_hypothesis_checkpoint.c",
+    "src/scm_model.c",
+    "tests/test_hypothesis_checkpoint.c",
+    "-lm",
+    "-o",
+    "build/hypothesis-io-development/checkpoint_tests"
+  ],
+  "execution_command": [
+    "build/hypothesis-io-development/checkpoint_tests"
+  ],
+  "result": {
+    "schema": "mumble_hypothesis_checkpoint_tests_v1",
+    "checks": 188,
+    "failed_checks": 0,
+    "checkpoint_bytes": 3004,
+    "tiny_stream_input_deliveries": 64,
+    "cell_trace_deliveries": 0
+  },
+  "first_output_sha256": {
+    "build/hypothesis-io-development/checkpoint_build.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/hypothesis-io-development/checkpoint_build.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/hypothesis-io-development/checkpoint_test.stdout.txt": "714a9546e4098265f4b66e63ec008fb3bc877106032f944fe28347bae8e3b9f9",
+    "build/hypothesis-io-development/checkpoint_test.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "binary_sha256": "3564ead9c1c5be3655cd1dfbae01b1aea84322ecdf14718d043eaa680936a0b3",
+  "current_source_sha256_at_persistence": {
+    "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+    "include/scm_hypothesis_checkpoint.h": "1e1743300cf17635828c8d8cf2d95aa6fc00066b377e3238de880dcb284b5545",
+    "include/scm_online.h": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_hypothesis.c": "e839c9016a092ed838181a176e1ebfd02174361737747bdb13227dba5cfc2c83",
+    "src/scm_hypothesis_checkpoint.c": "88ec1c229b395b5bdd02faf39fcc1183786a6b0da0c6ff05edeb9718204a5339",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "tools/hypothesis_probe.c": "009e59b2f9dd26e00f9c100a4d335f9ac4dc83657c27533b555ebb67da6d3a67",
+    "tests/test_hypothesis_checkpoint.c": "0c2ea3da05eaa9e020013a22d9e8135b9a2d1957aba6de7de9797e16b0221716"
+  },
+  "source_identity_limit": "The first development run did not snapshot source hashes. These are review-time hashes, not a claim that later-edited core bytes built the earlier binary. Integrated qualification freezes exact sources and binary separately before primary.",
+  "source_paths_newer_than_binary_at_persistence": [
+    "src/scm_hypothesis.c"
+  ],
+  "rerun_for_this_record": false,
+  "scope": "Constructed valid bank and32 paired deterministic intervals; no raw cell trace or truth data. Includes distinct evidence cursors, canonical byte roundtrip, malformed/CRC/truncated/config rejection, linear-weight underflow preservation, host failure atomicity, continuation and cold reset."
+}

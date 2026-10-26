@@ -1,0 +1,92 @@
+{
+  "schema": "mumble_nonlinear_hypothesis_plan_v1",
+  "status": "frozen_before_primary",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "work_branch": "implementation/nonlinear-hypothesis-001",
+  "basis_revision": "218d40e1804644052364d9c891eadda737f99516",
+  "design": "plans/nonlinear_evidence_design_001.json",
+  "user_clarification": "plans/capacity_learning_horizon_001.json",
+  "superseded_unexecuted_test": "plans/nonlinear_hypothesis_falsification_001.json",
+  "question": "Can two causally retained public capacity alternatives deliver prompt SOC and improve or retain capacity accuracy as later informative use arrives?",
+  "case": {
+    "id": "cell_b_35hz_s202610240",
+    "path": "data/cell_b_35hz_s202610240.csv",
+    "sha256": "b35cd9c88c1f67b4a623847653422ba2542527f88f89f742495695c0f4d63cbe",
+    "start_index": 0,
+    "samples": 73500,
+    "nominal_duration_s": 2100,
+    "nominal_rate_Hz": 35,
+    "intervals": "Original values, sample order and physical state continuity; no thinning, resampling, resetting or new data generation."
+  },
+  "arms": [
+    {"name": "coincident_control", "mode": "coincident", "initialization": "Two identical inherited public local Gaussians, each weight1/2."},
+    {"name": "public_logQ_split", "mode": "split", "initialization": "The fixed public half-Gaussian moment split in the design; no scoring truth or fitted starts."}
+  ],
+  "implementation": {
+    "dimension": 16,
+    "components": 2,
+    "factor_entries_per_component": 136,
+    "model_version": 1,
+    "checkpoint_bytes": 3004,
+    "sigma_V": 0.001,
+    "max_dt_s": 1,
+    "max_abs_current_A": 0.25,
+    "remedy": "Finite out-of-domain actual rounded coordinate correction gets zero selected gain and matching full Joseph gain; same implementation in both arms.",
+    "truth_input": false,
+    "raw_history_retained": false,
+    "pruning_or_reseeding": false
+  },
+  "execution": {
+    "expected_processes": 2,
+    "expected_input_deliveries": 147000,
+    "batch_optimizer_calls": 0,
+    "case_workers": 1,
+    "query_stride_samples": 350,
+    "early_query_stride_samples": 35,
+    "early_query_through_sample": 350,
+    "checkpoint_samples": [31500, 63000, 73500],
+    "selected_query_times_s": [0, 1, 5, 10, 60, 120, 220, 400, 600, 900, 1200, 1500, 1800, 2100],
+    "process_timeout_s": 1200,
+    "primary_repetitions": 1,
+    "old_study_reruns": 0,
+    "two_cell_lifecycle_primary": false
+  },
+  "before_primary": [
+    "Implement the frozen packed full-factor, mixture, transaction and query contract in a separate module; preserve old candidates.",
+    "Pass independent dense prediction/Joseph, rank-deficient, zero-residual and prior subnormal remedy checks; same actual gain for mean and covariance.",
+    "Pass coincident-component/no-double-counting, fixed public moments, pre-correction weights, underflow/nonfinite behavior, duplicate/order/source atomicity, missing voltage, whole-bank rejection and recovery checks.",
+    "Pass distinct bank/conditional evidence cursor and weight-only availability cases, and local hull evaluation from both actual factors.",
+    "Pass deterministic full checkpoint/continuation parity and corrupt/truncated/incompatible atomic restore; preserve first development failures and fixes.",
+    "Freeze source, plan, binary, test and resource hashes before either arm starts. Do not open truth in either inference process."
+  ],
+  "assessment": {
+    "hard_SOC_error_pp": 10,
+    "preferred_SOC_error_pp": 0.5,
+    "hard_capacity_error_percent": 5,
+    "preferred_capacity_error_percent": 0.5,
+    "capacity_startup_deadline": null,
+    "SOC": "Report first available target hit and earliest query after which every remaining saved query meets each target, with query resolution and unavailable periods. Report all selected checkpoints; early lucky accuracy is not a coverage claim.",
+    "capacity": "Report the same attainment times without an early deadline, all selected checkpoints and changes in absolute error from900 to1800 and1800 to2100. Separate late informative use from weak-tail retention. No monotonic convergence requirement from finite noisy data.",
+    "local_qualification": "Count saved local-provisional hard-error breaches for each component and aggregate; keep application accuracy unresolved uniformly. No label suppression can improve point scores.",
+    "mechanism": "Report both components, log weights, full local marginal diagnostics and post-inference oracle-best component to distinguish representation from weighting. Oracle never selects runtime output.",
+    "baseline": "Compare selected new coincident and split results with frozen bounded_online_002 control scores without rerunning it. Numerical remedy may differ, so attribute any split benefit only through the paired new arms.",
+    "full_vector": "At selected checkpoints report all16 estimated/current-truth coordinates and engineering-scaled errors; nuisance precision is not a separate universal accuracy target."
+  },
+  "gates": {
+    "functional": "All targeted invariants and original interval/delivery accounting pass; successful completion with no unexpected event or unreported gap.",
+    "numerical": "Zero rejected corrections and zero recovery events in the primary; keep failure stages and first outputs if violated.",
+    "resource": "Owned objects at most7152B plus explicit reserved costs for a10032B design total;10240B ceiling. Known excess fails. Actual M23 stack, math, acquisition and deadline remain open until measured, not assumed passed.",
+    "SOC_usefulness": "Available aggregate SOC meets the hard limit at900,1800,2100; early acquisition reported separately, not hidden by this coarse gate.",
+    "capacity_accuracy_observation": "Report whether each declared target is attained and retained at1800/2100. This is observed finite-trace performance, not a startup deadline or eventual-convergence proof.",
+    "promotion": "No full promotion from this one case. A point pass cannot validate coverage, restore all historical evidence or qualify indefinite operation."
+  },
+  "decision_rules": [
+    "Any numerical, evidence-accounting or known resource failure rejects the implementation for continuation until that concrete failure is resolved.",
+    "A useful second component with inaccurate aggregate identifies a weighting/output problem; two similarly wrong components identify failure of this split to retain a useful alternative on this trace.",
+    "Capacity error improving with later stimulus supports continued learning on this finite trace; no5% hit means capacity remains unresolved, not that all longer operation must fail.",
+    "Capacity regression or plateau, especially with wrong narrow precision, is evidence against assuming duration alone repairs the approximation. Name the missing mechanism before a longer campaign.",
+    "Passing both new arms without meaningful split benefit does not establish a need for the second component. Preserve all outcomes and original gates."
+  ],
+  "stop": "One complete predeclared two-arm2100s comparison, then a concrete keep/reject/unresolved mechanism decision and compact handoff. No post-outcome horizon, starts, component count, noise or prior sweep; no annual run. A later longer experiment requires its own continuous-trajectory and retained-evidence contract."
+}

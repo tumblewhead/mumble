@@ -21,9 +21,12 @@ SESSION_OBJECTS = $(SESSION_OBJECT) $(SESSION_CHECKPOINT_OBJECT) $(ESTIMATOR_OBJ
 ONLINE_OBJECT = build/scm_online.o
 ONLINE_CHECKPOINT_OBJECT = build/scm_online_checkpoint.o
 ONLINE_OBJECTS = $(ONLINE_OBJECT) $(ONLINE_CHECKPOINT_OBJECT) $(MODEL_OBJECT)
+HYPOTHESIS_OBJECT = build/scm_hypothesis.o
+HYPOTHESIS_CHECKPOINT_OBJECT = build/scm_hypothesis_checkpoint.o
+HYPOTHESIS_OBJECTS = $(HYPOTHESIS_OBJECT) $(HYPOTHESIS_CHECKPOINT_OBJECT) $(MODEL_OBJECT)
 TEST_NAMES = $(basename $(notdir $(wildcard tests/test_*.c)))
 TEST_BINS = $(addprefix build/,$(TEST_NAMES))
-.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box test-compact test-session test-online online-stack session-stack compact-stack evidence-stack remainder-stack sanitize clean
+.PHONY: all test test-assess test-evidence test-remainder test-stable test-certificate test-certificate-box test-compact test-session test-online test-hypothesis hypothesis-stack online-stack session-stack compact-stack evidence-stack remainder-stack sanitize clean
 all: build/scm_estimator
 build:
 	mkdir -p build
@@ -78,6 +81,25 @@ build/scm_online_probe: tools/online_probe.c $(ONLINE_OBJECTS) | build
 test-online: build/test_online build/test_online_checkpoint
 	./build/test_online
 	./build/test_online_checkpoint
+build/scm_hypothesis_checkpoint.o: src/scm_hypothesis_checkpoint.c | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) -MMD -MP -c $< -o $@
+build/test_hypothesis: tests/test_hypothesis.c $(HYPOTHESIS_OBJECT) $(ONLINE_OBJECT) $(MODEL_OBJECT) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+build/test_hypothesis_checkpoint: tests/test_hypothesis_checkpoint.c $(HYPOTHESIS_OBJECTS) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+build/scm_hypothesis_probe: tools/hypothesis_probe.c $(HYPOTHESIS_OBJECTS) | build
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $^ $(LDLIBS) -o $@
+test-hypothesis: build/test_hypothesis build/test_hypothesis_checkpoint
+	./build/test_hypothesis
+	./build/test_hypothesis_checkpoint
+# New candidate only; own-source host frames do not qualify target runtime.
+hypothesis-stack: | build
+	mkdir -p build/hypothesis-stack
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_hypothesis.c -o build/hypothesis-stack/scm_hypothesis.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -DSCM_HYPOTHESIS_NO_HOST_IO -fstack-usage -c src/scm_hypothesis_checkpoint.c -o build/hypothesis-stack/scm_hypothesis_checkpoint_core.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_hypothesis_checkpoint.c -o build/hypothesis-stack/scm_hypothesis_checkpoint_host.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c tools/hypothesis_probe.c -o build/hypothesis-stack/hypothesis_probe.o
+	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_model.c -o build/hypothesis-stack/scm_model.o
 online-stack: | build
 	mkdir -p build/online-stack
 	$(CC) $(CPPFLAGS) $(CFLAGS) -fstack-usage -c src/scm_online.c -o build/online-stack/scm_online.o
@@ -141,7 +163,7 @@ endif
 # This checks address/undefined behavior only; it is not a leak audit.
 sanitize: | build
 	@set -e; for name in $(TEST_NAMES); do \
-	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c src/scm_compact_evidence.c src/scm_compact_remainder.c src/scm_compact_assess.c src/scm_session.c src/scm_session_checkpoint.c src/scm_online.c src/scm_online_checkpoint.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
+	  $(CC) $(CPPFLAGS) -std=c99 -O1 -g -Wall -Wextra -Wpedantic -fsanitize=address,undefined -fno-omit-frame-pointer src/scm_model.c src/scm_features.c src/scm_estimator.c src/scm_assess.c src/scm_evidence.c src/scm_remainder.c src/scm_stable.c src/scm_certificate.c src/scm_certificate_box.c src/scm_compact_evidence.c src/scm_compact_remainder.c src/scm_compact_assess.c src/scm_session.c src/scm_session_checkpoint.c src/scm_online.c src/scm_online_checkpoint.c src/scm_hypothesis.c src/scm_hypothesis_checkpoint.c tests/$$name.c $(LDLIBS) -o build/$${name}_sanitized; \
 	  ASAN_OPTIONS=detect_leaks=0 ./build/$${name}_sanitized; \
 	done
 clean:

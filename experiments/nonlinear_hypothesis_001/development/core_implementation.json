@@ -1,0 +1,103 @@
+{
+  "schema": "mumble_hypothesis_core_implementation_v1",
+  "status": "implemented_integrated_strict_checks_pass_ready_for_source_freeze",
+  "owner": "hypothesis_core",
+  "source_sha256": {
+    "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5"
+  },
+  "public_API": {
+    "initialization": "scm_hypothesis_init(bank, config, coincident_or_public_logQ_split)",
+    "ingestion": "scm_hypothesis_ingest(bank, source_id, sample_index, sample, voltage_present, workspace)",
+    "query": "scm_hypothesis_query(bank, selector=-1 aggregate or0/1 component, one output arena)",
+    "validation": "Read-only component and bank validators; normalized finite log weights and common physical ledger.",
+    "recovery": "Explicit cold_reset and mark_unknown_gap; accepted prediction recovery consumes known interval once, retains old belief/weights and removes current-point availability.",
+    "external_dependency": "Only scm_model implementation; existing scm_online types/status/config layout are reused from its header. Old online core is not required to link."
+  },
+  "layout_bytes": {
+    "packed_component": 1464,
+    "bank_header": 32,
+    "bank": 2976,
+    "workspace_stage_and_scratch": 3504,
+    "query_arena": 592,
+    "external_configuration": 56,
+    "input": 24,
+    "owned_total": 7152,
+    "status": "Exact declared sizes are checked by independent test_hypothesis. Full target allocation and stack/runtime reserves are reviewed separately."
+  },
+  "fixed_storage": {
+    "factor_entries_per_component": 136,
+    "full_joint_covariance": true,
+    "hidden_full_prediction_or_rollback_arrays": 0,
+    "raw_history": 0,
+    "heap_allocation": false,
+    "scratch_vectors": 4,
+    "scores": 2,
+    "query_scope": "One union arena; component and aggregate views serialize over it."
+  },
+  "work_bound_per_input": {
+    "predictions_max": 6,
+    "conditional_corrections_max": 2,
+    "likelihood_scores_max": 2,
+    "basis": "Two initial predictions; at most two all-zero numeric restorations; at most two whole-bank rejection predictions. No data-dependent convergence loop or replay assimilation."
+  },
+  "numerical_contract": {
+    "Joseph": "The final actual normalized gain updates both mean and full Joseph covariance. Packed descending/ascending orthogonal rotations preserve all lower entries.",
+    "boundary_remedy": "Finite actual rounded mean outside support blocks that coordinate gain and multiplier before masks and Joseph. Nonfinite arithmetic remains a rejection.",
+    "all_zero": "Restore both numeric arrays from immutable old component and reapply identical prediction; conditional diagnostics remain staged.",
+    "rejection": "Any component correction/score or bank weight/validation failure rejects the voltage for both components, reconstructs both physical predictions from immutable old bank and retains old weights.",
+    "freshness": "Common physical input ledger; separate conditional cursors and joint bank cursor. Weight-only freshness requires unequal scores and a represented normalized-log-weight change."
+  },
+  "common_score_refinement": {
+    "issue": "Adding large finite absolute predictive scores to finite prior log weights can erase carried log odds by rounding; common negative offset can also cause avoidable overflow.",
+    "discovery": "Independent root/core source review before primary source freeze.",
+    "fix": "If scores are exactly equal, copy old normalized log weights byte-for-byte. Otherwise subtract max(score0,score1) before adding prior log weights, then use stable log-sum-exp. Genuine nonfinite relative arithmetic still rejects the whole bank voltage.",
+    "mathematical_rule_changed": false,
+    "new_noise_floor_pruning_or_tuning": false,
+    "new_storage_bytes": 0,
+    "verification": "Integrated strict suite passes; equal huge common scores preserve logs exactly, while genuine differential overflow rejects the whole bank. Prior development outputs are preserved by the independent tester."
+  },
+  "capacity_horizon_review": {
+    "plan": "plans/capacity_learning_horizon_001.json",
+    "implementation_conflict": false,
+    "notes": "No horizon-specific threshold, reset, capacity decision deadline or truth input exists in the core. Both alternatives and full factors continue across known intervals. Unresolved application accuracy remains explicit. The static matched model does not add aging or temperature drift."
+  },
+  "remaining_limits": [
+    "Finite uint64 counters/generation have explicit overflow rejection; this does not establish indefinite operation.",
+    "Accumulated binary64 elapsed times reject nonfinite or positive-dt stagnation; all-prefix arithmetic and long-run rounding remain unproved.",
+    "Extremely small relative log-weight contrasts can round away; weight-only cursor does not claim a represented update when both normalized logs are unchanged.",
+    "Both local components may acquire the same bias and approximate predictive weights may favor the wrong component. No exact historical nonlinear likelihood, hard support or validated coverage.",
+    "No actual Cortex-M23 memory, software-math stack, IRQ nesting or deadline measurement by this author."
+  ],
+  "author_actions": {
+    "strict_C99_compile": "passed with -O2 -Wall -Wextra -Werror -pedantic",
+    "new_primary_runs": 0,
+    "raw_trace_reads_or_replays": 0,
+    "old_online_source_changes": false,
+    "git_commits": 0
+  },
+  "query_moment_refinement": {
+    "issue": "Displayed linear weight exp(log_w) can underflow while its weighted covariance contribution remains representable. The square-root weight can also underflow before multiplying a large factor.",
+    "discovery": "Independent test-agent source review after the first passing core suite; first failing focused witness is preserved in core_review.json.",
+    "witnesses": [
+      "log_w=-1000, factor=1e150: weighted SD about7.1246e-68 despite linear weight0.",
+      "log_w=-2000, factor=1e308: weighted SD about5.076e-127 despite linear and square-root weight underflow."
+    ],
+    "fix": "Compute normalized log square-root weights. For normal square-root weights multiply normally; for subnormal/zero square-root weights combine log(abs(value))+log_root_weight before exp. Apply to all within/between SD terms regardless of displayed weight.",
+    "new_storage_bytes": 0,
+    "inference_changed": false,
+    "scope": "Query-only mixture-moment calculation; no pruning, inflation or coverage claim.",
+    "verification": "Integrated strict suite passes both -1000/1e150 and -2000/1e308 weighted-covariance witnesses. First failed query witness retained by the independent tester."
+  },
+  "integrated_verification_reported_by_root": {
+    "strict_C99_optimization": "O2",
+    "core_checks": 7386,
+    "core_failed": 0,
+    "checkpoint_checks": 188,
+    "checkpoint_failed": 0,
+    "largest_reported_query_own_source_frame_bytes": 192,
+    "full_target_stack_qualified": false,
+    "source_and_output_receipt": "Root preserves integrated build/test hashes and output in this experiment development artifacts.",
+    "sanitizer_and_independent_review": "Recorded separately by hypothesis_tests; this author did not rerun those tests."
+  }
+}
