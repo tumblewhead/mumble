@@ -33,8 +33,15 @@ preservation and exactly-once accounting pass. Production source remains
 unchanged, and the original 17 rejections still lack individual failure records.
 The [separate uncertainty decision](plans/local_uncertainty_decision_001.json)
 keeps local precision as a diagnostic and application SOC/Q accuracy unresolved.
-The next task is one bounded nonlinear-evidence design decision addressing
-biased capacity before another primary; longer campaigns follow qualification.
+The [nonlinear-evidence design decision](experiments/nonlinear_evidence_design_001/REPORT.md)
+is now frozen: retain exactly two public capacity alternatives with separate
+nonlinear states, full joint local factors and predictive weights. One saved
+evidence audit and 15 host layout checks pass; no new estimator inference ran.
+The complete proposed allocation is 10,032 bytes including unmeasured target
+reserves. The learner is not implemented or accuracy-qualified. Next implement
+the contract and its targeted checks, then use the
+[one frozen Cell B 900-second comparison](plans/nonlinear_hypothesis_falsification_001.json).
+Longer campaigns follow qualification.
 
 The [supplemental M1 belief audit](experiments/m1_belief_audit_001/REPORT.md)
 reports all sixteen fitted quantities and applies the new targets to the frozen
@@ -64,6 +71,10 @@ experiment work to specific delivery decisions.
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
+| [Current nonlinear-evidence design](experiments/nonlinear_evidence_design_001/summary.json) | Two persistent public capacity components selected; saved-evidence audit and proposed 10,032-byte allocation; no learner inference |
+| [Two-component contract](plans/nonlinear_evidence_design_001.json) | Public moment split, single-use mixture evidence, complete staging, distinct evidence cursors, resource and query semantics |
+| [Next bounded comparison](plans/nonlinear_hypothesis_falsification_001.json) | One existing B 900 s prefix, coincident control versus public split; targeted prerequisites and fixed stop rule; not executed |
+| [Design publication](provenance/nonlinear_evidence_design_001_publication.json) | Original execution versus published source/result identities and preserved bundle |
 | [Completed boundary diagnostic](experiments/boundary_transaction_diagnostic_001/summary.json) | Minimal numerical witness, 625 passing fixture assertions, selected remedy and preserved transaction invariants; no cell replay |
 | [Boundary remedy decision](experiments/boundary_transaction_diagnostic_001/decision.json) | Finite actual-mean coordinate zero-gain fallback tested in a diagnostic variant; production source unchanged |
 | [Boundary diagnostic publication](provenance/boundary_transaction_diagnostic_001_publication.json) | Identical published source/result trees and preserved original execution commits |
@@ -115,7 +126,7 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
 | **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
-| **M2: Desktop performance and year-scale behavior** | **A4: two candidates evaluated; neither promoted.** Boundary fixture complete and remedy selected; decide a bounded nonlinear-evidence mechanism for biased capacity before another small candidate gate. Variations and duration increases remain gated |
+| **M2: Desktop performance and year-scale behavior** | **A4: two candidates evaluated; neither promoted.** Two-component nonlinear-evidence design frozen; implement and check it before one B 900 s comparison. Variations and duration increases remain gated |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality
@@ -272,11 +283,17 @@ has reached its finish line on `diagnostic/online-boundary-001`: a reproducible
 mean-domain failure at R3 and a tested coordinate-only remedy decision. It does
 not identify the causes of the original 17 rejected steps or change live
 inference. Preserve both candidates, the completed M1 campaign and the original
-60-fit study. Next, follow the
-[nonlinear-evidence decision boundary](plans/local_uncertainty_decision_001.json)
-to address biased narrow capacity with one concrete mechanism and discriminating
-test. The numerical remedy and reporting decision alone do not qualify accuracy
-or authorize another primary run.
+60-fit study. The [nonlinear-evidence design](plans/nonlinear_evidence_design_001.json)
+now selects exactly two persistent public log-capacity components. Saved
+results reveal SOC/hysteresis voltage compensation and an input-only
+reachability violation; neither establishes the unique bias cause or proves
+this design sufficient. Implement the frozen packed layout, numerical remedy,
+bank transactions and checkpoint rules on `implementation/nonlinear-hypothesis-001`.
+After targeted checks and source freeze, perform only the
+[declared B 900 s comparison](plans/nonlinear_hypothesis_falsification_001.json).
+Its available point-error gates remain 5% capacity and 10 percentage points
+SOC. Application accuracy/coverage and complete M23 resources remain unqualified;
+no full two-cell primary or automatic horizon/start/count sweep is queued.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to

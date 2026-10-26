@@ -2,15 +2,15 @@
 
 ## Decision
 
-**M1's desktop lifecycle is complete; both bounded candidates remain unpromoted,
-and the boundary transaction diagnostic has reached its finish line.** A
-minimal subnormal witness reproduces a mean-domain failure, and a diagnostic
-coordinate zero-gain fallback preserves the transaction and full covariance.
-Production inference remains unchanged. The next action is **one bounded
-nonlinear-evidence design decision addressing biased capacity and local
-qualification**. A concrete mechanism and discriminating test must be frozen
-before another primary. Longer trajectories follow a qualified candidate, then
-a runnable Cortex-M23 C subsystem near **10 KiB total SRAM**.
+**M1's desktop lifecycle is complete; both bounded candidates remain unpromoted.
+The boundary remedy and two-component nonlinear-evidence design are frozen.**
+The next action is to implement exactly two public capacity alternatives with
+separate nonlinear states and full joint local factors, then pass targeted
+transaction, covariance and persistence checks before the one declared
+Cell B 900-second comparison. Production inference remains unchanged by these
+design/diagnostic studies. The proposed complete allocation is **10,032 bytes**;
+target reserves are unmeasured. Longer trajectories follow a qualified
+candidate, then a runnable Cortex-M23 C subsystem near **10 KiB total SRAM**.
 
 The original priority change put integration ahead of another uncertain-RC
 refinement. That completed integration now supports the learner decision.
@@ -20,7 +20,8 @@ open-ended sequence that must finish before the application can run.
 
 This roadmap preserves the user's direction and original plan from 2026-10-24,
 America/Los_Angeles, with M1 and both A4 candidate outcomes added on 2026-10-25.
-The M2 duration campaign and Cortex-M23 target work have not run.
+The nonlinear-evidence design was frozen on 2026-10-26 UTC. The M2 duration
+campaign and Cortex-M23 target work have not run.
 The executable work order is [trajectory_to_m23_001.json](../plans/trajectory_to_m23_001.json).
 
 The active [estimation targets](../plans/estimation_targets_001.json) prioritize
@@ -39,7 +40,7 @@ applies the new interpretation without replacing the frozen M1 scores.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — boundary diagnostic complete** | One bounded nonlinear-evidence design decision for biased capacity, then a qualified bounded learner, short variations and selected annual streams | Chosen candidate meets hard target, lifecycle, resource, numerical-health and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
+| **M2: Desktop performance — two-component design frozen** | Implement and falsify the selected public capacity components, then qualify a bounded learner before short variations and selected annual streams | Chosen candidate meets hard target, lifecycle, resource, numerical-health and honest-qualification gates before duration increases; numerical proofs and finite endurance evidence reported separately |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -138,6 +139,18 @@ unchanged; the historical 17 rejection causes still lack actual failed-step
 records. The [numerical remedy](../experiments/boundary_transaction_diagnostic_001/decision.json)
 and [separate uncertainty decision](../plans/local_uncertainty_decision_001.json)
 are frozen. Neither repairs or qualifies the measured capacity bias.
+
+The [nonlinear-evidence design](../experiments/nonlinear_evidence_design_001/REPORT.md)
+now selects two persistent components from one public log-capacity moment
+split. A selective saved-result audit exposes OCV/hysteresis compensation and
+a public input-only reachability violation; neither identifies a unique bias
+cause. Full staged-bank transactions and a complete 10,032-byte planning
+allocation are explicit. Fifteen host layout checks pass, with no new inference
+or primary run. The first test is the
+[frozen two-arm B 900 s prefix](../plans/nonlinear_hypothesis_falsification_001.json),
+after implementation and targeted invariants. It compares a coincident control
+with the fixed public split. No accuracy or coverage improvement has yet been
+demonstrated, and complete target memory/timing remains open.
 
 The user-requested compact-layout step is now implemented and checked in
 [compact_bounded_001](COMPACT_BOUNDED_001.md). Its fixed-chart component owns
@@ -289,14 +302,17 @@ Original raw statuses, failed qualification audits, point-error limits and
 useful-availability gates stay unchanged. An all-unresolved reporting policy
 cannot manufacture a performance pass.
 
-Next, make one narrowly scoped design decision: what bounded mechanism can
-retain or check enough nonlinear evidence to address the observed capacity
-bias? Freeze its evidence semantics, complete resource costs and one
-falsifying small test, or identify the missing datum. Cell B control's wrong
-narrow capacity has zero rejected corrections, so this requires a separate
-learner/uncertainty mechanism. Do not automatically repeat the diagnostic or
-primary, integrate the numerical variant, tune noise/priors/thresholds, or
-queue reporting-only work as a substitute for the accuracy decision.
+That design decision is complete. Follow the
+[frozen two-component contract](../plans/nonlinear_evidence_design_001.json)
+on `implementation/nonlinear-hypothesis-001`: implement packed full factors,
+the prior numerical remedy, causal weights, complete staging, distinct bank
+and conditional evidence cursors, and a new atomic checkpoint format. Pass
+targeted algebra/lifecycle fixtures and freeze source/resources before the
+single planned B 900 s comparison. Keep the public split fixed; no source
+initialization may read truth or a saved fit. The comparison stops at its
+declared keep/reject/attribution-unresolved decision. Do not repeat completed
+studies, expand the horizon or component count after results, or use reporting
+changes as an accuracy improvement.
 
 Promotion still requires hard targets, lifecycle, resources, numerical health
 and honest uncertainty qualification. Report the preferred 0.5%/0.5 pp region

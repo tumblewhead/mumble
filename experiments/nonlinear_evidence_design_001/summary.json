@@ -1,0 +1,92 @@
+{
+  "schema": "mumble_nonlinear_evidence_design_summary_v1",
+  "status": "design_finish_line_complete_candidate_not_implemented",
+  "work_branch": "design/online-nonlinear-evidence-001",
+  "source_revision": "4c451ac1d1844c09b5be2cc281c02373efa9bef7",
+  "basis_revision": "921b19d934b5d4b13932168dbddf0a0c740ca67e",
+  "decision": "Select exactly two persistent public logQ-split conditional components with full joint local factors and pre-correction predictive weights for one falsification.",
+  "hypothesis": "A separately carried public capacity alternative may avoid early wrong local collapse; distinct useful alternatives and useful causal weighting are unproved.",
+  "findings": {
+    "wrong_narrow_capacity_precedes_first_reversal": true,
+    "final_voltage_error_decomposition_mV": {
+      "OCV": -57.44053841012287,
+      "ohmic": -0.26380167342244376,
+      "RC": -0.057886967892295006,
+      "hysteresis": 57.580473047931534
+    },
+    "final_total_model_voltage_error_mV": -0.18175400350607399,
+    "final_h_reachability": {
+      "nominal_time_s": 2100,
+      "positive_charge_Ah_exact_prescription": "21/4000",
+      "positive_charge_Ah": 0.00525,
+      "analytic_lower_evaluated_double": -0.9481830725635632,
+      "saved_h": -0.9607819338653544,
+      "violation_below_lower": 0.01259886130179122,
+      "outside_analytic_hull_at_ordinary_precision": true
+    },
+    "reachability_scope": "Public input/model analytic inequality at ordinary precision; no outward-rounded certificate and no new raw-input compliance audit.",
+    "unique_capacity_bias_cause_established": false
+  },
+  "public_split": {
+    "Q_component_points_Ah": [
+      0.04546915522255347,
+      0.07917455211955067
+    ],
+    "weights": [
+      0.5,
+      0.5
+    ],
+    "initial_log_state_moments_preserved": "Real-arithmetic identity; audit rounding differences in receipt.",
+    "original_prior_density_preserved": false,
+    "truth_in_initialization": false
+  },
+  "resource_design_bytes": {
+    "owned_objects": 7152,
+    "complete_budget_with_reserves": 10032,
+    "headroom_to_10240": 208,
+    "planned_checkpoint": 3004,
+    "actual_target_qualified": false
+  },
+  "verification": {
+    "host_layout_checks": 15,
+    "layout_failed_checks": 0,
+    "production_source_changed": false,
+    "new_estimator_inference_runs": 0,
+    "primary_runs": 0
+  },
+  "scope_limits": [
+    "Two local components do not reconstruct historical nonlinear likelihood or automatically enforce model reachability.",
+    "Approximate predictive weights can favor the wrong component; both components can share the same bias.",
+    "Application SOC/Q accuracy remains uniformly unresolved, local precision diagnostic, hard support absent and coverage unvalidated.",
+    "Complete target SRAM,35Hz timing, power-loss recovery and full-model indefinite stability are unqualified.",
+    "The prior17 cold rejection events remain unattributed."
+  ],
+  "next": {
+    "work_branch": "implementation/nonlinear-hypothesis-001",
+    "action": "Implement frozen packed two-component contract and numerical remedy, pass targeted invariants, then freeze source before the one planned B900s comparison.",
+    "test": "plans/nonlinear_hypothesis_falsification_001.json",
+    "arms": [
+      "two_coincident_public_components",
+      "two_public_logQ_split_components"
+    ],
+    "samples_per_arm": 31500,
+    "hard_limits": {
+      "capacity_percent": 5,
+      "SOC_pp": 10
+    },
+    "stop": "One comparison then keep/reject/attribution-unresolved; no automatic horizon/start/count sweep or two-cell lifecycle primary.",
+    "candidate_promotion": false
+  },
+  "evidence": {
+    "design": "plans/nonlinear_evidence_design_001.json",
+    "audit_plan": "experiments/nonlinear_evidence_design_001/plan.json",
+    "receipt": "experiments/nonlinear_evidence_design_001/primary/receipt.json",
+    "audit": "experiments/nonlinear_evidence_design_001/primary/evidence_audit.json",
+    "layout": "experiments/nonlinear_evidence_design_001/primary/layout_probe.json",
+    "report": "experiments/nonlinear_evidence_design_001/REPORT.md",
+    "independent_review": "experiments/nonlinear_evidence_design_001/independent_review.json",
+    "verification": "experiments/nonlinear_evidence_design_001/verification.json",
+    "publication": "provenance/nonlinear_evidence_design_001_publication.json"
+  },
+  "published_source_revision": "b0a0bdca18530b9998fc34c0beaf83286c4f57bd"
+}

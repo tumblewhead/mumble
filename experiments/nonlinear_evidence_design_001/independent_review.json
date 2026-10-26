@@ -1,0 +1,120 @@
+{
+  "schema": "mumble_nonlinear_evidence_design_independent_review_v1",
+  "decision": "design_selection_supported_for_next_implementation_only",
+  "source_revision": "4c451ac1d1844c09b5be2cc281c02373efa9bef7",
+  "review_scope": "Independent source, frozen-output, provenance and scalar-arithmetic review. No audit/probe rerun or estimator execution.",
+  "review_actions": {
+    "read_only_checks": 28,
+    "failed_checks": 0,
+    "audit_script_reruns": 0,
+    "layout_probe_reruns": 0,
+    "inference_runs": 0,
+    "optimizer_calls": 0,
+    "raw_voltage_trace_reads": 0,
+    "original_artifact_or_runtime_source_changes": 0,
+    "written_file": "experiments/nonlinear_evidence_design_001/independent_review.json"
+  },
+  "reviewed_artifacts_sha256": {
+    "primary/evidence_audit.json": "250e4fd2787ce99d222b16094dc29a0ef7fcd98bf227cc0cb46096dddea6af58",
+    "primary/layout_probe.json": "43cc31db4f886de7e8fd47d6cbc4b980ed2834c0db3929904a60c9a862ce7f38",
+    "primary/evidence_execution.json": "a2d22a68b4eeb12f45af4772b1e4086ba8256ad5b3b731a2c5dcf70b887c65fa",
+    "primary/layout_execution.json": "5bbad3d9914980737f9058e0098f8da68590ea89b489763faaaa844d6deb8bae"
+  },
+  "provenance_review": {
+    "passed": true,
+    "findings": [
+      "The stated frozen commit exists. Audit script, every hashed evidence input, both plans and the layout probe match that commit.",
+      "Both recorded execution statuses succeed. The saved layout binary matches its recorded SHA256; it was not executed by this reviewer.",
+      "Production src/include and the original bounded001/002, M1 and M1-belief-audit artifacts have no diff from the preceding921b19d9 checkpoint.",
+      "The audit reads saved query/scoring outputs and source text. Its restricted AST decoder does not import or execute the truth-bearing generator, create raw data, or replay model trajectories.",
+      "Public split arithmetic is computed from public source constants before scoring truth is loaded. Retrospective truth use remains separate."
+    ]
+  },
+  "public_split_review": {
+    "passed": true,
+    "initial_capacity_points_mAh": [45.46915522255347, 79.17455211955067],
+    "public_logQ_mean": -2.8134107167600364,
+    "public_logQ_SD": 0.347557011337284,
+    "within_component_logQ_SD": 0.20951093757861336,
+    "reconstructed_mean_difference": 0.0,
+    "reconstructed_variance_difference": -8.326672684688674e-17,
+    "means_inside_public_mean_domain": true,
+    "aggregate_initial_geometric_point_Ah": 0.06,
+    "interpretation": "The fixed split preserves public log-state first two moments to the recorded floating precision. It does not preserve the original Gaussian density or provide hard support. Component exp(logQ mean) values are points, not physical-space posterior expectations. No filtering accuracy was tested."
+  },
+  "frozen_failure_evidence_review": {
+    "passed": true,
+    "capacity_error_and_local_precision_arithmetic": "All twelve reported selected-query capacity errors and local half-widths agree with scalar formulas applied to the saved values.",
+    "B_control_900s": {
+      "capacity_Ah": 0.05012770677215715,
+      "capacity_error_percent": -22.522864339788008,
+      "local_2SD_max_halfwidth_percent_of_estimate": 0.0793594233533061,
+      "status": "provisional"
+    },
+    "B_control_final_endpoint_mV": {
+      "OCV_difference": -57.44053841012287,
+      "ohmic_difference": -0.26380167342244376,
+      "RC_difference": -0.057886967892295006,
+      "hysteresis_difference": 57.580473047931534,
+      "total_difference": -0.18175400350607399
+    },
+    "interpretation": "Large opposing state contributions coexist with a small terminal-voltage difference. This supports endpoint compensation as an observed symptom. It does not identify a unique causal mechanism, prove a competing accurate basin, or show that a two-component capacity split will repair the error.",
+    "reference_limit": "The M1 reference was also unresolved at900s, with capacity error+26.629799869520767%. Its later successful fits do not prove that this new bounded candidate can meet the900s timely-learning gate. Candidate failure there is not physical-unidentifiability evidence."
+  },
+  "input_only_bound_review": {
+    "passed": true,
+    "equation": "For positive current and gamma_plus>=gamma_min, h(t)>=1+(h_lower-1)*exp(-gamma_min*positive_charge_Ah).",
+    "premises": "Inherited static matched model, h in[-1,1], public gamma support, and the prescribed positive-current tail from1500s. No scoring truth enters this bound.",
+    "positive_charge_Ah": [0.005, 0.00525],
+    "gamma_min_evaluated_double": 4.999999999999999,
+    "bounds_evaluated_double": [-0.9506198240566655, -0.9481830725635632],
+    "saved_h_below_bound": [0.004121332986068649, 0.01259886130179122],
+    "interpretation": "The arithmetic is consistent and identifies a conditional history-consistency violation of the saved point under the stated input/model premises.",
+    "limits": "The calculation uses the public exact event prescription and ordinary double/libm; it is not a fresh raw-input compliance audit or outward-rounded C certificate. The final broad bound trims only about0.0126 in h and does not exclude the full wrong SOC/Q/h compensation family or establish a sufficient capacity remedy."
+  },
+  "resource_review": {
+    "recorded_layout_checks": 15,
+    "recorded_layout_failed_checks": 0,
+    "verified_bytes": {
+      "packed_component": 1464,
+      "bank_header": 32,
+      "live_bank": 2976,
+      "staged_bank": 2976,
+      "scratch": 528,
+      "query_arena": 592,
+      "external_config": 56,
+      "input": 24,
+      "owned_subtotal": 7152,
+      "codec_buffer": 128,
+      "acquisition": 448,
+      "RAM_support_arrays": 256,
+      "stack_math_caller_ISR_reserve": 2048,
+      "proposed_total": 10032,
+      "headroom_to_10240": 208,
+      "planned_checkpoint": 3004,
+      "planned_two_NVM_slots": 6008
+    },
+    "interpretation": "The recorded host sizeof results and sums match the explicit proposed ownership. The probe implements no filter and measures no target deadline, live estimator peak, software-math stack or acquisition/persistence timing.",
+    "qualification": "Complete Cortex-M23 memory and35Hz timing remain unqualified. The2048B combined stack/runtime allowance and other target reserves are allocations, not measured sufficient costs.208B headroom is small; any measured reserve or total-cap excess must remain a failure.",
+    "codec_limit": "3004B is the planned named-field serialized size. No codec was executed. It is not an additional full RAM buffer unless the implementation actually allocates one."
+  },
+  "plan_consistency_review": {
+    "passed": true,
+    "mechanism": "Exactly two persistent public logQ-split alternatives versus two coincident components; no pruning, rejuvenation, moment collapse back into inference or post-result starts/count sweep.",
+    "accounting": "Pre-correction scores update mixture weights while each conditional component assimilates once. Alternatives are summed; their posteriors or precision matrices are not multiplied.",
+    "transaction": "Complete staged-bank ownership, common physical chronology, distinct conditional/bank evidence cursors, weight-only learning, numerical rejection and atomic restore semantics are explicit.",
+    "queries": "Geometric capacity center, weighted SOC and component-voltage prediction are defined separately from moment-based local ranges/hulls and unresolved application qualification.",
+    "future_gate": "Freeze the implemented source, hashes, commands and resource receipt after the required targeted algebra, transaction and codec checks, before the planned two-arm31500-sample comparison.",
+    "stop_rule": "One B900 prefix comparison, then keep/reject/attribution-unresolved. No source integration, estimator run, longer horizon or full two-cell lifecycle primary occurred in this design audit.",
+    "success_limit": "A future useful point result can retain this mechanism for further qualification. It is not a coverage result, target qualification or proof that nonlinear-history loss has been repaired."
+  },
+  "blocking_findings": [],
+  "remaining_limits": [
+    "The packed two-component learner, weighting transaction, query implementation and new codec are not implemented by this study.",
+    "Two components may share the same bias, miss the useful alternative or assign excessive predictive weight to a wrong branch.",
+    "Initial moment agreement and host ABI layout do not establish inference accuracy.",
+    "Endpoint compensation and the conditional h-bound violation do not establish hysteresis as the cause of capacity bias.",
+    "Complete target RAM, deadline, power-loss recovery, runtime longevity, physical model validity and uncertainty coverage remain open.",
+    "The design study ends at a frozen mechanism and falsification contract. No additional sweep or campaign is justified by these arithmetic checks."
+  ]
+}

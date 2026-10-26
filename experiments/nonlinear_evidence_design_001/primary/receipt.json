@@ -1,0 +1,95 @@
+{
+  "schema": "mumble_nonlinear_evidence_design_receipt_v1",
+  "status": "completed_once_design_audit_only",
+  "created_UTC": "2026-10-26T01:06:49.112918+00:00",
+  "basis_revision": "921b19d934b5d4b13932168dbddf0a0c740ca67e",
+  "source_revision": "4c451ac1d1844c09b5be2cc281c02373efa9bef7",
+  "source_tree": "a018b6e58ae097ac681b0094811b5f387d8e6d18",
+  "source_sha256": {
+    "experiments/nonlinear_evidence_design_001/evidence_review.json": "2aa1ff36e1363472cddfce517011268d0e7f9f02a7f1c4a3a2b5f9cf14973598",
+    "experiments/nonlinear_evidence_design_001/mechanism_review.json": "ef7fbc671b8659151a6fff731ec655288504724f8d36fc781f6965bdbb4683b4",
+    "experiments/nonlinear_evidence_design_001/plan.json": "0f46d3be3057201b3b506ed6cb3ccb2dd6d85ea70c6679210bd8276b9cdbd544",
+    "experiments/nonlinear_evidence_design_001/transaction_review.json": "c466f7893d0a128669e5190892d9bd8c7b52b748c95d800038961b1b9e3aa515",
+    "plans/nonlinear_evidence_design_001.json": "d38f7cc2a03c5c119bcfe210bc75c2fee744ae5565c441e34b403b47c6028c38",
+    "plans/nonlinear_hypothesis_falsification_001.json": "00afc6fa4ce8300858c446cffa880113e16c1f7ad3c4b82f0f0acf88f2f0339a",
+    "tools/audit_nonlinear_evidence_design.py": "cb6aee9a94435de43c6b66b7a951578f9db28047c7e3e8d7716f1493f667bb9a",
+    "tools/nonlinear_evidence_layout_probe.c": "5697596589bff82412dac9afcaa31c24243501c68a3d1008d138251835915bca"
+  },
+  "executions": {
+    "saved_evidence_audit": {
+      "command": [
+        "python3",
+        "tools/audit_nonlinear_evidence_design.py",
+        "--source-revision",
+        "4c451ac1d1844c09b5be2cc281c02373efa9bef7",
+        "--output",
+        "experiments/nonlinear_evidence_design_001/primary/evidence_audit.json"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.05589462500211084,
+      "inference_runs": 0
+    },
+    "host_layout_probe": {
+      "build_command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-Iinclude",
+        "tools/nonlinear_evidence_layout_probe.c",
+        "-o",
+        "build/nonlinear_evidence_layout_probe"
+      ],
+      "build_returncode": 0,
+      "build_wall_seconds": 0.04124594500171952,
+      "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "run_command": [
+        "build/nonlinear_evidence_layout_probe"
+      ],
+      "run_returncode": 0,
+      "run_wall_seconds": 0.0007846679982321803,
+      "binary_sha256": "6bf5a411cbeb5b0eadbf321b733684a05dbdab56100a551371e314a87060b375",
+      "filtering_calls": 0
+    }
+  },
+  "outputs_sha256": {
+    "evidence_audit.json": "250e4fd2787ce99d222b16094dc29a0ef7fcd98bf227cc0cb46096dddea6af58",
+    "evidence_audit.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence_audit.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence_execution.json": "a2d22a68b4eeb12f45af4772b1e4086ba8256ad5b3b731a2c5dcf70b887c65fa",
+    "layout_build.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "layout_build.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "layout_execution.json": "5bbad3d9914980737f9058e0098f8da68590ea89b489763faaaa844d6deb8bae",
+    "layout_probe.json": "43cc31db4f886de7e8fd47d6cbc4b980ed2834c0db3929904a60c9a862ce7f38",
+    "layout_probe.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "actions": {
+    "saved_evidence_audits": 1,
+    "host_layout_probe_runs": 1,
+    "new_estimator_inference_runs": 0,
+    "raw_trace_replays": 0,
+    "raw_voltage_trace_reads": 0,
+    "batch_optimizer_calls": 0,
+    "new_primary_runs": 0,
+    "production_source_changes": 0
+  },
+  "results": {
+    "audit_exit": 0,
+    "layout_checks": 15,
+    "layout_failed_checks": 0,
+    "design_budget_bytes": 10032,
+    "headroom_bytes": 208,
+    "split_mean_error": 0.0,
+    "split_variance_error": -8.326672684688674e-17
+  },
+  "qualification": {
+    "learner_implemented": false,
+    "new_accuracy_measured": false,
+    "target_measured": false,
+    "coverage_validated": false
+  },
+  "preservation": "First audit/probe outputs retained. Prior results and production code are unchanged; current navigation/state are updated separately."
+}

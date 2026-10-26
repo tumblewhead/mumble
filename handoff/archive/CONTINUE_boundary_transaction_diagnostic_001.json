@@ -1,0 +1,102 @@
+{
+  "schema": "mumble_continue_v13",
+  "task": "Continue from the completed boundary transaction diagnostic; stop-rule work is finished. Do not rerun it or the two-cell primary merely to resume.",
+  "repository": {
+    "url": "https://github.com/tumblewhead/mumble",
+    "work_branch": "diagnostic/online-boundary-001",
+    "base_checkpoint": "3177f499d3c23c0586504864ba22b9eca9050a47",
+    "diagnostic_source_revision": "cded053a4160a9b5f3726062235d7a200009ab6f",
+    "latest_checkpoint": "Fetch current branch tip; historical IDs are not reset targets.",
+    "handoff_url": "https://github.com/tumblewhead/mumble/blob/diagnostic/online-boundary-001/handoff/CONTINUE.json",
+    "bounded002_original_execution_source": "4c59c2363bf8ebe81238b30af7b03d802a5e3e13",
+    "bounded002_published_source": "bdfa692584911fb536b08c5f496188ec42d93ca2",
+    "bounded002_publication_mapping": "provenance/bounded_online_002_publication.json",
+    "published_diagnostic_source_revision": "87da5a60b596efe9f065fb1f6334b290675add97",
+    "published_research_revision_before_metadata": "68b0d8d9247ce6f37a7466d057c8123d99466f64",
+    "diagnostic_publication_mapping": "provenance/boundary_transaction_diagnostic_001_publication.json",
+    "original_execution_bundle": "provenance/boundary_transaction_diagnostic_001_development.bundle"
+  },
+  "bootstrap": [
+    "Fetch current repository, inspect status and preserve newer, dirty or unrelated work. Use pull-run-push and a work branch.",
+    "Read AGENTS.md, README.md, PROJECT_STATE.json and this handoff, then selective diagnostic summary/decisions. Do not load all raw traces.",
+    "Use publication provenance to distinguish original execution and published identities. Preserve both bounded candidates and frozen failures."
+  ],
+  "goal": {
+    "implementation": "Runnable Cortex-M23 C near10240B complete subsystem SRAM",
+    "estimation": "Estimate stimulus-supported quantities, retain evidence and uncertainty, expose unknowns. Nominal35Hz; actual intervals/order.",
+    "capacity_error_percent": {
+      "hard": 5,
+      "preferred": 0.5
+    },
+    "SOC_error_pp": {
+      "hard": 10,
+      "preferred": 0.5
+    }
+  },
+  "current": {
+    "milestone": "M2/A4 candidate qualification; M1 lifecycle complete",
+    "latest_estimator": "bounded_online_002, not promoted; production source unchanged by diagnostic",
+    "diagnostic": "boundary_transaction_diagnostic_001 completed once; minimal witness and remedy decision frozen",
+    "witness": "u=2^-1074, mean=u,gain=1,standard=-1.5 -> scale=u -> selected=u -> proposed=-u. Full API fixture captures mean_domain at R3 coordinate9 with unchanged default noise.",
+    "remedy": "Finite out-of-domain actual rounded mean -> set that coordinate selected gain and multiplier to0; use same final gain in mean/full Joseph and final masks. Tested diagnostic variant only.",
+    "checks": {
+      "baseline": 105,
+      "remedy": 520,
+      "failed": 0,
+      "max_dense_Joseph_error": 2.220446049250313e-16,
+      "advanced_prediction_preserved": true,
+      "exactly_once_and_duplicate_atomic": true,
+      "all_zero_bytes_preserved": true
+    },
+    "new_cell_trace_deliveries": 0,
+    "new_two_cell_primary_runs": 0,
+    "memory_bytes": {
+      "core": 5896,
+      "named_host_fixed": 7064,
+      "inherited_host_plus_own_stack_partial": 8184,
+      "production_added": 0,
+      "checkpoint_added": 0,
+      "fixture_capture_record": 80,
+      "M23_qualified": false
+    },
+    "unresolved": [
+      "Original cold suffix rejections A7/B10 remain unattributed: saved endpoints lack actual failed stage/coordinate/predicted factor/gain/innovation operands.",
+      "B control has zero rejected corrections but finalQ error-7.5378899062% and a wrong narrow local range. Numerical remedy does not explain or repair capacity bias."
+    ],
+    "uncertainty_decision": "Keep local precision diagnostics and legacy raw research statuses; application SOC/Q accuracy unresolved uniformly, coverage unvalidated, hard support not provided. Metadata only; no scoring/threshold/status changes."
+  },
+  "next": {
+    "action": "One bounded design decision on nonlinear evidence and biased capacity.",
+    "plan": "plans/local_uncertainty_decision_001.json",
+    "suggested_work_branch": "design/online-nonlinear-evidence-001",
+    "finish_line": "Select one concrete bounded mechanism with retained-evidence semantics, complete resource costs and a discriminating small test, or name the missing datum. Freeze that contract before another primary.",
+    "numerical_remedy": "experiments/boundary_transaction_diagnostic_001/decision.json",
+    "do_not": "No automatic fixture repeat, source integration, third two-cell primary, duration expansion, threshold/noise/prior tuning or reporting-only relabeling presented as an accuracy improvement."
+  },
+  "evidence": {
+    "summary": "experiments/boundary_transaction_diagnostic_001/summary.json",
+    "report": "experiments/boundary_transaction_diagnostic_001/REPORT.md",
+    "plan": "experiments/boundary_transaction_diagnostic_001/plan.json",
+    "receipt": "experiments/boundary_transaction_diagnostic_001/primary/receipt.json",
+    "review": "experiments/boundary_transaction_diagnostic_001/independent_review.json",
+    "verification": "experiments/boundary_transaction_diagnostic_001/verification.json",
+    "numerical_decision": "experiments/boundary_transaction_diagnostic_001/decision.json",
+    "uncertainty_decision": "plans/local_uncertainty_decision_001.json",
+    "bounded002_summary": "experiments/bounded_online_002/summary.json",
+    "bounded002_behavior": "experiments/bounded_online_002/behavior_review.json",
+    "roadmap": "docs/ROADMAP.md",
+    "targets": "plans/estimation_targets_001.json",
+    "prior_handoff": "handoff/archive/CONTINUE_bounded_online_002.json",
+    "publication": "provenance/boundary_transaction_diagnostic_001_publication.json"
+  },
+  "guardrails": [
+    "Truth only in generation/post-inference scoring; never initialization/reset/inference/tuning.",
+    "Preserve actual intervals/order, carried state and exactly-once accounting. No posterior/replayed-observation double counting.",
+    "Same actual selected gain for mean/full Joseph; rejection preserves committed physical prediction.",
+    "Separate numerical health, point error, local precision, hard support and validated coverage. Preserve failed gates; all-unresolved cannot manufacture promotion.",
+    "Numerical witness is constructed API-valid arithmetic, not physical-history reachability or attribution of17 historical rejections.",
+    "Full-model indefinite stability, annual behavior, temperature/EOD and complete M23 qualification remain open.",
+    "Machine handoffs compact JSON/YAML; mumble remains distinct from SCM, NAIA and D2/D2E proof claims.",
+    "Diagnostic source/result commit identities differ between execution and API publication; publication mapping verifies identical trees and preserves original commits in a checked bundle."
+  ]
+}
