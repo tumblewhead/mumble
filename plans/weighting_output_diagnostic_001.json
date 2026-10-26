@@ -1,0 +1,181 @@
+{
+  "schema": "mumble_weighting_output_diagnostic_v1",
+  "status": "frozen_saved_evidence_audit_before_execution",
+  "base_revision": "b4c57239f163ed0a9a48cf39acf18117915aa4bf",
+  "work_branch": "planning/weighting-output-diagnostic-001",
+  "user_authorization": "Continue from recovered repository, check the confidence recollection, and move forward unless significant contrary evidence appears.",
+  "question": "Does the 7811s SOC output jump come from component motion, weight motion, or an implementation/accounting error; which recorded predictive-score terms prefer the selected component?",
+  "finish_line": "One read-only saved-evidence audit plus a concrete evidence-supported next decision. Stop on an input/identity/accounting mismatch. No production modification or new trajectory is implied.",
+  "known_before_audit": [
+    "Published final local intervals exclude truth but contain their own reported estimate.",
+    "The published 7811/7812s snapshots show component dominance reversal and little movement in component SOC errors.",
+    "Source review found the declared predictive log-score, stable log-weight normalization, and matching aggregate-moment formulas; no production defect established."
+  ],
+  "inputs": {
+    "identities": {
+      "src/scm_hypothesis.c": {
+        "sha256": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+        "bytes": 35149
+      },
+      "include/scm_hypothesis.h": {
+        "sha256": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+        "bytes": 7399
+      },
+      "tools/continuous_probe.c": {
+        "sha256": "6353081ee5e00bf24b4d65e03ee408ed102f6a2d2aa5c3960c3f49f5c5d140d9",
+        "bytes": 27505
+      },
+      "tools/continuous_source.py": {
+        "sha256": "b5edc4f82d58383d3a23409258648fc117ad962cec461a35a97e01361546ea02",
+        "bytes": 42925
+      },
+      "plans/nonlinear_evidence_design_001.json": {
+        "sha256": "d38f7cc2a03c5c119bcfe210bc75c2fee744ae5565c441e34b403b47c6028c38",
+        "bytes": 15848
+      },
+      "experiments/continuous_learning_validation_001/implementation/interpretation_review.json": {
+        "sha256": "05df5a79ea9aa74fd525b425b89d592d8e48554e857c021cdcbbfc336b4bb6c4",
+        "bytes": 30098
+      },
+      "experiments/continuous_learning_validation_001/implementation/reporting/observed_results.json": {
+        "sha256": "0178f17c540300148f7c392e76ffa0054562db65032b9a8ce185c46da7c6de0a",
+        "bytes": 693343
+      },
+      "experiments/continuous_learning_validation_001/implementation/evidence/index.json": {
+        "sha256": "0db1f4cfc784e3fc6f52a4f65c1a50c0bbb1a407367742336d7eeb309773104f",
+        "bytes": 58307
+      }
+    },
+    "archive_sha256": "41bd5b5566d14d5abb05a085b837bf03034d9e5854245852a64ec820e6b81503",
+    "archive_members": [
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/metrics.bin",
+        "bytes": 40320000,
+        "sha256": "ac29b79c8fd2ce9b34601067824c230ee97d7051c0ed699d494da5592cb276ba",
+        "git_blob_sha1": "131c2da83820998ccf0240f94510e00e3bf657cd",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/queries.jsonl",
+        "bytes": 94135978,
+        "sha256": "fbee9673c4bcace1906c0e47347ee8e67b03d078ac3ea8d489518d2ddfe8b7c6",
+        "git_blob_sha1": "200bea83966ab51ca003a2a26ee8157635cda438",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/truth.bin",
+        "bytes": 16128000,
+        "sha256": "351b93c4157e80681eb5902f713750b6ab71d5c23a1b21a76cdbd8572861fc9f",
+        "git_blob_sha1": "ed1672fc261e084f690cb3ae4bd63f58268a8163",
+        "mode": "100644"
+      }
+    ],
+    "source_base": "b4c57239f163ed0a9a48cf39acf18117915aa4bf",
+    "input_policy": "Immutable. Restore exact archived bytes to a separate scratch directory; do not modify primary artifacts or reuse reconstructed data as new inference evidence."
+  },
+  "scope": {
+    "cell": "B_continuous",
+    "rate_Hz": 35,
+    "context_next_index_inclusive": [
+      252000,
+      302400
+    ],
+    "context_nominal_seconds": [
+      7200,
+      8640
+    ],
+    "focus_next_index_inclusive": [
+      273000,
+      273875
+    ],
+    "focus_nominal_seconds": [
+      7800,
+      7825
+    ],
+    "additional_query_indices": [
+      504000
+    ],
+    "saved_witness_indices": [
+      273385,
+      273420,
+      283500,
+      294000,
+      300440,
+      300475,
+      504000
+    ],
+    "endpoint_audit": "All4 saved endpoints times3 entities times2 quantities from published reporting extraction. Shared A suffixes are not independent replications.",
+    "new_generator_runs": 0,
+    "new_learner_runs": 0,
+    "new_optimizer_calls": 0,
+    "old_scorer_runs": 0,
+    "parameter_or_noise_changes": 0,
+    "truth_use": "Post-inference errors/containment only; never weights, component selection or tuning."
+  },
+  "checks": [
+    {
+      "id": "identities",
+      "definition": "Verify source/saved-extraction digests and each restored member byte count and SHA256 against frozen index."
+    },
+    {
+      "id": "chronology",
+      "definition": "Metric record next_index n stores pre-update weights. Query n is post-update and must equal metric n+1 old weights. Query score at n compares D_old(n+1)-D_old(n), D=logw1-logw0. Require valid transaction and available matching fields; final504000 has no next row and is excluded from this recurrence check."
+    },
+    {
+      "id": "weight_recurrence",
+      "definition": "At every successful full query in scope, compare the stored odds increment with ell1-ell0. Scan every context scalar row for changes, dominance crossing and representability."
+    },
+    {
+      "id": "score_terms",
+      "definition": "At saved queries only, verify ell_j=-0.5*log(S_j)-0.5*r_j^2/S_j. Decompose ell1-ell0 into0.5*log(S0/S1) and0.5*(r0^2/S0-r1^2/S1). Never call sampled term sums the decomposition of all35Hz increments."
+    },
+    {
+      "id": "moments",
+      "definition": "Reconstruct normalized weights, all16 aggregate chart means and marginal SDs with within/between terms, currentSOC, geometric capacity center, matching local intervals, all-component hull and weighted voltage. Require matching entity/index/availability."
+    },
+    {
+      "id": "output_motion",
+      "definition": "For the saved7811/7812s pair, decompose SOC error change exactly as (1-p_bar)*delta_e0+p_bar*delta_e1+delta_p*(gap_before+gap_after)/2. This midpoint identity is descriptive attribution of output motion, not a unique cause of predictive preference."
+    },
+    {
+      "id": "intervals",
+      "definition": "Count own-point and truth containment separately in matching available intervals. Express final B point error and interval widths in mAh/percentage points. Do not infer calibrated coverage or propose inflation factors from these ratios."
+    }
+  ],
+  "numerical_tolerances": {
+    "log_score_abs": 1e-10,
+    "log_odds_increment_abs": 2e-09,
+    "query_old_weight_abs": 2e-09,
+    "moment_abs": 2e-13,
+    "moment_rel": 1e-10,
+    "interval_abs": 2e-13,
+    "interval_rel": 1e-10,
+    "meaning": "Binary64 reconstruction/accounting checks only; not physical accuracy requirements. Record maxima and mismatches, never widen thresholds after observing results."
+  },
+  "resource_bounds": {
+    "restore_selected_bytes_max": 167772160,
+    "restoration_wall_s_max": 180,
+    "audit_wall_s_max": 60,
+    "audit_peak_RSS_bytes_max": 268435456,
+    "audit_output_bytes_max": 8388608,
+    "selected_full_queries_max": 2000,
+    "audit_processes": 1,
+    "data_retention": "Existing121330272B archive remains repository evidence. Only3members are materialized separately; derived results contain compact reducers and narrow focus rows."
+  },
+  "deliverables": [
+    "tools/audit_weighting_output.py",
+    "experiments/weighting_output_diagnostic_001/attempt001/result.json",
+    "experiments/weighting_output_diagnostic_001/attempt001/query_diagnostics.csv",
+    "experiments/weighting_output_diagnostic_001/attempt001/focus_odds.csv",
+    "experiments/weighting_output_diagnostic_001/REPORT.md",
+    "experiments/weighting_output_diagnostic_001/decision.json",
+    "independent review and updated compact handoff"
+  ],
+  "decision_rules": {
+    "accounting_failure": "Preserve failure and isolate concrete mismatch before scientific interpretation.",
+    "accounting_pass": "Report measured evidence contributions, output-motion split and unresolved uncertainty; choose one smallest next mechanism question.",
+    "insufficient_saved_data": "Name exact missing observables; do not invent all-sample score terms or start a replay automatically.",
+    "excluded": "No seed/horizon/noise/component-count sweep, longer run, pruning/reseeding, truth-selected output, production-weight adjustment, or annual/M23 promotion."
+  },
+  "provenance": "Plan frozen after published-witness/source review and before restoring/reading archived raw records. An audit may diagnose already known behavior; it is not a new performance trial."
+}
