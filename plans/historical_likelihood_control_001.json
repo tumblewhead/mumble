@@ -14,10 +14,15 @@
     "archived_records": 504000,
     "prefix_records": 252000,
     "nominal_endpoint_seconds": 7200,
-    "witness_path": "experiments/weighting_output_diagnostic_001/attempt001/witness_queries.jsonl",
+    "witness_path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/queries.jsonl",
     "target_selector": "Exactly the aggregate query with next_index252000; capacity_Ah and current_soc only, no truth or error fields. Require exactly one matching query.",
     "truth_in_inference": false,
-    "conversion": "Write only the selected prefix to scratch CSV with the existing CLI header and17-significant-digit floats. Every row must round-trip bit-for-bit to its original32B observation. Hash source before/after and both binary-prefix and CSV representations; no resampling, regenerated noise or sample omission."
+    "conversion": "Write only the selected prefix to scratch CSV with the existing CLI header and17-significant-digit floats. Every row must round-trip bit-for-bit to its original32B observation. Hash source before/after and both binary-prefix and CSV representations; no resampling, regenerated noise or sample omission.",
+    "witness_bytes": 94135978,
+    "witness_sha256": "fbee9673c4bcace1906c0e47347ee8e67b03d078ac3ea8d489518d2ddfe8b7c6",
+    "witness_git_blob_sha1": "200bea83966ab51ca003a2a26ee8157635cda438",
+    "witness_restoration_record": "experiments/weighting_output_diagnostic_001/restoration.json",
+    "witness_location": "Explicit --query-evidence-root, separate from observations root; complete original archived queries, streamed without collecting them in RAM."
   },
   "model": {
     "existing_reference": "Unchanged scm_estimator.c, scm_model.c, scm_features.c, scm_assess.c and main.c from the published base.",
@@ -58,7 +63,19 @@
     "source": "Compile unchanged reference with cc -std=c99 -O3 -Wall -Wextra -Wpedantic -Werror -Iinclude src/main.c src/scm_estimator.c src/scm_model.c src/scm_features.c src/scm_assess.c -lm. Pin compiler, complete source/header/supervisor hashes and exact executable bytes before invocation.",
     "preflight": "Independent contract/source review; verify existing reference hashes against base; executable --help only; verify conversion and argument wiring. No new optimizer qualification run or hidden warm-up fit.",
     "failure": "Malformed/nonfinite output, nonzero executable exit, input mutation or resource breach stops the remaining calls, preserving all outputs and receipt. Finite nonconverged fit output remains a candidate witness and allows the two already specified calls; it never becomes an exclusion or promotion claim.",
-    "output": "Exclusive attempt001 directory, strict JSON, all raw stdout/stderr, per-child wait4 resources, before/after input identities, exact commands and source revision. Preserve prelaunch failures."
+    "output": "Exclusive repaired attempt002 directory, with failed prelaunch attempt001 preserved. Strict JSON, all raw stdout/stderr, per-child wait4 resources, before/after input identities, exact commands and source revision. Preserve any new failure; no automatic retry.",
+    "prelaunch_repair": {
+      "failed_attempt": "experiments/historical_likelihood_control_001/attempt001",
+      "source_revision": "3c7e9f20ef3c25d38d423f03a064fdd03b956896",
+      "failure": "The compact selected witness file omitted the fixed252000 endpoint; target extraction failed before conversion or child launch.",
+      "prior_witness_path": "experiments/weighting_output_diagnostic_001/attempt001/witness_queries.jsonl",
+      "completed_fit_invocations": 0,
+      "completed_source_generations": 0,
+      "decision": "Preserve the failure and use the same252000 query from the complete original archived query file. Independent identity review and source publication precede one repaired attempt002.",
+      "inference_retries": 0,
+      "total_fit_limit_across_attempts": 3,
+      "time_prefix_starts_iteration_caps_resource_caps_and_target_values_selection_changed": false
+    }
   },
   "resources": {
     "child_CPU_s_max": 120,
@@ -94,6 +111,12 @@
       "change": "Constrained --initial plus --starts3 means free-fit theta then public starts0,1, not public starts1,2. Preserve the unchanged solver and clarify the two human CLI/source shorthands.",
       "fit_or_optimizer_calls_before_amendment": 0,
       "prior_contract_commit": "3b9cf66"
+    },
+    {
+      "basis": "Preserved target-extraction preflight failure, before any optimizer call",
+      "change": "Replace the compact witness subset with its complete original archived queries.jsonl, bound through preserved restoration metadata and exact member hash. Same endpoint and target fields.",
+      "fit_or_optimizer_calls_before_amendment": 0,
+      "prior_source_revision": "3c7e9f20ef3c25d38d423f03a064fdd03b956896"
     }
   ]
 }

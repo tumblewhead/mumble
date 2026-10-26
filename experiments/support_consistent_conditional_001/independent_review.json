@@ -1,6 +1,6 @@
 {
   "schema": "mumble_support_consistent_conditional_001_independent_review_v1",
-  "status": "contract_and_implementation_pass_results_pending",
+  "status": "pass",
   "reviewer": "independent interval and mathematical reviewer",
   "contract_path": "plans/support_consistent_conditional_001.json",
   "contract_sha256": "6dc336a03686716f8bbc1fe225b5f80eb0d495781ebfc25ce42366d905fd74a8",
@@ -8,7 +8,7 @@
   "stages": {
     "contract": "pass",
     "implementation": "pass",
-    "canonical_results": "pending"
+    "canonical_results": "pass"
   },
   "material_contract_blockers": [],
   "reviewer_activity": {
@@ -50,5 +50,72 @@
     "path": "experiments/support_consistent_conditional_001/implementation_review.json",
     "bytes": 4333,
     "sha256": "b36c5148262ce4830ba19501001862af3401e17b9904fdcb091dafee5e136382"
+  },
+  "result_review": {
+    "status": "pass",
+    "source_revision": "3c7e9f20ef3c25d38d423f03a064fdd03b956896",
+    "artifact_identities": [
+      {
+        "path": "experiments/support_consistent_conditional_001/attempt001/process_receipt.json",
+        "bytes": 854,
+        "sha256": "d9242cfa25ef1027fba5d5858b1409562f8a6a24de04c3addcd62d2c1067a38a"
+      },
+      {
+        "path": "experiments/support_consistent_conditional_001/attempt001/result.json",
+        "bytes": 109056,
+        "sha256": "e0f91230f700001f2760b72bfb9ec2d561483c2ece9466226cfec66387c2ef4b"
+      }
+    ],
+    "independent_arithmetic_and_accounting_checks": 605,
+    "failures": [],
+    "maximum_arithmetic_errors": {
+      "kernel_mean": 2.220446049250313e-16,
+      "kernel_covariance": 1.1102230246251565e-16,
+      "supported_mean": 2.220446049250313e-16,
+      "supported_covariance": 1.0755285551056204e-16,
+      "supported_log_support_mass": 4.440892098500626e-16,
+      "supported_scalar_h_mean": 2.220446049250313e-16,
+      "supported_scalar_h_variance": 1.0581813203458523e-16,
+      "log_evidence": 4.440892098500626e-14,
+      "oracle_mean": 1.1102230246251565e-16,
+      "oracle_covariance": 5.551115123125783e-17,
+      "oracle_scalar_h_mean": 7.176999099542128e-17,
+      "oracle_scalar_h_variance": 5.551115123125783e-17,
+      "oracle_log_evidence": 6.217248937900877e-14,
+      "sequential_batch": 4.618527782440651e-14,
+      "discrete_variance": 7.771561172376096e-16,
+      "public_product": 0.0,
+      "public_reciprocal": 0.0
+    },
+    "original_frozen_checks": 79,
+    "original_quadrature_function_evaluations": 2352,
+    "reference_invocations": 1,
+    "outward_kernel_h_mean": 1.3102625298329345,
+    "outward_supported_h_mean": 0.9424897614877814,
+    "outward_supported_h_variance": 0.002715648822858699,
+    "physical_h_variance_growth": {
+      "before": 0.25131627759920105,
+      "after": 0.25370410180368447
+    },
+    "same_moments_posterior_variances": {
+      "A": 0.5000000000000008,
+      "B": 1.928749847963914e-22
+    },
+    "public_start_product": {
+      "exact_variance_V2": 0.00046977777777777795,
+      "linearized_and_degree3_variance_V2": 0.00019200000000000006,
+      "omitted_fourth_order_variance_V2": 0.0002777777777777779
+    },
+    "whole_process_wall_s": 1.8338562230001116,
+    "whole_process_CPU_s": 1.827621,
+    "whole_process_peak_RSS_bytes": 87691264,
+    "interpretation": "GO only for the fixed affine supported reference; NO-GO as a standalone historical SOC/Q uncertainty remedy. This neither calibrates intervals nor identifies the actual history that caused the saved undercoverage. The old degree-three probe is not an exact fourth-moment oracle.",
+    "reviewer_activity": {
+      "reference_reruns": 0,
+      "quadrature_calls": 0,
+      "physical_model_calls": 0,
+      "fit_calls": 0,
+      "stored_number_algebra_only": true
+    }
   }
 }

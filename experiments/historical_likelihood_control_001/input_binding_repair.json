@@ -1,0 +1,114 @@
+{
+  "schema": "mumble_historical_likelihood_input_binding_repair_v1",
+  "status": "implemented_and_fabricated_checks_passed_before_repaired_launch",
+  "cause": "The preserved compact witness file contained no query at the frozen252000 endpoint. The driver rejected target extraction before prefix conversion or any child launch.",
+  "preserved_attempt": {
+    "directory": "experiments/historical_likelihood_control_001/attempt001",
+    "source_revision": "3c7e9f20ef3c25d38d423f03a064fdd03b956896",
+    "driver_sha256": "770c4e48eb54adcce61d5d71e1077f914dd56ab716319153736511a7afce7646",
+    "plan_sha256": "2cf714200e971ba2f58e41f938fa01b6e451f117b253a1c9ea087cf33e44565a",
+    "execution_receipt": {
+      "path": "experiments/historical_likelihood_control_001/attempt001/receipt.json",
+      "bytes": 10997,
+      "sha256": "c7567fc3be04d5ae34e8880eae3a42fd7eea2a4d8e08f6839ebca80760c22e8d"
+    },
+    "executable_receipt": {
+      "path": "experiments/historical_likelihood_control_001/executable_receipt.json",
+      "bytes": 2772,
+      "sha256": "de99df37c483673e15d27c81d759b293325e877d0cd085b82618a5a9602959a7"
+    },
+    "fit_invocations_attempted": 0,
+    "observed_children_launched": 0,
+    "conversion_started": false,
+    "all_bound_inputs_unchanged": true
+  },
+  "repair": {
+    "scope": "Only the target-record input binding changes. Same original query endpoint and same target selector; no fabricated query or different prefix.",
+    "query_evidence_root_argument": "--query-evidence-root",
+    "witness_member": {
+      "witness_path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/queries.jsonl",
+      "witness_bytes": 94135978,
+      "witness_sha256": "fbee9673c4bcace1906c0e47347ee8e67b03d078ac3ea8d489518d2ddfe8b7c6",
+      "witness_git_blob_sha1": "200bea83966ab51ca003a2a26ee8157635cda438",
+      "witness_restoration_record": "experiments/weighting_output_diagnostic_001/restoration.json"
+    },
+    "identity_chain": "Bind unchanged restoration metadata to frozen base and final source commits; match exactly one path/bytes/SHA256/Git-blob entry to amended plan; stream-hash the complete restored query member against those bytes/SHA256; include metadata and full member in all before/after identity checks.",
+    "memory": "No94MB Git blob or JSONL file is loaded in one allocation. Existing extraction streams every row and requires exactly one selected endpoint.",
+    "inference_retries": 0,
+    "total_fit_limit_across_attempts": 3,
+    "repaired_attempt": "attempt002"
+  },
+  "unchanged_function_source_sha256": {
+    "extract_targets": "8158bf7d4dc6f6e2e899682ca497e42a78c0631c9213bbbee96357e0397e88bb",
+    "convert_prefix": "2995f8331c65a32d7e6afe0532e59fa72dcd4e0e695fbdfd214e7b012cf57bc2",
+    "fit_command": "acd54d247a70a77fadf1907e6de5e543b31fb8ed4d581b108ae0e152cc96faf8",
+    "validate_fit": "7a8ab6dab9cec58b581b7bb418fe289b5e5e09a20374af01943b9fdfe532129c",
+    "child_bounds": "e3d28b07fb43a06bcd9de152c7e8bee807be4afac7d300af02b95f563a7f8ccb",
+    "posthash": "2227f3d40be5b9528672ab1b4606475af2aa2b6da720a1fd28769caa5bfdeda0",
+    "check_supervisor": "8a5f68ac3ad4af633d06b302dfc54952aec9e1c28c5c20269b8d295089441961",
+    "commit_identity": "8214bcd0492b3559e12f88488a27bcd470a433a3c6e0d7b9b0fee73520a81b8b"
+  },
+  "unchanged_policy": [
+    "prefix252000",
+    "three sequential maximum fit calls",
+    "starts and max iterations",
+    "reference C sources",
+    "compiler and binary",
+    "CSV conversion and bitwise verification",
+    "target extraction and two numeric inference fields",
+    "per-child and supervisor resource caps",
+    "no automatic retry",
+    "no truth in inference",
+    "no local covariance inversion"
+  ],
+  "new_driver": {
+    "path": "tools/run_historical_likelihood_control.py",
+    "bytes": 33919,
+    "sha256": "9a4d473b5dae1237a588f617e3cb22789d00c1ce1ea78442ef07314c1f1cc057"
+  },
+  "amended_plan": {
+    "path": "plans/historical_likelihood_control_001.json",
+    "bytes": 9314,
+    "sha256": "33736f934e5836a565f4178f54da61f1bffe8b93f08555b4d5123442b62bdb6c"
+  },
+  "restoration_metadata_identity": {
+    "bytes": 1998,
+    "sha256": "2a8091607937df906cfd15b70c79aeabc55f6ce27867d83d9427ca3cd41844bb"
+  },
+  "qualification": {
+    "schema": "mumble_historical_input_repair_checks_v1",
+    "driver_sha256": "9a4d473b5dae1237a588f617e3cb22789d00c1ce1ea78442ef07314c1f1cc057",
+    "fixture_path": "/tmp/mumble-historical-input-repair-fixtures.py",
+    "fixture_sha256": "34b1b00e6162fdd6e1fe07bc1e0e8d6f348e3e672df42e280d9895e385820225",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/tmp/mumble-historical-input-repair-fixtures.py"
+    ],
+    "passed": [
+      "complete_query_member_above_old_cap_bound_and_selected_streamingly",
+      "restoration_byte_SHA256_and_Git_blob_mismatches_rejected",
+      "exactly_one_restored_member_required",
+      "unverified_restoration_rejected",
+      "complete_original_query_member_in_posthash_set",
+      "explicit_query_root_recorded_in_prelaunch_failure_without_child"
+    ],
+    "failed": [],
+    "canonical_query_reads": 0,
+    "canonical_target_extractions": 0,
+    "optimizer_calls": 0,
+    "child_processes_launched": 0,
+    "limits": "Fabricated Python-only identity/streaming/CLI/posthash checks; source review binds unchanged Git helpers. No canonical preflight, conversion, fit, or prior-check rerun."
+  },
+  "qualification_exact_fixture_source": "\"\"\"Fabricated input-binding repair checks; no original query or optimizer read.\"\"\"\nimport contextlib\nimport copy\nimport hashlib\nimport io\nimport json\nfrom pathlib import Path\nimport sys\nimport tempfile\n\nsys.dont_write_bytecode = True\nROOT = Path('/workspace/scratch/d8e043c88fda/mumble-repo')\nsys.path.insert(0, str(ROOT / 'tools'))\nimport run_historical_likelihood_control as driver\n\npassed = []\nwith tempfile.TemporaryDirectory(prefix='historical-input-repair-fabricated-') as temporary:\n    top = Path(temporary)\n    query_root = top / 'separate-query-root'\n    query_root.mkdir()\n    witness = query_root / 'fabricated-queries.jsonl'\n    with witness.open('w') as stream:\n        for index in range(256):\n            n = driver.PREFIX_RECORDS if index == 127 else index\n            query = {'schema': 'mumble_continuous_query_v1', 'event': 'query', 'next_index': n,\n                     'aggregate': {'next_index': n, 'point_available': 1, 'capacity_available': 1,\n                                   'capacity_Ah': .061, 'current_soc': .42},\n                     'ignored_fabricated_padding': 'x' * 8192}\n            stream.write(json.dumps(query) + '\\n')\n    identity = driver.supervisor.digest(witness)\n    assert identity['bytes'] > 1048576\n    blob = hashlib.sha1(('blob ' + str(identity['bytes']) + '\\0').encode())\n    with witness.open('rb') as stream:\n        while block := stream.read(65536):\n            blob.update(block)\n    inputs = {'witness_path': witness.name, 'witness_bytes': identity['bytes'],\n              'witness_sha256': identity['sha256'], 'witness_git_blob_sha1': blob.hexdigest()}\n    member = {'path': witness.name, **identity, 'git_blob_sha1': blob.hexdigest()}\n    restoration = {'schema': 'mumble_weighting_evidence_restoration_v1',\n                   'status': 'verified_selected_members_restored',\n                   'selected_members_SHA256_and_Git_blob_verified': [member]}\n    expected = driver.archived_witness_identity(inputs, restoration)\n    assert expected == identity\n    records = {}\n    actual_path = driver.supervisor.beneath(query_root, inputs['witness_path'])\n    driver.supervisor.bind_file(records, actual_path, expected, 'archived_original_queries')\n    target = driver.extract_targets(actual_path)\n    assert target['witness_line_number'] == 128\n    assert target['capacity_Ah'] == .061 and target['current_soc'] == .42\n    assert len(records) == 1 and records[str(actual_path)]['bytes'] > 1048576\n    passed.append('complete_query_member_above_old_cap_bound_and_selected_streamingly')\n\n    for key, changed in [('witness_bytes', identity['bytes'] + 1),\n                         ('witness_sha256', '0' * 64),\n                         ('witness_git_blob_sha1', '0' * 40)]:\n        corrupted = dict(inputs)\n        corrupted[key] = changed\n        try:\n            driver.archived_witness_identity(corrupted, restoration)\n        except driver.supervisor.ProbeError:\n            pass\n        else:\n            raise AssertionError('mismatched ' + key + ' accepted')\n    passed.append('restoration_byte_SHA256_and_Git_blob_mismatches_rejected')\n    for members in ([], [member, member]):\n        corrupted = copy.deepcopy(restoration)\n        corrupted['selected_members_SHA256_and_Git_blob_verified'] = members\n        try:\n            driver.archived_witness_identity(inputs, corrupted)\n        except driver.supervisor.ProbeError:\n            pass\n        else:\n            raise AssertionError('missing or duplicate member accepted')\n    passed.append('exactly_one_restored_member_required')\n    corrupted = copy.deepcopy(restoration)\n    corrupted['status'] = 'unverified'\n    try:\n        driver.archived_witness_identity(inputs, corrupted)\n    except driver.supervisor.ProbeError:\n        pass\n    else:\n        raise AssertionError('unverified restoration accepted')\n    passed.append('unverified_restoration_rejected')\n    assert all(row['unchanged'] for row in driver.posthash(records))\n    with witness.open('ab') as stream:\n        stream.write(b'\\n')\n    assert not driver.posthash(records)[0]['unchanged']\n    passed.append('complete_original_query_member_in_posthash_set')\n\n    fake_root = top / 'fake-repository'\n    fake_root.mkdir()\n    output = top / 'failed-preflight'\n    args = ['--root', str(fake_root), '--evidence-root', str(top / 'observation-root'),\n            '--query-evidence-root', str(query_root), '--binary', str(top / 'missing-binary'),\n            '--output-dir', str(output), '--scratch-dir', str(top / 'scratch'),\n            '--source-revision', 'a' * 40, '--executable-receipt', str(top / 'missing-receipt')]\n    with contextlib.redirect_stdout(io.StringIO()):\n        assert driver.main(args) == 1\n    receipt = json.loads((output / 'receipt.json').read_text())\n    assert receipt['query_evidence_root'] == str(query_root)\n    assert receipt['fit_invocations_attempted'] == receipt['observed_children_launched'] == 0\n    assert receipt['closed_output_bytes'] == driver.tree_bytes(output)\n    passed.append('explicit_query_root_recorded_in_prelaunch_failure_without_child')\n\nrecord = {'schema': 'mumble_historical_input_repair_checks_v1',\n          'driver_sha256': hashlib.sha256((ROOT / driver.DRIVER).read_bytes()).hexdigest(),\n          'fixture_path': str(Path(__file__).resolve()),\n          'fixture_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),\n          'command': [sys.executable, str(Path(__file__).resolve())],\n          'passed': passed, 'failed': [], 'canonical_query_reads': 0,\n          'canonical_target_extractions': 0, 'optimizer_calls': 0,\n          'child_processes_launched': 0,\n          'limits': 'Fabricated Python-only identity/streaming/CLI/posthash checks; source review binds unchanged Git helpers. No canonical preflight, conversion, fit, or prior-check rerun.'}\nPath('/tmp/mumble-historical-input-repair-checks.json').write_text(json.dumps(record, indent=2) + '\\n')\nprint(json.dumps(record, indent=2))\n",
+  "qualification_limits": "Six new fabricated Python-only input-binding/streaming/argument/posthash checks. Original six-check fixtures and receipts were not changed or rerun. No optimizer, learner, source generator, canonical query extraction or new canonical conversion executed by this agent.",
+  "independent_original_input_observation_reported_to_author": {
+    "reviewer": "interval_audit",
+    "method": "Independent streamed full-file SHA256 and Git-blob verification, plus one endpoint row inspection; this author did not repeat it.",
+    "rows": 14654,
+    "matching_endpoint_rows": 1,
+    "matching_line_number": 7369,
+    "matching_line_bytes_including_newline": 6424,
+    "matching_line_sha256": "b19ea102848ecc41b5acae99db0495a248d63ff2cf280f3baf76840e0f2d8e95"
+  },
+  "writes": "Only current driver and this new repair record in repository. Preserved attempt001, old executable receipt, old source commit and existing qualification artifacts unchanged by this agent."
+}

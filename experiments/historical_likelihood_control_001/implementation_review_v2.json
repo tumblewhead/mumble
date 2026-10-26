@@ -1,0 +1,85 @@
+{
+  "schema": "mumble_historical_likelihood_control_implementation_review_v2",
+  "status": "pass",
+  "plan_sha256": "33736f934e5836a565f4178f54da61f1bffe8b93f08555b4d5123442b62bdb6c",
+  "source_sha256": {
+    "tools/run_historical_likelihood_control.py": "9a4d473b5dae1237a588f617e3cb22789d00c1ce1ea78442ef07314c1f1cc057",
+    "tools/run_conditional_belief_probe.py": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+  },
+  "reviewer": "independent interval and mathematical reviewer",
+  "scope": "Prelaunch input-container repair only, reviewed against the original source and contract. No optimizer/reference execution or conversion by reviewer.",
+  "previous_immutable_review": {
+    "path": "experiments/historical_likelihood_control_001/implementation_review.json",
+    "bytes": 4541,
+    "sha256": "e24b9c45b52377231efdca5bf05fcd72cf2c25bbf7731124ab50202e6a6a8399"
+  },
+  "preserved_failure": {
+    "path": "experiments/historical_likelihood_control_001/attempt001",
+    "phase": "target_extraction",
+    "fit_invocations_attempted": 0,
+    "observed_children_launched": 0,
+    "CSV_conversion": null,
+    "closed_output_bytes": 11738,
+    "result_identity": {
+      "bytes": 741,
+      "sha256": "5f4549d10c384bdf7c09105808a75355d70fd5f14b73ce2a95b3eaea87e93422"
+    },
+    "receipt_identity": {
+      "bytes": 10997,
+      "sha256": "c7567fc3be04d5ae34e8880eae3a42fd7eea2a4d8e08f6839ebca80760c22e8d"
+    }
+  },
+  "findings": [
+    "The preserved attempt failed because the compact selected witness omitted n=252000; no target, CSV or fit was produced. The complete original query file contains exactly the same predeclared endpoint query.",
+    "The repaired helper requires exactly one original query member in the preserved successful restoration record, with matching bytes, SHA256 and Git-blob identity. The restoration record is pinned to the base and final source commits; actual original query bytes are hash-checked before use and in every posthash set.",
+    "The separate explicit query evidence root remains disjoint from output and scratch; original queries are streamed rather than collected in memory.",
+    "The target selector, objective, source binary, 252000-record prefix, three calls, starts, iteration/resource caps, fit parsing, CSV conversion and no-retry logic are unchanged.",
+    "The amended plan discloses one explicit prelaunch repair and preserves a total of at most three fit invocations across attempts. It does not authorize an inference retry or result-driven target/prefix selection.",
+    "The prior implementation review remains valid for unchanged driver sections and the reused supervisor. Six new author-recorded fabricated Python-only repair checks were read; the reviewer did not execute them."
+  ],
+  "original_query_verification": {
+    "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/queries.jsonl",
+    "bytes": 94135978,
+    "rows": 14654,
+    "sha256": "fbee9673c4bcace1906c0e47347ee8e67b03d078ac3ea8d489518d2ddfe8b7c6",
+    "git_blob_sha1": "200bea83966ab51ca003a2a26ee8157635cda438",
+    "matching_target_queries": 1,
+    "target": {
+      "next_index": 252000,
+      "aggregate_next_index": 252000,
+      "line_number": 7369,
+      "line_bytes": 6424,
+      "line_sha256": "b19ea102848ecc41b5acae99db0495a248d63ff2cf280f3baf76840e0f2d8e95",
+      "capacity_Ah": 0.06597778624402621,
+      "current_soc": 0.5133228864538338,
+      "point_available": 1,
+      "capacity_available": 1
+    },
+    "compact_witness_target_matches": 0,
+    "verification": "Reviewer independently streamed the full original query member and recomputed SHA256, Git-blob SHA1, byte count, row count and unique target-line identity; selected only aggregate point/availability fields."
+  },
+  "restoration_record_identity": {
+    "path": "experiments/weighting_output_diagnostic_001/restoration.json",
+    "bytes": 1998,
+    "sha256": "2a8091607937df906cfd15b70c79aeabc55f6ce27867d83d9427ca3cd41844bb"
+  },
+  "qualification_evidence_read": {
+    "receipt": "/tmp/mumble-historical-input-repair-checks.json",
+    "script": "/tmp/mumble-historical-input-repair-fixtures.py",
+    "passed_labels": 6,
+    "reviewer_reruns": 0
+  },
+  "material_blockers": [],
+  "source_corrections_requested": [],
+  "canonical_result_review_pending": true,
+  "reviewer_activity": {
+    "fit_calls": 0,
+    "reference_calls": 0,
+    "source_imports": 0,
+    "CSV_conversions": 0,
+    "physical_model_calls": 0,
+    "truth_fields_used": 0,
+    "source_edits": 0,
+    "git_writes": 0
+  }
+}

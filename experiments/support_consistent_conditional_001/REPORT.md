@@ -16,12 +16,12 @@ coverage merely by producing better points or different local widths.
 
 This report is accompanied by the [frozen reference contract](../../plans/support_consistent_conditional_001.json),
 [mathematical specification](mathematics.json), executable reference and
-independent review. Execution results are recorded separately when complete.
+independent review. The [executed reference](attempt001/result.json) passed all **79 checks** in one invocation. The largest raw reconstruction discrepancy was **6.22e-14**. Six independent scalar-oracle evaluations used 24 quadrature integrals; no battery model or learner ran. The [whole-process receipt](attempt001/process_receipt.json) records 1.834 seconds and 87,691,264 bytes peak RSS. See the [compact summary](summary.json).
 
 ## What the previous probe established
 
 The previous [three-checkpoint probe](../conditional_belief_adequacy_001/REPORT.md)
-found a saved h mean of exactly1 with positive variance. Such a pair cannot be
+found a saved h mean of exactly 1 with positive variance. Such a pair cannot be
 the moments of a distribution confined to[-1,1]. It occurred in an already
 downweighted alternative after the component switch. It does not establish
 the cause of the broader SOC/Q failures.
@@ -32,7 +32,7 @@ law. It is an inference parameter, not a residual rejection threshold.
 
 ## A coherent supported conditional law
 
-Let x contain the16 chart coordinates, with q=log(Q_Ah), z=SOC and h the
+Let x contain the 16 chart coordinates, with q=log(Q_Ah), z=SOC and h the
 hysteresis state. For the single-bound reference, define
 
 \[
@@ -42,7 +42,7 @@ hysteresis state. For the single-bound reference, define
 
 The stored m,K are **Gaussian kernel parameters**. They are not the physical
 mean and covariance of p_C. The kernel center can lie outside C while the
-normalized physical distribution remains entirely within C. The other15
+normalized physical distribution remains entirely within C. The other 15
 coordinates are not physically bounded by this single-bound reference.
 
 For an affine voltage likelihood y=c+J^T x+epsilon with variance R, define
@@ -63,7 +63,7 @@ evidence
 The prior normalizer in the denominator is necessary. The normalizer ratios
 telescope over successive distinct observations; the source/sample ledger
 must still prevent duplicate observations. A constant likelihood leaves the
-normalized law unchanged. Missing voltage contributes an evidence factor1.
+normalized law unchanged. Missing voltage contributes an evidence factor 1.
 
 This follows directly from the Gaussian-product identity. The standard
 definition and moment calculation for truncated Gaussian distributions are
@@ -114,7 +114,7 @@ kernel covariance decreases. A fixed scalar qualification checks that case.
 
 ### Why moment repair cannot be repeated as fresh conditioning
 
-An already-supported half-normal has mean sqrt(2/pi) and variance1-2/pi.
+An already-supported half-normal has mean sqrt(2/pi) and variance 1-2/pi.
 Replacing it with an unrestricted Gaussian with those moments and truncating
 again shifts the mean and contracts variance without new information. The
 operation has changed the law by projecting and conditioning again.
@@ -127,10 +127,10 @@ warm migration.
 
 ## A stronger obstruction: two moments do not determine the next posterior
 
-Consider two laws on[-1,1]. A places probability1/2 at each of
-X=+/-1/sqrt(2). B places probability1/2 at0 and1/4 at each of+/-1. Both
-have mean0 and variance1/2. Under y=X+epsilon with y=0 and Gaussian SD sigma,
-A retains posterior variance1/2. B has posterior variance
+Consider two laws on[-1,1]. A places probability 1/2 at each of
+X=+/-1/sqrt(2). B places probability 1/2 at 0 and1/4 at each of +/-1. Both
+have mean 0 and variance 1/2. Under y=X+epsilon with y=0 and Gaussian SD sigma,
+A retains posterior variance 1/2. B has posterior variance
 
 \[
  \frac{r}{1+r},\qquad r=\exp[-1/(2\sigma^2)].
@@ -158,8 +158,8 @@ For independent initial H and h with E[h]=0,
 \]
 
 The first-order observation map retains the first term. The second equals
-2.7777778e-4 V² for the public initial moments. This is277.78 times the
-1e-6 V² sensor-noise variance, **not**277.78 times the total predicted voltage
+2.7777778e-4 V² for the public initial moments. This is 277.78 times the
+1e-6 V² sensor-noise variance, **not** 277.78 times the total predicted voltage
 variance; other uncertain coordinates also contribute. A degree-three axis
 quadrature rule can miss this fourth-moment product term as well. Small
 late-stage results from that rule do not certify broad-prior adequacy.
@@ -171,8 +171,8 @@ For a Gaussian log-capacity q with variance v,
 \]
 
 where the point transition uses exp(-E[q]). The public split's v gives a
-ratio1.02219003. This is an omitted moment under the declared Gaussian chart
-law, not an assertion of a2.219% SOC or capacity error in the actual stream.
+ratio 1.02219003. This is an omitted moment under the declared Gaussian chart
+law, not an assertion of a 2.219% SOC or capacity error in the actual stream.
 
 A further semantic distinction concerns the innovation-dependent selected
 gain. In an affine Gaussian reference let g=PJ/sqrt(S), t the selected
@@ -215,12 +215,12 @@ transported narrow h interval with[-1,1] changes the law. A full correlated
 physical box needs its joint normalizer; marginal normalizers cannot simply
 be multiplied.
 
-The existing owned objects use7,152 bytes. The proposed complete subsystem
-allocation is10,032 bytes, including unmeasured stack/runtime reserves,
-against a10,240-byte planning ceiling. One16D binary64 mean plus packed factor
-uses1,216 bytes. Naively retaining both kernel and physical moment objects for
-two components in live and staged banks adds4,864 bytes, reaching14,896 bytes.
-Even one extra derived moment object adds1,216 bytes, exceeding the208-byte
+The existing owned objects use 7,152 bytes. The proposed complete subsystem
+allocation is 10,032 bytes, including unmeasured stack/runtime reserves,
+against a 10,240-byte planning ceiling. One 16D binary64 mean plus packed factor
+uses 1,216 bytes. Naively retaining both kernel and physical moment objects for
+two components in live and staged banks adds 4,864 bytes, reaching 14,896 bytes.
+Even one extra derived moment object adds 1,216 bytes, exceeding the 208-byte
 planning headroom. Storage reuse would need explicit lifetimes, factor
 algorithms, query/prediction work and checkpoint semantics. No such target
 implementation is claimed here.

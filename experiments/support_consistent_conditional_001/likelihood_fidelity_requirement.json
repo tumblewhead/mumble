@@ -1,0 +1,43 @@
+{
+  "schema": "mumble_likelihood_fidelity_requirement_v1",
+  "status": "analytic_requirement_not_an_implemented_certificate",
+  "purpose": "Tie a future nonlinear likelihood representation to posterior probability error instead of a voltage materiality heuristic.",
+  "assumptions": [
+    "Exact P and approximate Q use the same prior, parameterization, support and target map.",
+    "Both normalizers are positive and finite and likelihoods are positive on their common essential support.",
+    "The parameter-dependent log likelihood error delta=ell-ell_hat satisfies a<=delta<=b throughout that support, almost everywhere."
+  ],
+  "definitions": {
+    "width": "w=b-a is the oscillation of log likelihood error.",
+    "L": "L(q,w)=q/[q+(1-q)*exp(w)]",
+    "U": "U(q,w)=q*exp(w)/[1-q+q*exp(w)]"
+  },
+  "identities_and_bounds": {
+    "normalizer": "Z/Z_hat=E_Q[exp(delta)]",
+    "posterior_density_ratio": "dP/dQ=exp(delta)/E_Q[exp(delta)]",
+    "event": "For every event A with q=Q(A), L(q,w)<=P(A)<=U(q,w).",
+    "log_odds": "For0<q<1, |logit(P(A))-logit(Q(A))|<=w. At q=0 or1, common support forces equality.",
+    "total_variation": "TV(P,Q)<=tanh(w/4).",
+    "uniform_absolute_error": "If |ell-ell_hat|<=epsilon, then w<=2epsilon, so TV<=tanh(epsilon/2).",
+    "credible_region": "If Q(C)>=1-alpha_hat, then P(C_complement)<=U(alpha_hat,w). Requiring alpha_hat<=L(alpha,w) suffices for P(C)>=1-alpha. No alpha or error budget is selected here."
+  },
+  "proof": {
+    "event": "Let r_A=E_Q[exp(delta)|A], r_C=E_Q[exp(delta)|A_complement]. Both lie in[exp(a),exp(b)]. Then p=q*r_A/[q*r_A+(1-q)*r_C]. Extreme allowed ratios give L and U and attain the bounds.",
+    "TV": "Maximizing U(q,w)-q over q gives q=1/[1+exp(w/2)] and maximum[exp(w/2)-1]/[exp(w/2)+1]=tanh(w/4). The lower difference is symmetric."
+  },
+  "composition": {
+    "validity": "For a valid exact factorization of disjoint observation blocks, sum_i a_i<=delta_total<=sum_i b_i, hence w_total<=sum_i(b_i-a_i). Conditional independence or correctly conditioned chain-rule factors are needed; disjoint IDs alone do not establish a likelihood factorization.",
+    "replacement": "Relinearizing or replacing an old evidence block replaces its earlier representation. Never append the same observations or combine them with their derived posterior as independent evidence.",
+    "offsets": "An additive error constant over the entire unknown state cancels in normalized posterior inference. Component-specific constants change mixture weights and do not cancel globally. Absolute evidence offsets must remain available if model evidence is needed.",
+    "boundary_states": "Approximate entering-state distributions, latent-history marginalization and changed conditioning laws must be included in the block's error account.",
+    "lifetime": "Repeated positive allowances can accumulate until the bound becomes uninformative; a future streaming design must own its cumulative error. No per-step allowance is chosen here."
+  },
+  "limits": [
+    "A local Hessian, finite grid, small prediction difference or narrow Gaussian factor does not provide the global error premise.",
+    "Deleting positive-likelihood support creates unbounded log error. A certificate restricted to a retained region additionally needs an omitted-mass bound for unconditional inference.",
+    "Changed priors or target maps need their own error accounting.",
+    "These bounds compare two specified model posteriors. They do not establish correctness of the physical/noise model or frequentist coverage.",
+    "The current learner and the new pure-likelihood control have not been shown to satisfy this certificate."
+  ],
+  "activity": {"model_calls":0,"canonical_reads":0,"epsilon_selected":false,"implementation_claim":false}
+}

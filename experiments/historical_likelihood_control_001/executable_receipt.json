@@ -1,0 +1,55 @@
+{
+  "schema": "mumble_historical_likelihood_executable_receipt_v1",
+  "status": "qualified_before_historical_fits",
+  "source_revision": "3c7e9f20ef3c25d38d423f03a064fdd03b956896",
+  "plan_sha256": "2cf714200e971ba2f58e41f938fa01b6e451f117b253a1c9ea087cf33e44565a",
+  "binary_sha256": "9c713216750150ddbf91c164ce0c4a29ee67168d4d0dcc9b0bad8f856a1f93e2",
+  "binary_bytes": 118128,
+  "compile_command": [
+    "cc",
+    "-std=c99",
+    "-O3",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Iinclude",
+    "src/main.c",
+    "src/scm_estimator.c",
+    "src/scm_model.c",
+    "src/scm_features.c",
+    "src/scm_assess.c",
+    "-lm",
+    "-o",
+    "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/historical_likelihood_control_001/qualification/scm_estimator.bin"
+  ],
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "source_sha256": {
+    "src/main.c": "3de80c5f9f0f7d333923a72868ae861bc7e1e459d86b2314dcc0ecf8c43ca140",
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_features.c": "2da1c946b93b622c95ee0482289561265c645207178bc0d453b0cb1c123b5315",
+    "src/scm_assess.c": "6a8bcb0ce6dd3965b5ed8a7be60f38bc98a4cf83e46288513c15ee79f91de1ac",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_features.h": "f5f859cd54fc02290d5deca3795b811f9cfe14a4eeb34e4eb7da5f7fb23842b6",
+    "include/scm_assess.h": "87b4d26d512c51ebaec5a46d46588c6249f85d91a71b7dbaf2bf387163c4bff5",
+    "tools/run_historical_likelihood_control.py": "770c4e48eb54adcce61d5d71e1077f914dd56ab716319153736511a7afce7646",
+    "tools/run_conditional_belief_probe.py": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+  },
+  "qualification": {
+    "help_passed": true,
+    "optimizer_calls": 0,
+    "fabricated_driver_checks": "qualification/driver_checks.json",
+    "fabricated_driver_checks_passed": 6
+  },
+  "independent_source_review": {
+    "path": "experiments/historical_likelihood_control_001/implementation_review.json",
+    "sha256": "e24b9c45b52377231efdca5bf05fcd72cf2c25bbf7731124ab50202e6a6a8399",
+    "passed": true
+  },
+  "build_receipt": {
+    "path": "experiments/historical_likelihood_control_001/qualification/build_receipt.json",
+    "sha256": "869b51ac0bd702884091252c855eca8bb316b693e0e9be1e3cf568c2cfc853a7"
+  }
+}

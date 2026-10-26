@@ -91,6 +91,24 @@ def commit_identity(root, revision, relative, actual):
             'Pinned Git blob differs: ' + revision + ':' + relative)
 
 
+def archived_witness_identity(inputs, restoration):
+    """Bind the complete query member through the preserved restoration record."""
+    require(restoration['schema'] == 'mumble_weighting_evidence_restoration_v1'
+            and restoration['status'] == 'verified_selected_members_restored',
+            'Original query restoration was not verified')
+    members = restoration['selected_members_SHA256_and_Git_blob_verified']
+    require(isinstance(members, list), 'Missing restored-member identity table')
+    matching = [row for row in members if row.get('path') == inputs['witness_path']]
+    require(len(matching) == 1, 'Expected exactly one restored original query member')
+    member = matching[0]
+    require(type(inputs['witness_bytes']) is int and inputs['witness_bytes'] > 0
+            and member['bytes'] == inputs['witness_bytes']
+            and member['sha256'] == inputs['witness_sha256']
+            and member['git_blob_sha1'] == inputs['witness_git_blob_sha1'],
+            'Amended query-member identity differs from preserved restoration')
+    return {'bytes': inputs['witness_bytes'], 'sha256': inputs['witness_sha256']}
+
+
 def validate_preflight(args, root, records, started):
     require(re.fullmatch(r'[0-9a-f]{40}', args.source_revision) is not None,
             'Source revision must be a full40-character commit SHA')
@@ -184,11 +202,16 @@ def validate_preflight(args, root, records, started):
     supervisor.bind_file(records, observations,
                          {'sha256': inputs['observation_member_sha256'],
                           'bytes': inputs['observation_member_bytes']}, 'archived_observations')
-    witness = supervisor.beneath(root, inputs['witness_path'])
-    witness_id = supervisor.bind_file(records, witness, label='raw_witness_queries')
-    require(witness_id['bytes'] <= 1048576, 'Unexpectedly large raw witness file')
-    commit_identity(root, plan['base_revision'], inputs['witness_path'], witness_id)
-    commit_identity(root, args.source_revision, inputs['witness_path'], witness_id)
+    restoration_relative = inputs['witness_restoration_record']
+    restoration_path = supervisor.beneath(root, restoration_relative)
+    restoration_id = supervisor.bind_file(records, restoration_path,
+                                          label='original_query_restoration')
+    commit_identity(root, plan['base_revision'], restoration_relative, restoration_id)
+    commit_identity(root, args.source_revision, restoration_relative, restoration_id)
+    member_identity = archived_witness_identity(inputs, read_json(restoration_path))
+    query_evidence_root = supervisor.argument_path(root, args.query_evidence_root)
+    witness = supervisor.beneath(query_evidence_root, inputs['witness_path'])
+    supervisor.bind_file(records, witness, member_identity, 'archived_original_queries')
     check_supervisor(started, CAPS)
     return plan, receipt, binary, observations, witness
 
@@ -396,7 +419,8 @@ def child_bounds(started):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    for name in ('root', 'evidence-root', 'binary', 'output-dir', 'scratch-dir', 'executable-receipt'):
+    for name in ('root', 'evidence-root', 'query-evidence-root', 'binary',
+                 'output-dir', 'scratch-dir', 'executable-receipt'):
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--source-revision', required=True)
     args = parser.parse_args(argv)
@@ -405,10 +429,13 @@ def main(argv=None):
     output = supervisor.argument_path(root, args.output_dir)
     scratch = supervisor.argument_path(root, args.scratch_dir)
     evidence_root = supervisor.argument_path(root, args.evidence_root)
+    query_evidence_root = supervisor.argument_path(root, args.query_evidence_root)
     original_primary = root / 'experiments/continuous_learning_validation_001/implementation/primary'
     require(not output.is_relative_to(original_primary), 'Cannot write to original primary evidence')
     require(not output.is_relative_to(evidence_root) and not evidence_root.is_relative_to(output),
             'Output and restored evidence must be disjoint')
+    require(not output.is_relative_to(query_evidence_root) and not query_evidence_root.is_relative_to(output),
+            'Output and restored query evidence must be disjoint')
     output.parent.mkdir(parents=True, exist_ok=True)
     output.mkdir()  # A failed reserved attempt is never reused.
     records, errors, fits = {}, [], []
@@ -421,6 +448,7 @@ def main(argv=None):
         require(not scratch.is_relative_to(root) and not root.is_relative_to(scratch),
                 'Scratch conversion must be outside the repository')
         require(not scratch.is_relative_to(evidence_root) and not evidence_root.is_relative_to(scratch)
+                and not scratch.is_relative_to(query_evidence_root) and not query_evidence_root.is_relative_to(scratch)
                 and not scratch.is_relative_to(output) and not output.is_relative_to(scratch),
                 'Scratch, evidence, and output trees must be disjoint')
         plan, executable, binary, observations, witness = validate_preflight(args, root, records, started)
@@ -519,6 +547,8 @@ def main(argv=None):
                'status': 'failed' if errors else 'completed', 'errors': errors,
                'source_revision': args.source_revision,
                'plan_sha256': result['plan_sha256'],
+               'observation_evidence_root': str(evidence_root),
+               'query_evidence_root': str(query_evidence_root),
                'executable_receipt': str(supervisor.argument_path(root, args.executable_receipt)),
                'fit_invocations_attempted': sum(row['supervisor_invocation_started'] for row in fits),
                'observed_children_launched': sum(bool(row['worker'] and row['worker']['child_launched']) for row in fits),

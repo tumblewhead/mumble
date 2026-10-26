@@ -1,0 +1,122 @@
+{
+  "schema": "mumble_support_consistent_conditional_summary_v1",
+  "status": "reference_qualified_streaming_remedy_rejected",
+  "source_revision": "3c7e9f20ef3c25d38d423f03a064fdd03b956896",
+  "contract_sha256": "6dc336a03686716f8bbc1fe225b5f80eb0d495781ebfc25ce42366d905fd74a8",
+  "raw_result_sha256": "e0f91230f700001f2760b72bfb9ec2d561483c2ece9466226cfec66387c2ef4b",
+  "reference_invocations": 1,
+  "checks": {
+    "count": 79,
+    "passed": true,
+    "failed_count": 0,
+    "maximum_raw_absolute_discrepancy": 6.217248937900877e-14
+  },
+  "counts": {
+    "affine_kernel_products": 8,
+    "oracle_integrals": 6,
+    "quadrature_calls": 24,
+    "quadrature_function_evaluations": 2352
+  },
+  "cases": {
+    "interior": {
+      "log_evidence": -0.6650608937135751,
+      "log_support_normalizer_ratio": 0.0,
+      "posterior_kernel_h_mean": 0.0,
+      "supported_h_mean": 0.0,
+      "supported_h_variance": 0.03999940531185317,
+      "supported_SOC_mean": 0.5479999999999998,
+      "supported_logQ_mean": -2.8134107167600364
+    },
+    "outward": {
+      "log_evidence": -3.8164101519984914,
+      "log_support_normalizer_ratio": -3.1098507011690444,
+      "posterior_kernel_h_mean": 1.3102625298329345,
+      "supported_h_mean": 0.9424897614877814,
+      "supported_h_variance": 0.0027156488228586993,
+      "supported_SOC_mean": 0.5587347747527309,
+      "supported_logQ_mean": -2.796157645206371
+    }
+  },
+  "zero_information": {
+    "kernel_identity_passed": true,
+    "moment_retruncation_mean_difference_norm": 0.01364947781840303,
+    "moment_retruncation_covariance_difference_norm": 0.0010060382925202887,
+    "negative_control_adopted": false
+  },
+  "supported_variance_growth": {
+    "prior": 0.25131627759920105,
+    "posterior": 0.25370410180368447
+  },
+  "public_start_algebra": {
+    "source": "src/scm_hypothesis.c",
+    "anchors": [
+      "public_belief",
+      "split_component"
+    ],
+    "H_mean": 0.024,
+    "h_mean": 0,
+    "H_variance": 0.0008333333333333335,
+    "h_variance": 0.3333333333333334,
+    "exact_Gaussian_product_mean_V": 0,
+    "exact_Gaussian_product_variance_V2": 0.00046977777777777795,
+    "linearized_product_variance_V2": 0.00019200000000000006,
+    "degree3_axis_product_variance_V2": 0.00019200000000000006,
+    "omitted_Var_H_times_Var_h_V2": 0.0002777777777777779,
+    "logQ_split_alpha": 0.7978845608028654,
+    "logQ_split_beta": 0.6028102749890869,
+    "components": [
+      {
+        "sign": -1,
+        "kernel_mean_logQ": -3.0907210901048416,
+        "kernel_variance_logQ": 0.04389483296506962,
+        "point_reciprocal_Q_Ah_inverse": 21.992931144319634,
+        "exact_Gaussian_reciprocal_mean_Ah_inverse": 22.480955005796122,
+        "exact_Gaussian_reciprocal_variance_Ah_inverse_squared": 22.678243844083372,
+        "linearized_reciprocal_variance_Ah_inverse_squared": 21.231448753931215,
+        "Jensen_mean_increment_Ah_inverse": 0.48802386147648846,
+        "degree3_axis_reciprocal_mean_Ah_inverse": 22.504538885565502
+      },
+      {
+        "sign": 1,
+        "kernel_mean_logQ": -2.536100343415231,
+        "kernel_variance_logQ": 0.04389483296506962,
+        "point_reciprocal_Q_Ah_inverse": 12.630320895153744,
+        "exact_Gaussian_reciprocal_mean_Ah_inverse": 12.910588128952279,
+        "exact_Gaussian_reciprocal_variance_Ah_inverse_squared": 7.479489571573955,
+        "linearized_reciprocal_variance_Ah_inverse_squared": 7.0023234883712355,
+        "Jensen_mean_increment_Ah_inverse": 0.2802672337985346,
+        "degree3_axis_reciprocal_mean_Ah_inverse": 12.924132115767195
+      }
+    ],
+    "limitations": "Moments of the public unbounded Gaussian laws, not bounded physical priors. Polynomial/reciprocal algebra only; no battery propagation or truth. The degree-three rule does not integrate general fourth moments exactly."
+  },
+  "process_resources": {
+    "schema": "mumble_support_reference_process_receipt_v1",
+    "source_revision": "3c7e9f20ef3c25d38d423f03a064fdd03b956896",
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/d8e043c88fda/mumble-repo/tools/support_consistent_reference.py",
+      "--root",
+      "/workspace/scratch/d8e043c88fda/mumble-repo",
+      "--output",
+      "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/support_consistent_conditional_001/attempt001/result.json"
+    ],
+    "returncode": 0,
+    "whole_process_wall_s": 1.8338562230001116,
+    "child_user_CPU_s": 1.380876,
+    "child_system_CPU_s": 0.446745,
+    "child_peak_RSS_bytes": 87691264,
+    "resource_method": "wait4 for this exact child; whole process includes imports and final receipt writing",
+    "canonical_model_calls": 0,
+    "reference_invocations": 1
+  },
+  "decision": {
+    "reference": "go",
+    "streaming_SOC_Q_remedy": "no_go",
+    "reason": "Exact single-h affine conditioning does not recover historical likelihood, full-box support or nonlinear prediction closure."
+  },
+  "coverage_validated": false,
+  "production_sources_changed": false,
+  "next_control": "../historical_likelihood_control_001/REPORT.md",
+  "independent_review": "independent_review.json"
+}
