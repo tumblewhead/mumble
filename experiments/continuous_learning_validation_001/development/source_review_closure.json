@@ -1,0 +1,46 @@
+{
+  "schema": "mumble_continuous_contract_source_closure_v1",
+  "status": "pass",
+  "reviewed_contract": "plans/continuous_learning_validation_001.json",
+  "reviewed_contract_sha256": "85f076973c6dd8a945181303a487d87d12da20f53e2d315a26cebfa8a24f4ba4",
+  "source_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "scope": "Targeted closure of SC1-SC3 and related source-compatibility notes; no learner or generator execution.",
+  "closed": [
+    {
+      "id": "SC1",
+      "section": "frozen_estimator.output_center; measurements.voltage.preupdate_forecast",
+      "result": "Explicit exp/log-weight renormalization now matches aggregate_query order. Raw centers use aggregate means; old forecast weights use identical normalization."
+    },
+    {
+      "id": "SC2",
+      "section": "continuous_source.cursor_invariants",
+      "result": "Legitimate conditional/bank cursor lag and inequality are explicit; only common physical ledger fields require equality."
+    },
+    {
+      "id": "SC3",
+      "section": "failure_stops.immediate; measurements.qualification_separation; frozen_estimator.output_center.raw_unavailable_centers",
+      "result": "Ordinary local-status transitions allowed. Raw unavailable means are distinct from convenience-field zero placeholders. SOC and Q availability masks are correctly distinguished."
+    },
+    {
+      "id": "warm_scratch",
+      "section": "A_second_cell_lifecycle.warm_parity",
+      "result": "Only resume-entry workspace likelihood scratch is excluded and marked unavailable; subsequent per-input diagnostics still compare."
+    },
+    {
+      "id": "resumable_digest",
+      "section": "continuous_source.end_digest",
+      "result": "Explicit source-bound SHA256 chain supports saved prefix state and is distinguished from post-generation concatenated-record SHA256."
+    },
+    {
+      "id": "boundary_inputs",
+      "section": "continuous_source.no_boundary_observations",
+      "result": "Zero-dt pseudo-observations are explicitly prohibited; queries/checkpoints do not add samples."
+    }
+  ],
+  "remaining_source_incompatibilities": [],
+  "estimator_runs": 0,
+  "generator_runs": 0,
+  "primary_runs": 0,
+  "remote_writes": 0,
+  "project_file_mutations": 0
+}

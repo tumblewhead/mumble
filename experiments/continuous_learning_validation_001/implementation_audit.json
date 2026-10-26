@@ -1,0 +1,265 @@
+{
+  "schema": "mumble_continuous_contract_implementation_audit_v1",
+  "kind": "read_only_source_review",
+  "source_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "source_tree": "e19e53ff6cd55905542707fbbab1f40b6eb1dc0c",
+  "estimator_executions": 0,
+  "primary_runs": 0,
+  "remote_writes": 0,
+  "source_files": [
+    {
+      "path": "include/scm_hypothesis.h",
+      "git_blob": "c15da7d282275a77c6737d04c3625290d489a7cd",
+      "bytes": 7399
+    },
+    {
+      "path": "include/scm_hypothesis_checkpoint.h",
+      "git_blob": "9f582d6397f790943ac270bb3adaa727e48bb7a5",
+      "bytes": 2825
+    },
+    {
+      "path": "src/scm_hypothesis.c",
+      "git_blob": "e8850286e3382bcb70300dadcdeaa410941badfb",
+      "bytes": 35149
+    },
+    {
+      "path": "src/scm_hypothesis_checkpoint.c",
+      "git_blob": "2a1d82ea7c376720eadb387f05fd2b8d1b4fb0ae",
+      "bytes": 10923
+    },
+    {
+      "path": "src/scm_model.c",
+      "git_blob": "279c649db1a84d142ddf1c1ae02bbb5cf4256143",
+      "bytes": 5765
+    },
+    {
+      "path": "tests/test_hypothesis_checkpoint.c",
+      "git_blob": "29228929f4574d822f11018d2b6ec652d4b46bd2",
+      "bytes": 14215
+    },
+    {
+      "path": "tools/generate_cases.py",
+      "git_blob": "839c940d1a348e31d48f5795acaec7c24ff9fdbb",
+      "bytes": 11096
+    },
+    {
+      "path": "tools/hypothesis_probe.c",
+      "git_blob": "bdeddabe4d3598f3799e0af529f04bfcd7e97fa5",
+      "bytes": 17073
+    },
+    {
+      "path": "tools/run_nonlinear_hypothesis.py",
+      "git_blob": "fc0d5e38e1864cfebff7ebb434b1e9a03e4e88ce",
+      "bytes": 13812
+    }
+  ],
+  "exact_config": {
+    "model_version": 1,
+    "algorithm_id": "two_component_public_logQ_predictive_joseph_v1",
+    "components": 2,
+    "dimension": 16,
+    "packed_factor_entries_per_component": 136,
+    "sigma_V": 0.001,
+    "max_dt_s": 1,
+    "max_abs_current_A": 0.25,
+    "process_noise": "None. Predict transforms physical means and corresponding full-factor rows; no inflation/forgetting.",
+    "coordinates": [
+      "ln(tau1)",
+      "ln(tau2)",
+      "ln(tau3)",
+      "ln(gamma_plus)",
+      "ln(gamma_minus)",
+      "ln(Q_Ah)",
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "H",
+      "SOC",
+      "v1",
+      "v2",
+      "v3",
+      "h"
+    ],
+    "model": "3 Foster RC modes + R0; V=OCV(z)-R0*I-sum(v)-H*h. Positive current discharges; gamma units Ah^-1.",
+    "OCV": "3+1.15*z+0.08*tanh(8*(z-0.5)); current candidate calls scm_ocv_eval(NULL,...). Illustrative known curve, not measured user OCV.",
+    "measurement_semantics": "Voltage is point sample at end of constant-current interval. Preserve actual dt and sample order.",
+    "configured_domains": {
+      "tau_s": [
+        [
+          0.015,
+          0.15
+        ],
+        [
+          0.15,
+          1.5
+        ],
+        [
+          1.5,
+          30
+        ]
+      ],
+      "gamma_per_Ah": [
+        5,
+        1200
+      ],
+      "Q_Ah": [
+        0.03,
+        0.1
+      ],
+      "R0_and_R_ohm": [
+        0,
+        1
+      ],
+      "H_V": [
+        0,
+        0.1
+      ],
+      "SOC": [
+        0,
+        1
+      ],
+      "v_V": [
+        -0.25,
+        0.25
+      ],
+      "h": [
+        -1,
+        1
+      ]
+    },
+    "current_generator_noise": {
+      "voltage": "iid N(0,0.001^2) V per sample at35Hz",
+      "current": "Exact; no current noise or bias",
+      "quantization": "None",
+      "temperature_C": 25,
+      "temperature_dynamics": false,
+      "parameter_drift": false,
+      "plant_model_matched": true
+    }
+  },
+  "public_initialization": {
+    "source": "src/scm_hypothesis.c: public_belief, split_component, scm_hypothesis_init",
+    "mean_ln_tau": "midpoints of ln-domain limits; physical tau=sqrt(lower*upper) by mode",
+    "mean_ln_gamma": [
+      5.0106352940962555,
+      5.703782474656201
+    ],
+    "mean_ln_Q": -2.8134107167600364,
+    "mean_R0_R1_R2_R3": [
+      0.1,
+      0.1,
+      0.1,
+      0.1
+    ],
+    "mean_H": 0.024,
+    "mean_SOC": 0.68,
+    "mean_v": [
+      0,
+      0,
+      0
+    ],
+    "mean_h": 0,
+    "covariance": "Initially diagonal. SD=(upper-lower)/sqrt(12), with entering SOC width0.75 and entering v width0.16; no initial cross covariance.",
+    "split": "Only lnQ: means mu +/- 0.7978845608028654*sigma; diagonal lnQ factor sigma*0.6028102749890869. Component0 lower mean. Other coordinates unchanged.",
+    "initial_log_weights": [
+      -0.6931471805599453,
+      -0.6931471805599453
+    ],
+    "initial_evidence": "No voltage evidence; prediction invalid, excitation0; zero clocks/index/counters."
+  },
+  "weight_rule": {
+    "score": "From each pre-correction prediction: ell=-log(sd)-(0.5*(innovation/sd))*(innovation/sd). sd includes sigma_V and full predicted local covariance projection.",
+    "update": "Only after all conditional transactions pass. Remove common max(score), add old normalized log weights, then stable log1p exp normalization. Exactly equal scores retain old log weights byte-for-byte.",
+    "retention": "Keep both means/full factors and finite log weights; no pruning, merging, reseeding, covariance inflation, forgetting, floor/clipping, or posterior replay. Display exp(logw) may underflow without dropping a component.",
+    "missing_voltage": "Both physical predictions carried once; weights and evidence cursors retained.",
+    "rejected_voltage": "Whole-bank rollback of corrections/weights; both valid physical predictions and interval/accounting commit once.",
+    "uncertainty": "Mixture local moment ranges and all-component hull are diagnostics only. Application SOC/Q accuracy remains uniformly unresolved; coverage unvalidated; no hard support."
+  },
+  "output_metrics": {
+    "SOC": "weighted component current SOC using current normalized weights",
+    "Q": "exp(sum_j w_j*mean_lnQ_j), a geometric center; not physical-space posterior expectation or mixture median",
+    "voltage_query": "POST-correction component voltages averaged with POST-update weights. Label filtered fit, not one-step forecast.",
+    "causal_voltage_measurement": "Host adapter captures old normalized weights before ingest; for successful voltage transaction, component last_innovation_V is the PRE-correction innovation. Causal mixture residual = sum_j old_w_j * innovation_j. Mixture forecast = observed V - that residual. Invalid/rejected/missing/recovery transaction has no successful pre-update diagnostic; capture separately.",
+    "error_scoring": "Clean synthetic truth may score these outputs only in separate post-inference scorer. Preserve no-truth initialization/inference."
+  },
+  "persistence": {
+    "existing_record_bytes": 3004,
+    "codec_buffer_bytes": 128,
+    "model_tag": "HYP2PK01",
+    "magic": "SCMHYP01",
+    "numeric": "IEEE binary64",
+    "content": "Both complete means and136-entry factors, both finite log weights, bank and per-component evidence cursors, source IDs/config, physical counters/clocks, masks/flags/diagnostics. CRC and structural/model/config validation.",
+    "restore": "Decode into counted staged bank; successful restore is byte-exact and no assimilation. Failed restore preserves destination bytes.",
+    "cold_reset": "Explicitly recreates public split and equal weights, sets epoch_begin=evidence cursor=existing next_index, clears evidence/excitation, marks HISTORY_LOST; retains physical stream position/clock and lifecycle counters. This is intentionally unsuitable inside a retention primary.",
+    "checkpoint_exists": "experiments/nonlinear_hypothesis_001/primary/checkpoints/public_logQ_split-73500.bin",
+    "checkpoint_git_blob": "4e1b6c53f754913a3dda8b2866c58bdef498a882",
+    "generator_checkpoint": "No matching full plant/RNG/input-phase checkpoint in old generator. New continuous source is simpler than grafting extension onto CSV-bound source identity.",
+    "existing_fixture_scope": "188 checkpoint assertions;32 paired deterministic intervals (64 ingest deliveries), plus70-sample CLI whole versus35+35 fresh-process continuation. These are not a full second-cell lifecycle primary.",
+    "target_limit": "Host atomic file write is not actual M23 NVM power-loss/ring-timing qualification."
+  },
+  "accounting_and_failure": {
+    "negative_ingest_return": "Live bank unchanged.",
+    "positive_accepted_recovery": "Known interval consumed exactly once; old belief retained but not current; recovery/model unavailable flags. Do not auto cold-reset in primary.",
+    "zero_return": "Can still mean rejected voltage with valid physical prediction; check UPDATE_REJECTED flag and rejection stage, not only return code.",
+    "bank_counts": "One interval/voltage event, not two. Do not sum component sample counts.",
+    "evidence": "bank_evidence_next_index distinct from both conditional cursors. Weight-only accepted relative-weight update can advance bank evidence even when neither conditional gains moves.",
+    "counters": [
+      "prediction_count",
+      "voltage_count",
+      "missing_voltage_count",
+      "rejected_voltage_count",
+      "limited_gain_count (per component)",
+      "zero_gain_count (per component)",
+      "cold_resets",
+      "generation",
+      "bank_evidence_next_index",
+      "conditional evidence_next_index"
+    ],
+    "rejection_stages": [
+      "prediction",
+      "observation",
+      "projection",
+      "innovation_sd",
+      "gain",
+      "mean",
+      "covariance",
+      "likelihood",
+      "weights",
+      "component_validation",
+      "bank_validation",
+      "regeneration"
+    ],
+    "failure_stop_recommendation": "Stop first negative ingest return, recovery, rejected-voltage flag, counter/source/index mismatch, nonfinite output/state, persistence mismatch, or budget breach; preserve first failure snapshot before any diagnostic adaptation.",
+    "work_cap_per_delivery": {
+      "physical_predictions": 6,
+      "conditional_corrections": 2,
+      "predictive_likelihoods": 2
+    }
+  },
+  "minimum_new_harness": {
+    "algorithm_changes": "None required or authorized by design.",
+    "adapter": "New bounded continuous adapter (prefer leave frozen hypothesis_probe unchanged). Existing probe hard-caps --end73500 and entire validation/orchestrator pins73500 and2100s.",
+    "stream_generator": "Carry plant z,v,h, exact/global input index, phase cursor/elapsed, RNG bit-generator state including cached normal-generation state if applicable, and cumulative signed/absolute charge. One continuous generation; no phase reseeding or repeated observation history.",
+    "generator_chunking": "Pin RNG algorithm/version and call shape or test scalar/chunk equivalence explicitly. Freeze chunk size if reproducibility needs it. Existing np.random.default_rng hides algorithm/version choice and draws full arrays.",
+    "source_identity": "Use immutable complete experiment/config/source stream identity; do not change source_id at phases. Source provenance hash and generated-stream digest can be distinct fields.",
+    "streaming_interfaces": "Generator emits only sample_index,dt,current,voltage to estimator; truth records sent to separate scoring artifact, never estimator process.",
+    "instrumentation": "Retain old weights for causal voltage; log bounded summaries and full state only at predeclared endpoints/failure. No diagnostics change inference.",
+    "continuation_gate": "Tiny split-run versus uninterrupted generator+estimator fixture compares future sample bytes, RNG/plant state, clocks/index and final canonical learner checkpoint, including a phase boundary. Existing estimator-only checkpoint fixtures do not cover coupled generator continuation."
+  },
+  "recommended_gates": [
+    "Freeze complete candidate source blobs and new harness source, compiler flags, binary, config/plan and stream identity before primary.",
+    "Use prior core/codec qualification as evidence; rerun targeted short fixtures only for new adapter/generator behavior and no need to rerun old cell studies.",
+    "Verify generator carry across phase and chunk boundaries with independently evaluated one-dwell closed forms; do not use truth to correct learner.",
+    "Verify full coupled warm continuation on a short constructed fixture with exact generated future samples and canonical estimator checkpoint parity.",
+    "Verify unavailable, missing, rejected and recovery records cannot silently count as accurate or zero error.",
+    "Keep full-fidelity means/factors/log weights through all primary phases; no collapse or resets.",
+    "Add a short second-cell/lifecycle gate before treating longer B evidence as broader qualification; do not infer duration sufficiency or generalization from cellB alone."
+  ],
+  "open_limits": [
+    "Historical17 cold-reset rejection causes still unattributed.",
+    "No actual M23 full-system memory/timing/NVM qualification.",
+    "No drift, temperature, current-bias, quantization or model-mismatch claim.",
+    "No coverage confidence from one trajectory's correlated query inclusion count."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "mumble_continuous_contract_source_compatibility_review_v1",
+  "status": "one_required_correction_and_two_precision_clarifications",
+  "reviewed_contract": "plans/continuous_learning_validation_001.json",
+  "source_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "estimator_runs": 0,
+  "primary_generation": 0,
+  "remote_writes": 0,
+  "required_corrections": [
+    {
+      "id": "SC1",
+      "severity": "medium",
+      "sections": [
+        "frozen_estimator.output_center",
+        "measurements.voltage.preupdate_forecast"
+      ],
+      "source": "src/scm_hypothesis.c:aggregate_query",
+      "finding": "The draft's SOC/Q expressions use exp(log_weight_j) directly. Source computes raw weights, total=wa+wb, then divides both by total. Normalized log weights are checked with finite tolerance, so omitting this final normalization can change exact binary64 center values.",
+      "correction": "Define old/current normalized linear weights as exp(logw_j)/(exp(logw_0)+exp(logw_1)); use canonical aggregate query means for source-exact centers. SOC center=aggregate.mean[11]; Q center=exp(aggregate.mean[5]). Use the same normalized old weights for forecast."
+    }
+  ],
+  "clarifications": [
+    {
+      "id": "SC2",
+      "sections": [
+        "failure_stops.immediate[3]",
+        "preflight_before_any_primary"
+      ],
+      "finding": "Cursor inconsistency is a valid stop, but equality across all evidence cursors would incorrectly reject valid states. Conditional cursors can differ and bank/conditional cursors may legitimately lag next_index, including all-zero gain/no weight-change events.",
+      "correction": "Specify epoch_begin<=conditional_evidence_cursor_j<=bank_evidence_cursor<=next_index, together with source's has_voltage/joint-evidence flag rules. Equal physical source/index/counts/clock are required across components; equal evidence cursors are not."
+    },
+    {
+      "id": "SC3",
+      "sections": [
+        "failure_stops.immediate[2]",
+        "measurements.qualification_separation",
+        "logging_and_budgets.per_sample_record"
+      ],
+      "finding": "Ordinary unexcited/unresolved/provisional status transitions are valid. Source aggregate queries leave current_soc and capacity_Ah zero when the point is unavailable, while still computing raw aggregate.mean. Finite-point diagnostics must not score these zero placeholders.",
+      "correction": "Explicitly exempt the three legitimate local-status values/transitions from unexpected-status stops. Read raw centers from aggregate means, attach API availability masks, and never count unavailable raw centers as accurate. At initial/cold entry, identify these values as prior centers rather than learned/currently qualified outputs."
+    }
+  ],
+  "passed": [
+    {
+      "check": "source_pins",
+      "result": "All seven pinned blobs and sizes match the source tree, including include/scm_online.h=45493ed9240f0ea0b9ceb81550630460820d3af2."
+    },
+    {
+      "check": "forecast_via_innovations",
+      "result": "Compatible for successful accepted voltage transactions: last_innovation_V is pre-correction; capture old weights before ingest. Draft correctly makes forecast unavailable on missing/rejected/recovery transactions."
+    },
+    {
+      "check": "query_purity",
+      "result": "scm_hypothesis_query takes const bank and writes only separate output arena; canonical checkpoint comparison is appropriate. Preserve disjoint state/workspace/input/output."
+    },
+    {
+      "check": "lifecycle_source_id",
+      "result": "Immutable32-byte source ID shared across same-cell baseline/warm/cold is compatible; restore validates exact config/source. Separate B uses separate immutable source."
+    },
+    {
+      "check": "cold_reset",
+      "result": "Actual reset API preserves next_index, elapsed_s and cumulative lifecycle counts, recreates public split/equal weights and clears conditional/bank evidence and excitation. Contract matches."
+    },
+    {
+      "check": "coupled_snapshot",
+      "result": "Learner3004-byte record is sufficient for learner state. New external envelope appropriately adds plant/event/RNG/index state without changing estimator."
+    },
+    {
+      "check": "failure_returns",
+      "result": "Draft correctly catches UPDATE_REJECTED/count increments even when ingest returns0; no automatic recovery/reset on B."
+    },
+    {
+      "check": "counts",
+      "result": "3 A processes plus1 B =4;73500+42000+42000+504000=661500 input deliveries;73500+42000+504000=619500 generator evaluations."
+    },
+    {
+      "check": "scalar_record_size",
+      "result": "uint64 index +7 binary64 +uint64 mask +int32 return +uint32 flags =80 bytes; max payload52920000 bytes correct."
+    },
+    {
+      "check": "resource_scope",
+      "result": "Owned estimator7152-byte ceiling and separate host logging/observer resources are compatible. No complete M23 qualification inferred."
+    }
+  ],
+  "implementation_notes": [
+    "Warm parity should compare API query/persistent-bank fields and delivered suffix records. Scratch-only last attempted likelihoods are not checkpointed; label resume-entry scratch diagnostics unavailable and exclude them from persistent-query equality if the new adapter logs them.",
+    "Executable receipt should define rolling digest algorithm/resumable state. A final SHA256 digest alone cannot resume ordinary SHA256-of-concatenated-records hashing; use a portable hasher state, an explicitly specified chain digest, or preserve a separately bounded prefix-digest scheme.",
+    "Source config permits dt=0, but this contract prescribes strictly positive1/35, so exactly-once phase boundaries must not introduce extra zero-dt pseudo-observations."
+  ]
+}

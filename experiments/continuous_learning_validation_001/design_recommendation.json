@@ -1,0 +1,224 @@
+{
+  "schema": "mumble_independent_continuous_design_recommendation_v1",
+  "status": "recommendation_only_no_primary_executed",
+  "source_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "recommendation": {
+    "horizon_s": 14400,
+    "nominal_Hz": 35,
+    "main_samples": 504000,
+    "reason": "Four hours supports a finite learning, hour-scale quiet-retention, and renewed-excitation diagnostic at about seven times the completed 2100 s horizon. It is deliberately short of day/week/year qualification.",
+    "main_case": "One new continuous Cell B matched-model stream with fixed fresh seed and unchanged split candidate, initialized once from inherited public estimator prior.",
+    "main_case_limit": "One scenario, one seed and known illustrative 25 C OCV cannot establish generalization, coverage, aging or indefinite behavior.",
+    "repeated_current_protocol": "The existing 0-2100 s CURRENT schedule may be reused as a deterministic input protocol, but generate new observations and carry plant, RNG and index state throughout; never repeat CSV observations or reset at phase boundaries.",
+    "phase_example": [
+      {
+        "start_s": 0,
+        "end_s": 2100,
+        "input": "Existing deterministic current protocol, new observations",
+        "purpose": "Prompt SOC and initial capacity acquisition"
+      },
+      {
+        "start_s": 2100,
+        "end_s": 5700,
+        "current_A": 0,
+        "purpose": "Rest retention"
+      },
+      {
+        "start_s": 5700,
+        "end_s": 9300,
+        "current_A": 0.003,
+        "purpose": "Weak-load retention"
+      },
+      {
+        "start_s": 9300,
+        "end_s": 11100,
+        "current_A": -0.03,
+        "purpose": "Renewed charge and reversal"
+      },
+      {
+        "start_s": 11100,
+        "end_s": 12900,
+        "current_A": 0.03,
+        "purpose": "Renewed sustained discharge"
+      },
+      {
+        "start_s": 12900,
+        "end_s": 13200,
+        "input": "Predeclared balanced pulse train",
+        "purpose": "Renewed transitions"
+      },
+      {
+        "start_s": 13200,
+        "end_s": 14400,
+        "current_A": 0.003,
+        "purpose": "Final weak retention"
+      }
+    ],
+    "phase_example_not_yet_frozen": "Parent must freeze exact pulse train, seed and all schedule details; this recommendation is not an execution contract."
+  },
+  "second_cell_lifecycle": {
+    "required": true,
+    "reason": "The two-component learner has only one B primary. Earlier full-model two-cell lifecycle evidence belongs to different algorithms; deterministic checkpoint fixtures are valuable but do not establish this candidate's two-cell recovery trajectory.",
+    "proposed_case": "Existing Cell A 2100 s immutable data, one split candidate, unchanged public initialization; this combination has not been run as a primary.",
+    "arms": [
+      {
+        "name": "uninterrupted",
+        "samples": 73500
+      },
+      {
+        "name": "warm_suffix",
+        "restore_at_s": 900,
+        "samples": 42000
+      },
+      {
+        "name": "cold_suffix",
+        "reset_at_s": 900,
+        "samples": 42000
+      }
+    ],
+    "total_deliveries": 157500,
+    "branch_semantics": "Uninterrupted control supplies the900 s full checkpoint. Warm suffix reads exactly that state and consumes indices31500..73499. Cold suffix starts the inherited public prior at the same source/time/index while physical plant/observations continue. Prefix is not assimilated twice within any estimator.",
+    "gate": "Numerical, evidence, complete-state continuation and fixed-memory failures block further execution. Capacity outcomes must be reported without changing the user requirement into a2100 s startup deadline.",
+    "explicit_policy_needed": "The older roadmap requires a hard-target-qualified small candidate before a duration campaign. A short diagnostic duration pilot can be authorized separately, but the new contract must explicitly distinguish this from campaign promotion and state how an accurate or inaccurate A result affects admission.",
+    "no_independent_replication": "Warm duplicates are lifecycle parity checks, not additional accuracy samples or independent trials."
+  },
+  "measurements": {
+    "query_resolution": "Use bounded per35Hz-update reducers for point-error maxima and availability if feasible; persist1Hz diagnostics, all phase boundaries, and selected full-vector snapshots. If only1Hz truth scoring is available, every attainment/retention claim must explicitly be restricted to that grid.",
+    "target_errors": {
+      "capacity_percent": "100*(Q_est/Q_truth-1)",
+      "SOC_pp": "100*(SOC_est-SOC_truth)",
+      "capacity_hard": 5,
+      "capacity_preferred": 0.5,
+      "SOC_hard": 10,
+      "SOC_preferred": 0.5,
+      "capacity_startup_deadline": null
+    },
+    "attainment": "For each target separately, report first observed hit and earliest sample from which all later scored samples to the declared endpoint pass. Preserve unavailable intervals, late regressions and the finite endpoint.",
+    "prompt_SOC": "Report early trajectory and acquisition by first1s/5s/10s/60s/120s checkpoints; do not treat an initially lucky accurate point as evidence-qualified knowledge.",
+    "capacity_learning": "Report signed and absolute errors at declared phase boundaries, changes over informative phases, transferred charge and full-vector errors. No monotonic convergence rule.",
+    "retention": "A target is retained in a weak interval only when it passed at entry and every scored in-window sample, without unavailable points. If entry misses, label no acquired target to retain; still report drift, maximum error, endpoint and unavailable fractions.",
+    "renewed_excitation": "If already preferred at renewal entry, continued preferred accuracy is retention; lack of improvement is not failure. Otherwise report change and threshold reacquisition. No causal attribution of improvement to excitation over elapsed time without a matched weak-only counterfactual.",
+    "voltage": "Separate noiseless synthetic point-voltage error from noisy measurement residual. Report transient peak and dt-weighted RMS by regime. Current query predicted_voltage_V is POST-correction fitted voltage; any causal forecast metric requires actual pre-update weights and innovations.",
+    "state_metrics": "Direct SOC error and OCV-equivalent SOC proxy must remain separately labeled; do not divide all voltage error by local OCV slope and call the result actual SOC error.",
+    "accounting": "Track signed, positive, negative and absolute transferred charge separately so charge-balanced loops cannot look like zero use.",
+    "statuses": "Score all finite numeric Q/SOC estimates independently of raw local status; report point availability, raw local qualification and application accuracy qualification separately."
+  },
+  "uncertainty": {
+    "keep_unvalidated": true,
+    "diagnostics": [
+      "Aggregate and both components: raw local2SD ranges, containment, width, unavailable counts and local-provisional hard-error breaches.",
+      "Full component hull containment and width; hull is an uncertainty diagnostic, not certified support.",
+      "Log weights and component errors, plus post-scoring oracle-best component, to separate representation from weighting failure."
+    ],
+    "forbidden": [
+      "Runtime truth-driven component choice",
+      "Seed, prior, process-noise, threshold, inflation or weight tuning from pilot outcomes",
+      "Calling empirical containment fraction across correlated samples95% coverage",
+      "Suppressing estimates or labels to improve scores"
+    ],
+    "product_accuracy_status": "unresolved uniformly; preserve raw diagnostics and original failed gates"
+  },
+  "bounded_execution": {
+    "maximum_proposed_main_plus_gate_deliveries": 661500,
+    "primary_repetitions": 1,
+    "optimizer_calls": 0,
+    "old_completed_study_reruns": 0,
+    "suggested_limits": {
+      "main_wall_s": 1200,
+      "each_lifecycle_process_wall_s": 600,
+      "host_peak_RSS_MiB": 256,
+      "output_MiB": 64,
+      "failure_ring_samples": 350,
+      "workers": 1
+    },
+    "suggested_limit_note": "Budgets are recommendations to freeze before execution, not measured costs. Full16-coordinate/factor logs at1Hz can exceed64MiB; compact query columns and selected full-factor snapshots must be specified.",
+    "state_carry": [
+      "plant SOC, RC voltages and hysteresis",
+      "entire estimator bank including component states/factors/log weights/evidence cursors",
+      "noise generator and any cached normal variate",
+      "source identity, next input index and actual clock",
+      "bounded metric reducers, phase/index cursor and logging state"
+    ],
+    "stop_on": [
+      "Unexpected correction rejection or recovery",
+      "Nonfinite/invalid state, factor, voltage or log-weights",
+      "Duplicate, dropped, unordered or wrong-source assimilation",
+      "Invalid actual dt, count mismatch, charge-accounting mismatch or counter overflow",
+      "Invalid warm restore parity",
+      "Plant exits declared domain",
+      "Frozen work/storage/time limit exceeded"
+    ],
+    "stop_semantics": "Preserve first failure, entering state and bounded context; stop without reseeding, clipping, changing priors, extending horizon or silently skipping intervals.",
+    "resource_scope": "7152B owned and10032B proposed complete allocation remain different from measured target SRAM; target math/stack/acquisition/IRQ/timing remain unqualified."
+  },
+  "checkpoint_finding": {
+    "complete_prior_B_checkpoint": "experiments/nonlinear_hypothesis_001/primary/checkpoints/public_logQ_split-73500.bin",
+    "bytes": 3004,
+    "git_blob": "4e1b6c53f754913a3dda8b2866c58bdef498a882",
+    "limitation": "Implementation reviewer found no saved whole generator/RNG continuity state or defined source-identity bridge. New stream with public initialization is preferable to grafting a posterior onto changed source semantics."
+  },
+  "decision_rules": [
+    "Functional/numerical/resource failure: block extension, preserve first witness, name one concrete repair task.",
+    "Accurate point retained through weak use and later excitation: supports finite retention under this scenario; candidate remains unpromoted.",
+    "Later error reduction with target acquisition: supports continued learning on declared chronology, without causal or eventual-convergence claim.",
+    "Both components inaccurate: split failed to retain an accurate alternative here; aggregate inaccurate while a component is accurate: weighting/output failure.",
+    "Missed capacity target at finite endpoint: capacity unresolved on this horizon, not proof that longer use can never work and not permission to extend adaptively.",
+    "No additional gain when already in preferred region: diminishing-return success, not a reason to extend or tune.",
+    "No day/week/year or M23 promotion follows automatically."
+  ],
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/AGENTS.md"
+    },
+    {
+      "path": "README.md",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/README.md"
+    },
+    {
+      "path": "PROJECT_STATE.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/PROJECT_STATE.json"
+    },
+    {
+      "path": "handoff/CONTINUE.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/handoff/CONTINUE.json"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/docs/ROADMAP.md"
+    },
+    {
+      "path": "plans/capacity_learning_horizon_001.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/plans/capacity_learning_horizon_001.json"
+    },
+    {
+      "path": "plans/trajectory_to_m23_001.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/plans/trajectory_to_m23_001.json"
+    },
+    {
+      "path": "data/manifest.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/data/manifest.json"
+    },
+    {
+      "path": "experiments/nonlinear_hypothesis_001/plan.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/experiments/nonlinear_hypothesis_001/plan.json"
+    },
+    {
+      "path": "experiments/nonlinear_hypothesis_001/summary.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/experiments/nonlinear_hypothesis_001/summary.json"
+    },
+    {
+      "path": "experiments/nonlinear_hypothesis_001/decision.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/experiments/nonlinear_hypothesis_001/decision.json"
+    },
+    {
+      "path": "experiments/parameter_sensitivity_001/decision.json",
+      "url": "https://github.com/tumblewhead/mumble/blob/91105b2e1a367fdbb1570fb1b273d95806df6dca/experiments/parameter_sensitivity_001/decision.json"
+    }
+  ],
+  "execution": {
+    "estimator_runs": 0,
+    "new_plant_trajectories": 0,
+    "remote_mutations": 0
+  }
+}

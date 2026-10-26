@@ -1,0 +1,223 @@
+{
+  "schema": "mumble_continuous_learning_design_verification_v1",
+  "status": "passed_design_arithmetic_and_source_identity_only",
+  "basis_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "contract_sha256": "e873e998e11b99146a28ceda07e46fe4425c974d641dcb4f4892e75563e1c91c",
+  "audit_script_sha256": "d141d23a31841d0800b6362ce4e663c9d234d17e197527b1e6c0341fd8134e50",
+  "checks_passed": 28,
+  "checks": [
+    "design_only_zero_primary",
+    "capacity_has_no_startup_deadline",
+    "all16_coordinates_retained",
+    "unchanged:src/scm_hypothesis.c",
+    "unchanged:src/scm_hypothesis_checkpoint.c",
+    "unchanged:src/scm_model.c",
+    "unchanged:include/scm_hypothesis.h",
+    "unchanged:include/scm_hypothesis_checkpoint.h",
+    "unchanged:include/scm_model.h",
+    "unchanged:include/scm_online.h",
+    "inherited_generator_source_pinned",
+    "inherited106_blocks2100_seconds",
+    "phase_and_sample_contiguity",
+    "A157500_deliveries",
+    "arm_delivery_counts",
+    "primary661500_deliveries",
+    "unique577500_observations",
+    "generator619500_evaluations",
+    "four_primary_processes",
+    "wall_time_cap3600_seconds",
+    "80_byte_sample_record",
+    "scalar_payload52920000_bytes",
+    "full_query_cap",
+    "output_cap_has_room_for_declared_record_caps",
+    "target_memory_is_unqualified",
+    "target208_byte_headroom",
+    "cell_a_analytic_SOC_inside_domain",
+    "cell_b_analytic_SOC_inside_domain"
+  ],
+  "frozen_estimator_sources": [
+    {
+      "path": "src/scm_hypothesis.c",
+      "git_blob": "e8850286e3382bcb70300dadcdeaa410941badfb",
+      "sha256": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5"
+    },
+    {
+      "path": "src/scm_hypothesis_checkpoint.c",
+      "git_blob": "2a1d82ea7c376720eadb387f05fd2b8d1b4fb0ae",
+      "sha256": "88ec1c229b395b5bdd02faf39fcc1183786a6b0da0c6ff05edeb9718204a5339"
+    },
+    {
+      "path": "src/scm_model.c",
+      "git_blob": "279c649db1a84d142ddf1c1ae02bbb5cf4256143",
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    },
+    {
+      "path": "include/scm_hypothesis.h",
+      "git_blob": "c15da7d282275a77c6737d04c3625290d489a7cd",
+      "sha256": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+    },
+    {
+      "path": "include/scm_hypothesis_checkpoint.h",
+      "git_blob": "9f582d6397f790943ac270bb3adaa727e48bb7a5",
+      "sha256": "1e1743300cf17635828c8d8cf2d95aa6fc00066b377e3238de880dcb284b5545"
+    },
+    {
+      "path": "include/scm_model.h",
+      "git_blob": "7b77242b72e11e7f69b065f1d42726f6b3ddb864",
+      "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+    },
+    {
+      "path": "include/scm_online.h",
+      "git_blob": "45493ed9240f0ea0b9ceb81550630460820d3af2",
+      "sha256": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84"
+    }
+  ],
+  "B_event_blocks": 193,
+  "phase_charge": [
+    {
+      "id": "initial_learning",
+      "start_s": 0,
+      "end_s": 2100,
+      "samples": 73500,
+      "signed_charge_Ah_exact": "2281/168000",
+      "positive_charge_Ah_exact": "2981/168000",
+      "negative_magnitude_charge_Ah_exact": "1/240",
+      "absolute_charge_Ah_exact": "1227/56000"
+    },
+    {
+      "id": "retention_rest",
+      "start_s": 2100,
+      "end_s": 3000,
+      "samples": 31500,
+      "signed_charge_Ah_exact": "0",
+      "positive_charge_Ah_exact": "0",
+      "negative_magnitude_charge_Ah_exact": "0",
+      "absolute_charge_Ah_exact": "0"
+    },
+    {
+      "id": "retention_weak",
+      "start_s": 3000,
+      "end_s": 7200,
+      "samples": 147000,
+      "signed_charge_Ah_exact": "7/2000",
+      "positive_charge_Ah_exact": "7/2000",
+      "negative_magnitude_charge_Ah_exact": "0",
+      "absolute_charge_Ah_exact": "7/2000"
+    },
+    {
+      "id": "renewed_sustained_discharge",
+      "start_s": 7200,
+      "end_s": 8100,
+      "samples": 31500,
+      "signed_charge_Ah_exact": "3/200",
+      "positive_charge_Ah_exact": "3/200",
+      "negative_magnitude_charge_Ah_exact": "0",
+      "absolute_charge_Ah_exact": "3/200"
+    },
+    {
+      "id": "renewed_rest_after_discharge",
+      "start_s": 8100,
+      "end_s": 8400,
+      "samples": 10500,
+      "signed_charge_Ah_exact": "0",
+      "positive_charge_Ah_exact": "0",
+      "negative_magnitude_charge_Ah_exact": "0",
+      "absolute_charge_Ah_exact": "0"
+    },
+    {
+      "id": "renewed_charge",
+      "start_s": 8400,
+      "end_s": 9300,
+      "samples": 31500,
+      "signed_charge_Ah_exact": "-3/200",
+      "positive_charge_Ah_exact": "0",
+      "negative_magnitude_charge_Ah_exact": "3/200",
+      "absolute_charge_Ah_exact": "3/200"
+    },
+    {
+      "id": "renewed_rest_after_charge",
+      "start_s": 9300,
+      "end_s": 9600,
+      "samples": 10500,
+      "signed_charge_Ah_exact": "0",
+      "positive_charge_Ah_exact": "0",
+      "negative_magnitude_charge_Ah_exact": "0",
+      "absolute_charge_Ah_exact": "0"
+    },
+    {
+      "id": "renewed_transitions",
+      "start_s": 9600,
+      "end_s": 10200,
+      "samples": 21000,
+      "signed_charge_Ah_exact": "1/200",
+      "positive_charge_Ah_exact": "1/200",
+      "negative_magnitude_charge_Ah_exact": "0",
+      "absolute_charge_Ah_exact": "1/200"
+    },
+    {
+      "id": "renewed_reversals",
+      "start_s": 10200,
+      "end_s": 10800,
+      "samples": 21000,
+      "signed_charge_Ah_exact": "0",
+      "positive_charge_Ah_exact": "1/200",
+      "negative_magnitude_charge_Ah_exact": "1/200",
+      "absolute_charge_Ah_exact": "1/100"
+    },
+    {
+      "id": "final_weak_retention",
+      "start_s": 10800,
+      "end_s": 14400,
+      "samples": 126000,
+      "signed_charge_Ah_exact": "1/1000",
+      "positive_charge_Ah_exact": "1/1000",
+      "negative_magnitude_charge_Ah_exact": "0",
+      "absolute_charge_Ah_exact": "1/1000"
+    }
+  ],
+  "analytic_generator_domain": {
+    "cell_a": {
+      "scope": "Exact rational prescribed-input SOC at event boundaries; linear within each constant-current event. This is a generator-domain audit, not a learner run or voltage trajectory.",
+      "SOC_min": 0.5737103174603174,
+      "SOC_max": 0.8,
+      "SOC_final": 0.5737103174603174,
+      "signed_charge_Ah_exact": "2281/168000",
+      "signed_charge_Ah": 0.013577380952380952,
+      "positive_charge_Ah_exact": "2981/168000",
+      "negative_magnitude_charge_Ah_exact": "1/240",
+      "absolute_charge_Ah_exact": "1227/56000"
+    },
+    "cell_b": {
+      "scope": "Exact rational prescribed-input SOC at event boundaries; linear within each constant-current event. This is a generator-domain audit, not a learner run or voltage trajectory.",
+      "SOC_min": 0.2842135865165231,
+      "SOC_max": 0.78,
+      "SOC_final": 0.4233171413851476,
+      "signed_charge_Ah_exact": "3877/168000",
+      "signed_charge_Ah": 0.023077380952380953,
+      "positive_charge_Ah_exact": "7937/168000",
+      "negative_magnitude_charge_Ah_exact": "29/1200",
+      "absolute_charge_Ah_exact": "3999/56000"
+    }
+  },
+  "full_query_count_without_failure": {
+    "A_uninterrupted": 2267,
+    "A_warm_suffix": 1208,
+    "A_cold_suffix": 1208,
+    "B_continuous": 14654
+  },
+  "full_query_count_with_one_failure_max": 19338,
+  "execution": {
+    "primary_runs": 0,
+    "learner_runs": 0,
+    "optimizer_calls": 0,
+    "voltage_trajectory_generations": 0,
+    "noise_draws": 0,
+    "completed_study_reruns": 0
+  },
+  "not_established": [
+    "Executable harness preflight",
+    "New accuracy or uncertainty outcomes",
+    "Actual runtime/RSS/target memory",
+    "Generalization or indefinite stability"
+  ]
+}

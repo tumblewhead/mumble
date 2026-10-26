@@ -1,0 +1,124 @@
+{
+  "schema": "mumble_continuous_learning_design_summary_v1",
+  "status": "design_finish_line_complete_contract_frozen_no_primary",
+  "work_branch": "design/continuous-learning-validation-001",
+  "basis_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "contract": "plans/continuous_learning_validation_001.json",
+  "contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+  "report": "experiments/continuous_learning_validation_001/REPORT.md",
+  "decision": "experiments/continuous_learning_validation_001/decision.json",
+  "question": "Finite continuous acquisition, weak-use retention and renewed learning for the unchanged public-split candidate.",
+  "frozen_decisions": {
+    "second_cell_lifecycle_gate": {
+      "required": true,
+      "cell": "A",
+      "duration_s": 2100,
+      "learner_arms": [
+        "uninterrupted",
+        "warm_suffix_from900s",
+        "cold_suffix_from900s"
+      ],
+      "learner_deliveries": 157500,
+      "admission": "Numerical/accounting/lifecycle/known-resource validity; accuracy reported observationally for this diagnostic only."
+    },
+    "continuous_pilot": {
+      "cell": "B",
+      "duration_s": 14400,
+      "samples": 504000,
+      "public_initializations": 1,
+      "resets": 0,
+      "phases_s": {
+        "initial_learning": [
+          0,
+          2100
+        ],
+        "rest_and_weak_retention": [
+          2100,
+          7200
+        ],
+        "renewed_excitation": [
+          7200,
+          10800
+        ],
+        "final_weak_retention": [
+          10800,
+          14400
+        ]
+      }
+    },
+    "capacity_startup_deadline": null,
+    "targets": {
+      "Q_hard_percent": 5,
+      "Q_preferred_percent": 0.5,
+      "SOC_hard_pp": 10,
+      "SOC_preferred_pp": 0.5
+    },
+    "sample_error_resolution_s": "1/35",
+    "full_queries": "1Hz plus event boundaries/first-after-event, checkpoints and first failure",
+    "noise_seeds": {
+      "A": 2026102601,
+      "B": 2026102602
+    },
+    "uncertainty": "Local ranges/hulls and serial truth inclusion remain unvalidated diagnostics; no accuracy certification.",
+    "interpretation": "Diagnostic pilot, not campaign promotion or a causal test of time versus excitation."
+  },
+  "future_execution_caps": {
+    "learner_processes": 4,
+    "learner_deliveries": 661500,
+    "unique_physical_observations": 577500,
+    "generator_evaluations_with_warm_parity": 619500,
+    "primary_wall_s": 3600,
+    "scoring_wall_s": 600,
+    "preflight_wall_s": 600,
+    "output_bytes": 536870912,
+    "host_RSS_bytes_per_process": 536870912,
+    "per_sample_payload_bytes": 52920000
+  },
+  "verification": {
+    "design_checks_passed": 28,
+    "frozen_learner_source_blobs": 7,
+    "independent_review": "pass_after_amendments",
+    "remaining_review_blockers": 0,
+    "full_query_records_nominal": 19337,
+    "B_current_blocks": 193,
+    "B_SOC_generator_domain": [
+      0.2842135865165231,
+      0.78
+    ],
+    "scope": "Source identities and exact input/accounting arithmetic only; no execution qualification."
+  },
+  "review_corrections": [
+    "Exact exp(logweight)/sum normalization.",
+    "Raw unavailable centers from coordinate means, with original availability masks.",
+    "Threshold loss separated from harmless drift inside a retained preferred target.",
+    "Legitimate conditional/bank cursor lag and local status transitions retained.",
+    "Resumable hash chain distinct from whole-stream SHA256; restore-entry scratch excluded only where not checkpointed.",
+    "Explicit learner/helper/time scopes and component target-disagreement rule."
+  ],
+  "execution": {
+    "primary_runs": 0,
+    "learner_runs": 0,
+    "optimizer_calls": 0,
+    "noise_draws": 0,
+    "voltage_trajectory_generations": 0,
+    "completed_study_reruns": 0
+  },
+  "estimator_code_changed": false,
+  "estimator_SRAM_added_bytes": 0,
+  "candidate_promoted": false,
+  "coverage_validated": false,
+  "M23_qualified": false,
+  "evidence": {
+    "source_audit": "experiments/continuous_learning_validation_001/implementation_audit.json",
+    "design_recommendation": "experiments/continuous_learning_validation_001/design_recommendation.json",
+    "verification": "experiments/continuous_learning_validation_001/design_verification.json",
+    "independent_review": "experiments/continuous_learning_validation_001/independent_review.json",
+    "preserved_review_draft": "experiments/continuous_learning_validation_001/development/contract_review_draft.json",
+    "initial_verification": "experiments/continuous_learning_validation_001/development/design_verification_initial.json",
+    "provenance": "provenance/continuous_learning_validation_001_design.json"
+  },
+  "next": {
+    "work_branch": "implementation/continuous-learning-validation-001",
+    "action": "Implement frozen host harness and bounded preflight, freeze/review executable receipt, then execute the staged contract once if its gates pass."
+  }
+}

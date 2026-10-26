@@ -1,0 +1,47 @@
+{
+  "schema": "mumble_continuous_learning_design_decision_v1",
+  "status": "design_closed_before_primary",
+  "basis_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "contract": "plans/continuous_learning_validation_001.json",
+  "contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+  "decision": "Keep the unchanged public-split candidate for qualification; freeze one short A lifecycle validity gate and one conditional four-hour B continuous diagnostic.",
+  "rationale": [
+    "The split learner has one B primary; earlier full lifecycle studies use other implementations.",
+    "One continuous fresh stream carries plant, learner, RNG, input index and predictive weights without an unsupported old-checkpoint/source bridge.",
+    "Separate prompt SOC, cumulative capacity acquisition, weak-use retention and renewed-excitation observations; capacity has no startup deadline.",
+    "All-sample Q/SOC scores and causal forecast instrumentation prevent sparse-query or post-fit metrics from concealing relevant errors."
+  ],
+  "admission_scope": "A validity failures block B. A accuracy remains observational for admission to this diagnostic, is fully preserved, and still blocks broader usefulness/campaign qualification when it misses. This is not a waiver for day/week/annual work.",
+  "retention_rule": "A hard/preferred target must pass on entry and throughout its declared window. If not acquired at entry, report that separately. Within-target drift is not failure; an already preferred estimate need not improve further.",
+  "not_established": [
+    "Any new accuracy or retention outcome",
+    "Calibrated uncertainty or hard support",
+    "Whether time alone or renewed stimulus causes improvement",
+    "Full-model indefinite stability",
+    "Complete M23 memory/timing/NVM qualification"
+  ],
+  "finish_line": {
+    "frozen_contract": true,
+    "independent_review_passed": true,
+    "design_checks_passed": 28,
+    "execution": {
+      "primary_runs": 0,
+      "learner_runs": 0,
+      "optimizer_calls": 0,
+      "noise_draws": 0,
+      "voltage_trajectory_generations": 0,
+      "completed_study_reruns": 0
+    }
+  },
+  "next": {
+    "work_branch": "implementation/continuous-learning-validation-001",
+    "action": "Implement frozen host harness and bounded preflight, freeze/review executable receipt, then execute the staged contract once if its gates pass."
+  },
+  "stop": "Design task is complete. Do not run a primary, generate its noise or change the learner here. In implementation, stop at the frozen staged result or first validity/budget failure; no adaptive rerun or automatic duration extension.",
+  "candidate_promoted": false,
+  "evidence": [
+    "experiments/continuous_learning_validation_001/summary.json",
+    "experiments/continuous_learning_validation_001/independent_review.json",
+    "experiments/continuous_learning_validation_001/design_verification.json"
+  ]
+}

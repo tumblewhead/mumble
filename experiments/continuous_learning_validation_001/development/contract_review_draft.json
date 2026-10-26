@@ -1,0 +1,696 @@
+{
+  "schema": "mumble_continuous_learning_validation_v1",
+  "status": "frozen_design_before_harness_and_primary",
+  "date_local": "2026-10-25",
+  "timezone": "America/Los_Angeles",
+  "work_branch": "design/continuous-learning-validation-001",
+  "basis_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "basis_tree": "e19e53ff6cd55905542707fbbab1f40b6eb1dc0c",
+  "question": "Does the unchanged public-split learner acquire useful SOC/capacity, retain acquired accuracy through weak use, and remain able to learn during renewed excitation on one finite continuous trajectory?",
+  "finish_line": "Freeze this contract and its independent review. Execute zero primary runs and make zero learner changes in the design task.",
+  "scope": {
+    "candidate": "SCM_HYPOTHESIS_PUBLIC_LOGQ_SPLIT; two_component_public_logQ_predictive_joseph_v1",
+    "dimension": 16,
+    "components": 2,
+    "capacity_startup_deadline_s": null,
+    "interpretation": "One staged diagnostic study, not product qualification or admission to the day/week/annual campaign.",
+    "primary_stages": [
+      "A_second_cell_lifecycle",
+      "B_continuous_4h"
+    ],
+    "repetitions_per_logical_arm": 1,
+    "noise_seeds_per_cell": 1,
+    "coincident_control_runs": 0,
+    "why_no_new_control": "The mechanism comparison is complete. This study asks retention/lifecycle questions about the retained candidate; it does not attribute a new split-versus-control benefit.",
+    "old_study_reruns": 0,
+    "optimizer_calls": 0,
+    "parameter_sweeps": 0,
+    "no_primary_now": true,
+    "candidate_promoted": false
+  },
+  "authority": {
+    "goals": "plans/estimation_targets_001.json",
+    "capacity_timing": "plans/capacity_learning_horizon_001.json",
+    "learner_decision": "experiments/nonlinear_hypothesis_001/decision.json",
+    "sensitivity_decision": "experiments/parameter_sensitivity_001/decision.json",
+    "source_audit": "experiments/continuous_learning_validation_001/implementation_audit.json",
+    "publication_resolution": "provenance/parameter_sensitivity_001_publication.json and provenance/nonlinear_hypothesis_001_publication.json; basis_revision is the published repository, not an original executed-commit reset target"
+  },
+  "frozen_estimator": {
+    "git_blobs": [
+      {
+        "path": "src/scm_hypothesis.c",
+        "sha": "e8850286e3382bcb70300dadcdeaa410941badfb",
+        "size": 35149
+      },
+      {
+        "path": "src/scm_hypothesis_checkpoint.c",
+        "sha": "2a1d82ea7c376720eadb387f05fd2b8d1b4fb0ae",
+        "size": 10923
+      },
+      {
+        "path": "src/scm_model.c",
+        "sha": "279c649db1a84d142ddf1c1ae02bbb5cf4256143",
+        "size": 5765
+      },
+      {
+        "path": "include/scm_hypothesis.h",
+        "sha": "c15da7d282275a77c6737d04c3625290d489a7cd",
+        "size": 7399
+      },
+      {
+        "path": "include/scm_hypothesis_checkpoint.h",
+        "sha": "9f582d6397f790943ac270bb3adaa727e48bb7a5",
+        "size": 2825
+      },
+      {
+        "path": "include/scm_model.h",
+        "sha": "7b77242b72e11e7f69b065f1d42726f6b3ddb864",
+        "size": 2763
+      },
+      {
+        "path": "include/scm_online.h",
+        "sha": "45493ed9240f0ea0b9ceb81550630460820d3af2",
+        "size": 6639
+      }
+    ],
+    "config": {
+      "sigma_V": 0.001,
+      "max_dt_s": 1.0,
+      "max_abs_current_A": 0.25,
+      "model_version": 1,
+      "process_noise": 0,
+      "initial_mode": "public_logQ_split"
+    },
+    "coordinate_order": [
+      "ln(tau1)",
+      "ln(tau2)",
+      "ln(tau3)",
+      "ln(gamma_plus)",
+      "ln(gamma_minus)",
+      "ln(Q_Ah)",
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "H",
+      "SOC",
+      "v1",
+      "v2",
+      "v3",
+      "h"
+    ],
+    "public_initialization": {
+      "source": "src/scm_hypothesis.c: public_belief, split_component, scm_hypothesis_init",
+      "mean_ln_tau": "midpoints of ln-domain limits; physical tau=sqrt(lower*upper) by mode",
+      "mean_ln_gamma": [
+        5.0106352940962555,
+        5.703782474656201
+      ],
+      "mean_ln_Q": -2.8134107167600364,
+      "mean_R0_R1_R2_R3": [
+        0.1,
+        0.1,
+        0.1,
+        0.1
+      ],
+      "mean_H": 0.024,
+      "mean_SOC": 0.68,
+      "mean_v": [
+        0,
+        0,
+        0
+      ],
+      "mean_h": 0,
+      "covariance": "Initially diagonal. SD=(upper-lower)/sqrt(12), with entering SOC width0.75 and entering v width0.16; no initial cross covariance.",
+      "split": "Only lnQ: means mu +/- 0.7978845608028654*sigma; diagonal lnQ factor sigma*0.6028102749890869. Component0 lower mean. Other coordinates unchanged.",
+      "initial_log_weights": [
+        -0.6931471805599453,
+        -0.6931471805599453
+      ],
+      "initial_evidence": "No voltage evidence; prediction invalid, excitation0; zero clocks/index/counters."
+    },
+    "domains": {
+      "tau_s": [
+        [
+          0.015,
+          0.15
+        ],
+        [
+          0.15,
+          1.5
+        ],
+        [
+          1.5,
+          30
+        ]
+      ],
+      "gamma_per_Ah": [
+        5,
+        1200
+      ],
+      "Q_Ah": [
+        0.03,
+        0.1
+      ],
+      "R0_and_R_ohm": [
+        0,
+        1
+      ],
+      "H_V": [
+        0,
+        0.1
+      ],
+      "SOC": [
+        0,
+        1
+      ],
+      "v_V": [
+        -0.25,
+        0.25
+      ],
+      "h": [
+        -1,
+        1
+      ]
+    },
+    "weights": {
+      "score": "From each pre-correction prediction: ell=-log(sd)-(0.5*(innovation/sd))*(innovation/sd). sd includes sigma_V and full predicted local covariance projection.",
+      "update": "Only after all conditional transactions pass. Remove common max(score), add old normalized log weights, then stable log1p exp normalization. Exactly equal scores retain old log weights byte-for-byte.",
+      "retention": "Keep both means/full factors and finite log weights; no pruning, merging, reseeding, covariance inflation, forgetting, floor/clipping, or posterior replay. Display exp(logw) may underflow without dropping a component.",
+      "missing_voltage": "Both physical predictions carried once; weights and evidence cursors retained.",
+      "rejected_voltage": "Whole-bank rollback of corrections/weights; both valid physical predictions and interval/accounting commit once.",
+      "uncertainty": "Mixture local moment ranges and all-component hull are diagnostics only. Application SOC/Q accuracy remains uniformly unresolved; coverage unvalidated; no hard support."
+    },
+    "output_center": {
+      "SOC": "sum_j exp(log_weight_j)*SOC_j",
+      "Q_Ah": "exp(sum_j exp(log_weight_j)*mean_lnQ_j); preserve the existing geometric center"
+    },
+    "prohibited_changes": [
+      "No tuned prior, fitted start, truth initialization or truth-conditioned reset.",
+      "No component pruning, merging, inflation, forgetting, clipping/flooring weights or reseeding.",
+      "No adjustment of model, sigma, covariance, gains, status thresholds or state domains.",
+      "No estimator/plant reset at any B phase, chunk, log write or checkpoint."
+    ],
+    "source_rule": "These blobs remain byte-identical. All linked project-source dependencies and new host tools must additionally be hashed in an executable receipt before inference."
+  },
+  "physical_and_noise_model": {
+    "temperature_C": 25,
+    "plant_modes": 3,
+    "parameters_constant": true,
+    "truth_source": {
+      "path": "tools/generate_cases.py",
+      "git_blob": "839c940d1a348e31d48f5795acaec7c24ff9fdbb",
+      "symbols": [
+        "CELLS[cell_a]",
+        "CELLS[cell_b]"
+      ]
+    },
+    "truth_values_usage": "Generation and separate post-inference scoring only; never estimator config, initialization, state, output selection or tuning.",
+    "OCV": "3 + 1.15*z + 0.08*tanh(8*(z-0.5)); known illustrative analytic curve, not the measured user curve",
+    "voltage": "OCV(z)-R0*I-sum(v)-H*h, measured at interval end",
+    "sample_rate_Hz": 35,
+    "dt_s_binary64_expression": "1.0/35.0",
+    "current": "Exact prescribed constant current per interval; positive discharges; no current noise, bias, quantization or timing jitter.",
+    "noise": {
+      "distribution": "independent Gaussian voltage N(0,0.001^2) V per generated reading",
+      "sigma_V": 0.001,
+      "generator": "numpy.random.Generator(numpy.random.PCG64(seed))",
+      "draw": "Exactly one scalar rng.normal(0.0,0.001) per global input index, in order, including rest; never reseed at phase/chunk boundaries.",
+      "seeds": {
+        "cell_a": 2026102601,
+        "cell_b": 2026102602
+      },
+      "version_rule": "Pin NumPy/Python/libm versions and generator source hash in executable receipt before any primary noise or learner output is generated. Never change these after opening results."
+    },
+    "generator_math": "Use independent constant-current closed forms from each event entering z,v,h. At within-event count k, elapsed=k*binary64(1/35), z=z_enter-I*elapsed/(3600*Q), v=R*I+(v_enter-R*I)*exp(-elapsed/tau), h=sign(I)+(h_enter-sign(I))*exp(-gamma_sign*abs(I)*elapsed/3600) or h_enter at I=0. Carry the final physical state into the next event. Do not restart a physical dwell at a host chunk.",
+    "nominal_vs_actual_time": "Index k corresponds to nominal rational time k/35; the delivered binary64 dt and its chronological estimator sum remain the inference authority. Log both; phase indexing uses integer counts.",
+    "excluded": [
+      "aging",
+      "temperature dynamics",
+      "sensor bias",
+      "ADC quantization",
+      "model mismatch",
+      "unknown-input gaps",
+      "missing voltage in the primary",
+      "measured-cell or EOD validation"
+    ]
+  },
+  "continuous_source": {
+    "initialization": "Fresh public estimator start and declared synthetic plant start once per new cell; do not graft the old posterior or a sensitivity aggregate onto a new source.",
+    "estimator_input_fields": [
+      "sample_index",
+      "dt_s",
+      "current_A",
+      "voltage_V"
+    ],
+    "truth_separation": "A separate process/artifact holds truth. Estimator receives only the four observation fields and public immutable source/config identifiers; scorer runs after inference artifacts close.",
+    "carried_generator_fields": [
+      "global next_index",
+      "event index and within-event sample count",
+      "event entering z,v1,v2,v3,h",
+      "current physical z,v1,v2,v3,h",
+      "complete PCG64 state",
+      "scalar-normal generator/cache state if any",
+      "signed, positive, negative-magnitude and absolute charge",
+      "stream manifest/source identity and rolling input digest"
+    ],
+    "carried_learner_fields": "Complete unchanged 3004-byte checkpoint: both means/factors, normalized log weights, full configuration, clocks/counters, excitation/status, bank and conditional evidence cursors.",
+    "source_id": "32-byte SHA256 of canonical UTF-8 source manifest (sorted keys, compact separators, no NaN), containing contract SHA256, cell id, full immutable schedule, noise seed, generator source/environment identity and measurement semantics. Exclude future generated-output digests. Keep this source ID unchanged for all phases and lifecycle arms of that cell.",
+    "end_digest": "Hash canonical binary observation records (uint64 index, three binary64 dt/I/V fields, little endian) in generation order; retain separate whole-stream and suffix digests. Source ID and realized-input digest have distinct meanings.",
+    "chunk_size_samples": 35,
+    "chunk_rule": "Chunks affect I/O only. The generator and learner state continue unchanged. Scalar RNG draw order and event elapsed count do not depend on chunk size.",
+    "duplicate_semantics": "Shared observations may be delivered once to each independently scored lifecycle arm. Never replay a prefix into an already retained bank or count copied lifecycle suffixes as independent noise replications.",
+    "persistence": "Checkpoint writing is observation-free. A coupled envelope binds learner bytes, generator/RNG/phase/index state, source/config hashes and checksums. Warm restore resumes at next_index with no assimilation, replay or lost interval. A cold reset is allowed only in the named A cold arm."
+  },
+  "A_second_cell_lifecycle": {
+    "required_before_B": true,
+    "cell": "cell_a",
+    "noise_seed": 2026102601,
+    "duration_s": 2100,
+    "unique_observations": 73500,
+    "current_protocol": "Exact inherited profile() at basis_revision, not inherited CSV observations.",
+    "arms": [
+      {
+        "id": "A_uninterrupted",
+        "start_index": 0,
+        "end_index": 73500,
+        "input_deliveries": 73500,
+        "initialization": "public split",
+        "checkpoint_next_indices": [
+          31500,
+          63000,
+          73500
+        ],
+        "timeout_s": 600
+      },
+      {
+        "id": "A_warm_suffix",
+        "start_index": 31500,
+        "end_index": 73500,
+        "input_deliveries": 42000,
+        "initialization": "Fresh process restores the complete A_uninterrupted coupled checkpoint at900s; generator resumes and its future observation bytes must match the baseline suffix.",
+        "checkpoint_next_indices": [
+          63000,
+          73500
+        ],
+        "timeout_s": 600
+      },
+      {
+        "id": "A_cold_suffix",
+        "start_index": 31500,
+        "end_index": 73500,
+        "input_deliveries": 42000,
+        "initialization": "Restore the same estimator checkpoint, then call scm_hypothesis_cold_reset exactly once. Preserve known stream cursor/clock; use fresh public split/equal weights and HISTORY_LOST. Consume the same A suffix with its original physical state/noise; no plant reset.",
+        "checkpoint_next_indices": [
+          63000,
+          73500
+        ],
+        "timeout_s": 600
+      }
+    ],
+    "processes": 3,
+    "total_input_deliveries": 157500,
+    "warm_parity": "Bit-identical per-sample numeric outputs, query fields and final canonical learner checkpoints versus the uninterrupted suffix, excluding run labels, wall time and explicitly external observer metadata. Coupled generator state and future observation bytes/digests must match too.",
+    "cold_semantics": "Post-reset point availability initially false; no retained uncertainty/excitation advertised. Report first and sustained SOC/Q target attainment in both global and reset-relative time. Do not compare cold suffix bytes with warm output.",
+    "B_admission": {
+      "required": [
+        "Complete all three arms inside budgets without numerical/accounting/source/generator-domain failure.",
+        "Warm continuation and coupled generator parity pass; cold reset uses the actual API with the specified history-loss semantics.",
+        "Known owned-estimator resource ceiling passes; complete target resources remain unqualified."
+      ],
+      "accuracy_is_observational": true,
+      "rationale": "This four-hour run is a bounded diagnostic to test continued acquisition/retention, not a promoted duration campaign. A finite A capacity or SOC miss is preserved and classified; it cannot silently become a new startup deadline. Numerical/lifecycle/resource failures do block B because their outputs cannot support a valid continuation conclusion.",
+      "SOC_checkpoints_s": [
+        900,
+        1800,
+        2100
+      ],
+      "cold_SOC_checkpoints_global_s": [
+        1800,
+        2100
+      ],
+      "accuracy_consequence": "A hard-target miss keeps broader usefulness unresolved and precludes campaign promotion even if B later passes. Execute the frozen B diagnostic only if the required validity gates pass; do not tune it in response to A accuracy.",
+      "failure": "Do not launch B after any required validity failure. Preserve first outputs and a blocked-stage receipt; stop this study for a named repair/design decision."
+    }
+  },
+  "B_continuous_4h": {
+    "cell": "cell_b",
+    "noise_seed": 2026102602,
+    "duration_s": 14400,
+    "samples": 504000,
+    "arms": 1,
+    "processes": 1,
+    "timeout_s": 1800,
+    "phases": [
+      {
+        "id": "initial_learning",
+        "start_s": 0,
+        "end_s": 2100,
+        "start_index": 0,
+        "end_index": 73500,
+        "kind": "inherited_current_protocol",
+        "protocol": "tools/generate_cases.py:profile at basis_revision; current/duration/label tuples only; 106 blocks; generate new plant/noise observations"
+      },
+      {
+        "id": "retention_rest",
+        "start_s": 2100,
+        "end_s": 3000,
+        "start_index": 73500,
+        "end_index": 105000,
+        "kind": "constant",
+        "current_A": 0.0
+      },
+      {
+        "id": "retention_weak",
+        "start_s": 3000,
+        "end_s": 7200,
+        "start_index": 105000,
+        "end_index": 252000,
+        "kind": "constant",
+        "current_A": 0.003
+      },
+      {
+        "id": "renewed_sustained_discharge",
+        "start_s": 7200,
+        "end_s": 8100,
+        "start_index": 252000,
+        "end_index": 283500,
+        "kind": "constant",
+        "current_A": 0.06
+      },
+      {
+        "id": "renewed_rest_after_discharge",
+        "start_s": 8100,
+        "end_s": 8400,
+        "start_index": 283500,
+        "end_index": 294000,
+        "kind": "constant",
+        "current_A": 0.0
+      },
+      {
+        "id": "renewed_charge",
+        "start_s": 8400,
+        "end_s": 9300,
+        "start_index": 294000,
+        "end_index": 325500,
+        "kind": "constant",
+        "current_A": -0.06
+      },
+      {
+        "id": "renewed_rest_after_charge",
+        "start_s": 9300,
+        "end_s": 9600,
+        "start_index": 325500,
+        "end_index": 336000,
+        "kind": "constant",
+        "current_A": 0.0
+      },
+      {
+        "id": "renewed_transitions",
+        "start_s": 9600,
+        "end_s": 10200,
+        "start_index": 336000,
+        "end_index": 357000,
+        "kind": "repeat",
+        "repeats": 30,
+        "pattern": [
+          {
+            "current_A": 0.06,
+            "duration_s": 10
+          },
+          {
+            "current_A": 0.0,
+            "duration_s": 10
+          }
+        ]
+      },
+      {
+        "id": "renewed_reversals",
+        "start_s": 10200,
+        "end_s": 10800,
+        "start_index": 357000,
+        "end_index": 378000,
+        "kind": "repeat",
+        "repeats": 10,
+        "pattern": [
+          {
+            "current_A": -0.06,
+            "duration_s": 30
+          },
+          {
+            "current_A": 0.06,
+            "duration_s": 30
+          }
+        ]
+      },
+      {
+        "id": "final_weak_retention",
+        "start_s": 10800,
+        "end_s": 14400,
+        "start_index": 378000,
+        "end_index": 504000,
+        "kind": "constant",
+        "current_A": 0.001
+      }
+    ],
+    "phase_intervals": "Prescribed current on [start_s,end_s); corresponding observations have next_index in (start_index,end_index]. No overlap, gap, hidden reset or noise reseed.",
+    "analysis_windows": {
+      "prompt_SOC": [
+        0,
+        600
+      ],
+      "initial_acquisition": [
+        0,
+        2100
+      ],
+      "first_retention": [
+        2100,
+        7200
+      ],
+      "renewed_excitation": [
+        7200,
+        10800
+      ],
+      "final_retention": [
+        10800,
+        14400
+      ]
+    },
+    "checkpoint_times_s": [
+      0,
+      900,
+      1800,
+      2100,
+      3000,
+      7200,
+      8100,
+      8400,
+      9300,
+      9600,
+      10200,
+      10800,
+      14400
+    ],
+    "resets": 0,
+    "warm_restarts": 0,
+    "why_4h": "504000 chronological intervals give an85-minute first weak/rest period,60-minute renewed-use period and60-minute final weak period at modest bounded cost. Horizon selection precedes all new inference and does not promise sufficient capacity information.",
+    "claim_scope": "A single prescribed schedule confounds duration, sample count and stimulus. Report learning observed during phases; do not claim duration alone or renewed excitation caused improvement without a counterfactual arm."
+  },
+  "measurements": {
+    "targets": {
+      "capacity_error_percent": {
+        "hard": 5.0,
+        "preferred": 0.5
+      },
+      "SOC_error_pp": {
+        "hard": 10.0,
+        "preferred": 0.5
+      }
+    },
+    "signed_error_definitions": {
+      "Q_percent": "100*(Q_est/Q_truth-1)",
+      "SOC_pp": "100*(SOC_est-SOC_truth)"
+    },
+    "sample_grid": {
+      "point_error_every_samples": 1,
+      "resolution_s": "1/35",
+      "initial_query": true,
+      "scope": "All delivered interval ends, not continuous-time bounds between observations."
+    },
+    "qualification_separation": "Compute raw finite-point errors regardless of local-provisional/unresolved status. Also report current-point availability separately. Unavailable, missing or failed queries never count as accurate or as zero error. Application accuracy stays unresolved uniformly; this must not erase finite numeric point scores.",
+    "attainment": {
+      "first": "First available sample satisfying abs(error)<=target. Report initial raw-prior error separately; initialization is not learned evidence.",
+      "sustained": "First available sample after which every remaining required sample through the declared window end is available and satisfies the target. Censor as not observed if none; this is finite-window retention, not eventual convergence.",
+      "outputs": [
+        "global time and next_index",
+        "time since public/cold start",
+        "last violating/unavailable index",
+        "first target hit",
+        "all-later-samples-pass index",
+        "total and longest unavailable duration",
+        "pass fractions with all scheduled samples as denominator"
+      ]
+    },
+    "retention": "For each target and each retention window, pass only if the entry query and every subsequent interval-end query through the window exit are available and inside that target. If entry misses, label not_acquired_at_entry; still report all errors/drift and acquisition inside the window. Report separate rest and weak-subphase results as diagnostics.",
+    "renewal": "Report signed and absolute error at7200 and10800, first/sustained threshold attainments within the renewed window and final retention. If already inside preferred at7200, retained preferred accuracy is a success; no additional reduction is required.",
+    "SOC_prompt": "Report acquisition from the first interval, 1s,5s,10s,60s,120s,220s,400s,600s and all other declared endpoints. No invented instantaneous certainty claim or hidden early cutoff.",
+    "capacity": "No startup deadline. Report every endpoint and whole-phase trajectory, including any plateau/regression. A4h miss means unresolved in this experiment; it neither proves eventual failure nor authorizes an automatic extension.",
+    "error_reducers": [
+      "per-window signed mean",
+      "duration-weighted RMS",
+      "maximum absolute error with first index/time",
+      "endpoint signed errors",
+      "fraction and longest consecutive duration outside each hard/preferred target",
+      "numerical/unavailable counts"
+    ],
+    "charge": {
+      "signed_Ah": "sum(I*dt)/3600",
+      "positive_Ah": "sum(max(I,0)*dt)/3600",
+      "negative_magnitude_Ah": "sum(max(-I,0)*dt)/3600",
+      "absolute_Ah": "positive_Ah+negative_magnitude_Ah",
+      "usage": "Report cumulative and per-phase charge plus elapsed time; do not equate many weak samples with new capacity information."
+    },
+    "voltage": {
+      "preupdate_forecast": "Before ingest, save old normalized weights. On a successful voltage transaction, r_j=component[j].last_innovation_V is pre-correction. Set r_mix=sum(old_w_j*r_j), V_forecast=V_observed-r_mix. Mark unavailable on missing/rejected/recovery/invalid transactions; preserve failure capture.",
+      "forecast_scoring": "Separate post-inference scorer compares the causal V_forecast with clean plant end-interval voltage. Also report noisy innovation residual V_observed-V_forecast. Current at this interval is known before voltage assimilation.",
+      "postupdate_fit": "scm_hypothesis_query(...).predicted_voltage_V uses corrected components and updated weights; label filtered voltage fit, never one-step forecast.",
+      "summary": "Separate peak absolute error (including transition peaks), duration-weighted RMS and signed bias by prescribed phase/regime, with first peak time. No universal voltage pass threshold or per-nuisance tolerance is introduced.",
+      "OCV_equivalent_SOC": "Optional algebraic diagnostic at saved full queries only:100*voltage_error/Uprime(z_truth), with Uprime=1.15+0.64*sech^2(8*(z_truth-0.5)). Label scoring-truth OCV-equivalent proxy; never substitute for direct SOC error or feed it to inference."
+    },
+    "full_vector": "At initial, regular1Hz, input transition boundary/first-after-transition, checkpoint and failure queries, save all16 aggregate/component coordinates and local SD/statuses. Score natural-unit errors and positive-parameter relative errors. No nuisance-parameter precision mandate, pruning or compensation-based correctness claim.",
+    "mechanism": "On the same saved full-query grid, report both component Q/SOC errors, all log weights including exponentially underflowed displayed weights, gain-limit/zero-gain counts, excitation and bank/conditional evidence ages. Post-inference oracle-best component is a diagnostic only; it never chooses runtime output.",
+    "uncertainty": "One audit at the saved full-query grid: component and aggregate local ranges, all-component hull, widths, availability, empirical truth inclusion and raw local-provisional hard-error breaches. Serial-sample inclusion is descriptive, not calibrated coverage; no confidence level, hard support, interval tuning or accuracy certification follows."
+  },
+  "logging_and_budgets": {
+    "workers": 1,
+    "max_primary_processes": 4,
+    "max_unique_physical_observations": 577500,
+    "max_primary_input_deliveries": 661500,
+    "generator_evaluations_max": 619500,
+    "generator_count_note": "73500 A base +42000 warm generator suffix parity +504000 B; cold reads the existing A observation suffix. This excludes small declared preflight fixtures.",
+    "max_primary_wall_s": 3600,
+    "max_preflight_wall_s": 600,
+    "max_preflight_toy_input_deliveries": 4096,
+    "max_output_bytes": 536870912,
+    "max_host_RSS_bytes_per_process": 536870912,
+    "per_sample_record": {
+      "bytes": 80,
+      "endianness": "little",
+      "fields": [
+        "uint64 next_index",
+        "binary64 actual_elapsed_s",
+        "binary64 aggregate_SOC",
+        "binary64 aggregate_Q_Ah",
+        "binary64 preupdate_forecast_V",
+        "binary64 postupdate_fit_V",
+        "binary64 old_log_weight_0",
+        "binary64 old_log_weight_1",
+        "uint64 availability_mask",
+        "int32 ingest_return",
+        "uint32 combined_flags"
+      ],
+      "max_records": 661500,
+      "max_payload_bytes": 52920000,
+      "rule": "Truth-free output emitted once per delivered interval, with a documented header/version and explicit unavailable mask; nonfinite placeholders must be masked."
+    },
+    "full_query_grid": "Unique next_index values at0/arm entry, every35 samples, every event boundary and first sample after a boundary, every named checkpoint, cold-reset entry and first failure. Deduplicate coinciding reasons. Do not thin the scalar per-sample record.",
+    "max_full_query_records": 24000,
+    "max_full_query_record_bytes": 8192,
+    "truth_logs": "Separate compact per-physical-sample Q/SOC/clean-voltage records and full16 truth on saved full-query grid; reuse A truth for its paired lifecycle suffixes. Never load truth in an inference process.",
+    "failure_excerpt": "Fixed35-observation ring plus entering learner checkpoint, event/RNG/plant state outside inference, failed input, flags/stage/counters, compiler/source/config identity and rolling digest. Preserve exactly the first failure; no retry/repair inside that run.",
+    "output_policy": "Exclusive-create new output directory. Never overwrite any completed-study artifacts. Preserve incomplete outputs and partial receipt on timeout, failure or cap; stop before disk/log budget is exceeded.",
+    "estimator_memory": {
+      "owned_bytes_ceiling": 7152,
+      "proposed_complete_target_bytes": 10032,
+      "complete_subsystem_limit_bytes": 10240,
+      "target_reserve_bytes_unmeasured": 2880,
+      "headroom_bytes": 208,
+      "host_prior_named_plus_own_stack_partial_bytes": 9624,
+      "qualification": "Design reservations are not target measurements. New host observation/scoring/checkpoint resources are accounted separately and must not be reported as embedded estimator storage."
+    }
+  },
+  "preflight_before_any_primary": [
+    "Build a separate continuous host adapter and stateful generator; preserve frozen tools/hypothesis_probe.c and completed-study runners. The existing adapter refuses end>73500.",
+    "Verify all seven estimator source blobs and compile-dependency hashes against this contract; freeze new harness/generator/scorer source, compiler flags/version, binary hashes, Python/NumPy/libm versions, schedule/seed/config and contract SHA256 in an immutable executable receipt.",
+    "Statically verify contiguous integer phase/index accounting, event counts, exact signed/positive/negative/absolute charge, prescribed cell SOC domain and numerical guards. Domain checks may use scoring truth solely to validate the generator; no parameter or input tuning after inference.",
+    "Use only constructed short fixtures, at most4096 learner deliveries, to verify generator event carry and closed-form physical propagation, scalar noise sequence/chunk independence, fresh-process coupled restore at both an interior-event position and a transition, and matching future observation bytes/canonical learner checkpoints.",
+    "Verify host forecast instrumentation on a constructed transaction: old-weight causal forecast agrees with independently computed pre-correction component voltages; the post-correction query remains separately labeled. Diagnostics/queries must leave canonical learner bytes unchanged.",
+    "Verify first-failure stops, atomic source/index rejection, UPDATE_REJECTED despite return0, recovery/unavailable flags, output byte limits, counter accounting and scorer behavior for unavailable finite points. These are small interface fixtures, not new cell primaries.",
+    "Verify cold-reset entry loses knowledge/excitation and retains known source/index/clock, without plant/RNG reset. Existing core/Joseph/codec qualification is inherited evidence; do not rerun long studies.",
+    "Have an independent reviewer compare the executable receipt and implementation with this frozen contract before A. Any material source/metric/schedule change requires a new version with rationale; preserve this version and all first failures."
+  ],
+  "failure_stops": {
+    "immediate": [
+      "Negative ingest result or unexpected accepted-recovery result.",
+      "Any rejected-voltage flag/count increment, even when ingest returns0; record rejection stage/component.",
+      "Nonfinite state, factor, log weight or required available output; invalid factor/config/domain or unexpected status/recovery event.",
+      "Source/index/order, counters, charge, clock or bank/conditional cursor inconsistency; any duplicated, skipped or twice-assimilated observation.",
+      "Synthetic plant leaves its declared domain; any truth-dependent schedule/config adaptation.",
+      "Warm checkpoint/query/generated-input mismatch or cold-reset semantics failure.",
+      "Known estimator-storage excess, wall/RSS/output budget breach, incomplete log/record, I/O/hash/checksum failure."
+    ],
+    "not_a_failure_stop": [
+      "Finite accuracy miss, overconfident local interval, near-zero displayed weight, limited gains or zero gains alone. Record them without suppressing observations or changing inference."
+    ],
+    "action": "Preserve first-failure entry snapshot/input/outputs and partial receipt. Mark the affected study invalid or incomplete, block unstarted B if A validity fails, and stop. Do not cold-reset/reseed/retry/extend or silently change a tolerance.",
+    "prior_failures": "Keep historical17 cold-reset rejections unattributed and original uncertainty failures intact. A new successful lifecycle result does not retroactively explain or erase them."
+  },
+  "decision_rules": [
+    {
+      "id": "validity_failure",
+      "if": "Any required numerical/accounting/lifecycle/resource gate fails.",
+      "then": "Reject continuation of this experiment until a named repair is reviewed; preserve first outputs. Do not infer capacity convergence/retention from invalid or truncated coverage."
+    },
+    {
+      "id": "acquired_and_retained",
+      "if": "A target is attained and then passes every available-required sample throughout a declared retention window, including its entry.",
+      "then": "Record finite sample-grid acquisition/retention for that target and window. Keep preferred and hard classifications separate; no promotion or coverage claim."
+    },
+    {
+      "id": "not_acquired",
+      "if": "Target misses at retention entry or is never sustained through its finite window.",
+      "then": "Record not_acquired_at_entry or unresolved_at_finite_endpoint, with first/sustained times and error trajectory. Do not manufacture a retention failure for knowledge never acquired or an eventual-convergence conclusion."
+    },
+    {
+      "id": "renewed_learning",
+      "if": "A previously missed target becomes sustained during renewed excitation and remains inside its target through final retention.",
+      "then": "Support continued learning under this prescribed use. If already preferred, retained preferred accuracy suffices. Do not claim causality from duration or stimulus alone."
+    },
+    {
+      "id": "regression",
+      "if": "A previously acquired target leaves its target, becomes unavailable or has larger error during weak/renewed use.",
+      "then": "Name retention/regression/availability failure and report its duration, magnitude, state/weight diagnostics. A fresh longer run is not an automatic remedy."
+    },
+    {
+      "id": "weight_or_representation",
+      "if": "At saved full queries a component has materially different target accuracy from the aggregate, or both components miss.",
+      "then": "Report exact component-versus-aggregate error and weight evidence; classify a weighting/output symptom or failure to retain a useful alternative. No oracle selection, causal mechanism proof or tuning from truth."
+    },
+    {
+      "id": "finish",
+      "if": "The predeclared valid study completes or a stopping condition occurs.",
+      "then": "Close one learning/retention decision and update summary/roadmap/handoff. A pass can justify a separately frozen next short variation or uncertainty decision; it cannot queue day/week/annual runs, establish indefinite stability, or qualify M23."
+    }
+  ],
+  "next_implementation": {
+    "work_branch": "implementation/continuous-learning-validation-001",
+    "action": "Implement only the frozen new host generator/adapter/scorer and small preflight fixtures, review executable receipt, then execute the staged contract once under its gates.",
+    "not_in_design_task": [
+      "No primary generation or inference",
+      "No sensitivity rerun",
+      "No learner source change",
+      "No annual/day/week campaign",
+      "No calibrated-uncertainty or target-resource claim"
+    ],
+    "required_outputs": [
+      "preflight and source/binary/contract receipt",
+      "exclusive first primary logs and input/truth hashes",
+      "A gate outcome and B started/blocked status",
+      "all-sample point/voltage and saved-grid uncertainty scores",
+      "phase/charge/accounting and memory/timing results",
+      "independent interpretation audit",
+      "compact summary, decision and handoff"
+    ]
+  }
+}

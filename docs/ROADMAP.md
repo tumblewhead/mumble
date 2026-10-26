@@ -7,9 +7,12 @@ later capacity learning on one frozen Cell B comparison and is retained for
 further qualification.** Capacity error improves from +13.16% at 900 seconds
 to +0.095% at 2100 seconds; SOC stays within 0.5 points on all saved queries
 from 580 seconds. Both arms complete without rejected corrections. Local
-uncertainty remains overconfident, so the candidate is not promoted. The next
-task is to freeze one continuous learning/retention validation contract, with
-an honest uncertainty assessment and finite work/stopping rules. See the
+uncertainty remains overconfident, so the candidate is not promoted. The
+[continuous learning/retention contract](../plans/continuous_learning_validation_001.json)
+is now frozen: one short A lifecycle gate and one conditional four-hour B
+diagnostic, with all-sample target scores and finite work/stopping rules.
+No new primary was run in the design task. Next implement and qualify its
+separate continuous host harness. See the preserved
 [result and decision](../experiments/nonlinear_hypothesis_001/REPORT.md).
 The measured owned subtotal is **7152 bytes**; the proposed complete target
 allocation is **10,032 bytes**, including unmeasured reserves. Complete
@@ -22,7 +25,7 @@ isolated reversal effect; the final complete-vector sampled peak remains below
 0.987 mV across the fixed set. Signed compensation matters. These point effects
 support output-focused validation, not coverage, universal nuisance tolerances
 or parameter removal. The [new decision](../experiments/parameter_sensitivity_001/decision.json)
-carries the regime and charge-dependent consequences into the next contract.
+carries the regime and charge-dependent consequences into that frozen contract.
 
 The original priority change put integration ahead of another uncertain-RC
 refinement. That completed integration now supports the learner decision.
@@ -59,7 +62,7 @@ not improve capacity, and accurate points do not validate uncertainty ranges.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — candidate retained for qualification** | Preserve the first public-split learning result, freeze continuous validation, then qualify broader short cases and duration pilots | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
+| **M2: Desktop performance — candidate retained for qualification** | Continuous validation contract frozen; implement its host harness and run the staged diagnostic before further qualification decisions | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -365,11 +368,15 @@ is implied.
 ### Use a short variation matrix and a duration ladder
 
 The new candidate has one favorable finite learning result; it has not passed
-broader performance, lifecycle or uncertainty qualification. A single bounded
-continuous-validation design is the next task. It must decide the short
-second-cell/lifecycle prerequisites and what one duration pilot can establish.
-Historical failures remain preserved, and no day/week/annual campaign starts
-automatically from the favorable endpoint. Capacity has no startup deadline.
+broader performance, lifecycle or uncertainty qualification. The
+[continuous validation design](../experiments/continuous_learning_validation_001/REPORT.md)
+now requires a short A lifecycle validity gate before one four-hour B diagnostic.
+This is explicitly a bounded learning/retention diagnostic: A accuracy is scored
+observationally, while numerical, accounting, lifecycle and known-resource
+failures block B. An A accuracy miss cannot create a capacity startup deadline
+or disappear from usefulness assessment. This diagnostic exception does not
+promote the candidate or waive the hard-target/uncertainty gates for the later
+day/week/annual campaign. Historical failures remain preserved.
 
 | Step | Purpose | Scope control |
 | --- | --- | --- |
@@ -451,15 +458,16 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Fetch the latest `analysis/parameter-sensitivity-001` descendant and read
-the [sensitivity summary](../experiments/parameter_sensitivity_001/summary.json)
-and [decision](../experiments/parameter_sensitivity_001/decision.json), together
-with the preserved learner result. Do not rerun either completed study.
-Use `design/continuous-learning-validation-001` to freeze one continuous
-learning/retention contract for the unchanged candidate. Specify carried plant,
-estimator and noise state, one finite horizon, weak and renewed informative use,
-prompt SOC and later capacity metrics, output-error diagnostics across operating
-regimes, accumulated charge, uncertainty diagnostics, resource limits and failure
-stops. Decide any short second-cell/lifecycle prerequisite explicitly. Stop with
-one frozen contract or a named missing datum; this design task runs no primary.
-Annual behavior and full-model indefinite operation remain separate obligations.
+Fetch the latest `design/continuous-learning-validation-001` descendant and read
+the [design summary](../experiments/continuous_learning_validation_001/summary.json),
+[contract](../plans/continuous_learning_validation_001.json) and
+[decision](../experiments/continuous_learning_validation_001/decision.json).
+The design finish line is complete, with zero primary runs and unchanged
+learner sources. Preserve both completed studies and their provenance.
+Use `implementation/continuous-learning-validation-001` for the new continuous
+generator, host adapter, scorer and bounded preflight fixtures. Freeze and
+independently review source, binary, environment and contract identities before
+inference; then execute the staged A/B contract once under its admission and
+failure rules. Stop with its concrete learning/retention decision. Annual
+behavior, uncertainty qualification and full-model indefinite operation remain
+separate obligations; no duration or parameter sweep is queued automatically.

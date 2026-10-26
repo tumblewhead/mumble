@@ -6,6 +6,18 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The continuous learning/retention contract is now frozen.** It declares one
+short Cell A lifecycle gate, followed by one four-hour continuous Cell B
+diagnostic under the unchanged public-split learner. Every 35 Hz interval is
+scored for Q/SOC; plant, learner, RNG, weights and input position carry through
+rest, weak use and renewed excitation. Capacity has no startup deadline.
+The [contract](plans/continuous_learning_validation_001.json),
+[design report](experiments/continuous_learning_validation_001/REPORT.md) and
+[independent review](experiments/continuous_learning_validation_001/independent_review.json)
+are complete. **No new primary was run and no estimator source changed.**
+Next implement and qualify the separate continuous host harness before the
+one declared staged execution; the candidate remains unpromoted.
+
 **The requested parameter/state sensitivity analysis is complete.** At the
 final saved estimate, a **19.24% τ₂ error** produces at most **1.571 mV** of
 isolated voltage error across six declared future protocols. The complete
@@ -33,8 +45,9 @@ removes a capacity startup deadline while keeping prompt SOC and the declared
 accuracy targets. The candidate is retained for further qualification;
 **it is not promoted**. Its local ranges still miss truth, including at the
 final accurate point. Complete target memory, broader performance, uncertainty
-coverage and indefinite operation remain open. The next task is one
-[continuous learning/retention validation contract](experiments/parameter_sensitivity_001/decision.json).
+coverage and indefinite operation remain open. The
+[continuous learning/retention validation contract](plans/continuous_learning_validation_001.json)
+now defines the next bounded diagnostic and its implementation prerequisites.
 
 The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
 end-to-end desktop demonstration, a desktop performance campaign including
@@ -102,6 +115,9 @@ experiment work to specific delivery decisions.
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
+| [Frozen continuous validation contract](plans/continuous_learning_validation_001.json) | New A lifecycle gate and one continuous B four-hour diagnostic; exact chronology, carried state, all-sample target metrics, uncertainty and finite budgets |
+| [Continuous validation design report](experiments/continuous_learning_validation_001/REPORT.md) | Why this scope, diagnostic admission versus campaign promotion, source review corrections, static verification and next implementation |
+| [Continuous validation design review](experiments/continuous_learning_validation_001/independent_review.json) | Independent scientific, numerical-interface and accounting review; final contract hash and resolved findings |
 | [Current sensitivity result](experiments/parameter_sensitivity_001/summary.json) | All sixteen saved parameter/state errors, six future regimes, joint compensation and charge-dependent SOC consequences |
 | [Sensitivity report and figures](experiments/parameter_sensitivity_001/REPORT.md) | Normalized local derivatives, exact finite error effects, three saved anchors and explicit interpretation limits |
 | [Sensitivity decision](experiments/parameter_sensitivity_001/decision.json) | Preserve candidate; assess application outputs under declared use, with no universal nuisance precision or automatic duration campaign |
@@ -109,7 +125,7 @@ experiment work to specific delivery decisions.
 | [Current learner result](experiments/nonlinear_hypothesis_001/summary.json) | Two-arm 2100 s comparison complete; later capacity learning supported, local uncertainty still fails, candidate retained for qualification |
 | [Learning report and figure](experiments/nonlinear_hypothesis_001/REPORT.md) | Prompt SOC, later capacity, first versus retained target attainment, component weights and remaining limits |
 | [Capacity timing amendment](plans/capacity_learning_horizon_001.json) | No capacity startup deadline; prompt SOC, unchanged hard/preferred accuracy targets, continuous long-trajectory requirement |
-| [Current mechanism decision](experiments/nonlinear_hypothesis_001/decision.json) | Keep public split for controlled qualification; next freeze one continuous learning/retention validation contract |
+| [Preserved mechanism decision](experiments/nonlinear_hypothesis_001/decision.json) | Keep public split for controlled qualification; its requested continuous validation design is now frozen |
 | [Learner publication](provenance/nonlinear_hypothesis_001_publication.json) | Original execution versus published commit identities and preserved development bundle |
 | [Prior nonlinear-evidence design](experiments/nonlinear_evidence_design_001/summary.json) | Two persistent public capacity components selected; saved-evidence audit and proposed 10,032-byte allocation; no inference in that design study |
 | [Two-component contract](plans/nonlinear_evidence_design_001.json) | Public moment split, single-use mixture evidence, complete staging, distinct evidence cursors, resource and query semantics |
@@ -167,7 +183,7 @@ experiment work to specific delivery decisions.
 | --- | --- |
 | Foundations | Completed 35 Hz reference and bounded/proof studies preserved; current limits and failures remain recorded |
 | **M1: Two-cell end-to-end desktop demonstration** | **Functionally complete.** Warm continuation and cold reset pass; the separate usefulness gate fails for cell B at 900 s and is preserved |
-| **M2: Desktop performance and year-scale behavior** | **A4: new split candidate retained for qualification.** One B 2100 s pair supports later capacity learning; uncertainty, generalization and lifetime behavior remain open. Next freeze one continuous validation contract |
+| **M2: Desktop performance and year-scale behavior** | **A4: split candidate retained; continuous validation contract frozen.** Implement/qualify its host harness, then execute the staged diagnostic once. Uncertainty, broader performance and lifetime behavior remain open |
 | **M3: Cortex-M23 near 10 KiB** | Complete simultaneous SRAM and timing account, actual target execution, recovery parity and relevant lifetime obligations |
 
 The fixed R/tau partition is a possible remedy for a demonstrated target-quality
@@ -323,17 +339,18 @@ The [two-component learner comparison](experiments/nonlinear_hypothesis_001/REPO
 and the [parameter sensitivity analysis](experiments/parameter_sensitivity_001/REPORT.md)
 are complete. Preserve the completed M1 campaign, both older bounded candidates,
 the original 60-fit study, failed uncertainty diagnostics and all source identities.
-The latest canonical work branch is `analysis/parameter-sensitivity-001`.
+The latest canonical work branch is `design/continuous-learning-validation-001`.
 
-Next, follow the [sensitivity decision](experiments/parameter_sensitivity_001/decision.json)
-on `design/continuous-learning-validation-001` to freeze one finite continuous
-learning/retention validation contract for the unchanged learner. Declare carried
-plant/estimator/noise/input state, useful target availability, rest/transient/load/
-charge/reversal diagnostics, accumulated charge, honest uncertainty semantics,
-resource limits and failure stops. Decide short second-cell/lifecycle prerequisites
-before any duration extension. This next design task ends with one contract or
-a named missing datum; it runs no primary. No 24-hour or annual run is queued
-automatically, and there is no capacity startup deadline.
+The [frozen continuous validation contract](plans/continuous_learning_validation_001.json)
+closes the sensitivity decision's next design task, with zero primary runs.
+On `implementation/continuous-learning-validation-001`, implement only the new
+stateful generator, continuous host adapter, scorer and bounded preflight fixtures.
+Preserve the seven pinned learner source blobs and the old 73,500-sample probe.
+Freeze/review executable source and binary identities before inference, then run
+the A lifecycle gate and conditional four-hour B diagnostic once. Accuracy misses
+remain visible and do not invent a capacity startup deadline; validity failures
+stop the study. No day/week/annual campaign or full qualification follows
+automatically. See the [design decision](experiments/continuous_learning_validation_001/decision.json).
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to

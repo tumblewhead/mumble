@@ -1,0 +1,127 @@
+{
+  "schema": "mumble_continuous_validation_independent_design_review_v1",
+  "reviewed_contract": "plans/continuous_learning_validation_001.json",
+  "source_revision": "91105b2e1a367fdbb1570fb1b273d95806df6dca",
+  "status": "pass_after_three_local_metric_corrections",
+  "overall": "The amended staged contract is suitable for the design finish line. All three original metric/decision blockers are resolved; chronology, public initialization, no-truth inference, continuity, finite budgets, diagnostic admission, uncertainty limits and interpretation are coherent. No primary was executed.",
+  "clarifications": [
+    {
+      "id": "C1_process_and_timeout_scope",
+      "section": "logging_and_budgets",
+      "amendment": "Clarify that max_primary_processes=4 counts learner processes/logical arm executions, while each arm timeout and total wall cap include its generator/I/O helpers. Separate truth generation otherwise makes process/time scope ambiguous.",
+      "disposition": "resolved_in_reviewed_contract"
+    },
+    {
+      "id": "C2_component_diagnostic_language",
+      "section": "decision_rules[id=weight_or_representation]",
+      "amendment": "Prefer an exact hard/preferred target-status disagreement or report the numerical component-versus-aggregate differences directly. Avoid leaving 'materially different' as an unfrozen binary decision threshold.",
+      "disposition": "resolved_in_reviewed_contract; exact hard/preferred target-status disagreement replaces materiality language, with availability separate"
+    }
+  ],
+  "passed_review_topics": [
+    "A required Cell A lifecycle prerequisite is justified because prior two-cell lifecycle evidence belongs to different learner implementations.",
+    "A accuracy remains observational for admission to this diagnostic B study; validity failures block B. Product/day/week/annual promotion still requires separate usefulness/uncertainty qualification, so no capacity startup deadline is invented.",
+    "The four-hour B stream has exactly one plant/public estimator initialization, carried plant/RNG/phase/index/learner state and evolving weights, with no hidden reset or recycled CSV voltage/noise.",
+    "A warm/cold suffix copies are legitimate separate lifecycle arms and are not counted as independent accuracy/noise replications or assimilated twice into one retained bank.",
+    "No scoring truth enters runtime priors, weights, state correction, output selection, schedule adaptation or tuning.",
+    "Q and SOC are scored at every interval end; finite-window sustained attainment and retention require availability throughout and distinguish targets not acquired at window entry.",
+    "Causal pre-update forecast is separated from post-update fit; time-weighted RMS, peaks and direct SOC error are separated from the optional OCV-equivalent proxy.",
+    "Local ranges, mixture hulls, raw provisional errors and serial inclusion remain descriptive; no calibrated coverage or hard-support claim is made.",
+    "Failure stops inspect rejected-update flags even when ingest returns0, preserve valid prediction accounting and first-failure records, and do not silently restart.",
+    "Full16-coordinate structure and frozen source blobs remain intact; no nuisance-precision mandate or pruning follows from sensitivity scoring.",
+    "The one chronological schedule cannot identify a causal effect of duration versus stimulus; the contract states that limitation.",
+    "The work ends at a concrete finite decision and does not automatically launch annual operation or transfer restricted all-prefix proof claims."
+  ],
+  "independent_static_accounting": {
+    "method": "Evaluate only the deterministic profile() block specification from its AST; expand prescribed new blocks and use Fraction arithmetic. No simulate(), samples(), RNG or estimator was called.",
+    "initial_current_events": 106,
+    "B_current_events": 193,
+    "A_unique_observations": 73500,
+    "B_observations": 504000,
+    "unique_physical_observations": 577500,
+    "A_deliveries": 157500,
+    "total_learner_deliveries": 661500,
+    "generator_evaluations_including_warm_parity": 619500,
+    "B_charge_Ah": {
+      "positive": "7937/168000",
+      "negative_magnitude": "29/1200",
+      "signed": "3877/168000",
+      "absolute": "3999/56000",
+      "maximum_cumulative_signed": "5389/168000"
+    },
+    "B_analytic_SOC": {
+      "minimum": 0.2842135865165231,
+      "maximum": 0.78,
+      "final": 0.4233171413851476,
+      "scope": "Prescribed model and exact rational charge at constant-current endpoints; not an estimator result or machine-arithmetic guarantee."
+    },
+    "full_query_records_by_arm": {
+      "A_uninterrupted": 2267,
+      "A_warm_suffix": 1208,
+      "A_cold_suffix": 1208,
+      "B_continuous": 14654
+    },
+    "full_query_records_total": 19337,
+    "declared_query_cap": 24000,
+    "scalar_record_bytes": 80,
+    "scalar_payload_bytes": 52920000,
+    "sum_primary_timeouts_s": 3600,
+    "scope": "Nominal successful completion, including required initial/arm-entry queries and deduplicated event boundaries/first-after-event samples. Failure capture adds at most a bounded first-failure query."
+  },
+  "execution": {
+    "new_plant_trajectories": 0,
+    "noise_draws": 0,
+    "estimator_runs": 0,
+    "completed_study_reruns": 0,
+    "remote_mutations": 0
+  },
+  "post_amendment_disposition": "Design finish line passed. Implementation conformance, executable-source freeze, bounded new preflight and all primary results remain future work. This review does not qualify runtime execution, coverage, indefinite stability or M23 resources.",
+  "initial_reviewed_contract_sha256": "e873e998e11b99146a28ceda07e46fe4425c974d641dcb4f4892e75563e1c91c",
+  "initial_draft_preserved_at": "experiments/continuous_learning_validation_001/development/contract_review_draft.json",
+  "reviewed_contract_sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+  "resolved_findings": [
+    {
+      "id": "R1_normalize_binary64_weights",
+      "sections": [
+        "frozen_estimator.output_center",
+        "measurements.voltage.preupdate_forecast"
+      ],
+      "source": "src/scm_hypothesis.c: aggregate_query",
+      "finding": "The pinned implementation computes wa=exp(logw0), wb=exp(logw1), total=wa+wb, then divides both weights by total. The written output formulas omit the division. Mathematically normalized log weights can still produce a total different from1 in binary64.",
+      "amendment": "Specify w_j=exp(logw_j)/(exp(logw0)+exp(logw1)), evaluated in the pinned query order. Use those current weights for SOC and exp(weighted logQ), and the same normalization applied to captured old weights for the causal forecast. Prefer the existing query output for available aggregate values.",
+      "disposition": "resolved_in_reviewed_contract"
+    },
+    {
+      "id": "R2_raw_unavailable_centers",
+      "sections": [
+        "measurements.qualification_separation",
+        "measurements.attainment",
+        "logging_and_budgets.per_sample_record"
+      ],
+      "source": "src/scm_hypothesis.c: aggregate_query early return before JOINT_EVIDENCE",
+      "finding": "aggregate_query always computes aggregate.mean[], but current_soc and capacity_Ah remain zero-filled when JOINT_EVIDENCE is absent. This occurs at public initialization and immediately after the declared cold reset. Treating these finite zero placeholders as raw estimates would corrupt the required initial/raw-prior error report.",
+      "amendment": "Define raw aggregate SOC as aggregate.mean[11] and raw Q as exp(aggregate.mean[5]), or equivalent normalized component-center computation. Record query availability separately. Never score zero-filled unavailable convenience fields as estimates. Unavailable raw centers can be reported diagnostically, but cannot satisfy target attainment or retention. Define per-sample record fields accordingly.",
+      "disposition": "resolved_in_reviewed_contract"
+    },
+    {
+      "id": "R3_drift_is_not_threshold_failure",
+      "sections": [
+        "decision_rules[id=regression]",
+        "measurements.renewal"
+      ],
+      "finding": "The regression rule currently names a failure whenever error grows, including a tiny increase wholly inside the preferred region. That conflicts with the rule that retained preferred accuracy succeeds and no further reduction is required.",
+      "amendment": "Use threshold crossing or availability loss as the target-retention failure condition. Report error increases while the target remains continuously satisfied as descriptive drift, not a failed retention/renewal gate. Classify hard and preferred targets separately.",
+      "disposition": "resolved_in_reviewed_contract"
+    }
+  ],
+  "remaining_blockers": [],
+  "amendment_checks": [
+    "Explicit normalized binary64 weights now match pinned aggregate_query.",
+    "Raw unavailable SOC/Q centers are derived from mean[] with separate point/capacity availability masks; zero placeholders cannot become estimates.",
+    "Threshold-specific loss/availability is separated from harmless error drift inside a retained target.",
+    "Learner process counts, helper caps, primary/scoring/preflight timeout scopes are explicit.",
+    "Allowed lagging evidence cursors, valid local-status changes, no boundary pseudo-observations and resume-entry workspace-only scratch exclusion are explicit.",
+    "Checkpointable input hash chain is distinguished from ordinary whole-stream/suffix SHA256.",
+    "Component-versus-aggregate interpretation now uses exact hard/preferred pass/fail disagreement and reports availability separately, without an unfrozen materiality threshold."
+  ]
+}
