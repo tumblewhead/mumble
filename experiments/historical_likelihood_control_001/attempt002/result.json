@@ -1,0 +1,151 @@
+{
+  "schema": "mumble_historical_likelihood_control_result_v1",
+  "status": "completed",
+  "execution_errors": [],
+  "source_revision": "5bc11d685ac4b093a03208c0caac86ddede5e599",
+  "plan_sha256": "33736f934e5836a565f4178f54da61f1bffe8b93f08555b4d5123442b62bdb6c",
+  "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+  "prefix_records": 252000,
+  "recursive_targets": {
+    "next_index": 252000,
+    "selector": "aggregate",
+    "capacity_Ah": 0.06597778624402621,
+    "current_soc": 0.5133228864538338,
+    "witness_line_number": 7369,
+    "witness_line_sha256": "b19ea102848ecc41b5acae99db0495a248d63ff2cf280f3baf76840e0f2d8e95",
+    "inference_fields": [
+      "aggregate.capacity_Ah",
+      "aggregate.current_soc"
+    ],
+    "truth_fields_read_or_used": false
+  },
+  "fits": [
+    {
+      "fit_id": "free",
+      "optimizer_status": 0,
+      "termination_reason": 1,
+      "iterations": 163,
+      "evaluations": 257,
+      "converged_starts": 2,
+      "theta": [
+        -2.53575381309488,
+        -0.4224404125109073,
+        2.0148743625778036,
+        5.798919407649255,
+        6.216945726620952,
+        0.7799604966417,
+        -2.7379363200550615
+      ],
+      "alpha": [
+        0.16671415752278962,
+        0.21807648779619637,
+        0.26520748265802835,
+        0.32988611341715224,
+        0.02995993166562699,
+        -0.0025979677687409993,
+        0.004333230865170002,
+        0.00593601847065372,
+        0.010451329833428441
+      ],
+      "capacity_Ah": 0.06470373701300736,
+      "endpoint_SOC": 0.5160285857384294,
+      "charge_Ah": 0.01707738095242571,
+      "elapsed_physical_s": 7199.999999959603,
+      "objective": 126417.51119391782,
+      "objective_full": 126417.51119391828,
+      "voltage_rmse": 0.0010016554202439648,
+      "matrix_chart": "entering_state",
+      "unrestricted_local_precision_computed": false,
+      "raw_Gram_scales_and_legacy_assessment": "free/stdout.json",
+      "uncertainty_semantics": "No covariance inversion by this driver; raw legacy assessment remains diagnostic only"
+    },
+    {
+      "fit_id": "fixed_recursive_Q",
+      "optimizer_status": 0,
+      "termination_reason": 1,
+      "iterations": 45,
+      "evaluations": 57,
+      "converged_starts": 3,
+      "theta": [
+        -2.531117616168372,
+        -0.44141365005388217,
+        1.9999445199134787,
+        5.508862332242158,
+        6.3201721701015305,
+        0.7746676347317143,
+        -2.7184371656690085
+      ],
+      "alpha": [
+        0.16995276093722883,
+        0.21639314393297596,
+        0.26940908338819053,
+        0.33009944482011444,
+        0.03200899702812398,
+        0.002072513735010161,
+        -0.0003135816690879661,
+        0.009673397711615588,
+        0.0026508959761289285
+      ],
+      "capacity_Ah": 0.06597778624402621,
+      "endpoint_SOC": 0.5158323217482943,
+      "charge_Ah": 0.01707738095242571,
+      "elapsed_physical_s": 7199.999999959603,
+      "objective": 152672.12632965195,
+      "objective_full": 152672.12632965102,
+      "voltage_rmse": 0.0011007649805016588,
+      "matrix_chart": "entering_state",
+      "unrestricted_local_precision_computed": false,
+      "raw_Gram_scales_and_legacy_assessment": "fixed_recursive_Q/stdout.json",
+      "uncertainty_semantics": "No covariance inversion by this driver; raw legacy assessment remains diagnostic only"
+    },
+    {
+      "fit_id": "fixed_recursive_SOC",
+      "optimizer_status": 0,
+      "termination_reason": 1,
+      "iterations": 46,
+      "evaluations": 60,
+      "converged_starts": 2,
+      "theta": [
+        -2.2670675732614383,
+        -0.02455562787057896,
+        2.208791688692762,
+        5.762786851018,
+        6.44650156383451,
+        0.776905463004419,
+        -2.736611865800022
+      ],
+      "alpha": [
+        0.18024051696970142,
+        0.24442343601197655,
+        0.25751003944040946,
+        0.3015935602158749,
+        0.02558972673693661,
+        -0.00265378918743566,
+        0.006103121348588236,
+        0.003844686504467327,
+        0.007371205520422102
+      ],
+      "capacity_Ah": 0.06478949092884492,
+      "endpoint_SOC": 0.5133228864538337,
+      "charge_Ah": 0.01707738095242571,
+      "elapsed_physical_s": 7199.999999959603,
+      "objective": 143871.4236581232,
+      "objective_full": 143871.4236581192,
+      "voltage_rmse": 0.0010685675906087358,
+      "matrix_chart": "linked_current_SOC",
+      "unrestricted_local_precision_computed": false,
+      "raw_Gram_scales_and_legacy_assessment": "fixed_recursive_SOC/stdout.json",
+      "uncertainty_semantics": "No covariance inversion by this driver; raw legacy assessment remains diagnostic only"
+    }
+  ],
+  "all_three_outputs_validated": true,
+  "local_precision_computed": false,
+  "coverage_validated": false,
+  "candidate_promoted": false,
+  "statistical_threshold": null,
+  "signed_NLL_differences_from_free": {
+    "fixed_recursive_Q": 26254.615135732733,
+    "fixed_recursive_SOC": 17453.912464200912
+  },
+  "constrained_fit_beats_free_baseline": false
+}

@@ -1,0 +1,131 @@
+{
+  "schema": "mumble_continue_v20",
+  "task": "Continue after the completed three-checkpoint conditional-belief adequacy probe. Prioritize a joint support-consistent conditional-correction design while keeping historical SOC/Q undercoverage unresolved.",
+  "repository": {
+    "url": "https://github.com/tumblewhead/mumble",
+    "work_branch": "design/conditional-belief-adequacy-001",
+    "latest_checkpoint": "Fetch the current work-branch tip. Historical IDs are provenance, not reset targets.",
+    "base_revision": "66fabc24476b668e358c5aa6995308c52ac8f751",
+    "contract_commit": "7ee11761abbc0990ea44df265b60004f63481565",
+    "probe_source_commit": "b0be4adeedc26dc3617f32282ff4c949635757fa",
+    "probe_source_tree": "0c2436e23591a5d5d2d1963005378f00732ebb06",
+    "handoff_url": "https://github.com/tumblewhead/mumble/blob/design/conditional-belief-adequacy-001/handoff/CONTINUE.json",
+    "publication": "provenance/conditional_belief_adequacy_001_publication.json",
+    "result_commit_before_metadata": "24ed14c883a0d30d423a9c310e390b79c6bee5b0",
+    "result_tree": "425b164b9940d9943458ea9b2f305bdad4196392",
+    "publication_status": "Contract, reviewed source and completed result published and verified; fetch the current work-branch tip for this metadata."
+  },
+  "bootstrap": [
+    "Fetch current repository; inspect status and preserve newer/dirty/unrelated work. Use a work branch; no force-push.",
+    "Read AGENTS.md, README.md, PROJECT_STATE.json, this handoff, then the new summary/contract/decision and selective evidence. No raw trace loading or completed-study reruns to resume.",
+    "Repository is canonical memory. Resolve executed/published historical identities through the preserved maps; new design is based directly on the published parent."
+  ],
+  "goal": {
+    "implementation": "Runnable Cortex-M23 C near 10240 B complete subsystem SRAM.",
+    "estimation": "Stimulus-supported quantities, carried evidence/uncertainty, explicit unknowns; 35 Hz preserving actual intervals and order.",
+    "Q_error_percent": {
+      "hard": 5,
+      "preferred": 0.5
+    },
+    "SOC_error_pp": {
+      "hard": 10,
+      "preferred": 0.5
+    },
+    "capacity_startup_deadline": null,
+    "priority": "Prompt SOC; capacity can learn during later informative use."
+  },
+  "current": {
+    "milestone": "M1 complete; M2/A4 continuous study, weighting audit and conditional-belief probe complete; candidate unpromoted.",
+    "execution": "One original primary attempt; 4 learner arms; 661500 deliveries; 619500 source draws including warm parity; 577500 unique observations; 1 scorer; 0 rejections; 0 retries. Frozen learner unchanged.",
+    "A": "Validity gate and exact warm continuity pass. Final Q error +1.081343 percent baseline/warm, +1.690304 percent cold; SOC error +0.163462 / +0.371131 pp. Weak tails retain hard Q and preferred SOC. Preferred Q not acquired; no startup deadline.",
+    "B": "Final Q error -0.408454 percent; SOC error -0.0118574 pp. Preferred Q sustained from 9784.8 s; SOC from 8584.142857 s. Entry and all 126000 final weak intervals retain both preferred targets.",
+    "regression": "Preferred SOC lost at index 273391 / 7811.171429 s for 27054 samples / 772.971429 s; recovered at index 300445 / 8584.142857 s. Peak error 0.808669 pp; all rows available and valid; hard targets retained.",
+    "weight_symptom": "Dominance flip at index 273391 / 7811.171429 s matches preferred SOC exit. Weight motion accounts for 99.9633056 percent of the 7811-to-7812 s error change by the exact midpoint identity. Source, math and query chronology agree.",
+    "uncertainty": "All 8670 selected matching intervals contain their own point. Aggregate SOC/Q truth inclusion is 0/1445 each; component 0 Q inclusion is 8/1445, and all other conditional quantity counts are zero. All 24 matching endpoint intervals exclude truth. These serial counts do not estimate coverage.",
+    "resources": "Original primary output 391584188 B; primary 17.2194 s + scorer 33.9928 s; worker peak RSS 33976320 B. Supervisor peak RSS not recorded; all-process RSS unqualified. Core 7152 B; proposed 10032 B includes 2880 B unmeasured reserves; M23 unqualified.",
+    "history": "Prior 17 cold rejections and original uncertainty failures remain unchanged; no completed-study reruns.",
+    "weighting_audit": "One saved-evidence audit: 50401 scalar rows, 1445 full queries, 152995 numerical comparisons, zero mismatches; zero learner/source/original-scorer runs.",
+    "predictive_score": "Residual-driven at 1444 saved context queries: residual sum 1094.016502 nats, log-variance sum -0.0055481 nats. These sampled terms do not decompose all 35 Hz updates. A small variance-term difference does not calibrate either variance.",
+    "constraint_witness": "At 8400 s, component 0 has h=1 with SD=9.055643565861842e-6 and its h correction blocked. This motivates a node domain check; it does not explain the earlier 7811 s switch.",
+    "audit_resources": "Audit wall time 1.6745 s, own peak RSS 24027136 B, output 901750 B. Restored 150583978 B separately. Original primary and 7152 B owned core unchanged. The old supervisor RSS gap remains open.",
+    "conditional_probe": {
+      "invocations": 1,
+      "node_propagations": 176,
+      "center_propagations": 6,
+      "numerical_checks": 4056,
+      "mismatches": 0,
+      "independent_checks": 6003,
+      "admissible_components": 5,
+      "inadmissible_components": 1,
+      "maximum_admitted_mean_shift_microV": 1.2187679670483398,
+      "maximum_admitted_variance_shift_V2": 1.2313896406190924e-11,
+      "bounded_moment_finding": "At 8400 s component 0: mean_h=1, Var(h)=8.200468039193499e-11, necessary bounded-support cap=0; 16/32 nodes outside h bound. This later, downweighted component does not establish the earlier switch cause.",
+      "resources": "Exact child wall 0.014307688 s, peak RSS 10039296 B including fork/exec setup. Supervisor wall before receipt 0.391455182 s and own peak RSS 15896576 B. Closed output 279424 B.",
+      "source_implication": "Static parameter marginal variances do not grow under ordinary prediction/correction in real arithmetic. Earlier nonlinear evidence is not retained for reevaluation; actual historical bias cause remains unresolved."
+    }
+  },
+  "next": {
+    "start_ref": "design/conditional-belief-adequacy-001",
+    "name": "joint_support_consistent_conditional_correction_design",
+    "proposed_branch": "design/support-consistent-conditional-001",
+    "question": "Can one conditional correction carry physical support and full joint uncertainty without converting contact with a bound into unjustified certainty?",
+    "first_action": "Specify a compact conditional-moment and update contract using a single active h-bound Gaussian/linear-voltage reference; distinguish physical moments from distribution parameters and define evidence ownership.",
+    "scope": "One 16D component, one voltage likelihood, joint SOC/logQ correlations and public physical support. Analytical reference and storage/operation accounting; no trajectory or production patch.",
+    "joint_reference": {
+      "Gaussian_voltage_moments": [
+        "m_G",
+        "P_G"
+      ],
+      "conditional_direction": "b=P_G[:,h]/P_G[h,h] for positive P_G[h,h]",
+      "truncated_scalar_moments": [
+        "m_T",
+        "v_T"
+      ],
+      "joint_mean": "m_G+b*(m_T-m_G[h])",
+      "joint_covariance": "P_G+b*b^T*(v_T-P_G[h,h])",
+      "limitations": "Handle zero variance, support/voltage normalizers, full box support and subsequent nonlinear propagation explicitly. These are a reference, not an update applied to the saved checkpoint."
+    },
+    "required_deliverables": [
+      "Equations and semantics for distribution parameters, physical means/covariances and reported SOC/Q uncertainty.",
+      "An account of support and voltage evidence entering once, including already supported beliefs and subsequent prediction.",
+      "A complete state/workspace and operation estimate against the existing complete-subsystem SRAM goal.",
+      "Three fixed future qualification cases: interior linear, outward h-bound with SOC/logQ correlations, and zero-information preservation of an already supported belief.",
+      "One independently reviewed go/no-go decision for the representation and a finite qualification contract."
+    ],
+    "finish_line": "One reviewed design decision. Reject mean clipping, forced zero h variance, loss of joint dependence, duplicate evidence or unbudgeted persistent/workspace state. State what remains unknown rather than expanding the campaign.",
+    "historical_uncertainty": "Explicitly unresolved. Support consistency cannot reconstruct an earlier discarded nonlinear likelihood or by itself calibrate the SOC/Q intervals. Any historical-evidence recovery requires a separate evidence-ownership/storage contract.",
+    "current_status": "next_design_not_yet_frozen_or_executed",
+    "automatic_new_learner_runs": 0,
+    "automatic_new_source_generations": 0,
+    "automatic_weight_changes": false
+  },
+  "evidence": {
+    "summary": "experiments/conditional_belief_adequacy_001/summary.json",
+    "report": "experiments/conditional_belief_adequacy_001/REPORT.md",
+    "decision": "experiments/conditional_belief_adequacy_001/decision.json",
+    "contract": "plans/conditional_belief_adequacy_001.json",
+    "raw_probe": "experiments/conditional_belief_adequacy_001/attempt001/raw_probe.json",
+    "reduction": "experiments/conditional_belief_adequacy_001/attempt001/result.json",
+    "execution_receipt": "experiments/conditional_belief_adequacy_001/attempt001/receipt.json",
+    "executable_receipt": "experiments/conditional_belief_adequacy_001/executable_receipt.json",
+    "implementation_review": "experiments/conditional_belief_adequacy_001/implementation_review.json",
+    "result_review": "experiments/conditional_belief_adequacy_001/result_review.json",
+    "source_review": "experiments/conditional_belief_adequacy_001/source_review.json",
+    "previous_handoff": "handoff/archive/CONTINUE_weighting_output_diagnostic_001.json",
+    "previous_weighting_report": "experiments/weighting_output_diagnostic_001/REPORT.md",
+    "original_archive": "experiments/continuous_learning_validation_001/implementation/evidence/index.json",
+    "roadmap": "docs/ROADMAP.md",
+    "report_review": "experiments/conditional_belief_adequacy_001/report_review.json"
+  },
+  "guardrails": [
+    "Truth only in generation/domain validation or post-inference scoring; never initialization, inference, weights, runtime selection or tuning.",
+    "Actual intervals/order, carried state and exactly-once evidence accounting; same actual mean/full-Joseph gains; preserve valid prediction on rejected voltage.",
+    "Local precision, point accuracy, numerical health, hard support and coverage are separate. Raw status cannot hide point scores.",
+    "Retained preferred accuracy needs no further improvement; within-target drift is not failure. A four-hour miss is unresolved at this endpoint, not eventual failure.",
+    "No nuisance pruning, sensitivity rerun, seed/horizon/start/component-count sweep, day/week/annual promotion or proof transfer.",
+    "Machine handoffs use compact JSON/YAML; mumble is distinct from SCM, NAIA and D2/D2E proof claims.",
+    "No current own-point interval-exclusion defect established. Match entity, index, units and availability. Both conditionals miss truth; a normalization repair or retaining the alternative alone cannot validate coverage.",
+    "A mean at the physical upper h bound with materially positive variance is incompatible with any bounded-support moment interpretation. Do not repair uncertainty by forced zero variance or mean clipping.",
+    "The completed probe made no learner update and does not validate coverage. A future joint support-consistent design must preserve full dependencies and account for support/voltage evidence once."
+  ]
+}

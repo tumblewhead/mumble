@@ -6,6 +6,30 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The supported-correction decision and one-prefix historical control are complete.**
+At the fixed 7,200-second checkpoint, reevaluating all 252,000 archived voltage
+observations gives capacity **64.703737 mAh** and SOC **51.602859%**, close to
+the post-inference truth of **64.700000 mAh** and **51.605284%**. The saved
+recursive values were **65.977786 mAh** and **51.332289%**. Capacity local SD is
+about **0.00508 mAh** in the historical fit and **0.00506 mAh** in the recursive
+summary: this witness exposes a confidently wrong center with almost the same
+reported local width. Fixing either recursive target while reoptimizing the
+other quantities increases the best found likelihood cost. See the
+[historical control report](experiments/historical_likelihood_control_001/REPORT.md),
+[summary](experiments/historical_likelihood_control_001/summary.json),
+[decision](experiments/historical_likelihood_control_001/decision.json) and
+[independent review](experiments/historical_likelihood_control_001/independent_review.json).
+
+The exact single-h-bound reference passed **79 checks** and **605 independent
+review checks**, but it cannot generally recover missing SOC/Q information.
+See the [supported-reference decision](experiments/support_consistent_conditional_001/REPORT.md).
+The selected next engineering step is a finite retained-likelihood replacement
+prototype with a common declared prior, full joint dependencies and exactly-once
+evidence ownership. Its [design](plans/retained_likelihood_replacement_001.json)
+is not yet executed. Production estimator code is unchanged; calibrated
+intervals and complete Cortex-M23 resources remain unresolved. Current branch:
+`design/support-consistent-conditional-001`.
+
 **The three-checkpoint conditional-belief probe is complete.** Five of six
 component snapshots have nonlinear voltage-mean corrections of only
 1.15–1.22 microvolts against 1,000-microvolt observation-noise SD. At 8,400 s,
@@ -17,9 +41,9 @@ result review pass. See the
 [summary](experiments/conditional_belief_adequacy_001/summary.json),
 [decision](experiments/conditional_belief_adequacy_001/decision.json) and
 [result review](experiments/conditional_belief_adequacy_001/result_review.json).
-The next finite decision concerns joint support-consistent conditional
-correction. Historical SOC/Q undercoverage and the cause of the earlier weight
-switch remain unresolved. Current branch: `design/conditional-belief-adequacy-001`.
+The subsequent supported-correction decision and historical control are now
+complete and linked above. Historical SOC/Q coverage and the unique cause of
+the earlier weight switch remain unresolved.
 
 **The saved-evidence weighting/interval audit is complete.** It checked
 50,401 scalar rows and 1,445 full queries with no tested accounting or formula

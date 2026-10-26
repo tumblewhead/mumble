@@ -7,12 +7,12 @@ general repair for the narrow SOC and capacity intervals**. Retain its
 distribution and evidence identities as requirements for a future estimator.
 Do not install it as a drop-in modification to the present learner.
 
-The user's objective remains useful, defensible SOC/capacity uncertainty. A
-new [one-prefix historical-likelihood control](../../plans/historical_likelihood_control_001.json)
-tests the broader problem directly: reevaluate the actual nonlinear evidence
-at 7,200 seconds, before the earlier weight switch and later h-bound witness.
-This control has its own fixed call/resource budget and cannot establish
-coverage merely by producing better points or different local widths.
+The user's objective remains useful, defensible SOC/capacity uncertainty. The
+[one-prefix historical-likelihood control](../historical_likelihood_control_001/REPORT.md)
+has now completed its three declared fits at 7,200 seconds, before the earlier
+weight switch and later h-bound witness. It reevaluates the archived nonlinear
+evidence and supplies a concrete target-discrepancy witness. Better points or
+different local widths do not by themselves establish coverage.
 
 This report is accompanied by the [frozen reference contract](../../plans/support_consistent_conditional_001.json),
 [mathematical specification](mathematics.json), executable reference and
@@ -240,11 +240,21 @@ moment insufficiency and public-start nonlinear moments. Independent scalar
 integration supplies the moment/evidence comparison. Numerical reconstruction
 tolerances qualify arithmetic only; there is no voltage-materiality gate.
 
-The next diagnostic is the separately frozen historical-likelihood control.
-It fits the same archived prefix with the existing full-history reference,
-then separately fixes Q and current SOC at their recursive points while
-reoptimizing nuisance quantities. It uses no recursive posterior penalty and
-no truth. Its bounded likelihood objective differs from the online prior;
+The separately frozen historical-likelihood control has completed one free
+fit and two target-constrained fits on the same archived prefix. It uses no
+recursive posterior penalty and no truth in inference. The free result is
+Q=64.703737 mAh and current SOC=51.602859 percent. Fixing the saved recursive
+Q or SOC increases the best found negative log likelihood by 26,254.615 and
+17,453.912 respectively; the nuisance quantities are reoptimized in each case.
+The [control report](../historical_likelihood_control_001/REPORT.md) records
+local precision, post-inference scoring and the selected evidence-retention
+work. Its bounded likelihood objective differs from the online prior, and
 local optimum costs cannot establish global exclusion or calibrated coverage.
-The result must determine the next evidence-retention decision, preserving
-all previous failures and the useful later point learning already observed.
+
+A future compressed representation needs an explicit approximation account.
+The [likelihood-fidelity requirement](likelihood_fidelity_requirement.json)
+relates a global bound on parameter-dependent log-likelihood error to exact
+posterior tail-probability bounds under a common prior and target map. It is
+an acceptance principle, not an implemented certificate or an obstacle to
+building a finite retained-evidence prototype. No voltage cutoff or arbitrary
+uncertainty multiplier is introduced.

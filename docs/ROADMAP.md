@@ -2,13 +2,27 @@
 
 ## Decision
 
+**The supported-reference decision and historical likelihood control are complete.**
+The single-h-bound mathematical reference passed all 79 checks but is not a
+general SOC/Q uncertainty repair. At the fixed 7,200-second prefix, the full
+nonlinear history gives Q=64.703737 mAh and SOC=51.602859%, close to the archived
+truth, while the recursive center is biased despite a similar capacity local
+SD. The three declared fits all completed; no production estimator changed.
+The next finite engineering step is a retained-likelihood replacement prototype
+with common prior/support semantics and full joint evidence ownership. See the
+[control report](../experiments/historical_likelihood_control_001/REPORT.md),
+[decision](../experiments/historical_likelihood_control_001/decision.json),
+[review](../experiments/historical_likelihood_control_001/independent_review.json)
+and [prototype design](../plans/retained_likelihood_replacement_001.json).
+Local likelihood curvature and this one truth comparison do not establish
+calibrated posterior intervals or identify one unique historical approximation.
+
 **The three-checkpoint conditional-belief probe is complete.** Five admitted
 component snapshots show only 1.15–1.22-microvolt nonlinear mean corrections.
 At 8,400 s, component 0 has an h mean/variance pair incompatible with the
 physical interval [-1,1], and half the prescribed nodes are outside that bound.
-The next finite decision is a joint support-consistent conditional-correction
-design. Historical SOC/Q uncertainty and the earlier weight-switch cause remain
-open. See the [probe report](../experiments/conditional_belief_adequacy_001/REPORT.md),
+The subsequent supported-correction decision is complete and linked above.
+Historical SOC/Q coverage and the earlier weight-switch cause remain open. See the [probe report](../experiments/conditional_belief_adequacy_001/REPORT.md),
 [decision](../experiments/conditional_belief_adequacy_001/decision.json) and
 [independent result review](../experiments/conditional_belief_adequacy_001/result_review.json).
 
@@ -89,7 +103,7 @@ not improve capacity, and accurate points do not validate uncertainty ranges.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — candidate retained for qualification** | Continuous diagnostic, weighting audit and conditional-belief probe complete; joint support-consistent correction design next | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
+| **M2: Desktop performance — candidate retained for qualification** | Continuous diagnostic, supported reference and historical control complete; finite retained-likelihood replacement next | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory
@@ -486,34 +500,34 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Fetch the current `design/conditional-belief-adequacy-001` work branch and read
-its [summary](../experiments/conditional_belief_adequacy_001/summary.json),
-[report](../experiments/conditional_belief_adequacy_001/REPORT.md),
-[decision](../experiments/conditional_belief_adequacy_001/decision.json),
-[independent review](../experiments/conditional_belief_adequacy_001/result_review.json)
-and [handoff](../handoff/CONTINUE.json). The original primary, weighting audit
-and canonical checkpoint probe are complete and preserved.
+Fetch the current `design/support-consistent-conditional-001` work branch and
+read the [historical control report](../experiments/historical_likelihood_control_001/REPORT.md),
+[summary](../experiments/historical_likelihood_control_001/summary.json),
+[decision](../experiments/historical_likelihood_control_001/decision.json),
+[independent review](../experiments/historical_likelihood_control_001/independent_review.json)
+and [handoff](../handoff/CONTINUE.json). The support reference and both historical
+attempts are closed; the first historical attempt failed before any fit, and the
+repaired attempt used exactly the three declared calls. Do not rerun them to resume.
 
-Use `design/support-consistent-conditional-001` for the next finite design
-contract: one conditional component, one voltage likelihood, public support,
-full joint correlations and an exact single-active-h-bound reference. Define
-which distribution quantities are carried and reported, how support/evidence
-enter once, how prediction works, and the complete storage/workspace cost.
+Use the [retained-likelihood replacement design](../plans/retained_likelihood_replacement_001.json)
+to implement one finite host prototype at the same prefix. It must preserve a
+coherent common prior and support, the complete entering-state chart and all
+SOC/Q cross-dependencies. Reevaluate retained nonlinear evidence and replace
+its former approximation; never multiply the replayed observations into a
+posterior already derived from them. The completed pure-likelihood result is a
+reference and possible warm start, not a matched-prior posterior benchmark.
 
-Specify three fixed later qualification cases: an interior linear case, an
-outward h-bound case with SOC/logQ correlations, and zero-information
-preservation of an already supported belief. Finish with one independently
-reviewed representation go/no-go decision. This is a design task; no new
-trajectory, automatic estimator change or weight adjustment is queued.
+Freeze the actual implementation and finite call/resource budget before new
+inference. Finish with one reviewed replacement comparison and measured storage
+and work. Report whether it recovers a useful center and preserves uncertainty
+semantics; do not substitute a multiplier, voltage cutoff or status-only change.
+The global likelihood-error requirement is an eventual fidelity target for
+compression, not an open-ended prerequisite to this finite prototype.
 
-Do not manufacture certainty by setting the h variance to zero or silently
-clipping a mean. The later downweighted boundary witness does not establish
-the earlier dominance-switch cause. Small current local moment corrections
-do not validate historical uncertainty or bound accumulated score effects.
-Support consistency alone cannot recover discarded historical evidence.
-
-The old supervisor RSS measurement gap remains open. This probe records its
-own supervisor and exact-child resources but does not repair that historical
-measurement. Capacity has no startup deadline. Useful point accuracy, local
-precision, physical support, calibrated coverage, complete Cortex-M23 resources
-and indefinite operation remain separate obligations.
+The current full-history solver retained 169,346,072 host bytes. A streaming
+likelihood evaluator may avoid its large row workspace, but retaining or
+compressing the historical observations remains a separate resource obligation.
+The original supervisor RSS measurement gap remains open. Capacity has no
+startup deadline. Useful point accuracy, local precision, physical support,
+calibrated coverage, complete Cortex-M23 resources and indefinite operation
+remain separate obligations.

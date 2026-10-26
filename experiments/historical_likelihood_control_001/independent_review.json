@@ -1,24 +1,28 @@
 {
   "schema": "mumble_historical_likelihood_control_001_independent_review_v1",
-  "status": "prelaunch_repair_review_pass_attempt002_pending",
+  "status": "pass",
   "reviewer": "independent interval and mathematical reviewer",
   "contract_path": "plans/historical_likelihood_control_001.json",
   "contract_sha256": "33736f934e5836a565f4178f54da61f1bffe8b93f08555b4d5123442b62bdb6c",
-  "local_contract_revision": "c857ffd",
   "stages": {
     "contract": "pass",
     "implementation": "pass",
-    "canonical_results": "pending",
+    "canonical_results": "pass",
     "prelaunch_attempt001": "failed_before_any_fit",
-    "prelaunch_input_repair": "pass"
+    "prelaunch_input_repair": "pass",
+    "reporting_reducer": "pass"
   },
   "material_contract_blockers": [],
   "reviewer_activity": {
     "new_fit_or_reference_executions": 0,
     "physical_model_evaluations": 0,
-    "new_canonical_observation_or_checkpoint_reads": 0,
+    "new_canonical_observation_or_checkpoint_reads": 252000,
     "existing_source_or_evidence_edits": 0,
-    "git_writes": 0
+    "git_writes": 0,
+    "canonical_input_read_scope": "Post-completion read-only verification: full input hashes, all 252000 original observation/CSV record pairs, and saved query/truth endpoint. No checkpoint or model execution.",
+    "truth_read_stage": "after attempt002 completed; descriptive reporting only",
+    "canonical_truth_records_decoded_after_fit_completion": 1,
+    "reporting_reducer_executions": 0
   },
   "findings": [
     "The amended contract correctly matches unchanged CLI start semantics: free public starts 0,1,2; constrained start0 is the free theta and subsequent starts are public 0,1. No solver edit or extra invocation is needed.",
@@ -84,5 +88,299 @@
     },
     "compact_witness_target_matches": 0,
     "verification": "Reviewer independently streamed the full original query member and recomputed SHA256, Git-blob SHA1, byte count, row count and unique target-line identity; selected only aggregate point/availability fields."
-  }
+  },
+  "source_revision": "5bc11d685ac4b093a03208c0caac86ddede5e599",
+  "canonical_result_review": {
+    "status": "pass",
+    "checks": 252117,
+    "failures": [],
+    "artifacts_verified": 22,
+    "closed_files_including_receipt": 23,
+    "closed_output_bytes": 123386,
+    "bound_inputs_verified": 20,
+    "commit_bound_files_verified": 14,
+    "CSV_header": "sample_index,dt_s,current_A,voltage_V",
+    "bitwise_rows_verified": 252000,
+    "binary_prefix_sha256": "a2219e78d29ddab4cfd1e02a7b6b520dc74fc0229e995b1aba0044bb240b269d",
+    "result_identity": {
+      "bytes": 5024,
+      "sha256": "08beb5fd47ae4caea35c00dcb2dc37e29fbb50b62194060cc6e44c88b5d192f8"
+    },
+    "receipt_identity": {
+      "bytes": 28207,
+      "sha256": "7f33713c0b4509581c8939124518ca741853dd506084b0623e07bd06ced8cb44"
+    },
+    "executable_receipt_v2_identity": {
+      "bytes": 3597,
+      "sha256": "9c5ad997f7d4ea2a1fbb3044c63b314ade39020136fc03c8d32282f1a8637897"
+    },
+    "supervisor": {
+      "own_peak_RSS_bytes": 17436672,
+      "RSS_method": "getrusage(RUSAGE_SELF), not cumulative child usage",
+      "wall_s_before_final_receipt": 57.760553493999396
+    },
+    "source_executions_by_reviewer": 0,
+    "frozen_fit_calls_across_attempts": 3,
+    "attempt001_fit_calls": 0,
+    "attempt002_fit_calls": 3,
+    "all_commands_starts_constraints_and_resource_caps_reconciled": true,
+    "fits": [
+      {
+        "fit_id": "free",
+        "Q_Ah": 0.06470373701300736,
+        "SOC": 0.5160285857384294,
+        "objective": 126417.51119391782,
+        "objective_full": 126417.51119391828,
+        "RMSE_V": 0.0010016554202439648,
+        "status": 0,
+        "termination_reason": 1,
+        "iterations": 163,
+        "evaluations": 257,
+        "converged_starts": 2,
+        "active_linear_constraints": 0,
+        "active_outer_bounds": 0,
+        "elapsed_physical_s": 7199.999999959603,
+        "charge_Ah": 0.01707738095242571,
+        "child_wall_s": 34.80431860800036,
+        "child_CPU_s": 34.768517,
+        "child_peak_RSS_bytes": 170393600,
+        "delta_from_free_objective_full": 0.0,
+        "delta_from_free_objective": 0.0
+      },
+      {
+        "fit_id": "fixed_recursive_Q",
+        "Q_Ah": 0.06597778624402621,
+        "SOC": 0.5158323217482943,
+        "objective": 152672.12632965195,
+        "objective_full": 152672.12632965102,
+        "RMSE_V": 0.0011007649805016588,
+        "status": 0,
+        "termination_reason": 1,
+        "iterations": 45,
+        "evaluations": 57,
+        "converged_starts": 3,
+        "active_linear_constraints": 0,
+        "active_outer_bounds": 0,
+        "elapsed_physical_s": 7199.999999959603,
+        "charge_Ah": 0.01707738095242571,
+        "child_wall_s": 8.195747063000454,
+        "child_CPU_s": 8.185719,
+        "child_peak_RSS_bytes": 170262528,
+        "delta_from_free_objective_full": 26254.615135732733,
+        "delta_from_free_objective": 26254.61513573413
+      },
+      {
+        "fit_id": "fixed_recursive_SOC",
+        "Q_Ah": 0.06478949092884492,
+        "SOC": 0.5133228864538337,
+        "objective": 143871.4236581232,
+        "objective_full": 143871.4236581192,
+        "RMSE_V": 0.0010685675906087358,
+        "status": 0,
+        "termination_reason": 1,
+        "iterations": 46,
+        "evaluations": 60,
+        "converged_starts": 2,
+        "active_linear_constraints": 0,
+        "active_outer_bounds": 0,
+        "elapsed_physical_s": 7199.999999959603,
+        "charge_Ah": 0.01707738095242571,
+        "child_wall_s": 8.830584309000187,
+        "child_CPU_s": 8.819784,
+        "child_peak_RSS_bytes": 170262528,
+        "delta_from_free_objective_full": 17453.912464200912,
+        "delta_from_free_objective": 17453.912464205394
+      }
+    ],
+    "objective_definition": "objective_full is the explicit full-history half sum of squared voltage residuals divided by sigma_V squared, without the fixed Gaussian additive constant. Signed deltas use objective_full. objective is separately retained and agrees up to summation roundoff."
+  },
+  "local_precision_review": {
+    "scope": "Independent algebra on retained free Gram only; no model/solver/reference execution; exact binary64 entries embedded in Decimal at 70-digit precision",
+    "source": "free/stdout.json",
+    "dimension": 16,
+    "symmetric_max_absolute_error": 0.0,
+    "all_cholesky_pivots_positive": true,
+    "decimal_reconstruction_max_abs": "1E-61",
+    "condition_2_binary64": 80331740.6517283,
+    "gradient_formula": "endpoint SOC = z0-charge_Ah/exp(logQ); g_scaled = coordinate_scales * g_raw; Gram already uses sigma-whitened residual Jacobians",
+    "cov_logQ_SOC": -3.6756237060847027e-10,
+    "corr_logQ_SOC": -0.2840371347372075,
+    "active_linear_constraints": 0,
+    "active_outer_bounds": 0,
+    "interpretation": "Local unrestricted Gauss-Newton precision in this interior free fit, not calibrated posterior/frequentist coverage or global identifiability; no constrained-chart covariance and no eigenvalue clipping/pseudoinverse.",
+    "eigenvalue_min_binary64": 460.90319611095384,
+    "eigenvalue_max_binary64": 37025156015.53781,
+    "products": {
+      "log_Q": {
+        "variance": 6.1596765275739885e-09,
+        "SD": 7.848360674417294e-05,
+        "variance_decimal": "6.159676527573988314184558468095072044669651636332546250156945990955311E-9",
+        "solve_residual_max_abs_decimal": "1.66E-67",
+        "binary64_cholesky_variance": 6.15967652757398e-09,
+        "binary64_relative_variance_error": 1.3169006450320564e-15,
+        "scaled_gradient_nonzero": {
+          "6": 1
+        }
+      },
+      "Q_Ah": {
+        "variance": 2.578793903292854e-11,
+        "SD": 5.078182650607257e-06,
+        "variance_decimal": "2.578793903292854118492903177680098298776034423321545589526747791033922E-11",
+        "solve_residual_max_abs_decimal": "1.602E-68",
+        "binary64_cholesky_variance": 2.5787939032928543e-11,
+        "binary64_relative_variance_error": 7.239138181787958e-17,
+        "scaled_gradient_nonzero": {
+          "6": 0.06470373701300736
+        }
+      },
+      "endpoint_SOC": {
+        "variance": 2.718653979952779e-10,
+        "SD": 1.6488341274830463e-05,
+        "variance_decimal": "2.718653979952778775894753414428888561257851815088977341894546591068084E-10",
+        "solve_residual_max_abs_decimal": "2.95E-68",
+        "binary64_cholesky_variance": 2.718653979952673e-10,
+        "binary64_relative_variance_error": 3.893476513668604e-14,
+        "scaled_gradient_nonzero": {
+          "5": 0.1,
+          "6": 0.2639319109032706
+        }
+      }
+    },
+    "statistical_threshold": null
+  },
+  "post_inference_witness_review": {
+    "post_inference_only": true,
+    "verified_members": [
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/queries.jsonl",
+        "bytes": 94135978,
+        "sha256": "fbee9673c4bcace1906c0e47347ee8e67b03d078ac3ea8d489518d2ddfe8b7c6",
+        "git_blob_sha1": "200bea83966ab51ca003a2a26ee8157635cda438"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/truth.bin",
+        "bytes": 16128000,
+        "sha256": "351b93c4157e80681eb5902f713750b6ab71d5c23a1b21a76cdbd8572861fc9f",
+        "git_blob_sha1": "ed1672fc261e084f690cb3ae4bd63f58268a8163"
+      }
+    ],
+    "matching_query_count": 1,
+    "query_line": 7369,
+    "query_line_bytes": 6424,
+    "query_line_sha256": "b19ea102848ecc41b5acae99db0495a248d63ff2cf280f3baf76840e0f2d8e95",
+    "truth": {
+      "next_index": 252000,
+      "capacity_Ah": 0.0647,
+      "SOC": 0.5160528446308963,
+      "clean_voltage_V": 3.572313354824681
+    },
+    "recursive_aggregate": {
+      "capacity_Ah": 0.06597778624402621,
+      "SOC": 0.5133228864538338,
+      "logQ_SD": 7.674167583776465e-05,
+      "SOC_SD": 7.84097177545266e-06,
+      "local_Q_interval_Ah": [
+        0.06596766052934153,
+        0.0659879135129588
+      ],
+      "local_SOC_interval": [
+        0.5133072045102829,
+        0.5133385683973848
+      ],
+      "both_own_points_included": true,
+      "Q_truth_included": false,
+      "SOC_truth_included": false,
+      "both_statuses": "provisional",
+      "local_ranges_available": true
+    },
+    "free_errors": {
+      "Q_Ah": 3.7370130073627328e-06,
+      "SOC": -2.4258892466932913e-05,
+      "Q_error_in_local_SD": 0.7358957454820683,
+      "SOC_error_in_local_SD": -1.4712754947621223,
+      "semantics": "Descriptive single-endpoint errors divided by local curvature SDs; not calibrated tail probabilities or coverage."
+    }
+  },
+  "result_interpretation": [
+    "Both predeclared constrained fits have higher returned full objective than the free fit. Neither beats the free baseline; no additional fit is authorized or needed to complete this control.",
+    "The free fit supplies a retained nonlinear-history likelihood witness at a different SOC/Q location. The available local optimizer results do not establish global optimum, global target exclusion or unique historical causation.",
+    "The free Q local SD is approximately the same scale as the original recursive delta-method Q SD. The large Q disagreement at this checkpoint is predominantly a location discrepancy; these results do not justify blanket covariance inflation as a remedy.",
+    "Both original recursive local intervals contain their own declared points and miss the held-out truth at this endpoint. Their numerical self-containment does not establish calibrated coverage.",
+    "The bounded likelihood fit and prior-conditioned recursive mixture are different inferential objects; neither objective nor curvature may be added to a posterior already conditioned on the same observations.",
+    "The full matrix was formed before damping and Schur reduction, but it is a Gauss-Newton likelihood Jacobian Gram. It omits residual second derivatives and is local; its inverse is not automatically a posterior covariance.",
+    "All retained fits report zero active linear constraints and outer bounds. No unrestricted precision is inferred from either constrained fit, particularly the linked endpoint-SOC chart.",
+    "The observed host memory and timing establish only this bounded desktop control. They do not qualify complete Cortex-M23 memory, compute, streaming evidence retention or indefinite numerical behavior.",
+    "The original aggregate and each of the two component local Q and SOC intervals miss endpoint truth; both free local two-SD display bands contain it. These six exclusions and two inclusions are a single-checkpoint descriptive comparison, not an interval calibration study."
+  ],
+  "initial_contract_review_revision": "c857ffd",
+  "current_contract_and_source_revision": "5bc11d685ac4b093a03208c0caac86ddede5e599",
+  "reporting_review": {
+    "status": "pass",
+    "checks": 154,
+    "failures": [],
+    "report_input_identities_verified": 45,
+    "report_artifact_identities_verified": 2,
+    "source_review": "Full static reducer review: closed inference and all hashes precede truth; exact free chart and scale gradients, no extra sigma, damping, eigenvalue clipping or pseudo-inverse; identities and all new numeric reductions reconciled. No material blocker.",
+    "source_identity": {
+      "bytes": 28304,
+      "sha256": "83e2c449f6a1411421ef6fb7018b637b074f16fc444bab3b29b0ab314e084c1a"
+    },
+    "summary_identity": {
+      "bytes": 98746,
+      "sha256": "23987362287e44f665dd2d797f21c944f180c7892ad4e4f4aacd860dc43a3943"
+    },
+    "receipt_identity": {
+      "bytes": 26704,
+      "sha256": "f2074ce05919cc2bcc7f32d79118df3b4d3aa606949d35c35c42dd51b342b812"
+    },
+    "precision_comparisons": [
+      {
+        "target": "logQ",
+        "reported_SD": 7.848360674417289e-05,
+        "independent_Decimal_SD": 7.848360674417294e-05,
+        "relative_variance_difference": 1.3322676295501878e-15
+      },
+      {
+        "target": "Q_Ah",
+        "reported_SD": 5.078182650607257e-06,
+        "independent_Decimal_SD": 5.078182650607257e-06,
+        "relative_variance_difference": 2.220446049250313e-16
+      },
+      {
+        "target": "SOC",
+        "reported_SD": 1.648834127483014e-05,
+        "independent_Decimal_SD": 1.6488341274830463e-05,
+        "relative_variance_difference": 3.8968828164342995e-14
+      }
+    ],
+    "original_entities_verified": 3,
+    "original_interval_truth_inclusion": {
+      "aggregate": {
+        "Q": false,
+        "SOC": false
+      },
+      "component0": {
+        "Q": false,
+        "SOC": false
+      },
+      "component1": {
+        "Q": false,
+        "SOC": false
+      }
+    },
+    "free_local_intervals": {
+      "Q_Ah": [
+        0.06469358144477261,
+        0.06471389417545846
+      ],
+      "SOC": [
+        0.5159956090558797,
+        0.516061562420979
+      ]
+    },
+    "reducer_runs_by_reviewer": 0,
+    "new_model_solver_reference_runs": 0,
+    "limitation": "Independent arithmetic checks use retained fit matrices and objectives. They do not reevaluate model trajectories, derivatives or residual likelihoods, and do not establish calibration or global fits."
+  },
+  "material_result_or_reporting_blockers": []
 }

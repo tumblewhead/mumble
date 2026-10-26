@@ -1,0 +1,80 @@
+{
+  "schema": "mumble_historical_likelihood_control_decision_v1",
+  "status": "control_closed_retained_likelihood_replacement_selected",
+  "question": "How should the overly narrow and wrong SOC/capacity intervals be repaired?",
+  "finding": "At the fixed7200s prefix, reevaluating the complete nonlinear likelihood largely corrects the capacity center while retaining almost the same capacity local SD. SOC center also improves and its local SD is about2.10 times larger. Select joint evidence-retention/replacement work, not a blanket width multiplier.",
+  "endpoint": {
+    "seconds": 7200,
+    "samples": 252000,
+    "truth_Q_Ah": 0.0647,
+    "truth_SOC": 0.5160528446308963,
+    "recursive_Q_Ah": 0.06597778624402621,
+    "recursive_SOC": 0.5133228864538338,
+    "historical_Q_Ah": 0.06470373701300736,
+    "historical_SOC": 0.5160285857384294,
+    "recursive_Q_error_percent": 1.9749400989585997,
+    "historical_Q_error_percent": 0.005775908821270548,
+    "recursive_SOC_error_pp": -0.27299581770624526,
+    "historical_SOC_error_pp": -0.0024258892466932913,
+    "historical_to_recursive_Q_SD_ratio": 1.0029500376864562,
+    "historical_to_recursive_SOC_SD_ratio": 2.102844104916864,
+    "historical_local_two_SD_contains_truth": true,
+    "recursive_local_two_SD_contains_truth": false
+  },
+  "constraint_minus_free_NLL": {
+    "fixed_recursive_Q": 26254.615135732733,
+    "fixed_recursive_SOC": 17453.912464200912
+  },
+  "completed": {
+    "supported_reference_invocations": 1,
+    "supported_reference_checks": 79,
+    "supported_reference_independent_checks": 605,
+    "historical_attempt001_fit_calls": 0,
+    "historical_attempt002_fit_calls": 3,
+    "inference_retries": 0,
+    "readonly_reporting_invocations": 1,
+    "raw_result_independent_checks": 252117,
+    "reporting_independent_checks": 154,
+    "old_learner_ingests": 0,
+    "source_generations": 0,
+    "production_estimator_changes": false
+  },
+  "support_reference_decision": "GO as an exact single-bound affine reference; NO-GO as a standalone historical SOC/Q remedy or an unbudgeted nonlinear streaming implementation.",
+  "next": {
+    "name": "retained_likelihood_replacement_001",
+    "design": "plans/retained_likelihood_replacement_001.json",
+    "status": "design_only_not_executed",
+    "scope": "One same-prefix finite host replacement comparison with a coherent common prior/support, original entering-state chart, full joint dependencies, exact observation ownership and measured storage/work. Freeze executable details and budget before inference.",
+    "existing_reference_reuse": "Completed free fit may be a warm start and likelihood reference; it is not a matched-prior posterior.",
+    "ownership": "Replace an old evidence approximation. Do not append replayed observations to a posterior already derived from them.",
+    "resource_gap": "Existing full solver retains169346072 host bytes. Streaming evaluation can remove row workspace but retained evidence still needs storage; near10KiB M23 is not qualified.",
+    "proposed_full_prefix_model_passes_max": 4,
+    "proposed_surrogate_prior_solves": 2,
+    "new_full_nonlinear_likelihood_optimizations": 0,
+    "prior_semantics": "Intentional coherent supported reference from public Gaussian kernels, common between arms; not claimed identical to original online prior probability semantics."
+  },
+  "limits": [
+    "Single endpoint and finite local searches; higher constrained costs do not prove global exclusion.",
+    "Pure likelihood and a prior-conditioned recursive mixture differ; unique historical causation is unresolved.",
+    "Local Gauss-Newton two-SD ranges are diagnostic; one truth inclusion is not coverage validation.",
+    "No production interval repair, candidate promotion, broader campaign or target qualification is claimed."
+  ],
+  "reject_as_repair": [
+    "Truth-tuned width multiplier or voltage materiality cutoff",
+    "h mean clipping or forced zero h variance",
+    "Dropping SOC/Q/nuisance correlations",
+    "Counting observations and their derived posterior as independent evidence",
+    "Reporting-only status changes in place of useful uncertainty"
+  ],
+  "evidence": {
+    "report": "experiments/historical_likelihood_control_001/REPORT.md",
+    "summary": "experiments/historical_likelihood_control_001/summary.json",
+    "result": "experiments/historical_likelihood_control_001/attempt002/result.json",
+    "receipt": "experiments/historical_likelihood_control_001/attempt002/receipt.json",
+    "independent_review": "experiments/historical_likelihood_control_001/independent_review.json",
+    "supported_reference": "experiments/support_consistent_conditional_001/REPORT.md",
+    "likelihood_fidelity": "experiments/support_consistent_conditional_001/likelihood_fidelity_requirement.json"
+  },
+  "coverage_validated": false,
+  "candidate_promoted": false
+}

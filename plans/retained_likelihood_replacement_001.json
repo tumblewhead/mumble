@@ -1,0 +1,130 @@
+{
+  "schema": "mumble_retained_likelihood_replacement_design_v1",
+  "status": "design_only_not_executed",
+  "question": "At the same7200s prefix, can one explicit nonlinear-evidence block be relinearized and atomically replaced under a common coherent prior, changing the target solution without duplicating evidence or inventing uncertainty?",
+  "decision_scope": "A finite host prototype of one replacement transaction. This is not an executable frozen contract, a new completed fit, a calibrated interval provider or a firmware implementation.",
+  "existing_evidence": {
+    "historical_control": "plans/historical_likelihood_control_001.json; completed attempt002, to be used only after its independent result review.",
+    "use_of_completed_free_fit": "Reuse its entering parameter/state vector as the replacement anchor and common numerical warm start, and its saved pure-likelihood value as an evaluator parity reference. Do not call it a matched-prior MAP or posterior.",
+    "current_comparison": "The completed pure-likelihood solution supplies a useful target witness. This design does not rerun its three fits or change their interpretation.",
+    "baseline_measured_resources": {
+      "free_fit_wall_s": 34.80431860800036,
+      "free_fit_CPU_s": 34.768517,
+      "free_fit_peak_RSS_bytes": 170393600,
+      "free_fit_evaluations": 257,
+      "source": "experiments/historical_likelihood_control_001/attempt002/free/resources.json and summary.json"
+    }
+  },
+  "input_and_ownership": {
+    "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+    "prefix_records": 252000,
+    "prefix_interval": "[0,252000)",
+    "observations": "The existing archived little-endian<Qddd> observations, preserving source hash, record IDs, actual intervals/current/voltage and the existing binary-prefix identity.",
+    "entering_state": "All16 coordinates describe time0 parameters and entering physical state. Each complete model pass begins from this same candidate entering state and propagates every prefix interval in order. Never initialize the history from the corrected7200s state.",
+    "prior_once": "One immutable time0 prior belongs outside the replaceable likelihood block. The block owns only observations0..251999.",
+    "replacement": "Retire the old block representation and install its replacement; never add both quadratics, their precisions, or the recursive posterior. Repeated evaluation is not a new observation.",
+    "cursor": "The source/observation cursor remains252000 throughout the transaction. Only the representation generation changes.",
+    "later_window_caveat": "No later-window arrival Gaussian is introduced. A later entering-state distribution derived from earlier observations would need its own disjoint evidence ownership and transport contract."
+  },
+  "common_reference_prior": {
+    "chart": "x=(logtau1..3,loggamma_plus,loggamma_minus,logQ,R0,R1..3,H,z0,v10..3,h0), with density relative to Lebesgue dx in this entering chart.",
+    "kernel_source": "Use exactly the two public means, diagonal factors and initial weights from scm_hypothesis.c:public_belief and split_component; do not use a fitted or truth-selected center.",
+    "definition": "pi_ref(x)=1_D(x)*[0.5*N(x;mu0,P0)+0.5*N(x;mu1,P1)]/Z_D.",
+    "support_D": "The original reference entering box: public logtau/loggamma/logQ bounds, R0..3 in[0,1], H in[0,0.1], z0 in[0.2,0.95], v_i0 in[-0.08,0.08], h0 in[-1,1], intersected with physical feasibility over the fixed known current/time prefix. SOC path feasibility is z0-max_prefix_charge/Q>=0 and z0-min_prefix_charge/Q<=1.",
+    "semantics": "This is an intentional coherent supported reference built from the public Gaussian kernels. The online initialization does not establish an exact physically supported Gaussian-mixture posterior, so do not claim identical original-prior probability semantics.",
+    "normalization": "Condition the mixture as a whole. Do not separately renormalize components while silently retaining equal weights. Z_D is common to both arms and cancels in MAP/cost contrasts; no marginal evidence or posterior probabilities are reported without the required normalization.",
+    "same_between_arms": "Both arms use the identical prior kernel mixture, support, base measure, target map and source. Only the likelihood linearization anchor differs.",
+    "prior_derivatives": "Use the exact log-sum-exp mixture penalty and its gradient/Hessian, including the responsibility covariance term. Do not replace the mixture by a moment-matched Gaussian or add its precision twice."
+  },
+  "chart_and_model_reuse": {
+    "unchanged_API": [
+      "scm_model_init",
+      "scm_model_step",
+      "scm_model_predict"
+    ],
+    "forward_mapping": "Legacy theta=(x0,x1,x2,x3,x4,x11,x5). Legacy alpha=(x6,x7,x8,x9,x10,x12,x13,x14,x10*x15). Thus u0=H*h0 is recomputed for each candidate.",
+    "derivatives": "Use all7 existing theta derivatives and all9 amplitude features. Chain dV/dH=X_H+h0*X_u0 and dV/dh0=H*X_u0; retain the complete16-column Jacobian and full joint Gram.",
+    "warm_start_mapping": "Convert the saved free theta/alpha back to x. Its H must be positive to identify h0=u0/H; validate support and round-trip the mapped predictions. The mapping is only a point initialization, not an inferred prior.",
+    "base_measure": "Keep optimization/objective semantics in x. If a later density or integration is expressed in legacy(theta,alpha) coordinates, dx=d(theta,alpha)/H for H>0 and its density must include1/H. Merely using another numerical coordinate to optimize the same explicitly x-based objective does not change the chosen MAP base measure.",
+    "existing_solver_limit": "The current variable-projection inner problem treats alpha as linear. A Gaussian prior on h0=u0/H is nonlinear in alpha, so adding a diagonal prior to that inner solve or its raw Gram is not a coherent matched-prior implementation."
+  },
+  "arms_and_one_transaction": {
+    "old_anchor": "The fixed public entering mean before the logQ split, as encoded by public_belief. This is a declared frozen-block control, not a reconstruction of every historical online linearization.",
+    "replacement_anchor": "The completed free retained-history fit mapped to x; no new full-history nonlinear-likelihood optimum is sought in this prototype.",
+    "quadratic_definition": "At each anchor a, stream the exact nonlinear prefix to obtain L(a)=sum r_i(a)^2/(2*sigma_V^2), gradient g(a), and full undamped Gauss-Newton Gram G(a). Store q_a(x)=L(a)+g(a)^T(x-a)+0.5*(x-a)^T*G(a)*(x-a). Sigma_V remains0.001.",
+    "frozen_arm": "Solve q_old(x)-log pi_ref_kernel(x) on D from the common completed-free-fit warm start. Keep q_old frozen.",
+    "replacement_arm": "Retire q_old and solve q_new(x)-log pi_ref_kernel(x) on the same D from the same warm start. The old likelihood is not retained as another factor.",
+    "cheap_optimization_budget": "Exactly two16D surrogate/prior solves, one start each, proposed maximum100 iterations and1024 objective/gradient calls per solve. The Gaussian-mixture prior makes these generally nonlinear surrogate optimizations, but their calls read no observations and invoke no battery model. A final executable contract must freeze solver details and stopping arithmetic before execution.",
+    "nonlinear_validation": "Evaluate the true retained nonlinear likelihood and full gradient/Gram at both final candidates. Compare L(x)-log pi_ref_kernel(x) under the same prior, not recursive prequential scores.",
+    "transaction_outcome": "A numerical/input failure stops the prototype. Otherwise report whether the replacement candidate decreases the true common-prior objective relative to the frozen candidate. A future executable contract may commit the new block/candidate only for a numerically resolved decrease; unresolved or worse candidates retain the old transaction and stop. No extra anchor, retry or line-search through further history is implied.",
+    "identification_limit": "This paired comparison isolates anchor/relinearization effects within this explicit reference. It does not uniquely attribute the original online failure, because the exact old nonlinear likelihood cannot be recovered from its saved endpoint Gaussian."
+  },
+  "minimal_evaluation_budget": {
+    "full_prefix_model_passes_max": 4,
+    "passes": [
+      "Build old-anchor block",
+      "Build completed-free-fit replacement block and verify saved likelihood parity",
+      "Audit frozen-arm candidate with the exact nonlinear objective",
+      "Audit replacement-arm candidate with the exact nonlinear objective"
+    ],
+    "model_steps_max": 1008000,
+    "source_generations": 0,
+    "learner_ingests": 0,
+    "alternate_prefixes": 0,
+    "retries": 0,
+    "optional_paired_prior_cost_account": "Before model evaluation, at most3 algebraic prior-density evaluations at the completed free/fixedQ/fixedSOC candidate vectors may add the common reference-prior penalty to their preserved likelihood values. This quantifies prior contributions without claiming a new optimum.",
+    "optional_prior_contrast_bound": "The public components have the same diagonal covariance. Over the entering box, let M_j=max_x0.5*(x-mu_j)^T*P^{-1}*(x-mu_j), computed by the farthest endpoint in each coordinate. Then prior log-density oscillation on D is at most-log[0.5*exp(-M0)+0.5*exp(-M1)]. This cheap bound can test whether prior variation could reverse the ranking of the existing feasible witnesses. It is not a global exclusion of any constrained target.",
+    "new_full_nonlinear_likelihood_optimizer_calls": 0
+  },
+  "outputs_and_finite_gates": {
+    "local_reconstruction": "Verify cost/gradient/Gram construction and the H*h0 chain rule on bounded fabricated fixtures before canonical invocation. Freeze numerical tolerances from arithmetic/reconstruction requirements, not from voltage error or truth.",
+    "accounting": "Record all source/prior/support hashes, block ownership, unchanged prefix cursor, model-pass counts and before/after input hashes. Verify the old factor is replaced rather than summed.",
+    "targets": "Report Q=exp(x_logQ) and SOC_T=z0-charge_T/exp(x_logQ), true likelihood, prior penalty and their sum for both candidates.",
+    "joint_local_shape": "Record all16 coordinates, undamped full Grams, prior curvature and any active constraints. When justified numerically, report local surrogate curvature and its forward endpoint target projection with full covariance; do not call it a calibrated interval or exact supported mean/covariance.",
+    "endpoint_transport": "Forward-propagate the candidate entering state and its full derivative map. Never invert the dissipative endpoint transition to fabricate an entering prior.",
+    "no_uncertainty_patch": "No covariance inflation, eigenvalue clipping, rank cutoff/pseudoinverse that invents null-space variance, point clipping, truth-selected weight or arbitrary voltage-error gate.",
+    "finish_line": "One reviewed source and one bounded prototype invocation, two surrogate candidates, four-or-fewer exact prefix passes, and one replace/retain result with measured resources. No confidence/firmware promotion or automatic longer campaign.",
+    "global_certificate": "The likelihood-fidelity requirement is the target for future compression. A lifetime/global epsilon proof is not a prerequisite for implementing this finite exact-history replacement transaction; no such certificate is claimed here."
+  },
+  "resource_estimates_and_proposed_limits": {
+    "existing_full_reference_requested_arrays_bytes": {
+      "rows_252000_times80_times8": 161280000,
+      "samples_252000_times24": 6048000,
+      "voltage_252000_times8": 2016000,
+      "subtotal": 169344000
+    },
+    "streaming_evidence_external_bytes": 8064000,
+    "two_quadratic_payload_bytes": 2704,
+    "quadratic_payload_derivation": "Each block:16 anchor doubles+16 gradient doubles+136 packed Gram doubles+1 cost double=1352B. Two staged blocks=2704B before metadata.",
+    "existing_model_struct_source_count_bytes": {
+      "scm_model_state_LP64_binary64": 280,
+      "scm_model_row_LP64_binary64": 648,
+      "one_full_Jacobian": 128
+    },
+    "proposed_read_buffer_bytes": 4096,
+    "memory_caveat": "These are source-derived payloads, not a complete subsystem total. Optimizer/prior/transport/workspace, stream I/O, stack and runtime remain additional and must be measured. External8.064MB retained evidence is essential to this reference; it is not a10KiB autonomous estimator.",
+    "existing_memory_gap": "The previous full design budget is10032B against10240B, including unmeasured reserves. The2704B two-block payload alone exceeds the208B nominal remainder; integration needs a new allocation design. Do not add this prototype to the live core and claim the old budget.",
+    "runtime_estimate": "The completed free fit averaged about0.135s per reported evaluation including solver overhead. Four prefix passes are far fewer than its257 evaluations, but the new accumulation/optimizer implementation must be timed; this rate is not a promised runtime.",
+    "proposed_limits": {
+      "CPU_s": 30,
+      "wall_s": 60,
+      "child_RSS_bytes": 134217728,
+      "supervisor_RSS_bytes": 134217728,
+      "derived_output_bytes": 2097152
+    },
+    "status": "Planning estimates only; executable review must freeze and measure full costs before any implementation claim."
+  },
+  "prior_or_MAP_reference_decision": {
+    "reuse_completed_fit": "Yes for a source-bound entering anchor, common warm start and pure-likelihood parity witness.",
+    "needs_new_matched_prior_fit_now": "No for this finite replacement-mechanics prototype: both surrogate objectives use the explicitly common reference prior, and exact nonlinear costs are audited without seeking new optima.",
+    "what_requires_a_later_contract": "Calling any result a full nonlinear MAP/posterior reference requires a separately frozen matched-prior solve or integration. The current free fit cannot be relabeled that way.",
+    "user_goal": "The history control suggests useful correction may primarily recenter an inaccurate narrow capacity estimate rather than indiscriminately widen it. This prototype tests replacing the information representation that determines the point and joint local shape."
+  },
+  "activity": {
+    "design_only": true,
+    "new_model_or_fit_runs": 0,
+    "canonical_observation_reads": 0,
+    "production_source_changes": 0,
+    "previous_evidence_changes": 0
+  }
+}

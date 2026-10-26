@@ -1,0 +1,74 @@
+{
+  "schema": "mumble_historical_likelihood_executable_receipt_v1",
+  "status": "qualified_before_historical_fits",
+  "source_revision": "5bc11d685ac4b093a03208c0caac86ddede5e599",
+  "plan_sha256": "33736f934e5836a565f4178f54da61f1bffe8b93f08555b4d5123442b62bdb6c",
+  "binary_sha256": "9c713216750150ddbf91c164ce0c4a29ee67168d4d0dcc9b0bad8f856a1f93e2",
+  "binary_bytes": 118128,
+  "compile_command": [
+    "cc",
+    "-std=c99",
+    "-O3",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Iinclude",
+    "src/main.c",
+    "src/scm_estimator.c",
+    "src/scm_model.c",
+    "src/scm_features.c",
+    "src/scm_assess.c",
+    "-lm",
+    "-o",
+    "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/historical_likelihood_control_001/qualification/scm_estimator.bin"
+  ],
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "source_sha256": {
+    "src/main.c": "3de80c5f9f0f7d333923a72868ae861bc7e1e459d86b2314dcc0ecf8c43ca140",
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_features.c": "2da1c946b93b622c95ee0482289561265c645207178bc0d453b0cb1c123b5315",
+    "src/scm_assess.c": "6a8bcb0ce6dd3965b5ed8a7be60f38bc98a4cf83e46288513c15ee79f91de1ac",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "include/scm_features.h": "f5f859cd54fc02290d5deca3795b811f9cfe14a4eeb34e4eb7da5f7fb23842b6",
+    "include/scm_assess.h": "87b4d26d512c51ebaec5a46d46588c6249f85d91a71b7dbaf2bf387163c4bff5",
+    "tools/run_historical_likelihood_control.py": "9a4d473b5dae1237a588f617e3cb22789d00c1ce1ea78442ef07314c1f1cc057",
+    "tools/run_conditional_belief_probe.py": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+  },
+  "qualification": {
+    "help_passed": true,
+    "optimizer_calls": 0,
+    "fabricated_driver_checks": "qualification/driver_checks.json",
+    "fabricated_driver_checks_passed": 6,
+    "input_binding_repair_checks": {
+      "path": "experiments/historical_likelihood_control_001/input_binding_repair.json",
+      "sha256": "8f441c145ac9b8cfa6eeee27087909e26f5052ab0bedb877273ce38d50e4f653",
+      "fabricated_checks_passed": 6,
+      "optimizer_calls": 0,
+      "child_processes": 0
+    }
+  },
+  "independent_source_review": {
+    "path": "experiments/historical_likelihood_control_001/implementation_review_v2.json",
+    "sha256": "572c8ca6de67ec40ef7ef987dafaed179696224ebb7b3a32da1c1d4ce2b58f7b",
+    "passed": true
+  },
+  "build_receipt": {
+    "path": "experiments/historical_likelihood_control_001/qualification/build_receipt.json",
+    "sha256": "869b51ac0bd702884091252c855eca8bb316b693e0e9be1e3cf568c2cfc853a7"
+  },
+  "repair_provenance": {
+    "previous_executable_receipt": {
+      "path": "experiments/historical_likelihood_control_001/executable_receipt.json",
+      "sha256": "de99df37c483673e15d27c81d759b293325e877d0cd085b82618a5a9602959a7"
+    },
+    "preserved_prelaunch_attempt": "experiments/historical_likelihood_control_001/attempt001",
+    "prior_fit_invocations": 0,
+    "new_compile_or_help_calls": 0,
+    "binary_reused_unchanged": true,
+    "total_fit_limit_across_attempts": 3,
+    "inference_retries": 0
+  }
+}
