@@ -1,0 +1,43 @@
+{
+  "schema": "mumble_historical_likelihood_control_001_independent_review_v1",
+  "status": "contract_and_implementation_pass_results_pending",
+  "reviewer": "independent interval and mathematical reviewer",
+  "contract_path": "plans/historical_likelihood_control_001.json",
+  "contract_sha256": "2cf714200e971ba2f58e41f938fa01b6e451f117b253a1c9ea087cf33e44565a",
+  "local_contract_revision": "c857ffd",
+  "stages": {
+    "contract": "pass",
+    "implementation": "pass",
+    "canonical_results": "pending"
+  },
+  "material_contract_blockers": [],
+  "reviewer_activity": {
+    "new_fit_or_reference_executions": 0,
+    "physical_model_evaluations": 0,
+    "new_canonical_observation_or_checkpoint_reads": 0,
+    "existing_source_or_evidence_edits": 0,
+    "git_writes": 0
+  },
+  "findings": [
+    "The amended contract correctly matches unchanged CLI start semantics: free public starts 0,1,2; constrained start0 is the free theta and subsequent starts are public 0,1. No solver edit or extra invocation is needed.",
+    "The fixed Q theta index is 6 for this seven-coordinate replay theta. The current-SOC link is entering z0 = target + signed charge/Q, not the latest recursive current state as an initial state.",
+    "The objective contains the selected voltage likelihood once. Repeated optimizer evaluations reevaluate that objective; the recursive posterior and prequential score are not added as independent evidence.",
+    "The control compares bounded likelihood optima/local geometry with an approximate recursive posterior point, which are different inferential objects. It cannot uniquely attribute a discrepancy to one historical approximation.",
+    "A feasible constrained result is a witness. Its high objective cannot globally exclude the target; a constrained result below the free result makes the free baseline incomplete and cannot trigger a retry.",
+    "Finite nonconverged output may complete the predeclared constrained calls but cannot be promoted to an exclusion, validated interval or global optimum.",
+    "The three-call, prefix, iteration, CPU/wall/RSS/output limits are finite. Original data, source, learner and scorer remain immutable."
+  ],
+  "implementation_review_requirements": [
+    "Bind the exact witness JSONL to the frozen base and select only the unique aggregate n=252000 capacity_Ah/current_soc fields; do not consult truth/error fields.",
+    "Verify all 252000 CSV rows bit-for-bit against the original binary records, original index order and actual dt/current/voltage; hash the source and derived representations.",
+    "Preserve exact-child resource accounting, total supervisor wall/RSS limits, exclusive failure receipts, strict JSON, bounded output and no automatic retry.",
+    "Calculate unrestricted local target SD only from the free fit undamped Gram and its full coordinate scales. Endpoint SOC gradient in replay theta is dz/dz0=1 and dz/dlogQ=charge/Q. The linked constrained-SOC matrix is a changed chart and must not be treated as unrestricted target uncertainty.",
+    "Do not inherit the legacy assessment eigenvalue cutoff as a new acceptance gate. Report raw legacy output honestly, but any independently derived precision must avoid clipping/pseudoinverse thresholds and expose numerical conditioning or failure.",
+    "Source and executable identities must be frozen before the first optimizer invocation. Compilation and --help do not qualify optimizer results."
+  ],
+  "implementation_review": {
+    "path": "experiments/historical_likelihood_control_001/implementation_review.json",
+    "bytes": 4541,
+    "sha256": "e24b9c45b52377231efdca5bf05fcd72cf2c25bbf7731124ab50202e6a6a8399"
+  }
+}

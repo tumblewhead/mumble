@@ -1,0 +1,25 @@
+{
+  "schema": "mumble_historical_driver_fabricated_checks_v1",
+  "driver_sha256": "770c4e48eb54adcce61d5d71e1077f914dd56ab716319153736511a7afce7646",
+  "supervisor_sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a",
+  "fixture_script": "/tmp/mumble-historical-driver-fixtures.py",
+  "fixture_script_sha256": "9c2bd838c788aaa64eba4f38801d79538286cd3da7e30c7004be24ecf9b26e17",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/tmp/mumble-historical-driver-fixtures.py"
+  ],
+  "passed": [
+    "all_fabricated_CSV_records_roundtrip_including_signed_zero",
+    "exact_aggregate_targets_and_duplicate_witness_rejection",
+    "free_and_both_constraint_argv_wiring",
+    "finite_nonconverged_output_retained_as_candidate",
+    "malformed_essential_numeric_output_rejected",
+    "prelaunch_failure_receipt_exact_bytes_and_no_overwrite"
+  ],
+  "failed": [],
+  "canonical_input_reads": 0,
+  "optimizer_calls": 0,
+  "learner_calls": 0,
+  "child_processes_launched": 0,
+  "limitations": "Python-only fabricated conversion, argv, parse and prelaunch-failure checks. No canonical target extraction, canonical CSV conversion, C fit or new C qualification."
+}

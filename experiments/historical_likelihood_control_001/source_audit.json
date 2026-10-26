@@ -1,0 +1,257 @@
+{
+  "schema": "mumble_uncertainty_readonly_audit_v1",
+  "base_revision": "6e56a2498858ffaf112f717465afa4edb15e21a2",
+  "scope": {
+    "repository": "/workspace/scratch/d8e043c88fda/mumble-repo",
+    "repository_writes": 0,
+    "canonical_observation_or_checkpoint_reads": 0,
+    "learner_runs": 0,
+    "reference_fits": 0,
+    "tests_run": 0,
+    "calculations": "Closed-form arithmetic from public source constants only. Published compact summaries and historical receipt read."
+  },
+  "conclusion": {
+    "established": "The retained quantities are local Gaussian precision diagnostics. They do not carry a demonstrated posterior or confidence-coverage interpretation. Source arithmetic and saved probes do not establish a unique historical cause of SOC/Q undercoverage.",
+    "boundary_only_remedy": "No-go as a general repair. It addresses a real support inconsistency but cannot recover discarded historical nonlinear evidence, and the witness occurs later than the weight switch.",
+    "defensible_next_action": "One bounded, truth-free full-history likelihood control at an already archived prefix can test whether the saved recursive targets are compatible with a reoptimized historical model before choosing an embedded representation repair."
+  },
+  "findings": [
+    {
+      "id": "query_semantics",
+      "kind": "source_fact",
+      "refs": [
+        "include/scm_hypothesis.h:1",
+        "include/scm_hypothesis.h:104",
+        "src/scm_hypothesis.c:496",
+        "src/scm_hypothesis.c:532",
+        "src/scm_hypothesis.c:560",
+        "plans/nonlinear_evidence_design_001.json:queries"
+      ],
+      "facts": [
+        "Conditional SOC is mean plus/minus two row-factor SDs; capacity is exp(mean_logQ plus/minus two SD_logQ).",
+        "Aggregate uses within-plus-between marginal variance; its ranges are moment-Gaussian diagnostics, not mixture quantiles. Capacity point is exp(weighted logQ), not physical posterior mean.",
+        "Both components contribute to an unweighted local-range hull regardless of underflowed display weights. No covariance-diagonal-only query defect or missing between-component term was found."
+      ],
+      "implication": "Correct mixture quantiles would be required for literal mixture credible intervals, but cannot repair common conditional bias; the saved audit finds both conditional ranges wrong."
+    },
+    {
+      "id": "initialization",
+      "kind": "source_fact",
+      "refs": [
+        "src/scm_hypothesis.c:49",
+        "src/scm_hypothesis.c:162",
+        "plans/nonlinear_evidence_design_001.json:public_initialization"
+      ],
+      "facts": [
+        "Public means are hand-declared; diagonal variance is width squared divided by12. SOC uses entering width0.75 and RC entering voltages width0.16; all runtime means are checked only against the wider current-state box.",
+        "Exactly two logQ components preserve first two mixture moments but change prior density/higher moments; they overlap and are not disjoint physical capacity hypotheses.",
+        "Gaussian locations/covariances are not physical moments of a box-truncated Gaussian. Reusing them as truncation-kernel parameters changes physical moments."
+      ],
+      "implication": "Any support-consistent replacement must explicitly define its initial probability law or feasible-set semantics, including how inherited means/variances relate to that law. Public initialization is not truth-tuned."
+    },
+    {
+      "id": "irreversible_local_compression",
+      "kind": "source_fact_and_derivation",
+      "refs": [
+        "src/scm_hypothesis.c:192",
+        "src/scm_hypothesis.c:241",
+        "include/scm_hypothesis.h:1"
+      ],
+      "equations": [
+        "P_minus = F(mean) P F(mean)^T; static coordinate rows0..10 are copied unchanged.",
+        "g=P_minus H^T/sqrt(S), S=H P_minus H^T+sigma_V^2; t_i=lambda_i*g_i with0<=lambda_i<=1.",
+        "P_plus=P_minus-g*g^T+(g-t)*(g-t)^T.",
+        "P_plus_ii=P_minus_ii-lambda_i*(2-lambda_i)*g_i^2."
+      ],
+      "implications": [
+        "Static marginal variances cannot increase in ordinary ingestion in real arithmetic; this is not a floating-point monotonicity guarantee.",
+        "No process covariance, forgetting, retained raw history or reevaluation of old nonlinear likelihood is present. No process noise is intrinsically required for the matched static-parameter model.",
+        "Changing a local Jacobian after prior compression can retain spurious certainty; the source establishes susceptibility, not when or why the archived trajectory became biased."
+      ]
+    },
+    {
+      "id": "data_dependent_gain_semantics",
+      "kind": "exact_affine_Gaussian_derivation",
+      "refs": [
+        "src/scm_hypothesis.c:241"
+      ],
+      "assumptions": "X~N(m,P), y=H X+epsilon, epsilon~N(0,R) independent; no truncation. Let nu=y-Hm, S=HPH^T+R, g=PH^T/sqrt(S), and selected normalized gain t=t(y).",
+      "equations": [
+        "Exact conditional mean m_G=m+g*nu/sqrt(S), covariance P_G=P-g*g^T.",
+        "Selected estimate m_t=m+t*nu/sqrt(S).",
+        "E[(X-m_t)(X-m_t)^T|y]=P_G+(g-t)*(g-t)^T*(nu^2/S).",
+        "Stored Joseph J_t=P_G+(g-t)*(g-t)^T."
+      ],
+      "interpretation": [
+        "J_t is the unconditional MSE identity for a gain fixed independently of y. With t(y), its expectation generally misses correlation with nu^2/S.",
+        "J_t is not the exact conditional covariance P_G, nor generally conditional MSE about m_t. With physical support the correct posterior differs further.",
+        "This is an assumed-covariance semantic issue, not proof of the historical cause and not a prescription to multiply covariance by the realized normalized residual."
+      ]
+    },
+    {
+      "id": "broad_prior_product_term",
+      "kind": "source_constants_plus_exact_moment_witness",
+      "refs": [
+        "src/scm_hypothesis.c:49",
+        "src/scm_hypothesis.c:217"
+      ],
+      "assumption": "Initial H and h are independent under the declared diagonal Gaussian approximation. The product identity also holds for any independent supported marginals with these first two moments.",
+      "equations": [
+        "mu_H=.024; mu_h=0; Var(H)=.1^2/12; Var(h)=4/12.",
+        "Var(H*h)=mu_H^2*Var(h)+Var(H)*Var(h).",
+        "The observation Jacobian retains only mu_H^2*Var(h) at this initial center."
+      ],
+      "numbers": {
+        "retained_Hh_linear_variance_V2": 0.000192,
+        "omitted_product_variance_V2": 0.00027777777777777783,
+        "omitted_term_divided_by_sigma_V_squared": 277.7777777777778
+      },
+      "caveats": [
+        "This isolates one variance contribution at the public initial observation map; it is not the total predictive variance or an archived first-update measurement.",
+        "The existing32 axis nodes form a degree-three rule and can miss the independent H*h fourth-moment variance contribution. A finite discriminating fixture needs analytic product moments or mixed-coordinate integration.",
+        "The late tiny-covariance probe does not rule out this broad-belief historical approximation issue."
+      ]
+    },
+    {
+      "id": "broad_prior_capacity_transport",
+      "kind": "exact_Gaussian_identity_plus_source_constants",
+      "refs": [
+        "src/scm_hypothesis.c:49",
+        "src/scm_hypothesis.c:162",
+        "src/scm_hypothesis.c:192"
+      ],
+      "equations": [
+        "For q=logQ~N(mu,v), E[1/Q]=exp(-mu+v/2), whereas predict uses exp(-mu).",
+        "For jointly Gaussian z,q and c=I*dt/3600: E[z_next]=mu_z-c*exp(-mu_q+v_q/2).",
+        "Var(z_next)=P_zz+c^2*exp(-2mu_q+v_q)*(exp(v_q)-1)+2c*P_zq*exp(-mu_q+v_q/2)."
+      ],
+      "numbers": {
+        "unsplit_logQ_variance": 0.1207958761297049,
+        "split_conditional_logQ_variance": 0.04389483296506961,
+        "split_E_inverseQ_divided_by_inverse_exp_mean": 1.0221900327097846
+      },
+      "caveat": "Exact for the stated untruncated Gaussian chart distribution; not an archived bias attribution or an exact physically truncated prior calculation."
+    },
+    {
+      "id": "curved_identifiability",
+      "kind": "mechanism_hypothesis_with_exact_test_identity",
+      "refs": [
+        "src/scm_hypothesis.c:192",
+        "src/scm_hypothesis.c:217",
+        "src/scm_hypothesis.c:241"
+      ],
+      "identity": "For static x and repeated y_i=f(x)+noise, full negative log likelihood is a constant plus N*(f(x)-mean(y))^2/(2sigma^2). At a fitted level set f(x)=mean(y), local Hessian has rank at most1. Summing Jacobian outer products at changing earlier estimates can spuriously resolve more directions.",
+      "actual_model_link": "At rest with known zero RC states, voltage U(z)-H*h is one scalar function of uncertain static z,H,h. A fabricated fixture can expose artificial information along its curved level set without truth or a long run.",
+      "caveat": "The real varying-current stream contains more information than this fixture. No conclusion that its true SOC/Q are unidentifiable follows."
+    },
+    {
+      "id": "truncation_scope",
+      "kind": "analytic_reference",
+      "refs": [
+        "experiments/conditional_belief_adequacy_001/decision.json:selected_next_work.joint_reference"
+      ],
+      "equations": [
+        "With Gaussian reference(m_G,P_G), scalar bounded h moments(m_T,v_T), and b=P_G[:,h]/P_G[h,h], joint mean=m_G+b*(m_T-m_G[h]), covariance=P_G+b*b^T*(v_T-P_G[h,h])."
+      ],
+      "comparison": [
+        "Truncation to an interval has v_T<=P_G[h,h], hence contracts relative to that untruncated Gaussian kernel.",
+        "This does NOT imply physical covariance contracts between two already-supported prior/posterior distributions. A likelihood can move mass away from a bound and broaden physical variance while kernel covariance contracts.",
+        "Re-Gaussianizing supported moments and truncating again can shrink uncertainty with zero new information. Exact repeated support conditioning must be idempotent; keep support normalization/evidence ownership explicit."
+      ],
+      "implication": "A correct boundary representation is needed, but no general undercoverage repair or historical information recovery follows."
+    }
+  ],
+  "saved_evidence": {
+    "weighting_audit": "experiments/weighting_output_diagnostic_001/summary.json reports0/1445 aggregate truth inclusions for each target, while all matching ranges contain their own point; both conditional alternatives mostly miss truth. Serial selected frequencies are not calibrated coverage estimates.",
+    "probe": "experiments/conditional_belief_adequacy_001/summary.json:5 admitted snapshots, maximum mean change1.2187679670483398e-6V and variance change1.2313896406190924e-11V2. At8400s component0, mean_h=1 with Var(h)=8.200468039193499e-11 is inconsistent with support[-1,1].",
+    "limitation": "A small local quadrature correction of an already concentrated belief cannot certify that the concentration itself is justified."
+  },
+  "finite_tests_proposed_not_run": [
+    "Affine interior Gaussian update: exact posterior covariance and evidence normalizer; no boundary approximation.",
+    "Affine Gaussian reference with known selected gain t(y): distinguish conditional covariance, conditional MSE, and Joseph assumed matrix; do not treat residual scaling as a repair.",
+    "One correlated active bound: analytical joint moments and SOC/logQ cross-covariance, including zero-variance and zero-information idempotence; include an inward-likelihood example where physical supported variance grows.",
+    "Public broad-prior H*h observation moment identity and reciprocal-Q transport identity; use mixed-coordinate degree-four-capable integration where needed.",
+    "Repeated nonlinear scalar observation with a known curved likelihood ridge: compare finite all-data likelihood and recursive local information along the ridge.",
+    "One archived prefix full-history likelihood control described below; no new stream generation or old learner campaign rerun."
+  ],
+  "full_history_control": {
+    "recommendation": "Feasible and useful as a finite historical-likelihood diagnostic; not a guaranteed positive outcome, Bayesian posterior control, uncertainty calibration, or firmware remedy.",
+    "model_compatibility": {
+      "same": "Known illustrative OCV, three RC modes, same tau/gamma/Q/R/H ranges, exact measured dt/current, end-of-interval voltage, sigma_V=.001, physical deterministic propagation. scm_model.c/scm_estimator.c/scm_assess.c hashes match historical M1 receipt.",
+      "parameterization": "theta=[logtau3,loggamma2,z0,logQ], alpha=[R0,R1,R2,R3,H,v10,v20,v30,u0=H*h0]. |u0|<=H gives physical h0 support and exact linear variable projection at fixed theta.",
+      "differences": [
+        "Full reference minimizes voltage NLL with hard entering support z0 in[.2,.95], v_i0 in[-.08,.08], h0 in[-1,1]. It does not add the online Gaussian/mixture prior density.",
+        "Online uses those entering widths as initial moment scales but checks live means against wider current-state bounds. Therefore supports share provenance, but actual prior enforcement and density are not identical.",
+        "Full reference recomputes z from entering z0 and accumulated charge; online carries incrementally corrected current state. Exact model formulas agree, floating arithmetic and historical-state consistency are not identical.",
+        "Reference local assessment uses different precision-status thresholds; compare raw points, ranges, Gram, eigen/null diagnostics and costs, not status labels."
+      ]
+    },
+    "proposed_prefix": {
+      "next_index": 252000,
+      "nominal_seconds": 7200,
+      "reason": "Already restored and probed, before the dominance switch and later boundary witness; pre-existing conditional undercoverage. Fix choice before optimization.",
+      "input": "Archived B source observations records0..251999, same source identity and exact original bytes; no truth file, no regeneration."
+    },
+    "minimum_contract": [
+      "One new diagnostic fit on all chosen archived observations, --method full --modes3 --sigma.001 --starts3 --max-iter120, public built-in starts only; no saved recursive Gaussian added to the objective. Record all statuses and finite failures; no adaptive starts or retries.",
+      "At most two predeclared constrained target fits, one fixed logQ at the recursive aggregate Q and one fixed-current-SOC at the same saved aggregate z; nuisance variables reoptimized. Baseline fit theta may be one declared start, not an independent prior. Report actual best objective and NLL differences without treating local high cost as global exclusion.",
+      "The unconstrained fit supplies current SOC=z0-charge/Q and Q plus undamped all-data joint Gram diagnostics. Compare both recursive components and aggregate at the exact same index/units.",
+      "If the baseline fails to converge or a constrained call finds a lower objective, preserve the solver limitation and classify inference as incomplete; do not open an adaptive campaign.",
+      "Pin source/binary/input/plan hashes, source chronology, exact child and supervisor RSS/CPU/wall, combined output cap and immutable originals. Any scoring remains separate and later. No inference tuning from truth."
+    ],
+    "comparison_warning": "Do not compare recursive prequential scores directly to batch residual NLL. Do not use the latest corrected16-vector as if it were an initial state; its old RC/h state generally cannot be inverted after strong attenuation. Target-constrained history fits provide an interpretable alternative.",
+    "resources": {
+      "source_formula": "For3 modes, nt7,na9,cd80; full rows640N bytes + voltage8N + samples24N =672N plus small structs/solver stack/parser/runtime.",
+      "at252000_samples_requested_core_bytes": 169344000,
+      "at283500_samples_requested_core_bytes": 190512000,
+      "M1_at73500_session_plus_solver_requested_bytes": 49470676,
+      "M1_B_control_four_fits_wall_s": 12.270747012999891,
+      "M1_total20_fits_CPU_s": 53.646645,
+      "proposed_guard": "A fresh512MiB process memory cap leaves room above the source allocation estimate; choose bounded CPU/wall caps for the at-most3 calls before launch, not from observed convergence. Existing times are only feasibility evidence, not a bound.",
+      "M1_scope": "Historical requested allocations exclude full process RSS/allocator/runtime; old observations and noise realization differ from the new continuous B stream."
+    },
+    "references": [
+      "src/scm_estimator.c:55",
+      "src/scm_estimator.c:64",
+      "src/scm_estimator.c:76",
+      "src/scm_estimator.c:177",
+      "src/scm_estimator.c:308",
+      "src/scm_estimator.c:314",
+      "src/scm_estimator.c:319",
+      "src/scm_assess.c:79",
+      "src/scm_assess.c:136",
+      "src/main.c:239",
+      "tools/run_profiles.py"
+    ],
+    "historical_receipt_url": "https://github.com/tumblewhead/mumble/blob/design/conditional-belief-adequacy-001/experiments/trajectory_integration_001/primary/receipt.json",
+    "historical_summary_url": "https://github.com/tumblewhead/mumble/blob/design/conditional-belief-adequacy-001/experiments/trajectory_integration_001/summary.json",
+    "not_proved": [
+      "A global optimum or global target exclusion.",
+      "Posterior credible coverage or frequentist confidence calibration.",
+      "The unique historical cause of the recursive undercoverage.",
+      "A bounded-memory embedded repair."
+    ]
+  },
+  "repair_scope": [
+    "Choose explicit uncertainty semantics and an evidence representation capable of preserving the required nonlinear alternatives; a label change is not a performance repair.",
+    "Support-consistent conditioning must preserve joint dependencies, normalize predictive evidence correctly, and never count already-known support or replayed observations twice.",
+    "A supported Gaussian kernel, finite mixture or retained/relinearizable likelihood must pass broad-prior and curved-ridge checks, not only late small-covariance local checks.",
+    "If useful historical information has already been compressed away, no local mathematical projection can reconstruct it from the current mean/factor. A new candidate needs a history/evidence ownership and bounded-resource contract.",
+    "Nominal interval calibration ultimately requires an independent, predeclared validation population/replication design; a single selected prefix or profile is insufficient. No truth-tuned multiplier, arbitrary process noise, covariance floor or forced zero boundary variance is recommended."
+  ],
+  "source_sha256": {
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+    "include/scm_hypothesis.h": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+    "src/scm_online.c": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "include/scm_estimator.h": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4",
+    "src/scm_assess.c": "6a8bcb0ce6dd3965b5ed8a7be60f38bc98a4cf83e46288513c15ee79f91de1ac",
+    "src/main.c": "3de80c5f9f0f7d333923a72868ae861bc7e1e459d86b2314dcc0ecf8c43ca140",
+    "plans/nonlinear_evidence_design_001.json": "d38f7cc2a03c5c119bcfe210bc75c2fee744ae5565c441e34b403b47c6028c38",
+    "plans/local_uncertainty_decision_001.json": "187cc5322195b24c51ed6259d1a0ec40f9adaa06d050948611f4a7f52a9399b1",
+    "experiments/conditional_belief_adequacy_001/summary.json": "a8cf9f69e931cdbdb781936de6278c15a8994fc6e5b91c8b7da14e8a8d034340",
+    "experiments/conditional_belief_adequacy_001/decision.json": "e8b7fb03010f29b0959897823925facfee355ac21f53ae56ade59ea985e6437f",
+    "experiments/weighting_output_diagnostic_001/summary.json": "798de5165c5af49aa6ffabfd96a40512a373021b1e174b5b13c843905b59f960"
+  }
+}

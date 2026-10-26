@@ -1,0 +1,94 @@
+{
+  "schema": "mumble_support_math_v1",
+  "status": "independent_analytic_design_no_evaluation",
+  "authority": [
+    "AGENTS.md",
+    "README.md: Next work and limits",
+    "PROJECT_STATE.json",
+    "handoff/CONTINUE.json",
+    "experiments/conditional_belief_adequacy_001/decision.json"
+  ],
+  "decision": {
+    "go": "Finite analytic reference for one supported conditional correction and normalized evidence.",
+    "no_go": "Standalone remedy for historical SOC/Q undercoverage, drop-in conversion of the archived impossible moment pair, or streaming estimator adoption without prediction/full-box closure."
+  },
+  "representation": {
+    "variables": "x in R^16; q=x[5]=log(Q_Ah), z=x[11], h=x[15]. C={a<=h<=b}, normally a=-1,b=1.",
+    "density": "p_C(dx)=1_C(x) N(dx;m,K)/Z(m,K), where Z(m,K)=Pr_{N(m,K)}(C)>0.",
+    "persistent_semantics": "m,K are Gaussian KERNEL parameters, not the physical supported mean/covariance. Retain the kernel and the support descriptor; physical moments are derived. A kernel center may lie outside C.",
+    "non_gaussian_joint": "For K_hh>0, let d=K[:,h]/K_hh and C_res=K-K[:,h]K[h,:]/K_hh. Draw H from the scalar truncated normal and independent eta~N(0,C_res); X=m+d(H-m_h)+eta. This keeps every SOC/logQ correlation and the non-Gaussian joint shape.",
+    "migration": "The saved physical moment pair mean_h=1 with positive variance has no supported-distribution inverse. Reinterpreting that pair as a kernel changes the belief and is not an exact warm migration."
+  },
+  "scalar_moments": {
+    "definitions": "s=sqrt(K_hh), alpha=(a-m_h)/s, beta=(b-m_h)/s, Z=Phi(beta)-Phi(alpha).",
+    "lambda": "lambda=(phi(alpha)-phi(beta))/Z.",
+    "mean": "m_T=m_h+s*lambda.",
+    "variance": "v_T=s^2*[1+(alpha*phi(alpha)-beta*phi(beta))/Z-lambda^2]. Infinite-endpoint terms t*phi(t) have limit zero.",
+    "joint_mean": "M=m+K[:,h]/K_hh*(m_T-m_h).",
+    "joint_covariance": "V=K+K[:,h]K[h,:]/K_hh^2*(v_T-K_hh).",
+    "positive_variance": "With positive kernel variance and a nonempty finite interval, a<m_T<b and v_T>0. Contact of the kernel center with a bound does not imply a deterministic physical state.",
+    "contraction_proof": "For normalized truncated scalar density f and mean m_T, integration of d[(h-m_T)f(h)]/dh gives 1-v_T/s^2=(b-m_T)f(b)-(a-m_T)f(a)>=0. Thus 0<=v_T<=s^2 and V<=K in PSD order."
+  },
+  "correction_and_evidence": {
+    "likelihood": "y=c+J^T x+epsilon, epsilon~N(0,R), R>0; c,J,R are frozen for this reference likelihood.",
+    "S_r": "S=R+J^T K J; r=y-c-J^T m.",
+    "kernel_update": "m_plus=m+(K J/S)*r; K_plus=K-(K J)(K J)^T/S.",
+    "posterior": "p_C_plus(dx)=1_C(x) N(dx;m_plus,K_plus)/Z_plus.",
+    "evidence": "p(y|C)=Normal(y;c+J^T m,S)*Z_plus/Z_prior.",
+    "log_evidence": "-0.5*[log(2*pi)+log(S)+r^2/S]+log(Z_plus)-log(Z_prior).",
+    "reason": "Gaussian product identity: N(x;m,K)*Normal(y;c+J^T x,R)=Normal(y;c+J^T m,S)*N(x;m_plus,K_plus). Integrate over C and divide by the prior support normalizer.",
+    "exactly_once": "The support indicator is part of the prior, not another observation. The normalizer ratio telescopes over distinct measurements. Source/sample cursor ownership must separately prevent reusing an observation.",
+    "two_observation_identity": "For two distinct independent-noise observations, evidence1*evidence2 = unconstrained Gaussian joint predictive density(y1,y2)*Z_2/Z_0. Sequential and batch kernel parameters and final supported moments agree.",
+    "no_voltage_cutoff": "Every finite y is evaluated under the declared Gaussian likelihood. There is no voltage residual acceptance threshold, truth-based scale or added covariance multiplier. Numerical loss of evaluability is reported as numerical failure, not as evidence rejection.",
+    "linearization_location": "If this reference is later embedded in a nonlinear model, form an affine likelihood at an admissible physical location, not automatically at the possibly out-of-domain kernel center. That future approximation is outside this exact reference."
+  },
+  "zero_information": {
+    "condition": "J=0, or more generally K J=0. Then the likelihood is constant on the Gaussian support.",
+    "identity": "m_plus=m, K_plus=K, Z_plus=Z_prior, M_plus=M, V_plus=V; evidence is the constant likelihood density. Missing voltage instead contributes evidence factor1.",
+    "negative_control": "Converting the supported M,V into a new Gaussian kernel and truncating it again changes the distribution even when J=0. Example: N(0,1) restricted to h<=0 has M=-sqrt(2/pi), V=1-2/pi. Reinterpreting M,V as a Gaussian and restricting again decreases M and V again. This violates zero-information invariance.",
+    "weight_note": "A constant within-component likelihood may still distinguish different components if their constants differ. With the same c,R across components and J=0, weights also remain unchanged."
+  },
+  "singular_case": {
+    "PSD_requirement": "K_hh=0 in a PSD matrix implies K[:,h]=0. A nonzero cross row with zero diagonal is invalid, not a branch to regularize.",
+    "inside": "If a<=m_h<=b, h=m_h almost surely, Z=1, M=m,V=K. Use ordinary Gaussian conditioning on remaining directions; no division by K_hh. The boundary value h=1 is allowed when its variance was genuinely zero.",
+    "outside": "If m_h is outside [a,b], Z=0 and there is no supported prior or posterior. Report an invalid zero-mass prior before evaluating voltage. Do not clip, reseed or fabricate variance.",
+    "tiny_positive": "A positive variance remains positive; no arbitrary small-variance threshold changes it into the singular branch."
+  },
+  "SOC_Q_reporting": {
+    "linear_marginal": "For T=t^T X, write T=m_t+d_t(H-m_h)+eta_t, d_t=K_th/K_hh and Var(eta_t)=K_tt-K_th^2/K_hh. Its CDF is the one-dimensional integral over h in[a,b] of phi((h-m_h)/s)/s * Phi((t_value-m_t-d_t(h-m_h))/sqrt(Var(eta_t))), divided by Z. For zero residual variance use the deterministic indicator limit.",
+    "SOC": "Use the supported z marginal and declared quantile probability; mean +/-2 SD is not its exact nominal-probability interval.",
+    "capacity": "Q=exp(q), so F_Q(Q)=F_q(log(Q)) and Q quantiles are exp(q quantiles). exp(E[q]) is not E[Q].",
+    "capacity_raw_moments": "For k=1,2, E[Q^k]=exp(k*m_q+0.5*k^2*K_qq)*Z(m_h+k*K_hq,K_hh)/Z(m_h,K_hh). Here Z uses the same h bounds. Var(Q)=E[Q^2]-E[Q]^2.",
+    "claim_limit": "Nominal posterior probability is conditional on the specified reference distribution. It does not establish calibrated frequentist coverage or historical adequacy."
+  },
+  "undercoverage_counterexample": {
+    "rank_one_limitation": "After the voltage update, support changes chart covariance only by a negative-semidefinite rank-one term along K_plus[:,h], and moves the mean only along that direction.",
+    "decisive_case": "If K_plus[z,h]=K_plus[q,h]=0, conditioning on h leaves the complete joint z,q marginal unchanged. An already biased, too-narrow SOC/logQ marginal therefore remains biased and too narrow. This disproves a general interval-repair claim for the support operation.",
+    "historical_loss": "This operation does not recover an old nonlinear likelihood, change unrepresented parameter alternatives, or establish when prior covariance became inadequate.",
+    "covariance_growth_distinction": "The supported posterior can have larger variance than the PREVIOUS supported prior when an observation moves mass away from a boundary. Contraction is relative to its own updated Gaussian kernel, not a claim of physical-marginal monotonicity over observations.",
+    "growth_example": "Scalar h in[-1,1], prior kernel N(1,1), observation y=-1 under y=h+epsilon and R=1. Updated kernel is N(0,1/2). Prior variance is 1-2*phi(2)/[Phi(0)-Phi(-2)]-[(phi(2)-phi(0))/[Phi(0)-Phi(-2)]]^2; posterior variance is 0.5*[1-2*sqrt(2)*phi(sqrt(2))/(2*Phi(sqrt(2))-1)]. The latter is larger (approximately0.2537 versus0.2513). This is a scalar analytic illustration, not a run."
+  },
+  "closure_limits": {
+    "full_box": "A single h restriction does not constrain any other Gaussian coordinate to its physical range. A full-box truncated Gaussian also closes under an affine Gaussian likelihood, but needs its multivariate support normalizer and actual joint moments; the scalar formula does not supply them.",
+    "affine_prediction": "For an invertible affine map, the Gaussian kernel transforms affinely but its truncation slab also transforms. An axis-aligned h slab stays axis aligned only under special maps. Even h_next=A*h+B with fixed A>0 requires carrying the transformed interval[A*a+B,A*b+B]; replacing it with the larger physical[-1,1] interval changes the law.",
+    "nonlinear_prediction": "The real transition depends nonlinearly on Q,tau and gamma. The supported Gaussian family is not closed under that pushforward. Real voltage also includes nonlinear OCV and H*h. A re-projection after prediction or nonlinear conditioning is an additional approximation requiring its own contract; repeated moment re-truncation is not exact closure.",
+    "storage": "A scalar-support kernel can use16 kernel means plus136 factor entries, with a support descriptor and optional log-normalizer cache. Derived physical moments, numerical normalizer workspace and any prediction-closure state must be budgeted separately. This is not a complete10KiB implementation claim."
+  },
+  "finite_qualification_proposal": {
+    "scope": "Only fabricated affine reference calculations; no canonical states, nonlinear model calls or learner runs.",
+    "common": "16D with q index5,z index11,h index15; h bounds[-1,1]. Other13 axes may be fixed independent N(0,0.01) because they factor out of this reference likelihood; this deliberately claims only h support.",
+    "interior": "h~N(0,0.04), z~N(0.5,0.0004), q~N(log(0.06),0.0009), independent. c=2.97,J_z=1.5,J_h=0, all other J=0,R=0.0001,y=3.8. The support normalizer ratio is1; ordinary Gaussian z correction, unchanged q and unchanged supported h law.",
+    "outward": "H~N(1,0.04), z=0.5+0.1*(H-1)+eps_z with Var(eps_z)=0.0004, q=log(0.06)-0.3*(H-1)+eps_q with Var(eps_q)=0.0009. Independent residuals. c=2.97,J_z=1.5,J_h=-0.02,R=0.0001,y=3.8. S=0.001676,r=0.1,m_h_plus=1+0.00052/0.001676>1. Require actual mean_h<1, positive variance and the full correlated supported formulas.",
+    "zero_information": "Reuse the outward case posterior KERNEL and support, set J=0 and choose any frozen finite c,y with R=0.0001. Require exact kernel identity, unchanged physical law, correct constant evidence; show moment-retruncate negative control changes the law.",
+    "branch_checks": "Exactly zero h variance with h=1 and zero cross row is valid; h=1.01 is zero-mass invalid. Two distinct outward-family observations, e.g.y1=3.8,y2=3.72 with unchanged c,J,R, must match joint Gaussian evidence times Z2/Z0 and batch final kernel. Include the scalar covariance-growth example as an algebraic branch assertion.",
+    "numerics": "Use log support probabilities and stable tail ratios; positive interval mass may underflow in ordinary probability space. Numerical tolerances qualify reconstruction accuracy only and are never voltage-error acceptance thresholds.",
+    "finish_line": "One finite qualification receipt and reviewed GO for reference correctness / NO-GO for standalone SOC/Q remedy or streaming adoption. No automatic canonical experiment."
+  },
+  "activity": {
+    "repository_files_changed": false,
+    "production_runs": 0,
+    "canonical_data_model_evaluations": 0,
+    "existing_evidence_changed": false,
+    "arithmetic_qualification_runs": 0
+  }
+}

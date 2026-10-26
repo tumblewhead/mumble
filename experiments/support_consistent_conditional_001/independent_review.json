@@ -1,0 +1,54 @@
+{
+  "schema": "mumble_support_consistent_conditional_001_independent_review_v1",
+  "status": "contract_and_implementation_pass_results_pending",
+  "reviewer": "independent interval and mathematical reviewer",
+  "contract_path": "plans/support_consistent_conditional_001.json",
+  "contract_sha256": "6dc336a03686716f8bbc1fe225b5f80eb0d495781ebfc25ce42366d905fd74a8",
+  "local_contract_revision": "4bd543e",
+  "stages": {
+    "contract": "pass",
+    "implementation": "pass",
+    "canonical_results": "pending"
+  },
+  "material_contract_blockers": [],
+  "reviewer_activity": {
+    "new_fit_or_reference_executions": 0,
+    "physical_model_evaluations": 0,
+    "new_canonical_observation_or_checkpoint_reads": 0,
+    "existing_source_or_evidence_edits": 0,
+    "git_writes": 0
+  },
+  "findings": [
+    "The contract distinguishes Gaussian kernel parameters from supported physical moments and owns the prior support normalization exactly once. Evidence is Gaussian predictive density times posterior support mass divided by prior support mass.",
+    "The interior case preserves finite h support exactly because h is independent of the observed z direction; it does not approximate the h bound as absent.",
+    "The outward case requires full joint SOC/logQ effects and an independent scalar integration. Zero-information calls preserve the kernel exactly; moment-retruncation is a rejected negative control.",
+    "Truncation is a covariance downdate relative to its untruncated posterior kernel. It need not reduce variance relative to the previous supported prior; the frozen scalar variance-increase branch correctly tests this distinction.",
+    "The same-moments/different-posterior construction is a sufficiency obstruction, not evidence that its discrete history occurred in the battery model.",
+    "Reference GO concerns these affine identities only. The explicit global-remedy NO-GO preserves the unresolved full box, nonlinear prediction, historical uncertainty and coverage obligations.",
+    "No raw-voltage materiality cutoff appears. Frozen floating-point reconstruction allowances qualify numerical comparisons only and are not asserted as rigorous quadrature enclosures.",
+    "Public-start H*h and reciprocal-Q witnesses must use the unchanged source initialization, distinguish exact declared-Gaussian moments from linearization and degree-three quadrature, and make no historical causal claim."
+  ],
+  "public_source_witness_review": {
+    "paths": [
+      "src/scm_hypothesis.c:49-63",
+      "src/scm_hypothesis.c:162-167",
+      "plans/nonlinear_evidence_design_001.json:27-40"
+    ],
+    "H_h": "Initial H mean .024, h mean 0, independent diagonal variances (.1/sqrt(12))^2 and (2/sqrt(12))^2. Product variance includes Var(H)*Var(h), in addition to the mean-gradient terms. The diagonal axis rule omits that fourth-order cross contribution.",
+    "split_logQ": "Use alpha=.7978845608028654 and beta=.6028102749890869, not an alternative split. For each Gaussian q component, E[exp(-q)]=exp(-mu_q+Var(q)/2); exp(-mu_q) is its center value. The split preserves first two chart moments, not all density or reciprocal moments.",
+    "domain_limit": "These are algebraic witnesses about the declared Gaussian representation; no physical model propagation or calibrated bounded distribution is asserted."
+  },
+  "resource_review": {
+    "host_reference_only": true,
+    "target_budget_bytes": 10240,
+    "existing_design_with_unmeasured_reserves_bytes": 10032,
+    "headroom_bytes": 208,
+    "naive_extra_mean_and_packed_factor_for_two_live_and_two_staged_components_bytes": 4864,
+    "requirement": "Reject naive duplicate kernel/physical-moment storage. Any future implementation must account for all live/staged objects, scratch, acquisition, checkpoint and software-math/ISR stack; host RSS is not target SRAM qualification."
+  },
+  "implementation_review": {
+    "path": "experiments/support_consistent_conditional_001/implementation_review.json",
+    "bytes": 4333,
+    "sha256": "b36c5148262ce4830ba19501001862af3401e17b9904fdcb091dafee5e136382"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "mumble_historical_likelihood_control_001_implementation_review_v1",
+  "status": "pass",
+  "scope": "Independent read-only pre-execution source and mathematics/control review. A pass permits only the frozen finite operation; it is not a result or coverage qualification.",
+  "reviewer": "independent interval and mathematical reviewer",
+  "plan_sha256": "2cf714200e971ba2f58e41f938fa01b6e451f117b253a1c9ea087cf33e44565a",
+  "source_sha256": {
+    "tools/run_historical_likelihood_control.py": "770c4e48eb54adcce61d5d71e1077f914dd56ab716319153736511a7afce7646",
+    "tools/run_conditional_belief_probe.py": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+  },
+  "file_identities": [
+    {
+      "path": "tools/run_historical_likelihood_control.py",
+      "bytes": 31834,
+      "sha256": "770c4e48eb54adcce61d5d71e1077f914dd56ab716319153736511a7afce7646"
+    },
+    {
+      "path": "tools/run_conditional_belief_probe.py",
+      "bytes": 36322,
+      "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+    }
+  ],
+  "material_blockers": [],
+  "source_corrections_requested": [],
+  "canonical_result_review_pending": true,
+  "reviewer_activity": {
+    "reference_or_fit_executions": 0,
+    "repository_source_imports": 0,
+    "model_calls": 0,
+    "new_canonical_input_or_target_reads": 0,
+    "source_edits": 0,
+    "git_writes": 0
+  },
+  "findings": [
+    "The amended fixed three-call sequence matches the unchanged CLI: public starts 0,1,2 for free; free theta followed by public starts 0,1 for constrained fits, with 120 iterations per start and no retry.",
+    "The driver binds unchanged C/header sources and reused supervisor to the base and final commits, binds the witness to both commits, and binds exact plan, independent review, executable and observation identities before target extraction.",
+    "Target extraction selects the unique aggregate n=252000 point fields and availability metadata. It does not use truth/error fields in targets, objectives, starts or fit selection.",
+    "All 252000 original binary records are converted using 17 significant digits and compared bit-for-bit both during conversion and after closed-file reread. Original index order, actual dt/current/voltage and both representations are retained by hashes.",
+    "Q uses --fixed 6 log(Q); current SOC uses the existing entering-state/charge/Q link. The free theta is a numerical start, not another observation or posterior penalty.",
+    "The immutable prior supervisor provides exact-child wait4 resources, combined output limits and termination. The driver additionally accounts for total wall/RSS, derived output, scratch CSV, per-fit/final hashes and attempted-versus-observed launches.",
+    "Malformed essential values, source mutation, child failure or resource breach stop remaining calls. Finite nonconverged candidates remain explicitly labeled and do not trigger extra starts or retries.",
+    "Raw undamped Gram/scales are retained without inversion or eigenvalue threshold adoption. The linked-SOC chart is labeled separately. Signed objective differences are reported without a statistical or voltage cutoff; constrained-better-than-free is explicitly flagged.",
+    "Exclusive attempt reservation and bounded failure receipt preserve prelaunch failures and reject output reuse."
+  ],
+  "qualification_evidence_read": {
+    "receipt": "/tmp/mumble-historical-driver-checks.json",
+    "script": "/tmp/mumble-historical-driver-fixtures.py",
+    "observed_passed_checks": 6,
+    "scope": "Author-recorded fabricated Python-only conversion, target uniqueness, argv, finite/nonfinite parse and prelaunch receipt/no-overwrite checks. Reviewer read script and receipt without importing or running them.",
+    "optimizer_or_child_process_calls_in_that_qualification": 0
+  },
+  "limits": [
+    "This is a new bounded full-history likelihood control, not a rerun of the recursive learner, a prior-conditioned posterior or a calibration test.",
+    "A high-cost local constrained candidate cannot globally exclude a target. A constrained candidate below free establishes an incomplete free baseline and permits no automatic retry.",
+    "Any subsequent local-SD reduction must use the appropriate free chart and full coordinate scales, expose conditioning and numerical failure, and avoid cutoff/pseudoinverse repair.",
+    "Compilation and help validate interfaces only. Source review does not predict optimizer convergence or that execution will finish within its frozen budget."
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "mumble_historical_reference_build_v1",
+  "base_revision": "6e56a2498858ffaf112f717465afa4edb15e21a2",
+  "compile_command": [
+    "cc",
+    "-std=c99",
+    "-O3",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Iinclude",
+    "src/main.c",
+    "src/scm_estimator.c",
+    "src/scm_model.c",
+    "src/scm_features.c",
+    "src/scm_assess.c",
+    "-lm",
+    "-o",
+    "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/historical_likelihood_control_001/qualification/scm_estimator.bin"
+  ],
+  "compile_returncode": 0,
+  "compile_stdout": "",
+  "compile_stderr": "",
+  "compile_wall_s": 6.4626779950003765,
+  "source_identities": {
+    "src/main.c": {
+      "bytes": 21686,
+      "sha256": "3de80c5f9f0f7d333923a72868ae861bc7e1e459d86b2314dcc0ecf8c43ca140"
+    },
+    "src/scm_estimator.c": {
+      "bytes": 22907,
+      "sha256": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5"
+    },
+    "src/scm_model.c": {
+      "bytes": 5765,
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    },
+    "src/scm_features.c": {
+      "bytes": 4499,
+      "sha256": "2da1c946b93b622c95ee0482289561265c645207178bc0d453b0cb1c123b5315"
+    },
+    "src/scm_assess.c": {
+      "bytes": 11752,
+      "sha256": "6a8bcb0ce6dd3965b5ed8a7be60f38bc98a4cf83e46288513c15ee79f91de1ac"
+    },
+    "include/scm_estimator.h": {
+      "bytes": 1807,
+      "sha256": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4"
+    },
+    "include/scm_model.h": {
+      "bytes": 2763,
+      "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+    },
+    "include/scm_features.h": {
+      "bytes": 2489,
+      "sha256": "f5f859cd54fc02290d5deca3795b811f9cfe14a4eeb34e4eb7da5f7fb23842b6"
+    },
+    "include/scm_assess.h": {
+      "bytes": 3863,
+      "sha256": "87b4d26d512c51ebaec5a46d46588c6249f85d91a71b7dbaf2bf387163c4bff5"
+    }
+  },
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "optimizer_calls": 0,
+  "binary": {
+    "path": "experiments/historical_likelihood_control_001/qualification/scm_estimator.bin",
+    "bytes": 118128,
+    "sha256": "9c713216750150ddbf91c164ce0c4a29ee67168d4d0dcc9b0bad8f856a1f93e2"
+  },
+  "help_returncode": 0,
+  "help_stdout": "Usage: scm_estimator --data FILE [options]\n  --method full|tangent|hybrid   Observation representation (default full)\n  --modes 1|2|3                 Foster branches (default 3)\n  --starts N                    Nonlinear starts\n  --max-iter N                  Iteration limit per start\n  --sigma VALUE                 Known iid voltage sigma in V\n  --case ID                     JSON identifier\n  --prefix N                    Read only the first N observations\n  --initial a,b,...             Exactly modes+4 transformed theta values\n  --fixed INDEX VALUE           Fix transformed theta; repeatable\n  --fixed-alpha INDEX VALUE     Fix physical linear coordinate; repeatable\n  --fixed-current-soc VALUE     Fix SOC at the end of the retained prefix\n  --ocv FILE                    Known PWL table with header z,voltage\n  --help                        This help\nData header: sample_index,dt_s,current_A,voltage_V\nIndices start at0 and remain contiguous. Point voltage is at interval END.\ntheta=log(tau_i),log(gamma_plus),log(gamma_minus),z0,log(Q_Ah).\nalpha=R0,R_i,H,v_i0,u0=H*h0. Fixed current SOC couples z0 to Q and charge.\nJoint-normal diagnostics describe likelihood linearization before damping, not a posterior.\nDefault OCV is illustrative, not measured:3+1.15*z+.08*tanh(8*(z-.5)).\nHost reference replays retained data; no bounded-memory online claim.\n",
+  "help_stderr": "",
+  "status": "built_existing_source_help_pass"
+}
