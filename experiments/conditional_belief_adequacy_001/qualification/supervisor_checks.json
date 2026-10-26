@@ -1,0 +1,95 @@
+{
+  "schema": "mumble_conditional_supervisor_qualification_v1",
+  "status": "passed_fabricated_checks_at_recorded_source",
+  "source": {
+    "path": "tools/run_conditional_belief_probe.py",
+    "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a",
+    "bytes": 36322
+  },
+  "plan_sha256": "49ebd3fb609f9fa739076c14979265a7b50e93025c3692999a6b6747e9c9778e",
+  "check_count": 12,
+  "checks": {
+    "syntax": "passed",
+    "reject_duplicate_JSON": "passed",
+    "reject_nonfinite_JSON": "passed",
+    "zero_covariance_noise_once": "passed",
+    "boundary_rule_and_bounded_moments": "passed",
+    "reject_survivor_moments": "passed",
+    "combined_output_limit": "passed",
+    "exact_child_usage_recorded": "passed",
+    "wall_deadline_kills_child": "passed",
+    "prelaunch_failure_receipt_retained": "passed",
+    "self_inclusive_output_count_exact": "passed",
+    "existing_output_not_overwritten": "passed"
+  },
+  "invocations": [
+    {
+      "argv": [
+        "python3",
+        "-"
+      ],
+      "cwd": "repository_root",
+      "stdin_python": "import ast,copy,importlib.util,json,pathlib,sys,tempfile\nsys.dont_write_bytecode=True\npath=pathlib.Path('tools/run_conditional_belief_probe.py')\nast.parse(path.read_text())\nspec=importlib.util.spec_from_file_location('supervisor_check',path)\nm=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nplan=json.loads(pathlib.Path('plans/conditional_belief_adequacy_001.json').read_text())\nchecks={'syntax':True}\nfor text,name in [('{\"x\":1,\"x\":2}','reject_duplicate_JSON'),('{\"x\":NaN}','reject_nonfinite_JSON')]:\n    try:m.strict_json(text)\n    except m.ProbeError:checks[name]=True\n    else:checks[name]=False\nlower=[-4.2,-1.9,.4,1.6,1.6,-3.5,0,0,0,0,0,0,-.25,-.25,-.25,-1]\nupper=[-1.9,.4,3.4,7.1,7.1,-2.3,1,1,1,1,.1,1,.25,.25,.25,1]\nmean=[(a+b)/2 for a,b in zip(lower,upper)]\nnames=['x'+str(i) for i in range(16)]\n\ndef make_component(index,boundary):\n    mu=mean[:]; factor=[0.0]*136\n    if boundary:mu[15]=1.0;factor[-1]=.001\n    def point(column,sign):\n        pre=mu[:]\n        if column==15:pre[15]+=sign*.004 if boundary else 0\n        bad=pre[15]>1\n        return {'column':column,'sign':sign,'weight':0 if column<0 else 1/32,\n                'pre_state':pre,'pre_failure_mask':(1<<15) if bad else 0,\n                'propagated':not bad,'post_state':None if bad else pre[:],\n                'post_failure_mask':0,'model_code':None if bad else 0,\n                'voltage_V':None if bad else 3.7,'admitted':not bad,\n                'failures':[{'stage':'pre','coordinate':15}] if bad else []}\n    nodes=[point(k,s) for k in range(16) for s in (1,-1)]\n    nl={'mean_V':3.7,'clean_variance_V2':0,'predictive_variance_V2':1e-6,\n        'mean_shift_vs_physical_center_V':0,'mean_shift_vs_production_center_V':0,'variance_shift_V2':0}\n    return {'component':index,'saved_mean':mu,'saved_lower_factor_packed_by_row':factor,\n            'sigma_V':.001,'center_valid':True,'linear_reference_valid':True,\n            'moment_rule_admissible':not boundary,'node_count':32,\n            'node_propagations':31 if boundary else 32,'invalid_nodes':int(boundary),\n            'pre_invalid_nodes':int(boundary),'post_invalid_nodes':0,'center':point(-1,0),\n            'linearized':{'mean_V':3.7,'physical_center_V':3.7,'physical_minus_production_order_V':0,\n                'center_order_tolerance_V':1e-12,'clean_sd_V':0,'clean_variance_V2':0,\n                'predictive_variance_V2':1e-6,'predictive_sd_from_hypot_V':.001,\n                'direct_chain_vs_propagated_factor_max_V':0,'projected_factor_V':[0.0]*16},\n            'nonlinear_moments':None if boundary else nl,'nodes':nodes}\n\ndef fixture(boundary):\n    raw={'schema':'mumble_conditional_belief_probe_v1',\n        'status':'completed_with_inadmissible_components' if boundary else 'completed_all_components_admissible',\n        'source_id':plan['inputs']['source_id'],'new_learner_updates':0,'source_generations':0,'truth_inputs':0,\n        'lower':lower,'upper':upper,'coordinate_names':names,'node_propagations':186 if boundary else 192,\n        'center_propagations':6,'inadmissible_components':6 if boundary else 0,'snapshots':[]}\n    expected={}\n    for n in plan['scope']['next_indices']:\n        expected[n]=(.01,0,3.7)\n        raw['snapshots'].append({'checkpoint_next_index':n,'observation_index':n,'predicted_next_index':n+1,\n            'nominal_checkpoint_s':n/35,'dt_s':.01,'current_A':0,'observed_voltage_V':3.7,\n            'saved_state_unchanged':True,'log_weights':[-.6931471805599453]*2,\n            'components':[make_component(j,boundary) for j in range(2)]})\n    return raw,expected\nfor boundary,name in [(False,'zero_covariance_noise_once'),(True,'boundary_rule_and_bounded_moments')]:\n    raw,expected=fixture(boundary);result=m.reduce_probe(raw,plan,expected)\n    checks[name]=result['interpretation_eligible'] and result['bounded_scalar_violations']==(6 if boundary else 0) and result['inadmissible_components']==(6 if boundary else 0)\nraw,expected=fixture(True)\nraw['snapshots'][0]['components'][0]['nonlinear_moments']={}\ntry:m.reduce_probe(raw,plan,expected)\nexcept m.ProbeError:checks['reject_survivor_moments']=True\nelse:checks['reject_survivor_moments']=False\nbounds=copy.deepcopy(plan['resource_bounds']);bounds.update(probe_wall_s_max=3,probe_CPU_s_max=2,probe_output_bytes_max=128)\nwith tempfile.TemporaryDirectory(prefix='mumble-probe-supervisor-') as temp:\n    result=m.supervise([sys.executable,'-c','import os;os.write(1,b\"a\"*80);os.write(2,b\"b\"*80)'],pathlib.Path(temp),bounds)\n    checks['combined_output_limit']=result['output_truncated'] and sum(result['stdout_stderr_bytes_written'].values())==128 and 'combined_probe_stdout_stderr_limit' in result['resource_violations']\n    checks['exact_child_usage_recorded']=result['peak_RSS_bytes']>0 and result['CPU_total_s']>=0\nbounds['probe_wall_s_max']=.05\nwith tempfile.TemporaryDirectory(prefix='mumble-probe-deadline-') as temp:\n    result=m.supervise([sys.executable,'-c','import time;time.sleep(2)'],pathlib.Path(temp),bounds)\n    checks['wall_deadline_kills_child']='probe_wall_limit' in result['resource_violations'] and result['exit_code']<0\nprint(json.dumps({'schema':'mumble_conditional_supervisor_fabricated_checks_v1','passed':all(checks.values()),'checks':checks,'canonical_snapshot_reads':0,'canonical_observation_reads':0,'physical_model_calls':0,'learner_runs':0},indent=2))\nassert all(checks.values())\n",
+      "observed_stdout": {
+        "schema": "mumble_conditional_supervisor_fabricated_checks_v1",
+        "passed": true,
+        "checks": {
+          "syntax": true,
+          "reject_duplicate_JSON": true,
+          "reject_nonfinite_JSON": true,
+          "zero_covariance_noise_once": true,
+          "boundary_rule_and_bounded_moments": true,
+          "reject_survivor_moments": true,
+          "combined_output_limit": true,
+          "exact_child_usage_recorded": true,
+          "wall_deadline_kills_child": true
+        },
+        "canonical_snapshot_reads": 0,
+        "canonical_observation_reads": 0,
+        "physical_model_calls": 0,
+        "learner_runs": 0
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "-"
+      ],
+      "cwd": "repository_root",
+      "stdin_python": "import contextlib,hashlib,importlib.util,io,json,pathlib,sys,tempfile\nsys.dont_write_bytecode=True\nspec=importlib.util.spec_from_file_location('supervisor_check',pathlib.Path('tools/run_conditional_belief_probe.py'))\nm=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nwith tempfile.TemporaryDirectory(prefix='mumble-probe-prelaunch-') as td:\n    temp=pathlib.Path(td);root=temp/'root';root.mkdir();out=root/'attempt001'\n    args=['--root',str(root),'--evidence-root',str(temp/'no-evidence'),'--binary','no-binary',\n          '--output-dir',str(out),'--source-revision','0'*40,'--executable-receipt','no-receipt']\n    with contextlib.redirect_stdout(io.StringIO()):exit_code=m.main(args)\n    receipt=json.loads((out/'receipt.json').read_text());before=(out/'receipt.json').read_bytes()\n    assert exit_code==1 and receipt['status']=='failed' and receipt['probe']['child_launched'] is False\n    assert receipt['canonical_probe_invocations']==0\n    assert receipt['closed_derived_bytes']==sum(p.stat().st_size for p in out.iterdir())\n    try:m.main(args)\n    except FileExistsError:pass\n    else:raise AssertionError('Existing output accepted')\n    assert (out/'receipt.json').read_bytes()==before\n    print(json.dumps({'prelaunch_failure_receipt_retained':True,'child_launched':False,\n                      'self_inclusive_output_count_exact':True,'existing_output_not_overwritten':True,\n                      'canonical_input_reads':0,'probe_runs':0}))\npath=pathlib.Path('tools/run_conditional_belief_probe.py')\nprint(json.dumps({'path':str(path),'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}))\n",
+      "observed_stdout_records": [
+        {
+          "prelaunch_failure_receipt_retained": true,
+          "child_launched": false,
+          "self_inclusive_output_count_exact": true,
+          "existing_output_not_overwritten": true,
+          "canonical_input_reads": 0,
+          "probe_runs": 0
+        },
+        {
+          "path": "tools/run_conditional_belief_probe.py",
+          "bytes": 36322,
+          "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+        }
+      ]
+    }
+  ],
+  "provenance": "The two commands and printed values are transcribed from the actually executed inline checks. Creating this record did not rerun them.",
+  "limitations": [
+    "Only fabricated JSON, missing-input preflight and small Python child processes were exercised. No canonical checkpoint or observation bytes were read.",
+    "Synthetic voltage values test the reducer's arithmetic/accounting and noise addition, not the physical model. C physical/derivative qualification is separate.",
+    "The output-budget and deadline checks use deliberately smaller fixture limits. CPU/address-space hard-limit termination was not separately stress-tested.",
+    "Child usage check establishes that this child's RSS/CPU fields are recorded; it does not substitute for canonical-run resource evidence.",
+    "Exact temporary process measurements were not retained; the booleans above are the observed printed outcomes. Temporary fixture directories were removed.",
+    "Qualification binds the stated source hash. Later source changes require explicit scoped review or checks rather than silently inheriting this receipt.",
+    "No per-invocation UTC timestamp was recorded."
+  ],
+  "activity": {
+    "canonical_snapshot_reads": 0,
+    "canonical_observation_reads": 0,
+    "physical_model_calls": 0,
+    "learner_runs": 0,
+    "canonical_probe_invocations": 0,
+    "reruns_while_recording": 0
+  }
+}

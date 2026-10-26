@@ -1,0 +1,129 @@
+{
+  "schema": "mumble_conditional_belief_source_review_v1",
+  "status": "complete_source_only_no_causal_attribution",
+  "reviewer": "verify_receipts",
+  "base_revision": "66fabc24476b668e358c5aa6995308c52ac8f751",
+  "scope": "Trace the frozen conditional mean, covariance, physical-domain and evidence semantics before interpreting the three-checkpoint probe.",
+  "activity": {
+    "canonical_snapshot_reads": 0,
+    "restorations": 0,
+    "learner_runs": 0,
+    "node_propagations": 0,
+    "probe_runs": 0,
+    "source_or_specification_changes": 0,
+    "new_artifacts": ["experiments/conditional_belief_adequacy_001/source_review.json"],
+    "witness_source": "The existing handoff describes the 8400-second h = 1, positive-SD witness. This review did not open or verify its canonical snapshot."
+  },
+  "source_files": [
+    {"path": "src/scm_online.c", "sha256": "b07c2147a281026b9cd22ef9d8470d383147c0fd48bfe27ec90c4599ba7dd730", "bytes": 18282, "unchanged_from_base": true},
+    {"path": "src/scm_hypothesis.c", "sha256": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5", "bytes": 35149, "unchanged_from_base": true},
+    {"path": "src/scm_model.c", "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646", "bytes": 5765, "unchanged_from_base": true},
+    {"path": "include/scm_online.h", "sha256": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84", "bytes": 6639, "unchanged_from_base": true},
+    {"path": "include/scm_hypothesis.h", "sha256": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc", "bytes": 7399, "unchanged_from_base": true},
+    {"path": "include/scm_model.h", "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c", "bytes": 2763, "unchanged_from_base": true}
+  ],
+  "specification_files": [
+    {"path": "plans/local_uncertainty_decision_001.json", "sha256": "187cc5322195b24c51ed6259d1a0ec40f9adaa06d050948611f4a7f52a9399b1", "bytes": 4211, "unchanged_from_base": true},
+    {"path": "plans/nonlinear_evidence_design_001.json", "sha256": "d38f7cc2a03c5c119bcfe210bc75c2fee744ae5565c441e34b403b47c6028c38", "bytes": 15848, "unchanged_from_base": true}
+  ],
+  "coordinate_order": ["log_tau1", "log_tau2", "log_tau3", "log_gamma_plus", "log_gamma_minus", "log_Q", "R0", "R1", "R2", "R3", "H", "z", "v1", "v2", "v3", "h"],
+  "confirmed_code_facts": [
+    {
+      "source": "src/scm_hypothesis.c",
+      "functions": ["predict", "observation"],
+      "facts": [
+        "Each component propagates its mean through the nonlinear physical equations.",
+        "The full packed factor propagates as L_minus = F(mean) L. Static parameter rows 0..10 remain unchanged during prediction; SOC, three RC voltages and hysteresis rows are transformed.",
+        "There is no process covariance injection. Packing preserves the full 136-entry lower factor; it is not a diagonal covariance approximation.",
+        "The voltage observation is U(z) - R0 I - v1 - v2 - v3 - H h, evaluated at the predicted component mean.",
+        "The observation gradient has direct entries only for R0, H, z, v1..v3 and h. Capacity and other static parameters learn through their propagated cross-covariances with those observed coordinates."
+      ]
+    },
+    {
+      "source": "src/scm_hypothesis.c",
+      "function": "correct",
+      "symbols": "j_y is the column observation gradient; H without a subscript is the physical hysteresis amplitude. P_minus = L_minus L_minus^T.",
+      "equations": {
+        "innovation": "r = observed_voltage - observation(predicted_mean)",
+        "innovation_variance": "S = sigma_V^2 + ||L_minus^T j_y||^2",
+        "normalized_optimal_gain": "g = P_minus j_y / sqrt(S)",
+        "selected_gain": "t_i = lambda_i g_i, with 0 <= lambda_i <= 1",
+        "mean_update": "mean_plus = mean_minus + t r / sqrt(S)",
+        "covariance_update": "P_plus = P_minus - g g^T + (g - t)(g - t)^T",
+        "coordinate_variance_identity": "P_plus[ii] = P_minus[ii] - lambda_i(2 - lambda_i) g_i^2"
+      },
+      "implications": [
+        "The same selected gain updates the actual mean and full Joseph covariance.",
+        "In real arithmetic, every correction marginal variance is nonincreasing. Because static parameter rows remain unchanged during prediction, their marginal variances cannot grow during ordinary ingestion without an explicit reset. This statement does not assert floating-point monotonicity at every rounding boundary.",
+        "A fully blocked coordinate retains its predicted marginal variance in the correction. Do not attribute a tiny hysteresis variance directly to blocking as though the covariance still used the unblocked optimal gain.",
+        "Cross-covariances can change when one coordinate is blocked. The entire covariance difference need not be negative semidefinite under unequal coordinate gain scales.",
+        "Zero innovation can still contract covariance. All-zero selected gains instead restore the predicted numeric arrays."
+      ]
+    },
+    {
+      "source": "src/scm_hypothesis.c",
+      "functions": ["scm_hypothesis_component_validate", "predict", "correct"],
+      "facts": [
+        "Physical coordinate bounds constrain means.",
+        "Validation checks finite means within bounds, finite factor entries and nonnegative factor diagonals.",
+        "Validation does not require Gaussian support, cubature nodes, or any bounded distribution with these moments to lie within the physical domain.",
+        "Gain limiting reduces each outward correction independently, with a small inward margin. A still-out-of-domain rounded candidate sets that coordinate's gain to zero.",
+        "There is no truncated-posterior moment calculation or projection of covariance onto moment-feasible physical distributions."
+      ]
+    },
+    {
+      "sources": ["include/scm_hypothesis.h", "plans/nonlinear_evidence_design_001.json"],
+      "facts": [
+        "The two components retain separate means, full local factors and nonlinear physical states.",
+        "They retain no raw observations or reevaluable historical nonlinear likelihood.",
+        "The initial split changes log-capacity mean and variance only; its Gaussian components overlap and are not permanent disjoint capacity supports.",
+        "No pruning, merging, reseeding, rejuvenation, forgetting, covariance inflation or posterior replay occurs.",
+        "Both components continue inference independently of their current weights. Query aggregation never feeds a moment-collapsed distribution back into inference."
+      ]
+    },
+    {
+      "source": "src/scm_hypothesis.c",
+      "functions": ["correct", "update_weights", "scm_hypothesis_ingest"],
+      "facts": [
+        "Each score is the pre-correction local predictive Gaussian score: -log(sqrt(S)) - 0.5(r/sqrt(S))^2.",
+        "Weights use these scores only after both conditional updates succeed.",
+        "The score uses the local unconstrained linearized predictive moments; mean-feasibility limiting does not turn it into an exact constrained predictive density.",
+        "innovation_ewma is diagnostic only and does not change noise, gains, weights or uncertainty."
+      ]
+    },
+    {
+      "source": "src/scm_hypothesis.c",
+      "functions": ["component_query", "aggregate_query", "target_hull"],
+      "facts": [
+        "Conditional SOC intervals are mean_z +/- 2 SD_z; capacity intervals exponentiate mean_logQ +/- 2 SD_logQ.",
+        "Aggregate marginal variance includes both within-component variance and between-component displacement.",
+        "The all-component hull includes both conditional intervals regardless of their weights.",
+        "These calculations describe retained local moments, not calibrated coverage or physical support."
+      ]
+    }
+  ],
+  "source_based_explanations_requiring_evidence": [
+    {
+      "hypothesis": "Earlier nonlinear or constraint approximations may have displaced a conditional mean while subsequent linearized conditioning continued to shrink its local covariance.",
+      "basis": "Historical observations survive only through the evolving mean/factor; later parameter changes do not relinearize or reconstruct older likelihood contributions.",
+      "limit": "Source establishes this possible mechanism, not that it caused the observed bias."
+    },
+    {
+      "hypothesis": "Tiny retained parameter uncertainty can make later parameter corrections small even when its point estimate remains biased.",
+      "basis": "Parameter marginal variances never receive new process uncertainty and their gains depend on the retained local covariance.",
+      "limit": "The actual gain and residual history would be needed to attribute this mechanism to a particular interval."
+    }
+  ],
+  "boundary_moment_implication": {
+    "conditional_statement": "If an audited component has exactly mean_h = 1 and Var(h) > 0, those cannot be the exact moments of any distribution supported on h <= 1.",
+    "reason": "1 - h is nonnegative; E[1 - h] = 0 forces h = 1 almost surely and therefore Var(h) = 0.",
+    "node_implication": "For a symmetric rule mean +/- sqrt(16) L_column, a nonzero hysteresis factor row at mean_h = 1 necessarily creates an outward node in real arithmetic.",
+    "scope": "This is a mathematical implication of the existing handoff's boundary witness, not a new canonical-snapshot observation or a probe result.",
+    "causality_limit": "A boundary inconsistency at 8400 seconds does not establish the cause of the earlier 7811-second dominance switch."
+  },
+  "interpretation_guidance": {
+    "if_admitted_local_nonlinear_moments_change_little": "Deprioritize the immediate one-step moment approximation at these snapshots and frozen scales. This does not validate the retained historical mean/covariance or rule out errors accumulated while beliefs were broader.",
+    "if_nodes_violate_domain": "The specified complete moment rule is inadmissible. Report offending coordinates without clipping, dropping or renormalizing nodes. This identifies a local representation/domain incompatibility, not a uniquely established global bias cause.",
+    "qualification": "Preserve the existing decision: application SOC/Q accuracy unresolved, coverage unvalidated and hard support absent. No covariance-inflation remedy is established by this source trace."
+  }
+}

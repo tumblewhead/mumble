@@ -1,0 +1,90 @@
+{
+  "schema": "mumble_conditional_belief_probe_qualification_v1",
+  "source": {
+    "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/conditional_belief_probe.c",
+    "bytes": 29989,
+    "sha256": "5b7055f4001d2858f59896e9da129825f5ee076a21740ab47746067bab0cb763"
+  },
+  "binary": {
+    "path": "/workspace/scratch/d8e043c88fda/weighting_audit/probe-preflight/conditional_belief_probe",
+    "bytes": 73648,
+    "sha256": "80ebc729d651639f9b2e541dc68f3de618e52fc29f4ad82b24b383a691d3ce1d"
+  },
+  "linked_sources": [
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/src/scm_hypothesis.c",
+      "bytes": 35149,
+      "sha256": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5"
+    },
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/src/scm_hypothesis_checkpoint.c",
+      "bytes": 10923,
+      "sha256": "88ec1c229b395b5bdd02faf39fcc1183786a6b0da0c6ff05edeb9718204a5339"
+    },
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/src/scm_model.c",
+      "bytes": 5765,
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    }
+  ],
+  "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "compile_command": [
+    "cc",
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-Iinclude",
+    "tools/conditional_belief_probe.c",
+    "src/scm_hypothesis.c",
+    "src/scm_hypothesis_checkpoint.c",
+    "src/scm_model.c",
+    "-lm",
+    "-o",
+    "/workspace/scratch/d8e043c88fda/weighting_audit/probe-preflight/conditional_belief_probe"
+  ],
+  "compile_working_directory": "/workspace/scratch/d8e043c88fda/mumble-repo",
+  "compile_exit_code": 0,
+  "fixture_command": [
+    "/workspace/scratch/d8e043c88fda/weighting_audit/probe-preflight/conditional_belief_probe",
+    "--self-test"
+  ],
+  "fixture_exit_code": 0,
+  "fixture_stdout": {
+    "schema": "mumble_conditional_belief_preflight_v1",
+    "passed": true,
+    "checks": {
+      "linear_voltage_moments": true,
+      "zero_covariance": true,
+      "pre_domain_boundary": true,
+      "post_domain_SOC": true,
+      "dense_factor_node_mean_covariance": true,
+      "positive_negative_zero_current_derivatives_and_dense_covariance": true,
+      "wrong_observation_index_rejected_without_propagation": true,
+      "saved_component_unchanged": true
+    },
+    "derivative_step": 1e-05,
+    "derivative_abs_tolerance": 2e-08,
+    "maximum_derivative_error": 1.0827225782605865e-09,
+    "maximum_variance_error_V2": 1.974183131236946e-16,
+    "fixture_node_propagations": 223,
+    "fixture_center_propagations": 7,
+    "canonical_data_read": false
+  },
+  "earlier_qualification_only": [
+    {
+      "event": "First linker attempt failed because repo build directory did not exist. No executable was run; destination moved to dedicated scratch directory."
+    },
+    {
+      "event": "Initial subset of five fabricated checks passed before adding the agreed directional-derivative, wrong-index and mean checks. 127 node calls and4 centers, zero canonical input reads."
+    }
+  ],
+  "canonical_inputs_read": false,
+  "canonical_probe_invocations": 0,
+  "note": "Recorded from completed compiler/tool outputs; receipt creation does not rerun the probe.",
+  "compile_tool_wait_seconds": 0.891360455,
+  "fixture_tool_wait_seconds": 2.4587e-05,
+  "timing_scope": "Tool-reported wait durations only; canonical wall time and peak RSS are measured separately by the supervisor."
+}

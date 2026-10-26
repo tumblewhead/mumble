@@ -1,0 +1,79 @@
+{
+  "schema": "mumble_conditional_belief_implementation_review_v1",
+  "status": "pass",
+  "reviewer": "independent interval and mathematical reviewer",
+  "contract_publication_revision": "7ee11761abbc0990ea44df265b60004f63481565",
+  "plan_sha256": "49ebd3fb609f9fa739076c14979265a7b50e93025c3692999a6b6747e9c9778e",
+  "scope": "Read-only review of the complete C probe, supervisor, and selected-member restorer against the frozen plan. Review-file creation only; no canonical or fabricated probe reruns.",
+  "reviewed_file_identities": [
+    {
+      "path": "plans/conditional_belief_adequacy_001.json",
+      "bytes": 12824,
+      "sha256": "49ebd3fb609f9fa739076c14979265a7b50e93025c3692999a6b6747e9c9778e"
+    },
+    {
+      "path": "experiments/conditional_belief_adequacy_001/contract_review.json",
+      "bytes": 4311,
+      "sha256": "291cbebde46fb8c41a418fb92a9342b2fa7ba42a06b15bfee80df5d8318197c1"
+    },
+    {
+      "path": "tools/conditional_belief_probe.c",
+      "bytes": 29989,
+      "sha256": "5b7055f4001d2858f59896e9da129825f5ee076a21740ab47746067bab0cb763"
+    },
+    {
+      "path": "tools/run_conditional_belief_probe.py",
+      "bytes": 36322,
+      "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+    },
+    {
+      "path": "tools/restore_conditional_evidence.py",
+      "bytes": 6279,
+      "sha256": "d7efb672e17be412881f0b4e45fed31fbea401d372391759c68f11dd141e0717"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/evidence/restore_primary.py",
+      "bytes": 13558,
+      "sha256": "ac5eb80aeb735ca69fbaaf8bae14eee7d3435c4d7d21fe38c8810eb34832c011"
+    }
+  ],
+  "review_findings": {
+    "input_identity_and_chronology": "The supervisor binds the plan and passing contract review, published source Git blobs, executable receipt/binary, original source identities, and four selected member SHA256/byte counts. The C codec validates checkpoint identity/configuration. All three checkpoint indices and exact archived next observations are validated before any propagation; n consumes observation n to produce endpoint n+1.",
+    "linear_reference": "The C calculation uses the full transition Jacobian at the saved center, the voltage gradient at the propagated center, and the complete packed lower factor. Independent chain-gradient and propagated-factor products are compared. Latent variance is the projected-factor squared norm; the fixed observation variance is added once.",
+    "node_and_covariance_rule": "The C probe uses all 32 column nodes mu +/- 4 L[:,k] with equal weight 1/32, including repeated nodes. The reducer independently checks every node formula and reconstructs all 16 means and 136 lower-triangle covariance entries from the complete intended node set, including nodes rejected for propagation.",
+    "domain_and_invalid_rules": "All 16 pre coordinates and successful post-step states receive public-bound checks. Physical-step errors retain attempted SOC/model status and no fabricated post-state. Any invalid node makes the entire component moment rule unavailable. The reducer rejects survivor moments or changed weights and reconciles individual, component and global admission/propagation counts.",
+    "moment_reduction": "For fully admitted components, independent stable sums reconstruct the nonlinear voltage mean and population variance, observation-noise addition, and signed changes relative to the physical and production-order centers. Frozen numerical mismatches disable interpretation.",
+    "bounded_moment_check": "The reducer computes each saved marginal variance from its complete factor row, cap=(b-mu)(mu-a), and excess using the frozen 128*DBL_EPSILON*(b-a)^2 comparison allowance. It does not repair, truncate or project the moments.",
+    "resource_and_attempt_accounting": "A new exclusive output directory reserves the single attempt. The exact probe child is reaped with wait4, independently of earlier git/compiler children. CPU, address-space, file-size, core-dump and wall restrictions are set; combined stdout/stderr retention is capped. Probe RSS, supervisor RSS, counters and self-inclusive derived-output bytes are recorded separately.",
+    "failure_and_immutability": "Preflight and execution failures retain failure records; numerical or resource failures suppress scientific eligibility. All bound input/source/binary files are rehashed after the attempt. No automatic retry, learner ingestion, old scorer, source generation or truth input is introduced.",
+    "restoration": "The restorer requires a new destination outside the repository, validates frozen source/index identities and exactly four selected members, verifies every archive part and the concatenated archive through the preserved helper, checks member metadata and selected SHA256/Git-blob/byte identities, consumes the XZ footer, and preserves the original primary evidence."
+  },
+  "qualification_evidence_reviewed": [
+    {
+      "path": "/workspace/scratch/d8e043c88fda/weighting_audit/probe-preflight/qualification.json",
+      "description": "Recorded successful C compile with strict warning flags and fabricated affine-voltage, zero-covariance, dense-factor, pre/post-domain, derivative, wrong-index and unchanged-component checks. Maximum derivative error 1.0827225782605865e-9 against 2e-8; maximum dense variance error 1.974183131236946e-16. These are separately recorded fabricated calls, not canonical calls."
+    },
+    {
+      "path": "experiments/conditional_belief_adequacy_001/qualification/supervisor_checks.json",
+      "description": "Reviewed the two preserved historical inline scripts and observed outputs for 12 fabricated supervisor checks, including strict JSON, noise once, bounded-moment and invalid-rule behavior, combined output cap, exact-child usage, deadline termination, prelaunch failure retention, output-byte closure and no overwrite. No qualification was rerun by this reviewer."
+    }
+  ],
+  "material_blockers": [],
+  "source_corrections_requested": [],
+  "interpretation_limits": [
+    "A bounded scalar-moment violation disproves that bounded-support interpretation; a pass is only necessary and does not establish joint feasibility or coverage.",
+    "Finite-node admission is not a Gaussian support or calibration test; invalid-node counts are not probability estimates.",
+    "The one-step sensitivity scales are frozen prioritization scales. Small differences do not bound accumulated sequential-likelihood effects.",
+    "A later boundary failure does not establish the cause of the earlier component-weight switch.",
+    "Exact-child peak RSS includes fork/exec setup, as disclosed. Canonical resource sufficiency remains an execution result, not a claim from fabricated checks."
+  ],
+  "reviewer_activity": {
+    "canonical_checkpoint_reads": 0,
+    "canonical_observation_reads": 0,
+    "model_calls": 0,
+    "learner_updates": 0,
+    "fabricated_probe_reruns": 0,
+    "production_source_edits": 0
+  },
+  "remaining_gate": "Root must publish these exact reviewed implementation sources and bind the qualified executable before the single canonical invocation. Completed canonical results still require independent result review."
+}
