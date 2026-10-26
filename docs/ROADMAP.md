@@ -15,6 +15,15 @@ The measured owned subtotal is **7152 bytes**; the proposed complete target
 allocation is **10,032 bytes**, including unmeasured reserves. Complete
 Cortex-M23 qualification near **10 KiB total SRAM** remains open.
 
+The [parameter/state sensitivity analysis](../experiments/parameter_sensitivity_001/REPORT.md)
+is also complete: all sixteen saved coordinates, three anchors and six future
+protocols, with no learner rerun or code change. A 19.24% τ₂ error has a 1.571 mV
+isolated reversal effect; the final complete-vector sampled peak remains below
+0.987 mV across the fixed set. Signed compensation matters. These point effects
+support output-focused validation, not coverage, universal nuisance tolerances
+or parameter removal. The [new decision](../experiments/parameter_sensitivity_001/decision.json)
+carries the regime and charge-dependent consequences into the next contract.
+
 The original priority change put integration ahead of another uncertain-RC
 refinement. That completed integration now supports the learner decision.
 Proofs and small experiments remain essential when they resolve a
@@ -442,14 +451,15 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Fetch the latest `implementation/nonlinear-hypothesis-001` descendant and read
-the [completed comparison](../experiments/nonlinear_hypothesis_001/summary.json)
-and [decision](../experiments/nonlinear_hypothesis_001/decision.json), without
-rerunning either arm. Use `design/continuous-learning-validation-001` to freeze
-one continuous learning/retention contract for the unchanged candidate. Specify
-carried plant/estimator/noise state, a finite horizon, weak and renewed
-informative use, prompt SOC and later capacity metrics, uncertainty diagnostics,
-resource limits and failure stops. Decide any short second-cell/lifecycle
-prerequisite explicitly. Stop with one frozen contract or a named missing datum;
-this design task runs no primary. Annual behavior and full-model indefinite
-operation remain separate open obligations.
+Fetch the latest `analysis/parameter-sensitivity-001` descendant and read
+the [sensitivity summary](../experiments/parameter_sensitivity_001/summary.json)
+and [decision](../experiments/parameter_sensitivity_001/decision.json), together
+with the preserved learner result. Do not rerun either completed study.
+Use `design/continuous-learning-validation-001` to freeze one continuous
+learning/retention contract for the unchanged candidate. Specify carried plant,
+estimator and noise state, one finite horizon, weak and renewed informative use,
+prompt SOC and later capacity metrics, output-error diagnostics across operating
+regimes, accumulated charge, uncertainty diagnostics, resource limits and failure
+stops. Decide any short second-cell/lifecycle prerequisite explicitly. Stop with
+one frozen contract or a named missing datum; this design task runs no primary.
+Annual behavior and full-model indefinite operation remain separate obligations.

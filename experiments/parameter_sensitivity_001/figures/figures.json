@@ -1,0 +1,104 @@
+{
+  "schema": "mumble_parameter_sensitivity_figures_v1",
+  "completed": true,
+  "created_utc": "2026-10-26T02:58:13.581526+00:00",
+  "input_directory": "experiments/parameter_sensitivity_001/primary",
+  "source_revision": "df4c4b6dd56bcffd88de3b06c1d3e818a0dc0184",
+  "receipt_sha256": "7386e537943caa14ea233c7b674cd2a25f15a1e4d723bf4eb88991543891adb8",
+  "artifacts_sha256": {
+    "results.json": "e1c44a60b4f192852da66ac0ba660bbaf0d20c750513381a4a97001bd4d6a6c3",
+    "profiles.npz": "1140bc3aac2d387b06417f59035a8a1c3f3a2c5b916989f66c4c97b7112d737d"
+  },
+  "plotter_sha256": "a1d8b33809c1fa4eb1654e2c7c9724c58eac4cb0edffca2b0108c0c4cfbb96f4",
+  "plotter_frozen_by_receipt": true,
+  "numpy": "2.3.5",
+  "matplotlib": "3.10.8",
+  "anchor_index": 73500,
+  "anchor_time_s": 2100.0,
+  "coordinate_order": [
+    "log_tau1",
+    "log_tau2",
+    "log_tau3",
+    "log_gamma_plus",
+    "log_gamma_minus",
+    "log_Q_Ah",
+    "R0",
+    "R1",
+    "R2",
+    "R3",
+    "H",
+    "current_z",
+    "current_v1",
+    "current_v2",
+    "current_v3",
+    "current_h"
+  ],
+  "reference_units": [
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 percent fractional differential",
+    "1 SOC percentage point",
+    "1 mV",
+    "1 mV",
+    "1 mV",
+    "0.01 dimensionless h"
+  ],
+  "protocol_order": [
+    "rest_300s",
+    "weak_300s",
+    "load_step_130s",
+    "charge_600s",
+    "reversal_600s",
+    "discharge_1800s"
+  ],
+  "heatmap_values": {
+    "left": "Stored unit_sensitivity_at_estimate_mV.peak_abs; estimated anchor only",
+    "right": "Stored isolated_actual_error_mV.peak_abs; known finite error at truth baseline",
+    "scale": "Shared logarithmic mV colour scale; exact zeros masked; rounded annotations",
+    "peak_scope": "Full declared 35 Hz sample grid including initial point; not peaks of the thinned plot views"
+  },
+  "profile_values": {
+    "source": "Only supplied profiles.npz arrays, converted from V to mV",
+    "curves": [
+      "joint_error_V",
+      "sum_isolated_errors_V",
+      "linear_joint_error_V"
+    ],
+    "first_order_anchor": "scoring truth",
+    "sum_of_isolated_errors_is_bound": false,
+    "sum_absolute_isolated_errors_plotted": false,
+    "display_scope": "Plot views only: all35Hz samples used for metrics, first10s of each dwell retained densely plus401 evenly spaced indices; finalanchor only."
+  },
+  "scope": "State-conditioned future model predictions from saved entering states. No pre-anchor history recomputation, voltage assimilation, estimator call, or uncertainty-coverage claim.",
+  "physics_or_metric_recalculation": false,
+  "propagation_calls": 0,
+  "estimator_runs": 0,
+  "optimizer_calls": 0,
+  "completed_study_reruns": 0,
+  "artifacts": {
+    "voltage_sensitivity_and_error_heatmaps.png": {
+      "sha256": "25fbdc97b23292753dd9e3980465b440b39973964478f06c019d6e55a4621927",
+      "bytes": 420290
+    },
+    "voltage_sensitivity_and_error_heatmaps.svg": {
+      "sha256": "746cf4f8c4bc534dd571ec29a4b70c365d4220bc5dd0be100559c7fc7d940f76",
+      "bytes": 108180
+    },
+    "joint_voltage_error_profiles.png": {
+      "sha256": "c87ab346d0bdd997a30b1d16258d9d82acb57a168c9cfe33aa0f5c5d58f1d4bb",
+      "bytes": 439348
+    },
+    "joint_voltage_error_profiles.svg": {
+      "sha256": "1315ea5d862d288d037577f7ec5322c306dd9b2e2b55309696da75ecb12db43a",
+      "bytes": 85959
+    }
+  }
+}

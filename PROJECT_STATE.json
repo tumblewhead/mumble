@@ -1,7 +1,7 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "A4_two_component_candidate_completed_late_capacity_learning_supported_qualification_open",
+  "stage": "A4_parameter_sensitivity_completed_continuous_validation_contract_pending",
   "objective": "Deliver a runnable ~10KiB Cortex-M23 C estimator: first a two-cell desktop lifecycle demonstration, then varied desktop trajectories over about one year, preserving stimulus-supported learning, evidence, unknowns and conditional lifetime guarantees.",
   "nominal_rate_Hz": 35,
   "current_model": {
@@ -110,7 +110,22 @@
     "nonlinear_hypothesis_report": "experiments/nonlinear_hypothesis_001/REPORT.md",
     "nonlinear_hypothesis_decision": "experiments/nonlinear_hypothesis_001/decision.json",
     "nonlinear_hypothesis_publication": "provenance/nonlinear_hypothesis_001_publication.json",
-    "capacity_learning_horizon": "plans/capacity_learning_horizon_001.json"
+    "capacity_learning_horizon": "plans/capacity_learning_horizon_001.json",
+    "parameter_sensitivity_plan": "experiments/parameter_sensitivity_001/plan.json",
+    "parameter_sensitivity_primary_receipt": "experiments/parameter_sensitivity_001/primary/receipt.json",
+    "parameter_sensitivity_full_metrics": "experiments/parameter_sensitivity_001/primary/results.json",
+    "parameter_sensitivity_compact_plot_profiles": "experiments/parameter_sensitivity_001/primary/profiles.npz",
+    "parameter_sensitivity_qualification": "experiments/parameter_sensitivity_001/development/qualification.json",
+    "parameter_sensitivity_preflight": "experiments/parameter_sensitivity_001/development/preflight.json",
+    "parameter_sensitivity_independent_review": "experiments/parameter_sensitivity_001/independent_review.json",
+    "parameter_sensitivity_interpretation_review": "experiments/parameter_sensitivity_001/interpretation_review.json",
+    "parameter_sensitivity_report": "experiments/parameter_sensitivity_001/REPORT.md",
+    "parameter_sensitivity_decision": "experiments/parameter_sensitivity_001/decision.json",
+    "parameter_sensitivity_verification": "experiments/parameter_sensitivity_001/verification.json",
+    "parameter_sensitivity_heatmap": "experiments/parameter_sensitivity_001/figures_readable/voltage_sensitivity_and_error_heatmaps.png",
+    "parameter_sensitivity_joint_profiles": "experiments/parameter_sensitivity_001/figures/joint_voltage_error_profiles.png",
+    "parameter_sensitivity_publication": "provenance/parameter_sensitivity_001_publication.json",
+    "parameter_sensitivity_summary": "experiments/parameter_sensitivity_001/summary.json"
   },
   "completed": {
     "main_cases": 6,
@@ -162,10 +177,11 @@
     "bounded_online_002 removes observed all-zero-gain stalls but fails numerical health (17 cold correction rejections), capacity (8/16 joint hard checks) and provisional-error audit. B control capacity remains -7.53789% despite zero rejections. Exact rejection cause and honest local uncertainty remain unresolved.",
     "boundary_transaction_diagnostic_001 reproduces a subnormal mean-domain failure and tests a coordinate zero-gain fallback (625 assertions). Production source is unchanged; the original17 rejected steps remain unattributed. This finite host fixture does not repair capacity bias, validate coverage, or qualify target/lifetime behavior.",
     "nonlinear_evidence_design_001 selects two public logQ moment components but implements no learner. The10032B full design budget includes unmeasured target reserves; two approximate components need not repair capacity bias, model-reachability inconsistency or coverage.",
-    "nonlinear_hypothesis_001 passes the one2100s CellB functional/numerical/owned-resource and late hard-target observations. FinalQ+0.09523percent andSOC-0.00806pp support later learning, but local intervals and the all-componentQhull still miss truth;79 saved aggregate provisionalQ hard breaches. No coverage, generalization, full-target or indefinite qualification."
+    "nonlinear_hypothesis_001 passes the one2100s CellB functional/numerical/owned-resource and late hard-target observations. FinalQ+0.09523percent andSOC-0.00806pp support later learning, but local intervals and the all-componentQhull still miss truth;79 saved aggregate provisionalQ hard breaches. No coverage, generalization, full-target or indefinite qualification.",
+    "parameter_sensitivity_001 is a saved-state, fixed-model, open-loop point diagnostic. Final joint sampled peak below0.987mV across six future protocols includes signed compensation; it does not qualify uncertainty, nuisance identifiability, arbitrary inputs, estimator feedback, indefinite operation or M23 resources."
   ],
   "next_work": [
-    "Freeze one finite continuous learning/retention validation contract for the unchanged candidate before executing another primary. Follow experiments/nonlinear_hypothesis_001/decision.json on design/continuous-learning-validation-001; this task ends with one contract or missing datum, no new primary.",
+    "Freeze one finite continuous learning/retention validation contract for the unchanged candidate before another primary. Follow experiments/parameter_sensitivity_001/decision.json on design/continuous-learning-validation-001; include regime/output/charge diagnostics, honest uncertainty and one finite stopping rule. No primary in this design task.",
     "Preserve the completed two-arm comparison, both earlier bounded candidates, historical900s gate, failed uncertainty diagnostics and all original execution/publication identities. Do not rerun studies to resume.",
     "M2: Qualify short cell/load/noise and lifecycle behavior before day/week/annual campaigns; keep capacity without a startup deadline and promptSOC as separate requirements.",
     "M3: Select actual Cortex-M23 device/toolchain, measure complete10240B subsystem and35Hz deadline, and close deployment-specific lifetime obligations."
@@ -902,5 +918,29 @@
     "original_research_revision": "b5219ac485475d4a820fa07b8102a19bf51050b1",
     "published_research_revision_before_metadata": "a570f9cb5c21fa80e0b41f12aa1e111f5620c930",
     "original_development_bundle": "provenance/nonlinear_hypothesis_001_development.bundle"
+  },
+  "parameter_sensitivity": {
+    "work_branch": "analysis/parameter-sensitivity-001",
+    "source_revision": "df4c4b6dd56bcffd88de3b06c1d3e818a0dc0184",
+    "published_source_revision": "77d72301ba1a8aba4361d5bc28954cb6bcd42714",
+    "status": "completed_once_offline_analysis_decision_closed",
+    "summary": "experiments/parameter_sensitivity_001/summary.json",
+    "decision": "experiments/parameter_sensitivity_001/decision.json",
+    "execution": {
+      "propagation_calls": 612,
+      "diagnostic_interval_evaluations": 13316100,
+      "estimator_runs": 0,
+      "optimizer_calls": 0,
+      "completed_study_reruns": 0,
+      "all_domains_passed": true
+    },
+    "final_joint_peak_mV_over_six_protocols": 0.9868517034083979,
+    "final_joint_peak_direct_SOC_pp_over_six_protocols": 0.036052492860072505,
+    "final_isolated_tau2_peak_mV": 1.5710174567784563,
+    "final_isolated_R3_peak_mV": 1.5070405554364896,
+    "added_estimator_storage_bytes": 0,
+    "estimator_changed": false,
+    "publication_provenance": "provenance/parameter_sensitivity_001_publication.json",
+    "publication_status": "source_published_research_publication_pending"
   }
 }

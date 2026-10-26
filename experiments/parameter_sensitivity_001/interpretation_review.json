@@ -1,0 +1,316 @@
+{
+  "schema": "mumble_parameter_sensitivity_interpretation_review_v1",
+  "status": "completed_saved_metric_review",
+  "source_revision": "df4c4b6dd56bcffd88de3b06c1d3e818a0dc0184",
+  "evidence": {
+    "experiments/parameter_sensitivity_001/primary/results.json": "e1c44a60b4f192852da66ac0ba660bbaf0d20c750513381a4a97001bd4d6a6c3",
+    "experiments/parameter_sensitivity_001/plan.json": "eee07ac659a8a23859d39ff9e17d7de7d7d8c751576601c4e35588c7a17f7afb"
+  },
+  "scope": {
+    "new_propagation_calls": 0,
+    "new_estimator_runs": 0,
+    "new_scoring_runs": 0,
+    "new_tests": 0,
+    "artifacts_written": [
+      "experiments/parameter_sensitivity_001/interpretation_review.json"
+    ],
+    "selection": "Programmatic extraction of compact metrics from the one frozen offline result; no trace replay, model evaluation or parameter modification.",
+    "qualification": "One synthetic cell, three saved aggregate point vectors, six independent hypothetical follow-ups per vector; not a full mixture, coverage, observability or long-duration estimator qualification."
+  },
+  "main_finding": "The final saved vector predicts all six declared voltage trajectories within 0.987 mV sampled peak, despite several remaining parameter errors of roughly 4-19%. Their practical effects depend strongly on the protocol and compensate each other. Current SOC and Q errors are already small enough to produce at most 0.03606 percentage point direct SOC error in these six follow-ups. These are conditional point results, not universal nuisance tolerances or accuracy guarantees.",
+  "final_protocol_summary": [
+    {
+      "protocol": "rest_300s",
+      "joint_voltage_peak_mV": 0.24123499680150928,
+      "joint_voltage_RMS_mV": 0.21392229751819122,
+      "joint_SOC_peak_pp": 0.008062126651964263,
+      "voltage_OCV_equivalent_SOC_peak_pp_proxy": 0.014851813134672764,
+      "joint_RMS_over_absolute_isolated_sum_RMS": 0.29016662376581687
+    },
+    {
+      "protocol": "weak_300s",
+      "joint_voltage_peak_mV": 0.19830826678424174,
+      "joint_voltage_RMS_mV": 0.19152325382534535,
+      "joint_SOC_peak_pp": 0.008062126651964263,
+      "voltage_OCV_equivalent_SOC_peak_pp_proxy": 0.01220899687189154,
+      "joint_RMS_over_absolute_isolated_sum_RMS": 0.21396727115134279
+    },
+    {
+      "protocol": "load_step_130s",
+      "joint_voltage_peak_mV": 0.7106413655137978,
+      "joint_voltage_RMS_mV": 0.2095053322617564,
+      "joint_SOC_peak_pp": 0.008062126651964263,
+      "voltage_OCV_equivalent_SOC_peak_pp_proxy": 0.04226053296398014,
+      "joint_RMS_over_absolute_isolated_sum_RMS": 0.07316955316754101
+    },
+    {
+      "protocol": "charge_600s",
+      "joint_voltage_peak_mV": 0.6569106167964023,
+      "joint_voltage_RMS_mV": 0.12476177778176964,
+      "joint_SOC_peak_pp": 0.015414563237303724,
+      "voltage_OCV_equivalent_SOC_peak_pp_proxy": 0.04048111399673354,
+      "joint_RMS_over_absolute_isolated_sum_RMS": 0.05346772935532687
+    },
+    {
+      "protocol": "reversal_600s",
+      "joint_voltage_peak_mV": 0.9868517034083979,
+      "joint_voltage_RMS_mV": 0.19358374607531273,
+      "joint_SOC_peak_pp": 0.008062126651964263,
+      "voltage_OCV_equivalent_SOC_peak_pp_proxy": 0.05518853007875026,
+      "joint_RMS_over_absolute_isolated_sum_RMS": 0.05923448697035063
+    },
+    {
+      "protocol": "discharge_1800s",
+      "joint_voltage_peak_mV": 0.6201063503477044,
+      "joint_voltage_RMS_mV": 0.23208963263631904,
+      "joint_SOC_peak_pp": 0.036052492860072505,
+      "voltage_OCV_equivalent_SOC_peak_pp_proxy": 0.0381051911457181,
+      "joint_RMS_over_absolute_isolated_sum_RMS": 0.0587940190024268
+    }
+  ],
+  "final_coordinate_summary": {
+    "scope": "Each maximum is over this fixed six-protocol set at the final anchor, not a universal ranking or bound. Normalized sensitivity uses the truth anchor. Parameter reference units are a 1% fractional differential; state units are 1 SOC pp, 1 mV for v states, and 0.01 h.",
+    "columns": [
+      "coordinate",
+      "saved_error",
+      "error_unit",
+      "maximum_normalized_local_voltage_peak_mV",
+      "maximum_exact_isolated_voltage_peak_mV",
+      "protocol_of_exact_peak",
+      "time_of_exact_peak_s"
+    ],
+    "rows": [
+      [
+        "tau1",
+        12.142532289286615,
+        "percent of truth",
+        0.07216399811445273,
+        0.8317784061078193,
+        "reversal_600s",
+        300.0857142857143
+      ],
+      [
+        "tau2",
+        19.240377857790588,
+        "percent of truth",
+        0.08938934600584114,
+        1.5710174567784563,
+        "reversal_600s",
+        300.7142857142857
+      ],
+      [
+        "tau3",
+        5.804757528513267,
+        "percent of truth",
+        0.10925999607499325,
+        0.6164221430182693,
+        "reversal_600s",
+        307.7142857142857
+      ],
+      [
+        "gamma_plus",
+        -5.054837177402486,
+        "percent of truth",
+        0.018389127728526196,
+        0.09537499070289002,
+        "reversal_600s",
+        186.57142857142858
+      ],
+      [
+        "gamma_minus",
+        -1.5465046306652317,
+        "percent of truth",
+        0.21719603439722082,
+        0.3385156525079758,
+        "reversal_600s",
+        541.8857142857142
+      ],
+      [
+        "Q",
+        0.09523113281822905,
+        "percent of truth",
+        5.354096705951235,
+        0.5093989029059109,
+        "discharge_1800s",
+        1800.0
+      ],
+      [
+        "R0",
+        7.200820668062086,
+        "percent of truth",
+        0.096,
+        0.6912787841342194,
+        "load_step_130s",
+        10.028571428571428
+      ],
+      [
+        "R1",
+        3.978937061561173,
+        "percent of truth",
+        0.132,
+        0.5252196921263774,
+        "load_step_130s",
+        12.228571428571428
+      ],
+      [
+        "R2",
+        3.7042755765718205,
+        "percent of truth",
+        0.162,
+        0.6000926434053255,
+        "load_step_130s",
+        35.542857142857144
+      ],
+      [
+        "R3",
+        -7.6113159365464975,
+        "percent of truth",
+        0.198,
+        1.5070405554364896,
+        "reversal_600s",
+        219.28571428571428
+      ],
+      [
+        "H",
+        0.5201651986372925,
+        "percent of truth",
+        0.299997491926606,
+        0.15604825497872454,
+        "discharge_1800s",
+        1800.0
+      ],
+      [
+        "z",
+        -0.008062126651964263,
+        "SOC percentage points",
+        17.89999999977812,
+        0.14431206527909524,
+        "reversal_600s",
+        355.6857142857143
+      ],
+      [
+        "v1",
+        0.02626098460630378,
+        "mV",
+        1.0,
+        0.02626098460600801,
+        "rest_300s",
+        0.0
+      ],
+      [
+        "v2",
+        0.030004632170231995,
+        "mV",
+        1.0,
+        0.030004632169955414,
+        "rest_300s",
+        0.0
+      ],
+      [
+        "v3",
+        -0.07535202777181067,
+        "mV",
+        1.0,
+        0.07535202777209093,
+        "rest_300s",
+        0.0
+      ],
+      [
+        "h",
+        -0.015744701044822285,
+        "dimensionless h",
+        0.3,
+        0.4723410313443033,
+        "rest_300s",
+        0.0
+      ]
+    ]
+  },
+  "per_regime_interpretation": {
+    "rest_and_weak_use": "At rest, the final h error contributes +0.47234 mV, while current SOC and H contribute about -0.13096 and -0.13005 mV. Entering RC voltage errors decay. Q, resistances and both gamma parameters have zero direct rest sensitivity with entering states fixed. The 3 mA protocol adds small resistance and charge effects; it does not make this rest-conditioned zero a claim of historical irrelevance.",
+    "load_steps_and_reversal": "R3 has the largest sustained isolated resistance effect, about 1.50704 mV at 60 mA. Tau2 has a +19.2404% error and produces a 1.57102 mV isolated peak about 0.7143 s after reversal, but only 0.08699 mV RMS over the 600 s reversal protocol. Tau1 and tau3 isolated reversal peaks are 0.83178 and 0.61642 mV. Large percentage errors in time constants primarily affect transitions in this tested regime.",
+    "charge_and_hysteresis": "Gamma_minus is only -1.5465% wrong but produces up to 0.33852 mV isolated effect, whereas gamma_plus is -5.0548% wrong and produces at most 0.09537 mV. The starting h is near positive saturation, so a transition toward negative h responds more strongly than further positive excitation. Rate importance is directional and state dependent.",
+    "sustained_discharge": "Resistance errors supply the largest individual final-anchor voltage RMS effects, while Q supplies the growing SOC drift. A 1% Q differential yields up to 5.35410 mV in this 0.03 Ah discharge, much greater than its remaining actual-error contribution of 0.50940 mV because Q is only +0.09523% wrong. H contributes about -0.15605 mV at the endpoint; entering h and RC-state effects mostly decay.",
+    "initial_RC_states": "Their final saved errors are only +0.02626, +0.03000 and -0.07535 mV. The corresponding isolated voltage peaks occur at entry and decay; this does not imply the associated resistances or time constants are dispensable.",
+    "current_SOC": "A 1 percentage point SOC differential can produce 17.9 mV over this set, but the final saved SOC error is only -0.008062 pp and its exact isolated voltage peak is 0.14431 mV. Normalized sensitivity and actual error effect must remain separate."
+  },
+  "cancellation_and_interaction": {
+    "evidence": "Final joint voltage RMS is only about 5.35-7.32% of RMS(sum of absolute isolated effects) for charge, reversal, long discharge and the load-step protocol. This is a diagnostic of the saved decomposition, not a bounded cancellation fraction or reliability claim.",
+    "steady_resistance_example_mV": {
+      "R0": -0.6912787841342194,
+      "R1": -0.5252196921263774,
+      "R2": -0.6000926434048814,
+      "R3": 1.5070405554360455,
+      "sum": -0.3095505642294327
+    },
+    "conditional_repair_example": {
+      "protocol": "discharge_1800s",
+      "anchor_s": 2100,
+      "original_final_error_mV": -0.0490927143350639,
+      "R3_removed_contribution_mV": 1.5070405554360455,
+      "derived_final_error_after_only_R3_repair_mV": -1.5561332697711094,
+      "meaning": "Replacing R3 alone by truth would worsen this endpoint prediction because the other errors remain. This is arithmetic from the saved counterfactual, not a proposed correction or a reason to prefer a wrong physical parameter."
+    },
+    "remainder_scale": "Across the six final-anchor protocols, exact cross-coordinate interaction peaks are at most 0.05538 mV and total first-order residual peaks at most 0.11283 mV. Most of the large magnitude reduction here is signed compensation already present in the isolated effects, rather than a large nonlinear interaction remainder.",
+    "interpretation": "Good joint prediction can coexist with inaccurate individual coordinates. Preserve joint-state/covariance treatment and test appropriate changes of regime before drawing conclusions about individual parameter requirements. These six results do not establish that the compensation will persist for arbitrary future input."
+  },
+  "anchor_contrast": {
+    "long_discharge_same_declared_protocol": [
+      {
+        "anchor_s": 900.0,
+        "Q_error_percent": 13.163557959821619,
+        "initial_SOC_error_pp": 0.42408759776494387,
+        "Q_isolated_final_SOC_error_pp": 5.393661292682489,
+        "joint_final_SOC_error_pp": 5.817748890447433,
+        "Q_isolated_final_voltage_error_mV": 65.05049299452548,
+        "joint_voltage_peak_mV": 61.88186633162695,
+        "joint_voltage_RMS_mV": 43.02223336537729
+      },
+      {
+        "anchor_s": 1800.0,
+        "Q_error_percent": 0.751759157845078,
+        "initial_SOC_error_pp": 0.0790970916393463,
+        "Q_isolated_final_SOC_error_pp": 0.3459736820325632,
+        "joint_final_SOC_error_pp": 0.4250707736719095,
+        "Q_isolated_final_voltage_error_mV": 3.9964774244216628,
+        "joint_voltage_peak_mV": 3.047544885288911,
+        "joint_voltage_RMS_mV": 1.7805017668605585
+      },
+      {
+        "anchor_s": 2100.0,
+        "Q_error_percent": 0.09523113281822905,
+        "initial_SOC_error_pp": -0.008062126651964263,
+        "Q_isolated_final_SOC_error_pp": 0.04411461951203677,
+        "joint_final_SOC_error_pp": 0.036052492860072505,
+        "Q_isolated_final_voltage_error_mV": 0.5093989029059109,
+        "joint_voltage_peak_mV": 0.6201063503477044,
+        "joint_voltage_RMS_mV": 0.23208963263631904
+      }
+    ],
+    "meaning": "The large 900 s capacity error has modest immediate consequences under weak use but becomes important after substantial future charge displacement. Later saved Q and SOC estimates sharply reduce that conditional forecasting error. This supports assessing capacity on relevant charge throughput and later evidence while seeking prompt SOC, without imposing a startup deadline.",
+    "nonmonotonic_example": "Rest-voltage RMS is 0.61545, 0.99908 and 0.21392 mV at the 900, 1800 and 2100 s anchors. Improvement is not uniform across every metric. Anchor comparisons change both estimation error and the true entering physical state, so changes in voltage sensitivity are not solely attributable to learning.",
+    "no_learning_during_followups": "The hypothetical future protocols propagate fixed saved parameters without voltage assimilation. Their future errors do not predict what the live estimator would learn or correct over those same protocols."
+  },
+  "SOC_distinction": {
+    "formula": "For signed net charge C_Ah since the anchor: z(t)=z_anchor-C_Ah/Q. Therefore full SOC error is delta_z_anchor+C_Ah*(1/Q_truth-1/Q_estimate), and dz/dlogQ=C_Ah/Q. Only Q and entering z affect actual open-loop SOC in this model.",
+    "final_long_discharge": "The Q error alone gives +0.04411462 pp; adding initial SOC error -0.00806213 pp gives +0.03605249 pp. The endpoint terminal-voltage error is nevertheless -0.04909 mV, whose OCV-equivalent proxy is -0.00425156 pp. Actual SOC error and the voltage proxy even have opposite signs here.",
+    "limits": "The proxy is pointwise voltage error divided by the truth-path OCV slope with other voltage terms fixed. Nuisance parameters can affect live estimator SOC through voltage updates, which this analysis does not simulate. No proxy is an SOC bound or uncertainty interval."
+  },
+  "practical_priorities": [
+    "Keep prompt SOC and later charge-dependent capacity usefulness as separate objectives. Evaluate Q consequences under declared charge displacement rather than requiring every parameter to reach the same percentage accuracy.",
+    "Preserve joint physical-state and parameter treatment. Single-coordinate error magnitude or a counterfactual repair does not determine whether changing that coordinate improves complete predictions.",
+    "For dynamic-voltage use, pay attention to the resistance combination and transition response, especially R3 and tau2 in these saved results. Their tested importance does not establish universal tolerances or justify removing other modes.",
+    "During weak use, monitor offset-like SOC/H/h compensation; during charge and reversal, retain the distinction between the two hysteresis rates. Do not reinterpret voltage precision as direct SOC or capacity accuracy.",
+    "Use these findings to sharpen the already-proposed continuous learning/retention validation contract, keeping bidirectional changes, weak-use carry and later informative charge displacement explicit. Do not expand or execute that experiment in this analysis.",
+    "Retain unresolved application accuracy and unvalidated coverage. Being below the inherited 1 mV per-sample noise scale in these noiseless forward comparisons is a reference observation, not an acceptance or identifiability threshold."
+  ],
+  "not_supported": [
+    "Universal nuisance-parameter accuracy thresholds.",
+    "Parameter or component pruning.",
+    "Posterior uncertainty calibration from sensitivity.",
+    "A 24-hour run, annual behavior or indefinite stability.",
+    "Hardware stimulus recommendations.",
+    "Any estimator change or tuning from scoring truth."
+  ],
+  "stop": "One frozen offline analysis and interpretation complete. Publish the existing evidence and stop; no additional artifact, estimator run, protocol expansion or tuning is requested."
+}

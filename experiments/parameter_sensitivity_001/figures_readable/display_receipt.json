@@ -1,0 +1,92 @@
+{
+  "schema": "mumble_parameter_sensitivity_display_revision_v1",
+  "completed": true,
+  "created_utc": "2026-10-26T03:01:43.747865+00:00",
+  "input_directory": "experiments/parameter_sensitivity_001/primary",
+  "analysis_source_revision": "df4c4b6dd56bcffd88de3b06c1d3e818a0dc0184",
+  "input_receipt_sha256": "7386e537943caa14ea233c7b674cd2a25f15a1e4d723bf4eb88991543891adb8",
+  "input_artifacts_sha256": {
+    "results.json": "e1c44a60b4f192852da66ac0ba660bbaf0d20c750513381a4a97001bd4d6a6c3",
+    "profiles.npz": "1140bc3aac2d387b06417f59035a8a1c3f3a2c5b916989f66c4c97b7112d737d"
+  },
+  "base_plotter": {
+    "path": "tools/plot_parameter_sensitivity.py",
+    "sha256": "a1d8b33809c1fa4eb1654e2c7c9724c58eac4cb0edffca2b0108c0c4cfbb96f4",
+    "frozen_by_analysis_receipt": true
+  },
+  "display_tool": {
+    "path": "tools/plot_parameter_sensitivity_heatmap.py",
+    "sha256": "0b596cfc26fcacd39e7d372170c22b74fe7b5d1f5fb9695292bf45018e470017"
+  },
+  "anchor_index": 73500,
+  "anchor_time_s": 2100.0,
+  "column_labels": {
+    "rest_300s": "Rest\n0 mA\n300 s",
+    "weak_300s": "Weak load\n+3 mA\n300 s",
+    "load_step_130s": "Load step\n0/+60/0 mA\n10/60/60 s",
+    "charge_600s": "Charge\n\u221230 mA\n600 s",
+    "reversal_600s": "Reversal\n+60/\u221230 mA\n300/300 s",
+    "discharge_1800s": "Discharge\n+60 mA\n1800 s"
+  },
+  "label_segments_verified_against_saved_protocols": true,
+  "colour_mapping": {
+    "scale": "logarithmic",
+    "floor_mV": 0.001,
+    "ceiling_mV": 20,
+    "clip_below_floor": true,
+    "exact_zero_masked": true,
+    "raw_numerical_annotations_retained": true,
+    "nonzero_cells_below_floor": {
+      "local_sensitivity": 2,
+      "isolated_error": 0
+    },
+    "floor_is_physical_or_statistical_bound": false
+  },
+  "preservation": {
+    "original_figures_modified": false,
+    "metrics_modified": false,
+    "analysis_model_or_estimator_modified": false,
+    "primary_artifacts_modified": false
+  },
+  "scope": "Display-only derivative: shorter protocol labels and clipped colour normalization; original numeric peaks retained. State-conditioned forward predictions, without voltage assimilation or uncertainty-coverage claims.",
+  "propagation_calls": 0,
+  "model_calls": 0,
+  "estimator_runs": 0,
+  "optimizer_calls": 0,
+  "matplotlib": "3.10.8",
+  "artifacts": {
+    "voltage_sensitivity_and_error_heatmaps.png": {
+      "sha256": "c4fbf3476709e3c707527acf43fd873f5963f0c0dd7cd9bb145be9394e3cbca8",
+      "bytes": 500026
+    },
+    "voltage_sensitivity_and_error_heatmaps.svg": {
+      "sha256": "93af1bf002c02c2205ae6d5d68110bfc8914b1d3b076cffb4a8edaec6159c60b",
+      "bytes": 113749
+    }
+  },
+  "visual_review": {
+    "status": "pass",
+    "method": "Viewed the generated PNG at full displayed resolution; no model or metric execution.",
+    "checks": [
+      "Six column labels are separated and show explicit currents and dwell durations without duplication.",
+      "All sixteen row labels, both panel titles, colourbar and footnotes are visible without clipping.",
+      "Shared colour scale spans 0.001 to 20 mV, with below-floor saturation explicitly marked.",
+      "The two tiny nonzero local sensitivities remain annotated as 7.98e-19 and 1.60e-18 mV.",
+      "Exact zero cells remain grey dashes."
+    ]
+  },
+  "preservation_verification": {
+    "original_figures_manifest_sha256": "b4dcb7f7cb03049474304fe6ec78d8306f45a543393c32d498dce92cdd068508",
+    "original_figure_hash_matches": {
+      "voltage_sensitivity_and_error_heatmaps.png": true,
+      "voltage_sensitivity_and_error_heatmaps.svg": true,
+      "joint_voltage_error_profiles.png": true,
+      "joint_voltage_error_profiles.svg": true
+    },
+    "primary_artifact_hash_matches": {
+      "results.json": true,
+      "profiles.npz": true
+    },
+    "original_base_plotter_hash_matches": true
+  }
+}

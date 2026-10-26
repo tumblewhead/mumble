@@ -1,0 +1,48 @@
+{
+  "schema": "mumble_parameter_sensitivity_decision_v1",
+  "status": "decision_closed_after_one_frozen_offline_analysis",
+  "basis": [
+    "experiments/parameter_sensitivity_001/summary.json",
+    "experiments/parameter_sensitivity_001/independent_review.json",
+    "experiments/parameter_sensitivity_001/interpretation_review.json"
+  ],
+  "decision": "Keep the unchanged two-component candidate for controlled qualification. Use application-output effects and target availability under declared use to judge the importance of nuisance estimation errors.",
+  "retain": [
+    "Prompt SOC; capacity may learn over longer informative use without a startup deadline.",
+    "Hard5percent/preferred0.5percent capacity and hard10pp/preferred0.5pp SOC targets.",
+    "All16 coordinates and full joint state/parameter structure; no precision mandate or pruning based on this fixed set.",
+    "Existing failed uncertainty diagnostics, historical results and execution/publication identities."
+  ],
+  "findings_for_next_contract": [
+    "Final tau2+19.24percent gives1.571mV isolated reversal peak; R3-7.61percent gives1.507mV sustained-load effect. Time-constant peaks and resistance offsets have different consequences.",
+    "Final complete-vector peak remains below0.987mV across the six protocols, partly through compensation. Do not infer independent parameter correctness from a good voltage fit.",
+    "Q sensitivity grows with net charge movement. Final Q error adds0.044115pp over0.03Ah; the900s anchor adds5.393661pp under the same follow-up charge.",
+    "Only Q and entering SOC change direct propagated SOC; nuisance effects through future voltage corrections remain unmeasured.",
+    "Separate transient peak, duration-weighted RMS, direct SOC error and OCV-equivalent proxy.",
+    "Point sensitivity does not calibrate local uncertainty, establish identifiability, supply hard bounds or validate generalization."
+  ],
+  "next": {
+    "work_branch": "design/continuous-learning-validation-001",
+    "action": "Freeze one finite continuous learning/retention validation contract for the unchanged candidate.",
+    "required_decisions": [
+      "Carried plant, estimator, noise-generator and input-index state across one finite horizon; no hidden resets or repeated CSV history.",
+      "Separate prompt-SOC, capacity-learning, weak-use retention and renewed-excitation endpoints; retain no capacity startup deadline.",
+      "Rest, weak load, transitions, sustained load, charge/reversal and accumulated charge as declared regime diagnostics, without universal nuisance tolerances.",
+      "Freeze public initialization, model/noise configuration, initial component weights and the weight-update rule; carried predictive weights continue to evolve. Predeclare target/output-error metrics, query resolution, finite compute/logging budgets and numerical/accounting failure stops.",
+      "One honest uncertainty assessment: local ranges and component hulls remain unvalidated and cannot certify accuracy.",
+      "Whether a short second-cell/lifecycle gate is needed before a duration extension."
+    ],
+    "finish_line": "One frozen experiment contract tied to a learning/retention decision, or a named missing datum. No primary run in the design task."
+  },
+  "not_authorized_by_this_result": [
+    "Estimator/prior/noise/weight tuning from scoring truth.",
+    "Parameter removal, universal importance ordering or automatic uniform precision requirements.",
+    "Automatic 24h, week, annual, multiple-seed, component-count or horizon sweep.",
+    "Uncertainty coverage, full-model indefinite proof or complete M23 qualification claims."
+  ],
+  "estimator_code_changed": false,
+  "estimator_SRAM_added_bytes": 0,
+  "candidate_promoted": false,
+  "coverage_validated": false,
+  "complete_M23_qualified": false
+}

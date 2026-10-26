@@ -1,0 +1,345 @@
+{
+  "schema": "mumble_parameter_sensitivity_independent_results_review_v1",
+  "status": "passed_with_scoped_limits",
+  "source_revision": "df4c4b6dd56bcffd88de3b06c1d3e818a0dc0184",
+  "completed_utc": "2026-10-26T03:02:44.782940+00:00",
+  "scope": "One independent audit of the frozen offline sensitivity outputs; no primary, estimator, optimizer, scorer or old test suite rerun.",
+  "evidence_sha256": {
+    "experiments/parameter_sensitivity_001/plan.json": "eee07ac659a8a23859d39ff9e17d7de7d7d8c751576601c4e35588c7a17f7afb",
+    "experiments/parameter_sensitivity_001/primary/receipt.json": "7386e537943caa14ea233c7b674cd2a25f15a1e4d723bf4eb88991543891adb8",
+    "experiments/parameter_sensitivity_001/primary/results.json": "e1c44a60b4f192852da66ac0ba660bbaf0d20c750513381a4a97001bd4d6a6c3",
+    "experiments/parameter_sensitivity_001/primary/profiles.npz": "1140bc3aac2d387b06417f59035a8a1c3f3a2c5b916989f66c4c97b7112d737d",
+    "experiments/parameter_sensitivity_001/development/qualification.json": "1dcad4844d85fe125e442097208bda4f0eabc2d595370cdf4aee1908de3c9793",
+    "tools/parameter_sensitivity.py": "289591462e92cdff77579ccb2b32b5ccd954b18b729ffb700a3bc9acadd5a47a",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+  },
+  "checks": {
+    "identity": {
+      "checked": 27,
+      "failed": 0
+    },
+    "chronology": {
+      "checked": 2,
+      "failed": 0
+    },
+    "scope": {
+      "checked": 2,
+      "failed": 0
+    },
+    "counts": {
+      "checked": 22,
+      "failed": 0
+    },
+    "units": {
+      "checked": 299,
+      "failed": 0
+    },
+    "anchor_binding": {
+      "checked": 6,
+      "failed": 0
+    },
+    "domain": {
+      "checked": 648,
+      "failed": 0
+    },
+    "SOC_charge_metrics": {
+      "checked": 1836,
+      "failed": 0
+    },
+    "differential_normalization": {
+      "checked": 2304,
+      "failed": 0
+    },
+    "metric_shape": {
+      "checked": 5184,
+      "failed": 0
+    },
+    "metric_time": {
+      "checked": 2592,
+      "failed": 0
+    },
+    "metric_peak": {
+      "checked": 5184,
+      "failed": 0
+    },
+    "R0_exact_metrics": {
+      "checked": 432,
+      "failed": 0
+    },
+    "Q_differential_metrics": {
+      "checked": 216,
+      "failed": 0
+    },
+    "R_DC_exact_metrics": {
+      "checked": 216,
+      "failed": 0
+    },
+    "interaction_arithmetic": {
+      "checked": 54,
+      "failed": 0
+    },
+    "profiles": {
+      "checked": 36,
+      "failed": 0
+    },
+    "profile_metrics": {
+      "checked": 660,
+      "failed": 0
+    },
+    "C_isolated_points": {
+      "checked": 32,
+      "failed": 0
+    },
+    "C_joint_points": {
+      "checked": 12,
+      "failed": 0
+    },
+    "C_repair_points": {
+      "checked": 3,
+      "failed": 0
+    }
+  },
+  "maximum_absolute_differences": {
+    "counts": 2.168404344971009e-19,
+    "anchor_binding": 0.0,
+    "units": 0.0,
+    "domain": 5.551115123125783e-17,
+    "SOC_charge_metrics": 1.3766765505351941e-14,
+    "differential_normalization": 7.105427357601002e-15,
+    "metric_time": 0.0,
+    "metric_peak": 0.0,
+    "R0_exact_metrics": 1.0833001162779965e-12,
+    "Q_differential_metrics": 1.7763568394002505e-15,
+    "R_DC_exact_metrics": 8.43769498715119e-13,
+    "interaction_arithmetic": 3.552713678800501e-15,
+    "profiles": 0.0,
+    "profile_metrics": 1.3877787807814457e-17,
+    "C_isolated_points": 8.881784197001252e-13,
+    "C_joint_points": 8.881784197001252e-13,
+    "C_repair_points": 4.440892098500626e-13
+  },
+  "failures": [],
+  "audit_only_corrections": [],
+  "independent_methods": {
+    "domain": "For each of the 612 declared coordinate vectors/protocol combinations, independently evaluate SOC from entering SOC minus transferred charge/capacity; confirm valid physical parameters and h within [-1,1]. With positive gamma, subsequent h is a convex transition toward +/-1.",
+    "SOC_and_Q": "Recompute every saved joint and isolated SOC peak, RMS, endpoint and selected peak value from charge alone at all three anchors. Independently recompute normalized log-Q voltage differential using the known OCV derivative.",
+    "R0_and_R": "Recompute all R0 metric curves exactly as -I times delta R0, including normalized differentials and repair sign. Recompute isolated R1/R2/R3 effects for each single-dwell protocol from -I deltaR (1-exp(-t/tau_truth)).",
+    "production_C": "Recompute the maximum-over-declared-protocol isolated peak and same-protocol final value for every coordinate at the final anchor, plus all six joint peaks/finals and selected Q/R3/H conditional repair peaks, using unchanged production scm_physical_step in constant-current chunks.",
+    "profiles": "Verify signed joint, signed isolated sum, absolute isolated sum, interaction and linear remainder identities, endpoint/peak consistency, and OCV proxy units. Sparse plot profiles are not used to recompute full-rate RMS.",
+    "normalization": "For both truth/estimate Jacobian bases, verify actual native error divided by its declared reference-unit scale transforms unit differential metrics into known-error linear metrics. One-percent differential units are not exact finite perturbations."
+  },
+  "activity": {
+    "primary_reexecutions": 0,
+    "estimator_executions": 0,
+    "optimizer_calls": 0,
+    "old_tests_or_studies": 0,
+    "all_declared_domain_cases_checked": 612,
+    "saved_profile_rows_read": 5419,
+    "selected_C_point_evaluations": 69,
+    "production_C_chunk_calls": 110,
+    "full_sample_model_trajectories_reexecuted": 0
+  },
+  "final_anchor_importance_maximum_over_six_declared_protocols": [
+    {
+      "coordinate": "tau2",
+      "protocol": "reversal_600s",
+      "peak_index": 10525,
+      "peak_time_s": 300.7142857142857,
+      "peak_abs_mV": 1.5710174567784563,
+      "signed_at_peak_mV": -1.5710174567784563,
+      "RMS_on_that_protocol_mV": 0.08698851260881721
+    },
+    {
+      "coordinate": "R3",
+      "protocol": "reversal_600s",
+      "peak_index": 7675,
+      "peak_time_s": 219.28571428571428,
+      "peak_abs_mV": 1.5070405554364896,
+      "signed_at_peak_mV": 1.5070405554364896,
+      "RMS_on_that_protocol_mV": 1.1688734184549952
+    },
+    {
+      "coordinate": "tau1",
+      "protocol": "reversal_600s",
+      "peak_index": 10503,
+      "peak_time_s": 300.0857142857143,
+      "peak_abs_mV": 0.8317784061078193,
+      "signed_at_peak_mV": -0.8317784061078193,
+      "RMS_on_that_protocol_mV": 0.01543843560549682
+    },
+    {
+      "coordinate": "R0",
+      "protocol": "load_step_130s",
+      "peak_index": 351,
+      "peak_time_s": 10.028571428571428,
+      "peak_abs_mV": 0.6912787841342194,
+      "signed_at_peak_mV": -0.6912787841342194,
+      "RMS_on_that_protocol_mV": 0.4696314548799457
+    },
+    {
+      "coordinate": "tau3",
+      "protocol": "reversal_600s",
+      "peak_index": 10770,
+      "peak_time_s": 307.7142857142857,
+      "peak_abs_mV": 0.6164221430182693,
+      "signed_at_peak_mV": -0.6164221430182693,
+      "RMS_on_that_protocol_mV": 0.11245768135725367
+    },
+    {
+      "coordinate": "R2",
+      "protocol": "load_step_130s",
+      "peak_index": 1244,
+      "peak_time_s": 35.542857142857144,
+      "peak_abs_mV": 0.6000926434053255,
+      "signed_at_peak_mV": -0.6000926434053255,
+      "RMS_on_that_protocol_mV": 0.40546909141587384
+    },
+    {
+      "coordinate": "R1",
+      "protocol": "load_step_130s",
+      "peak_index": 428,
+      "peak_time_s": 12.228571428571428,
+      "peak_abs_mV": 0.5252196921263774,
+      "signed_at_peak_mV": -0.5252196921263774,
+      "RMS_on_that_protocol_mV": 0.35659874448689743
+    },
+    {
+      "coordinate": "Q",
+      "protocol": "discharge_1800s",
+      "peak_index": 63000,
+      "peak_time_s": 1800.0,
+      "peak_abs_mV": 0.5093989029059109,
+      "signed_at_peak_mV": 0.5093989029059109,
+      "RMS_on_that_protocol_mV": 0.3126919485361234
+    },
+    {
+      "coordinate": "h",
+      "protocol": "rest_300s",
+      "peak_index": 0,
+      "peak_time_s": 0.0,
+      "peak_abs_mV": 0.4723410313443033,
+      "signed_at_peak_mV": 0.4723410313443033,
+      "RMS_on_that_protocol_mV": 0.4723410313443033
+    },
+    {
+      "coordinate": "gamma_minus",
+      "protocol": "reversal_600s",
+      "peak_index": 18966,
+      "peak_time_s": 541.8857142857142,
+      "peak_abs_mV": 0.3385156525079758,
+      "signed_at_peak_mV": -0.3385156525079758,
+      "RMS_on_that_protocol_mV": 0.1962301356443984
+    },
+    {
+      "coordinate": "H",
+      "protocol": "discharge_1800s",
+      "peak_index": 63000,
+      "peak_time_s": 1800.0,
+      "peak_abs_mV": 0.15604825497872454,
+      "signed_at_peak_mV": -0.15604825497872454,
+      "RMS_on_that_protocol_mV": 0.15351225233436955
+    },
+    {
+      "coordinate": "z",
+      "protocol": "reversal_600s",
+      "peak_index": 12449,
+      "peak_time_s": 355.6857142857143,
+      "peak_abs_mV": 0.14431206527909524,
+      "signed_at_peak_mV": -0.14431206527909524,
+      "RMS_on_that_protocol_mV": 0.1417336890672621
+    },
+    {
+      "coordinate": "gamma_plus",
+      "protocol": "reversal_600s",
+      "peak_index": 6530,
+      "peak_time_s": 186.57142857142858,
+      "peak_abs_mV": 0.09537499070289002,
+      "signed_at_peak_mV": 0.09537499070289002,
+      "RMS_on_that_protocol_mV": 0.06736115824579544
+    },
+    {
+      "coordinate": "v3",
+      "protocol": "rest_300s",
+      "peak_index": 0,
+      "peak_time_s": 0.0,
+      "peak_abs_mV": 0.07535202777209093,
+      "signed_at_peak_mV": 0.07535202777209093,
+      "RMS_on_that_protocol_mV": 0.008408571039405026
+    },
+    {
+      "coordinate": "v2",
+      "protocol": "rest_300s",
+      "peak_index": 0,
+      "peak_time_s": 0.0,
+      "peak_abs_mV": 0.030004632169955414,
+      "signed_at_peak_mV": -0.030004632169955414,
+      "RMS_on_that_protocol_mV": 0.0009659496840818825
+    },
+    {
+      "coordinate": "v1",
+      "protocol": "rest_300s",
+      "peak_index": 0,
+      "peak_time_s": 0.0,
+      "peak_abs_mV": 0.02626098460600801,
+      "signed_at_peak_mV": -0.02626098460600801,
+      "RMS_on_that_protocol_mV": 0.00023978178594525804
+    }
+  ],
+  "final_anchor_protocol_results": [
+    {
+      "protocol": "rest_300s",
+      "joint_peak_mV": 0.24123499680150928,
+      "joint_RMS_mV": 0.21392229751819122,
+      "joint_final_SOC_error_pp": -0.008062126651964263,
+      "interaction_peak_mV": 0.004019704330282536
+    },
+    {
+      "protocol": "weak_300s",
+      "joint_peak_mV": 0.19830826678424174,
+      "joint_RMS_mV": 0.19152325382534535,
+      "joint_final_SOC_error_pp": -0.00769450482269729,
+      "interaction_peak_mV": 0.004190604817377874
+    },
+    {
+      "protocol": "load_step_130s",
+      "joint_peak_mV": 0.7106413655137978,
+      "joint_RMS_mV": 0.2095053322617564,
+      "joint_final_SOC_error_pp": -0.006591639334896371,
+      "interaction_peak_mV": 0.03896844568140878
+    },
+    {
+      "protocol": "charge_600s",
+      "joint_peak_mV": 0.6569106167964023,
+      "joint_RMS_mV": 0.12476177778176964,
+      "joint_final_SOC_error_pp": -0.015414563237303724,
+      "interaction_peak_mV": 0.019660137401178446
+    },
+    {
+      "protocol": "reversal_600s",
+      "joint_peak_mV": 0.9868517034083979,
+      "joint_RMS_mV": 0.19358374607531273,
+      "joint_final_SOC_error_pp": -0.0043859083592945325,
+      "interaction_peak_mV": 0.05537673467426174
+    },
+    {
+      "protocol": "discharge_1800s",
+      "joint_peak_mV": 0.6201063503477044,
+      "joint_RMS_mV": 0.23208963263631904,
+      "joint_final_SOC_error_pp": 0.036052492860072505,
+      "interaction_peak_mV": 0.034553993897734614
+    }
+  ],
+  "interpretive_limits": [
+    "Importance is conditional on the six declared future inputs and saved entering states; changing a parameter does not reconstruct its pre-anchor history.",
+    "Metrics describe open-loop point trajectories; there are no noisy observations, voltage corrections, re-estimation, posterior propagation or prediction-coverage qualification.",
+    "Actual propagated SOC depends only on entering SOC and Q in this model. Voltage sensitivity of other coordinates is not their effect on an operating estimator SOC.",
+    "OCV-equivalent SOC is 100 deltaV/Uprime with other voltage terms fixed; it is a proxy, not actual SOC error or a bound.",
+    "Peak values are from the 35 Hz grid including t0; later current-switch instantaneous limits are absent. Plateau peak indices can depend on floating-point tie-breaking.",
+    "RMS excludes t0 and uses every equal-duration sample. Compact nonuniform plot profiles cannot independently reproduce those RMS values.",
+    "Exact isolated effects, conditional repairs and joint error are different decompositions. Signed effects can cancel; their absolute sum and RMS ratio are diagnostics, not certified bounds or a bounded cancellation fraction.",
+    "One-percent physical-parameter differential units differ from absolute entering-state units. Neither normalized sensitivity nor maximum-over-protocol ranking is universal importance.",
+    "Selected C points independently validate stored values; exhaustive nonlinear peak searches were not rerun. The full-grid metric code was reviewed."
+  ],
+  "blockers": []
+}

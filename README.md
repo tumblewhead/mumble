@@ -6,6 +6,19 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The requested parameter/state sensitivity analysis is complete.** At the
+final saved estimate, a **19.24% τ₂ error** produces at most **1.571 mV** of
+isolated voltage error across six declared future protocols. The complete
+estimated vector stays below **0.987 mV** sampled voltage error, with substantial
+signed compensation. A 30-minute 60 mA discharge adds **0.0441 SOC percentage
+points** from capacity error alone; the full starting-state/capacity combination
+ends at **+0.0361 points**. These are state-conditioned point predictions, not
+coverage or arbitrary-input guarantees. See the
+[sensitivity report](experiments/parameter_sensitivity_001/REPORT.md),
+[summary](experiments/parameter_sensitivity_001/summary.json) and
+[decision](experiments/parameter_sensitivity_001/decision.json).
+The analysis changes no learner code and adds no estimator SRAM.
+
 **The new two-component candidate learns capacity with later use on the first
 declared comparison.** Its Cell B capacity error improves from **+13.16% at
 900 seconds** to **+0.75% at 1800 seconds** and **+0.095% at 2100 seconds**;
@@ -21,7 +34,7 @@ accuracy targets. The candidate is retained for further qualification;
 **it is not promoted**. Its local ranges still miss truth, including at the
 final accurate point. Complete target memory, broader performance, uncertainty
 coverage and indefinite operation remain open. The next task is one
-[continuous learning/retention validation contract](experiments/nonlinear_hypothesis_001/decision.json).
+[continuous learning/retention validation contract](experiments/parameter_sensitivity_001/decision.json).
 
 The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
 end-to-end desktop demonstration, a desktop performance campaign including
@@ -89,6 +102,10 @@ experiment work to specific delivery decisions.
 | [Delivery roadmap](docs/ROADMAP.md) | Two-cell lifecycle, desktop annual trajectories and Cortex-M23 delivery; finish lines and stop rules |
 | [Machine-readable action plan](plans/trajectory_to_m23_001.json) | Immediate A1-A4 work, cases, reset semantics, campaign gates and resource boundary |
 | [Accuracy target contract](plans/estimation_targets_001.json) | Capacity 5% / SOC 10 percentage points hard limits; 0.5% / 0.5 points preferred region; no nuisance-parameter precision mandate |
+| [Current sensitivity result](experiments/parameter_sensitivity_001/summary.json) | All sixteen saved parameter/state errors, six future regimes, joint compensation and charge-dependent SOC consequences |
+| [Sensitivity report and figures](experiments/parameter_sensitivity_001/REPORT.md) | Normalized local derivatives, exact finite error effects, three saved anchors and explicit interpretation limits |
+| [Sensitivity decision](experiments/parameter_sensitivity_001/decision.json) | Preserve candidate; assess application outputs under declared use, with no universal nuisance precision or automatic duration campaign |
+| [Sensitivity publication](provenance/parameter_sensitivity_001_publication.json) | Executed versus published source/result trees and preserved original development history |
 | [Current learner result](experiments/nonlinear_hypothesis_001/summary.json) | Two-arm 2100 s comparison complete; later capacity learning supported, local uncertainty still fails, candidate retained for qualification |
 | [Learning report and figure](experiments/nonlinear_hypothesis_001/REPORT.md) | Prompt SOC, later capacity, first versus retained target attainment, component weights and remaining limits |
 | [Capacity timing amendment](plans/capacity_learning_horizon_001.json) | No capacity startup deadline; prompt SOC, unchanged hard/preferred accuracy targets, continuous long-trajectory requirement |
@@ -302,22 +319,21 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The [small M2/A4 diagnostic](experiments/boundary_transaction_diagnostic_001/REPORT.md)
-has reached its finish line on `diagnostic/online-boundary-001`: a reproducible
-mean-domain failure at R3 and a tested coordinate-only remedy decision. It does
-not identify the causes of the original 17 rejected steps or change live
-inference. Preserve both candidates, the completed M1 campaign and the original
-60-fit study. The [nonlinear-evidence design](plans/nonlinear_evidence_design_001.json)
-now selects exactly two persistent public log-capacity components. Saved
-results reveal SOC/hysteresis voltage compensation and an input-only
-reachability violation; neither establishes the unique bias cause or proves
-this design sufficient. Implement the frozen packed layout, numerical remedy,
-bank transactions and checkpoint rules on `implementation/nonlinear-hypothesis-001`.
-After targeted checks and source freeze, perform only the
-[declared B 900 s comparison](plans/nonlinear_hypothesis_falsification_001.json).
-Its available point-error gates remain 5% capacity and 10 percentage points
-SOC. Application accuracy/coverage and complete M23 resources remain unqualified;
-no full two-cell primary or automatic horizon/start/count sweep is queued.
+The [two-component learner comparison](experiments/nonlinear_hypothesis_001/REPORT.md)
+and the [parameter sensitivity analysis](experiments/parameter_sensitivity_001/REPORT.md)
+are complete. Preserve the completed M1 campaign, both older bounded candidates,
+the original 60-fit study, failed uncertainty diagnostics and all source identities.
+The latest canonical work branch is `analysis/parameter-sensitivity-001`.
+
+Next, follow the [sensitivity decision](experiments/parameter_sensitivity_001/decision.json)
+on `design/continuous-learning-validation-001` to freeze one finite continuous
+learning/retention validation contract for the unchanged learner. Declare carried
+plant/estimator/noise/input state, useful target availability, rest/transient/load/
+charge/reversal diagnostics, accumulated charge, honest uncertainty semantics,
+resource limits and failure stops. Decide short second-cell/lifecycle prerequisites
+before any duration extension. This next design task ends with one contract or
+a named missing datum; it runs no primary. No 24-hour or annual run is queued
+automatically, and there is no capacity startup deadline.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to

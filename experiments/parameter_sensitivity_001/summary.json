@@ -1,0 +1,742 @@
+{
+  "schema": "mumble_parameter_sensitivity_summary_v1",
+  "status": "completed_once_offline_analysis_decision_closed",
+  "work_branch": "analysis/parameter-sensitivity-001",
+  "source_revision": "df4c4b6dd56bcffd88de3b06c1d3e818a0dc0184",
+  "published_source_revision": "77d72301ba1a8aba4361d5bc28954cb6bcd42714",
+  "source_tree": "dbdce2d4c248b721433b73c79358844ba9cb956f",
+  "question": "Under specified future inputs, how much does each saved parameter/state error change predicted terminal voltage and propagated SOC, and how do errors cancel or interact?",
+  "scope": "Six independent future protocols from each of three saved aggregate current-state anchors; deterministic point propagation, no re-estimation.",
+  "execution": {
+    "propagation_calls": 612,
+    "diagnostic_interval_evaluations": 13316100,
+    "estimator_runs": 0,
+    "optimizer_calls": 0,
+    "completed_study_reruns": 0,
+    "all_domains_passed": true
+  },
+  "anchor_times_s": [
+    900,
+    1800,
+    2100
+  ],
+  "final_anchor_s": 2100,
+  "final_coordinate_results_maxima_over_declared_six_protocols_only": [
+    {
+      "coordinate": "log_tau1",
+      "label": "tau1",
+      "physical_estimate": 0.08410689921696496,
+      "physical_truth_scoring_only": 0.075,
+      "signed_physical_error": 0.009106899216964962,
+      "physical_unit": "s",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.8317784061078193,
+      "protocol_of_isolated_maximum": "reversal_600s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.8317784061078193,
+        "signed_at_peak": -0.8317784061078193,
+        "peak_index": 10503,
+        "peak_time_s": 300.0857142857143,
+        "RMS": 0.01543843560549682,
+        "initial": 0.0,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.07572473590517002,
+      "protocol_of_local_reference_maximum": "reversal_600s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": 12.142532289286615
+    },
+    {
+      "coordinate": "log_tau2",
+      "label": "tau2",
+      "physical_estimate": 0.7750624560756388,
+      "physical_truth_scoring_only": 0.65,
+      "signed_physical_error": 0.12506245607563882,
+      "physical_unit": "s",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 1.5710174567784563,
+      "protocol_of_isolated_maximum": "reversal_600s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 1.5710174567784563,
+        "signed_at_peak": -1.5710174567784563,
+        "peak_index": 10525,
+        "peak_time_s": 300.7142857142857,
+        "RMS": 0.08698851260881721,
+        "initial": 0.0,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.0927051082717968,
+      "protocol_of_local_reference_maximum": "reversal_600s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": 19.240377857790588
+    },
+    {
+      "coordinate": "log_tau3",
+      "label": "tau3",
+      "physical_estimate": 7.935356814638494,
+      "physical_truth_scoring_only": 7.499999999999999,
+      "signed_physical_error": 0.43535681463849496,
+      "physical_unit": "s",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.6164221430182693,
+      "protocol_of_isolated_maximum": "reversal_600s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.6164221430182693,
+        "signed_at_peak": -0.6164221430182693,
+        "peak_index": 10770,
+        "peak_time_s": 307.7142857142857,
+        "RMS": 0.11245768135725367,
+        "initial": 0.0,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.10094401040616509,
+      "protocol_of_local_reference_maximum": "reversal_600s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": 5.804757528513267
+    },
+    {
+      "coordinate": "log_gamma_plus",
+      "label": "gamma_plus",
+      "physical_estimate": 313.31903731457174,
+      "physical_truth_scoring_only": 329.99999999999994,
+      "signed_physical_error": -16.6809626854282,
+      "physical_unit": "1/Ah",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.09537499070289002,
+      "protocol_of_isolated_maximum": "reversal_600s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.09537499070289002,
+        "signed_at_peak": 0.09537499070289002,
+        "peak_index": 6530,
+        "peak_time_s": 186.57142857142858,
+        "RMS": 0.06736115824579544,
+        "initial": 0.0,
+        "final": 0.023923775979817208
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.020231465733112974,
+      "protocol_of_local_reference_maximum": "reversal_600s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": -5.054837177402486
+    },
+    {
+      "coordinate": "log_gamma_minus",
+      "label": "gamma_minus",
+      "physical_estimate": 492.2674768466737,
+      "physical_truth_scoring_only": 499.99999999999983,
+      "signed_physical_error": -7.732523153326156,
+      "physical_unit": "1/Ah",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.3385156525079758,
+      "protocol_of_isolated_maximum": "reversal_600s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.3385156525079758,
+        "signed_at_peak": -0.3385156525079758,
+        "peak_index": 18966,
+        "peak_time_s": 541.8857142857142,
+        "RMS": 0.1962301356443984,
+        "initial": 0.0,
+        "final": -0.33017486679698393
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.21765239872205014,
+      "protocol_of_local_reference_maximum": "reversal_600s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": -1.5465046306652317
+    },
+    {
+      "coordinate": "log_Q_Ah",
+      "label": "Q",
+      "physical_estimate": 0.06476161454293339,
+      "physical_truth_scoring_only": 0.0647,
+      "signed_physical_error": 6.161454293339419e-05,
+      "physical_unit": "Ah",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.5093989029059109,
+      "protocol_of_isolated_maximum": "discharge_1800s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.5093989029059109,
+        "signed_at_peak": 0.5093989029059109,
+        "peak_index": 63000,
+        "peak_time_s": 1800.0,
+        "RMS": 0.3126919485361234,
+        "initial": 0.0,
+        "final": 0.5093989029059109
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 5.3491282824399375,
+      "protocol_of_local_reference_maximum": "discharge_1800s",
+      "peak_direct_SOC_error_pp": 0.04411461951203677,
+      "relative_error_percent": 0.09523113281822905
+    },
+    {
+      "coordinate": "R0",
+      "label": "R0",
+      "physical_estimate": 0.17152131306889934,
+      "physical_truth_scoring_only": 0.16,
+      "signed_physical_error": 0.011521313068899336,
+      "physical_unit": "ohm",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.6912787841342194,
+      "protocol_of_isolated_maximum": "load_step_130s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.6912787841342194,
+        "signed_at_peak": -0.6912787841342194,
+        "peak_index": 351,
+        "peak_time_s": 10.028571428571428,
+        "RMS": 0.4696314548799457,
+        "initial": 0.0,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.1029127878413396,
+      "protocol_of_local_reference_maximum": "load_step_130s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": 7.200820668062086
+    },
+    {
+      "coordinate": "R1",
+      "label": "R1",
+      "physical_estimate": 0.22875366153543458,
+      "physical_truth_scoring_only": 0.22,
+      "signed_physical_error": 0.008753661535434581,
+      "physical_unit": "ohm",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.5252196921263774,
+      "protocol_of_isolated_maximum": "load_step_130s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.5252196921263774,
+        "signed_at_peak": -0.5252196921263774,
+        "peak_index": 428,
+        "peak_time_s": 12.228571428571428,
+        "RMS": 0.35659874448689743,
+        "initial": 0.0,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.13725219692126076,
+      "protocol_of_local_reference_maximum": "load_step_130s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": 3.978937061561173
+    },
+    {
+      "coordinate": "R2",
+      "label": "R2",
+      "physical_estimate": 0.28000154405674393,
+      "physical_truth_scoring_only": 0.27,
+      "signed_physical_error": 0.010001544056743916,
+      "physical_unit": "ohm",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.6000926434053255,
+      "protocol_of_isolated_maximum": "load_step_130s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.6000926434053255,
+        "signed_at_peak": -0.6000926434053255,
+        "peak_index": 1244,
+        "peak_time_s": 35.542857142857144,
+        "RMS": 0.40546909141587384,
+        "initial": 0.0,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.16800092643404635,
+      "protocol_of_local_reference_maximum": "load_step_130s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": 3.7042755765718205
+    },
+    {
+      "coordinate": "R3",
+      "label": "R3",
+      "physical_estimate": 0.3048826574093966,
+      "physical_truth_scoring_only": 0.33,
+      "signed_physical_error": -0.025117342590603442,
+      "physical_unit": "ohm",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 1.5070405554364896,
+      "protocol_of_isolated_maximum": "reversal_600s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 1.5070405554364896,
+        "signed_at_peak": 1.5070405554364896,
+        "peak_index": 7675,
+        "peak_time_s": 219.28571428571428,
+        "RMS": 1.1688734184549952,
+        "initial": 0.0,
+        "final": -0.7535202777182448
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.18292959444563792,
+      "protocol_of_local_reference_maximum": "reversal_600s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": -7.6113159365464975
+    },
+    {
+      "coordinate": "H",
+      "label": "H",
+      "physical_estimate": 0.030156049559591187,
+      "physical_truth_scoring_only": 0.03,
+      "signed_physical_error": 0.00015604955959118774,
+      "physical_unit": "V",
+      "reference_unit": "1 percent fractional differential",
+      "peak_isolated_actual_error_mV": 0.15604825497872454,
+      "protocol_of_isolated_maximum": "discharge_1800s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.15604825497872454,
+        "signed_at_peak": -0.15604825497872454,
+        "peak_index": 63000,
+        "peak_time_s": 1800.0,
+        "RMS": 0.15351225233436955,
+        "initial": -0.1300481492845229,
+        "final": -0.15604825497872454
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.3015559442487729,
+      "protocol_of_local_reference_maximum": "discharge_1800s",
+      "peak_direct_SOC_error_pp": 0.0,
+      "relative_error_percent": 0.5201651986372925
+    },
+    {
+      "coordinate": "current_z",
+      "label": "z",
+      "physical_estimate": 0.5700680502577304,
+      "physical_truth_scoring_only": 0.5701486715242501,
+      "signed_physical_error": -8.062126651964263e-05,
+      "physical_unit": "fraction",
+      "reference_unit": "1 SOC percentage point",
+      "peak_isolated_actual_error_mV": 0.14431206527909524,
+      "protocol_of_isolated_maximum": "reversal_600s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.14431206527909524,
+        "signed_at_peak": -0.14431206527909524,
+        "peak_index": 12449,
+        "peak_time_s": 355.6857142857143,
+        "RMS": 0.1417336890672621,
+        "initial": -0.13096404072809875,
+        "final": -0.14117532721868997
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 17.899999999003455,
+      "protocol_of_local_reference_maximum": "reversal_600s",
+      "peak_direct_SOC_error_pp": 0.008062126651969814
+    },
+    {
+      "coordinate": "current_v1",
+      "label": "v1",
+      "physical_estimate": 0.0006862609846063038,
+      "physical_truth_scoring_only": 0.00066,
+      "signed_physical_error": 2.626098460630378e-05,
+      "physical_unit": "V",
+      "reference_unit": "1 mV",
+      "peak_isolated_actual_error_mV": 0.02626098460600801,
+      "protocol_of_isolated_maximum": "rest_300s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.02626098460600801,
+        "signed_at_peak": -0.02626098460600801,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.00023978178594525804,
+        "initial": -0.02626098460600801,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 1.0,
+      "protocol_of_local_reference_maximum": "rest_300s",
+      "peak_direct_SOC_error_pp": 0.0
+    },
+    {
+      "coordinate": "current_v2",
+      "label": "v2",
+      "physical_estimate": 0.0008400046321702321,
+      "physical_truth_scoring_only": 0.0008100000000000001,
+      "signed_physical_error": 3.0004632170231994e-05,
+      "physical_unit": "V",
+      "reference_unit": "1 mV",
+      "peak_isolated_actual_error_mV": 0.030004632169955414,
+      "protocol_of_isolated_maximum": "rest_300s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.030004632169955414,
+        "signed_at_peak": -0.030004632169955414,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.0009659496840818825,
+        "initial": -0.030004632169955414,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 1.0,
+      "protocol_of_local_reference_maximum": "rest_300s",
+      "peak_direct_SOC_error_pp": 0.0
+    },
+    {
+      "coordinate": "current_v3",
+      "label": "v3",
+      "physical_estimate": 0.0009146479722281893,
+      "physical_truth_scoring_only": 0.00099,
+      "signed_physical_error": -7.535202777181067e-05,
+      "physical_unit": "V",
+      "reference_unit": "1 mV",
+      "peak_isolated_actual_error_mV": 0.07535202777209093,
+      "protocol_of_isolated_maximum": "rest_300s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.07535202777209093,
+        "signed_at_peak": 0.07535202777209093,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.008408571039405026,
+        "initial": 0.07535202777209093,
+        "final": 0.0
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 1.0,
+      "protocol_of_local_reference_maximum": "rest_300s",
+      "peak_direct_SOC_error_pp": 0.0
+    },
+    {
+      "coordinate": "current_h",
+      "label": "h",
+      "physical_estimate": 0.8176325261976005,
+      "physical_truth_scoring_only": 0.8333772272424228,
+      "signed_physical_error": -0.015744701044822285,
+      "physical_unit": "dimensionless",
+      "reference_unit": "0.01 dimensionless h",
+      "peak_isolated_actual_error_mV": 0.4723410313443033,
+      "protocol_of_isolated_maximum": "rest_300s",
+      "isolated_metrics_at_maximum": {
+        "peak_abs": 0.4723410313443033,
+        "signed_at_peak": 0.4723410313443033,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.4723410313443033,
+        "initial": 0.4723410313443033,
+        "final": 0.4723410313443033
+      },
+      "peak_local_reference_sensitivity_at_estimate_mV": 0.3015604955959119,
+      "protocol_of_local_reference_maximum": "rest_300s",
+      "peak_direct_SOC_error_pp": 0.0
+    }
+  ],
+  "final_protocol_results": [
+    {
+      "protocol": "rest_300s",
+      "joint_voltage_error_mV": {
+        "peak_abs": 0.24123499680150928,
+        "signed_at_peak": 0.24123499680150928,
+        "peak_index": 108,
+        "peak_time_s": 3.085714285714286,
+        "RMS": 0.21392229751819122,
+        "initial": 0.23287220599099712,
+        "final": 0.21378579499575778
+      },
+      "joint_SOC_error_pp": {
+        "peak_abs": 0.008062126651964263,
+        "signed_at_peak": -0.008062126651964263,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.008062126651964263,
+        "initial": -0.008062126651964263,
+        "final": -0.008062126651964263
+      },
+      "joint_OCV_equivalent_SOC_pp_proxy": {
+        "peak_abs": 0.014851813134672764,
+        "signed_at_peak": 0.014851813134672764,
+        "peak_index": 108,
+        "peak_time_s": 3.085714285714286,
+        "RMS": 0.013170286360623815,
+        "initial": 0.014336951659145312,
+        "final": 0.013161882480662478
+      },
+      "nonlinear_interaction_peak_mV": 0.004019704330282536,
+      "top_three_isolated_voltage_effects": [
+        {
+          "coordinate": "current_h",
+          "peak_mV": 0.4723410313443033
+        },
+        {
+          "coordinate": "current_z",
+          "peak_mV": 0.13096404072809875
+        },
+        {
+          "coordinate": "H",
+          "peak_mV": 0.1300481492845229
+        }
+      ]
+    },
+    {
+      "protocol": "weak_300s",
+      "joint_voltage_error_mV": {
+        "peak_abs": 0.19830826678424174,
+        "signed_at_peak": 0.19830826678424174,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.19152325382534535,
+        "initial": 0.19830826678424174,
+        "final": 0.18464594340183993
+      },
+      "joint_SOC_error_pp": {
+        "peak_abs": 0.008062126651964263,
+        "signed_at_peak": -0.008062126651964263,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.007879012956937975,
+        "initial": -0.008062126651964263,
+        "final": -0.00769450482269729
+      },
+      "joint_OCV_equivalent_SOC_pp_proxy": {
+        "peak_abs": 0.01220899687189154,
+        "signed_at_peak": 0.01220899687189154,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.011739008571982729,
+        "initial": 0.01220899687189154,
+        "final": 0.011265166682091694
+      },
+      "nonlinear_interaction_peak_mV": 0.004190604817377874,
+      "top_three_isolated_voltage_effects": [
+        {
+          "coordinate": "current_h",
+          "peak_mV": 0.4723410313443033
+        },
+        {
+          "coordinate": "current_z",
+          "peak_mV": 0.13215766124918815
+        },
+        {
+          "coordinate": "H",
+          "peak_mV": 0.13210716358047492
+        }
+      ]
+    },
+    {
+      "protocol": "load_step_130s",
+      "joint_voltage_error_mV": {
+        "peak_abs": 0.7106413655137978,
+        "signed_at_peak": 0.7106413655137978,
+        "peak_index": 2558,
+        "peak_time_s": 73.08571428571429,
+        "RMS": 0.2095053322617564,
+        "initial": 0.23287220599099712,
+        "final": 0.15676797630570505
+      },
+      "joint_SOC_error_pp": {
+        "peak_abs": 0.008062126651964263,
+        "signed_at_peak": -0.008062126651964263,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.007064787062674094,
+        "initial": -0.008062126651964263,
+        "final": -0.006591639334896371
+      },
+      "joint_OCV_equivalent_SOC_pp_proxy": {
+        "peak_abs": 0.04226053296398014,
+        "signed_at_peak": 0.04226053296398014,
+        "peak_index": 2558,
+        "peak_time_s": 73.08571428571429,
+        "RMS": 0.012632848489686587,
+        "initial": 0.014336951659145312,
+        "final": 0.00932270277508223
+      },
+      "nonlinear_interaction_peak_mV": 0.03896844568140878,
+      "top_three_isolated_voltage_effects": [
+        {
+          "coordinate": "R3",
+          "peak_mV": 1.5065349996508104
+        },
+        {
+          "coordinate": "log_tau2",
+          "peak_mV": 1.0473449711856375
+        },
+        {
+          "coordinate": "R0",
+          "peak_mV": 0.6912787841342194
+        }
+      ]
+    },
+    {
+      "protocol": "charge_600s",
+      "joint_voltage_error_mV": {
+        "peak_abs": 0.6569106167964023,
+        "signed_at_peak": 0.6569106167964023,
+        "peak_index": 107,
+        "peak_time_s": 3.057142857142857,
+        "RMS": 0.12476177778176964,
+        "initial": 0.5785115980581068,
+        "final": -0.05948313536086047
+      },
+      "joint_SOC_error_pp": {
+        "peak_abs": 0.015414563237303724,
+        "signed_at_peak": -0.015414563237303724,
+        "peak_index": 21000,
+        "peak_time_s": 600.0,
+        "RMS": 0.01192886047173554,
+        "initial": -0.008062126651964263,
+        "final": -0.015414563237303724
+      },
+      "joint_OCV_equivalent_SOC_pp_proxy": {
+        "peak_abs": 0.04048111399673354,
+        "signed_at_peak": 0.04048111399673354,
+        "peak_index": 107,
+        "peak_time_s": 3.057142857142857,
+        "RMS": 0.008135693995963802,
+        "initial": 0.03561649953165571,
+        "final": -0.00439964488846947
+      },
+      "nonlinear_interaction_peak_mV": 0.019660137401178446,
+      "top_three_isolated_voltage_effects": [
+        {
+          "coordinate": "R3",
+          "peak_mV": 0.7535202777182448
+        },
+        {
+          "coordinate": "log_tau2",
+          "peak_mV": 0.5760397341521006
+        },
+        {
+          "coordinate": "current_h",
+          "peak_mV": 0.4723410313443033
+        }
+      ]
+    },
+    {
+      "protocol": "reversal_600s",
+      "joint_voltage_error_mV": {
+        "peak_abs": 0.9868517034083979,
+        "signed_at_peak": 0.9868517034083979,
+        "peak_index": 10608,
+        "peak_time_s": 303.0857142857143,
+        "RMS": 0.19358374607531273,
+        "initial": -0.4584065781432223,
+        "final": -0.13238488423361616
+      },
+      "joint_SOC_error_pp": {
+        "peak_abs": 0.008062126651964263,
+        "signed_at_peak": -0.008062126651964263,
+        "peak_index": 0,
+        "peak_time_s": 0.0,
+        "RMS": 0.00395956874730606,
+        "initial": -0.008062126651964263,
+        "final": -0.0043859083592945325
+      },
+      "joint_OCV_equivalent_SOC_pp_proxy": {
+        "peak_abs": 0.05518853007875026,
+        "signed_at_peak": 0.05518853007875026,
+        "peak_index": 10608,
+        "peak_time_s": 303.0857142857143,
+        "RMS": 0.011013807295707785,
+        "initial": -0.02822214408587548,
+        "final": -0.007560541989448268
+      },
+      "nonlinear_interaction_peak_mV": 0.05537673467426174,
+      "top_three_isolated_voltage_effects": [
+        {
+          "coordinate": "log_tau2",
+          "peak_mV": 1.5710174567784563
+        },
+        {
+          "coordinate": "R3",
+          "peak_mV": 1.5070405554364896
+        },
+        {
+          "coordinate": "log_tau1",
+          "peak_mV": 0.8317784061078193
+        }
+      ]
+    },
+    {
+      "protocol": "discharge_1800s",
+      "joint_voltage_error_mV": {
+        "peak_abs": 0.6201063503477044,
+        "signed_at_peak": -0.6201063503477044,
+        "peak_index": 109,
+        "peak_time_s": 3.1142857142857143,
+        "RMS": 0.23208963263631904,
+        "initial": -0.4584065781432223,
+        "final": -0.0490927143350639
+      },
+      "joint_SOC_error_pp": {
+        "peak_abs": 0.036052492860072505,
+        "signed_at_peak": 0.036052492860072505,
+        "peak_index": 63000,
+        "peak_time_s": 1800.0,
+        "RMS": 0.018922207093725867,
+        "initial": -0.008062126651964263,
+        "final": 0.036052492860072505
+      },
+      "joint_OCV_equivalent_SOC_pp_proxy": {
+        "peak_abs": 0.0381051911457181,
+        "signed_at_peak": -0.0381051911457181,
+        "peak_index": 108,
+        "peak_time_s": 3.085714285714286,
+        "RMS": 0.0159870181154112,
+        "initial": -0.02822214408587548,
+        "final": -0.0042515550597399965
+      },
+      "nonlinear_interaction_peak_mV": 0.034553993897734614,
+      "top_three_isolated_voltage_effects": [
+        {
+          "coordinate": "R3",
+          "peak_mV": 1.5070405554364896
+        },
+        {
+          "coordinate": "log_tau2",
+          "peak_mV": 0.9949777226263556
+        },
+        {
+          "coordinate": "R0",
+          "peak_mV": 0.6912787841342194
+        }
+      ]
+    }
+  ],
+  "same_1800s_60mA_discharge_from_each_saved_anchor": [
+    {
+      "anchor_time_s": 900.0,
+      "capacity_error_percent": 13.163557959821619,
+      "entering_SOC_error_pp": 0.42408759776494387,
+      "joint_peak_voltage_error_mV": 61.88186633162695,
+      "joint_final_SOC_error_pp": 5.817748890447433,
+      "Q_only_peak_voltage_error_mV": 65.05049299452548,
+      "Q_only_final_SOC_error_pp": 5.393661292682489
+    },
+    {
+      "anchor_time_s": 1800.0,
+      "capacity_error_percent": 0.751759157845078,
+      "entering_SOC_error_pp": 0.0790970916393463,
+      "joint_peak_voltage_error_mV": 3.047544885288911,
+      "joint_final_SOC_error_pp": 0.4250707736719095,
+      "Q_only_peak_voltage_error_mV": 3.9964774244216628,
+      "Q_only_final_SOC_error_pp": 0.3459736820325632
+    },
+    {
+      "anchor_time_s": 2100.0,
+      "capacity_error_percent": 0.09523113281822905,
+      "entering_SOC_error_pp": -0.008062126651964263,
+      "joint_peak_voltage_error_mV": 0.6201063503477044,
+      "joint_final_SOC_error_pp": 0.036052492860072505,
+      "Q_only_peak_voltage_error_mV": 0.5093989029059109,
+      "Q_only_final_SOC_error_pp": 0.04411461951203677
+    }
+  ],
+  "final_joint_maximum_voltage_error_mV": 0.9868517034083979,
+  "final_joint_maximum_direct_SOC_error_pp": 0.036052492860072505,
+  "final_maximum_cross_coordinate_interaction_mV": 0.05537673467426174,
+  "decision": "Keep the unchanged candidate for qualification; prioritize application output error under declared use. Do not impose uniform nuisance precision, prune, retune or claim uncertainty coverage from sensitivity.",
+  "limits": [
+    "State-conditioned future effects exclude each parameter's pre-anchor history.",
+    "Maxima are on the declared35Hz grid; they are not continuous-time, arbitrary-input or uncertainty bounds.",
+    "Only Q and entering SOC directly change propagated SOC; voltage-correction feedback is not simulated.",
+    "Signed errors compensate; isolated peak magnitudes do not add to a joint prediction error.",
+    "One-percent parameter differential units differ from the stated absolute state units.",
+    "OCV-equivalent SOC is a voltage proxy, not actual SOC error or estimator response.",
+    "Propagation of aggregate mean is not prediction of the full two-component mixture distribution.",
+    "The three-anchor contrast also changes physical starting state; it is not a controlled parameter-only learning experiment.",
+    "No lifetime, real-cell, complete M23, predictive-coverage or universal identifiability qualification."
+  ],
+  "estimator_storage_added_bytes": 0,
+  "candidate_promoted": false,
+  "coverage_validated": false,
+  "complete_M23_qualified": false,
+  "next": "Freeze one continuous learning/retention validation contract using this analysis; no new primary or24h pilot in this task.",
+  "evidence": {
+    "plan": "experiments/parameter_sensitivity_001/plan.json",
+    "primary_receipt": "experiments/parameter_sensitivity_001/primary/receipt.json",
+    "full_metrics": "experiments/parameter_sensitivity_001/primary/results.json",
+    "compact_plot_profiles": "experiments/parameter_sensitivity_001/primary/profiles.npz",
+    "qualification": "experiments/parameter_sensitivity_001/development/qualification.json",
+    "preflight": "experiments/parameter_sensitivity_001/development/preflight.json",
+    "independent_review": "experiments/parameter_sensitivity_001/independent_review.json",
+    "interpretation_review": "experiments/parameter_sensitivity_001/interpretation_review.json",
+    "report": "experiments/parameter_sensitivity_001/REPORT.md",
+    "decision": "experiments/parameter_sensitivity_001/decision.json",
+    "verification": "experiments/parameter_sensitivity_001/verification.json",
+    "heatmap": "experiments/parameter_sensitivity_001/figures_readable/voltage_sensitivity_and_error_heatmaps.png",
+    "joint_profiles": "experiments/parameter_sensitivity_001/figures/joint_voltage_error_profiles.png",
+    "publication": "provenance/parameter_sensitivity_001_publication.json"
+  }
+}
