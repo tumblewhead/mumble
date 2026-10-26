@@ -1,0 +1,55 @@
+{
+  "schema": "mumble_conditional_belief_contract_review_v1",
+  "status": "pass",
+  "reviewer": "independent interval and mathematical reviewer",
+  "plan_path": "plans/conditional_belief_adequacy_001.json",
+  "plan_sha256": "49ebd3fb609f9fa739076c14979265a7b50e93025c3692999a6b6747e9c9778e",
+  "base_revision": "66fabc24476b668e358c5aa6995308c52ac8f751",
+  "scope": "Pre-execution mathematical, source-semantics, chronology, domain and resource review. No canonical checkpoint/observation bytes inspected or model propagations executed.",
+  "math_review": {
+    "factor": "Packed lower-triangular L, P=L L^T. Nodes use columns, mu\u00b14L[:,k], equal population weights1/32, including repeated nodes for rank deficiency. This reconstructs the stated first two chart moments.",
+    "linearized": "mu_minus=f(mu,dt,I); B=F(mu,dt,I)L; g=dh/dx at mu_minus. Predictive variance is ||gB||^2+sigmaV^2, preserving all correlations and adding observation noise exactly once. No process/current/time noise is introduced.",
+    "nonlinear": "Complete admitted32point rules provide approximate nonlinear voltage mean and population variance; add the same sigmaV^2 once. These are cubature moments of the retained local Gaussian, not exact posterior/predictive moments or calibrated coverage.",
+    "bounded_scalar_condition": "For X in[a,b], E[(X-a)(b-X)]>=0 implies Var(X)<=(b-mu)(mu-a). The recorded128eps(b-a)^2 allowance is numerical only. A violation contradicts that bounded moment interpretation; passing is not sufficient for joint support or calibration.",
+    "comparison_scales": "0.1sigmaV mean and0.1sigmaV^2 variance shifts are acceptable frozen noise-referenced prioritization scales. They are distinct from arithmetic tolerances and do not bound accumulated likelihood effects."
+  },
+  "chronology_review": {
+    "checkpoint": "next_index=n has consumed input indices0..n-1.",
+    "next_observation": "Read stored input index n from byte offset32*n; apply its exact dt/current and produce endpoint n+1.",
+    "reference_exclusion": "Checkpoint last_prediction/last_innovation_variance refer to the preceding update and are not the new forecast reference.",
+    "phase_change": "Current may change at the selected checkpoint; next archived input determines the probe."
+  },
+  "domain_review": {
+    "pre_and_post": "Check all16public chart-coordinate bounds before propagation; unchanged physical-step checks and full post-coordinate admission afterward.",
+    "failure_semantics": "Any invalid node invalidates the complete component moment rule. Preserve individually admitted values as diagnostics only. No clipping, dropping, replacement or renormalization.",
+    "interpretation": "Invalid-node fractions are not Gaussian tail probabilities. All nodes admitted does not prove bounded Gaussian support. The known later h=1positivevariance witness is not attributed to the earlier weight switch.",
+    "center": "Six centers are propagated separately; production-order voltage comparison uses the same propagated center without a second physical step."
+  },
+  "finite_scope": {
+    "components": 2,
+    "snapshots": 3,
+    "dimension": 16,
+    "maximum_node_propagations": 192,
+    "maximum_center_propagations": 6,
+    "canonical_invocations": 1,
+    "new_learner_ingests": 0,
+    "new_source_generations": 0,
+    "truth_stream_inputs": 0,
+    "numeric_tolerances_fixed": true,
+    "source_review_and_publication_before_run": true,
+    "input_identities_pinned": true,
+    "probe_and_supervisor_RSS_separate": true,
+    "no_automatic_retry_or_extension": true
+  },
+  "meaningful_fabricated_checks": [
+    "Dense off-diagonal factor node mean/covariance reconstruction; catches packed indexing and missing correlations.",
+    "Zero-covariance identity: all nodes equal center, latent variance0, predictive variance sigmaV^2 exactly once.",
+    "Interior directional derivative/linearized reference checks under positive, negative and zero current.",
+    "Initial h boundary and post-propagation SOC boundary failures suppress component moments without changing node weights.",
+    "Wrong observation index is rejected; checkpoint/live state stays unchanged."
+  ],
+  "blockers": [],
+  "required_clarifications_remaining": [],
+  "source_qualification_pending": true,
+  "canonical_execution_pending": true
+}

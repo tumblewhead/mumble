@@ -1,0 +1,199 @@
+{
+  "schema": "mumble_conditional_belief_adequacy_contract_v1",
+  "status": "frozen_before_canonical_input_restoration_and_probe_execution",
+  "base_revision": "66fabc24476b668e358c5aa6995308c52ac8f751",
+  "work_branch": "design/conditional-belief-adequacy-001",
+  "user_authorization": "Run the next specified probe to investigate the narrow uncertainty and component preference issue.",
+  "question": "At three saved component beliefs, are the local one-step linearized voltage moments materially different from positive-weight nonlinear moments, or is the retained belief incompatible with the declared physical domain?",
+  "finish_line": "One bounded checkpoint probe, independent review and one evidence-supported conditional-belief decision. Preserve domain failures as findings. Do not run a learner replay, regenerate observations or tune a remedy.",
+  "known_before_execution": [
+    "The 7811.171429 s SOC excursion is a recorded component-weight switch; tested arithmetic and reporting reconcile.",
+    "Both conditional SOC local intervals miss truth at all 1445 selected queries.",
+    "At the previously published 8400 s witness, component 0 has h=1 and nonzero local SD. Domain incompatibility at this later time is anticipated and does not establish the earlier switch cause."
+  ],
+  "inputs": {
+    "identities": {
+      "src/scm_hypothesis.c": {
+        "sha256": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+        "bytes": 35149
+      },
+      "src/scm_hypothesis_checkpoint.c": {
+        "sha256": "88ec1c229b395b5bdd02faf39fcc1183786a6b0da0c6ff05edeb9718204a5339",
+        "bytes": 10923
+      },
+      "src/scm_model.c": {
+        "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+        "bytes": 5765
+      },
+      "include/scm_hypothesis.h": {
+        "sha256": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc",
+        "bytes": 7399
+      },
+      "include/scm_hypothesis_checkpoint.h": {
+        "sha256": "1e1743300cf17635828c8d8cf2d95aa6fc00066b377e3238de880dcb284b5545",
+        "bytes": 2825
+      },
+      "include/scm_online.h": {
+        "sha256": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84",
+        "bytes": 6639
+      },
+      "include/scm_model.h": {
+        "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+        "bytes": 2763
+      },
+      "tools/continuous_probe.c": {
+        "sha256": "6353081ee5e00bf24b4d65e03ee408ed102f6a2d2aa5c3960c3f49f5c5d140d9",
+        "bytes": 27505
+      },
+      "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/receipt.json": {
+        "sha256": "332f4e5d679fc5a37c08c90af82529460f791eaabb235fc588e798b2654ab480",
+        "bytes": 4426
+      },
+      "experiments/continuous_learning_validation_001/implementation/evidence/index.json": {
+        "sha256": "0db1f4cfc784e3fc6f52a4f65c1a50c0bbb1a407367742336d7eeb309773104f",
+        "bytes": 58307
+      },
+      "experiments/continuous_learning_validation_001/implementation/evidence/restore_primary.py": {
+        "sha256": "ac5eb80aeb735ca69fbaaf8bae14eee7d3435c4d7d21fe38c8810eb34832c011",
+        "bytes": 13558
+      },
+      "experiments/weighting_output_diagnostic_001/decision.json": {
+        "sha256": "e53fc36c4e3bf84680a60d8ca1b6a0509a2c22f5ec998765386b41d5ccacef08",
+        "bytes": 6440
+      }
+    },
+    "archive_sha256": "41bd5b5566d14d5abb05a085b837bf03034d9e5854245852a64ec820e6b81503",
+    "archive_members": [
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/learner-252000.bin",
+        "bytes": 3004,
+        "sha256": "1d1560bc217544c7ac5a7c0a45f1d10c45c463e5dc52a66729ddf6b952d89c08",
+        "git_blob_sha1": "1324b469478e30c75da1b018c5b27a02dc2b9d72",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/learner-283500.bin",
+        "bytes": 3004,
+        "sha256": "09d99568b597174fb2156100fb4d72fdd61b500c59e28f4f5c86296745511ad7",
+        "git_blob_sha1": "87a882434ab2068f9d7434bb1fc22dbcf0c54009",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/learner-294000.bin",
+        "bytes": 3004,
+        "sha256": "a3f29e1abec1586467b9421e40cfa1253a4699f708b5fc1afc5620f7379b9ebb",
+        "git_blob_sha1": "c8bd1a8dc5a08da578c1072e42cf003564a74a0a",
+        "mode": "100644"
+      },
+      {
+        "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+        "bytes": 16128000,
+        "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+        "git_blob_sha1": "df785789cb5b7e2873e15f57fe6a18a86deb194c",
+        "mode": "100644"
+      }
+    ],
+    "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+    "expected_config": {
+      "sigma_V": 0.001,
+      "max_dt_s": 1.0,
+      "max_abs_current_A": 0.25
+    },
+    "observation_format": "little-endian headerless <Qddd: sample_index, dt_s, current_A, voltage_V; 32 bytes per record",
+    "observation_records": 504000,
+    "policy": "Restore exactly four indexed members to a new separate directory. Verify all archive pieces and selected identities. Original primary and saved audit remain immutable. No truth stream is an input."
+  },
+  "scope": {
+    "cell": "B_continuous",
+    "nominal_seconds": [
+      7200,
+      8100,
+      8400
+    ],
+    "next_indices": [
+      252000,
+      283500,
+      294000
+    ],
+    "components": 2,
+    "dimension": 16,
+    "nodes_per_component": 32,
+    "node_weight": 0.03125,
+    "maximum_node_propagations": 192,
+    "maximum_center_propagations": 6,
+    "new_learner_ingests": 0,
+    "new_source_generations": 0,
+    "optimizer_calls": 0,
+    "old_scorer_runs": 0,
+    "chronology": "Checkpoint n has consumed observations 0..n-1. Read only observation n at byte offset32*n and verify its stored index. Propagate to n+1 using that archived dt/current, including any current-phase change. The checkpoint last-prediction fields describe the preceding update and are not the comparison reference."
+  },
+  "node_rule": {
+    "definition": "For each saved component with P=L*L^T, form x_(k,+/-)=mu +/- sqrt(16)*L[:,k], k=0..15. Packed storage is lower-triangular by row. Keep all32 weights equal1/32, including repeated nodes for rank deficiency.",
+    "center": "Propagate each of six centers once through the unchanged physical step; also calculate the production voltage subtraction order for the same propagated state. No correction or weight update.",
+    "admission": "Check finite values and every public chart-coordinate bound before each node propagation. Apply unchanged physical-domain checks and check all propagated chart-coordinate bounds. Record every pre/post failure and its coordinate/margin. Each individually admitted node is propagated once.",
+    "invalid_component_rule": "Any pre-domain failure, physical-step failure or post-domain failure makes the entire intended32-node moment rule unavailable for that component. Keep admitted node values for audit only; no moments from survivors, clipping, dropping, renormalizing or replacement. A domain failure is a scientific finding, not automatically an implementation failure.",
+    "nonlinear_moments": "For complete admitted rules, mean=sum(v_i)/32 and population latent variance=sum((v_i-mean)^2)/32. Add the fixed sigma_V^2 once for predictive variance. No process, current or timing noise is introduced.",
+    "linearized_reference": "At the saved center compute xminus=f(mu,dt,I), B=F(mu,dt,I)*L, g=dh/dx at xminus. Mean=h(xminus,I), latent variance=||g*B||^2 and predictive variance=latent+sigma_V^2. Preserve all cross-covariances.",
+    "not_implied": "This degree-three spherical-radial rule approximates moments of the retained local Gaussian. Admitted nodes do not prove Gaussian support, exact nonlinear moments, calibrated coverage or historical adequacy. Node failure fractions are not Gaussian probability estimates."
+  },
+  "bounded_moment_check": {
+    "definition": "For every saved coordinate with public bounds[a,b], compute v=sum_j L_ij^2, cap=(b-mu_i)*(mu_i-a), excess=v-cap. Any bounded distribution requires v<=cap.",
+    "comparison_allowance": "128*DBL_EPSILON*(b-a)^2; report v, cap, excess, allowance and whether excess exceeds allowance. Check finite means within bounds first.",
+    "scope": "A necessary scalar moment-feasibility condition. Violation disproves a bounded-support interpretation of that mean/variance pair; passing does not establish a valid joint distribution or calibrated coverage. Do not project or repair the moments."
+  },
+  "decision_scales": {
+    "mean_shift_over_sigma_V": 0.1,
+    "variance_shift_over_sigma_V_squared": 0.1,
+    "absolute_mean_scale_V": 0.0001,
+    "absolute_variance_scale_V2": 1e-07,
+    "comparison": "For complete admitted rules, flag absolute mean or variance change at or above its scale. Report signed changes and latent/predictive values even below threshold.",
+    "meaning": "Noise-referenced prioritization scales fixed before evaluation. They are not numerical tolerances, physical error bounds or coverage tests. Small one-step differences can accumulate in sequential likelihoods; these snapshots cannot quantify that effect."
+  },
+  "numerical_checks": {
+    "center_physical_vs_production_voltage_abs_V": 1e-12,
+    "node_rule_mean_abs": 2e-13,
+    "node_rule_covariance_abs": 2e-15,
+    "node_rule_covariance_rel": 2e-10,
+    "factor_projection_abs_V": 2e-13,
+    "variance_reconstruction_abs_V2": 2e-15,
+    "variance_reconstruction_rel": 2e-10,
+    "meaning": "Roundoff/reconstruction checks only, not application accuracy. Preserve failures and do not widen after canonical execution."
+  },
+  "resource_bounds": {
+    "restore_selected_bytes_max": 20971520,
+    "restoration_wall_s_max": 180,
+    "probe_wall_s_max": 60,
+    "probe_processes": 1,
+    "probe_CPU_s_max": 10,
+    "probe_address_space_bytes_max": 268435456,
+    "probe_peak_RSS_bytes_max": 268435456,
+    "supervisor_peak_RSS_bytes_max": 268435456,
+    "probe_output_bytes_max": 8388608,
+    "total_derived_output_bytes_max": 12582912,
+    "build_and_fabricated_checks": "Separate qualification operations, not canonical checkpoint probes; record commands and source/binary identities.",
+    "retention": "Store only compact canonical node diagnostics/reducers and receipts. Keep the existing original archive; restored4members live outside original primary."
+  },
+  "execution_policy": {
+    "contract": "Commit this contract before restoring/inspecting the selected new input bytes.",
+    "source": "Review, qualify with bounded fabricated fixtures, and publish the probe source before the one canonical invocation. Pin exact source, binary and input digests in its receipt.",
+    "attempts": "One canonical invocation. No automatic retry, added checkpoint, node rescaling or trajectory extension. A concrete harness failure must be preserved and explained before any repair decision.",
+    "preservation": "No production estimator/source changes, no new estimate/weight publication from these node evaluations, no estimator SRAM addition."
+  },
+  "decision_rules": {
+    "identity_or_arithmetic_failure": "Preserve failure and isolate the mismatch before scientific interpretation.",
+    "domain_or_bounded_moment_failure": "Prioritize physical compatibility of the conditional uncertainty representation. Evaluate admitted components separately; do not attribute later boundary failure to the earlier weight switch.",
+    "admitted_material_moment_shift": "Prioritize one-step nonlinear moment treatment at these snapshots, without adopting a new online filter or claiming coverage.",
+    "admitted_small_moment_shift": "Deprioritize immediate one-step moment approximation at these snapshots and scales. Examine retained historical uncertainty; this does not prove a unique historical cause.",
+    "mixed_or_insufficient": "Report exact discriminating findings and remaining ambiguity; choose one finite next decision rather than automatically broadening the experiment."
+  },
+  "deliverables": [
+    "tools/conditional_belief_probe.c",
+    "tools/restore_conditional_evidence.py",
+    "tools/run_conditional_belief_probe.py",
+    "experiments/conditional_belief_adequacy_001/attempt001/raw_probe.json",
+    "experiments/conditional_belief_adequacy_001/attempt001/result.json",
+    "experiments/conditional_belief_adequacy_001/REPORT.md",
+    "experiments/conditional_belief_adequacy_001/decision.json",
+    "Independent design/source/result reviews, publication record and updated machine-readable handoff."
+  ]
+}
