@@ -1,0 +1,799 @@
+{
+  "schema": "mumble_continuous_learning_independent_interpretation_review_v1",
+  "created_utc": "2026-10-26T04:23:10.245143+00:00",
+  "reviewer": "/root/continuous_generator_impl",
+  "status": "valid_finite_experiment_with_mixed_accuracy_outcomes_no_promotion",
+  "review_scope": "Interpretation of immutable once-only primary and existing scores against frozen contract; no model, generator, learner or scorer execution.",
+  "decision": {
+    "validity": "All4arms complete with valid full-query/scalar scoring,0 invalid transactions and0 input/accounting issues. A lifecycle gate passes; A accuracy did not control B admission.",
+    "supported": "On this Cell B trajectory, hard SOC is sustained from the first delivered interval and hard capacity from1096.628571s. Preferred SOC is retained through first weak/rest use; preferred capacity is acquired during renewed use. Both preferred targets are retained at entry and every final-hour sample.",
+    "regression": "Cell B preferred SOC accuracy is genuinely lost during renewed use for27054 consecutive interval ends,772.971429s. Later recovery and final retention do not erase that target-specific regression.",
+    "unresolved": "Cell A preferred capacity is not acquired at its weak-tail entry and remains outside preferred at2100s in all3arms. Local uncertainty remains unvalidated and often excludes truth even when point targets pass.",
+    "promotion": false,
+    "automatic_duration_extension": false,
+    "capacity_startup_deadline": null,
+    "next_action_scope": "Close this finite diagnostic. A separately frozen short variation or uncertainty/weighting decision may be considered; no queued day/week/year run, estimator tuning, oracle selection or M23 qualification follows."
+  },
+  "validity_summary": {
+    "source_revision": "f73f39f276b84bcb76be8d5dc177c55191d34ff1",
+    "learner_processes": 4,
+    "delivered_intervals": 661500,
+    "unique_physical_observations": 577500,
+    "generator_evaluations": 619500,
+    "primary_wall_s": 17.219439389999025,
+    "wall_including_scoring_s": 51.22989311299898,
+    "runtime_output_bytes": 391583956,
+    "scored_arms": {
+      "A_uninterrupted": {
+        "valid": true,
+        "intervals": 73500,
+        "invalid_transactions": 0,
+        "integrity_issue_count": 0,
+        "full_queries": 2267
+      },
+      "A_warm_suffix": {
+        "valid": true,
+        "intervals": 42000,
+        "invalid_transactions": 0,
+        "integrity_issue_count": 0,
+        "full_queries": 1208
+      },
+      "A_cold_suffix": {
+        "valid": true,
+        "intervals": 42000,
+        "invalid_transactions": 0,
+        "integrity_issue_count": 0,
+        "full_queries": 1208
+      },
+      "B_continuous": {
+        "valid": true,
+        "intervals": 504000,
+        "invalid_transactions": 0,
+        "integrity_issue_count": 0,
+        "full_queries": 14654
+      }
+    },
+    "warm_parity": {
+      "metric_bytes": 3360000,
+      "observation_bytes": 1344000,
+      "query_records": 1208,
+      "passed": true
+    },
+    "cold_semantics": {
+      "passed": true,
+      "checks": 16,
+      "global_next_index": 31500,
+      "history_lost": true,
+      "truth_initialization": false
+    },
+    "independence_limit": "Warm/cold A suffixes reuse the same physical observation suffix and are lifecycle comparisons, not independent noise realizations or3independent cells.",
+    "target_resource_limit": "7152owned estimator bytes is the frozen owned subtotal. Host observer/runtime, complete target stack/reserves and M23 timing remain separate qualifications."
+  },
+  "A_accuracy": {
+    "A_uninterrupted": {
+      "final_SOC_error_pp": 0.16346190147870088,
+      "final_Q_error_percent": 1.0813434917147147,
+      "hard_Q_sustained_from": {
+        "next_index": 55943,
+        "time_s": 1598.3714285714286,
+        "since_epoch_s": 1598.3714285714286
+      },
+      "preferred_SOC_sustained_from": {
+        "next_index": 60376,
+        "time_s": 1725.0285714285715,
+        "since_epoch_s": 1725.0285714285715
+      },
+      "preferred_Q_sustained_from": null,
+      "weak_tail_SOC_hard_preferred": [
+        "retained",
+        "retained"
+      ],
+      "weak_tail_Q_hard_preferred": [
+        "retained",
+        "not_acquired_at_entry"
+      ]
+    },
+    "A_warm_suffix": {
+      "final_SOC_error_pp": 0.16346190147870088,
+      "final_Q_error_percent": 1.0813434917147147,
+      "hard_Q_sustained_from": {
+        "next_index": 55943,
+        "time_s": 1598.3714285714286,
+        "since_epoch_s": 1598.3714285714286
+      },
+      "preferred_SOC_sustained_from": {
+        "next_index": 60376,
+        "time_s": 1725.0285714285715,
+        "since_epoch_s": 1725.0285714285715
+      },
+      "preferred_Q_sustained_from": null,
+      "weak_tail_SOC_hard_preferred": [
+        "retained",
+        "retained"
+      ],
+      "weak_tail_Q_hard_preferred": [
+        "retained",
+        "not_acquired_at_entry"
+      ]
+    },
+    "A_cold_suffix": {
+      "final_SOC_error_pp": 0.3711313794495297,
+      "final_Q_error_percent": 1.6903043780589933,
+      "hard_Q_sustained_from": {
+        "next_index": 59781,
+        "time_s": 1708.0285714285715,
+        "since_epoch_s": 808.0285714285715
+      },
+      "preferred_SOC_sustained_from": {
+        "next_index": 36354,
+        "time_s": 1038.6857142857143,
+        "since_epoch_s": 138.68571428571428
+      },
+      "preferred_Q_sustained_from": null,
+      "weak_tail_SOC_hard_preferred": [
+        "retained",
+        "retained"
+      ],
+      "weak_tail_Q_hard_preferred": [
+        "retained",
+        "not_acquired_at_entry"
+      ]
+    }
+  },
+  "A_interpretation": "At1800\u20132100s all3arms retain hard SOC/Q and preferred SOC. Preferred Q is not_acquired_at_entry, not a manufactured retention failure. Cold hard-Q sustained onset is1708.028571s global/808.028571s after reset; warm continuation is identical to baseline suffix. Early threshold hits are not sustained acquisition or a capacity startup deadline.",
+  "B_windows": {
+    "initial_acquisition": {
+      "start_s": 0.0,
+      "end_s": 2100.0,
+      "interval_count": 73500,
+      "complete": true,
+      "quantities": {
+        "SOC_pp": {
+          "entry_error": -9.999999999999998,
+          "end_error": -0.2769777596742018,
+          "peak_absolute_error": 4.721520429067483,
+          "peak_time_s": 0.08571428571428572,
+          "hard_classification": "sustained_through_finite_endpoint",
+          "hard_sustained_from": {
+            "next_index": 1,
+            "time_s": 0.02857142857142857,
+            "since_epoch_s": 0.02857142857142857
+          },
+          "preferred_classification": "sustained_through_finite_endpoint",
+          "preferred_first_hit": {
+            "next_index": 93,
+            "time_s": 2.657142857142857,
+            "since_epoch_s": 2.657142857142857
+          },
+          "preferred_sustained_from": {
+            "next_index": 37832,
+            "time_s": 1080.9142857142858,
+            "since_epoch_s": 1080.9142857142858
+          },
+          "preferred_pass_fraction": 0.5096190476190476,
+          "preferred_outside_samples": 36043,
+          "preferred_outside_duration_s": 1029.8,
+          "unavailable_samples": 0
+        },
+        "Q_percent": {
+          "entry_error": -7.264296754250377,
+          "end_error": 2.5429057101142183,
+          "peak_absolute_error": 39.198943601848455,
+          "peak_time_s": 38.142857142857146,
+          "hard_classification": "sustained_through_finite_endpoint",
+          "hard_sustained_from": {
+            "next_index": 38382,
+            "time_s": 1096.6285714285714,
+            "since_epoch_s": 1096.6285714285714
+          },
+          "preferred_classification": "not_sustained_at_finite_endpoint",
+          "preferred_first_hit": {
+            "next_index": 833,
+            "time_s": 23.8,
+            "since_epoch_s": 23.8
+          },
+          "preferred_sustained_from": null,
+          "preferred_pass_fraction": 0.0030068027210884353,
+          "preferred_outside_samples": 72929,
+          "preferred_outside_duration_s": 2083.6857142857143,
+          "unavailable_samples": 350
+        }
+      },
+      "charge_Ah": {
+        "signed_Ah": 0.013577380952380952,
+        "positive_Ah": 0.017744047619047618,
+        "negative_magnitude_Ah": 0.004166666666666667,
+        "absolute_Ah": 0.021910714285714283,
+        "observed_samples": 73500
+      }
+    },
+    "first_retention": {
+      "start_s": 2100.0,
+      "end_s": 7200.0,
+      "interval_count": 178500,
+      "complete": true,
+      "quantities": {
+        "SOC_pp": {
+          "entry_error": -0.2769777596742018,
+          "end_error": -0.27299581770624526,
+          "peak_absolute_error": 0.3380509360066841,
+          "peak_time_s": 3000.7428571428572,
+          "hard_classification": "retained",
+          "hard_sustained_from": {
+            "next_index": 73500,
+            "time_s": 2100.0,
+            "since_epoch_s": 2100.0
+          },
+          "preferred_classification": "retained",
+          "preferred_first_hit": {
+            "next_index": 73500,
+            "time_s": 2100.0,
+            "since_epoch_s": 2100.0
+          },
+          "preferred_sustained_from": {
+            "next_index": 73500,
+            "time_s": 2100.0,
+            "since_epoch_s": 2100.0
+          },
+          "preferred_pass_fraction": 1.0,
+          "preferred_outside_samples": 0,
+          "preferred_outside_duration_s": 0.0,
+          "unavailable_samples": 0
+        },
+        "Q_percent": {
+          "entry_error": 2.5429057101142183,
+          "end_error": 1.9749400989585997,
+          "peak_absolute_error": 2.54288598600676,
+          "peak_time_s": 2100.0285714285715,
+          "hard_classification": "retained",
+          "hard_sustained_from": {
+            "next_index": 73500,
+            "time_s": 2100.0,
+            "since_epoch_s": 2100.0
+          },
+          "preferred_classification": "not_acquired_at_entry",
+          "preferred_first_hit": null,
+          "preferred_sustained_from": null,
+          "preferred_pass_fraction": 0.0,
+          "preferred_outside_samples": 178500,
+          "preferred_outside_duration_s": 5100.0,
+          "unavailable_samples": 0
+        }
+      },
+      "charge_Ah": {
+        "signed_Ah": 0.0035,
+        "positive_Ah": 0.0035,
+        "negative_magnitude_Ah": 0.0,
+        "absolute_Ah": 0.0035,
+        "observed_samples": 178500
+      }
+    },
+    "renewed_excitation": {
+      "start_s": 7200.0,
+      "end_s": 10800.0,
+      "interval_count": 126000,
+      "complete": true,
+      "quantities": {
+        "SOC_pp": {
+          "entry_error": -0.27299581770624526,
+          "end_error": -0.0030455061856948795,
+          "peak_absolute_error": 0.8086692692852504,
+          "peak_time_s": 8100.057142857143,
+          "hard_classification": "sustained_through_finite_endpoint",
+          "hard_sustained_from": {
+            "next_index": 252000,
+            "time_s": 7200.0,
+            "since_epoch_s": 7200.0
+          },
+          "preferred_classification": "sustained_through_finite_endpoint",
+          "preferred_first_hit": {
+            "next_index": 252000,
+            "time_s": 7200.0,
+            "since_epoch_s": 7200.0
+          },
+          "preferred_sustained_from": {
+            "next_index": 300445,
+            "time_s": 8584.142857142857,
+            "since_epoch_s": 8584.142857142857
+          },
+          "preferred_pass_fraction": 0.7852857142857143,
+          "preferred_outside_samples": 27054,
+          "preferred_outside_duration_s": 772.9714285714285,
+          "unavailable_samples": 0
+        },
+        "Q_percent": {
+          "entry_error": 1.9749400989585997,
+          "end_error": -0.42354346939544874,
+          "peak_absolute_error": 2.0244435048542675,
+          "peak_time_s": 7372.142857142857,
+          "hard_classification": "sustained_through_finite_endpoint",
+          "hard_sustained_from": {
+            "next_index": 252000,
+            "time_s": 7200.0,
+            "since_epoch_s": 7200.0
+          },
+          "preferred_classification": "sustained_through_finite_endpoint",
+          "preferred_first_hit": {
+            "next_index": 342468,
+            "time_s": 9784.8,
+            "since_epoch_s": 9784.8
+          },
+          "preferred_sustained_from": {
+            "next_index": 342468,
+            "time_s": 9784.8,
+            "since_epoch_s": 9784.8
+          },
+          "preferred_pass_fraction": 0.2820079365079365,
+          "preferred_outside_samples": 90467,
+          "preferred_outside_duration_s": 2584.7714285714287,
+          "unavailable_samples": 0
+        }
+      },
+      "charge_Ah": {
+        "signed_Ah": 0.005,
+        "positive_Ah": 0.024999999999999998,
+        "negative_magnitude_Ah": 0.02,
+        "absolute_Ah": 0.045,
+        "observed_samples": 126000
+      }
+    },
+    "final_retention": {
+      "start_s": 10800.0,
+      "end_s": 14400.0,
+      "interval_count": 126000,
+      "complete": true,
+      "quantities": {
+        "SOC_pp": {
+          "entry_error": -0.0030455061856948795,
+          "end_error": -0.011857401835146941,
+          "peak_absolute_error": 0.011857401835146941,
+          "peak_time_s": 14400.0,
+          "hard_classification": "retained",
+          "hard_sustained_from": {
+            "next_index": 378000,
+            "time_s": 10800.0,
+            "since_epoch_s": 10800.0
+          },
+          "preferred_classification": "retained",
+          "preferred_first_hit": {
+            "next_index": 378000,
+            "time_s": 10800.0,
+            "since_epoch_s": 10800.0
+          },
+          "preferred_sustained_from": {
+            "next_index": 378000,
+            "time_s": 10800.0,
+            "since_epoch_s": 10800.0
+          },
+          "preferred_pass_fraction": 1.0,
+          "preferred_outside_samples": 0,
+          "preferred_outside_duration_s": 0.0,
+          "unavailable_samples": 0
+        },
+        "Q_percent": {
+          "entry_error": -0.42354346939544874,
+          "end_error": -0.4084538413536398,
+          "peak_absolute_error": 0.42370192020455555,
+          "peak_time_s": 10822.314285714287,
+          "hard_classification": "retained",
+          "hard_sustained_from": {
+            "next_index": 378000,
+            "time_s": 10800.0,
+            "since_epoch_s": 10800.0
+          },
+          "preferred_classification": "retained",
+          "preferred_first_hit": {
+            "next_index": 378000,
+            "time_s": 10800.0,
+            "since_epoch_s": 10800.0
+          },
+          "preferred_sustained_from": {
+            "next_index": 378000,
+            "time_s": 10800.0,
+            "since_epoch_s": 10800.0
+          },
+          "preferred_pass_fraction": 1.0,
+          "preferred_outside_samples": 0,
+          "preferred_outside_duration_s": 0.0,
+          "unavailable_samples": 0
+        }
+      },
+      "charge_Ah": {
+        "signed_Ah": 0.001,
+        "positive_Ah": 0.001,
+        "negative_magnitude_Ah": 0.0,
+        "absolute_Ah": 0.001,
+        "observed_samples": 126000
+      }
+    }
+  },
+  "B_subphase_interpretation": {
+    "rest_2100_3000": "SOC error changes-0.276977760\u2192-0.338034551pp but never leaves preferred; this is descriptive within-target drift and successful retention. Q hard retained; preferred Q not acquired at entry.",
+    "weak_3000_7200": "SOC preferred and Q hard retained throughout4200s/147000intervals. Q+2.191493460\u2192+1.974940099% stays outside preferred; no added information claim follows merely from many weak samples.",
+    "renewed_SOC_exit": {
+      "first_outside_index": 273391,
+      "first_outside_s": 7811.171428571429,
+      "last_outside_index": 300444,
+      "last_outside_s": 8584.114285714286,
+      "consecutive_outside_samples": 27054,
+      "outside_duration_s": 772.9714285714285,
+      "reacquired_sustained_index": 300445,
+      "reacquired_sustained_s": 8584.142857142857
+    },
+    "renewed_Q_acquisition": {
+      "preferred_sustained_index": 342468,
+      "preferred_sustained_s": 9784.8,
+      "time_since_renewed_start_s": 2584.7999999999993,
+      "continued_through_final_retention": true
+    },
+    "final_weak_10800_14400": "SOC |error| grows0.003045506\u21920.011857402pp while capacity |error| falls0.423543469\u21920.408453841%. Both stay preferred at entry+all126000intervals. SOC drift within preferred is not regression or a failed gate.",
+    "causality_limit": "Observed learning and recovery occur during this prescribed use. Duration, sample count, stimulus and adaptation are confounded; no counterfactual arm proves which caused improvement."
+  },
+  "availability_audit": {
+    "initial_raw_prior_useful_attainment": false,
+    "initial_A_raw_Q_error_zero_is_not_acquired_accuracy": true,
+    "initial_B_SOC_raw_error_minus10pp_is_not_acquired_accuracy": true,
+    "observed_SOC_unavailable_samples": {
+      "A_uninterrupted": 0,
+      "A_warm_suffix": 0,
+      "A_cold_suffix": 0,
+      "B_continuous": 0
+    },
+    "observed_Q_unavailable_samples": {
+      "A_uninterrupted": 350,
+      "A_warm_suffix": 0,
+      "A_cold_suffix": 0,
+      "B_continuous": 350
+    },
+    "Q_initial_unavailable_duration_s_for_A_base_and_B": 10.0,
+    "regression_rows_available_valid": true,
+    "rule": "Raw finite prior/stale errors remain descriptive; current-point availability controls useful target hits. Initial/cold priors have zero duration and are not learned evidence."
+  },
+  "uncertainty_audit": {
+    "B_saved_grid": {
+      "aggregate": {
+        "SOC_pp": {
+          "saved_queries": 14654,
+          "available_ranges": 14653,
+          "truth_inclusions": 119,
+          "empirical_inclusion_among_available": 0.008121203849041152,
+          "raw_local_provisional_queries": 14652,
+          "raw_local_provisional_hard_error_breaches": 0
+        },
+        "Q_percent": {
+          "saved_queries": 14654,
+          "available_ranges": 14653,
+          "truth_inclusions": 231,
+          "empirical_inclusion_among_available": 0.015764689824609296,
+          "raw_local_provisional_queries": 14369,
+          "raw_local_provisional_hard_error_breaches": 906
+        }
+      },
+      "component0": {
+        "SOC_pp": {
+          "saved_queries": 14654,
+          "available_ranges": 14653,
+          "truth_inclusions": 11,
+          "empirical_inclusion_among_available": 0.0007506995154575854,
+          "raw_local_provisional_queries": 14652,
+          "raw_local_provisional_hard_error_breaches": 0
+        },
+        "Q_percent": {
+          "saved_queries": 14654,
+          "available_ranges": 14653,
+          "truth_inclusions": 240,
+          "empirical_inclusion_among_available": 0.01637889851907459,
+          "raw_local_provisional_queries": 14405,
+          "raw_local_provisional_hard_error_breaches": 942
+        }
+      },
+      "component1": {
+        "SOC_pp": {
+          "saved_queries": 14654,
+          "available_ranges": 14653,
+          "truth_inclusions": 121,
+          "empirical_inclusion_among_available": 0.00825769467003344,
+          "raw_local_provisional_queries": 14652,
+          "raw_local_provisional_hard_error_breaches": 0
+        },
+        "Q_percent": {
+          "saved_queries": 14654,
+          "available_ranges": 14653,
+          "truth_inclusions": 229,
+          "empirical_inclusion_among_available": 0.01562819900361701,
+          "raw_local_provisional_queries": 14350,
+          "raw_local_provisional_hard_error_breaches": 933
+        }
+      },
+      "all_component_hull": {
+        "SOC_pp": {
+          "saved_queries": 14654,
+          "available_ranges": 14654,
+          "truth_inclusions": 1793,
+          "empirical_inclusion_among_available": 0.1223556708066057,
+          "raw_local_provisional_queries": 0,
+          "raw_local_provisional_hard_error_breaches": 0
+        },
+        "Q_percent": {
+          "saved_queries": 14654,
+          "available_ranges": 14654,
+          "truth_inclusions": 13449,
+          "empirical_inclusion_among_available": 0.9177698921796097,
+          "raw_local_provisional_queries": 0,
+          "raw_local_provisional_hard_error_breaches": 0
+        }
+      }
+    },
+    "B_final": {
+      "truth_SOC": 0.423317141385147,
+      "truth_Q_Ah": 0.0647,
+      "aggregate_SOC_interval": [
+        0.423194111095661,
+        0.42320302363793
+      ],
+      "aggregate_Q_interval_Ah": [
+        0.06443371897951458,
+        0.0644377418125619
+      ],
+      "all_component_hull": [
+        0.423194111095661,
+        0.4232669649735267,
+        0.06443371897951458,
+        0.06502593472479172
+      ],
+      "aggregate_SOC_truth_included": false,
+      "aggregate_Q_truth_included": false,
+      "hull_SOC_truth_included": false,
+      "hull_Q_truth_included": true
+    },
+    "interpretation": "B aggregate truth inclusion is119/14653SOC(0.8121%) and231/14653Q(1.5765%);906raw local-provisional Q hard-error breaches occur. These fractions describe one serial saved-query grid, not frequentist coverage probabilities. Final point-target success does not validate local uncertainty. All-component hull also fails SOC inclusion and is not hard support."
+  },
+  "component_weight_audit": {
+    "B_log_weight_diagnostics": [
+      {
+        "minimum_log_weight": -71156.59422051531,
+        "maximum_log_weight": 0,
+        "displayed_exp_underflow_queries": 6691
+      },
+      {
+        "minimum_log_weight": -28281.83445354854,
+        "maximum_log_weight": 0,
+        "displayed_exp_underflow_queries": 7343
+      }
+    ],
+    "B_raw_saved_grid_disagreement_counts": {
+      "SOC_pp": {
+        "hard": {
+          "component_aggregate_disagreement": 0,
+          "both_components_miss": 0
+        },
+        "preferred": {
+          "component_aggregate_disagreement": 1889,
+          "both_components_miss": 983
+        }
+      },
+      "Q_percent": {
+        "hard": {
+          "component_aggregate_disagreement": 167,
+          "both_components_miss": 1115
+        },
+        "preferred": {
+          "component_aggregate_disagreement": 5105,
+          "both_components_miss": 8973
+        }
+      }
+    },
+    "renewed_SOC_switch_witness": [
+      {
+        "next_index": 273385,
+        "time_s": 7811.0,
+        "log_weights": [
+          -0.00029111558615613453,
+          -8.141935720633338
+        ],
+        "aggregate_SOC_pp": -0.05467387414426761,
+        "component_SOC_pp": [
+          -0.054489452629996604,
+          -0.6880809480099503
+        ]
+      },
+      {
+        "next_index": 273420,
+        "time_s": 7812.0,
+        "log_weights": [
+          -64.4340190699118,
+          -1.039108915563025e-28
+        ],
+        "aggregate_SOC_pp": -0.6885450249367653,
+        "component_SOC_pp": [
+          -0.054490431638526404,
+          -0.6885450249367653
+        ]
+      }
+    ],
+    "8400s_witness": {
+      "log_weights": [
+        -58706.554481677704,
+        0
+      ],
+      "errors_aggregate_component0_component1": [
+        {
+          "SOC_pp": -0.7600082226795812,
+          "Q_percent": -1.469287103378003
+        },
+        {
+          "SOC_pp": -0.39330591825672,
+          "Q_percent": -0.15350979888116845
+        },
+        {
+          "SOC_pp": -0.7600082226795812,
+          "Q_percent": -1.469287103378003
+        }
+      ]
+    },
+    "interpretation": "At7812s a current available component meets preferred SOC while the aggregate misses it. At8400s component0 meets both preferred targets while the aggregate misses both. This satisfies the frozen weighting/output symptom rule; it is not a proof of a unique causal failure mechanism or authorization for truth-selected output. Large finite negative log weights remain logged even when displayed exponentials underflow. Raw disagreement/both-miss counts can overlap and include initial/unavailable points; availability is separate.",
+    "oracle_runtime_selection": false,
+    "truth_tuning_authorized": false
+  },
+  "voltage_scope": {
+    "B_whole_arm": {
+      "causal_clean_mV": {
+        "RMS": 1.0444997842226869,
+        "signed_mean": -0.27040872361836743,
+        "maximum_absolute_error": 102.77240722898907,
+        "first_peak": {
+          "signed_error": -102.77240722898907,
+          "next_index": 1,
+          "nominal_time_s": 0.02857142857142857
+        }
+      },
+      "noisy_innovation_mV": {
+        "RMS": 1.4471910467352251,
+        "signed_mean": 0.26939651887360716,
+        "maximum_absolute_error": 103.65969274971398,
+        "first_peak": {
+          "signed_error": 103.65969274971398,
+          "next_index": 1,
+          "nominal_time_s": 0.02857142857142857
+        }
+      },
+      "filtered_fit_clean_mV": {
+        "RMS": 1.0340764254133712,
+        "signed_mean": -0.2701139838540063,
+        "maximum_absolute_error": 5.301505211944946,
+        "first_peak": {
+          "signed_error": -5.301505211944946,
+          "next_index": 301517,
+          "nominal_time_s": 8614.771428571428
+        }
+      }
+    },
+    "interpretation": "Causal clean forecast, observed-minus-forecast innovation and corrected filtered fit are separate quantities. Whole-arm causal RMS1.0445mV includes an initial102.7724mVpeak; postfit is not a one-step forecast. No universal voltage threshold or all16-parameter correctness follows."
+  },
+  "selective_saved_row_checks": [
+    {
+      "next_index": 273390,
+      "nominal_time_s": 7811.142857142857,
+      "SOC_error_pp": -0.08668754571679593,
+      "Q_error_percent": 1.3713134081241973,
+      "availability_mask": 15,
+      "ingest_return": 0,
+      "flags": 0
+    },
+    {
+      "next_index": 273391,
+      "nominal_time_s": 7811.171428571429,
+      "SOC_error_pp": -0.5923715484538072,
+      "Q_error_percent": -1.24590363981385,
+      "availability_mask": 15,
+      "ingest_return": 0,
+      "flags": 0
+    },
+    {
+      "next_index": 300444,
+      "nominal_time_s": 8584.114285714286,
+      "SOC_error_pp": -0.5000495853192122,
+      "Q_error_percent": -1.100448887147909,
+      "availability_mask": 15,
+      "ingest_return": 0,
+      "flags": 0
+    },
+    {
+      "next_index": 300445,
+      "nominal_time_s": 8584.142857142857,
+      "SOC_error_pp": -0.4999857175004896,
+      "Q_error_percent": -1.100369698136472,
+      "availability_mask": 15,
+      "ingest_return": 0,
+      "flags": 0
+    },
+    {
+      "next_index": 342467,
+      "nominal_time_s": 9784.771428571428,
+      "SOC_error_pp": 0.029508843103526194,
+      "Q_error_percent": -0.500026636257711,
+      "availability_mask": 15,
+      "ingest_return": 0,
+      "flags": 0
+    },
+    {
+      "next_index": 342468,
+      "nominal_time_s": 9784.8,
+      "SOC_error_pp": 0.029503978690981203,
+      "Q_error_percent": -0.4999945445275711,
+      "availability_mask": 15,
+      "ingest_return": 0,
+      "flags": 0
+    }
+  ],
+  "raw_input_identities": {
+    "metrics": {
+      "path": "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/primary/B_continuous/metrics.bin",
+      "bytes": 40320000,
+      "sha256": "ac29b79c8fd2ce9b34601067824c230ee97d7051c0ed699d494da5592cb276ba"
+    },
+    "truth": {
+      "path": "/workspace/scratch/df37870c5570/mumble/experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/truth.bin",
+      "bytes": 16128000,
+      "sha256": "351b93c4157e80681eb5902f713750b6ab71d5c23a1b21a76cdbd8572861fc9f"
+    }
+  },
+  "evidence": [
+    {
+      "path": "plans/continuous_learning_validation_001.json",
+      "sha256": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/receipt.json",
+      "sha256": "309e313300f9c1864b376634407cc918855f1462ca000fdee2639bb31f0e7502"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/completion.json",
+      "sha256": "56638f99ee3e3a3aa1e69d222c66c4c4d6eb20468bbf3c831be97846e8139717"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/A_gate.json",
+      "sha256": "b09853a1dbc4d7f7d8cdf7437da76cdad25adc25f41351067ef942baa8f83b30"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/A_warm_suffix/parity.json",
+      "sha256": "616a90590a720cbd2c079db1fb92f722c5905c460746d20558d75a8d80577d9b"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/A_cold_suffix/cold_semantics.json",
+      "sha256": "62c97ffd9cce521ae6f08d0c94a19f62298e14c744f5d5c410f0b4cd75016488"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/A_uninterrupted.json",
+      "sha256": "b876c25dcc277c6f4e6ca639000d3652e970fe9caeb678062f5399529a109363"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/A_warm_suffix.json",
+      "sha256": "e28a2583ef56ffab4662f9e94006d75d1b4baa227a26aa92a453dd78c69ff93a"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/A_cold_suffix.json",
+      "sha256": "0e3e9c1508954f642b81023c8160ffab02bc2305882a80200fb400a3eea29d1c"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/B_continuous.json",
+      "sha256": "f7a500fbc228269728a8f6e6d06f19fc22becd8a149f8af194e6b1b50811d039"
+    }
+  ],
+  "review_execution": {
+    "new_generator_evaluations": 0,
+    "new_noise_draws": 0,
+    "new_learner_deliveries": 0,
+    "new_scorer_runs": 0,
+    "primary_or_historical_reruns": 0,
+    "writes_to_primary": 0
+  },
+  "interpretation_blockers": [],
+  "required_reporting_caveats": [
+    "Do not collapse mixed preferred outcomes into an unqualified pass.",
+    "Do not relabel Q not-acquired-at-entry as loss of retained knowledge.",
+    "Do not erase the renewed preferred-SOC regression because final retention passed.",
+    "Do not label drift entirely within preferred as a failure.",
+    "Do not infer coverage, indefinite stability, stimulus causality, target-platform qualification or automatic longer runs."
+  ]
+}

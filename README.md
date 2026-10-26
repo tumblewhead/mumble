@@ -6,17 +6,34 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
-**The continuous learning/retention contract is now frozen.** It declares one
-short Cell A lifecycle gate, followed by one four-hour continuous Cell B
-diagnostic under the unchanged public-split learner. Every 35 Hz interval is
-scored for Q/SOC; plant, learner, RNG, weights and input position carry through
-rest, weak use and renewed excitation. Capacity has no startup deadline.
-The [contract](plans/continuous_learning_validation_001.json),
-[design report](experiments/continuous_learning_validation_001/REPORT.md) and
-[independent review](experiments/continuous_learning_validation_001/independent_review.json)
-are complete. **No new primary was run and no estimator source changed.**
-Next implement and qualify the separate continuous host harness before the
-one declared staged execution; the candidate remains unpromoted.
+**The frozen continuous learning/retention experiment is complete.** The
+unchanged learner processed all **661,500 deliveries** in four valid arms, with
+exact warm continuation, valid cold-reset semantics and zero rejected updates.
+Cell B ends its four-hour stream at **−0.408454% capacity error** and
+**−0.0118574 SOC percentage points**; both preferred targets hold throughout
+the final weak-use hour.
+
+**The outcome is mixed, and the candidate is not promoted.** Preferred SOC
+accuracy regressed for **772.971 seconds** during renewed use, coinciding with
+a sharp component-weight/output change, before recovery. Cell A ends inside
+the hard capacity target but outside preferred (+1.081343% baseline/warm,
++1.690304% cold). B's aggregate local intervals include truth at only 0.8121%
+of available SOC queries and 1.5765% of capacity queries. These are descriptive
+serial-grid frequencies, not validated coverage. Capacity has no startup deadline.
+See the [implementation and results report](experiments/continuous_learning_validation_001/implementation/REPORT.md),
+[summary](experiments/continuous_learning_validation_001/implementation/summary.json),
+[decision](experiments/continuous_learning_validation_001/implementation/decision.json)
+and [independent interpretation review](experiments/continuous_learning_validation_001/implementation/interpretation_review.json).
+
+The run and scorer took 51.23 seconds, with 391,584,188 bytes of closed runtime
+outputs. Worker peak RSS was recorded within limit; the supervisor's own peak
+was not saved, so full all-process memory qualification remains open. The
+owned estimator subtotal remains 7,152 bytes, with no estimator source change.
+The next question is a bounded diagnosis of the 7,811-second weighting/output
+episode using preserved evidence. No primary retry or longer campaign is queued.
+The [frozen contract](plans/continuous_learning_validation_001.json) and
+[design report](experiments/continuous_learning_validation_001/REPORT.md) remain
+preserved alongside the once-only execution.
 
 **The requested parameter/state sensitivity analysis is complete.** At the
 final saved estimate, a **19.24% τ₂ error** produces at most **1.571 mV** of
@@ -47,7 +64,7 @@ accuracy targets. The candidate is retained for further qualification;
 final accurate point. Complete target memory, broader performance, uncertainty
 coverage and indefinite operation remain open. The
 [continuous learning/retention validation contract](plans/continuous_learning_validation_001.json)
-now defines the next bounded diagnostic and its implementation prerequisites.
+defined the completed bounded diagnostic; its result decision now identifies the next question.
 
 The [current roadmap](docs/ROADMAP.md) has three deliverables: a small two-cell
 end-to-end desktop demonstration, a desktop performance campaign including

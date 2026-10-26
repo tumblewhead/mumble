@@ -2,21 +2,27 @@
 
 ## Decision
 
-**M1's desktop lifecycle is complete. The new two-component candidate supports
-later capacity learning on one frozen Cell B comparison and is retained for
-further qualification.** Capacity error improves from +13.16% at 900 seconds
-to +0.095% at 2100 seconds; SOC stays within 0.5 points on all saved queries
-from 580 seconds. Both arms complete without rejected corrections. Local
-uncertainty remains overconfident, so the candidate is not promoted. The
-[continuous learning/retention contract](../plans/continuous_learning_validation_001.json)
-is now frozen: one short A lifecycle gate and one conditional four-hour B
-diagnostic, with all-sample target scores and finite work/stopping rules.
-No new primary was run in the design task. Next implement and qualify its
-separate continuous host harness. See the preserved
-[result and decision](../experiments/nonlinear_hypothesis_001/REPORT.md).
-The measured owned subtotal is **7152 bytes**; the proposed complete target
-allocation is **10,032 bytes**, including unmeasured reserves. Complete
-Cortex-M23 qualification near **10 KiB total SRAM** remains open.
+**M1's desktop lifecycle is complete. The continuous learning/retention
+diagnostic has now completed once under the unchanged two-component learner.**
+All four arms are valid with 661,500 learner deliveries, zero rejected updates,
+exact warm continuation and valid cold reset. Cell B ends four hours at
+−0.408454% capacity error and −0.0118574 SOC percentage points; both preferred
+targets hold at the entry and all 126,000 intervals of the final weak hour.
+
+The candidate remains **unpromoted**. Preferred SOC accuracy regressed for
+772.971 seconds during renewed excitation, with a component-weight/output
+switch around 7,811 seconds. Cell A preferred capacity remains unresolved at
+the finite endpoint, and local uncertainty remains unvalidated. The
+[result report](../experiments/continuous_learning_validation_001/implementation/REPORT.md)
+and [decision](../experiments/continuous_learning_validation_001/implementation/decision.json)
+close this bounded experiment. The next question is a small weighting/output
+diagnosis using preserved evidence; a longer campaign is not an automatic remedy.
+
+The owned core subtotal remains **7,152 bytes**. Recorded worker RSS and runtime
+output limits passed, but the supervisor's own peak RSS was not saved. The
+proposed complete target allocation remains **10,032 bytes**, including
+unmeasured reserves; complete Cortex-M23 qualification near **10 KiB total SRAM**
+remains open.
 
 The [parameter/state sensitivity analysis](../experiments/parameter_sensitivity_001/REPORT.md)
 is also complete: all sixteen saved coordinates, three anchors and six future
@@ -367,10 +373,11 @@ is implied.
 
 ### Use a short variation matrix and a duration ladder
 
-The new candidate has one favorable finite learning result; it has not passed
-broader performance, lifecycle or uncertainty qualification. The
+The candidate now has the earlier finite learning comparison and the completed
+continuous diagnostic; broader performance and uncertainty qualification remain
+open. The declared continuous lifecycle checks passed. The
 [continuous validation design](../experiments/continuous_learning_validation_001/REPORT.md)
-now requires a short A lifecycle validity gate before one four-hour B diagnostic.
+required a short A lifecycle validity gate before one four-hour B diagnostic; both stages have now completed once.
 This is explicitly a bounded learning/retention diagnostic: A accuracy is scored
 observationally, while numerical, accounting, lifecycle and known-resource
 failures block B. An A accuracy miss cannot create a capacity startup deadline
@@ -458,16 +465,23 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Fetch the latest `design/continuous-learning-validation-001` descendant and read
-the [design summary](../experiments/continuous_learning_validation_001/summary.json),
-[contract](../plans/continuous_learning_validation_001.json) and
-[decision](../experiments/continuous_learning_validation_001/decision.json).
-The design finish line is complete, with zero primary runs and unchanged
-learner sources. Preserve both completed studies and their provenance.
-Use `implementation/continuous-learning-validation-001` for the new continuous
-generator, host adapter, scorer and bounded preflight fixtures. Freeze and
-independently review source, binary, environment and contract identities before
-inference; then execute the staged A/B contract once under its admission and
-failure rules. Stop with its concrete learning/retention decision. Annual
-behavior, uncertainty qualification and full-model indefinite operation remain
-separate obligations; no duration or parameter sweep is queued automatically.
+Fetch the latest `implementation/continuous-learning-validation-001` descendant
+and read the [result summary](../experiments/continuous_learning_validation_001/implementation/summary.json),
+[report](../experiments/continuous_learning_validation_001/implementation/REPORT.md),
+[decision](../experiments/continuous_learning_validation_001/implementation/decision.json)
+and independent reviews. The source, qualified executable and single primary
+are preserved. Do not rerun completed studies to resume or extend this run.
+
+The next bounded question is the component-weight/output episode around
+7,811 seconds: the aggregate leaves preferred SOC while a retained component
+still passes, and at 8,400 seconds that component passes both preferred targets
+while the aggregate misses both. Start with existing scalar crossings, full
+queries and checkpoints; specify a finite diagnostic before any new execution.
+No truth-based component selection, pruning, seed search or horizon extension
+is authorized by this result. The supervisor's own RSS high-water measurement
+also needs an explicit future correction before claiming all-process memory
+qualification.
+
+Capacity has no startup deadline. Local precision, point accuracy, coverage,
+full target resources and indefinite operation remain separate obligations.
+No day/week/annual promotion or automatic sweep is queued.

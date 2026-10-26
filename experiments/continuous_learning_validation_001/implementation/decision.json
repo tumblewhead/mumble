@@ -1,0 +1,65 @@
+{
+  "schema": "mumble_continuous_learning_decision_v1",
+  "status": "finite_diagnostic_closed_candidate_retained_not_promoted",
+  "primary_once_complete": true,
+  "findings": [
+    {
+      "id": "validity_lifecycle",
+      "outcome": "passed",
+      "detail": "All four arms and their saved-input/full-query scoring are valid; exact warm parity, cold public reset, unchanged learner, zero rejected updates."
+    },
+    {
+      "id": "first_retention",
+      "outcome": "useful_targets_retained",
+      "detail": "B2100\u20137200s retains preferred SOC and hard Q at entry and all178500intervals. Preferred Q was not acquired at entry."
+    },
+    {
+      "id": "renewed_use",
+      "outcome": "mixed",
+      "detail": "B reaches sustained preferred Q at9784.8s, but previously preferred SOC is outside target for27054samples starting7811.171429s; restored8584.142857s. Hard SOC and Q remain satisfied throughout renewed use."
+    },
+    {
+      "id": "final_retention",
+      "outcome": "passed_finite_preferred_targets",
+      "detail": "B10800\u201314400s retains both preferred targets at entry and all126000samples. FinalQ\u22120.408454percent;SOC\u22120.0118574pp. Small within-target SOC drift is not a failure."
+    },
+    {
+      "id": "A_capacity",
+      "outcome": "preferred_unresolved_at_finite_endpoint",
+      "detail": "A baseline/warmQ+1.081343percent andcoldQ+1.690304percent at2100s; hard target met. No capacity startup deadline imposed."
+    },
+    {
+      "id": "uncertainty",
+      "outcome": "unvalidated_and_observed_miscalibration_symptoms",
+      "detail": "B aggregate local intervals include truth only119/14653SOC and231/14653Q queries;906local-provisionalQhard breaches; final aggregate intervals exclude truth."
+    },
+    {
+      "id": "resources",
+      "outcome": "recorded_worker_limits_pass_supervisor_peak_unverified",
+      "detail": "Closedruntimeoutputs391584188B;workerHWM33976320B;core7152B. No saved supervisorHWM, no fulltargetSRAM/WCET/lifetime qualification."
+    }
+  ],
+  "selected_next_work": {
+    "name": "bounded_weighting_output_diagnosis",
+    "basis": "At7811\u20137812s aggregate dominance changes toward a component missing preferred SOC while another retained component passes; at8400s the alternative passes both preferred targets while aggregate misses both.",
+    "first_action": "Read preserved scalar crossing rows, full component/weight queries and existing checkpoints; define the next diagnostic question and finite budget before any new execution.",
+    "forbidden_shortcuts": [
+      "Do not select a truth oracle component at runtime.",
+      "Do not prune or reseed components from these truth scores.",
+      "Do not extend the current run or search seeds/horizons.",
+      "Do not infer calibrated coverage from local precision or hull inclusion."
+    ],
+    "parallel_prerequisite": "Record supervisor RSS high-water explicitly in a future harness revision; do not rerun this primary to repair that measurement gap."
+  },
+  "automatic_new_runs": false,
+  "capacity_startup_deadline": null,
+  "candidate_promoted": false,
+  "annual_campaign_authorized_by_this_result": false,
+  "estimator_changed": false,
+  "preserved_history": "Prior learner/sensitivity evidence,17historical cold-reset rejections and earlier uncertainty failures remain unchanged; this run does not retroactively explain them.",
+  "support": [
+    "summary.json",
+    "interpretation_review.json",
+    "independent_run_review.json"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "schema": "mumble_continuous_final_report_review_v1",
+  "status": "pass",
+  "reviewer": "continuous_scoring_impl",
+  "scope": "Targeted fact and interpretation check of REPORT.md,summary.json,decision.json against immutable score summaries and completed independent reviews. No broader implementation or campaign review.",
+  "reviewed_files": [
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/REPORT.md",
+      "sha256": "6d774de27a41625cda372d41ff138278af551777df5fa9e711b4e4798df7d91a"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/summary.json",
+      "sha256": "81410c15272d59dc8ee3594b514a3e8eaceed7c60693788b620afa67ae245a62"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/decision.json",
+      "sha256": "77193c9b4997d8af37269af4216e2e103dbc6ff13c108153f9212907a95fa72f"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/A_uninterrupted.json",
+      "sha256": "b876c25dcc277c6f4e6ca639000d3652e970fe9caeb678062f5399529a109363"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/A_warm_suffix.json",
+      "sha256": "e28a2583ef56ffab4662f9e94006d75d1b4baa227a26aa92a453dd78c69ff93a"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/A_cold_suffix.json",
+      "sha256": "0e3e9c1508954f642b81023c8160ffab02bc2305882a80200fb400a3eea29d1c"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/scoring/B_continuous.json",
+      "sha256": "f7a500fbc228269728a8f6e6d06f19fc22becd8a149f8af194e6b1b50811d039"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/independent_run_review.json",
+      "sha256": "7fac66654e3806589aaa27a19d038033fbe35fdd17672dd8666e8a4472f5d5a0"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/interpretation_review.json",
+      "sha256": "05df5a79ea9aa74fd525b425b89d592d8e48554e857c021cdcbbfc336b4bb6c4"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/preflight.json",
+      "sha256": "77bb2ebde25a174f1f3099b800db01613a74d457f2bcc74a04ab4f2944f98d72"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/source_publication.json",
+      "sha256": "989a7e08c34d09d9ab01534266fcef809ce755eeb25a01c6d7ab4fb0fa41093a"
+    },
+    {
+      "path": "experiments/continuous_learning_validation_001/implementation/executable_review.json",
+      "sha256": "eb44b14bc1faabdb9aa8626e6048674907edde475d27a9f8358d1c25b8e0234c"
+    }
+  ],
+  "numeric_review": {
+    "exact_saved_value_comparisons": 158,
+    "mismatches": [],
+    "method": "Read-only JSON comparisons after explicit field-name mapping, including complete nested retained windows, endpoints, checkpoint errors,16-coordinate arrays, uncertainty counts, resource totals and evidence digests. Report decimal rounding was checked against the same saved values; no scores were recalculated."
+  },
+  "interpretation_checks": [
+    {
+      "area": "first_hit_and_sustained_attainment",
+      "status": "pass",
+      "finding": "Early available hits are distinguished from all-later-sample attainment through the declared finite endpoints, including B SOC initial acquisition versus the later renewed-use regression."
+    },
+    {
+      "area": "real_preferred_SOC_regression",
+      "status": "pass",
+      "finding": "Preserves first outside index273391 at7811.171429s,27054 consecutive outside intervals,772.971429s duration, recovery index300445 at8584.142857s and0.808669pp peak. Available valid transactions are distinguished from numeric failure."
+    },
+    {
+      "area": "Q_not_acquired_at_entry",
+      "status": "pass",
+      "finding": "B first retention and A weak tails retain hard Q while preferred Q remains not acquired at entry; no invented retention loss or capacity startup deadline."
+    },
+    {
+      "area": "final_retention_and_drift",
+      "status": "pass",
+      "finding": "B final entry plus all126000 required intervals retain both preferred targets. Small SOC drift wholly inside preferred is correctly classified as successful retention."
+    },
+    {
+      "area": "uncertainty_and_vectors",
+      "status": "pass",
+      "finding": "Final point accuracy does not establish local interval calibration, hard support, identifiability or nuisance-parameter precision. Saved inclusion denominators and local-provisional breach counts are preserved."
+    },
+    {
+      "area": "resource_measurement_limit",
+      "status": "pass",
+      "finding": "Separates recorded worker high-water evidence from missing supervisor high-water measurement, and host accounting from7152-byte owned core and unmeasured complete-target reservations. No blanket all-process memory or Cortex-M23 qualification is claimed."
+    },
+    {
+      "area": "decision_scope",
+      "status": "pass",
+      "finding": "Candidate retained without promotion; finite diagnostic closed. The bounded weighting/output question begins with preserved evidence and requires separate specification before new execution. No automatic seed/horizon/duration or annual campaign."
+    }
+  ],
+  "closed_correction": {
+    "file": "REPORT.md",
+    "section": "Voltage and all sixteen coordinates",
+    "issue": "Original wording implied the causal forecast was logged before ingestion.",
+    "resolution": "The causal voltage forecast uses pre-update weights and pre-correction component innovations, and is logged after the transaction. It is distinct from the query's post-correction fitted voltage.",
+    "owner_applied_change": true
+  },
+  "remaining_corrections": [],
+  "review_activity": {
+    "new_scoring_runs": 0,
+    "new_learner_deliveries": 0,
+    "new_generator_evaluations": 0,
+    "new_noise_draws": 0,
+    "primary_edits": 0,
+    "frozen_source_or_test_edits": 0,
+    "report_summary_or_decision_edits_by_reviewer": 0
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "mumble_continuous_evidence_restore_verification_v1",
+  "attempt": 1,
+  "status": "failed",
+  "observed_by": "root; preserved from reported first verification without rerunning it",
+  "command": [
+    "python",
+    "experiments/continuous_learning_validation_001/implementation/evidence/restore_primary.py",
+    "--verify-only"
+  ],
+  "exit_code": 1,
+  "error": "RestoreError: Existing file size/mode differs; refusing overwrite: experiments/continuous_learning_validation_001/implementation/primary/A_cold_suffix/learner-63000.bin",
+  "wall_s": 0.098263065,
+  "helper_sha256": "628973301498cd2eb5d80c126233cee5c42ff197df1a424fc91c137d77752020",
+  "index_sha256": "0db1f4cfc784e3fc6f52a4f65c1a50c0bbb1a407367742336d7eeb309773104f",
+  "diagnosis": {
+    "existing_permissions_octal": "0o600",
+    "existing_bytes": 3004,
+    "indexed_git_mode": "100644",
+    "cause": "Git mode records regular-file executable status, not exact read/write permissions. A0600 checkpoint is Git-mode100644."
+  },
+  "primary_files_modified": false,
+  "new_study_runs": 0,
+  "new_noise_draws": 0,
+  "new_learner_calls": 0,
+  "new_scorer_calls": 0
+}

@@ -5,6 +5,12 @@ execution of `plans/continuous_learning_validation_001.json`. The frozen contrac
 SHA256 is `8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851`.
 The seven pinned estimator files remain unchanged.
 
+The single staged execution is complete. See [the outcome report](REPORT.md),
+[compact result](summary.json) and [decision](decision.json): valid lifecycle,
+later capacity acquisition and successful final preferred retention, with a
+preferred-SOC regression during renewed use, unresolved A preferred capacity,
+and unvalidated local uncertainty. The candidate is not promoted.
+
 ## Responsibilities
 
 | File | Responsibility |
