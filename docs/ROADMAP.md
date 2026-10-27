@@ -16,23 +16,23 @@ passed 16 cases and 4,757 assertions. The compiled host project stack path is
 760 bytes and the complete planning ledger remains 10,216 / 10,240 bytes, with
 actual Cortex-M23 runtime/IRQ/caller memory and timing unmeasured.
 
-**M2 remains open and M3 is not promoted.** The fixed-prefix joint-shape backend
-is implemented and qualified, and its exact original inputs are restored. Its
-one registered capture stopped at sample 224 on a one-ULP likelihood parity
-failure. No bank checkpoint or reference node evaluation was released; the
-finite decision is unresolved. The cause remains unestablished, and the attempt
-must not be retried or its tolerance changed. See the
-[diagnostic status](../experiments/fixed_prefix_shape_001/README.md),
-[decision](../experiments/fixed_prefix_shape_001/decision.json) and
-[current handoff](../handoff/CONTINUE.json). Current branch:
-`diagnostics/fixed-prefix-shape-001`.
+**M2 remains open and M3 is not promoted.** The user-authorized non-aborting
+parity census completed all 15,751 snapshots through the two-hour prefix. Only
+likelihood/total cost differed, by at most 2.04e-10 NLL and 36 ULP; all saved
+physical outputs, prior, elapsed time, support slacks and flags matched exactly.
+The observed differences are negligible at application scales. Their cause and
+full bank-coefficient equality remain unestablished.
 
-Next isolate environment/arithmetic reproduction on fabricated inputs under a
-separate plan. Once development is stable, the user requests configurable
-cell/load/noise/duration trajectories to assess longer-term variation. That
-campaign has not started. The original rolling
-[report](../experiments/live_anchor_integration_001/REPORT.md) and all its limits
-remain unchanged.
+Use the retained diagnostic bank for the joint-shape comparison with documented
+numerical reconstruction semantics. The previous strict failure stays preserved;
+no new prefix replay is needed. See the
+[census report](../experiments/parity_census_001/README.md),
+[decision](../experiments/parity_census_001/decision.json) and
+[current handoff](../handoff/CONTINUE.json). Current branch:
+`diagnostics/parity-census-001`.
+
+After development stabilizes, the user requests configurable cell/load/noise/
+duration trajectories for longer-term variation. That campaign has not started.
 
 ### Previous primitive checkpoint
 

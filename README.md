@@ -38,22 +38,26 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `diagnostics/fixed-prefix-shape-001`.
+The current work branch is `diagnostics/parity-census-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
 [restoration instructions](experiments/live_anchor_integration_001/publication_transport001/ARTIFACTS.md)
 verify identities and never overwrite a differing existing file.
 
-The fixed-prefix joint likelihood-shape backend is now implemented and qualified,
-and its exact archived inputs are restored. Its single registered capture stopped
-at sample 224 on a one-ULP likelihood mismatch after 14 matching snapshots.
-The decision is **unresolved**; no bank checkpoint or 545-node reference comparison
-was released. See the [diagnostic status](experiments/fixed_prefix_shape_001/README.md),
-[decision](experiments/fixed_prefix_shape_001/decision.json) and
-[current handoff](handoff/CONTINUE.json). A separately planned reproduction
-investigation comes next. Configurable cell/load/noise/duration trajectories are
-requested once development is stable; no longer campaign has started.
+The user-authorized non-aborting parity census is complete. Across all 15,751
+snapshots in the two-hour prefix, only likelihood and total costs differ, by at
+most **2.04e-10 NLL (36 ULP maximum)**. Saved physical outputs, elapsed time,
+prior, support slacks and flags match bit-for-bit. The drift is negligible at
+application scales; its exact cause remains unestablished. See the
+[census report](experiments/parity_census_001/README.md),
+[complete mismatch inventory](experiments/parity_census_001/attempt001/mismatches.csv.gz)
+and [current handoff](handoff/CONTINUE.json).
+
+The original strict-parity failure remains preserved. A diagnostic bank is now
+available for the joint likelihood-shape comparison, which has not run.
+Configurable cell/load/noise/duration trajectories are requested once development
+is stable; no longer campaign has started.
 
 ### Previous primitive checkpoint
 
