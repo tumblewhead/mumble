@@ -1,0 +1,963 @@
+{
+  "authorship_limit": "This reviewer implemented orchestration; separate independent source/numerical review is review/result_review.json.",
+  "bound_file_identities": [
+    {
+      "bytes": 30894944,
+      "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+    },
+    {
+      "bytes": 1023032,
+      "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+      "sha256": "6117c52522997d2aaccb2b52b3c6bf42c0a6c5edb1d718431fed6b2fc5fec234"
+    },
+    {
+      "bytes": 16128000,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-conditional-evidence/experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+      "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f"
+    },
+    {
+      "bytes": 30254,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/receipt.json",
+      "sha256": "ee57549314b080a2c4b3d9e1a38d3ac144a7ce964d7090c9ae87a05dc1231a2b"
+    },
+    {
+      "bytes": 6435,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/compact_history.h",
+      "sha256": "f115ae16915937b84ecf284377b3db96bac3f45f36c12dd444b9a2c7aa05fc3e"
+    },
+    {
+      "bytes": 6273,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/supervisor.json",
+      "sha256": "c98856188a12e99928f88c4401ddb4112e42fabf1ef1714a383a53375186c758"
+    },
+    {
+      "bytes": 9444,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/adc12.c",
+      "sha256": "c79f6f394bd83d75ab2c85ac645919b031371f5052cbb5c5915e455f5b4ec343"
+    },
+    {
+      "bytes": 4830,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/adc12.h",
+      "sha256": "f05e46ee9a01b7dd9bbf2c3da6313061c5df46adfe4d00155b66c4d72c46d4aa"
+    },
+    {
+      "bytes": 3318,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/history_translation.c",
+      "sha256": "fc466d7893c8bd1b981e9a753dec04e46575badd597b969f0d2fd8b337877eba"
+    },
+    {
+      "bytes": 1634,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/history_translation.h",
+      "sha256": "5aab00671e32f3e3e5323e2e97e8922610f2d06206b34d2cf9df4283885fb31e"
+    },
+    {
+      "bytes": 2427,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/live_layout.h",
+      "sha256": "24d37d7f298dfdbce40bb2da7ae2d39c8a76479c90d835b00c18383e511f7ba5"
+    },
+    {
+      "bytes": 14782,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/support_step.c",
+      "sha256": "9629fa7f700097770b96ff4349bafe06c15ab8b876300d6e54bce51ecca8ee95"
+    },
+    {
+      "bytes": 3587,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/support_step.h",
+      "sha256": "e30ad444760167cbcf1a1dd33911cb6fd9b5e58a9dabe4d4f877c9ad75bc371e"
+    },
+    {
+      "bytes": 859,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/commit.json",
+      "sha256": "7819d116aa0e984ed08bf3dc6de69598517016529abe3a8f25c8805f34ad43c0"
+    },
+    {
+      "bytes": 33494823,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/objects/b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c.bin",
+      "sha256": "b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c"
+    },
+    {
+      "bytes": 33494823,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/raw_probe.json",
+      "sha256": "b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c"
+    },
+    {
+      "bytes": 1081,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/reservation.json",
+      "sha256": "a792a11f0ec0b5f471c479974b35ae3edb746a6d77f26016fcc2bc6292dc0752"
+    },
+    {
+      "bytes": 283,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/stream_closed.json",
+      "sha256": "a7dd7905192e488c2aff48041ac8820a8eaa2b98b2c0b607bb4e717e6d8aaa66"
+    },
+    {
+      "bytes": 18328,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/receipt.json",
+      "sha256": "77ca4f32003a39ab082445ddc43943191ff19e21aabaa92823c2464b20f3e777"
+    },
+    {
+      "bytes": 15145,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/result.json",
+      "sha256": "101d7e73201d571477384a5c08855ba10760eb37f9147c9ab39bc739496f502f"
+    },
+    {
+      "bytes": 71120,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/build001/host_probe",
+      "sha256": "f8d1702a001fc8d63e22b00e013a8dc72e797e40dbd01ae64b09e03d5e386738"
+    },
+    {
+      "bytes": 7183,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/build001/receipt.json",
+      "sha256": "19fa2ff839a8f6df5733e304b7b09c67f35c7265cf30692ee6c2228b573e2923"
+    },
+    {
+      "bytes": 31035,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/build_acceptance001.json",
+      "sha256": "daaaa52de102bce4063d49314c6708d0c33df1a4b43fc4d22d7b82ed8bfabb82"
+    },
+    {
+      "bytes": 16251,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/executable_receipt.json",
+      "sha256": "0fb43796599bfb278f0e1fe1f5a21f0f1e5ca00d04ce08eac6527efe52ff9acc"
+    },
+    {
+      "bytes": 5999,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/execution_process/receipt.json",
+      "sha256": "338acf3c491baab5691239c2115f83a750d9422682d72ebb87f51db919452d08"
+    },
+    {
+      "bytes": 1949,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_audit_plan.json",
+      "sha256": "b144122a05d67038b533ca44b3b971f961f32a22b9efa907a64a6dd8dc74cad3"
+    },
+    {
+      "bytes": 7577,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_exact_audit.c",
+      "sha256": "5288e16efa087025602cdf0c4e6bbe3b1043c6820047ce4dfb409467293d4a83"
+    },
+    {
+      "bytes": 4940,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_input.c",
+      "sha256": "3b9d00f0a1c07618a64dabaee5f75d3f5e70746c4f401393ce845aed69955a05"
+    },
+    {
+      "bytes": 1976,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_input.h",
+      "sha256": "cfffb2f2244d9dfdc3476f5d56de5c357c1e57a8072aba0d7168e288c2fb615f"
+    },
+    {
+      "bytes": 14370,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_probe.c",
+      "sha256": "385119022ecbc413ad90ec7fe099c5ef8143021e19387772f14e3a9da9a951ed"
+    },
+    {
+      "bytes": 7066,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_run_plan.json",
+      "sha256": "94ac66a1b60743fb6cd425e44fb40152bedce979b43fc6f4e29caf7f0a495329"
+    },
+    {
+      "bytes": 34608,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/build001/host_exact_audit",
+      "sha256": "70e23834b3af178bd12b2dfbe8335c85031010c428175de5c300105bdb6364de"
+    },
+    {
+      "bytes": 325,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/point_252000.txt",
+      "sha256": "d7c634fb4011a34b4e2e2acdf482cef42c5e173271dfd5cd8ace83e9048d99cf"
+    },
+    {
+      "bytes": 322,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/point_294000.txt",
+      "sha256": "91bc20ba2932ee25b79cc07ce86d6fe128ea1e3965aaf4c809ba8e04ef72a6b5"
+    },
+    {
+      "bytes": 324,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/point_504000.txt",
+      "sha256": "8e64a89bd397bd3a89f73a3121dab42265a66cbe049d6f53637b6de96a648b74"
+    },
+    {
+      "bytes": 17191,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/receipt.json",
+      "sha256": "e6cd4b97bea16034cf7fb60e364da073af7a344611440a9caec50672e11adf46"
+    },
+    {
+      "bytes": 26128,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/result.json",
+      "sha256": "75515e53f4dbaf8261f7bdaa06ba686546273304b1123511fa2839a875cb028d"
+    },
+    {
+      "bytes": 1442,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/public_contract.c",
+      "sha256": "500e9f20893d66570607d268cb1e5e6eccf37c8078127ff345cbcce92a73c2a9"
+    },
+    {
+      "bytes": 4883,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/receipt.json",
+      "sha256": "dcc6a97b8dd7926f268bab99370be3d17ed1274cc87abad9aecd5fd9c6e2373a"
+    },
+    {
+      "bytes": 3027650,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/trace_independent_copy.jsonl.gz",
+      "sha256": "f18944ea9206a97448b20076218a76cb43dfd6b5a6785c9be61f29d6f26b7355"
+    },
+    {
+      "bytes": 8568513,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/trace_original.jsonl.gz",
+      "sha256": "1916a1a42aa2027000a75bcb445f1959861e58c21dc991988b2f5bf57c2c3a1c"
+    },
+    {
+      "bytes": 6492,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_recovery001/receipt.json",
+      "sha256": "9962390a90db6c014b9cd7b5f802fa15abe7792ba54dd692b832f8786452c8c6"
+    },
+    {
+      "bytes": 8568513,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_recovery001/trace_independent_copy.jsonl.gz",
+      "sha256": "1916a1a42aa2027000a75bcb445f1959861e58c21dc991988b2f5bf57c2c3a1c"
+    },
+    {
+      "bytes": 2724,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_selection.json",
+      "sha256": "ac19d489d790bfaf8df19919f65715d51fa5ddc96b6c4a12b7b26efbd86cdc06"
+    },
+    {
+      "bytes": 1007049,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_attempt001/receipt.json",
+      "sha256": "4c4e1c3b99d698089ccdc48c5882412235ba21f9a5ecc54f75c9f80c7450e30a"
+    },
+    {
+      "bytes": 5309,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_bridge.c",
+      "sha256": "198c839ce49a906599dab483510a75f4f9fcc0a8a1a17e276d3b9a092183eab3"
+    },
+    {
+      "bytes": 9618,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_oracle.py",
+      "sha256": "aae74d8b90b1de70abc100a0bacfad63166aaca87b475eeb39286b75f6d17d84"
+    },
+    {
+      "bytes": 10451,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_plan.json",
+      "sha256": "332be1f64448d34b61da94855ad15e9799c969ac11fa14c854723fe8ca335cbc"
+    },
+    {
+      "bytes": 59024,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_qualification.py",
+      "sha256": "123ce3bc97216998e601ae1095d458059b275cb24455854b79fbf7fe63cac81a"
+    },
+    {
+      "bytes": 11104,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/reporting_plan.json",
+      "sha256": "a4a1916e0dc42349f8e067475b314522820efc3568e052804a37bd137d0f9a92"
+    },
+    {
+      "bytes": 4626,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/build_accounting_review.json",
+      "sha256": "31a3d5cf789dc253ca7905b0164b98dca066a4d3c43658f8aca6e5a28c1ad016"
+    },
+    {
+      "bytes": 10298,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/engine_source_review.json",
+      "sha256": "228d29fb3bf3fa56f27d6b87ad78fde1e2e0e5e264b5e9df47c53c9e39dc6624"
+    },
+    {
+      "bytes": 31906,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/execution_receipt_review.json",
+      "sha256": "5536fadb285fdee26cc1a6ec318c98a9445fd9a49126304d693ea84f1c508a83"
+    },
+    {
+      "bytes": 3034,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/host_adapter_source_review.json",
+      "sha256": "710991fbf629235f7209d927ebe94ebffa2a3cded2ca6e402ae387a019fd53cf"
+    },
+    {
+      "bytes": 8391,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/integration_qualification_review.json",
+      "sha256": "a88e3207ecd9c80105bed62996b04b87ba9a166bcdfc318b1e68af1ebbeb7f70"
+    },
+    {
+      "bytes": 24502,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_engine.c",
+      "sha256": "65ec07983569d0a31ae7a1a573d0b374909badcc3a95cc81f5bce8c6fedc4088"
+    },
+    {
+      "bytes": 4463,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_engine.h",
+      "sha256": "01d8b6002d9e788b0fcc8e20ade30cbf6d11222a98bf6fedf8b08c01141bea20"
+    },
+    {
+      "bytes": 13781,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_model.c",
+      "sha256": "7b97ce9aea7596f2e6f76b7e411d53c5a7d60fa94e7abd1fefbab22f2b059dc8"
+    },
+    {
+      "bytes": 3170,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_model.h",
+      "sha256": "b98e16fe08eab172c12230b1899ace122f08085b527c976f394e9a873c703a0f"
+    },
+    {
+      "bytes": 2763,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/include/scm_model.h",
+      "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+    },
+    {
+      "bytes": 5765,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/src/scm_model.c",
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    },
+    {
+      "bytes": 15381,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/capture_preservation.py",
+      "sha256": "14f1ec0c73a816ffa0c441b6a5af465115e98080d1948d452f41a28ea30e5207"
+    },
+    {
+      "bytes": 10073,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/execute_live_anchor_integration_once.py",
+      "sha256": "61bf0e50482f510fc151914842e47d9a53346e1e9c36b28b240ccb9f1c1031fb"
+    },
+    {
+      "bytes": 8473,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/package_live_anchor_trace.py",
+      "sha256": "caf05f388206d340e180504b73b632df0f0cc7c114d69e750d6d3e3bd50de097"
+    },
+    {
+      "bytes": 13555,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/recover_live_anchor_trace_package.py",
+      "sha256": "55b822b944b4a7b44385a265025a05b3a66ce5f5854b28d1f1ec55363e2743b3"
+    },
+    {
+      "bytes": 39006,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/report_live_anchor_integration.py",
+      "sha256": "a2a043a548caa7173aab24fdf6af1409124409e67f7dca5f9d8033548a97ed8e"
+    },
+    {
+      "bytes": 55925,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_compact_nonlinear_history.py",
+      "sha256": "b4a128b2c3547795fadc9e60406365c3784d0ba733367bfa1372fdbfbe3e7498"
+    },
+    {
+      "bytes": 22451,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_live_anchor_exact_audits.py",
+      "sha256": "90ea16b12465f2bd68a6f36e7d611ef9289796c3696da0a940a5e209a4c198c8"
+    },
+    {
+      "bytes": 32636,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_live_anchor_integration.py",
+      "sha256": "e9dccc8fec9720e39a4c82551637adc9f5dbacf8cee4743a6d49b0f34e889d6f"
+    }
+  ],
+  "checks": [
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/execution_receipt_review.json",
+      "passed": true
+    },
+    {
+      "name": "original failed review preserved and reason explicit",
+      "passed": true
+    },
+    {
+      "name": "identity /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "passed": true
+    },
+    {
+      "name": "identity /usr/bin/x86_64-linux-gnu-gcc-13",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-conditional-evidence/experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/compact_history.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/supervisor.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/adc12.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/adc12.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/history_translation.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/history_translation.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/live_layout.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/support_step.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_bootstrap_001/support_step.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/commit.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/objects/b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c.bin",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/raw_probe.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/reservation.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/stream_closed.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/result.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/build001/host_probe",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/build001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/build_acceptance001.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/executable_receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/execution_process/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_audit_plan.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_exact_audit.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_input.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_input.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_probe.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/host_run_plan.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/build001/host_exact_audit",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/point_252000.txt",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/point_294000.txt",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/point_504000.txt",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001/result.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/public_contract.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_attempt001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_bridge.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_oracle.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_plan.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/qualification/independent_qualification.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/reporting_plan.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/build_accounting_review.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/engine_source_review.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/host_adapter_source_review.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/integration_qualification_review.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_engine.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_engine.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_model.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/rolling_model.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/include/scm_model.h",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/src/scm_model.c",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/capture_preservation.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/execute_live_anchor_integration_once.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/report_live_anchor_integration.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/run_compact_nonlinear_history.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/run_live_anchor_exact_audits.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/run_live_anchor_integration.py",
+      "passed": true
+    },
+    {
+      "name": "fresh completed primary closure gate",
+      "passed": true
+    },
+    {
+      "name": "primary full extent and single invocation",
+      "passed": true
+    },
+    {
+      "name": "primary forbidden calls and retry zero",
+      "passed": true
+    },
+    {
+      "name": "exact closed manifest /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001",
+      "passed": true
+    },
+    {
+      "name": "closed byte count /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/postclosure_audit001",
+      "passed": true
+    },
+    {
+      "name": "audit success count/resource cap",
+      "passed": true
+    },
+    {
+      "name": "audit forbidden calls and retry zero",
+      "passed": true
+    },
+    {
+      "name": "bound exact reference payload 252000",
+      "passed": true
+    },
+    {
+      "name": "bound exact reference payload 294000",
+      "passed": true
+    },
+    {
+      "name": "bound exact reference payload 504000",
+      "passed": true
+    },
+    {
+      "name": "build capture unchanged",
+      "passed": true
+    },
+    {
+      "name": "original package remains failed in exactly the observed role",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_recovery001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "exact closed manifest /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_recovery001",
+      "passed": true
+    },
+    {
+      "name": "closed byte count /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_recovery001",
+      "passed": true
+    },
+    {
+      "name": "recovery successful and scope unchanged",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/recover_live_anchor_trace_package.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/run_live_anchor_integration.py",
+      "passed": true
+    },
+    {
+      "name": "repeated identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/run_live_anchor_integration.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/tools/package_live_anchor_trace.py",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "repeated identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/receipt.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/execution_receipt_review.json",
+      "passed": true
+    },
+    {
+      "name": "repeated identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/execution_receipt_review.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/commit.json",
+      "passed": true
+    },
+    {
+      "name": "repeated identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/commit.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/raw_probe.json",
+      "passed": true
+    },
+    {
+      "name": "repeated identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/raw_probe.json",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/objects/b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c.bin",
+      "passed": true
+    },
+    {
+      "name": "repeated identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/attempt001/producer/objects/b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c.bin",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/trace_original.jsonl.gz",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/trace_independent_copy.jsonl.gz",
+      "passed": true
+    },
+    {
+      "name": "recovery raw and captured commit identities match",
+      "passed": true
+    },
+    {
+      "name": "recovery resources under finite limits",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_selection.json",
+      "passed": true
+    },
+    {
+      "name": "selected publication keeps failed original status",
+      "passed": true
+    },
+    {
+      "name": "selected original and recovered independent paths",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/trace_original.jsonl.gz",
+      "passed": true
+    },
+    {
+      "name": "repeated identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication001/trace_original.jsonl.gz",
+      "passed": true
+    },
+    {
+      "name": "selected role raw/gzip identity original",
+      "passed": true
+    },
+    {
+      "name": "identity /workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_recovery001/trace_independent_copy.jsonl.gz",
+      "passed": true
+    },
+    {
+      "name": "selected role raw/gzip identity independent_object",
+      "passed": true
+    },
+    {
+      "name": "all collected identities unchanged at review closure",
+      "passed": true
+    }
+  ],
+  "checks_passed": 106,
+  "errors": [],
+  "facts": {
+    "postclosure_audit": {
+      "all_three_available": true,
+      "closed_bytes": 178484,
+      "counts": {
+        "audit_passes_completed": 3,
+        "audit_passes_reserved": 3,
+        "builds_completed": 1,
+        "builds_reserved": 1,
+        "candidate_mutations": 0,
+        "child_activity_complete": true,
+        "children_launched_reported": 4,
+        "children_reaped_reported": 4,
+        "children_reserved": 4,
+        "dispatcher_invocations": 1,
+        "model_counts_complete": true,
+        "model_init_calls_reported": 3,
+        "model_predict_calls_reported": 1050000,
+        "model_steps_reported": 1050000,
+        "model_steps_reserved_upper_bound": 1050000,
+        "optimizer_calls": 0,
+        "prior_calls": 0,
+        "retries": 0,
+        "truth_reads": 0
+      },
+      "resources_before_final_receipt": {
+        "CPU_self_s": 1.010994,
+        "CPU_total_s": 2.176522,
+        "CPU_waited_children_s": 1.1655280000000001,
+        "scope": "Dispatcher and waited compile/reference children through pre-final-receipt snapshot; exact wait4 retained per child.",
+        "supervisor_peak_RSS_bytes": 82616320,
+        "wall_s": 2.1877758749978966
+      }
+    },
+    "preserved_original_failed_review": {
+      "bytes": 31906,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/review/execution_receipt_review.json",
+      "sha256": "5536fadb285fdee26cc1a6ec318c98a9445fd9a49126304d693ea84f1c508a83"
+    },
+    "primary": {
+      "block_rows": 31500,
+      "closed_bytes": 67062560,
+      "counts": {
+        "canonical_invocations": 1,
+        "child_launch_count_complete": true,
+        "historical_candidate_reads": 0,
+        "model_steps_reported": 2016000,
+        "model_steps_reserved_upper_bound": 6048000,
+        "prior_evaluations_reported": 94501,
+        "producer_children_launched": 1,
+        "producer_children_reaped": 1,
+        "producer_children_reserved": 1,
+        "proposal_rounds_reported": 31500,
+        "qr_rows_reported": 504000,
+        "query_evaluations_reported": 126001,
+        "retries": 0,
+        "truth_reads": 0,
+        "worker_counts_complete": true
+      },
+      "snapshots": 31501,
+      "source_id": "7eab36193d584aa27ac6730d3fff9677194676c1bc99e3b717197013c14c8ea9",
+      "source_revision": "6e60b8f98a2f122b61fc8932c3762a7592999de3",
+      "terminal_work_counts": {
+        "accepted_steps": 31500,
+        "model_steps": 2016000,
+        "prior_evaluations": 94501,
+        "proposal_rounds": 31500,
+        "qr_rows": 504000,
+        "query_evaluations": 126001
+      },
+      "wait4": {
+        "CPU_scope": "Exact wait4 of canonical supervisor including its waited child and final inner closure",
+        "CPU_system_s": 1.055398,
+        "CPU_total_s": 12.720086,
+        "CPU_user_s": 11.664688,
+        "RSS_method": "Exact wait4 high-water for this PID and waited descendants; not summed concurrent memory",
+        "bounds": {
+          "AS_bytes": 1073741824,
+          "CPU_s": 600.0,
+          "RSS_bytes": 268435456,
+          "capture_bytes": 67108864,
+          "wall_s": 900.0
+        },
+        "capture_closed_before_dependent_read": true,
+        "capture_commit_identity": {
+          "bytes": 846,
+          "sha256": "7cf8b20da2ec94d650c2f0f5690fd1b32cc44353b2bbf7fabf5075a6d5a4c50d"
+        },
+        "capture_errors": [],
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+          "-B",
+          "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_live_anchor_integration.py",
+          "--root",
+          "/workspace/scratch/d8e043c88fda/mumble-repo",
+          "--evidence-root",
+          "/workspace/scratch/d8e043c88fda/mumble-conditional-evidence",
+          "--source-revision",
+          "6e60b8f98a2f122b61fc8932c3762a7592999de3",
+          "--executable-receipt",
+          "experiments/live_anchor_integration_001/executable_receipt.json"
+        ],
+        "exit_code": 0,
+        "output_truncated": false,
+        "peak_RSS_bytes": 84135936,
+        "pid": 5,
+        "resource_violations": [],
+        "stdout_stderr_bytes_observed": {
+          "stderr": 0,
+          "stdout": 875
+        },
+        "stdout_stderr_bytes_written": {
+          "stderr": 0,
+          "stdout": 875
+        },
+        "wall_s_through_wait4": 12.49638785100251
+      },
+      "wall_s_before_outer_receipt": 13.037296042995877,
+      "whole_CPU_s_before_outer_receipt": 13.329468
+    },
+    "publication": {
+      "cause": "unattributed",
+      "descriptor_scan_incomplete": true,
+      "no_matching_open_writers_observed": true,
+      "original_integrity_status": "failed_postclosure",
+      "recovery_receipt": {
+        "bytes": 6492,
+        "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_recovery001/receipt.json",
+        "sha256": "9962390a90db6c014b9cd7b5f802fa15abe7792ba54dd692b832f8786452c8c6"
+      },
+      "selected_roles": [
+        {
+          "gzip_identity": {
+            "bytes": 8568513,
+            "sha256": "1916a1a42aa2027000a75bcb445f1959861e58c21dc991988b2f5bf57c2c3a1c"
+          },
+          "gzip_path": "experiments/live_anchor_integration_001/publication001/trace_original.jsonl.gz",
+          "raw_identity": {
+            "bytes": 33494823,
+            "sha256": "b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c"
+          },
+          "role": "original"
+        },
+        {
+          "gzip_identity": {
+            "bytes": 8568513,
+            "sha256": "1916a1a42aa2027000a75bcb445f1959861e58c21dc991988b2f5bf57c2c3a1c"
+          },
+          "gzip_path": "experiments/live_anchor_integration_001/publication_recovery001/trace_independent_copy.jsonl.gz",
+          "raw_identity": {
+            "bytes": 33494823,
+            "sha256": "b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c"
+          },
+          "role": "independent_object",
+          "source": "One recompression of the still-verified independent raw capture; not a relabelled original gzip."
+        }
+      ],
+      "selection": {
+        "bytes": 2724,
+        "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/live_anchor_integration_001/publication_selection.json",
+        "sha256": "ac19d489d790bfaf8df19919f65715d51fa5ddc96b6c4a12b7b26efbd86cdc06"
+      }
+    }
+  },
+  "limits": [
+    "No causal attribution for gzip truncation: exact prefix and writer snapshots are observations only, with inaccessible/disappearing process descriptors.",
+    "Closed original raw roles and primary/reference receipts remain unchanged.",
+    "Inverse model or interval coverage is not inferred from fixed-point reference diagnostics.",
+    "Exact wait4 is per process with waited descendants; bookkeeping snapshots precede final receipts; no target MCU memory/timing claim."
+  ],
+  "review_activity": {
+    "model_calls": 0,
+    "new_scientific_executions": 0,
+    "observation_access": "SHA256 revalidation only from prior bound identity; no record decode",
+    "optimizer_calls": 0,
+    "prior_calls": 0,
+    "trace_value_decodes": 0,
+    "truth_reads": 0
+  },
+  "reviewer": "verify_receipts",
+  "schema": "mumble_live_anchor_execution_receipt_review_v2",
+  "scope": "Primary and fixed reference execution receipts plus explicitly selected publication artifacts after authorized byte-only recovery. Original damaged package and failed v1 review are not relabelled successful.",
+  "status": "passed",
+  "unique_bound_files": 69
+}

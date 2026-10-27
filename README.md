@@ -6,26 +6,47 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
-**The causal rolling engine is integrated and its finite qualification passes.**
-Starting from the public mean, the C candidate owns one compact history bank,
-sixteen retained ADC records and eight incoming records. It accepts twelve-bit
-V/I/T codes with actual duration ticks; playback and saved traces belong to the host.
-The integrated suite passed **16 cases and 4,757 assertions**, including independent
-full-joint derivatives, prior/record ownership, supported trial preservation and
-an actual merge-fault latch. Its context is **8,680 bytes** and the compiled host
-project call-path maximum is **760 bytes**. With the declared stack and runtime
-reservations the planning total remains **10,216 bytes**; target resources are
-still unmeasured.
+**The rolling engine is integrated and has completed one four-hour causal run.**
+Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
+once, retaining sixteen working records, eight incoming records and one compact
+history bank. Playback, saved history, truth scoring and exact audits stayed
+outside the estimator. All 16 original quantities and five current states were
+saved at 31,501 points.
 
-One frozen four-hour public-start probe is next, after source publication. It will
-save all sixteen original-coordinate traces and five current-state traces.
-Predetermined exact audits and truth scoring are external, after candidate closure.
-The experiment does not yet establish convergence, calibrated intervals, historical
-fidelity or M3 readiness. See the
-[integration design](experiments/live_anchor_integration_001/DESIGN.md),
-[qualification](experiments/live_anchor_integration_001/qualification/independent_attempt001/receipt.json)
-and [frozen run plan](experiments/live_anchor_integration_001/host_run_plan.json).
-The work branch is `implementation/live-anchor-integration-001`.
+Final capacity is **64.659363 mAh**, **−0.0628083%** from the synthetic reference;
+current SOC is **42.3222974%**, **−0.00941675 percentage points** from reference.
+The preferred ±0.5% capacity target holds at every remaining saved point from
+**33.0057 minutes**; the preferred ±0.5-point SOC target does so from
+**17.76 minutes**. Capacity initially worsens. Several nuisance parameters retain substantial
+error: τ₁, R₀, τ₂ and R₂ remain biased, and all-parameter convergence has not
+been established. Every block stops at its
+one-round work limit, without a stationarity certificate.
+
+The integrated qualification passed **16 cases and 4,757 assertions**. The
+candidate context is **8,680 bytes**, the compiled host project call path is
+**760 bytes**, and the full planning ledger is **10,216 / 10,240 bytes**.
+The 24-byte margin is not measured Cortex-M23 headroom. Joint historical shape,
+calibrated SOC/capacity intervals, varied-use robustness and complete target
+resources remain open; the candidate is **not promoted to M3**.
+
+See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
+[all-16 traces](experiments/live_anchor_integration_001/reporting001/all16_parameters.png),
+[full saved trajectory and restoration](experiments/live_anchor_integration_001/publication_transport001/ARTIFACTS.md),
+[result review](experiments/live_anchor_integration_001/review/result_review.json),
+[decision](experiments/live_anchor_integration_001/decision.json) and
+[editable three-slide update](https://chatgpt.com/space/page_e30b3cf9d27c8191a4ef730313214592).
+The frozen source was published before inference. The original reporting-format
+failure and subsequent compressed-export integrity incidents are preserved,
+with separate saved-data/byte-only continuations and no inference retry.
+The current work branch is `implementation/live-anchor-integration-001`.
+Vector figures and raw trace roles are distributed as exact compressed copies;
+[restoration instructions](experiments/live_anchor_integration_001/publication_transport001/ARTIFACTS.md)
+verify identities and never overwrite a differing existing file.
+
+The next useful design is one fixed-prefix, joint local likelihood-shape
+comparison around an internally learned anchor, before interval construction.
+Absolute likelihood offsets at isolated points do not establish curvature or
+coverage error. See the [current handoff](handoff/CONTINUE.json).
 
 ### Previous primitive checkpoint
 
@@ -42,15 +63,15 @@ The saved 8 MB archive and file playback are permitted host tools; neither is an
 estimator dependency. Physical calibration is explicit, and T is preserved
 without claiming temperature compensation.
 
-**The rolling engine itself still needs integration.** Current-block derivatives,
+**At that checkpoint, the rolling engine still needed integration.** Current-block derivatives,
 approximate boundary transport, evidence/prior ownership transactions and actual
-call chains are next. Historical fidelity, calibrated SOC/capacity intervals and
-Cortex-M23 SRAM/timing remain unqualified. See the
+call chains were then the next tasks. Historical fidelity, calibrated SOC/capacity
+intervals and Cortex-M23 SRAM/timing were unqualified at that checkpoint. See the
 [live-anchor report](experiments/live_anchor_bootstrap_001/REPORT.md),
 [design](experiments/live_anchor_bootstrap_001/DESIGN.md),
 [decision](experiments/live_anchor_bootstrap_001/decision.json) and
-[handoff](handoff/CONTINUE.json). The current branch is
-`implementation/live-anchor-bootstrap-001`.
+[archived handoff](handoff/archive/CONTINUE_live_anchor_bootstrap_001.json).
+That checkpoint is preserved on `implementation/live-anchor-bootstrap-001`.
 
 ### Previous fixed-origin comparison
 

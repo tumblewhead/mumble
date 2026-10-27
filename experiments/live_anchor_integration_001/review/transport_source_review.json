@@ -1,0 +1,48 @@
+{
+  "activity": {
+    "data_value_decodes": 0,
+    "git_mutations": 0,
+    "helper_imports": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "packaging_runs": 0,
+    "prior_evaluations": 0,
+    "recompression_decompression_runs": 0,
+    "restoration_runs": 0,
+    "truth_reads": 0
+  },
+  "bindings": {
+    "experiments/live_anchor_integration_001/publication_transport001/manifest.json": {
+      "bytes": 6769,
+      "sha256": "697464611d6a77360606b00d75aa38c1b5317b6ebceccf33fee4edcf0484e363"
+    },
+    "experiments/live_anchor_integration_001/publication_transport001/package_transport.py": {
+      "bytes": 8928,
+      "sha256": "d0a90a19bf3f1e45a6ab8ce3efea453d5887eed47dca8aff53b492c128a6d248"
+    },
+    "experiments/live_anchor_integration_001/publication_transport001/receipt.json": {
+      "bytes": 9614,
+      "sha256": "088ed7818f6d39cf95b5236e8c49cea3d835fb2dc4b507057d77a715d78f1cd3"
+    },
+    "experiments/live_anchor_integration_001/publication_transport001/restore_transport.py": {
+      "bytes": 5762,
+      "sha256": "334c859dc63aecc9cf1968166152c17354cbefb4eab4d8429c5a78dd4e7f6678"
+    },
+    "experiments/live_anchor_integration_001/review/transport_publication_review.json": {
+      "bytes": 6427,
+      "sha256": "c1faea7201707ca8286a3ad7ce4a2dbd21a79b49c800aa345fb828aa45c6079a"
+    }
+  },
+  "findings": [
+    "Packager selects exactly the three predeclared existing gzip roles and pins their prior selected identities and metadata; it performs no gzip processing, data decoding, model call or Git mutation.",
+    "Input identities are checked before and after opaque splitting. Ordered chunks are at most4000000B, content-addressed bySHA256, and duplicates are reused only after matching length/hash/file identity. Complete ordered concatenation must reproduce each original identity.",
+    "Both identical compressed trace roles retain separate role paths while sharing their verified chunk sequence. This does not collapse the downstream independent raw-capture roles.",
+    "Restorer requires a completed packaging receipt, exact bound helper and manifest, exact three-role path inventory, safe nonsymlink paths, all ordered-concatenation checks and all existing-target checks before any installation.",
+    "Matching existing gzip files are preserved; differing files cause failure. Absent outputs are written to individually fsynced temporary files and installed with link(), which cannot overwrite a concurrent existing target. Installed identity is checked and temporary files are removed.",
+    "The subsequent reviewed raw-asset restorer remains responsible for restoring two distinct raw-capture inodes and their original byte identities; canonical capture validation remains required before scientific use."
+  ],
+  "material_blockers": [],
+  "schema": "mumble_live_anchor_transport_source_review_v1",
+  "scope": "Narrow read-only source review of opaque compressed-byte splitting and restoration. No helper or scientific execution. Saved-byte packaging validation is separately attributed to transport_publication_review.json.",
+  "status": "passed"
+}

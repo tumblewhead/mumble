@@ -2,6 +2,34 @@
 
 ## Decision
 
+**The rolling engine is integrated; its first public-start point probe is complete.**
+One four-hour, 504,000-record chronological run reached capacity error
+−0.0628083% and current SOC error −0.00941675 percentage points. All 16 fitted
+quantities and five current states are saved, including biased nuisance results.
+The preferred capacity and SOC targets hold at every remaining saved point from
+33.0057 and 17.76 minutes, respectively. Every update exhausted its one-round
+budget, so this is finite point-accuracy evidence without a convergence certificate.
+
+The candidate owns 8,680 bytes, sixteen working records, eight incoming records
+and a compact history bank; it has no archive or truth dependency. A finite suite
+passed 16 cases and 4,757 assertions. The compiled host project stack path is
+760 bytes and the complete planning ledger remains 10,216 / 10,240 bytes, with
+actual Cortex-M23 runtime/IRQ/caller memory and timing unmeasured.
+
+**M2 remains open and M3 is not promoted.** The shortest next design is a fixed-prefix
+joint local likelihood-shape comparison around the internally learned anchor.
+Compare centered likelihood differences under identical decoded input, original
+prior/support and evidence ownership before constructing SOC/capacity intervals.
+Accurate point estimates and isolated absolute likelihood offsets cannot validate
+joint uncertainty. Read the
+[completed report](../experiments/live_anchor_integration_001/REPORT.md),
+[decision](../experiments/live_anchor_integration_001/decision.json),
+[review](../experiments/live_anchor_integration_001/review/result_review.json) and
+[current handoff](../handoff/CONTINUE.json). Current branch:
+`implementation/live-anchor-integration-001`.
+
+### Previous primitive checkpoint
+
 **The bounded causal-anchor design is selected and its critical C primitives pass.**
 ADC12 transport, a support-aware joint proposal and in-place polynomial
 translation passed 30 finite cases and 40,083 assertions. The selected design
@@ -11,15 +39,16 @@ calibration. The 24 B margin is not a
 measured target allowance. File playback and saved history are permitted study
 tools; the estimator owns only delivered samples and bounded state.
 
-The next action is to integrate the rolling engine. Block derivatives,
+At that checkpoint, the next action was to integrate the rolling engine. Block derivatives,
 approximate boundary transport, accepted-objective
-checks, once-only evidence/prior transactions and actual call chains remain to
-implement and qualify. No new battery-data run or interval/M3 promotion occurred.
+checks, once-only evidence/prior transactions and actual call chains remained to
+implement and qualify. That primitive checkpoint included no new battery-data
+run or interval/M3 promotion.
 Read the [report](../experiments/live_anchor_bootstrap_001/REPORT.md),
 [design](../experiments/live_anchor_bootstrap_001/DESIGN.md),
 [decision](../experiments/live_anchor_bootstrap_001/decision.json) and
-[current handoff](../handoff/CONTINUE.json). Use branch
-`implementation/live-anchor-bootstrap-001`.
+[archived handoff](../handoff/archive/CONTINUE_live_anchor_bootstrap_001.json).
+That checkpoint is preserved on `implementation/live-anchor-bootstrap-001`.
 
 ### Previous compact-history result
 
