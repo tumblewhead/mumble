@@ -1,0 +1,47 @@
+{
+  "schema": "mumble_parity_census_plan_v1",
+  "base_revision": "428b8ce986979ef4e5bf2f6ac314dc57c13932cf",
+  "branch": "diagnostics/parity-census-001",
+  "authorization": "User requests a more flexible parity pass that records all issues without aborting, to assess their extent and severity.",
+  "relationship_to_original": "Separate diagnostic adaptation. Preserve the closed exact-parity failure and its original gate. This census does not retroactively pass that gate.",
+  "prefix": 252000,
+  "snapshots": 15751,
+  "input_contract": "../fixed_prefix_shape_001/plan.json",
+  "expected_records": "../fixed_prefix_shape_001/attempt001/expected.bin",
+  "behavior": {
+    "reconstruction": "Original public initialization, chronological ADC input, saved accepted x at each block, re_commit only.",
+    "continue": "Record every finite scalar mismatch and output flag mismatch; continue through the complete registered two-hour prefix.",
+    "stop": "Missing or changed inputs, invalid/nonfinite expected data, source/order failure, invalid live bank, failed model/commit/query, output failure or resource limit.",
+    "truth_or_optimizer_calls": 0,
+    "saved_fields": "All 27 binary64 fields and index/flags/phase/availability at every snapshot, including matching values.",
+    "checkpoint": "Pointer-free host-ABI diagnostic bank with distinct FPSHC01 magic; not accepted by the old strict checkpoint loader.",
+    "no_automatic_shape_comparison": true
+  },
+  "analysis": {
+    "mismatch_inventory": "Lossless gzip CSV with each mismatched sample, elapsed time, field, actual/expected decimal and hex values, signed/absolute/relative difference and ULP distance.",
+    "per_field": "Counts, first/last occurrence, largest absolute and relative errors, largest ULP distance, ULP histogram and consecutive mismatch run length.",
+    "ULP_bins": [1, 4, 16, 256, 4096],
+    "signed_zero": "Bitwise sign difference recorded separately; numerical difference and ULP distance zero.",
+    "relative_error": "abs(actual-expected)/max(abs(actual),abs(expected)); zero when both are zero.",
+    "severity_context": "Costs compared descriptively with the existing 0.1-NLL shape budget; SOC differences converted to percentage points and compared with the existing 0.5-pp target; RC voltages compared with the existing 1-mV likelihood sigma. These ratios are context, not new acceptance tolerances.",
+    "time_windows": "Fixed 900-second nominal windows over the two-hour prefix; retain actual saved elapsed times in all rows.",
+    "limits": "Saved point/endpoint parity does not establish equality of unsaved bank coefficients, joint curvature, uncertainty coverage or library attribution. Saved accepted x is installed by construction, not independently re-estimated."
+  },
+  "finite_caps": {
+    "canonical_census_invocations": 1,
+    "records": 252000,
+    "model_steps": 504000,
+    "qr_rows": 252000,
+    "queries": 31501,
+    "prior_evaluations": 15751,
+    "optimizer_calls": 0,
+    "reference_passes": 0,
+    "CPU_s": 120,
+    "wall_s": 180,
+    "host_RSS_bytes": 268435456,
+    "host_AS_bytes": 1073741824,
+    "closed_output_bytes": 67108864
+  },
+  "gates": ["fabricated continuation/inventory and structural-failure tests", "qualified source published and verified", "original input and expected-record hashes", "exclusive durable census reservation"],
+  "finish_line": "Complete mismatch inventory with magnitude and temporal summaries, or explicit partial inventory if a structural failure prevents continuation. No threshold tuning or inference retry."
+}
