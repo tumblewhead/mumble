@@ -2,6 +2,21 @@
 
 ## Decision
 
+The user has authorized desktop discovery with retained observations and memory
+above 10 KiB, followed by reduction toward the deployment target. The new
+[desktop baseline](../experiments/desktop_history_001/README.md) passes the frozen
+545-point fidelity gate with zero computed discrepancy and completes five
+public-start prefix fits. The two-hour endpoint errors are +0.006627% capacity
+and −0.002784 percentage points SOC. Three checkpoints pass the declared gradient
+tolerance; two line-search stops remain explicit. History storage is 6.048 MB;
+this is not bounded-memory firmware or a varied-trajectory stability result.
+
+The next priority is to measure history-refresh/compression tradeoffs against
+this preserved baseline. Desktop diagnostic storage is no longer constrained by
+the deployment ceiling. Original prior/support, evidence ownership, chronology,
+and the 0.1 NLL fidelity criterion remain unchanged. The results below preserve
+the compact engine's earlier evidence and unresolved deployment discrepancy.
+
 **The rolling engine is integrated; its first public-start point probe is complete.**
 One four-hour, 504,000-record chronological run reached capacity error
 −0.0628083% and current SOC error −0.00941675 percentage points. All 16 fitted
@@ -33,7 +48,7 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`implementation/structured-history-repair-001`.
+`diagnostics/desktop-history-001`.
 
 The requested repair is implemented and qualified, but the selected candidate
 fails its controlled fidelity gate. Structured features alone give **193.291124
@@ -651,31 +666,30 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Continue from `implementation/structured-history-repair-001` and the
-[closed decision](../experiments/structured_history_repair_001/decision.json).
-The selected implementation and two fixed controlled arms are complete. Preserve
-the source, qualifications, all 545-node comparisons and failed gate. Do not start
-the causal probe or repeat those closed arms by default.
+Continue from `diagnostics/desktop-history-001` and the
+[desktop decision](../experiments/desktop_history_001/decision.json). Preserve
+its qualified source, closed fidelity/learning workers and postclosure scoring.
+Do not rerun completed studies by default.
 
-Use one bounded structured-row attribution at fixed early-learning checkpoints
-to distinguish remaining forced-response f/hb transport from nonlinear rate/OCV
-residual truncation. The full candidate's slope-error norm remains about 129.46;
-its final forced-response jets match the control bitwise. The measured attenuation
-improvement is insufficient, and these results do not uniquely apportion the
-remaining error. Reuse the saved comparison and reference evidence.
+Design one bounded history-refresh/compression comparison against the saved
+desktop baseline, especially during early estimate motion. Measure likelihood
+shape, battery outputs, retained bytes and replay work together. Extra desktop
+storage is explicitly authorized; establish which information preserves behavior
+before forcing a representation into the 10 KiB deployment boundary.
 
-Select another representation or boundary change only after that diagnosis.
-Keep the original prior/support and once-only evidence ownership, a declared
-complete memory/stack budget and the existing 0.1 NLL finite-point gate. Do not
-install the retrospective oracle, fit corrections to its slopes, shrink the
-stencil after observing results, raise tolerance or silently forget old evidence.
-A newly qualified candidate must pass the full controlled gate before a new
-causal public-start probe. Useful uncertainty, varied cell/load/noise/duration
-trajectories and actual Cortex-M23 qualification remain subsequent work.
+The compact structured candidate still fails its 0.1 NLL gate. Desktop success
+does not promote that candidate or authorize its previously gated causal probe.
+Future desktop candidates can retain already-received observations, but cannot
+use future samples, saved future estimates or truth for fitting. Preserve the
+original prior/support and once-only evidence ownership. Keep solver convergence,
+point accuracy, uncertainty coverage and target readiness as separate claims.
+
+Address useful uncertainty and cell/load/noise/duration stability after the
+baseline is sufficiently stable; actual Cortex-M23 qualification remains later.
 
 ### What the current memory figures mean
 
-The latest selected schema owns 8,088 B core, 408 B input store, 56 B calibration and
+The preserved compact schema owns 8,088 B core, 408 B input store, 56 B calibration and
 128 B codec reservation: 8,680 B objects. Add 768 B project stack and 768 B
 runtime/IRQ/caller reservations for **10,216 B planned**. The query phase fits a
 224 B first-order state and 32 B decoded input within its shared 1,600 B workspace.

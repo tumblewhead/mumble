@@ -1,0 +1,197 @@
+{
+  "causal": {
+    "checkpoints": [
+      {
+        "Q_Ah": 0.06691317388708234,
+        "SOC": 0.7526855349022903,
+        "prefix": 4096,
+        "status": "no_accepted_step",
+        "total": 2094.0731706585034
+      },
+      {
+        "Q_Ah": 0.06857001316395984,
+        "SOC": 0.7243491904983912,
+        "prefix": 16384,
+        "status": "projected_gradient_tolerance",
+        "total": 8603.278878878902
+      },
+      {
+        "Q_Ah": 0.06470535108598237,
+        "SOC": 0.573059337561084,
+        "prefix": 65536,
+        "status": "projected_gradient_tolerance",
+        "total": 35325.08671745034
+      },
+      {
+        "Q_Ah": 0.06470422656155354,
+        "SOC": 0.5623953044907846,
+        "prefix": 126000,
+        "status": "no_accepted_step",
+        "total": 68103.39014135725
+      },
+      {
+        "Q_Ah": 0.06470428750278573,
+        "SOC": 0.5160250032132638,
+        "prefix": 252000,
+        "status": "projected_gradient_tolerance",
+        "total": 136556.28931882957
+      }
+    ],
+    "derivative_evaluations": 184,
+    "evaluations": 1163,
+    "firmware_ready": false,
+    "initialization": "public mean",
+    "likelihood_ownership": "All received observations once per objective; original prior once; no posterior carried as additional evidence",
+    "model_steps_upper_bound": 58059904,
+    "observation_bytes": 6048000,
+    "optimizer_calls": 5,
+    "received": 252000,
+    "reference_reads": 0,
+    "saved_anchor_reads": 0,
+    "source_revision": "d1d94d821cba2ea2fb7f3e90cdd60d5ddfbdedc2",
+    "status": "completed",
+    "truth_reads": 0
+  },
+  "fidelity": {
+    "available_nodes": 545,
+    "decision": "keep_on_tested_points_only",
+    "derivative_evaluations": 0,
+    "evaluations": 545,
+    "firmware_ready": false,
+    "interval_NLL": [
+      0.0,
+      0.00027667021339420017
+    ],
+    "max_endpoint_difference": 0.0,
+    "model_steps_upper_bound": 137340000,
+    "optimizer_calls": 0,
+    "oscillation_NLL": 0.0,
+    "source_revision": "d1d94d821cba2ea2fb7f3e90cdd60d5ddfbdedc2",
+    "status": "completed"
+  },
+  "figures": {
+    "comparison.png": {
+      "bytes": 89748,
+      "sha256": "97e8eaebfa9200819083d45a9bae92e4e7e6c5af8d823352d277173ef13eafaf"
+    },
+    "comparison.svg": {
+      "bytes": 58074,
+      "sha256": "cf90c37e67e360ff368dfdae5ac67de2d43174998df80d9007f6223755d2e5e0"
+    }
+  },
+  "final_point_errors": {
+    "Q_percent": 0.00662674310005773,
+    "SOC_percentage_points": -0.0027841417632457066,
+    "physical_parameters": [
+      0.07995073425126505,
+      0.6575966130503299,
+      7.50180242952308,
+      329.9831508143218,
+      501.31360182655396,
+      0.06470428750278573,
+      0.16781750473650256,
+      0.21735617758343956,
+      0.26485632180851215,
+      0.32984526481585175,
+      0.029951851936242,
+      0.7799546686421657,
+      -0.0026565520551010907,
+      0.00444445467138415,
+      0.005922028883650257,
+      0.348647502120261
+    ],
+    "static_reference": [
+      0.075,
+      0.65,
+      7.5,
+      330.0,
+      500.0,
+      0.0647,
+      0.16,
+      0.22,
+      0.27,
+      0.33,
+      0.03,
+      0.78,
+      -0.002,
+      0.004,
+      0.006,
+      0.35
+    ]
+  },
+  "independent_reviewer": false,
+  "limits": [
+    "Same recurrence in frozen reference; independent physical algebra checked on fabricated cases only.",
+    "One cell, one two-hour source prefix, five sparse learning checkpoints; not a robustness campaign.",
+    "Two no-decreasing-step stops remain explicit; three checkpoints meet projected-gradient tolerance. No global or all-parameter convergence claim.",
+    "Different optimizer and update cadence from compact learner: point-accuracy improvement cannot be uniquely attributed to history storage.",
+    "No calibrated uncertainty; solver GN/majorizer is not validated posterior precision.",
+    "Memory grows with duration and replay cost grows with prefix. No firmware or M3 promotion."
+  ],
+  "next": "Use this unchanged desktop baseline to measure causal history-refresh/compression accuracy and resource tradeoffs, then return to the10KiB deployment goal.",
+  "qualification_checks": 78,
+  "report_script": {
+    "bytes": 5982,
+    "sha256": "0d83f6a2e8eb1356a1e5798851968555d61092bdf1ff4ea4bfc265edda7ec3d3"
+  },
+  "resources": {
+    "causal_CPU_s": 8.03743,
+    "causal_wall_s": 8.099549582984764,
+    "decoded_history_bytes": 6048000,
+    "fidelity_CPU_s": 18.013602,
+    "history_bytes_per_sample": 24,
+    "supervisor_inclusive_CPU_s": 26.205612,
+    "worker_peak_RSS_bytes": 54108160
+  },
+  "same_prefix_original_rolling_errors": {
+    "Q_percent": -0.17364889206241685,
+    "SOC_percentage_points": -0.12518533140490895
+  },
+  "schema": "mumble_desktop_history_review_v1",
+  "scoring_after_execution_closure": true,
+  "scoring_source": {
+    "bytes": 63113,
+    "path": "experiments/live_anchor_integration_001/reporting_continuation001/summary.json",
+    "sha256": "ea289626a92f2239414a65a24c3aaa6592a6ea7ebe33060e740e90a22326e9aa"
+  },
+  "source_revision": "101298128923ae6123164e9265b658f553052835",
+  "status": "verified_desktop_baseline",
+  "stops": [
+    {
+      "accepted_steps": 70,
+      "iterations": 92,
+      "last_projected_gradient_inf": 0.00015944178062793357,
+      "prefix": 4096,
+      "status": "no_accepted_step"
+    },
+    {
+      "accepted_steps": 37,
+      "iterations": 38,
+      "last_projected_gradient_inf": 5.337172720298877e-05,
+      "prefix": 16384,
+      "status": "projected_gradient_tolerance"
+    },
+    {
+      "accepted_steps": 7,
+      "iterations": 8,
+      "last_projected_gradient_inf": 1.4509724231670518e-05,
+      "prefix": 65536,
+      "status": "projected_gradient_tolerance"
+    },
+    {
+      "accepted_steps": 8,
+      "iterations": 27,
+      "last_projected_gradient_inf": 0.0002611333425104889,
+      "prefix": 126000,
+      "status": "no_accepted_step"
+    },
+    {
+      "accepted_steps": 12,
+      "iterations": 14,
+      "last_projected_gradient_inf": 4.331791301687149e-05,
+      "prefix": 252000,
+      "status": "projected_gradient_tolerance"
+    }
+  ],
+  "worker_metadata_note": "Worker result.source_revision contains the plan base_revision, not executed source. This review and execution receipt carry the authoritative executed source revision; original worker outputs are preserved."
+}

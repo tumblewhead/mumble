@@ -6,6 +6,21 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**A desktop retained-history baseline is now working on the two-hour diagnostic.**
+With the user's authorization to separate desktop memory from the 10 KiB target,
+it retains received observations and recomputes their likelihood at each query.
+All 545 frozen costs and endpoints match the saved recurrence exactly. A separate
+public-start learner completed five checkpoints; final capacity error is
+**+0.006627%** and SOC error **−0.002784 percentage points**. Three checkpoints
+met the gradient tolerance; two retain explicit line-search stops.
+
+The decoded history uses **6,048,000 bytes**, and the five fits took about
+**8.04 CPU seconds** on this host. This is a desktop baseline, not a deployable
+repair or a robustness result. The next step is measuring history-refresh and
+compression tradeoffs against it before reducing memory toward the target.
+See the [desktop report](experiments/desktop_history_001/README.md) and
+[decision](experiments/desktop_history_001/decision.json).
+
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
 once, retaining sixteen working records, eight incoming records and one compact
@@ -38,7 +53,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `implementation/structured-history-repair-001`.
+The current work branch is `diagnostics/desktop-history-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
