@@ -23,13 +23,17 @@ physical outputs, prior, elapsed time, support slacks and flags matched exactly.
 The observed differences are negligible at application scales. Their cause and
 full bank-coefficient equality remain unestablished.
 
-Use the retained diagnostic bank for the joint-shape comparison with documented
-numerical reconstruction semantics. The previous strict failure stays preserved;
-no new prefix replay is needed. See the
-[census report](../experiments/parity_census_001/README.md),
-[decision](../experiments/parity_census_001/decision.json) and
+**The joint-shape comparison is complete and selects repair.** All 545 frozen
+points were available. Centered error oscillation is **252.960406 NLL**, versus
+**0.1 NLL** registered, and remains **126.231763 NLL** at half radius. The
+computed-arithmetic interval is [252.960264, 252.960548] NLL. The saved numerically
+reconstructed bank has a large local slope discrepancy; this is separate from
+tiny scalar replay drift. No new prefix reconstruction or inference occurred.
+See the [comparison report](../experiments/joint_shape_comparison_001/README.md),
+[decision](../experiments/joint_shape_comparison_001/decision.json),
+[preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`diagnostics/parity-census-001`.
+`diagnostics/joint-shape-comparison-001`.
 
 After development stabilizes, the user requests configurable cell/load/noise/
 duration trajectories for longer-term variation. That campaign has not started.
@@ -632,23 +636,25 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Use `implementation/live-anchor-bootstrap-001` and the current
-[handoff](../handoff/CONTINUE.json). The live-anchor design and three finite
-primitive qualifications are complete. Preserve these and all older studies.
+Continue from `diagnostics/joint-shape-comparison-001` and the current
+[handoff](../handoff/CONTINUE.json). The integrated rolling engine, census and
+545-point shape comparison are complete; preserve their original evidence.
 
-Implement one rolling 16-record public-start engine. Use the quadratic-first
-quartic factor for older evidence, the current raw block for nonlinear queries
-conditional on its approximate carried boundary, and the original joint prior
-once. Use the support-aware proposal with complete represented-objective
-acceptance. Qualify derivatives, boundary transport, evidence/cursor ownership,
-queue/fault transitions and actual memory/call-chain overlap before one newly
-frozen finite causal probe. Capacity has no startup identification deadline.
+Localize the measured slope discrepancy between the rolling historical factor
+and original recurrence, separating factor approximation from carried-boundary
+error. Use the existing frozen witness for a bounded diagnosis, then select one
+causal repair that retains evidence ownership, original support and bounded
+memory. Whitened directions mix parameters; the largest coordinate-15 error
+does not by itself attribute the cause to initial hysteresis. Small terminal
+state differences do not establish historical residual fidelity.
 
-The saved archive may supply file playback and external postclosure reference
-checks. It may not initialize or steer candidate anchors. Calibration and tick
-scale must be explicit and immutable; 12-bit codes do not specify noise or
-physical accuracy. The current 25 C model preserves T without compensation.
-Calibrated intervals and measured Cortex-M23 resources remain separate gates.
+Do not rerun the four-hour inference by default, initialize from truth or the
+external historical optimum, double-count replayed observations, or shrink the
+stencil after seeing the discrepancy. Archive replay is an external diagnostic
+only. The original 0.1 NLL finite-node gate stays fixed. After a qualified repair,
+useful SOC/capacity uncertainty and the requested cell/load/noise/duration
+trajectories remain M2 work. Actual Cortex-M23 device/build, full subsystem
+SRAM, timing and lifecycle measurements remain M3 gates.
 
 ### What the current memory figures mean
 

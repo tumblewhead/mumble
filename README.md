@@ -38,7 +38,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `diagnostics/parity-census-001`.
+The current work branch is `diagnostics/joint-shape-comparison-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
@@ -54,10 +54,18 @@ application scales; its exact cause remains unestablished. See the
 [complete mismatch inventory](experiments/parity_census_001/attempt001/mismatches.csv.gz)
 and [current handoff](handoff/CONTINUE.json).
 
-The original strict-parity failure remains preserved. A diagnostic bank is now
-available for the joint likelihood-shape comparison, which has not run.
-Configurable cell/load/noise/duration trajectories are requested once development
-is stable; no longer campaign has started.
+The joint likelihood-shape comparison is now complete: **545/545 points** were
+available, with **252.960406 NLL** centered error oscillation against the registered
+**0.1 NLL** budget. At half the radius it is still **126.231763 NLL**. This exposes
+a substantive local history-shape mismatch in the numerically reconstructed bank.
+The next step is a bounded localization and causal repair of the historical
+factor/carried boundary. See the [comparison report](experiments/joint_shape_comparison_001/README.md),
+[figure](experiments/joint_shape_comparison_001/reporting001/joint_shape.png) and
+[decision](experiments/joint_shape_comparison_001/decision.json).
+
+The original strict-parity failure and complete census remain preserved. M2
+remains open and M3 is unpromoted. Configurable cell/load/noise/duration
+trajectories are requested once development is stable; no longer campaign has started.
 
 ### Previous primitive checkpoint
 
