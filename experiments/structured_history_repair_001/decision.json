@@ -1,0 +1,67 @@
+{
+  "schema": "mumble_structured_history_repair_decision_v1",
+  "status": "closed_complete_candidate_fails_fidelity_gate",
+  "implementation_complete": true,
+  "qualification_passed": true,
+  "qualification_checks": 5260,
+  "arms": {
+    "control": {
+      "decision": "repair_computed_shape_witness",
+      "available_nodes": 545,
+      "oscillation_NLL": 193.2911239641544,
+      "oscillation_computed_arithmetic_interval_NLL": [
+        193.2693900312808,
+        193.31285789702798
+      ],
+      "reduction_from_original_percent": 23.58838804105663
+    },
+    "full": {
+      "decision": "repair_computed_shape_witness",
+      "available_nodes": 545,
+      "oscillation_NLL": 185.61224225666956,
+      "oscillation_computed_arithmetic_interval_NLL": [
+        185.59060796188334,
+        185.63387655145578
+      ],
+      "reduction_from_original_percent": 26.623994215191004
+    }
+  },
+  "budget_NLL": 0.1,
+  "repair_successful": false,
+  "candidate_promoted": false,
+  "causal_probe_allowed": false,
+  "causal_probe_started": false,
+  "M2_complete": false,
+  "M3_complete": false,
+  "planning_total_bytes": 10216,
+  "target_measured": false,
+  "source_review_independent": false,
+  "decision": "Retain qualified experimental implementation and reject causal promotion. The selected structural repair improves the old witness but does not meet the original finite-point criterion.",
+  "remaining_mechanisms": [
+    "Approximate forced-response f/hb transport",
+    "Nonlinear rate/OCV truncation of previously stored residuals"
+  ],
+  "next_action": "Before another repair, use one bounded structured-row attribution at fixed early-learning checkpoints to separate forced-response boundary error from nonlinear rate/OCV residual truncation. Preserve this finite failure; no automatic rerun or causal probe.",
+  "unchanged": [
+    "Original source/evidence",
+    "Frozen545nodes and0.1NLL budget",
+    "Public16x prior/support",
+    "No archive or truth in estimator",
+    "M3 unpromoted"
+  ],
+  "evidence": {
+    "plan": "plan.json",
+    "qualification": "qualification/development003/receipt.json",
+    "execution": "attempt001/receipt.json",
+    "review": "result_review.json",
+    "full_analysis": "full_analysis.json",
+    "control_analysis": "control_analysis.json",
+    "report": "README.md"
+  },
+  "limits": [
+    "Controlled old anchor schedule, not autonomous learning",
+    "No independent reviewer",
+    "Computed-cost scope excludes feature/libm/recurrence/coefficient-construction error",
+    "No coverage, convergence or M3 promotion"
+  ]
+}

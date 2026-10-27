@@ -38,7 +38,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `diagnostics/history-shape-localization-001`.
+The current work branch is `implementation/structured-history-repair-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
@@ -61,10 +61,17 @@ a substantive local history-shape mismatch in the numerically reconstructed bank
 Localization is now complete: direct row sums reproduce the stored factor,
 and 97.74% of the slope-error projection comes from samples 4,096–65,536.
 A retrospective final-origin factor gives **0.00142448 NLL** on the same points;
-it is an external diagnostic, not a causal repair. The selected next candidate
-preserves exact amplitude dependence in 37 features and uses analytic initial-state
-attenuation. **The repair is planned, not implemented.** See the
-[diagnosis and repair plan](experiments/history_shape_localization_001/README.md)
+it is an external diagnostic, not a causal repair.
+
+**The planned structured-history candidate is now implemented and qualified,
+but its fidelity gate failed.** Exact amplitude dependence in 37 features plus
+analytic initial-state attenuation reduces error to **185.612242 NLL**—a
+**26.62% reduction**, still above 0.1 NLL. Both arms completed all 545 points;
+5,260 qualification checks passed and the planning ledger remains 10,216 bytes.
+The gated causal probe was not started. See the
+[implementation and result](experiments/structured_history_repair_001/README.md),
+[decision](experiments/structured_history_repair_001/decision.json),
+[previous diagnosis](experiments/history_shape_localization_001/README.md)
 and [original comparison report](experiments/joint_shape_comparison_001/README.md),
 [figure](experiments/joint_shape_comparison_001/reporting001/joint_shape.png) and
 [decision](experiments/joint_shape_comparison_001/decision.json).

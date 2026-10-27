@@ -33,17 +33,22 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`diagnostics/history-shape-localization-001`.
+`implementation/structured-history-repair-001`.
 
-The requested analysis-before-repair stage is complete. Direct sums of old rows
-reproduce the stored factor, while the final-origin retrospective oracle reduces
-oscillation to **0.00142448 NLL**. Early learning contributes most of the slope
-error; sparse controls show both residual truncation and boundary approximation.
-The [repair plan](../experiments/history_shape_localization_001/repair_plan.json)
-selects a 37-feature representation preserving exact amplitude dependence,
-reciprocal-capacity OCV coordinates and analytic initial-state attenuation.
-It is **not implemented or causally validated**. The oracle is not a deployment
-candidate. See the [diagnosis](../experiments/history_shape_localization_001/README.md).
+The requested repair is implemented and qualified, but the selected candidate
+fails its controlled fidelity gate. Structured features alone give **193.291124
+NLL**; the full candidate with analytic initial-state attenuation gives
+**185.612242 NLL**, versus the unchanged **0.1 NLL** budget. Both arms evaluated
+all 545 points. The full computed-arithmetic interval is
+[185.590608, 185.633877] NLL. The gated causal probe was not started.
+
+Qualification passed **5,260 checks**. Context remains **8,680 bytes**; the
+conservative compiled host project path is 712 bytes, within its 768-byte
+reservation, and the planning total remains **10,216 / 10,240 bytes**. These are
+not actual Cortex-M23 measurements. See the
+[candidate report](../experiments/structured_history_repair_001/README.md),
+[decision](../experiments/structured_history_repair_001/decision.json) and
+[preserved diagnosis](../experiments/history_shape_localization_001/README.md).
 
 After development stabilizes, the user requests configurable cell/load/noise/
 duration trajectories for longer-term variation. That campaign has not started.
@@ -646,30 +651,27 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Continue from `diagnostics/history-shape-localization-001` and
-[repair_plan.json](../experiments/history_shape_localization_001/repair_plan.json).
-The requested issue analysis and repair design are complete. Preserve the original
-inference, census, shape comparison and new localization outputs.
+Continue from `implementation/structured-history-repair-001` and the
+[closed decision](../experiments/structured_history_repair_001/decision.json).
+The selected implementation and two fixed controlled arms are complete. Preserve
+the source, qualifications, all 545-node comparisons and failed gate. Do not start
+the causal probe or repeat those closed arms by default.
 
-Implement the separate structured-history candidate. Keep exact amplitude
-products in the 37 residual features; use reciprocal capacity internally for
-OCV while retaining the original 16-coordinate prior and support. Qualify the
-new translation, derivatives, zero-amplitude cases and bank-schema rejection.
-Use analytic initial-state attenuation, with explicit charge/time ownership;
-forced-response boundary terms remain approximate.
+Use one bounded structured-row attribution at fixed early-learning checkpoints
+to distinguish remaining forced-response f/hb transport from nonlinear rate/OCV
+residual truncation. The full candidate's slope-error norm remains about 129.46;
+its final forced-response jets match the control bitwise. The measured attenuation
+improvement is insufficient, and these results do not uniquely apportion the
+remaining error. Reuse the saved comparison and reference evidence.
 
-Measure the complete context/workspace/stack before two fixed controlled
-commit-schedule arms on the saved prefix. Reuse all 545 frozen points and original
-reference results. Preserve the 0.1 NLL gate. Only after the full candidate passes,
-register one new causal two-hour public-start probe with no saved-anchor, oracle
-or truth access. If the candidate fails, retain the result and diagnose remaining
-forced-response transport or nonlinear truncation before another design.
-
-The retrospective rebuilt factor is diagnostic only. Do not install it, correct
-slopes from its reference, silently discard old evidence or rerun the unchanged
-four-hour inference. Useful uncertainty and requested cell/load/noise/duration
-trajectories follow a stable causal repair. Actual Cortex-M23 SRAM, timing and
-lifecycle measurement remain separate M3 gates.
+Select another representation or boundary change only after that diagnosis.
+Keep the original prior/support and once-only evidence ownership, a declared
+complete memory/stack budget and the existing 0.1 NLL finite-point gate. Do not
+install the retrospective oracle, fit corrections to its slopes, shrink the
+stencil after observing results, raise tolerance or silently forget old evidence.
+A newly qualified candidate must pass the full controlled gate before a new
+causal public-start probe. Useful uncertainty, varied cell/load/noise/duration
+trajectories and actual Cortex-M23 qualification remain subsequent work.
 
 ### What the current memory figures mean
 
