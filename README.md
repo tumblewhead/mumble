@@ -39,6 +39,8 @@ The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
 The current work branch is `implementation/live-anchor-integration-001`.
+The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
+was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
 [restoration instructions](experiments/live_anchor_integration_001/publication_transport001/ARTIFACTS.md)
 verify identities and never overwrite a differing existing file.
