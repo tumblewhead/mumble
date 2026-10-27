@@ -1,0 +1,106 @@
+test_01_count_and_determinism (test_shape.ShapeTests.test_01_count_and_determinism) ... ok
+test_02_coupled_whitening (test_shape.ShapeTests.test_02_coupled_whitening) ... ERROR
+test_03_constant_offset_cancels (test_shape.ShapeTests.test_03_constant_offset_cancels) ... ERROR
+test_04_recovers_complete_quadratic (test_shape.ShapeTests.test_04_recovers_complete_quadratic) ... ERROR
+test_05_cross_coupling_axes_alone_miss (test_shape.ShapeTests.test_05_cross_coupling_axes_alone_miss) ... ok
+test_06_linear_bias_is_not_curvature (test_shape.ShapeTests.test_06_linear_bias_is_not_curvature) ... ERROR
+test_07_large_allowance_is_unresolved (test_shape.ShapeTests.test_07_large_allowance_is_unresolved) ... ok
+test_08_missing_node_cannot_pass (test_shape.ShapeTests.test_08_missing_node_cannot_pass) ... ok
+test_09_resolved_partial_witness_still_repairs (test_shape.ShapeTests.test_09_resolved_partial_witness_still_repairs) ... ok
+test_10_anchor_unavailable_rejected (test_shape.ShapeTests.test_10_anchor_unavailable_rejected) ... ok
+test_11_node_identity_and_point_are_binding (test_shape.ShapeTests.test_11_node_identity_and_point_are_binding) ... ok
+test_12_nonfinite_cost_and_negative_allowance_rejected (test_shape.ShapeTests.test_12_nonfinite_cost_and_negative_allowance_rejected) ... ok
+test_13_bad_metric_is_not_repaired (test_shape.ShapeTests.test_13_bad_metric_is_not_repaired) ... ok
+test_14_support_only_global_halving (test_shape.ShapeTests.test_14_support_only_global_halving) ... ok
+test_15_boundary_anchor_has_no_symmetric_stencil (test_shape.ShapeTests.test_15_boundary_anchor_has_no_symmetric_stencil) ... ok
+test_16_horizon_and_count_binding (test_shape.ShapeTests.test_16_horizon_and_count_binding) ... ok
+test_17_derived_soc_uses_original_entering_chart (test_shape.ShapeTests.test_17_derived_soc_uses_original_entering_chart) ... ok
+test_18_capture_requires_real_hash_bound_file (test_shape.ShapeTests.test_18_capture_requires_real_hash_bound_file) ... ok
+test_19_missing_capture_and_optimizer_replay_rejected (test_shape.ShapeTests.test_19_missing_capture_and_optimizer_replay_rejected) ... ok
+test_20_output_exclusive_and_strict_json (test_shape.ShapeTests.test_20_output_exclusive_and_strict_json) ... ok
+test_21_packed_order_and_unexcited_quantities_remain_joint (test_shape.ShapeTests.test_21_packed_order_and_unexcited_quantities_remain_joint) ... ERROR
+
+======================================================================
+ERROR: test_02_coupled_whitening (test_shape.ShapeTests.test_02_coupled_whitening)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 54, in test_02_coupled_whitening
+    d, _, metric, *_ = self.fixture(True)
+                       ~~~~~~~~~~~~^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 26, in fixture
+    design = s.make_design(x, metric, sd, lo, hi, 0., 0., 0.)
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 115, in make_design
+    require(bool(np.array_equal(g, g.T)), "metric is not exactly symmetric")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 37, in require
+    raise ContractError(message)
+shape.ContractError: metric is not exactly symmetric
+
+======================================================================
+ERROR: test_03_constant_offset_cancels (test_shape.ShapeTests.test_03_constant_offset_cancels)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 60, in test_03_constant_offset_cancels
+    d, *_ = self.fixture(True)
+            ~~~~~~~~~~~~^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 26, in fixture
+    design = s.make_design(x, metric, sd, lo, hi, 0., 0., 0.)
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 115, in make_design
+    require(bool(np.array_equal(g, g.T)), "metric is not exactly symmetric")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 37, in require
+    raise ContractError(message)
+shape.ContractError: metric is not exactly symmetric
+
+======================================================================
+ERROR: test_04_recovers_complete_quadratic (test_shape.ShapeTests.test_04_recovers_complete_quadratic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 67, in test_04_recovers_complete_quadratic
+    d, *_ = self.fixture(True)
+            ~~~~~~~~~~~~^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 26, in fixture
+    design = s.make_design(x, metric, sd, lo, hi, 0., 0., 0.)
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 115, in make_design
+    require(bool(np.array_equal(g, g.T)), "metric is not exactly symmetric")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 37, in require
+    raise ContractError(message)
+shape.ContractError: metric is not exactly symmetric
+
+======================================================================
+ERROR: test_06_linear_bias_is_not_curvature (test_shape.ShapeTests.test_06_linear_bias_is_not_curvature)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 86, in test_06_linear_bias_is_not_curvature
+    d, *_ = self.fixture(True)
+            ~~~~~~~~~~~~^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 26, in fixture
+    design = s.make_design(x, metric, sd, lo, hi, 0., 0., 0.)
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 115, in make_design
+    require(bool(np.array_equal(g, g.T)), "metric is not exactly symmetric")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 37, in require
+    raise ContractError(message)
+shape.ContractError: metric is not exactly symmetric
+
+======================================================================
+ERROR: test_21_packed_order_and_unexcited_quantities_remain_joint (test_shape.ShapeTests.test_21_packed_order_and_unexcited_quantities_remain_joint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 211, in test_21_packed_order_and_unexcited_quantities_remain_joint
+    d, _, metric, *_ = self.fixture(True)
+                       ~~~~~~~~~~~~^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/test_shape.py", line 26, in fixture
+    design = s.make_design(x, metric, sd, lo, hi, 0., 0., 0.)
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 115, in make_design
+    require(bool(np.array_equal(g, g.T)), "metric is not exactly symmetric")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/mumble-fixed-prefix/experiments/fixed_prefix_shape_001/shape.py", line 37, in require
+    raise ContractError(message)
+shape.ContractError: metric is not exactly symmetric
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.384s
+
+FAILED (errors=5)

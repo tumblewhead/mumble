@@ -1,0 +1,15 @@
+{
+  "schema": "mumble_shape_development_receipt_v1",
+  "status": "failed",
+  "tests": 21,
+  "errors": 5,
+  "scope": "fabricated_numerical_unit_tests_only",
+  "canonical_inference_runs": 0,
+  "reference_model_steps": 0,
+  "files": {
+    "shape.py": "9bae4a0004c9923bf94912e928fedf5319444110683279522062ed5a2a178f09",
+    "test_shape.py": "a3c47bf749a15880811e472f47278d9f8540c01e6108b5b553e4863829f10a14"
+  },
+  "cause": "Fixture scaled its two matrix halves with different division order, violating the intentional exact-symmetry input contract. No canonical data was accessed.",
+  "planned_fix": "Use an outer-product scale matrix for both fabricated metric generation and whitening; preserve lower-packed symmetry without clipping or metric repair."
+}
