@@ -551,34 +551,50 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Fetch the current `design/support-consistent-conditional-001` work branch and
-read the [historical control report](../experiments/historical_likelihood_control_001/REPORT.md),
-[summary](../experiments/historical_likelihood_control_001/summary.json),
-[decision](../experiments/historical_likelihood_control_001/decision.json),
-[independent review](../experiments/historical_likelihood_control_001/independent_review.json)
-and [handoff](../handoff/CONTINUE.json). The support reference and both historical
-attempts are closed; the first historical attempt failed before any fit, and the
-repaired attempt used exactly the three declared calls. Do not rerun them to resume.
+Use the current `implementation/autonomous-anchor-refinement-001` branch and
+[handoff](../handoff/CONTINUE.json). The supplied-anchor replacement is complete.
+The autonomous-anchor invocation remains failed, with seven independently
+verified accepted steps and an exact separate recovery of the lost output.
+Read its [report](../experiments/autonomous_anchor_refinement_001/REPORT.md),
+[decision](../experiments/autonomous_anchor_refinement_001/decision.json) and
+[result review](../experiments/autonomous_anchor_refinement_001/result_review.json).
+Preserve both outcomes; do not rerun either experiment to resume.
 
-Use the [retained-likelihood replacement design](../plans/retained_likelihood_replacement_001.json)
-to implement one finite host prototype at the same prefix. It must preserve a
-coherent common prior and support, the complete entering-state chart and all
-SOC/Q cross-dependencies. Reevaluate retained nonlinear evidence and replace
-its former approximation; never multiply the replayed observations into a
-posterior already derived from them. The completed pure-likelihood result is a
-reference and possible warm start, not a matched-prior posterior benchmark.
+Before another scientific launch, complete one bounded capture-preservation
+qualification with fabricated child outputs, independent exact copies and
+identity records. Its finish line is detection and preserved evidence for the
+declared loss/mutation and duplicate-writer cases. This is an experiment-harness
+repair, separate from the estimator's uncertainty problem.
 
-Freeze the actual implementation and finite call/resource budget before new
-inference. Finish with one reviewed replacement comparison and measured storage
-and work. Report whether it recovers a useful center and preserves uncertainty
-semantics; do not substitute a multiplier, voltage cutoff or status-only change.
-The global likelihood-error requirement is an eventual fidelity target for
-compression, not an open-ended prerequisite to this finite prototype.
+The next scientific decision is joint supported posterior/interval fidelity
+around the saved internally obtained anchor, with the near-10-KiB complete
+subsystem goal kept explicit. Then establish a bounded evidence representation
+that retains the nonlinear information needed for reanchoring, SOC/Q uncertainty,
+weak-use retention and renewed learning. If finer point progress is actually
+needed, first derive and qualify a paired residual-difference comparator;
+do not lower the frozen arithmetic allowance based on the existing result.
+No new numerical invocation, alternate seed/prefix or longer campaign is queued.
 
-The current full-history solver retained 169,346,072 host bytes. A streaming
-likelihood evaluator may avoid its large row workspace, but retaining or
-compressing the historical observations remains a separate resource obligation.
-The original supervisor RSS measurement gap remains open. Capacity has no
-startup deadline. Useful point accuracy, local precision, physical support,
-calibrated coverage, complete Cortex-M23 resources and indefinite operation
-remain separate obligations.
+### What the current memory figures mean
+
+The earlier streaming C candidate owns 7,152 bytes and retains no raw history,
+but its uncertainty and performance qualification remain open. The latest
+anchor experiment is a separate host reference: its C likelihood evaluator has
+a 10,680-byte fixed workspace inside an 11,072-byte compiler-reported main
+frame. Those overlapping figures are not complete estimator RAM and exclude
+the host proposal solver, other call-chain/runtime costs and stored observations.
+
+The external 8,064,000 bytes are the first 252,000 raw measurement records from
+the existing observation archive: a uint64 sample index followed by binary64
+actual interval, current and voltage, 32 bytes per record. At the nominal 35 Hz this
+is two hours of input history. The evaluator reads it through a 4,096-byte
+buffer and reevaluates it at each trial point. Fixed evaluation workspace does
+not bound the retained-history size or the work needed for later replay.
+The [C evaluator](../experiments/retained_likelihood_replacement_001/stream_evaluator.c)
+and [frozen input contract](../plans/autonomous_anchor_refinement_001.json)
+define these scopes.
+
+A deployable solution must combine useful nonlinear inference and honest
+uncertainty with bounded retained evidence and a measured complete C resource
+budget. Capacity still has no startup deadline. The M2 varied-duration campaign
+and M3 Cortex-M23 execution, timing and complete SRAM qualification remain ahead.
