@@ -1,0 +1,108 @@
+{
+  "schema": "mumble_replacement_math_policy_and_qualification_v1",
+  "status": "qualified_with_explicit_solver_limitations",
+  "policy": {
+    "schema": "mumble_replacement_math_policy_v1",
+    "versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "solver": "scipy.optimize.minimize(method='trust-constr')",
+    "primary_documentation": "https://docs.scipy.org/doc/scipy-1.17.0/reference/optimize.minimize-trustconstr.html",
+    "derivatives": "Analytic full objective gradient/Hessian and two SOC constraint Jacobians/Hessians; no finite differences in solves",
+    "coordinate_map": "x=common_warm_start + diag(public_unsplit_SD)*u; same origin/scales for both arms; x density base measure unchanged",
+    "objective_scale": "sqrt(max(1, ||D*G_old*D||_inf, ||D*G_new*D||_inf)); fixed before both solves",
+    "objective_offset": "Drop each quadratic's constant value at the common warm start from its optimizer objective only; preserve it in every reported cost",
+    "constraint_scale": "SOC path slacks divided by public unsplit SOC SD; box constraints in u",
+    "max_iterations_per_solve": 100,
+    "max_actual_combined_objective_gradient_evaluations_per_solve": 1024,
+    "evaluation_accounting": "Every actual objective/gradient kernel evaluation, any Hessian-triggered evaluation, and one forced final verification consume the same cap; final slot reserved. Cached Hessians and callback logging do not evaluate an objective. Raw SciPy nfev/njev/nhev also reported.",
+    "starts_per_arm": 1,
+    "solves": 2,
+    "retries": 0,
+    "gtol": 2.346785832000663e-09,
+    "xtol": 2.842170943040401e-14,
+    "barrier_tol": 3.666852862501036e-11,
+    "initial_tr_radius": 1.0,
+    "initial_constr_penalty": 1.0,
+    "initial_barrier_parameter": 3.666852862501036e-11,
+    "initial_barrier_tolerance": 2.346785832000663e-09,
+    "stopping_rationale": "gtol equals the independently checked numerical KKT tolerance; initial barrier is1/64 of that tolerance because SciPy can report gtol success before its barrier complementarity is small",
+    "factorization_method": "QRFactorization",
+    "sparse_jacobian": false,
+    "keep_feasible": true,
+    "independent_KKT_tolerance": 2.346785832000663e-09,
+    "KKT_checks": "Relative scaled stationarity, absolute scaled complementarity and dual violation <=KKT tolerance; strict raw feasibility and optimizer success additionally required for converged status",
+    "feasibility_arithmetic": "Compute SOC using charge/exp(logQ), matching model order. Report gamma(64)*max(1,operand magnitudes) allowances separately; raw negative slacks are never clipped or accepted for model evaluation",
+    "linear_algebra": "No eigenvalue clipping, pseudoinverse covariance, covariance repair or curvature inversion; unmodified spectra reported diagnostically. trust-constr QR may fall back to SVD for constrained optimization; all emitted warnings are recorded and this does not define a posterior covariance.",
+    "curvature_interpretation": "Local surrogate and prior curvature only; no calibrated intervals, supported moments or posterior probabilities",
+    "thread_policy": "Supervisor sets single-thread BLAS environment before importing numpy/scipy; this module never changes process-global thread settings"
+  },
+  "files": {
+    "experiments/retained_likelihood_replacement_001/replacement_math.py": {
+      "sha256": "870583ec263f4bf4e69b80aa9fc06402336deb606aeaa88533389ddce715261b",
+      "bytes": 30940
+    },
+    "experiments/retained_likelihood_replacement_001/math_qualification.py": {
+      "sha256": "ca8760cb31920f4e8be22f243ba796c0656d6dcf460a505e38c59318c32b8cf2",
+      "bytes": 17857
+    },
+    "experiments/retained_likelihood_replacement_001/qualification/math_attempt004.json": {
+      "sha256": "59afd76e83ba823dcc4d714e7e67978835a18ec0ec299e1b9cfb72ca9e281c56",
+      "bytes": 190931
+    }
+  },
+  "attempts": [
+    {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt001.json",
+      "sha256": "d33ba7faa9ed928f71d486d514bdf7e1272473a8caaf6737115029c238f77a2f",
+      "status": "failed_exception",
+      "checks": 24,
+      "failed": 1,
+      "reason_or_disposition": "Stopped before optimizer calls: fabricated Gram used two sequential coordinate divisions that reintroduced9.1e-13 asymmetry. Validator rejected it; fixture now divides by symmetric outer product, with no input tolerance widening."
+    },
+    {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt002.json",
+      "sha256": "43086bb39747750f6891c4af3fd967feb44ba7414f11904de98dfd50aeb8770c",
+      "status": "failed_checks",
+      "checks": 57,
+      "failed": 5,
+      "reason_or_disposition": "Four normal and two budget fixture solves. Prior/path/mapping algebra passed. Five checks exposed early SciPy gtol success with large barrier complementarity and stricter-than-needed optimizer stopping. Independent KKT rejected false success."
+    },
+    {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt003.json",
+      "sha256": "e7755a7212f79c8a764b0f6ad242e1cb2ed233db7b9e9233af31b9911965ed46",
+      "status": "failed_checks",
+      "checks": 57,
+      "failed": 2,
+      "reason_or_disposition": "Precanonical policy correction: initial barrier set to EPS^(2/3), solver gtol aligned with unchanged independent KKT tolerance64*EPS^(2/3). All known-coordinate errors passed. Two hard cases remained correctly KKT-unresolved; original qualifier overrequired all four solves to converge."
+    },
+    {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt004.json",
+      "sha256": "59afd76e83ba823dcc4d714e7e67978835a18ec0ec299e1b9cfb72ca9e281c56",
+      "status": "pass",
+      "checks": 59,
+      "failed": 0,
+      "reason_or_disposition": "Same solver source and numeric thresholds as attempt003. Qualifier explicitly tests known-point accuracy, honest status conjunction, easy-case convergence, and hard-case unresolved preservation.59checks pass; two hard cases remain unresolved."
+    }
+  ],
+  "canonical_model_calls": 0,
+  "canonical_optimizer_calls": 0,
+  "fabricated_optimizer_invocations_total": 18,
+  "inference_or_qualification_thresholds_using_truth": false,
+  "canonical_decision_to_freeze": "Root must decide whether feasible KKT-unresolved candidates receive exact-cost audits and whether a replacement transaction requires both KKT-converged solves; no after-result fallback.",
+  "qualification_resources": {
+    "wall_s_from_before_numerical_imports": 1.2345911919983337,
+    "CPU_s_from_before_numerical_imports": 1.23119516,
+    "own_peak_RSS_bytes": 65675264,
+    "final_encoding_excluded_from_time": true
+  },
+  "solver_limitations": {
+    "unresolved_fixture_names": [
+      "dense_ill_conditioned_interior",
+      "SOC_path_lower_active"
+    ],
+    "semantics": "Passing qualification establishes known-point accuracy and correct convergence/limit reporting; it does not establish universal optimizer convergence. Hard-case unresolved flags are preserved, not relaxed into success."
+  },
+  "maximum_known_target_coordinate_error_in_public_SD": 2.2138465828612667e-07
+}

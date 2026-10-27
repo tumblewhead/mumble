@@ -1,0 +1,166 @@
+{
+  "schema": "mumble_retained_likelihood_replacement_execution_contract_v1",
+  "status": "frozen_before_canonical_invocation",
+  "base_revision": "f632c268f69ad10f856f761f5542c35d4d4c96fd",
+  "design": "plans/retained_likelihood_replacement_001.json",
+  "authorization": "User: please implement and execute this design we are discussing. Includes the finite prototype, independent review, result recording and canonical repository publication.",
+  "finish_line": "One preserved canonical attempt; at most four exact prefix model passes, exactly two surrogate/prior solves when prerequisites pass, one accepted or retained transaction, independent review and publication. No original fitter/learner rerun, automatic retry, extra anchor or longer campaign.",
+  "inputs": {
+    "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+    "observation_member": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+    "observation_bytes": 16128000,
+    "observation_sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+    "archive_records": 504000,
+    "prefix_records": 252000,
+    "prefix_bytes": 8064000,
+    "prefix_sha256": "a2219e78d29ddab4cfd1e02a7b6b520dc74fc0229e995b1aba0044bb240b269d",
+    "record_format": "little-endian <Qddd index,dt_s,current_A,voltage_V>",
+    "nominal_endpoint_s": 7200,
+    "metadata_identities": {
+      "plans/retained_likelihood_replacement_001.json": {
+        "bytes": 14507,
+        "sha256": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e"
+      },
+      "experiments/historical_likelihood_control_001/attempt002/free/stdout.json": {
+        "bytes": 18734,
+        "sha256": "1c85adcceef8245968c8399f75091cb4b50f2186a944285961d65683651ae06b"
+      },
+      "experiments/historical_likelihood_control_001/attempt002/receipt.json": {
+        "bytes": 28207,
+        "sha256": "7f33713c0b4509581c8939124518ca741853dd506084b0623e07bd06ced8cb44"
+      },
+      "experiments/historical_likelihood_control_001/attempt002/conversion.json": {
+        "bytes": 600,
+        "sha256": "51dddb7267ca4273901c3a2758d0023f3e96f2ceff3545dad0588916d70e8706"
+      }
+    },
+    "truth_in_inference": false,
+    "input_only_scan": "Before any model call stream and validate exactly the prefix, preserving index/order and bits; compute charge extrema including zero using I*dt/3600 and sequential addition, as in the model. No source generation or resampling."
+  },
+  "representation": {
+    "dimension": 16,
+    "chart": "logtau1..3,loggamma_plus,loggamma_minus,logQ,R0,R1..3,H,z0,v10..3,h0",
+    "prior_configuration": "experiments/retained_likelihood_replacement_001/qualification/worker_configuration.json",
+    "public_prior_source": "src/scm_hypothesis.c:public_belief,split_component",
+    "prior": "One common supported mixture of the public Gaussian kernels with density in entering x. Condition the mixture as a whole. The common support normalizer cancels in cost contrasts; no normalized evidence or posterior moments are claimed.",
+    "old_anchor": "Fixed unsplit public entering mean",
+    "replacement_anchor": "Mapped original free historical fit; no new full nonlinear optimum is sought. This supplied anchor is not an autonomous anchor-selection result.",
+    "support": "Declared entering box and SOC path feasibility at both prefix charge extrema; strict nonnegative raw slacks before all model passes. No point clipping or arithmetic-slack admission.",
+    "sigma_V": 0.001,
+    "model": "Unchanged src/scm_model.c and include/scm_model.h; same illustrative OCV and3RC hysteresis."
+  },
+  "sequence": [
+    "Input-only validation and anchor feasibility; zero model steps.",
+    "old_anchor: construct full likelihood cost, gradient and Gram.",
+    "replacement_anchor: construct full likelihood block, check saved-free cost/Gram parity.",
+    "One solve_worker child: frozen and replacement surrogate/prior solves, one identical start each, durable per-solve started/completed/exception markers.",
+    "frozen_audit: evaluate finite strictly feasible frozen candidate under exact nonlinear history.",
+    "replacement_audit: evaluate finite strictly feasible replacement candidate under exact nonlinear history.",
+    "Compare identical-prior computed costs and atomically accept replacement or retain old active block."
+  ],
+  "solver_policy": {
+    "schema": "mumble_replacement_math_policy_v1",
+    "versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "solver": "scipy.optimize.minimize(method='trust-constr')",
+    "primary_documentation": "https://docs.scipy.org/doc/scipy-1.17.0/reference/optimize.minimize-trustconstr.html",
+    "derivatives": "Analytic full objective gradient/Hessian and two SOC constraint Jacobians/Hessians; no finite differences in solves",
+    "coordinate_map": "x=common_warm_start + diag(public_unsplit_SD)*u; same origin/scales for both arms; x density base measure unchanged",
+    "objective_scale": "sqrt(max(1, ||D*G_old*D||_inf, ||D*G_new*D||_inf)); fixed before both solves",
+    "objective_offset": "Drop each quadratic's constant value at the common warm start from its optimizer objective only; preserve it in every reported cost",
+    "constraint_scale": "SOC path slacks divided by public unsplit SOC SD; box constraints in u",
+    "max_iterations_per_solve": 100,
+    "max_actual_combined_objective_gradient_evaluations_per_solve": 1024,
+    "evaluation_accounting": "Every actual objective/gradient kernel evaluation, any Hessian-triggered evaluation, and one forced final verification consume the same cap; final slot reserved. Cached Hessians and callback logging do not evaluate an objective. Raw SciPy nfev/njev/nhev also reported.",
+    "starts_per_arm": 1,
+    "solves": 2,
+    "retries": 0,
+    "gtol": 2.346785832000663e-09,
+    "xtol": 2.842170943040401e-14,
+    "barrier_tol": 3.666852862501036e-11,
+    "initial_tr_radius": 1.0,
+    "initial_constr_penalty": 1.0,
+    "initial_barrier_parameter": 3.666852862501036e-11,
+    "initial_barrier_tolerance": 2.346785832000663e-09,
+    "stopping_rationale": "gtol equals the independently checked numerical KKT tolerance; initial barrier is1/64 of that tolerance because SciPy can report gtol success before its barrier complementarity is small",
+    "factorization_method": "QRFactorization",
+    "sparse_jacobian": false,
+    "keep_feasible": true,
+    "independent_KKT_tolerance": 2.346785832000663e-09,
+    "KKT_checks": "Relative scaled stationarity, absolute scaled complementarity and dual violation <=KKT tolerance; strict raw feasibility and optimizer success additionally required for converged status",
+    "feasibility_arithmetic": "Compute SOC using charge/exp(logQ), matching model order. Report gamma(64)*max(1,operand magnitudes) allowances separately; raw negative slacks are never clipped or accepted for model evaluation",
+    "linear_algebra": "No eigenvalue clipping, pseudoinverse covariance, covariance repair or curvature inversion; unmodified spectra reported diagnostically. trust-constr QR may fall back to SVD for constrained optimization; all emitted warnings are recorded and this does not define a posterior covariance.",
+    "curvature_interpretation": "Local surrogate and prior curvature only; no calibrated intervals, supported moments or posterior probabilities",
+    "thread_policy": "Supervisor sets single-thread BLAS environment before importing numpy/scipy; this module never changes process-global thread settings"
+  },
+  "solver_qualification": {
+    "source_sha256": "870583ec263f4bf4e69b80aa9fc06402336deb606aeaa88533389ddce715261b",
+    "receipt": "experiments/retained_likelihood_replacement_001/qualification/math_attempt004.json",
+    "receipt_sha256": "59afd76e83ba823dcc4d714e7e67978835a18ec0ec299e1b9cfb72ca9e281c56",
+    "status": "Qualified finite solver with explicit limitations; two hard fabricated cases accurate and feasible but KKT-unresolved. Earlier receipts preserved.",
+    "feasible_unresolved_candidates": "Receive the two already-budgeted exact-cost audits. Raw success never overrides independent KKT.",
+    "generic_exception": "Preserve partial per-solve markers/results and stop remaining model passes; no retry."
+  },
+  "numerical_rules": {
+    "unit_roundoff": "u=2^-53; gamma(k)=k*u/(1-k*u)",
+    "parity": "Cost and mapped full Gram checked with gamma(8*N+128) times the sum of absolute computed accumulation/reference scales. Coordinate map is the exact local H*h0 chain with legacy coordinate scales removed. This is an engineering reconstruction check, not a full real-model interval certificate.",
+    "integral_endpoint_check": "Sequential charge/extrema/time must match the input-only scan bit-for-bit; saved-free endpoint SOC and legacy round-trip checked at gamma(64) operand scale.",
+    "cost_resolution": "allowance=gamma(8*N+64)*(S_cost_frozen+S_cost_replacement)+gamma(8)*(abs(L_frozen)+abs(L_replacement)+abs(prior_frozen)+abs(prior_replacement)); S_cost are the evaluator compensated absolute computed summand scales. Difference evaluated by math.fsum of the four signed terms.",
+    "arithmetic_scope": "The allowance concerns accumulation and combination of computed residual-square terms and fixed reported prior-cost values. It does not bound model recurrence, libm, residual/J products or the prior log-density evaluation against exact real arithmetic. No global likelihood-fidelity certificate is asserted.",
+    "voltage_materiality_cutoff": null,
+    "truth_tuned_error_or_uncertainty_gate": false
+  },
+  "transaction": {
+    "cursor": 252000,
+    "observations_owned": "Exactly source_id:[0,252000), one active likelihood block. Prior is outside this block and owned once.",
+    "before": "Generation0: old block and frozen candidate.",
+    "acceptance": "All input/source/parity/domain/resource checks pass, both candidates finite and strictly feasible, and F_frozen-F_replacement exceeds the frozen arithmetic-resolution allowance. Both surrogate solves need not be KKT-converged.",
+    "accepted_label": "accepted_feasible_point_improvement",
+    "unresolved_or_worse": "Retain generation0 and old block/candidate; record signed difference and solver statuses. No new solve, anchor, threshold or pass.",
+    "after": "If accepted generation1 replaces old block with new block and candidate; prior and observation cursor unchanged. Do not add the two likelihood approximations or the old recursive posterior.",
+    "interpretation": "A feasible-point computed-objective improvement is a transaction witness, not a MAP/global optimum or posterior-fidelity/coverage result."
+  },
+  "resources": {
+    "canonical_supervisor_invocations_max": 1,
+    "full_prefix_model_passes_max": 4,
+    "model_steps_max": 1008000,
+    "surrogate_solver_calls_max": 2,
+    "total_fitter_or_learner_calls": 0,
+    "retries": 0,
+    "CPU_total_s_max": 30,
+    "wall_total_s_max": 60,
+    "child_RSS_bytes_max": 134217728,
+    "supervisor_RSS_bytes_max": 134217728,
+    "child_address_space_bytes_max": 1073741824,
+    "child_stdout_stderr_bytes_max": 524288,
+    "closed_output_bytes_max": 2097152,
+    "parallel_children_max": 1,
+    "qualification_scope": "Build and fabricated qualification are separately recorded before canonical execution and are not canonical calls.",
+    "CPU_scope": "Canonical supervisor RUSAGE_SELF plus all waited children, including bookkeeping. Exact child wait4 also recorded.",
+    "wall_scope": "From canonical supervisor start through final receipt accounting; no blocking wait beyond remaining budget.",
+    "thread_policy": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    }
+  },
+  "failure": "Reserve an exclusive attempt directory before validation. Preserve every launched child stdout/stderr/resource record, per-solve markers and input identities. Any nonzero child exit, malformed/nonfinite output, input mutation, model-domain failure, parity failure or cap breach stops the remaining sequence. Finite strictly feasible KKT-unresolved solves are retained and audited under the predeclared policy.",
+  "reporting": {
+    "source": "Separate read-only reducer after complete closed execution",
+    "truth": "At most one original archived endpoint truth record after source hash, closed receipt and all output identities verified; never an inference input.",
+    "shape": "Keep gradients and raw full matrices. Only PD/interior inverse-curvature shape scales may be shown; retain unresolved and nonstationary labels. No candidate-centered uncertainty intervals or truth-in-interval coverage checks. Audit Gram+prior Hessian is Gauss-Newton, not exact nonlinear Hessian.",
+    "prior_derivative_reconstruction": "At most two explicitly counted post-inference prior algebra evaluations for shape/gradient reporting; no model or optimizer call.",
+    "promotion": false,
+    "whole_process_closure": "Require execution_process/receipt.json to record root exit0 and whole-process wait4 CPU/wall/RSS within frozen limits, including the internal result/receipt close. This outer launcher invokes the canonical supervisor once and performs no inference itself."
+  },
+  "failure_closure": {
+    "success_limits_unchanged": true,
+    "emergency_result_bytes_max": 524288,
+    "emergency_receipt_bytes_max": 524288,
+    "semantics": "If the ordinary cumulative output cap is breached, stop inference and preserve a bounded failure result/manifest even if this diagnostic closure adds bytes beyond that cap. Record failed status, cap breach and actual retained bytes; never discard evidence or report resource compliance. The emergency allowance is failure-only and cannot authorize another model pass or solve."
+  }
+}

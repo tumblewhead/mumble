@@ -1,0 +1,242 @@
+{
+  "schema": "mumble_replacement_math_qualification_v1",
+  "status": "failed_exception",
+  "policy": {
+    "schema": "mumble_replacement_math_policy_v1",
+    "versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "solver": "scipy.optimize.minimize(method='trust-constr')",
+    "primary_documentation": "https://docs.scipy.org/doc/scipy-1.17.0/reference/optimize.minimize-trustconstr.html",
+    "derivatives": "Analytic full objective gradient/Hessian and two SOC constraint Jacobians/Hessians; no finite differences in solves",
+    "coordinate_map": "x=common_warm_start + diag(public_unsplit_SD)*u; same origin/scales for both arms; x density base measure unchanged",
+    "objective_scale": "sqrt(max(1, ||D*G_old*D||_inf, ||D*G_new*D||_inf)); fixed before both solves",
+    "objective_offset": "Drop each quadratic's constant value at the common warm start from its optimizer objective only; preserve it in every reported cost",
+    "constraint_scale": "SOC path slacks divided by public unsplit SOC SD; box constraints in u",
+    "max_iterations_per_solve": 100,
+    "max_actual_combined_objective_gradient_evaluations_per_solve": 1024,
+    "evaluation_accounting": "Every actual objective/gradient kernel evaluation, any Hessian-triggered evaluation, and one forced final verification consume the same cap; final slot reserved. Cached Hessians and callback logging do not evaluate an objective. Raw SciPy nfev/njev/nhev also reported.",
+    "starts_per_arm": 1,
+    "solves": 2,
+    "retries": 0,
+    "gtol": 3.666852862501036e-11,
+    "xtol": 2.842170943040401e-14,
+    "barrier_tol": 3.666852862501036e-11,
+    "initial_tr_radius": 1.0,
+    "initial_constr_penalty": 1.0,
+    "initial_barrier_parameter": 6.055454452393343e-06,
+    "initial_barrier_tolerance": 1.4901161193847656e-08,
+    "factorization_method": "QRFactorization",
+    "sparse_jacobian": false,
+    "keep_feasible": true,
+    "independent_KKT_tolerance": 2.346785832000663e-09,
+    "KKT_checks": "Relative scaled stationarity, absolute scaled complementarity and dual violation <=KKT tolerance; strict raw feasibility and optimizer success additionally required for converged status",
+    "feasibility_arithmetic": "Report gamma(64)*max(1,operand magnitudes) allowances separately; raw negative slacks are never clipped or accepted for model evaluation",
+    "linear_algebra": "No eigenvalue clipping, pseudo-inverse, covariance repair or curvature inversion; unmodified spectra reported diagnostically",
+    "curvature_interpretation": "Local surrogate and prior curvature only; no calibrated intervals, supported moments or posterior probabilities",
+    "thread_policy": "Supervisor sets single-thread BLAS environment before importing numpy/scipy; this module never changes process-global thread settings"
+  },
+  "source_hashes": {
+    "experiments/retained_likelihood_replacement_001/replacement_math.py": "d172c2ac571ebd3989b5f4194d94488db69553a17e750b3e2f8a120fa0a01e4a",
+    "experiments/retained_likelihood_replacement_001/math_qualification.py": "b35a4d7ada74d926688c13146901b01c960a795bf8dedfaad8f4d6a2d44208cd",
+    "plans/retained_likelihood_replacement_001.json": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5"
+  },
+  "scope": "Fabricated algebra and six bounded synthetic solver invocations only",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "exception": {
+    "type": "ValueError",
+    "message": "Gram must be finite and exactly symmetric, or lower packed",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/math_qualification.py\", line 266, in main\n    report[\"algebra\"] = algebra_checks(checks)\n                        ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/math_qualification.py\", line 155, in algebra_checks\n    block = rm.QuadraticBlock(a, 7., g, gram)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<string>\", line 8, in __init__\n  File \"/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/replacement_math.py\", line 239, in __post_init__\n    raise ValueError(\"Gram must be finite and exactly symmetric, or lower packed\")\nValueError: Gram must be finite and exactly symmetric, or lower packed\n"
+  },
+  "checks": [
+    {
+      "name": "pinned_dependencies",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "negative_responsibility_Hessian",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 3.552713678800501e-15,
+        "tolerance": 2.842170943040401e-14
+      }
+    },
+    {
+      "name": "symmetric_mixture_zero_gradient",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 4.440892098500626e-16,
+        "tolerance": 2.842170943040401e-14
+      }
+    },
+    {
+      "name": "actual_public_prior_is_not_globally_convex",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "prior_cosh_cost_0",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 2.6645352591003757e-15,
+        "tolerance": 1.3159594987941495e-12
+      }
+    },
+    {
+      "name": "prior_cosh_gradient_0",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 8.881784197001252e-16,
+        "tolerance": 7.860635718262687e-13
+      }
+    },
+    {
+      "name": "prior_cosh_Hessian_0",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 0.0,
+        "tolerance": 2.728484105318784e-10
+      }
+    },
+    {
+      "name": "prior_cosh_cost_1",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 0.0,
+        "tolerance": 1.358592529326526e-12
+      }
+    },
+    {
+      "name": "prior_cosh_gradient_1",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 4.440892098500626e-16,
+        "tolerance": 7.860635718262687e-13
+      }
+    },
+    {
+      "name": "prior_cosh_Hessian_1",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 3.552713678800501e-15,
+        "tolerance": 2.728484105318784e-10
+      }
+    },
+    {
+      "name": "prior_cosh_cost_2",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 2.6645352591003757e-15,
+        "tolerance": 1.3648075980162567e-12
+      }
+    },
+    {
+      "name": "prior_cosh_gradient_2",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 2.6645352591003757e-15,
+        "tolerance": 7.860635718262687e-13
+      }
+    },
+    {
+      "name": "prior_cosh_Hessian_2",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 7.105427357601002e-15,
+        "tolerance": 2.728484105318784e-10
+      }
+    },
+    {
+      "name": "prior_directional_gradient",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 1.5982526413438336e-10,
+        "tolerance": 1.8774286656005304e-08
+      }
+    },
+    {
+      "name": "prior_directional_Hessian",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 5.862621499375109e-11,
+        "tolerance": 2.116056238695652e-08
+      }
+    },
+    {
+      "name": "path_constraint_directional_Jacobian",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 1.042829711472848e-11,
+        "tolerance": 1.8774286656005304e-08
+      }
+    },
+    {
+      "name": "path_constraint_directional_Hessians",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 2.0520703192250522e-12,
+        "tolerance": 1.8774286656005304e-08
+      }
+    },
+    {
+      "name": "charge_extrema_preserve_zero",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "reject_charge_extrema_excluding_zero",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "invalid_support_is_reported_without_clipping",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "entering_legacy_roundtrip",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 6.938893903907228e-18,
+        "tolerance": 3.552713678800501e-15
+      }
+    },
+    {
+      "name": "u0_product_chain",
+      "pass": true,
+      "detail": {
+        "max_abs_error": 7.399896667648065e-15,
+        "tolerance": 1.8774286656005304e-08
+      }
+    },
+    {
+      "name": "reject_nonidentified_H_zero_inverse_map",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "packed_lower_preserves_all_correlations",
+      "pass": false,
+      "detail": {
+        "max_abs_error": 9.094947017729282e-13,
+        "tolerance": 0.0
+      }
+    }
+  ],
+  "check_count": 24,
+  "failed_count": 1,
+  "resources": {
+    "wall_s_from_before_numerical_imports": 1.1305369009987771,
+    "CPU_s_from_before_numerical_imports": 1.126696298,
+    "own_peak_RSS_bytes": 64626688,
+    "final_encoding_excluded_from_time": true
+  }
+}

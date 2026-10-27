@@ -1,0 +1,126 @@
+{
+  "schema": "mumble_retained_likelihood_evaluator_qualification_summary_v1",
+  "status": "pass",
+  "base_revision": "f632c268f69ad10f856f761f5542c35d4d4c96fd",
+  "exact_qualification_command": [
+    "python3",
+    "experiments/retained_likelihood_replacement_001/evaluator_qualification.py"
+  ],
+  "artifacts": {
+    "source": {
+      "path": "experiments/retained_likelihood_replacement_001/stream_evaluator.c",
+      "bytes": 21386,
+      "sha256": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942"
+    },
+    "qualification_source": {
+      "path": "experiments/retained_likelihood_replacement_001/evaluator_qualification.py",
+      "bytes": 29425,
+      "sha256": "b80765d925b3ac79c47b021e85bc91803eade4c4593b25d9df0646c7fb62f0b9"
+    },
+    "receipt": {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/receipt.json",
+      "bytes": 75620,
+      "sha256": "822ac641214f8ec938b5081888a656a7640686f7aa25b0834d21d37cf4889090"
+    },
+    "binary": {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+      "bytes": 34240,
+      "sha256": "74ac92c6d81f50af73a0568ea2e853993ecdd2729e4e544a5132eb455ddb97bb"
+    }
+  },
+  "source_sha256": {
+    "experiments/retained_likelihood_replacement_001/evaluator_qualification.py": "b80765d925b3ac79c47b021e85bc91803eade4c4593b25d9df0646c7fb62f0b9",
+    "experiments/retained_likelihood_replacement_001/stream_evaluator.c": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+    "plans/retained_likelihood_replacement_001.json": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e"
+  },
+  "checks": {
+    "assertions": 5819,
+    "groups": 101,
+    "methods": [
+      "Direct physical-state and analytic tangent recurrence, independent of model feature basis",
+      "Unchanged scm_physical_step five-point finite differences for all16 columns",
+      "Direct compensated cost/gradient/fullGram reconstruction",
+      "Exact zero-dt H*h0 chain and zero-H derivative controls",
+      "Zero observations and a129-record fixed-buffer seam",
+      "Nonfinite, truncated, unordered, domain, malformed-chart and call-limit controls"
+    ]
+  },
+  "counts": {
+    "invocations": 22,
+    "model_init_calls": 16,
+    "model_step_calls": 156,
+    "model_predict_calls": 155,
+    "records_accumulated": 154
+  },
+  "direct_physical_fabricated_steps": 728,
+  "canonical_observation_reads": 0,
+  "canonical_model_passes": 0,
+  "canonical_truth_reads": 0,
+  "original_fitter_invocations": 0,
+  "learner_invocations": 0,
+  "resources": {
+    "wall_s": 1.0508161620000465,
+    "supervisor_own_peak_RSS_bytes": 14548992,
+    "maximum_exact_evaluator_child_peak_RSS_bytes": 10420224,
+    "resource_scope": "Exact wait4 child processes, including process launch/runtime; no attribution of compiler RSS to evaluator."
+  },
+  "storage": {
+    "workspace_sizeof_bytes": 10680,
+    "read_buffer_bytes": 4096,
+    "model_state_sizeof_bytes": 280,
+    "model_row_sizeof_bytes": 648,
+    "accumulator_sizeof_bytes": 32,
+    "likelihood_accumulators_bytes": 4896,
+    "diagnostic_accumulators_bytes": 64,
+    "chart_and_jacobian_arrays_bytes": 568,
+    "readonly_bound_arrays_bytes": 256,
+    "x_token_buffer_bytes": 128,
+    "observation_sized_arrays": 0,
+    "explicit_heap_allocations": 0,
+    "additional_stored_endpoint_matrices": 0,
+    "limitations": "Workspace is fixed automatic storage. This sizeof accounting excludes other scalar/pointer stack frames, unchanged model function stack, compiler spills, FILE/libc/libm storage, executable code, process/runtime and externally retained observations. It is not complete target SRAM or a measured stack peak."
+  },
+  "compiler_reported_main_stack_bytes": 11072,
+  "build_flags": [
+    "-std=c99",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fstack-usage"
+  ],
+  "cli": {
+    "required": [
+      "--x FILE",
+      "--sigma 0.001"
+    ],
+    "optional": [
+      "--observations FILE (otherwise stdin)",
+      "--prefix N (default252000;0..252000 only)"
+    ],
+    "x_file": "Exactly16 whitespace-separated finite decimal values in declared entering chart; no trailing tokens."
+  },
+  "payload": {
+    "gradient": "16 unscaled entering-x coordinates; prediction-observed residual, whitened once",
+    "gram": "136 lower-packed row-major entries i*(i+1)/2+j, j<=i; full undamped GN",
+    "endpoint_x": "16 values in entering chart with propagated z/v/h",
+    "endpoint_derivative": "256 row-major values d(endpoint_x)/d(entering_x)",
+    "endpoint_state": "16 physical values, exponentiated first6 static coordinates",
+    "endpoint_physical_derivative": "256 row-major values d(endpoint_state)/d(entering_x)",
+    "absolute_summand_scales": "Compensated absolute sums of computed cost/gradient/Gram summands; not a full-model/libm roundoff certificate"
+  },
+  "sources_unchanged": true,
+  "independent_review": "Pending; reviewer notified. No canonical launch authorized by this receipt.",
+  "limitations": [
+    "Fabricated qualification only; source/binary require independent review and publication before canonical use.",
+    "No production or canonical archive file was opened for model evaluation or truth scoring.",
+    "The sizeof accounting is not complete target SRAM and evaluator peak RSS is a host measurement.",
+    "No likelihood optimum, calibrated uncertainty, global numerical guarantee or firmware readiness is established."
+  ]
+}

@@ -1,0 +1,1920 @@
+{
+  "schema": "mumble_retained_likelihood_evaluator_qualification_v1",
+  "status": "pass",
+  "source_sha256": {
+    "experiments/retained_likelihood_replacement_001/evaluator_qualification.py": "b80765d925b3ac79c47b021e85bc91803eade4c4593b25d9df0646c7fb62f0b9",
+    "experiments/retained_likelihood_replacement_001/stream_evaluator.c": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+    "plans/retained_likelihood_replacement_001.json": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e"
+  },
+  "qualification_source": "experiments/retained_likelihood_replacement_001/evaluator_qualification.py",
+  "scope": "Only code literals and fabricated files created below this exclusive output directory; no archived observation, truth, checkpoint or original fitter access.",
+  "arithmetic_policy": {
+    "binary64_unit_roundoff": 1.1102230246251565e-16,
+    "reconstruction_tolerance": "256*u*(N+1)*max(1,|reference|,local_scale); cost/gradient/Gram tolerances propagate the separately allowed prediction and Jacobian errors into their summands.",
+    "finite_difference": "Five-point central derivative with h=2e-5*max(1,|x_k|); tolerance is 256*u*(N+1)*max(1,|function|)/h + h^4*max(1,|derivative|).",
+    "limitations": "These fixed fabricated reconstruction tolerances exercise code and mapping. They are not global libm/trajectory error bounds, statistical thresholds or coverage calibration."
+  },
+  "finite_difference_steps": [
+    5.991464547107982e-05,
+    2e-05,
+    3.2188758248682007e-05,
+    9.883284845218609e-05,
+    0.00011121363262031055,
+    5.4667360181730006e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05
+  ],
+  "binary_sha256": "74ac92c6d81f50af73a0568ea2e853993ecdd2729e4e544a5132eb455ddb97bb",
+  "binary_bytes": 34240,
+  "physical_reference_library_sha256": "031a38712500bccfd06c1b5e362ca63271a5df03da3b7a3c1082fc8daf87b50a",
+  "compiler_version": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "storage": {
+    "workspace_sizeof_bytes": 10680,
+    "read_buffer_bytes": 4096,
+    "model_state_sizeof_bytes": 280,
+    "model_row_sizeof_bytes": 648,
+    "accumulator_sizeof_bytes": 32,
+    "likelihood_accumulators_bytes": 4896,
+    "diagnostic_accumulators_bytes": 64,
+    "chart_and_jacobian_arrays_bytes": 568,
+    "readonly_bound_arrays_bytes": 256,
+    "x_token_buffer_bytes": 128,
+    "observation_sized_arrays": 0,
+    "explicit_heap_allocations": 0,
+    "additional_stored_endpoint_matrices": 0,
+    "limitations": "Workspace is fixed automatic storage. This sizeof accounting excludes other scalar/pointer stack frames, unchanged model function stack, compiler spills, FILE/libc/libm storage, executable code, process/runtime and externally retained observations. It is not complete target SRAM or a measured stack peak."
+  },
+  "failure": null,
+  "checks": [
+    {
+      "name": "mixed_current/physical_vs_direct_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "mixed_current/endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 5.551115123125783e-17,
+      "maximum_error_over_tolerance": 0.0001953125
+    },
+    {
+      "name": "mixed_current/endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 3.469446951953614e-18,
+      "maximum_error_over_tolerance": 1.220703125e-05
+    },
+    {
+      "name": "mixed_current/physical_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 5.551115123125783e-17,
+      "maximum_error_over_tolerance": 0.0001953125
+    },
+    {
+      "name": "mixed_current/physical_endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 3.469446951953614e-18,
+      "maximum_error_over_tolerance": 1.220703125e-05
+    },
+    {
+      "name": "mixed_current/charge_time",
+      "status": "pass",
+      "scalar_comparisons": 4,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0
+    },
+    {
+      "name": "mixed_current/cost",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "mixed_current/gradient",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 1.273747329832986e-09,
+      "maximum_error_over_tolerance": 0.0003150715525316128
+    },
+    {
+      "name": "mixed_current/Gram",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 4.656612873077393e-10,
+      "maximum_error_over_tolerance": 0.00013482261202782736
+    },
+    {
+      "name": "mixed_current/absolute_gradient_terms",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 1.7689671949483454e-10,
+      "maximum_error_over_tolerance": 0.00012438799069606324
+    },
+    {
+      "name": "mixed_current/absolute_Gram_terms",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 4.656612873077393e-10,
+      "maximum_error_over_tolerance": 0.00013482261202782736
+    },
+    {
+      "name": "mixed_current/absolute_cost_terms",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "mixed_current/last_prediction",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 4.440892098500626e-16,
+      "maximum_error_over_tolerance": 0.00041224038544016115
+    },
+    {
+      "name": "mixed_current/last_J",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 5.684341886080802e-14,
+      "maximum_error_over_tolerance": 0.0002
+    },
+    {
+      "name": "zero_dt/physical_vs_direct_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/physical_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/physical_endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/charge_time",
+      "status": "pass",
+      "scalar_comparisons": 4,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0
+    },
+    {
+      "name": "zero_dt/cost",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/gradient",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/Gram",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/absolute_gradient_terms",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/absolute_Gram_terms",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/absolute_cost_terms",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/last_prediction",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_dt/last_J",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_current/physical_vs_direct_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_current/endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 2.8698592549372254e-42,
+      "maximum_error_over_tolerance": 2.0194839173657903e-29
+    },
+    {
+      "name": "zero_current/endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 4.336808689942018e-19,
+      "maximum_error_over_tolerance": 3.0517578125e-06
+    },
+    {
+      "name": "zero_current/physical_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 2.8698592549372254e-42,
+      "maximum_error_over_tolerance": 2.0194839173657903e-29
+    },
+    {
+      "name": "zero_current/physical_endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 4.336808689942018e-19,
+      "maximum_error_over_tolerance": 3.0517578125e-06
+    },
+    {
+      "name": "zero_current/charge_time",
+      "status": "pass",
+      "scalar_comparisons": 4,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0
+    },
+    {
+      "name": "zero_current/cost",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_current/gradient",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 1.1102230246251565e-16,
+      "maximum_error_over_tolerance": 4.7634778310035716e-08
+    },
+    {
+      "name": "zero_current/Gram",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 1.8189894035458565e-12,
+      "maximum_error_over_tolerance": 3.0937743900656514e-06
+    },
+    {
+      "name": "zero_current/absolute_gradient_terms",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 1.1102230246251565e-16,
+      "maximum_error_over_tolerance": 4.7634778310035716e-08
+    },
+    {
+      "name": "zero_current/absolute_Gram_terms",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 1.8189894035458565e-12,
+      "maximum_error_over_tolerance": 3.0937743900656514e-06
+    },
+    {
+      "name": "zero_current/absolute_cost_terms",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_current/last_prediction",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_current/last_J",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 4.440892098500626e-16,
+      "maximum_error_over_tolerance": 3.125e-06
+    },
+    {
+      "name": "zero_samples/physical_vs_direct_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/physical_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/physical_endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/charge_time",
+      "status": "pass",
+      "scalar_comparisons": 4,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0
+    },
+    {
+      "name": "zero_samples/cost",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/gradient",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/Gram",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/absolute_gradient_terms",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/absolute_Gram_terms",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_samples/absolute_cost_terms",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_H_chain/physical_vs_direct_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_H_chain/endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 5.551115123125783e-17,
+      "maximum_error_over_tolerance": 0.0001953125
+    },
+    {
+      "name": "zero_H_chain/endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 3.469446951953614e-18,
+      "maximum_error_over_tolerance": 1.220703125e-05
+    },
+    {
+      "name": "zero_H_chain/physical_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 5.551115123125783e-17,
+      "maximum_error_over_tolerance": 0.0001953125
+    },
+    {
+      "name": "zero_H_chain/physical_endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 3.469446951953614e-18,
+      "maximum_error_over_tolerance": 1.220703125e-05
+    },
+    {
+      "name": "zero_H_chain/charge_time",
+      "status": "pass",
+      "scalar_comparisons": 4,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0
+    },
+    {
+      "name": "zero_H_chain/cost",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_H_chain/gradient",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 1.2740883903461508e-09,
+      "maximum_error_over_tolerance": 0.0003619930221429057
+    },
+    {
+      "name": "zero_H_chain/Gram",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 4.656612873077393e-10,
+      "maximum_error_over_tolerance": 0.00013482261202782736
+    },
+    {
+      "name": "zero_H_chain/absolute_gradient_terms",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 3.483364707790315e-10,
+      "maximum_error_over_tolerance": 0.0003619930221429057
+    },
+    {
+      "name": "zero_H_chain/absolute_Gram_terms",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 4.656612873077393e-10,
+      "maximum_error_over_tolerance": 0.00013482261202782736
+    },
+    {
+      "name": "zero_H_chain/absolute_cost_terms",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "zero_H_chain/last_prediction",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 4.440892098500626e-16,
+      "maximum_error_over_tolerance": 0.00041114844725854093
+    },
+    {
+      "name": "zero_H_chain/last_J",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 5.684341886080802e-14,
+      "maximum_error_over_tolerance": 0.0002
+    },
+    {
+      "name": "buffer_boundary/physical_vs_direct_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0.0
+    },
+    {
+      "name": "buffer_boundary/endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 2.3314683517128287e-15,
+      "maximum_error_over_tolerance": 0.0006310096153846154
+    },
+    {
+      "name": "buffer_boundary/endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 4.7704895589362195e-18,
+      "maximum_error_over_tolerance": 1.2911283052884616e-06
+    },
+    {
+      "name": "buffer_boundary/physical_endpoint",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 2.3314683517128287e-15,
+      "maximum_error_over_tolerance": 0.0006310096153846154
+    },
+    {
+      "name": "buffer_boundary/physical_endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 4.7704895589362195e-18,
+      "maximum_error_over_tolerance": 1.2911283052884616e-06
+    },
+    {
+      "name": "buffer_boundary/charge_time",
+      "status": "pass",
+      "scalar_comparisons": 4,
+      "maximum_absolute_error": 0.0,
+      "maximum_error_over_tolerance": 0
+    },
+    {
+      "name": "buffer_boundary/cost",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 1.7905676941154525e-12,
+      "maximum_error_over_tolerance": 2.7047316745754776e-06
+    },
+    {
+      "name": "buffer_boundary/gradient",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 3.21307538797555e-07,
+      "maximum_error_over_tolerance": 0.0001519675225844486
+    },
+    {
+      "name": "buffer_boundary/Gram",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 1.430511474609375e-06,
+      "maximum_error_over_tolerance": 0.00048546895602573977
+    },
+    {
+      "name": "buffer_boundary/absolute_gradient_terms",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 7.540802471339703e-08,
+      "maximum_error_over_tolerance": 3.314540801836138e-05
+    },
+    {
+      "name": "buffer_boundary/absolute_Gram_terms",
+      "status": "pass",
+      "scalar_comparisons": 136,
+      "maximum_absolute_error": 1.430511474609375e-06,
+      "maximum_error_over_tolerance": 0.00048546895602573977
+    },
+    {
+      "name": "buffer_boundary/absolute_cost_terms",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 1.7905676941154525e-12,
+      "maximum_error_over_tolerance": 2.7047316745754776e-06
+    },
+    {
+      "name": "buffer_boundary/last_prediction",
+      "status": "pass",
+      "scalar_comparisons": 1,
+      "maximum_absolute_error": 2.6645352591003757e-15,
+      "maximum_error_over_tolerance": 0.00019261332187441732
+    },
+    {
+      "name": "buffer_boundary/last_J",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 8.412825991399586e-12,
+      "maximum_error_over_tolerance": 0.0015860448104245068
+    },
+    {
+      "name": "physical_five_point_last_voltage_derivative",
+      "status": "pass",
+      "scalar_comparisons": 16,
+      "maximum_absolute_error": 1.7294496501563117e-08,
+      "maximum_error_over_tolerance": 0.0003210836807394917
+    },
+    {
+      "name": "physical_five_point_endpoint_derivative",
+      "status": "pass",
+      "scalar_comparisons": 256,
+      "maximum_absolute_error": 4.261146990813813e-12,
+      "maximum_error_over_tolerance": 0.00029985156048677945
+    },
+    {
+      "name": "analytic_H_times_h_and_zero_dt_controls",
+      "status": "pass"
+    },
+    {
+      "name": "truncated_record",
+      "status": "pass",
+      "expected_error": "truncated_prefix",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "wrong_first_index",
+      "status": "pass",
+      "expected_error": "unordered_record_index",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "duplicate_index",
+      "status": "pass",
+      "expected_error": "unordered_record_index",
+      "records_accumulated": 1,
+      "model_step_calls": 1
+    },
+    {
+      "name": "nonfinite_dt",
+      "status": "pass",
+      "expected_error": "nonfinite_record",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "nonfinite_current",
+      "status": "pass",
+      "expected_error": "nonfinite_record",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "nonfinite_voltage",
+      "status": "pass",
+      "expected_error": "nonfinite_record",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "negative_dt",
+      "status": "pass",
+      "expected_error": "negative_dt",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "SOC_domain_exit",
+      "status": "pass",
+      "expected_error": "model_step_failed",
+      "records_accumulated": 0,
+      "model_step_calls": 1
+    },
+    {
+      "name": "finite_record_cost_overflow",
+      "status": "pass",
+      "expected_error": "nonfinite_cost_accumulation",
+      "records_accumulated": 0,
+      "model_step_calls": 1
+    },
+    {
+      "name": "x_extra_value",
+      "status": "pass",
+      "expected_error": "invalid_x_file",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "x_nonfinite",
+      "status": "pass",
+      "expected_error": "invalid_x_file",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "x_missing_value",
+      "status": "pass",
+      "expected_error": "invalid_x_file",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "x_outside_entering_support",
+      "status": "pass",
+      "expected_error": "entering_support_or_init_failed",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "prefix_over_cap",
+      "status": "pass",
+      "expected_error": "invalid_prefix",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "duplicate_sigma_option",
+      "status": "pass",
+      "expected_error": "unknown_or_repeated_option",
+      "records_accumulated": 0,
+      "model_step_calls": 0
+    },
+    {
+      "name": "exact_prefix_ignores_suffix",
+      "status": "pass",
+      "input_bytes_read": 32
+    }
+  ],
+  "assertions_executed": 5819,
+  "check_groups_completed": 101,
+  "children": [
+    {
+      "command": [
+        "cc",
+        "--version"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.007472015999155701,
+      "CPU_user_s": 0.002806,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 9662464,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "compiler_version.stdout",
+      "stdout_sha256": "e412d6c932acaaea35c743bc158d4ba2400ca0e3df66df406a872b2ce0f8601b",
+      "stdout_bytes": 243,
+      "stderr": "compiler_version.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fstack-usage",
+        "-I",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/include",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/stream_evaluator.c",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/src/scm_model.c",
+        "-lm",
+        "-o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.5699903209988406,
+      "CPU_user_s": 0.390988,
+      "CPU_system_s": 0.172901,
+      "peak_RSS_bytes": 27656192,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "build_evaluator.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "build_evaluator.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-shared",
+        "-fPIC",
+        "-I",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/include",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/src/scm_model.c",
+        "-lm",
+        "-o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/original_model.so"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.2463263019999431,
+      "CPU_user_s": 0.203952,
+      "CPU_system_s": 0.037818,
+      "peak_RSS_bytes": 22151168,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "build_physical_reference.stdout",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "build_physical_reference.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.008209145998989698,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.0028409999999999998,
+      "peak_RSS_bytes": 9707520,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "mixed_current.stdout",
+      "stdout_sha256": "1da2f906707f5425f0e01b0c08f7d16075f4d2519c2e28b3810ca792fe032165",
+      "stdout_bytes": 12050,
+      "stderr": "mixed_current.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_dt.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_dt.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.007104492000507889,
+      "CPU_user_s": 0.002405,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 9822208,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "zero_dt.stdout",
+      "stdout_sha256": "07cef622522e614ae7ad8933ddda7a8c7007300e0d734f474157ad5e039b6073",
+      "stdout_bytes": 6755,
+      "stderr": "zero_dt.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_current.observations.bin",
+        "--prefix",
+        "4"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.007454069000232266,
+      "CPU_user_s": 0.002828,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 9871360,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "zero_current.stdout",
+      "stdout_sha256": "612d71d597b8a00d70c77d9608732e0a5fb469bd2f15a70c338aa497df011aea",
+      "stdout_bytes": 8117,
+      "stderr": "zero_current.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_samples.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_samples.observations.bin",
+        "--prefix",
+        "0"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.007125242000256549,
+      "CPU_user_s": 0.002624,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 9895936,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "zero_samples.stdout",
+      "stdout_sha256": "9ab71e8fdc187d431ab8bbc310c40fb44890d025d85c96dff47e7796296f0458",
+      "stdout_bytes": 5550,
+      "stderr": "zero_samples.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_H_chain.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/zero_H_chain.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.00682385899926885,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.00519,
+      "peak_RSS_bytes": 9932800,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "zero_H_chain.stdout",
+      "stdout_sha256": "ad3457ad4c1507e0cd018424c54e02a8c36c582101254dd89a3557efaa452b99",
+      "stdout_bytes": 10217,
+      "stderr": "zero_H_chain.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/buffer_boundary.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/buffer_boundary.observations.bin",
+        "--prefix",
+        "129"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.007046364000416361,
+      "CPU_user_s": 0.001862,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 9990144,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "buffer_boundary.stdout",
+      "stdout_sha256": "153ca09a18e1b101829c4197a23fd4ce6bc330ca92d2f30c24ea722a3912d45a",
+      "stdout_bytes": 12067,
+      "stderr": "buffer_boundary.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/truncated_record.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.006968236000830075,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.001527,
+      "peak_RSS_bytes": 10354688,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "truncated_record.stdout",
+      "stdout_sha256": "8dd97ab85661d9581cb42ca64d0f1dae20a92e7138f91bac1e96038a4ffc8a76",
+      "stdout_bytes": 345,
+      "stderr": "truncated_record.stderr",
+      "stderr_sha256": "17f3958c8f9593a6e33072661ea3c19e95cd8a297a1c406b379f4453cac4a462",
+      "stderr_bytes": 46
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/wrong_first_index.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.006945912000446697,
+      "CPU_user_s": 0.002127,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 10366976,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "wrong_first_index.stdout",
+      "stdout_sha256": "68ffc9c37e381ee4b31b0e92a80e537e89901aab147a0ac3e1c5c66fdf690952",
+      "stdout_bytes": 352,
+      "stderr": "wrong_first_index.stderr",
+      "stderr_sha256": "2ed48d644bfb9cd7a56f9acf761014050388f3597289abb293700e45b80949ed",
+      "stderr_bytes": 53
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/duplicate_index.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.00713272900065931,
+      "CPU_user_s": 0.001462,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 10366976,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "duplicate_index.stdout",
+      "stdout_sha256": "8239868e2dca9c256207d1cf6ed107b53263097a8fdcf77fcb345f362f5f18c3",
+      "stdout_bytes": 352,
+      "stderr": "duplicate_index.stderr",
+      "stderr_sha256": "b87629964ce7d7df02e9b98671e9512ab6fb81bf95d76d062eb2bb63093eea30",
+      "stderr_bytes": 53
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/nonfinite_dt.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.006520126000395976,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.0017029999999999999,
+      "peak_RSS_bytes": 10366976,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "nonfinite_dt.stdout",
+      "stdout_sha256": "dff9b0654a0325c99d16ba089324d3cbbab0fc35ab606550f3b2b478ac6a258f",
+      "stdout_bytes": 345,
+      "stderr": "nonfinite_dt.stderr",
+      "stderr_sha256": "b3a62ef44473828c5fca40d119aa930c99a96820eb3db60fe2967920739502ed",
+      "stderr_bytes": 47
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/nonfinite_current.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.011190597000677371,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.002253,
+      "peak_RSS_bytes": 10366976,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "nonfinite_current.stdout",
+      "stdout_sha256": "dff9b0654a0325c99d16ba089324d3cbbab0fc35ab606550f3b2b478ac6a258f",
+      "stdout_bytes": 345,
+      "stderr": "nonfinite_current.stderr",
+      "stderr_sha256": "b3a62ef44473828c5fca40d119aa930c99a96820eb3db60fe2967920739502ed",
+      "stderr_bytes": 47
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/nonfinite_voltage.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.008012090000192984,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.002575,
+      "peak_RSS_bytes": 10375168,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "nonfinite_voltage.stdout",
+      "stdout_sha256": "dff9b0654a0325c99d16ba089324d3cbbab0fc35ab606550f3b2b478ac6a258f",
+      "stdout_bytes": 345,
+      "stderr": "nonfinite_voltage.stderr",
+      "stderr_sha256": "b3a62ef44473828c5fca40d119aa930c99a96820eb3db60fe2967920739502ed",
+      "stderr_bytes": 47
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/negative_dt.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.003766378000364057,
+      "CPU_user_s": 0.0029449999999999997,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 10379264,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "negative_dt.stdout",
+      "stdout_sha256": "488bbee31260e5b9fd823063935c90e087a65b789d2391f88ab842b522871119",
+      "stdout_bytes": 340,
+      "stderr": "negative_dt.stderr",
+      "stderr_sha256": "37efdc714f406c5069735d16fe4090dd2f56e28f7dc9482a84738f0de577a5a1",
+      "stderr_bytes": 42
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/SOC_domain_exit.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.007921213000372518,
+      "CPU_user_s": 0.0023409999999999998,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 10379264,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "SOC_domain_exit.stdout",
+      "stdout_sha256": "80daa0809765219ce39cbb026fb6005969822976c6a25f1827441e8c2980cb79",
+      "stdout_bytes": 346,
+      "stderr": "SOC_domain_exit.stderr",
+      "stderr_sha256": "ef0b518044e69b9c82dc7af502a333688441ae2e6b5da0b4da573eb2437baea2",
+      "stderr_bytes": 48
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/finite_record_cost_overflow.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.006927083999471506,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.002451,
+      "peak_RSS_bytes": 10383360,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "finite_record_cost_overflow.stdout",
+      "stdout_sha256": "5b485b415b2f510e6a667dee76fa6907b3a01bd2af1027c90aa80f7b63335900",
+      "stdout_bytes": 356,
+      "stderr": "finite_record_cost_overflow.stderr",
+      "stderr_sha256": "aad8006fca45e515ea46cb0f7349010463e320ddf3356db60d6b436874489893",
+      "stderr_bytes": 58
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/x_extra_value.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.006694732999676489,
+      "CPU_user_s": 0.0018969999999999998,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 10391552,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "x_extra_value.stdout",
+      "stdout_sha256": "6a16d345516c5209316da3c7843eab885775080ab30a12ecbb7628751f05a5dd",
+      "stdout_bytes": 341,
+      "stderr": "x_extra_value.stderr",
+      "stderr_sha256": "13710b7637da190146a7bb1f4006fcaa5dc28c13f5d00950a7038b161b484b21",
+      "stderr_bytes": 44
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/x_nonfinite.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.007034807000309229,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.002611,
+      "peak_RSS_bytes": 10403840,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "x_nonfinite.stdout",
+      "stdout_sha256": "6a16d345516c5209316da3c7843eab885775080ab30a12ecbb7628751f05a5dd",
+      "stdout_bytes": 341,
+      "stderr": "x_nonfinite.stderr",
+      "stderr_sha256": "13710b7637da190146a7bb1f4006fcaa5dc28c13f5d00950a7038b161b484b21",
+      "stderr_bytes": 44
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/x_missing_value.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.007126234000679688,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.003019,
+      "peak_RSS_bytes": 10407936,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "x_missing_value.stdout",
+      "stdout_sha256": "6a16d345516c5209316da3c7843eab885775080ab30a12ecbb7628751f05a5dd",
+      "stdout_bytes": 341,
+      "stderr": "x_missing_value.stderr",
+      "stderr_sha256": "13710b7637da190146a7bb1f4006fcaa5dc28c13f5d00950a7038b161b484b21",
+      "stderr_bytes": 44
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/x_outside_entering_support.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.observations.bin",
+        "--prefix",
+        "9"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.006912523000210058,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.004306,
+      "peak_RSS_bytes": 10412032,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "x_outside_entering_support.stdout",
+      "stdout_sha256": "6bb9a2d6a710800eb27ddcc4405e359729e65b7733c2e99e5a84bebcb6048aa3",
+      "stdout_bytes": 359,
+      "stderr": "x_outside_entering_support.stderr",
+      "stderr_sha256": "e162419f3a6982959bccf70b4c914c9c3421e1d04b6639134e724681c1de23e0",
+      "stderr_bytes": 62
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.observations.bin",
+        "--prefix",
+        "252001"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.00707206200058863,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.00203,
+      "peak_RSS_bytes": 10412032,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "prefix_over_cap.stdout",
+      "stdout_sha256": "e28c42ee543f9a58d4d511cc1f801488a0b820a37398d31c71cafbeb9ee0e7d0",
+      "stdout_bytes": 346,
+      "stderr": "prefix_over_cap.stderr",
+      "stderr_sha256": "84bb643872eedad67a82f0d8af79454418a14d1ce91028d21e1846229870b3ef",
+      "stderr_bytes": 44
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.observations.bin",
+        "--prefix",
+        "9",
+        "--sigma",
+        "0.002"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 1,
+      "wall_s": 0.008627578001323855,
+      "CPU_user_s": 0.0022849999999999997,
+      "CPU_system_s": 0.0,
+      "peak_RSS_bytes": 10416128,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "duplicate_sigma_option.stdout",
+      "stdout_sha256": "d4eefa6e41deb53000b4e1b2462426491247d17647d83b865374e982a06784ab",
+      "stdout_bytes": 353,
+      "stderr": "duplicate_sigma_option.stderr",
+      "stderr_sha256": "308400a3235c7068a7a14138957e918dd45aee93147ee3dbdc3a23100f75103a",
+      "stderr_bytes": 56
+    },
+    {
+      "command": [
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+        "--x",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/mixed_current.x.txt",
+        "--sigma",
+        "0.001",
+        "--observations",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/unread_suffix.observations.bin",
+        "--prefix",
+        "1"
+      ],
+      "cwd": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/retained_likelihood_replacement_001/qualification/evaluator_run001",
+      "exit_code": 0,
+      "wall_s": 0.008536134999303613,
+      "CPU_user_s": 0.0,
+      "CPU_system_s": 0.003998,
+      "peak_RSS_bytes": 10420224,
+      "resource_measurement": "os.wait4 for this exact child PID; build commands may include compiler descendants",
+      "timed_out": false,
+      "stdout": "exact_prefix_ignores_suffix.stdout",
+      "stdout_sha256": "041c8ce2762be18bb0239fbc6c696b5ffb78154503b25d2ad91e2021e42f0f61",
+      "stdout_bytes": 11518,
+      "stderr": "exact_prefix_ignores_suffix.stderr",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    }
+  ],
+  "evaluator_counts_on_fabricated_inputs": {
+    "invocations": 22,
+    "model_init_calls": 16,
+    "model_step_calls": 156,
+    "model_predict_calls": 155,
+    "records_accumulated": 154
+  },
+  "direct_physical_reference_calls_on_fabricated_inputs": 728,
+  "canonical_observation_reads": 0,
+  "canonical_model_passes": 0,
+  "canonical_truth_reads": 0,
+  "original_fitter_invocations": 0,
+  "learner_invocations": 0,
+  "source_sha256_after": {
+    "experiments/retained_likelihood_replacement_001/evaluator_qualification.py": "b80765d925b3ac79c47b021e85bc91803eade4c4593b25d9df0646c7fb62f0b9",
+    "experiments/retained_likelihood_replacement_001/stream_evaluator.c": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942",
+    "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+    "plans/retained_likelihood_replacement_001.json": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e"
+  },
+  "sources_unchanged": true,
+  "supervisor_own_peak_RSS_bytes": 14548992,
+  "wall_s_before_receipt": 1.0508161620000465,
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "linux",
+    "uname": [
+      "Linux",
+      "2be9ab533ecc",
+      "6.18.55",
+      "#1 SMP Wed Oct 14 19:45:18 UTC 2026",
+      "x86_64"
+    ]
+  },
+  "limitations": [
+    "Fabricated qualification only; source/binary require independent review and publication before canonical use.",
+    "No production or canonical archive file was opened for model evaluation or truth scoring.",
+    "The sizeof accounting is not complete target SRAM and evaluator peak RSS is a host measurement.",
+    "No likelihood optimum, calibrated uncertainty, global numerical guarantee or firmware readiness is established."
+  ],
+  "artifacts_before_receipt": {
+    "SOC_domain_exit.observations.bin": {
+      "bytes": 32,
+      "sha256": "c859ccda4bb2cd22e3c4ce4b300018db5126d45d40e4a4c24fea2d41497ba942"
+    },
+    "SOC_domain_exit.resources.json": {
+      "bytes": 1280,
+      "sha256": "b6b3aeec871f27aba32d89f7631dd6eb6a5f0b8a12f6b9f55f7af4be8fcf4cc6"
+    },
+    "SOC_domain_exit.stderr": {
+      "bytes": 48,
+      "sha256": "ef0b518044e69b9c82dc7af502a333688441ae2e6b5da0b4da573eb2437baea2"
+    },
+    "SOC_domain_exit.stdout": {
+      "bytes": 346,
+      "sha256": "80daa0809765219ce39cbb026fb6005969822976c6a25f1827441e8c2980cb79"
+    },
+    "buffer_boundary.observations.bin": {
+      "bytes": 4128,
+      "sha256": "34733a0e0c8acc3d2fd05a82c0e11844247305defd4db645d5adc99ac89134cc"
+    },
+    "buffer_boundary.resources.json": {
+      "bytes": 1271,
+      "sha256": "cf770590fb14c3a03f5046412016c6c9abc649ef16ce6679855b7998e5250412"
+    },
+    "buffer_boundary.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "buffer_boundary.stdout": {
+      "bytes": 12067,
+      "sha256": "153ca09a18e1b101829c4197a23fd4ce6bc330ca92d2f30c24ea722a3912d45a"
+    },
+    "buffer_boundary.x.txt": {
+      "bytes": 262,
+      "sha256": "9b1cd094eaaec8a777bba2b6e45010ca6903a2a98087c70242d88aaed404ef79"
+    },
+    "build_evaluator.resources.json": {
+      "bytes": 1309,
+      "sha256": "5c07a3843baddf9b43ac504b5c9b752f6fa9b839e0b1d38f3e05baf76900f315"
+    },
+    "build_evaluator.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_evaluator.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_physical_reference.resources.json": {
+      "bytes": 1213,
+      "sha256": "dec980154b145128c6ce957abd2d6caef657cc6c559333a34d91e34dcf318df9"
+    },
+    "build_physical_reference.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_physical_reference.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler_version.resources.json": {
+      "bytes": 744,
+      "sha256": "4879db2b6f3505ea970a1ce964908728ad89e789ecb183878336f6f30fbb37fd"
+    },
+    "compiler_version.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compiler_version.stdout": {
+      "bytes": 243,
+      "sha256": "e412d6c932acaaea35c743bc158d4ba2400ca0e3df66df406a872b2ce0f8601b"
+    },
+    "duplicate_index.observations.bin": {
+      "bytes": 288,
+      "sha256": "a7e8ccd3fc637f1d15fa4d299594e7d527224a51979f66306f78f5311017afee"
+    },
+    "duplicate_index.resources.json": {
+      "bytes": 1266,
+      "sha256": "c48274a838d07afd8a7dc4d705396e663ff307bcfdde0d25f4fc365518ed3750"
+    },
+    "duplicate_index.stderr": {
+      "bytes": 53,
+      "sha256": "b87629964ce7d7df02e9b98671e9512ab6fb81bf95d76d062eb2bb63093eea30"
+    },
+    "duplicate_index.stdout": {
+      "bytes": 352,
+      "sha256": "8239868e2dca9c256207d1cf6ed107b53263097a8fdcf77fcb345f362f5f18c3"
+    },
+    "duplicate_sigma_option.resources.json": {
+      "bytes": 1320,
+      "sha256": "cfc7f242f104f77a7576f9560737891ae4613747dc6af36341d01a43a0eca97c"
+    },
+    "duplicate_sigma_option.stderr": {
+      "bytes": 56,
+      "sha256": "308400a3235c7068a7a14138957e918dd45aee93147ee3dbdc3a23100f75103a"
+    },
+    "duplicate_sigma_option.stdout": {
+      "bytes": 353,
+      "sha256": "d4eefa6e41deb53000b4e1b2462426491247d17647d83b865374e982a06784ab"
+    },
+    "exact_prefix_ignores_suffix.resources.json": {
+      "bytes": 1290,
+      "sha256": "3bf76c17b25c84d2af32a2fe14a73c62b98978063c143556a5bae18a11748d85"
+    },
+    "exact_prefix_ignores_suffix.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "exact_prefix_ignores_suffix.stdout": {
+      "bytes": 11518,
+      "sha256": "041c8ce2762be18bb0239fbc6c696b5ffb78154503b25d2ad91e2021e42f0f61"
+    },
+    "finite_record_cost_overflow.observations.bin": {
+      "bytes": 32,
+      "sha256": "0101e58af864d9847ad4a4cb3f11c9384f1ca35d23e41743de326edb05137e06"
+    },
+    "finite_record_cost_overflow.resources.json": {
+      "bytes": 1303,
+      "sha256": "1b5e409b218e2ef84328c04ad602847a8f9b6da3702bedf19053d1a81a2c5f60"
+    },
+    "finite_record_cost_overflow.stderr": {
+      "bytes": 58,
+      "sha256": "aad8006fca45e515ea46cb0f7349010463e320ddf3356db60d6b436874489893"
+    },
+    "finite_record_cost_overflow.stdout": {
+      "bytes": 356,
+      "sha256": "5b485b415b2f510e6a667dee76fa6907b3a01bd2af1027c90aa80f7b63335900"
+    },
+    "mixed_current.observations.bin": {
+      "bytes": 288,
+      "sha256": "d74dae66d808138fb6c3cd0e9bbeff746e42e8d85c91a42e8f01d88994d11a8e"
+    },
+    "mixed_current.resources.json": {
+      "bytes": 1274,
+      "sha256": "bc2f78fd4a5da8da5fc642bb46800435a458ff5242940d463c1d02a9e12a326b"
+    },
+    "mixed_current.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "mixed_current.stdout": {
+      "bytes": 12050,
+      "sha256": "1da2f906707f5425f0e01b0c08f7d16075f4d2519c2e28b3810ca792fe032165"
+    },
+    "mixed_current.x.txt": {
+      "bytes": 262,
+      "sha256": "9b1cd094eaaec8a777bba2b6e45010ca6903a2a98087c70242d88aaed404ef79"
+    },
+    "negative_dt.observations.bin": {
+      "bytes": 32,
+      "sha256": "fc0204b57558fa3249e0e4f0e90eea9be5f491028ff26d52d30b3ae1c3975e9a"
+    },
+    "negative_dt.resources.json": {
+      "bytes": 1268,
+      "sha256": "16c9d4e65acf6eec249ac547b56583129cc47f991b4b653e484c9f542691fe4f"
+    },
+    "negative_dt.stderr": {
+      "bytes": 42,
+      "sha256": "37efdc714f406c5069735d16fe4090dd2f56e28f7dc9482a84738f0de577a5a1"
+    },
+    "negative_dt.stdout": {
+      "bytes": 340,
+      "sha256": "488bbee31260e5b9fd823063935c90e087a65b789d2391f88ab842b522871119"
+    },
+    "nonfinite_current.observations.bin": {
+      "bytes": 32,
+      "sha256": "758dcd4583a673a44fce99548cb86ac08d1c5f207ba9debe85994370d6ec8d02"
+    },
+    "nonfinite_current.resources.json": {
+      "bytes": 1273,
+      "sha256": "843e22ab512ece3c98dabcadcb02e793573b54f0df02f930873f6fd30c369d8b"
+    },
+    "nonfinite_current.stderr": {
+      "bytes": 47,
+      "sha256": "b3a62ef44473828c5fca40d119aa930c99a96820eb3db60fe2967920739502ed"
+    },
+    "nonfinite_current.stdout": {
+      "bytes": 345,
+      "sha256": "dff9b0654a0325c99d16ba089324d3cbbab0fc35ab606550f3b2b478ac6a258f"
+    },
+    "nonfinite_dt.observations.bin": {
+      "bytes": 32,
+      "sha256": "521c760db8a30eaac4c90396af2c5b2cb47a82295218e01da7bf9ed0099cee79"
+    },
+    "nonfinite_dt.resources.json": {
+      "bytes": 1271,
+      "sha256": "54bf0651ad6d4f12024ad605227a23f3473ee56a3c803da8d8c05005866e8ee0"
+    },
+    "nonfinite_dt.stderr": {
+      "bytes": 47,
+      "sha256": "b3a62ef44473828c5fca40d119aa930c99a96820eb3db60fe2967920739502ed"
+    },
+    "nonfinite_dt.stdout": {
+      "bytes": 345,
+      "sha256": "dff9b0654a0325c99d16ba089324d3cbbab0fc35ab606550f3b2b478ac6a258f"
+    },
+    "nonfinite_voltage.observations.bin": {
+      "bytes": 32,
+      "sha256": "9baffb0f15791d99318bbf99dcbf29eafa31cd74c314b0f28cdc04e5343d0380"
+    },
+    "nonfinite_voltage.resources.json": {
+      "bytes": 1273,
+      "sha256": "d19e2e8ad979877863334a4fba3a49c5fe134c35757a8d6d848b9f08af3750fb"
+    },
+    "nonfinite_voltage.stderr": {
+      "bytes": 47,
+      "sha256": "b3a62ef44473828c5fca40d119aa930c99a96820eb3db60fe2967920739502ed"
+    },
+    "nonfinite_voltage.stdout": {
+      "bytes": 345,
+      "sha256": "dff9b0654a0325c99d16ba089324d3cbbab0fc35ab606550f3b2b478ac6a258f"
+    },
+    "original_model.so": {
+      "bytes": 20112,
+      "sha256": "031a38712500bccfd06c1b5e362ca63271a5df03da3b7a3c1082fc8daf87b50a"
+    },
+    "prefix_over_cap.resources.json": {
+      "bytes": 1268,
+      "sha256": "54d046f8e74aa70b72ce42b91350a9eb3242bcdf4903aa7136911ab4aa302b63"
+    },
+    "prefix_over_cap.stderr": {
+      "bytes": 44,
+      "sha256": "84bb643872eedad67a82f0d8af79454418a14d1ce91028d21e1846229870b3ef"
+    },
+    "prefix_over_cap.stdout": {
+      "bytes": 346,
+      "sha256": "e28c42ee543f9a58d4d511cc1f801488a0b820a37398d31c71cafbeb9ee0e7d0"
+    },
+    "reservation.json": {
+      "bytes": 932,
+      "sha256": "3bedaa9b7c73323d9687bf0c479e32a95b4943a188309704cbe358c714dfe1eb"
+    },
+    "stream_evaluator.bin": {
+      "bytes": 34240,
+      "sha256": "74ac92c6d81f50af73a0568ea2e853993ecdd2729e4e544a5132eb455ddb97bb"
+    },
+    "stream_evaluator.bin-scm_model.su": {
+      "bytes": 728,
+      "sha256": "1f0d59e827d4e85eac4d5548b22f586bd61095040e08e6e09d3ce6a8bdd0e0f8"
+    },
+    "stream_evaluator.bin-stream_evaluator.su": {
+      "bytes": 1151,
+      "sha256": "fbcb5d0f6bf8af154fd0c589bd73d8aab99569539c9ef80eb978f85d8b486c53"
+    },
+    "truncated_record.observations.bin": {
+      "bytes": 287,
+      "sha256": "4b399a9646856ffc9a2d79156c7fb0a1e1410b3c6f973442d8df16f1abcac44e"
+    },
+    "truncated_record.resources.json": {
+      "bytes": 1270,
+      "sha256": "ef6fbbaf7e76711bb108e8ce8a9add57ee5e6c166160d6f1885575f841e57a25"
+    },
+    "truncated_record.stderr": {
+      "bytes": 46,
+      "sha256": "17f3958c8f9593a6e33072661ea3c19e95cd8a297a1c406b379f4453cac4a462"
+    },
+    "truncated_record.stdout": {
+      "bytes": 345,
+      "sha256": "8dd97ab85661d9581cb42ca64d0f1dae20a92e7138f91bac1e96038a4ffc8a76"
+    },
+    "unread_suffix.observations.bin": {
+      "bytes": 63,
+      "sha256": "a543c186e5f0116d3f485f8301cf8ba6c56f2e0839a63fa0dfb5eaa42f87ebbe"
+    },
+    "wrong_first_index.observations.bin": {
+      "bytes": 288,
+      "sha256": "0bffa9351e3b78f3b70ede11d195b0e2a6291b41ed145f06f9b7b6740d0d381a"
+    },
+    "wrong_first_index.resources.json": {
+      "bytes": 1273,
+      "sha256": "3849b139a35f673c957175e1b3056663d90dc0e7fa0f53c24fe5b14b798e6116"
+    },
+    "wrong_first_index.stderr": {
+      "bytes": 53,
+      "sha256": "2ed48d644bfb9cd7a56f9acf761014050388f3597289abb293700e45b80949ed"
+    },
+    "wrong_first_index.stdout": {
+      "bytes": 352,
+      "sha256": "68ffc9c37e381ee4b31b0e92a80e537e89901aab147a0ac3e1c5c66fdf690952"
+    },
+    "x_extra_value.resources.json": {
+      "bytes": 1274,
+      "sha256": "7886436dfd70590d69b38ae07f5bddc45d5ea9c2926c87b4ba02d6bf8a805c74"
+    },
+    "x_extra_value.stderr": {
+      "bytes": 44,
+      "sha256": "13710b7637da190146a7bb1f4006fcaa5dc28c13f5d00950a7038b161b484b21"
+    },
+    "x_extra_value.stdout": {
+      "bytes": 341,
+      "sha256": "6a16d345516c5209316da3c7843eab885775080ab30a12ecbb7628751f05a5dd"
+    },
+    "x_extra_value.x.txt": {
+      "bytes": 264,
+      "sha256": "d3c3fb815f4b14fbda9ea93f28113517315803f5aea51950168fe73558aec205"
+    },
+    "x_missing_value.resources.json": {
+      "bytes": 1267,
+      "sha256": "c66ebc4784edfeedb1e2e394c0193a1f6f0fc5963cebfbc94b164769662f60e1"
+    },
+    "x_missing_value.stderr": {
+      "bytes": 44,
+      "sha256": "13710b7637da190146a7bb1f4006fcaa5dc28c13f5d00950a7038b161b484b21"
+    },
+    "x_missing_value.stdout": {
+      "bytes": 341,
+      "sha256": "6a16d345516c5209316da3c7843eab885775080ab30a12ecbb7628751f05a5dd"
+    },
+    "x_missing_value.x.txt": {
+      "bytes": 159,
+      "sha256": "990ae295342ffd5d86934c1ed78897814dc0a620dd4c8ab923f6282b8b8aa742"
+    },
+    "x_nonfinite.resources.json": {
+      "bytes": 1255,
+      "sha256": "24d2612ebf16ed2723faf17243bf6d85ca4f7bb6011da32e12c3d9df2ff0d372"
+    },
+    "x_nonfinite.stderr": {
+      "bytes": 44,
+      "sha256": "13710b7637da190146a7bb1f4006fcaa5dc28c13f5d00950a7038b161b484b21"
+    },
+    "x_nonfinite.stdout": {
+      "bytes": 341,
+      "sha256": "6a16d345516c5209316da3c7843eab885775080ab30a12ecbb7628751f05a5dd"
+    },
+    "x_nonfinite.x.txt": {
+      "bytes": 149,
+      "sha256": "acc3201b7e37161c8d0cc37c1e30fff4e92f1e6b7c82ebaf5687d345dc5c8f4e"
+    },
+    "x_outside_entering_support.resources.json": {
+      "bytes": 1300,
+      "sha256": "79d4f4ddcb1970b48c01bf26ba0f985210e32bf36068f937add884f831117275"
+    },
+    "x_outside_entering_support.stderr": {
+      "bytes": 62,
+      "sha256": "e162419f3a6982959bccf70b4c914c9c3421e1d04b6639134e724681c1de23e0"
+    },
+    "x_outside_entering_support.stdout": {
+      "bytes": 359,
+      "sha256": "6bb9a2d6a710800eb27ddcc4405e359729e65b7733c2e99e5a84bebcb6048aa3"
+    },
+    "x_outside_entering_support.x.txt": {
+      "bytes": 163,
+      "sha256": "e196ff682d2e829cbbede59dfcb4a40b731a6d94866c9b02eadb9bd94ebae13d"
+    },
+    "zero_H_chain.observations.bin": {
+      "bytes": 288,
+      "sha256": "ad54fc3d7ee25a029457e5ba6b993248f0181392d66aa9348e826798318fc1a7"
+    },
+    "zero_H_chain.resources.json": {
+      "bytes": 1255,
+      "sha256": "6ad106e2880876b30f13e5ddc2490a3bbaf69ad3775e371a5dd744bfc236e98e"
+    },
+    "zero_H_chain.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "zero_H_chain.stdout": {
+      "bytes": 10217,
+      "sha256": "ad3457ad4c1507e0cd018424c54e02a8c36c582101254dd89a3557efaa452b99"
+    },
+    "zero_H_chain.x.txt": {
+      "bytes": 243,
+      "sha256": "270df63b7df9a388ed9dc34fe5504497ba2dca42f60b6c1d89951b2a144d9008"
+    },
+    "zero_current.observations.bin": {
+      "bytes": 128,
+      "sha256": "7e5b5be013111ebb0a9a8f32993e5951fcb9e9450f61f3093f4b671182a2ae0f"
+    },
+    "zero_current.resources.json": {
+      "bytes": 1256,
+      "sha256": "6affdfbbc931213b5b333b74bae9477c43f41a87eeef7959091286dc3dc61649"
+    },
+    "zero_current.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "zero_current.stdout": {
+      "bytes": 8117,
+      "sha256": "612d71d597b8a00d70c77d9608732e0a5fb469bd2f15a70c338aa497df011aea"
+    },
+    "zero_current.x.txt": {
+      "bytes": 262,
+      "sha256": "9b1cd094eaaec8a777bba2b6e45010ca6903a2a98087c70242d88aaed404ef79"
+    },
+    "zero_dt.observations.bin": {
+      "bytes": 32,
+      "sha256": "361dbc035a0ea01b077d01560cc9872027d571a9f0e36fe3dbaa6a7b5815662a"
+    },
+    "zero_dt.resources.json": {
+      "bytes": 1236,
+      "sha256": "d9101789fb4e9b40904bfa9384f31c989d95372396fa6bbecf9bb07b0a3e7506"
+    },
+    "zero_dt.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "zero_dt.stdout": {
+      "bytes": 6755,
+      "sha256": "07cef622522e614ae7ad8933ddda7a8c7007300e0d734f474157ad5e039b6073"
+    },
+    "zero_dt.x.txt": {
+      "bytes": 262,
+      "sha256": "9b1cd094eaaec8a777bba2b6e45010ca6903a2a98087c70242d88aaed404ef79"
+    },
+    "zero_samples.observations.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "zero_samples.resources.json": {
+      "bytes": 1256,
+      "sha256": "1af30854ab6359c315aa6a58c640f8caf8531bd4d7ff1c4ee6968aad095e6881"
+    },
+    "zero_samples.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "zero_samples.stdout": {
+      "bytes": 5550,
+      "sha256": "9ab71e8fdc187d431ab8bbc310c40fb44890d025d85c96dff47e7796296f0458"
+    },
+    "zero_samples.x.txt": {
+      "bytes": 262,
+      "sha256": "9b1cd094eaaec8a777bba2b6e45010ca6903a2a98087c70242d88aaed404ef79"
+    }
+  }
+}

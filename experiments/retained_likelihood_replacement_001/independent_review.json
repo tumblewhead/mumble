@@ -1,0 +1,508 @@
+{
+  "schema": "mumble_retained_likelihood_replacement_independent_review_v1",
+  "status": "pre_execution_implementation_review_passed",
+  "base_revision": "f632c268f69ad10f856f761f5542c35d4d4c96fd",
+  "design": {
+    "path": "plans/retained_likelihood_replacement_001.json",
+    "bytes": 14507,
+    "sha256": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e",
+    "status": "pass_as_unexecuted_design"
+  },
+  "stages": {
+    "design": "pass",
+    "anchor_input_algebra": "pass",
+    "executable_contract": "pass_final_failure_and_outer_closure_amendment",
+    "C_evaluator": "pass",
+    "prior_surrogate_solver": "pass_with_documented_solver_limitations",
+    "supervisor": "pass",
+    "fabricated_qualification_evidence": "pass_with_documented_math_solver_limitations",
+    "canonical_execution": "not_started",
+    "fabricated_evaluator_qualification_evidence": "pass",
+    "fabricated_math_qualification_evidence": "pass_with_documented_solver_limitations",
+    "solve_worker": "pass",
+    "fabricated_worker_qualification_evidence": "pass",
+    "outer_observer": "pass",
+    "fabricated_supervisor_qualification_evidence": "pass",
+    "post_inference_reporting_source": "pass"
+  },
+  "material_blockers": [],
+  "anchor_preflight": {
+    "status": "pass",
+    "scope": "Read-only hash/input-integral/anchor algebra; no model, optimizer, source generation or truth access",
+    "base_revision": "f632c268f69ad10f856f761f5542c35d4d4c96fd",
+    "design_sha256": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e",
+    "free_stdout": {
+      "path": "experiments/historical_likelihood_control_001/attempt002/free/stdout.json",
+      "bytes": 18734,
+      "sha256": "1c85adcceef8245968c8399f75091cb4b50f2186a944285961d65683651ae06b",
+      "git_blob_sha1": "095d4f52e969361a92ee2219d3ae9851edf77eef"
+    },
+    "observations": {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-conditional-evidence/experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+      "bytes": 16128000,
+      "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+      "prefix_records": 252000,
+      "prefix_sha256": "a2219e78d29ddab4cfd1e02a7b6b520dc74fc0229e995b1aba0044bb240b269d"
+    },
+    "input_integrals": {
+      "charge_Ah": 0.01707738095242571,
+      "minimum_prefix_charge_Ah_including_zero": 0.0,
+      "maximum_prefix_charge_Ah_including_zero": 0.01707738095242571,
+      "minimum_charge_next_index": 0,
+      "maximum_charge_next_index": 252000,
+      "elapsed_s": 7199.999999959603,
+      "maximum_absolute_current_A": 0.075,
+      "arithmetic": "Sequential binary64 dt*I/3600 accumulation, matching the unchanged model order; initial zero charge included."
+    },
+    "anchors": [
+      {
+        "id": "public_old",
+        "x": [
+          -3.0484125313829042,
+          -0.7458274383888583,
+          1.90333124488516,
+          5.0106352940962555,
+          5.703782474656201,
+          -2.8134107167600364,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.024,
+          0.68,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "within_entering_box": true,
+        "Q_Ah": 0.06,
+        "h0": 0.0,
+        "prefix_SOC_min": 0.3953769841262382,
+        "prefix_SOC_max": 0.68,
+        "lower_path_slack": 0.3953769841262382,
+        "upper_path_slack": 0.31999999999999995,
+        "endpoint_SOC": 0.3953769841262382
+      },
+      {
+        "id": "completed_free_replacement",
+        "x": [
+          -2.53575381309488,
+          -0.4224404125109073,
+          2.0148743625778036,
+          5.798919407649255,
+          6.216945726620952,
+          -2.7379363200550615,
+          0.16671415752278962,
+          0.21807648779619637,
+          0.26520748265802835,
+          0.32988611341715224,
+          0.02995993166562699,
+          0.7799604966417,
+          -0.0025979677687409993,
+          0.004333230865170002,
+          0.00593601847065372,
+          0.3488435804885111
+        ],
+        "within_entering_box": true,
+        "Q_Ah": 0.06470373701300736,
+        "h0": 0.3488435804885111,
+        "prefix_SOC_min": 0.5160285857384294,
+        "prefix_SOC_max": 0.7799604966417,
+        "lower_path_slack": 0.5160285857384294,
+        "upper_path_slack": 0.22003950335830003,
+        "endpoint_SOC": 0.5160285857384294
+      }
+    ],
+    "legacy_alpha_point_roundtrip_max_absolute_error": 0.0,
+    "new_canonical_model_passes": 0,
+    "optimizer_executions": 0,
+    "truth_reads": 0
+  },
+  "review_requirements": [
+    "Use the exact common supported mixture in the original entering x chart. Whole-mixture normalization cancels from the specified common-prior cost comparisons; it is not an excuse to renormalize components independently or report unsupported posterior probabilities.",
+    "Implement u0=H*h0 and both product derivatives, full 16-column joint gradient/Gram, actual sample chronology and sigma whitening once. Numerical chart scales must be propagated consistently to gradients, Hessians and target maps.",
+    "The mixture prior Hessian includes weighted component precision minus responsibility gradient covariance and can be indefinite. It must not be replaced by a single Gaussian precision or silently repaired for an uncertainty claim.",
+    "Validate both anchors on the complete supported path before the first canonical model step. Include zero in the input charge extrema. Do not initialize the prefix from a corrected endpoint state.",
+    "Count all surrogate objective/gradient evaluations, model passes and source operations. Two cheap solves must never invoke the battery model, including their convergence checks. Fabricated qualification work is explicitly separate.",
+    "Qualify replacement by the exact-prefix nonlinear likelihood plus the identical prior penalty at both returned candidates, with a frozen arithmetic-resolution account. A bound for summing computed residuals is not by itself a rigorous real-model/libm error certificate.",
+    "Retire the old evidence block atomically; do not add its replacement, a replayed likelihood, or a derived posterior as independent evidence. Keep the observation cursor fixed.",
+    "Preserve source/input/binary hashes, exclusive output/failure receipts, child and supervisor resources, four-pass/two-solve caps and post-inference-only truth.",
+    "Any local shape remains diagnostic, especially under active constraints or indefinite curvature; no covariance clipping, null-space invention, global exclusion, calibration or embedded-budget promotion."
+  ],
+  "activity": {
+    "canonical_model_passes": 0,
+    "optimizer_executions": 0,
+    "source_generations": 0,
+    "truth_reads": 0,
+    "git_writes": 0,
+    "production_edits": 0,
+    "read_only_original_observation_records_checked": 252000
+  },
+  "interpretation_limits": [
+    "The replacement anchor is reused from the completed expensive likelihood fit; a successful transaction does not establish autonomous anchor selection.",
+    "The old public-mean frozen block does not reconstruct the actual recursive approximation.",
+    "This is a finite common-prior replacement-mechanics prototype, not a posterior integration, full nonlinear MAP reference, coverage qualification or near-10KiB implementation."
+  ],
+  "evaluator_review": {
+    "status": "pass",
+    "source_review": "Full static source and fabricated-reference audit; no source/evaluator/physical model/fixture execution by reviewer.",
+    "source_sha256": {
+      "experiments/retained_likelihood_replacement_001/evaluator_qualification.py": "b80765d925b3ac79c47b021e85bc91803eade4c4593b25d9df0646c7fb62f0b9",
+      "experiments/retained_likelihood_replacement_001/stream_evaluator.c": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942",
+      "src/scm_model.c": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646",
+      "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+      "src/scm_hypothesis.c": "779f4854cabf434db70b71a47b098fe15b1b54d54b5c440df2c2393a2c1fecb5",
+      "plans/retained_likelihood_replacement_001.json": "d49da33ddb5a578f8bcbaa6d2804fbecef2008dc0faabf701c66b6a004719c8e"
+    },
+    "receipt": {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/receipt.json",
+      "bytes": 75620,
+      "sha256": "822ac641214f8ec938b5081888a656a7640686f7aa25b0834d21d37cf4889090"
+    },
+    "artifacts_verified": 106,
+    "source_identities_verified": 6,
+    "fabricated_assertions_reported": 5819,
+    "check_groups_verified": 101,
+    "largest_reported_error_over_frozen_reconstruction_tolerance": 0.0015860448104245068,
+    "retained_raw_evaluator_counts_verified": {
+      "invocations": 22,
+      "model_init_calls": 16,
+      "model_step_calls": 156,
+      "model_predict_calls": 155,
+      "records_accumulated": 154
+    },
+    "successful_fabricated_children": 7,
+    "intentional_error_children": 15,
+    "separate_physical_reference_steps_reported": 728,
+    "workspace_bytes": 10680,
+    "failures": [],
+    "findings": [
+      "The independent physical tangent and separate physical C API finite differences exercise the complete16D entering map, H*h0 product, all gradient/Gram entries and full endpoint derivative map.",
+      "Zero-dt, zero-current, zero-H, zero-sample and buffer-boundary cases plus malformed/domain/overflow/prefix controls are retained.",
+      "Exact source and binary identities match the qualification receipt; all raw evaluator attempted-call counters reconcile.",
+      "Canonical wrapper must bind the source/prefix identity and validate complete path support before model stepping. The evaluator intentionally reads only the requested prefix.",
+      "The 10680-byte workspace excludes additional stack/runtime and external evidence; it is a host qualification figure and already exceeds the complete10240-byte target ceiling by itself.",
+      "Reconstruction tolerances and compensated summand scales do not establish real-model/libm bounds, posterior fidelity or coverage."
+    ]
+  },
+  "math_review": {
+    "status": "pass_with_documented_solver_limitations",
+    "source_review": "Static source review plus independent algebra on saved fabricated output only; no repository module import or optimizer/model invocation.",
+    "saved_evidence_audit": {
+      "status": "pass",
+      "scope": "Independent arithmetic from saved fabricated outputs only; no repository module imported, no optimizer or physical model invoked.",
+      "identities": [
+        {
+          "path": "experiments/retained_likelihood_replacement_001/replacement_math.py",
+          "sha256": "870583ec263f4bf4e69b80aa9fc06402336deb606aeaa88533389ddce715261b",
+          "bytes": 30940
+        },
+        {
+          "path": "experiments/retained_likelihood_replacement_001/math_qualification.py",
+          "sha256": "ca8760cb31920f4e8be22f243ba796c0656d6dcf460a505e38c59318c32b8cf2",
+          "bytes": 17857
+        },
+        {
+          "path": "experiments/retained_likelihood_replacement_001/qualification/math_policy.json",
+          "sha256": "f3d00b364c70c9b8d6d45af359f64ccd6a3fe7daaa44f2463d0fb0745760f992",
+          "bytes": 7198
+        },
+        {
+          "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt001.json",
+          "sha256": "d33ba7faa9ed928f71d486d514bdf7e1272473a8caaf6737115029c238f77a2f",
+          "bytes": 8985
+        },
+        {
+          "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt002.json",
+          "sha256": "43086bb39747750f6891c4af3fd967feb44ba7414f11904de98dfd50aeb8770c",
+          "bytes": 240096
+        },
+        {
+          "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt003.json",
+          "sha256": "e7755a7212f79c8a764b0f6ad242e1cb2ed233db7b9e9233af31b9911965ed46",
+          "bytes": 190207
+        },
+        {
+          "path": "experiments/retained_likelihood_replacement_001/qualification/math_attempt004.json",
+          "sha256": "59afd76e83ba823dcc4d714e7e67978835a18ec0ec299e1b9cfb72ca9e281c56",
+          "bytes": 190931
+        }
+      ],
+      "reported_checks_all_true": 59,
+      "KKT_and_prior_reductions": [
+        {
+          "pair": "pair_a",
+          "arm": "frozen",
+          "name": "dense_interior",
+          "status": "converged",
+          "independent_expected_status": "converged",
+          "stationarity_relative": 2.6731309543255395e-10,
+          "complementarity_scaled": 1.1561157897178446e-09,
+          "dual_violation_scaled": 4.60138140270402e-11,
+          "independent_KKT_max_abs_difference": 0.0,
+          "independent_prior_cost_abs_difference": 8.881784197001252e-16,
+          "independent_prior_Hessian_max_abs_difference": 7.105427357601002e-15,
+          "iterations": 11,
+          "combined_evaluations": 12,
+          "final_verification": 1,
+          "warning_count": 0
+        },
+        {
+          "pair": "pair_a",
+          "arm": "replacement",
+          "name": "dense_ill_conditioned_interior",
+          "status": "unresolved",
+          "independent_expected_status": "unresolved",
+          "stationarity_relative": 1.8502656557543203e-09,
+          "complementarity_scaled": 1.978775491959342e-08,
+          "dual_violation_scaled": 7.529244837802827e-10,
+          "independent_KKT_max_abs_difference": 0.0,
+          "independent_prior_cost_abs_difference": 8.881784197001252e-16,
+          "independent_prior_Hessian_max_abs_difference": 2.1316282072803006e-14,
+          "iterations": 21,
+          "combined_evaluations": 22,
+          "final_verification": 1,
+          "warning_count": 0
+        },
+        {
+          "pair": "pair_b",
+          "arm": "frozen",
+          "name": "H_lower_and_h_upper_active",
+          "status": "converged",
+          "independent_expected_status": "converged",
+          "stationarity_relative": 9.405335297610119e-11,
+          "complementarity_scaled": 1.2090468201402246e-10,
+          "dual_violation_scaled": 0.0,
+          "independent_KKT_max_abs_difference": 5.169878828456423e-26,
+          "independent_prior_cost_abs_difference": 4.440892098500626e-16,
+          "independent_prior_Hessian_max_abs_difference": 0.0,
+          "iterations": 22,
+          "combined_evaluations": 23,
+          "final_verification": 1,
+          "warning_count": 0
+        },
+        {
+          "pair": "pair_b",
+          "arm": "replacement",
+          "name": "SOC_path_lower_active",
+          "status": "unresolved",
+          "independent_expected_status": "unresolved",
+          "stationarity_relative": 2.874961202462067e-09,
+          "complementarity_scaled": 5.069263476057843e-09,
+          "dual_violation_scaled": 0.0,
+          "independent_KKT_max_abs_difference": 1.3877787807814457e-17,
+          "independent_prior_cost_abs_difference": 1.7763568394002505e-15,
+          "independent_prior_Hessian_max_abs_difference": 7.105427357601002e-15,
+          "iterations": 59,
+          "combined_evaluations": 45,
+          "final_verification": 1,
+          "warning_count": 0
+        }
+      ],
+      "known_point_reductions": [
+        {
+          "known_point": "dense_interior",
+          "max_error_in_public_SD": 1.9875801297316232e-08,
+          "tolerance": 3.814697265625e-06
+        },
+        {
+          "known_point": "dense_ill_conditioned_interior",
+          "max_error_in_public_SD": 2.2138465828612667e-07,
+          "tolerance": 3.814697265625e-06
+        },
+        {
+          "known_point": "H_lower_and_h_upper_active",
+          "max_error_in_public_SD": 8.419259455725997e-10,
+          "tolerance": 3.814697265625e-06
+        },
+        {
+          "known_point": "SOC_path_lower_active",
+          "max_error_in_public_SD": 7.678868824438479e-09,
+          "tolerance": 3.814697265625e-06
+        }
+      ],
+      "fabricated_optimizer_invocations_total": 18,
+      "current_source_equal_in_attempts003_and004": true,
+      "bookkeeping_notes": [
+        "attempt001 failed_count includes the recorded exception; it is consistent with its policy ledger."
+      ],
+      "canonical_model_passes": 0,
+      "optimizer_executions_by_reviewer": 0
+    },
+    "policy": {
+      "independent_KKT_tolerance": 2.346785832000663e-09,
+      "max_iterations_per_solve": 100,
+      "max_combined_evaluations_per_solve_including_final": 1024,
+      "starts_per_arm": 1,
+      "solves": 2,
+      "retries": 0,
+      "maximum_known_point_error_in_public_SD": 2.2138465828612667e-07
+    },
+    "findings": [
+      "The common whole-mixture kernel uses the original entering x base measure, including the negative responsibility-covariance Hessian term; independent cosh-form reductions agree.",
+      "All 16 coordinates and dense Gram correlations remain present; H*h0 is a forward-model map and does not redefine the chosen density measure.",
+      "The two arms share the exact public prior SD coordinate scale, common warm start, fixed pair objective scale and full path support. Support arithmetic matches charge/exp(logQ), and negative raw slacks are not admitted.",
+      "Actual objective/gradient work, Hessian-triggered work and one forced final verification share the evaluation cap. Cached final prior is reused for curvature reporting.",
+      "Raw optimizer success is insufficient: strict feasibility and independently checked scaled stationarity, complementarity and dual signs are required for converged status.",
+      "The 2 easy synthetic cases converge; the 2 hard cases remain accurately located but KKT-unresolved. Passing qualification establishes honest status handling, not universal optimizer convergence.",
+      "All failed fabricated attempts and pre-canonical policy changes are retained. Attempts003 and004 use identical solver bytes and numerical thresholds; the final qualification explicitly preserves the hard-case unresolved flags.",
+      "No covariance inversion or eigenvalue alteration is performed. Floating curvature spectra and optimizer QR/SVD warnings cannot establish posterior uncertainty or calibration."
+    ],
+    "remaining_contract_requirements": [
+      "Bind the accepted feasible-point policy and exact frozen arithmetic allowance to the published executable contract.",
+      "Retain per-solve started/completed markers and partial output under unexpected exceptions; source solve_pair itself returns after both arms."
+    ]
+  },
+  "pre_execution_acceptance_policy_review": {
+    "status": "pass_pending_binding_to_executable_contract",
+    "authority": "Root decision before any canonical pass on 2026-10-27",
+    "unresolved_candidates": "Both finite strictly feasible KKT-unresolved candidates receive their already-budgeted exact-history audits.",
+    "acceptance": "Both candidates finite and strictly feasible, all input/domain/resource/parity checks valid, and identical-prior computed nonlinear objective decrease exceeds the frozen arithmetic-resolution allowance. KKT convergence is not an additional transaction requirement.",
+    "required_label": "accepted_feasible_point_improvement",
+    "limits": [
+      "Retain individual raw and independent KKT statuses.",
+      "Stronger converged-surrogate wording requires both solves to pass.",
+      "Computed-term arithmetic resolution does not certify all model recurrence or libm error.",
+      "No MAP, global optimum, posterior fidelity, supported-moment or coverage claim."
+    ]
+  },
+  "shape_reporting_review": {
+    "status": "final_static_source_review_passed",
+    "findings": [
+      "Positive definiteness and interiority permit local matrix diagnostics but do not establish supported posterior moments or valid intervals.",
+      "At a nonstationary candidate, a local quadratic includes a linear term; candidate-centered intervals based only on inverse curvature are not justified.",
+      "If retained for KKT-unresolved candidates, inverse-curvature quantities must be labeled nonstationary shape scales, with raw gradient and status visible.",
+      "Audit Gram plus prior Hessian is a Gauss-Newton approximation, not the exact nonlinear objective Hessian. Surrogate stationarity does not establish stationarity of the audited nonlinear objective.",
+      "Preserve full joint scaling/endpoint transport; do not invert non-PD or active-support cases, or repair matrices to produce uncertainty."
+    ],
+    "identity": {
+      "path": "experiments/retained_likelihood_replacement_001/reporting.py",
+      "bytes": 46986,
+      "sha256": "81dc98377d55a96e6a72373c5c7d3eea16a370d14eff89821ce49f56a7eadc26"
+    },
+    "outer_closure_gate": "Verified before inference_closed=True and before truth access, including combined closed-byte accounting."
+  },
+  "execution_contract_review": {
+    "status": "pass",
+    "identity": {
+      "path": "plans/retained_likelihood_replacement_execution_001.json",
+      "bytes": 13839,
+      "sha256": "ad51d651ee68b1a19c1685f8486faa6c55e6d7ad21950fcfc2be42dc23aca3a1"
+    },
+    "policy_matches_qualified_configuration_exactly": true,
+    "findings": [
+      "The common supported prior and original entering chart remain fixed; likelihood blocks are alternatives and the prior is owned once.",
+      "The sequence permits at most four prefix model passes and two cheap solves, with no new full-history optimizer, retries or truth input.",
+      "Every canonical model point requires strict support before launch; entire-prefix charge extrema include initial zero.",
+      "Finite strictly feasible unresolved candidates receive their existing audit passes. Acceptance uses only the predeclared computed-objective decrease and other validity checks; convergence is recorded separately.",
+      "The frozen gamma allowance concerns computed summands and fixed prior-cost values; it explicitly excludes a real-model/libm or prior-evaluation certificate.",
+      "CPU, wall, own/child RSS, output bytes and closed identity checks remain supervisor obligations.",
+      "Post-inference reporting is limited to two prior algebra reconstructions and at most one verified endpoint truth record, with no candidate-centered intervals or posterior claims."
+    ],
+    "earlier_reviewed_contract_sha256": "6778f7b0295298a7f6c1837b0c2c7209e7b64601996cf9cdf93aba8cf53a26e5",
+    "final_amendment": "Failure-only bounded emergency closure and mandatory outer resource closure; successful finite limits unchanged."
+  },
+  "worker_review": {
+    "status": "pass",
+    "identities": {
+      "experiments/retained_likelihood_replacement_001/solve_worker.py": {
+        "sha256": "94a729a3991b8d89f2163be01d61a38cd63eef10e99b9e98471a1c7c5e8df658",
+        "bytes": 28128
+      },
+      "experiments/retained_likelihood_replacement_001/qualification/worker_checks.json": {
+        "sha256": "2e07ca76ec7faf349b9a0f7e2c10e1935723296f33487b3a750f5ee870fadbb7",
+        "bytes": 25720
+      },
+      "experiments/retained_likelihood_replacement_001/qualification/worker_configuration.json": {
+        "sha256": "1c2f7264cfbad4fac60a2db32032d9cb5c410067f9c3ba784e73721024642106",
+        "bytes": 6877
+      }
+    },
+    "policy_and_public_prior_match_math_qualification_exactly": true,
+    "saved_qualification_checks": 26,
+    "case_summaries": {
+      "two_returns": {
+        "status": "completed",
+        "counts": {
+          "started_markers": 2,
+          "solver_calls_entered": 2,
+          "solver_calls_returned": 2,
+          "results_saved": 2
+        },
+        "stub_call_order": [
+          "frozen",
+          "replacement"
+        ],
+        "first_result_status": "unresolved",
+        "output_file_count": 10
+      },
+      "second_call_exception": {
+        "status": "failed",
+        "counts": {
+          "started_markers": 2,
+          "solver_calls_entered": 2,
+          "solver_calls_returned": 1,
+          "results_saved": 1
+        },
+        "stub_call_order": [
+          "frozen",
+          "replacement"
+        ],
+        "first_result_status": "unresolved",
+        "output_file_count": 9
+      }
+    },
+    "stub_solver_calls": 4,
+    "real_optimizer_calls": 0,
+    "model_calls": 0,
+    "canonical_input_reads": 0,
+    "findings": [
+      "The worker imports only the hash-pinned qualified math module from its expected path under the frozen numerical versions and single-thread environment.",
+      "Input parsers reject duplicate/nonfinite JSON, extra or nondecimal warm tokens, mismatched prefix/extrema/schema and forbidden evaluator activity.",
+      "Each exclusive fsynced started marker precedes its call; each returned result is closed before the second marker. A generic second-call exception preserves the first result and both started reservations.",
+      "Candidate support, independent convergence conjunction, evaluation/iteration bounds, unchanged warm start and source/input posthashes are checked.",
+      "Missing completion preserves unknown progress rather than assigning zero evaluations. Worker failure information is retained when possible and the parent must retain all closed and partial files on child failure.",
+      "Worker-internal timing excludes final receipt encoding; exact full child time/RSS and overall caps remain supervisor responsibilities. Stub qualification timing begins after numerical imports and is not a canonical resource qualification."
+    ],
+    "limitations": [
+      "Temporary stub-case files are represented by hashes and retained embedded result/exception summaries in the qualification receipt; reviewer did not rerun or recreate them."
+    ]
+  },
+  "supervisor_review": {
+    "status": "pass",
+    "supervisor": {
+      "path": "tools/run_retained_likelihood_replacement.py",
+      "bytes": 41522,
+      "sha256": "aaaa652008e03476768e273fa048e8567a9e9b932a43c6716d12b41aca5e1986"
+    },
+    "outer": {
+      "path": "tools/execute_retained_likelihood_replacement_once.py",
+      "bytes": 5875,
+      "sha256": "e2b28d86ce05597bef061f4389867f5efca732d57ce69ed690d2ec521e6c0140"
+    },
+    "qualification": {
+      "identity": {
+        "path": "experiments/retained_likelihood_replacement_001/qualification/supervisor_checks.json",
+        "bytes": 22756,
+        "sha256": "984c09648dac9d66ad565fc29d721980a8208db7f1b61bfa664b8530e6df2ea1"
+      },
+      "reported_check_groups_or_checks": 56,
+      "source_review_and_saved_receipt_audit": "pass; not reexecuted by reviewer",
+      "real_children": 0,
+      "model_calls": 0,
+      "optimizer_calls": 0,
+      "canonical_reads": 0
+    },
+    "resolved_findings": [
+      "Explicit equality between immutable review plan/source hashes and executable source identities.",
+      "Bounded failure-only receipt path after ordinary output-cap failure.",
+      "Unknown attempted model-step accounting until recovery of a valid count.",
+      "Whole-process resource closure and combined observer/attempt output accounting.",
+      "Resource-failure transaction rollback also resets archived-old-block flag.",
+      "Symmetry-preserving outer-product coordinate scaling and precise unresolved/nonstationary reporting labels."
+    ],
+    "material_findings": []
+  },
+  "immutable_implementation_review_path": "experiments/retained_likelihood_replacement_001/implementation_review.json"
+}
