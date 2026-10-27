@@ -48,7 +48,7 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`diagnostics/history-compressor-options-001`.
+`specifications/minimal-health-model-001`.
 
 The requested repair is implemented and qualified, but the selected candidate
 fails its controlled fidelity gate. Structured features alone give **193.291124
@@ -666,47 +666,35 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-The latest user decision selects **explicit health evolution instead of exponential
-history discounting**. Read [the decision](../plans/health_evolution_001.json).
-First specify a minimal aging-aware desktop contract: evolving capacity and a
-limited resistance model, transition uncertainty, physically consistent charge/SOC,
-and explicit inference semantics. Keep model-predicted change, observation-based
-correction and uncertainty growth distinguishable. No aging implementation or
-validation is implied. The stationary desktop baseline remains a control.
+The [minimal aging-aware model](../specifications/minimal_health_model_001/model.json)
+is specified. It has five physical states, two evolving health quantities
+(log-capacity and ohmic resistance), and nine uncertain static parameters.
+The initial public prior remains once-only. Each actual input interval has a
+normalized health transition; rate/noise values must be declared explicitly.
+The supplied numeric profiles are synthetic test assumptions, not calibrated
+cell-aging laws.
 
-The compressor comparison below follows that contract; it must compare against
-the same dynamic reference, not treat one fixed parameter vector as valid over
-an entire aging lifetime.
+Implement a separate desktop kernel for the declared update order, path density
+and SOC-continuous accessible-capacity convention. Account for the change in
+accessible charge explicitly. Qualify zero drift, mixed-current charge balance,
+zero-duration/order behavior, transition normalization and derivatives, support
+boundaries, weak input and low-dimensional marginal controls within the stated
+finite budgets. Twenty-nine completed consistency checks cover specification
+arithmetic and source bindings only; no aging implementation has run.
 
-The user requires **SRAM-only deployment history**, with no flash/FRAM/archive
-replay fallback. Read the [options analysis](../experiments/history_compressor_options_001/options.json)
-and [bounded audit](../experiments/history_compressor_options_001/attempt001/analysis.json).
-The leading comparison is fixed nonlinear response bases versus multiple local
-summaries with declared validity regions. Preserve parameter-dependent physical
-state as well as likelihood. This is an analysis recommendation; no compressor
-has been implemented or shown to meet 10 KiB. Desktop diagnostic memory remains
-explicitly exempt from that deployment ceiling.
+The chosen inference target is the Bayesian joint marginal of current physical
+state, health and static nuisance quantities. Joint-path MAP may help debug the
+model but cannot stand in for that marginal or its uncertainty. Select and
+register a numerically checked full-history posterior reference before any
+canonical aging inference. The old stationary desktop remains a zero-drift
+control; its 545-point pass does not validate aging.
 
-Continue from `diagnostics/history-compressor-options-001` and the
-[desktop decision](../experiments/desktop_history_001/decision.json). Preserve
-its qualified source, closed fidelity/learning workers and postclosure scoring.
-Do not rerun completed studies by default.
-
-Design one bounded history-refresh/compression comparison against the saved
-desktop baseline, especially during early estimate motion. Measure likelihood
-shape, battery outputs, retained bytes and replay work together. Extra desktop
-storage is explicitly authorized; establish which information preserves behavior
-before forcing a representation into the 10 KiB deployment boundary.
-
-The compact structured candidate still fails its 0.1 NLL gate. Desktop success
-does not promote that candidate or authorize its previously gated causal probe.
-Future desktop candidates can retain already-received observations, but cannot
-use future samples, saved future estimates or truth for fitting. Preserve the
-original prior/support and once-only evidence ownership. Keep solver convergence,
-point accuracy, uncertainty coverage and target readiness as separate claims.
-
-Address useful uncertainty and cell/load/noise/duration stability after the
-baseline is sufficiently stable; actual Cortex-M23 qualification remains later.
+Only then compare fixed response bases and multiple local summaries against
+the same dynamic target. The user requires SRAM-only deployment history within
+roughly 10 KiB for the complete subsystem; no flash/FRAM/archive replay fallback.
+Desktop diagnostic memory remains explicitly exempt. Keep physical aging-rate
+calibration, useful uncertainty, varied cell/load/noise/duration stability and
+actual Cortex-M23 execution as distinct later gates.
 
 ### What the current memory figures mean
 

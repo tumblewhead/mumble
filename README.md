@@ -28,9 +28,12 @@ hypotheses and segment coresets. No new compressor is implemented. Desktop
 diagnostic storage remains separate from the deployment constraint.
 
 The user selected **explicit health evolution**, rather than exponential history
-discounting. The [architecture decision](plans/health_evolution_001.json) requires
-an aging-aware desktop reference before choosing the final compressor. The
-current stationary baseline remains a control; aging is not yet implemented.
+discounting. The [minimal model specification](specifications/minimal_health_model_001/model.json)
+now defines evolving capacity and ohmic resistance, an explicit charge/SOC
+convention, normalized uncertain transitions and a Bayesian current-state
+marginal as the compression target. Twenty-nine specification consistency checks
+passed; no aging kernel, posterior solver or physical aging calibration is yet
+implemented. The stationary desktop baseline remains the zero-drift control.
 
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
@@ -64,7 +67,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `diagnostics/history-compressor-options-001`.
+The current work branch is `specifications/minimal-health-model-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
