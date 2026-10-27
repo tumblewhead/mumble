@@ -6,7 +6,8 @@ The C commit-only capture, original-recurrence reference backend and bounded
 supervisor are implemented and qualified on fabricated inputs. The final suite
 passed 704 C assertions, 80 Decimal checks, 11 negative/preservation checks and
 four supervisor checks. The numerical geometry/analyzer retains its earlier
-21 passing tests. The actual battery-data comparison has **not yet run**.
+21 passing tests. The registered capture ran once and stopped on snapshot parity. The actual
+545-node battery-data comparison **did not start**; the decision is **unresolved**.
 
 Both registered inputs have been restored from existing lossless repository
 archives and match their exact byte counts and SHA256 values. The earlier
@@ -145,11 +146,29 @@ Development attempt 002 passed all 21 tests. These are software development test
 iterations, not scientific-run retries. No canonical observations or truth were
 read. No independent-agent review is claimed.
 
-Next publish and verify the qualified backend source, then execute the one finite
-plan using `runner.py --qualification qualification/backend_development003/receipt.json
---publication source_publication.json`. The runner reserves `attempt001` durably
-and refuses any scientific retry. The original GCC13 producer and this GCC16
-build must still pass every exact snapshot parity gate.
+Qualified source was published and verified at
+`acdfde2b551659489c53fe9a111b293074af0118` before the one capture invocation.
+`scientific_reservation.json` permanently reserves that attempt. The source,
+qualification, original logs and distinct-inode capture copy are preserved.
+
+The capture matched fourteen snapshots (initial plus blocks through sample 208),
+then stopped at sample 224, nominally 6.4 seconds. Its likelihood was
+2162.0094802077533 versus saved 2162.009480207753: one binary64 ULP,
+4.547473508864641e-13 NLL. The exact parity contract has no tolerance.
+No bank checkpoint or nodes were released; reference passes and optimizer calls
+were zero. Actual capture work was 448 model steps, 224 QR rows, 29 queries and
+15 prior evaluations. All process limits held.
+
+This is an unresolved bank-identity gate, with no keep/repair conclusion about
+likelihood shape. GCC 13 versus GCC 16 and compiler options/runtime differences
+are possible causes, not an established attribution. No scientific retry or
+tolerance relaxation occurred. See [decision](decision.json),
+[execution receipt](attempt001/receipt.json), [failure log](attempt001/capture.stderr),
+and [saved-evidence review](result_review.json).
+
+The next technical step is to separately register a fabricated environment and
+arithmetic reproduction diagnostic. Establish why bitwise parity differs before
+considering a new canonical plan. The current finite attempt remains closed.
 Do not rerun the four-hour estimator or its three closed audits. Do not propose
 intervals or M3 promotion from this numerical-module qualification.
 
