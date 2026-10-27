@@ -1,0 +1,64 @@
+{
+  "schema": "mumble_retained_likelihood_replacement_result_v1",
+  "status": "failed",
+  "source_revision": "e8598bb546b83083c02de170304365fd78d36e41",
+  "plan_sha256": "ad51d651ee68b1a19c1685f8486faa6c55e6d7ad21950fcfc2be42dc23aca3a1",
+  "passes": [
+    {
+      "id": "old_anchor",
+      "path": "old_anchor/stdout.json",
+      "validation": {
+        "passed": true,
+        "records": 252000,
+        "model_steps": 252000,
+        "cost": 4068160787.364232,
+        "endpoint_Q_Ah": 0.06,
+        "endpoint_SOC": 0.3953769841262382,
+        "fixed_workspace_bytes": 10680
+      }
+    },
+    {
+      "id": "replacement_anchor",
+      "path": "replacement_anchor/stdout.json",
+      "validation": {
+        "passed": true,
+        "records": 252000,
+        "model_steps": 252000,
+        "cost": 126417.5111939194,
+        "endpoint_Q_Ah": 0.06470373701300736,
+        "endpoint_SOC": 0.5160285857384294,
+        "fixed_workspace_bytes": 10680
+      }
+    }
+  ],
+  "candidates": {},
+  "errors": [
+    {
+      "stage": "replacement_anchor",
+      "exception_type": "ProbeError",
+      "message": "Historical free-fit reconstruction parity failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_retained_likelihood_replacement.py\", line 560, in execute\n    require(parity[\"passed\"], \"Historical free-fit reconstruction parity failed\")\n  File \"/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_conditional_belief_probe.py\", line 46, in require\n    raise ProbeError(message)\nrun_conditional_belief_probe.ProbeError: Historical free-fit reconstruction parity failed\n"
+    }
+  ],
+  "coverage_validated": false,
+  "candidate_promoted": false,
+  "truth_reads": 0,
+  "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+  "prefix_records": 252000,
+  "input_summary": "prefix_input.json",
+  "anchors": "anchors.json",
+  "counts": {
+    "supervisor_invocations": 1,
+    "model_passes_started": 2,
+    "model_passes_completed": 2,
+    "model_steps_reported": 504000,
+    "model_step_count_complete": true,
+    "solver_invocations_reserved": 0,
+    "solver_started_markers": 0,
+    "solver_results_saved": 0,
+    "learner_calls": 0,
+    "fitter_calls": 0,
+    "truth_reads": 0,
+    "retries": 0
+  }
+}

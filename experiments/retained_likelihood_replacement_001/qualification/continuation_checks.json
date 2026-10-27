@@ -1,0 +1,331 @@
+{
+  "schema": "mumble_saved_block_continuation_qualification_v1",
+  "status": "passed",
+  "sources": {
+    "tools/continue_retained_likelihood_replacement.py": {
+      "bytes": 20384,
+      "sha256": "830d04bef86c6ccbf9f9e418fcb53ea38661efe84209c78192d1f0998c93bc78"
+    },
+    "tools/execute_retained_likelihood_continuation_once.py": {
+      "bytes": 7769,
+      "sha256": "587f6cbdc116313d317c2257a3de2c19955d0830afcaa416eab3d5d7d7343e3e"
+    },
+    "tools/run_retained_likelihood_replacement.py": {
+      "bytes": 41522,
+      "sha256": "aaaa652008e03476768e273fa048e8567a9e9b932a43c6716d12b41aca5e1986"
+    },
+    "experiments/retained_likelihood_replacement_001/continuation_qualification.py": {
+      "bytes": 13347,
+      "sha256": "8b2bb73e59b9656cc554354fe19184fda3dd693e08c61dcd4c978ca64cda0704"
+    }
+  },
+  "checks": [
+    {
+      "name": "closed_manifest_exact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "closed_manifest_mutation_rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "anchor_copy_exact_identity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "source_anchor_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:unknown_original_counts_not_complete",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:closed_manifest",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:original_status_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:two_saved_blocks_not_reexecuted",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:exactly_two_reserved_solves",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:only_two_remaining_audits",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:local_and_cumulative_calls",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "complete:unresolved_feasible_improvement_retains_status",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "exclusive_continuation_no_overwrite",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "audit_failure:unknown_original_counts_not_complete",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "audit_failure:closed_manifest",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "audit_failure:original_status_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "audit_failure:two_saved_blocks_not_reexecuted",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "audit_failure:exactly_two_reserved_solves",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "failed_audit:remaining_audit_not_started",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "failed_audit:failed_receipt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "failed_audit:unknown_steps_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "failed_audit:earlier_solver_output_preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "third_new_model_pass_rejected_before_launch",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "cumulative_CPU_includes_original",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "cumulative_active_wall_includes_original",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "outer_cumulative_CPU_veto",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "outer_exactly_one_stub_launch",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "outer_combined_closed_byte_count_exact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "source_files_unchanged",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "check_count": 29,
+  "failed_count": 0,
+  "cases": {
+    "complete": {
+      "calls": [
+        "reuse_two_closed_anchors",
+        "one_worker_two_solves",
+        "frozen_audit",
+        "replacement_audit"
+      ],
+      "status": "completed",
+      "counts": {
+        "supervisor_invocations": 1,
+        "model_passes_started": 2,
+        "model_passes_completed": 2,
+        "model_steps_reported": 504000,
+        "model_step_count_complete": true,
+        "solver_invocations_reserved": 2,
+        "solver_started_markers": 2,
+        "solver_results_saved": 2,
+        "learner_calls": 0,
+        "fitter_calls": 0,
+        "truth_reads": 0,
+        "retries": 0
+      },
+      "cumulative_counts": {
+        "original_counts_verified": true,
+        "supervisor_invocations": 2,
+        "model_passes_started": 4,
+        "model_passes_completed": 4,
+        "model_steps_reported": 1008000,
+        "model_step_count_complete": true,
+        "solver_invocations_reserved": 2,
+        "solver_started_markers": 2,
+        "solver_results_saved": 2,
+        "repeated_anchor_passes": 0,
+        "learner_calls": 0,
+        "fitter_calls": 0,
+        "truth_reads": 0,
+        "further_retries": 0
+      }
+    },
+    "audit_failure": {
+      "calls": [
+        "reuse_two_closed_anchors",
+        "one_worker_two_solves",
+        "frozen_audit"
+      ],
+      "status": "failed",
+      "counts": {
+        "supervisor_invocations": 1,
+        "model_passes_started": 1,
+        "model_passes_completed": 0,
+        "model_steps_reported": 0,
+        "model_step_count_complete": false,
+        "solver_invocations_reserved": 2,
+        "solver_started_markers": 2,
+        "solver_results_saved": 2,
+        "learner_calls": 0,
+        "fitter_calls": 0,
+        "truth_reads": 0,
+        "retries": 0
+      },
+      "cumulative_counts": {
+        "original_counts_verified": true,
+        "supervisor_invocations": 2,
+        "model_passes_started": 3,
+        "model_passes_completed": 2,
+        "model_steps_reported": 504000,
+        "model_step_count_complete": false,
+        "solver_invocations_reserved": 2,
+        "solver_started_markers": 2,
+        "solver_results_saved": 2,
+        "repeated_anchor_passes": 0,
+        "learner_calls": 0,
+        "fitter_calls": 0,
+        "truth_reads": 0,
+        "further_retries": 0
+      }
+    },
+    "outer_veto": {
+      "schema": "mumble_retained_continuation_outer_receipt_v1",
+      "status": "failed",
+      "errors": [
+        "Cumulative original plus continuation process budget exceeded"
+      ],
+      "source_revision": "0000000000000000000000000000000000000000",
+      "continuation_process_finished": true,
+      "continuation_invocations": 1,
+      "further_retries": 0,
+      "truth_reads": 0,
+      "model_calls": 0,
+      "optimizer_calls": 0,
+      "source": {
+        "bytes": 7769,
+        "sha256": "587f6cbdc116313d317c2257a3de2c19955d0830afcaa416eab3d5d7d7343e3e"
+      },
+      "process": {
+        "exit_code": 0,
+        "resource_violations": [],
+        "output_truncated": false,
+        "CPU_total_s": 0.2,
+        "wall_s_through_wait4": 0.2,
+        "peak_RSS_bytes": 1000,
+        "RSS_method": "wait4 high-water statistic for the continuation supervisor/descendants; not summed simultaneous memory",
+        "CPU_method": "Exact wait4 CPU includes continuation supervisor and its waited descendants/bookkeeping"
+      },
+      "cumulative_resources": {
+        "CPU_total_s": 30.099999999999998,
+        "active_process_wall_s": 1.2,
+        "maximum_wait4_peak_RSS_bytes": 1000,
+        "canonical_supervisor_invocations": 2,
+        "repeated_anchor_passes": 0,
+        "CPU_total_s_max": 30,
+        "active_process_wall_s_max": 60,
+        "peak_RSS_bytes_max": 134217728
+      },
+      "original_outer_receipt": {
+        "path": "experiments/retained_likelihood_replacement_001/execution_process/receipt.json",
+        "bytes": 177,
+        "sha256": "2f5888c1f9da95189cebda8c5be12ce5cb26666c20a55defd12b97e0576dfff6"
+      },
+      "inner_receipt": {
+        "bytes": 371,
+        "sha256": "8a55d5eac5ab4cffb2c2f77a203cde5cebd45c6d9ef3f009dd3fd0a7d0bb723e"
+      },
+      "inner_result": {
+        "bytes": 86,
+        "sha256": "1c2a70c933e0e9bdf47d073c8c143fb90728c5905cc541b305d3979373726fbd"
+      },
+      "stdout": {
+        "bytes": 41,
+        "sha256": "567daa8755c95eaef3380183a74eccf8e129626e34090efbb28f81e032830fd6"
+      },
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "directory_bytes_before_outer_receipt": {
+        "attempt001": 0,
+        "execution_process": 177,
+        "continuation001": 457,
+        "continuation_process": 1294
+      },
+      "all_closed_output_bytes_including_outer_receipt": 4514,
+      "all_closed_output_bytes_max": 2097152,
+      "outer_bookkeeping_wall_s_before_receipt": 0.0006480669981101528,
+      "outer_own_peak_RSS_bytes": 22278144,
+      "scope": "Sum of two whole-supervisor wait4 CPU/active wall observations; excludes intervening source work. Original parity failure remains failed. No model call is repeated, no truth is read, and failed cumulative closure vetoes reporting."
+    }
+  },
+  "real_child_calls": 0,
+  "real_model_calls": 0,
+  "real_optimizer_calls": 0,
+  "canonical_evidence_reads": 0,
+  "truth_reads": 0,
+  "numeric_stack_imports": 0,
+  "resources": {
+    "wall_s": 0.03548293300264049,
+    "CPU_s": 0.021575762999999998,
+    "peak_own_RSS_bytes": 22278144
+  }
+}

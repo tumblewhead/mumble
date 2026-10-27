@@ -1,0 +1,82 @@
+{
+  "schema": "mumble_retained_replacement_outer_receipt_v1",
+  "status": "failed",
+  "errors": [
+    "Canonical supervisor exit or whole-process resource check failed",
+    "Inner inference did not complete successfully"
+  ],
+  "source_revision": "e8598bb546b83083c02de170304365fd78d36e41",
+  "canonical_supervisor_invocations": 1,
+  "canonical_process_finished": true,
+  "retries": 0,
+  "truth_reads": 0,
+  "model_calls": 0,
+  "optimizer_calls": 0,
+  "source": {
+    "bytes": 5875,
+    "sha256": "e2b28d86ce05597bef061f4389867f5efca732d57ce69ed690d2ec521e6c0140"
+  },
+  "process": {
+    "child_launched": true,
+    "pid": 5,
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "-B",
+      "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_retained_likelihood_replacement.py",
+      "--root",
+      "/workspace/scratch/d8e043c88fda/mumble-repo",
+      "--evidence-root",
+      "/workspace/scratch/d8e043c88fda/mumble-conditional-evidence",
+      "--source-revision",
+      "e8598bb546b83083c02de170304365fd78d36e41"
+    ],
+    "exit_code": 1,
+    "wall_s_through_wait4": 1.4690322859969456,
+    "CPU_user_s": 1.224138,
+    "CPU_system_s": 0.189749,
+    "CPU_total_s": 1.413887,
+    "peak_RSS_bytes": 18628608,
+    "RSS_method": "wait4 high-water RSS for the canonical supervisor/descendant accounting; not summed simultaneous process-tree memory",
+    "stdout_stderr_bytes_written": {
+      "stdout": 1723,
+      "stderr": 0
+    },
+    "stdout_stderr_bytes_observed": {
+      "stdout": 1723,
+      "stderr": 0
+    },
+    "output_truncated": false,
+    "limits": {
+      "probe_CPU_s_max": 30,
+      "probe_wall_s_max": 60,
+      "probe_address_space_bytes_max": 1073741824,
+      "probe_peak_RSS_bytes_max": 134217728,
+      "probe_output_bytes_max": 524288
+    },
+    "resource_violations": [],
+    "CPU_method": "wait4 CPU for the canonical supervisor including its waited descendants and git bookkeeping"
+  },
+  "inner_receipt": {
+    "bytes": 18307,
+    "sha256": "aafc925349b1c6b73ff8554139612da630ef29f1990704b7fd430aa8915067c0"
+  },
+  "inner_result": {
+    "bytes": 2309,
+    "sha256": "e338a6ce7a7617c44b4f6cdb6334d0dab7a4d4d35c1badeb703a012177aa9481"
+  },
+  "stdout": {
+    "bytes": 1723,
+    "sha256": "b3651adb34e7ff25dbaa354606314ffa7ff7a698b2a6767d32f7eb2b5c0c49dc"
+  },
+  "stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "attempt_closed_bytes": 87444,
+  "observer_closed_bytes_before_receipt": 2693,
+  "canonical_closed_output_bytes_including_outer_receipt": 93177,
+  "canonical_closed_output_bytes_max": 2097152,
+  "outer_bookkeeping_wall_s_before_receipt": 1.4918627989973174,
+  "outer_own_peak_RSS_bytes": 13623296,
+  "scope": "Exact wait4 CPU includes the canonical supervisor and its waited descendants. Child wall includes internal result/receipt close and exit. This outer observation adds no inference. A failed outer receipt vetoes result validity and post-inference truth reporting."
+}

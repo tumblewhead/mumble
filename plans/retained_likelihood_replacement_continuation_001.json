@@ -1,0 +1,109 @@
+{
+  "schema": "mumble_retained_likelihood_saved_block_continuation_contract_v1",
+  "status": "frozen_before_any_remaining_solver_or_model_call",
+  "base_revision": "e8598bb546b83083c02de170304365fd78d36e41",
+  "original_execution_contract": "plans/retained_likelihood_replacement_execution_001.json",
+  "original_plan_sha256": "ad51d651ee68b1a19c1685f8486faa6c55e6d7ad21950fcfc2be42dc23aca3a1",
+  "authorization": "Completes the user-authorized implementation/execution after a diagnosed numerical comparison defect, without repeating either model anchor pass. The user asked to move forward unless a significant contrary finding emerged. The original frozen invocation remains failed, not retrospectively passed.",
+  "original_attempt": {
+    "identities": {
+      "experiments/retained_likelihood_replacement_001/attempt001/receipt.json": {
+        "bytes": 18307,
+        "sha256": "aafc925349b1c6b73ff8554139612da630ef29f1990704b7fd430aa8915067c0"
+      },
+      "experiments/retained_likelihood_replacement_001/attempt001/result.json": {
+        "bytes": 2309,
+        "sha256": "e338a6ce7a7617c44b4f6cdb6334d0dab7a4d4d35c1badeb703a012177aa9481"
+      },
+      "experiments/retained_likelihood_replacement_001/execution_process/receipt.json": {
+        "bytes": 3040,
+        "sha256": "84e3e76986e6acefc4a36b9f69c5f98828d2527fb0dea32af6d69b07ec850d62"
+      },
+      "experiments/retained_likelihood_replacement_001/attempt001/historical_parity.json": {
+        "bytes": 30994,
+        "sha256": "a434abe32dc6c432144d71ea72d301992e540e3bf12f23d08ba0e362b5231334"
+      },
+      "experiments/retained_likelihood_replacement_001/attempt001/old_anchor/stdout.json": {
+        "bytes": 12270,
+        "sha256": "c7a898e9cfd66478d01efbf2f7062653984c3f07586f6e05fc5b9731524e14f8"
+      },
+      "experiments/retained_likelihood_replacement_001/attempt001/replacement_anchor/stdout.json": {
+        "bytes": 12455,
+        "sha256": "60620a8d5c128adaf11634919c6b7b54ebb571841cb5dfcd0e45c16798e5e878"
+      }
+    },
+    "status": "failed",
+    "failure": "Historical free-fit reconstruction parity failed",
+    "model_passes_completed": 2,
+    "model_steps": 504000,
+    "solver_calls": 0,
+    "truth_reads": 0,
+    "only_failed_Gram_entry": {
+      "packed_index": 82,
+      "x_indices": [
+        12,
+        4
+      ],
+      "coordinates": [
+        "v10",
+        "loggamma_minus"
+      ],
+      "actual": -4.43101161e-315,
+      "reference": 0.0,
+      "relative_only_allowance": 0.0
+    }
+  },
+  "cause": "Legacy scale-before-whitening erases a decayed initial-state feature at the smallest binary64 subnormal; the new unscaled whitening retains it. Saved final-row scalar arithmetic reproduces the order effect. A relative-only error model omits additive underflow and its computed allowance also rounds to zero. Other135 Gram entries, cost and endpoint SOC pass the original check.",
+  "diagnostic_repair": {
+    "module": "experiments/retained_likelihood_replacement_001/underflow_parity.py",
+    "qualification": "experiments/retained_likelihood_replacement_001/qualification/underflow_parity_checks.json",
+    "scope": "A source-derived additive gradual-underflow account for the one diagnosed Gram comparison, with fabricated arithmetic qualification and explicit scope limits. Higher precision of the original relative expression alone is insufficient. No model recurrence, global likelihood-fidelity or posterior certificate.",
+    "admission": "All original comparisons except the identified single entry must already pass; that entry must pass the separately derived qualified underflow account. Keep original failure and raw matrices. Any other mismatch stops the continuation.",
+    "no_voltage_floor": true,
+    "no_truth_tuning": true
+  },
+  "unchanged": [
+    "Original attempt/result/review and all original execution source files",
+    "C evaluator binary, physical model, prior, support, sigma and entering-coordinate chart",
+    "Old/replacement anchors, common warm start and all solver policies/caps",
+    "Computed nonlinear-cost acceptance rule, no MAP/coverage claim",
+    "No covariance inflation, clipping, evidence duplication or learner/fitter rerun"
+  ],
+  "sequence": [
+    "Verify original failed outer/inner closures, all original manifests, exact source/input hashes and two closed valid anchor evaluations; no started solver markers may exist.",
+    "Validate qualified saved-output underflow diagnosis. Copy the two anchor outputs byte-for-byte with explicit reuse provenance; copies are not model calls or new evidence.",
+    "Run the original worker once: exactly one frozen and one replacement surrogate/prior solve from the same saved warm start, each100iterations/1024combined-evaluation cap.",
+    "Audit the two finite strictly feasible candidates with exactly two remaining C model passes; unresolved KKT status remains explicit.",
+    "Apply unchanged common-prior computed-cost comparison; close continuation and cumulative process resources, then independent post-inference reporting."
+  ],
+  "limits": {
+    "continuation_invocations_max": 1,
+    "additional_model_passes_max": 2,
+    "additional_model_steps_max": 504000,
+    "additional_solver_calls_max": 2,
+    "cumulative_model_passes_max": 4,
+    "cumulative_model_steps_max": 1008000,
+    "cumulative_solver_calls_max": 2,
+    "original_plus_continuation_supervisor_invocations_max": 2,
+    "cumulative_CPU_s_max": 30,
+    "cumulative_active_process_wall_s_max": 60,
+    "child_and_supervisor_peak_RSS_bytes_max": 134217728,
+    "address_space_bytes_max": 1073741824,
+    "per_child_stdout_stderr_bytes_max": 524288,
+    "all_original_plus_continuation_closed_output_bytes_max": 2097152,
+    "repeated_anchor_passes": 0,
+    "learner_or_fitter_calls": 0,
+    "truth_reads_during_inference": 0,
+    "further_retries_or_continuations": 0
+  },
+  "resources_scope": "Cumulative CPU and active process wall are sums of the original and continuation whole-supervisor wait4 receipts, excluding the intervening source-review/publication time. Combined runtime output bytes include both attempts and both outer observers, including receipts. Peak RSS is per process/high-water, not summed concurrent tree memory. A failed outer receipt vetoes validity.",
+  "failure": "Stop remaining work, preserve all partial outputs and call markers, no further retry/continuation. Bounded emergency failure closure remains permitted solely to preserve an over-cap failure, never to report resource compliance.",
+  "reporting": {
+    "new_source": "experiments/retained_likelihood_replacement_001/reporting_continuation.py",
+    "prior_algebra_evaluations_max": 2,
+    "truth_endpoint_records_max": 1,
+    "truth_after_valid_cumulative_closure_only": true,
+    "uncertainty": "Unmodified PD/interior inverse-curvature shape scales only, with full joint transport and solver/audited-gradient labels; no intervals or coverage test.",
+    "promotion": false
+  }
+}

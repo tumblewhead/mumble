@@ -1,0 +1,113 @@
+{
+  "schema": "mumble_retained_likelihood_continuation_implementation_review_v1",
+  "status": "passed",
+  "reviewer": "independent interval_audit agent",
+  "continuation_invocations_before_review": 0,
+  "continuation_plan_sha256": "1fe5ac901630be7472794df9dc24783f84f16a95008864875ae7afda09e007fa",
+  "reviewed_source_sha256": {
+    "plans/retained_likelihood_replacement_continuation_001.json": "1fe5ac901630be7472794df9dc24783f84f16a95008864875ae7afda09e007fa",
+    "tools/continue_retained_likelihood_replacement.py": "830d04bef86c6ccbf9f9e418fcb53ea38661efe84209c78192d1f0998c93bc78",
+    "tools/execute_retained_likelihood_continuation_once.py": "587f6cbdc116313d317c2257a3de2c19955d0830afcaa416eab3d5d7d7343e3e",
+    "experiments/retained_likelihood_replacement_001/underflow_parity.py": "de9c46dc540bdf8e1a730acc95f9b21d0895649a15a5d8a1e8efa60b2dfef8eb",
+    "experiments/retained_likelihood_replacement_001/qualification/underflow_parity_checks.json": "63d05843ae95f49a0b40ace1bb5cd04d980d81dd968c621a38a670b483e3d7c7",
+    "experiments/retained_likelihood_replacement_001/continuation_qualification.py": "8b2bb73e59b9656cc554354fe19184fda3dd693e08c61dcd4c978ca64cda0704",
+    "experiments/retained_likelihood_replacement_001/qualification/continuation_checks.json": "1f43d1aa0d9e5928b2f73e36fab5475728728176e60d20f7e06e7137bccaa41f",
+    "experiments/retained_likelihood_replacement_001/reporting_continuation.py": "5e381d445873f903272fcee70c23802db0439daeb330f6538a0e9fd1a81c8837",
+    "experiments/retained_likelihood_replacement_001/reporting.py": "81dc98377d55a96e6a72373c5c7d3eea16a370d14eff89821ce49f56a7eadc26",
+    "src/scm_estimator.c": "28846f09c4edde6f3ae1e92cc174a5e6fa082a7a83e5f27824f3ff021a5e6bb5",
+    "experiments/retained_likelihood_replacement_001/independent_parity_failure_review.json": "56c09b451cac21237d54a617cc89e196b70978f3d13e6e1661219c48042222ce"
+  },
+  "reviewed_source_bytes": {
+    "plans/retained_likelihood_replacement_continuation_001.json": 6946,
+    "tools/continue_retained_likelihood_replacement.py": 20384,
+    "tools/execute_retained_likelihood_continuation_once.py": 7769,
+    "experiments/retained_likelihood_replacement_001/underflow_parity.py": 26678,
+    "experiments/retained_likelihood_replacement_001/qualification/underflow_parity_checks.json": 18707,
+    "experiments/retained_likelihood_replacement_001/continuation_qualification.py": 13347,
+    "experiments/retained_likelihood_replacement_001/qualification/continuation_checks.json": 9540,
+    "experiments/retained_likelihood_replacement_001/reporting_continuation.py": 37651,
+    "experiments/retained_likelihood_replacement_001/reporting.py": 46986,
+    "src/scm_estimator.c": 22907,
+    "experiments/retained_likelihood_replacement_001/independent_parity_failure_review.json": 10190
+  },
+  "material_blockers": [],
+  "original_implementation_review_preserved": {
+    "path": "experiments/retained_likelihood_replacement_001/implementation_review.json",
+    "bytes": 17369,
+    "sha256": "78b531f2ff1b6433d341658ad23d9f699bc6ceca9df32fb958bc07eb6a312be0"
+  },
+  "scope": {
+    "method": "Static source, mathematical derivation, saved artifact identity and fabricated receipt review only.",
+    "new_canonical_model_evaluations": 0,
+    "new_optimizer_executions": 0,
+    "new_learner_or_fitter_executions": 0,
+    "truth_reads": 0,
+    "qualification_reruns": 0,
+    "continuation_output_directories_absent_at_review": true,
+    "original_attempt_status": "failed",
+    "original_attempt_reclassified": false,
+    "adaptation": "A separately frozen continuation reuses the two closed anchor blocks. It is not the original single-invocation run and does not retrospectively pass its failed comparator."
+  },
+  "independent_mathematical_findings": [
+    "The sole eligible discrepancy is packed Gram entry 82, direct v10/log_gamma_minus, with zero legacy reference and nonzero subnormal current value. The original other 135 Gram comparisons, cost comparison and endpoint SOC comparison must remain passed; any additional or different failure is fatal.",
+    "The source-bound raw theta/alpha round trip is checked bitwise. The scale-1 gamma-minus counterpart has the same operation order in the unchanged model conventions. The H*h0 coordinate chain is not involved in the selected entry.",
+    "The preprocessing loss bound rho*abs(a)+E follows round-to-nearest binary64 multiplication/division with gradual underflow. E retains eta/2 in exact rational arithmetic; it never becomes a zero floating-point constant.",
+    "The complete normal coefficient K=[beta+C/(1-u)]/(1-beta), with beta=u+(1+u)*gamma(N)^2, is verified exactly to fit the inherited Gamma=gamma(8*N+128). The additive B covers Jacobian scaling loss, both product underflows, old summation/final-division effects and the final unscaling underflow.",
+    "The counterpart L1 norm bound uses the saved nonnegative compensated diagonal, includes possible squared-term underflow, applies Cauchy-Schwarz, and uses an outward decimal square root verified by an exact rational square. B remains outside 1/(1-beta), consistent with the independent derivation.",
+    "Downward rounding of the old floating-point allowance is recovered separately. The final comparison uses exact rational error and allowance; displayed float bounds are rounded upward. No voltage, truth, observed-error floor or covariance modification is introduced.",
+    "The qualification rejects an oversized subnormal discrepancy and additional failed entries; eligibility alone does not imply acceptance."
+  ],
+  "continuation_control_review": {
+    "source_and_evidence": "The original result, receipt, parity, anchor outputs and outer receipt are pinned by exact hashes; their closed manifests and resource records are rechecked. New source/review identities and committed blobs are bound before work. Original qualified C, mathematical solver and worker remain unchanged.",
+    "saved_block_reuse": "Anchor stdout bytes are copied exactly with original-path provenance; no model call is counted or made for reuse. The corrected arithmetic gate is saved separately while the original failure is retained.",
+    "sequencing": "Exactly one remaining worker may own two surrogate solves. Only frozen and replacement audit model passes may follow; a failed first audit prevents the second. No new anchor pass, optimizer restart or further continuation is admitted.",
+    "cumulative_limits": {
+      "supervisor_invocations": 2,
+      "unique_model_passes": 4,
+      "model_steps": 1008000,
+      "surrogate_solves": 2,
+      "CPU_s": 30,
+      "active_process_wall_s": 60,
+      "per_process_or_high_water_RSS_bytes": 134217728,
+      "combined_four_directory_output_bytes": 2097152
+    },
+    "count_completeness": "Model-step completeness stays false until the original attempt is verified and any reserved current model execution returns a retained valid attempted-step count.",
+    "resource_closure": "Prior whole-process CPU and active wall time are deducted from remaining limits. The outer observer checks cumulative wait4 CPU/wall/RSS and all four actual directory byte totals including its final receipt; any outer failure vetoes reporting. Per-process/high-water RSS is not a simultaneous process-tree sum.",
+    "failure_preservation": "Exclusive directories and per-child markers preserve completed and partial work. The existing bounded emergency result/receipt closure remains failure-only, and failed transactions reset the old-block archived flag.",
+    "acceptance": "The unchanged rule requires finite strictly feasible candidates, valid scope/resource/domain/parity gates and a positive identical-prior computed nonlinear objective decrease above the frozen arithmetic-resolution allowance. Feasible KKT-unresolved candidates may be audited and accepted only with accepted_feasible_point_improvement wording and their statuses retained."
+  },
+  "reporting_review": {
+    "adapter_sha256": "5e381d445873f903272fcee70c23802db0439daeb330f6538a0e9fd1a81c8837",
+    "unchanged_numerical_core_sha256": "81dc98377d55a96e6a72373c5c7d3eea16a370d14eff89821ce49f56a7eadc26",
+    "closure": "Adapter verifies the original failed attempt, copied anchors, completed continuation and outer closure, current and cumulative counters, closed manifests, all original-plus-continuation resource sums and four-directory bytes before reporting.",
+    "numerics": "The pinned unchanged core retains the whole supported common prior, full joint Hessian/Gram shape algebra, endpoint transport and exact computed-objective contrast. Positive-definite interior inverse-curvature scales are shape diagnostics, including at unresolved KKT; no candidate-centered interval or truth-in-interval claim is produced.",
+    "truth_isolation": "One endpoint truth record may be decoded only after original and continuation closure, source identities, numerical reductions and transaction reconstruction have passed. No truth is available to either inference arm."
+  },
+  "qualification_evidence": [
+    {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/continuation_checks.json",
+      "bytes": 9540,
+      "sha256": "1f43d1aa0d9e5928b2f73e36fab5475728728176e60d20f7e06e7137bccaa41f",
+      "reported_status": "passed",
+      "checks": 29,
+      "all_checks_passed": true,
+      "independent_review": "Saved receipt and fixture source reviewed; no qualification rerun."
+    },
+    {
+      "path": "experiments/retained_likelihood_replacement_001/qualification/underflow_parity_checks.json",
+      "bytes": 18707,
+      "sha256": "63d05843ae95f49a0b40ace1bb5cd04d980d81dd968c621a38a670b483e3d7c7",
+      "reported_status": "pass",
+      "checks": 36,
+      "all_checks_passed": true,
+      "independent_review": "Saved receipt and fixture source reviewed; no qualification rerun."
+    }
+  ],
+  "limits_of_review": [
+    "This is a pre-execution source and arithmetic review, not a claim that the continuation has run or will satisfy its objective or resource gates.",
+    "The underflow bound is conditional on the bound common computed stream, round-to-nearest gradual-underflow arithmetic and finite nonoverflowing operations. It does not bound libm, physical-model or derivative-recurrence error against exact real physics.",
+    "The adaptation is explicitly informed by the observed original numerical bookkeeping failure; it is separately documented and does not erase or relabel that failed attempt.",
+    "The supported reference prior is the deliberately specified common prior, not a reconstruction of the actual recursive posterior. A feasible computed-cost improvement is not a MAP, global optimum, calibrated coverage or production interval repair.",
+    "The retained host-reference resource accounting does not establish the target embedded SRAM/compute implementation budget."
+  ]
+}
