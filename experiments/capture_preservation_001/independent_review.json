@@ -1,0 +1,165 @@
+{
+  "schema": "mumble_capture_preservation_independent_review_v1",
+  "status": "passed",
+  "reviewer": "interval_audit",
+  "reviewed_utc": "2026-10-27T03:48:26.214562+00:00",
+  "static_review_preceded_qualification": true,
+  "qualification_invocations": 1,
+  "source_identities": {
+    "experiments/capture_preservation_001/plan.json": {
+      "bytes": 5131,
+      "sha256": "2b4cbb1bdad7f37a4440586a53266f2706208e1e648de10b6e3423aee7a54e0d"
+    },
+    "tools/capture_preservation.py": {
+      "bytes": 15381,
+      "sha256": "14f1ec0c73a816ffa0c441b6a5af465115e98080d1948d452f41a28ea30e5207"
+    },
+    "experiments/capture_preservation_001/qualification.py": {
+      "bytes": 19051,
+      "sha256": "7f578b255ea8075bd609116f75f3c8af754208c4442a3dc6676e1583e32758d7"
+    },
+    "experiments/capture_preservation_001/source_freeze.json": {
+      "bytes": 1568,
+      "sha256": "075a62c599dffd44953ebb21a489f6ce277e46e57f96c949d3e3ed28209b5046"
+    }
+  },
+  "qualification_receipt": {
+    "path": "experiments/capture_preservation_001/attempt001/receipt.json",
+    "bytes": 30254,
+    "sha256": "ee57549314b080a2c4b3d9e1a38d3ac144a7ce964d7090c9ae87a05dc1231a2b"
+  },
+  "saved_evidence_checks": {
+    "cases_passed": 8,
+    "cases_failed": 0,
+    "real_child_reservations": 8,
+    "real_children_completed": 8,
+    "stub_children": 0,
+    "source_and_python_identities_match": true,
+    "source_freeze_matches": true,
+    "closed_manifest_entries": 68,
+    "closed_manifest_matches_current_files": true,
+    "closed_runtime_output_bytes": 100391,
+    "closed_output_count_matches": true,
+    "scientific_activity": {
+      "model_calls": 0,
+      "optimizer_calls": 0,
+      "prior_evaluations": 0,
+      "observation_reads": 0,
+      "truth_reads": 0,
+      "historical_capture_changes": 0,
+      "scientific_status_changes": 0
+    }
+  },
+  "cases": [
+    {
+      "name": "exact_binary_commit",
+      "status": "passed",
+      "child_exit_code": 0,
+      "stdout_observed": 8192,
+      "stdout_retained": 8192,
+      "committed": true,
+      "explicit_faults": []
+    },
+    {
+      "name": "legitimate_empty",
+      "status": "passed",
+      "child_exit_code": 0,
+      "stdout_observed": 0,
+      "stdout_retained": 0,
+      "committed": true,
+      "explicit_faults": []
+    },
+    {
+      "name": "duplicate_writers",
+      "status": "passed",
+      "child_exit_code": 0,
+      "stdout_observed": 1025,
+      "stdout_retained": 1025,
+      "committed": true,
+      "explicit_faults": []
+    },
+    {
+      "name": "original_truncated_after_commit",
+      "status": "passed",
+      "child_exit_code": 0,
+      "stdout_observed": 1025,
+      "stdout_retained": 1025,
+      "committed": true,
+      "explicit_faults": [
+        "Explicit fixture truncation of original after commit"
+      ]
+    },
+    {
+      "name": "original_deleted_after_commit",
+      "status": "passed",
+      "child_exit_code": 0,
+      "stdout_observed": 1025,
+      "stdout_retained": 1025,
+      "committed": true,
+      "explicit_faults": [
+        "Explicit fixture deletion of original after commit"
+      ]
+    },
+    {
+      "name": "object_corrupted_after_commit",
+      "status": "passed",
+      "child_exit_code": 0,
+      "stdout_observed": 1025,
+      "stdout_retained": 1025,
+      "committed": true,
+      "explicit_faults": [
+        "Explicit fixture one-byte corruption of committed object"
+      ]
+    },
+    {
+      "name": "original_truncated_before_commit",
+      "status": "passed",
+      "child_exit_code": 0,
+      "stdout_observed": 1025,
+      "stdout_retained": 1025,
+      "committed": false,
+      "explicit_faults": [
+        "Explicit fixture truncation of original before commit"
+      ]
+    },
+    {
+      "name": "output_cap_exceeded",
+      "status": "passed",
+      "child_exit_code": -9,
+      "stdout_observed": 8193,
+      "stdout_retained": 8192,
+      "committed": false,
+      "explicit_faults": []
+    }
+  ],
+  "source_review_findings": [
+    "Expected SHA and length are derived from actual successful writer calls, independently of later filesystem hashing.",
+    "Original and separate-inode content-addressed copy are validated before publishing a fsynced commit binding; cooperating duplicate writers and commits are excluded.",
+    "Dependent reads require an externally pinned commit and valid reservation/stream-close/original/copy identities. A surviving duplicate does not silently replace a missing original.",
+    "Partial or over-cap captures cannot commit; declared injected failures and surviving data remain in the qualification artifacts."
+  ],
+  "resources_as_recorded": {
+    "CPU_children_s": 0.137621,
+    "CPU_self_s": 0.317106,
+    "CPU_total_s": 0.454727,
+    "maximum_child_wait4_peak_RSS_bytes": 9355264,
+    "scope": "Parent rusage plus waited children through qualification closure, before final receipt serialization; each child has exact wait4 resources. Main wall excludes interpreter startup.",
+    "supervisor_peak_RSS_bytes": 44249088,
+    "wall_s_before_receipt": 0.48420697600522544
+  },
+  "resource_interpretation": "Within fixed caps. CPU/wall snapshots precede final receipt serialization and wall excludes interpreter startup, as explicitly disclosed; per-child CPU/RSS use exact wait4.",
+  "limitations": [
+    "Finite eight-case fabricated qualification only; no reproduction or cause identification of the historical capture loss.",
+    "No physical storage independence, power-loss, hostile-writer or filesystem-immutability guarantee.",
+    "Future scientific integration must pin this source and the returned commit identity, count duplicate storage/hash costs, and enforce its own acceptance/resource contract.",
+    "No original scientific source, empty capture or failed status was changed."
+  ],
+  "finish_line": "Declared capture prerequisite is closed; no extra tests or scientific rerun are needed absent a concrete new defect.",
+  "review_activity": {
+    "qualification_reruns": 0,
+    "scientific_calls": 0,
+    "old_source_or_result_edits": 0,
+    "source_and_saved_evidence_reads_only": true
+  },
+  "material_blockers": []
+}

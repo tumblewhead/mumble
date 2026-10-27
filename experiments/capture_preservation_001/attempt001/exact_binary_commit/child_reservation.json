@@ -1,0 +1,19 @@
+{
+  "child_CPU_s_max": 1,
+  "child_address_space_bytes_max": 134217728,
+  "child_sequence_scope": "one child in this case",
+  "child_wall_s_max": 2,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+    "8192"
+  ],
+  "fabricated_payload_bytes": 8192,
+  "reservation_before_launch": {
+    "bytes": 415,
+    "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+  }
+}

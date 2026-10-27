@@ -1,0 +1,41 @@
+{
+  "CPU_system_s": 0.0,
+  "CPU_total_s": 0.023201,
+  "CPU_user_s": 0.023201,
+  "RSS_method": "Exact wait4 high-water for this PID and waited descendants; not summed concurrent memory",
+  "bounds": {
+    "AS_bytes": 134217728,
+    "CPU_s": 1,
+    "RSS_bytes": 67108864,
+    "capture_bytes": 16384,
+    "wall_s": 2
+  },
+  "capture_closed_before_dependent_read": true,
+  "capture_commit_identity": {
+    "bytes": 847,
+    "sha256": "3c239c0145b3443c852133284c65dd074f195ac0d15f3b02b424d14c9ab66c3f"
+  },
+  "capture_errors": [],
+  "child_launched": true,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "-I",
+    "-B",
+    "-c",
+    "import json, sys\nvalue = {\"schema\":\"mumble_compact_capture_fixture_v1\",\"status\":\"completed\",\"payload\":\"x\"*8192,\"model_calls\":0,\"prior_evaluations\":0}\nsys.stdout.write(json.dumps(value,sort_keys=True,separators=(\",\",\":\"))+\"\\n\")\nsys.stdout.flush()\nsys.stderr.write(\"fabricated capture fixture\\n\")\nsys.stderr.flush()\n"
+  ],
+  "exit_code": 0,
+  "output_truncated": false,
+  "peak_RSS_bytes": 11636736,
+  "pid": 5,
+  "resource_violations": [],
+  "stdout_stderr_bytes_observed": {
+    "stderr": 27,
+    "stdout": 8311
+  },
+  "stdout_stderr_bytes_written": {
+    "stderr": 27,
+    "stdout": 8311
+  },
+  "wall_s_through_wait4": 0.02450005000719102
+}

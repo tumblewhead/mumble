@@ -1,0 +1,53 @@
+{
+  "schema": "mumble_capture_preservation_plan_v1",
+  "status": "frozen_before_implementation_and_qualification",
+  "base_revision": "1f7b4ddb31070072fb8940f159d0e9c29984dd73",
+  "authorization": "Root authorized one isolated future-probe capture utility and one small fabricated qualification; preserve all existing scientific sources and evidence.",
+  "question": "Can an exclusive capture transaction preserve an independently written exact copy and durable identity record before dependent reads, while explicitly rejecting changed or lost evidence and duplicate writers?",
+  "scope": {
+    "new_module": "tools/capture_preservation.py",
+    "qualification_source": "experiments/capture_preservation_001/qualification.py",
+    "qualification_directory": "experiments/capture_preservation_001/attempt001",
+    "old_source_or_result_edits": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_evaluations": 0,
+    "observation_reads": 0,
+    "truth_reads": 0,
+    "canonical_retries_or_continuations": 0
+  },
+  "transaction": {
+    "reservation": "Exclusive new directory and fsynced reservation before a child is started; one raw_probe.json writer only.",
+    "expected_identity": "Incremental SHA256 and byte length from bytes successfully written by the capture writer, independent of later file hashing.",
+    "commit": "Require a closed, fsynced, within-cap writer. Verify original against expected stream identity. Exclusively write a separate inode at objects/<sha256>.bin, fsync it and its directory, reverify original and copy, then exclusively write and fsync commit.json and its directory. Never overwrite or rename original capture.",
+    "dependent_read": "Caller pins the returned commit identity. Verified read requires that exact commit, its bound reservation, and both original and object identities; return bytes only from the committed object. Missing or changed original/copy fails explicitly, with no silent fallback or scientific-status change.",
+    "partial_failure": "Retain bounded original/partial object and reservation. No commit means no permission to consume. A failure is never relabeled as scientific success.",
+    "threat_and_durability_scope": "Cooperating callers on the host filesystem. Exclusive creation prevents a second API writer; later unauthorized writes are detected at validation boundaries. Independent inodes and fsync improve survivability but do not prove physical storage independence, power-loss correctness, or resistance to an actor able to change all bytes and external bindings. The original capture-loss mechanism remains unattributed."
+  },
+  "fixed_cases": [
+    {"name": "exact_binary_commit", "payload_bytes": 8192, "capture_cap": 8192, "check": "One child, binary payload larger than buffer, precommit read rejection, distinct original/object inodes, exact committed read."},
+    {"name": "legitimate_empty", "payload_bytes": 0, "capture_cap": 8192, "check": "A deliberately empty stream can be committed and verified; expected stream identity distinguishes it from loss."},
+    {"name": "duplicate_writers", "payload_bytes": 1025, "capture_cap": 8192, "check": "Second reservation, writer and commit all reject without changing committed bytes."},
+    {"name": "original_truncated_after_commit", "payload_bytes": 1025, "capture_cap": 8192, "check": "Explicit injected truncation makes verified read fail; independent object survives."},
+    {"name": "original_deleted_after_commit", "payload_bytes": 1025, "capture_cap": 8192, "check": "Explicit injected deletion makes verified read fail; independent object survives."},
+    {"name": "object_corrupted_after_commit", "payload_bytes": 1025, "capture_cap": 8192, "check": "Explicit injected corruption makes verified read fail; original survives."},
+    {"name": "original_truncated_before_commit", "payload_bytes": 1025, "capture_cap": 8192, "check": "Stream identity mismatch prevents commit; no dependent payload read."},
+    {"name": "output_cap_exceeded", "payload_bytes": 8193, "capture_cap": 8192, "check": "Bounded partial output retained, child ended, over-cap writer cannot commit."}
+  ],
+  "limits": {
+    "qualification_invocations": 1,
+    "cases": 8,
+    "fabricated_children_max": 8,
+    "per_child_payload_bytes_max": 8193,
+    "child_CPU_s_max": 1,
+    "child_wall_s_max": 2,
+    "child_address_space_bytes_max": 134217728,
+    "CPU_total_s_max": 5,
+    "wall_s_max": 15,
+    "process_peak_RSS_bytes_max": 67108864,
+    "parent_address_space_bytes_max": 268435456,
+    "closed_runtime_output_bytes_max": 262144
+  },
+  "qualification_evidence": "Preserve exact child commands, plan/module/qualification/Python identities, per-child exact wait4 resources, case assertions and explicitly injected corruptions, aggregate CPU/wall/RSS and closed-file manifest. No optional repeated qualification after the planned pass.",
+  "finish_line": "One small saved qualification and independent static review. Integration into a future scientific probe requires that probe's own preflight/source binding; this utility does not alter any historical result or repair the failed autonomous invocation."
+}

@@ -1,0 +1,776 @@
+{
+  "cases": [
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "exact_binary_commit",
+      "commit_identity": {
+        "bytes": 846,
+        "sha256": "93a05f170e929eb7dbdf812862d26aac53040858d141a560a202bec0bb444775"
+      },
+      "expected_rejections": [
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/exact_binary_commit/commit.json",
+          "type": "CaptureIntegrityError"
+        }
+      ],
+      "injected_faults": [],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.011406999999999999,
+        "CPU_total_s": 0.015551999999999998,
+        "CPU_user_s": 0.004144999999999999,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "8192"
+        ],
+        "exit_code": 0,
+        "killed_after_output_cap": false,
+        "output_error": null,
+        "peak_RSS_bytes": 9199616,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 8192,
+        "stdout_bytes_written": 8192,
+        "stream_identity": {
+          "bytes": 8192,
+          "sha256": "1f5a16c4456f34c5459e4e66d8650d4dbb6b298810d0c21cef6571db21d69c81"
+        },
+        "wall_s": 0.01896374099305831
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    },
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "legitimate_empty",
+      "commit_identity": {
+        "bytes": 840,
+        "sha256": "4484bdc543cb1e1fcbc7ec51c6aec2b666f592b89fa113d1a4d3990ed9135ea3"
+      },
+      "expected_rejections": [
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/legitimate_empty/commit.json",
+          "type": "CaptureIntegrityError"
+        }
+      ],
+      "injected_faults": [],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.004685,
+        "CPU_total_s": 0.020057,
+        "CPU_user_s": 0.015371999999999999,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "0"
+        ],
+        "exit_code": 0,
+        "killed_after_output_cap": false,
+        "output_error": null,
+        "peak_RSS_bytes": 9342976,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 0,
+        "stdout_bytes_written": 0,
+        "stream_identity": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "wall_s": 0.02316950100066606
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    },
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "duplicate_writers",
+      "commit_identity": {
+        "bytes": 846,
+        "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+      },
+      "expected_rejections": [
+        {
+          "message": "[Errno 17] File exists: '/workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/duplicate_writers'",
+          "type": "FileExistsError"
+        },
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/duplicate_writers/commit.json",
+          "type": "CaptureIntegrityError"
+        },
+        {
+          "message": "Original writer already reserved",
+          "type": "CaptureStateError"
+        },
+        {
+          "message": "Capture is already committed",
+          "type": "CaptureStateError"
+        }
+      ],
+      "injected_faults": [],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.008348,
+        "CPU_total_s": 0.016301999999999997,
+        "CPU_user_s": 0.007954,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "1025"
+        ],
+        "exit_code": 0,
+        "killed_after_output_cap": false,
+        "output_error": null,
+        "peak_RSS_bytes": 9347072,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 1025,
+        "stdout_bytes_written": 1025,
+        "stream_identity": {
+          "bytes": 1025,
+          "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+        },
+        "wall_s": 0.027231367996137124
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    },
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "original_truncated_after_commit",
+      "commit_identity": {
+        "bytes": 846,
+        "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+      },
+      "expected_rejections": [
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/original_truncated_after_commit/commit.json",
+          "type": "CaptureIntegrityError"
+        },
+        {
+          "message": "Capture content identity mismatch",
+          "type": "CaptureIntegrityError"
+        }
+      ],
+      "injected_faults": [
+        "Explicit fixture truncation of original after commit"
+      ],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.009797,
+        "CPU_total_s": 0.015144999999999999,
+        "CPU_user_s": 0.0053479999999999995,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "1025"
+        ],
+        "exit_code": 0,
+        "killed_after_output_cap": false,
+        "output_error": null,
+        "peak_RSS_bytes": 9216000,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 1025,
+        "stdout_bytes_written": 1025,
+        "stream_identity": {
+          "bytes": 1025,
+          "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+        },
+        "wall_s": 0.019035805002204143
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    },
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "original_deleted_after_commit",
+      "commit_identity": {
+        "bytes": 846,
+        "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+      },
+      "expected_rejections": [
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/original_deleted_after_commit/commit.json",
+          "type": "CaptureIntegrityError"
+        },
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/original_deleted_after_commit/raw_probe.json",
+          "type": "CaptureIntegrityError"
+        }
+      ],
+      "injected_faults": [
+        "Explicit fixture deletion of original after commit"
+      ],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.016923,
+        "CPU_total_s": 0.016923,
+        "CPU_user_s": 0.0,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "1025"
+        ],
+        "exit_code": 0,
+        "killed_after_output_cap": false,
+        "output_error": null,
+        "peak_RSS_bytes": 9347072,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 1025,
+        "stdout_bytes_written": 1025,
+        "stream_identity": {
+          "bytes": 1025,
+          "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+        },
+        "wall_s": 0.02052502999868011
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    },
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "object_corrupted_after_commit",
+      "commit_identity": {
+        "bytes": 846,
+        "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+      },
+      "expected_rejections": [
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/object_corrupted_after_commit/commit.json",
+          "type": "CaptureIntegrityError"
+        },
+        {
+          "message": "Capture content identity mismatch",
+          "type": "CaptureIntegrityError"
+        }
+      ],
+      "injected_faults": [
+        "Explicit fixture one-byte corruption of committed object"
+      ],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.016086,
+        "CPU_total_s": 0.019158,
+        "CPU_user_s": 0.003072,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "1025"
+        ],
+        "exit_code": 0,
+        "killed_after_output_cap": false,
+        "output_error": null,
+        "peak_RSS_bytes": 9351168,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 1025,
+        "stdout_bytes_written": 1025,
+        "stream_identity": {
+          "bytes": 1025,
+          "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+        },
+        "wall_s": 0.023562007998407353
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    },
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "original_truncated_before_commit",
+      "commit_identity": null,
+      "expected_rejections": [
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/original_truncated_before_commit/commit.json",
+          "type": "CaptureIntegrityError"
+        },
+        {
+          "message": "Original differs from successfully written stream",
+          "type": "CaptureIntegrityError"
+        }
+      ],
+      "injected_faults": [
+        "Explicit fixture truncation of original before commit"
+      ],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.0,
+        "CPU_total_s": 0.015404999999999999,
+        "CPU_user_s": 0.015404999999999999,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "1025"
+        ],
+        "exit_code": 0,
+        "killed_after_output_cap": false,
+        "output_error": null,
+        "peak_RSS_bytes": 9351168,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 1025,
+        "stdout_bytes_written": 1025,
+        "stream_identity": {
+          "bytes": 1025,
+          "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+        },
+        "wall_s": 0.02033328099787468
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    },
+    {
+      "canonical_recovery_or_retry": false,
+      "case": "output_cap_exceeded",
+      "commit_identity": null,
+      "expected_rejections": [
+        {
+          "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/output_cap_exceeded/commit.json",
+          "type": "CaptureIntegrityError"
+        },
+        {
+          "message": "Capture writer must be successfully closed before commit",
+          "type": "CaptureStateError"
+        }
+      ],
+      "injected_faults": [],
+      "real_fabricated_children": 1,
+      "resources": {
+        "CPU_system_s": 0.0,
+        "CPU_total_s": 0.016412,
+        "CPU_user_s": 0.016412,
+        "child_launched": true,
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-I",
+          "-B",
+          "-c",
+          "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+          "8193"
+        ],
+        "exit_code": -9,
+        "killed_after_output_cap": true,
+        "output_error": {
+          "message": "Original capture output cap exceeded",
+          "type": "CaptureLimitError"
+        },
+        "peak_RSS_bytes": 9355264,
+        "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout_bytes_observed": 8193,
+        "stdout_bytes_written": 8192,
+        "stream_identity": {
+          "bytes": 8192,
+          "sha256": "1f5a16c4456f34c5459e4e66d8650d4dbb6b298810d0c21cef6571db21d69c81"
+        },
+        "wall_s": 0.019790156999079045
+      },
+      "scientific_status_changes": 0,
+      "status": "passed"
+    }
+  ],
+  "cases_completed": 8,
+  "cases_planned": 8,
+  "closed_runtime_output_bytes": 100391,
+  "counts": {
+    "child_activity_complete": true,
+    "historical_capture_changes": 0,
+    "model_calls": 0,
+    "observation_reads": 0,
+    "optimizer_calls": 0,
+    "prior_evaluations": 0,
+    "qualification_invocations": 1,
+    "real_fabricated_child_reservations": 8,
+    "real_fabricated_children_completed": 8,
+    "scientific_status_changes": 0,
+    "stub_children": 0,
+    "truth_reads": 0
+  },
+  "failure": null,
+  "files": {
+    "duplicate_writers/case.json": {
+      "bytes": 1992,
+      "sha256": "3880d58321d5aba63e2484fedd9e3547dcd3e3416632e24a9a9907104d90d583"
+    },
+    "duplicate_writers/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "duplicate_writers/child_reservation.json": {
+      "bytes": 613,
+      "sha256": "8d166c96b272bdff7dbb6448e3a64b6d96a339c4521cb0d704e212841896d444"
+    },
+    "duplicate_writers/child_resources.json": {
+      "bytes": 947,
+      "sha256": "48a0b397574dfc5412944221c1ecf25de549246064b218827ea76b1c84593478"
+    },
+    "duplicate_writers/commit.json": {
+      "bytes": 846,
+      "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+    },
+    "duplicate_writers/objects/7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15.bin": {
+      "bytes": 1025,
+      "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+    },
+    "duplicate_writers/raw_probe.json": {
+      "bytes": 1025,
+      "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+    },
+    "duplicate_writers/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "duplicate_writers/stream_closed.json": {
+      "bytes": 275,
+      "sha256": "fa09a02b1e584b0aa99e8e5a6c757f1a7c9b3fd85b7cc2381af72c750cc8503f"
+    },
+    "exact_binary_commit/case.json": {
+      "bytes": 1622,
+      "sha256": "933e8a296bd197bd39280b3ca3051dead00fd9e634520cbccbaa8e28d5f091dc"
+    },
+    "exact_binary_commit/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "exact_binary_commit/child_reservation.json": {
+      "bytes": 613,
+      "sha256": "461cba2fabdf9e2b2be1c051b51f2b159cf6f11721af8029ec159effd08ea22c"
+    },
+    "exact_binary_commit/child_resources.json": {
+      "bytes": 970,
+      "sha256": "24b593f40227b225b8ebce982a8318a3ac431045c20a0247608756dc832f18c1"
+    },
+    "exact_binary_commit/commit.json": {
+      "bytes": 846,
+      "sha256": "93a05f170e929eb7dbdf812862d26aac53040858d141a560a202bec0bb444775"
+    },
+    "exact_binary_commit/objects/1f5a16c4456f34c5459e4e66d8650d4dbb6b298810d0c21cef6571db21d69c81.bin": {
+      "bytes": 8192,
+      "sha256": "1f5a16c4456f34c5459e4e66d8650d4dbb6b298810d0c21cef6571db21d69c81"
+    },
+    "exact_binary_commit/raw_probe.json": {
+      "bytes": 8192,
+      "sha256": "1f5a16c4456f34c5459e4e66d8650d4dbb6b298810d0c21cef6571db21d69c81"
+    },
+    "exact_binary_commit/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "exact_binary_commit/stream_closed.json": {
+      "bytes": 275,
+      "sha256": "948c89aee9a7b8dc63f9268f70814ba811bd679ebe3078694e8c55b3a41d9b73"
+    },
+    "legitimate_empty/case.json": {
+      "bytes": 1580,
+      "sha256": "ce177158133f4c686900a8719e4e04dcd8ddbceafb04307b88cfea6556a5f8b1"
+    },
+    "legitimate_empty/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "legitimate_empty/child_reservation.json": {
+      "bytes": 607,
+      "sha256": "1580020ff6dd7b9af03954f56f111989d7727d8acd4a163899ff92db03caf4ca"
+    },
+    "legitimate_empty/child_resources.json": {
+      "bytes": 934,
+      "sha256": "e0cafb8468db853d51561798432a5faf0efb8f5c14fa57b93533cfc52cbab427"
+    },
+    "legitimate_empty/commit.json": {
+      "bytes": 840,
+      "sha256": "4484bdc543cb1e1fcbc7ec51c6aec2b666f592b89fa113d1a4d3990ed9135ea3"
+    },
+    "legitimate_empty/objects/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "legitimate_empty/raw_probe.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "legitimate_empty/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "legitimate_empty/stream_closed.json": {
+      "bytes": 272,
+      "sha256": "593b119ba46dac5a55c6bbe0bc811cfd741d262e25996c4e2d190249a6a3e97a"
+    },
+    "object_corrupted_after_commit/case.json": {
+      "bytes": 1778,
+      "sha256": "ce571d4288664168df27be4793c36642f68a14641e403a540f9bf4b5c2426a8b"
+    },
+    "object_corrupted_after_commit/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "object_corrupted_after_commit/child_reservation.json": {
+      "bytes": 613,
+      "sha256": "8d166c96b272bdff7dbb6448e3a64b6d96a339c4521cb0d704e212841896d444"
+    },
+    "object_corrupted_after_commit/child_resources.json": {
+      "bytes": 935,
+      "sha256": "ba41a7da5683b7a60a70aafe27a53540d61616e0f806c9864a5dd90624f832b8"
+    },
+    "object_corrupted_after_commit/commit.json": {
+      "bytes": 846,
+      "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+    },
+    "object_corrupted_after_commit/objects/7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15.bin": {
+      "bytes": 1025,
+      "sha256": "e7217a01fcfe5f895d0f0b038e25bfb04146b4c741f2b05ca112a9f8300891b2"
+    },
+    "object_corrupted_after_commit/raw_probe.json": {
+      "bytes": 1025,
+      "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+    },
+    "object_corrupted_after_commit/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "object_corrupted_after_commit/stream_closed.json": {
+      "bytes": 275,
+      "sha256": "fa09a02b1e584b0aa99e8e5a6c757f1a7c9b3fd85b7cc2381af72c750cc8503f"
+    },
+    "original_deleted_after_commit/case.json": {
+      "bytes": 1904,
+      "sha256": "97b13467ac1357a71210009115776907ebba6bbb2f5a6815e329f540bf96ccc4"
+    },
+    "original_deleted_after_commit/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original_deleted_after_commit/child_reservation.json": {
+      "bytes": 613,
+      "sha256": "8d166c96b272bdff7dbb6448e3a64b6d96a339c4521cb0d704e212841896d444"
+    },
+    "original_deleted_after_commit/child_resources.json": {
+      "bytes": 929,
+      "sha256": "5a40aa16c35cf8a5ec9c30c3c1b1065b2ca8d941f969c5b60e75a12610478814"
+    },
+    "original_deleted_after_commit/commit.json": {
+      "bytes": 846,
+      "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+    },
+    "original_deleted_after_commit/objects/7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15.bin": {
+      "bytes": 1025,
+      "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+    },
+    "original_deleted_after_commit/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "original_deleted_after_commit/stream_closed.json": {
+      "bytes": 275,
+      "sha256": "fa09a02b1e584b0aa99e8e5a6c757f1a7c9b3fd85b7cc2381af72c750cc8503f"
+    },
+    "original_truncated_after_commit/case.json": {
+      "bytes": 1803,
+      "sha256": "2bd161f964e514726d8591987bde2e1211cc7fce3a2aee744b57de0386cf4f21"
+    },
+    "original_truncated_after_commit/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original_truncated_after_commit/child_reservation.json": {
+      "bytes": 613,
+      "sha256": "8d166c96b272bdff7dbb6448e3a64b6d96a339c4521cb0d704e212841896d444"
+    },
+    "original_truncated_after_commit/child_resources.json": {
+      "bytes": 960,
+      "sha256": "d1f65aaa62e6e7f0fee07f230fbafda5ff044f15a0114639a6cd17b3ed43b8b5"
+    },
+    "original_truncated_after_commit/commit.json": {
+      "bytes": 846,
+      "sha256": "1e0429527a8a419812e9854fdafb21d4d0f2629c1f0fa58a4c4e4da33f35da07"
+    },
+    "original_truncated_after_commit/objects/7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15.bin": {
+      "bytes": 1025,
+      "sha256": "7bec35b7137ed53c8a2f2e7d254838c9bbd8b0d3cd93f8d006fc776f8d50ce15"
+    },
+    "original_truncated_after_commit/raw_probe.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original_truncated_after_commit/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "original_truncated_after_commit/stream_closed.json": {
+      "bytes": 275,
+      "sha256": "fa09a02b1e584b0aa99e8e5a6c757f1a7c9b3fd85b7cc2381af72c750cc8503f"
+    },
+    "original_truncated_before_commit/case.json": {
+      "bytes": 1715,
+      "sha256": "78262125084bb40f7b306e25f22ef0dbb64542f91da7ba97a4c805c00035a2cd"
+    },
+    "original_truncated_before_commit/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original_truncated_before_commit/child_reservation.json": {
+      "bytes": 613,
+      "sha256": "8d166c96b272bdff7dbb6448e3a64b6d96a339c4521cb0d704e212841896d444"
+    },
+    "original_truncated_before_commit/child_resources.json": {
+      "bytes": 953,
+      "sha256": "cb1db7c1a9748fefabb71adcdb0518ac2bd8fd2c8f323be973d4ff380cfc7a40"
+    },
+    "original_truncated_before_commit/raw_probe.json": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original_truncated_before_commit/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "original_truncated_before_commit/stream_closed.json": {
+      "bytes": 275,
+      "sha256": "fa09a02b1e584b0aa99e8e5a6c757f1a7c9b3fd85b7cc2381af72c750cc8503f"
+    },
+    "output_cap_exceeded/case.json": {
+      "bytes": 1700,
+      "sha256": "d9a5c406b41c2d0b8114f432185df5e429de7563e32593fc00e9285f3b532c48"
+    },
+    "output_cap_exceeded/child.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "output_cap_exceeded/child_reservation.json": {
+      "bytes": 613,
+      "sha256": "5116a37a272cc35daa2a12699ca0b2277eac409d03eb83650eb549707cd74775"
+    },
+    "output_cap_exceeded/child_resources.json": {
+      "bytes": 1018,
+      "sha256": "56ab850ff2916f61347a441bc1f2c900fb57b5384f0f976652fd65cdfbbf617d"
+    },
+    "output_cap_exceeded/raw_probe.json": {
+      "bytes": 8192,
+      "sha256": "1f5a16c4456f34c5459e4e66d8650d4dbb6b298810d0c21cef6571db21d69c81"
+    },
+    "output_cap_exceeded/reservation.json": {
+      "bytes": 415,
+      "sha256": "9efda2e650a35545c0be0a9e806e524e0735a844e6b74ad8facaeac7b8100537"
+    },
+    "output_cap_exceeded/stream_closed.json": {
+      "bytes": 293,
+      "sha256": "191d91bba45eb782741f0d4d644165c905aef57bca23453d8b5dfb14398c475b"
+    },
+    "reservation.json": {
+      "bytes": 2168,
+      "sha256": "96c7ed55db8081d896c89d4d13c0ebb8c90cf11d5a3418c69c933fd5266dadc8"
+    }
+  },
+  "limitations": [
+    "Finite fabricated qualification, not a reproduction of the original capture loss.",
+    "No power-loss, kernel/filesystem fault injection, cross-device replication or hostile-writer guarantee.",
+    "Independent inode copy and fsync are implemented; physical storage may still be shared.",
+    "Original loss remains an error even if the copy survives; no historical scientific status is changed.",
+    "Future inference must pin the commit identity and separately enforce its scientific/resource contract."
+  ],
+  "limits": {
+    "CPU_total_s_max": 5,
+    "cases": 8,
+    "child_CPU_s_max": 1,
+    "child_address_space_bytes_max": 134217728,
+    "child_wall_s_max": 2,
+    "closed_runtime_output_bytes_max": 262144,
+    "fabricated_children_max": 8,
+    "parent_address_space_bytes_max": 268435456,
+    "per_child_payload_bytes_max": 8193,
+    "process_peak_RSS_bytes_max": 67108864,
+    "qualification_invocations": 1,
+    "wall_s_max": 15
+  },
+  "resources": {
+    "CPU_children_s": 0.137621,
+    "CPU_self_s": 0.317106,
+    "CPU_total_s": 0.454727,
+    "maximum_child_wait4_peak_RSS_bytes": 9355264,
+    "scope": "Parent rusage plus waited children through qualification closure, before final receipt serialization; each child has exact wait4 resources. Main wall excludes interpreter startup.",
+    "supervisor_peak_RSS_bytes": 44249088,
+    "wall_s_before_receipt": 0.48420697600522544
+  },
+  "schema": "mumble_capture_preservation_qualification_v1",
+  "source_freeze": {
+    "bytes": 1568,
+    "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/source_freeze.json",
+    "sha256": "075a62c599dffd44953ebb21a489f6ce277e46e57f96c949d3e3ed28209b5046"
+  },
+  "sources": {
+    "module": {
+      "bytes": 15381,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/capture_preservation.py",
+      "sha256": "14f1ec0c73a816ffa0c441b6a5af465115e98080d1948d452f41a28ea30e5207"
+    },
+    "plan": {
+      "bytes": 5131,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/plan.json",
+      "sha256": "2b4cbb1bdad7f37a4440586a53266f2706208e1e648de10b6e3423aee7a54e0d"
+    },
+    "python": {
+      "bytes": 30894944,
+      "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+    },
+    "qualification": {
+      "bytes": 19051,
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/qualification.py",
+      "sha256": "7f578b255ea8075bd609116f75f3c8af754208c4442a3dc6676e1583e32758d7"
+    }
+  },
+  "status": "passed"
+}

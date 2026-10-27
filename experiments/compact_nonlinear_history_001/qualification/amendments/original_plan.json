@@ -1,0 +1,349 @@
+{
+  "schema": "mumble_compact_history_independent_qualification_plan_v1",
+  "status": "frozen_before_any_qualification_execution",
+  "owner": "interval_audit",
+  "scope": "Independent fabricated mathematical, source/lifecycle and memory qualification only. No canonical observations, historical candidate data or truth enters these cases.",
+  "implementation_paths": [
+    "experiments/compact_nonlinear_history_001/compact_history.h",
+    "experiments/compact_nonlinear_history_001/compact_history.c"
+  ],
+  "coordinate_order": [
+    "log_tau1",
+    "log_tau2",
+    "log_tau3",
+    "log_gamma_plus",
+    "log_gamma_minus",
+    "log_Q",
+    "R0",
+    "R1",
+    "R2",
+    "R3",
+    "H",
+    "z0",
+    "v10",
+    "v20",
+    "v30",
+    "h0"
+  ],
+  "fixed_base_point": {
+    "first_six_natural_values": [
+      0.08,
+      0.7,
+      7.5,
+      300,
+      500,
+      0.065
+    ],
+    "remaining_original_coordinates": [
+      0.16,
+      0.22,
+      0.27,
+      0.33,
+      0.03,
+      0.75,
+      -0.003,
+      0.004,
+      0.006,
+      0.35
+    ],
+    "transform": "Natural first6 values are logged once to construct the original chart."
+  },
+  "comparison_scales": [
+    0.2,
+    0.2,
+    0.2,
+    0.3,
+    0.3,
+    0.2,
+    0.1,
+    0.1,
+    0.1,
+    0.1,
+    0.02,
+    0.1,
+    0.01,
+    0.01,
+    0.01,
+    0.5
+  ],
+  "expected_nonzero_lower_Hessian_pairs": [
+    [
+      0,
+      0
+    ],
+    [
+      7,
+      0
+    ],
+    [
+      12,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      9,
+      2
+    ],
+    [
+      14,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      10,
+      4
+    ],
+    [
+      15,
+      3
+    ],
+    [
+      15,
+      4
+    ],
+    [
+      15,
+      10
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      11,
+      11
+    ]
+  ],
+  "physical_fixture_voltage_V": 3.6,
+  "physical_fixtures": {
+    "zero_current": {
+      "dt_s": [
+        0,
+        0.1,
+        0.7
+      ],
+      "current_A": [
+        0,
+        0,
+        0
+      ]
+    },
+    "positive": {
+      "dt_s": [
+        0.2,
+        0.07,
+        1.3
+      ],
+      "current_A": [
+        0.06,
+        0.06,
+        0.02
+      ]
+    },
+    "negative": {
+      "dt_s": [
+        0.15,
+        0.4,
+        0.6
+      ],
+      "current_A": [
+        -0.06,
+        -0.02,
+        -0.04
+      ]
+    },
+    "mixed": {
+      "dt_s": [
+        0.25,
+        0.3,
+        0.4,
+        0.1,
+        0.45
+      ],
+      "current_A": [
+        0.06,
+        -0.06,
+        0,
+        0.03,
+        -0.02
+      ]
+    },
+    "zero_H_boundary_h": {
+      "dt_s": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "current_A": [
+        0.04,
+        -0.03,
+        0
+      ],
+      "coordinate_overrides": {
+        "H": 0,
+        "h0": 1
+      }
+    }
+  },
+  "fixed_cases": [
+    {
+      "id": 1,
+      "name": "zero_current_signed_jet",
+      "check": "Independent full16D second-order AD against the C prepared row; tau decay and H*h0 retained; unexcited gamma derivatives exactly absent."
+    },
+    {
+      "id": 2,
+      "name": "positive_current_signed_jet",
+      "check": "All signed first/second derivatives and structural sparsity; inactive gamma_minus entries absent."
+    },
+    {
+      "id": 3,
+      "name": "negative_current_signed_jet",
+      "check": "All signed first/second derivatives and structural sparsity; inactive gamma_plus entries absent."
+    },
+    {
+      "id": 4,
+      "name": "mixed_current_signed_jet",
+      "check": "All20 lower Hessian pairs including cross-rate hysteresis and H*h0, original dt/order and prospective-versus-committed jet consistency."
+    },
+    {
+      "id": 5,
+      "name": "zero_H_boundary_h_signed_jet",
+      "check": "At H=0,h0=1 the H*h0 cross derivative remains present even when the first h0 derivative vanishes. No h clipping or division by H."
+    },
+    {
+      "id": 6,
+      "name": "independent_directional_finite_difference",
+      "check": "Five-point first and second directional differences of an independent scalar physical recurrence at the mixed fixture endpoint cross-check the AD oracle in exactly2 fixed directions. h=2^-7; direction1 scales*(i+1)/16, direction2 scales*(-1)^i*(17-i)/16, zero-based i."
+    },
+    {
+      "id": 7,
+      "name": "affine_QR_objective",
+      "check": "Affine restriction matches direct residual sums, full gradient and Hessian at3 fixed query displacements; prepared physical rows also exercise the actual C QR insertion."
+    },
+    {
+      "id": 8,
+      "name": "signed_sparse_quadratic_QR_objective",
+      "check": "A fixed fabricated triangular factor with all20 signed quadratic monomials matches independently expanded residual cost, gradient and true Hessian at3 fixed query displacements. It must retain residual-Hessian cross terms."
+    },
+    {
+      "id": 9,
+      "name": "zero_and_rank_deficient_QR",
+      "check": "Zero and rank-deficient fabricated factors have finite correct cost/gradient/Hessian without invented precision, damping, rank cutoff or pseudoinverse."
+    },
+    {
+      "id": 10,
+      "name": "source_chronology_prevalidation",
+      "check": "Wrong source, duplicate index and skipped index reject without adding evidence or changing the operational bank; correct continuation consumes the row once."
+    },
+    {
+      "id": 11,
+      "name": "support_nonfinite_prevalidation",
+      "check": "Invalid initialization/support and nonfinite/negative-duration inputs reject according to the frozen header; no silent clipping or sample replacement."
+    },
+    {
+      "id": 12,
+      "name": "in_place_numerical_fault",
+      "check": "A declared fabricated oversized factor/row arithmetic fault either rejects before mutation or latches unavailable after mutation. Subsequent query/push/refine must not consume a partially changed factor; do not claim old-byte rollback."
+    },
+    {
+      "id": 13,
+      "name": "query_and_endpoint_no_evidence_duplication",
+      "check": "Repeated queries/endpoint projection may increment their own declared counters but never alter factor, origin, physical jet, source cursor, model-step or QR-row counts."
+    },
+    {
+      "id": 14,
+      "name": "exact_common_mixture_prior",
+      "check": "Independent second-order AD of the public whole-mixture kernel at exactly3 fixed public points (mean and two public component means) verifies cost/gradient/Hessian and distinction from curvature majorizer."
+    },
+    {
+      "id": 15,
+      "name": "one_bounded_fabricated_refinement",
+      "check": "Exactly1 call, max_rounds=2, to the C sketch refiner on a fixed strong full-rank affine likelihood centered at the public mean. Require correct frozen decrease/ownership/stop accounting, never force convergence or exact nonlinear-history acceptance."
+    },
+    {
+      "id": 16,
+      "name": "no_heap_and_complete_layout",
+      "check": "Inspect symbols, actual sizeof/offsets and compiler stack records. One operational bank only; the phase union must account for simultaneous query arrays. No malloc/calloc/realloc/free references or hidden duplicate factor. Target runtime/IRQ/caller reserves remain explicitly unmeasured."
+    }
+  ],
+  "fixed_query_displacements": "Zero; 0.1*scales*((i-7.5)/8); -0.1*scales*((-1)^i)*(i+1)/16. All inputs are fabricated original-chart points, subject to raw support.",
+  "fabricated_factor": "Upper triangular37x37; diagonal0.25+(row%5)/32, off-diagonal(((row+3)*(column+5))%17-8)/256. Affine variant zeroes quadratic columns; zero/rank-deficient variants remove declared rows/columns rather than alter eigenvalues.",
+  "numerical_gates": {
+    "AD_value_relative_to_max_1": 9.094947017729282e-13,
+    "AD_scaled_gradient_Hessian_relative_to_max_1": 2.3283064365386963e-10,
+    "structural_zero_absolute": 0,
+    "directional_first_relative_to_max_1": 1e-08,
+    "directional_second_relative_to_max_1": 2.384185791015625e-07,
+    "QR_cost_gradient_Hessian_relative_to_max_1": 2.3283064365386963e-10,
+    "meaning": "Frozen fabricated reconstruction tolerances, not production inference, voltage-accuracy, noise-calibration or uncertainty thresholds. No claim of outward-rounded libm error certification."
+  },
+  "hard_activity_bounds": {
+    "qualification_invocations": 1,
+    "fixed_cases": 16,
+    "fabricated_model_steps_max": 512,
+    "synthetic_QR_row_insertions_max": 256,
+    "query_evaluations_max": 128,
+    "fabricated_refinement_calls_max": 1,
+    "refinement_max_rounds": 2,
+    "canonical_observation_reads": 0,
+    "historical_candidate_numeric_reads": 0,
+    "truth_reads": 0,
+    "learner_calls": 0,
+    "canonical_replays": 0
+  },
+  "finite_resources": {
+    "CPU_s_max": 30,
+    "wall_s_max": 60,
+    "process_RSS_bytes_max": 268435456,
+    "address_space_bytes_max": 536870912,
+    "retained_output_bytes_max": 4194304
+  },
+  "proposed_whole_system_ledger_bytes": {
+    "one_context_core_cap": 8112,
+    "ADC_ring_and_metadata": 448,
+    "checkpoint_serializer": 128,
+    "own_stack_cap": 768,
+    "libm_IRQ_caller_reserve": 768,
+    "total_cap": 10224,
+    "ceiling": 10240,
+    "headroom": 16,
+    "status": "Hard proposed allocations and host-layout checks, not measured Cortex-M23 SRAM or timing."
+  },
+  "failure_policy": "Reserve one attempt and bind plan/source/compiler/Python before tests. Preserve any failing receipt and partial outputs. A defect repair or change to fixtures/gates requires an explicit separately recorded decision; no silent retry or tolerance widening.",
+  "finish_line": "One saved finite qualification and independent source review. Stop after declared cases; no new broad campaign or canonical run is authorized by this plan."
+}

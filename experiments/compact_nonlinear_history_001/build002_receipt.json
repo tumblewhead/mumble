@@ -1,0 +1,193 @@
+{
+  "binary": {
+    "bytes": 59344,
+    "path": "experiments/compact_nonlinear_history_001/build002/probe.bin",
+    "sha256": "f466456ad318c27a302ebfc9e6b3f164b0861c328e994e15a8fd3be73f473b2e"
+  },
+  "candidate_undefined_symbols": [
+    "                 U __stack_chk_fail",
+    "                 U exp",
+    "                 U expm1",
+    "                 U fmax",
+    "                 U fmin",
+    "                 U hypot",
+    "                 U ldexp",
+    "                 U log",
+    "                 U nextafter",
+    "                 U scm_model_init",
+    "                 U scm_ocv_eval",
+    "                 U tanh"
+  ],
+  "commands": [
+    {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fstack-usage",
+        "-I",
+        "include",
+        "-I",
+        "experiments/compact_nonlinear_history_001",
+        "-c",
+        "experiments/compact_nonlinear_history_001/probe.c",
+        "-o",
+        "experiments/compact_nonlinear_history_001/build002/probe.o"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fstack-usage",
+        "-I",
+        "include",
+        "-I",
+        "experiments/compact_nonlinear_history_001",
+        "-c",
+        "experiments/compact_nonlinear_history_001/compact_history.c",
+        "-o",
+        "experiments/compact_nonlinear_history_001/build002/compact_history.o"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-std=c99",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fstack-usage",
+        "-I",
+        "include",
+        "-I",
+        "experiments/compact_nonlinear_history_001",
+        "-c",
+        "src/scm_model.c",
+        "-o",
+        "experiments/compact_nonlinear_history_001/build002/scm_model.o"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "/usr/bin/x86_64-linux-gnu-gcc-13",
+        "-o",
+        "experiments/compact_nonlinear_history_001/build002/probe.bin",
+        "experiments/compact_nonlinear_history_001/build002/probe.o",
+        "experiments/compact_nonlinear_history_001/build002/compact_history.o",
+        "experiments/compact_nonlinear_history_001/build002/scm_model.o",
+        "-lm"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "compiler": {
+    "bytes": 1023032,
+    "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+    "sha256": "6117c52522997d2aaccb2b52b3c6bf42c0a6c5edb1d718431fed6b2fc5fec234",
+    "version": "x86_64-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0"
+  },
+  "counts": {
+    "compile_commands": 3,
+    "model_steps": 0,
+    "prior_evaluations": 0,
+    "scientific_invocations": 0,
+    "truth_reads": 0
+  },
+  "flags": [
+    "-std=c99",
+    "-O3",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Werror",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fstack-usage",
+    "-I",
+    "include",
+    "-I",
+    "experiments/compact_nonlinear_history_001"
+  ],
+  "limitations": "Host compiler ABI/static stack estimates; external libm, ISR and caller paths are not target high-water measurements. No executable/model invocation occurs in this build.",
+  "resources": {
+    "CPU_children_s": 1.104384,
+    "CPU_self_s": 0.05581799999999999,
+    "peak_RSS_self_bytes": 11665408,
+    "peak_RSS_waited_children_bytes": 38457344,
+    "wall_s": 1.1126311920015723
+  },
+  "schema": "mumble_compact_nonlinear_history_build_v1",
+  "source_identities": {
+    "experiments/compact_nonlinear_history_001/build.py": {
+      "bytes": 4330,
+      "sha256": "9644618aefb9583d4369fb7a7badabb50fadde5bb71f061c27d21dad56becd11"
+    },
+    "experiments/compact_nonlinear_history_001/compact_history.c": {
+      "bytes": 31366,
+      "sha256": "7d6a238b642113926c4c80f464afb3f65e9390de5ca46ed7756c3083939ad2bf"
+    },
+    "experiments/compact_nonlinear_history_001/compact_history.h": {
+      "bytes": 6435,
+      "sha256": "f115ae16915937b84ecf284377b3db96bac3f45f36c12dd444b9a2c7aa05fc3e"
+    },
+    "experiments/compact_nonlinear_history_001/probe.c": {
+      "bytes": 20425,
+      "sha256": "f122d2a3fc4f32e3e23e24e4ca92e7c06cfec9039c765ac7d1821b1e31eda81e"
+    },
+    "include/scm_model.h": {
+      "bytes": 2763,
+      "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+    },
+    "src/scm_model.c": {
+      "bytes": 5765,
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    }
+  },
+  "stack_usage": {
+    "compact_history.su": {
+      "bytes": 1061,
+      "contents": "experiments/compact_nonlinear_history_001/compact_history.c:136:12:advance_jet\t176\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:75:12:point_support\t80\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:310:12:add_prior.constprop\t128\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:287:15:row_derivative\t48\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:59:8:ch_qr_index\t8\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:64:8:ch_packed_index\t8\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:112:5:ch_init\t16\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:210:5:ch_prepare\t8\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:245:5:ch_push\t96\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:349:5:ch_endpoint\t64\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:394:5:ch_query\t160\tstatic\nexperiments/compact_nonlinear_history_001/compact_history.c:548:5:ch_refine\t224\tstatic\n",
+      "sha256": "c1928f5e224881dbc28b68eb1013476deba483e0de58a2a7655ec000043af42c"
+    },
+    "probe.su": {
+      "bytes": 567,
+      "contents": "experiments/compact_nonlinear_history_001/probe.c:81:12:parse_source\t16\tstatic\nexperiments/compact_nonlinear_history_001/probe.c:165:13:trace\t8\tstatic\nexperiments/compact_nonlinear_history_001/probe.c:153:13:snapshot_exact.part.0\t8\tstatic\nexperiments/compact_nonlinear_history_001/probe.c:73:13:vector.constprop\t48\tstatic\nexperiments/compact_nonlinear_history_001/probe.c:209:13:print_cost.part.0\t16\tstatic\nexperiments/compact_nonlinear_history_001/probe.c:219:13:print_exact\t32\tstatic\nexperiments/compact_nonlinear_history_001/probe.c:324:5:main\t496\tdynamic,bounded\n",
+      "sha256": "3b437fde795739f92f3a8209914cbc9383fa6433b3b6ad0ec436d50c861b2ecc"
+    },
+    "scm_model.su": {
+      "bytes": 376,
+      "contents": "src/scm_model.c:5:5:scm_model_ntheta\t8\tstatic\nsrc/scm_model.c:6:5:scm_model_nalpha\t8\tstatic\nsrc/scm_model.c:8:5:scm_ocv_validate\t8\tstatic\nsrc/scm_model.c:21:5:scm_ocv_eval\t48\tstatic\nsrc/scm_model.c:44:5:scm_model_init\t368\tstatic\nsrc/scm_model.c:63:5:scm_model_step\t480\tstatic\nsrc/scm_model.c:104:5:scm_model_predict\t8\tstatic\nsrc/scm_model.c:120:5:scm_physical_step\t240\tstatic\n",
+      "sha256": "1596616ab74d663ef8acc911e58154bd333df403cea3f6bfa5e5e909b38967dd"
+    }
+  },
+  "status": "passed"
+}

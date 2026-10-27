@@ -1,0 +1,48 @@
+{
+  "canonical_recovery_or_retry": false,
+  "case": "exact_binary_commit",
+  "commit_identity": {
+    "bytes": 846,
+    "sha256": "93a05f170e929eb7dbdf812862d26aac53040858d141a560a202bec0bb444775"
+  },
+  "expected_rejections": [
+    {
+      "message": "Required capture file unavailable: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/capture_preservation_001/attempt001/exact_binary_commit/commit.json",
+      "type": "CaptureIntegrityError"
+    }
+  ],
+  "injected_faults": [],
+  "real_fabricated_children": 1,
+  "resources": {
+    "CPU_system_s": 0.011406999999999999,
+    "CPU_total_s": 0.015551999999999998,
+    "CPU_user_s": 0.004144999999999999,
+    "child_launched": true,
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-I",
+      "-B",
+      "-c",
+      "import os, sys\nn = int(sys.argv[1])\ndata = bytes((i * 37 + 11) % 256 for i in range(n))\nwhile data:\n    data = data[os.write(1, data):]\n",
+      "8192"
+    ],
+    "exit_code": 0,
+    "killed_after_output_cap": false,
+    "output_error": null,
+    "peak_RSS_bytes": 9199616,
+    "resources_scope": "exact wait4 of this real fabricated child; no stub resources",
+    "stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout_bytes_observed": 8192,
+    "stdout_bytes_written": 8192,
+    "stream_identity": {
+      "bytes": 8192,
+      "sha256": "1f5a16c4456f34c5459e4e66d8650d4dbb6b298810d0c21cef6571db21d69c81"
+    },
+    "wall_s": 0.01896374099305831
+  },
+  "scientific_status_changes": 0,
+  "status": "passed"
+}

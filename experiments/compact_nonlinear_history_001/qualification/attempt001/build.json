@@ -1,0 +1,93 @@
+{
+  "commands": [
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fPIC",
+        "-fstack-usage",
+        "-I/workspace/scratch/d8e043c88fda/mumble-repo/include",
+        "-I/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001",
+        "-c",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/compact_history.c",
+        "-o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/attempt001/compact_history.o"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fPIC",
+        "-fstack-usage",
+        "-I/workspace/scratch/d8e043c88fda/mumble-repo/include",
+        "-I/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001",
+        "-c",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/src/scm_model.c",
+        "-o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/attempt001/scm_model.o"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-std=c99",
+        "-O3",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-fPIC",
+        "-fstack-usage",
+        "-I/workspace/scratch/d8e043c88fda/mumble-repo/include",
+        "-I/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001",
+        "-c",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/bridge.c",
+        "-o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/attempt001/bridge.o"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cc",
+        "-shared",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/attempt001/compact_history.o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/attempt001/scm_model.o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/attempt001/bridge.o",
+        "-lm",
+        "-o",
+        "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/compact_nonlinear_history_001/qualification/attempt001/candidate.so"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "library": {
+    "path": "experiments/compact_nonlinear_history_001/qualification/attempt001/candidate.so",
+    "bytes": 46176,
+    "sha256": "6dab7af60deda980c08e2afed41f52b40a79f511514c8abecd1080a9cc49f79a"
+  }
+}
