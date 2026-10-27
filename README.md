@@ -6,6 +6,29 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The causal rolling engine is integrated and its finite qualification passes.**
+Starting from the public mean, the C candidate owns one compact history bank,
+sixteen retained ADC records and eight incoming records. It accepts twelve-bit
+V/I/T codes with actual duration ticks; playback and saved traces belong to the host.
+The integrated suite passed **16 cases and 4,757 assertions**, including independent
+full-joint derivatives, prior/record ownership, supported trial preservation and
+an actual merge-fault latch. Its context is **8,680 bytes** and the compiled host
+project call-path maximum is **760 bytes**. With the declared stack and runtime
+reservations the planning total remains **10,216 bytes**; target resources are
+still unmeasured.
+
+One frozen four-hour public-start probe is next, after source publication. It will
+save all sixteen original-coordinate traces and five current-state traces.
+Predetermined exact audits and truth scoring are external, after candidate closure.
+The experiment does not yet establish convergence, calibrated intervals, historical
+fidelity or M3 readiness. See the
+[integration design](experiments/live_anchor_integration_001/DESIGN.md),
+[qualification](experiments/live_anchor_integration_001/qualification/independent_attempt001/receipt.json)
+and [frozen run plan](experiments/live_anchor_integration_001/host_run_plan.json).
+The work branch is `implementation/live-anchor-integration-001`.
+
+### Previous primitive checkpoint
+
 **The causal live-anchor design is selected, and its three C prerequisites are qualified.**
 The input interface preserves 12-bit V/I/T and 64-bit actual duration ticks. A
 support-aware joint proposal handles active bounds; an in-place translation

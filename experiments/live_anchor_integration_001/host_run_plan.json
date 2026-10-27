@@ -1,0 +1,80 @@
+{
+  "schema": "mumble_live_anchor_host_run_plan_v1",
+  "status": "prelaunch_contract_source_review_required",
+  "base_revision": "47ec846a27e3588f63ea9425441a0ee746c9a63d",
+  "scope": "One public-start chronological504000-record run of the new rolling engine, with every committed-block trace saved externally. No warmup, restored fitted anchor, truth input, retry or extension.",
+  "input": {
+    "member": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+    "bytes": 16128000,
+    "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+    "records": 504000,
+    "format": "little-endian <Qddd>: index, actual_dt_s, current_A, observed_voltage_V",
+    "candidate_interface": "Only source32, sequence and native ADC12 raw records; no archive pointer/handle or unbounded history in candidate.",
+    "parent_access": "Byte hashing before/after; host producer alone decodes chronological records during the canonical child. No outcome scan or data-dependent calibration adjustment."
+  },
+  "study_fixture": {
+    "voltage_V": {"offset": 1.5, "units_per_code": 0.0009765625, "minimum": 1.5, "maximum": 5.4990234375},
+    "current_A": {"offset": -0.256, "units_per_code": 0.000125, "minimum": -0.256, "maximum": 0.255875},
+    "temperature_C": {"offset": -40.0, "units_per_code": 0.0625, "synthetic_value": 25.0, "synthetic_code": 1040},
+    "seconds_per_tick": 1.4285714285714285e-7,
+    "provenance": "Explicit synthetic-study configuration, selected before archive outcomes; not user hardware specifications.",
+    "voltage_range_reason": "Source support has |I|<=0.25, R0/Ri<=1, |vi|<=0.25, H<=0.1 and |h|<=1. With0<=SOC<=1 its conservative terminal-voltage envelope is approximately1.82..5.33 V. The broader dyadic map covers that envelope; unbounded Gaussian noise still requires explicit overflow failure.",
+    "quantization": "Reject nonfinite/outside-calibrated-span values before rounding. For nonnegative q use floor(q+0.5), with exact half ties toward the higher code/tick. No clipping.",
+    "producer_domain": "Ordered contiguous index;0<=actual_dt<=1 s and |I|<=0.25 A. Decode and validate engineering outputs before offering to candidate.",
+    "statistics": "For successfully encoded records, report decoded-minus-original dt/I/V signed sum, mean, RMS, maximum absolute error, half-tie counts and channel rail counts.",
+    "temperature_scope": "Archive contains no T; synthesized25 C only. No temperature compensation or physical ADC calibration accuracy claim."
+  },
+  "likelihood": {
+    "sigma_V": 0.001,
+    "law": "Point Gaussian voltage residual conditional on decoded current/time and quantized voltage; approximate quantized-input likelihood.",
+    "prior": "Original public supported joint mixture once in the original entering16D chart; no density Jacobian from proposal coordinates.",
+    "quantization_variance_inflation": false,
+    "coverage_claim": false
+  },
+  "algorithm": {
+    "initialization": "re_init uses public mean and empty bank; no historical candidate input.",
+    "retained_records": 16,
+    "ingress_records": 8,
+    "rounds_per_full_block": 1,
+    "fractions_max_per_round": 8,
+    "blocks": 31500,
+    "flow": "Offer then admit each valid record. At16 retained records call re_process(ctx,1) once. Save search stop/fraction before one postcommit re_query(ctx,0,1) at bank.estimate. Also make exactly one initial empty-block query.",
+    "work_caps": {"query_evaluations": 346501, "prior_evaluations": 315001, "attempted_model_steps": 6048000, "qr_rows": 504000, "proposal_rounds": 31500, "fraction_attempts": 252000},
+    "work_cap_derivation": "At most11 queries/block plus initial1,10 prior evaluations/block plus initial1,16*(11 query passes+1 merge pass)*31500 attempted model steps. Rejected fractions consume finite work; counters reserve actual model calls before each recurrence.",
+    "success_semantics": "CH_OK from process means a valid merge, not convergence. Preserve unresolved stops and approximation flags."
+  },
+  "trace": {
+    "format": "UTF-8 strict JSON Lines on child stdout",
+    "schema": "mumble_live_anchor_trace_v1",
+    "roles": ["header", "initial", "31500 committed-block rows", "terminal"],
+    "snapshot_count": 31501,
+    "fields": ["next_index", "decoded elapsed_s", "source elapsed_s", "original entering x[16]", "current SOC/v[3]/h", "likelihood/prior/total costs", "flags", "saved search stop/fraction", "accepted-step delta", "all work counters"],
+    "interpretation": "Original entering states and derived current states remain separately named. Approximate history/boundary flags are retained; no interval is produced.",
+    "candidate_owned_trace_bytes": 0
+  },
+  "execution": {
+    "canonical_invocations": 1,
+    "retries": 0,
+    "attempt": "experiments/live_anchor_integration_001/attempt001",
+    "outer": "experiments/live_anchor_integration_001/execution_process",
+    "CPU_s": 600,
+    "wall_s": 900,
+    "host_RSS_bytes": 268435456,
+    "AS_bytes": 1073741824,
+    "combined_child_stdout_stderr_bytes": 67108864,
+    "outer_stdout_stderr_bytes": 262144,
+    "outer_output_limit_scope": "Outer capture transaction enforces256 KiB live stdout. Reused supervision receives64 MiB file/combined-stream bound so inherited RLIMIT_FSIZE permits the inner trace. Outer combined stdout/stderr is additionally checked against256 KiB at closure.",
+    "closed_runtime_output_bytes": 150994944,
+    "exclusive_output": true,
+    "capture": "Reuse unchanged qualified capture_preservation.py and exact wait4 streaming helper; original raw_probe.json and independent content-addressed copy must both remain intact. Never rename capture roles or silently recover an original.",
+    "closure": "Durable reservation before child launch. Freeze source/plan/input/binary/Python/qualification/review identities. Retain failures and partial complete trace rows. Whole-process outer wait4 includes inner supervisor, child and final inner closure; closed manifests and input/source posthashes required.",
+    "failure": "Stop on producer, engine, numerical, budget or integrity failure. A failed run stays failed. Missing terminal/partial activity remains explicit, never inferred zero."
+  },
+  "publication_gate": "Root publishes and verifies the reviewed source tree, then supplies the executable receipt before the single canonical invocation.",
+  "postclosure": {
+    "exact_audits": "Separately frozen host_audit_plan.json; no audit output enters inference.",
+    "publication": "Preserve raw JSONL and its independent exact copy locally. Package each with deterministic gzip only after closure, binding raw/compressed/decompressed hashes and sizes; compressed publication never changes the canonical capture roles or status.",
+    "truth": "Filenames may be discovered before run; contents only after candidate whole-process closure. External scoring/presentation only.",
+    "target": "Host measurements and the8680 B candidate object are not a Cortex-M23 complete SRAM/timing qualification."
+  }
+}

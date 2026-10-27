@@ -1,0 +1,132 @@
+{
+  "execution": {
+    "canonical_observation_reads": 0,
+    "compilations": 0,
+    "fabricated_numerical_runs": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_calls": 0,
+    "root_engine_edits_by_reviewer": 0,
+    "truth_reads": 0
+  },
+  "gate": "No remaining material source blocker. Combined independent numerical qualification, final stack accounting, frozen identities and the parent canonical-run gate are still required.",
+  "interpretation_limits": [
+    "Polynomial translation preserves represented older evidence; it cannot renew discarded nonlinear historical derivatives.",
+    "Raw-block reevaluation is nonlinear conditional on an approximate carried boundary after transport; state transport is not archived replay.",
+    "A metric stop can still commit observations at the unchanged estimate; it is explicitly unresolved and is not a successful proposal or precision claim.",
+    "The current estimate can become infeasible under a new raw block before proposal generation. The engine stops instead of attempting a separate feasibility-restoration solve; this does not establish exclusion of every supported parameter point.",
+    "Post-re_process result costs come from the commit preflight without the prior; only stop reason/round/fraction are restored. A host needing Armijo details must capture refinement output before commit and respect cost/prior availability flags.",
+    "Accumulated approximation error, scalar input quantization, finite unmodeled temperature and parameter support remain part of the declared model limitations. No credible interval, coverage, global optimum or M23 readiness follows."
+  ],
+  "material_blockers": [],
+  "phase_liveness": {
+    "actual_integrated_stack": "Not compiled or measured by this review; must be checked before canonical invocation.",
+    "auxiliary_refinement_view_bytes": 88,
+    "auxiliary_reserved_union_bytes": 128,
+    "context_bytes": "8680 by static layout/assertion; combined sizeof qualification pending",
+    "preserved_trial_endpoint_bytes": 128,
+    "query_or_proposal_workspace_bytes": 1600,
+    "query_state_plus_reading_bytes": 256,
+    "result_union_bytes": 120,
+    "target_SRAM_and_timing": "Unqualified. Host static layout and a reserved stack/runtime budget are not device measurements."
+  },
+  "pre_freeze_findings_resolved": [
+    {
+      "issue": "Repeated full query-state checks per scalar Jacobian were suspected.",
+      "resolution": "Source confirms rm_query_derivative already checks only pointers/index and its scalar result. Full-state validation is outside the scalar derivative loop. No kernel change required."
+    },
+    {
+      "issue": "Proposal wrapper plus local baseline/input fields risked exceeding the standalone support stack allowance.",
+      "resolution": "Parent replaced the spare checkpoint byte array with a typed mutually exclusive128B auxiliary phase and calls ss_propose directly. Actual combined compiler stack remains a required qualification gate."
+    },
+    {
+      "issue": "Commit preflight and merge each consume block_count model attempts.",
+      "resolution": "Counter bound now uses UINT64_MAX-2*block_count before preflight."
+    },
+    {
+      "issue": "Metric and reciprocal-rounding outcomes could be conflated with ordinary no-direction stops.",
+      "resolution": "CH_STOP_METRIC and RE_STOP_ROUNDING7 remain distinct."
+    },
+    {
+      "issue": "Rejected trial prevalidation could leave stale support-result or previous-trial cost/flags.",
+      "resolution": "Result is cleared after saving proposal slopes and on every CH_ERR_DOMAIN trial rejection."
+    }
+  ],
+  "public_constants_literal_identity": {
+    "ch_lower": true,
+    "ch_pair": true,
+    "ch_public_mean": true,
+    "ch_public_sd": true,
+    "ch_upper": true
+  },
+  "reviewed_source_sha256": {
+    "experiments/live_anchor_bootstrap_001/history_translation.c": "fc466d7893c8bd1b981e9a753dec04e46575badd597b969f0d2fd8b337877eba",
+    "experiments/live_anchor_bootstrap_001/history_translation.h": "5aab00671e32f3e3e5323e2e97e8922610f2d06206b34d2cf9df4283885fb31e",
+    "experiments/live_anchor_bootstrap_001/live_layout.h": "24d37d7f298dfdbce40bb2da7ae2d39c8a76479c90d835b00c18383e511f7ba5",
+    "experiments/live_anchor_bootstrap_001/support_step.c": "9629fa7f700097770b96ff4349bafe06c15ab8b876300d6e54bce51ecca8ee95",
+    "experiments/live_anchor_bootstrap_001/support_step.h": "e30ad444760167cbcf1a1dd33911cb6fd9b5e58a9dabe4d4f877c9ad75bc371e",
+    "experiments/live_anchor_integration_001/public_contract.c": "500e9f20893d66570607d268cb1e5e6eccf37c8078127ff345cbcce92a73c2a9",
+    "experiments/live_anchor_integration_001/rolling_engine.c": "65ec07983569d0a31ae7a1a573d0b374909badcc3a95cc81f5bce8c6fedc4088",
+    "experiments/live_anchor_integration_001/rolling_engine.h": "01d8b6002d9e788b0fcc8e20ade30cbf6d11222a98bf6fedf8b08c01141bea20",
+    "experiments/live_anchor_integration_001/rolling_model.c": "7b97ce9aea7596f2e6f76b7e411d53c5a7d60fa94e7abd1fefbab22f2b059dc8",
+    "experiments/live_anchor_integration_001/rolling_model.h": "b98e16fe08eab172c12230b1899ace122f08085b527c976f394e9a873c703a0f"
+  },
+  "reviewer": "/root/weighting_audit",
+  "schema": "mumble_live_anchor_engine_source_review_v1",
+  "scope": "Independent algebra/source/phase-liveness review of parent-owned engine. Rolling model kernels were authored by this reviewer and receive separate independent review by interval_audit.",
+  "status": "passed_source_only_pending_combined_qualification",
+  "verified": [
+    {
+      "anchor": "rolling_engine.c:ready/re_offer/re_admit",
+      "finding": "Source and immutable calibration/model generation identify the input; offered/retained/committed cursors obey next_index+block_count+ingress_count=next_ingress_sequence. Invalid/full offers do not mutate context; admission transfers raw ownership without adding evidence."
+    },
+    {
+      "anchor": "rolling_engine.c:polynomial_row/polynomial_derivative/re_query",
+      "finding": "Quadratic-first triangular factor contributes every represented residual row, including constant residual energy. Original-coordinate full joint gradient and packed GN include all sparse-feature cross effects; the current raw block is evaluated separately from the same boundary for each query."
+    },
+    {
+      "anchor": "rolling_engine.c:prior/precision",
+      "finding": "Cost and gradient use the original equal-weight whole-mixture prior exactly once per requested objective; its fixed kernel precision is added only as optimization geometry. Original support-normalizer constants are omitted only from within-prefix costs/contrasts. No posterior or prior is merged into observation rows."
+    },
+    {
+      "anchor": "rolling_engine.c:charge_extrema/point_support",
+      "finding": "Charge extrema include zero and all retained intervals in sequential I*dt/3600 order. SOC support uses charge/exp(logQ), matching original division order. All public support bounds are unchanged."
+    },
+    {
+      "anchor": "rolling_engine.c:re_query; rolling_engine.h:re_query contract",
+      "finding": "Cost-only queries leave packed136 and gradient16 unchanged. Their point remains live; query state224 and decoded reading32 occupy only the final256B. The older-factor temporary Jrow uses the first128B of that phase before rm_query_init initializes the full state."
+    },
+    {
+      "anchor": "rolling_engine.h:re_aux_workspace/re_context; rolling_engine.c:re_refine",
+      "finding": "The explicit128B auxiliary union contains an88B refinement configuration/baseline view and is mutually exclusive with checkpoint coding. It avoids an extra persistent allocation and removes the former proposal helper/input stack frame. Embedded pointers are temporary views, not checkpoint serialization."
+    },
+    {
+      "anchor": "rolling_engine.c:re_refine",
+      "finding": "The support primitive receives original-coordinate gradient/metric and a bank-owned immutable anchor. Its reciprocal-coordinate parameterization never changes the prior density measure. Original-chart slope is saved before the result phase changes."
+    },
+    {
+      "anchor": "rolling_engine.c:re_refine trial loop",
+      "finding": "The exact returned full endpoint is copied into the first16 packed doubles after the metric dies. Cost-only trials preserve this storage. Full alpha1 uses those exact values; later trials use anchor+alpha*(endpoint-anchor). Every trial rechecks original support and conditional physical state."
+    },
+    {
+      "anchor": "rolling_engine.c:re_refine acceptance",
+      "finding": "Accepted estimates require finite total-objective decrease beyond the computed cost allowance and quarter-slope Armijo requirement. The combination guard uses32 operations. These are computed-operand arithmetic guards, not nonlinear approximation certificates or voltage-error thresholds."
+    },
+    {
+      "anchor": "rolling_engine.c:re_refine status handling",
+      "finding": "Finite direction, reciprocal-rounding, metric and no-trial stops are distinguishable. Nonpositive metric causes no proposed step or repair and remains an explicit CH_STOP_METRIC unresolved outcome. Nonfinite/other negative query failures propagate. No finite stop is declared nonlinear stationarity."
+    },
+    {
+      "anchor": "rolling_engine.c:re_commit",
+      "finding": "Model-work counter prevalidation reserves2*block_count for physical/block preflight plus merge. Physical preflight and boundary transport precede factor mutation; normalized raw-log-chart translation is kept separate from boundary-jet raw-coordinate transport."
+    },
+    {
+      "anchor": "rolling_engine.c:re_commit/qr_append",
+      "finding": "Old factor is translated once, boundary state is transported approximately, each retained row is appended once, and committed cursor/QR-row count advance only after complete merge. Raw slots retire only then. Unexpected failures after mutation latch unavailable; no partial factor remains queryable."
+    },
+    {
+      "anchor": "rolling_engine.c:re_process",
+      "finding": "CH_OK denotes completed ingestion, not optimizer convergence. Refinement stop reason/round/fraction survive commit; committed prior remains the original prior and the estimate remains in the original entering chart."
+    }
+  ]
+}

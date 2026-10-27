@@ -1,0 +1,292 @@
+{
+  "closure_gate": "Parent-pinned completed whole-process outer receipt binds runner source; import only that verified source and call validate_closed_run(root,identity,read_observations=False). Require both original and independent captures. Rebind reporter/plan to pre-inference source identities before any truth read/literal evaluation. Failed inference is not silently accepted.",
+  "current_quantities": [
+    {
+      "name": "current_SOC",
+      "trace": "endpoint.SOC",
+      "unit": "fraction"
+    },
+    {
+      "name": "current_v1_V",
+      "trace": "endpoint.v_V[0]",
+      "unit": "V"
+    },
+    {
+      "name": "current_v2_V",
+      "trace": "endpoint.v_V[1]",
+      "unit": "V"
+    },
+    {
+      "name": "current_v3_V",
+      "trace": "endpoint.v_V[2]",
+      "unit": "V"
+    },
+    {
+      "name": "current_h",
+      "trace": "endpoint.h",
+      "unit": "dimensionless"
+    }
+  ],
+  "errors": {
+    "Q_percent": "100*(Q_est/Q_truth-1)",
+    "current_SOC_pp": "100*(SOC_est-SOC_truth)",
+    "positive_parameter_relative_percent": "100*(estimate/reference-1) where the positive reference is meaningful",
+    "signed": "physical estimate minus physical reference, in native units",
+    "statistics": [
+      "initial rawprior",
+      "final",
+      "postinitial minimum/maximum signed error",
+      "postinitial mean absolute/RMS/maximumabsolute error withindex/time",
+      "reference availability counts",
+      "exact unchanged-point counts labeleddescriptive only"
+    ]
+  },
+  "failure_policy": "New exclusive outputdirectory; retain failure receipt and partialoutputs, no automatic rerun/threshold relaxation. Successful completion requires unchanged inputs/source and stable outputaccounting after rendering.",
+  "figure_policy": "Standardmatplotlib PNG+SVG, allsavedpoints, no smoothing, no fittedline or outcome-selectedzoom. Scales/title/legends statephysicalunits, sourcevsdecoded time and reference availability. Low-amplitude/static nuisance axes remain visible. All16 originalquantities are separately namedfromcurrentstates.",
+  "figures": [
+    {
+      "extent": "full0..4h",
+      "high_resolution_PNG": true,
+      "layout": "4x4",
+      "stem": "all16_parameters"
+    },
+    {
+      "extent": "full0..4h",
+      "layout": "2x4 slide-friendly",
+      "stem": "parameters_01_08"
+    },
+    {
+      "extent": "full0..4h",
+      "layout": "2x4 slide-friendly",
+      "stem": "parameters_09_16"
+    },
+    {
+      "extent": "full0..4h; missingv/h truth explicitlylabeled",
+      "layout": "5x1",
+      "stem": "current_states"
+    },
+    {
+      "extent": "full0..4h; existinghard/preferred thresholds",
+      "layout": "2x2 valuesandpoint-errors",
+      "stem": "capacity_SOC_overview"
+    },
+    {
+      "extent": "predeclared0..120s; includesinitial andallsavedearlypoints",
+      "layout": "2x2 valuesandpoint-errors",
+      "stem": "early_capacity_SOC"
+    },
+    {
+      "extent": "full0..4h; acceptedsteps/categoricalstops, noflatline convergenceclaim",
+      "layout": "2x1",
+      "stem": "optimization_trace"
+    }
+  ],
+  "input_trace": {
+    "end_time_nominal_s": 14400,
+    "indices": "0 plus16,32,...,504000",
+    "preservation": "All saved snapshots remain in numerical CSV; every point supplied to figures, no smoothing or outcome-selected subset. Initial public prior is explicitly separate from learned-point target screens.",
+    "schema": "mumble_live_anchor_trace_v1",
+    "snapshots_max": 31501
+  },
+  "interpretation": [
+    "A flat or accurate point trace doesnot establish convergence, identifiability, calibrated uncertainty or real-device accuracy.",
+    "Approximate olderhistory and boundarytransport flags remain visible.",
+    "The fixed decoded-point Gaussian likelihood afterquantization is approximate; no noise inflation is introduced.",
+    "Exact nonlinear likelihood audits stay separate and use their predeclared threepoints/caps.",
+    "No production promotion or actual Cortex-M23 SRAM/timing claim."
+  ],
+  "limits": {
+    "CPU_s": 120,
+    "RSS_bytes": 536870912,
+    "closed_output_bytes": 100663296,
+    "reporting_invocations": 1,
+    "wall_s": 180
+  },
+  "optional_dense_current_truth": {
+    "alignment": "Header begin/count/version/sourceidentity andCRC required. Read header72+(n-begin)*208. Record stores event-enteringz,v[3],h andeventindex/within-count, notalways currentstate.",
+    "availability_policy": "Use only if already local under repo or supplied evidence root. No restore, network, history replay or RNG hydration. Otherwise currentv/h truth is unavailable afterinitial; plot complete estimates and explicit unavailable labels.",
+    "bytes": 104832280,
+    "header": "<8sIIQQ32s payload64B plus<II CRC/reserved8B =72B",
+    "manifest_bytes": 30935,
+    "manifest_path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/source_manifest.json",
+    "manifest_sha256": "468fe1d68618cce6ac118327dd07548416cb7eade5bf76d04916fa1d3508f86e",
+    "maximum_closed_form_reference_evaluations": 31501,
+    "maximum_direct_record_reads": 31501,
+    "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/source_states.bin",
+    "reconstruction": "Within-event elapsed=within_count*binary64(1/35); use source event-entry constant-current closedforms once perselectedrecord; atwithin0 currentstate equalsstored enteringstate. Verify reconstructedSOC agreesbitwise with scalartruth. Ignore stored RNG bytes.",
+    "record": "<QII6d8d16s16sII32s payload200B plus<II CRC/reserved8B =208B",
+    "separate_accounting": "Reporting-only reference evaluations; not the separately frozen original-model likelihood audits.",
+    "sha256": "a5c5914fc2d0bd4daacdc6951d2ca1db3a8b3d94351986aa00f20e848f0f3b0b"
+  },
+  "original_quantities": [
+    {
+      "index": 0,
+      "name": "tau1_s",
+      "reference_key": "tau[0]",
+      "transform": "exp",
+      "unit": "s"
+    },
+    {
+      "index": 1,
+      "name": "tau2_s",
+      "reference_key": "tau[1]",
+      "transform": "exp",
+      "unit": "s"
+    },
+    {
+      "index": 2,
+      "name": "tau3_s",
+      "reference_key": "tau[2]",
+      "transform": "exp",
+      "unit": "s"
+    },
+    {
+      "index": 3,
+      "name": "gamma_plus_per_Ah",
+      "reference_key": "gamma_plus",
+      "transform": "exp",
+      "unit": "1/Ah"
+    },
+    {
+      "index": 4,
+      "name": "gamma_minus_per_Ah",
+      "reference_key": "gamma_minus",
+      "transform": "exp",
+      "unit": "1/Ah"
+    },
+    {
+      "index": 5,
+      "name": "Q_Ah",
+      "reference_key": "Q_Ah",
+      "transform": "exp",
+      "unit": "Ah"
+    },
+    {
+      "index": 6,
+      "name": "R0_ohm",
+      "reference_key": "R0",
+      "transform": "identity",
+      "unit": "ohm"
+    },
+    {
+      "index": 7,
+      "name": "R1_ohm",
+      "reference_key": "R[0]",
+      "transform": "identity",
+      "unit": "ohm"
+    },
+    {
+      "index": 8,
+      "name": "R2_ohm",
+      "reference_key": "R[1]",
+      "transform": "identity",
+      "unit": "ohm"
+    },
+    {
+      "index": 9,
+      "name": "R3_ohm",
+      "reference_key": "R[2]",
+      "transform": "identity",
+      "unit": "ohm"
+    },
+    {
+      "index": 10,
+      "name": "H_V",
+      "reference_key": "H",
+      "transform": "identity",
+      "unit": "V"
+    },
+    {
+      "index": 11,
+      "name": "initial_SOC",
+      "reference_key": "z0",
+      "transform": "identity",
+      "unit": "fraction"
+    },
+    {
+      "index": 12,
+      "name": "initial_v1_V",
+      "reference_key": "v0[0]",
+      "transform": "identity",
+      "unit": "V"
+    },
+    {
+      "index": 13,
+      "name": "initial_v2_V",
+      "reference_key": "v0[1]",
+      "transform": "identity",
+      "unit": "V"
+    },
+    {
+      "index": 14,
+      "name": "initial_v3_V",
+      "reference_key": "v0[2]",
+      "transform": "identity",
+      "unit": "V"
+    },
+    {
+      "index": 15,
+      "name": "initial_h",
+      "reference_key": "h0",
+      "transform": "identity",
+      "unit": "dimensionless"
+    }
+  ],
+  "outputs": [
+    "summary.json",
+    "trajectory.csv.gz",
+    "reporting_receipt.json",
+    "PNG/SVG figurepairs"
+  ],
+  "point_error_requirements": {
+    "Q_absolute_relative_percent": {
+      "hard": 5.0,
+      "preferred": 0.5
+    },
+    "current_SOC_absolute_pp": {
+      "hard": 10.0,
+      "preferred": 0.5
+    },
+    "rule": "Inclusive <= comparisons on actual saved postinitialblock grid. Firsthit and first all-later-saved-points-pass index are finite-window descriptive screens; missing/unavailable points are never successes. No universal nuisance parameter threshold.",
+    "source": "plans/estimation_targets_001.json"
+  },
+  "preexecution_activity": {
+    "RNG_draws": 0,
+    "journal_record_reads": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_calls": 0,
+    "source_generation_calls": 0,
+    "truth_file_opens": 0,
+    "truth_literal_evaluations": 0,
+    "truth_record_decodes": 0
+  },
+  "scalar_truth": {
+    "alignment": "For next_index n>0 read byteoffset32*(n-1) and require embeddedindex n. No n0 binaryrecord; use initial source literal.",
+    "bytes": 16128000,
+    "format": "little-endian<Qddd:next_index,Q_Ah,current_SOC,clean_voltage_V",
+    "maximum_direct_record_reads": 31500,
+    "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/truth.bin",
+    "record_bytes": 32,
+    "reference": "Original source physical truth, not redefined for quantized decoded input.",
+    "sha256": "351b93c4157e80681eb5902f713750b6ab71d5c23a1b21a76cdbd8572861fc9f"
+  },
+  "schema": "mumble_live_anchor_reporting_plan_v1",
+  "scope": "Postclosure scoring/presentation only. No candidate changes, model replay, optimizer, prior evaluator, RNG, historical fitter, or uncertainty interval calculation.",
+  "source_metadata_sha256": {
+    "experiments/continuous_learning_validation_001/implementation/evidence/index.json": "0db1f4cfc784e3fc6f52a4f65c1a50c0bbb1a407367742336d7eeb309773104f",
+    "plans/continuous_learning_validation_001.json": "8fa48af8ce027cfb82a7bac1f943a48517a30d311825c90e833d90c0ff551851",
+    "plans/estimation_targets_001.json": "6b8797c32eb432c206cc03543eb310209181be11f8ab90b4915244d856fe1993",
+    "tools/continuous_source.py": "b5edc4f82d58383d3a23409258648fc117ad962cec461a35a97e01361546ea02",
+    "tools/generate_cases.py": "f519aa58f1ef4e06a61a1bb35f5d3204160d9658cafefa30f6b6113833eb5733",
+    "tools/score_continuous_learning.py": "4af2d17ba013a2d0b3d065080e21a70fa7f33ef64a4af3fed0b475c15faa825b"
+  },
+  "static_truth": {
+    "git_blob_sha1": "839c940d1a348e31d48f5795acaec7c24ff9fdbb",
+    "initial_state_rule": "Original entering z0/v0/h0 use literal initial-state fields, never current-state truth_query.mean[11:16].",
+    "method": "After closure only, AST-parse the pinned module and literal-evaluate only the selected cell dictionary; never import/execute the generator module. At most one selected literal evaluation.",
+    "source": "tools/generate_cases.py",
+    "symbol": "CELLS[cell_b]"
+  },
+  "status": "frozen_before_candidate_outcomes_and_reporting_execution"
+}

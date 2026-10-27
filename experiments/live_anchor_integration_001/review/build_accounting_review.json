@@ -1,0 +1,122 @@
+{
+  "schema": "rolling_canonical_build_accounting_review_v1",
+  "status": "passed",
+  "bindings": [
+    {
+      "path": "experiments/live_anchor_integration_001/build001/receipt.json",
+      "bytes": 7183,
+      "sha256": "19fa2ff839a8f6df5733e304b7b09c67f35c7265cf30692ee6c2228b573e2923"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build_acceptance001.json",
+      "bytes": 31035,
+      "sha256": "daaaa52de102bce4063d49314c6708d0c33df1a4b43fc4d22d7b82ed8bfabb82"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe",
+      "bytes": 71120,
+      "sha256": "f8d1702a001fc8d63e22b00e013a8dc72e797e40dbd01ae64b09e03d5e386738"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/qualification/independent_plan.json",
+      "bytes": 10451,
+      "sha256": "332be1f64448d34b61da94855ad15e9799c969ac11fa14c854723fe8ca335cbc"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/qualification/independent_qualification.py",
+      "bytes": 59024,
+      "sha256": "123ce3bc97216998e601ae1095d458059b275cb24455854b79fbf7fe63cac81a"
+    }
+  ],
+  "checks": {
+    "original_failure_preserved": true,
+    "only_bookkeeping_failure": true,
+    "same_binary": true,
+    "no_additional_build_execution": true,
+    "seven_candidate_stack_records": true,
+    "independent_project_maximum760": true,
+    "all_paths_match_followup": true,
+    "canonical_source_bindings_match": true,
+    "original_build_manifest_matches": true,
+    "followup_passed": true,
+    "planning_total": true
+  },
+  "correction": "The original compilation succeeded but the root metadata reducer included the external host printf/counter translation unit. Its dynamic,bounded frame is outside the estimator. Restricting the existing-source/existing-SU reduction to seven candidate modules is a bookkeeping correction; the first failed receipt remains failed.",
+  "candidate_sources": [
+    "experiments/live_anchor_integration_001/rolling_engine.c",
+    "experiments/live_anchor_integration_001/rolling_model.c",
+    "experiments/live_anchor_integration_001/public_contract.c",
+    "experiments/live_anchor_bootstrap_001/adc12.c",
+    "experiments/live_anchor_bootstrap_001/support_step.c",
+    "experiments/live_anchor_bootstrap_001/history_translation.c",
+    "src/scm_model.c"
+  ],
+  "stack_records": [
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe-rolling_engine.su",
+      "bytes": 3702,
+      "sha256": "a334fc794290cd812d35d53598e705ec9f717e9b8a7e830c8d71df6375c74534"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe-rolling_model.su",
+      "bytes": 2036,
+      "sha256": "333102c08a1da07b659da14b15a073a4a5dc25e852025cdc028fa47b09db8050"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe-public_contract.su",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe-adc12.su",
+      "bytes": 1689,
+      "sha256": "b05685c0dfb27f22bd8921b0875dfdaa410c8ed6d8514b00e256582d53afdc87"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe-support_step.su",
+      "bytes": 2840,
+      "sha256": "5e674e06fcd0b3fc5797f0f60a10a0d9baa33a63730edb15bed9785a7cbb16c7"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe-history_translation.su",
+      "bytes": 915,
+      "sha256": "a6e940114c648262120436700e55d9cd24e62a3d7bb3843cf88daf5a24185ea9"
+    },
+    {
+      "path": "experiments/live_anchor_integration_001/build001/host_probe-scm_model.su",
+      "bytes": 729,
+      "sha256": "3678b5383b0755212bdc1d80ab1c25210885a85a349ea4b5952f89cbc11e745d"
+    }
+  ],
+  "maximum_project_path": {
+    "bytes": 760,
+    "functions": [
+      "rolling_engine.c:re_process",
+      "rolling_engine.c:re_refine",
+      "support_step.c:ss_propose",
+      "support_step.c:select_point",
+      "support_step.c:edge_point",
+      "support_step.c:plane"
+    ]
+  },
+  "memory": {
+    "objects": 8680,
+    "observed_conservative_project_path": 760,
+    "project_reservation": 768,
+    "runtime_IRQ_caller_reservation": 768,
+    "planning_total": 10216,
+    "target_measured": false
+  },
+  "reviewer_activity": {
+    "source_metadata_reads": true,
+    "saved_frame_arithmetic_only": true,
+    "builds": 0,
+    "binary_executions": 0,
+    "fixture_reruns": 0,
+    "model_calls": 0,
+    "prior_calls": 0,
+    "observation_reads": 0,
+    "truth_reads": 0
+  },
+  "material_blockers": []
+}

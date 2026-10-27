@@ -1,0 +1,18 @@
+{
+  "schema": "mumble_live_anchor_postclosure_audit_plan_v1",
+  "status": "checkpoint_and_call_policy_frozen_before_canonical_results",
+  "input_trace_gate": "Whole canonical process has finished; bind immutable inner/outer receipts, raw trace and independent copy. Audits are separate and cannot influence the candidate.",
+  "checkpoints": [252000, 294000, 504000],
+  "selection": "Exactly the saved original-entering candidate x[16] at each matching committed next_index. Missing checkpoints stay unavailable; never substitute a nearby or retrospectively fitted point.",
+  "maximum_passes": 3,
+  "maximum_exact_model_steps": 1050000,
+  "maximum_optimizer_calls": 0,
+  "maximum_prior_calls": 0,
+  "input": "Same pinned archive, same hp_encode calibration/timing/rounding and ADC decode as inference. Original unquantized measurements are not silently substituted.",
+  "reference": "Unchanged original scm_model_init/step/predict at each frozen candidate, with u0=H*h0 and original entering chart; accumulate likelihood and endpoint states. No candidate changes or optimization.",
+  "failure_policy": "At most one reserved audit per selected checkpoint. Failed/domain-inadmissible references remain unavailable with attempted counts; no retry or alternative point.",
+  "output": "Separate postclosure_audit001 directory with source/input/point/trace provenance, original and independent captures, exact wait4 resources and cumulative counts.",
+  "caps": {"CPU_s": 30, "wall_s": 60, "RSS_bytes": 134217728, "AS_bytes": 536870912, "capture_bytes_per_child": 1048576, "closed_output_bytes": 8388608},
+  "truth": "No truth input to these likelihood audits. Any later all16/physical-state truth scoring is an external reporting stage after closure, with its own input identities.",
+  "claim_limit": "Finite fidelity diagnostics at three predetermined points; no global exclusion, posterior fidelity, convergence, noise-law or interval-coverage claim."
+}

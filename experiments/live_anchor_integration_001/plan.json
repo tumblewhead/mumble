@@ -1,0 +1,17 @@
+{
+  "schema":"mumble_live_anchor_integration_plan_v1",
+  "base_revision":"47ec846a27e3588f63ea9425441a0ee746c9a63d",
+  "branch":"implementation/live-anchor-integration-001",
+  "goal":"Integrate the causal rolling public-start estimator, qualify it, execute one finite chronological probe and deliver all-parameter/current-state traces with an honest update slide.",
+  "design":"experiments/live_anchor_integration_001/DESIGN.md",
+  "qualification_plan":"experiments/live_anchor_integration_001/qualification/independent_plan.json",
+  "canonical_plan":"experiments/live_anchor_integration_001/host_run_plan.json",
+  "postclosure_audit_plan":"experiments/live_anchor_integration_001/host_audit_plan.json",
+  "inference_input":{"channels_bits":{"V":12,"I":12,"T":12},"actual_interval_ticks_bits":64,"source_identity_bytes":32,"public_start":true,"archive_or_truth_access":false,"saved_fitted_anchor_access":false},
+  "ownership":{"history_banks":1,"retained_raw_records":16,"ingress_raw_records":8,"common_prior":"original supported joint mixture, once per objective, never merged into likelihood","record_commit":"one row per chronological record, retire raw block after complete commit"},
+  "memory_plan_bytes":{"bank":6368,"workspace":1600,"result":120,"input_store":408,"calibration":56,"auxiliary_refine_or_checkpoint":128,"context":8680,"project_stack_reservation":768,"runtime_IRQ_caller_reservation":768,"total":10216,"limit":10240,"target_measurement":false},
+  "trace_contract":{"all_original_coordinates":16,"derived_current_states":5,"capacity_and_SOC_overview":true,"full_span":true,"truth_scoring":"external reporting only after whole-process candidate closure","convergence_claim":"Only as supported by actual evidence; flat, biased, unresolved and failed traces remain explicit.","intervals":"Not generated or validated by this integration."},
+  "phases":["source review","one frozen fabricated qualification","reviewed-source publication and verification","one canonical stream with exclusive captures","predeclared external exact audits","truth-based reporting and figures","presentation creation and visual QA","independent result/receipt review","result publication and continuation update"],
+  "failure_policy":"Preserve every reservation, failed invocation and partial capture. No automatic scientific retry or undeclared extension. Any necessary correction requires a separately named, explained attempt.",
+  "promotion":"Experimental candidate only. Complete target SRAM/timing, long-run fidelity, robustness and calibrated uncertainty remain M3 gates."
+}
