@@ -1,0 +1,52 @@
+{
+  "schema": "mumble_desktop_history_v1",
+  "base_revision": "d1d94d821cba2ea2fb7f3e90cdd60d5ddfbdedc2",
+  "authorization": "User explicitly authorized desktop diagnostic with extra memory to find working version before deployment compression. Supersedes 10KiB restriction for this experiment only.",
+  "inputs": {
+    "observations": {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+      "bytes": 16128000,
+      "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f"
+    },
+    "nodes": {
+      "path": "experiments/joint_shape_comparison_001/attempt001/nodes.json",
+      "bytes": 410748,
+      "sha256": "8c1a3043d7a3808e1bb584b2c87ef80682642c7224dc170673d0343e1f4413d4"
+    },
+    "evaluations": {
+      "path": "experiments/joint_shape_comparison_001/attempt001/evaluations.json",
+      "bytes": 702907,
+      "sha256": "fe0064f1b20316196d968118cbb3193e7bacb9cf436b111e7801c77fa38b0c16"
+    }
+  },
+  "prefix": 252000,
+  "checkpoints": [
+    4096,
+    16384,
+    65536,
+    126000,
+    252000
+  ],
+  "iterations_per_checkpoint": 120,
+  "fidelity_budget_NLL": 0.1,
+  "design": [
+    "Retain decoded observations received so far; exact original recurrence per query, no compact history approximation.",
+    "Frozen545-point numerical fidelity arm reuses existing references, same recurrence implementation: not independent physical validation.",
+    "Separate causal mode starts at public mean and reads one prefix increment at a time. No saved anchors, truth, references or future samples in fit.",
+    "Original public supports and two-component capacity prior once. No posterior reused as extra evidence.",
+    "Damped GN, box projection, exact objective backtracking, reject invalid SOC paths; max120iterations per checkpoint; no claim all parameters converge.",
+    "No history forgetting. Physical state recomputed continuously across complete received prefix for each candidate.",
+    "Memory grows24bytes per retained decoded observation, plus read/decode transient, Python/runtime workspace; measure RSS.",
+    "Sparse-checkpoint desktop learner is not the original per16sample solver or real-time firmware.",
+    "Success means fidelity passes and causal learner completes with valid descending updates; optimizer stationarity, battery point accuracy, coverage and robustness remain separately reported."
+  ],
+  "caps": {
+    "CPU_s": 600,
+    "wall_s": 900,
+    "RSS_bytes": 536870912,
+    "model_steps_per_worker": 2000000000,
+    "canonical_runs_per_mode": 1,
+    "automatic_retries": 0
+  },
+  "later": "Measure omitted-information/resource tradeoffs only against a working retained-history baseline; preserve 10KiB Cortex-M23 goal separately."
+}
