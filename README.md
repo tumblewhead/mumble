@@ -6,6 +6,39 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The finite retained-likelihood replacement prototype is implemented and executed.**
+At the same 252,000-sample prefix, replacing one full joint likelihood block
+under a single common prior reduces the audited nonlinear objective by
+**30,064,065.6144**, against a computed comparison allowance of **0.006786**.
+The accepted feasible candidate has capacity **64.703748 mAh** and SOC
+**51.602860%**. Its post-inference errors are **+0.005792% capacity** and
+**−0.002424 SOC percentage points**. The observation cursor is unchanged, the prior is counted once,
+and the old block is retired rather than added to its replacement. See the
+[replacement report](experiments/retained_likelihood_replacement_001/REPORT.md),
+[summary](experiments/retained_likelihood_replacement_001/summary.json),
+[decision](experiments/retained_likelihood_replacement_001/decision.json) and
+[result review](experiments/retained_likelihood_replacement_001/result_review.json).
+
+This is a supplied-anchor replacement result: the completed historical fit
+provided the new anchor and common warm start. The frozen public-mean control
+does not reconstruct the earlier online estimator. Both surrogate solves remain
+**unresolved under the independent KKT checks**; a feasible point improvement
+does not establish a nonlinear MAP or calibrated SOC/capacity intervals.
+The next finite design must obtain useful anchors from its own accepted state
+and audit replacements against the nonlinear objective. Posterior fidelity,
+coverage and complete target resources remain separate open requirements.
+
+The original attempt stopped at a subnormal arithmetic parity check. A reviewed
+continuation reused its two saved anchor passes, then completed the two solves
+and two candidate audits: **four model passes total, no repeated anchor pass**.
+The two inference invocations used **4.565692 CPU seconds**, **4.671269 active
+process wall seconds**, at most **64,974,848 bytes wait4 peak RSS**, and
+**393,863 bytes of closed runtime output**. The C evaluator has a fixed
+**10,680-byte workspace** and still needs **8,064,000 bytes of external prefix
+data**; these are not complete firmware resources. Production estimator code
+is unchanged and the candidate is not promoted. Current branch:
+`implementation/retained-likelihood-replacement-001`.
+
 **The supported-correction decision and one-prefix historical control are complete.**
 At the fixed 7,200-second checkpoint, reevaluating all 252,000 archived voltage
 observations gives capacity **64.703737 mAh** and SOC **51.602859%**, close to
@@ -23,12 +56,11 @@ other quantities increases the best found likelihood cost. See the
 The exact single-h-bound reference passed **79 checks** and **605 independent
 review checks**, but it cannot generally recover missing SOC/Q information.
 See the [supported-reference decision](experiments/support_consistent_conditional_001/REPORT.md).
-The selected next engineering step is a finite retained-likelihood replacement
-prototype with a common declared prior, full joint dependencies and exactly-once
-evidence ownership. Its [design](plans/retained_likelihood_replacement_001.json)
-is not yet executed. Production estimator code is unchanged; calibrated
-intervals and complete Cortex-M23 resources remain unresolved. Current branch:
-`design/support-consistent-conditional-001`.
+That result selected the retained-likelihood replacement prototype, now completed
+and linked above, with a common declared prior, full joint dependencies and
+exactly-once evidence ownership. The original
+[design](plans/retained_likelihood_replacement_001.json) remains preserved
+alongside its executable contract and separately reviewed continuation.
 
 **The three-checkpoint conditional-belief probe is complete.** Five of six
 component snapshots have nonlinear voltage-mean corrections of only

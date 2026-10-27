@@ -1,0 +1,119 @@
+{
+  "schema": "mumble_continue_v21",
+  "task": "Continue repairing SOC/capacity uncertainty after the completed supported-reference decision and fixed-prefix historical likelihood control. Implement one finite matched-prior retained-likelihood replacement prototype.",
+  "repository": {
+    "url": "https://github.com/tumblewhead/mumble",
+    "work_branch": "design/support-consistent-conditional-001",
+    "latest_checkpoint": "Fetch current work-branch tip; historical IDs are provenance, not reset targets.",
+    "base_revision": "6e56a2498858ffaf112f717465afa4edb15e21a2",
+    "contracts_commit": "0145dba527abe7c9734985f61d885e1cc93ed8dd",
+    "reference_source_commit": "3c7e9f20ef3c25d38d423f03a064fdd03b956896",
+    "historical_source_commit": "5bc11d685ac4b093a03208c0caac86ddede5e599",
+    "historical_source_tree": "1a8fda261946e0fb732cdbcc7dfde8e6a84ea050",
+    "handoff_url": "https://github.com/tumblewhead/mumble/blob/design/support-consistent-conditional-001/handoff/CONTINUE.json",
+    "publication": "provenance/support_consistent_conditional_001_publication.json",
+    "publication_status": "Contracts, both reviewed source checkpoints and completed results published and verified; fetch current work-branch tip for this continuation metadata.",
+    "result_commit_before_metadata": "0e8c0c9ff2a09811d8fb524778de13285e252efc",
+    "result_tree": "2a8658cbef03516f6ccb384153b5b735033228d1"
+  },
+  "bootstrap": [
+    "Inspect status and preserve newer/dirty/unrelated work; use a work branch and no force-push.",
+    "Read AGENTS.md, README.md, PROJECT_STATE.json, this handoff, current decision/report and selective source/evidence. No completed-study reruns to resume.",
+    "Original contracts, raw evidence and failed attempts remain immutable; use provenance maps rather than historical reset targets."
+  ],
+  "goal": {
+    "implementation": "Runnable Cortex-M23 C near 10240 B complete subsystem SRAM.",
+    "estimation": "Stimulus-supported quantities, carried evidence/uncertainty, explicit unknowns; 35 Hz preserving actual intervals and order.",
+    "Q_error_percent": {
+      "hard": 5,
+      "preferred": 0.5
+    },
+    "SOC_error_pp": {
+      "hard": 10,
+      "preferred": 0.5
+    },
+    "capacity_startup_deadline": null,
+    "priority": "Prompt SOC; capacity can learn during later informative use."
+  },
+  "current": {
+    "milestone": "M1 complete. A4 continuous study, weighting audit, conditional probe, supported reference and historical control complete; production candidate unpromoted.",
+    "main_finding": "At the fixed7200s prefix, reevaluating the complete nonlinear likelihood largely corrects the capacity center while retaining almost the same capacity local SD. SOC center also improves and its local SD is about2.10 times larger. Select joint evidence-retention/replacement work, not a blanket width multiplier.",
+    "endpoint": {
+      "seconds": 7200,
+      "samples": 252000,
+      "truth_Q_Ah": 0.0647,
+      "truth_SOC": 0.5160528446308963,
+      "recursive_Q_Ah": 0.06597778624402621,
+      "recursive_SOC": 0.5133228864538338,
+      "historical_Q_Ah": 0.06470373701300736,
+      "historical_SOC": 0.5160285857384294,
+      "recursive_Q_error_percent": 1.9749400989585997,
+      "historical_Q_error_percent": 0.005775908821270548,
+      "recursive_SOC_error_pp": -0.27299581770624526,
+      "historical_SOC_error_pp": -0.0024258892466932913,
+      "historical_to_recursive_Q_SD_ratio": 1.0029500376864562,
+      "historical_to_recursive_SOC_SD_ratio": 2.102844104916864,
+      "historical_local_two_SD_contains_truth": true,
+      "recursive_local_two_SD_contains_truth": false
+    },
+    "constraint_minus_free_NLL": {
+      "fixed_recursive_Q": 26254.615135732733,
+      "fixed_recursive_SOC": 17453.912464200912
+    },
+    "execution": {
+      "supported_reference_invocations": 1,
+      "supported_reference_checks": 79,
+      "supported_reference_independent_checks": 605,
+      "historical_attempt001_fit_calls": 0,
+      "historical_attempt002_fit_calls": 3,
+      "inference_retries": 0,
+      "readonly_reporting_invocations": 1,
+      "raw_result_independent_checks": 252117,
+      "reporting_independent_checks": 154,
+      "old_learner_ingests": 0,
+      "source_generations": 0,
+      "production_estimator_changes": false
+    },
+    "support_decision": "GO as an exact single-bound affine reference; NO-GO as a standalone historical SOC/Q remedy or an unbudgeted nonlinear streaming implementation.",
+    "local_precision": "Unrestricted full16D undamped Gram, Cholesky without cutoff; independent70-digit calculation agrees within3.90e-14 relative variance. No active bounds reported.",
+    "resources": "Full solver retained169346072B, peak childRSS170393600B; supervisor57.7606s before final receipt, peakRSS17436672B; closed runtime123386B. Desktop only. Production core7152B; proposed10032B includes unmeasured reserves; M23 unqualified.",
+    "older_results": "Original661500 deliveries/four arms/zero rejections/exact warm continuity and B finalpreferredQ/SOC retained. Earlier772.971s preferredSOC regression and uncertainty failures preserved; original supervisorRSS gap remains."
+  },
+  "next": {
+    "name": "retained_likelihood_replacement_001",
+    "design": "plans/retained_likelihood_replacement_001.json",
+    "status": "design_only_not_executed",
+    "scope": "One same-prefix finite host replacement comparison with a coherent common prior/support, original entering-state chart, full joint dependencies, exact observation ownership and measured storage/work. Freeze executable details and budget before inference.",
+    "existing_reference_reuse": "Completed free fit may be a warm start and likelihood reference; it is not a matched-prior posterior.",
+    "ownership": "Replace an old evidence approximation. Do not append replayed observations to a posterior already derived from them.",
+    "resource_gap": "Existing full solver retains169346072 host bytes. Streaming evaluation can remove row workspace but retained evidence still needs storage; near10KiB M23 is not qualified.",
+    "proposed_full_prefix_model_passes_max": 4,
+    "proposed_surrogate_prior_solves": 2,
+    "new_full_nonlinear_likelihood_optimizations": 0,
+    "prior_semantics": "Intentional coherent supported reference from public Gaussian kernels, common between arms; not claimed identical to original online prior probability semantics."
+  },
+  "evidence": {
+    "report": "experiments/historical_likelihood_control_001/REPORT.md",
+    "summary": "experiments/historical_likelihood_control_001/summary.json",
+    "result": "experiments/historical_likelihood_control_001/attempt002/result.json",
+    "receipt": "experiments/historical_likelihood_control_001/attempt002/receipt.json",
+    "independent_review": "experiments/historical_likelihood_control_001/independent_review.json",
+    "supported_reference": "experiments/support_consistent_conditional_001/REPORT.md",
+    "likelihood_fidelity": "experiments/support_consistent_conditional_001/likelihood_fidelity_requirement.json",
+    "contract": "plans/historical_likelihood_control_001.json",
+    "reporting_receipt": "experiments/historical_likelihood_control_001/reporting_receipt.json",
+    "prelaunch_failure": "experiments/historical_likelihood_control_001/attempt001/receipt.json",
+    "input_repair": "experiments/historical_likelihood_control_001/input_binding_repair.json",
+    "source_audit": "experiments/historical_likelihood_control_001/source_audit.json",
+    "previous_handoff": "handoff/archive/CONTINUE_conditional_belief_adequacy_001.json",
+    "roadmap": "docs/ROADMAP.md"
+  },
+  "guardrails": [
+    "Truth only in generation or post-inference scoring; never prior selection, initialization, fitting, weights or tuning.",
+    "Preserve actual sample order/time and entering-state ownership. Replay replaces its prior approximation; no double-counting through the recursive posterior.",
+    "The completed control is pure likelihood; matched-prior posterior work must define prior/support/base measure and state-map semantics explicitly.",
+    "Useful point accuracy, numerical convergence, local precision, physical support, calibrated coverage and target resources are distinct.",
+    "No blanket uncertainty inflation, h clipping/zero variance, lost cross-covariance, or reporting-only fix. No original-run retry or broader seed/prefix/year campaign.",
+    "Machine handoffs remain compact JSON/YAML. No SCM/NAIA/D2/D2E proof claim transfer."
+  ]
+}

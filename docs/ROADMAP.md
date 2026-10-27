@@ -2,14 +2,38 @@
 
 ## Decision
 
+**The finite retained-likelihood replacement prototype is complete.**
+One replacement transaction at the fixed 7,200-second prefix improved the
+audited common-prior nonlinear objective by 30,064,065.6144, with a computed
+comparison allowance of 0.006786. Its feasible point is Q=64.703748 mAh and
+SOC=51.602860%. The two saved anchor evaluations were reused after a reviewed
+subnormal-parity correction; four model passes and two surrogate solves were
+used in total. Exactly one prior and one active observation block remain.
+See the [report](../experiments/retained_likelihood_replacement_001/REPORT.md),
+[decision](../experiments/retained_likelihood_replacement_001/decision.json) and
+[result review](../experiments/retained_likelihood_replacement_001/result_review.json).
+
+The supplied historical-fit anchor makes this a mechanics and local-fidelity
+test. It does not demonstrate autonomous anchor discovery or reconstruct the
+earlier online approximation. Both independent KKT statuses remain unresolved;
+any reported inverse-curvature scales are local shape diagnostics, not calibrated
+uncertainty intervals. The next bounded host design should choose and refine
+anchors from public initialization or its own accepted state, retain full joint
+dependencies, and accept replacements only after an exact nonlinear-cost audit.
+Its pass budget and stopping policy must be declared before inference. No new
+execution or longer campaign is queued by this result. Posterior fidelity and
+coverage require their own qualification. The measured 10,680-byte C workspace
+and 8,064,000-byte external prefix do not meet the complete near-10-KiB Cortex-M23
+goal, and production estimator code is unchanged.
+
 **The supported-reference decision and historical likelihood control are complete.**
 The single-h-bound mathematical reference passed all 79 checks but is not a
 general SOC/Q uncertainty repair. At the fixed 7,200-second prefix, the full
 nonlinear history gives Q=64.703737 mAh and SOC=51.602859%, close to the archived
 truth, while the recursive center is biased despite a similar capacity local
 SD. The three declared fits all completed; no production estimator changed.
-The next finite engineering step is a retained-likelihood replacement prototype
-with common prior/support semantics and full joint evidence ownership. See the
+That result selected the retained-likelihood replacement prototype, now completed
+above, with common prior/support semantics and full joint evidence ownership. See the
 [control report](../experiments/historical_likelihood_control_001/REPORT.md),
 [decision](../experiments/historical_likelihood_control_001/decision.json),
 [review](../experiments/historical_likelihood_control_001/independent_review.json)

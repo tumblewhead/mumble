@@ -1,0 +1,157 @@
+{
+  "schema": "mumble_retained_likelihood_replacement_publication_v1",
+  "repository": "https://github.com/tumblewhead/mumble",
+  "work_branch": "implementation/retained-likelihood-replacement-001",
+  "base_revision": "f632c268f69ad10f856f761f5542c35d4d4c96fd",
+  "publication_status": "sources_verified_reviewed_results_ready_for_publication",
+  "published": {
+    "original_source": {
+      "commit": "e8598bb546b83083c02de170304365fd78d36e41",
+      "tree": "cc57f72d010a83204bc5fcddd6052825d92d9abe",
+      "local_preparation_commit": "c0d6f258817da4000d6b2bf1f702056d214d5055",
+      "tree_identity_verified": true,
+      "remote_ref_and_FETCH_HEAD_verified_before_execution": true,
+      "used_for": "Original invocation: two valid anchor passes, then relative-only subnormal parity failure before any solve."
+    },
+    "continuation_source": {
+      "commit": "e5f30addfc24383daec1e0067cf5ac4a602d12df",
+      "tree": "b5bbc2da8eb1906022607ede7ad976f99fd54456",
+      "local_preparation_commit": "c95204f7921fe7affec4b73e408b0f0382af406e",
+      "tree_identity_verified": true,
+      "remote_ref_and_FETCH_HEAD_verified_before_execution": true,
+      "used_for": "Reviewed saved-anchor continuation: exactly two surrogate/prior solves and two remaining model audits; no repeated anchor passes."
+    }
+  },
+  "preserved_local_source_branches": {
+    "provenance/retained-replacement-source-local-001": "c0d6f258817da4000d6b2bf1f702056d214d5055",
+    "provenance/retained-replacement-continuation-local-001": "c95204f7921fe7affec4b73e408b0f0382af406e"
+  },
+  "execution": {
+    "original_failed_result": {
+      "path": "experiments/retained_likelihood_replacement_001/attempt001/result.json",
+      "bytes": 2309,
+      "sha256": "e338a6ce7a7617c44b4f6cdb6334d0dab7a4d4d35c1badeb703a012177aa9481"
+    },
+    "original_failed_receipt": {
+      "path": "experiments/retained_likelihood_replacement_001/attempt001/receipt.json",
+      "bytes": 18307,
+      "sha256": "aafc925349b1c6b73ff8554139612da630ef29f1990704b7fd430aa8915067c0"
+    },
+    "continuation_result": {
+      "path": "experiments/retained_likelihood_replacement_001/continuation001/result.json",
+      "bytes": 8744,
+      "sha256": "b45ffb6b4a6e0649aa899c7c0b376156fbcc60f0c125a7b9f834f3240c54c313"
+    },
+    "continuation_receipt": {
+      "path": "experiments/retained_likelihood_replacement_001/continuation001/receipt.json",
+      "bytes": 49071,
+      "sha256": "0e0fb7966f360339f6d6e958bc9c20c704fe1a6d3a9f819531fb04771c683d71"
+    },
+    "cumulative_outer_receipt": {
+      "path": "experiments/retained_likelihood_replacement_001/continuation_process/receipt.json",
+      "bytes": 3533,
+      "sha256": "e7a8f9403a2fc30e22fe4ab5c2bd53c27de8247915694795a338c369e62da271"
+    },
+    "model_passes_total": 4,
+    "model_steps_total": 1008000,
+    "surrogate_prior_solves_total": 2,
+    "supervisor_invocations_total": 2,
+    "repeated_anchor_passes": 0,
+    "new_full_nonlinear_fits": 0,
+    "old_learner_ingests": 0,
+    "source_generations": 0,
+    "truth_reads_during_inference": 0,
+    "production_source_changes": false,
+    "original_status": "failed; preserved without reclassification",
+    "continuation_status": "completed; accepted_feasible_point_improvement; both independent KKT statuses unresolved",
+    "resource_scope": "Cumulative closed inference only; reporting and fabricated qualification are separately recorded. CPU/active wall exclude intervening implementation/review/publication time; wait4 RSS is not summed concurrent memory."
+  },
+  "reviews": {
+    "experiments/retained_likelihood_replacement_001/implementation_review.json": {
+      "path": "experiments/retained_likelihood_replacement_001/implementation_review.json",
+      "bytes": 17369,
+      "sha256": "78b531f2ff1b6433d341658ad23d9f699bc6ceca9df32fb958bc07eb6a312be0"
+    },
+    "experiments/retained_likelihood_replacement_001/independent_parity_failure_review.json": {
+      "path": "experiments/retained_likelihood_replacement_001/independent_parity_failure_review.json",
+      "bytes": 10190,
+      "sha256": "56c09b451cac21237d54a617cc89e196b70978f3d13e6e1661219c48042222ce"
+    },
+    "experiments/retained_likelihood_replacement_001/continuation_review.json": {
+      "path": "experiments/retained_likelihood_replacement_001/continuation_review.json",
+      "bytes": 10855,
+      "sha256": "664880fd65b60dae0c41ea20a5454a1ef5a875c5ebd0f307a5ef882f1232fa9f"
+    },
+    "experiments/retained_likelihood_replacement_001/result_review.json": {
+      "path": "experiments/retained_likelihood_replacement_001/result_review.json",
+      "bytes": 19905,
+      "sha256": "96f18229caf442b33027b3b1cfd93e27f8a44a8d723e9252473835de9609e873"
+    },
+    "experiments/retained_likelihood_replacement_001/REPORT.md": {
+      "path": "experiments/retained_likelihood_replacement_001/REPORT.md",
+      "bytes": 13543,
+      "sha256": "46e0dd4cb3e357f86b880e683e2293708b718d7c09a364d4ed1f3f13c1dcc5f6"
+    },
+    "experiments/retained_likelihood_replacement_001/decision.json": {
+      "path": "experiments/retained_likelihood_replacement_001/decision.json",
+      "bytes": 10915,
+      "sha256": "7db743eff3897a2a04ffb5a70ebfb6f7be94398d73d566f50ede0b899210dbea"
+    }
+  },
+  "verification": "Git data API uses expected-parent compare-and-swap with force=false. Verify the complete local Git tree equals the remote created tree before each publication, then read back branch/commit and fetch FETCH_HEAD. Original execution sources/results are immutable; adaptations have separate source and receipts.",
+  "current_branch_instruction": "Fetch current implementation/retained-likelihood-replacement-001 tip for final metadata; source/result IDs are evidence identities, not historical reset targets.",
+  "reporting": {
+    "status": "completed",
+    "selected_attempt": "reporting_attempt002",
+    "selection": "experiments/retained_likelihood_replacement_001/reporting_selection.json",
+    "receipt": "experiments/retained_likelihood_replacement_001/reporting_attempt002/reporting_receipt.json",
+    "reporter_invocations_total": 2,
+    "post_inference_prior_algebra_evaluations_total": 2,
+    "post_inference_truth_endpoint_records_total": 1,
+    "failed_first_report": "Preserved unchanged at root and in reporting_attempt001; stopped before prior algebra or truth on exact outer artifact set.",
+    "metadata_adaptation": "V3 admits only the two recorded regular empty capture paths by exact name, byte length and hash. Their origin remains unattributed; all required scientific outputs and caps still match.",
+    "canonical_summary": {
+      "path": "experiments/retained_likelihood_replacement_001/summary.json",
+      "bytes": 426342,
+      "sha256": "9f1686681584bfbfbdee8d47c6354f43aad90eff712b79c10f490682085ce067"
+    },
+    "selected_summary": {
+      "path": "experiments/retained_likelihood_replacement_001/reporting_attempt002/summary.json",
+      "bytes": 426342,
+      "sha256": "9f1686681584bfbfbdee8d47c6354f43aad90eff712b79c10f490682085ce067"
+    },
+    "selected_receipt": {
+      "path": "experiments/retained_likelihood_replacement_001/reporting_attempt002/reporting_receipt.json",
+      "bytes": 93052,
+      "sha256": "baec4a9475970fbcf2d469ce60041110c1895147bbfcad0a9c3020ff1d7c223e"
+    },
+    "selection_record": {
+      "path": "experiments/retained_likelihood_replacement_001/reporting_selection.json",
+      "bytes": 2945,
+      "sha256": "5b4305bd0413f9d2f09c1145797a87d00e678098eab2b619fee945029c1adcbe"
+    },
+    "preserved_first_receipt": {
+      "path": "experiments/retained_likelihood_replacement_001/reporting_receipt.json",
+      "bytes": 84067,
+      "sha256": "8e5b1230a21b04db13c28c15266d1cd3a23e26646526efe5e2e81e92a883dc70"
+    },
+    "metadata_provenance": {
+      "path": "experiments/retained_likelihood_replacement_001/reporting_outer_artifact_provenance.json",
+      "bytes": 5262,
+      "sha256": "2d6e5262fec5f3acd554962ae37869503eb4c406ae2a0b7c7f5c5390da816f5d"
+    },
+    "new_model_optimizer_or_learner_calls": 0
+  },
+  "verification_before_result_publication": {
+    "changed_nonempty_JSON_files_parsed_strictly": 56,
+    "intentionally_preserved_empty_JSON_paths": [
+      "experiments/retained_likelihood_replacement_001/continuation_process/raw_probe.json"
+    ],
+    "document_links_resolved_in_worktree_or_tracked_tree": 212,
+    "frozen_source_identities_verified": 33,
+    "qualified_evaluator_binary_unchanged": true,
+    "production_C_and_headers_unchanged_from_base": true,
+    "previous_handoff_archived_byte_exact": true,
+    "new_model_optimizer_prior_or_truth_calls_for_publication": 0
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "mumble_retained_likelihood_reporting_schema_adaptation_v1",
+  "status": "source_prepared_before_first_reporting_invocation",
+  "recorded_UTC": "2026-10-27T01:54:15.641307+00:00",
+  "original_source": {
+    "path": "experiments/retained_likelihood_replacement_001/reporting_continuation.py",
+    "sha256": "5e381d445873f903272fcee70c23802db0439daeb330f6538a0e9fd1a81c8837",
+    "bytes": 37651,
+    "preserved_unchanged": true
+  },
+  "adapted_source": {
+    "path": "experiments/retained_likelihood_replacement_001/reporting_continuation_v2.py",
+    "sha256": "9b8e12ac69d2894a66593031326695eb0e3cfa456626d84a4c2b5a8d6df9dc46",
+    "bytes": 37693
+  },
+  "exact_source_diff": {
+    "context": "validate_closed_continuation: expected_total",
+    "added_line": "        \"original_counts_verified\": True,",
+    "other_source_changes": 0
+  },
+  "reason": "The completed continuation receipt includes the explicitly verified original_counts_verified:true flag. The reviewed reporter compared cumulative_counts by exact dictionary equality but omitted that one schema key.",
+  "timing": {
+    "after_inference_and_cumulative_outer_closure": true,
+    "before_first_reporting_invocation": true,
+    "reporting_outputs_present_before_adaptation": {
+      "summary.json": false,
+      "reporting_receipt.json": false,
+      "reporting_reservation.json": false
+    }
+  },
+  "closed_continuation": {
+    "source_revision": "e5f30addfc24383daec1e0067cf5ac4a602d12df",
+    "receipt_path": "experiments/retained_likelihood_replacement_001/continuation001/receipt.json",
+    "receipt_sha256": "0e0fb7966f360339f6d6e958bc9c20c704fe1a6d3a9f819531fb04771c683d71",
+    "outer_receipt_path": "experiments/retained_likelihood_replacement_001/continuation_process/receipt.json",
+    "outer_receipt_sha256": "e7a8f9403a2fc30e22fe4ab5c2bd53c27de8247915694795a338c369e62da271",
+    "status": "completed"
+  },
+  "source_only_checks": {
+    "AST_syntax_valid": true,
+    "actual_cumulative_counts_match_one_key_adaptation": true,
+    "actual_current_counts_match_original_expected": true
+  },
+  "activity_before_adaptation": {
+    "reporter_invocations": 0,
+    "post_inference_reporter_prior_algebra_evaluations": 0,
+    "reporter_truth_records_decoded": 0,
+    "new_model_or_optimizer_calls": 0
+  },
+  "unchanged": [
+    "Original reporter",
+    "Original failed attempt",
+    "Completed continuation and all source/input bindings",
+    "All numerical reduction helpers and policies",
+    "Two prior algebra and one truth-record reporting budget"
+  ],
+  "authorization": "Root authorized this separate exact-copy one-key adaptation, independent exact-delta review, then one reporting invocation."
+}
