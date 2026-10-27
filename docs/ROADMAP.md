@@ -2,6 +2,34 @@
 
 ## Decision
 
+**Autonomous anchor refinement now has verified partial evidence from one failed finite run.**
+Seven accepted full steps from the fixed public mean reached Q=64.703748 mAh and
+SOC=51.602860%, agreeing with the earlier supplied-anchor feasible point. The
+common-prior audited objective decreased from 4,068,160,781.516271 to
+126,413.134107. No historical fit or truth entered inference. All seven accepted
+generations retain one prior, one active likelihood block and cursor252000.
+
+The invocation failed when one previously bound rejected-trial capture became
+empty. Its exact bytes were recovered separately from a retained request and
+matched the original hash; the mechanism remains unattributed. All failed
+receipts and the empty capture remain preserved. Independent review and a
+separate read-only partial report validate the accepted chain without restarting
+inference. Eleven model passes, eight proposals and 11 prior evaluations used
+28.310357 CPU s, 29.060402 active wall s and 63,991,808 B peak RSS; limits held.
+See the [report](../experiments/autonomous_anchor_refinement_001/REPORT.md),
+[decision](../experiments/autonomous_anchor_refinement_001/decision.json),
+[summary](../experiments/autonomous_anchor_refinement_001/failure_reporting001/summary.json)
+and [result review](../experiments/autonomous_anchor_refinement_001/result_review.json).
+
+The next engineering prerequisite for another canonical run is a bounded
+capture-preservation qualification, retaining an independent exact copy and
+identity record before dependent work. The next scientific question is joint
+posterior/interval fidelity around an internally obtained anchor. The near-equal
+reference point does not validate narrow uncertainty intervals. If further point
+resolution becomes necessary, design a paired residual-difference comparator
+with derived bounds; do not reduce the current arithmetic guard after seeing
+this result. No new inference run, longer campaign or promotion is queued.
+
 **The finite retained-likelihood replacement prototype is complete.**
 One replacement transaction at the fixed 7,200-second prefix improved the
 audited common-prior nonlinear objective by 30,064,065.6144, with a computed
@@ -17,10 +45,9 @@ The supplied historical-fit anchor makes this a mechanics and local-fidelity
 test. It does not demonstrate autonomous anchor discovery or reconstruct the
 earlier online approximation. Both independent KKT statuses remain unresolved;
 any reported inverse-curvature scales are local shape diagnostics, not calibrated
-uncertainty intervals. The next bounded host design should choose and refine
-anchors from public initialization or its own accepted state, retain full joint
-dependencies, and accept replacements only after an exact nonlinear-cost audit.
-Its pass budget and stopping policy must be declared before inference. No new
+uncertainty intervals. That decision led to the public-start autonomous refinement above, which retained
+full joint dependencies and accepted replacements only after nonlinear-cost
+audits under a frozen pass budget and stopping policy. No new
 execution or longer campaign is queued by this result. Posterior fidelity and
 coverage require their own qualification. The measured 10,680-byte C workspace
 and 8,064,000-byte external prefix do not meet the complete near-10-KiB Cortex-M23
@@ -127,7 +154,7 @@ not improve capacity, and accurate points do not validate uncertainty ranges.
 | Milestone | Deliverable | Finish line |
 | --- | --- | --- |
 | **M1: Basic operation — functionally complete** | Two existing synthetic cells, one short trajectory each, desktop C estimation plus lifecycle handling | Lifecycle gates pass; the separate cell B 900 s usefulness failure is retained and blocks performance promotion of the sparse baseline |
-| **M2: Desktop performance — candidate retained for qualification** | Continuous diagnostic, supported reference and historical control complete; finite retained-likelihood replacement next | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
+| **M2: Desktop performance — candidate retained for qualification** | Continuous diagnostic and supplied-anchor replacement complete; public-start anchor refinement has verified partial evidence from a failed run | Prompt SOC, later capacity learning/retention, lifecycle, resources, numerical health and honest uncertainty assessed separately; no capacity startup deadline or annual promotion from one trace |
 | **M3: Embedded delivery** | The chosen algorithm running as Cortex-M23 C near 10 KiB | Complete SRAM and timing measured, target execution and reset behavior demonstrated, relevant lifetime obligations closed under the stated deployment contract |
 
 Start a target-build and memory-accounting skeleton during M1/M2. Final memory

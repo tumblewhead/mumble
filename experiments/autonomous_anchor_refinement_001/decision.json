@@ -1,0 +1,252 @@
+{
+  "schema": "mumble_autonomous_anchor_decision_v1",
+  "status": "completed_partial_failure_analysis",
+  "inference_status": "failed",
+  "decision": "retain_verified_public_start_partial_progress_preserve_failed_invocation",
+  "source_revision": "9bab10b2817519ff52724250599fe2505488b217",
+  "accepted_prefix": {
+    "independently_verified": true,
+    "start": "PUBLIC_MEAN exactly",
+    "historical_or_truth_initialization": false,
+    "accepted_full_steps": 7,
+    "last_installed_generation": 7,
+    "initial": {
+      "Q_Ah": 0.06,
+      "endpoint_SOC": 0.3953769841262382,
+      "computed_common_objective": 4068160781.516271,
+      "point_errors": {
+        "Q_error_Ah": -0.004699999999999996,
+        "Q_error_percent": -7.264296754250381,
+        "SOC_error_fraction": -0.12067586050465812,
+        "SOC_error_percentage_points": -12.067586050465811,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    "final_accepted": {
+      "Q_Ah": 0.06470374762381097,
+      "endpoint_SOC": 0.5160286018382255,
+      "computed_common_objective": 126413.13410669097,
+      "point_errors": {
+        "Q_error_Ah": 3.7476238109734883e-06,
+        "Q_error_percent": 0.005792308826852378,
+        "SOC_error_fraction": -2.4242792670770008e-05,
+        "SOC_error_percentage_points": -0.002424279267077001,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    "computed_initial_minus_final_common_objective": 4068034368.3821645,
+    "completed_normal_stop": false
+  },
+  "reference_semantics": {
+    "dimension": 16,
+    "density_base_measure": "Original entering x chart",
+    "prior": "One whole-mixture supported public reference, exact kernel cost/gradient; no separate component normalization. Not an assertion of identical original online-prior probability semantics.",
+    "proposal_metric": "Full G+diag(KERNEL_PRECISION), a prior-curvature majorizer and optimization metric; not exact nonlinear Hessian or posterior precision.",
+    "physical_support": "Original entering box and all-prefix SOC support, checked raw without clipping.",
+    "acceptance": "Frozen quarter-slope Armijo rule plus computed-arithmetic allowances; no voltage or truth threshold."
+  },
+  "ownership": {
+    "source_interval_half_open": [
+      0,
+      252000
+    ],
+    "cursor": 252000,
+    "prior_copies": 1,
+    "active_likelihood_blocks": 1,
+    "replacement_generations": 7,
+    "old_block_added_as_evidence": false,
+    "accepted_audit_reused_as_next_anchor": true,
+    "full_joint_dependencies_and_state_transport": true
+  },
+  "solver_status": {
+    "proposal_count": 8,
+    "combined_quadratic_evaluations": 578,
+    "rounds": [
+      {
+        "round": 1,
+        "status": "unresolved",
+        "KKT_passed": false
+      },
+      {
+        "round": 2,
+        "status": "unresolved",
+        "KKT_passed": false
+      },
+      {
+        "round": 3,
+        "status": "unresolved",
+        "KKT_passed": false
+      },
+      {
+        "round": 4,
+        "status": "unresolved",
+        "KKT_passed": false
+      },
+      {
+        "round": 5,
+        "status": "unresolved",
+        "KKT_passed": false
+      },
+      {
+        "round": 6,
+        "status": "unresolved",
+        "KKT_passed": false
+      },
+      {
+        "round": 7,
+        "status": "converged",
+        "KKT_passed": true
+      },
+      {
+        "round": 8,
+        "status": "converged",
+        "KKT_passed": true
+      }
+    ],
+    "scope": "Constrained quadratic KKT only; nonlinear stationarity and global optimality are not established."
+  },
+  "late_trial_resolution": {
+    "trials": [
+      {
+        "alpha": 1.0,
+        "parent_trial_recorded": true,
+        "accepted": false,
+        "deltaF": 2.1920272592623746e-06,
+        "cost_arithmetic_allowance": 5.659179943203584e-05
+      },
+      {
+        "alpha": 0.5,
+        "parent_trial_recorded": true,
+        "accepted": false,
+        "deltaF": 1.5831787809617026e-06,
+        "cost_arithmetic_allowance": 5.6591799422957886e-05
+      },
+      {
+        "alpha": 0.25,
+        "parent_trial_recorded": false,
+        "accepted": false,
+        "deltaF": 9.141992229899643e-07,
+        "cost_arithmetic_allowance": 5.6591799418500256e-05,
+        "installed": false
+      }
+    ],
+    "interpretation": "Positive computed reductions are below the frozen cost-resolution allowance. They are rejected or remain uncommitted; this is neither demonstrated worsening nor an optimum. The remaining fraction schedule did not finish.",
+    "original_parent_rejected_trial_count": 2,
+    "additional_completed_uncommitted_assessments": 1,
+    "original_guard_relaxed": false
+  },
+  "capture_failure": {
+    "original_path": "attempt001/calls/call027_model/raw_probe.json",
+    "original_expected_bytes": 12427,
+    "original_expected_sha256": "dda4e930bbc097082f4bff05800f227a4595a1616d3fe51345b8b1f0af76c6e2",
+    "original_actual_bytes": 0,
+    "separate_recovery": "recovery001/call027_raw_probe.json",
+    "recovery_matches_original_bytes_and_hash": true,
+    "original_empty_capture_preserved": true,
+    "cause": "Unattributed",
+    "original_inference_status_reclassified": false,
+    "retry_or_continuation": false
+  },
+  "counts": {
+    "supervisor_invocations": 1,
+    "model_passes_reserved": 11,
+    "model_passes_launched": 11,
+    "model_passes_completed": 11,
+    "model_steps_reported": 2772000,
+    "model_step_count_complete": true,
+    "proposal_calls_reserved": 8,
+    "proposal_actions_completed": 8,
+    "prior_actions_reserved": 1,
+    "assess_actions_reserved": 10,
+    "external_prior_evaluations_reserved": 11,
+    "external_prior_evaluations_started_reported": 11,
+    "external_prior_evaluations_completed": 11,
+    "optimizer_calls_started": 8,
+    "optimizer_calls_completed": 8,
+    "proposal_combined_evaluations_reported": 578,
+    "worker_activity_complete": true,
+    "accepted_steps": 7,
+    "rejected_trials": 2,
+    "infeasible_trials": 0,
+    "truth_reads": 0,
+    "historical_candidate_reads": 0,
+    "learner_calls": 0,
+    "source_generations": 0,
+    "original_fitter_calls": 0,
+    "retries": 0
+  },
+  "resources": {
+    "CPU_total_s": 28.310357,
+    "active_process_wall_s": 29.060402365998016,
+    "maximum_wait4_peak_RSS_bytes": 63991808,
+    "closed_runtime_output_bytes": 2278422,
+    "scope": "Original failed invocation including waited descendants; reporting/recovery separate."
+  },
+  "storage": {
+    "C_fixed_workspace_bytes": 10680,
+    "C_main_frame_bytes": 11072,
+    "workspace_inside_main_frame": true,
+    "external_prefix_bytes": 8064000,
+    "complete_M23_resources_qualified": false
+  },
+  "post_run_comparison": {
+    "performed_only_after_independent_partial_evidence_review": true,
+    "reference": "Earlier saved supplied-anchor feasible point; not an optimum.",
+    "reference_Q_Ah": 0.06470374768047353,
+    "reference_endpoint_SOC": 0.516028601622853,
+    "computed_final_minus_reference_objective": -4.4718035496771336e-08,
+    "reference_cost_difference_interpretation": "Descriptive computed difference only, not a certified improvement over the reference.",
+    "truth_reused_from_previously_verified_summary": true,
+    "raw_truth_file_opened": false,
+    "truth_Q_Ah": 0.0647,
+    "truth_SOC": 0.5160528446308963,
+    "activity": {
+      "model_calls": 0,
+      "optimizer_calls": 0,
+      "prior_function_evaluations": 0,
+      "observation_numeric_decodes": 0,
+      "raw_truth_file_opens": 0,
+      "previous_summary_numeric_reads": 1,
+      "saved_truth_records_reused": 1,
+      "inference_outputs_modified": 0,
+      "canonical_retries": 0
+    }
+  },
+  "established": [
+    "Seven independently verified internally generated full steps gave substantial common-prior objective improvement from public initialization on this prefix.",
+    "The last installed point is close to the earlier supplied-anchor feasible reference and the post-report truth for this case.",
+    "The implemented ownership/acceptance records preserve one prior, one likelihood block and complete joint state transport through the verified accepted prefix."
+  ],
+  "not_established": [
+    "Successful completion or a normal stopping result for the original invocation",
+    "A uniquely identified cause of capture loss",
+    "Nonlinear stationarity or local/global MAP",
+    "Joint posterior/interval fidelity, calibrated SOC/Q coverage or broader autonomous performance",
+    "Online bounded-memory inference or Cortex-M23 readiness"
+  ],
+  "candidate_promoted": false,
+  "coverage_validated": false,
+  "production_estimator_changed": false,
+  "next": {
+    "status": "design_only_no_new_scientific_execution",
+    "immediate_action": "One finite capture-preservation qualification using fabricated children, independent exact snapshots and exact capture/hash ownership before dependent work. Include deliberate truncation and duplicate-writer failure cases.",
+    "finish_line": "Reviewed lifecycle/manifest contract and preserved failure receipts for the declared fabricated cases. An extra copy improves recoverability without claiming immutable underlying storage; do not replay or relabel this invocation.",
+    "conditional_numerical_work": "Only if more point progress is needed, qualify a paired residual-difference cost comparator with derived arithmetic bounds before a new inference contract. Do not lower the frozen guard or add a voltage floor.",
+    "separate_uncertainty_question": "Determine joint supported posterior/interval fidelity around internally obtained anchors. Point improvement and local quadratic KKT alone do not answer it.",
+    "automatic_retry_or_long_campaign": false
+  },
+  "evidence": {
+    "report": "REPORT.md",
+    "qualified_summary": "failure_reporting001/summary.json",
+    "failure_reporting_receipt": "failure_reporting001/receipt.json",
+    "accepted_prefix_review": "pre_failure_reporting_review.json",
+    "result_review": "result_review.json",
+    "original_result": "attempt001/result.json",
+    "outer_failure_receipt": "execution_process/receipt.json",
+    "failure_diagnostic": "failure_diagnostic.json",
+    "separate_recovery": "recovery001/call027_raw_probe.json",
+    "plot": "anchor_trajectory.svg",
+    "inference_contract": "../../plans/autonomous_anchor_refinement_001.json",
+    "failure_reporting_contract": "../../plans/autonomous_anchor_failure_reporting_001.json"
+  }
+}

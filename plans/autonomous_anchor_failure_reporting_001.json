@@ -1,0 +1,92 @@
+{
+  "schema": "mumble_autonomous_anchor_failure_reporting_contract_v1",
+  "status": "frozen_before_failure_reporting",
+  "purpose": "Read-only partial reporting of an already FAILED finite invocation. This contract is post hoc to the failure; it changes no inference method, result status, stopping rule or budget.",
+  "canonical_run_status_required": "failed",
+  "source_revision": "9bab10b2817519ff52724250599fe2505488b217",
+  "original_plan_sha256": "3f493d1067ea40798c8c91d5a0820fa89cef888d8d082774df2230679835be2b",
+  "pinned_inputs": {
+    "experiments/autonomous_anchor_refinement_001/attempt001/result.json": {
+      "bytes": 7291,
+      "sha256": "5e541dd2f1844db9e6ac19bf8029aa0f43347947e796b49b8ffcc93684d44f0d"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/receipt.json": {
+      "bytes": 140363,
+      "sha256": "d67accf267710a474ebc7d96b8f97432846dc0375814e0cdfdfd577e1f06a0f9"
+    },
+    "experiments/autonomous_anchor_refinement_001/execution_process/receipt.json": {
+      "bytes": 4510,
+      "sha256": "506cbbde14c4f98dc00a566ad308937cb393cf43bf7037fce2811e50c2b31375"
+    },
+    "experiments/autonomous_anchor_refinement_001/executable_receipt.json": {
+      "bytes": 4915,
+      "sha256": "d0214108ff1ef9ef9d6f31c0c259b7bdd48d6ac068070cbeced7799c8bf06c0e"
+    },
+    "experiments/autonomous_anchor_refinement_001/reporting.py": {
+      "bytes": 14823,
+      "sha256": "397ccedcebf60a637492d986c84afc3a1aea8549037bb5d7895a2ecde5c25a2b"
+    },
+    "experiments/autonomous_anchor_refinement_001/schema.py": {
+      "bytes": 15539,
+      "sha256": "8de215b8c779dd2a5b26c0a506c49c597fcbe249d99c6c3984e7085fa442a136"
+    }
+  },
+  "known_failure": {
+    "relative_path": "calls/call027_model/raw_probe.json",
+    "expected": {
+      "bytes": 12427,
+      "sha256": "dda4e930bbc097082f4bff05800f227a4595a1616d3fe51345b8b1f0af76c6e2"
+    },
+    "actual": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_of_recovered_decoded_payload": "attempt001/calls/call028_assess/request.json#/trial_block",
+    "separate_recovery": "recovery001/call027_raw_probe.json",
+    "cause": "Unattributed; no mechanism inferred from a hash mismatch."
+  },
+  "pre_reference_gate": [
+    "Independent review passed with accepted_prefix_verified true and exact source hashes for this contract, failure reporter, original reporting helper and shared schema.",
+    "Original result and receipts remain failed and hash-identical; their final closed manifests match, including the empty capture.",
+    "All original source/input bindings and every generated binding except the one declared damaged capture match. The separate recovery must match its original byte count and SHA, and its decoded value must equal the saved worker request.",
+    "Every accepted generation 0..7 has an intact original audit, saved exact prior, same point, endpoint and objective; all retain one prior and one likelihood block, cursor252000.",
+    "Seven accepted trial records remain monotone and accepted under saved arithmetic guards. No unrecorded trial becomes accepted.",
+    "All source/input/result/recovery bindings are rechecked after reporting."
+  ],
+  "reference_after_gate": {
+    "path": "experiments/retained_likelihood_replacement_001/summary.json",
+    "bytes": 426342,
+    "sha256": "9f1686681584bfbfbdee8d47c6354f43aad90eff712b79c10f490682085ce067",
+    "uses": [
+      "Previously saved supplied-anchor feasible reference",
+      "Previously verified single endpoint truth record for point scoring only"
+    ],
+    "raw_truth_file_access": false
+  },
+  "limits": {
+    "invocations": 1,
+    "CPU_s": 5,
+    "wall_s": 10,
+    "address_space_bytes": 268435456,
+    "process_RSS_bytes": 67108864,
+    "report_output_bytes": 2097152,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_function_calls": 0,
+    "observation_decodes": 0,
+    "raw_truth_opens": 0,
+    "canonical_retries": 0
+  },
+  "outputs": [
+    "failure_reporting001/reservation.json",
+    "failure_reporting001/summary.json",
+    "failure_reporting001/receipt.json"
+  ],
+  "claims": [
+    "Partial accepted-anchor evidence from a failed run; not a completed finite experiment.",
+    "All seven original accepted points can be described if their prerequisites pass.",
+    "No nonlinear convergence, globally optimal point, calibrated posterior interval, coverage or firmware resource claim.",
+    "The pending call030 assessment is diagnostic only; parent never installed or recorded it as a trial outcome."
+  ],
+  "original_outputs_modified": false
+}

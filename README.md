@@ -6,14 +6,38 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
-**Autonomous anchor refinement is the active finite experiment.**
-The new [design](experiments/autonomous_anchor_refinement_001/DESIGN.md) starts
-from the fixed public mean, then reuses each accepted nonlinear audit as the next
-anchor. It retains the exact common mixture prior and full joint likelihood
-dependencies. The [frozen contract](plans/autonomous_anchor_refinement_001.json)
-allows at most 16 proposal rounds and 33 complete model passes, with no supplied
-historical-fit anchor. Source review passed after 48 fabricated math checks and 12 controller lifecycle
-cases. Its one canonical invocation will use the exact published source. Current work branch:
+**Autonomous anchor refinement produced seven verified accepted steps; the finite run is failed.**
+Starting only from the fixed public mean, the full joint refinement reached
+**64.703748 mAh capacity and 51.602860% endpoint SOC**. The computed common-prior
+objective fell from **4,068,160,781.516271 to 126,413.134107**. This independently
+obtained point agrees closely with the earlier supplied-anchor feasible point.
+Post-inference scoring gives **+0.005792% capacity error** and
+**−0.002424 SOC percentage points**. See the
+[anchor report](experiments/autonomous_anchor_refinement_001/REPORT.md),
+[partial summary](experiments/autonomous_anchor_refinement_001/failure_reporting001/summary.json),
+[decision](experiments/autonomous_anchor_refinement_001/decision.json),
+[result review](experiments/autonomous_anchor_refinement_001/result_review.json) and
+[trajectory](experiments/autonomous_anchor_refinement_001/anchor_trajectory.png).
+
+The original invocation remains **failed**: a previously verified rejected-trial
+capture became empty, and its integrity check stopped the run. A separate
+[recovery](experiments/autonomous_anchor_refinement_001/failure_diagnostic.json)
+reconstructed the exact original bytes from a retained worker request, matching
+the recorded SHA256. The original empty capture and failed receipts remain
+unchanged; the loss mechanism is unattributed. The independently reviewed
+partial report validates all seven accepted generations without a retry.
+
+The run used **11 model passes, 2,772,000 model steps, eight proposal solves and
+11 exact external-prior evaluations**, with **28.310357 CPU seconds**,
+**29.060402 active process wall seconds**, **63,991,808 bytes peak RSS** and
+**2,278,422 bytes of closed runtime output**. All resource limits held. Six inner
+solves remain KKT-unresolved and the last two pass their independent inner checks;
+none establishes nonlinear convergence. Later computed decreases were below the
+declared arithmetic allowance and were rejected. No uncertainty interval or
+coverage claim follows. Production estimator source is unchanged, the candidate
+is unpromoted, and complete near-10-KiB Cortex-M23 resources remain unqualified.
+The [frozen design](plans/autonomous_anchor_refinement_001.json), source checkpoint
+and all partial evidence are preserved on
 `implementation/autonomous-anchor-refinement-001`.
 
 **The finite retained-likelihood replacement prototype is implemented and executed.**
@@ -34,8 +58,8 @@ provided the new anchor and common warm start. The frozen public-mean control
 does not reconstruct the earlier online estimator. Both surrogate solves remain
 **unresolved under the independent KKT checks**; a feasible point improvement
 does not establish a nonlinear MAP or calibrated SOC/capacity intervals.
-The next finite design must obtain useful anchors from its own accepted state
-and audit replacements against the nonlinear objective. Posterior fidelity,
+That supplied-anchor result motivated the autonomous refinement above, which
+obtained its accepted anchors internally and audited the nonlinear objective. Posterior fidelity,
 coverage and complete target resources remain separate open requirements.
 
 The original attempt stopped at a subnormal arithmetic parity check. A reviewed

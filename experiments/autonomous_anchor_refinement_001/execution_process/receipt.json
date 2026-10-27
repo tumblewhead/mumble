@@ -1,0 +1,120 @@
+{
+  "schema": "mumble_autonomous_anchor_v1",
+  "kind": "outer_receipt",
+  "status": "failed",
+  "source_revision": "9bab10b2817519ff52724250599fe2505488b217",
+  "plan_sha256": "3f493d1067ea40798c8c91d5a0820fa89cef888d8d082774df2230679835be2b",
+  "canonical_process_finished": true,
+  "canonical_supervisor_invocations": 1,
+  "retries": 0,
+  "roles": {
+    "stdout": "raw_probe.json",
+    "stderr": "probe.stderr",
+    "reservation": "reservation.json",
+    "receipt": "receipt.json"
+  },
+  "source_bindings": [
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/execute_autonomous_anchor_once.py",
+      "label": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/execute_autonomous_anchor_once.py",
+      "bytes": 8838,
+      "sha256": "07c14556780848ff2f812e9a54a2adae8125a5e5d8d30d9ef9a751f1bc4e68b0"
+    },
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/autonomous_anchor_refinement_001/schema.py",
+      "label": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/autonomous_anchor_refinement_001/schema.py",
+      "bytes": 15539,
+      "sha256": "8de215b8c779dd2a5b26c0a506c49c597fcbe249d99c6c3984e7085fa442a136"
+    },
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_conditional_belief_probe.py",
+      "label": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_conditional_belief_probe.py",
+      "bytes": 36322,
+      "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+    }
+  ],
+  "process": {
+    "child_launched": true,
+    "pid": 5,
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "-B",
+      "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_autonomous_anchor_refinement.py",
+      "--root",
+      "/workspace/scratch/d8e043c88fda/mumble-repo",
+      "--evidence-root",
+      "/workspace/scratch/d8e043c88fda/mumble-conditional-evidence",
+      "--source-revision",
+      "9bab10b2817519ff52724250599fe2505488b217",
+      "--executable-receipt",
+      "experiments/autonomous_anchor_refinement_001/executable_receipt.json"
+    ],
+    "exit_code": 1,
+    "wall_s_through_wait4": 29.060402365998016,
+    "CPU_user_s": 25.503884,
+    "CPU_system_s": 2.806473,
+    "CPU_total_s": 28.310357,
+    "peak_RSS_bytes": 63991808,
+    "RSS_method": "wait4 high-water statistic for canonical supervisor/descendants; not summed concurrent memory",
+    "stdout_stderr_bytes_written": {
+      "stdout": 1336,
+      "stderr": 0
+    },
+    "stdout_stderr_bytes_observed": {
+      "stdout": 1336,
+      "stderr": 0
+    },
+    "output_truncated": false,
+    "limits": {
+      "probe_CPU_s_max": 60,
+      "probe_wall_s_max": 90,
+      "probe_address_space_bytes_max": 1073741824,
+      "probe_peak_RSS_bytes_max": 134217728,
+      "probe_output_bytes_max": 524288
+    },
+    "resource_violations": [],
+    "CPU_method": "Exact wait4 CPU for canonical supervisor including its waited descendants and final closure"
+  },
+  "errors": [
+    {
+      "type": "ValueError",
+      "message": "Canonical process exit/resource failure"
+    }
+  ],
+  "inner_receipt": {
+    "bytes": 140363,
+    "sha256": "d67accf267710a474ebc7d96b8f97432846dc0375814e0cdfdfd577e1f06a0f9"
+  },
+  "inner_result": {
+    "bytes": 7291,
+    "sha256": "5e541dd2f1844db9e6ac19bf8029aa0f43347947e796b49b8ffcc93684d44f0d"
+  },
+  "inner_closed_bytes": 2268834,
+  "files": {
+    "probe.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw_probe.json": {
+      "bytes": 1336,
+      "sha256": "4d334fdd16c32d9daa98cf3a347403de4141930a67d79db64678de9631d76d89"
+    },
+    "reservation.json": {
+      "bytes": 2348,
+      "sha256": "6c9ad100f65dc2c05bf80746bcd1609d273d5cae8496979bf56629fe84721fe8"
+    },
+    "resources.json": {
+      "bytes": 1394,
+      "sha256": "7873bc7e28ea190476882f2bd9db9cdbadffdc1dee1a0472fc3902f8d882ac55"
+    }
+  },
+  "closed_output_bytes_including_receipt": 9588,
+  "all_closed_output_bytes": 2278422,
+  "all_closed_output_bytes_max": 8388608,
+  "outer_own_peak_RSS_bytes": 14675968,
+  "outer_bookkeeping_wall_s_before_receipt": 29.090457997001067,
+  "truth_reads": 0,
+  "model_calls": 0,
+  "optimizer_calls": 0,
+  "scope": "One complete canonical-supervisor wait4 observation, including waited descendants and inner result/receipt closure. Outer observer bookkeeping is separately reported. Raw capture names remain unchanged. Failed closure vetoes reporting; no retry."
+}

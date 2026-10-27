@@ -1,0 +1,551 @@
+{
+  "schema": "mumble_autonomous_anchor_failure_diagnostic_v1",
+  "status": "failed_run_preserved_exact_saved_capture_recovered_separately",
+  "recorded_UTC": "2026-10-27T02:59:26.058457+00:00",
+  "source_revision": "9bab10b2817519ff52724250599fe2505488b217",
+  "original_failure": {
+    "result": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/result.json",
+      "bytes": 7291,
+      "sha256": "5e541dd2f1844db9e6ac19bf8029aa0f43347947e796b49b8ffcc93684d44f0d"
+    },
+    "receipt": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/receipt.json",
+      "bytes": 140363,
+      "sha256": "d67accf267710a474ebc7d96b8f97432846dc0375814e0cdfdfd577e1f06a0f9"
+    },
+    "outer_receipt": {
+      "path": "experiments/autonomous_anchor_refinement_001/execution_process/receipt.json",
+      "bytes": 4510,
+      "sha256": "506cbbde14c4f98dc00a566ad308937cb393cf43bf7037fce2811e50c2b31375"
+    },
+    "statuses": {
+      "result": "failed",
+      "receipt": "failed",
+      "outer": "failed"
+    },
+    "stop_reason": "numerical_input_or_resource_failure",
+    "errors": [
+      {
+        "stage": "assess",
+        "type": "ValueError",
+        "message": "Bound file changed: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json"
+      },
+      {
+        "stage": "posthash_generated",
+        "type": "ValueError",
+        "message": "Bound file changed: /workspace/scratch/d8e043c88fda/mumble-repo/experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json"
+      }
+    ],
+    "counts": {
+      "supervisor_invocations": 1,
+      "model_passes_reserved": 11,
+      "model_passes_launched": 11,
+      "model_passes_completed": 11,
+      "model_steps_reported": 2772000,
+      "model_step_count_complete": true,
+      "proposal_calls_reserved": 8,
+      "proposal_actions_completed": 8,
+      "prior_actions_reserved": 1,
+      "assess_actions_reserved": 10,
+      "external_prior_evaluations_reserved": 11,
+      "external_prior_evaluations_started_reported": 11,
+      "external_prior_evaluations_completed": 11,
+      "optimizer_calls_started": 8,
+      "optimizer_calls_completed": 8,
+      "proposal_combined_evaluations_reported": 578,
+      "worker_activity_complete": true,
+      "accepted_steps": 7,
+      "rejected_trials": 2,
+      "infeasible_trials": 0,
+      "truth_reads": 0,
+      "historical_candidate_reads": 0,
+      "learner_calls": 0,
+      "source_generations": 0,
+      "original_fitter_calls": 0,
+      "retries": 0
+    },
+    "original_status_reclassified": false
+  },
+  "observed_integrity_failure": {
+    "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json",
+    "original_bound_identity": {
+      "bytes": 12427,
+      "sha256": "dda4e930bbc097082f4bff05800f227a4595a1616d3fe51345b8b1f0af76c6e2"
+    },
+    "current_identity": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "final_manifest_identity": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "capture_resource_receipt": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/resources.json",
+      "bytes": 1357,
+      "sha256": "5c69fdcd2d22a6e7dc21c7059cf554f48cf2dd8c69aef8b7cae0928269976877"
+    },
+    "capture_stdout_bytes_written": 12427,
+    "capture_stdout_bytes_observed": 12427,
+    "capture_output_truncated_by_supervisor": false,
+    "capture_child_exit_code": 0,
+    "current_stat_observation": {
+      "inode": 657468,
+      "nlink": 1,
+      "mtime_ns": 1793069685394377849,
+      "ctime_ns": 1793069687618276473
+    },
+    "stat_limit": "Filesystem timestamps and inode metadata do not identify the writer or mechanism."
+  },
+  "chronology": [
+    "Call027 completed one evaluator pass and recorded 12427 captured stdout bytes, exit0 and no output truncation. Its parsed result was validated and bound by length/SHA256.",
+    "Call028 assessment request retained the complete parsed call027 payload at /trial_block. Its worker confirms the saved request identity and unchanged input/source bindings.",
+    "The next model call029 completed and its capture remains intact.",
+    "Run.child performs generated-input rechecks before reserving call030 and again after its resource/completion records. The latter recheck reported call027 changed. This bounds the detection window through code flow, not a syscall trace.",
+    "Call030 assessment completed, but its response was not returned to the refinement loop after the failed recheck. It was not installed as a new accepted generation. Seven prior accepted generations remain in the failed attempt.",
+    "Failure closure retained both the original generated binding and the now-empty capture identity in its final manifest. The outer process retained failed status."
+  ],
+  "last_completed_assessment": {
+    "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/output/result.json",
+    "status": "completed",
+    "counts": {
+      "combined_evaluations": 0,
+      "optimizer_calls_completed": 0,
+      "optimizer_calls_started": 0,
+      "optimizer_evaluation_count_complete": true,
+      "prior_evaluations": 1,
+      "prior_evaluations_completed": 1
+    },
+    "worker_acceptance_flag": false,
+    "adopted_by_parent_after_failed_recheck": false
+  },
+  "capture_lifecycle_source_facts": {
+    "qualified_supervisor": "tools/run_conditional_belief_probe.py:supervise",
+    "creation": "Per-call raw_probe.json and probe.stderr are opened with exclusive xb before fork.",
+    "writes": "The parent drains child stdout/stderr pipes into those newly created streams. Combined-output truncation, if any, is explicit in resource records.",
+    "completion": "Finally waits the child, drains/closes registered descriptors, flushes and fsyncs each capture, and closes each stream before returning.",
+    "new_parent": "Unique monotonically numbered call directories; no capture rename or overwrite operation. Subsequent request/result writes use exclusive creation. Identity checks open bound files read-only.",
+    "identified_reopen_or_truncate_path_for_old_capture": null,
+    "source_identities": {
+      "tools/run_conditional_belief_probe.py": {
+        "path": "tools/run_conditional_belief_probe.py",
+        "bytes": 36322,
+        "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+      },
+      "tools/run_autonomous_anchor_refinement.py": {
+        "path": "tools/run_autonomous_anchor_refinement.py",
+        "bytes": 35740,
+        "sha256": "b4c398a1e798100030bab9db562b824d2e5979609d98e015ac5761b41b7729f0"
+      },
+      "tools/execute_autonomous_anchor_once.py": {
+        "path": "tools/execute_autonomous_anchor_once.py",
+        "bytes": 8838,
+        "sha256": "07c14556780848ff2f812e9a54a2adae8125a5e5d8d30d9ef9a751f1bc4e68b0"
+      },
+      "experiments/autonomous_anchor_refinement_001/schema.py": {
+        "path": "experiments/autonomous_anchor_refinement_001/schema.py",
+        "bytes": 15539,
+        "sha256": "8de215b8c779dd2a5b26c0a506c49c597fcbe249d99c6c3984e7085fa442a136"
+      },
+      "experiments/autonomous_anchor_refinement_001/proposal_worker.py": {
+        "path": "experiments/autonomous_anchor_refinement_001/proposal_worker.py",
+        "bytes": 9954,
+        "sha256": "b6561b3db92b708d4a145af4a09136775f92c5b3d2db51e98dd08f52d39001ba"
+      },
+      "experiments/retained_likelihood_replacement_001/stream_evaluator.c": {
+        "path": "experiments/retained_likelihood_replacement_001/stream_evaluator.c",
+        "bytes": 21386,
+        "sha256": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942"
+      }
+    }
+  },
+  "causal_attribution": {
+    "status": "unattributed",
+    "established": "A previously verified capture is now empty. The changed filesystem object, not a reported model/domain/optimizer/resource failure, triggered this stop.",
+    "not_established": [
+      "Which process or service changed the file",
+      "Whether the emptying was truncation, replacement or a filesystem/synchronization event",
+      "That the prior separate empty-capture observation has the same cause"
+    ],
+    "evidence_limit": "No syscall/audit trace for the modification is retained. Source inspection and timestamps alone cannot identify its cause."
+  },
+  "saved_data_recovery": {
+    "output": {
+      "path": "experiments/autonomous_anchor_refinement_001/recovery001/call027_raw_probe.json",
+      "bytes": 12427,
+      "sha256": "dda4e930bbc097082f4bff05800f227a4595a1616d3fe51345b8b1f0af76c6e2"
+    },
+    "exclusive_new_path": true,
+    "source_request": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/request.json",
+      "bytes": 68405,
+      "sha256": "d87acab78a340203f44278593f568aa551193956fa1a8e9953554501d28f2aed"
+    },
+    "source_JSON_pointer": "/trial_block",
+    "source_request_worker_binding": {
+      "bytes": 68405,
+      "sha256": "d87acab78a340203f44278593f568aa551193956fa1a8e9953554501d28f2aed"
+    },
+    "source_request_input_and_sources_unchanged": true,
+    "formatter_source": {
+      "path": "experiments/retained_likelihood_replacement_001/stream_evaluator.c",
+      "bytes": 21386,
+      "sha256": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942"
+    },
+    "formatter_functions": [
+      "emit",
+      "print_array",
+      "print_accumulators",
+      "print_names",
+      "print_endpoint_map"
+    ],
+    "method": "Preserved insertion-order compact JSON, finite binary64 values serialized with .17g matching the C %.17g emitter, integer/boolean/string values preserved, exactly one final LF.",
+    "exact_original_length_and_SHA256_match": true,
+    "intact_capture_controls": [
+      {
+        "identity": {
+          "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/raw_probe.json",
+          "bytes": 12415,
+          "sha256": "b60fa88d2a6bb422ce56550543404570665a2cfa35454be571dfecedc96dbe44"
+        },
+        "serialization_matches_retained_raw_bytes": true
+      },
+      {
+        "identity": {
+          "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/raw_probe.json",
+          "bytes": 12410,
+          "sha256": "893a0f8bcafbea0d59601e05e391693735e7d7331ca35a7d61f6acb8e9a0703c"
+        },
+        "serialization_matches_retained_raw_bytes": true
+      }
+    ],
+    "reproduction_code": "def serialize_c_json(value):\n    if value is None: return 'null'\n    if type(value) is bool: return 'true' if value else 'false'\n    if type(value) is int: return str(value)\n    if type(value) is float:\n        if not math.isfinite(value): raise ValueError('nonfinite stored value')\n        return format(value, '.17g')\n    if isinstance(value, str): return json.dumps(value, ensure_ascii=False, separators=(',', ':'))\n    if isinstance(value, list): return '[' + ','.join(serialize_c_json(v) for v in value) + ']'\n    if isinstance(value, dict):\n        return '{' + ','.join(serialize_c_json(k) + ':' + serialize_c_json(v) for k, v in value.items()) + '}'\n    raise TypeError(type(value))\n# Preserve the insertion order of request['trial_block']; append exactly one LF.\nreconstructed = (serialize_c_json(request['trial_block']) + '\\n').encode('utf-8')\n",
+    "original_capture_restored_or_modified": false,
+    "scientific_data_recomputed": false,
+    "semantics": "Exact-byte saved-data recovery is separate forensic evidence. It does not reverse the original integrity failure, establish a cause, authorize continuation or satisfy the original successful-closure gate."
+  },
+  "minimal_future_design_recommendation": {
+    "scope": "Separate future source/contract change only; no implementation change or retry made here.",
+    "capture_commit": "After each child closes, verify its bytes and create a second independent content-addressed copy by exclusive creation, followed by file and directory fsync, before permitting a dependent operation.",
+    "identity_binding": "Record both original capture and committed-copy identities in a durable append-only pass record; bind subsequent computation to the verified committed object. Store the committed copy outside the mutable capture pathname when practical.",
+    "failure_policy": "Any unexpected mutation remains explicit; preserve original failed artifacts. A duplicate can preserve evidence but is not proof that the underlying filesystem is immutable.",
+    "resource_policy": "Freeze and account for duplicate-storage/hash work and output bytes before a future launch. Do not add replay or expanded scientific budgets in this diagnostic."
+  },
+  "activity": {
+    "new_model_calls": 0,
+    "new_optimizer_calls": 0,
+    "new_prior_evaluations": 0,
+    "canonical_observation_numeric_reads": 0,
+    "truth_reads": 0,
+    "original_output_or_source_writes": 0,
+    "recovered_captures_written_separately": 1,
+    "original_inference_retry_or_continuation": 0
+  },
+  "bound_evidence_before": {
+    "experiments/autonomous_anchor_refinement_001/attempt001/result.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/result.json",
+      "bytes": 7291,
+      "sha256": "5e541dd2f1844db9e6ac19bf8029aa0f43347947e796b49b8ffcc93684d44f0d"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/receipt.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/receipt.json",
+      "bytes": 140363,
+      "sha256": "d67accf267710a474ebc7d96b8f97432846dc0375814e0cdfdfd577e1f06a0f9"
+    },
+    "experiments/autonomous_anchor_refinement_001/execution_process/receipt.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/execution_process/receipt.json",
+      "bytes": 4510,
+      "sha256": "506cbbde14c4f98dc00a566ad308937cb393cf43bf7037fce2811e50c2b31375"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/request.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/request.json",
+      "bytes": 68405,
+      "sha256": "d87acab78a340203f44278593f568aa551193956fa1a8e9953554501d28f2aed"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tools/run_conditional_belief_probe.py": {
+      "path": "tools/run_conditional_belief_probe.py",
+      "bytes": 36322,
+      "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+    },
+    "tools/run_autonomous_anchor_refinement.py": {
+      "path": "tools/run_autonomous_anchor_refinement.py",
+      "bytes": 35740,
+      "sha256": "b4c398a1e798100030bab9db562b824d2e5979609d98e015ac5761b41b7729f0"
+    },
+    "tools/execute_autonomous_anchor_once.py": {
+      "path": "tools/execute_autonomous_anchor_once.py",
+      "bytes": 8838,
+      "sha256": "07c14556780848ff2f812e9a54a2adae8125a5e5d8d30d9ef9a751f1bc4e68b0"
+    },
+    "experiments/autonomous_anchor_refinement_001/schema.py": {
+      "path": "experiments/autonomous_anchor_refinement_001/schema.py",
+      "bytes": 15539,
+      "sha256": "8de215b8c779dd2a5b26c0a506c49c597fcbe249d99c6c3984e7085fa442a136"
+    },
+    "experiments/autonomous_anchor_refinement_001/proposal_worker.py": {
+      "path": "experiments/autonomous_anchor_refinement_001/proposal_worker.py",
+      "bytes": 9954,
+      "sha256": "b6561b3db92b708d4a145af4a09136775f92c5b3d2db51e98dd08f52d39001ba"
+    },
+    "experiments/retained_likelihood_replacement_001/stream_evaluator.c": {
+      "path": "experiments/retained_likelihood_replacement_001/stream_evaluator.c",
+      "bytes": 21386,
+      "sha256": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/reservation.json",
+      "bytes": 11685,
+      "sha256": "0dda44e08fa233acf23ca1d8217a591541a32c00fa417bb846a63a3f896ba328"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/resources.json",
+      "bytes": 1345,
+      "sha256": "600edba0a8574295cc503cbe6cdf5484aeab602f2f33abd0d80cfaebefe34100"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/completion.json",
+      "bytes": 1637,
+      "sha256": "5a398ae7111cedb069afd7abccf36df29fa93883e976a6e3824dfe7ef0c19eb0"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/raw_probe.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/raw_probe.json",
+      "bytes": 12415,
+      "sha256": "b60fa88d2a6bb422ce56550543404570665a2cfa35454be571dfecedc96dbe44"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/reservation.json",
+      "bytes": 11686,
+      "sha256": "40c36d5f14d6c5251132a0a0fa7127949e3ca5e993ae1ad426d62bd47f189d8d"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/resources.json",
+      "bytes": 1357,
+      "sha256": "5c69fdcd2d22a6e7dc21c7059cf554f48cf2dd8c69aef8b7cae0928269976877"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/completion.json",
+      "bytes": 1649,
+      "sha256": "5ca3c433979f94466864294a2b4b8030deb8094b2c70921f765988eb112af034"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/reservation.json",
+      "bytes": 11670,
+      "sha256": "4fdca9ddd153daddb394dcfc4a49d6870a851de6199ddae0df8bd64ab826e08c"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/resources.json",
+      "bytes": 1308,
+      "sha256": "c911bbbf276f025a9d74e545bf2fd4850dca673c6701258647373fbd45e2bdf2"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/completion.json",
+      "bytes": 1988,
+      "sha256": "4dcb8cefd0c294a16372040d31170c73d2efb821dbeae7d4829d1aedbfcd53d3"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/output/result.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/output/result.json",
+      "bytes": 11526,
+      "sha256": "c69ff6d9825a75dea3d775842b90a61e6ca994943a0dd39b1aa20702e27b918a"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/reservation.json",
+      "bytes": 11697,
+      "sha256": "3735c4c963076ae946452958aa3915363defdfd053fb0e06644afcf0176678f2"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/resources.json",
+      "bytes": 1345,
+      "sha256": "7899562ae95ec2b3c2505b131eb352dd628f1773a57b64edbcd86fec0dfc3d91"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/completion.json",
+      "bytes": 1637,
+      "sha256": "f23f1f2cffe1adb16ba5a11f70cb8e2aa496648670e98c8ff4ede63368546bdb"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/raw_probe.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/raw_probe.json",
+      "bytes": 12410,
+      "sha256": "893a0f8bcafbea0d59601e05e391693735e7d7331ca35a7d61f6acb8e9a0703c"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/reservation.json",
+      "bytes": 11680,
+      "sha256": "af7763aafa309117f7d6f94fd8ee6ff47de31d94a546286362f76ea5c7c32fb4"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/resources.json",
+      "bytes": 1311,
+      "sha256": "836b2eec667f7fea8a637625342483445f8a5e3cdba463405627fd8e1ffc6472"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/completion.json",
+      "bytes": 1991,
+      "sha256": "13cf3c033d5c5e2cd329f0d502bf51a1d95f6c0b0df150eb2ae8315bdc537602"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/output/result.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/output/result.json",
+      "bytes": 11504,
+      "sha256": "8fd3bbfeeba7a71bb8f7bfcfba88d97c39e261ec0e5292f3b624a3cfccd48d17"
+    }
+  },
+  "bound_evidence_after": {
+    "experiments/autonomous_anchor_refinement_001/attempt001/result.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/result.json",
+      "bytes": 7291,
+      "sha256": "5e541dd2f1844db9e6ac19bf8029aa0f43347947e796b49b8ffcc93684d44f0d"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/receipt.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/receipt.json",
+      "bytes": 140363,
+      "sha256": "d67accf267710a474ebc7d96b8f97432846dc0375814e0cdfdfd577e1f06a0f9"
+    },
+    "experiments/autonomous_anchor_refinement_001/execution_process/receipt.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/execution_process/receipt.json",
+      "bytes": 4510,
+      "sha256": "506cbbde14c4f98dc00a566ad308937cb393cf43bf7037fce2811e50c2b31375"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/request.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/request.json",
+      "bytes": 68405,
+      "sha256": "d87acab78a340203f44278593f568aa551193956fa1a8e9953554501d28f2aed"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/raw_probe.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tools/run_conditional_belief_probe.py": {
+      "path": "tools/run_conditional_belief_probe.py",
+      "bytes": 36322,
+      "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+    },
+    "tools/run_autonomous_anchor_refinement.py": {
+      "path": "tools/run_autonomous_anchor_refinement.py",
+      "bytes": 35740,
+      "sha256": "b4c398a1e798100030bab9db562b824d2e5979609d98e015ac5761b41b7729f0"
+    },
+    "tools/execute_autonomous_anchor_once.py": {
+      "path": "tools/execute_autonomous_anchor_once.py",
+      "bytes": 8838,
+      "sha256": "07c14556780848ff2f812e9a54a2adae8125a5e5d8d30d9ef9a751f1bc4e68b0"
+    },
+    "experiments/autonomous_anchor_refinement_001/schema.py": {
+      "path": "experiments/autonomous_anchor_refinement_001/schema.py",
+      "bytes": 15539,
+      "sha256": "8de215b8c779dd2a5b26c0a506c49c597fcbe249d99c6c3984e7085fa442a136"
+    },
+    "experiments/autonomous_anchor_refinement_001/proposal_worker.py": {
+      "path": "experiments/autonomous_anchor_refinement_001/proposal_worker.py",
+      "bytes": 9954,
+      "sha256": "b6561b3db92b708d4a145af4a09136775f92c5b3d2db51e98dd08f52d39001ba"
+    },
+    "experiments/retained_likelihood_replacement_001/stream_evaluator.c": {
+      "path": "experiments/retained_likelihood_replacement_001/stream_evaluator.c",
+      "bytes": 21386,
+      "sha256": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/reservation.json",
+      "bytes": 11685,
+      "sha256": "0dda44e08fa233acf23ca1d8217a591541a32c00fa417bb846a63a3f896ba328"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/resources.json",
+      "bytes": 1345,
+      "sha256": "600edba0a8574295cc503cbe6cdf5484aeab602f2f33abd0d80cfaebefe34100"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/completion.json",
+      "bytes": 1637,
+      "sha256": "5a398ae7111cedb069afd7abccf36df29fa93883e976a6e3824dfe7ef0c19eb0"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/raw_probe.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call025_model/raw_probe.json",
+      "bytes": 12415,
+      "sha256": "b60fa88d2a6bb422ce56550543404570665a2cfa35454be571dfecedc96dbe44"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/reservation.json",
+      "bytes": 11686,
+      "sha256": "40c36d5f14d6c5251132a0a0fa7127949e3ca5e993ae1ad426d62bd47f189d8d"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/resources.json",
+      "bytes": 1357,
+      "sha256": "5c69fdcd2d22a6e7dc21c7059cf554f48cf2dd8c69aef8b7cae0928269976877"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call027_model/completion.json",
+      "bytes": 1649,
+      "sha256": "5ca3c433979f94466864294a2b4b8030deb8094b2c70921f765988eb112af034"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/reservation.json",
+      "bytes": 11670,
+      "sha256": "4fdca9ddd153daddb394dcfc4a49d6870a851de6199ddae0df8bd64ab826e08c"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/resources.json",
+      "bytes": 1308,
+      "sha256": "c911bbbf276f025a9d74e545bf2fd4850dca673c6701258647373fbd45e2bdf2"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/completion.json",
+      "bytes": 1988,
+      "sha256": "4dcb8cefd0c294a16372040d31170c73d2efb821dbeae7d4829d1aedbfcd53d3"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/output/result.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call028_assess/output/result.json",
+      "bytes": 11526,
+      "sha256": "c69ff6d9825a75dea3d775842b90a61e6ca994943a0dd39b1aa20702e27b918a"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/reservation.json",
+      "bytes": 11697,
+      "sha256": "3735c4c963076ae946452958aa3915363defdfd053fb0e06644afcf0176678f2"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/resources.json",
+      "bytes": 1345,
+      "sha256": "7899562ae95ec2b3c2505b131eb352dd628f1773a57b64edbcd86fec0dfc3d91"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/completion.json",
+      "bytes": 1637,
+      "sha256": "f23f1f2cffe1adb16ba5a11f70cb8e2aa496648670e98c8ff4ede63368546bdb"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/raw_probe.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call029_model/raw_probe.json",
+      "bytes": 12410,
+      "sha256": "893a0f8bcafbea0d59601e05e391693735e7d7331ca35a7d61f6acb8e9a0703c"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/reservation.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/reservation.json",
+      "bytes": 11680,
+      "sha256": "af7763aafa309117f7d6f94fd8ee6ff47de31d94a546286362f76ea5c7c32fb4"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/resources.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/resources.json",
+      "bytes": 1311,
+      "sha256": "836b2eec667f7fea8a637625342483445f8a5e3cdba463405627fd8e1ffc6472"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/completion.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/completion.json",
+      "bytes": 1991,
+      "sha256": "13cf3c033d5c5e2cd329f0d502bf51a1d95f6c0b0df150eb2ae8315bdc537602"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/output/result.json": {
+      "path": "experiments/autonomous_anchor_refinement_001/attempt001/calls/call030_assess/output/result.json",
+      "bytes": 11504,
+      "sha256": "8fd3bbfeeba7a71bb8f7bfcfba88d97c39e261ec0e5292f3b624a3cfccd48d17"
+    }
+  },
+  "all_original_bound_evidence_unchanged_during_diagnosis": true
+}

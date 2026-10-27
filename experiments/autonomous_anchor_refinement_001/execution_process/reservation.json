@@ -1,0 +1,57 @@
+{
+  "schema": "mumble_autonomous_anchor_v1",
+  "kind": "outer_reservation",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "-B",
+    "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_autonomous_anchor_refinement.py",
+    "--root",
+    "/workspace/scratch/d8e043c88fda/mumble-repo",
+    "--evidence-root",
+    "/workspace/scratch/d8e043c88fda/mumble-conditional-evidence",
+    "--source-revision",
+    "9bab10b2817519ff52724250599fe2505488b217",
+    "--executable-receipt",
+    "experiments/autonomous_anchor_refinement_001/executable_receipt.json"
+  ],
+  "source_revision": "9bab10b2817519ff52724250599fe2505488b217",
+  "plan_sha256": "3f493d1067ea40798c8c91d5a0820fa89cef888d8d082774df2230679835be2b",
+  "source_bindings": [
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/execute_autonomous_anchor_once.py",
+      "label": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/execute_autonomous_anchor_once.py",
+      "bytes": 8838,
+      "sha256": "07c14556780848ff2f812e9a54a2adae8125a5e5d8d30d9ef9a751f1bc4e68b0"
+    },
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/autonomous_anchor_refinement_001/schema.py",
+      "label": "/workspace/scratch/d8e043c88fda/mumble-repo/experiments/autonomous_anchor_refinement_001/schema.py",
+      "bytes": 15539,
+      "sha256": "8de215b8c779dd2a5b26c0a506c49c597fcbe249d99c6c3984e7085fa442a136"
+    },
+    {
+      "path": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_conditional_belief_probe.py",
+      "label": "/workspace/scratch/d8e043c88fda/mumble-repo/tools/run_conditional_belief_probe.py",
+      "bytes": 36322,
+      "sha256": "411c483c25a2578ef99feea1476ef8482ecb14c65ca0f7958c9e65f9b9f0d82a"
+    }
+  ],
+  "limits": {
+    "probe_CPU_s_max": 60,
+    "probe_wall_s_max": 90,
+    "probe_address_space_bytes_max": 1073741824,
+    "probe_peak_RSS_bytes_max": 134217728,
+    "probe_output_bytes_max": 524288,
+    "supervisor_peak_RSS_bytes_max": 134217728
+  },
+  "roles": {
+    "stdout": "raw_probe.json",
+    "stderr": "probe.stderr",
+    "reservation": "reservation.json",
+    "receipt": "receipt.json"
+  },
+  "canonical_supervisor_invocations_before": 0,
+  "canonical_supervisor_invocations_after_reservation": 1,
+  "utc": "2026-10-27T02:54:19.753966+00:00",
+  "retries": 0
+}

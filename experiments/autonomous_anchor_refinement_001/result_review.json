@@ -1,0 +1,573 @@
+{
+  "schema": "mumble_autonomous_anchor_independent_result_review_v1",
+  "status": "passed_with_failed_inference_preserved",
+  "reviewer": "interval_audit",
+  "reviewed_utc": "2026-10-27T03:04:41.211467+00:00",
+  "source_revision": "9bab10b2817519ff52724250599fe2505488b217",
+  "source_tree": "421d20fab6a547b11a0a6248e3bb3f241cc6a691",
+  "plan_sha256": "3f493d1067ea40798c8c91d5a0820fa89cef888d8d082774df2230679835be2b",
+  "canonical_inference_status": "failed",
+  "canonical_experiment_completed": false,
+  "canonical_invocations": 1,
+  "canonical_retries": 0,
+  "reviewed_artifact_identities": {
+    "experiments/autonomous_anchor_refinement_001/independent_review.json": {
+      "bytes": 13480,
+      "sha256": "aa40101dd0ba117482a62b1e9476cbbd15dbb70cf5b6a034bb1f3d8d27574aee"
+    },
+    "experiments/autonomous_anchor_refinement_001/pre_failure_reporting_review.json": {
+      "bytes": 9980,
+      "sha256": "324a556d791b5e666915ef84f338f0fc4dd96f29f18038b1cc00a979ab68e22d"
+    },
+    "experiments/autonomous_anchor_refinement_001/executable_receipt.json": {
+      "bytes": 4915,
+      "sha256": "d0214108ff1ef9ef9d6f31c0c259b7bdd48d6ac068070cbeced7799c8bf06c0e"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/result.json": {
+      "bytes": 7291,
+      "sha256": "5e541dd2f1844db9e6ac19bf8029aa0f43347947e796b49b8ffcc93684d44f0d"
+    },
+    "experiments/autonomous_anchor_refinement_001/attempt001/receipt.json": {
+      "bytes": 140363,
+      "sha256": "d67accf267710a474ebc7d96b8f97432846dc0375814e0cdfdfd577e1f06a0f9"
+    },
+    "experiments/autonomous_anchor_refinement_001/execution_process/receipt.json": {
+      "bytes": 4510,
+      "sha256": "506cbbde14c4f98dc00a566ad308937cb393cf43bf7037fce2811e50c2b31375"
+    },
+    "experiments/autonomous_anchor_refinement_001/recovery001/call027_raw_probe.json": {
+      "bytes": 12427,
+      "sha256": "dda4e930bbc097082f4bff05800f227a4595a1616d3fe51345b8b1f0af76c6e2"
+    },
+    "experiments/autonomous_anchor_refinement_001/failure_diagnostic.json": {
+      "bytes": 31494,
+      "sha256": "d7fe4491d6592536aa681ccf9c739c3b94a645ec36a4ff1ac080ded334d6d67a"
+    },
+    "plans/autonomous_anchor_failure_reporting_001.json": {
+      "bytes": 4604,
+      "sha256": "027d86cad6ddea0ad2917bb0cce25d1e7b87b4fd4bc5adec4eb932085e1c2b03"
+    },
+    "experiments/autonomous_anchor_refinement_001/failure_reporting.py": {
+      "bytes": 15953,
+      "sha256": "7f99941c33127e6fc067e515c1fa84933f5c0a50366893824502c4894c6d4137"
+    },
+    "experiments/autonomous_anchor_refinement_001/failure_reporting001/summary.json": {
+      "bytes": 162843,
+      "sha256": "180eb4efd01329cd40d5c184b2b5393cd4d9d3ae553a2a394e44a1ed5580668c"
+    },
+    "experiments/autonomous_anchor_refinement_001/failure_reporting001/receipt.json": {
+      "bytes": 77778,
+      "sha256": "cebb2752a184bb60bf634e018681d7a6952d46bb48f96c700733aa307c3126ec"
+    }
+  },
+  "conclusion": {
+    "accepted_prefix_verified": true,
+    "partial_evidence_only": true,
+    "accepted_generations": 8,
+    "accepted_replacements": 7,
+    "original_failure_preserved": true,
+    "normal_reporter_invoked": false,
+    "separate_failure_report_invocations": 1,
+    "no_material_contradiction_in_saved_partial_report": true,
+    "statement": "Seven intact, independently verified accepted full steps begin at the fixed public mean and reach a feasible point agreeing closely with the separately supplied-anchor reference. The finite invocation stopped on a generated-file integrity failure, so this evidence does not establish a completed autonomous refinement, nonlinear stationarity or an uncertainty remedy."
+  },
+  "integrity_and_failure": {
+    "source_bindings_checked": 22,
+    "input_bindings_checked": 2,
+    "generated_bindings_checked": 59,
+    "source_and_input_mismatches": [],
+    "sole_generated_mismatch": {
+      "relative_path": "calls/call027_model/raw_probe.json",
+      "expected": {
+        "bytes": 12427,
+        "sha256": "dda4e930bbc097082f4bff05800f227a4595a1616d3fe51345b8b1f0af76c6e2"
+      },
+      "actual": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "closed_attempt_manifest_entries": 267,
+    "closed_outer_manifest_entries": 4,
+    "final_manifests_match_current_bytes": true,
+    "original_failed_result_receipt_and_outer_hashes_unchanged": true,
+    "accepted_generation_original_raw_files_intact": true,
+    "failure_stage": "Post-call030 assessment recheck; repeated in final generated-file posthash.",
+    "detection_window": "Source flow rechecks generated files before reserving call030 and after retaining its completion; the latter reports call027 changed. This is a control-flow bound, not a syscall trace.",
+    "file_metadata_observation": {
+      "mtime_ns": 1793069685394377849,
+      "ctime_ns": 1793069687618276473,
+      "inode": 657468,
+      "nlink": 1,
+      "scope": "Observed after closure; timestamps do not identify the modifying process or mechanism."
+    },
+    "cause": "Unattributed. The evidence establishes a formerly verified capture is now empty, but does not establish truncation versus replacement, the responsible actor, a filesystem cause or equivalence to any earlier anomaly.",
+    "reported_failure_class": "Bound generated-file identity changed; no scientific child reported model/domain/optimizer/resource failure at this stop."
+  },
+  "recovery": {
+    "path": "experiments/autonomous_anchor_refinement_001/recovery001/call027_raw_probe.json",
+    "original_capture_left_empty": true,
+    "exact_original_bytes": 12427,
+    "exact_original_sha256": "dda4e930bbc097082f4bff05800f227a4595a1616d3fe51345b8b1f0af76c6e2",
+    "decoded_equals": "attempt001/calls/call028_assess/request.json#/trial_block",
+    "independent_in_memory_serialization_verified": true,
+    "serialization": "Preserved JSON object order, compact separators, .17g float formatting, final newline.",
+    "intact_control_calls_with_exact_byte_roundtrip": [
+      25,
+      29
+    ],
+    "canonical_manifest_substitution": false,
+    "original_status_reclassification": false,
+    "limits": "Exact recovery preserves the earlier computed witness; it does not repair the original provenance failure or license resumed inference."
+  },
+  "activity_reconstruction": {
+    "supervised_scientific_children": 30,
+    "durable_reservations_and_request_identities_checked": 30,
+    "model_passes_reserved_launched_completed": 11,
+    "model_steps": 2772000,
+    "model_counter_witness_for_call027": "Separately recovered exact original payload, retained parent count and request witness.",
+    "proposal_calls": 8,
+    "optimizer_calls_started_completed": 8,
+    "proposal_combined_evaluations": 578,
+    "exact_external_prior_evaluations": 11,
+    "standalone_initial_prior_actions": 1,
+    "trial_assessment_actions": 10,
+    "all_children_exit_zero_no_reported_resource_violation": true,
+    "model_and_worker_activity_counts_complete": true,
+    "historical_candidate_reads_in_inference": 0,
+    "truth_reads_in_inference": 0,
+    "learner_calls": 0,
+    "original_fitter_calls": 0,
+    "source_generations": 0,
+    "retries": 0,
+    "reported_call_caps_satisfied": true,
+    "supervised_child_CPU_sum_s": 22.106714999999998,
+    "CPU_scope_note": "Whole-process CPU below includes supervisor work and other waited preflight activity; summing scientific-child records alone is not the whole process total."
+  },
+  "evidence_ownership": {
+    "public_initialization_verified": true,
+    "generation_zero_equals_frozen_public_unsplit_mean": true,
+    "all_generations_share": {
+      "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+      "source_interval": [
+        0,
+        252000
+      ],
+      "cursor": 252000,
+      "prior_copies": 1,
+      "active_likelihood_blocks": 1
+    },
+    "old_block_added_as_independent_evidence": false,
+    "generation_increment_policy": "Only accepted full-step trials1..7 install generations1..7; source cursor remains252000.",
+    "all_generation_point_endpoint_cost_and_prior_references_match": true,
+    "all_accepted_objectives_strictly_decrease": true,
+    "observations_replayed": "Same prefix may be reevaluated, but each accepted transaction replaces the sole likelihood representation and keeps the common prior once."
+  },
+  "accepted_generations": [
+    {
+      "generation": 0,
+      "Q_Ah": 0.06,
+      "endpoint_SOC": 0.3953769841262382,
+      "likelihood_cost": 4068160787.364232,
+      "prior_kernel_cost": -5.8479608914046946,
+      "computed_common_objective": 4068160781.516271,
+      "point_errors": {
+        "Q_error_Ah": -0.004699999999999996,
+        "Q_error_percent": -7.264296754250381,
+        "SOC_error_fraction": -0.12067586050465812,
+        "SOC_error_percentage_points": -12.067586050465811,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    {
+      "generation": 1,
+      "Q_Ah": 0.0731608705677199,
+      "endpoint_SOC": 0.5206364270484659,
+      "likelihood_cost": 21766050.69765455,
+      "prior_kernel_cost": -2.6950677008203523,
+      "computed_common_objective": 21766048.00258685,
+      "point_errors": {
+        "Q_error_Ah": 0.008460870567719908,
+        "Q_error_percent": 13.077079702812842,
+        "SOC_error_fraction": 0.0045835824175696205,
+        "SOC_error_percentage_points": 0.45835824175696205,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    {
+      "generation": 2,
+      "Q_Ah": 0.06446977069524752,
+      "endpoint_SOC": 0.5099596793202429,
+      "likelihood_cost": 637046.4990803091,
+      "prior_kernel_cost": -2.7198355133180954,
+      "computed_common_objective": 637043.7792447958,
+      "point_errors": {
+        "Q_error_Ah": -0.00023022930475247172,
+        "Q_error_percent": -0.35584127473334115,
+        "SOC_error_fraction": -0.006093165310653403,
+        "SOC_error_percentage_points": -0.6093165310653403,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    {
+      "generation": 3,
+      "Q_Ah": 0.06480871440859524,
+      "endpoint_SOC": 0.5151217683911554,
+      "likelihood_cost": 230273.77041833638,
+      "prior_kernel_cost": -2.632924467072645,
+      "computed_common_objective": 230271.13749386932,
+      "point_errors": {
+        "Q_error_Ah": 0.00010871440859525072,
+        "Q_error_percent": 0.16802845223377239,
+        "SOC_error_fraction": -0.000931076239740869,
+        "SOC_error_percentage_points": -0.0931076239740869,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    {
+      "generation": 4,
+      "Q_Ah": 0.0647104575737722,
+      "endpoint_SOC": 0.51602092317969,
+      "likelihood_cost": 126664.82926124647,
+      "prior_kernel_cost": -3.7905795007512944,
+      "computed_common_objective": 126661.03868174572,
+      "point_errors": {
+        "Q_error_Ah": 1.04575737722018e-05,
+        "Q_error_percent": 0.016163174300157342,
+        "SOC_error_fraction": -3.192145120634038e-05,
+        "SOC_error_percentage_points": -0.003192145120634038,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    {
+      "generation": 5,
+      "Q_Ah": 0.06470376818683081,
+      "endpoint_SOC": 0.5160293830571827,
+      "likelihood_cost": 126425.60462412763,
+      "prior_kernel_cost": -4.33815279234874,
+      "computed_common_objective": 126421.26647133529,
+      "point_errors": {
+        "Q_error_Ah": 3.7681868308159228e-06,
+        "Q_error_percent": 0.0058240909286181195,
+        "SOC_error_fraction": -2.3461573713579043e-05,
+        "SOC_error_percentage_points": -0.0023461573713579043,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    {
+      "generation": 6,
+      "Q_Ah": 0.06470374696305616,
+      "endpoint_SOC": 0.5160286223880503,
+      "likelihood_cost": 126417.52426689713,
+      "prior_kernel_cost": -4.3764282860721035,
+      "computed_common_objective": 126413.14783861105,
+      "point_errors": {
+        "Q_error_Ah": 3.746963056161512e-06,
+        "Q_error_percent": 0.005791287567483017,
+        "SOC_error_fraction": -2.4222242846039244e-05,
+        "SOC_error_percentage_points": -0.0024222242846039244,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    {
+      "generation": 7,
+      "Q_Ah": 0.06470374762381097,
+      "endpoint_SOC": 0.5160286018382255,
+      "likelihood_cost": 126417.51220268113,
+      "prior_kernel_cost": -4.378095990159581,
+      "computed_common_objective": 126413.13410669097,
+      "point_errors": {
+        "Q_error_Ah": 3.7476238109734883e-06,
+        "Q_error_percent": 0.005792308826852378,
+        "SOC_error_fraction": -2.4242792670770008e-05,
+        "SOC_error_percentage_points": -0.002424279267077001,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    }
+  ],
+  "proposal_diagnostics": [
+    {
+      "round": 1,
+      "generation": 0,
+      "inner_solver_status": "unresolved",
+      "raw_solver_success": true,
+      "KKT_passed": false,
+      "KKT_stationarity_relative": 1.376711209717276e-05,
+      "KKT_complementarity": 0.00012251247839742573,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 99,
+      "combined_evaluations": 74,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    },
+    {
+      "round": 2,
+      "generation": 1,
+      "inner_solver_status": "unresolved",
+      "raw_solver_success": false,
+      "KKT_passed": false,
+      "KKT_stationarity_relative": 1.869086663319003e-05,
+      "KKT_complementarity": 0.00013151815408351289,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 100,
+      "combined_evaluations": 101,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    },
+    {
+      "round": 3,
+      "generation": 2,
+      "inner_solver_status": "unresolved",
+      "raw_solver_success": false,
+      "KKT_passed": false,
+      "KKT_stationarity_relative": 6.520847640236428e-08,
+      "KKT_complementarity": 1.6997290720762582e-07,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 100,
+      "combined_evaluations": 92,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    },
+    {
+      "round": 4,
+      "generation": 3,
+      "inner_solver_status": "unresolved",
+      "raw_solver_success": true,
+      "KKT_passed": false,
+      "KKT_stationarity_relative": 6.161214051089885e-07,
+      "KKT_complementarity": 1.6168914556699954e-06,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 97,
+      "combined_evaluations": 78,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    },
+    {
+      "round": 5,
+      "generation": 4,
+      "inner_solver_status": "unresolved",
+      "raw_solver_success": true,
+      "KKT_passed": false,
+      "KKT_stationarity_relative": 1.5070206916965243e-09,
+      "KKT_complementarity": 5.000678197145364e-09,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 96,
+      "combined_evaluations": 86,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    },
+    {
+      "round": 6,
+      "generation": 5,
+      "inner_solver_status": "unresolved",
+      "raw_solver_success": true,
+      "KKT_passed": false,
+      "KKT_stationarity_relative": 1.2276853063514245e-09,
+      "KKT_complementarity": 2.4553041496106474e-09,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 98,
+      "combined_evaluations": 88,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    },
+    {
+      "round": 7,
+      "generation": 6,
+      "inner_solver_status": "converged",
+      "raw_solver_success": true,
+      "KKT_passed": true,
+      "KKT_stationarity_relative": 6.716141923800978e-10,
+      "KKT_complementarity": 1.3432248018594413e-09,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 33,
+      "combined_evaluations": 34,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    },
+    {
+      "round": 8,
+      "generation": 7,
+      "inner_solver_status": "converged",
+      "raw_solver_success": true,
+      "KKT_passed": true,
+      "KKT_stationarity_relative": 8.123631960071523e-10,
+      "KKT_complementarity": 1.6866186502583363e-09,
+      "KKT_tolerance": 2.346785832000663e-09,
+      "iterations": 24,
+      "combined_evaluations": 25,
+      "direction_admitted": true,
+      "strictly_feasible": true
+    }
+  ],
+  "acceptance_arithmetic": {
+    "independent_proposal_receipts_checked": 8,
+    "independent_worker_assessments_checked": 10,
+    "all_stored_direction_model_cost_and_Armijo_fields_reproduced_exactly": true,
+    "exact_rational_dot_error_max_fraction_of_declared_guard": 0.0014357704855487295,
+    "exact_rational_model_decrease_error_max_fraction_of_declared_guard": 0.00012566699077678928,
+    "seven_accepted_trials_are_full_steps": true,
+    "last_accepted_step": {
+      "deltaF": 0.013731920091114347,
+      "A_cost": 5.6591802114416724e-05,
+      "Armijo_required_decrease": 0.006843550717626449,
+      "margin": 0.006831777571373481,
+      "A_combine": 7.329981105945396e-17
+    },
+    "recorded_rejected_trials": 2,
+    "rejected_trial_fractions_at_round8": [
+      1.0,
+      0.5
+    ],
+    "last_completed_worker_assessment": {
+      "call": 30,
+      "alpha": 0.25,
+      "accepted": false,
+      "installed": false,
+      "parent_trial_record_written": false,
+      "included_in_parent_rejected_count": false,
+      "computed_deltaF": 9.141992229899643e-07,
+      "A_cost": 5.6591799418500256e-05,
+      "Armijo_required_decrease": 2.5879761930493007e-07,
+      "margin": -5.593639781481522e-05
+    },
+    "round8_worker_assessments": "All three completed worker assessments reject gains below the frozen approximately5.66e-5 cost arithmetic allowance; only two parent trial records committed before the failure.",
+    "scope": "Stored/computed-operand arithmetic only. No real-model/libm error certificate, noise calibration, statistical confidence threshold or tolerance change.",
+    "stopping_limit": "The remaining trial fractions were not executed. Do not call this all-fractions-rejected, a completed numerical-resolution stop, or nonlinear convergence."
+  },
+  "KKT_interpretation": {
+    "unresolved_rounds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "passed_rounds": [
+      7,
+      8
+    ],
+    "early_finite_unresolved_directions_accepted_under_frozen_policy": true,
+    "raw_solver_success_does_not_override_independent_KKT": true,
+    "nonlinear_stationarity_established": false,
+    "metric_is_posterior_precision": false,
+    "meaning": "KKT pertains to each bounded prior-majorized quadratic subproblem, including artificial step bounds; nonlinear exact-cost descent remains a separate test."
+  },
+  "whole_inference_resources": {
+    "CPU_total_s": 28.310357,
+    "active_wall_s_through_wait4": 29.060402365998016,
+    "maximum_wait4_peak_RSS_bytes": 63991808,
+    "closed_attempt_bytes": 2268834,
+    "closed_outer_bytes": 9588,
+    "combined_closed_runtime_bytes": 2278422,
+    "CPU_limit_s": 60,
+    "wall_limit_s": 90,
+    "process_RSS_limit_bytes": 134217728,
+    "closed_runtime_output_limit_bytes": 8388608,
+    "resource_violations": [],
+    "within_frozen_caps": true,
+    "whole_process_exit_code": 1,
+    "interpretation": "Whole canonical supervisor plus waited descendants and inner closure. This is a host-process high-water bound, not simultaneous aggregate memory, target SRAM or firmware qualification. Recovery and reporting are separate."
+  },
+  "partial_failure_reporting": {
+    "contract_sha256": "027d86cad6ddea0ad2917bb0cce25d1e7b87b4fd4bc5adec4eb932085e1c2b03",
+    "review_preceded_report": true,
+    "status": "completed_partial_failure_analysis",
+    "receipt_status": "completed",
+    "inference_status_unchanged": "failed",
+    "failed_manifest_and_accepted_prefix_gate_passed_before_reference": true,
+    "ordinary_completed_inference_gate_passed": false,
+    "all_303_retained_report_input_identities_match": true,
+    "report_manifest_matches_current_files": true,
+    "closed_report_bytes": 242005,
+    "summary_bytes": 162843,
+    "receipt_bytes": 77778,
+    "activity": {
+      "model_calls": 0,
+      "optimizer_calls": 0,
+      "prior_function_evaluations": 0,
+      "observation_numeric_decodes": 0,
+      "raw_truth_file_opens": 0,
+      "previous_summary_numeric_reads": 1,
+      "saved_truth_records_reused": 1,
+      "inference_outputs_modified": 0,
+      "canonical_retries": 0
+    },
+    "all_8_point_error_and_common_cost_reductions_match": true,
+    "recorded_resources_before_receipt": {
+      "wall_s": 0.5041334990019095,
+      "CPU_s": 0.45590723499999997,
+      "own_peak_RSS_bytes": 44896256
+    },
+    "reference_and_truth_provenance": {
+      "path": "experiments/retained_likelihood_replacement_001/summary.json",
+      "bytes": 426342,
+      "sha256": "9f1686681584bfbfbdee8d47c6354f43aad90eff712b79c10f490682085ce067",
+      "numeric_access": "Exactly once after the new reviewed failed-run gate. Saved endpoint truth reused once; no raw truth decode or prior function call.",
+      "independent_review_scope": "Reviewed the new saved report and its scalar arithmetic/provenance. Did not reopen or decode raw truth."
+    }
+  },
+  "post_inference_point_comparison": {
+    "saved_truth": {
+      "capacity_Ah": 0.0647,
+      "SOC": 0.5160528446308963,
+      "next_index": 252000,
+      "record_sha256": "1de05995432563cadabbab040b526f02808e70d10cf5df3972ad03bb55b65351",
+      "original_source_sha256": "351b93c4157e80681eb5902f713750b6ab71d5c23a1b21a76cdbd8572861fc9f"
+    },
+    "final_accepted": {
+      "Q_Ah": 0.06470374762381097,
+      "SOC": 0.5160286018382255,
+      "computed_common_objective": 126413.13410669097,
+      "point_errors": {
+        "Q_error_Ah": 3.7476238109734883e-06,
+        "Q_error_percent": 0.005792308826852378,
+        "SOC_error_fraction": -2.4242792670770008e-05,
+        "SOC_error_percentage_points": -0.002424279267077001,
+        "scope": "One post-inference point comparison with a previously verified saved truth record; no interval/coverage test."
+      }
+    },
+    "supplied_anchor_feasible_reference": {
+      "Q_Ah": 0.06470374768047353,
+      "SOC": 0.516028601622853,
+      "computed_common_objective": 126413.13410673568
+    },
+    "autonomous_minus_reference": {
+      "Q_Ah": -5.666256353009658e-11,
+      "SOC": 2.153724976139415e-10,
+      "computed_common_objective": -4.4718035496771336e-08
+    },
+    "comparison_limit": "The approximately4.47e-8 signed objective difference is far below the approximately5.66e-5 comparison allowance at this scale. Describe agreement, not superiority or optimality. One synthetic endpoint point comparison establishes neither calibrated intervals nor coverage."
+  },
+  "strongest_justified_next_engineering_step": {
+    "finding": "Public-start accepted-audit reuse can reach the same feasible point as the earlier supplied-anchor construction on this prefix without loading a historical candidate into inference. This is useful partial mechanism evidence.",
+    "immediate_priority": "Before another scientific launch, separately specify and qualify durable content-addressed capture commit/copy, directory fsync and exact identity ownership using fabricated child output. Preserve this failure and account for duplicate-storage/hash work. No inference retry is authorized by this review.",
+    "subsequent_decision": "Any further anchor run or extension must have a fresh finite contract, coherent single-prior/single-block ownership and honest arithmetic stopping. Online bounded-memory integration and uncertainty calibration remain separate open work.",
+    "not_supported": [
+      "Completed autonomous refinement",
+      "Nonlinear or global MAP optimum",
+      "Coverage repair from recentering alone",
+      "Validated posterior covariance from the proposal metric",
+      "Firmware-ready retained-history computation"
+    ]
+  },
+  "review_activity": {
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_function_evaluations": 0,
+    "observation_numeric_decodes": 0,
+    "raw_truth_file_opens": 0,
+    "original_source_or_output_writes": 0,
+    "inference_retries": 0,
+    "methods": [
+      "Read-only source and JSON inspection",
+      "Before/after byte and SHA256 checks",
+      "Independent saved-operand cost and Armijo reduction",
+      "Exact rational arithmetic for saved proposal products",
+      "Independent byte reconstruction without evaluator execution",
+      "Scalar comparison with already-reported endpoint truth"
+    ]
+  },
+  "material_blockers_to_reporting_verified_partial_evidence": [],
+  "material_blocker_to_claiming_completed_experiment": "The canonical run and outer receipt are failed because a bound capture changed; exact recovery does not erase this."
+}
