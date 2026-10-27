@@ -38,7 +38,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `diagnostics/joint-shape-comparison-001`.
+The current work branch is `diagnostics/history-shape-localization-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
@@ -58,8 +58,14 @@ The joint likelihood-shape comparison is now complete: **545/545 points** were
 available, with **252.960406 NLL** centered error oscillation against the registered
 **0.1 NLL** budget. At half the radius it is still **126.231763 NLL**. This exposes
 a substantive local history-shape mismatch in the numerically reconstructed bank.
-The next step is a bounded localization and causal repair of the historical
-factor/carried boundary. See the [comparison report](experiments/joint_shape_comparison_001/README.md),
+Localization is now complete: direct row sums reproduce the stored factor,
+and 97.74% of the slope-error projection comes from samples 4,096–65,536.
+A retrospective final-origin factor gives **0.00142448 NLL** on the same points;
+it is an external diagnostic, not a causal repair. The selected next candidate
+preserves exact amplitude dependence in 37 features and uses analytic initial-state
+attenuation. **The repair is planned, not implemented.** See the
+[diagnosis and repair plan](experiments/history_shape_localization_001/README.md)
+and [original comparison report](experiments/joint_shape_comparison_001/README.md),
 [figure](experiments/joint_shape_comparison_001/reporting001/joint_shape.png) and
 [decision](experiments/joint_shape_comparison_001/decision.json).
 

@@ -1,0 +1,150 @@
+{
+  "schema": "mumble_structured_history_repair_plan_v1",
+  "status": "analysis_complete_implementation_not_started",
+  "prepared_before_estimator_changes": true,
+  "diagnostic_source_revision": "f7ea9a0d74ff578dabf577a9ec5a8445117a517e",
+  "evidence": "experiments/history_shape_localization_001/result_review.json",
+  "problem": "Accumulated residual approximation under anchor movement, with transported-boundary error also present. Old factor storage/translation matches direct row sums; final-origin oracle establishes local representational adequacy only.",
+  "evidence_summary": {
+    "max_direct_sum_vs_saved_QR_gap_NLL": 4.598405212163925e-09,
+    "direct_sum_vs_saved_gradient_whitened_norm": 5.632023291703628e-11,
+    "gradient_error_whitened_norm": 204.35341323710915,
+    "oracle_oscillation_NLL": 0.0014244763005990535,
+    "oracle_oscillation_computed_arithmetic_interval_NLL": [
+      0.001282196983667118,
+      0.001566755617530989
+    ]
+  },
+  "candidate_path": "experiments/structured_history_repair_001",
+  "selected_design": {
+    "name": "structured37_residual_features_with_analytic_attenuation",
+    "public_coordinates": "Keep original16 x, prior, supports, observations, actual intervals/order and1mV residual law. No prior transformation or inference centering from truth.",
+    "internal_nonlinear_coordinates": [
+      "logtau1",
+      "logtau2",
+      "logtau3",
+      "loggamma_plus",
+      "loggamma_minus",
+      "initial_SOC",
+      "inverse_capacity"
+    ],
+    "exact_amplitudes": [
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "initial_v1",
+      "initial_v2",
+      "initial_v3",
+      "H",
+      "H_times_initial_h"
+    ],
+    "feature_counts": {
+      "RC": 18,
+      "hysteresis": 12,
+      "ohmic": 1,
+      "OCV_including_constant": 6,
+      "total": 37
+    },
+    "translation_order": {
+      "quadratic_in_shifted_coordinates": 15,
+      "linear_in_shifted_coordinates": 12,
+      "constant_in_shifted_coordinates": 10
+    },
+    "factor_entries": 703,
+    "factor_bytes": 5624,
+    "residual_family": "Not the old joint-quadratic residual: amplitude-times-rate-quadratic features retain selected higher interactions and H*h0 is exact.",
+    "Q_internal_scale": "Fixed public normalization for reciprocal capacity; origin follows candidate estimate. Derivatives remain w.r.t. original logQ.",
+    "zero_H": "No division by H; evaluate H*h0 and both original-coordinate derivatives directly.",
+    "boundary": "Compute RC initial attenuation from elapsed/tau and hysteresis initial attenuation from two cumulative signed-direction charge magnitudes. Reclaim redundant stored attenuation jets; f/hb forced-response jets remain approximate.",
+    "evidence_ownership": "One active factor, raw block retired once, common prior never merged as observations; no additive posterior/replay.",
+    "bank_format": "New explicit schema/magic for changed feature semantics and boundary fields; reject old banks even if byte sizes match. No silent conversion or claim that missing history is recoverable."
+  },
+  "source_changes_planned": [
+    "New feature/derivative kernels replacing polynomial_row/polynomial_derivative in separate candidate",
+    "New residual-row construction preserving conditional amplitude linearity",
+    "New closed in-place37feature translation with original atomic-failure semantics",
+    "New boundary representation/transport with actual interval/charge integrals",
+    "Reused support-aware proposal, source/cursor/calibration/ADC ownership rules with qualified integration"
+  ],
+  "phases": [
+    {
+      "id": 1,
+      "action": "Implement and qualify structured features, original-x derivatives and sparse triangular translation on fabricated cases.",
+      "checks": [
+        "Exact amplitude dependence including H=0 and zero R/v",
+        "Nonlinear coordinate finite differences and analytic chain rules",
+        "Translation before/after costs/gradients at joint points and repeated shifts",
+        "Constant residual energy and all cross terms retained",
+        "Nonfinite rejection/phase ownership before and after mutation",
+        "Reject old feature-bank schema even when sizes match"
+      ],
+      "canonical_model_calls": 0
+    },
+    {
+      "id": 2,
+      "action": "Implement/qualify analytic attenuation boundary; measure context/workspace and compiled stack under complete10240B planning ceiling.",
+      "checks": [
+        "Variable actual intervals, rest, both current signs and multiple query rate changes",
+        "Compare attenuation against original recurrence with declared rounding scope",
+        "No hidden second bank or raw archive in candidate",
+        "Input/cursor/prior/calibration/phase invariants",
+        "Attenuation underflow, zero accumulated charge, finite counters and nonfinite/overflow rejection"
+      ]
+    },
+    {
+      "id": 3,
+      "action": "Two predetermined controlled commit-schedule arms on252000 samples:structured-feature-only control and full candidate.",
+      "new_optimizer_calls": 0,
+      "raw_records_per_arm": 252000,
+      "arms": 2,
+      "represented_queries_per_arm": 545,
+      "new_original_reference_passes": 0,
+      "reuse_references": "experiments/joint_shape_comparison_001/attempt001/evaluations.json",
+      "freeze_nodes": "experiments/joint_shape_comparison_001/attempt001/nodes.json",
+      "purpose": "Falsify candidate and distinguish representation/boundary improvements; no autonomous-inference claim.",
+      "continue_when": "Full candidate has545 available points and registered arithmetic upper oscillation<=0.1NLL; memory and lifecycle checks pass."
+    },
+    {
+      "id": 4,
+      "action": "Only after phase3 passes, separately register one public-start causal252000-record run and postclosure shape comparison.",
+      "candidate_access_forbidden": [
+        "saved accepted anchors",
+        "final estimate",
+        "retrospective oracle bank",
+        "truth",
+        "archive except one-way ordered host delivery"
+      ],
+      "optimizer_policy": "Retain existing bounded per-block proposal policy initially; no concurrent optimizer retuning.",
+      "comparison": "Freeze new candidate node design before original-reference evaluations; retain full joint stencil and0.1NLL rule.",
+      "continue_when": "Causal-run qualification and local shape gate pass; separately plan uncertainty and varied trajectories."
+    }
+  ],
+  "resource_requirements": {
+    "complete_SRAM_planning_ceiling_bytes": 10240,
+    "old_context_bytes": 8680,
+    "old_planning_total_bytes": 10216,
+    "new_context_and_stack_status": "Must be compiled and measured before canonical candidate run; same factor size is not a full memory proof.",
+    "raw_working_records": 16,
+    "incoming_records": 8,
+    "archive_in_candidate": false,
+    "estimator_heap": false,
+    "future_phase3_limits": "Freeze executable work/CPU/wall/RSS/output caps from qualified kernels before either arm; no automatic repeats or sweeps."
+  },
+  "failure_policy": "If finite candidate fails, preserve all results and localize residual f/hb transport or rate/OCV truncation before another design. Do not tune observed error away with oracle corrections, reference-driven radii, extra prior or implicit forgetting.",
+  "explicit_non_solutions": [
+    "Install retrospectively rebuilt factor as firmware repair",
+    "Translate stored factor and claim relinearization",
+    "Subtract measured slope error using external reference",
+    "Retain startup raw history without counting its memory",
+    "Assert all local errors caused by one parameter from whitened coordinate15"
+  ],
+  "limitations": [
+    "Candidate effectiveness untested",
+    "Sparse-block diagnosis does not fully apportion all historical mechanisms",
+    "Exact attenuation formulas do not make f/hb boundary exact",
+    "Finite0.1NLL gate is not coverage or universal fidelity",
+    "M2 and M3 remain open"
+  ],
+  "finish_line": "Qualified causal repair passing fixed-node fidelity and complete resource/lifecycle gates; only then proceed to uncertainty and requested cell/load/noise/duration variation."
+}

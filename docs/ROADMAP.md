@@ -33,7 +33,17 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`diagnostics/joint-shape-comparison-001`.
+`diagnostics/history-shape-localization-001`.
+
+The requested analysis-before-repair stage is complete. Direct sums of old rows
+reproduce the stored factor, while the final-origin retrospective oracle reduces
+oscillation to **0.00142448 NLL**. Early learning contributes most of the slope
+error; sparse controls show both residual truncation and boundary approximation.
+The [repair plan](../experiments/history_shape_localization_001/repair_plan.json)
+selects a 37-feature representation preserving exact amplitude dependence,
+reciprocal-capacity OCV coordinates and analytic initial-state attenuation.
+It is **not implemented or causally validated**. The oracle is not a deployment
+candidate. See the [diagnosis](../experiments/history_shape_localization_001/README.md).
 
 After development stabilizes, the user requests configurable cell/load/noise/
 duration trajectories for longer-term variation. That campaign has not started.
@@ -636,25 +646,30 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Continue from `diagnostics/joint-shape-comparison-001` and the current
-[handoff](../handoff/CONTINUE.json). The integrated rolling engine, census and
-545-point shape comparison are complete; preserve their original evidence.
+Continue from `diagnostics/history-shape-localization-001` and
+[repair_plan.json](../experiments/history_shape_localization_001/repair_plan.json).
+The requested issue analysis and repair design are complete. Preserve the original
+inference, census, shape comparison and new localization outputs.
 
-Localize the measured slope discrepancy between the rolling historical factor
-and original recurrence, separating factor approximation from carried-boundary
-error. Use the existing frozen witness for a bounded diagnosis, then select one
-causal repair that retains evidence ownership, original support and bounded
-memory. Whitened directions mix parameters; the largest coordinate-15 error
-does not by itself attribute the cause to initial hysteresis. Small terminal
-state differences do not establish historical residual fidelity.
+Implement the separate structured-history candidate. Keep exact amplitude
+products in the 37 residual features; use reciprocal capacity internally for
+OCV while retaining the original 16-coordinate prior and support. Qualify the
+new translation, derivatives, zero-amplitude cases and bank-schema rejection.
+Use analytic initial-state attenuation, with explicit charge/time ownership;
+forced-response boundary terms remain approximate.
 
-Do not rerun the four-hour inference by default, initialize from truth or the
-external historical optimum, double-count replayed observations, or shrink the
-stencil after seeing the discrepancy. Archive replay is an external diagnostic
-only. The original 0.1 NLL finite-node gate stays fixed. After a qualified repair,
-useful SOC/capacity uncertainty and the requested cell/load/noise/duration
-trajectories remain M2 work. Actual Cortex-M23 device/build, full subsystem
-SRAM, timing and lifecycle measurements remain M3 gates.
+Measure the complete context/workspace/stack before two fixed controlled
+commit-schedule arms on the saved prefix. Reuse all 545 frozen points and original
+reference results. Preserve the 0.1 NLL gate. Only after the full candidate passes,
+register one new causal two-hour public-start probe with no saved-anchor, oracle
+or truth access. If the candidate fails, retain the result and diagnose remaining
+forced-response transport or nonlinear truncation before another design.
+
+The retrospective rebuilt factor is diagnostic only. Do not install it, correct
+slopes from its reference, silently discard old evidence or rerun the unchanged
+four-hour inference. Useful uncertainty and requested cell/load/noise/duration
+trajectories follow a stable causal repair. Actual Cortex-M23 SRAM, timing and
+lifecycle measurement remain separate M3 gates.
 
 ### What the current memory figures mean
 
