@@ -1,0 +1,100 @@
+{
+  "schema": "mumble_history_shape_localization_plan_v1",
+  "base_revision": "68838d54d90bea4f158a8aa4d26db0e6576fb2ae",
+  "scope": "Analyze discrepancy and plan repair before modifying estimator. Diagnostic-only replay, no optimization or candidate repair.",
+  "questions": [
+    "Does a direct sum of old per-observation polynomial rows reproduce stored QR costs and gradient?",
+    "Which chronological windows contribute the final-anchor slope error?",
+    "At eight predetermined blocks, how much error comes from boundary transport versus the residual Taylor approximation?",
+    "Would the same37-feature representation be accurate on the already-frozen545 points if its center and boundary had been exact from the start?"
+  ],
+  "inputs": {
+    "observations": {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+      "bytes": 16128000,
+      "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f"
+    },
+    "expected": {
+      "path": "experiments/fixed_prefix_shape_001/attempt001/expected.bin",
+      "bytes": 3717236,
+      "sha256": "fefe8697ffd7aa83ef0aa7aaa5dc71cefda313773234d7a8bf95c95f4b1eab02"
+    },
+    "bank": {
+      "path": "experiments/joint_shape_comparison_001/attempt001/adapter.bank.bin",
+      "bytes": 6864,
+      "sha256": "c1fe886147ef10da9d9992bac3aec52f7cb2c81ac828d84928405f5ecb89d4e4"
+    },
+    "nodes_binary": {
+      "path": "experiments/joint_shape_comparison_001/attempt001/nodes.bin",
+      "bytes": 69760,
+      "sha256": "3d047cc35895216f2c6173ef10119c95c928b8f912f24ba62ba21c55c4fa6389"
+    },
+    "nodes": {
+      "path": "experiments/joint_shape_comparison_001/attempt001/nodes.json",
+      "bytes": 410748,
+      "sha256": "8c1a3043d7a3808e1bb584b2c87ef80682642c7224dc170673d0343e1f4413d4"
+    },
+    "evaluations": {
+      "path": "experiments/joint_shape_comparison_001/attempt001/evaluations.json",
+      "bytes": 702907,
+      "sha256": "fe0064f1b20316196d968118cbb3193e7bacb9cf436b111e7801c77fa38b0c16"
+    }
+  },
+  "checkpoints": [
+    16,
+    224,
+    1024,
+    4096,
+    16384,
+    65536,
+    126000,
+    252000
+  ],
+  "selected_node_indices": [
+    0,
+    31,
+    32,
+    129,
+    130,
+    303,
+    304,
+    401,
+    402
+  ],
+  "selection": "Eight fixed logarithmically spaced/structural chronological checkpoints including original224 parity failure and finalprefix. Direct row checks use anchor and previous two extremal directions at both radii; selected after prior results for diagnosis only.",
+  "decomposition": "At each selected final16-sample block evaluate rolling rows, exact-state/derivative rows at that block saved anchor, and original recurrence at final saved anchor. rolling-exact_origin diagnoses transported-boundary effect; exact_origin-reference diagnoses residual Taylor approximation for that block. Do not extrapolate sparse block decomposition to all history.",
+  "counterfactual": "Rebuild one host-only factor at the saved final estimate using exact-origin derivatives and all original observations. Reuse closed original recurrence results for all545 frozen points. This retrospective oracle uses future estimates for earlier samples and MUST NOT be installed or called a causal repair.",
+  "qualification": "Four existing fabricated96-sample cases; direct rows vs qualified QR, gradients, original reference mapping, exact-origin residual/derivative agreement, first-block and final-block decomposition identities.",
+  "caps": {
+    "canonical_invocations": 1,
+    "retries": 0,
+    "rolling_merge_steps": 252000,
+    "exact_origin_merge_steps": 465280,
+    "original_reference_steps": 252000,
+    "total_model_steps": 969280,
+    "oracle_QR_rows": 252000,
+    "oracle_queries": 545,
+    "saved_bank_queries": 1,
+    "optimizer_calls": 0,
+    "truth_reads": 0,
+    "CPU_s": 60,
+    "wall_s": 120,
+    "RSS_bytes": 268435456,
+    "AS_bytes": 1073741824,
+    "output_bytes": 67108864
+  },
+  "gates": [
+    "Preserve original sources/results",
+    "Qualify on fabricated data",
+    "Publish and verify qualified diagnostic source",
+    "Freeze checkpoints and all input/source hashes before canonical run",
+    "Close once-only outputs and distinguish retrospective evidence from deployable repair"
+  ],
+  "finish_line": "Save attribution evidence and a concrete repair plan with candidate changes, falsification tests, memory/work limits and explicit causal/evidence-ownership restrictions before any estimator modification.",
+  "limits": [
+    "Self-review, not independent validation",
+    "Computed diagnostics, no full recurrence/libm error proof",
+    "No calibrated uncertainty or M3 promotion",
+    "No hidden deletion or replacement of old evidence"
+  ]
+}
