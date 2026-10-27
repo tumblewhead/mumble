@@ -6,6 +6,31 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The causal live-anchor design is selected, and its three C prerequisites are qualified.**
+The input interface preserves 12-bit V/I/T and 64-bit actual duration ticks. A
+support-aware joint proposal handles active bounds; an in-place translation
+preserves the stored polynomial when its origin moves. The three finite suites
+passed 30 cases and 40,083 assertions in three builds, with zero retries.
+
+The selected rolling design owns one history bank, 16 raw working samples and 8
+incoming samples. Its compiled host object layout plus explicit stack/runtime
+reservations totals **10,216 bytes**, leaving 24 bytes to the 10,240-byte target.
+The saved 8 MB archive and file playback are permitted host tools; neither is an
+estimator dependency. Physical calibration is explicit, and T is preserved
+without claiming temperature compensation.
+
+**The rolling engine itself still needs integration.** Current-block derivatives,
+approximate boundary transport, evidence/prior ownership transactions and actual
+call chains are next. Historical fidelity, calibrated SOC/capacity intervals and
+Cortex-M23 SRAM/timing remain unqualified. See the
+[live-anchor report](experiments/live_anchor_bootstrap_001/REPORT.md),
+[design](experiments/live_anchor_bootstrap_001/DESIGN.md),
+[decision](experiments/live_anchor_bootstrap_001/decision.json) and
+[handoff](handoff/CONTINUE.json). The current branch is
+`implementation/live-anchor-bootstrap-001`.
+
+### Previous fixed-origin comparison
+
 **The live-stream compact nonlinear-history experiment is implemented and complete.**
 Its allocation-free C candidate retains a **5,624-byte history factor** in an
 **8,112-byte estimator core**, with **zero raw-history bytes**. Each candidate
@@ -34,7 +59,7 @@ explicit ownership of earlier evidence. See the
 [result review](experiments/compact_nonlinear_history_001/result_review.json),
 [receipt review](experiments/compact_nonlinear_history_001/receipt_review.json) and
 [fidelity figure](experiments/compact_nonlinear_history_001/history_fidelity.png).
-The current branch is `implementation/bounded-history-anchor-001`.
+That completed comparison is preserved on `implementation/bounded-history-anchor-001`.
 
 **Autonomous anchor refinement produced seven verified accepted steps; the finite run is failed.**
 Starting only from the fixed public mean, the full joint refinement reached
@@ -507,23 +532,21 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-Use `implementation/bounded-history-anchor-001`, the current
+Use `implementation/live-anchor-bootstrap-001`, the current
 [handoff](handoff/CONTINUE.json) and
-[compact-history decision](experiments/compact_nonlinear_history_001/decision.json).
-Capture preservation is qualified, and the one compact-history comparison is
-closed with intact original/copy captures. Preserve all previous results,
-including the failed autonomous-anchor invocation and its verified seven steps;
-no completed experiment needs a replay to recover context.
+[live-anchor decision](experiments/live_anchor_bootstrap_001/decision.json).
+The three primitive qualifications and their independent reviews are closed.
+Preserve all earlier results, including the failed autonomous-anchor invocation
+and its seven verified accepted steps. No completed study needs a replay to
+recover context.
 
-The next finite design is **causal bootstrap and anchor transition with bounded
-history**, reusing the locally faithful quartic bank. Its proposal must respect
-physical bounds, and it must state what happens to evidence acquired before a
-new origin. Improving bound-aware search alone cannot repair the independently
-observed away-origin likelihood error. Translating a retained polynomial does
-not recreate discarded nonlinear derivatives. A recent-data buffer, alternate
-bootstrap representation or retained approximation must fit the complete memory
-ledger and expose any evidence loss; no arbitrary history-window length is chosen
-by this result.
+Implement the selected rolling 16-record public-start engine using its qualified
+ADC12 transport, support-aware proposal and quadratic-first history translation.
+Qualify current-block derivatives, approximate boundary transport, full-objective
+acceptance, once-only prior/evidence ownership and phase/call-chain liveness.
+Then freeze one finite chronological probe; permitted file playback supplies the
+input and archive assessments remain external, after candidate closure. A
+coordinate translation does not restore discarded historical nonlinearity.
 
 SOC/capacity uncertainty remains unvalidated. The finite node comparison is a
 necessary local-fidelity check, not posterior integration, tail validation or

@@ -1,7 +1,7 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "M2_A4_compact_history_local_fidelity_complete_causal_bootstrap_open",
+  "stage": "M2_A4_live_anchor_design_primitives_complete_integration_open",
   "objective": "Deliver a runnable ~10KiB Cortex-M23 C estimator: first a two-cell desktop lifecycle demonstration, then varied desktop trajectories over about one year, preserving stimulus-supported learning, evidence, unknowns and conditional lifetime guarantees.",
   "nominal_rate_Hz": 35,
   "current_model": {
@@ -149,7 +149,8 @@
     "autonomous_anchor_result_review": "experiments/autonomous_anchor_refinement_001/result_review.json",
     "autonomous_anchor_failure_diagnostic": "experiments/autonomous_anchor_refinement_001/failure_diagnostic.json",
     "autonomous_anchor_publication": "provenance/autonomous_anchor_refinement_001_publication.json",
-    "compact_nonlinear_history": "experiments/compact_nonlinear_history_001/REPORT.md"
+    "compact_nonlinear_history": "experiments/compact_nonlinear_history_001/REPORT.md",
+    "live_anchor_bootstrap": "experiments/live_anchor_bootstrap_001/REPORT.md"
   },
   "completed": {
     "main_cases": 6,
@@ -206,11 +207,12 @@
     "parameter_sensitivity_001 is a saved-state, fixed-model, open-loop point diagnostic. Final joint sampled peak below0.987mV across six future protocols includes signed compensation; it does not qualify uncertainty, nuisance identifiability, arbitrary inputs, estimator feedback, indefinite operation or M23 resources."
   ],
   "next_work": [
-    "Preserve the completed compact-history comparison and the old failed autonomous-anchor run with its verified seven accepted steps; no retry or implicit continuation.",
-    "Keep the 37-feature quartic C bank for local maintenance. Design one causal live-stream bootstrap/anchor transition, with support-aware joint search and explicit ownership of pre-origin evidence.",
-    "Compare startup/transition representations against the complete10240B budget and lost nonlinear information; do not choose an arbitrary raw-history duration or treat coordinate translation as renewed derivatives.",
-    "Qualify supported joint SOC/capacity uncertainty and coverage separately; finite-node fidelity and good point estimates are not credible intervals.",
-    "Measure target ADC/checkpoint integration, full simultaneous SRAM/stack/IRQ/runtime and software floating point timing before M3 promotion."
+    "Preserve all closed qualifications and studies, including the failed autonomous-anchor run and its verified seven steps; no replay is needed to recover context.",
+    "Implement the selected rolling16-record public-start engine with one quadratic-first history bank,8 incoming samples and immutable explicit ADC12 calibration.",
+    "Qualify224B current-block derivative state, approximate boundary-jet transport, supported proposal plus objective acceptance, original-prior-once and record-once commit, queue/fault behavior and complete phase/call-chain liveness.",
+    "Then freeze one finite public-start chronological probe. File playback supplies samples; archive-based exact assessments are external postclosure diagnostics and cannot steer the estimator.",
+    "Qualify joint SOC/capacity uncertainty separately. Polynomial translation preserves an approximation; neither curvature nor point accuracy establishes coverage.",
+    "Measure actual Cortex-M23 SRAM, library/IRQ/caller stack, ADC/checkpoint integration and software floating-point timing before M3 promotion."
   ],
   "handoff_format": "compact_JSON",
   "continuation_handoff": "handoff/CONTINUE.json",
@@ -294,6 +296,20 @@
       "current_SOC_hard_pp": 10.0,
       "current_SOC_preferred_pp": 0.5,
       "semantics": "User performance requirements, not certified error bounds or local covariance coverage; gains below preferred region have diminishing priority."
+    },
+    "live_stream_storage": {
+      "saved_archive_for_study_permitted": true,
+      "file_playback_for_input_permitted": true,
+      "estimator_archive_dependency_permitted": false,
+      "ADC_bits": {
+        "V": 12,
+        "I": 12,
+        "T": 12
+      },
+      "actual_intervals_and_order_required": true,
+      "physical_scales_offsets_timer_and_rail_semantics": "not supplied; require explicit configuration, no invented hardware defaults",
+      "history_goal": "compact bounded owned evidence while allowing late capacity learning",
+      "temperature": "preserve input; current25C model has no compensation"
     }
   },
   "indefinite_stability": {
@@ -570,9 +586,9 @@
     "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
     "plan": "plans/trajectory_to_m23_001.json",
     "report": "docs/ROADMAP.md",
-    "status": "compact_history_local_fidelity_complete_causal_bootstrap_open",
+    "status": "live_anchor_design_primitives_complete_integration_open",
     "current_milestone": "M2_A4_bounded_history_before_M3",
-    "next_work_branch": null,
+    "next_work_branch": "implementation/live-anchor-integration-001",
     "M1": "Complete desktop lifecycle, exact warm continuation and cold recovery on two2100s cells. Full retained history, not bounded firmware. Cell B900s quality gate failed.",
     "M2": "Continuous4h diagnostic completed once: valid lifecycle, successful final preferred retention, preferredSOCregression during renewed use, ApreferredQunresolved and uncertainty unvalidated. Candidate unpromoted; bounded weighting/output question next.",
     "M3": "Actual Cortex-M23 execution with complete10240B subsystem planning boundary and relevant lifetime proof obligations.",
@@ -583,10 +599,11 @@
     "M1_complete": true,
     "M2_complete": false,
     "M3_complete": false,
-    "latest_component": "compact_nonlinear_history_001:onepassperbank,quarticlocalfidelity,publicorigin/searchlimitations,10224Bplanned,no promotion",
-    "next_start_ref": "implementation/bounded-history-anchor-001",
+    "latest_component": "live_anchor_bootstrap_001:ADC12+supportedproposal+translation qualified; rolling design10216Bplanned; integration/coverage/M3 open",
+    "next_start_ref": "implementation/live-anchor-bootstrap-001",
     "M1_usefulness_passed": false,
-    "M1_cold_usefulness_passed": true
+    "M1_cold_usefulness_passed": true,
+    "next_work_branch_status": "proposed_not_created"
   },
   "compact_bounded": {
     "work_branch": "implementation/compact-bounded-001",
@@ -1488,5 +1505,67 @@
     "result_revision": "506e62829578181cf02ad34e1c11a433881d02c9",
     "result_tree": "ce6eb77b2b8787826d131a3816438e305aa67d1d",
     "result_url": "https://github.com/tumblewhead/mumble/commit/506e62829578181cf02ad34e1c11a433881d02c9"
+  },
+  "live_anchor_bootstrap": {
+    "status": "design_selected_primitives_passed_integration_open",
+    "branch": "implementation/live-anchor-bootstrap-001",
+    "base_revision": "f26f5586535b7658ca9352b81339005f885287d6",
+    "checkpoint_revision": "83b30c4e69235de1b438ed9178bd1efb3f11698c",
+    "checkpoint_tree": "cd3932460ebdbf15addc7c1653fc36747a81ec4f",
+    "checkpoint_url": "https://github.com/tumblewhead/mumble/commit/83b30c4e69235de1b438ed9178bd1efb3f11698c",
+    "checkpoint_scope": "Qualified source and results published together after primitive qualifications; no canonical stream launch.",
+    "publication_status": "remote_full_tree_verified_and_fetched_locally",
+    "contract": "plans/live_anchor_bootstrap_001.json",
+    "report": "experiments/live_anchor_bootstrap_001/REPORT.md",
+    "design": "experiments/live_anchor_bootstrap_001/DESIGN.md",
+    "decision": "experiments/live_anchor_bootstrap_001/decision.json",
+    "summary": "experiments/live_anchor_bootstrap_001/summary.json",
+    "source_review": "experiments/live_anchor_bootstrap_001/review/source_and_design_review.json",
+    "result_review": "experiments/live_anchor_bootstrap_001/review/primitive_result_review.json",
+    "report_review": "experiments/live_anchor_bootstrap_001/review/report_review.json",
+    "receipt_review": "experiments/live_anchor_bootstrap_001/qualification/receipt_review.json",
+    "provenance": "provenance/live_anchor_bootstrap_001_publication.json",
+    "counts": {
+      "builds": 3,
+      "finite_cases": 30,
+      "assertions": 40083,
+      "retries": 0,
+      "canonical_streams": 0,
+      "battery_model_calls": 0,
+      "observation_reads": 0,
+      "prior_calls": 0,
+      "truth_reads": 0
+    },
+    "planned_memory": {
+      "factor_bytes": 5624,
+      "bank_bytes": 6368,
+      "core_bytes": 8088,
+      "input_store_bytes": 408,
+      "calibration_bytes": 56,
+      "codec_reserve_bytes": 128,
+      "project_stack_cap_bytes": 768,
+      "runtime_IRQ_caller_cap_bytes": 768,
+      "total_bytes": 10216,
+      "headroom_bytes": 24,
+      "claim": "sizeof-qualified host schema plus explicit unmeasured reservations; integrated and target liveness remain open"
+    },
+    "integrated_estimator_complete": false,
+    "candidate_promoted": false,
+    "coverage_validated": false,
+    "target_measured": false,
+    "next": {
+      "action": "Implement selected rolling engine, qualify it, then freeze one finite public-start chronological probe.",
+      "implementation": [
+        "quadratic-first row/query engine",
+        "sparse224B block derivative state",
+        "approximate boundary jet transport",
+        "support proposal plus represented-objective acceptance",
+        "single-prior/single-count commit transaction",
+        "integrated queue/overrun/unavailable states",
+        "actual complete phase/call-chain accounting"
+      ],
+      "probe_gate": "Freeze source, calibration/model/noise contract, public initialization, finite proposal/work schedule and external postclosure audit before invoking. No old study rerun.",
+      "estimation": "Prompt SOC, capacity allowed later; never force informative capacity from short or zero-current startup."
+    }
   }
 }

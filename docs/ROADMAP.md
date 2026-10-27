@@ -2,6 +2,27 @@
 
 ## Decision
 
+**The bounded causal-anchor design is selected and its critical C primitives pass.**
+ADC12 transport, a support-aware joint proposal and in-place polynomial
+translation passed 30 finite cases and 40,083 assertions. The selected design
+retains sixteen current samples and queues eight incoming samples. Its compiled
+host layout and explicit reservations total 10,216 bytes, including 56 B of RAM
+calibration. The 24 B margin is not a
+measured target allowance. File playback and saved history are permitted study
+tools; the estimator owns only delivered samples and bounded state.
+
+The next action is to integrate the rolling engine. Block derivatives,
+approximate boundary transport, accepted-objective
+checks, once-only evidence/prior transactions and actual call chains remain to
+implement and qualify. No new battery-data run or interval/M3 promotion occurred.
+Read the [report](../experiments/live_anchor_bootstrap_001/REPORT.md),
+[design](../experiments/live_anchor_bootstrap_001/DESIGN.md),
+[decision](../experiments/live_anchor_bootstrap_001/decision.json) and
+[current handoff](../handoff/CONTINUE.json). Use branch
+`implementation/live-anchor-bootstrap-001`.
+
+### Previous compact-history result
+
 **Compact nonlinear history is now a useful local C component; causal cold start remains open.**
 The single 294,000-sample experiment completed with two fixed-origin banks and
 external reference checks at 7,200 and 8,400 s. Candidate history is a 37-feature
@@ -24,7 +45,7 @@ evidence ownership. Read the [report](../experiments/compact_nonlinear_history_0
 [decision](../experiments/compact_nonlinear_history_001/decision.json),
 [result review](../experiments/compact_nonlinear_history_001/result_review.json) and
 [receipt review](../experiments/compact_nonlinear_history_001/receipt_review.json).
-The current branch is `implementation/bounded-history-anchor-001`. The run used
+That comparison is preserved on `implementation/bounded-history-anchor-001`. The run used
 6.866106 CPU s, 6.935785 active wall s, 19,169,280 B host peak RSS and 758,011 B
 closed runtime output. All original/copy captures survived verification.
 
@@ -576,27 +597,35 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Use `implementation/bounded-history-anchor-001` and the current
-[handoff](../handoff/CONTINUE.json). Both capture qualification and the finite
-compact-history comparison are complete. Preserve the old failed anchor run and
-its seven accepted steps, and the new completed comparison; do not rerun them.
+Use `implementation/live-anchor-bootstrap-001` and the current
+[handoff](../handoff/CONTINUE.json). The live-anchor design and three finite
+primitive qualifications are complete. Preserve these and all older studies.
 
-Design one bounded **causal bootstrap/anchor-transition** prototype. It must use
-the live stream, respect physical support in the full joint proposal, and account
-for evidence collected before the chosen origin. A simple public-origin chart is
-inadequate at the tested good-anchor neighborhood even apart from its constrained-
-search failure. A coordinate translation cannot regenerate missing historical
-nonlinearity. Compare proposed startup/transition representations on their explicit
-information retention and complete phase-dependent memory cost before selecting
-one finite execution. Do not introduce an arbitrary replay-window duration.
+Implement one rolling 16-record public-start engine. Use the quadratic-first
+quartic factor for older evidence, the current raw block for nonlinear queries
+conditional on its approximate carried boundary, and the original joint prior
+once. Use the support-aware proposal with complete represented-objective
+acceptance. Qualify derivatives, boundary transport, evidence/cursor ownership,
+queue/fault transitions and actual memory/call-chain overlap before one newly
+frozen finite causal probe. Capacity has no startup identification deadline.
 
-Retain the local bank as the maintenance component. Calibrated SOC/capacity
-intervals still require supported posterior and coverage qualification beyond
-finite local nodes. ADC/checkpoint integration, complete target stack and software-
-floating-point timing then supply M3 evidence. No automatic continuation or broader
-campaign has been launched by this completed comparison.
+The saved archive may supply file playback and external postclosure reference
+checks. It may not initialize or steer candidate anchors. Calibration and tick
+scale must be explicit and immutable; 12-bit codes do not specify noise or
+physical accuracy. The current 25 C model preserves T without compensation.
+Calibrated intervals and measured Cortex-M23 resources remain separate gates.
 
 ### What the current memory figures mean
+
+The latest selected schema owns 8,088 B core, 408 B input store, 56 B calibration and
+128 B codec reservation: 8,680 B objects. Add 768 B project stack and 768 B
+runtime/IRQ/caller reservations for **10,216 B planned**. The query phase fits a
+224 B first-order state and 32 B decoded input within its shared 1,600 B workspace.
+The standalone 304 B ADC FIFO is not additionally owned. See the concrete
+[layout](../experiments/live_anchor_bootstrap_001/live_layout.h); full integration,
+actual target stack and timing remain unqualified.
+
+The following figures describe preserved earlier components.
 
 The new experimental bank owns 6,368 B of retained factor/state/metadata, inside
 an 8,112 B core with serialized workspace, report and one ADC sample. The factor
