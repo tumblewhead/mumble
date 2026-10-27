@@ -1,0 +1,2768 @@
+{
+  "CPU_s": 2.9924399999999998,
+  "binaries": {
+    "control": {
+      "bytes": 47752,
+      "sha256": "8ba8661be2f7ad269374d8cf84526d93aca8d5cf8186513bf5f08b6816b18b65"
+    },
+    "full": {
+      "bytes": 51888,
+      "sha256": "bfdea9241fc36167ffde0dce87d07a72282e5dc58dbfd3567c119260d6fdea99"
+    }
+  },
+  "canonical_input_reads": 0,
+  "cases": [
+    {
+      "arm": "control",
+      "checks_so_far": 1818,
+      "status": "passed"
+    },
+    {
+      "arm": "full",
+      "checks_so_far": 3683,
+      "status": "passed"
+    }
+  ],
+  "checks": 3684,
+  "children": [
+    {
+      "CPU_s": 0.771666,
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wl,--gc-sections",
+        "-Iinclude",
+        "-DSH_ANALYTIC_ATTENUATION=0",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/host.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_engine.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_model.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/features.c",
+        "experiments/live_anchor_integration_001/public_contract.c",
+        "experiments/live_anchor_integration_001/host_input.c",
+        "experiments/live_anchor_bootstrap_001/adc12.c",
+        "experiments/live_anchor_bootstrap_001/support_step.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/qualification/development002/control_worker"
+      ],
+      "peak_RSS_bytes": 63754240,
+      "returncode": 0,
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "wall_s": 0.7877467120415531
+    },
+    {
+      "CPU_s": 0.6481039999999999,
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wl,--gc-sections",
+        "-Iinclude",
+        "-DSH_ANALYTIC_ATTENUATION=0",
+        "-DSH_NO_MAIN",
+        "-shared",
+        "-fPIC",
+        "-fstack-usage",
+        "-fno-inline",
+        "-fno-optimize-sibling-calls",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/host.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_engine.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_model.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/features.c",
+        "experiments/live_anchor_integration_001/public_contract.c",
+        "experiments/live_anchor_integration_001/host_input.c",
+        "experiments/live_anchor_bootstrap_001/adc12.c",
+        "experiments/live_anchor_bootstrap_001/support_step.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/qualification/development002/control/candidate.so"
+      ],
+      "peak_RSS_bytes": 60694528,
+      "returncode": 0,
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "wall_s": 0.6618073009885848
+    },
+    {
+      "CPU_s": 0.756408,
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wl,--gc-sections",
+        "-Iinclude",
+        "-DSH_ANALYTIC_ATTENUATION=1",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/host.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_engine.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_model.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/features.c",
+        "experiments/live_anchor_integration_001/public_contract.c",
+        "experiments/live_anchor_integration_001/host_input.c",
+        "experiments/live_anchor_bootstrap_001/adc12.c",
+        "experiments/live_anchor_bootstrap_001/support_step.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/qualification/development002/full_worker"
+      ],
+      "peak_RSS_bytes": 62988288,
+      "returncode": 0,
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "wall_s": 0.7644071219838224
+    },
+    {
+      "CPU_s": 0.654277,
+      "command": [
+        "cc",
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-Wl,--gc-sections",
+        "-Iinclude",
+        "-DSH_ANALYTIC_ATTENUATION=1",
+        "-DSH_NO_MAIN",
+        "-shared",
+        "-fPIC",
+        "-fstack-usage",
+        "-fno-inline",
+        "-fno-optimize-sibling-calls",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/host.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_engine.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/rolling_model.c",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/features.c",
+        "experiments/live_anchor_integration_001/public_contract.c",
+        "experiments/live_anchor_integration_001/host_input.c",
+        "experiments/live_anchor_bootstrap_001/adc12.c",
+        "experiments/live_anchor_bootstrap_001/support_step.c",
+        "src/scm_model.c",
+        "-lm",
+        "-o",
+        "/home/easy/proj/mumble/experiments/structured_history_repair_001/qualification/development002/full/candidate.so"
+      ],
+      "peak_RSS_bytes": 60764160,
+      "returncode": 0,
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "wall_s": 0.6635351199656725
+    }
+  ],
+  "files": {
+    "build_control.process.json": {
+      "bytes": 1364,
+      "sha256": "3d534ea3fda6ee18611342d39b20137bd8ae2e7a15ebc7ce506624db81465702"
+    },
+    "build_control.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_control.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_control.stdout.copy": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_full.process.json": {
+      "bytes": 1361,
+      "sha256": "37f63b7121c13406839843577cfdd609e3dd4f3b4f9057afc209abfd203d4dde"
+    },
+    "build_full.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_full.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build_full.stdout.copy": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "control/candidate.so": {
+      "bytes": 70064,
+      "sha256": "e2eeb6832a839fe4ba5941d3e167ef0d1684ef752156ba9fceb13360fab0ee1d"
+    },
+    "control/candidate.so-adc12.su": {
+      "bytes": 1073,
+      "sha256": "7e0a139f54f7ae42b6592567bd2df4e65c4d2e1fa8c567a50af8d30ec443c0a2"
+    },
+    "control/candidate.so-features.su": {
+      "bytes": 1229,
+      "sha256": "5a79abe38f45d502aafed144716ba321d1bc411b22edcbf92cd2f408287e594f"
+    },
+    "control/candidate.so-host.su": {
+      "bytes": 401,
+      "sha256": "5974c89ac70a606097adc03847cc9a24796f269175917af18a2e69105b579227"
+    },
+    "control/candidate.so-host_input.su": {
+      "bytes": 483,
+      "sha256": "c4419a6e068507436668e686fb4fdd4d30f29f3c80b3388805a37ba3c3411d9f"
+    },
+    "control/candidate.so-public_contract.su": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "control/candidate.so-rolling_engine.su": {
+      "bytes": 3040,
+      "sha256": "276f26d54303800a85820db42fc4d53855997ea3b6ff9fa703f17266ab6cf846"
+    },
+    "control/candidate.so-rolling_model.su": {
+      "bytes": 1733,
+      "sha256": "abf96e1bb9025bb2d6d1b76ac1e41c0b718f77bed0769442a59230e723cf3bc2"
+    },
+    "control/candidate.so-scm_model.su": {
+      "bytes": 377,
+      "sha256": "930b338629bd9d95f1239e48a291822162270cca1df27bce45eea213e9ec0d0a"
+    },
+    "control/candidate.so-support_step.su": {
+      "bytes": 1914,
+      "sha256": "dd2861705172e81f0757c6cb893735346a10c1dd5e544310f5320207cb9ad6a7"
+    },
+    "control/memory.json": {
+      "bytes": 24308,
+      "sha256": "9efacaa05f48e18e44772766c8637a91b9f86a627a3421326ed77496b94ffb36"
+    },
+    "control/old.bank.bin": {
+      "bytes": 6864,
+      "sha256": "60e0c76a438970e64242ad8e4ab4253fcdeee9fecc2b40a77b4bb99a57e1045e"
+    },
+    "control/other.bank.bin": {
+      "bytes": 6864,
+      "sha256": "84bc8f493498d41b6436bb76d1675197857c580811ffc5d09333fe5b16e305d9"
+    },
+    "control/preprocessed/adc12.c": {
+      "bytes": 84385,
+      "sha256": "55521cf4031f08caaed97530c391234de6ecf55ad2d6ee1622620799cbab3b6a"
+    },
+    "control/preprocessed/features.c": {
+      "bytes": 71692,
+      "sha256": "e1f75253adb0a8c539520a28b649e9598a3d874477184e43eed4c2852f0d1bc3"
+    },
+    "control/preprocessed/host_input.c": {
+      "bytes": 81054,
+      "sha256": "db95ac174522a88e94804ca32bb4affcca3248a6c4a3388ba2c60ab4f90c120d"
+    },
+    "control/preprocessed/public_contract.c": {
+      "bytes": 9035,
+      "sha256": "9d97e4ee9f20082d076561eaf966b6620db03ce37133bb2f76c103df5e5045cb"
+    },
+    "control/preprocessed/rolling_engine.c": {
+      "bytes": 108185,
+      "sha256": "da910b48feb1ce9af2069e12b616d0afaff4c1693be838b88ea6027f9bc111e2"
+    },
+    "control/preprocessed/rolling_model.c": {
+      "bytes": 97337,
+      "sha256": "a1ae08659ad2ea73f5a09677f11a62e2bd01c58d9c64c4ec5b5ff2837731898e"
+    },
+    "control/preprocessed/scm_model.c": {
+      "bytes": 77222,
+      "sha256": "30745a622d34f575fa1262a5644c00da993fa982877997cfb6e1f95a8f3a5b6a"
+    },
+    "control/preprocessed/support_step.c": {
+      "bytes": 88482,
+      "sha256": "bc83576370eb0d54f2c1f309493bfb14060b2a421dc4ef7842ef0696f5442fa5"
+    },
+    "control/valid.bank.bin": {
+      "bytes": 6864,
+      "sha256": "6264b613d24e4119d7e805d281d979e126d14e5367e36b1f3decaa29ea8a4a70"
+    },
+    "control_worker": {
+      "bytes": 47752,
+      "sha256": "8ba8661be2f7ad269374d8cf84526d93aca8d5cf8186513bf5f08b6816b18b65"
+    },
+    "full/candidate.so": {
+      "bytes": 70128,
+      "sha256": "909330fae600f619facf1c2b35fec171cf218b92272f56e806f8f25d1f6c5add"
+    },
+    "full/candidate.so-adc12.su": {
+      "bytes": 1073,
+      "sha256": "7e0a139f54f7ae42b6592567bd2df4e65c4d2e1fa8c567a50af8d30ec443c0a2"
+    },
+    "full/candidate.so-features.su": {
+      "bytes": 1229,
+      "sha256": "5a79abe38f45d502aafed144716ba321d1bc411b22edcbf92cd2f408287e594f"
+    },
+    "full/candidate.so-host.su": {
+      "bytes": 401,
+      "sha256": "5974c89ac70a606097adc03847cc9a24796f269175917af18a2e69105b579227"
+    },
+    "full/candidate.so-host_input.su": {
+      "bytes": 483,
+      "sha256": "c4419a6e068507436668e686fb4fdd4d30f29f3c80b3388805a37ba3c3411d9f"
+    },
+    "full/candidate.so-public_contract.su": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "full/candidate.so-rolling_engine.su": {
+      "bytes": 3040,
+      "sha256": "276f26d54303800a85820db42fc4d53855997ea3b6ff9fa703f17266ab6cf846"
+    },
+    "full/candidate.so-rolling_model.su": {
+      "bytes": 1962,
+      "sha256": "9281af1e5758e1efd699f9a914cc82bdbd692c616807d91a2b31afc60df82db4"
+    },
+    "full/candidate.so-scm_model.su": {
+      "bytes": 377,
+      "sha256": "930b338629bd9d95f1239e48a291822162270cca1df27bce45eea213e9ec0d0a"
+    },
+    "full/candidate.so-support_step.su": {
+      "bytes": 1914,
+      "sha256": "dd2861705172e81f0757c6cb893735346a10c1dd5e544310f5320207cb9ad6a7"
+    },
+    "full/memory.json": {
+      "bytes": 24871,
+      "sha256": "bb5a8c7cf7548c3abc75e36f65a84b7ac879c47e3a88b18badca949571703018"
+    },
+    "full/old.bank.bin": {
+      "bytes": 6864,
+      "sha256": "5c03ede4b230e5b1a0818a74a047564f59ec93ec2896a1940957cf7d132196b3"
+    },
+    "full/other.bank.bin": {
+      "bytes": 6864,
+      "sha256": "e0915e4a4107c54c12b0648c36f0ab69ea04b7d53061a522152b8d3ba79f0d79"
+    },
+    "full/preprocessed/adc12.c": {
+      "bytes": 84385,
+      "sha256": "55521cf4031f08caaed97530c391234de6ecf55ad2d6ee1622620799cbab3b6a"
+    },
+    "full/preprocessed/features.c": {
+      "bytes": 71692,
+      "sha256": "e1f75253adb0a8c539520a28b649e9598a3d874477184e43eed4c2852f0d1bc3"
+    },
+    "full/preprocessed/host_input.c": {
+      "bytes": 81054,
+      "sha256": "db95ac174522a88e94804ca32bb4affcca3248a6c4a3388ba2c60ab4f90c120d"
+    },
+    "full/preprocessed/public_contract.c": {
+      "bytes": 9035,
+      "sha256": "9d97e4ee9f20082d076561eaf966b6620db03ce37133bb2f76c103df5e5045cb"
+    },
+    "full/preprocessed/rolling_engine.c": {
+      "bytes": 108185,
+      "sha256": "da910b48feb1ce9af2069e12b616d0afaff4c1693be838b88ea6027f9bc111e2"
+    },
+    "full/preprocessed/rolling_model.c": {
+      "bytes": 98038,
+      "sha256": "852d364a590187b02f6c891d0802374739cc1edd7fdcc4063306114e21456609"
+    },
+    "full/preprocessed/scm_model.c": {
+      "bytes": 77222,
+      "sha256": "30745a622d34f575fa1262a5644c00da993fa982877997cfb6e1f95a8f3a5b6a"
+    },
+    "full/preprocessed/support_step.c": {
+      "bytes": 88482,
+      "sha256": "bc83576370eb0d54f2c1f309493bfb14060b2a421dc4ef7842ef0696f5442fa5"
+    },
+    "full/valid.bank.bin": {
+      "bytes": 6864,
+      "sha256": "56d21b148334fc093e3490779a6dadce6373ef8eaa06f927b6374df8801d6f32"
+    },
+    "full_worker": {
+      "bytes": 51888,
+      "sha256": "bfdea9241fc36167ffde0dce87d07a72282e5dc58dbfd3567c119260d6fdea99"
+    },
+    "shared_control.process.json": {
+      "bytes": 1503,
+      "sha256": "f00052202a56be59bfae9e8c498181bdaf6cdc8b2a19c929fa14dbbb5506f2cc"
+    },
+    "shared_control.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shared_control.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shared_control.stdout.copy": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shared_full.process.json": {
+      "bytes": 1490,
+      "sha256": "be454589b8893688afa6b10ad9c82e183d51cfd7ad32605e8a760b6fb37e0682"
+    },
+    "shared_full.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shared_full.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shared_full.stdout.copy": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_snapshot/features.c": {
+      "bytes": 4605,
+      "sha256": "cf7fde92feb3544fbadb3c614edd4faf3b164995e1d172bcb8fea03b2582bc3b"
+    },
+    "source_snapshot/features.h": {
+      "bytes": 1100,
+      "sha256": "12f39e7b0b720d4867d3f69cc18f8d232b8e7f24a52784027af2e5ddaf2d7dc2"
+    },
+    "source_snapshot/host.c": {
+      "bytes": 6125,
+      "sha256": "3b26c70dcb4d0566f63a016d3a61c50cf62ab0460f337c156264906bda054ce3"
+    },
+    "source_snapshot/plan.json": {
+      "bytes": 4372,
+      "sha256": "b0d8385295dc8f6a7a4ea39fc4628a29bc37c160dedaa9bf0c8dd5e55f9f7388"
+    },
+    "source_snapshot/qualify.py": {
+      "bytes": 15039,
+      "sha256": "08354cd1003da7acb5641af3db459d1e2c0964bbf88924e8b411cc8c41455930"
+    },
+    "source_snapshot/rolling_engine.c": {
+      "bytes": 23998,
+      "sha256": "7e59ea163e9d12bcf1f4800c270ae50cce19135a08ba869cfe63eaa57bae865a"
+    },
+    "source_snapshot/rolling_engine.h": {
+      "bytes": 4463,
+      "sha256": "01d8b6002d9e788b0fcc8e20ade30cbf6d11222a98bf6fedf8b08c01141bea20"
+    },
+    "source_snapshot/rolling_model.c": {
+      "bytes": 15972,
+      "sha256": "03ea81d5b5d8967356bdc9c24ef166e2a74dc154d6eb684e5f64e581bd8f1c83"
+    },
+    "source_snapshot/rolling_model.h": {
+      "bytes": 3004,
+      "sha256": "e45bebb7e5f10bc9780de6b908d91e34b0d4982a1d8f7604a00d12b55fb71a44"
+    },
+    "source_snapshot/study.py": {
+      "bytes": 5869,
+      "sha256": "93089e8ed0a44d5f2155e696b5663edfc3c7a37e34053b07f0b4ec45c4ab697d"
+    }
+  },
+  "independent": false,
+  "memory": {
+    "control": {
+      "context_bytes": 8680,
+      "emitted_frames": [
+        {
+          "bytes": 8,
+          "function": "sh_context_bytes",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sh_snapshot_bytes",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 6912,
+          "function": "sh_save",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 6912,
+          "function": "sh_load",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 8,
+          "function": "packed",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "add",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ready",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "input_domain",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "precision",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "search_stop",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 48,
+          "function": "endpoint",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 96,
+          "function": "charge_extrema",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 64,
+          "function": "point_support",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 32,
+          "function": "qr",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "up",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "mul_up",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "add_up",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 48,
+          "function": "allowance",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 80,
+          "function": "qr_append",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlap",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "total",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 160,
+          "function": "prior",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 128,
+          "function": "polynomial_derivative",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 160,
+          "function": "polynomial_row",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "re_invalidate",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 96,
+          "function": "re_init",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 80,
+          "function": "re_offer",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "re_admit",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 256,
+          "function": "re_query",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 128,
+          "function": "re_refine",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 144,
+          "function": "re_commit",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 32,
+          "function": "re_process",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "point_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sample_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "physical_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "prediction",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "jet_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "uni",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "bi",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "query_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 32,
+          "function": "set_constants",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 16,
+          "function": "ocv",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 32,
+          "function": "rm_init_jet",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 48,
+          "function": "rm_transport",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 64,
+          "function": "rm_query_init",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 112,
+          "function": "rm_query_step",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "rm_query_derivative",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 160,
+          "function": "rm_merge_step",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "amplitude",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "amplitude_tangent",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "add",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 32,
+          "function": "coordinate",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 16,
+          "function": "tangent",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sh_index",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 128,
+          "function": "translated",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 80,
+          "function": "pass",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 48,
+          "function": "sh_feature",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 112,
+          "function": "sh_feature_derivative",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 48,
+          "function": "sh_shift",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 32,
+          "function": "sh_translate",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlaps",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "little_u64",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "little_double",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "channel",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 16,
+          "function": "hp_decode_record",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 144,
+          "function": "hp_encode",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlap",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "codes_valid",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "state_valid",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "output_arguments",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "affine_valid",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "copy_sample",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 48,
+          "function": "adc12_stream_init",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 24,
+          "function": "adc12_stream_push",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 32,
+          "function": "adc12_stream_peek",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 16,
+          "function": "adc12_stream_pop",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 16,
+          "function": "adc12_convert",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 48,
+          "function": "adc12_stream_take",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "adc12_pack",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "adc12_unpack",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ix",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlaps",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sum_add",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "plane",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "pair_cost",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "finish",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 224,
+          "function": "edge_point",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 112,
+          "function": "feasible",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 112,
+          "function": "geometry",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 80,
+          "function": "original_support",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 96,
+          "function": "validate",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 16,
+          "function": "up",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 16,
+          "function": "add_up",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 80,
+          "function": "scaled_metric",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 48,
+          "function": "allowance",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 176,
+          "function": "select_point",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 40,
+          "function": "cholesky",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "finish",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "value",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 288,
+          "function": "diagnostics",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ss_workspace_bytes",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ss_input_bytes",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ss_result_bytes",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 144,
+          "function": "ss_propose",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "scm_model_ntheta",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "scm_model_nalpha",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "scm_ocv_validate",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 48,
+          "function": "scm_ocv_eval",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 384,
+          "function": "scm_model_init",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 480,
+          "function": "scm_model_step",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 64,
+          "function": "scm_model_predict",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 208,
+          "function": "scm_physical_step",
+          "kind": "static",
+          "source": "scm_model.c"
+        }
+      ],
+      "external_calls_not_in_project_frame_sum": [
+        "__builtin_inff",
+        "__builtin_isfinite",
+        "__builtin_isnan",
+        "__builtin_nanf",
+        "adc12_convert",
+        "exp",
+        "expm1",
+        "fabs",
+        "floor",
+        "fmax",
+        "fmin",
+        "hypot",
+        "ldexp",
+        "log",
+        "memcmp",
+        "memcpy",
+        "memset",
+        "nextafter",
+        "sqrt",
+        "tanh"
+      ],
+      "maximum_project_path_bytes": 712,
+      "paths": {
+        "re_admit": {
+          "bytes": 24,
+          "functions": [
+            "rolling_engine.c:re_admit",
+            "rolling_engine.c:ready"
+          ]
+        },
+        "re_commit": {
+          "bytes": 672,
+          "functions": [
+            "rolling_engine.c:re_commit",
+            "rolling_engine.c:re_query",
+            "rolling_engine.c:polynomial_derivative",
+            "features.c:sh_feature_derivative",
+            "features.c:coordinate"
+          ]
+        },
+        "re_init": {
+          "bytes": 160,
+          "functions": [
+            "rolling_engine.c:re_init",
+            "rolling_model.c:rm_init_jet",
+            "rolling_model.c:set_constants"
+          ]
+        },
+        "re_offer": {
+          "bytes": 88,
+          "functions": [
+            "rolling_engine.c:re_offer",
+            "rolling_engine.c:input_domain"
+          ]
+        },
+        "re_process": {
+          "bytes": 712,
+          "functions": [
+            "rolling_engine.c:re_process",
+            "rolling_engine.c:re_refine",
+            "support_step.c:ss_propose",
+            "support_step.c:select_point",
+            "support_step.c:edge_point",
+            "support_step.c:plane"
+          ]
+        },
+        "re_query": {
+          "bytes": 528,
+          "functions": [
+            "rolling_engine.c:re_query",
+            "rolling_engine.c:polynomial_derivative",
+            "features.c:sh_feature_derivative",
+            "features.c:coordinate"
+          ]
+        },
+        "re_refine": {
+          "bytes": 680,
+          "functions": [
+            "rolling_engine.c:re_refine",
+            "support_step.c:ss_propose",
+            "support_step.c:select_point",
+            "support_step.c:edge_point",
+            "support_step.c:plane"
+          ]
+        }
+      },
+      "planning_total_bytes": 10216,
+      "runtime_IRQ_caller_reservation_bytes": 768,
+      "scope": "No-inline/no-sibling-call host frames summed conservatively along project source paths. Qualification wrappers and Python reference memory are outside candidate storage. Libm/libc, hardware ISR/runtime and caller frames remain in the separate unmeasured reserve; no target measurement.",
+      "source_call_graph": {
+        "adc12.c:affine_valid": [],
+        "adc12.c:codes_valid": [],
+        "adc12.c:copy_sample": [],
+        "adc12.c:overlap": [],
+        "adc12.c:state_valid": [],
+        "features.c:add": [],
+        "features.c:amplitude": [],
+        "features.c:amplitude_tangent": [],
+        "features.c:coordinate": [],
+        "features.c:pass": [
+          "features.c:sh_index",
+          "features.c:translated"
+        ],
+        "features.c:sh_feature": [
+          "features.c:amplitude",
+          "features.c:coordinate"
+        ],
+        "features.c:sh_feature_derivative": [
+          "features.c:amplitude",
+          "features.c:amplitude_tangent",
+          "features.c:coordinate",
+          "features.c:tangent"
+        ],
+        "features.c:sh_index": [],
+        "features.c:sh_shift": [
+          "features.c:coordinate"
+        ],
+        "features.c:sh_translate": [
+          "features.c:pass"
+        ],
+        "features.c:tangent": [],
+        "features.c:translated": [
+          "features.c:add",
+          "features.c:sh_index"
+        ],
+        "host_input.c:channel": [],
+        "host_input.c:hp_decode_record": [
+          "host_input.c:little_double",
+          "host_input.c:little_u64",
+          "host_input.c:overlaps"
+        ],
+        "host_input.c:hp_encode": [
+          "host_input.c:channel",
+          "host_input.c:overlaps"
+        ],
+        "host_input.c:little_double": [
+          "host_input.c:little_u64"
+        ],
+        "host_input.c:little_u64": [],
+        "host_input.c:overlaps": [],
+        "rolling_engine.c:add": [],
+        "rolling_engine.c:add_up": [
+          "rolling_engine.c:up"
+        ],
+        "rolling_engine.c:allowance": [
+          "rolling_engine.c:add_up",
+          "rolling_engine.c:mul_up",
+          "rolling_engine.c:up"
+        ],
+        "rolling_engine.c:charge_extrema": [
+          "rolling_engine.c:input_domain"
+        ],
+        "rolling_engine.c:endpoint": [],
+        "rolling_engine.c:input_domain": [],
+        "rolling_engine.c:mul_up": [
+          "rolling_engine.c:up"
+        ],
+        "rolling_engine.c:overlap": [],
+        "rolling_engine.c:packed": [],
+        "rolling_engine.c:point_support": [],
+        "rolling_engine.c:polynomial_derivative": [
+          "features.c:sh_feature_derivative",
+          "rolling_engine.c:add",
+          "rolling_engine.c:qr",
+          "rolling_engine.c:total"
+        ],
+        "rolling_engine.c:polynomial_row": [
+          "features.c:sh_feature",
+          "rolling_engine.c:add",
+          "rolling_engine.c:qr",
+          "rolling_engine.c:total"
+        ],
+        "rolling_engine.c:precision": [],
+        "rolling_engine.c:prior": [
+          "rolling_engine.c:add",
+          "rolling_engine.c:packed",
+          "rolling_engine.c:precision",
+          "rolling_engine.c:total"
+        ],
+        "rolling_engine.c:qr": [
+          "features.c:sh_index"
+        ],
+        "rolling_engine.c:qr_append": [
+          "features.c:sh_index"
+        ],
+        "rolling_engine.c:re_admit": [
+          "rolling_engine.c:ready"
+        ],
+        "rolling_engine.c:re_commit": [
+          "features.c:sh_shift",
+          "features.c:sh_translate",
+          "rolling_engine.c:qr_append",
+          "rolling_engine.c:re_invalidate",
+          "rolling_engine.c:re_query",
+          "rolling_engine.c:ready",
+          "rolling_model.c:rm_merge_step",
+          "rolling_model.c:rm_transport"
+        ],
+        "rolling_engine.c:re_init": [
+          "rolling_engine.c:overlap",
+          "rolling_engine.c:re_invalidate",
+          "rolling_model.c:rm_init_jet"
+        ],
+        "rolling_engine.c:re_invalidate": [],
+        "rolling_engine.c:re_offer": [
+          "rolling_engine.c:input_domain",
+          "rolling_engine.c:overlap",
+          "rolling_engine.c:ready"
+        ],
+        "rolling_engine.c:re_process": [
+          "rolling_engine.c:re_commit",
+          "rolling_engine.c:re_invalidate",
+          "rolling_engine.c:re_refine",
+          "rolling_engine.c:ready"
+        ],
+        "rolling_engine.c:re_query": [
+          "rolling_engine.c:add",
+          "rolling_engine.c:charge_extrema",
+          "rolling_engine.c:endpoint",
+          "rolling_engine.c:packed",
+          "rolling_engine.c:point_support",
+          "rolling_engine.c:polynomial_derivative",
+          "rolling_engine.c:polynomial_row",
+          "rolling_engine.c:prior",
+          "rolling_engine.c:ready",
+          "rolling_engine.c:total",
+          "rolling_model.c:rm_query_derivative",
+          "rolling_model.c:rm_query_init",
+          "rolling_model.c:rm_query_step"
+        ],
+        "rolling_engine.c:re_refine": [
+          "rolling_engine.c:add_up",
+          "rolling_engine.c:allowance",
+          "rolling_engine.c:charge_extrema",
+          "rolling_engine.c:mul_up",
+          "rolling_engine.c:re_query",
+          "rolling_engine.c:ready",
+          "rolling_engine.c:search_stop",
+          "support_step.c:ss_propose"
+        ],
+        "rolling_engine.c:ready": [],
+        "rolling_engine.c:search_stop": [],
+        "rolling_engine.c:total": [],
+        "rolling_engine.c:up": [],
+        "rolling_model.c:bi": [],
+        "rolling_model.c:jet_valid": [
+          "rolling_model.c:physical_valid",
+          "rolling_model.c:point_valid"
+        ],
+        "rolling_model.c:ocv": [
+          "scm_model.c:scm_ocv_eval"
+        ],
+        "rolling_model.c:physical_valid": [],
+        "rolling_model.c:point_valid": [],
+        "rolling_model.c:prediction": [],
+        "rolling_model.c:query_valid": [
+          "rolling_model.c:physical_valid"
+        ],
+        "rolling_model.c:rm_init_jet": [
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:set_constants"
+        ],
+        "rolling_model.c:rm_merge_step": [
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:ocv",
+          "rolling_model.c:sample_valid"
+        ],
+        "rolling_model.c:rm_query_derivative": [],
+        "rolling_model.c:rm_query_init": [
+          "rolling_model.c:bi",
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:ocv",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:prediction",
+          "rolling_model.c:query_valid",
+          "rolling_model.c:uni"
+        ],
+        "rolling_model.c:rm_query_step": [
+          "rolling_model.c:ocv",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:prediction",
+          "rolling_model.c:query_valid",
+          "rolling_model.c:sample_valid"
+        ],
+        "rolling_model.c:rm_transport": [
+          "rolling_model.c:bi",
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:set_constants",
+          "rolling_model.c:uni"
+        ],
+        "rolling_model.c:sample_valid": [],
+        "rolling_model.c:set_constants": [],
+        "rolling_model.c:uni": [],
+        "scm_model.c:scm_model_init": [
+          "scm_model.c:scm_model_ntheta"
+        ],
+        "scm_model.c:scm_model_nalpha": [],
+        "scm_model.c:scm_model_ntheta": [],
+        "scm_model.c:scm_model_predict": [
+          "scm_model.c:scm_model_nalpha",
+          "scm_model.c:scm_model_ntheta"
+        ],
+        "scm_model.c:scm_model_step": [
+          "scm_model.c:scm_model_ntheta",
+          "scm_model.c:scm_ocv_eval"
+        ],
+        "scm_model.c:scm_ocv_eval": [],
+        "scm_model.c:scm_ocv_validate": [],
+        "scm_model.c:scm_physical_step": [
+          "scm_model.c:scm_model_ntheta",
+          "scm_model.c:scm_ocv_eval"
+        ],
+        "support_step.c:add_up": [
+          "support_step.c:up"
+        ],
+        "support_step.c:allowance": [
+          "support_step.c:add_up",
+          "support_step.c:up"
+        ],
+        "support_step.c:cholesky": [
+          "support_step.c:ix"
+        ],
+        "support_step.c:diagnostics": [
+          "support_step.c:add_up",
+          "support_step.c:allowance",
+          "support_step.c:ix",
+          "support_step.c:sum_add",
+          "support_step.c:up",
+          "support_step.c:value"
+        ],
+        "support_step.c:edge_point": [
+          "support_step.c:plane"
+        ],
+        "support_step.c:feasible": [
+          "support_step.c:plane"
+        ],
+        "support_step.c:finish": [],
+        "support_step.c:geometry": [],
+        "support_step.c:ix": [],
+        "support_step.c:original_support": [],
+        "support_step.c:overlaps": [],
+        "support_step.c:pair_cost": [],
+        "support_step.c:plane": [],
+        "support_step.c:scaled_metric": [
+          "support_step.c:add_up",
+          "support_step.c:ix"
+        ],
+        "support_step.c:select_point": [
+          "support_step.c:edge_point",
+          "support_step.c:feasible",
+          "support_step.c:pair_cost"
+        ],
+        "support_step.c:ss_input_bytes": [],
+        "support_step.c:ss_propose": [
+          "support_step.c:cholesky",
+          "support_step.c:diagnostics",
+          "support_step.c:finish",
+          "support_step.c:geometry",
+          "support_step.c:original_support",
+          "support_step.c:scaled_metric",
+          "support_step.c:select_point",
+          "support_step.c:validate"
+        ],
+        "support_step.c:ss_result_bytes": [],
+        "support_step.c:ss_workspace_bytes": [],
+        "support_step.c:sum_add": [],
+        "support_step.c:up": [],
+        "support_step.c:validate": [
+          "support_step.c:original_support",
+          "support_step.c:overlaps"
+        ],
+        "support_step.c:value": []
+      }
+    },
+    "full": {
+      "context_bytes": 8680,
+      "emitted_frames": [
+        {
+          "bytes": 8,
+          "function": "sh_context_bytes",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sh_snapshot_bytes",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 6912,
+          "function": "sh_save",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 6912,
+          "function": "sh_load",
+          "kind": "static",
+          "source": "host.c"
+        },
+        {
+          "bytes": 8,
+          "function": "packed",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "add",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ready",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "input_domain",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "precision",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "search_stop",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 48,
+          "function": "endpoint",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 96,
+          "function": "charge_extrema",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 64,
+          "function": "point_support",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 32,
+          "function": "qr",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "up",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "mul_up",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "add_up",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 48,
+          "function": "allowance",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 80,
+          "function": "qr_append",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlap",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "total",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 160,
+          "function": "prior",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 128,
+          "function": "polynomial_derivative",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 160,
+          "function": "polynomial_row",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "re_invalidate",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 96,
+          "function": "re_init",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 80,
+          "function": "re_offer",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 16,
+          "function": "re_admit",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 256,
+          "function": "re_query",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 128,
+          "function": "re_refine",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 144,
+          "function": "re_commit",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 32,
+          "function": "re_process",
+          "kind": "static",
+          "source": "rolling_engine.c"
+        },
+        {
+          "bytes": 8,
+          "function": "point_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sample_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "physical_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "prediction",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "jet_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "uni",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "bi",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "query_valid",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 32,
+          "function": "set_constants",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 32,
+          "function": "attenuation",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 112,
+          "function": "analytic_attenuation",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 16,
+          "function": "ocv",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 32,
+          "function": "rm_init_jet",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 32,
+          "function": "rm_transport",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 112,
+          "function": "rm_query_init",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 112,
+          "function": "rm_query_step",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "rm_query_derivative",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 224,
+          "function": "rm_merge_step",
+          "kind": "static",
+          "source": "rolling_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "amplitude",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "amplitude_tangent",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "add",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 32,
+          "function": "coordinate",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 16,
+          "function": "tangent",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sh_index",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 128,
+          "function": "translated",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 80,
+          "function": "pass",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 48,
+          "function": "sh_feature",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 112,
+          "function": "sh_feature_derivative",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 48,
+          "function": "sh_shift",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 32,
+          "function": "sh_translate",
+          "kind": "static",
+          "source": "features.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlaps",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "little_u64",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "little_double",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "channel",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 16,
+          "function": "hp_decode_record",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 144,
+          "function": "hp_encode",
+          "kind": "static",
+          "source": "host_input.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlap",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "codes_valid",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "state_valid",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "output_arguments",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "affine_valid",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "copy_sample",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 48,
+          "function": "adc12_stream_init",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 24,
+          "function": "adc12_stream_push",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 32,
+          "function": "adc12_stream_peek",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 16,
+          "function": "adc12_stream_pop",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 16,
+          "function": "adc12_convert",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 48,
+          "function": "adc12_stream_take",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "adc12_pack",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "adc12_unpack",
+          "kind": "static",
+          "source": "adc12.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ix",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "overlaps",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "sum_add",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "plane",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "pair_cost",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "finish",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 224,
+          "function": "edge_point",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 112,
+          "function": "feasible",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 112,
+          "function": "geometry",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 80,
+          "function": "original_support",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 96,
+          "function": "validate",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 16,
+          "function": "up",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 16,
+          "function": "add_up",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 80,
+          "function": "scaled_metric",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 48,
+          "function": "allowance",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 176,
+          "function": "select_point",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 40,
+          "function": "cholesky",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "finish",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "value",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 288,
+          "function": "diagnostics",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ss_workspace_bytes",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ss_input_bytes",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "ss_result_bytes",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 144,
+          "function": "ss_propose",
+          "kind": "static",
+          "source": "support_step.c"
+        },
+        {
+          "bytes": 8,
+          "function": "scm_model_ntheta",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "scm_model_nalpha",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 8,
+          "function": "scm_ocv_validate",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 48,
+          "function": "scm_ocv_eval",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 384,
+          "function": "scm_model_init",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 480,
+          "function": "scm_model_step",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 64,
+          "function": "scm_model_predict",
+          "kind": "static",
+          "source": "scm_model.c"
+        },
+        {
+          "bytes": 208,
+          "function": "scm_physical_step",
+          "kind": "static",
+          "source": "scm_model.c"
+        }
+      ],
+      "external_calls_not_in_project_frame_sum": [
+        "__builtin_inff",
+        "__builtin_isfinite",
+        "__builtin_isnan",
+        "__builtin_nanf",
+        "adc12_convert",
+        "else",
+        "exp",
+        "expm1",
+        "fabs",
+        "floor",
+        "fmax",
+        "fmin",
+        "hypot",
+        "ldexp",
+        "log",
+        "memcmp",
+        "memcpy",
+        "memset",
+        "nextafter",
+        "sqrt",
+        "tanh"
+      ],
+      "maximum_project_path_bytes": 712,
+      "paths": {
+        "re_admit": {
+          "bytes": 24,
+          "functions": [
+            "rolling_engine.c:re_admit",
+            "rolling_engine.c:ready"
+          ]
+        },
+        "re_commit": {
+          "bytes": 672,
+          "functions": [
+            "rolling_engine.c:re_commit",
+            "rolling_engine.c:re_query",
+            "rolling_engine.c:polynomial_derivative",
+            "features.c:sh_feature_derivative",
+            "features.c:coordinate"
+          ]
+        },
+        "re_init": {
+          "bytes": 160,
+          "functions": [
+            "rolling_engine.c:re_init",
+            "rolling_model.c:rm_init_jet",
+            "rolling_model.c:set_constants"
+          ]
+        },
+        "re_offer": {
+          "bytes": 88,
+          "functions": [
+            "rolling_engine.c:re_offer",
+            "rolling_engine.c:input_domain"
+          ]
+        },
+        "re_process": {
+          "bytes": 712,
+          "functions": [
+            "rolling_engine.c:re_process",
+            "rolling_engine.c:re_refine",
+            "support_step.c:ss_propose",
+            "support_step.c:select_point",
+            "support_step.c:edge_point",
+            "support_step.c:plane"
+          ]
+        },
+        "re_query": {
+          "bytes": 528,
+          "functions": [
+            "rolling_engine.c:re_query",
+            "rolling_engine.c:polynomial_derivative",
+            "features.c:sh_feature_derivative",
+            "features.c:coordinate"
+          ]
+        },
+        "re_refine": {
+          "bytes": 680,
+          "functions": [
+            "rolling_engine.c:re_refine",
+            "support_step.c:ss_propose",
+            "support_step.c:select_point",
+            "support_step.c:edge_point",
+            "support_step.c:plane"
+          ]
+        }
+      },
+      "planning_total_bytes": 10216,
+      "runtime_IRQ_caller_reservation_bytes": 768,
+      "scope": "No-inline/no-sibling-call host frames summed conservatively along project source paths. Qualification wrappers and Python reference memory are outside candidate storage. Libm/libc, hardware ISR/runtime and caller frames remain in the separate unmeasured reserve; no target measurement.",
+      "source_call_graph": {
+        "adc12.c:affine_valid": [],
+        "adc12.c:codes_valid": [],
+        "adc12.c:copy_sample": [],
+        "adc12.c:overlap": [],
+        "adc12.c:state_valid": [],
+        "features.c:add": [],
+        "features.c:amplitude": [],
+        "features.c:amplitude_tangent": [],
+        "features.c:coordinate": [],
+        "features.c:pass": [
+          "features.c:sh_index",
+          "features.c:translated"
+        ],
+        "features.c:sh_feature": [
+          "features.c:amplitude",
+          "features.c:coordinate"
+        ],
+        "features.c:sh_feature_derivative": [
+          "features.c:amplitude",
+          "features.c:amplitude_tangent",
+          "features.c:coordinate",
+          "features.c:tangent"
+        ],
+        "features.c:sh_index": [],
+        "features.c:sh_shift": [
+          "features.c:coordinate"
+        ],
+        "features.c:sh_translate": [
+          "features.c:pass"
+        ],
+        "features.c:tangent": [],
+        "features.c:translated": [
+          "features.c:add",
+          "features.c:sh_index"
+        ],
+        "host_input.c:channel": [],
+        "host_input.c:hp_decode_record": [
+          "host_input.c:little_double",
+          "host_input.c:little_u64",
+          "host_input.c:overlaps"
+        ],
+        "host_input.c:hp_encode": [
+          "host_input.c:channel",
+          "host_input.c:overlaps"
+        ],
+        "host_input.c:little_double": [
+          "host_input.c:little_u64"
+        ],
+        "host_input.c:little_u64": [],
+        "host_input.c:overlaps": [],
+        "rolling_engine.c:add": [],
+        "rolling_engine.c:add_up": [
+          "rolling_engine.c:up"
+        ],
+        "rolling_engine.c:allowance": [
+          "rolling_engine.c:add_up",
+          "rolling_engine.c:mul_up",
+          "rolling_engine.c:up"
+        ],
+        "rolling_engine.c:charge_extrema": [
+          "rolling_engine.c:input_domain"
+        ],
+        "rolling_engine.c:endpoint": [],
+        "rolling_engine.c:input_domain": [],
+        "rolling_engine.c:mul_up": [
+          "rolling_engine.c:up"
+        ],
+        "rolling_engine.c:overlap": [],
+        "rolling_engine.c:packed": [],
+        "rolling_engine.c:point_support": [],
+        "rolling_engine.c:polynomial_derivative": [
+          "features.c:sh_feature_derivative",
+          "rolling_engine.c:add",
+          "rolling_engine.c:qr",
+          "rolling_engine.c:total"
+        ],
+        "rolling_engine.c:polynomial_row": [
+          "features.c:sh_feature",
+          "rolling_engine.c:add",
+          "rolling_engine.c:qr",
+          "rolling_engine.c:total"
+        ],
+        "rolling_engine.c:precision": [],
+        "rolling_engine.c:prior": [
+          "rolling_engine.c:add",
+          "rolling_engine.c:packed",
+          "rolling_engine.c:precision",
+          "rolling_engine.c:total"
+        ],
+        "rolling_engine.c:qr": [
+          "features.c:sh_index"
+        ],
+        "rolling_engine.c:qr_append": [
+          "features.c:sh_index"
+        ],
+        "rolling_engine.c:re_admit": [
+          "rolling_engine.c:ready"
+        ],
+        "rolling_engine.c:re_commit": [
+          "features.c:sh_shift",
+          "features.c:sh_translate",
+          "rolling_engine.c:qr_append",
+          "rolling_engine.c:re_invalidate",
+          "rolling_engine.c:re_query",
+          "rolling_engine.c:ready",
+          "rolling_model.c:rm_merge_step",
+          "rolling_model.c:rm_transport"
+        ],
+        "rolling_engine.c:re_init": [
+          "rolling_engine.c:overlap",
+          "rolling_engine.c:re_invalidate",
+          "rolling_model.c:rm_init_jet"
+        ],
+        "rolling_engine.c:re_invalidate": [],
+        "rolling_engine.c:re_offer": [
+          "rolling_engine.c:input_domain",
+          "rolling_engine.c:overlap",
+          "rolling_engine.c:ready"
+        ],
+        "rolling_engine.c:re_process": [
+          "rolling_engine.c:re_commit",
+          "rolling_engine.c:re_invalidate",
+          "rolling_engine.c:re_refine",
+          "rolling_engine.c:ready"
+        ],
+        "rolling_engine.c:re_query": [
+          "rolling_engine.c:add",
+          "rolling_engine.c:charge_extrema",
+          "rolling_engine.c:endpoint",
+          "rolling_engine.c:packed",
+          "rolling_engine.c:point_support",
+          "rolling_engine.c:polynomial_derivative",
+          "rolling_engine.c:polynomial_row",
+          "rolling_engine.c:prior",
+          "rolling_engine.c:ready",
+          "rolling_engine.c:total",
+          "rolling_model.c:rm_query_derivative",
+          "rolling_model.c:rm_query_init",
+          "rolling_model.c:rm_query_step"
+        ],
+        "rolling_engine.c:re_refine": [
+          "rolling_engine.c:add_up",
+          "rolling_engine.c:allowance",
+          "rolling_engine.c:charge_extrema",
+          "rolling_engine.c:mul_up",
+          "rolling_engine.c:re_query",
+          "rolling_engine.c:ready",
+          "rolling_engine.c:search_stop",
+          "support_step.c:ss_propose"
+        ],
+        "rolling_engine.c:ready": [],
+        "rolling_engine.c:search_stop": [],
+        "rolling_engine.c:total": [],
+        "rolling_engine.c:up": [],
+        "rolling_model.c:analytic_attenuation": [
+          "rolling_model.c:attenuation"
+        ],
+        "rolling_model.c:attenuation": [],
+        "rolling_model.c:bi": [],
+        "rolling_model.c:jet_valid": [
+          "rolling_model.c:physical_valid",
+          "rolling_model.c:point_valid"
+        ],
+        "rolling_model.c:ocv": [
+          "scm_model.c:scm_ocv_eval"
+        ],
+        "rolling_model.c:physical_valid": [],
+        "rolling_model.c:point_valid": [],
+        "rolling_model.c:prediction": [],
+        "rolling_model.c:query_valid": [
+          "rolling_model.c:physical_valid"
+        ],
+        "rolling_model.c:rm_init_jet": [
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:set_constants"
+        ],
+        "rolling_model.c:rm_merge_step": [
+          "rolling_model.c:analytic_attenuation",
+          "rolling_model.c:attenuation",
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:ocv",
+          "rolling_model.c:sample_valid"
+        ],
+        "rolling_model.c:rm_query_derivative": [],
+        "rolling_model.c:rm_query_init": [
+          "rolling_model.c:attenuation",
+          "rolling_model.c:bi",
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:ocv",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:prediction",
+          "rolling_model.c:query_valid",
+          "rolling_model.c:uni"
+        ],
+        "rolling_model.c:rm_query_step": [
+          "rolling_model.c:ocv",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:prediction",
+          "rolling_model.c:query_valid",
+          "rolling_model.c:sample_valid"
+        ],
+        "rolling_model.c:rm_transport": [
+          "rolling_model.c:analytic_attenuation",
+          "rolling_model.c:bi",
+          "rolling_model.c:jet_valid",
+          "rolling_model.c:point_valid",
+          "rolling_model.c:set_constants",
+          "rolling_model.c:uni"
+        ],
+        "rolling_model.c:sample_valid": [],
+        "rolling_model.c:set_constants": [],
+        "rolling_model.c:uni": [],
+        "scm_model.c:scm_model_init": [
+          "scm_model.c:scm_model_ntheta"
+        ],
+        "scm_model.c:scm_model_nalpha": [],
+        "scm_model.c:scm_model_ntheta": [],
+        "scm_model.c:scm_model_predict": [
+          "scm_model.c:scm_model_nalpha",
+          "scm_model.c:scm_model_ntheta"
+        ],
+        "scm_model.c:scm_model_step": [
+          "scm_model.c:scm_model_ntheta",
+          "scm_model.c:scm_ocv_eval"
+        ],
+        "scm_model.c:scm_ocv_eval": [],
+        "scm_model.c:scm_ocv_validate": [],
+        "scm_model.c:scm_physical_step": [
+          "scm_model.c:scm_model_ntheta",
+          "scm_model.c:scm_ocv_eval"
+        ],
+        "support_step.c:add_up": [
+          "support_step.c:up"
+        ],
+        "support_step.c:allowance": [
+          "support_step.c:add_up",
+          "support_step.c:up"
+        ],
+        "support_step.c:cholesky": [
+          "support_step.c:ix"
+        ],
+        "support_step.c:diagnostics": [
+          "support_step.c:add_up",
+          "support_step.c:allowance",
+          "support_step.c:ix",
+          "support_step.c:sum_add",
+          "support_step.c:up",
+          "support_step.c:value"
+        ],
+        "support_step.c:edge_point": [
+          "support_step.c:plane"
+        ],
+        "support_step.c:feasible": [
+          "support_step.c:plane"
+        ],
+        "support_step.c:finish": [],
+        "support_step.c:geometry": [],
+        "support_step.c:ix": [],
+        "support_step.c:original_support": [],
+        "support_step.c:overlaps": [],
+        "support_step.c:pair_cost": [],
+        "support_step.c:plane": [],
+        "support_step.c:scaled_metric": [
+          "support_step.c:add_up",
+          "support_step.c:ix"
+        ],
+        "support_step.c:select_point": [
+          "support_step.c:edge_point",
+          "support_step.c:feasible",
+          "support_step.c:pair_cost"
+        ],
+        "support_step.c:ss_input_bytes": [],
+        "support_step.c:ss_propose": [
+          "support_step.c:cholesky",
+          "support_step.c:diagnostics",
+          "support_step.c:finish",
+          "support_step.c:geometry",
+          "support_step.c:original_support",
+          "support_step.c:scaled_metric",
+          "support_step.c:select_point",
+          "support_step.c:validate"
+        ],
+        "support_step.c:ss_result_bytes": [],
+        "support_step.c:ss_workspace_bytes": [],
+        "support_step.c:sum_add": [],
+        "support_step.c:up": [],
+        "support_step.c:validate": [
+          "support_step.c:original_support",
+          "support_step.c:overlaps"
+        ],
+        "support_step.c:value": []
+      }
+    }
+  },
+  "sources": {
+    "experiments/compact_nonlinear_history_001/compact_history.h": {
+      "bytes": 6435,
+      "sha256": "f115ae16915937b84ecf284377b3db96bac3f45f36c12dd444b9a2c7aa05fc3e"
+    },
+    "experiments/fixed_prefix_shape_001/backend.c": {
+      "bytes": 15936,
+      "sha256": "fff68946f3667ea1372cfaed85b4728099cfd63a288b7c9b88999eb3f1232998"
+    },
+    "experiments/fixed_prefix_shape_001/backend_contract.json": {
+      "bytes": 3752,
+      "sha256": "c2ebbd9b5a6ebb020e196e386aa50ebe67acb8d671d1559cb95aec0256b1b6d8"
+    },
+    "experiments/fixed_prefix_shape_001/plan.json": {
+      "bytes": 7824,
+      "sha256": "065a6da482ce0a810b0f70a45b03a6c97d45b1b5db59e1a80031f0cebb939cce"
+    },
+    "experiments/fixed_prefix_shape_001/qualify_backend.c": {
+      "bytes": 5357,
+      "sha256": "23155bb318fe887e4221d15a839844b09a1678cea1d739fa696e99283291dc60"
+    },
+    "experiments/fixed_prefix_shape_001/qualify_backend.py": {
+      "bytes": 9883,
+      "sha256": "3302fffbabe4e24b070e6ce9a4ba70d32558e2962039908f657589f0a17c44a9"
+    },
+    "experiments/fixed_prefix_shape_001/runner.py": {
+      "bytes": 16514,
+      "sha256": "2667b9ccae983f69a73798c8a3da7ff7b6698cb18b6a0511542b8bf8784dfbdd"
+    },
+    "experiments/fixed_prefix_shape_001/shape.py": {
+      "bytes": 17084,
+      "sha256": "64eb2ec6d4a0591953edc52bddc2d1a46ff3655ae8834eafa0a077ce19df1147"
+    },
+    "experiments/live_anchor_bootstrap_001/adc12.c": {
+      "bytes": 9444,
+      "sha256": "c79f6f394bd83d75ab2c85ac645919b031371f5052cbb5c5915e455f5b4ec343"
+    },
+    "experiments/live_anchor_bootstrap_001/adc12.h": {
+      "bytes": 4830,
+      "sha256": "f05e46ee9a01b7dd9bbf2c3da6313061c5df46adfe4d00155b66c4d72c46d4aa"
+    },
+    "experiments/live_anchor_bootstrap_001/history_translation.c": {
+      "bytes": 3318,
+      "sha256": "fc466d7893c8bd1b981e9a753dec04e46575badd597b969f0d2fd8b337877eba"
+    },
+    "experiments/live_anchor_bootstrap_001/history_translation.h": {
+      "bytes": 1634,
+      "sha256": "5aab00671e32f3e3e5323e2e97e8922610f2d06206b34d2cf9df4283885fb31e"
+    },
+    "experiments/live_anchor_bootstrap_001/live_layout.h": {
+      "bytes": 2427,
+      "sha256": "24d37d7f298dfdbce40bb2da7ae2d39c8a76479c90d835b00c18383e511f7ba5"
+    },
+    "experiments/live_anchor_bootstrap_001/support_step.c": {
+      "bytes": 14782,
+      "sha256": "9629fa7f700097770b96ff4349bafe06c15ab8b876300d6e54bce51ecca8ee95"
+    },
+    "experiments/live_anchor_bootstrap_001/support_step.h": {
+      "bytes": 3587,
+      "sha256": "e30ad444760167cbcf1a1dd33911cb6fd9b5e58a9dabe4d4f877c9ad75bc371e"
+    },
+    "experiments/live_anchor_integration_001/host_input.c": {
+      "bytes": 4940,
+      "sha256": "3b9d00f0a1c07618a64dabaee5f75d3f5e70746c4f401393ce845aed69955a05"
+    },
+    "experiments/live_anchor_integration_001/host_input.h": {
+      "bytes": 1976,
+      "sha256": "cfffb2f2244d9dfdc3476f5d56de5c357c1e57a8072aba0d7168e288c2fb615f"
+    },
+    "experiments/live_anchor_integration_001/public_contract.c": {
+      "bytes": 1442,
+      "sha256": "500e9f20893d66570607d268cb1e5e6eccf37c8078127ff345cbcce92a73c2a9"
+    },
+    "experiments/live_anchor_integration_001/rolling_engine.c": {
+      "bytes": 24502,
+      "sha256": "65ec07983569d0a31ae7a1a573d0b374909badcc3a95cc81f5bce8c6fedc4088"
+    },
+    "experiments/live_anchor_integration_001/rolling_engine.h": {
+      "bytes": 4463,
+      "sha256": "01d8b6002d9e788b0fcc8e20ade30cbf6d11222a98bf6fedf8b08c01141bea20"
+    },
+    "experiments/live_anchor_integration_001/rolling_model.c": {
+      "bytes": 13781,
+      "sha256": "7b97ce9aea7596f2e6f76b7e411d53c5a7d60fa94e7abd1fefbab22f2b059dc8"
+    },
+    "experiments/live_anchor_integration_001/rolling_model.h": {
+      "bytes": 3170,
+      "sha256": "b98e16fe08eab172c12230b1899ace122f08085b527c976f394e9a873c703a0f"
+    },
+    "experiments/structured_history_repair_001/features.c": {
+      "bytes": 4605,
+      "sha256": "cf7fde92feb3544fbadb3c614edd4faf3b164995e1d172bcb8fea03b2582bc3b"
+    },
+    "experiments/structured_history_repair_001/features.h": {
+      "bytes": 1100,
+      "sha256": "12f39e7b0b720d4867d3f69cc18f8d232b8e7f24a52784027af2e5ddaf2d7dc2"
+    },
+    "experiments/structured_history_repair_001/host.c": {
+      "bytes": 6125,
+      "sha256": "3b26c70dcb4d0566f63a016d3a61c50cf62ab0460f337c156264906bda054ce3"
+    },
+    "experiments/structured_history_repair_001/plan.json": {
+      "bytes": 4372,
+      "sha256": "b0d8385295dc8f6a7a4ea39fc4628a29bc37c160dedaa9bf0c8dd5e55f9f7388"
+    },
+    "experiments/structured_history_repair_001/qualify.py": {
+      "bytes": 15039,
+      "sha256": "08354cd1003da7acb5641af3db459d1e2c0964bbf88924e8b411cc8c41455930"
+    },
+    "experiments/structured_history_repair_001/rolling_engine.c": {
+      "bytes": 23998,
+      "sha256": "7e59ea163e9d12bcf1f4800c270ae50cce19135a08ba869cfe63eaa57bae865a"
+    },
+    "experiments/structured_history_repair_001/rolling_engine.h": {
+      "bytes": 4463,
+      "sha256": "01d8b6002d9e788b0fcc8e20ade30cbf6d11222a98bf6fedf8b08c01141bea20"
+    },
+    "experiments/structured_history_repair_001/rolling_model.c": {
+      "bytes": 15972,
+      "sha256": "03ea81d5b5d8967356bdc9c24ef166e2a74dc154d6eb684e5f64e581bd8f1c83"
+    },
+    "experiments/structured_history_repair_001/rolling_model.h": {
+      "bytes": 3004,
+      "sha256": "e45bebb7e5f10bc9780de6b908d91e34b0d4982a1d8f7604a00d12b55fb71a44"
+    },
+    "experiments/structured_history_repair_001/study.py": {
+      "bytes": 5869,
+      "sha256": "93089e8ed0a44d5f2155e696b5663edfc3c7a37e34053b07f0b4ec45c4ab697d"
+    },
+    "include/scm_model.h": {
+      "bytes": 2763,
+      "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+    },
+    "src/scm_model.c": {
+      "bytes": 5765,
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    }
+  },
+  "status": "passed"
+}
