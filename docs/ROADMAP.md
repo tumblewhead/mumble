@@ -48,7 +48,7 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`diagnostics/desktop-history-001`.
+`diagnostics/history-compressor-options-001`.
 
 The requested repair is implemented and qualified, but the selected candidate
 fails its controlled fidelity gate. Structured features alone give **193.291124
@@ -666,7 +666,16 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Continue from `diagnostics/desktop-history-001` and the
+The user requires **SRAM-only deployment history**, with no flash/FRAM/archive
+replay fallback. Read the [options analysis](../experiments/history_compressor_options_001/options.json)
+and [bounded audit](../experiments/history_compressor_options_001/attempt001/analysis.json).
+The leading comparison is fixed nonlinear response bases versus multiple local
+summaries with declared validity regions. Preserve parameter-dependent physical
+state as well as likelihood. This is an analysis recommendation; no compressor
+has been implemented or shown to meet 10 KiB. Desktop diagnostic memory remains
+explicitly exempt from that deployment ceiling.
+
+Continue from `diagnostics/history-compressor-options-001` and the
 [desktop decision](../experiments/desktop_history_001/decision.json). Preserve
 its qualified source, closed fidelity/learning workers and postclosure scoring.
 Do not rerun completed studies by default.

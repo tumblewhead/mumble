@@ -21,6 +21,12 @@ compression tradeoffs against it before reducing memory toward the target.
 See the [desktop report](experiments/desktop_history_001/README.md) and
 [decision](experiments/desktop_history_001/decision.json).
 
+Deployment history is now explicitly **SRAM-only**, within the complete near-10-KiB
+budget. The [compressor options analysis](experiments/history_compressor_options_001/options.json)
+compares fixed nonlinear response bases, multiple local summaries, conditional
+hypotheses and segment coresets. No new compressor is implemented. Desktop
+diagnostic storage remains separate from the deployment constraint.
+
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
 once, retaining sixteen working records, eight incoming records and one compact
@@ -53,7 +59,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `diagnostics/desktop-history-001`.
+The current work branch is `diagnostics/history-compressor-options-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;

@@ -1,7 +1,7 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "desktop_history_baseline_established_before_deployment_compression",
+  "stage": "SRAM_only_history_compressor_options_analyzed",
   "objective": "Deliver a runnable ~10KiB Cortex-M23 C estimator: first a two-cell desktop lifecycle demonstration, then varied desktop trajectories over about one year, preserving stimulus-supported learning, evidence, unknowns and conditional lifetime guarantees.",
   "nominal_rate_Hz": 35,
   "current_model": {
@@ -178,7 +178,9 @@
     "desktop_history_qualification": "experiments/desktop_history_001/qualification/development001/receipt.json",
     "desktop_history_execution": "experiments/desktop_history_001/attempt001/receipt.json",
     "desktop_history_review": "experiments/desktop_history_001/result_review.json",
-    "desktop_history_decision": "experiments/desktop_history_001/decision.json"
+    "desktop_history_decision": "experiments/desktop_history_001/decision.json",
+    "history_compressor_options": "experiments/history_compressor_options_001/options.json",
+    "history_compressor_analysis": "experiments/history_compressor_options_001/attempt001/analysis.json"
   },
   "completed": {
     "main_cases": 6,
@@ -239,10 +241,11 @@
     "parameter_sensitivity_001 is a saved-state, fixed-model, open-loop point diagnostic. Final joint sampled peak below0.987mV across six future protocols includes signed compensation; it does not qualify uncertainty, nuisance identifiability, arbitrary inputs, estimator feedback, indefinite operation or M23 resources."
   ],
   "next_work": [
-    "Preserve desktop_history_001:545-point exact-recurrence fidelity gate passes and five public-start prefix fits complete; three gradient passes and two explicit line-search stops. No default rerun.",
-    "Use this desktop baseline for one bounded history-refresh/compression comparison, especially early estimate motion. Measure approximation error, battery outputs, storage and replay work together.",
-    "User authorizes retained observations and memory above10KiB in desktop discovery; preserve original prior/support/evidence ownership and0.1NLL criterion. Keep10KiB as separate deployment goal.",
-    "After stability, qualify useful uncertainty and varied cell/load/noise/duration trajectories, then Cortex-M23 resources and lifecycle."
+    "SRAM-only deployment history explicitly required by user; complete subsystem target10240B. No flash/FRAM/archive history fallback. Desktop diagnostic memory exception remains.",
+    "Read experiments/history_compressor_options_001/options.json and attempt001/analysis.json. Desktop is a useful single-trajectory reference; recovery, coverage, cadence and broader validation remain open.",
+    "Design one bounded comparison: fixed nonlinear response bases versus multiple validity-limited summaries. Preserve exact amplitude structure and parameter-dependent physical boundary. No compressor implemented by this analysis.",
+    "Use identical observation chronology and controlled optimizer/cadence to separate representation error; evaluate early movement and mature checkpoints, signed gradients, Q/SOC, retained weak evidence and complete memory/compute.",
+    "After a fidelity/usefulness pass, reduce toward10KiB and qualify target timing. Keep uncertainty and cell/load/noise/duration stability as separate gates."
   ],
   "handoff_format": "compact_JSON",
   "continuation_handoff": "handoff/CONTINUE.json",
@@ -612,13 +615,13 @@
     "original_development_bundle": "provenance/indefinite_stability_004_development.bundle"
   },
   "delivery_roadmap": {
-    "work_branch": "diagnostics/desktop-history-001",
+    "work_branch": "diagnostics/history-compressor-options-001",
     "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
     "plan": "plans/trajectory_to_m23_001.json",
     "report": "docs/ROADMAP.md",
-    "status": "desktop_baseline_passed_prepare_history_compression_tradeoffs",
+    "status": "SRAM_only_compressor_options_analyzed",
     "current_milestone": "M2_desktop_fidelity_before_deployment_compression",
-    "next_work_branch": "diagnostics/desktop-history-001",
+    "next_work_branch": "diagnostics/history-compressor-options-001",
     "M1": "Complete desktop lifecycle, exact warm continuation and cold recovery on two2100s cells. Full retained history, not bounded firmware. Cell B900s quality gate failed.",
     "M2": "Finite live rolling point accuracy demonstrated on one synthetic4h stream; nuisance biases, joint uncertainty, broader robustness and target resources remain unresolved.",
     "M3": "Actual Cortex-M23 execution with complete10240B subsystem planning boundary and relevant lifetime proof obligations.",
@@ -629,8 +632,8 @@
     "M1_complete": true,
     "M2_complete": false,
     "M3_complete": false,
-    "latest_component": "desktop_history_001:78checks;545point0NLL;five public-start fits;6.048MB history;final Q+0.006627%,SOC-0.002784pp;no coverage/M3",
-    "next_start_ref": "diagnostics/desktop-history-001",
+    "latest_component": "Bounded read-only compressor audit:10queries/928032steps,no fit; early large parameter motion,late<0.002publicSD; localGN condition~1.1e8; fixed response basis and multiple-summary comparison proposed.",
+    "next_start_ref": "diagnostics/history-compressor-options-001",
     "M1_usefulness_passed": false,
     "M1_cold_usefulness_passed": true,
     "next_work_branch_status": "created_current"
@@ -1784,5 +1787,17 @@
     "target_bytes": 10240,
     "target_measured": false,
     "source_review_independent": false
+  },
+  "history_compressor_analysis": {
+    "path": "experiments/history_compressor_options_001",
+    "status": "analysis_complete_no_compressor_implemented",
+    "history_constraint": "SRAM_only",
+    "subsystem_target_bytes": 10240,
+    "desktop_extra_memory_allowed": true,
+    "read_only_model_steps": 928032,
+    "new_optimizer_calls": 0,
+    "lead_option": "fixed_nonlinear_response_basis",
+    "comparator": "multiple_validity_limited_summaries",
+    "full_deployment_design_selected": false
   }
 }
