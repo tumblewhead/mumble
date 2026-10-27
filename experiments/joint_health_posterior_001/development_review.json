@@ -1,0 +1,29 @@
+{
+  "schema": "mumble_posterior_development_review_v1",
+  "reviewer": "implementing_agent_not_independent",
+  "preserved_attempt": "qualification/development001",
+  "status": "7_of_8_cases_passed_stationary_quantile_unresolved",
+  "failure": {
+    "coordinate": "current v1_V",
+    "quantile": 0.05,
+    "particle_refinement_shift_in_posterior_SD": 0.47761349472784936,
+    "limit": 0.3,
+    "late_mutation_acceptance_fraction": "approximately0.03"
+  },
+  "diagnosis": "Whole-path covariance proposal is too large for the nonlinear narrow-voltage geometry; sparse tail exploration is visible in the refinement comparison. Finite evidence, not a proof of unique cause.",
+  "registered_changes": [
+    "Decrease proposal factor1.5 to0.5; increase fixed mutations24 to48",
+    "Increase particle levels1024/2048 to2048/4096 with new fixed seed blocks; keep every numerical threshold unchanged",
+    "Raise physical-step cap100M to200M for the increased finite work; CPU240s/wall360s/RSS512MiB/output32MiB unchanged",
+    "Expose reusable posterior.refine/solve API and exercise it in dynamic qualification",
+    "Use disjoint seed blocks for predictive and conditioned queries so their Monte Carlo errors can be combined as independent; first attempt used paired seeds"
+  ],
+  "unchanged": [
+    "Original public prior and model",
+    "All likelihood factors and health normalizers",
+    "Original kernels and all historical evidence",
+    "No canonical records or truth files"
+  ],
+  "next_attempt": "qualification/development002",
+  "automatic_retries": 0
+}

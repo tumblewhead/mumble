@@ -11,9 +11,10 @@ and −0.002784 percentage points SOC. Three checkpoints pass the declared gradi
 tolerance; two line-search stops remain explicit. History storage is 6.048 MB;
 this is not bounded-memory firmware or a varied-trajectory stability result.
 
-The next priority is a numerically checked full-history posterior for the
-selected aging-aware model. Its physical and path-density kernels now pass
-301 finite checks. Desktop diagnostic storage is no longer constrained by the
+The next priority is bounded prefix-length scaling of the new
+[joint posterior reference](../experiments/joint_health_posterior_001/README.md).
+Stationary and dynamic short-fixture marginal checks pass; the original physical
+and path-density kernels retain their301 finite checks. Desktop diagnostic storage is no longer constrained by the
 deployment ceiling. Original prior/support, evidence ownership, chronology,
 and the 0.1 NLL fidelity criterion remain unchanged. The results below preserve
 the compact engine's earlier evidence and unresolved deployment discrepancy.
@@ -49,7 +50,7 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`implementation/minimal-health-kernels-001`.
+`implementation/joint-health-posterior-001`.
 
 The requested repair is implemented and qualified, but the selected candidate
 fails its controlled fidelity gate. Structured features alone give **193.291124
@@ -683,12 +684,22 @@ correlations, scalar marginal controls and failure atomicity. Explicit numerical
 underflow is unresolved, never silently zero diffusion. Original stationary
 sources and evidence are unchanged. No canonical aging inference has run.
 
-The chosen inference target is the Bayesian joint marginal of current physical
-state, health and static nuisance quantities. Joint-path MAP may help debug the
-model but cannot stand in for that marginal or its uncertainty. Select and
-register a numerically checked full-history posterior reference before any
-canonical aging inference. The old stationary desktop remains a zero-drift
-control; its 545-point pass does not validate aging.
+The Bayesian joint marginal now has a full-path tempered SMC implementation.
+Independent runs at2048/4096 particles pass the registered finite moment,
+covariance, percentile and evidence checks on short stationary/dynamic inputs.
+All16 current quantities stay uncertain and correlated. The first stationary
+tail discrepancy and subsequent suite-budget overrun remain preserved; a
+separately registered completion finishes the dynamic comparison. There is no
+clean-pass claim for the failed original suites. See the
+[posterior report](../experiments/joint_health_posterior_001/README.md).
+
+Register a short progression of longer retained prefixes next, with prospective
+work reservations, independent-population checks and explicit stopping on
+unresolved mixing or precision. Measure runtime and memory before canonical
+aging inference. The four-record dynamic qualification is not long-duration
+validation, and sample-moment accuracy does not establish a0.1NLL marginal
+message-density gate. The old stationary desktop remains a zero-drift control;
+its545-point pass does not validate aging.
 
 Only then compare fixed response bases and multiple local summaries against
 the same dynamic target. The user requires SRAM-only deployment history within

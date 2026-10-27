@@ -1,0 +1,50 @@
+{
+  "path": "experiments/joint_health_posterior_001",
+  "status": "full_joint_posterior_short_fixtures_qualified_with_preserved_failures",
+  "base_revision": "566aaeb3697bd33f30009386953f81f29cbbd5ed",
+  "work_branch": "implementation/joint-health-posterior-001",
+  "backend": "tempered_full_path_SMC_with_joint_Metropolis",
+  "implemented": true,
+  "all16_current_quantities_uncertain": true,
+  "qualified_records_max": 4,
+  "dynamic_fixture_elapsed_s": 0.57,
+  "particle_levels": [
+    2048,
+    4096
+  ],
+  "independent_populations_per_level": 4,
+  "final_refinement_populations": 48,
+  "independent_review": false,
+  "report": "experiments/joint_health_posterior_001/README.md",
+  "plan": "experiments/joint_health_posterior_001/plan.json",
+  "completion_plan": "experiments/joint_health_posterior_001/completion_plan.json",
+  "qualification": "experiments/joint_health_posterior_001/qualification/completion001/receipt.json",
+  "boundary_report": "experiments/joint_health_posterior_001/qualification/completion001/boundary_report.json",
+  "passing_prior_case_reports": 7,
+  "passing_prior_case_checks": 243,
+  "completion_checks": 7,
+  "whole_suite_clean_pass": false,
+  "development_failures_preserved": [
+    "stationary_tail_quantile_discrepancy",
+    "post_population_resource_cap_overrun_and_uncaptured_result"
+  ],
+  "worker_CPU_s_all_attempts": 114.99792599999999,
+  "worker_peak_RSS_bytes": 64684032,
+  "vectorized_physical_steps_all_attempts": 265827861,
+  "physical_rate_calibration": false,
+  "coverage_validated": false,
+  "compression_density_gate_qualified": false,
+  "canonical_aging_runs": 0,
+  "target_measured": false,
+  "schema": "mumble_joint_posterior_decision_v1",
+  "decision": "Proceed to registered bounded prefix-length scaling before canonical aging trajectories or compression comparison",
+  "limits": [
+    "Only finite short-prefix numerical checks; no convergence proof or calibrated coverage",
+    "Complete latent history grows with interval count; long-history mixing/memory/runtime unqualified",
+    "Covariance includes derivedQ as an extra output, not an independent17th state",
+    "Small inferred changes may be below Monte Carlo resolution",
+    "Original suite total-step guard was post-population and overran; prospective reservation used in explicit completion",
+    "No posterior message-density precision/0.1NLL compression qualification",
+    "No target hardware or calibrated physical aging profile"
+  ]
+}

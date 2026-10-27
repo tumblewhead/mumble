@@ -1,0 +1,173 @@
+{
+  "schema": "mumble_joint_health_posterior_plan_v2",
+  "base_revision": "566aaeb3697bd33f30009386953f81f29cbbd5ed",
+  "target_specification": "specifications/minimal_health_model_001/model.json",
+  "backend": "Full-path tempered sequential Monte Carlo with covariance-preconditioned symmetric Metropolis moves",
+  "selected_scope": "Desktop retained-history posterior for all16 current quantities; finite short fixtures first; no canonical aging run",
+  "alternatives": {
+    "joint_path_MAP": "Does not compute marginal uncertainty or relative integrated mode mass",
+    "bootstrap_particle_filter_without_rejuvenation": "Static-parameter and ancestral path diversity can collapse",
+    "single_local_Gaussian": "Would assume the representation whose sufficiency is still at issue",
+    "gradient_MCMC": "Possible later comparator; bounds, mixture exploration and path conditioning need separate registration"
+  },
+  "measure": {
+    "initial": "original16 x = public_mean + public_sd*u; exact two-component logQ mixture and original rectangular support",
+    "health": "y_j = previous_j + declared_mean_increment + sqrt(v_j)*u_j; zero-v coordinates eliminated",
+    "noncentered_density": "initial_prior(x)*prod(public_sd)*prod(phi(u_health)/Z(previous))*physical_support*likelihood^beta",
+    "prior_sampling": "Original independent truncated coordinates, mixture label AND value redrawn on capacity rejection; normalized health draws by rejection; entire path redrawn when physical support fails",
+    "constants": "All original prior and voltage constants retained in evaluator; normalizing constant of full supported path prior unknown but cancels within fixed-query posterior. SMC evidence is conditional on that normalized supported prior, not an absolute likelihood across different physical-support contracts.",
+    "no_discounting": true,
+    "prior_ownership": "once",
+    "query": "Complete retained prefix only; no inherited posterior added as an extra factor"
+  },
+  "numerics": {
+    "safe_normalizer": "erfc tails when probability >=0.01; otherwise qualified scalar scaled integral. Unresolved arithmetic propagates, never becomes zero particle mass.",
+    "truncated_normal_rejection_rounds": 256,
+    "whole_path_rejection_rounds": 64,
+    "initial_population": "draw from declared prior, no truth or optimized centers",
+    "ess_fraction": 0.8,
+    "mutations_per_stage": 48,
+    "proposal_factor": 0.5,
+    "proposal_covariance": "Weighted current path covariance, frozen within stage; ridge1e-8*max(diagonal,1e-4)",
+    "max_tempering_stages": 96,
+    "resampling": "stratified",
+    "reported_weight_ESS": "Incremental importance-weight diagnostic only, never posterior independent sample count",
+    "full_population_seeds_low": [
+      3201,
+      3202,
+      3203,
+      3204
+    ],
+    "full_population_seeds_high": [
+      4201,
+      4202,
+      4203,
+      4204
+    ],
+    "full_particle_levels": [
+      2048,
+      4096
+    ],
+    "generic_control_particle_levels": [
+      2048,
+      4096
+    ],
+    "acceptance_diagnostics": "all per-stage fractions and surviving initial ancestor counts retained; no convergence inferred from these alone",
+    "conditioned_query_seed_offset": 10000
+  },
+  "adequacy": {
+    "kind": "Finite independently replicated moment/quantile/evidence diagnostics, not a universal convergence proof or calibrated coverage",
+    "mean_MCSE_in_posterior_SD": 0.08,
+    "covariance_MCSE_scaled_by_marginal_SD_product": 0.12,
+    "quantile_MCSE_in_posterior_SD": 0.15,
+    "refinement_mean_in_posterior_SD": 0.15,
+    "refinement_covariance_scaled": 0.25,
+    "refinement_quantile_in_posterior_SD": 0.3,
+    "log_evidence_MCSE_NLL": 0.2,
+    "refinement_log_evidence_NLL": 0.5,
+    "failure": "uncertainty_unresolved; raw approximate populations retained as diagnostic only",
+    "compression_density_contrast_0_1_NLL_gate": "not qualified by sample moments; requires separate density/message comparison"
+  },
+  "qualification": {
+    "cases": [
+      "vectorized full-path density and current-state parity with qualified scalar kernels including Jacobian",
+      "bounded original prior and capacity-mixture moments",
+      "conjugate correlated Gaussian full posterior",
+      "two-mode marginal masses versus analytic mixture posterior",
+      "conditional bounded R0 marginal versus independent quadrature",
+      "full16 stationary short-prefix posterior",
+      "full16 dynamic prediction and conditioning at current boundary",
+      "resource/status/source-order/unknown-gap failures"
+    ],
+    "physics_and_density_tolerances": {
+      "voltage_state_atol": 1e-10,
+      "normalized_density_NLL_atol": 1e-07
+    },
+    "known_posterior_gate": "mean and mode-mass errors <= max(5*independent-replicate MCSE,0.04 posterior SD or0.01 mass); variance/covariance errors <=max(5*MCSE,0.06 marginal SD product)",
+    "prior_draws": 32768,
+    "fabricated_records_per_case": 8,
+    "stationary_records": [
+      [
+        0.03,
+        0.02,
+        3.858
+      ],
+      [
+        0.04,
+        -0.02,
+        3.862
+      ],
+      [
+        0.2,
+        0,
+        3.86
+      ]
+    ],
+    "dynamic_records": [
+      [
+        0.03,
+        0.02,
+        3.858
+      ],
+      [
+        0.04,
+        -0.02,
+        3.862
+      ],
+      [
+        0.2,
+        0,
+        3.86
+      ],
+      [
+        0.3,
+        0.02,
+        3.858
+      ]
+    ],
+    "voltage_origin": "Declared finite fixture measurements; no plant truth file, fit or truth scoring",
+    "stationary_rates": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "dynamic_rates": [
+      -0.001,
+      -0.01,
+      0.0001,
+      0.001,
+      0.2,
+      0.5,
+      0.1,
+      0.3
+    ],
+    "rate_scope": "Artificial conditioning fixture, not calibrated aging",
+    "boundary_reports": "Separate prediction with final voltage masked and full conditioning. Prediction increments/variance changes computed between last two health boundaries under the predictive path posterior, explicitly conditional on valid path support."
+  },
+  "caps": {
+    "CPU_s": 240,
+    "wall_s": 360,
+    "RSS_bytes": 536870912,
+    "output_bytes": 33554432,
+    "path_evaluations_per_target": 8000000,
+    "physical_steps_total": 200000000,
+    "automatic_retries": 0
+  },
+  "failure_policy": "Collect independent finite case failures; preserve sources, seeds, samples, all statuses and receipts. No automatic rerun or tolerance changes. Development corrections use new named snapshots and a written reason.",
+  "deployment": {
+    "history": "SRAM_only",
+    "complete_target_bytes": 10240,
+    "desktop_memory_exception": true,
+    "target_measured": false
+  },
+  "method_source": {
+    "url": "https://www.stats.ox.ac.uk/~doucet/delmoral_doucet_jasra_sequentialmontecarlosamplersJRSSB.pdf",
+    "attribution": "Del Moral,Doucet,Jasra2006:SMC samplers over intermediate distributions with weighting/resampling/Markov moves. Does not validate this implementation or finite adequacy thresholds."
+  },
+  "development_revision": "See development_review.json; thresholds and model unchanged, more particles/mutations and smaller proposals after stationary tail-quantile failure."
+}

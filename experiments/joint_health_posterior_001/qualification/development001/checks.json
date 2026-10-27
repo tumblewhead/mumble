@@ -1,0 +1,201 @@
+{
+  "cases": [
+    {
+      "name": "full_path_parity",
+      "status": "passed",
+      "diagnostics": {
+        "max_density_gap_NLL": 4.354205884737894e-11
+      },
+      "checks": 153
+    },
+    {
+      "name": "original_prior_moments",
+      "status": "passed",
+      "diagnostics": {
+        "draws": 32768,
+        "max_mean_error_standard_errors": 0.9506848034446477
+      },
+      "checks": 33
+    },
+    {
+      "name": "correlated_gaussian",
+      "status": "passed",
+      "diagnostics": {
+        "status": "finite_moment_checks_passed",
+        "diagnostics": {
+          "mean_MCSE_SD": 0.008721784174584593,
+          "covariance_MCSE_scaled": 0.021713347728446894,
+          "quantile_MCSE_SD": 0.03332192459149674,
+          "refinement_mean_SD": 0.008305961179161155,
+          "refinement_covariance_scaled": 0.0744096406765991,
+          "refinement_quantile_SD": 0.0935864127599314,
+          "log_evidence_MCSE": 0.006986345610472875,
+          "refinement_log_evidence": 0.00786944242537757
+        },
+        "limits": {
+          "mean_MCSE_SD": 0.08,
+          "covariance_MCSE_scaled": 0.12,
+          "quantile_MCSE_SD": 0.15,
+          "refinement_mean_SD": 0.15,
+          "refinement_covariance_scaled": 0.25,
+          "refinement_quantile_SD": 0.3,
+          "log_evidence_MCSE": 0.2,
+          "refinement_log_evidence": 0.5
+        },
+        "rigorous_error_bound": false,
+        "density_contrast_0_1_NLL_qualified": false,
+        "coverage_validated": false
+      },
+      "checks": 12
+    },
+    {
+      "name": "mixture_mass_control",
+      "status": "passed",
+      "diagnostics": {
+        "adequacy": {
+          "status": "finite_moment_checks_passed",
+          "diagnostics": {
+            "mean_MCSE_SD": 0.008756022980659929,
+            "covariance_MCSE_scaled": 0.019901265741093712,
+            "quantile_MCSE_SD": 0.012412840137158272,
+            "refinement_mean_SD": 0.005810879327193624,
+            "refinement_covariance_scaled": 0.008802346095077112,
+            "refinement_quantile_SD": 0.00393437518312226,
+            "log_evidence_MCSE": 0.0028438990493757444,
+            "refinement_log_evidence": 0.0018618488505364184
+          },
+          "limits": {
+            "mean_MCSE_SD": 0.08,
+            "covariance_MCSE_scaled": 0.12,
+            "quantile_MCSE_SD": 0.15,
+            "refinement_mean_SD": 0.15,
+            "refinement_covariance_scaled": 0.25,
+            "refinement_quantile_SD": 0.3,
+            "log_evidence_MCSE": 0.2,
+            "refinement_log_evidence": 0.5
+          },
+          "rigorous_error_bound": false,
+          "density_contrast_0_1_NLL_qualified": false,
+          "coverage_validated": false
+        },
+        "exact_low_mode_probability": 0.19591820588844008,
+        "estimated_low_mode_probability": 0.19885253906250266
+      },
+      "checks": 12
+    },
+    {
+      "name": "scalar_marginal_quadrature",
+      "status": "passed",
+      "diagnostics": {
+        "status": "finite_moment_checks_passed",
+        "diagnostics": {
+          "mean_MCSE_SD": 0.010057549584498381,
+          "covariance_MCSE_scaled": 0.025428250126949607,
+          "quantile_MCSE_SD": 0.04262789694149062,
+          "refinement_mean_SD": 0.02756609610411833,
+          "refinement_covariance_scaled": 0.020796070491814353,
+          "refinement_quantile_SD": 0.05084506395147255,
+          "log_evidence_MCSE": 0.003996223989699306,
+          "refinement_log_evidence": 0.005235834058187283
+        },
+        "limits": {
+          "mean_MCSE_SD": 0.08,
+          "covariance_MCSE_scaled": 0.12,
+          "quantile_MCSE_SD": 0.15,
+          "refinement_mean_SD": 0.15,
+          "refinement_covariance_scaled": 0.25,
+          "refinement_quantile_SD": 0.3,
+          "log_evidence_MCSE": 0.2,
+          "refinement_log_evidence": 0.5
+        },
+        "rigorous_error_bound": false,
+        "density_contrast_0_1_NLL_qualified": false,
+        "coverage_validated": false
+      },
+      "checks": 11
+    },
+    {
+      "name": "stationary_joint_posterior",
+      "status": "failed",
+      "error": "Traceback (most recent call last):\n  File \"/home/easy/proj/mumble/experiments/joint_health_posterior_001/qualify.py\", line 45, in case\n    row['diagnostics'] = fn()\n                         ~~^^\n  File \"/home/easy/proj/mumble/experiments/joint_health_posterior_001/qualify.py\", line 233, in stationary_joint_posterior\n    check(adequate['status']=='finite_moment_checks_passed','stationary joint numerical adequacy')\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/easy/proj/mumble/experiments/joint_health_posterior_001/qualify.py\", line 24, in check\n    raise AssertionError(label)\nAssertionError: stationary joint numerical adequacy\n",
+      "checks": 9
+    },
+    {
+      "name": "dynamic_joint_posterior",
+      "status": "passed",
+      "diagnostics": {
+        "prediction": {
+          "status": "finite_moment_checks_passed",
+          "diagnostics": {
+            "mean_MCSE_SD": 0.030260464509133462,
+            "covariance_MCSE_scaled": 0.04767976580705299,
+            "quantile_MCSE_SD": 0.0958352158639148,
+            "refinement_mean_SD": 0.06873612864359584,
+            "refinement_covariance_scaled": 0.1128506016839355,
+            "refinement_quantile_SD": 0.13670391597952236,
+            "log_evidence_MCSE": 0.0309561839658999,
+            "refinement_log_evidence": 0.07816084701440218
+          },
+          "limits": {
+            "mean_MCSE_SD": 0.08,
+            "covariance_MCSE_scaled": 0.12,
+            "quantile_MCSE_SD": 0.15,
+            "refinement_mean_SD": 0.15,
+            "refinement_covariance_scaled": 0.25,
+            "refinement_quantile_SD": 0.3,
+            "log_evidence_MCSE": 0.2,
+            "refinement_log_evidence": 0.5
+          },
+          "rigorous_error_bound": false,
+          "density_contrast_0_1_NLL_qualified": false,
+          "coverage_validated": false
+        },
+        "posterior": {
+          "status": "finite_moment_checks_passed",
+          "diagnostics": {
+            "mean_MCSE_SD": 0.04093783115980479,
+            "covariance_MCSE_scaled": 0.059246479326473644,
+            "quantile_MCSE_SD": 0.10210053514007678,
+            "refinement_mean_SD": 0.07149903254127514,
+            "refinement_covariance_scaled": 0.10611126173775944,
+            "refinement_quantile_SD": 0.22809479693248727,
+            "log_evidence_MCSE": 0.04430202043623378,
+            "refinement_log_evidence": 0.15462310931342316
+          },
+          "limits": {
+            "mean_MCSE_SD": 0.08,
+            "covariance_MCSE_scaled": 0.12,
+            "quantile_MCSE_SD": 0.15,
+            "refinement_mean_SD": 0.15,
+            "refinement_covariance_scaled": 0.25,
+            "refinement_quantile_SD": 0.3,
+            "log_evidence_MCSE": 0.2,
+            "refinement_log_evidence": 0.5
+          },
+          "rigorous_error_bound": false,
+          "density_contrast_0_1_NLL_qualified": false,
+          "coverage_validated": false
+        },
+        "report": "boundary_report.json"
+      },
+      "checks": 19
+    },
+    {
+      "name": "failures",
+      "status": "passed",
+      "diagnostics": {
+        "automatic_retries": 0,
+        "silent_fallbacks": 0
+      },
+      "checks": 9
+    }
+  ],
+  "checks": 258,
+  "canonical_records": 0,
+  "truth_reads": 0,
+  "posterior_populations": 48,
+  "target_path_evaluations": 17154144,
+  "physical_steps": 37328403,
+  "independent_review": false,
+  "status": "failed"
+}

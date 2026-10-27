@@ -35,9 +35,14 @@ marginal as the compression target. The [desktop health kernels](experiments/min
 are now implemented and pass **301 checks across ten finite cases**, including
 stationary equivalence, charge balance, transition tails/derivatives and small
 marginal posterior controls. These controls separate predicted drift from
-measurement corrections and uncertainty growth. A full joint aging posterior
-solver and physical aging calibration remain open. The stationary desktop
-baseline remains the zero-drift control.
+measurement corrections and uncertainty growth. The [full joint posterior solver](experiments/joint_health_posterior_001/README.md)
+is now implemented and passes finite numerical checks on short stationary and
+dynamic fixtures, using independent particle populations and doubled particle
+counts. All16 current quantities retain uncertainty and correlations. Earlier
+quantile and resource-limit failures are preserved with an explicit completion.
+Long-history scaling, physical aging calibration and the compressor's density
+fidelity gate remain open. The stationary desktop baseline remains the zero-drift
+control.
 
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
@@ -71,7 +76,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `implementation/minimal-health-kernels-001`.
+The current work branch is `implementation/joint-health-posterior-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
