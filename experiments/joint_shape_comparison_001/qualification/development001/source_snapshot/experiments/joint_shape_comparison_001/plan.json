@@ -1,0 +1,67 @@
+{
+  "schema": "mumble_joint_shape_comparison_plan_v1",
+  "parent_revision": "ee6ffab141ac0c7eb2486152165a667a688c1804",
+  "branch": "diagnostics/joint-shape-comparison-001",
+  "decision": "Does the saved numerically reconstructed history preserve local joint likelihood contrasts within the registered 0.1 NLL finite-node oscillation budget?",
+  "inputs": {
+    "diagnostic_bank": {
+      "path": "experiments/parity_census_001/attempt001/diagnostic_bank.bin",
+      "bytes": 6864,
+      "sha256": "6b1af179dfd801a18925d19f8911a3ecc625f2e913554760cab5025583e9d015"
+    },
+    "census_summary": {
+      "path": "experiments/parity_census_001/attempt001/summary.json",
+      "bytes": 21349,
+      "sha256": "bba8b30633ca201f7dbbd92fc25211a35721b0611ad588523704f424b25aab48"
+    },
+    "census_receipt": {
+      "path": "experiments/parity_census_001/attempt001/receipt.json",
+      "bytes": 9119,
+      "sha256": "a18e8f43d9fb0ce13ce4d53f97b67cf9c6000029eb03753a3fd7efc861cd1367"
+    },
+    "observations": {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+      "bytes": 16128000,
+      "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f"
+    }
+  },
+  "adaptation": {
+    "reason": "User authorized continuing beyond tiny scalar parity differences; reuse completed census bank without any replay.",
+    "format": "Derived copy changes only byte4 from C to 0 to use unchanged qualified host loader; no other bytes modified.",
+    "certifies_strict_parity": false,
+    "original_strict_failure": "experiments/fixed_prefix_shape_001/attempt001/receipt.json",
+    "census_scalar_drift_is_bound_at_new_nodes": false
+  },
+  "qualification": "Fabricated 4-case saved metrics and 20 reference results; adapter preservation and invalid-input rejection; inherited 21 geometry/decision tests; no canonical observations.",
+  "source_review": "Self-review; no independent reviewer. Inherited C arithmetic and Python shape comparison unchanged.",
+  "publication_gate": "Qualified source committed, pushed to existing origin and remotely verified before canonical metric/reference.",
+  "geometry": "Inherited full 16-dimensional GN-plus-prior metric for design only; 16 basis plus120 pair directions, both signs and radii1,.5; common-support-only global halving capped16; no metric repair.",
+  "freeze": "Exclusive nodes.json/nodes.bin, geometry, adapter and bank hashes before references; no reference-driven adaptation.",
+  "comparison": "Inherited qualified likelihood-only reference, actual intervals/order, original codec and sigma0.001V; common prior cancels; centered differences remove constant offset.",
+  "decision_rule": "Inherited shape.compare: repair if arithmetic lower bound exceeds0.1; keep only complete545 and upper bound<=0.1; otherwise unresolved. Continue all frozen nodes even if a discrepancy is large.",
+  "finite_caps": {
+    "metric_invocations": 1,
+    "comparison_invocations": 1,
+    "retries": 0,
+    "prefix_replay_invocations": 0,
+    "new_optimizer_calls": 0,
+    "truth_reads": 0,
+    "prefix_records": 252000,
+    "represented_node_queries": 545,
+    "reference_passes": 545,
+    "reference_model_steps": 137340000,
+    "reference_predict_calls": 137340000,
+    "CPU_s": 600,
+    "wall_s": 900,
+    "host_RSS_bytes": 268435456,
+    "host_AS_bytes": 1073741824,
+    "closed_output_bytes": 67108864
+  },
+  "limitations": [
+    "Numerically reconstructed bank; unsaved original coefficients cannot be compared.",
+    "Computed-cost allowances exclude recurrence/libm forward error and physical model error.",
+    "Finite points only: no tails, between-node guarantee, posterior coverage, all-parameter convergence or M3 promotion.",
+    "Host diagnostic reference uses archive; candidate firmware may not."
+  ],
+  "finish_line": "Complete all545 evaluations or explicitly preserve unresolved execution; save full joint differences/endpoints, resource receipt and keep/repair/unresolved decision; update roadmap before any further experiment."
+}
