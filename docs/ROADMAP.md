@@ -2,6 +2,32 @@
 
 ## Decision
 
+**Compact nonlinear history is now a useful local C component; causal cold start remains open.**
+The single 294,000-sample experiment completed with two fixed-origin banks and
+external reference checks at 7,200 and 8,400 s. Candidate history is a 37-feature
+QR factor occupying 5,624 B; the core occupies 8,112 B with no heap or raw samples.
+Full planned objects and reservations total 10,224 B, only 16 B below the 10,240 B
+goal. Target stack, runtime, acquisition, recovery and timing are not measured.
+
+Around saved autonomous generation 7, the same 41 joint-node likelihood-error
+oscillations fall from affine 0.0261749 / 0.0227073 to quartic 0.0004693 /
+0.0005214 at the two checkpoints. Two suffix steps improve the independently
+audited common objective by 17.48326 relative to the unchanged saved anchor.
+The public-origin arm gives 37,737.8 / 43,235.6 oscillation on those nodes and
+also stalls against the initial-h bound. Search and representation defects are
+distinct. The warm chart fails at the distant public node, so local success does
+not establish global fidelity, calibrated intervals or autonomous cold start.
+
+The reviewed decision is to keep the local quartic bank and next design bounded,
+causal bootstrap/anchor transition with support-aware search and explicit earlier-
+evidence ownership. Read the [report](../experiments/compact_nonlinear_history_001/REPORT.md),
+[decision](../experiments/compact_nonlinear_history_001/decision.json),
+[result review](../experiments/compact_nonlinear_history_001/result_review.json) and
+[receipt review](../experiments/compact_nonlinear_history_001/receipt_review.json).
+The current branch is `implementation/bounded-history-anchor-001`. The run used
+6.866106 CPU s, 6.935785 active wall s, 19,169,280 B host peak RSS and 758,011 B
+closed runtime output. All original/copy captures survived verification.
+
 **Autonomous anchor refinement now has verified partial evidence from one failed finite run.**
 Seven accepted full steps from the fixed public mean reached Q=64.703748 mAh and
 SOC=51.602860%, agreeing with the earlier supplied-anchor feasible point. The
@@ -21,14 +47,13 @@ See the [report](../experiments/autonomous_anchor_refinement_001/REPORT.md),
 [summary](../experiments/autonomous_anchor_refinement_001/failure_reporting001/summary.json)
 and [result review](../experiments/autonomous_anchor_refinement_001/result_review.json).
 
-The next engineering prerequisite for another canonical run is a bounded
-capture-preservation qualification, retaining an independent exact copy and
-identity record before dependent work. The next scientific question is joint
-posterior/interval fidelity around an internally obtained anchor. The near-equal
-reference point does not validate narrow uncertainty intervals. If further point
-resolution becomes necessary, design a paired residual-difference comparator
-with derived bounds; do not reduce the current arithmetic guard after seeing
-this result. No new inference run, longer campaign or promotion is queued.
+That result led to the capture-preservation qualification and compact-history
+comparison above. Capture preservation passed eight fabricated real-child cases;
+the C bank passed sixteen independent cases before its one canonical invocation.
+The near-equal reference point still does not validate narrow uncertainty
+intervals. If finer point resolution becomes necessary, derive a paired residual-
+difference comparator rather than reduce an existing arithmetic guard after seeing
+a result. No retry, longer campaign or promotion follows from the failed run.
 
 **The finite retained-likelihood replacement prototype is complete.**
 One replacement transaction at the fixed 7,200-second prefix improved the
@@ -551,31 +576,37 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
-Use the current `implementation/autonomous-anchor-refinement-001` branch and
-[handoff](../handoff/CONTINUE.json). The supplied-anchor replacement is complete.
-The autonomous-anchor invocation remains failed, with seven independently
-verified accepted steps and an exact separate recovery of the lost output.
-Read its [report](../experiments/autonomous_anchor_refinement_001/REPORT.md),
-[decision](../experiments/autonomous_anchor_refinement_001/decision.json) and
-[result review](../experiments/autonomous_anchor_refinement_001/result_review.json).
-Preserve both outcomes; do not rerun either experiment to resume.
+Use `implementation/bounded-history-anchor-001` and the current
+[handoff](../handoff/CONTINUE.json). Both capture qualification and the finite
+compact-history comparison are complete. Preserve the old failed anchor run and
+its seven accepted steps, and the new completed comparison; do not rerun them.
 
-Before another scientific launch, complete one bounded capture-preservation
-qualification with fabricated child outputs, independent exact copies and
-identity records. Its finish line is detection and preserved evidence for the
-declared loss/mutation and duplicate-writer cases. This is an experiment-harness
-repair, separate from the estimator's uncertainty problem.
+Design one bounded **causal bootstrap/anchor-transition** prototype. It must use
+the live stream, respect physical support in the full joint proposal, and account
+for evidence collected before the chosen origin. A simple public-origin chart is
+inadequate at the tested good-anchor neighborhood even apart from its constrained-
+search failure. A coordinate translation cannot regenerate missing historical
+nonlinearity. Compare proposed startup/transition representations on their explicit
+information retention and complete phase-dependent memory cost before selecting
+one finite execution. Do not introduce an arbitrary replay-window duration.
 
-The next scientific decision is joint supported posterior/interval fidelity
-around the saved internally obtained anchor, with the near-10-KiB complete
-subsystem goal kept explicit. Then establish a bounded evidence representation
-that retains the nonlinear information needed for reanchoring, SOC/Q uncertainty,
-weak-use retention and renewed learning. If finer point progress is actually
-needed, first derive and qualify a paired residual-difference comparator;
-do not lower the frozen arithmetic allowance based on the existing result.
-No new numerical invocation, alternate seed/prefix or longer campaign is queued.
+Retain the local bank as the maintenance component. Calibrated SOC/capacity
+intervals still require supported posterior and coverage qualification beyond
+finite local nodes. ADC/checkpoint integration, complete target stack and software-
+floating-point timing then supply M3 evidence. No automatic continuation or broader
+campaign has been launched by this completed comparison.
 
 ### What the current memory figures mean
+
+The new experimental bank owns 6,368 B of retained factor/state/metadata, inside
+an 8,112 B core with serialized workspace, report and one ADC sample. The factor
+alone is 5,624 B. Add 448 B ADC queue, 128 B checkpoint-codec reservation,
+768 B project-stack cap and 768 B runtime/IRQ/caller reservation: 10,224 B planned
+total. Compiler-reviewed project call chains fit their cap on this host; target
+runtime and timing remain unknown. The old learner is not present simultaneously.
+The 42 reference models, two experimental banks, audit replay and host snapshots
+are qualification machinery and are included in measured host RSS, not this
+one-candidate target ledger.
 
 The earlier streaming C candidate owns 7,152 bytes and retains no raw history,
 but its uncertainty and performance qualification remain open. The latest

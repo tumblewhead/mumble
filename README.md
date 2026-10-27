@@ -6,6 +6,36 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**The live-stream compact nonlinear-history experiment is implemented and complete.**
+Its allocation-free C candidate retains a **5,624-byte history factor** in an
+**8,112-byte estimator core**, with **zero raw-history bytes**. Each candidate
+ingested 294,000 ordered samples once. Exact replay and 42 reference trajectories
+belonged only to external host qualification, never candidate acceptance.
+The full planning ledger is **10,224 bytes**, including an ADC queue, codec and
+stack/runtime reservations; its **16-byte margin is not measured M23 headroom**.
+
+The saved autonomous anchor gives a useful local result. Over the same 41 nearby
+joint diagnostic points, quartic likelihood-error oscillation is **0.0004693**
+at 7,200 s and **0.0005214** at 8,400 s, versus affine **0.02617 / 0.02271**.
+Two accepted suffix updates improve the independently audited common objective
+by **17.48326** relative to the unchanged saved anchor. This is local maintenance
+after retrospective bootstrap, not autonomous live cold start or interval coverage.
+
+The fixed public-origin arm remains inadequate: its corresponding error
+oscillations are **37,737.8 / 43,235.6**, and its final search directions hit the
+initial-h support boundary. Representation error and constrained-search limitations
+are separate findings. The saved-anchor chart also fails at the distant public
+point; no global validity or convergence is claimed. Keep this local C bank and
+next design causal bootstrap/anchor transition with support-aware search and
+explicit ownership of earlier evidence. See the
+[report](experiments/compact_nonlinear_history_001/REPORT.md),
+[decision](experiments/compact_nonlinear_history_001/decision.json),
+[summary](experiments/compact_nonlinear_history_001/reporting001/summary.json),
+[result review](experiments/compact_nonlinear_history_001/result_review.json),
+[receipt review](experiments/compact_nonlinear_history_001/receipt_review.json) and
+[fidelity figure](experiments/compact_nonlinear_history_001/history_fidelity.png).
+The current branch is `implementation/bounded-history-anchor-001`.
+
 **Autonomous anchor refinement produced seven verified accepted steps; the finite run is failed.**
 Starting only from the fixed public mean, the full joint refinement reached
 **64.703748 mAh capacity and 51.602860% endpoint SOC**. The computed common-prior
@@ -477,27 +507,29 @@ belong in this repository; chat summaries are supporting context.
 
 ## Next work and limits
 
-The latest canonical work branch is `design/conditional-belief-adequacy-001`.
-The continuous experiment, saved-evidence weighting audit and three-checkpoint
-conditional-belief probe are complete. Read the current
+Use `implementation/bounded-history-anchor-001`, the current
 [handoff](handoff/CONTINUE.json) and
-[decision](experiments/conditional_belief_adequacy_001/decision.json); preserve
-all previous results and do not repeat completed work to recover context.
+[compact-history decision](experiments/compact_nonlinear_history_001/decision.json).
+Capture preservation is qualified, and the one compact-history comparison is
+closed with intact original/copy captures. Preserve all previous results,
+including the failed autonomous-anchor invocation and its verified seven steps;
+no completed experiment needs a replay to recover context.
 
-The next finite task is a joint support-consistent conditional-correction
-design, using an analytically solvable active h bound as a reference. Define
-physical moments, joint SOC/logQ correlations, support and voltage evidence
-accounting, subsequent prediction, and the complete memory/workspace cost.
-Specify three later qualification cases: interior linear behavior, an outward
-correlated h-bound case, and zero-information preservation of an already
-supported belief. Finish with one reviewed representation go/no-go decision.
+The next finite design is **causal bootstrap and anchor transition with bounded
+history**, reusing the locally faithful quartic bank. Its proposal must respect
+physical bounds, and it must state what happens to evidence acquired before a
+new origin. Improving bound-aware search alone cannot repair the independently
+observed away-origin likelihood error. Translating a retained polynomial does
+not recreate discarded nonlinear derivatives. A recent-data buffer, alternate
+bootstrap representation or retained approximation must fit the complete memory
+ledger and expose any evidence loss; no arbitrary history-window length is chosen
+by this result.
 
-The probe establishes a bounded-moment incompatibility and small present
-one-step changes at the five admitted snapshots. It does not establish the
-cause of the earlier weight switch or explain all SOC/Q undercoverage. Keep
-historical uncertainty loss open; support consistency alone cannot recover
-an earlier discarded nonlinear likelihood. No covariance inflation, forced
-zero h variance, silent clipping, weight change or longer campaign follows.
+SOC/capacity uncertainty remains unvalidated. The finite node comparison is a
+necessary local-fidelity check, not posterior integration, tail validation or
+coverage. No interval inflation, support clipping, new truth input, automatic
+rerun or longer campaign follows. Target ADC/codec integration, software-floating-
+point timing and measured complete M23 SRAM remain open.
 
 The original two-cell traces include hysteresis and multiple unknown RC modes.
 They are outside certificate004's restricted contract; do not insert truth to
