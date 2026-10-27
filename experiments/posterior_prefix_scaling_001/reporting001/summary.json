@@ -1,0 +1,194 @@
+{
+  "CPU_guard_limitation": "Inherited supervisor gives child the remaining CPU limit, but active parent monitoring adds CPU before wait4 accounting. Combined budget checked after closure; recorded overrun remains explicit.",
+  "CPU_overrun_s": 5.412816000000021,
+  "cost_probes": [
+    {
+      "dimension": 32,
+      "elapsed_s": 0.22857142857142856,
+      "median_CPU_s_per_evaluated_path": 3.889042968749953e-06,
+      "one_4096_path_matrix_bytes": 1048576,
+      "one_dense_covariance_bytes": 8192,
+      "prefix": 8
+    },
+    {
+      "dimension": 80,
+      "elapsed_s": 0.9142857142857143,
+      "median_CPU_s_per_evaluated_path": 1.560176953124999e-05,
+      "one_4096_path_matrix_bytes": 2621440,
+      "one_dense_covariance_bytes": 51200,
+      "prefix": 32
+    },
+    {
+      "dimension": 272,
+      "elapsed_s": 3.657142857142857,
+      "median_CPU_s_per_evaluated_path": 6.626932812500003e-05,
+      "one_4096_path_matrix_bytes": 8912896,
+      "one_dense_covariance_bytes": 591872,
+      "prefix": 128
+    }
+  ],
+  "coverage_validated": false,
+  "declared_CPU_s": 360,
+  "density_contrast_gate_qualified": false,
+  "missing_32_record_populations": [
+    {
+      "particles": 4096,
+      "seed": 832103
+    },
+    {
+      "particles": 4096,
+      "seed": 832104
+    }
+  ],
+  "new_model_steps": 0,
+  "new_sampling_calls": 0,
+  "next_recommendation": "Before any separately registered completion, account for live parent+child CPU with stopping headroom. Reuse six saved32-record populations; only two4096-particle populations remain. Keep thresholds and solver fixed to distinguish compute insufficiency from mixing failure.",
+  "numerical_conclusion": "8records pass;32records unresolved from compute exhaustion;128posterior not tested",
+  "parent_accounted_CPU_s": 6.171603000000005,
+  "peak_worker_RSS_bytes": 71397376,
+  "prefixes": [
+    {
+      "adequacy": {
+        "coverage_validated": false,
+        "density_contrast_0_1_NLL_qualified": false,
+        "diagnostics": {
+          "covariance_MCSE_scaled": 0.044992123400245,
+          "log_evidence_MCSE": 0.023390194647241926,
+          "mean_MCSE_SD": 0.036734271841091626,
+          "quantile_MCSE_SD": 0.09001267666151737,
+          "refinement_covariance_scaled": 0.07515436764254564,
+          "refinement_log_evidence": 0.13235402577445754,
+          "refinement_mean_SD": 0.06630071633611935,
+          "refinement_quantile_SD": 0.13629192297658846
+        },
+        "limits": {
+          "covariance_MCSE_scaled": 0.12,
+          "log_evidence_MCSE": 0.2,
+          "mean_MCSE_SD": 0.08,
+          "quantile_MCSE_SD": 0.15,
+          "refinement_covariance_scaled": 0.25,
+          "refinement_log_evidence": 0.5,
+          "refinement_mean_SD": 0.15,
+          "refinement_quantile_SD": 0.3
+        },
+        "rigorous_error_bound": false,
+        "status": "finite_moment_checks_passed"
+      },
+      "ancestor_fraction_is_not_posterior_ESS": true,
+      "capacity_component_probability": 0.5259643653678312,
+      "capacity_component_probability_MCSE": 0.005244637965987171,
+      "captured_population_model_steps": 176115936,
+      "dimension": 32,
+      "final_acceptance": [
+        0.24784342447916666,
+        0.24329630533854166,
+        0.24016316731770834,
+        0.251251220703125,
+        0.22090657552083334,
+        0.24279276529947916,
+        0.23044331868489584,
+        0.22968037923177084
+      ],
+      "model_steps_exact": true,
+      "population_CPU_s": [
+        6.449639868,
+        6.335168200999999,
+        6.157475788000001,
+        6.174541648999998,
+        12.146219536,
+        12.143906300000005,
+        11.980025562000002,
+        12.214430676999996
+      ],
+      "prefix": 8,
+      "process_CPU_s": 73.698134,
+      "process_peak_RSS_bytes": 65503232,
+      "saved_populations": 8,
+      "source_elapsed_s": 0.22857142857142856,
+      "stages": [
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21,
+        21
+      ],
+      "status": "finite_moment_checks_passed",
+      "surviving_initial_ancestors": [
+        195,
+        190,
+        185,
+        183,
+        373,
+        388,
+        374,
+        374
+      ]
+    },
+    {
+      "adequacy": "not_computed; required independent refinement incomplete or unlaunched",
+      "ancestor_fraction_is_not_posterior_ESS": true,
+      "captured_population_model_steps": 682112480,
+      "dimension": 80,
+      "final_acceptance": [
+        0.2592671712239583,
+        0.3029073079427083,
+        0.316619873046875,
+        0.3306884765625,
+        0.19330851236979166,
+        0.22314961751302084
+      ],
+      "model_steps_exact": false,
+      "population_CPU_s": [
+        33.331410984,
+        33.458559086,
+        32.687242115000004,
+        34.174896118999996,
+        65.13373421,
+        66.82162950400001
+      ],
+      "prefix": 32,
+      "process_CPU_s": 285.061996,
+      "process_peak_RSS_bytes": 71397376,
+      "saved_populations": 6,
+      "source_elapsed_s": 0.9142857142857143,
+      "stages": [
+        28,
+        28,
+        28,
+        29,
+        29,
+        29
+      ],
+      "status": "interrupted_uncertainty_unresolved",
+      "surviving_initial_ancestors": [
+        50,
+        52,
+        62,
+        58,
+        113,
+        109
+      ]
+    },
+    {
+      "adequacy": "not_computed; required independent refinement incomplete or unlaunched",
+      "captured_population_model_steps": 0,
+      "dimension": 272,
+      "model_steps_exact": false,
+      "prefix": 128,
+      "process_CPU_s": null,
+      "process_peak_RSS_bytes": null,
+      "saved_populations": 0,
+      "source_elapsed_s": 3.657142857142857,
+      "status": "not_launched_by_gate"
+    }
+  ],
+  "source_review_independent": false,
+  "status": "closed_scaling_assessment_with_resource_limit",
+  "target_measured": false,
+  "total_CPU_s": 365.412816,
+  "truth_scoring_performed": false,
+  "waited_children_CPU_s": 359.241213
+}

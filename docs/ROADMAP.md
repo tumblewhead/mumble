@@ -11,9 +11,11 @@ and −0.002784 percentage points SOC. Three checkpoints pass the declared gradi
 tolerance; two line-search stops remain explicit. History storage is 6.048 MB;
 this is not bounded-memory firmware or a varied-trajectory stability result.
 
-The next priority is bounded prefix-length scaling of the new
-[joint posterior reference](../experiments/joint_health_posterior_001/README.md).
-Stationary and dynamic short-fixture marginal checks pass; the original physical
+The first [prefix-scaling study](../experiments/posterior_prefix_scaling_001/README.md)
+is closed at a CPU limit: 8 records pass, 32 records remain unresolved with six
+of eight populations saved, and 128 received a cost probe only. The next priority
+is aggregate CPU supervision and a registered completion of the two missing
+32-record populations. Stationary and dynamic short-fixture marginal checks pass; the original physical
 and path-density kernels retain their301 finite checks. Desktop diagnostic storage is no longer constrained by the
 deployment ceiling. Original prior/support, evidence ownership, chronology,
 and the 0.1 NLL fidelity criterion remain unchanged. The results below preserve
@@ -50,7 +52,7 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`implementation/joint-health-posterior-001`.
+`diagnostics/posterior-prefix-scaling-001`.
 
 The requested repair is implemented and qualified, but the selected candidate
 fails its controlled fidelity gate. Structured features alone give **193.291124
@@ -693,13 +695,22 @@ separately registered completion finishes the dynamic comparison. There is no
 clean-pass claim for the failed original suites. See the
 [posterior report](../experiments/joint_health_posterior_001/README.md).
 
-Register a short progression of longer retained prefixes next, with prospective
-work reservations, independent-population checks and explicit stopping on
-unresolved mixing or precision. Measure runtime and memory before canonical
-aging inference. The four-record dynamic qualification is not long-duration
-validation, and sample-moment accuracy does not establish a0.1NLL marginal
-message-density gate. The old stationary desktop remains a zero-drift control;
-its545-point pass does not validate aging.
+The registered 8/32/128-record progression has now run to its compute limit.
+All cost probes completed; the 8-record posterior passes unchanged refinement
+checks. At 32 records, four 2048-particle and two 4096-particle populations are
+saved, but the 360-second campaign CPU allowance was exhausted. The recorded
+365.413 seconds includes an explicit aggregate-supervisor overrun. The128-record
+posterior was not launched; it is not an inference failure.
+
+First qualify live parent/child CPU accounting with stopping headroom. Then
+register only the two missing 32-record 4096-particle populations (seeds 832103
+and 832104), reusing the six existing ones. Keep the model and numerical gates
+fixed to distinguish insufficient computation from inadequate posterior mixing.
+Decide on larger prefixes or sampler repair after that comparison. At 35 Hz even
+128 records span only 3.657 seconds, so this is not long-duration aging validation.
+Sample-moment accuracy still does not establish a0.1NLL marginal message-density
+gate. The old stationary desktop remains a zero-drift control; its545-point pass
+does not validate aging.
 
 Only then compare fixed response bases and multiple local summaries against
 the same dynamic target. The user requires SRAM-only deployment history within

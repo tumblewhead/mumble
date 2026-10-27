@@ -1,0 +1,54 @@
+{
+  "path": "experiments/posterior_prefix_scaling_001",
+  "status": "closed_at_CPU_limit_8_passes_32_unresolved_128_unlaunched",
+  "base_revision": "f1e270a69cd2aa477bcae18f617ea8cb4e6cb533",
+  "work_branch": "diagnostics/posterior-prefix-scaling-001",
+  "plan": "experiments/posterior_prefix_scaling_001/plan.json",
+  "report": "experiments/posterior_prefix_scaling_001/README.md",
+  "receipt": "experiments/posterior_prefix_scaling_001/attempt001/receipt.json",
+  "summary": "experiments/posterior_prefix_scaling_001/reporting001/summary.json",
+  "qualification_checks": 31,
+  "prefixes_registered": [
+    8,
+    32,
+    128
+  ],
+  "passed_prefixes": [
+    8
+  ],
+  "interrupted_prefixes": [
+    32
+  ],
+  "unlaunched_posterior_prefixes": [
+    128
+  ],
+  "cost_probes_completed": [
+    8,
+    32,
+    128
+  ],
+  "posterior_populations_completed": 14,
+  "posterior_population_interrupted": 1,
+  "eight_record_elapsed_s": 0.22857142857142856,
+  "CPU_s": 365.412816,
+  "CPU_budget_s": 360,
+  "CPU_overrun_s": 5.412816000000021,
+  "peak_worker_RSS_bytes": 71397376,
+  "inherited_solver_unchanged": true,
+  "automatic_retries": 0,
+  "canonical_aging_runs": 0,
+  "coverage_validated": false,
+  "compression_density_gate_qualified": false,
+  "target_measured": false,
+  "independent_review": false,
+  "schema": "mumble_prefix_scaling_decision_v1",
+  "decision": "Repair aggregate CPU supervision, then separately register only the missing two32-record high-particle populations with fixed solver and thresholds; reuse six saved populations. Assess precision before increasing prefix length.",
+  "limits": [
+    "Only8-record numerical adequacy established on this new fixture",
+    "32-record full refinement incomplete from CPU exhaustion; not evidence of physical exclusion or posterior failure",
+    "128-record cost probe only; no posterior inference",
+    "Combined CPU supervision overran by5.413s; requires live accounting/headroom before continuation",
+    "Interrupted population work counters unavailable; saved-population counts are a lower bound",
+    "Fixed synthetic35Hz stream with artificial diffusion and floating-point measurements; not long-term aging, varied-cell robustness or ADC12 validation"
+  ]
+}

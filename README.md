@@ -44,6 +44,15 @@ Long-history scaling, physical aging calibration and the compressor's density
 fidelity gate remain open. The stationary desktop baseline remains the zero-drift
 control.
 
+The [first prefix-scaling study](experiments/posterior_prefix_scaling_001/README.md)
+is closed: the **8-record posterior passes**, the **32-record comparison is
+CPU-limited with six of eight populations saved**, and the 128-record posterior
+was not launched. Cost probes completed at all three lengths. The campaign
+recorded 365.413 CPU seconds against its 360-second budget; aggregate supervision
+needs live accounting and stopping headroom before a separately registered
+32-record completion. This is a compute-limit finding, not a failed numerical
+comparison at 32 records.
+
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
 once, retaining sixteen working records, eight incoming records and one compact
@@ -76,7 +85,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `implementation/joint-health-posterior-001`.
+The current work branch is `diagnostics/posterior-prefix-scaling-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
