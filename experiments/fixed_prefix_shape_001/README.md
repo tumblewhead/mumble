@@ -2,12 +2,24 @@
 
 ## Status
 
-The numerical node generator and analyzer are implemented and have passed 21
-fabricated unit tests. The C capture/reference backend is **not implemented or
-qualified here**. The battery-data comparison has **not run**. This directory
-contains no new battery accuracy, convergence, covariance, or coverage result.
-The completed rolling experiment and all its failed/successful receipts remain
-unchanged at `af4524c40b33cb80de230a4afc8878793a9f1860`.
+The C commit-only capture, original-recurrence reference backend and bounded
+supervisor are implemented and qualified on fabricated inputs. The final suite
+passed 704 C assertions, 80 Decimal checks, 11 negative/preservation checks and
+four supervisor checks. The numerical geometry/analyzer retains its earlier
+21 passing tests. The actual battery-data comparison has **not yet run**.
+
+Both registered inputs have been restored from existing lossless repository
+archives and match their exact byte counts and SHA256 values. The earlier
+missing-input finding applied to the uncompressed path and missed the tracked
+chunked archive. No source was regenerated. See [restoration](input_restoration001.json),
+[backend contract](backend_contract.json), [source review](backend_review.json),
+and [qualification](qualification/backend_development003/receipt.json).
+The review was performed by the same assistant; it is not independent review.
+
+The original failed development attempt is retained. It compared unused ADC
+padding bytes; the checkpoint now serializes those bytes as zero, and equality
+checks compare canonical input fields. Exact original source versions were
+recovered against their recorded hashes in `qualification/recovered_sources001`.
 
 ## What repository inspection established
 
@@ -21,8 +33,8 @@ This supports a **commit-only reconstruction proposal**, not a claim that such a
 reconstruction has already been qualified or executed.
 
 The original observation file is referenced by a 16,128,000-byte identity and
-SHA256 in the source manifest. It is absent from its canonical GitHub directory
-at the inspected revision. The first two-hour prefix occupies 8,064,000 bytes.
+SHA256 in the source manifest. It was absent as an uncompressed file at the inspected revision, but its exact
+bytes are retained in the tracked `implementation/evidence/primary.tar.xz.part-*` archive. The first two-hour prefix occupies 8,064,000 bytes.
 No substitute stream, source regeneration or reoptimization is authorized by
 this design. The original trace is distributed through the existing verified
 transport/restoration path. Its uncompressed identity is also fixed in the plan.
@@ -105,7 +117,7 @@ Run from this directory:
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python -m unittest -v test_shape
 ```
 
-After the separately implemented and qualified C backend supplies the capture:
+The backend/supervisor supplies the capture; geometry can then be inspected with:
 
 ```sh
 python shape.py design --capture capture.json --snapshot bank.bin --output nodes.json
@@ -133,8 +145,17 @@ Development attempt 002 passed all 21 tests. These are software development test
 iterations, not scientific-run retries. No canonical observations or truth were
 read. No independent-agent review is claimed.
 
-Implement and qualify the commit-only C capture plus batched original-recurrence
-reference backend, bind the unchanged model/codec source identities, publish its
-source, locate the exact archived observations, and execute the one finite plan.
+Next publish and verify the qualified backend source, then execute the one finite
+plan using `runner.py --qualification qualification/backend_development003/receipt.json
+--publication source_publication.json`. The runner reserves `attempt001` durably
+and refuses any scientific retry. The original GCC13 producer and this GCC16
+build must still pass every exact snapshot parity gate.
 Do not rerun the four-hour estimator or its three closed audits. Do not propose
 intervals or M3 promotion from this numerical-module qualification.
+
+## Subsequent trajectory objective
+
+After this development is stable, the requested next capability is a configurable
+cell/load/noise/duration trajectory runner for longer-term behavior across those
+variations. The current diagnostic remains a finite prerequisite. No longer
+campaign has started, and this step will not establish coverage or M23 readiness.
