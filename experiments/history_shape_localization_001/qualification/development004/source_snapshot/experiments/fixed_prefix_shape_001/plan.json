@@ -1,0 +1,211 @@
+{
+  "schema": "mumble_fixed_prefix_shape_plan_v1",
+  "status": "design_selected_numerical_module_tested_C_backend_pending",
+  "base_revision": "af4524c40b33cb80de230a4afc8878793a9f1860",
+  "work_branch": "diagnostics/fixed-prefix-shape-001",
+  "scientific_execution_status": "not_started",
+  "new_inference_runs": 0,
+  "fixed_prefix": {
+    "records": 252000,
+    "source_elapsed_s": 7200,
+    "blocks": 15750,
+    "saved_snapshots": 15751,
+    "selection": "first already scheduled exact-audit checkpoint; not truth-selected"
+  },
+  "input": {
+    "observations": {
+      "path": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+      "bytes": 16128000,
+      "sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+      "prefix_bytes": 8064000
+    },
+    "trace": {
+      "path": "experiments/live_anchor_integration_001/attempt001/producer/raw_probe.json",
+      "bytes": 33494823,
+      "sha256": "b2f9194092392f9001d1cef417db881c1d9b8ff9759ee6731d78a08600b1f46c",
+      "restoration": "existing publication_transport001/ARTIFACTS.md; exact byte-only restoration, no inference"
+    },
+    "model_contract": "experiments/live_anchor_integration_001/attempt001/source_manifest.json",
+    "calibration": "unchanged hp_fixture_calibration; original 12-bit V/I/T encoder and decoder; actual intervals/order",
+    "sigma_V": 0.001,
+    "truth_reads": 0,
+    "source_generations": 0
+  },
+  "state_reconstruction": {
+    "method": "host_only_commit_replay_of_saved_accepted_anchors",
+    "initialization": "re_init(public mean), zero prefix; never initialize the live candidate with final saved anchor",
+    "per_block": "offer/admit 16 original ADC records; install that block saved accepted x in host-only harness; re_commit; query for parity",
+    "forbidden_calls": [
+      "re_refine",
+      "re_process",
+      "ch_refine",
+      "any optimizer",
+      "truth readers"
+    ],
+    "qualification_required": "fabricated original online versus commit-only reconstruction; compare factor, jet, origin, estimate, support extrema, cursors, source identity and flags, excluding real work counters; no archive read in this qualification",
+    "parity": "bitwise recorded likelihood/prior/total costs, endpoint SOC/v[3]/h, elapsed, support/endpoint slacks and flags at every available snapshot including initial; no data-selected tolerance",
+    "snapshot": "bank + inputs + calibration only; explicit host ABI/schema and SHA256; exclude pointer-bearing auxiliary and scratch workspace; block and ingress counts zero",
+    "counter_semantics": "new reconstruction work only; do not forge historical optimization counters",
+    "failure": "stop unresolved; no automated rerun, changed prefix, reoptimization or tolerance expansion"
+  },
+  "geometry": {
+    "metric": "full joint original-x GN plus kernel precision from re_query(ctx,1,1); node design only",
+    "scale": "D=diag(ch_public_sd), M=D*G*D, M=L*L.T, B=D*inverse(L.T)",
+    "whitening_residual_inf_max": 1e-06,
+    "metric_repairs": false,
+    "directions": {
+      "basis": 16,
+      "normalized_pair_sums": 120
+    },
+    "signs": [
+      -1,
+      1
+    ],
+    "initial_radii": [
+      1,
+      0.5
+    ],
+    "global_support_halvings_max": 16,
+    "support_only": true,
+    "support_inputs": [
+      "original entering lower/upper",
+      "charge_min_Ah",
+      "charge_max_Ah"
+    ],
+    "reference_calls_before_nodes_frozen": 0,
+    "node_count": 545,
+    "freeze": "save exact nodes.json and SHA256 before reference evaluation; all downstream points must match exactly"
+  },
+  "comparison": {
+    "objective": "likelihood only; same original common supported prior on both sides",
+    "prior_source_sha256": "500e9f20893d66570607d268cb1e5e6eccf37c8078127ff345cbcce92a73c2a9",
+    "contrast": "(L_rep(x)-L_rep(a))-(L_ref(x)-L_ref(a))",
+    "budget_NLL": 0.1,
+    "quantity": "finite-node error oscillation; not absolute anchor offset",
+    "arithmetic": "backend must qualify/register represented and reference computed-cost allowances before canonical execution; shape.py adds a six-operation gamma guard for centered scalar subtraction",
+    "exclusions": [
+      "recurrence/libm forward-error certificate",
+      "physical model error",
+      "between-node/global/tail fidelity",
+      "posterior coverage"
+    ],
+    "missing_nodes": "retain explicit unavailable records; never silently drop/replace them",
+    "decisions": [
+      "repair_computed_shape_witness",
+      "keep_on_tested_points_only",
+      "unresolved"
+    ],
+    "outputs": [
+      "all centered discrepancies and allowances",
+      "full mixed second-difference matrices at two scales",
+      "odd directional slope differences",
+      "endpoint discrepancies clearly not physical-truth errors",
+      "resource/call counts and closed hashes"
+    ]
+  },
+  "finite_caps": {
+    "capture_invocations": 1,
+    "comparison_invocations": 1,
+    "retries": 0,
+    "new_optimizer_calls": 0,
+    "capture_records": 252000,
+    "capture_model_steps": 504000,
+    "capture_qr_rows": 252000,
+    "capture_queries_including_metric": 31502,
+    "capture_prior_evaluations_including_metric": 15752,
+    "represented_node_queries": 545,
+    "reference_passes": 545,
+    "reference_model_steps": 137340000,
+    "reference_predict_calls": 137340000,
+    "CPU_s": 600,
+    "wall_s": 900,
+    "host_RSS_bytes": 268435456,
+    "host_AS_bytes": 1073741824,
+    "closed_output_bytes": 67108864,
+    "scope": "host diagnostic only, not target estimator memory or timing"
+  },
+  "execution_gates": [
+    "C backend implementation and source review",
+    "fabricated commit-replay and reference/allowance qualification",
+    "publish and verify qualified source",
+    "exact full observations and original trace byte identities available",
+    "durable exclusive reservation and call budgets before launch",
+    "all snapshot parity checks pass",
+    "pointer-free checkpoint closed and hashed",
+    "exact node set closed and hashed before references"
+  ],
+  "implemented_files": [
+    "shape.py",
+    "test_shape.py"
+  ],
+  "pending_implementation": [
+    "C commit-only capture",
+    "C original-recurrence batch reference and numerical allowance accounting",
+    "bounded once-only process supervisor and capture preservation"
+  ],
+  "capture_contract": {
+    "schema": "mumble_fixed_prefix_capture_v1",
+    "required": [
+      "base_revision",
+      "prefix",
+      "observations_sha256",
+      "trace_sha256",
+      "snapshot_scope",
+      "snapshot_bytes",
+      "snapshot_sha256",
+      "reconstruction",
+      "anchor[16]",
+      "metric_packed_lower[136]",
+      "public_sd[16]",
+      "lower[16]",
+      "upper[16]",
+      "charge_min_Ah",
+      "charge_max_Ah",
+      "charge_Ah"
+    ],
+    "reconstruction": {
+      "method": "commit_only",
+      "optimizer_calls": 0,
+      "truth_reads": 0,
+      "records": 252000,
+      "blocks": 15750,
+      "checked_snapshots": 15751,
+      "parity": "bitwise"
+    },
+    "snapshot_scope": "pointer_free_host_ABI_bank_inputs_calibration"
+  },
+  "evaluation_contract": {
+    "schema": "mumble_fixed_prefix_evaluations_v1",
+    "required": [
+      "design_sha256",
+      "snapshot_sha256",
+      "prefix",
+      "observations_sha256",
+      "common_prior_source_sha256",
+      "closed=true",
+      "rows[545]"
+    ],
+    "row": {
+      "required": [
+        "id",
+        "x[16]",
+        "status"
+      ],
+      "available": [
+        "represented_likelihood_cost",
+        "reference_likelihood_cost",
+        "represented_cost_allowance",
+        "reference_cost_allowance"
+      ],
+      "unavailable": [
+        "reason"
+      ]
+    }
+  },
+  "no_promotion": [
+    "uncertainty intervals",
+    "all-parameter convergence",
+    "M3",
+    "actual Cortex-M23 qualification"
+  ]
+}

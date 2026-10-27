@@ -1,0 +1,32 @@
+{
+  "schema": "mumble_fixed_prefix_backend_contract_v1",
+  "status": "registered_before_canonical_evaluation",
+  "scope": "host diagnostic; inherited estimator, codec, model and geometry unchanged",
+  "capture": {
+    "format": "expected records are little-endian Q27dIII: index; x16, elapsed, likelihood, prior, total, SOC,v3,h,support_slack,endpoint_slack; flags,phase,available",
+    "parity": "memcmp every binary64 field and exact integer fields at all 15751 snapshots, including initial; abort immediately on mismatch",
+    "checkpoint": "FPSH001 plus explicit sizes, ch_bank, lab_input_store, adc12_calibration; initialized host ABI, excludes auxiliary pointer union, result and scratch",
+    "counter_semantics": "actual reconstruction only; optimizer/proposal/accepted counters zero",
+    "qualification": "four fabricated online paths versus saved-anchor commit reconstruction, including changed anchors, zero current/time, mixed signs and varying intervals; full bank equality excluding only work counters"
+  },
+  "arithmetic": {
+    "rounding": "binary64 round-nearest; no fast-math or contraction; nonfinite results unavailable; positive allowance arithmetic rounded upward with nextafter",
+    "gamma": "gamma_n = n*u/(1-n*u), u=2^-53, with outward operations and n*minimum_subnormal additive allowance",
+    "represented": "gamma_16384 * cost_absolute_scale plus underflow allowance; committed bank has zero raw records; bound covers evaluation of the stored 37-feature polynomial at fixed binary64 coefficients and x, including coordinate differences/scaling, products, compensated row sums, squares and final compensated sum",
+    "represented_count_basis": "703 triangular terms; each term uses at most two coordinate subtractions/divisions, one feature product and one coefficient product; each compensated add has at most six rounded operations; 37 squares and the final compensated sum keep the conservative scalar operation count below 16384",
+    "reference": "For each computed prediction mu and decoded V: a=up((abs(mu)+abs(V))/sigma), epsilon=guard(8,a), local=up(epsilon*(abs(r)+epsilon/2)+guard(4,cost)), r=fl((mu-V)/sigma), cost=fl(0.5*r*r). Upward sum of locals plus guard(8*N+32, upward_sum_of_computed_costs) bounds residual formation, squaring and compensated accumulation",
+    "exclusions": ["bank construction and transport error", "recurrence/prediction/libm forward error", "physical model error", "continuous-region, normalization, tail or coverage guarantees"],
+    "qualification": "60-digit Decimal evaluation of stored polynomials and exact-real residual squares from emitted computed operands; separately check original recurrence against a Decimal physical-state recurrence on fabricated cases"
+  },
+  "supervisor": {
+    "reservation": "exclusive fsynced scientific_reservation.json before capture; never deleted after failure",
+    "gates": ["qualified source identities", "verified published revision", "full observation/trace hashes", "all capture parity", "closed pointer-free snapshot", "closed hashed node set before reference"],
+    "limits": "inherited plan caps; single sequential child, process-group termination, CPU/AS/file-size rlimits, wall/output/live-RSS polling, wait4 accounting, fsynced logs with distinct-inode verified copies",
+    "failure": "unresolved receipt; no retries, tolerance widening, regenerated inputs or adaptive node changes"
+  },
+  "future_user_objective": {
+    "request": "Once development is stable, run configurable cell-load-noise-duration trajectories to assess longer-term variation",
+    "sequence": "close current finite diagnostic first; retain stable source/input contracts for a separately registered trajectory runner",
+    "campaign_started": false
+  }
+}

@@ -20,13 +20,17 @@ import numpy as np
 
 def sources():
     result=runner.bound_sources()
-    for n in ('localize.c','diagnose.py','localization_plan.json'):
+    for n in ('localize.c','diagnose.py','localization_plan.json','continuation_plan.json'):
         p=HERE/n;result[str(p.relative_to(ROOT))]=runner.identity(p)
     return result
 
 
 def build(binary):
     return ['cc',*runner.FLAGS,str(HERE/'localize.c'),*runner.SOURCES[2:],'-lm','-o',str(binary)]
+
+
+def input_paths(plan):
+    return {k:ROOT/v['path'] for k,v in plan['inputs'].items()}
 
 
 def run_worker(budget,binary,out,name,obs,expected,bank,nodes,prefix,checkpoints,selected,node_count):
@@ -45,7 +49,7 @@ def run_worker(budget,binary,out,name,obs,expected,bank,nodes,prefix,checkpoints
 
 
 def qualify():
-    out=HERE/'qualification/development003';out.mkdir(parents=True)
+    out=HERE/'qualification/development005';out.mkdir(parents=True)
     bound=sources()
     for n in bound:
         p=out/'source_snapshot'/n;p.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/n,p)
@@ -53,6 +57,9 @@ def qualify():
     result={'status':'failed','sources':bound,'checks':0,'canonical_input_reads':0,'independent':False}
     def check(ok,msg):shape.require(ok,msg);result['checks']+=1
     try:
+        paths=input_paths(shape.load(HERE/'localization_plan.json'))
+        check(len(paths)==6 and all(isinstance(p,Path) and p.is_absolute() for p in paths.values()),
+              'canonical path preparation without opening inputs')
         binary=out/'localize';budget.run(build(binary),'build');result['binary']=runner.identity(binary)
         fixture=HERE.parent/'fixed_prefix_shape_001/qualification/backend_development003'
         old=[json.loads(l) for l in (fixture/'fabricated.stdout').read_text().splitlines()]
@@ -94,8 +101,8 @@ def qualify():
 
 def execute():
     plan=shape.load(HERE/'localization_plan.json');bound=sources()
-    qpath=HERE/'qualification/development003/receipt.json';q=shape.load(qpath)
-    publication=shape.load(HERE/'source_publication.json')
+    qpath=HERE/'qualification/development005/receipt.json';q=shape.load(qpath)
+    publication=shape.load(HERE/'source_publication002.json')
     revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     shape.require(q['status']=='passed' and q['sources']==bound,'qualification gate')
     shape.require(publication['status']=='verified_remote' and publication['revision']==revision
@@ -103,13 +110,17 @@ def execute():
     binary=qpath.parent/'localize';shape.require(runner.identity(binary)==q['binary'],'binary identity')
     for v in plan['inputs'].values():
         shape.require(runner.identity(ROOT/v['path'])=={k:v[k] for k in ('bytes','sha256')},'input identity')
-    runner.save(HERE/'reservation.json',{'source_revision':revision,'sources':bound,'invocations':1,
+    previous=shape.load(HERE/'attempt001/receipt.json')
+    shape.require(previous['status']=='unresolved' and previous['children']==[]
+                  and previous['error']=="TypeError: 'PosixPath' object is not subscriptable",
+                  'continuation requires preserved zero-worker prelaunch failure')
+    runner.save(HERE/'reservation002.json',{'source_revision':revision,'sources':bound,'invocations':1,
                 'retries':0,'caps':plan['caps'],'qualification':runner.identity(qpath)})
-    out=HERE/'attempt001';out.mkdir();budget=runner.Budget(out,cpu=60,wall=120)
+    out=HERE/'attempt002';out.mkdir();budget=runner.Budget(out,cpu=60,wall=120)
     result={'status':'unresolved','source_revision':revision,'sources':bound,'invocations':1,
             'candidate_updates':0,'optimizer_calls':0,'truth_reads':0}
     try:
-        paths={k:ROOT[v['path']] for k,v in plan['inputs'].items()}
+        paths=input_paths(plan)
         records=run_worker(budget,binary,out,'localization',paths['observations'],paths['expected'],
                            paths['bank'],paths['nodes_binary'],252000,plan['checkpoints'],
                            plan['selected_node_indices'],545)
