@@ -1,0 +1,193 @@
+{
+  "schema": "live_bootstrap_primitive_saved_result_review_v1",
+  "status": "passed",
+  "scope": "Saved fabricated qualification results and reviewed source bindings only; no additional fixture, model, optimizer, prior or observed-data execution.",
+  "sources_and_design_review": {
+    "path": "experiments/live_anchor_bootstrap_001/review/source_and_design_review.json",
+    "bytes": 10954,
+    "sha256": "e1f185883bdbc8334d0cfa51ecad95a14d10f2103d32eae4554209f8823c132c"
+  },
+  "receipts": [
+    {
+      "path": "experiments/live_anchor_bootstrap_001/qualification/adc12_attempt001/receipt.json",
+      "bytes": 15917,
+      "sha256": "af05035758fe9f3522740f49c137f7ca47770a18d15f3ff4b7220677ed6d6fbc"
+    },
+    {
+      "path": "experiments/live_anchor_bootstrap_001/qualification/support_run001/receipt.json",
+      "bytes": 136451,
+      "sha256": "bf3c0302ec7543eb160dca3c06f035de480e12f5b9a8a9521e52f4f7ecc0e027"
+    },
+    {
+      "path": "experiments/live_anchor_bootstrap_001/qualification/translation_attempt001/receipt.json",
+      "bytes": 2834,
+      "sha256": "932a66a3fcb31014debc9b5e0786cc1f5cd54ff105d55de7a94f51eb20848183"
+    }
+  ],
+  "checks": {
+    "all_reviewed_sources_unchanged": true,
+    "support_one_build14calls": true,
+    "support_all277_assertions": true,
+    "support_plan_matches": true,
+    "support_manifest_matches": true,
+    "support_sizes": true,
+    "support_own_stack": true,
+    "translation_single8cases255points": true,
+    "translation_assertions39149": true,
+    "translation_reported_allowance": true,
+    "static_layout_total": true,
+    "passed_receipts": true,
+    "no_scientific_calls": true
+  },
+  "support_witnesses": [
+    {
+      "fixture": "active_h_other_descent",
+      "status": 0,
+      "reason": 0,
+      "original_coordinate_point": [
+        -0.05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "positive_descent_quantity": 0.010000000000000002,
+      "descent_allowance": 2.8421709430404836e-16,
+      "minimum_support_slack": 0.0,
+      "minimum_step_slack": 0.8
+    },
+    {
+      "fixture": "lower_soc_face",
+      "status": 0,
+      "reason": 0,
+      "original_coordinate_point": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.6931471805599453,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "positive_descent_quantity": 0.8614688793449419,
+      "descent_allowance": 2.4484418172078416e-14,
+      "minimum_support_slack": 0.0,
+      "minimum_step_slack": 0.3068528194400547
+    },
+    {
+      "fixture": "upper_soc_face",
+      "status": 0,
+      "reason": 0,
+      "original_coordinate_point": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.6931471805599453,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "positive_descent_quantity": 0.8614688793449419,
+      "descent_allowance": 2.4484418172078416e-14,
+      "minimum_support_slack": 0.0,
+      "minimum_step_slack": 0.3068528194400547
+    },
+    {
+      "fixture": "reciprocal_log_trust",
+      "status": 0,
+      "reason": 0,
+      "original_coordinate_point": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "positive_descent_quantity": 8.0,
+      "descent_allowance": 2.2737367544323867e-13,
+      "minimum_support_slack": 0.5,
+      "minimum_step_slack": 0.0
+    },
+    {
+      "fixture": "zero_gradient",
+      "status": 1,
+      "reason": 1,
+      "original_coordinate_point": null,
+      "positive_descent_quantity": -0.0,
+      "descent_allowance": 1.28e-321,
+      "minimum_support_slack": null,
+      "minimum_step_slack": null
+    },
+    {
+      "fixture": "reciprocal_anchor_rounding",
+      "status": 1,
+      "reason": 2,
+      "original_coordinate_point": null,
+      "positive_descent_quantity": 0.0,
+      "descent_allowance": 0.0,
+      "minimum_support_slack": null,
+      "minimum_step_slack": null
+    }
+  ],
+  "interpretations": [
+    "The active-h fixture keeps h0=-1 and returns descent in an independent feasible direction, addressing the concrete outward-direction obstruction without relaxing support.",
+    "Both coupled SOC faces move logQ and entering SOC together to logQ=-log(2),z0=0.5 with zero boundary slack and resolved original-coordinate descent. This is a fabricated geometric witness, not battery estimation accuracy.",
+    "The zero-gradient and reciprocal-anchor rounding fixtures remain explicitly unresolved. Invalid/nonfinite/indefinite input and metric statuses are not promoted to usable proposals.",
+    "All277 support assertions include independent Decimal polygon and exact Fraction majorizer/guard checks. Their finite scope does not establish universal binary64 polygon optimality or nonlinear objective acceptance.",
+    "The translation fixture passes39149 assertions over255 dense full-cost/gradient/Hessian points with maximum error/allowance9.139007007159217e-6. It preserves the represented sparse polynomial; it does not renew history fidelity.",
+    "Host sizeof validates8680 B of operational objects and10216 B only after adding the two768 B planning reservations.584 B is the conservative emitted support primitive project call path, excluding libm/libc/caller/IRQ; even with its48 B input view, complete integrated and target paths remain unqualified."
+  ],
+  "strongest_next_step": "Implement the selected16-record rolling engine using the qualified primitives, including current-block joint derivatives, approximate boundary recentering, represented-objective acceptance, once-only evidence ownership and fault/phase liveness; then freeze one finite public-start stream study. No new canonical run is authorized by these primitive results.",
+  "material_issues": [],
+  "reviewer_activity": {
+    "source_reads": true,
+    "saved_result_reads": true,
+    "saved_file_hashing": true,
+    "test_calls": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_calls": 0,
+    "observation_reads": 0,
+    "truth_reads": 0
+  }
+}

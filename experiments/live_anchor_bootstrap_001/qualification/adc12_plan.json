@@ -1,0 +1,54 @@
+{
+  "schema": "mumble_adc12_transport_qualification_plan_v1",
+  "status": "frozen_before_source_qualification",
+  "base_revision": "f26f5586535b7658ca9352b81339005f885287d6",
+  "authorization": "Implement the separate live ADC12 transport/calibration component and execute one finite fabricated suite. No model adapter or scientific numeric work.",
+  "sources": [
+    "experiments/live_anchor_bootstrap_001/adc12.h",
+    "experiments/live_anchor_bootstrap_001/adc12.c",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_test.c",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_qualification.py"
+  ],
+  "interface": {
+    "channels": "Three uint16_t values, each in [0,4095], ordered voltage/current/temperature; no C bitfields.",
+    "time": "uint64_t actual interval_ticks per raw sample, never a nominal-rate interval or an absolute timestamp. Zero ticks is permitted. Positive finite seconds_per_tick is caller supplied.",
+    "sequence": "One contiguous uint64_t next-sequence cursor in the FIFO. Push receives sequence separately; pop derives sequence from next_sequence-count. UINT64_MAX is the exhausted next cursor, never wrapped.",
+    "source": "One opaque 32-byte source identity retained in the FIFO and matched on every push.",
+    "queue": "16 native raw samples, one source identity, next sequence and uint32_t head/count. Expected host sizes are raw16 B and queue304 B; report actual sizeof.",
+    "calibration": "Caller-injected finite affine offset and units_per_code for all three channels, plus positive finite seconds_per_tick. Finite zero/negative channel gains are allowed as explicit caller choices. No physical calibration defaults.",
+    "decoded": "Four doubles dt_s, voltage_V, current_A, temperature_C. Atomic take also returns the unchanged raw sample and its derived sequence in separate buffers.",
+    "codec": "Optional exactly5-byte little-endian V bits0..11, I bits12..23, T bits24..35; upper4 bits must be zero. It serializes channels only, never struct padding or time metadata.",
+    "rejection": "Invalid arguments, overlap, lengths, range, padding, source, order, queue state/full/empty, sequence exhaustion, calibration and nonfinite conversion do not change the stream or output objects.",
+    "execution": "Allocation-free, no file/history API, single caller or externally serialized access; not an ISR-safe queue by itself."
+  },
+  "cases": [
+    {"name": "codec_roundtrip_and_rails", "vectors": 40, "description": "36 single channel-bit positions plus zero, all rails and two distinct mixed vectors; exact canonical bytes and reverse values."},
+    {"name": "codec_rejection_atomicity", "description": "Each channel at4096/65535, each high padding bit, wrong lengths, null arguments and alias rejection; unchanged outputs."},
+    {"name": "explicit_calibration", "description": "Exact binary-friendly fabricated coefficients, zero duration, raw rails, zero/negative gains and a uint64 duration above2^53. No physical ADC assumptions."},
+    {"name": "calibration_rejection_atomicity", "description": "Each coefficient NaN/infinity, invalid time scale, finite product/sum overflow, invalid code, null and overlap rejection."},
+    {"name": "source_order_range_atomicity", "description": "Opaque source mismatch, repeated/skipped sequence and invalid raw code reject without moving any FIFO field."},
+    {"name": "fifo_capacity_wrap_and_sequence", "description": "Fill16, reject full, pop8, append8 and drain exact FIFO order with derived sequences; empty rejects unchanged."},
+    {"name": "atomic_calibrated_take", "description": "Failed calibration retains raw input, sequence and decoded output; success consumes exactly one sample and retains raw temperature/time."},
+    {"name": "alias_state_and_counter_guards", "description": "Overlapping stream/input/output objects, corrupt head/count/cursor and exhausted uint64 cursor reject unchanged; no sequence wrap."}
+  ],
+  "execution": {
+    "attempt_path": "experiments/live_anchor_bootstrap_001/qualification/adc12_attempt001",
+    "exclusive_directory": true,
+    "compile_invocations": 1,
+    "test_invocations": 1,
+    "retry_count": 0,
+    "compiler_flags": ["-std=c99", "-O2", "-Wall", "-Wextra", "-Wpedantic", "-Werror", "-fno-fast-math", "-ffp-contract=off", "-fstack-usage"],
+    "compile_caps": {"CPU_s": 10, "wall_s": 15, "RSS_bytes": 134217728, "AS_bytes": 1073741824, "file_bytes": 262144},
+    "test_caps": {"CPU_s": 2, "wall_s": 3, "RSS_bytes": 67108864, "AS_bytes": 268435456, "file_bytes": 65536},
+    "whole_caps": {"CPU_s": 15, "wall_s": 20, "parent_RSS_bytes": 134217728, "closed_output_bytes": 524288}
+  },
+  "required_receipt": ["Exact source/plan/compiler/Python identities before and after", "Compiler/test argv and exit status", "Exact waited-process CPU/wall/RSS with compiler descendants included", "All case/assertion results", "Actual sizeof and host compiler stack records", "Full-path simultaneous storage ledger and comparison with prior448 B ADC reservation", "Closed file manifest and explicit scientific activity0"],
+  "limits": [
+    "Raw codes0 and4095 are retained as rail codes. Conversion does not declare them ordinary finite-noise measurements or implement censoring/saturation semantics.",
+    "Temperature is retained and converted only. The existing physical model is fixed at25 C; no compensation or physical validity claim is added.",
+    "Transport ADC width does not specify residual/statistic precision or replace measurement-noise assumptions.",
+    "Tick-to-double and affine arithmetic use host C double rounding; exact large-integer or physical calibration accuracy is not claimed.",
+    "No hardware sampling, DMA, clock wrap, interrupt concurrency, target stack/timing or physical ADC performance is qualified.",
+    "No model, optimizer, prior, learner, archived observation or truth call/read. No completed-study replay."
+  ]
+}

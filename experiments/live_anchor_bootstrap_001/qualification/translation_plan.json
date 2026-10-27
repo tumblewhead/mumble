@@ -1,0 +1,20 @@
+{
+  "schema":"live_translation_qualification_plan_v1",
+  "scope":"Fabricated algebra and host layout only; no model, observation, prior, truth or archived optimizer calls.",
+  "invocations":{"build":1,"test":1,"retries":0},
+  "caps":{"wall_seconds_per_child":30,"post_capture_bytes":1048576,"live_output_bound":false,"assertions":100000,"evaluation_points":255},
+  "cases":[
+    "zero translation leaves a finite nontrivial factor bitwise unchanged",
+    "three fixed dense mixed shifts,32 points each, full cost/gradient/Hessian",
+    "translation and its inverse,24 points",
+    "two composed exact-binary shifts,24 points",
+    "all37 pure basis terms,3 points each, including all20 quadratic pairs",
+    "null and alias argument rejection without writes",
+    "nonfinite shift/factor and overflow rejection without writes; independent pair map",
+    "complete static phase-layout sizes and offsets including56B RAM calibration"
+  ],
+  "arithmetic_check":{"reference":"independent dense long-double differentiation of each row polynomial","allowance":"gamma(16384)*(old_absolute_expansion+new_absolute_expansion), with gamma(n)=n*DBL_EPSILON/(1-n*DBL_EPSILON)","meaning":"Conservative frozen operation allowance for these bounded algebra fixtures, not a global numerical certificate or a physical uncertainty threshold."},
+  "memory":{"native_input_bytes":16,"query_state_bytes":224,"query_decoded_bytes":32,"phase_workspace_bytes":1600,"core_bytes":8088,"input_store_bytes":408,"calibration_bytes":56,"codec_reserve_bytes":128,"own_stack_cap_bytes":768,"runtime_irq_caller_cap_bytes":768,"planned_total_bytes":10216,"target_measurement":false,"integrated_phase_execution":false},
+  "failure_policy":"Preserve the first build/run and capture; any adaptation gets a new explicit attempt. A failed build is not a numerical execution.",
+  "acceptance":"All eight fabricated cases pass within frozen work caps; report compiler stack frames separately from the unmeasured integrated/target stack reservation."
+}

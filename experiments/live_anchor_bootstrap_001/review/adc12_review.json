@@ -1,0 +1,62 @@
+{
+  "schema": "live_adc12_independent_review_v1",
+  "status": "passed",
+  "scope": "Static component/test/runner review plus saved-byte qualification audit. No source execution or scientific calls by reviewer.",
+  "receipt": {
+    "path": "experiments/live_anchor_bootstrap_001/qualification/adc12_attempt001/receipt.json",
+    "bytes": 15917,
+    "sha256": "af05035758fe9f3522740f49c137f7ca47770a18d15f3ff4b7220677ed6d6fbc"
+  },
+  "source_freeze": {
+    "path": "experiments/live_anchor_bootstrap_001/qualification/adc12_source_freeze.json",
+    "bytes": 1787,
+    "sha256": "98ba37e75e008ae35432665ae974f930b5cf002e15ac77932daf0cded06166f1"
+  },
+  "source_sha256": {
+    "experiments/live_anchor_bootstrap_001/adc12.c": "c79f6f394bd83d75ab2c85ac645919b031371f5052cbb5c5915e455f5b4ec343",
+    "experiments/live_anchor_bootstrap_001/adc12.h": "f05e46ee9a01b7dd9bbf2c3da6313061c5df46adfe4d00155b66c4d72c46d4aa",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_plan.json": "2d730875a18557fbbd71f947305e5264cb2b331942a55c3796057014790e99cf",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_qualification.py": "b9ceb5fff228f011713470d502f8aa76fbf29173640f89203e7a09a4cda55faf",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_test.c": "744d92f97c1376c3550683378e11aaea7f05b60e92ca1c45a381ed0485dbb8f1"
+  },
+  "checks": {
+    "receipt_status_passed": true,
+    "all_frozen_sources_match": true,
+    "compiler_python_identities_match": true,
+    "manifest_matches": true,
+    "manifest_exact": true,
+    "closed_bytecount_matches": true,
+    "one_build_one_test": true,
+    "scientific_activity_zero": true,
+    "cases_assertions": true,
+    "child_resources": true,
+    "child_accounting_complete": true,
+    "capture_pairs": true
+  },
+  "saved_result": {
+    "cases": 8,
+    "assertions": 657,
+    "codec_vectors": 40,
+    "compile_invocations": 1,
+    "test_invocations": 1,
+    "retries": 0,
+    "closed_output_bytes": 73895
+  },
+  "interpretation": [
+    "Raw 12-bit V/I/T codes, actual uint64 interval ticks and explicit affine calibration are preserved. No model adapter, noise calibration or temperature-compensation claim.",
+    "Atomic failure leaves queue and output unchanged; externally serialized single-owner API is not an interrupt-safe queue.",
+    "The standalone 304 B FIFO plus one raw buffer, decoded reading, sequence, calibration and separate push source sums to 448 B; stack and acquisition concurrency are excluded. The integrated rolling-block layout does not additionally own this FIFO.",
+    "Resources are exact per waited child; supervisor CPU/wall snapshot explicitly excludes final receipt close. Per-function host stack is not whole-path or target stack."
+  ],
+  "reviewer_activity": {
+    "source_reads": true,
+    "saved_artifact_hashing": true,
+    "compiler_calls": 0,
+    "test_calls": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_calls": 0,
+    "observation_reads": 0,
+    "truth_reads": 0
+  }
+}

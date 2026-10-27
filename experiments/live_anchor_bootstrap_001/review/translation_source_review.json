@@ -1,0 +1,59 @@
+{
+  "schema": "live_translation_source_review_v1",
+  "status": "passed",
+  "scope": "Pre-execution source and mathematical review of the frozen eight-case fabricated translation/layout qualification. Integration and target measurement are excluded.",
+  "build_invocations_before_this_review": 0,
+  "test_invocations_before_this_review": 0,
+  "reviewed_source_sha256": {
+    "experiments/live_anchor_bootstrap_001/history_translation.h": "5aab00671e32f3e3e5323e2e97e8922610f2d06206b34d2cf9df4283885fb31e",
+    "experiments/live_anchor_bootstrap_001/history_translation.c": "fc466d7893c8bd1b981e9a753dec04e46575badd597b969f0d2fd8b337877eba",
+    "experiments/live_anchor_bootstrap_001/live_layout.h": "24d37d7f298dfdbce40bb2da7ae2d39c8a76479c90d835b00c18383e511f7ba5",
+    "experiments/live_anchor_bootstrap_001/support_step.h": "e30ad444760167cbcf1a1dd33911cb6fd9b5e58a9dabe4d4f877c9ad75bc371e",
+    "experiments/live_anchor_bootstrap_001/adc12.h": "f05e46ee9a01b7dd9bbf2c3da6313061c5df46adfe4d00155b66c4d72c46d4aa",
+    "experiments/live_anchor_bootstrap_001/qualification/translation_test.c": "7100f739536266f18ff31b1ea212afa306ffad86649c08e7633dea983cb7a487",
+    "experiments/live_anchor_bootstrap_001/qualification/translation_plan.json": "4c437c83c0aa01949a14f46e3b956710407d5202d6484c0abbf6a00c39182db4",
+    "experiments/live_anchor_bootstrap_001/qualification/run_translation.py": "f3471eaf64cdcc135b1d17bf2704b1c39ac2c308873fed08bc083903ca908324",
+    "experiments/compact_nonlinear_history_001/compact_history.h": "f115ae16915937b84ecf284377b3db96bac3f45f36c12dd444b9a2c7aa05fc3e",
+    "include/scm_model.h": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c",
+    "tools/capture_preservation.py": "14f1ec0c73a816ffa0c441b6a5af465115e98080d1948d452f41a28ea30e5207"
+  },
+  "findings": {
+    "polynomial_translation": "For d_old=d_new+s, the 20 quadratic,16 linear,constant basis is closed under translation. Its feature transform is upper triangular. Each row constant is updated before its original linear coefficients; each linear update depends only on its unchanged quadratic entries and its own old linear entry. This computes R*T without another factor.",
+    "failure_policy": "All source entries, shifts and prospective coefficient sums are checked before writes. Argument/alias/nonfinite preflight rejection preserves the factor. A mutation-stage fault explicitly requires the owner to latch unavailable; rollback is not promised.",
+    "finite_qualification": "Eight fixed cases include 255 independent dense long-double cost/full-gradient/full-Hessian comparisons, all37 basis terms and all20 pair identities, inverse/composition, rejection and complete layout assertions. Frozen tolerance covers these computed bounded fixtures; no physical or posterior threshold.",
+    "ownership": "Primitive does not read observations, evaluate a model or prior, change source/cursor ownership or relinearize old nonlinear evidence. Boundary-jet transport is separate and not implemented here.",
+    "runner": "One exclusive attempt, one build and at most one test; source hashes checked after, test output committed through existing capture-preservation utility before JSON use. Host cumulative-child RSS and per-function compiler frames are labeled, not target SRAM measurements."
+  },
+  "planned_layout_bytes": {
+    "bank": 6368,
+    "workspace": 1600,
+    "result": 120,
+    "core": 8088,
+    "retained16_and_ingress8_plus_metadata": 408,
+    "calibration_RAM": 56,
+    "codec_reserve": 128,
+    "operational_layout": 8680,
+    "own_stack_reserve": 768,
+    "runtime_IRQ_caller_reserve": 768,
+    "total": 10216,
+    "ceiling": 10240,
+    "headroom": 24
+  },
+  "layout_requirements": [
+    "The standalone adc12_stream is not additionally live. Source identity and committed cursor are reused from bank.",
+    "Actual sizeof and offsets must pass the frozen fixture. ss_input and all integration temporaries must occupy counted stack/result storage.",
+    "Query view is packed1088+gradient128+point128+state224+decoded32=1600. Merge view376+296+32+24=728 overlays it.",
+    "Calibration and tick conversion must be immutable within the evidence generation or require explicit invalidation/versioning.",
+    "Complete integrated stack, target ABI, IRQ/DMA concurrency and timing remain unqualified. The planned reserve is not a measured deployment fit."
+  ],
+  "reviewer_activity": {
+    "source_reads": true,
+    "compiler_calls": 0,
+    "test_calls": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_calls": 0,
+    "observation_reads": 0,
+    "truth_reads": 0
+  }
+}

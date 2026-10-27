@@ -1,0 +1,125 @@
+{
+  "schema": "live_bootstrap_independent_source_and_design_review_v1",
+  "status": "passed",
+  "stage": "Static source, math and design review; numerical qualification receipts are separate and must close before final acceptance.",
+  "canonical_stream_invocations_before_review": 0,
+  "source_sha256": {
+    "plans/live_anchor_bootstrap_001.json": "69f4d042d356fc5b1b933068e91f8a6476762a0af94c486773e3d9c095a82468",
+    "experiments/live_anchor_bootstrap_001/DESIGN.md": "260bbe01482c3d8650f959081048350fd97b471f8706ac2eed0106e61e5fac5c",
+    "experiments/live_anchor_bootstrap_001/adc12.h": "f05e46ee9a01b7dd9bbf2c3da6313061c5df46adfe4d00155b66c4d72c46d4aa",
+    "experiments/live_anchor_bootstrap_001/adc12.c": "c79f6f394bd83d75ab2c85ac645919b031371f5052cbb5c5915e455f5b4ec343",
+    "experiments/live_anchor_bootstrap_001/support_step.h": "e30ad444760167cbcf1a1dd33911cb6fd9b5e58a9dabe4d4f877c9ad75bc371e",
+    "experiments/live_anchor_bootstrap_001/support_step.c": "0f66c06cb34b69ba377d6a52fa154091161501bfcb89c62f44eaa5fb4a02143c",
+    "experiments/live_anchor_bootstrap_001/history_translation.h": "5aab00671e32f3e3e5323e2e97e8922610f2d06206b34d2cf9df4283885fb31e",
+    "experiments/live_anchor_bootstrap_001/history_translation.c": "fc466d7893c8bd1b981e9a753dec04e46575badd597b969f0d2fd8b337877eba",
+    "experiments/live_anchor_bootstrap_001/live_layout.h": "24d37d7f298dfdbce40bb2da7ae2d39c8a76479c90d835b00c18383e511f7ba5",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_plan.json": "2d730875a18557fbbd71f947305e5264cb2b331942a55c3796057014790e99cf",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_test.c": "744d92f97c1376c3550683378e11aaea7f05b60e92ca1c45a381ed0485dbb8f1",
+    "experiments/live_anchor_bootstrap_001/qualification/adc12_qualification.py": "b9ceb5fff228f011713470d502f8aa76fbf29173640f89203e7a09a4cda55faf",
+    "experiments/live_anchor_bootstrap_001/qualification/support_plan.json": "032380d6966f85a0775cdc8b903f1a2722de0a89a151afa34efb0b2eb0ef3dfc",
+    "experiments/live_anchor_bootstrap_001/qualification/support_qualify.py": "7d6ad703aa5776c5d9805bdf41317d5327400367fae561a113174baf79526515",
+    "experiments/live_anchor_bootstrap_001/qualification/translation_plan.json": "1daab1e58495078194d0f1d529e032ddec5c09471ef3e829f00c9b0e81de19c4",
+    "experiments/live_anchor_bootstrap_001/qualification/translation_test.c": "7100f739536266f18ff31b1ea212afa306ffad86649c08e7633dea983cb7a487",
+    "experiments/live_anchor_bootstrap_001/qualification/run_translation.py": "daa03e33bf3e011208c58bc6ca26d4c7d229bc688024672383f542d3490a5a92"
+  },
+  "related_reviews": [
+    {
+      "path": "experiments/live_anchor_bootstrap_001/review/adc12_review.json",
+      "bytes": 2991,
+      "sha256": "2a59dd08a875221561cdc397fd482996ffc10edbdd48d5bf84fddf1e580af91d"
+    },
+    {
+      "path": "experiments/live_anchor_bootstrap_001/review/translation_source_review.json",
+      "bytes": 4610,
+      "sha256": "a73fa32611b28b8ae8d62983dc3710f37cca88c4962d44d816a45a2ef75d10ff"
+    },
+    {
+      "path": "experiments/live_anchor_bootstrap_001/review/translation_source_amendment.json",
+      "bytes": 3354,
+      "sha256": "81f4b296bde25e9247eb1c3c9014834dd9cee7513a2cf2b28bebe764903318ea"
+    }
+  ],
+  "reviewed_contract": {
+    "public_start": true,
+    "older_factor_owns": "[0,n)",
+    "raw_current_block_owns": "[n,n+m), m<=16",
+    "ingress_records": 8,
+    "original_supported_joint_prior_count": 1,
+    "current_block_likelihood": "Nonlinear conditional on the carried approximate boundary functions, not exact reconstruction of the full path.",
+    "coordinate_chart": "Original entering states and parameters retained after approximation-origin translations.",
+    "no_canonical_inference_in_this_unit": true
+  },
+  "mathematical_findings": [
+    {
+      "topic": "Support-aware proposal",
+      "finding": "J55=-SD5 and every scaled cross entry use the reciprocal local Jacobian. Original logQ one-SD and physical bounds are transformed into reciprocal bounds. Fourteen scalar minimizers and the jointly constrained reciprocal-capacity/SOC polygon are treated together. The six halfplanes cover the box and both cumulative-charge extrema."
+    },
+    {
+      "topic": "Computed majorizer and metric",
+      "finding": "Outward absolute row sums majorize the computed full symmetric scaled metric in real arithmetic. Original metric must pass unmodified Cholesky. The diagonal construction is optimizer geometry, not posterior precision, and is not a global upper bound after nonlinear coordinate mapping."
+    },
+    {
+      "topic": "Admissible direction",
+      "finding": "Strict original division-order path support, original-coordinate one-SD bounds, resolved original-gradient slope and full/diagonal tangent model decreases are rechecked. Nonfinite/invalid metric errors remain negative; finite rounding/no-direction states remain unresolved. The candidate alone is never an accepted estimator update or a stationary point claim."
+    },
+    {
+      "topic": "Translation",
+      "finding": "Quadratic-first features are closed under d_old=d_new+s. Upper R*T preserves the already represented polynomial in real arithmetic. Constant-first/linear-second writes need no second factor. Read-only prospective validation precedes mutation; unexpected mutation failure requires unavailability."
+    },
+    {
+      "topic": "Evidence ownership",
+      "finding": "Current raw block is appended once only after accepted-point translation/transport. Old polynomial is never relabeled relinearized evidence. Original prior is included once, in its unchanged base measure; no density Jacobian is introduced for direction coordinates."
+    },
+    {
+      "topic": "Boundary state",
+      "finding": "Second-order boundary recentering and current-block derivative engine remain explicitly unimplemented. Their approximation error persists after old samples are discarded; current-block conditional evaluation is not full historical replay."
+    }
+  ],
+  "resource_review": {
+    "bank": 6368,
+    "workspace": 1600,
+    "result": 120,
+    "input_store": 408,
+    "RAM_calibration": 56,
+    "codec": 128,
+    "project_stack_reservation": 768,
+    "runtime_IRQ_caller_reservation": 768,
+    "planned_total": 10216,
+    "limit": 10240,
+    "headroom": 24,
+    "simultaneous_layout_claim": "Concrete host layout only. The standalone304 B FIFO is not coowned. Current-block query uses224 B state plus32 B decoded reading inside1600 B phase union; no extra jet/model-row/point vectors may coexist.",
+    "caller_view": "The support input48 B and integration locals/callers must fit counted stack/reserves.",
+    "unmeasured": [
+      "Complete integrated call-chain liveness",
+      "Target ABI/linker and actual SRAM",
+      "IRQ/DMA concurrency and input latency",
+      "Software-floating-point runtime",
+      "Calibration-uncertainty or temperature-model state"
+    ]
+  },
+  "calibration_and_uncertainty": [
+    "Actual uint64 interval duration and raw V/I/T rail codes are retained.12 bits does not determine physical units, measurement noise, clipping likelihood or accumulator precision.",
+    "Calibration/timebase is immutable within a source/config identity generation; silently changing it after raw retirement changes charge and old-factor meaning.",
+    "For positive c, scaling current gain and Q by c, resistances by1/c and both hysteresis rates by1/c leaves the present voltage model unchanged within support. Capacity accuracy therefore needs declared calibration or joint calibration uncertainty.",
+    "Temperature is converted and retained, but the existing fixed25 C model supplies no temperature-compensation law.",
+    "Historical fidelity remains unverified. Neither support repair nor polynomial translation establishes SOC/Q interval coverage."
+  ],
+  "finite_qualification_review": {
+    "ADC": "Eight cases/40 codec vectors; saved one-build/one-test receipt independently verified,657 assertions passed.",
+    "support": "Exactly14 frozen fabricated primitive calls; independent80-digit polygon oracle, Fraction majorization/guard checks, known coupled SOC and active-h descent witnesses, strict support, invalid metric and atomic rejection fixtures. Static preflight passed; author owns the one invocation.",
+    "translation_layout": "Eight cases,255 independent dense polynomial evaluation points with full gradient/Hessian; all20 pairs and37 basis terms; layout assertion10216 B. Prelaunch runner/plan amendment reviewed separately; no tolerance or case expansion."
+  },
+  "strongest_next_step": "Integrate one rolling16-record engine in the concrete layout, qualify boundary transport and block derivatives/ownership/fault liveness, then freeze one public-start chronological study with a finite predetermined proposal schedule. Exact archive assessments must remain postclosure and cannot steer candidates.",
+  "material_blockers": [],
+  "reviewer_activity": {
+    "source_reads": true,
+    "saved_receipt_hashing": true,
+    "compiler_calls": 0,
+    "primitive_test_calls": 0,
+    "model_calls": 0,
+    "optimizer_calls": 0,
+    "prior_calls": 0,
+    "observation_reads": 0,
+    "truth_reads": 0
+  }
+}
