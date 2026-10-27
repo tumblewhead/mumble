@@ -1,0 +1,75 @@
+{
+  "schema": "mumble_health_evolution_decision_v1",
+  "status": "direction_selected_contract_to_be_specified_before_implementation",
+  "user_decision": "Explicit health evolution rather than exponential history discounting; deployment history remains SRAM-only.",
+  "scope": "Architecture decision only. No new model, inference, compressor, aging rates or uncertainty calibration implemented.",
+  "principle": "Old observations constrain past physical/health states. Their implications for current health pass through an explicit transition model and its uncertainty; age alone does not multiply their likelihood by a discount.",
+  "states": {
+    "fast": [
+      "SOC or explicitly defined stored-charge state",
+      "three RC voltage states",
+      "hysteresis state"
+    ],
+    "slow_initial_candidates": [
+      "effective capacity",
+      "a limited resistance-health parameterization"
+    ],
+    "static_or_unresolved": "Preserve supported calibration/model quantities and nuisance uncertainty; do not make all16parameters independently drift by default."
+  },
+  "transition_template": {
+    "notation": "h_next = h_now + m(h_now, actual_elapsed, declared_exposures) + w",
+    "mean_increment": "Declared aging model, including a zero-mean drift alternative if no justified mean-rate law is available. Model assumptions must not be described as observed degradation.",
+    "uncertainty": "Declared transition distribution or bounded uncertainty, with units and scaling tied to actual elapsed time/exposures. Must be specified and validated, not tuned to conceal compressed-history error.",
+    "exposures": "Calendar time and charge throughput are available from actual intervals/current. Temperature dependence requires an explicit usable temperature model; current25C fixture is not temperature validation.",
+    "measurement_correction": "Only supported by informative new observations; retain weak/unresolved health modes otherwise."
+  },
+  "evidence_contract": [
+    "Original public prior once. Each observation and each transition factor owned once.",
+    "Past health can differ from current health; do not force old residuals to use current capacity/resistance.",
+    "Compressed summary must retain relevant current-state/health/nuisance correlations and declared approximation limits.",
+    "If retained observations are replayed, replace their summarized contribution or exclude them from the summary; never add both.",
+    "Declare whether eliminated histories are marginalized probabilistically or profiled; do not interchange those objectives.",
+    "No silent exponential discount, evidence deletion or certainty increase on eviction.",
+    "Select summary contents for faithful current-state inference under the transition model; stimulus still determines estimability."
+  ],
+  "physical_contract_required": [
+    "Define stored-charge/SOC convention and how capacity loss changes charge inventory and SOC. Do not divide lifetime accumulated charge by today's capacity.",
+    "Preserve actual sample order, intervals and carried RC/hysteresis state across health boundaries.",
+    "Separate aging hypotheses from temperature, load dependence, sensor bias and model mismatch; do not force every voltage residual into health drift.",
+    "Define support failure/recovery and abrupt-change status before general trajectories."
+  ],
+  "compressor_implication": "Use time-indexed state/health summaries linked by transition factors. Fixed response bases and multiple local summaries remain possible components; one static all-lifetime16parameter factor is not the aging target.",
+  "required_reason_fields": [
+    "predicted_health_change_and_model_assumption",
+    "measurement_supported_correction",
+    "uncertainty_growth_due_to_unobserved_evolution",
+    "unexcited_or_model_mismatch_status"
+  ],
+  "validation_before_compression": [
+    "Zero-evolution case retains evidence and agrees with corresponding stationary reference under matched inference semantics.",
+    "Weak-input aging case propagates declared uncertainty; it must not report unsupported precise health corrections.",
+    "Synthetic gradual change followed by renewed excitation assesses tracking and correction without truth entering fit.",
+    "Temperature/mismatch/control cases assess false attribution to permanent aging.",
+    "Aging-aware full-history desktop reference and compressed candidate must use the same transition law, prior and inference semantics. Existing stationary545point comparison cannot validate aging.",
+    "Retain0.1NLL finite contrast criterion where applicable, but predeclare aging-state query geometry and factor ownership rather than silently recycling the static stencil."
+  ],
+  "open_contract_items": [
+    "which resistance parameters evolve",
+    "health transition mean and uncertainty family/scales",
+    "charge/capacity-loss convention",
+    "marginalization versus profiling semantics",
+    "bounded-memory summary domains and saturation behavior",
+    "target device/clock and update-work budget"
+  ],
+  "deployment": {
+    "history": "SRAM-only",
+    "subsystem_target_bytes": 10240,
+    "flash_FRAM_archive_history_fallback": false,
+    "desktop_diagnostic_memory_exception": true
+  },
+  "next_action": "Specify and qualify a minimal aging-aware desktop reference contract before selecting the final history-compressor representation. Preserve stationary baseline as a zero-drift/reference control.",
+  "existing_evidence": [
+    "experiments/desktop_history_001/decision.json",
+    "experiments/history_compressor_options_001/options.json"
+  ]
+}

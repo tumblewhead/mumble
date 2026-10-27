@@ -1,7 +1,7 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "SRAM_only_history_compressor_options_analyzed",
+  "stage": "explicit_health_evolution_selected_before_compressor_design",
   "objective": "Deliver a runnable ~10KiB Cortex-M23 C estimator: first a two-cell desktop lifecycle demonstration, then varied desktop trajectories over about one year, preserving stimulus-supported learning, evidence, unknowns and conditional lifetime guarantees.",
   "nominal_rate_Hz": 35,
   "current_model": {
@@ -180,7 +180,8 @@
     "desktop_history_review": "experiments/desktop_history_001/result_review.json",
     "desktop_history_decision": "experiments/desktop_history_001/decision.json",
     "history_compressor_options": "experiments/history_compressor_options_001/options.json",
-    "history_compressor_analysis": "experiments/history_compressor_options_001/attempt001/analysis.json"
+    "history_compressor_analysis": "experiments/history_compressor_options_001/attempt001/analysis.json",
+    "health_evolution_decision": "plans/health_evolution_001.json"
   },
   "completed": {
     "main_cases": 6,
@@ -241,11 +242,11 @@
     "parameter_sensitivity_001 is a saved-state, fixed-model, open-loop point diagnostic. Final joint sampled peak below0.987mV across six future protocols includes signed compensation; it does not qualify uncertainty, nuisance identifiability, arbitrary inputs, estimator feedback, indefinite operation or M23 resources."
   ],
   "next_work": [
-    "SRAM-only deployment history explicitly required by user; complete subsystem target10240B. No flash/FRAM/archive history fallback. Desktop diagnostic memory exception remains.",
-    "Read experiments/history_compressor_options_001/options.json and attempt001/analysis.json. Desktop is a useful single-trajectory reference; recovery, coverage, cadence and broader validation remain open.",
-    "Design one bounded comparison: fixed nonlinear response bases versus multiple validity-limited summaries. Preserve exact amplitude structure and parameter-dependent physical boundary. No compressor implemented by this analysis.",
-    "Use identical observation chronology and controlled optimizer/cadence to separate representation error; evaluate early movement and mature checkpoints, signed gradients, Q/SOC, retained weak evidence and complete memory/compute.",
-    "After a fidelity/usefulness pass, reduce toward10KiB and qualify target timing. Keep uncertainty and cell/load/noise/duration stability as separate gates."
+    "User selected explicit health evolution instead of exponential history discounting. Read plans/health_evolution_001.json before implementing a compressor.",
+    "Specify minimal time-indexed physical/health states, transition law/uncertainty, charge-capacity convention and inference semantics; prioritize capacity and limited resistance evolution.",
+    "Qualify an aging-aware desktop reference, preserving stationary baseline as zero-drift control; distinguish model prediction, supported observation correction and uncertainty growth.",
+    "Then compare history summaries against that matched dynamic reference. Fixed response bases and local summaries remain components, not a finalized all-lifetime static design.",
+    "SRAM-only deployment history, complete10240B target; desktop diagnostic exception remains. No flash/FRAM/archive history fallback."
   ],
   "handoff_format": "compact_JSON",
   "continuation_handoff": "handoff/CONTINUE.json",
@@ -619,7 +620,7 @@
     "baseline_revision": "afcd6b5e99e1db737062a543c0d6c439f59e378f",
     "plan": "plans/trajectory_to_m23_001.json",
     "report": "docs/ROADMAP.md",
-    "status": "SRAM_only_compressor_options_analyzed",
+    "status": "explicit_health_evolution_selected_contract_pending",
     "current_milestone": "M2_desktop_fidelity_before_deployment_compression",
     "next_work_branch": "diagnostics/history-compressor-options-001",
     "M1": "Complete desktop lifecycle, exact warm continuation and cold recovery on two2100s cells. Full retained history, not bounded firmware. Cell B900s quality gate failed.",
@@ -632,7 +633,7 @@
     "M1_complete": true,
     "M2_complete": false,
     "M3_complete": false,
-    "latest_component": "Bounded read-only compressor audit:10queries/928032steps,no fit; early large parameter motion,late<0.002publicSD; localGN condition~1.1e8; fixed response basis and multiple-summary comparison proposed.",
+    "latest_component": "Architecture decision:explicit health transitions instead of exponential discounting; no implementation or new scientific run.",
     "next_start_ref": "diagnostics/history-compressor-options-001",
     "M1_usefulness_passed": false,
     "M1_cold_usefulness_passed": true,
@@ -1799,5 +1800,12 @@
     "lead_option": "fixed_nonlinear_response_basis",
     "comparator": "multiple_validity_limited_summaries",
     "full_deployment_design_selected": false
+  },
+  "health_evolution": {
+    "decision": "plans/health_evolution_001.json",
+    "status": "direction_selected_contract_to_be_specified_before_implementation",
+    "history_discounting": "not_selected",
+    "implemented": false,
+    "aging_validated": false
   }
 }

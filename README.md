@@ -27,6 +27,11 @@ compares fixed nonlinear response bases, multiple local summaries, conditional
 hypotheses and segment coresets. No new compressor is implemented. Desktop
 diagnostic storage remains separate from the deployment constraint.
 
+The user selected **explicit health evolution**, rather than exponential history
+discounting. The [architecture decision](plans/health_evolution_001.json) requires
+an aging-aware desktop reference before choosing the final compressor. The
+current stationary baseline remains a control; aging is not yet implemented.
+
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
 once, retaining sixteen working records, eight incoming records and one compact

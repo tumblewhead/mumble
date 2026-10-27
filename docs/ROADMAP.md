@@ -666,6 +666,18 @@ chosen implementation's needs are also outside the immediate critical path.
 
 ## Next executable action
 
+The latest user decision selects **explicit health evolution instead of exponential
+history discounting**. Read [the decision](../plans/health_evolution_001.json).
+First specify a minimal aging-aware desktop contract: evolving capacity and a
+limited resistance model, transition uncertainty, physically consistent charge/SOC,
+and explicit inference semantics. Keep model-predicted change, observation-based
+correction and uncertainty growth distinguishable. No aging implementation or
+validation is implied. The stationary desktop baseline remains a control.
+
+The compressor comparison below follows that contract; it must compare against
+the same dynamic reference, not treat one fixed parameter vector as valid over
+an entire aging lifetime.
+
 The user requires **SRAM-only deployment history**, with no flash/FRAM/archive
 replay fallback. Read the [options analysis](../experiments/history_compressor_options_001/options.json)
 and [bounded audit](../experiments/history_compressor_options_001/attempt001/analysis.json).
