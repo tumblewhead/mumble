@@ -1,0 +1,166 @@
+{
+  "schema": "mumble_continue_v22",
+  "task": "Continue SOC/capacity uncertainty work after the implemented and executed finite retained-likelihood replacement prototype. Complete no additional inference automatically; the next finite design must obtain its own anchors.",
+  "repository": {
+    "url": "https://github.com/tumblewhead/mumble",
+    "work_branch": "implementation/retained-likelihood-replacement-001",
+    "latest_checkpoint": "Fetch current work-branch tip; historical source IDs are provenance, not reset targets.",
+    "base_revision": "f632c268f69ad10f856f761f5542c35d4d4c96fd",
+    "original_source_revision": "e8598bb546b83083c02de170304365fd78d36e41",
+    "continuation_source_revision": "e5f30addfc24383daec1e0067cf5ac4a602d12df",
+    "handoff_url": "https://github.com/tumblewhead/mumble/blob/implementation/retained-likelihood-replacement-001/handoff/CONTINUE.json",
+    "publication": "provenance/retained_likelihood_replacement_001_publication.json",
+    "publication_status": "Reviewed result and all source checkpoints published and verified; fetch current work-branch tip for this continuation metadata.",
+    "result_commit_before_metadata": "1413b7e17c8c8797ff221fce309203338e144b55",
+    "result_tree": "3f68ed6340937f0ca8f18c05439c88b49d90ac02"
+  },
+  "bootstrap": [
+    "Inspect status and preserve newer/dirty/unrelated work; use a work branch and no force-push.",
+    "Read AGENTS.md, README.md, PROJECT_STATE.json, this handoff, current decision/report and selective source/evidence. No completed-study reruns to resume.",
+    "Original contracts, raw evidence and failed attempts remain immutable; use provenance maps rather than historical reset targets."
+  ],
+  "goal": {
+    "implementation": "Runnable Cortex-M23 C near 10240 B complete subsystem SRAM.",
+    "estimation": "Stimulus-supported quantities, carried evidence/uncertainty, explicit unknowns; 35 Hz preserving actual intervals and order.",
+    "Q_error_percent": {
+      "hard": 5,
+      "preferred": 0.5
+    },
+    "SOC_error_pp": {
+      "hard": 10,
+      "preferred": 0.5
+    },
+    "capacity_startup_deadline": null,
+    "priority": "Prompt SOC; capacity can learn during later informative use."
+  },
+  "current": {
+    "milestone": "M1 and prior A4 studies complete; finite retained-likelihood replacement implemented and executed; production candidate unpromoted.",
+    "status": "completed_accepted_feasible_point_improvement",
+    "main_finding": "One common-prior full16D likelihood-block replacement produced a resolved decrease of computed nonlinear cost. The good replacement anchor was supplied by the completed historical fit. This demonstrates the declared replacement mechanism, not an autonomous uncertainty repair.",
+    "objective": {
+      "F_frozen": 30190478.748544097,
+      "F_replacement": 126413.13410673568,
+      "delta_frozen_minus_replacement": 30064065.61443736,
+      "arithmetic_resolution_allowance": 0.006785798899834227,
+      "decision": "accepted_feasible_point_improvement"
+    },
+    "endpoint": {
+      "seconds": 7200,
+      "samples": 252000,
+      "frozen_Q_Ah": 0.07506448716263708,
+      "frozen_SOC": 0.5251004471487077,
+      "replacement_Q_Ah": 0.06470374768047353,
+      "replacement_SOC": 0.516028601622853,
+      "truth_Q_Ah": 0.0647,
+      "truth_SOC": 0.5160528446308963,
+      "replacement_Q_error_percent": 0.005792396404230323,
+      "replacement_SOC_error_pp": -0.002424300804326762
+    },
+    "solvers": {
+      "frozen": {
+        "independent_status": "unresolved",
+        "iterations": 100,
+        "combined_objective_gradient_evaluations": 95,
+        "raw_success": false
+      },
+      "replacement": {
+        "independent_status": "unresolved",
+        "iterations": 27,
+        "combined_objective_gradient_evaluations": 28,
+        "raw_success": true,
+        "stationarity_relative": 1.8726904648678657e-09,
+        "complementarity_relative": 5.117695042826075e-09,
+        "tolerance": 2.346785832000663e-09
+      }
+    },
+    "ownership": "One immutable prior and one active likelihood block for [0,252000); cursor unchanged; old block archived, generation0 to1. No posterior multiplied into its own replayed observations.",
+    "execution": {
+      "original_counts_verified": true,
+      "supervisor_invocations": 2,
+      "model_passes_started": 4,
+      "model_passes_completed": 4,
+      "model_steps_reported": 1008000,
+      "model_step_count_complete": true,
+      "solver_invocations_reserved": 2,
+      "solver_started_markers": 2,
+      "solver_results_saved": 2,
+      "repeated_anchor_passes": 0,
+      "learner_calls": 0,
+      "fitter_calls": 0,
+      "truth_reads": 0,
+      "further_retries": 0
+    },
+    "resources": {
+      "cumulative_CPU_s": 4.565692,
+      "cumulative_active_process_wall_s": 4.671268788995803,
+      "maximum_wait4_peak_RSS_bytes": 64974848,
+      "closed_runtime_outputs_bytes": 393863,
+      "C_fixed_workspace_bytes": 10680,
+      "C_compiler_main_frame_bytes": 11072,
+      "external_prefix_bytes": 8064000,
+      "scope": "CPU/active wall sum original and continuation process receipts; excludes intervening implementation/review time. Peak is wait4 high-water, not summed concurrent memory. Workspace/frame/external storage are distinct, not a complete M23 budget."
+    },
+    "preserved_stop": "Original attempt failed on one subnormal Gram parity entry after2 valid anchors and0 solves. Separate qualified additive-underflow account admitted reuse; original failed result/source unchanged. Remaining2 solves+2 audits executed once.",
+    "limits": [
+      "Both independent KKT statuses unresolved; no nonlinear MAP or global optimum claim.",
+      "Supplied historical good anchor/common warm start; public-mean frozen control is not reconstructed recursive history.",
+      "Local shape diagnostics only; no calibrated intervals or coverage claim.",
+      "No production estimator changes or SRAM added; no complete10KiB target qualification."
+    ],
+    "older_results": "Earlier recursive bias and narrow intervals remain preserved; historical likelihood control nearly corrected Q with almost the same capacity local SD. See archivedv21 handoff and original evidence.",
+    "reporting": {
+      "status": "completed",
+      "selected_attempt": "reporting_attempt002",
+      "selection": "experiments/retained_likelihood_replacement_001/reporting_selection.json",
+      "receipt": "experiments/retained_likelihood_replacement_001/reporting_attempt002/reporting_receipt.json",
+      "reporter_invocations_total": 2,
+      "post_inference_prior_algebra_evaluations_total": 2,
+      "post_inference_truth_endpoint_records_total": 1,
+      "failed_first_report": "Preserved unchanged at root and in reporting_attempt001; stopped before prior algebra or truth on exact outer artifact set.",
+      "metadata_adaptation": "V3 admits only the two recorded regular empty capture paths by exact name, byte length and hash. Their origin remains unattributed; all required scientific outputs and caps still match."
+    },
+    "local_shape": {
+      "replacement_audit_Q_Ah": 5.078161958277633e-06,
+      "replacement_audit_endpoint_SOC": 1.648819020959952e-05,
+      "meaning": "Square roots of full joint transported inverse GN-plus-prior curvature entries at a candidate with unresolved KKT status; nonlinear stationarity is not established. Local shape only; not posterior SDs, centered confidence intervals or validated coverage."
+    },
+    "independent_result_review_status": "passed_with_explicit_scope_and_preserved_failures"
+  },
+  "next": {
+    "status": "new_finite_contract_required_not_executed",
+    "scope": "One same-prefix host autonomous anchor/refinement design from public initialization or internally accepted state, using the same coherent prior/support and full joint entering chart.",
+    "reference": "Historical free fit only as post-run reference, not an initialization/anchor supplied to the next autonomy test.",
+    "acceptance": "Preserve exact nonlinear objective audits, computed arithmetic comparison and replace/retain evidence ownership. Freeze pass/solve/resource budgets and stopping policy before any new inference.",
+    "separate_obligations": "Posterior likelihood fidelity/calibrated intervals and complete Cortex-M23 storage/runtime remain open. Neither one accurate point nor local Hessian widths closes them.",
+    "no_automatic_expansion": "No original learner or fit replay, retry, broader seed/prefix/year campaign or candidate promotion."
+  },
+  "evidence": {
+    "report": "experiments/retained_likelihood_replacement_001/REPORT.md",
+    "summary": "experiments/retained_likelihood_replacement_001/summary.json",
+    "decision": "experiments/retained_likelihood_replacement_001/decision.json",
+    "result_review": "experiments/retained_likelihood_replacement_001/result_review.json",
+    "result": "experiments/retained_likelihood_replacement_001/continuation001/result.json",
+    "receipt": "experiments/retained_likelihood_replacement_001/continuation001/receipt.json",
+    "outer_receipt": "experiments/retained_likelihood_replacement_001/continuation_process/receipt.json",
+    "reporting_receipt": "experiments/retained_likelihood_replacement_001/reporting_attempt002/reporting_receipt.json",
+    "original_failed_attempt": "experiments/retained_likelihood_replacement_001/attempt001/receipt.json",
+    "original_failure_review": "experiments/retained_likelihood_replacement_001/independent_parity_failure_review.json",
+    "implementation_review": "experiments/retained_likelihood_replacement_001/implementation_review.json",
+    "continuation_review": "experiments/retained_likelihood_replacement_001/continuation_review.json",
+    "design": "plans/retained_likelihood_replacement_001.json",
+    "execution_contract": "plans/retained_likelihood_replacement_execution_001.json",
+    "continuation_contract": "plans/retained_likelihood_replacement_continuation_001.json",
+    "previous_handoff": "handoff/archive/CONTINUE_historical_likelihood_control_001.json",
+    "previous_handoff_sha256": "3f49dd1ef1966767e96252f87647b03d5345bdac73217cf7d21444837407d624",
+    "roadmap": "docs/ROADMAP.md",
+    "reporting_selection": "experiments/retained_likelihood_replacement_001/reporting_selection.json"
+  },
+  "guardrails": [
+    "Truth only in generation or post-inference scoring; never prior selection, initialization, fitting, weights or tuning.",
+    "Preserve actual sample order/time and entering-state ownership. Replay replaces its prior approximation; no double-counting through the recursive posterior.",
+    "The completed control is pure likelihood; matched-prior posterior work must define prior/support/base measure and state-map semantics explicitly.",
+    "Useful point accuracy, numerical convergence, local precision, physical support, calibrated coverage and target resources are distinct.",
+    "No blanket uncertainty inflation, h clipping/zero variance, lost cross-covariance, or reporting-only fix. No original-run retry or broader seed/prefix/year campaign.",
+    "Machine handoffs remain compact JSON/YAML. No SCM/NAIA/D2/D2E proof claim transfer."
+  ]
+}

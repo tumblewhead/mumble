@@ -1,0 +1,149 @@
+{
+  "schema": "mumble_autonomous_anchor_refinement_contract_v1",
+  "status": "frozen_before_canonical_inference",
+  "base_revision": "ef4efee174c946c76a18a1b6a974900a8bbe41b2",
+  "authorization": "User requested work on obtaining the anchor after the completed supplied-anchor replacement probe. This contract defines one new finite implementation/execution; it does not rerun the old learner or historical fits.",
+  "question": "Can bounded full-joint retained-history refinement obtain useful likelihood anchors from the fixed public entering mean, without a supplied fitted anchor or truth?",
+  "finish_line": "One source-reviewed invocation, a finite accepted-anchor sequence or explicit unresolved stop, preserved trial/solve evidence, exact observation/prior ownership and closed resources. Report point improvement separately from inner convergence, nonlinear stationarity, posterior fidelity and target resources.",
+  "interpretation": "This is a bounded retained-history nonlinear refinement driver. Inner direction solves do not read observations, but its C audits evaluate the complete prefix. No online, global-MAP, calibrated-interval or firmware claim follows.",
+  "input": {
+    "source_id": "f0bd54ce53f1944d4f17070b6380dc8317ae895f2fd1628198a1c5408a67f79c",
+    "member": "experiments/continuous_learning_validation_001/implementation/primary/B_continuous/source/observations.bin",
+    "archive_bytes": 16128000,
+    "archive_sha256": "cdbf064028753eb1abf6f33ba2512853ecb58e21493791a269a4b5956545849f",
+    "prefix_records": 252000,
+    "prefix_bytes": 8064000,
+    "prefix_sha256": "a2219e78d29ddab4cfd1e02a7b6b520dc74fc0229e995b1aba0044bb240b269d",
+    "format": "little-endian <Qddd>: index, actual dt_s, current_A, voltage_V",
+    "scan": "Before any model call, validate ordered finite prefix records, actual time and sequential charge extrema including initial zero. Bind full archive and prefix hashes before/after. This input scan is not a model pass."
+  },
+  "unchanged_reference": {
+    "math_module": "experiments/retained_likelihood_replacement_001/replacement_math.py",
+    "math_sha256": "870583ec263f4bf4e69b80aa9fc06402336deb606aeaa88533389ddce715261b",
+    "evaluator_source": "experiments/retained_likelihood_replacement_001/stream_evaluator.c",
+    "evaluator_source_sha256": "29cfafde5b13b6039401181755266b92220bcee91a0f0bfe819e9123ee7a5942",
+    "evaluator_binary": "experiments/retained_likelihood_replacement_001/qualification/evaluator_run001/stream_evaluator.bin",
+    "evaluator_binary_bytes": 34240,
+    "evaluator_binary_sha256": "74ac92c6d81f50af73a0568ea2e853993ecdd2729e4e544a5132eb455ddb97bb",
+    "sigma_V": 0.001,
+    "chart": "Original16D entering x=(logtau1..3,loggamma_plus,loggamma_minus,logQ,R0,R1..3,H,z0,v10..3,h0). Density relative to Lebesgue dx.",
+    "prior": "One supported mixture of the same two public equal-weight Gaussian kernels; condition the mixture as a whole. Exact kernel cost/gradient/Hessian retained. Common support normalizer omitted only in cost differences.",
+    "support": "Original entering box intersected with z0-Cmax/exp(logQ)>=0 and1-z0+Cmin/exp(logQ)>=0. Every represented candidate requires raw nonnegative slacks. No clipping or allowance admission.",
+    "initialization": "PUBLIC_MEAN exactly, one start. If infeasible for the input prefix, stop; no substitute seed.",
+    "excluded_inference_inputs": [
+      "historical fit or fitted vectors",
+      "previous replacement/frozen candidate values",
+      "recursive posterior centers",
+      "truth files or prior reporting summaries"
+    ]
+  },
+  "proposal": {
+    "scaled_coordinates": "D=diag(PUBLIC_SD), fixed public scales; x=a+D*u with current accepted anchor a. Numerical coordinates do not change the density base measure.",
+    "exact_gradient": "g=gradient L(a)+gradient p(a), where p is the exact common Gaussian-mixture kernel penalty.",
+    "metric": "B=full G(a)+diag(KERNEL_PRECISION). The mixture Hessian is P^-1-r0*r1*v*v^T <=P^-1. B is a full joint optimization metric and upper bound on prior curvature, not exact nonlinear Hessian or posterior precision.",
+    "subproblem": "Minimize g^T*d+0.5*d^T*B*d subject to a+d in the unchanged support and |D^-1*d|_infinity<=1. Start at d=0.",
+    "metric_guard": "Require finite exact symmetry and an unmodified Cholesky factorization of D*B*D. Stop on failure; no eigenvalue or covariance repair.",
+    "solver": "Pinned scipy.optimize.minimize(method=trust-constr), analytic quadratic gradient/Hessian and exact SOC constraint Jacobian/Hessians, feasible box/SOC constraints, QRFactorization.",
+    "versions": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0"
+    },
+    "objective_scale": "sqrt(max(1,||D*B*D||_infinity)), recomputed by this fixed formula at each accepted anchor. Report exact objective contrasts unscaled.",
+    "max_iterations": 100,
+    "max_combined_objective_gradient_evaluations_including_final_verification": 256,
+    "gtol_and_independent_KKT_tolerance": "64*eps^(2/3)",
+    "xtol": "128*eps",
+    "initial_barrier_parameter": "eps^(2/3)",
+    "initial_barrier_tolerance": "64*eps^(2/3)",
+    "initial_trust_radius": 1.0,
+    "initial_constraint_penalty": 1.0,
+    "status": "Retain raw optimizer and independent constrained-quadratic KKT status. A finite feasible unresolved return can propose a direction only after the independent decrease checks. Surrogate success is not nonlinear stationarity.",
+    "direction_admission": "Require finite raw-feasible returned point within the declared step box, resolved negative g.dot(d), and resolved positive quadratic-model decrease under saved computed-product arithmetic allowances. No admissible direction stops unresolved; no fallback seed."
+  },
+  "trial_policy": {
+    "fractions": [
+      1.0,
+      0.5,
+      0.25,
+      0.125,
+      0.0625,
+      0.03125,
+      0.015625,
+      0.0078125
+    ],
+    "construction": "At alpha=1 use the exact returned point. Otherwise use a+alpha*(b-a) in the fixed chart. Check raw support again before every C call. The exact support is convex, but floating-point feasibility is independently checked.",
+    "Armijo_c1": 0.25,
+    "acceptance": "Let s=-fsum(g_i*d_i)>A_dot. Accept only deltaF-A_cost > c1*alpha*(s+A_dot)+A_combine. deltaF compares the actual C nonlinear likelihood and exact same prior kernel at the current/trial points. A_cost is the existing computed-summand/four-term comparison allowance; A_dot and A_combine account for the directional product sum and final comparison arithmetic.",
+    "arithmetic_scope": "Computed summand/product resolution only, not a global libm/derivative/nonlinear model error certificate. Save operation counts, absolute sums and all comparison terms. No voltage-error threshold or truth-derived gate.",
+    "knob_rationale": "The one-public-SD step box, quarter-slope sufficient-decrease rule, binary trial fractions and iteration/call limits are fixed dimensionless optimizer/work choices. They do not define uncertainty, noise or physical accuracy thresholds, and are not tuned on the canonical result.",
+    "failure": "An ambiguous or insufficient decrease is rejected. First accepted trial advances the anchor; all8 unsuccessful fractions stop unresolved. Invalid raw-feasibility trials are recorded without a model call. Numerical/model/resource failure stops the invocation without retry."
+  },
+  "ownership": {
+    "source_interval": [
+      0,
+      252000
+    ],
+    "interval_convention": "half-open",
+    "cursor": 252000,
+    "prior_copies": 1,
+    "active_likelihood_blocks": 1,
+    "accept": "Atomically install accepted point, its exact nonlinear audit/full g/G, prior value and endpoint state/transport. Increment generation once, archive old block. Reuse that audit as the next anchor without another model pass.",
+    "reject": "Retain current point/block/prior/generation; rejected audits remain diagnostics, not likelihood factors.",
+    "posterior_replayed_as_independent_prior": false
+  },
+  "limits": {
+    "canonical_invocations": 1,
+    "retries": 0,
+    "alternate_seeds": 0,
+    "alternate_prefixes": 0,
+    "proposal_rounds_max": 16,
+    "full_prefix_model_passes_max": 33,
+    "model_steps_max": 8316000,
+    "proposal_iterations_max": 100,
+    "proposal_combined_objective_gradient_evaluations_max": 256,
+    "total_proposal_combined_objective_gradient_evaluations_max": 4096,
+    "trial_fractions_per_proposal_max": 8,
+    "external_exact_prior_evaluations_max": 33,
+    "CPU_s_max": 60,
+    "active_process_wall_s_max": 90,
+    "process_peak_RSS_bytes_max": 134217728,
+    "process_address_space_bytes_max": 1073741824,
+    "per_child_combined_stdout_stderr_bytes_max": 524288,
+    "all_closed_runtime_outputs_bytes_max": 8388608,
+    "children_parallel_max": 1,
+    "source_generations": 0,
+    "old_learner_calls": 0,
+    "original_fitter_calls": 0,
+    "truth_reads_during_inference": 0
+  },
+  "accounting": {
+    "reservations": "Exclusive durable/fsynced pass and proposal reservations include counter before/after transitions and source/input/vector identities before child launch. Reservation consumes the slot even if execution remains incomplete.",
+    "captures": "Keep raw_probe.json and probe.stderr names unchanged; no rename aliases. Share exact role paths/manifest schema between runner and reporter.",
+    "partial_failure": "Preserve raw stdout/stderr, wait4 resources and any reported partial model/optimizer counts. A missing completion means unknown progress with a conservative reserved upper bound, never assumed zero work.",
+    "resources": "Subtract elapsed global CPU/wall before every launch. CPU RLIMIT is rounded to integer seconds; RSS is checked at wait4. Breaches fail closure and stop further calls. Outer whole-process wait4 includes waited descendants; peak RSS is high-water, not summed simultaneous process memory.",
+    "output_closure": "Include inner/outer receipts in the final byte total. Any failed outer closure vetoes success and scoring. Bounded failure-only emergency closure may preserve an over-cap failure but never claim compliance.",
+    "budget_outcome": "Ordinary pass/round budget exhaustion with valid closed accounting is a completed finite unresolved outcome. Numerical/input/resource failure is failed. Neither means convergence.",
+    "prior_calls": "Cache accepted exact prior cost/gradient/Hessian. One external exact-prior evaluation per completed model point at most, including the initial point. Proposal workers receive that saved prior payload; they do not call the mixture again. Any fabricated qualification calls are reported separately."
+  },
+  "reporting": {
+    "output_directory": "experiments/autonomous_anchor_refinement_001/reporting001",
+    "after_valid_closure_only": true,
+    "reference_summary": "experiments/retained_likelihood_replacement_001/summary.json",
+    "reference_summary_bytes": 426342,
+    "reference_summary_sha256": "9f1686681584bfbfbdee8d47c6354f43aad90eff712b79c10f490682085ce067",
+    "reference_use": "Read the immutable prior summary only after the new inference closes; compare to its feasible matched-prior reference and reuse its already-verified endpoint truth record. It is not a global optimum. No raw truth file or historical fit is reopened.",
+    "new_model_optimizer_or_prior_evaluations": 0,
+    "point_metrics": [
+      "initial/final nonlinear likelihood and common-prior cost",
+      "accepted/rejected sequence and model discrepancy",
+      "capacity/current SOC and post-run error",
+      "inner KKT statuses and saved nonlinear gradient",
+      "actual pass/solve/evaluation/resource totals"
+    ],
+    "no_new_intervals": true,
+    "coverage_validated": false,
+    "candidate_promoted": false,
+    "memory": "Keep C fixed workspace10680B, compiler main frame11072B (contains workspace), external prefix8064000B and actual host RSS distinct. No complete10KiB target claim."
+  },
+  "qualification_scope": "Reuse prior/model source qualification. Add small dense coupled quadratic and active-support proposal fixtures, exact full-step/feasible-chord checks and stub lifecycle cases for reject/accept, no acceptance, cache reuse, durable call reservation, partial failure and cumulative caps. Freeze source and independent review before canonical inference; no canonical warm-up."
+}

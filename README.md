@@ -6,6 +6,16 @@ The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
 
+**Autonomous anchor refinement is the active finite experiment.**
+The new [design](experiments/autonomous_anchor_refinement_001/DESIGN.md) starts
+from the fixed public mean, then reuses each accepted nonlinear audit as the next
+anchor. It retains the exact common mixture prior and full joint likelihood
+dependencies. The [frozen contract](plans/autonomous_anchor_refinement_001.json)
+allows at most 16 proposal rounds and 33 complete model passes, with no supplied
+historical-fit anchor. Source review passed after 48 fabricated math checks and 12 controller lifecycle
+cases. Its one canonical invocation will use the exact published source. Current work branch:
+`implementation/autonomous-anchor-refinement-001`.
+
 **The finite retained-likelihood replacement prototype is implemented and executed.**
 At the same 252,000-sample prefix, replacing one full joint likelihood block
 under a single common prior reduces the audited nonlinear objective by
@@ -36,8 +46,8 @@ process wall seconds**, at most **64,974,848 bytes wait4 peak RSS**, and
 **393,863 bytes of closed runtime output**. The C evaluator has a fixed
 **10,680-byte workspace** and still needs **8,064,000 bytes of external prefix
 data**; these are not complete firmware resources. Production estimator code
-is unchanged and the candidate is not promoted. Current branch:
-`implementation/retained-likelihood-replacement-001`.
+is unchanged and the candidate is not promoted. This completed result is
+preserved on `implementation/retained-likelihood-replacement-001`.
 
 **The supported-correction decision and one-prefix historical control are complete.**
 At the fixed 7,200-second checkpoint, reevaluating all 252,000 archived voltage
