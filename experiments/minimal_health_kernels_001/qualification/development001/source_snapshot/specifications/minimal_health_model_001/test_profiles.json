@@ -1,0 +1,78 @@
+{
+  "schema": "mumble_health_test_profiles_v1",
+  "status": "artificial_specification_fixtures_not_calibrated_cell_rates",
+  "parameter_order": [
+    "a_Q_day",
+    "a_Q_Ah",
+    "a_R_day",
+    "a_R_Ah",
+    "s_Q_day",
+    "s_Q_Ah",
+    "s_R_day",
+    "s_R_Ah"
+  ],
+  "profiles": {
+    "stationary": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "uncertainty_only_fixture": [
+      0,
+      0,
+      0,
+      0,
+      0.002,
+      0.005,
+      0.0002,
+      0.0005
+    ],
+    "assumed_trend_fixture": [
+      -0.001,
+      -0.01,
+      0.0001,
+      0.001,
+      0.002,
+      0.005,
+      0.0002,
+      0.0005
+    ]
+  },
+  "exposure_algebra_fixture": {
+    "calendar_days": 0.25,
+    "absolute_throughput_Ah": 0.04,
+    "mean_logQ_increment": -0.00065,
+    "mean_R0_increment_ohm": 6.5e-05,
+    "variance_logQ": 2e-06,
+    "variance_R0_ohm2": 2e-08,
+    "scope": "Aggregated exposure arithmetic only; not permission to replace many truncated per-record kernels by one."
+  },
+  "charge_fixtures": [
+    {
+      "z_before": 0.6,
+      "Q_before_Ah": 0.06,
+      "Q_next_Ah": 0.059,
+      "current_A": 0,
+      "dt_s": 1,
+      "z_next": 0.6,
+      "q_next_Ah": 0.0354,
+      "delta_q_availability_Ah": -0.0006
+    },
+    {
+      "z_before": 0.6,
+      "Q_before_Ah": 0.06,
+      "Q_next_Ah": 0.059,
+      "current_A": 0.1,
+      "dt_s": 1,
+      "z_next": 0.5995291902071563,
+      "q_next_Ah": 0.03537222222222222,
+      "delta_q_availability_Ah": -0.0006
+    }
+  ],
+  "usage": "Only fixed synthetic tests. The estimator receives the declared transition profile but not the realized simulated health path or scoring truth. Future physical profiles need separate calibration provenance."
+}

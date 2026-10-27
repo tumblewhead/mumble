@@ -1,0 +1,46 @@
+{
+  "path": "experiments/minimal_health_kernels_001",
+  "status": "kernels_and_small_marginal_controls_qualified",
+  "base_revision": "c0a773778337fe99185d319ec5202e68e9a8cbce",
+  "work_branch": "implementation/minimal-health-kernels-001",
+  "qualification": "experiments/minimal_health_kernels_001/qualification/development002/receipt.json",
+  "checks": "experiments/minimal_health_kernels_001/qualification/development002/checks.json",
+  "qualification_cases": 10,
+  "qualification_checks": 301,
+  "physical_steps": 562,
+  "independent_AD_steps": 15,
+  "posterior_quadrature_evaluations": 149059,
+  "inner_normalizer_nodes": 79456,
+  "worker_CPU_s": 0.503995,
+  "worker_peak_RSS_bytes": 37552128,
+  "kernels_implemented": true,
+  "full_posterior_implemented": false,
+  "physical_rate_calibration": false,
+  "coverage_validated": false,
+  "canonical_aging_runs": 0,
+  "independent_review": false,
+  "target_measured": false,
+  "schema": "mumble_health_kernel_decision_v1",
+  "decision": "Proceed to full-history posterior backend specification and qualification before compressor implementation",
+  "report": "experiments/minimal_health_kernels_001/README.md",
+  "current_scope": "Normalized supplied-health-path density and gradients; conditional scalar posterior controls only",
+  "development_attempts": [
+    {
+      "path": "qualification/development001",
+      "status": "passed",
+      "checks": 286
+    },
+    {
+      "path": "qualification/development002",
+      "status": "passed",
+      "checks": 301
+    }
+  ],
+  "limitations": [
+    "No full16D current marginal solver",
+    "No calibrated physical aging rates or validated interval coverage",
+    "Finite normalizer qualification, not a universal rigorous numerical certificate",
+    "Physical cursor atomicity is not a complete posterior checkpoint",
+    "No Cortex-M23 memory/timing qualification or compressor promotion"
+  ]
+}

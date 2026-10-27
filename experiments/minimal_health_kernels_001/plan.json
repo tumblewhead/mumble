@@ -1,0 +1,30 @@
+{
+  "schema": "mumble_health_kernel_qualification_v1",
+  "base_revision": "c0a773778337fe99185d319ec5202e68e9a8cbce",
+  "specification": "specifications/minimal_health_model_001/model.json",
+  "scope": "Python/NumPy path-density and gradient kernels plus conditional scalar marginal controls; no full aging posterior solver",
+  "initialization": "Original public prior, original two-component capacity mixture, support and prior ownership once",
+  "normalizer": {
+    "method": "Mode-scaled Gauss-Legendre integral; orders32/64/128 with successive-change check",
+    "relative_change_limit": 2e-12,
+    "tail_exponent_cut": 60,
+    "omitted_tail_relative_bound_limit": 1e-12,
+    "max_standardized_mode_distance": 10000,
+    "qualification": "Finite independent erf and 70-digit Decimal Simpson checks; successive-order error estimate is not a rigorous interval-arithmetic certificate",
+    "normalizer_nodes_separate_from_posterior_evaluations": true
+  },
+  "fixture_rates_order": ["a_Q_day", "a_Q_Ah", "a_R_day", "a_R_Ah", "s_Q_day", "s_Q_Ah", "s_R_day", "s_R_Ah"],
+  "profiles": {
+    "stationary": [0,0,0,0,0,0,0,0],
+    "specification_assumed_trend": [-0.001,-0.01,0.0001,0.001,0.002,0.005,0.0002,0.0005],
+    "gradient_conditioning_only": [-0.001,-0.01,0.0001,0.001,0.2,0.5,0.1,0.3],
+    "scalar_posterior_only": {"a_R_day":432,"s_R_day":"0.04*sqrt(86400)","other_coefficients":0,"initial_R0":"truncated Normal(0.2,0.06^2), support[0,1]"}
+  },
+  "scalar_drift_fixture": {"records":12,"dt_s":1,"rest_records":6,"then_current_A":0.02,"plant_R0":"0.2+0.012*(k+1)","observation_noise":"zero in plant; likelihood sigma remains0.001V","posterior_orders":[48,96],"truth_access":"Generation separate; inference receives records and public settings only; scoring after both inference calls close"},
+  "semantic_controls": ["uniform previousR0[0.1,0.2] with truncated Gaussian transition sd0.02: integral vs maximum", "standard Gaussian correlated z/health with correlation0.8; z-only measurement variance0.5"],
+  "pass_requirements": {"physics_atol":1e-10,"charge_atol_Ah":1e-12,"gradient_scaled_atol":1e-7,"gradient_scaled_rtol":1e-5,"transition_integral_atol":1e-8,"marginal_moment_atol":1e-6,"marginal_log_contrast_atol":1e-5,"state_failure":"byte-preserved physical cursor"},
+  "caps": {"fabricated_records_per_case":128,"kernel_model_steps":200000,"posterior_quadrature_evaluations":200000,"CPU_s":120,"wall_s":180,"RSS_bytes":268435456,"output_bytes":16777216,"automatic_retries":0},
+  "mismatch_threshold_sigma":6,
+  "scope_limits": ["Engineering fixture rates only, not calibrated aging", "Conditional scalar quadrature is not the full16D current posterior", "Finite numerical tests, no coverage or physical mechanism validation", "Original sources and results immutable", "No canonical trajectory runs", "No Cortex-M23 memory/timing claim"],
+  "failure_policy": "Collect independent case failures; preserve each frozen source snapshot and receipt. Any development correction requires a new explicit attempt directory; never automatic retries."
+}

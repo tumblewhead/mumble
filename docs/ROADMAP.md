@@ -11,9 +11,10 @@ and −0.002784 percentage points SOC. Three checkpoints pass the declared gradi
 tolerance; two line-search stops remain explicit. History storage is 6.048 MB;
 this is not bounded-memory firmware or a varied-trajectory stability result.
 
-The next priority is to measure history-refresh/compression tradeoffs against
-this preserved baseline. Desktop diagnostic storage is no longer constrained by
-the deployment ceiling. Original prior/support, evidence ownership, chronology,
+The next priority is a numerically checked full-history posterior for the
+selected aging-aware model. Its physical and path-density kernels now pass
+301 finite checks. Desktop diagnostic storage is no longer constrained by the
+deployment ceiling. Original prior/support, evidence ownership, chronology,
 and the 0.1 NLL fidelity criterion remain unchanged. The results below preserve
 the compact engine's earlier evidence and unresolved deployment discrepancy.
 
@@ -48,7 +49,7 @@ See the [comparison report](../experiments/joint_shape_comparison_001/README.md)
 [decision](../experiments/joint_shape_comparison_001/decision.json),
 [preserved census](../experiments/parity_census_001/README.md) and
 [current handoff](../handoff/CONTINUE.json). Current branch:
-`specifications/minimal-health-model-001`.
+`implementation/minimal-health-kernels-001`.
 
 The requested repair is implemented and qualified, but the selected candidate
 fails its controlled fidelity gate. Structured features alone give **193.291124
@@ -674,13 +675,13 @@ normalized health transition; rate/noise values must be declared explicitly.
 The supplied numeric profiles are synthetic test assumptions, not calibrated
 cell-aging laws.
 
-Implement a separate desktop kernel for the declared update order, path density
-and SOC-continuous accessible-capacity convention. Account for the change in
-accessible charge explicitly. Qualify zero drift, mixed-current charge balance,
-zero-duration/order behavior, transition normalization and derivatives, support
-boundaries, weak input and low-dimensional marginal controls within the stated
-finite budgets. Twenty-nine completed consistency checks cover specification
-arithmetic and source bindings only; no aging implementation has run.
+The separate [desktop kernels](../experiments/minimal_health_kernels_001/README.md)
+are implemented and pass **301 checks in ten finite cases**. These cover zero
+drift, mixed-current charge balance, zero-duration/order behavior, normalized
+transition tails/derivatives, deterministic-coordinate elimination, weak-input
+correlations, scalar marginal controls and failure atomicity. Explicit numerical
+underflow is unresolved, never silently zero diffusion. Original stationary
+sources and evidence are unchanged. No canonical aging inference has run.
 
 The chosen inference target is the Bayesian joint marginal of current physical
 state, health and static nuisance quantities. Joint-path MAP may help debug the

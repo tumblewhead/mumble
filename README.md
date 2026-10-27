@@ -16,8 +16,8 @@ met the gradient tolerance; two retain explicit line-search stops.
 
 The decoded history uses **6,048,000 bytes**, and the five fits took about
 **8.04 CPU seconds** on this host. This is a desktop baseline, not a deployable
-repair or a robustness result. The next step is measuring history-refresh and
-compression tradeoffs against it before reducing memory toward the target.
+repair or a robustness result. It is the preserved stationary control for the
+aging-aware reference and later compression comparisons.
 See the [desktop report](experiments/desktop_history_001/README.md) and
 [decision](experiments/desktop_history_001/decision.json).
 
@@ -31,9 +31,13 @@ The user selected **explicit health evolution**, rather than exponential history
 discounting. The [minimal model specification](specifications/minimal_health_model_001/model.json)
 now defines evolving capacity and ohmic resistance, an explicit charge/SOC
 convention, normalized uncertain transitions and a Bayesian current-state
-marginal as the compression target. Twenty-nine specification consistency checks
-passed; no aging kernel, posterior solver or physical aging calibration is yet
-implemented. The stationary desktop baseline remains the zero-drift control.
+marginal as the compression target. The [desktop health kernels](experiments/minimal_health_kernels_001/README.md)
+are now implemented and pass **301 checks across ten finite cases**, including
+stationary equivalence, charge balance, transition tails/derivatives and small
+marginal posterior controls. These controls separate predicted drift from
+measurement corrections and uncertainty growth. A full joint aging posterior
+solver and physical aging calibration remain open. The stationary desktop
+baseline remains the zero-drift control.
 
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**
@@ -67,7 +71,7 @@ See the [completed report](experiments/live_anchor_integration_001/REPORT.md),
 The frozen source was published before inference. The original reporting-format
 failure and subsequent compressed-export integrity incidents are preserved,
 with separate saved-data/byte-only continuations and no inference retry.
-The current work branch is `specifications/minimal-health-model-001`.
+The current work branch is `implementation/minimal-health-kernels-001`.
 The [complete result checkpoint](https://github.com/tumblewhead/mumble/commit/3ee49c76569df0c4f910a46e766da675aa0a5be3)
 was verified against the prepared full tree and fetched locally.
 Vector figures and raw trace roles are distributed as exact compressed copies;
