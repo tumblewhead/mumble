@@ -1,0 +1,48 @@
+{
+  "schema": "mumble_mainline_promotion_v1",
+  "baseline_revision": "dc3ce6c62185eb1ea49a9cdcc9517358e12ba50d",
+  "previous_main_revision": "0fd443b126579c625aea8c3772ddc28668aa242b",
+  "merge_method": "fast_forward_preserving_published_history",
+  "production_estimator_revision": "f37f168521011b5088d2c11256af89d50549b70b",
+  "implementation_changed_by_promotion": false,
+  "validation": [
+    {
+      "name": "campaign",
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MPLCONFIGDIR=/tmp/mumble-mainline-mpl python3 -B -m unittest experiments.foster_campaign_001.test_campaign experiments.foster_campaign_parallel_001.test_parallel experiments.foster_cccv_stimulus_001.test_charger experiments.foster_campaign_001.test_plot_summary experiments.foster_campaign_c_001.test_integration experiments.foster_campaign_001.test_evidence experiments.foster_bounded_hysteresis_001.test_bounded experiments.foster_uncertainty_audit_001.test_packet -v",
+      "exit_code": 0,
+      "counts": {
+        "unittest_methods": 48
+      },
+      "log": "provenance/mainline_foster_20261030/campaign_tests.txt",
+      "sha256": "53e30b9f653303d009bca81f3f333709629c1067ca94630ab7b8eb6b8d35bfcc"
+    },
+    {
+      "name": "core",
+      "command": "make -j4 test",
+      "exit_code": 0,
+      "counts": {
+        "C_test_executables": 18,
+        "python_assessment_tests": 12
+      },
+      "log": "provenance/mainline_foster_20261030/core_tests.txt",
+      "sha256": "7eb89633f78232342d354f188b5b989379fd4dc4c7d3428b8ed52878b4ad7780"
+    }
+  ],
+  "excluded_checkpoint_ancestors": [
+    "c9571cfc020470ff5b1ada95c20260119325da31",
+    "e7d2ec7dfc5caef8a6e6860dfb38431013c776d9"
+  ],
+  "retention": {
+    "new_bulk_outputs_committed": false,
+    "baseline_objects_already_on_origin": true,
+    "inherited_tracked_bytes": 379191360,
+    "historical_archives_removed": false,
+    "owner_original_worktree_and_results_preserved": true
+  },
+  "limits": [
+    "Uncertainty coverage is not qualified; repair prototypes remain experimental.",
+    "196-hour evidence uses stationary cell parameters; ten-year aging behavior is not qualified.",
+    "C context alone is 19416 bytes; Cortex-M23 SRAM and timing goals remain unmet or unmeasured.",
+    "Historical reports may require local-only evidence; this is not a rerun of every archived study."
+  ]
+}

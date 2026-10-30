@@ -1,3 +1,30 @@
+# Current mainline baseline
+
+The supported desktop campaign uses the optimized C rolling estimator with
+bounded hysteresis, continuous physical parameters, and likelihood/state-transport
+history. It supports parallel cases, configurable sample rate, CC/CV cycles,
+physical telemetry, and individual plots plus labeled all-arm overlays.
+See the [campaign guide](experiments/foster_campaign_001/README.md).
+
+```sh
+python3 -B -m experiments.foster_campaign_001.run \
+  --hours 4 --jobs 4 --sample-rate-hz 50 --cells A \
+  --loads charge-discharge --seeds 1000 1001 1002 1003
+```
+
+The [196-hour review](experiments/foster_bounded_196h_review_001/README.md)
+reports completion for eight seeds in both coefficient encodings. Uncertainty
+remains overconfident on some paths; aging and Cortex-M23 deployment are not
+qualified. The [uncertainty prototypes](experiments/foster_uncertainty_audit_001/README.md)
+remain experimental and are not enabled in the campaign backend.
+
+[Mainline promotion receipt](provenance/mainline_foster_20261030/receipt.json)
+records the tested revision and validation. New generated campaigns stay local.
+Previously published archives remain in Git history and the tracked tree; this
+promotion does not upload new bulk results or rewrite that history.
+
+---
+
 > Source checkpoint (2026-10-30): this branch saves code, documentation,
 > configuration and small receipts. New bulk trajectories, plots, compiled
 > binaries and large generated result files are excluded. Historical reports
