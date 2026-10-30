@@ -1,0 +1,169 @@
+{
+  "base_revision": "7aa5569da4f3f7d8d9c6237f29782ffa0d27b5aa",
+  "command": {
+    "run": "experiments/vi_event_windows_001/multiscale_input001",
+    "out": "/home/easy/proj/mumble/.worktrees/mainline-foster/experiments/vi_event_windows_001/multiscale001",
+    "hours": 4.0,
+    "future_minutes": 30.0,
+    "seeds": [
+      2000
+    ],
+    "conditions": [
+      "original",
+      "glitches"
+    ],
+    "schedules": [
+      "fixed16",
+      "fixed12",
+      "current",
+      "joint_vi",
+      "displaced_vi",
+      "sparse_current",
+      "sparse_vi",
+      "sparse_displaced"
+    ],
+    "likelihoods": [
+      "gaussian",
+      "mixture"
+    ]
+  },
+  "sources": {
+    "experiments/vi_event_windows_001/plan.json": {
+      "bytes": 3056,
+      "sha256": "114c64b2a6c87b965e593978461ad20a2d18cd9657da261fb9d93f5a5d64e627"
+    },
+    "experiments/vi_event_windows_001/robust.h": {
+      "bytes": 1926,
+      "sha256": "bf69998abeda6183dda6fe533d6227cc4eaed05781836a05cc1b441920e93536"
+    },
+    "experiments/vi_event_windows_001/replay.c": {
+      "bytes": 1535,
+      "sha256": "c146aacfb30ba0ebd6fdd1f5e85a197167fe788b1f2c11d64b23cd89b7a13af1"
+    },
+    "experiments/vi_event_windows_001/build.py": {
+      "bytes": 2438,
+      "sha256": "dabbae24d257abc4f8a804c2a2c81ea5f20ccf933df0176ece6514f783303ef7"
+    },
+    "experiments/vi_event_windows_001/schedule.py": {
+      "bytes": 2831,
+      "sha256": "a3ba670a8f93a81de611de1b9447bd2a3a82c561f6d09f47384408c3c9ab1dcf"
+    },
+    "experiments/vi_event_windows_001/run.py": {
+      "bytes": 9152,
+      "sha256": "087971ff767d515bc9163dcd93cfa43a27a6f8ad1a5e8286bb21b7c7d773bcc8"
+    },
+    "experiments/vi_event_windows_001/test_experiment.py": {
+      "bytes": 5591,
+      "sha256": "03f54dc6f6bf1507130da09d16c442dd22303eb3fda3b19f26940aea4da5a0d3"
+    },
+    "experiments/vi_event_windows_001/sparse.py": {
+      "bytes": 1444,
+      "sha256": "8b5aabca7c17441d6c496f4207e80059f999cc031df07bd4453ddf185eae7172"
+    },
+    "experiments/vi_event_windows_001/iteration002.json": {
+      "bytes": 1118,
+      "sha256": "a143d9278530714b0b455d6fe77629d0afa89acbda3b3957dee1e6c34c30d5f2"
+    },
+    "experiments/vi_event_windows_001/generate_control.py": {
+      "bytes": 1627,
+      "sha256": "74f696bf14744e5e3721381763f0a19bb5ae3608a5d1384e9a14326d90affcde"
+    }
+  },
+  "input_calibration": {
+    "bytes": 1600,
+    "sha256": "c02dd305e0922eb99ae79cd24529b2789101f6fce819df3909d2460b7b576216"
+  },
+  "input_summary": {
+    "bytes": 1699,
+    "sha256": "cdcb60c694caf971838483999a9f16b93589d3250ae6220f4d6ea59900e9d97a"
+  },
+  "config": {
+    "schema": "foster_public_calibration_v1",
+    "reference_temperature_K": 298.15,
+    "temperature_domain_C": [
+      15,
+      35
+    ],
+    "ocv_intercept_V": 3.0,
+    "ocv_slope_V_per_SOC": 1.15,
+    "ocv_residual": "zero in this synthetic characterized control",
+    "arrhenius_A_K": [
+      -200,
+      1500,
+      1200,
+      1000,
+      1400,
+      1000,
+      1600,
+      1000,
+      200,
+      -600,
+      -600
+    ],
+    "coefficient_order": [
+      "Q",
+      "R0",
+      "R1",
+      "tau1",
+      "R2",
+      "tau2",
+      "R3",
+      "tau3",
+      "H",
+      "gamma_plus",
+      "gamma_minus"
+    ],
+    "authority": "Public known synthetic calibration shared by plant and estimator; these coefficients and OCV law are not claimed learned. Plant reference parameters and initial states are hidden.",
+    "prior_mean_physical": {
+      "z": 0.6,
+      "v": [
+        0,
+        0,
+        0
+      ],
+      "h": 0,
+      "Q": 0.055,
+      "R0": 0.105,
+      "R": [
+        0.035,
+        0.07,
+        0.1
+      ],
+      "tau": [
+        0.07,
+        0.7,
+        6.0
+      ],
+      "H": 0.012,
+      "gamma_plus": 5,
+      "gamma_minus": 8
+    },
+    "prior_chart_sd": [
+      0.12,
+      0.01,
+      0.01,
+      0.01,
+      0.5,
+      0.3,
+      0.5,
+      0.5,
+      0.6,
+      0.5,
+      0.6,
+      0.5,
+      0.6,
+      0.6,
+      0.6,
+      0.6
+    ],
+    "prior_scope": "Untruncated local Gaussian in declared chart. Mean/path domain enforced; Gaussian-tail physical support and calibrated uncertainty are unresolved. No truth-centering.",
+    "numerical": {
+      "max_rounds": 4,
+      "fractions": 8,
+      "gradient_inf_tolerance": 1e-06,
+      "latent_step_tolerance": 1e-07,
+      "block_records": 16
+    },
+    "hysteresis_chart": "bounded"
+  }
+}

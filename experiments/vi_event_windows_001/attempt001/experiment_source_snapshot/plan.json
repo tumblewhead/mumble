@@ -1,0 +1,16 @@
+{
+  "schema": "mumble_vi_event_windows_plan_v1",
+  "base_revision": "7aa5569da4f3f7d8d9c6237f29782ffa0d27b5aa",
+  "hypothesis": "VI-correlated retirement boundaries reduce approximation error beyond extra fits or a different window-length distribution.",
+  "inputs": "First four hours of saved bounded196h owner streams, seeds1000 and1006,50Hz; next30minutes reserved for prediction. No truth accessible to detector or estimator.",
+  "schedules": ["fixed16", "fixed12", "current", "joint_vi", "displaced_vi"],
+  "event_schedule": "Partition into disjoint24-sample buffers; choose one split8..16 by maximum detrended normalized current-step/voltage-response correlation. Both blocks<=16; no sample omissions. Templates: instantaneous and first-order response using public prior tau values. No acceptance threshold; flat current falls back to12. Displaced control rotates chosen splits across buffers; same length histogram/count, offline diagnostic only.",
+  "measurement_models": ["original Gaussian", "Gaussian scale mixture:epsilon=.001,broad sigma=20*ordinary sigma"],
+  "fault_injection": "Independently add zero-mean Gaussian voltage corruption at probability.001 with SD=sqrt(20^2-1)*reported sigma. Separate reproducible RNG; fault labels available to scoring only. Clean means original noisy ADC data, not noiseless truth.",
+  "robust_approximation": "Exact mixture objective and gradient, positive frozen-responsibility GN/EM surrogate for steps and history. Token matches value and gradient at anchor, not exact mixture Hessian or posterior. Four fit rounds retained. Normalization correction retained.",
+  "ownership": "Candidate overlaps reuse samples only for detection. Every chronological observation contributes once to committed likelihood and physical transport; prior appears once. No fault-mask oracle, duplicated likelihood, arbitrary health decay or truth centering.",
+  "validation": ["Gaussian build and schedule parity", "mixed-length ownership and interval conservation", "mixture derivative and token value/gradient checks", "matcher polarity, baseline and noisy-step controls", "record failures and failed hypotheses without deletion"],
+  "metrics": ["Q/SOC endpoint and trajectory errors", "local uncertainty z-scores, not coverage certification", "next30min prediction including cross-time Gaussian covariance", "counts, model evaluations, elapsed time", "detector alignment and CPU cost", "memory lower bounds and latency"],
+  "staging": "Unit validation, short execution pilot, then four-hour two-seed clean/fault comparison. Add independent stimulus control if existing current rarely transitions. No production promotion based on two seeds.",
+  "limits": ["Single stationary cell with two noise realizations is not aging qualification.", "Mixture glitch assumptions are declared synthetic test conditions, not measured ADC specifications.", "C context already exceeds10KiB; detector does not solve memory limit.", "No full retained refit by default: compare saved four-hour reference if input/config identities agree."]
+}
