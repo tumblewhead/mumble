@@ -1,3 +1,5 @@
+> The owner196-hour run is now reviewed: all8seeds complete in both encodings. See [full-run review](../foster_bounded_196h_review_001/README.md) for sustained errors and remaining uncertainty limitations. The qualification below records the earlier24-hour step.
+
 # Bounded hysteresis history repair
 
 The 50 Hz, 196-hour owner run completed only seeds1000 and1004. Seeds1001,
