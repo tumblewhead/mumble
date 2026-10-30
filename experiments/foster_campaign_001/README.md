@@ -1,3 +1,5 @@
+> Default plotting keeps all six individual plot families and adds the six all-case overlays in `case_summary/`. Overlays label every seed/arm with consistent colors and precision line styles; no extra `--summary` flag is needed for a new campaign. See [plot controls](../foster_summary_labels_001/README.md).
+
 > The default estimator now uses bounded hysteresis coordinates. See [repair and qualification](../foster_bounded_hysteresis_001/README.md). Use `--hysteresis-chart legacy` for the original control. Physical plot/CSV h remains in [-1,1]; raw chart coordinate4 is eta for bounded runs.
 
 # Local continuous Foster campaigns and telemetry

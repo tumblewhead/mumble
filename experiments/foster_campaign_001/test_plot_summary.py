@@ -71,7 +71,7 @@ class SummaryPlotTests(unittest.TestCase):
         self.assertEqual([len(line.get_ydata()) for line in current], [32, 48])
         for index, line in enumerate(current):
             np.testing.assert_allclose(line.get_ydata(), index+np.arange(len(line.get_ydata()))/100)
-            self.assertEqual(line.get_alpha(), .25)
+            self.assertEqual(line.get_alpha(), .8)
             self.assertAlmostEqual(line.get_xdata()[-1], [32,48][index]/126000)
         q_lines = captured['errors'][0].lines
         self.assertEqual([len(line.get_ydata()) for line in q_lines], [2, 2, 3])
@@ -80,7 +80,7 @@ class SummaryPlotTests(unittest.TestCase):
         for line in captured['errors'][1].lines:
             np.testing.assert_allclose(line.get_ydata(), .2, atol=1e-12)
         for line in captured['errors'][2].lines:
-            if line.get_label() in ('float32', 'float64'):
+            if '/ float' in line.get_label():
                 np.testing.assert_allclose(line.get_ydata(), 2., atol=1e-12)
         # Reference bands/zero lines are drawn once, not once per case.
         self.assertEqual(len(captured['errors'][0].patches), 1)
@@ -106,6 +106,36 @@ class SummaryPlotTests(unittest.TestCase):
         import matplotlib.pyplot as plt
         plt.close('all')
 
+
+
+# Style and case identity must survive zooms and duplicate seeds.
+class SummaryIdentityTests(unittest.TestCase):
+    setUp = SummaryPlotTests.setUp
+    def test_each_arm_has_unique_label_color_and_precision_style(self):
+        import matplotlib.pyplot as plt
+        captured={}
+        def inspect(fig,axes,destination,name,heading,title):captured[name]=axes
+        with patch('experiments.foster_campaign_001.plot.save_plot',side_effect=inspect):
+            receipt=render_summary(self.root)
+        lines=captured['errors'][0].lines
+        self.assertEqual(len(set(line.get_label() for line in lines)),3)
+        self.assertEqual(len(set(tuple(line.get_color()) for line in lines)),3)
+        for line in lines:
+            self.assertIn('seed ',line.get_label())
+            self.assertEqual(line.get_linestyle(),'--' if 'float32' in line.get_label() else '-')
+        self.assertEqual(len(receipt['arm_styles']),3)
+        plt.close('all')
+    def test_duplicate_seed_disambiguation_and_color_stability(self):
+        path=self.root/'summary.json';data=json.loads(path.read_text())
+        data['cases'][1]['scenario']['seed']=0;path.write_text(json.dumps(data))
+        with patch('experiments.foster_campaign_001.plot.save_plot'):
+            full=render_summary(self.root)
+            zoom=render_summary(self.root,self.root/'zoom',start_hour=33/126000)
+        self.assertEqual(full['arm_styles'],zoom['arm_styles'])
+        self.assertEqual(len({a['label'] for a in full['arm_styles']}),3)
+        self.assertTrue(all('case_' in a['label'] for a in full['arm_styles']))
+        import matplotlib.pyplot as plt
+        plt.close('all')
 
 if __name__ == '__main__':
     unittest.main()

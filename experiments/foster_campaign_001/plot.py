@@ -8,13 +8,13 @@ from .rate import LEGACY_RATE
 from .telemetry import PARAMETERS, TRACE_COLUMNS, STATES
 
 
-def draw(ax, y, time_at, label, color, points=4000, alpha=1.):
+def draw(ax, y, time_at, label, color, points=4000, alpha=1., linestyle='-'):
     """Bin large traces with min/max envelopes so narrow current pulses survive."""
     n = len(y)
     if not n:
         return
     if n <= points:
-        ax.plot(time_at(np.arange(n))/3600, y, label=label, color=color, lw=.9, alpha=alpha)
+        ax.plot(time_at(np.arange(n))/3600, y, label=label, color=color, lw=.9, alpha=alpha, linestyle=linestyle)
         return
     starts = np.linspace(0, n, points+1, dtype=int)[:-1]
     counts = np.diff(np.r_[starts, n])
@@ -23,10 +23,10 @@ def draw(ax, y, time_at, label, color, points=4000, alpha=1.):
     mean = np.add.reduceat(y, starts)/counts
     t = time_at(starts+counts//2)/3600
     ax.fill_between(t, lo, hi, color=color, alpha=.2*alpha)
-    ax.plot(t, mean, color=color, label=label+' (bin mean/range)', lw=.8, alpha=alpha)
+    ax.plot(t, mean, color=color, label=label+' (bin mean/range)', lw=.8, alpha=alpha, linestyle=linestyle)
 
 
-def derived(ax, n, values, time_at, label, color, points=4000, alpha=1.):
+def derived(ax, n, values, time_at, label, color, points=4000, alpha=1., linestyle='-'):
     """Compute ratios/errors in bounded chunks, retaining plot-bin extrema."""
     if not n:
         return
@@ -40,19 +40,25 @@ def derived(ax, n, values, time_at, label, color, points=4000, alpha=1.):
         low.append(lo);high.append(hi);means.append(total/(end-start))
     t=time_at((edges[:-1]+edges[1:]-1)//2)/3600
     ax.fill_between(t,low,high,color=color,alpha=.2*alpha)
-    ax.plot(t,means,label=label+(' (bin mean/range)' if n>points else ''),color=color,lw=.9,alpha=alpha)
+    ax.plot(t,means,label=label+(' (bin mean/range)' if n>points else ''),color=color,lw=.9,alpha=alpha,linestyle=linestyle)
 
 
 def save_plot(fig, axes, destination, name, heading, title):
     import matplotlib.pyplot as plt
+    shared = getattr(fig, '_campaign_shared_legend', False)
+    figure_labels = {}
     for ax in np.asarray(axes).ravel():
         if ax.get_visible():
             ax.grid(alpha=.2)
             ax.set_xlabel('Simulated hours')
             handles, labels = ax.get_legend_handles_labels()
             unique = dict(zip(labels, handles))
-            if unique:
+            if shared:
+                figure_labels.update({label.replace(' (bin mean/range)', ''):handle for label,handle in unique.items()})
+            elif unique:
                 ax.legend(unique.values(), unique.keys(), fontsize=7)
+    if shared and figure_labels:
+        fig.legend(figure_labels.values(), figure_labels.keys(), loc='outside right upper', fontsize=7, title='Seed / arm', frameon=False)
     fig.suptitle(heading+'\n'+title, fontsize=12)
     for suffix in ['png','pdf']:
         path = destination/(name+'.'+suffix)
@@ -63,7 +69,7 @@ def save_plot(fig, axes, destination, name, heading, title):
 
 
 def render(case, result, config, cell, destination=None, start_hour=0., end_hour=None,
-           *, overlays=None, alpha=1.):
+           *, overlays=None, alpha=1., styles=None, case_style=None):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -85,6 +91,12 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
         last = np.searchsorted(rows[:,1], end/rate, side='right')
         traces[k] = rows[first:last]
     colors = dict(float64='#3165b4', float32='#dc7822')
+    styles = styles or {k:dict(label=k,color=colors[k],linestyle='-') for k in traces}
+    case_style = case_style or {}
+    truth_color=case_style.get('color','#151515')
+    truth_label=case_style.get('label','')
+    truth_prefix=(truth_label+' / ') if truth_label else ''
+    truth_style=case_style.get('truth_linestyle','-')
     title = ', '.join(str(result['scenario'][k]) for k in ['cell','load','noise_v','seed'])
     draw_line = partial(draw, alpha=alpha)
     draw_derived = partial(derived, alpha=alpha)
@@ -93,7 +105,10 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
     def panels(name, *args, **kwargs):
         if overlays is not None and name in overlays:
             return overlays[name][:2]
-        return plt.subplots(*args, **kwargs)
+        fig, axes = plt.subplots(*args, **kwargs)
+        if overlays is not None:
+            fig._campaign_shared_legend = True
+        return fig, axes
 
     def save(fig, axes, name, heading):
         if overlays is not None:
@@ -102,21 +117,21 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
             save_plot(fig, axes, destination, name, heading, title)
 
     fig, ax = panels('signals',3,1,figsize=(12,9),layout='constrained')
-    draw_line(ax[0], o[:,3], sample_time, 'Measured V', '#999999')
-    draw_line(ax[0], tr[:,16], sample_time, 'Noiseless plant V', '#151515')
+    draw_line(ax[0], o[:,3], sample_time, truth_prefix+'measured/input', case_style.get('color','#999999'))
+    draw_line(ax[0], tr[:,16], sample_time, truth_prefix+'truth', truth_color, linestyle=truth_style)
     for k, rows in traces.items():
-        draw_line(ax[0], rows[:,5], lambda ix,r=rows:r[ix,1], k+' assimilated endpoint V', colors[k])
-    draw_line(ax[1], o[:,1], sample_time, 'Current (+ discharge)', '#3165b4')
-    draw_line(ax[2], o[:,2], sample_time, 'Exogenous temperature', '#dc7822')
+        draw_line(ax[0], rows[:,5], lambda ix,r=rows:r[ix,1], **styles[k])
+    draw_line(ax[1], o[:,1], sample_time, truth_prefix+'measured/input' if truth_label else 'Current (+ discharge)', case_style.get('color','#3165b4'))
+    draw_line(ax[2], o[:,2], sample_time, truth_prefix+'measured/input' if truth_label else 'Exogenous temperature', case_style.get('color','#dc7822'))
     for a, unit in zip(ax,['V','A','°C']):
         a.set_ylabel(unit)
     save(fig, ax, 'signals', 'V / I / T — estimated V is an assimilated fit, not a forecast')
 
     fig, axes = panels('states',5,1,figsize=(12,13),layout='constrained')
     for j,a in enumerate(axes):
-        draw_line(a,tr[:,j],sample_time,'Plant truth','#151515')
+        draw_line(a,tr[:,j],sample_time,truth_prefix+'truth',truth_color,linestyle=truth_style)
         for k,rows in traces.items():
-            draw_line(a,rows[:,6+j],lambda ix,r=rows:r[ix,1],k,colors[k])
+            draw_line(a,rows[:,6+j],lambda ix,r=rows:r[ix,1],**styles[k])
         a.set_ylabel(STATES[j])
     save(fig,axes,'states','Five continuous dynamic states — SOC is a fraction')
 
@@ -127,12 +142,12 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
             a = axes.flat[j]
             if reference:
                 a.plot(sample_time(np.array([0,len(o)-1]))/3600,
-                       [cell['parameters'][name]]*2,color='#151515',
-                       label='Plant reference truth',lw=1,alpha=alpha)
+                       [cell['parameters'][name]]*2,color=truth_color,
+                       label=truth_prefix+'truth',lw=1,alpha=alpha,linestyle=truth_style)
             else:
-                draw_line(a,tr[:,5+j],sample_time,'Plant at T(t)','#151515')
+                draw_line(a,tr[:,5+j],sample_time,truth_prefix+'truth',truth_color,linestyle=truth_style)
             for k,rows in traces.items():
-                draw_line(a,rows[:,(22 if reference else 11)+j],lambda ix,r=rows:r[ix,1],k,colors[k])
+                draw_line(a,rows[:,(22 if reference else 11)+j],lambda ix,r=rows:r[ix,1],**styles[k])
             a.set_ylabel(name)
         axes.flat[-1].set_visible(False)
         save(fig,axes,'parameters_reference' if reference else 'parameters_effective',
@@ -140,19 +155,19 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
 
     fig,axes = panels('capacitances',3,1,figsize=(12,9),layout='constrained')
     for j,a in enumerate(axes):
-        draw_derived(a,len(tr),lambda sl,j=j:tr[sl,8+2*j]/tr[sl,7+2*j],sample_time,'Plant C=tau/R','#151515')
+        draw_derived(a,len(tr),lambda sl,j=j:tr[sl,8+2*j]/tr[sl,7+2*j],sample_time,truth_prefix+'truth',truth_color,linestyle=truth_style)
         for k,rows in traces.items():
-            draw_line(a,rows[:,33+j],lambda ix,r=rows:r[ix,1],k,colors[k])
+            draw_line(a,rows[:,33+j],lambda ix,r=rows:r[ix,1],**styles[k])
         a.set_ylabel('C%d (F)'%(j+1))
     save(fig,axes,'capacitances','Derived RC capacitances at measured temperature')
 
     fig,axes = panels('errors',4,1,figsize=(12,12),layout='constrained',sharex=True)
     for k,rows in traces.items():
         t = lambda i,r=rows:r[i,1]
-        draw_derived(axes[0],len(rows),lambda sl,r=rows:100*(r[sl,11]/truth[r[sl,0].astype(int)-1,5]-1),t,k,colors[k])
-        draw_derived(axes[1],len(rows),lambda sl,r=rows:100*(r[sl,6]-truth[r[sl,0].astype(int)-1,0]),t,k,colors[k])
-        draw_derived(axes[2],len(rows),lambda sl,r=rows:1000*(r[sl,5]-r[sl,4]),t,k,colors[k])
-        draw_derived(axes[3],len(rows),lambda sl,r=rows:1000*(r[sl,5]-truth[r[sl,0].astype(int)-1,16]),t,k,colors[k])
+        draw_derived(axes[0],len(rows),lambda sl,r=rows:100*(r[sl,11]/truth[r[sl,0].astype(int)-1,5]-1),t,**styles[k])
+        draw_derived(axes[1],len(rows),lambda sl,r=rows:100*(r[sl,6]-truth[r[sl,0].astype(int)-1,0]),t,**styles[k])
+        draw_derived(axes[2],len(rows),lambda sl,r=rows:1000*(r[sl,5]-r[sl,4]),t,**styles[k])
+        draw_derived(axes[3],len(rows),lambda sl,r=rows:1000*(r[sl,5]-truth[r[sl,0].astype(int)-1,16]),t,**styles[k])
     for a in axes[:2]:
         if first_case:
             a.axhspan(-.5,.5,color='#cfe5ce',alpha=.5)
@@ -178,7 +193,23 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
     reports = json.loads((campaign/'summary.json').read_text())['cases']
     overlays = {}
     included, skipped = [], []
-    alpha = .25
+    alpha = .8
+    # Sorting makes colors independent of worker completion order or zoom skips.
+    ordered = sorted(reports,key=lambda r:r['directory'])
+    total = sum(len(r.get('arms',{})) for r in ordered)
+    palette=plt.get_cmap('tab20' if total<=20 else 'hsv')
+    style_map={};style_receipt=[];position=0
+    seeds=[r.get('scenario',{}).get('seed') for r in ordered]
+    for report in ordered:
+        seed=report.get('scenario',{}).get('seed','?')
+        label=f'seed {seed}'
+        if seeds.count(seed)>1:label+=f" ({report['directory']})"
+        arms={}
+        for arm in sorted(report.get('arms',{}),reverse=True):
+            color=palette(position if total<=20 else position/max(total,1))
+            style=dict(label=label+' / '+arm,color=color,linestyle='-' if arm=='float64' else '--')
+            arms[arm]=style;style_receipt.append(dict(directory=report['directory'],seed=seed,arm=arm,**style));position+=1
+        style_map[report['directory']]=(arms,dict(label=label,color=next(iter(arms.values()))['color'] if arms else '#555555',truth_linestyle=':'))
     try:
         for report in reports:
             case = campaign/report['directory']
@@ -199,7 +230,7 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
                 continue
             cell = json.loads((case/'scenario.json').read_text())['cell_definition']
             render(case, report, config, cell, destination, start_hour, end_hour,
-                   overlays=overlays, alpha=alpha)
+                   overlays=overlays, alpha=alpha, styles=style_map[case.name][0],case_style=style_map[case.name][1])
             included.append(dict(directory=case.name, status=report['status'],
                                  scenario=report['scenario']))
         title = (f'{len(included)} cases overlaid; trace opacity {alpha:g}; '
@@ -207,7 +238,7 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
         for name, (fig, axes, heading) in overlays.items():
             save_plot(fig, axes, destination, name, heading, title)
         receipt = dict(status='completed' if included else 'no_plottable_cases',
-                       alpha=alpha, included=included, skipped=skipped,
+                       alpha=alpha, included=included, skipped=skipped, arm_styles=style_receipt,
                        start_hour=start_hour, end_hour=end_hour)
         (destination/'cases.json').write_text(json.dumps(receipt, indent=2)+'\n')
         return receipt

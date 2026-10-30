@@ -1,0 +1,105 @@
+{
+  "schema": "foster_uncertainty_audit_v1",
+  "source_revision": "14e064465edad30ef103c3d8fc946a3772c15d3b",
+  "source_run": "experiments/foster_campaign_001/run_bounded_20261030_185906_868310",
+  "observations_per_fit": 720000,
+  "fit_hours": 4,
+  "sample_rate_Hz": 50,
+  "seeds": [
+    1000,
+    1006
+  ],
+  "heldout_observations": 90000,
+  "heldout_minutes": 30,
+  "inference_truth_reads": 0,
+  "truth_used_for_post_fit_scoring": true,
+  "comparison": [
+    {
+      "seed": 1000,
+      "rolling": {
+        "Q_error_percent": 0.04573942621899363,
+        "SOC_error_pp": 0.024737803814500747,
+        "Q_3sd_upper_width_percent": 0.1362188733722205,
+        "SOC_3sd_width_pp": 0.04060041423805009,
+        "Q_log_zscore": 1.0077922348668262,
+        "SOC_zscore": 1.827897888143973
+      },
+      "retained": {
+        "Q_error_percent": -0.07365926368466669,
+        "SOC_error_pp": -0.029336488355169443,
+        "Q_3sd_upper_width_percent": 0.20314262597280858,
+        "SOC_3sd_width_pp": 0.08913204050918222,
+        "Q_log_zscore": 1.0893020216405627,
+        "SOC_zscore": 0.9874054780159752
+      },
+      "future_predictive_NLL_reduction": 92.82449249198544,
+      "local_stationarity": {
+        "gradient_inf": 8.081275300986235e-05,
+        "GN_newton_decrement_squared": 3.817429171183783e-10,
+        "estimated_cost_improvement": 1.9087145855918915e-10,
+        "cost_ulp": 5.820766091346741e-11,
+        "max_prior_latent_step": 1.283041690089017e-05,
+        "scope": "Local GN stationarity only; not a global-optimum or posterior-coverage proof."
+      }
+    },
+    {
+      "seed": 1006,
+      "rolling": {
+        "Q_error_percent": 0.6008905696120337,
+        "SOC_error_pp": 0.1752490996407341,
+        "Q_3sd_upper_width_percent": 0.133028388126951,
+        "SOC_3sd_width_pp": 0.08030762249754868,
+        "Q_log_zscore": 13.519463556917513,
+        "SOC_zscore": 6.546667459097675
+      },
+      "retained": {
+        "Q_error_percent": 0.03231463133570589,
+        "SOC_error_pp": 0.008020166817074292,
+        "Q_3sd_upper_width_percent": 0.18087981562479497,
+        "SOC_3sd_width_pp": 0.08291003538173382,
+        "Q_log_zscore": 0.5363554187444658,
+        "SOC_zscore": 0.2902000987026925
+      },
+      "future_predictive_NLL_reduction": 559.0842572311158,
+      "local_stationarity": {
+        "gradient_inf": 3.0042122570267393e-05,
+        "GN_newton_decrement_squared": 6.095599668319916e-11,
+        "estimated_cost_improvement": 3.047799834159958e-11,
+        "cost_ulp": 5.820766091346741e-11,
+        "max_prior_latent_step": 5.749480808669775e-06,
+        "scope": "Local GN stationarity only; not a global-optimum or posterior-coverage proof."
+      }
+    }
+  ],
+  "rounds_control": "4/12/32; increasing rounds helps seed1006 but worsens seed1000, so no universal repair established.",
+  "transport_control": "Recompute physical pushforward at conditioned mean: negligible effect on the observed bias; not promoted. Stage0 matches saved C library byte-for-byte.",
+  "window_control": "64/256/1024/8192 records; nonmonotone seed-dependent results.8192 records puts both tested Q/SOC errors inside local three-SD bands but requires327680raw bytes before workspace. Not promoted.",
+  "interpretation": "Path-dependent local nonlinear approximation and irreversible history linearization are implicated. Tests do not isolate one unique error term or establish calibrated coverage.",
+  "conditional_prototype": {
+    "scope": "Exact conditional likelihood and chronological transport for current stationary linear-OCV Foster physics, at a fixed set of5rate coordinates.11amplitudes retain all cross terms; prior stays separate.",
+    "algebra_test_methods": 3,
+    "amplitudes": 11,
+    "shape_coordinates": 5,
+    "packed_square_root_doubles": 78,
+    "square_root_bytes_f64": 624,
+    "conditioning_values_bytes": 40,
+    "transport_coefficients_bytes": 72,
+    "shared_normalizer_charge_extrema_count_bytes": 32,
+    "one_node_partial_numeric_bytes": 768,
+    "eight_nodes_partial_numeric_bytes": 5920,
+    "sixteen_nodes_partial_numeric_bytes": 11808,
+    "full_SRAM_bytes": null,
+    "uncertain_rate_field_implemented": false,
+    "production_integrated": false
+  },
+  "validation": {
+    "targeted_suite_tests": 48,
+    "tests_file": "tests.txt",
+    "heldout_prediction_includes_cross_time_covariance": true,
+    "exact_old_source_preserved": true,
+    "test_log_sha256": "6eac06629e6140cea02ebe5e8abbebab104b94f13a6bd79f2f5eab8fd88e9314"
+  },
+  "production_estimator_changed": false,
+  "plotting_changed": true,
+  "next": "Prototype a re-evaluable nonlinear likelihood/state-transport packet across uncertain rate coordinates, with joint prior/support and a measured compression-error budget; compare against retained-observation reference before promotion."
+}
