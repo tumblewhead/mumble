@@ -1,3 +1,5 @@
+> The default estimator now uses bounded hysteresis coordinates. See [repair and qualification](../foster_bounded_hysteresis_001/README.md). Use `--hysteresis-chart legacy` for the original control. Physical plot/CSV h remains in [-1,1]; raw chart coordinate4 is eta for bounded runs.
+
 # Local continuous Foster campaigns and telemetry
 
 Run longer durations, independent synthetic cells, load profiles, voltage-noise

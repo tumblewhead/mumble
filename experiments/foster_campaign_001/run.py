@@ -164,7 +164,8 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
         arrays[k].flush(); charts[k].flush()
     write(out / 'telemetry.json', dict(trace_columns=TRACE_COLUMNS, truth_columns=TRUTH_COLUMNS,
           observation_columns=OBS_COLUMNS, valid_trace_rows={k: s['outputs'] for k, s in stats.items()},
-          chart_columns='first16: chart mean; last16: marginal chart SD; chart defined in parent plan.json',
+          chart_columns='first16: chart mean; last16: marginal chart SD; coordinate4 is eta=atanh(h) for bounded, h for legacy',
+          hysteresis_chart=config.get('hysteresis_chart','legacy'),
           voltage_semantics='Endpoint voltage reconstructed from assimilated boundary mean, not an out-of-sample forecast',
           uncertainty='Local Gaussian chart marginals only; coverage unvalidated. Full covariance remains in live history.',
           sample_rate_Hz=rate,backend=backend,tick_hz=clock_hz(rate),
@@ -173,6 +174,7 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
           current_buckets='Classified by current at each block endpoint, not whole-window excitation'))
     result = dict(status='completed' if all(s['status']=='completed' for s in stats.values()) else 'unresolved',
                   scenario=scenario, arms=stats, records=n, source_id=source, model_id=model_id,
+                  hysteresis_chart=config.get('hysteresis_chart','legacy'),
                   encoding_difference=encoding_difference, simulation_hours=n/(3600*rate), sample_rate_Hz=rate, backend=backend,
                   timing=dict(generation_s=generation_s,estimator_s=backend_s),
                   charger=generated.get('charger'),
@@ -223,6 +225,7 @@ def parser():
     p.add_argument('--temperature-amplitude-c', type=float, default=8.)
     p.add_argument('--temperature-period-s', type=float, default=3600.)
     p.add_argument('--encoding', choices=['both', 'float32', 'float64'], default='both')
+    p.add_argument('--hysteresis-chart', choices=['bounded','legacy'], default='bounded', help='bounded: eta=atanh(h) history coordinates; legacy: original unbounded h Gaussian')
     p.add_argument('--sample-csv', action='store_true', help='also export all samples and truth to large CSV')
     p.add_argument('--no-plots', action='store_true')
     p.add_argument('--out')
@@ -266,7 +269,8 @@ def main():
     parent_verification = verify_parent(ROOT, preserved)
     config, model_id = prepare(out, args)
     backend_build=None
-    if args.backend=='c':_,backend_build=prepare_c(out,args.sample_rate_hz)
+    if args.backend=='c' or config.get('hysteresis_chart')=='bounded':
+        _,backend_build=prepare_c(out,args.sample_rate_hz,config)
     sources = list(HERE.glob('*.py')) + list(HERE.glob('*.json')) + list(HERE.glob('*.md'))
     for path in sources:
         target = out / 'source_snapshot' / path.relative_to(ROOT)

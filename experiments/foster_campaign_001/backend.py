@@ -8,7 +8,9 @@ from pathlib import Path
 import shutil
 import subprocess
 import numpy as np
-from experiments.foster_feedback_001.estimator import Rolling,prior
+from experiments.foster_feedback_001.estimator import Rolling
+from experiments.foster_feedback_001.history import pack_message
+from .coordinates import prior,chart_name
 from experiments.foster_feedback_001.history import GaussianBackend
 from specifications.evidence_feedback_001.protocol import History,WindowOwnership
 from experiments.foster_c_baseline_001.reference import Config,Message,DP,message,ptr,library
@@ -23,20 +25,25 @@ STOPS=['round_limit','gradient','step','no_descent']
 def identity(path):
     return {'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
 
-def prepare_c(campaign,rate):
+def prepare_c(campaign,rate,config=None):
+    if config is None:
+        path=campaign/'calibration.json'
+        config=json.loads(path.read_text()) if path.exists() else {}
+    chart=chart_name(config)
+    model=MODEL if chart=='legacy' else ROOT/'experiments/foster_bounded_hysteresis_001/model.c'
     hz=clock_hz(rate);out=campaign/'backend_c';binary=out/'estimator.so';receipt=out/'build.json'
     if binary.exists() and receipt.exists():
         info=json.loads(receipt.read_text())
-        if info['tick_hz']!=hz or info['binary']!=identity(binary):raise ValueError('C backend clock/binary mismatch')
+        if info['tick_hz']!=hz or info.get('hysteresis_chart','legacy')!=chart or info['binary']!=identity(binary):raise ValueError('C backend clock/binary mismatch')
         return binary,info
     out.mkdir(exist_ok=False)
-    sources=[ADAPTER/'rolling.c',ADAPTER/'bridge.c',CORE/'history.c',BASE/'numeric.c',MODEL]
+    sources=[ADAPTER/'rolling.c',ADAPTER/'bridge.c',CORE/'history.c',BASE/'numeric.c',model]
     recorded=sources+[CORE/'baseline.h']
     # Verify the frozen core files actually used, without rebuilding old evidence.
     expected=json.loads((CORE/'verification.json').read_text())['artifacts']
     for src in [CORE/'history.c',CORE/'baseline.h']:
         if identity(src)!=expected[str(src.relative_to(ROOT))]:raise ValueError('frozen history source changed')
-    for folder,src in [('foster_c_baseline_001',BASE/'numeric.c'),('foster_c_model_001',MODEL)]:
+    for folder,src in [('foster_c_baseline_001',BASE/'numeric.c')]+([('foster_c_model_001',MODEL)] if chart=='legacy' else []):
         expected_src=json.loads((ROOT/'experiments'/folder/'verification.json').read_text())['artifacts'][str(src.relative_to(ROOT))]
         if identity(src)!=expected_src:raise ValueError('frozen model/numeric source changed')
     snapshots=[]
@@ -47,7 +54,7 @@ def prepare_c(campaign,rate):
     for src in snapshots[:-1]:
         obj=out/(src.stem+'.o');cmd=['cc',*flags,'-c',str(src),'-o',str(obj)];subprocess.run(cmd,check=True);commands.append(cmd);objects.append(str(obj))
     cmd=['cc','-shared',*objects,'-lm','-o',str(binary)];subprocess.run(cmd,check=True);commands.append(cmd)
-    info={'backend':'c','core':'foster_c_history_001 stage2','tick_hz':hz,'sample_rate_hz':rate,'commands':commands,'sources':{str(src.relative_to(ROOT)):identity(src) for src in recorded},'binary':identity(binary),'compiler':subprocess.check_output(['cc','--version'],text=True).splitlines()[0]}
+    info={'backend':'c','hysteresis_chart':chart,'core':'foster_c_history_001 stage2','tick_hz':hz,'sample_rate_hz':rate,'commands':commands,'sources':{str(src.relative_to(ROOT)):identity(src) for src in recorded},'binary':identity(binary),'compiler':subprocess.check_output(['cc','--version'],text=True).splitlines()[0]}
     receipt.write_text(json.dumps(info,indent=2)+'\n');return binary,info
 
 class ClockRolling(Rolling):
@@ -68,10 +75,25 @@ class ClockRolling(Rolling):
         if len(self.rows)==self.block:return self.retire()
         return None
 
+class BoundedClockRolling(ClockRolling):
+    def __init__(self,binary,config,source,model_id,encoding,hz):
+        super().__init__(binary,config,source,model_id,encoding,hz)
+        from specifications.evidence_feedback_001.protocol import digest
+        self.binding=replace(self.binding,chart_id=digest('continuous_gap_chart16_atanh_h_v1'),
+                             domain_id=digest('h=tanh(eta); other physical tails unresolved'))
+        mean,root=prior(config)
+        self.history=History(self.binding,digest(dict(mean=mean.tolist(),root=root.tolist())),
+                             pack_message(mean,root,0.),self.backend,2184)
+        self.window=WindowOwnership(self.history.read())
+
+
 class PythonBackend:
     def __init__(self,campaign,config,source,model_id,encoding,rate):
         self.hz=clock_hz(rate);args=((campaign/'model.so').resolve(),config,source,model_id,encoding)
-        self.bank=Rolling(*args) if self.hz==1050 else ClockRolling(*args,self.hz)
+        if chart_name(config)=='bounded':
+            binary,_=prepare_c(campaign,rate,config)
+            self.bank=BoundedClockRolling(binary.resolve(),config,source,model_id,encoding,self.hz)
+        else:self.bank=Rolling(*args) if self.hz==1050 else ClockRolling(*args,self.hz)
         self.failure_index=0
     def advance(self,first,rows):
         value=None
@@ -88,7 +110,7 @@ class PythonBackend:
 class CBackend:
     def __init__(self,campaign,config,source,model_id,encoding,rate):
         if config['numerical']['block_records']!=16:raise ValueError('C backend requires16-record windows')
-        binary,self.build=prepare_c(campaign,rate);self.hz=clock_hz(rate);self.config=config
+        binary,self.build=prepare_c(campaign,rate,config);self.hz=clock_hz(rate);self.config=config
         self.lib=library(binary.resolve());self.context=C.create_string_buffer(self.lib.fb_context_bytes())
         num=config['numerical'];self.c=Config((C.c_double*14)(config['reference_temperature_K'],config['ocv_intercept_V'],config['ocv_slope_V_per_SOC'],*config['arrhenius_A_K']),num['max_rounds'],num['fractions'],8 if encoding=='float64' else 4,num['gradient_inf_tolerance'],num['latent_step_tolerance'])
         initial=message(*prior(config))

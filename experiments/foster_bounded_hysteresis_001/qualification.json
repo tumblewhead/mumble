@@ -1,0 +1,45 @@
+{
+  "schema": "foster_bounded_hysteresis_repair_v1",
+  "source_parent": "ffb1da726b07edea6d9a48ffebeaeb3b8caea799",
+  "branch": "repair/foster-bounded-hysteresis-001",
+  "owner_run": "experiments/foster_campaign_001/run_20261030_175523_166400",
+  "diagnosis": "All six failures reproduced with saved C binary in both encodings; committed messages byte-identical; unconstrained history candidate h below -1.",
+  "repair": "eta=atanh(h), exact stable constant-input flow in log complement probability, analytic full joint derivatives, same generic Gaussian history and likelihood code. Physical telemetry maps h=tanh(eta).",
+  "prior": "Gaussian eta with mean atanh(public prior h), root row scaled by 1/(1-h^2). Tangent match only; not an exact transformed/truncated h prior.",
+  "default_cli_chart": "bounded",
+  "legacy_control": "--hysteresis-chart legacy",
+  "targeted_tests": 43,
+  "tests_log_sha256": "cef1203559736796c947ea5dfcd5eeb74c5c88c59a1872a089cb394e55c642a8",
+  "saved_data_replays": {
+    "four_hours": {
+      "seeds": 8,
+      "arms": 16,
+      "completed": 16
+    },
+    "twenty_four_hours": {
+      "seeds": 8,
+      "arms": 16,
+      "completed": 16,
+      "observations_per_arm": 4320000,
+      "max_abs_final_Q_percent": 0.4397673495242893,
+      "max_abs_final_SOC_pp": 0.10909419726834457
+    }
+  },
+  "resources": {
+    "C_context_bytes": 19416,
+    "boundary_message_bytes": 2184,
+    "dimension": 16,
+    "model_M23_own_frame_bytes": 1312,
+    "model_M23_wrapper_own_frame_bytes": 32,
+    "complete_SRAM_bytes": null,
+    "target_cycles_measured": false,
+    "M23_model_cross_compile": "passed"
+  },
+  "limits": [
+    "196-hour repaired campaign not run; owner-run command supplied.",
+    "Endpoint accuracy is not sustained accuracy or validated coverage.",
+    "Gaussian approximation in eta remains nonlinear; this is not an exact posterior representation.",
+    "Other parameter/state support, long-term bias, aging and complete M23 memory/timing remain unqualified."
+  ],
+  "preservation": "Original owner run, frozen kernels, original manifests and generic history implementation unchanged. Only small receipts, sources and a 41,088-byte observation fixture are selected for Git."
+}

@@ -1,8 +1,8 @@
 {
   "schema": "mumble_continue_v41",
   "repository": "https://github.com/tumblewhead/mumble",
-  "work_branch": "checkpoint/source-only-20261030",
-  "base_revision": "c925d51e69f4d8d34505e0561082cf4cb4f852ea",
+  "work_branch": "repair/foster-bounded-hysteresis-001",
+  "base_revision": "ffb1da726b07edea6d9a48ffebeaeb3b8caea799",
   "read_current_branch_tip": true,
   "read_first": [
     "AGENTS.md",
@@ -10,10 +10,11 @@
     "PROJECT_STATE.json",
     "experiments/foster_campaign_001/README.md",
     "experiments/foster_96h_review_001/README.md",
-    "provenance/source_checkpoint_20261030.json"
+    "provenance/source_checkpoint_20261030.json",
+    "experiments/foster_bounded_hysteresis_001/README.md"
   ],
-  "current": "Optimized continuous Foster C campaign core implemented and profiled. Generic Gaussian history works on many controls but bounded hysteresis candidates can leave physical support; three failures reproduced in C/Python. Some runs have persistent Q/hysteresis bias and invalid uncertainty.",
-  "next_proposed_not_implemented": "Bounded hysteresis coordinates such as h=tanh(eta), with stable transport, consistent prior and full joint uncertainty; compare against bounded-distribution reference on saved short failures before deployment. Keep seed1006 sustained-bias control separate.",
+  "current": "Bounded hysteresis eta=atanh(h) repair reproduces all six old failures and completes all eight seeds in both encodings through24h.43 tests pass; original results preserved.",
+  "next_proposed_not_implemented": "Owner to rerun196h with supplied owner_run module. Review survival, sustained Q/SOC bias and uncertainty; do not treat endpoint scores as coverage.",
   "user_reported_run": "50Hz196h run completed: experiments/foster_campaign_001/run_20261030_175523_166400; completed_with_failures, not yet numerically reviewed. Newly generated outputs after the checkpoint remain local under /experiments/ ignore rule.",
   "resources": {
     "target": "Cortex-M23 custom RTL,16MHz,~10KiB SRAM",

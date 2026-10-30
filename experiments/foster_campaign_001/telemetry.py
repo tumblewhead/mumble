@@ -1,6 +1,7 @@
 """Physical reporting only; never fed back to the estimator."""
 import numpy as np
 from .rate import LEGACY_RATE
+from .coordinates import physical_states
 
 STATES = ['SOC', 'v1_V', 'v2_V', 'v3_V', 'h']
 PARAMETERS = ['Q_Ah', 'R0_ohm', 'R1_ohm', 'tau1_s', 'R2_ohm',
@@ -29,9 +30,10 @@ def physical(chart, config, temperature):
 def trace_row(readout, observation, config):
     m = np.asarray(readout['chart_mean'])
     ref, p = physical(m, config, observation[2])
+    states = physical_states(m, config)
     voltage = (config['ocv_intercept_V'] + config['ocv_slope_V_per_SOC'] * m[0] +
-               p[8] * m[4] - observation[1] * p[1] - sum(m[1:4]))
+               p[8] * states[4] - observation[1] * p[1] - sum(m[1:4]))
     capacitance = p[[3, 5, 7]] / p[[2, 4, 6]]
     return np.r_[readout['records'], readout.get('time_s', readout['records'] / LEGACY_RATE), observation[1:4],
-                 voltage, m[:5], p, ref, capacitance, readout['Q_log_sd'],
+                 voltage, states, p, ref, capacitance, readout['Q_log_sd'],
                  readout['SOC_sd'], readout['log_evidence']]

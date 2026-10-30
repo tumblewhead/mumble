@@ -31,7 +31,11 @@ def prepare(out,args):
     build=subprocess.run(command,capture_output=True,text=True)
     write(out/'build.json',dict(command=command,returncode=build.returncode,stdout=build.stdout,stderr=build.stderr))
     if build.returncode:raise RuntimeError(build.stderr)
-    config=read(HERE/'calibration.json');write(out/'calibration.json',config)
+    config=read(HERE/'calibration.json')
+    config['hysteresis_chart']=getattr(args,'hysteresis_chart','legacy')
+    if config['hysteresis_chart']=='bounded':
+        config['hysteresis_prior_scope']='Gaussian eta=atanh(h), tangent-matched at declared prior h; not an exact transformed or truncated h-Gaussian. Full joint covariance retained; coverage unqualified.'
+    write(out/'calibration.json',config)
     model_id=digest(dict(model=read(previous/'model.json'),source=sources[str((HERE/'model.c').relative_to(ROOT))],calibration=config))
     report=qualify((out/'model.so').resolve(),config,model_id);write(out/'qualification.json',report)
     print(json.dumps(dict(qualification=report['status'],passing_checks=report['passing_checks'],failures=report['failed_checks'])),flush=True)
