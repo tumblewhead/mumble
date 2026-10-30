@@ -1,0 +1,23 @@
+{
+  "schema": "partitioned_battery_closure_v1",
+  "status": "conditional_derivation_not_a_closed_full_battery_compressor",
+  "parent": "proofs/ten_year_history_001/roadmap.json",
+  "goal": "P3: identify exact stationary conditional operators, nonclosing function families, aging/support obstacles and explicit physical-query error obligations before another representation fit",
+  "model_sources": ["src/scm_model.c", "experiments/desktop_history_001/replay.c", "experiments/live_anchor_integration_001/rolling_model.c", "experiments/live_anchor_integration_001/public_contract.c", "specifications/minimal_health_model_001/model.json"],
+  "stationary_partition": {
+    "eta": ["log_tau1", "log_tau2", "log_tau3", "log_gamma_plus", "log_gamma_minus", "initial_SOC", "log_Q"],
+    "alpha": ["R0", "R1", "R2", "R3", "H", "initial_v1", "initial_v2", "initial_v3", "B=H*initial_h"],
+    "meaning": "Conditioning arguments, not plug-in estimates or frozen nuisance truth. The original sixteen-dimensional uncertainty/prior/support remains authoritative.",
+    "likelihood": "One quadratic in nine alpha coordinates at each eta; a 55-coefficient FUNCTION FIELD over eta, not 55 globally constant coefficients",
+    "normalizer": "Retain n*log(sigma*sqrt(2*pi)); sigma=0.001 V in the inherited fixture",
+    "support": "Use original support and all-prefix physical legality; B is constrained by abs(B)<=H, with a collapsed boundary at H=0. No division by H is needed for original-chart likelihood queries."
+  },
+  "aging": {
+    "inherited_implemented_model": "Per-record bounded normalized Q/R0 transitions, SOC-continuous capacity availability, deterministic fast state conditional on the complete health path",
+    "RC_extension": "User-confirmed C_i=tau_i/R_i. Voltage-continuous and branch-charge-continuous boundary maps are derived as separate assumptions; neither is selected or calibrated here.",
+    "proposed_envelopes": "0.5–1.5 relative changes, likely0.7–1.3, remain design assumptions; not rate bounds, certified support or coverage",
+    "no_hidden_changes": ["No coarsening of health transitions", "No replacement of bounded kernels by unbounded Gaussian diffusion", "No new process noise", "No arbitrary discount", "No assumption that equal end health implies equal history"]
+  },
+  "error_scope": "Approximation of the same admitted likelihood on common exact support; transition/map errors and prior/chart changes are separate. No numeric compression budget is inferred from SOC/Q point targets.",
+  "nonclaims": ["All exact history compression is impossible", "A fixed additive likelihood basis can exactly represent arbitrary continuous-rate/charge histories", "The conditional amplitude square root is a marginal posterior", "M23 memory or ten-year numerical accuracy is established"]
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "foster_c_model_plan_v1",
+  "branch": "optimization/foster-c-model-001",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "parent_manifest_sha256": "a806ac412b39c8f6e8be5f6c51cbefee992b40071f49773469f0ef1ee91135bd",
+  "variants": [
+    "previous optimized dense model",
+    "sparse physical derivatives",
+    "sparse derivatives plus per-block exact thermal cache"
+  ],
+  "derivation": {
+    "state_sensitivity_support": {
+      "z": [
+        0,
+        5
+      ],
+      "v1": [
+        1,
+        7,
+        8
+      ],
+      "v2": [
+        2,
+        9,
+        8,
+        10
+      ],
+      "v3": [
+        3,
+        11,
+        8,
+        10,
+        12
+      ],
+      "h": [
+        4,
+        5,
+        14,
+        15
+      ]
+    },
+    "reference_tau_gaps": "tau_j=sum(exp(gap_k)) for k<=j; each derivative uses its own gap and branch-specific thermal factor",
+    "covariance": "all statistical cross covariance retained; sparsity only in physical recurrence Jacobian",
+    "thermal_cache": "11 exact exp(A_k*(1/T-1/Tref)) per observation, rebuilt for every flush; no rounded temperature or constant-sample assumption",
+    "cache_storage": "176 doubles1408B replaces4352B before-prediction object in cached variant; prediction goes directly to current"
+  },
+  "qualification": [
+    "randomized model outputs/Jacobians/transport against frozen dense C",
+    "independent finite-difference derivatives and domain controls",
+    "irregular dt, changing temperatures, rest and polarity reversals",
+    "cache lifecycle partial windows, retries and independent contexts",
+    "existing15 targeted controls as applicable",
+    "paired3-repeat full4h and12h replays with both token encodings",
+    "full-final covariance and normalization parity",
+    "sanitizers and target resources"
+  ],
+  "criteria": {
+    "model_values_atol": 1e-12,
+    "model_derivatives_atol": 1e-10,
+    "finite_difference_atol": 1e-06,
+    "cache_vs_uncached": "bit-identical model and replay outputs for identical inputs",
+    "sustained": "report all discrepancies; 0.5%Q/0.5SOCpp are application scales not proof of equality"
+  },
+  "unchanged": [
+    "physical equations and calibration",
+    "prior",
+    "solver tolerances and iteration limits",
+    "history/QR/encoding",
+    "double arithmetic",
+    "source ownership"
+  ],
+  "limits": [
+    "host timing is not target cycles",
+    "stationary physical model only; aging/coverage unchanged"
+  ]
+}

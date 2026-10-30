@@ -1,0 +1,104 @@
+{
+  "schema": "mumble_history_basis_comparison_v1",
+  "status": "frozen_before_comparison",
+  "purpose": "Derive physically structured conditional history and compare fixed polynomial/rational coordinates and lossless orthogonal pairing without changing rolling solver.",
+  "scope": "Stationary representation-only fabricated comparison; not a causal learning, aging, coverage or full SRAM qualification.",
+  "inputs": {
+    "source": "experiments/history_provider_001/qualification/development001/frozen_queries.json",
+    "rule": "Reuse frozen64 raw ADC records;4096-record diagnostic repeats those input/voltage codes chronologically with carried physical state. No state reset at repetition; no plant truth or fitting.",
+    "prefixes": [
+      64,
+      4096
+    ]
+  },
+  "queries": {
+    "seed": 2026102801,
+    "local": "Original33public mean/axis nodes plus64 joint points in public support intersect mean+/-0.4publicSD.",
+    "global": "32 additional points uniform in original public rectangular support.",
+    "basis_nodes": "Degree+1 Chebyshev roots in each selected coordinate; nodes depend only on frozen domain and family, not observations or query outcomes.",
+    "no_adaptive_tuning": true
+  },
+  "arms": {
+    "families": [
+      "log_chebyshev",
+      "cayley_rational"
+    ],
+    "degrees": [
+      2,
+      3,
+      4
+    ],
+    "domains": [
+      "full_public",
+      "public_half_SD"
+    ],
+    "local_domain": "Original nonlinear-coordinate support intersect public mean+/-0.5publicSD; reciprocal capacity endpoints obtained from logQ endpoints. Never extrapolate outside declared domain.",
+    "total_candidates": 12
+  },
+  "algebra": {
+    "nonlinear_coordinates": [
+      "log_tau1",
+      "log_tau2",
+      "log_tau3",
+      "log_gamma_plus",
+      "log_gamma_minus",
+      "z0",
+      "chi=1/Q"
+    ],
+    "conditional_amplitudes": [
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "H",
+      "v10",
+      "v20",
+      "v30",
+      "H*h0"
+    ],
+    "feature_count": "6*(degree+1)+3*(degree+1)*(degree+2)/2+1",
+    "history": "Stream normalized residual coefficient rows into a square-root QR factor. Never drop constant residual energy or prior/likelihood distinctions.",
+    "response": "Propagate free/forced response at fixed rate nodes using exact original recurrences; project rows in a fixed basis. Nonlinear input-driven responses are not evolved by the latest fitted rate.",
+    "rational_mapping": "For each positive rate/timeconstant p, u=(p-pc)/(p+pc)/rho, pc=sqrt(pmin*pmax),rho=(sqrt(pmax/pmin)-1)/(sqrt(pmax/pmin)+1). Equivalent tanh((logp-center)/2)/tanh(halfwidth/2). Chebyshev polynomials in u give fixed negative-real rational poles. OCV coordinates remain affine z0/chi.",
+    "pairing": "Forced/free response retained separately with cross-products. Orthogonal control rotates all feature pairs by45degrees and transforms query features inversely; retains all components. Not two independent observations.",
+    "composition_limits": "Appending the same already-global rows is associative in exact arithmetic; generic independently entered blocks need parameter-dependent transport of bases. No claim of finite-degree closure under arbitrary transport or uncertain aging."
+  },
+  "measurement": [
+    "centered likelihood error oscillation against exactC replay",
+    "scaled original16gradient error",
+    "current endpoint errors separated byphysicalcoordinate",
+    "feature and factor storage lower bounds; actual hostmemory notfirmware",
+    "construction/query walltime only as diagnostic, no optimizedCcandidate speedclaim",
+    "row/batch QR and direct residual consistency",
+    "orthogonal paired representation invariance",
+    "out-of-domain unavailability"
+  ],
+  "qualification": {
+    "cap_model_steps": 10000000,
+    "comparisons_no_optimizer": true,
+    "derivative_controls": "Analytic feature derivatives versus finite differences atpublicmean, frozenepsilon1e-5publicSD; separate scaled atol/rtol1e-5 regression allowances.",
+    "recurrence_control": "Independent response predictor against originalC replay at all queries; expected cost/endpoint agreement rtol2e-10 atol2e-8 (finite regression only).",
+    "QR": "Independent NumPyQR/direct residual norm versus streamingC factor rtol2e-10 atol2e-8; no tolerance adaptation.",
+    "finite_cost_gate_NLL": 0.1,
+    "gate_scope": "Existing finite contrast criterion applied descriptively to this new frozen stencil; not replacement for preserved545-node canonical gate.",
+    "retries": 0
+  },
+  "interpretation": [
+    "No point estimator output treated as evidence.",
+    "Orthogonal change of coordinates alone cannot reduce algebraic dimension or improve exact representation error.",
+    "Fixed-domain local pass cannot be called global history fidelity; domains must cover actual future queries or declare unavailable.",
+    "A record repeated in a fabricated fixture is a declared new observation; this is not replaying a posterior as independent evidence.",
+    "No source/solver/prior/likelihood or physicalmodel changes; candidate interpolation may violate originalphysicalinvariants and must be judged against reference, not automatically called passive.",
+    "Full degree3/4 factors exceeding10240B are diagnostic comparison arms, never deployment proposals."
+  ],
+  "external_context": [
+    {
+      "url": "https://www.sintef.no/en/software/vector-fitting/",
+      "supports": "Pole/residue rational response representations; this experiment uses a fixed Cayley basis, not vector fitting."
+    },
+    {
+      "url": "https://dsprelated.com/freebooks/mdft/DFT_Derived.html",
+      "supports": "Orthogonal coordinates preserve signal representation when all components are retained; not a history sufficiency theorem."
+    }
+  ]
+}

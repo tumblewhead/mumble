@@ -1,0 +1,11 @@
+{
+  "status": "frozen_before_followup",
+  "reason": "Primary direct and QR feature-dual gradients exceeded unchanged tolerance in every long-prefix arm, including baseline. Determine whether contracting with the parameter Jacobian before summing feature duals reduces cancellation.",
+  "primary_preserved": "attempt001/receipt.json",
+  "cases": "4096 records; public_half_SD and full_public; baseline and time_kernel/all_three/K9 only",
+  "methods": ["feature_dual (primary)", "residual_Jacobian (same exact-arithmetic expression)"],
+  "checks": "Compare direct, QR and partitioned-merged QR gradients with unchanged 2e-8 absolute plus 2e-10 relative allowances. All original domain query points. No primary overwrite or tolerance adjustment.",
+  "extended_precision": "For mean, largest feature-dual allowance-ratio witness, and largest absolute-gap witness in each case, evaluate direct residual and Jacobian products in long double. These witnesses assess arithmetic only, not new approximation choices.",
+  "work_cap": "Two basis constructions = 532480 conservatively counted model-node steps; no optimizer or exact model queries. Aggregate primary+followup below original 3000000 cap.",
+  "limit": "No new degree/domain or representation selection, no physical convergence claim. Original primary numerical mismatches stay recorded."
+}

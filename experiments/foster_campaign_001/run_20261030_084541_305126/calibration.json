@@ -1,0 +1,88 @@
+{
+  "schema": "foster_public_calibration_v1",
+  "reference_temperature_K": 298.15,
+  "temperature_domain_C": [
+    15,
+    35
+  ],
+  "ocv_intercept_V": 3.0,
+  "ocv_slope_V_per_SOC": 1.15,
+  "ocv_residual": "zero in this synthetic characterized control",
+  "arrhenius_A_K": [
+    -200,
+    1500,
+    1200,
+    1000,
+    1400,
+    1000,
+    1600,
+    1000,
+    200,
+    -600,
+    -600
+  ],
+  "coefficient_order": [
+    "Q",
+    "R0",
+    "R1",
+    "tau1",
+    "R2",
+    "tau2",
+    "R3",
+    "tau3",
+    "H",
+    "gamma_plus",
+    "gamma_minus"
+  ],
+  "authority": "Public known synthetic calibration shared by plant and estimator; these coefficients and OCV law are not claimed learned. Plant reference parameters and initial states are hidden.",
+  "prior_mean_physical": {
+    "z": 0.6,
+    "v": [
+      0,
+      0,
+      0
+    ],
+    "h": 0,
+    "Q": 0.055,
+    "R0": 0.105,
+    "R": [
+      0.035,
+      0.07,
+      0.1
+    ],
+    "tau": [
+      0.07,
+      0.7,
+      6.0
+    ],
+    "H": 0.012,
+    "gamma_plus": 5,
+    "gamma_minus": 8
+  },
+  "prior_chart_sd": [
+    0.12,
+    0.01,
+    0.01,
+    0.01,
+    0.5,
+    0.3,
+    0.5,
+    0.5,
+    0.6,
+    0.5,
+    0.6,
+    0.5,
+    0.6,
+    0.6,
+    0.6,
+    0.6
+  ],
+  "prior_scope": "Untruncated local Gaussian in declared chart. Mean/path domain enforced; Gaussian-tail physical support and calibrated uncertainty are unresolved. No truth-centering.",
+  "numerical": {
+    "max_rounds": 4,
+    "fractions": 8,
+    "gradient_inf_tolerance": 1e-06,
+    "latent_step_tolerance": 1e-07,
+    "block_records": 16
+  }
+}

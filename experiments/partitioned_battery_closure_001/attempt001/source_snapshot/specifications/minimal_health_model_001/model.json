@@ -1,0 +1,318 @@
+{
+  "schema": "mumble_minimal_health_model_v1",
+  "status": "specified_not_implemented_or_aging_validated",
+  "base_revision": "e6dbae0bf6ed6d6f8deb9a313b8a997996b0877e",
+  "decision_source": "plans/health_evolution_001.json",
+  "purpose": "A minimal time-indexed capacity/resistance reference that transports past evidence through an explicit uncertain health transition before history compression.",
+  "scope": {
+    "temperature_C": 25,
+    "RC_modes": 3,
+    "OCV": "U(z)=3+1.15*z+0.08*tanh(8*(z-0.5))",
+    "sigma_voltage_V": 0.001,
+    "current_positive": "discharge",
+    "terminal_voltage": "at END of delivered piecewise-constant current interval",
+    "nominal_rate_Hz": 35,
+    "actual_intervals_required": true,
+    "physical_calibration": "Inherited ADC12 fixture and public support; fixed-noise likelihood is a research approximation, not calibrated coverage.",
+    "not_modeled": [
+      "temperature compensation",
+      "self discharge or parasitic loss current",
+      "OCV aging or electrode stoichiometry change",
+      "independent aging of all RC parameters",
+      "sensor drift",
+      "irreversible degradation mechanism identification",
+      "remaining useful life"
+    ]
+  },
+  "state": {
+    "fast_order": [
+      "z",
+      "v1_V",
+      "v2_V",
+      "v3_V",
+      "hysteresis"
+    ],
+    "health_order": [
+      "log_Q_Ah",
+      "R0_ohm"
+    ],
+    "static_order": [
+      "log_tau1_s",
+      "log_tau2_s",
+      "log_tau3_s",
+      "log_gamma_plus_per_Ah",
+      "log_gamma_minus_per_Ah",
+      "R1_ohm",
+      "R2_ohm",
+      "R3_ohm",
+      "H_V"
+    ],
+    "current_joint_dimension": 16,
+    "original_x_mapping": {
+      "static": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        7,
+        8,
+        9,
+        10
+      ],
+      "initial_fast": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "initial_health": [
+        5,
+        6
+      ]
+    },
+    "why_R0_only": "A minimal effective ohmic change can be observed during load changes without making every nuisance parameter drift. RC and hysteresis mismatch remains explicit; R0 is not asserted to capture all aging.",
+    "R0_chart": "Linear ohms, preserving the original prior/support including R0=0. Do not silently replace it with logR0.",
+    "Q_chart": "Natural log of numeric capacity in Ah; this is the original prior chart. Q=exp(log_Q_Ah).",
+    "static_does_not_mean_known": "All nine static quantities retain their original uncertainty and correlations; no plug-in truth values.",
+    "supports": {
+      "z": [
+        0,
+        1
+      ],
+      "v_each_V": [
+        -0.25,
+        0.25
+      ],
+      "hysteresis": [
+        -1,
+        1
+      ],
+      "log_Q_Ah": [
+        -3.506557897319982,
+        -2.3025850929940455
+      ],
+      "R0_ohm": [
+        0,
+        1
+      ],
+      "initial_z": [
+        0.2,
+        0.95
+      ],
+      "initial_v_each_V": [
+        -0.08,
+        0.08
+      ],
+      "others": "Inherited original public support at all times. Initial bounds must not be applied to later physical state."
+    }
+  },
+  "initial_prior": {
+    "definition": "Original joint public prior and support from bound desktop source, once at k=0. Retain both log-capacity mixture components and original prior on h0,H separately.",
+    "density_measure": "Lebesgue measure in original16x chart, restricted to declared support. Any initial support normalization is one global constant; do not alter it per query.",
+    "source_bindings": {
+      "experiments/live_anchor_integration_001/public_contract.c": {
+        "bytes": 1442,
+        "sha256": "500e9f20893d66570607d268cb1e5e6eccf37c8078127ff345cbcce92a73c2a9"
+      },
+      "experiments/desktop_history_001/desktop.py": {
+        "bytes": 8978,
+        "sha256": "9d131ddcb10baf498792e177c22b943664318f9ab3663bd293d4c93794fd1b0f"
+      },
+      "experiments/desktop_history_001/replay.c": {
+        "bytes": 2741,
+        "sha256": "ffba2ee6f475d6423f1b151e2b636cf4df7d27dbf568a8b20e11fb8e855656ba"
+      },
+      "src/scm_model.c": {
+        "bytes": 5765,
+        "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+      }
+    },
+    "initialization": "Public mean for point-debugger or draws from declared initial prior for posterior reference; no canonical truth, saved final estimate or old accepted schedule."
+  },
+  "chronology": {
+    "indexing": "Record k advances boundary k to k+1. State after record k is boundary k+1; record source index is checked before mutation.",
+    "health_resolution": "One transition per actual delivered interval, even when measurement is masked. Initial desktop contract uses no coarser health knots.",
+    "order": [
+      "Read actual dt_k and I_k, validate source index and input domain.",
+      "Compute declared exposure increments from that interval.",
+      "Draw/evaluate health H_(k+1) conditional on H_k using the normalized transition kernel.",
+      "Apply the declared capacity-availability map to pre-current charge at unchanged SOC.",
+      "Propagate fast physical state over the full interval using Q_(k+1),R0_(k+1),static parameters and current.",
+      "Evaluate end-of-interval voltage likelihood once, if measurement_valid is true.",
+      "Commit the boundary, source cursor and factor ownership atomically."
+    ],
+    "interpretation": "This transition-then-propagate rule is the defined discrete model, with updated health held over the delivered interval. It is not an exact continuous electrochemical aging law.",
+    "query_behavior": "Queries do not advance time, create health steps, consume observations or mutate retained evidence.",
+    "aggregation": "Do not collapse35Hz health transitions into sparse knots without a separately specified approximation. Truncated kernels generally do not have an exact coarse-step semigroup.",
+    "zero_duration": "D=A=0 yields identity health/fast-state transition. A dt=0 voltage reading may still supply one distinct observation; ordering must remain intact.",
+    "gaps": "Unknown-input gaps return recovery_required; do not invent zero current. A known-current long interval must use an explicitly registered delivery/propagation convention; no implicit new measurements."
+  },
+  "health_transition": {
+    "exposures": {
+      "calendar_days": "D=dt_s/86400",
+      "absolute_throughput_Ah": "A=abs(I_A)*dt_s/3600",
+      "notes": "No nominal-sample count and no equivalent-cycle denominator based on estimated capacity. Charge and discharge both contribute to A; rest contributes to D."
+    },
+    "parameters": {
+      "mean_logQ_per_day": "a_Q_day",
+      "mean_logQ_per_Ah": "a_Q_Ah",
+      "mean_R0_ohm_per_day": "a_R_day",
+      "mean_R0_ohm_per_Ah": "a_R_Ah",
+      "sd_logQ_per_sqrt_day": "s_Q_day",
+      "sd_logQ_per_sqrt_Ah": "s_Q_Ah",
+      "sd_R0_ohm_per_sqrt_day": "s_R_day",
+      "sd_R0_ohm_per_sqrt_Ah": "s_R_Ah"
+    },
+    "mean_increments": [
+      "m_Q=a_Q_day*D+a_Q_Ah*A",
+      "m_R=a_R_day*D+a_R_Ah*A"
+    ],
+    "variances": [
+      "v_Q=s_Q_day^2*D+s_Q_Ah^2*A",
+      "v_R=s_R_day^2*D+s_R_Ah^2*A"
+    ],
+    "process_covariance": "diag(v_Q,v_R), independent innovations in v1. Posterior health/state/static correlations must still be retained.",
+    "kernel": "For coordinate j with v_j>0: K_j(y|x)=phi((y-x-m_j)/sqrt(v_j))/(sqrt(v_j)*Z_j) on[L_j,U_j], zero outside; Z_j=Phi((U_j-x-m_j)/sqrt(v_j))-Phi((L_j-x-m_j)/sqrt(v_j)). K=product_j K_j.",
+    "kernel_NLL": "(y-x-m_j)^2/(2*v_j)+0.5*log(2*pi*v_j)+log(Z_j); retain state-dependent log(Z_j) and its derivatives. No projection or clipping of sampled transitions.",
+    "zero_variance": "Use an exact Dirac constraint y=x+m_j. Eliminate the redundant variable; never approximate zero by epsilon variance. An out-of-support deterministic transition is model_domain_exceeded, not a clipped state.",
+    "near_boundary": "Use stable log-CDF difference/log-tail calculations; cancellation or underflow without a certified stable value returns transition_numeric_unresolved. Boundary truncation changes moments and must be included in reason reports.",
+    "rate_selection": "All eight parameters required explicitly in an experiment manifest. No physical aging rate is silently defaulted, inferred from withheld truth, fitted per trajectory after seeing outcomes, or increased to hide compression/model error.",
+    "minimal_reference_modes": [
+      "stationary: all eight coefficients zero",
+      "uncertainty_only: mean coefficients zero and declared nonzero diffusion",
+      "assumed_trend: declared nonpositive Q log-mean rates and nonnegative R0 mean rates, with separately declared diffusion"
+    ],
+    "interpretation": "Diffusion permits both signs of effective-health increments. This is an effective drift/availability model, not proof of irreversible chemistry. Mean drift in logQ is not mean physical-capacity drift; truncation and exponentiation change moments.",
+    "weak_data": "Aging prediction continues under weak excitation. Do not infer that health was measured merely because its predicted mean or uncertainty changed. Correlation-mediated corrections remain legitimate and must be distinguished from direct excitation.",
+    "calibration_status": "No physical rate/noise calibration is established. Nonzero coefficients in supplied test fixtures are artificial engineering assumptions only."
+  },
+  "capacity_and_charge": {
+    "choice": "SOC-continuous effective-capacity availability convention, version1.",
+    "defined_accessible_charge": "q_k_Ah=z_k*Q_k",
+    "health_boundary": "q_pre_current=z_k*Q_(k+1); delta_q_availability=z_k*(Q_(k+1)-Q_k). z,v,h remain continuous through health change alone.",
+    "current_update": "q_(k+1)=q_pre_current-I_k*dt_k/3600; z_(k+1)=z_k-I_k*dt_k/(3600*Q_(k+1)).",
+    "balance_identity": "q_(k+1)-q_k=delta_q_availability-I_k*dt_k/3600.",
+    "meaning": "Capacity change removes or restores accessible charged and empty capacity proportionally, leaving SOC unchanged in a health-only step. Accessible-charge change is explicit in the ledger, not an unrecorded terminal current.",
+    "limits": "This chosen empirical convention is not a model of loss of lithium inventory, self-discharge or electrode OCV drift. A different mechanism requires a new charge/health contract, not silent substitution.",
+    "prohibited": [
+      "z=initial_z-lifetime_charge/current_Q when Q varies",
+      "silently rescale or clip z to repair invalid state",
+      "interpret an inference revision of Q as a physical degradation event; every candidate path must satisfy the model from its own initial state"
+    ],
+    "support_failure": "A propagated z outside[0,1] invalidates that path; preserve last valid state on implementation failure and report reason. Never clamp SOC."
+  },
+  "fast_physics": {
+    "RC": "v_i_next=exp(-dt/tau_i)*v_i+(1-exp(-dt/tau_i))*R_i*I; compute1-exp using-expm1 for short intervals.",
+    "hysteresis": "If I!=0 and dt!=0: e=exp(-gamma_sign*abs(I)*dt/3600); h_next=e*h+(1-e)*sign(I). Otherwise h_next=h.",
+    "voltage": "mu=U(z_next)-I*R0_next-sum_i(v_i_next)-H*h_next.",
+    "physical_continuity": "Carry v and h across all health/source boundaries; no event-reset initial states.",
+    "temperature": "Fixed25C fixture. Nonfixture temperatures must be retained and marked outside_validated_temperature_scope; do not explain them as R0 aging by default.",
+    "no_fast_process_noise_v1": "Fast physical state is deterministic conditional on initial state, full health path, static parameters and measured input. Sensor/OCV mismatch is an explicit test, not absorbed by hidden process noise."
+  },
+  "inference_semantics": {
+    "selected": "Bayesian current-state marginalization, not profile likelihood.",
+    "joint_target": "p(x0,H_1:N | V,I,dt) proportional to p0(x0)*product_k K(H_(k+1)|H_k,dt_k,I_k)*product_valid_k Normal(V_k;mu_k,0.001^2); physical states are deterministic path functions with declared support. No likelihood discount.",
+    "current_target": "Push forward the joint target to(9static parameters,5current physical states,2current health quantities), integrating eliminated histories and initial-state nuisance uncertainty. Keep correlations and supported modes.",
+    "normalization": "Transition normalizers are part of the model. Retain relative branch weights; overall query-independent constants may cancel in centered diagnostics only.",
+    "point_debugger": "Joint-path MAP may be implemented first to test gradients and descent, but it is not the marginal posterior mode/mean and cannot validate marginal uncertainty or a marginal history compressor.",
+    "reference_backend": "Implement path-density/derivative kernels and low-dimensional exact quadrature controls first; then choose and register a full-history posterior numerical backend with convergence/Monte-Carlo error diagnostics before canonical inference. Backend choice does not change the target distribution.",
+    "zero_drift_control": "Identity health transitions collapse the model to original16parameter stationary prior/likelihood. Check equality of path predictions and centered objective up to declared numerical tolerance. Matching a particular local optimizer result is not guaranteed or required by mathematical equivalence.",
+    "uncertainty": "Report model-conditional uncertainty only after posterior numerical adequacy. GN or prior-majorizer inverse is not a calibrated interval. If posterior query fails, report uncertainty_unresolved; do not replace it with curvature silently.",
+    "causality": "At boundary n use only records< n and the initial prior/transition configuration frozen before execution. Smoothing of already-seen history is allowed; future observations or plant truth are not.",
+    "prior_ownership": "The initial prior appears once in the uncompressed graph. If a marginal message absorbs it, mark owns_initial_prior=true and do not append the original prior again.",
+    "summary_target": "A current-boundary message over the joint16dimensional state, with explicit owned observation/transition intervals, initial-prior ownership, relative normalization and approximation domain. Recent retained raw intervals must be excluded from that message or removed before replay.",
+    "boundary_message_limit": "No specific Gaussian/QR approximation is selected here. Its representational sufficiency must be tested against the marginal target; the old static factor cannot simply be renamed an aging message."
+  },
+  "outputs": {
+    "required": [
+      "source_id,next_record_index,actual_elapsed",
+      "model/configuration/source hashes",
+      "point_statistic_kind and posterior_numerical_status",
+      "current_SOC,Q_Ah,R0_ohm and joint uncertainty status",
+      "predicted_health_moments_before_new_voltage",
+      "measurement_conditioned_health_moments_after_new_voltage",
+      "model_predicted_change,measurement_correction,uncertainty_change separately",
+      "delta_q_availability and net terminal charge ledger",
+      "direct_excitation and correlation_mediated_update flags when diagnosed",
+      "prior/observation/transition ownership ranges",
+      "physical/model support and recovery status"
+    ],
+    "moment_reporting": "Compute moments under the actual bounded kernel and physical Q transform. A zero unbounded log-mean increment does not imply zero physical-Q mean increment or unchanged bounded-kernel mean.",
+    "change_labels": "Model-predicted drift is not observed degradation. Measurement correction is model-conditional and not a unique proof of aging versus excluded mismatch.",
+    "convergence": "Keep numeric convergence, physical point error, likelihood precision and validated coverage separate."
+  },
+  "failure_and_scope": {
+    "invalid_record": "reject atomically with exact source/cursor/error reason; no evidence consumption",
+    "all_paths_invalid": "recovery_required/model_domain_exceeded; preserve last valid posterior/checkpoint, no hidden reset or fresh prior",
+    "unexpected_residual": "model_mismatch_suspected or unresolved_change, not automatic aging-rate inflation; diagnostic thresholds must be registered before use",
+    "weak_input": "prediction_dominated/provisional health; no precision based only on repeated uninformative observations",
+    "temperature_or_bias_case": "scope/mismatch status; model v1 cannot promise unique discrimination",
+    "memory_or_compute_limit": "explicit unresolved/resource_limit; no silent forgetting",
+    "restart": "Restore complete joint state/configuration/ownership or report recovery_required. SRAM-only working history remains firm; persistence policy is separate and not an archive replay fallback."
+  },
+  "qualification_and_next_execution": {
+    "status": "planned_not_executed",
+    "first_scope": "Kernel and posterior-semantics qualification on fabricated finite inputs only; no original long sweep or new two-hour canonical run.",
+    "cases": [
+      "zero-drift stationary equivalence including original capacity-mixture prior",
+      "zero-duration and mixed actual intervals/source order",
+      "capacity-only health jump at zero current with explicit accessible-charge balance",
+      "mixed-current charge balance under varying Q",
+      "R0-only jump changes ohmic voltage while RC/h states remain continuous",
+      "transition normalization,stable boundary tails,zero-variance dimension elimination and derivatives",
+      "calendar variance during rest and throughput variance for both current signs",
+      "interior prediction-only uncertainty growth with observations masked; bounded-kernel moments checked separately",
+      "small low-dimensional quadrature reference showing marginalization and profiling differ",
+      "weak direct excitation with legitimate correlated correction kept distinct",
+      "gradual synthetic drift followed by renewed excitation,with truth isolated to postclosure scoring",
+      "temperature,OCV,bias and abrupt-change mismatches remain explicit",
+      "failure atomicity and input-gap recovery"
+    ],
+    "initial_caps": {
+      "fabricated_records_per_case": 128,
+      "kernel_model_steps": 200000,
+      "posterior_quadrature_evaluations": 200000,
+      "CPU_s": 120,
+      "wall_s": 180,
+      "RSS_bytes": 268435456,
+      "output_bytes": 16777216,
+      "automatic_retries": 0
+    },
+    "pass_requirements": {
+      "short_physics_abs_voltage_V": 1e-10,
+      "short_physics_abs_SOC": 1e-10,
+      "charge_identity_abs_Ah": 1e-12,
+      "short_physics_rel_tolerance": 1e-10,
+      "gradient_scaled_relative_tolerance": 1e-05,
+      "gradient_scaled_absolute_tolerance": 1e-07,
+      "transition_integral_abs_error": 1e-08,
+      "scalar_marginal_moment_abs_error": 1e-06,
+      "scalar_marginal_log_contrast_error_NLL": 1e-05,
+      "failure_atomicity": "byte-preserved committed state and exact status/cursor"
+    },
+    "caps_interpretation": "CPU/memory/output bounds are qualification budgets, not predicted requirements or M23 timing. Nonlinear integration error unresolved within caps is an explicit failure, not exclusion.",
+    "later_compression_gate": "Predeclare current-state queries and compare centered-log-message contrasts against the matched dynamic marginal reference with combined numerical allowance<=0.1NLL. The original stationary545stencil is a zero-drift regression only, not an aging validation.",
+    "rates": "No plant-specific nonzero profile is accepted for deployment. Test coefficients have no physical calibration authority."
+  },
+  "deployment": {
+    "working_history": "SRAM_only",
+    "complete_subsystem_target_bytes": 10240,
+    "flash_FRAM_archive_history_fallback": false,
+    "desktop_diagnostic_memory_exception": true,
+    "target_measured": false,
+    "compressor_selected": false
+  },
+  "sources_and_attribution": [
+    {
+      "url": "https://www.nasa.gov/wp-content/uploads/2024/01/battery-modeling-for-prognostics.pdf",
+      "supports": "Separating state,age and age-rate estimation; example use of capacity and lumped resistance aging. Does not validate this kernel,coefficients or charge convention."
+    },
+    {
+      "url": "https://doc.comsol.com/6.3/doc/com.comsol.help.models.battery.lumped_li_battery_capacity_loss/lumped_li_battery_capacity_loss.html",
+      "supports": "Lumped aging models are empirical without detailed chemistry; calendar/cycling and temperature effects. Does not endorse the selected proportional-availability convention."
+    }
+  ],
+  "implementation_readiness": "Core physical/probabilistic semantics specified. Next implement and qualify kernels and small marginal controls. Full posterior backend/physical calibration/target hardware remain separate tasks; no claim a working aging estimator exists."
+}

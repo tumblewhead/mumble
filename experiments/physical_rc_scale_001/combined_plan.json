@@ -1,0 +1,93 @@
+{
+  "schema": "combined_rc_information_plan_v1",
+  "status": "frozen_after_endpoint_comparison_before_combined_fits",
+  "parent": "experiments/natural_hysteresis_001/attempt001/result.json",
+  "diagnosis": "experiments/backward_response_001/verification.json",
+  "prefixes": [
+    8,
+    32
+  ],
+  "arms": {
+    "combined_information": [
+      9,
+      10,
+      11
+    ]
+  },
+  "family": "Conditional precision in F: J_F+J_v/a(tau)^2, with both contributions nonnegative. Equivalently sd_F=s_ref/sqrt(1-lambda+lambda*(a_ref/a)^2), lambda in[0,1], a_ref=1-exp(-1). This is a normalized posterior family, not a second prior update.",
+  "ownership": "Same construction/heldout split and fixed memberships; posterior owns prior and source interval once; no fresh inference or truth.",
+  "optimizer": {
+    "iterations_per_conditional": 128,
+    "evaluations_per_conditional": 2048,
+    "gradient_infinity_tolerance": 1e-07,
+    "backtracking_attempts": 32,
+    "armijo": 0.0001,
+    "curvature_relative_guard": 1e-12,
+    "method": "Feasible BFGS with exact one-bound quadratic subproblem and constrained gradient residual"
+  },
+  "initialization": "Exact saved baseline at lambda0, with QR whitening of original F features. All learned quantities use construction populations only.",
+  "draws_per_batch": 16384,
+  "batches": 4,
+  "seeds": "Reuse saved natural-refit batch seeds for each arm; common seeds are not a guarantee of paired draws after rejection decisions differ.",
+  "work_caps": {
+    "conditional_fits": 12,
+    "fit_objective_rows": 110000000,
+    "heldout_density_points": 16384,
+    "generated_rows": 131072,
+    "inverse_OCV_sample_iterations": 6815744,
+    "predictive_sample_steps": 6815744,
+    "decomposition_sample_steps": 6815744,
+    "factor_rows": 131072,
+    "fresh_posterior_steps": 0
+  },
+  "checks": [
+    "Density/Jacobian and scaled-support equivalence",
+    "Every regression derivative including nonconstant intercept column",
+    "Bounded synthetic physical-scale recovery",
+    "Explicit failure status",
+    "Baseline serialization/density/draw equivalence",
+    "Unchanged unselected coefficients and2496B payload",
+    "All13probes, source/construction disagreement, full covariance and mixed response moments"
+  ],
+  "decision": "Report all arms and failures; assess variance correction against construction and heldout, with all probe regressions and batch variability visible. No heldout optimization, no arbitrary scalar accuracy threshold.",
+  "adaptation_policy": "One registered information-combination follow-up. Preserve endpoint failure. Do not tune the candidate to heldout. Report first-order local checks and all regressions.",
+  "storage_B": {
+    "retained_numeric": 2544,
+    "increase_over_baseline": 48,
+    "complete_target_SRAM": null
+  },
+  "limits": [
+    "Offline builder only",
+    "Only0.229/0.914seconds of source history",
+    "Finite population agreement is not coverage",
+    "No physical aging or causal update qualification"
+  ],
+  "parent_attempt": "experiments/physical_rc_scale_001/attempt001/result.json",
+  "rationale": "Full physical scaling improves prefix8 slow response but overcorrects prefix32. Construction-only precision-direction scores favor added physical precision for slow8, slow32 component0 and slightly fast32; others favor the baseline boundary.",
+  "construction_precision_direction_scores": {
+    "8": [
+      [
+        0.7462650008880695,
+        0.09990439822618041,
+        -0.3069120469216767
+      ],
+      [
+        0.6578219711128421,
+        0.11608978678414981,
+        -0.30121448065274564
+      ]
+    ],
+    "32": [
+      [
+        -0.023271909265348237,
+        0.2644659937520591,
+        -0.04740328482950154
+      ],
+      [
+        -0.019619414493180432,
+        0.29504720497618675,
+        0.004708837248988874
+      ]
+    ]
+  }
+}

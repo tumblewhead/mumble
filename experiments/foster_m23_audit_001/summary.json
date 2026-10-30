@@ -1,0 +1,95 @@
+{
+  "target": {
+    "architecture": "Cortex-M23, baseline, custom silicon Verilog simulation",
+    "clock_Hz": 16000000,
+    "SRAM_budget_B": 10240,
+    "stream_Hz": 35,
+    "block_samples": 16,
+    "cycles_per_sample": 457142.85714285716,
+    "cycles_per_block": 7314285.714285715
+  },
+  "toolchain": "arm-none-eabi-gcc (Arch Repository) 16.2.0",
+  "model_compile_command": "arm-none-eabi-gcc -std=c11 -O2 -mcpu=cortex-m23 -mthumb -mfloat-abi=soft -fstack-usage -ffunction-sections -fdata-sections -fno-fast-math -ffp-contract=off -Wall -Wextra -Werror -pedantic -c experiments/foster_feedback_001/model.c -o experiments/foster_m23_audit_001/model_m23.o",
+  "probe_link_command": "arm-none-eabi-gcc -std=c11 -Os -mcpu=cortex-m23 -mthumb -mfloat-abi=soft -fstack-usage -ffunction-sections -fdata-sections -nostartfiles --specs=nosys.specs -Wl,--gc-sections,-e,probe_entry,-Map,experiments/foster_m23_audit_001/link_probe.map experiments/foster_m23_audit_001/link_probe.c experiments/foster_m23_audit_001/model_m23.o -lm -o experiments/foster_m23_audit_001/link_probe.elf",
+  "measured_compile_only": {
+    "model_own_stack_B": 3944,
+    "host_model_own_stack_B": 3984,
+    "model_object_text_B": 2820,
+    "model_object_data_B": 0,
+    "model_object_BSS_B": 0,
+    "linked_probe_text_B": 11972,
+    "linked_probe_data_B": 296,
+    "linked_probe_BSS_B": 7736,
+    "probe_entry_stack_B": 24,
+    "probe_static_plus_known_stack_B": 12000
+  },
+  "minimum_source_numeric_live_B": {
+    "one_message": 2184,
+    "raw_window": 640,
+    "parameter_point": 128,
+    "calibration": 112,
+    "one_model_output_set": 4352,
+    "model_own_stack": 3944,
+    "total_before_caller_library_IRQ": 11360
+  },
+  "literal_trial_phase_numeric_live_B": {
+    "one_message": 2184,
+    "raw_window": 640,
+    "calibration": 112,
+    "before_and_current_and_trial_model_outputs": 13056,
+    "model_own_stack": 3944,
+    "trial_point": 128,
+    "four_optimizer_vectors": 512,
+    "whitened_Jacobian": 2048,
+    "partial_total": 22624
+  },
+  "existing_history_payloads_B": {
+    "message": 2184,
+    "float32_token": 1901,
+    "two_messages_and_float32_token": 6269,
+    "raw_window": 640
+  },
+  "candidate_not_implemented": {
+    "triangular_message_with_logZ_B": 1224,
+    "structured_F_float32_token_B": 1197,
+    "two_triangular_messages_and_structured_token_B": 3645,
+    "condition": "Retrangularize propagated root with orthogonal transforms; do not discard correlations. F bottom11 rows are identity. Full phase workspace/caller/runtime still required."
+  },
+  "model_work_source_counts": {
+    "nonzero_current16sample_call_exp": 251,
+    "nonzero_current16sample_call_expm1": 64,
+    "zero_current16sample_call_exp": 235,
+    "zero_current16sample_call_expm1": 48,
+    "domain_only_call_exp": 11,
+    "max_fit_calls_per_block": 33,
+    "max_full_calls_including_prediction_diagnostic": 34
+  },
+  "saved_four_hour_reference_work": {
+    "source": "experiments/foster_feedback_001/four_hour001/result.json",
+    "float64_fit_evaluations": 104497,
+    "blocks": 31500,
+    "full_model_evaluations_per_block": 4.3173650793650795,
+    "nonzero_current_equivalent_exp_per_second": 2394.565763888889,
+    "nonzero_current_equivalent_expm1_per_second": 604.4311111111111,
+    "scope": "Source call-count projection using observed mean evaluation count, not measured cycles; original trace contains rest so active equivalent overstates its transcendental counts."
+  },
+  "legacy_engine_plan_B": {
+    "context": 8680,
+    "own_stack_reserve": 768,
+    "runtime_IRQ_caller_reserve": 768,
+    "total": 10216,
+    "scope": "Different older estimator/history, not current model or complete target measurement"
+  },
+  "hardware_reference": "https://www.keil.arm.com/devices/arm-armcm23/processors/",
+  "limits": [
+    "No optimizer/history C port in current path",
+    "No target or RTL execution/timing measured",
+    "Float32 token storage still uses float64 computation and messages",
+    "Link probe uses default addresses, no vector/startup/board map and intentionally placeholder inputs; it is not runnable firmware",
+    "Newlib nosys link emits unimplemented-I/O-stub warnings; no acquisition or I/O integration claimed",
+    "Stack reports exclude library helper/transcendental and interrupts",
+    "Literal trial phase is a source-level lifetime ledger, not measured complete C implementation",
+    "No complete10KiB layout, coverage, aging or lifetime qualification"
+  ],
+  "next": "Port current block fit and square-root history to a static C reference with explicit phase workspace, replay saved traces, then run an RTL benchmark at16MHz; reduce temporary storage and redundant arithmetic before precision changes."
+}

@@ -1,0 +1,115 @@
+{
+  "checks": {
+    "targeted_tests": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "test_bad_token_rejected (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_bad_token_rejected) ... ok\ntest_dense_solvers (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_dense_solvers) ... ok\ntest_failed_replay_does_not_abort_other_arm (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_failed_replay_does_not_abort_other_arm) ... ok\ntest_failure_preserves_message_and_pending (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_failure_preserves_message_and_pending) ... ok\ntest_generic_history_full_covariance_and_normalizer (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_generic_history_full_covariance_and_normalizer) ... ok\ntest_irregular_intervals_partial_window (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_irregular_intervals_partial_window) ... ok\ntest_order_validation_and_flush (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_order_validation_and_flush) ... ok\ntest_qr_preserves_quadratic (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_qr_preserves_quadratic) ... ok\ntest_short_stream_python_parity (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_short_stream_python_parity) ... ok\ntest_single_block_python_full_message (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_single_block_python_full_message) ... ok\ntest_subnormal_qr_preserves_orthogonal_residual (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_subnormal_qr_preserves_orthogonal_residual) ... ok\ntest_token_codec (experiments.foster_c_baseline_001.test_baseline.BaselineTests.test_token_codec) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.189s\n\nOK\n"
+    },
+    "sanitizer_link": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "address_undefined_sanitizers": {
+      "returncode": 0,
+      "stdout": "{\"status\":\"completed\",\"records\":4097,\"tokens\":257,\"context_bytes\":22360,\"wall_s\":0.0252671881}\n",
+      "stderr": ""
+    },
+    "M23_link_probe": {
+      "returncode": 0,
+      "stdout": "/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-closer.o): note: the message above does not take linker garbage collection into account\n/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-lseekr.o): note: the message above does not take linker garbage collection into account\n/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-readr.o): note: the message above does not take linker garbage collection into account\n/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-writer.o): note: the message above does not take linker garbage collection into account\n",
+      "stderr": "/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-closer.o): in function `_close_r':\n/build/arm-none-eabi-newlib/src/build-newlib/arm-none-eabi/thumb/v8-m.base/nofp/newlib/../../../../../../newlib-4.6.0.20260123/newlib/libc/reent/closer.c:47:(.text._close_r+0x12): warning: _close is not implemented and will always fail\n/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-lseekr.o): in function `_lseek_r':\n/build/arm-none-eabi-newlib/src/build-newlib/arm-none-eabi/thumb/v8-m.base/nofp/newlib/../../../../../../newlib-4.6.0.20260123/newlib/libc/reent/lseekr.c:49:(.text._lseek_r+0x16): warning: _lseek is not implemented and will always fail\n/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-readr.o): in function `_read_r':\n/build/arm-none-eabi-newlib/src/build-newlib/arm-none-eabi/thumb/v8-m.base/nofp/newlib/../../../../../../newlib-4.6.0.20260123/newlib/libc/reent/readr.c:49:(.text._read_r+0x16): warning: _read is not implemented and will always fail\n/usr/arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/16.2.0/../../../../arm-none-eabi/lib/thumb/v8-m.base/nofp/libc.a(libc_a-writer.o): in function `_write_r':\n/build/arm-none-eabi-newlib/src/build-newlib/arm-none-eabi/thumb/v8-m.base/nofp/newlib/../../../../../../newlib-4.6.0.20260123/newlib/libc/reent/writer.c:49:(.text._write_r+0x16): warning: _write is not implemented and will always fail\n"
+    },
+    "M23_size": {
+      "returncode": 0,
+      "stdout": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n  25688\t    296\t  25048\t  51032\t   c758\t/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/probe.elf\n",
+      "stderr": ""
+    },
+    "M23_symbols": {
+      "returncode": 0,
+      "stdout": "0000f458 00000004 D _impure_ptr\n00008ec0 00000004 T fb_profile_bytes\n0000f580 00000004 B probe_status\n00008eb8 00000006 T fb_context_bytes\n00008a1c 00000006 T fb_now\n0000e420 00000008 r one\n0000e418 00000008 r tiny\n0000b9b0 0000000a T nan\n0000c848 0000000c T __aeabi_dcmpeq\n0000e360 0000000c T __errno\n0000bac4 0000000e T __math_oflow\n0000bab4 0000000e T __math_uflow\n0000c838 00000010 T __aeabi_cdcmpeq\n0000c838 00000010 T __aeabi_cdcmple\n0000b390 00000010 T finite\n0000e448 00000010 r halF\n0000e438 00000010 r ln2HI\n0000e428 00000010 r ln2LO\n0000c890 00000012 T __aeabi_dcmpge\n0000c87c 00000012 T __aeabi_dcmpgt\n0000c868 00000012 T __aeabi_dcmple\n0000c854 00000012 T __aeabi_dcmplt\n0000e248 00000012 T __gnu_thumb1_case_uqi\n00008efc 00000014 T fb_get_profile\n0000ba78 00000014 t with_errno\n0000c828 00000020 T __aeabi_cdrcmple\n0000f588 00000028 B probe_observation\n0000ba8c 00000028 t xflow\n0000c8e0 0000002c T __aeabi_ul2d\n0000c8e0 0000002c T __floatundidf\n0000dfd4 00000036 T __aeabi_dcmpun\n00008ec4 00000036 T fb_get_message\n0000e298 00000038 T __aeabi_d2uiz\n0000e298 00000038 T __fixunsdfsi\n0000c8a4 0000003c T __aeabi_d2ulz\n0000e25c 0000003c T __clzsi2\n0000c8a4 0000003c T __fixunsdfdi\n0000e0ba 0000003e T __aeabi_ui2d\n0000b9bc 0000003e T fmax\n00008e70 00000046 T fb_flush\n0000b2f4 0000004a T sqrt\n0000b240 0000004c T hypot\n0000e06c 0000004e T __aeabi_i2d\n0000b340 00000050 T ldexp\n00008000 0000005a T probe_entry\n0000e00c 00000060 T __aeabi_d2iz\n0000b28c 00000068 T log\n0000b1cc 00000072 T exp\n0000d3e0 00000076 T __eqdf2\n0000d3e0 00000076 T __nedf2\n0000e0f8 0000007c T __aeabi_f2d\n0000b9fc 0000007c T __fpclassifyd\n0000805c 00000084 t evaluate\n0000e2d0 0000008e T memset\n0000fe38 00000090 B probe_config\n0000e36c 000000a2 T memcpy\n0000bcfc 000000ac T round\n0000d514 000000bc T __ledf2\n0000d514 000000bc T __ltdf2\n0000d456 000000be T __gedf2\n0000d456 000000be T __gtdf2\n00008294 000000c2 t output\n0000e174 000000d4 T __aeabi_d2f\n00008f10 000000fa T fb_replay\n0000f460 00000120 D _impure_data\n0000a2c0 00000134 T fb_cholesky\n0000b3a0 00000134 T scalbn\n00015620 00000138 B __sf\n000080e0 000001b2 t latent\n00008c84 000001ea T fb_offer\n0000bad4 00000228 T __ieee754_sqrt\n000087e8 00000234 t fb_flush.part.0\n00008a24 00000260 T fb_init\n0000c170 000002d4 T __ieee754_hypot\n0000a3f4 000002d4 T fb_qr\n00009f48 00000376 T fb_solve\n0000bda8 000003c8 T __ieee754_exp\n0000c444 000003e2 T __ieee754_log\n0000d5d0 00000430 T __aeabi_dmul\n00008358 0000048e t fit\n0000900c 000004a2 T fb_token\n0000b4d4 000004da T expm1\n0000cec0 00000520 T __aeabi_ddiv\n0000c90c 000005b4 T __aeabi_dadd\n0000da00 000005d4 T __aeabi_dsub\n0000f5b0 00000888 B probe_prior\n000094b0 00000a98 T fb_history\n0000a6c8 00000b02 T foster_predict\n0000fec8 00005758 B probe_context\n00080000 fff95758 B _stack\n",
+      "stderr": ""
+    }
+  },
+  "commands": [
+    [
+      "/usr/sbin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "experiments.foster_c_baseline_001.test_baseline",
+      "-v"
+    ],
+    [
+      "clang",
+      "-std=c11",
+      "-O2",
+      "-fno-fast-math",
+      "-ffp-contract=off",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-fstack-usage",
+      "-g",
+      "-DFB_PROFILE",
+      "-D_POSIX_C_SOURCE=200809L",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/host_cli.c",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_clang_sanitize/baseline.o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_clang_sanitize/history.o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_clang_sanitize/numeric.o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_clang_sanitize/model.o",
+      "-lm",
+      "-o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_clang_sanitize/host_cli"
+    ],
+    [
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_clang_sanitize/host_cli",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/sanitizer_fixture.bin"
+    ],
+    [
+      "arm-none-eabi-gcc",
+      "-std=c11",
+      "-O2",
+      "-fno-fast-math",
+      "-ffp-contract=off",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-fstack-usage",
+      "-mcpu=cortex-m23",
+      "-mthumb",
+      "-mfloat-abi=soft",
+      "-nostartfiles",
+      "--specs=nosys.specs",
+      "-Wl,--gc-sections,-e,probe_entry,-Map,/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/probe.map",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/link_probe.c",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/baseline.o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/history.o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/numeric.o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/model.o",
+      "-lm",
+      "-o",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/probe.elf"
+    ],
+    [
+      "arm-none-eabi-size",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/probe.elf"
+    ],
+    [
+      "arm-none-eabi-nm",
+      "-S",
+      "--size-sort",
+      "/home/easy/proj/mumble/experiments/foster_c_baseline_001/build_m23/probe.elf"
+    ]
+  ],
+  "sanitizer_limits": "LeakSanitizer disabled: tracing environment unsupported. Core has no heap allocation. GCC16 sanitizer compile diagnosed stringop-overread in unchanged parent model; Clang sanitizer build used without modifying it.",
+  "parent_preservation": {
+    "artifacts": 68,
+    "changed": []
+  },
+  "status": "passed"
+}

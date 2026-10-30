@@ -1,0 +1,18 @@
+{
+  "status": "full_convolution_upper_bound_within_frozen_cap",
+  "primary_receipt_preserved": true,
+  "primary_identity": {
+    "bytes": 860336,
+    "sha256": "fd7dbea46b47290e46ee7e0443b4f0e631fa96c836b6780d04abb4a98fe96d81"
+  },
+  "counter_meaning": "The primary coefficient counter measures K*(K+1)/2 retained-coefficient multiply-adds per convolution. NumPy evaluates the full convolution before truncating.",
+  "retained_coefficient_multiply_adds": 11531568,
+  "full_convolution_multiply_adds_upper": 23063136,
+  "reason": "Each equal-length K convolution has K^2 products, and K^2 <= 2*K*(K+1)/2. The primary counts every recurrence convolution and all eight block-composition convolutions per mode/control.",
+  "frozen_cap": 30000000,
+  "other_work_counters": {
+    "model_node_steps": 1751360,
+    "carrier_values": 4683684
+  },
+  "limits": "Bound covers these convolution products only, not all matrix operations, transcendental evaluations, runtime or measured CPU instructions. No rerun or tolerance change."
+}

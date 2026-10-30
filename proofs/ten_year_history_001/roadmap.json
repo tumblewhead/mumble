@@ -1,0 +1,50 @@
+{
+  "schema": "ten_year_history_proof_roadmap_v1",
+  "decision": "Develop a proof-carrying incremental history contract before another empirical representation sweep. Continue the existing rolling solver as the practical estimator baseline.",
+  "gates": [
+    {
+      "id": "P0",
+      "name": "Define exact meaning and useful error",
+      "deliverable": "contract.json,lemmas.md and explicit error-ledger definitions",
+      "status": "foundation_written_physical_assumptions_open",
+      "must_resolve": ["Aging transition/rate uncertainty, including RC state transfer", "Physical query error allocation versus existing SOC/Q point targets", "Maximum admitted update rate and weak-excitation policy"]
+    },
+    {
+      "id": "P1",
+      "name": "Prove the incremental rolling token",
+      "deliverable": "One versioned token/operator with source interval, boundary state relation, prior ownership, noise model and actual exposure",
+      "acceptance": ["Repeated queries add no evidence", "Overlapping windows cannot be counted twice", "Chronological composition matches uncompressed replay", "Pure repetitions aggregate exactly in the admitted base family"],
+      "status": "next_implementation_target"
+    },
+    {
+      "id": "P2",
+      "name": "Build an exact closed aging reference",
+      "deliverable": "Small scalar/vector linear-Gaussian or exact bounded-set transition reference with chronological elimination; hypotheses clearly narrower than full battery",
+      "acceptance": ["Forward message equals batch elimination", "Old information weakens only through explicit admitted aging uncertainty", "Unexcited directions remain unresolved", "Arithmetic and ownership limits are explicit"],
+      "status": "finite_mathematical_witness_only"
+    },
+    {
+      "id": "P3",
+      "name": "Derive the battery gallery closure",
+      "deliverable": "Physical stimulus/response dictionary and dependence graph showing which mixed functions close under composition and aging",
+      "acceptance": ["Preserve chronology and carried-state/health correlations", "Separate exact sufficient coefficients from approximate remainders", "Prove finite size or declare growth/unresolved status", "Bind coefficients to SOC,Q and future-response queries"],
+      "status": "open_no_selected_gallery_size"
+    },
+    {
+      "id": "P4",
+      "name": "Prove finite-horizon error and resources",
+      "deliverable": "Certified local defect ledger, actual stability bounds, count/range proofs and complete SRAM/work accounting",
+      "acceptance": ["Apply L9 over every admitted prefix through ten years", "No unproved contraction or reset of spent error budget", "Conservative fallback on out-of-domain stimulus or aging", "Nominal35Hz is not used as an unstated maximum event rate"],
+      "status": "open"
+    },
+    {
+      "id": "P5",
+      "name": "Falsify and qualify the composed system",
+      "deliverable": "Fresh-source finite causal trajectories plus adversarial repetitive/weak-stimulus/aging tests, using the proof obligations as test oracles",
+      "acceptance": ["Separate history duration, future horizon, age and compaction count", "Compare rolling baseline and exact small reference", "Retain source uncertainty and all failures", "Only then expand to physical ten-year envelopes and MCU qualification"],
+      "status": "deferred_until_P1_to_P4"
+    }
+  ],
+  "no_more_unstructured_sweeps": "A new approximation family must identify the lemma it preserves, the defect it bounds and the lifetime budget it consumes before battery fitting.",
+  "scope_of_current_completion": "Written foundation and finite mathematical witnesses, not P1–P5 implementation or ten-year qualification."
+}

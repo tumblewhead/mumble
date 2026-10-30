@@ -1,0 +1,275 @@
+{
+  "schema": "continuous_foster_feedback_summary_v1",
+  "status": "pipeline_complete_four_hour_run_complete_sustained_capacity_and_uncertainty_unqualified",
+  "branch": "implementation/foster-feedback-001",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "targeted_checks": 55,
+  "preserved_earlier_artifacts": 371,
+  "records": 504000,
+  "simulated_hours": 4,
+  "retired_tokens_per_arm": 31500,
+  "model": "Continuous five-state11-parameter userFoster,+Hh,normalized dimensionlessgamma,knownlinearOCV and knownArrheniuslaws,stationaryreferenceparameters",
+  "implementation": "Experimental continuous rolling-boundary producer and genericGaussianfeedback adapter; legacyC rollingengine unchanged",
+  "history": "Prior-free centeredQR likelihood plus joint first-order deterministictransport; rootprioronce and disjointsource retirement",
+  "encoding": "float64 orfloat32 token coefficients; no physical parameter lattice or learnedshape dictionary",
+  "arms": {
+    "float64": {
+      "status": "completed",
+      "retired_records": 504000,
+      "generation": 31500,
+      "final": {
+        "time_s": 14400.0,
+        "Q_error_percent": 0.47877939609239917,
+        "SOC_error_pp": -0.08430931173285527,
+        "estimate": {
+          "Q": 0.05697146791758439,
+          "Q_ref": 0.05697146791758439,
+          "SOC": 0.6350403455189056,
+          "Q_log_sd": 0.002451073624676249,
+          "SOC_sd": 0.00020427292496370155,
+          "Q_SOC_chart_covariance": -2.665974157755742e-07,
+          "Q_interval_3sd": [
+            0.056554080581774975,
+            0.05739193570640979
+          ],
+          "chart_mean": [
+            0.6350403455189056,
+            -1.1186811868935066e-30,
+            -8.221744040538228e-09,
+            -0.0005984219894221497,
+            -0.2208486529194814,
+            -2.86520469932039,
+            -2.0132145694051053,
+            -3.365204142983813,
+            -1.8266888859952715,
+            -2.7524369236543302,
+            -0.4345983697310659,
+            -2.1251675890797674,
+            1.560936272979968,
+            -4.366962708766523,
+            1.7922100491044843,
+            2.163038063211871
+          ],
+          "chart_sd": [
+            0.00020427292496370155,
+            1.8961851321878186e-29,
+            1.350562938943793e-08,
+            1.8380013414954423e-05,
+            0.01548704657423118,
+            0.002451073624676249,
+            0.030588951082238795,
+            0.1287746626850739,
+            0.28765837954747425,
+            0.06232369245619895,
+            0.15548941468378616,
+            0.026754556278497935,
+            0.023469453604205784,
+            0.027546791380644708,
+            0.02491994303616992,
+            0.016101145080597477
+          ],
+          "log_evidence": 2066062.016758433,
+          "records": 504000,
+          "physical_point": "transformed Gaussian chart mean; Q is lognormal median"
+        }
+      },
+      "all": {
+        "outputs": 31500,
+        "max_Q_percent": 31.197457780081027,
+        "max_SOC_pp": 0.7967412247952166,
+        "joint_preferred": 550,
+        "Q_3sd_misses": 23416,
+        "SOC_3sd_misses": 29046,
+        "Q_RMSE_percent": 2.455372038759989,
+        "SOC_RMSE_pp": 0.11201448481942652,
+        "joint_preferred_fraction": 0.01746031746031746
+      },
+      "phase": {
+        "learning": {
+          "outputs": 11812,
+          "max_Q_percent": 31.197457780081027,
+          "max_SOC_pp": 0.7967412247952166,
+          "joint_preferred": 111,
+          "Q_3sd_misses": 8090,
+          "SOC_3sd_misses": 10034,
+          "Q_RMSE_percent": 3.0254771270621594,
+          "SOC_RMSE_pp": 0.154158135555196,
+          "joint_preferred_fraction": 0.009397223162885202
+        },
+        "weak": {
+          "outputs": 11813,
+          "max_Q_percent": 2.4841816219280277,
+          "max_SOC_pp": 0.0872673849729555,
+          "joint_preferred": 0,
+          "Q_3sd_misses": 11813,
+          "SOC_3sd_misses": 11442,
+          "Q_RMSE_percent": 2.4422121943521864,
+          "SOC_RMSE_pp": 0.0772412469096524,
+          "joint_preferred_fraction": 0.0
+        },
+        "renewed": {
+          "outputs": 7875,
+          "max_Q_percent": 2.60095000331213,
+          "max_SOC_pp": 0.08920901391271663,
+          "joint_preferred": 439,
+          "Q_3sd_misses": 3513,
+          "SOC_3sd_misses": 7570,
+          "Q_RMSE_percent": 1.19947551256193,
+          "SOC_RMSE_pp": 0.07479102773210039,
+          "joint_preferred_fraction": 0.055746031746031745
+        }
+      },
+      "stops": {
+        "round_limit": 2225,
+        "gradient": 29257,
+        "no_descent": 18
+      },
+      "storage": {
+        "message_payload_B": 2184,
+        "token_payload_B": 3537,
+        "two_messages_plus_token_B": 7905,
+        "raw_window_numeric_B": 640,
+        "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+        "complete_subsystem_B": null
+      }
+    },
+    "float32": {
+      "status": "completed",
+      "retired_records": 504000,
+      "generation": 31500,
+      "final": {
+        "time_s": 14400.0,
+        "Q_error_percent": 0.47931313105775697,
+        "SOC_error_pp": -0.08428882481185118,
+        "estimate": {
+          "Q": 0.056971770545309754,
+          "Q_ref": 0.056971770545309754,
+          "SOC": 0.6350405503881157,
+          "Q_log_sd": 0.0024507308370087665,
+          "SOC_sd": 0.0002042275764821128,
+          "Q_SOC_chart_covariance": -2.6668737102634977e-07,
+          "Q_interval_3sd": [
+            0.05655443915083627,
+            0.057392181547598786
+          ],
+          "chart_mean": [
+            0.6350405503881157,
+            -1.1231585650589408e-30,
+            -8.223700887984342e-09,
+            -0.0005984265255063042,
+            -0.22088167606685422,
+            -2.86519938741721,
+            -2.013210901559184,
+            -3.365177911724733,
+            -1.8266249923887343,
+            -2.7524563044591988,
+            -0.43458826231955316,
+            -2.1251675173983586,
+            1.5609376337325158,
+            -4.367025922535947,
+            1.7921991375013675,
+            2.163094856327914
+          ],
+          "chart_sd": [
+            0.0002042275764821128,
+            1.903711266256852e-29,
+            1.3509571301474875e-08,
+            1.8382196043148303e-05,
+            0.015480003293384762,
+            0.0024507308370087665,
+            0.030585630982130275,
+            0.12877188206539936,
+            0.28766448932091204,
+            0.06233025700560643,
+            0.15549623015129774,
+            0.02675464031820587,
+            0.023470573752948313,
+            0.02755441396347159,
+            0.024919564917242034,
+            0.01609239023410704
+          ],
+          "log_evidence": 2066062.0232767812,
+          "records": 504000,
+          "physical_point": "transformed Gaussian chart mean; Q is lognormal median"
+        }
+      },
+      "all": {
+        "outputs": 31500,
+        "max_Q_percent": 31.197014093338215,
+        "max_SOC_pp": 0.796740390423456,
+        "joint_preferred": 539,
+        "Q_3sd_misses": 23417,
+        "SOC_3sd_misses": 29030,
+        "Q_RMSE_percent": 2.4558179453134183,
+        "SOC_RMSE_pp": 0.11196591643827015,
+        "joint_preferred_fraction": 0.01711111111111111
+      },
+      "phase": {
+        "learning": {
+          "outputs": 11812,
+          "max_Q_percent": 31.197014093338215,
+          "max_SOC_pp": 0.796740390423456,
+          "joint_preferred": 111,
+          "Q_3sd_misses": 8090,
+          "SOC_3sd_misses": 10030,
+          "Q_RMSE_percent": 3.0255795657766775,
+          "SOC_RMSE_pp": 0.15409977953088785,
+          "joint_preferred_fraction": 0.009397223162885202
+        },
+        "weak": {
+          "outputs": 11813,
+          "max_Q_percent": 2.485207121279842,
+          "max_SOC_pp": 0.08719575958231474,
+          "joint_preferred": 0,
+          "Q_3sd_misses": 11813,
+          "SOC_3sd_misses": 11434,
+          "Q_RMSE_percent": 2.4430937102658414,
+          "SOC_RMSE_pp": 0.07718518670829172,
+          "joint_preferred_fraction": 0.0
+        },
+        "renewed": {
+          "outputs": 7875,
+          "max_Q_percent": 2.6019277124623708,
+          "max_SOC_pp": 0.08917811667438214,
+          "joint_preferred": 428,
+          "Q_3sd_misses": 3514,
+          "SOC_3sd_misses": 7566,
+          "Q_RMSE_percent": 1.2000464542300855,
+          "SOC_RMSE_pp": 0.07476732307480019,
+          "joint_preferred_fraction": 0.05434920634920635
+        }
+      },
+      "stops": {
+        "round_limit": 2226,
+        "gradient": 29254,
+        "no_descent": 20
+      },
+      "storage": {
+        "message_payload_B": 2184,
+        "token_payload_B": 1901,
+        "two_messages_plus_token_B": 6269,
+        "raw_window_numeric_B": 640,
+        "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+        "complete_subsystem_B": null
+      }
+    }
+  },
+  "max_encoding_Q_percent": 0.0010434776513079669,
+  "max_encoding_SOC_pp": 0.0002612129945789299,
+  "run_wall_s": 29.80539522401523,
+  "run_cpu_s": 29.714279321000003,
+  "preplot_total_wall_s": 31.322718094976153,
+  "audit": {
+    "Q_error_percent": 0.06517232062950296,
+    "SOC_error_pp": 0.04966539594863928,
+    "status": "no_descent",
+    "wall_s": 4.324506405973807,
+    "scope": "Single public-start retained nonlinear MAP fit; GN covariance is local, not validated posterior coverage"
+  },
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m experiments.foster_feedback_001.run --hours 4",
+  "next": "Diagnose local nonlinear likelihood/transport projection, rolling refinement and uncertainty against retained evidence; preserve currentrun before anyrepair. Do not polish already-small coefficientencoding errors.",
+  "coverage_validated": false,
+  "aging_implemented": false,
+  "complete_SRAM_B": null,
+  "lifetime_qualified": false
+}

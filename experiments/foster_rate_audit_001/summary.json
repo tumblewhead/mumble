@@ -1,0 +1,30 @@
+{
+  "status": "clock_invariance_verified; sampling_default_centralized; RC_bias_cause_unresolved",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "investigation/foster-rate-audit-001",
+  "report": "experiments/foster_rate_audit_001/README.md",
+  "receipt": "experiments/foster_rate_audit_001/result.json",
+  "controls": {
+    "campaign_tests": 32,
+    "paired_clock_controls": 8,
+    "full_posterior_clock_invariant": true,
+    "physical_endpoint_max_difference": 4.3298697960381105e-15
+  },
+  "sampling": {
+    "single_cli_setting": "--sample-rate-hz",
+    "default_source": "experiments/foster_campaign_001/rate.py:DEFAULT_RATE",
+    "period_s": "1/F_s",
+    "physical_model_uses": "observation dt, not nominal Fs",
+    "evidence_order": "source identity and sequence",
+    "remaining_clock_constraint": "dt must fit declared tick grid; checked, not substituted",
+    "legacy_rate_metadata": "historical35Hz fallback only"
+  },
+  "finding": "No35Hz multiplier found in active physical/history arithmetic. Identical-data nonlinear results depend on retirement partition and iteration cap; owner100Hz RC bias remains unresolved.",
+  "preserved_campaign_integration_artifacts": 347,
+  "adapted_sources_archived": 7,
+  "limits": [
+    "No owner48h reruns",
+    "No optimizer/history repair promoted",
+    "No new coverage, aging or M23 qualification"
+  ]
+}

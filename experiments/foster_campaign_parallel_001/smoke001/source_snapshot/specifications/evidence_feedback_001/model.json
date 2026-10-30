@@ -1,0 +1,44 @@
+{
+  "schema": "mumble.augmented_foster.model_contract.v1",
+  "status": "user_proposed_equations_adopted_with_explicit_units_and_domain",
+  "name": "OCV(SOC,T) + three Foster branches + directional hysteresis",
+  "sign_convention": "Positive current discharges; h tends toward+1 during discharge; terminal voltage contains+H*h exactly as proposed by user. This is distinct from the older minusHh model.",
+  "units": {"time":"s","current":"A","Q":"Ah","voltage":"V","resistance":"ohm","tau":"s","temperature_in_Arrhenius":"K","z":"fraction","h":"dimensionless","xi":"dimensionless full-capacity throughput","gamma_plus":"dimensionless","gamma_minus":"dimensionless"},
+  "dynamic_states": ["z","v1","v2","v3","h"],
+  "learned_parameters": ["Q","R0","R1","tau1","R2","tau2","R3","tau3","H","gamma_plus","gamma_minus"],
+  "equations": {
+    "soc":"dz/dt=-I/(3600*Q)",
+    "foster":"dvi/dt=-vi/taui+(Ri/taui)*I",
+    "throughput":"dxi/dt=abs(I)/(3600*Q)",
+    "hysteresis":"dh/dxi=gamma_dir*(sign(I)-h)",
+    "gamma_dir":"gamma_plus forI>0;gamma_minus forI<0;I=0 givesdh/dt=0 without selecting a direction",
+    "voltage":"V=OCV(z,T)+H*h-I*R0-sum(vi)"
+  },
+  "constant_interval_transport": {
+    "condition":"I,T and physical parameters held on declared interval; state is continuous across sample boundaries",
+    "z_next":"z-I*dt/(3600*Q)",
+    "vi_next":"exp(-dt/taui)*vi+Ri*I*(1-exp(-dt/taui))",
+    "h_next":"exp(-gamma_dir*abs(I)*dt/(3600*Q))*h+(1-exp(-gamma_dir*abs(I)*dt/(3600*Q)))*sign(I) forI!=0; otherwiseh",
+    "stable_arithmetic":"Evaluate1-exp(-x) using-expm1(-x) when appropriate; do not add diffusion or clip states to hide failed domain checks",
+    "measurement_epoch":"Endpoint voltage after interval transport; actual duration and sequence belong to the source",
+    "varying_temperature":"Producer must declare interval convention or integration and its error; the compressor does not reconstruct a temperature waveform or select a physical integrator"
+  },
+  "constraints": ["0<=z<=1 on supported physical path", "-1<=h<=1", "Q>0", "R0>=0", "Ri>0", "0<tau1<tau2<tau3 on the admitted temperature/health domain", "H>=0", "gamma_plus>0", "gamma_minus>0"],
+  "branch_identity":"Modes retain theirR/tau/vi pairing; do not independently sort time constants or RC states. A parameter path violating the declared ordering is outside this model contract.",
+  "capacitance":"Ci=taui/Ri in farads; C is derived rather than an additional independent parameter",
+  "temperature": {
+    "reference_temperature":"Required public calibration/model input, not fixture-derived",
+    "positive_parameter_family":"p(T)=p_ref*exp(A_p*(1/T-1/T_ref));A_p has unitsK and a parameter-specific sign. For a thermally activated rate A_p=-Ea/Rgas; resistance-like quantities may use the opposite sign. No universal shared activation coefficient is assumed.",
+    "zero_parameters":"H_ref=0 orR0_ref=0 remainszero under its multiplicative law; do not log-transformzero",
+    "OCV":"U=a(T)+b(T)*z+r(z,T),b(T)>0; separately declared calibration and residual model. Do not automatically assignOCV the electrical coefficient law.",
+    "coefficient_authority":"Thermal coefficients are characterized with declared uncertainty or learned jointly when informative; no truth parameters injected into initialization",
+    "health":"Reference parameter paths may change when supported by estimator evidence; this contract prescribes no nonzero calendar/cycle drift rate"
+  },
+  "inference_consequences": [
+    "Q influences bothSOC and hysteresis transport; tokens retain theircross dependence withgamma_plus/gamma_minus andH",
+    "Earliergamma inperAh converts to normalizedgamma by multiplying byQ_Ah only for a fixedQ reference; silently reusing old coefficients changes the model",
+    "With unknownlinearOCVslope and free directional gamma, scalingQ,b,gamma bylambda andz0 by1/lambda leaves the constant-parameter voltage trajectory invariant when states remain in domain. Independent calibration/anchors are needed for absoluteQ/SOC",
+    "An inferred parameter revision is epistemic; it is not a physical instantaneous charge/energy change. Genuine time-varyingQ/C needs an explicitly admitted availability/state-continuity convention"
+  ],
+  "implementation":"Equations and finite contract controls only; existingC plant/rolling solver and previous evidence remain unchanged"
+}

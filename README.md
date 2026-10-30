@@ -1,3 +1,9 @@
+> Source checkpoint (2026-10-30): this branch saves code, documentation,
+> configuration and small receipts. New bulk trajectories, plots, compiled
+> binaries and large generated result files are excluded. Historical reports
+> below may link to local-only evidence; their presence does not mean those
+> artifacts are included. See [checkpoint scope](provenance/source_checkpoint_20261030.json).
+
 # mumble
 
 C research reference for battery estimation from a 35 Hz voltage/current stream.
@@ -5,6 +11,241 @@ C research reference for battery estimation from a 35 Hz voltage/current stream.
 The goal is to **estimate what the available stimulus supports, retain earlier
 evidence, and explicitly report what remains unknown**. The delivery target is
 a runnable Cortex-M23 C estimator subsystem near 10 KiB SRAM.
+
+The active history goal is now **approximately ten years**, with a
+[proof-led foundation](experiments/ten_year_history_001/README.md) before further
+representation sweeps. Thirteen conditional lemmas establish exact repeated-
+factor compaction, chronological elimination, aging transport and an explicit
+local-defect/lifetime error model;423finite mathematical checks pass. The
+gallery must preserve evidence weight, cross terms and source ownership while
+eliminating raw events. User-confirmed aging quantities include RC-branch
+capacitance `C_i=tau_i/R_i`; the proposed0.5–1.5relative envelopes remain
+uncalibrated. Existing short-prefix prediction discrepancies do not establish
+ten-year error growth. An incremental rolling reference and exact closed-model
+elimination operator are now implemented; battery closure and numerical/resource
+proofs remain open. No ten-year battery or complete-SRAM certificate is claimed.
+See the [lemmas](proofs/ten_year_history_001/lemmas.md),
+[error model](proofs/ten_year_history_001/error_model.json) and
+[roadmap](proofs/ten_year_history_001/roadmap.json).
+
+The [incremental token reference](experiments/incremental_history_001/README.md)
+passes **1,289 finite checks** against independent batch Gaussian conditioning,
+sequential updates and rolling retirement controls. It preserves prior-free
+evidence ownership, chronology, full cross terms and normalization, including
+deterministic and singular transitions. A preserved first-attempt cancellation
+failure was repaired with an equivalent linear solve. Packed numeric storage
+would be **4,488 B for a 16-state operator**, or **5,704 B including a Gaussian
+prior**, before metadata and workspace; the Python prototype exceeds the full
+SRAM target. The partitioned battery closure derivation is now available below.
+The existing C rolling solver and its physical model are unchanged.
+
+The [battery closure derivation](experiments/partitioned_battery_closure_001/README.md)
+identifies exact conditional amplitude/block composition and the remaining
+nonlinear function dependencies; **844 finite checks pass**, including comparison
+with the existing C physical model. Its 55 underlying quadratic coefficients
+each depend on at most four nonlinear coordinates, with all cross terms retained.
+OCV has exact Möbius transport, but distinct OCV shifts and unknown RC rates
+prevent a fixed finite exact additive likelihood span for arbitrary histories.
+A residual-to-likelihood-to-query bound now makes accumulated approximation
+error explicit. A single conditioning node needs approximately **600 B**, or
+**9,000 B for sixteen nodes**, before metadata/workspace; no node count or full
+SRAM fit is selected. A stationary operator-field prototype with joint
+residual and outgoing-state error envelopes is now available below. Full aging closure and ten-year
+qualification remain open.
+
+The [operator-envelope and centroid study](experiments/operator_envelope_001/README.md)
+passes **1,725 finite checks**. It implements bounded-size likelihood/state error
+accounting, but the zero-order fixed-center field has large measured errors on
+nonzero-width domains and is not promoted. The user's center-trajectory proposal
+is retained as a useful coordinate decomposition: exact re-centering must preserve
+the residual distribution, and an uncertain center requires its cross covariance.
+Four knot values alone do not bound curve error, even for smooth monotone changes
+within30%; early data also leave a future spline direction unresolved. Estimated
+payload is **816 B per stationary field cell** or **288 B for four-knot values and
+shared times across eight health quantities**, excluding their uncertainty; a dense
+joint curve/residual Gaussian example costs6912B. Next is exact square-root
+re-centering with a curve remainder and joint uncertainty, coupled to a richer
+physical response representation. No complete aging transition or SRAM fit is selected.
+
+The [monotone spline/codebook implementation](experiments/monotone_codebook_001/README.md)
+now adopts the user's monotone reference-condition aging direction and both
+temperature representations: measured T(t) and reversible parameter response g(T).
+**1,118 finite checks pass** for square-root re-centering, packed center codes,
+monotone curves and quantization bounds. Compensating the factor for a quantized
+chart center preserves its likelihood in real arithmetic. Sixty age/temperature
+coefficient values pack into **90 B at12bits**, excluding descriptors/uncertainty;
+a scalar eight-coordinate packed factor plus center would use372B. Full dense
+coupling of64 age/thermal/residual coefficients would instead need17160B for the
+factor alone. The structured joint layout study is now available below.
+Monotone trajectory support is implemented; a normalized monotone
+health kernel, calibrated temperature model and full battery integration remain
+open. The previous nonlinear fixed-center approximation is not repaired by
+coordinate translation alone.
+
+The [structured joint history study](experiments/structured_joint_001/README.md)
+passes **174 finite checks** and reviews SpanishCastleMagic's shared nuisance
+constraints at a pinned revision. Physical partitioning does not imply
+independent uncertainty: block partitioning alone saves no factor entries.
+Chronological retirement preserves a joint boundary message, but monotone
+support introduces a nonquadratic probability-mass term and normalized aging
+transitions require state-dependent normalizers. These terms cannot be dropped
+or replaced by marginal support boxes. A proposed40-coordinate boundary root
+costs **6,888 B**, or **7,276 B** including12-bit centers and one scratch row;
+the48-coordinate active aging segment already costs10,264B on that partial
+basis. Complete memory, constrained message shape and physical calibration
+remain unresolved. Next is a small normalized monotone/thermal message against
+a batch integration oracle, before full aging integration. The rolling solver
+and earlier evidence remain unchanged.
+
+The [joint probability codebook study](experiments/joint_mass_codebook_001/README.md)
+now implements that small normalized monotone/thermal comparator and passes
+**2,064 finite checks**. Joint probability geometry can be encoded, but preserving
+means alone proved insufficient: linear-amplitude quantization badly distorts
+some rare tails and variances. Logarithmic relative amplitudes instead control
+log-density-ratio error, with an explicit composition bound. Its short-prefix
+**16-bit diagnostic reference uses8,262B** for4,131joint masses, before metadata
+and workspace. Its worst measured Q-mean distortion is0.0296% and SOC-mean
+distortion0.001743pp against the same finite grid; SOC-standard-deviation ratios
+stay about0.99807–1.00255. These are compression-preservation results, not physical
+accuracy or coverage. SOC-grid refinement changes the reference by2.30SOC points
+and2.16%Q, motivating the continuous-SOC repair below. The later long-run study
+rejects this fixed-range16-bit encoding for sustained operation.
+
+The [continuous-SOC repair and long-run study](experiments/continuous_soc_001/README.md)
+removes artificial variance from SOC-grid transport and passes **168 targeted
+checks**. Two **four-hour, 35 Hz** controls then complete with a fixed
+729-hypothesis history: stationary operation and an accelerated monotone Q/R0
+change, each including 90 minutes of weak use and renewed loading. Binary32 log
+weights preserve the binary64 reference well below the preferred 0.5% Q and
+0.5 SOC-point scales. Both point targets hold throughout weak use and renewed
+loading; initial learning and the aging-change transient remain explicit.
+The fixed-span log16 arm fails after 4 minutes 32 seconds without aborting the
+other arms. The partial binary32-weight/continuous-SOC payload is **14,580 B**,
+before descriptors and workspace, so complete SRAM remains unresolved. The two
+replays take about **464 host wall seconds** in total. This is a reduced-model
+stream diagnostic, not integration into the original rolling optimizer or
+ten-year qualification. It motivated the overall-system comparison below.
+
+The [system-history comparison](experiments/system_history_001/README.md) now
+completes **four four-hour, 35 Hz trials**, each with binary32 history, binary64
+history and the unchanged legacy C rolling estimator. **45 targeted harness
+checks pass**; all twelve estimator runs finish. Maximum encoding differences
+remain below the preferred scales: **0.02813% Q and 0.0000745 SOC points**.
+However, the cell between health nodes, gradual-aging case and combined stress
+finish with history capacity errors of **−10.05%, −5.76% and −2.70%**, respectively.
+SOC remains within 0.5 points throughout all four history trials, while reported
+uncertainty frequently becomes too narrow under mismatch. This exposes a health
+representation/inference limitation despite numerical history preservation.
+The partial history payload remains **14,580 B**, before workspace. Next is a
+focused continuous Q/R health representation with joint SOC/nuisance uncertainty
+on the frozen controls. Codec polishing and resource optimization are deferred;
+the [feedback boundary](experiments/system_history_001/boundary.md) is specified,
+but the new history is not yet integrated into the original rolling solver.
+
+The [evidence-token and feedback contract](specifications/evidence_feedback_001/README.md)
+now specifies that integration boundary and passes **143 finite protocol/model
+algebra checks**. The rolling estimator produces a reporting view separately
+from a prior-free token for newly retired observations. History returns one
+joint boundary message; atomic retirement and acknowledgment prevent overlap,
+repeated priors and feedback being re-ingested as evidence. The compressor has
+no plant, load, truth scorer or hidden deterioration rate. The user's five-state,
+eleven-parameter Foster model is explicitly bound, including dimensionless
+directional hysteresis rates, normalized throughput and **+Hh** in terminal
+voltage. A nearly linear OCV reference requires explicit slope/offset calibration;
+the capacity/slope ambiguity is tested. An illustrative 16-coordinate Gaussian
+message needs **1,216 B**, and two messages plus one operator need **6,920 B**
+before metadata, solver and workspace. This is a contract with a desktop
+transaction reference, not a new physical estimator or complete SRAM fit.
+The stationary continuous-parameter producer and feedback adapter are now
+implemented in the study below; observation-supported parameter trajectories
+remain later work.
+
+The [continuous Foster feedback pipeline](experiments/foster_feedback_001/README.md)
+passes **55 targeted checks** and completes a rerunnable **four-hour, 35 Hz**
+control with all eleven physical parameters continuous. The rolling producer
+exports a prior-free likelihood root and joint state-transport map; the generic
+history backend has no plant, load, truth or aging rule. Binary32 coefficient
+encoding changes queries by at most **0.001044% Q and 0.000262 SOC points** versus
+binary64 coefficients. The compact arm finishes at **+0.4793% Q and −0.0843 SOC
+points**, but Q error remains about **+2.4% during rest** and uncertainty is often
+too narrow. Final point accuracy therefore does not qualify sustained accuracy.
+Both arms consume504000 observations and commit31500 disjoint tokens in about
+**29.8 host wall seconds**. A boundary message uses **2184 B**, and two messages
+plus the compact token use **6269 B**, before raw window, metadata and workspace.
+Known linear OCV/Arrhenius calibration and stationary reference parameters are
+explicit assumptions. Next is diagnosis of the common rolling/message
+approximation error against retained evidence, before codec or memory tuning.
+
+The [local Foster campaign runner](experiments/foster_campaign_001/README.md)
+adds duration/cell/load/noise/seed sweeps and physical telemetry without changing
+the estimator or original evidence. `--jobs N` runs independent cases in parallel
+with one native math thread per worker (default: serial). Fourteen harness/process
+tests pass, including byte-identical serial/parallel traces; the original
+eight-case smoke and a separate parallel plot smoke are preserved. Each case saves V/I/T, all five states,
+eleven effective/reference parameters and derived capacitances as plots and
+arrays/CSV. Zero-added-noise smoke cases expose up to6.73%Q difference between
+coefficient encodings; the prior small encoding difference is not universal.
+Long-duration accuracy and aging remain unqualified. Start with
+`python3 -B -m experiments.foster_campaign_001.run --help`.
+
+The [CC–CV and variable-load stimulus](experiments/foster_cccv_stimulus_001/README.md)
+adds `--loads charge-discharge`, scheduled charger capabilities up to2C and
+0.2–0.7C discharge, with measured-voltage taper/cutoffs and continuous state.
+Twenty-two harness/process tests pass. One four-hour control completes both
+encodings; CV starts near89%SOC, with final compact Q error−0.04035%, SOC error
+−0.00742points, and gamma estimates5.886/8.793 versus6/9. These are one-case
+point diagnostics, not aging or coverage qualification. The estimator/history
+are unchanged; C-rates use a declared nominal capacity in the harness only.
+
+The [straightforward C Foster baseline](experiments/foster_c_baseline_001/README.md)
+now ports rolling fitting, QR token encoding and full joint-history updates.
+Twelve targeted tests and a standalone address/undefined sanitizer control pass.
+Saved four-hour CC–CV and twelve-hour weak-excitation replays complete in about
+**0.83–0.84s and2.55–2.56s per arm** on this host, with maximum compact-token
+port differences of **0.0000603% Q and0.0000277SOC points** from Python.
+A subnormal-column QR normalization bug was found and repaired; initial results
+are preserved. The M23 cross-build succeeds, but context plus its largest own
+stack frame already needs **33,800B**, before callers/runtime. Target cycles,
+aging and uncertainty coverage remain unqualified. This baseline is the oracle
+for later optimization; at that stage the campaign runner used the Python path.
+
+The [first C CPU optimization pass](experiments/foster_c_cpu_001/README.md)
+reduces paired host replay time by **14.8–17.8%** through initial-prediction reuse,
+deferring matrix construction until after convergence checks, and symmetric
+Cholesky fitting. Fifteen targeted tests and the sanitizer control pass. The first
+two stages preserve full messages bit-for-bit; the final stage differs from the
+C baseline by at most **0.0000229% Q and0.00000744SOC points** across the saved
+four-hour and twelve-hour controls. All83 frozen C-baseline artifacts remain
+unchanged. The33,800B resource lower bound remains; target cycles and subsequent
+physical-derivative/thermal optimizations are still open.
+
+The [sparse-derivative and thermal-cache pass](experiments/foster_c_model_001/README.md)
+reduces host runtime by another **13.6–17.4%** against the previous optimized C
+version. Seventeen targeted tests, the sanitizer control and M23 cross-build pass.
+Both encodings preserve estimates, uncertainty summaries, normalization and final
+joint messages **bit-for-bit** on the saved four-hour and twelve-hour cases.
+The cache replaces redundant workspace, reducing context by **2944B** to19416B;
+context plus the largest own stack frame still requires at least **30,856B**.
+Physical uncertainty, aging and target-cycle qualifications remain unchanged.
+Structured history arithmetic and workspace reuse are the next candidates.
+
+The [structured-history and workspace pass](experiments/foster_c_history_001/README.md)
+saves another **8.0–9.3% host runtime** in its default smaller-workspace variant.
+Twenty-two targeted tests, sanitizer checks and the M23 cross-build pass. All
+saved full-replay outputs and final joint messages remain byte-identical.
+The rolling-path context-plus-largest-own-frame lower bound falls from30856B
+to **21,832B**; accounting for known C caller frames brings it to22096B before
+math/runtime, acquisition and interrupts. A CPU-only variant saves9.2–11.0%
+but retains more stack. Persistent payload sizes and target cycles remain open.
+
+The [C campaign integration](experiments/foster_campaign_c_001/README.md) now
+makes the optimized C core the local runner default, with `--backend python`
+available for comparison. `--sample-rate-hz` selects an integer rate (default35),
+with physical schedules and timestamps kept in seconds. Thirty-two targeted
+checks pass, including10/35/70/100Hz and parallel workers. A short four-case
+comparison measured15.8× faster estimator calls and4.7× faster case execution
+including generation/export, excluding plots. These are single host measurements;
+M23 resources, aging and sustained physical accuracy remain unqualified.
 
 **A desktop retained-history baseline is now working on the two-hour diagnostic.**
 With the user's authorization to separate desktop memory from the 10 KiB target,
@@ -24,8 +265,190 @@ See the [desktop report](experiments/desktop_history_001/README.md) and
 Deployment history is now explicitly **SRAM-only**, within the complete near-10-KiB
 budget. The [compressor options analysis](experiments/history_compressor_options_001/options.json)
 compares fixed nonlinear response bases, multiple local summaries, conditional
-hypotheses and segment coresets. No new compressor is implemented. Desktop
+hypotheses and segment coresets. No replacement compressor is qualified. Desktop
 diagnostic storage remains separate from the deployment constraint.
+
+The [physical-history derivation and basis comparison](experiments/history_basis_comparison_001/README.md)
+now separates free/forced state transport from conditional likelihood. Twelve
+fixed polynomial/rational candidates were compared at two short fabricated
+prefixes; **all fail the retained-likelihood fidelity criterion**. Orthogonal
+paired coordinates preserve the same likelihood but do not reduce storage or
+approximation error. The known nonlinear OCV term dominates these failures;
+the next design should represent that history separately while preserving
+cross terms. One small gradient arithmetic mismatch is recorded separately.
+The rolling solver is unchanged, and full resource qualification and aging
+integration remain open. See the [decision receipt](experiments/history_basis_comparison_001/summary.json).
+
+The subsequent [partitioned-history comparison](experiments/partitioned_history_001/README.md)
+retains every dynamic/OCV cross term while giving OCV its own charge coordinate.
+On the same 97 local queries, degree-4 error falls from **27,922.6 to 103.49 NLL**
+at 4,096 fabricated records, approximately a **270× improvement**. All 48 tested
+candidate/prefix cases still fail the complete finite fidelity criterion.
+The raw-moment layout also fails a near-zero-cost cancellation control; its
+square-root comparator remains the numerical reference. Full storage planning
+includes solver, source/boundary state, scratch, raw queue and stack/runtime
+reservations: the degree-1 layouts fit the plan but are insufficiently accurate,
+and the higher-degree layouts exceed the target. No replacement is integrated.
+See the [decision](experiments/partitioned_history_001/summary.json).
+
+The [symbolic response-error study](experiments/response_symbolic_diagnostic_001/README.md)
+then traced the longer local discrepancy mainly to approximating hysteresis in
+log-rate coordinates. Using physical hysteresis rates at the same degree and
+feature count reduces it from **103.49 to 4.71 NLL**, another **22×** improvement.
+The predicted fifth-order weak-exposure error was supported by current-scaling
+controls. The analogous RC coordinate change worsened results; the next target
+is the slowest RC mode's carried initial-state response and its retained evidence
+cross terms. These are finite representation results, not SOC/Q accuracy or
+deployment qualification. The historical 0.1 NLL budget remains a descriptive
+comparison, not a universal physical acceptance requirement. See the
+[decision receipt](experiments/response_symbolic_diagnostic_001/summary.json).
+
+The [free-RC history comparison](experiments/free_rc_kernel_001/README.md) now
+derives a source-time series with an exact coefficient time-composition law and
+a symbolic uniform-time attenuation bound on fixed rate support. At 4,096 records,
+local discrepancy falls from **4.71 to 2.43 NLL**, essentially the exact-free
+control; the remaining error is mainly current-driven RC response. Matched
+log-tau interpolation reaches a similar local result, and the new kernel is
+worse at low order or broad support. All 52 cases completed; strict gradient
+arithmetic comparisons retain 52 flags, including baseline flags, investigated
+separately with extended precision. The nine-coefficient all-mode layout plans
+**38,896 B**, above the complete 10,240-B target. No solver or aging integration
+changed. Next is a matched comparison of the forced RC coefficient recurrence,
+followed by structural storage reduction; see the
+[decision receipt](experiments/free_rc_kernel_001/summary.json).
+
+The [forced-RC recurrence comparison](experiments/forced_rc_kernel_001/README.md)
+now carries both forced and free RC coefficients through physical state updates.
+At thirteen coefficients per component, local discrepancy falls from **2.42538
+to 0.134332 NLL** at 4,096 records (**18.06x**), and from **0.0531084 to
+0.000027296 NLL** at 64 records (**1,945.65x**). Independent current-step and
+chronological state-composition checks pass; hysteresis now accounts for
+**99.9184%** of the longer local worst-pair discrepancy. All 36 frozen cases
+completed with 27 retained gradient arithmetic flags, including baseline and
+optional equilibration checks. Matched interpolation is often better on broad
+support. Joint K=9 plans **48,520 B**, K=13 **70,792 B**; neither fits SRAM.
+The next target is structured likelihood storage and conditioning, while keeping
+the isolated hysteresis/OCV approximation questions explicit. No rolling solver
+or aging behavior changed. See the
+[decision receipt](experiments/forced_rc_kernel_001/summary.json).
+
+The [structured likelihood storage study](experiments/structured_likelihood_001/README.md)
+now compares exact product/derivative moments and fixed-rank square-root summaries
+with explicit discarded-information bounds. Exact packing retains cross terms
+and the represented Gauss–Newton metric algebraically, but saves only **1,776 B
+at K=9** and fails the zero-residual cancellation control. Smaller ranks lose
+substantial likelihood information; larger ranks retain accuracy at increased
+storage and update-workspace cost. All eight source cases and 48 batch/stream
+rank pairs completed, with **26 numerical flags**, including violations of the
+nominal PSD envelope in floating point. The retained-only rank-1 K9 plan is
+9,720 B, but its audited known-array subsystem lower bound is **13,728 B** before
+library workspace. No tested layout qualifies for deployment. The next design
+must address residual coordinates, explicit arithmetic error and live workspace
+before further compression or trajectory integration. See the
+[decision receipt](experiments/structured_likelihood_001/summary.json).
+
+The subsequent [strategy comparison](docs/COMPRESSION_STRATEGY_002.md) proposes
+comparing a small joint-current-state posterior mixture with a geometric
+likelihood atlas. A self-organizing graph could manage region placement after
+the underlying evidence and uncertainty semantics qualify. The analysis includes
+state-aware coresets, physical aging, source/prior ownership and preliminary core
+memory counts; it does not establish a complete SRAM fit or launch new inference.
+See the [design record](plans/compression_strategy_002.json).
+
+The first [three-way region comparison](experiments/region_compression_001/README.md)
+now tests a joint posterior mixture, a fixed probability atlas, and an atlas
+with learned capacity-region placement. All twelve offline cases and ten
+numerical controls complete. At the 32-record boundary, every candidate broadens
+one-second load-voltage uncertainty from **3.07 mV to 14.5–14.8 mV**, despite
+similar SOC/capacity marginals. A separate audit shows that full transformed
+covariance is preserved but nonlinear voltage cancellation is lost. Two/four
+regions retain about **2.5/5.0 kB** of numeric payload; the current offline builder
+already needs more than2MiB and supplies no causal update. The next experiment
+is physics-conditioned coordinates with exact support normalization. These are
+short saved-posterior tests, not a likelihood-atlas implementation, a general
+self-organizing network, or long-term qualification. See the
+[decision receipt](experiments/region_compression_001/summary.json).
+
+The matched [physical voltage-coordinate comparison](experiments/voltage_coordinates_001/README.md)
+now repairs the boundary prediction at the same numeric payload. At 32 records,
+voltage SD falls from **13.6–13.8 mV to 1.970–2.004 mV**, against a 1.968 mV reference.
+One-second load-prediction excess variance drops **88.2–89.2%**, but its SD remains
+5.61–5.77 mV against 3.07 mV. All twelve cases complete and twenty numerical
+controls pass; an exact
+physical-response audit localizes most remaining excess to free/forced RC
+response. Next are uncertain RC response coordinates with dependent support
+normalization and multiple prediction timescales. These remain short offline
+posterior comparisons; causal transport, aging and complete SRAM are unqualified.
+See the [receipt](experiments/voltage_coordinates_001/summary.json).
+
+The [RC response-coordinate comparison](experiments/rc_response_coordinates_001/README.md)
+now completes 36 cases and 29 numerical controls across several prediction
+timescales. Public mode-scale coordinates bring 32-record load-voltage SD to
+**3.23–3.27 mV at one second** and **16.09–16.31 mV at ten seconds**, against
+3.07 and 16.37 mV references. Short-time and reversal discrepancies remain;
+common one-second coordinates fit that horizon better but worsen long reversal
+predictions. Retained numeric storage is **2,496–2,512 B for two regions** or
+**4,960–4,992 B for four**, excluding complete subsystem workspace. A separate
+168-check derivative audit shows that physical support correction now changes
+the fitted distribution materially. Next is fitting the same bounded conditional
+likelihood with its normalizer in the objective, without adding retained
+coefficients. No causal or firmware qualification follows. See the
+[summary and storage estimate](experiments/rc_response_coordinates_001/summary.json).
+
+The [partition-coordinate and bounded-fit comparison](experiments/partition_coordinate_fit_001/README.md)
+now separates deterministic transport views from probability coordinates while
+retaining one joint sixteen-variable message. Eight matched cases and 39
+numerical controls complete after a separately recorded extreme-tail arithmetic
+repair. At 32 records, specialized coordinates reduce one-sample load-voltage
+SD from **1.014 to 0.578 mV** against a 0.600 mV reference. With bounded fitting,
+one-second load SD is **3.082 mV** against 3.070 mV and mean discrepancy is
+**−0.015 mV**. Retained numeric storage remains **2,496 B** for two components;
+four would require **4,960 B**, excluding workspace and the rest of the subsystem.
+Of 128 bounded conditional fits, 120 meet first-order stationarity; eight
+hysteresis-rate fits retain iteration limits near a bounded-exponential shape.
+This motivated the explicit natural-parameter repair below. Longer
+reversals, causal history updates, coverage and firmware memory remain open.
+See the [summary](experiments/partition_coordinate_fit_001/summary.json).
+
+The [natural-parameter repair](experiments/natural_hysteresis_001/README.md)
+now resolves all eight unfinished hysteresis conditionals in **one or two
+Newton steps**, with **48 controls and 314 receipt checks passing**. Each
+selects the exact bounded-exponential limit, retaining joint uncertainty
+without diverging Gaussian parameters. Maximum constrained gradient residual
+is **8.05e-9**. Other coefficients and source/prior ownership are unchanged.
+Predictive changes are small and the longer reversal discrepancy remains;
+numerical fit completion does not establish nonaccumulating history error.
+Retained numeric storage stays **2,496 B**, excluding complete subsystem
+workspace. The eight offline refits take **0.073 CPU seconds** on this host.
+Next is diagnosing remaining distribution-shape and coupling residuals before
+causal posterior transport, physical aging and long-trajectory qualification.
+See the [summary](experiments/natural_hysteresis_001/summary.json).
+
+The [backward symbolic response study](experiments/backward_response_001/README.md)
+now isolates the remaining reversal discrepancy. At32records, the **+1.470 mV**
+mean difference is mostly construction-versus-heldout disagreement (**+1.539 mV**);
+the message differs from construction by only **−0.069 mV**. Excess variance
+persists. A mixed covariance between carried RC amplitudes and pole-dependent
+gains accounts for **82.69%** of its excess over construction, despite nearly
+matching marginal amplitude variances. The exact physical decomposition passes
+five controls and1,452checks. The next derived repair fits carried RC scale as
+`a(tau)*s` in the existing `F=a(tau)*v` coordinates, preserving normalization,
+joint uncertainty and **2,496 B** retained numeric storage. It is proposed,
+not yet implemented or qualified. See the
+[reformulation](experiments/backward_response_001/reformulation.md).
+
+The [physical RC scale implementation and adaptations](experiments/physical_rc_scale_001/README.md)
+show that compulsory physical scaling overcorrects the32record case. Combining
+nonnegative physical-coordinate and response-coordinate precision produces a
+partial repair: excess reversal variance against construction falls **94.66%**
+at8records and **10.44%** at32records. Some shorter-horizon variances regress,
+and the32record discrepancy remains. A further physical mean-compensation test
+does not consistently help. **66 controls and all28fit-gradient checks pass**;
+failed endpoints and adaptations are preserved. The combined candidate retains
+**2,544 B**,48B above the original, excluding subsystem workspace. It is not
+promoted to the rolling estimator. Next is tracing generated conditioning
+distributions and carried-state coupling, followed by fresh-source and causal
+qualification. See the [summary](experiments/physical_rc_scale_001/summary.json).
 
 The user selected **explicit health evolution**, rather than exponential history
 discounting. The [minimal model specification](specifications/minimal_health_model_001/model.json)
@@ -44,14 +467,20 @@ Long-history scaling, physical aging calibration and the compressor's density
 fidelity gate remain open. The stationary desktop baseline remains the zero-drift
 control.
 
-The [first prefix-scaling study](experiments/posterior_prefix_scaling_001/README.md)
-is closed: the **8-record posterior passes**, the **32-record comparison is
-CPU-limited with six of eight populations saved**, and the 128-record posterior
-was not launched. Cost probes completed at all three lengths. The campaign
-recorded 365.413 CPU seconds against its 360-second budget; aggregate supervision
-needs live accounting and stopping headroom before a separately registered
-32-record completion. This is a compute-limit finding, not a failed numerical
-comparison at 32 records.
+The [prefix-scaling study and local follow-ups](experiments/posterior_prefix_scaling_001/README.md)
+now show an **8-record pass**, a **32-record pass after increasing moves from48
+to96**, and a **completed128-record run at96 moves that fails7/8 numerical
+checks**. The latter used88.4minutes for3.66seconds of observations. The local
+overnight runs at192 moves are now complete: **128 and256 records each fail6/8
+numerical checks**, despite completing all populations without a work-limit stop.
+They took2.77 and8.34hours for3.66 and7.31seconds of simulated operation. The
+[saved-evidence review](experiments/posterior_prefix_scaling_001/overnight_review001/summary.json)
+verifies source/input hashes and reproduces every numerical assessment. These
+fixtures assess numerical integration, not the earlier tens-of-minutes SOC and
+capacity point-accuracy crossings. The original campaign's
+CPU-limited partial32 result and365.413s/360s supervision overrun remain preserved.
+Live aggregate CPU supervision remains unrepaired; local follow-ups use direct
+workers with finite model-work caps and no CPU/wall cutoff.
 
 **The rolling engine is integrated and has completed one four-hour causal run.**
 Starting from the public mean, it processed **504,000 twelve-bit V/I/T records**

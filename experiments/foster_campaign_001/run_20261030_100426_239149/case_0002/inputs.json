@@ -1,0 +1,82 @@
+{
+  "status": "generated",
+  "valid_records": 17280000,
+  "charger": {
+    "settings": {
+      "nominal_capacity_ah": 0.06,
+      "charge_c": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "discharge_c": [
+        0.2,
+        0.01,
+        0.45,
+        0.08
+      ],
+      "charge_step_s": 900.0,
+      "discharge_step_s": 600.0,
+      "cv_voltage": 4.06,
+      "discharge_cutoff_v": 3.18,
+      "cycle_rest_s": 300.0,
+      "taper_end_c": 0.05,
+      "taper_hold_s": 30.0,
+      "cv_gain": 0.5
+    },
+    "sample_rate_Hz": 100,
+    "phase": "discharge",
+    "phase_records": {
+      "cc": 1483973,
+      "cv": 529354,
+      "rest_after_charge": 330000,
+      "discharge": 14636673,
+      "rest_after_discharge": 300000
+    },
+    "completed_cycles": 10,
+    "charge_Ah": 0.4510941138844866,
+    "discharge_Ah": 0.4479793995490175,
+    "authority": "Harness only: nominal nameplate capacity, global-time schedules and measured terminal V; no true SOC/Q or estimator feedback",
+    "current_grid_A": 0.000125,
+    "reference": "C-rates use nominal_capacity_ah, not unknown actual capacity",
+    "CV_scope": "Finite-bandwidth integral controller, not algebraic exact voltage clamp; current-limited CC/CV",
+    "timing": "Phase changes apply to the sample after the triggering measurement"
+  },
+  "requested_records": 17280000,
+  "sample_rate_Hz": 100,
+  "observation_columns": [
+    "dt_s",
+    "current_A",
+    "temperature_C",
+    "voltage_V",
+    "sigma_V"
+  ],
+  "truth_columns": [
+    "SOC",
+    "v1_V",
+    "v2_V",
+    "v3_V",
+    "h",
+    "Q_Ah",
+    "R0_ohm",
+    "R1_ohm",
+    "tau1_s",
+    "R2_ohm",
+    "tau2_s",
+    "R3_ohm",
+    "tau3_s",
+    "H_V",
+    "gamma_plus",
+    "gamma_minus",
+    "noiseless_voltage_V"
+  ],
+  "observation_identity": {
+    "bytes": 691200128,
+    "sha256": "fae16da3dc2bf763aeb892e57c1b5be94066c71ac4d86524ae7854dff6070acc"
+  },
+  "truth_identity": {
+    "bytes": 2350080128,
+    "sha256": "b3fe8fa9294ad8b72159d161eb543fb753a6867c37ac138c241f6c687d6a35ee"
+  },
+  "incomplete_array_rule": "Only rows below valid_records are valid; unused preallocated rows must not be read."
+}

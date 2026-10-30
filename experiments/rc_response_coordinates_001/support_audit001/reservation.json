@@ -1,0 +1,15 @@
+{
+  "status": "post_comparison_before_score_evaluation",
+  "primary": {
+    "bytes": 986076,
+    "sha256": "b7f67ba9f561a312470656e57056ce2be38ba9d53839a9b53d621f314aebeced"
+  },
+  "source": {
+    "bytes": 5513,
+    "sha256": "e8d56de10a9a58498fcb4f690cadefed719e1e8d47411b00624600d1e37e1a88"
+  },
+  "question": "The support correction is non-negligible. Is untruncated regression stationary for the normalized conditional likelihood?",
+  "design": "Use construction samples only. Compute intercept/logSD gradients for all saved regions/steps. Verify derivatives by central differences on first128members in each two-region mixture chart. No refit or heldout tuning.",
+  "derivative": "NLL gradient for intercept shift by sigma: mean((mu-x)/sigma+phi(a)/Z-phi(b)/Z); for log_sigma: mean(1-((mu-x)/sigma)^2+a*phi(a)/Z-b*phi(b)/Z).",
+  "work": "Separate post-comparison diagnostic, outside original candidate counters. No new inference or predictive trajectories."
+}

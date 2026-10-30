@@ -1,0 +1,42 @@
+{
+  "schema": "ten_year_history_error_model_v1",
+  "status": "explicit_symbolic_model_no_calibrated_battery_extrapolation",
+  "independent_axes": ["history observation count n", "future prediction horizon H", "physical age t and throughput A", "approximation operation count m"],
+  "reference": "Exact current-state posterior or declared query distribution under the admitted physical/aging model, with every observation/prior owned once",
+  "state_error": {
+    "definition": "e_k=distance(decoded_message_k,exact_model_belief_k)",
+    "local_components": {"c_k":"representation/compaction defect", "n_k":"numerical evaluation and solver defect", "m_k":"difference between implemented and admitted physical/aging update"},
+    "recurrence": "e_k <= L_k*e_(k-1)+c_k+n_k+m_k",
+    "extrapolation": "e_N <= product(L_1:N)*e_0 + sum_i[(c_i+n_i+m_i)*product(L_(i+1):N)]",
+    "strong_metric_case": "L_k<=1 for common Markov kernel and shared positive likelihood in log-density oscillation metric; local defects may be infinite if support or deterministic maps disagree",
+    "strict_contraction_case": "Only if independently established: L_blocks<=rho<1 and defect<=delta gives e_n<=rho^n*e_0+delta*(1-rho^n)/(1-rho)",
+    "calibrated_L_or_rho": null,
+    "calibrated_local_defects": null,
+    "calibrated_physical_model_error": null,
+    "interpretation": "No arbitrary decay multiplier, compaction reset or invented process noise is permitted to make the bound small"
+  },
+  "query_error": {
+    "expectation": "|E_q g-E_pi g| <= range(g)*tanh(D(q,pi)/4) when finite D exists",
+    "variance_loose_bound": "|Var_q g-Var_pi g| <=3*range(g)^2*tanh(D(q,pi)/4)",
+    "alternative": "A tighter physical-query metric is allowed only with proved propagation closure/stability",
+    "distinct_from": "Actual-cell point error, irreducible posterior uncertainty, noise/model calibration and coverage"
+  },
+  "failure_models": [
+    {"name":"repeated_reprojection","formula":"D_m=m*epsilon in the two-state log-odds counterexample","control":"Idempotence for no-new-evidence operations, exact sufficient updates or charged lifetime defect"},
+    {"name":"fixed_model_bias_growing_confidence","formula":"point bias approaches b while standardized bias grows proportional to sqrt(n)","control":"Calibrated representation/model discrepancy retained in uncertainty; do not infer accuracy from narrow posterior"},
+    {"name":"static_pooling_of_aging","formula":"For theta(t)=theta0+v*t, equal-time stationary pooling yields theta0+v*t/2, lagging current theta by-v*t/2","control":"Chronological health-state transport and elimination"},
+    {"name":"forecast_horizon_sensitivity","formula":"r(H,tau)=(1-exp(-H/tau))/a(t_star,tau), bounded by1/a_min; query depends on mixed rF moments","control":"Preserve weighted response/cross moments over the declared horizon family; do not confuse this with lifetime accumulation"}
+  ],
+  "gallery_error": {
+    "exact_case":"Finite shared log-likelihood span gives zero representation defect for real-arithmetic coefficient addition",
+    "approximate_case":"If each event contributes residual r_i(theta), cumulative log-error oscillation <=sum_i osc(r_i), even when the same template is reused",
+    "merge_obligation":"Bound the aggregate remainder over the reachable joint health/state domain, including cross terms and provenance"
+  },
+  "required_measurements_before_numeric_ten_year_forecast": [
+    "Per-operation approximation bounds under an exact replay or certified local operator, not finite particle-reference differences alone",
+    "Aging transition uncertainty/rate constraints and state-continuity convention for R,C,Q",
+    "Query error allocation and admissible excitation/availability conditions",
+    "Maximum delivered records/token updates and finite arithmetic ranges",
+    "A valid closure or contraction proof in the selected error metric"
+  ]
+}

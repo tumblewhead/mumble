@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "change": "--jobs N independent case processes; default1; native math threads1",
+  "tests": {
+    "count": 14,
+    "status": "passed",
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_campaign experiments.foster_campaign_parallel_001.test_parallel -v",
+    "serial_parallel": "Four short cases: both encodings arrays and CSVs byte-identical, actual overlap2, cap2"
+  },
+  "parent_solver_checks": 55,
+  "preserved_parent_artifacts": 246,
+  "archive_mapping": {
+    "experiments/foster_campaign_001/run.py": "experiments/foster_campaign_parallel_001/baseline/experiments/foster_campaign_001/run.py",
+    "experiments/foster_campaign_001/README.md": "experiments/foster_campaign_parallel_001/baseline/experiments/foster_campaign_001/README.md"
+  },
+  "plot_smoke": {
+    "cases": 2,
+    "workers": 2,
+    "overlap_verified": true,
+    "records_per_arm": 126,
+    "all_plots_completed": true
+  },
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "implementation/foster-campaign-jobs-001",
+  "limits": "Scheduling change only; no scientific accuracy, aging, speedup or firmware resource qualification",
+  "memory": "Each concurrent case owns its estimator and plotting workspace; numeric telemetry size per case unchanged"
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "natural_hysteresis_plan_v1",
+  "status": "frozen_before_new_battery_fits",
+  "baseline": "experiments/partition_coordinate_fit_001/attempt002/result.json",
+  "selection": "Specialized bounded-likelihood messages at8/32records, each two components. Refit only conditional coordinates3/4 (directional physical hysteresis rates): eight scalar regression problems total.",
+  "inheritance": "Same fixed construction memberships, first two populations for construction and last two for evaluation. All other coefficients, weights, physical chart and source/prior ownership preserved exactly. No truth or new inference.",
+  "family": "Normalized finite-support exp(eta*y-kappa*y²/2), y in(-1,1), eta linear in every preceding coordinate, kappa>=0 including exact zero.",
+  "optimizer": {"method": "Feasible damped Newton with an exact one-bound quadratic subproblem in QR-whitened construction features", "gradient_tolerance": 1e-7, "iterations": 48, "evaluations": 256, "backtracks": 32, "armijo": 0.0001, "regularization": "none", "initialization": "Exact conversion of saved finite Gaussian parameters"},
+  "numerics": {"quadrature_order": 64, "verification_order": 128, "log_partition_and_moment_absolute_tolerance": 2e-11, "quadrature_batch": 256, "sampler_round_cap": 128, "positive_precision_sampler_switch": 1.0},
+  "controls": ["Positive-precision Gaussian equivalence", "Zero-precision uniform/exponential normalization and sampling", "Quadrature refinement and independent512-node comparisons", "Every gradient and Hessian entry by finite difference", "Interior recovery and exact-boundary constrained optimality", "Nonconvergence remains explicit", "Full-message current coordinate/Jacobian/probe controls inherited", "Schema roundtrip, unchanged non-rate coefficients and storage"],
+  "comparison": "Two refitted messages plus exact-natural converted baselines; heldout joint density and the same13 rest/load/reversal probe outputs. Regenerate both with four independent16384-draw batches; report sampling variability separately from source uncertainty.",
+  "draw_batches": 4,
+  "draws_per_batch": 16384,
+  "seed_base": 1029401,
+  "probe_horizons_s": [0.02857142857142857, 0.1, 1.0, 10.0],
+  "work_caps": {"messages": 2, "refitted_conditionals": 8, "fit_objective_rows": 1100000, "fit_quadrature_nodes": 212000000, "heldout_density_points": 32768, "serialization_density_points": 64, "predictive_sample_steps": 13631488, "inverse_OCV_sample_iterations": 13631488, "fresh_posterior_steps": 0},
+  "failure_policy": "Preserve each finite fit and explicit cap/line-search/KKT status, continue census. No heldout-driven changes or cap increases. Record adaptations separately.",
+  "storage_estimate_B": {"two_component_numeric": 2496, "four_component_formula_only": 4960, "complete_target_SRAM": null},
+  "limits": ["Constrained numerical convergence is not history-error stability", "Saved histories0.229/0.914seconds and finite-moment references only", "Fixed-membership conditional fitting, not mixture EM", "No causal/aging update, coverage or MCU qualification"]
+}

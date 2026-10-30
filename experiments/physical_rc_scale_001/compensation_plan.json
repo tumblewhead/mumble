@@ -1,0 +1,91 @@
+{
+  "schema": "rc_compensation_plan_v1",
+  "status": "frozen_after_construction_only_conditioning_diagnostic",
+  "parent": "experiments/natural_hysteresis_001/attempt001/result.json",
+  "diagnosis": "experiments/backward_response_001/verification.json",
+  "prefixes": [
+    8,
+    32
+  ],
+  "arms": {
+    "physical_compensation": [
+      11
+    ]
+  },
+  "family": "Combined-information scale with two additional slow-carried mean features F1*(a3/a1-1),F2*(a3/a2-1). These express physical voltage-state compensation while retaining old linear features.",
+  "ownership": "Same construction/heldout split and fixed memberships; posterior owns prior and source interval once; no fresh inference or truth.",
+  "optimizer": {
+    "iterations_per_conditional": 128,
+    "evaluations_per_conditional": 2048,
+    "gradient_infinity_tolerance": 1e-07,
+    "backtracking_attempts": 32,
+    "armijo": 0.0001,
+    "curvature_relative_guard": 1e-12,
+    "method": "Feasible BFGS with exact one-bound quadratic subproblem and constrained gradient residual"
+  },
+  "initialization": "Exact combined-information fit with zero new coefficients; only slow conditional is refitted; no heldout tuning.",
+  "draws_per_batch": 16384,
+  "batches": 4,
+  "seeds": "Reuse saved natural-refit batch seeds for each arm; common seeds are not a guarantee of paired draws after rejection decisions differ.",
+  "work_caps": {
+    "conditional_fits": 4,
+    "fit_objective_rows": 110000000,
+    "heldout_density_points": 16384,
+    "generated_rows": 131072,
+    "inverse_OCV_sample_iterations": 6815744,
+    "predictive_sample_steps": 6815744,
+    "decomposition_sample_steps": 6815744,
+    "factor_rows": 131072,
+    "fresh_posterior_steps": 0
+  },
+  "checks": [
+    "Density/Jacobian and scaled-support equivalence",
+    "Every regression derivative including nonconstant intercept column",
+    "Bounded synthetic physical-scale recovery",
+    "Explicit failure status",
+    "Baseline serialization/density/draw equivalence",
+    "Unchanged unselected coefficients and2496B payload",
+    "All13probes, source/construction disagreement, full covariance and mixed response moments"
+  ],
+  "decision": "Report all arms and failures; assess variance correction against construction and heldout, with all probe regressions and batch variability visible. No heldout optimization, no arbitrary scalar accuracy threshold.",
+  "adaptation_policy": "One final registered mean-interaction test. Retain all earlier outcomes, report every probe and exploratory reuse of heldout sources. No further family tuning in this experiment.",
+  "storage_B": {
+    "retained_numeric": 2576,
+    "increase_over_original": 80,
+    "complete_target_SRAM": null
+  },
+  "limits": [
+    "Offline builder only",
+    "Only0.229/0.914seconds of source history",
+    "Finite population agreement is not coverage",
+    "No physical aging or causal update qualification"
+  ],
+  "parent_attempt": "experiments/physical_rc_scale_001/combined001/result.json",
+  "rationale": "Construction-only conditional/prefix decomposition shows substantial generated-prefix propagation error at32records. Physical state voltage compensation is nonlinear in the existing response chart.",
+  "construction_precision_direction_scores": {
+    "8": [
+      [
+        0.7462650008880695,
+        0.09990439822618041,
+        -0.3069120469216767
+      ],
+      [
+        0.6578219711128421,
+        0.11608978678414981,
+        -0.30121448065274564
+      ]
+    ],
+    "32": [
+      [
+        -0.023271909265348237,
+        0.2644659937520591,
+        -0.04740328482950154
+      ],
+      [
+        -0.019619414493180432,
+        0.29504720497618675,
+        0.004708837248988874
+      ]
+    ]
+  }
+}

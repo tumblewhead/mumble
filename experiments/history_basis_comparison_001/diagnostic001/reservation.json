@@ -1,0 +1,65 @@
+{
+  "plan": {
+    "schema": "mumble_history_basis_diagnostic_v1",
+    "status": "registered_after_comparison_before_attribution",
+    "comparison": "comparison002/receipt.json",
+    "purpose": "Explain representation failures and the one gradient arithmetic mismatch without tuning candidates or changing any pass threshold.",
+    "cases": "All 24 frozen candidate/prefix cases, same queries and domains.",
+    "measurements": [
+      "Separate voltage discrepancy into three RC, forced hysteresis, free hysteresis, OCV and ohmic terms.",
+      "Attribute cost discrepancy as sum_k delta_component*(exact_residual+delta_total/2); signed contributions retain cross effects.",
+      "For the recorded worst normalized gradient mismatch, compare direct row and QR calculations against long-double arithmetic and report cancellation ratio.",
+      "At 33 original local nodes, compare exact two-block cost/state composition with exact full 4096-record reference, carrying all five states."
+    ],
+    "aggregate_model_step_cap_including_comparisons": 10000000,
+    "prior_model_steps_upper": 5292288,
+    "no_candidate_changes": true,
+    "no_new_pass_criterion": true
+  },
+  "sources": {
+    "experiments/history_basis_comparison_001/diagnostic_plan.json": {
+      "bytes": 1125,
+      "sha256": "382b8fc967e012c59943c5cc1c7ff20c903d0db5ae23c3937e4aa25f3bfb685d"
+    },
+    "experiments/history_basis_comparison_001/diagnose.py": {
+      "bytes": 8012,
+      "sha256": "251d4d4925a85dcad42995240320298c84068054e76eaebca72f06fdef07ebcd"
+    },
+    "experiments/history_basis_comparison_001/basis.py": {
+      "bytes": 5749,
+      "sha256": "a3b146046bd8e95faaf44f30eac1f1e26b5cc50dbc016de93df5b436fc21c780"
+    },
+    "experiments/history_basis_comparison_001/compare.py": {
+      "bytes": 13074,
+      "sha256": "d75453ff92b68df00ce9bd64f5e08a78aec0ba46de60035120398d43e6373b18"
+    },
+    "experiments/history_provider_001/qualify.py": {
+      "bytes": 11434,
+      "sha256": "0a4c3d718501ecaaf06703061cfa7a1f3dc11edb22fcd9e4e0e45ce96300b630"
+    },
+    "experiments/history_basis_comparison_001/comparison002/provider.so": {
+      "bytes": 76640,
+      "sha256": "cb601fec44d536c72b26aaf71196641bcf7dc71c57d49900f1aa6226c74b4677"
+    },
+    "experiments/history_basis_comparison_001/comparison002/receipt.json": {
+      "bytes": 173177,
+      "sha256": "40a7f8af7a01382b6e2abc7b011880879b6b82fb8efccc710ea54c8527e21e2a"
+    },
+    "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json": {
+      "bytes": 57302,
+      "sha256": "fc112ec9c4047f45256cf462dd52fdee772999c9d631e7d7729bf0e2290dd4ac"
+    },
+    "experiments/history_basis_comparison_001/comparison002/reference_64.json": {
+      "bytes": 77443,
+      "sha256": "8b371abafd6980945165a04d2e6fc68ac927167ff163c0d00c8f6e6142023012"
+    },
+    "experiments/history_basis_comparison_001/comparison002/reference_4096.json": {
+      "bytes": 77354,
+      "sha256": "a0743502741c5cf74112742b3828793b435caf25b463bd5789bb96a537bbb397"
+    }
+  },
+  "command": [
+    "experiments/history_basis_comparison_001/diagnose.py",
+    "experiments/history_basis_comparison_001/diagnostic001"
+  ]
+}

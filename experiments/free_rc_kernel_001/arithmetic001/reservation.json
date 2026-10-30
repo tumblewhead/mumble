@@ -1,0 +1,92 @@
+{
+  "plan": {
+    "status": "frozen_before_followup",
+    "reason": "Primary direct and QR feature-dual gradients exceeded unchanged tolerance in every long-prefix arm, including baseline. Determine whether contracting with the parameter Jacobian before summing feature duals reduces cancellation.",
+    "primary_preserved": "attempt001/receipt.json",
+    "cases": "4096 records; public_half_SD and full_public; baseline and time_kernel/all_three/K9 only",
+    "methods": [
+      "feature_dual (primary)",
+      "residual_Jacobian (same exact-arithmetic expression)"
+    ],
+    "checks": "Compare direct, QR and partitioned-merged QR gradients with unchanged 2e-8 absolute plus 2e-10 relative allowances. All original domain query points. No primary overwrite or tolerance adjustment.",
+    "extended_precision": "For mean, largest feature-dual allowance-ratio witness, and largest absolute-gap witness in each case, evaluate direct residual and Jacobian products in long double. These witnesses assess arithmetic only, not new approximation choices.",
+    "work_cap": "Two basis constructions = 532480 conservatively counted model-node steps; no optimizer or exact model queries. Aggregate primary+followup below original 3000000 cap.",
+    "limit": "No new degree/domain or representation selection, no physical convergence claim. Original primary numerical mismatches stay recorded."
+  },
+  "sources": {
+    "experiments/free_rc_kernel_001/kernel.py": {
+      "bytes": 4967,
+      "sha256": "17a64b22204084ab3e9f45597ddfb2414688dd2b54909ac8dcee7073de8163da"
+    },
+    "experiments/free_rc_kernel_001/analyze.py": {
+      "bytes": 13424,
+      "sha256": "ce5d16e05c0ae846be054b41b141fc751be259ab32e0328b6554b522f18de8fb"
+    },
+    "experiments/free_rc_kernel_001/plan.json": {
+      "bytes": 4936,
+      "sha256": "101dde5013451f193a755eb482087377bc0e422af0a6010db6451541e37e7be9"
+    },
+    "experiments/response_symbolic_diagnostic_001/response.py": {
+      "bytes": 6588,
+      "sha256": "d5f553d2314715a59c2633ad2498e362d8974080aad7acf005c31fcc323ab84a"
+    },
+    "experiments/partitioned_history_001/partition.py": {
+      "bytes": 3115,
+      "sha256": "fa754e18bfc7487ebb3b22f28374944c3b9d712d680d3316d6c7d6d23737431d"
+    },
+    "experiments/history_basis_comparison_001/basis.py": {
+      "bytes": 5749,
+      "sha256": "a3b146046bd8e95faaf44f30eac1f1e26b5cc50dbc016de93df5b436fc21c780"
+    },
+    "experiments/history_provider_001/qualify.py": {
+      "bytes": 11434,
+      "sha256": "0a4c3d718501ecaaf06703061cfa7a1f3dc11edb22fcd9e4e0e45ce96300b630"
+    },
+    "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json": {
+      "bytes": 57302,
+      "sha256": "fc112ec9c4047f45256cf462dd52fdee772999c9d631e7d7729bf0e2290dd4ac"
+    },
+    "experiments/partitioned_history_001/comparison001/provider.so": {
+      "bytes": 76712,
+      "sha256": "d2076d9815bb3ca7668ceb90e41724d2801235d92c7bf91c2254cb251eab6474"
+    },
+    "experiments/response_symbolic_diagnostic_001/attempt001/receipt.json": {
+      "bytes": 305425,
+      "sha256": "c054a7d5e562916fc2db579201d37a81351dd6b734a6a5d8d38d52bd3af466ee"
+    },
+    "experiments/response_symbolic_diagnostic_001/followup001/receipt.json": {
+      "bytes": 83666,
+      "sha256": "104f157fa16f3927d50d50e77fe1b6658443e4aadfd4bb0b9349f6f11d356353"
+    },
+    "experiments/history_basis_comparison_001/comparison002/reference_64.json": {
+      "bytes": 77443,
+      "sha256": "8b371abafd6980945165a04d2e6fc68ac927167ff163c0d00c8f6e6142023012"
+    },
+    "experiments/history_basis_comparison_001/comparison002/reference_4096.json": {
+      "bytes": 77354,
+      "sha256": "a0743502741c5cf74112742b3828793b435caf25b463bd5789bb96a537bbb397"
+    },
+    "src/scm_model.c": {
+      "bytes": 5765,
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    },
+    "experiments/free_rc_kernel_001/arithmetic.py": {
+      "bytes": 4653,
+      "sha256": "361bbf92bb6a71bc131c02557d7724e4276355fd83f66e41deae70b2494339d8"
+    },
+    "experiments/free_rc_kernel_001/arithmetic_plan.json": {
+      "bytes": 1341,
+      "sha256": "e18866ba5ca6bfa0d6280eb7b18f8a5f1200d842d1b2d91ae4fd6603c1ec5171"
+    },
+    "experiments/free_rc_kernel_001/attempt001/receipt.json": {
+      "bytes": 643472,
+      "sha256": "1f49f446c6c066ef58160a5f56119e0d8c7ac7352fc7ea6280cd2d9275bba1ba"
+    }
+  },
+  "command": [
+    "experiments/free_rc_kernel_001/arithmetic.py",
+    "experiments/free_rc_kernel_001/arithmetic001"
+  ],
+  "revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "experiments/free-rc-kernel-001"
+}

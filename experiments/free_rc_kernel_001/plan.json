@@ -1,0 +1,70 @@
+{
+  "schema": "mumble_free_rc_kernel_plan_v1",
+  "status": "frozen_before_new_evaluation",
+  "question": "Can a source-time exponential kernel represent uncertain free RC responses and every likelihood cross term more accurately without changing the rolling solver?",
+  "scope": "Stationary fabricated representation diagnostic, no optimizer, truth, aging, causal learning run or target qualification.",
+  "baseline": "physical_hysteresis arm in experiments/response_symbolic_diagnostic_001/attempt001/receipt.json",
+  "inputs": "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json",
+  "fixed": {
+    "prefixes": [
+      64,
+      4096
+    ],
+    "domains": [
+      "public_half_SD",
+      "full_public"
+    ],
+    "dynamic_degree": 4,
+    "OCV_charge_degree": 12,
+    "queries": "Same97local/129full saved points. No retuning of support, noise, observed values or other response bases."
+  },
+  "candidate_families": [
+    "time_kernel",
+    "log_tau_interpolation"
+  ],
+  "free_modes": [
+    "slowest_only",
+    "all_three"
+  ],
+  "coefficients_per_selected_mode": [
+    5,
+    9,
+    13
+  ],
+  "baseline_included": true,
+  "primary_cases": 52,
+  "kernel": {
+    "pivot": "c_i=sqrt(lambda_min*lambda_max), lambda=1/tau; public or frozen local support only",
+    "chart": "z=(lambda-c)/(lambda+c); rho=maxabs(z)=tanh(log(lambda_max/lambda_min)/4)",
+    "functions": "b_n(t)=exp(-c*t)*L_n(2*c*t); beta_0=b_0, beta_n=b_n-b_(n-1); exp(-lambda*t)=sum_n z^n beta_n(t)",
+    "truncation": "Use n=0..K-1; beta_0(0)=1 and beta_n(0)=0 for n>0, preserving the physical entering value. No fitted centers or history weighting.",
+    "uniform_exact_arithmetic_bound": "|a-a_K|<=rho^K/(1-rho), all t>=0, from the Cayley right-half-plane map, bounded analytic exponential on the unit disk, and Cauchy coefficient estimates. Numeric bound endpoints not machine certified.",
+    "translation": "beta_n(t+s)=sum_(j=0)^n beta_j(t)*beta_(n-j)(s). Truncated coefficient convolution composes exactly in R[z]/(z^K), not by multiplying decoded scalar approximations.",
+    "endpoint": "Return exact free RC endpoint from elapsed time and queried tau; track historical residual approximation separately. Forced RC and hysteresis endpoint use inherited basis.",
+    "mixed_terms": "Emit complete joint normalized residual rows, replacing selected free RC columns only; retain cross terms through QR. Query analytic derivatives in all original16coordinates and GN from residual Jacobians."
+  },
+  "controls": {
+    "matched_log_basis": "Selectively interpolate free exp(-t/tau) on K fixed log-tau Chebyshev nodes. K5 must reproduce predecessor free columns, apart from recurrence rounding. Same number of free columns as time kernel.",
+    "raw_exact_free": "Exact selected free components at each stored observation, diagnostic lower-error control only; no bounded representation claim.",
+    "time_composition": "t=[0,.01,.1,1,10,120],s=[0,.03,2,30], all model pivots; compare direct beta(t+s) to truncated convolution and two merge trees.",
+    "initial_value": "Every selected kernel exactly has a_K(0)=1 in mathematical arithmetic; verify query/derivative behavior.",
+    "cross_terms": "Direct rows vs full QR cost,gradient,GN; partitioned and merged global-coordinate QR controls.",
+    "query_derivatives": "Central finite differences at public mean, delta=1e-5publicSD, scaled allowance1e-5.",
+    "reference": "Independent original recurrence versus saved C cost/endpoint on all queries; inherited2e-10 relative,2e-8 absolute numerical allowances.",
+    "finite_mismatches": "Record and continue; no tolerance relaxation; hard source/domain/nonfinite errors stop.",
+    "cancellation": "Public-mean zero represented residual control at4096/local/time_kernel/K9/all_three; QR versus direct squared residuals; no clipping."
+  },
+  "memory": {
+    "full_factor": "F=75 + selected_modes*(K-5), packed double QR F(F+1)/2",
+    "boundary": "Original forced/hysteresis node boundary, plus authoritative elapsed time; selected exact free endpoint needs no past samples. Conservative ledger retains inherited node state.",
+    "source_state": "Original identity,domain,estimate andownership reservations preserved. Add elapsed time and3kernel pivots=32B conservatively.",
+    "scratch": "Previous query reservation with expandedF and max extra kernel/query scratch 8*(4*K+16), no unproved aliasing.",
+    "limits": "Complete prospective allocation, not measured C/M23 footprint; static transforms in program ROM are allowed, historical data remain SRAM-only."
+  },
+  "work_caps": {
+    "model_steps_upper": 3000000,
+    "new_free_kernel_scalar_values_upper": 10000000,
+    "automatic_retries": 0
+  },
+  "decision": "Report continuous error, component attribution, uniform free-response bound and full memory/work tradeoff. Historical0.1NLL remains descriptive, not a universal physical gate. Do not select a degree after seeing results."
+}

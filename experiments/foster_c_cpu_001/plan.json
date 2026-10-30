@@ -1,0 +1,39 @@
+{
+  "schema": "foster_c_cpu_plan_v1",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "optimization/foster-c-cpu-001",
+  "baseline_manifest_sha256": "82e9af5a906701e398f54b0f2abb81bfa7a5d613f4382796b7581ea6cec5c49a",
+  "preserved_baseline_artifacts": 83,
+  "variants": [
+    "baseline",
+    "reuse_initial",
+    "reuse_and_defer_gram",
+    "reuse_defer_symmetric_cholesky"
+  ],
+  "unchanged": [
+    "physical model",
+    "history update and token encoding",
+    "prior, settings, ownership, sample chronology",
+    "double precision"
+  ],
+  "qualification": [
+    "baseline targeted suite against optimized library",
+    "exact first-two-stage message parity",
+    "independent SPD solve residuals",
+    "sustained mean, full-final-covariance, marginalSD, logZ and solver-stop comparisons",
+    "alternating-order repeated timings on saved4hCCCV and12hweak cases, both encodings",
+    "sanitizers and M23 resource build"
+  ],
+  "criteria": {
+    "stages1_2": "identical trace estimates, SD, evidence, stop and full message; evaluation-count diagnostic reduced by one per token",
+    "stage3_local": "existing baseline tolerances; independent SPD solve residual controlled by matrix scale",
+    "stage3_sustained": "report all differences; 0.5%Q/0.5SOCpoint application scales, not universal numerical equality",
+    "timing": "three alternating-order passes; median and range, no conversion to RTL cycles"
+  },
+  "deferred": [
+    "physical derivative specialization",
+    "temperature caching",
+    "history sparsity",
+    "precision or solver-tolerance changes"
+  ]
+}

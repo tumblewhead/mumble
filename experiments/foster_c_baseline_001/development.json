@@ -1,0 +1,17 @@
+{
+  "initial_checks": "9/10 tests passed after fixing test-only invalid digest fixtures",
+  "initial_float32_logZ_difference": -2.1728319410385666e-07,
+  "initial_float64_logZ_difference": -2.842170943040401e-14,
+  "adaptation": "Single-block float32-token logZ tolerance changed from1e-7 to1e-6, separate from unchanged double and independent history thresholds. Codec QR rounding differs; sustained differences reported without aborting. No estimator arithmetic or settings changed.",
+  "QR_repair": {
+    "symptom": "weak001 max logZ differences343.774(binary64),678.653(binary32) despite nearlyidentical means",
+    "root_cause": "subnormal sensitivity columns; unscaled Householder reflector loses orthogonality",
+    "witness": "qr_failure.txt",
+    "repair": "scale subnormal columns by DBL_MIN/DBL_EPSILON before reflector construction, rescale diagonal afterward",
+    "regression": "subnormal QR residual energy at nextafter(0,1),1e-320,1e-300,1e-290",
+    "final_receipts": [
+      "weak002/summary.json",
+      "cccv002/summary.json"
+    ]
+  }
+}

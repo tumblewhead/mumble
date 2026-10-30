@@ -1,0 +1,57 @@
+{
+  "schema": "foster_c_model_receipt_v1",
+  "status": "sparse_derivatives_and_exact_thermal_cache_qualified_on_saved_controls",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "optimization/foster-c-model-001",
+  "changes": [
+    "compute only structural nonzero physical derivatives",
+    "reuse11 exact Arrhenius factors per observation across trials",
+    "replace redundant before output with1408B thermal cache"
+  ],
+  "tests": 17,
+  "sanitizers": "Clang ASan/UBSan passed4097records; leakcheckdisabled",
+  "preserved": {
+    "CPU_pass1_artifacts": 98,
+    "CPU_pass1_changed": [],
+    "C_baseline_artifacts": 83,
+    "C_baseline_changed": [],
+    "original_Foster_artifacts": 68,
+    "original_Foster_changed": []
+  },
+  "benchmark": "experiments/foster_c_model_001/attempt001/summary.json",
+  "repetitions": 3,
+  "host_runtime_reduction_vs_previous_percent": [
+    13.618265872054202,
+    17.367500319188423
+  ],
+  "sparse_only_runtime_reduction_percent": [
+    9.782160493970038,
+    12.750435750751809
+  ],
+  "all_tested_stages_estimates_SD_logZ_stops_and_final_messages_bit_identical": true,
+  "cache_vs_sparse_bit_identical": true,
+  "memory": {
+    "context_B": 19416,
+    "context_saved_B": 2944,
+    "thermal_cache_B": 1408,
+    "removed_initial_prediction_B": 4352,
+    "model_M23_own_frame_B": 1272,
+    "model_wrapper_M23_own_frame_B": 32,
+    "largest_M23_own_frame_B": 11440,
+    "context_plus_largest_own_frame_lower_bound_B": 30856,
+    "complete_SRAM_B": null,
+    "target_budget_B": 10240,
+    "probe_text_B": 26876,
+    "probe_data_B": 296,
+    "probe_bss_B": 22104
+  },
+  "target_cycles_measured": false,
+  "campaign_default_backend_changed": false,
+  "limits": [
+    "bit equality is measured on specified controls, not universal proof",
+    "stationary model and localGaussian coverage limitations unchanged",
+    "host timing not target utilization",
+    "cached C context layout requires rebuilt callers"
+  ],
+  "next": "Structured history matrix operations and workspace reuse; obtain RTL cycle timing."
+}

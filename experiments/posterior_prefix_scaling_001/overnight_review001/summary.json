@@ -1,0 +1,224 @@
+{
+  "baseline128_moves96": {
+    "adequacy": {
+      "coverage_validated": false,
+      "density_contrast_0_1_NLL_qualified": false,
+      "diagnostics": {
+        "covariance_MCSE_scaled": 0.16129724290232567,
+        "log_evidence_MCSE": 0.16568776486132536,
+        "mean_MCSE_SD": 0.13770873218427918,
+        "quantile_MCSE_SD": 0.3581384919154677,
+        "refinement_covariance_scaled": 0.46763966267537976,
+        "refinement_log_evidence": 0.5688597508687963,
+        "refinement_mean_SD": 0.47347278483822997,
+        "refinement_quantile_SD": 0.6313007579778689
+      },
+      "limits": {
+        "covariance_MCSE_scaled": 0.12,
+        "log_evidence_MCSE": 0.2,
+        "mean_MCSE_SD": 0.08,
+        "quantile_MCSE_SD": 0.15,
+        "refinement_covariance_scaled": 0.25,
+        "refinement_log_evidence": 0.5,
+        "refinement_mean_SD": 0.15,
+        "refinement_quantile_SD": 0.3
+      },
+      "rigorous_error_bound": false,
+      "status": "uncertainty_unresolved"
+    },
+    "result": "experiments/posterior_prefix_scaling_001/local128_moves96_20261027_212508_513488/results/result.json",
+    "wall_s": 5305.318195
+  },
+  "interpretation": [
+    "128 at192 moves improves most diagnostics relative to96, but fails6/8 gates; closer pooled capacity means do not erase replicate variability.",
+    "256 at192 moves fails6/8 gates and remains exploratory because128 did not pass. More simulated duration changes the inference problem; this is not a controlled move-count comparison.",
+    "Broad physical uncertainty and numerical sampling uncertainty are distinct; weak excitation does not excuse failure to integrate a broad posterior consistently.",
+    "Neither fixture tests prior SOC/capacity point-accuracy timings around17.76/33.01 simulated minutes. No truth error was measured here."
+  ],
+  "recommended_next_step": "Diagnose full-path sampling efficiency and plan a method that can reach tens of simulated minutes before another cost-doubling run. Preserve this sampler as a short-fixture comparator; no automatic sampler change or inference launch.",
+  "results": {
+    "128": {
+      "CPU_s": 9964.997552632,
+      "adequacy": {
+        "coverage_validated": false,
+        "density_contrast_0_1_NLL_qualified": false,
+        "diagnostics": {
+          "covariance_MCSE_scaled": 0.08008446580204037,
+          "log_evidence_MCSE": 0.13480532299859266,
+          "mean_MCSE_SD": 0.08614366327153726,
+          "quantile_MCSE_SD": 0.19712723459901735,
+          "refinement_covariance_scaled": 0.3838411910590166,
+          "refinement_log_evidence": 0.5779444834765854,
+          "refinement_mean_SD": 0.18471061628665592,
+          "refinement_quantile_SD": 0.5919167653703038
+        },
+        "limits": {
+          "covariance_MCSE_scaled": 0.12,
+          "log_evidence_MCSE": 0.2,
+          "mean_MCSE_SD": 0.08,
+          "quantile_MCSE_SD": 0.15,
+          "refinement_covariance_scaled": 0.25,
+          "refinement_log_evidence": 0.5,
+          "refinement_mean_SD": 0.15,
+          "refinement_quantile_SD": 0.3
+        },
+        "rigorous_error_bound": false,
+        "status": "uncertainty_unresolved"
+      },
+      "elapsed_simulated_s": 3.657142857142857,
+      "failed_checks": [
+        "mean_MCSE_SD",
+        "quantile_MCSE_SD",
+        "refinement_mean_SD",
+        "refinement_covariance_scaled",
+        "refinement_quantile_SD",
+        "refinement_log_evidence"
+      ],
+      "key_outputs": {
+        "Q_Ah": {
+          "high_SD": 0.01515217439961829,
+          "high_mean": 0.059949458253839315,
+          "high_mean_MCSE": 0.001127527468538155,
+          "low_mean": 0.05987656131808737,
+          "refinement_mean_SD": 0.0048109884317184505,
+          "refinement_quantile_SD": [
+            0.13298184708759442,
+            0.009712902126901669,
+            0.20189385215080594
+          ]
+        },
+        "R0_ohm": {
+          "high_SD": 0.010866750098527368,
+          "high_mean": 0.11794616048441765,
+          "high_mean_MCSE": 0.00019709665473623155,
+          "low_mean": 0.11787330313899905,
+          "refinement_mean_SD": 0.006704612212300661,
+          "refinement_quantile_SD": [
+            0.05966953863043337,
+            0.01197899050702844,
+            0.04051751080487566
+          ]
+        },
+        "SOC": {
+          "high_SD": 0.010128459342736427,
+          "high_mean": 0.7022380023272389,
+          "high_mean_MCSE": 0.0007673640287055018,
+          "low_mean": 0.7017302735962591,
+          "refinement_mean_SD": 0.05012892028281995,
+          "refinement_quantile_SD": [
+            0.19693069519751394,
+            0.020752187081404066,
+            0.33144568810894065
+          ]
+        }
+      },
+      "peak_RSS_bytes": 139542528,
+      "populations_completed": 8,
+      "status": "uncertainty_unresolved",
+      "wall_s": 9984.29450878402,
+      "work": {
+        "admitted_batches": 51856,
+        "conservative_steps": 20440940544,
+        "denied_batches": 0,
+        "evaluated_paths": 159694848,
+        "limit": 64000000000
+      }
+    },
+    "256": {
+      "CPU_s": 29975.989779345,
+      "adequacy": {
+        "coverage_validated": false,
+        "density_contrast_0_1_NLL_qualified": false,
+        "diagnostics": {
+          "covariance_MCSE_scaled": 0.1226770090749388,
+          "log_evidence_MCSE": 0.16162229968920558,
+          "mean_MCSE_SD": 0.15443528560315856,
+          "quantile_MCSE_SD": 0.26896296732175073,
+          "refinement_covariance_scaled": 0.5403400618159849,
+          "refinement_log_evidence": 0.1253409303863009,
+          "refinement_mean_SD": 0.5795871250776368,
+          "refinement_quantile_SD": 1.1056224303475894
+        },
+        "limits": {
+          "covariance_MCSE_scaled": 0.12,
+          "log_evidence_MCSE": 0.2,
+          "mean_MCSE_SD": 0.08,
+          "quantile_MCSE_SD": 0.15,
+          "refinement_covariance_scaled": 0.25,
+          "refinement_log_evidence": 0.5,
+          "refinement_mean_SD": 0.15,
+          "refinement_quantile_SD": 0.3
+        },
+        "rigorous_error_bound": false,
+        "status": "uncertainty_unresolved"
+      },
+      "elapsed_simulated_s": 7.314285714285714,
+      "failed_checks": [
+        "mean_MCSE_SD",
+        "covariance_MCSE_scaled",
+        "quantile_MCSE_SD",
+        "refinement_mean_SD",
+        "refinement_covariance_scaled",
+        "refinement_quantile_SD"
+      ],
+      "key_outputs": {
+        "Q_Ah": {
+          "high_SD": 0.009852469955450593,
+          "high_mean": 0.060894974433955903,
+          "high_mean_MCSE": 0.0008162648647846638,
+          "low_mean": 0.0582962212605707,
+          "refinement_mean_SD": 0.2637666681690838,
+          "refinement_quantile_SD": [
+            0.05389232926008682,
+            0.24334548858821795,
+            0.620525318453207
+          ]
+        },
+        "R0_ohm": {
+          "high_SD": 0.0062128513797961695,
+          "high_mean": 0.12581910676294938,
+          "high_mean_MCSE": 0.0003888478821627278,
+          "low_mean": 0.12526197893424482,
+          "refinement_mean_SD": 0.08967345179321608,
+          "refinement_quantile_SD": [
+            0.05780874423499846,
+            0.07476180993140379,
+            0.1732796735569081
+          ]
+        },
+        "SOC": {
+          "high_SD": 0.006387183910441038,
+          "high_mean": 0.701984090840824,
+          "high_mean_MCSE": 0.0005318100170926367,
+          "low_mean": 0.7022525104621713,
+          "refinement_mean_SD": 0.04202472092724455,
+          "refinement_quantile_SD": [
+            0.41415956748110916,
+            0.03231234613282165,
+            0.32050554607741877
+          ]
+        }
+      },
+      "peak_RSS_bytes": 245301248,
+      "populations_completed": 8,
+      "status": "uncertainty_unresolved",
+      "wall_s": 30032.64401783701,
+      "work": {
+        "admitted_batches": 55120,
+        "conservative_steps": 43398463488,
+        "denied_batches": 0,
+        "evaluated_paths": 169525248,
+        "limit": 128000000000
+      }
+    }
+  },
+  "schema": "mumble_overnight_saved_evidence_review_v1",
+  "source_run": "experiments/posterior_prefix_scaling_001/local_overnight192_20261027_230259_090309",
+  "verification": {
+    "levels_and_assessments_recomputed_exactly": true,
+    "new_model_evaluations": 0,
+    "new_posterior_populations": 0,
+    "source_and_input_hashes_match": true,
+    "truth_scoring": false
+  }
+}

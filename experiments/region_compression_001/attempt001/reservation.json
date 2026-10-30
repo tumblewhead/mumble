@@ -1,0 +1,222 @@
+{
+  "status": "before_controls_and_candidate_evaluation",
+  "plan": {
+    "schema": "joint_region_compression_plan_v1",
+    "status": "frozen_before_candidate_evaluation",
+    "purpose": "First bounded offline comparison of statistical, geometric and self-organizing representations of one full16 current-state posterior message.",
+    "adaptation": "The geometric arm is a normalized probability atlas, not the previously proposed likelihood atlas. This makes all three arms compare the same existing current-state posterior. Likelihood transport and causal rolling integration are not implemented here.",
+    "reference_directories": {
+      "8": "experiments/posterior_prefix_scaling_001/attempt001/prefix_8",
+      "32": "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results"
+    },
+    "source_selection": "Sort the four population_n4096_seed*.npz files. Construct from first two; evaluate on last two independently. Use projected[:, :16] only. No truth reads or inference reruns.",
+    "reference_limit": "Existing finite moment checks, not validated coverage or an exact reference density. Particles within a population are dependent. Independent population differences are descriptive, not IID standard errors.",
+    "regions": [
+      2,
+      4
+    ],
+    "arms": [
+      "fixed_partition_gaussian_mixture",
+      "fixed_probability_atlas",
+      "adaptive_probability_atlas"
+    ],
+    "common_support": "Public static/health bounds; current SOC [0,1], RC voltages [-0.25,0.25], hysteresis [-1,1]. No clipping; numerical endpoints explicitly unavailable.",
+    "mixture": "Fixed equal-width normalized logQ bins choose construction membership. Each region fits a full16 Gaussian in global bounded-logit coordinates. Its density has global support; mixture weights are regional sample mass. No EM or covariance shrinkage.",
+    "atlas": "Disjoint normalized logQ intervals. Within each interval t in [-1,1] has maximum-entropy quadratic density exp(theta1*t+theta2*t*t)/Z. The remaining15 global logits have Gaussian conditional mean a+B*t and full15 residual covariance. Chart masses sum to one. Jacobians included.",
+    "adaptive": "Same atlas density and node count. A restricted self-organizing chain: 16 Lloyd passes on normalized logQ, starting equal-width centers; boundaries are center midpoints with fixed support endpoints. No forgetting, deletion, reseeding or truth-based tuning. This tests scalar placement, not a full16 neural gas.",
+    "numerics": {
+      "maxent_iterations": 64,
+      "maxent_backtracks": 32,
+      "quadrature_order": 128,
+      "verification_order": 256,
+      "moment_absolute_tolerance": 1e-09,
+      "normalizer_absolute_log_tolerance": 1e-09,
+      "adaptive_passes": 16,
+      "minimum_region_samples": 32,
+      "draws_per_case": 16384,
+      "draw_seed_base": 928001,
+      "rejection_batches_cap_per_chart": 128,
+      "density_batch_size": 512
+    },
+    "stationary_predictive_probes": [
+      {
+        "name": "rest_1s",
+        "steps": [
+          [
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "name": "load_1s",
+        "steps": [
+          [
+            0.05,
+            1.0
+          ]
+        ]
+      },
+      {
+        "name": "load_then_reversal_2s",
+        "steps": [
+          [
+            0.05,
+            1.0
+          ],
+          [
+            -0.05,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "assessment": [
+      "Held-out physical-coordinate log predictive density per independent population; relative scores only, not absolute KL or a universal NLL cutoff",
+      "All16 means, covariance, 5/50/95 quantiles; current Q/SOC/R0 marginals and fixed future voltage predictive distributions",
+      "Current terminal-voltage distribution, candidate-vs-reference spread; retain correlations and weak directions",
+      "Explicit physical support loss in future probes without discarding or renormalizing invalid mass",
+      "Packed retained numeric payload, construction lower bound, process peak RSS and host CPU; no Cortex-M23 claim"
+    ],
+    "ownership": "Each representation owns the initial prior and the same [0,prefix) observation/transition intervals once. Regions are alternatives, never independent evidence. Offline refitting uses source samples and is not an online update algebra.",
+    "controls": [
+      "full covariance analytic mixture",
+      "bounded transform Jacobian",
+      "quadratic density normalization/moment recovery",
+      "conditional Gaussian correlations",
+      "chart boundaries and total mass",
+      "sample replication does not shrink posterior uncertainty",
+      "unsupported inputs and singular factors fail explicitly",
+      "physical probe parity with qualified scalar kernel",
+      "serialized representation query parity"
+    ],
+    "work_caps": {
+      "cases": 12,
+      "fresh_posterior_model_steps": 0,
+      "predictive_physical_steps": 1500000,
+      "candidate_density_points": 100000,
+      "placement_sample_visits": 524288
+    },
+    "failure_policy": "Record per-case failures and continue the census. Do not relax numerical settings or tune on held-out samples after observing outcomes.",
+    "four_hour_gate": "Requires causal posterior ownership/update and physical health transport, adequate representation and complete SRAM/update qualification. Offline snapshots alone cannot satisfy this gate.",
+    "deployment_qualified": false
+  },
+  "identities": {
+    "experiments/region_compression_001/plan.json": {
+      "bytes": 4874,
+      "sha256": "998cc365cf913fa0f482b6386dc9448ac107e2497c49afa474861c7265dadc5d"
+    },
+    "experiments/region_compression_001/regions.py": {
+      "bytes": 10137,
+      "sha256": "5268c4c19a269094d89e0b8e83586e14f2a3f7267d1d0ecd67a16f2bdedce8c3"
+    },
+    "experiments/region_compression_001/test_regions.py": {
+      "bytes": 6394,
+      "sha256": "c4df39858e3cf19d4fc21d59d86a1bc141be90ac619e2428f0bb51ed0b3b4e11"
+    },
+    "experiments/region_compression_001/compare.py": {
+      "bytes": 11400,
+      "sha256": "0e75fba0ae61a266dd7b1f084d37174f7c1254f7e372c9b8faca002a53726a66"
+    },
+    "experiments/minimal_health_kernels_001/kernel.py": {
+      "bytes": 12423,
+      "sha256": "b994262640a87eddeca7f27201d5c1225739442eb9f78b020d4ed7b3b8b00654"
+    },
+    "experiments/joint_health_posterior_001/model.py": {
+      "bytes": 9811,
+      "sha256": "26a6fcc2a705cd093ec8125a03ad9f4540251c120f8bb3c3e8b58a338ba3e11c"
+    },
+    "experiments/joint_health_posterior_001/smc.py": {
+      "bytes": 6878,
+      "sha256": "dcd55fba9921a5f795e149cd6121243baaee50f1014ddc10827e9b1132de8419"
+    },
+    "specifications/minimal_health_model_001/model.json": {
+      "bytes": 20713,
+      "sha256": "b304bee8ddf0dbf26df9009dd8880b6bf541b173bb2a2a625d185d0f9e0504b0"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/result.json": {
+      "bytes": 13823,
+      "sha256": "407f4c261d23c73587eff99ad0807ce0714036df9c34ebaa5744cc39af7af90e"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808101.npz": {
+      "bytes": 1636119,
+      "sha256": "c0b7ee09191eaf16c11ad22a8280fd4ca13d12222436d4f17ff5158fd13b8069"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808102.npz": {
+      "bytes": 1636071,
+      "sha256": "4f7cc69c7b38c16529ff898d0cf7b0c817c89b3551974ff99520fdd1961de258"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808103.npz": {
+      "bytes": 1636309,
+      "sha256": "fa91322f8bd6e98c46e0a3286314dcb63949628e16198aa83910389a9f6e4cb5"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808104.npz": {
+      "bytes": 1636222,
+      "sha256": "a63b6156b6cb759abb064350f426856cb67830917d5f9fbd993f5c76b8b1b793"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808101.json": {
+      "bytes": 4389,
+      "sha256": "346b4713899427da4117dd07eab82c1a97ac355fef828398451b7a86be6c6aba"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808102.json": {
+      "bytes": 4390,
+      "sha256": "f1a8bcbace582af411eebfb1f9c8eaabcaf5a92ded7f968d9a7c0cee6987e7e5"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808103.json": {
+      "bytes": 4382,
+      "sha256": "2a3a2da57b21c86b1ed5f78bc5bcdd8663c2c9a4d9fbd4c0a48f535fc4f28940"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808104.json": {
+      "bytes": 4370,
+      "sha256": "d6c32df199725f211935791d6e2a4e6981f48ec7721055e38e52f513e0ed479a"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/result.json": {
+      "bytes": 13853,
+      "sha256": "1a8be58fbd68a4e536cbde7726059d73022c650149dd6e68d88e595796698963"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832101.npz": {
+      "bytes": 3146930,
+      "sha256": "8d20d358bd84ee23ea1a46fec4afc09ab3e437525df6eeebdf6a95f3122d6f3a"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832102.npz": {
+      "bytes": 3147186,
+      "sha256": "0a6fc0e6d84493e7466ff46bd19c6cc137781df6d67fdd5fd094801f14d6d0b4"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832103.npz": {
+      "bytes": 3139430,
+      "sha256": "1b5da29234ca81ab8c997ea58fad91dc538642d34481a424e92fa5fcb7d67222"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832104.npz": {
+      "bytes": 3147022,
+      "sha256": "49f7d543d9a20fe2bc10034b52ac6e634727ccccf424aeedf378e0a58e8d7f5a"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832101.json": {
+      "bytes": 5897,
+      "sha256": "2a711bb280a62d662eb63efeafbad0be5bf188a30ec5f4f1629aa61c449b7d07"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832102.json": {
+      "bytes": 5893,
+      "sha256": "defe3b3284e080bb726c2d90ecd8ce256f5fc845e3802ffdf294d47a4746aa1f"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832103.json": {
+      "bytes": 5910,
+      "sha256": "4e0650d2fd2e08ddb8e3c0abcc336e062750981da2f8d6de5eaeda5f133036f9"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832104.json": {
+      "bytes": 5894,
+      "sha256": "63627fff87439a00fd5412fe0dd68c26a59ab032cf946e283159c4d6c89cde8d"
+    }
+  },
+  "revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "experiments/region-compression-001",
+  "command": [
+    "/home/easy/proj/mumble/experiments/region_compression_001/compare.py"
+  ],
+  "python": "3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728]",
+  "numpy": "2.5.2",
+  "thread_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  }
+}

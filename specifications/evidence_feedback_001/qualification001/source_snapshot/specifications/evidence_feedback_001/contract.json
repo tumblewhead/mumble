@@ -1,0 +1,177 @@
+{
+  "schema": "mumble.evidence_feedback.contract.v1",
+  "status": "interface_contract_with_desktop_lifecycle_reference_not_battery_integration",
+  "authority": "User-defined Foster plant -> indexed35HzVIT -> rolling estimator -> evidence compressor -> rolling estimator feedback",
+  "roles": {
+    "harness": [
+      "programmable bidirectional stimulus",
+      "independent plant and hidden truth",
+      "temperature path",
+      "acquisition/noise",
+      "scoring"
+    ],
+    "rolling_estimator": [
+      "physical/measurement model",
+      "continuous parameter inference",
+      "active raw window",
+      "prior-free token production",
+      "estimate/status reporting",
+      "model and representation diagnostics"
+    ],
+    "history_compressor": [
+      "validate token contract and ownership",
+      "ordered generic composition/elimination",
+      "explicit representation error",
+      "atomic retirement",
+      "read-only boundary feedback"
+    ],
+    "prohibited_compressor_inputs": [
+      "plant truth",
+      "cell fixture selector",
+      "stimulus scheduler",
+      "scoring errors",
+      "hidden calendar/cycle aging rates",
+      "successive point estimates treated as independent observations"
+    ]
+  },
+  "model_binding": {
+    "physical_states": [
+      "SOC",
+      "v_RC1",
+      "v_RC2",
+      "v_RC3",
+      "hysteresis_state"
+    ],
+    "reference_parameters": [
+      "Q_Ah",
+      "R0_ohm",
+      "R1_ohm",
+      "tau1_s",
+      "R2_ohm",
+      "tau2_s",
+      "R3_ohm",
+      "tau3_s",
+      "H_V",
+      "gamma_plus_dimensionless",
+      "gamma_minus_dimensionless"
+    ],
+    "coordinate_semantics": "Continuous declared charts; no three-level capacity restriction. C_i=tau_i/R_i is derived. Preserve branch pairing and enforce0<tau1<tau2<tau3 across the admitted domain; never sort state values independently.",
+    "temperature": "Exogenous cell temperature initially; parameter-specific reciprocal-kelvin Arrhenius law IDs, reference temperature and units belong to producer model. Shared uncertain thermal coefficients remain joint variables or explicitly characterized inputs.",
+    "OCV": "Initial U(z,T)=a(T)+b(T)*z+r(z,T), b(T)>0 on admitted domain. r=0 is an explicit linear reference; a small residual requires a declared bound/model. No uncharacterized residual may be silently recast as independent sensor noise.",
+    "OCV_identifiability": "With unknowna,b,z0,Q at fixedT, voltage constrains a+b*z0 and b/Q. AbsoluteQ requires independent OCV/SOC calibration or equivalent informative anchors. Shared calibration uncertainty is retained once, not relearned independently each window.",
+    "health": "Reference-parameter trajectories inferred from rolling evidence. No compressor-owned nonzero drift, discount or process-noise injection. Stationary-reference mode is explicit; changing-health mode requires producer-declared trajectory variables, continuity and uncertainty, without a hidden deterioration rate.",
+    "charge": "Integrator tracks transferred charge; Q is estimated capacity. Changes in Q, C or temperature require an explicit charge/availability and RC-state convention in the producer model. A fittedQ revision is not itself a physical charge-loss event.",
+    "normative_model": "model.json",
+    "hysteresis": "User normalized throughputdxi=abs(I)*dt/(3600*Q) with dimensionlessgamma+/gamma- and terminal+H*h. Distinct identity from oldperAh rates/minusHh convention. Preserve jointQ/gamma/H/SOC dependence."
+  },
+  "objects": {
+    "EstimateView": {
+      "purpose": "User/reporting output only; never appendable as evidence",
+      "fields": [
+        "boundary epoch",
+        "parameter/state estimates",
+        "joint uncertainty reference",
+        "excitation/status",
+        "solver stop",
+        "source window",
+        "feedback version"
+      ]
+    },
+    "EvidenceToken": {
+      "semantics": "K_[a,b)(s_b,eta|s_a)=p(observations[a:b],s_b|s_a,eta,public_inputs[a:b],declared_model)",
+      "owns": "Only newly retired observations and their chronological transport, interval[a,b)",
+      "includes_root_prior": false,
+      "includes_feedback": false,
+      "fields": [
+        "schema/kind",
+        "immutable binding",
+        "entry and exit sequence/ticks",
+        "base feedback identity",
+        "payload representation and bytes",
+        "domain identity",
+        "approximation tier",
+        "payload/metadata content identity"
+      ],
+      "payload": "Joint boundary kernel or an explicitly qualified approximation. Retain cross terms, shared nuisance, deterministic constraints and normalization; point/curvature summaries are not presumed sufficient.",
+      "producer": "Build from owned physical likelihood/transport factors. Earlier feedback may select a linearization chart but its density, prior, information matrix and outside-window observations must not enter the token as evidence. Do not obtain the token by naively subtracting approximate posterior/prior Hessians.",
+      "anchor_provenance": "Record fit/linearization context in the representation payload. Context-dependent approximation does not acquire ownership of those context observations or justify dropping supported tails."
+    },
+    "FeedbackMessage": {
+      "semantics": "M_b(s_b,eta)=p(s_b,eta|observations[0:b],root_prior)",
+      "owns": "Exactly one root prior and contiguous retired prefix[0,b)",
+      "fields": [
+        "binding",
+        "root_prior_id",
+        "generation",
+        "boundary sequence/ticks",
+        "joint payload",
+        "representation tier",
+        "history error certificate or explicit unresolved status",
+        "message identity"
+      ],
+      "active_query": "Combine M_b with the active window[b,n) once; normalize/marginalize with declared semantics. Feedback is referenced, never appended as an observation token.",
+      "normalization": "Retain normalizers for evidence comparisons and parameter-dependent terms. Preserve singular/deterministic measures without invented process noise. Solver GN is not posterior covariance."
+    },
+    "CommitReceipt": {
+      "fields": [
+        "token identity",
+        "base message identity",
+        "new message identity",
+        "entry/exit sequence",
+        "generation"
+      ],
+      "meaning": "Retirement committed; only now may producer discard the raw prefix"
+    }
+  },
+  "composition": {
+    "rule": "M_b proportional to integral K_[a,b)(s_b,eta|s_a) M_a(s_a,eta) ds_a; retain sharedeta rather than independently integrating it in each token",
+    "semantics": "Marginal probability measure. Profiling/minimization is a distinct interface and must not be silently substituted.",
+    "order": "Adjacent nonoverlapping intervals, matching entry/exit epochs and immutable source/model/chart/calibration/noise/evolution bindings",
+    "quiet": "Identity health transport adds no forced health change. Rest observations can legitimately update correlated parameters; unexcited independent directions retain uncertainty.",
+    "error": "Backend must retain accumulated approximation/arithmetic/model uncertainty or unresolved status. A digest is provenance, not an error bound.0.5%Q/0.5SOCpp are application assessment scales, not universal token admission tolerances."
+  },
+  "lifecycle": [
+    "Initialize one public prior at boundary0 with source/binding and root_prior_id",
+    "Receive every indexedVIT frame in active window; preserve actualdt and gaps",
+    "Read immutable feedback snapshot; fit active window with it once",
+    "EmitEstimateView for reporting, separately construct prior-free retirement token for oldest prefix",
+    "Prepare: compare base feedback identity, source/binding, contiguous interval, observed-end watermark, payload/domain/representation and configured byte capacity; build candidate without changing authoritative history",
+    "Commit: atomically publish candidate and receipt; identical immediately repeated commit returns same receipt without another update",
+    "Acknowledge: producer advances retired watermark and excludes retired raw frames from queries, then releases their storage",
+    "If acknowledgment is lost, reconcile receipt before any query; never combine new feedback with old active prefix",
+    "Abort/failure leaves old feedback and producer-owned raw data intact; overflow becomes explicit backpressure/unavailable status, never silent eviction"
+  ],
+  "rejections": [
+    "EstimateView/FeedbackMessage submitted as token",
+    "prior or feedback included",
+    "duplicate or overlapping interval",
+    "gap/reversal",
+    "source/model/chart/calibration/noise/evolution mismatch",
+    "entry epoch mismatch",
+    "future/unreceived observations",
+    "stale base feedback",
+    "unsupported payload/domain",
+    "nonfinite or failed backend",
+    "capacity exhausted"
+  ],
+  "durability": "Externally serialized in-process protocol. One pending candidate and last receipt suffice; no unbounded receipt log. SRAM-only baseline does not promise power-loss durability. Soft restore needs coordinated history/window/prior snapshots; a hard reset starts an explicit new generation without plant truth.",
+  "storage_estimates": {
+    "scope": "Illustrative float64 Gaussian numeric payloads for16boundary coordinates, not nonlinear battery representation or completeSRAM",
+    "boundary_mean_and_packed_covariance_B": 1216,
+    "prior_free_two_boundary_Gaussian_operator_B": 4488,
+    "two_messages_plus_one_operator_B": 6920,
+    "excludes": [
+      "normalizer/status/identities",
+      "thermal/OCV/path variables",
+      "deterministic constraints if additional",
+      "representation bounds",
+      "raw window",
+      "solver",
+      "composition workspace",
+      "stack/runtime"
+    ],
+    "complete_SRAM_B": null
+  },
+  "implementation_scope": "protocol.py implements metadata/transaction ownership with a supplied opaque backend. Numerical Gaussian backend lives only in qualification. No plant/load/ADC/model imports in protocol; no C rolling adapter or physical compressor is implemented by this contract.",
+  "next_gate": "Implement producer/export and feedback query adapter around a small stationary continuous-parameter linearOCV Foster control, against independent retained-data reference. Check prior/source-once ownership and joint uncertainty before aging trajectories or storage optimization."
+}

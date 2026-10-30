@@ -1,0 +1,33 @@
+{
+  "schema": "foster_c_baseline_plan_v1",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "scope": "Straightforward dense double C rolling fit, QR token and Gaussian history; no model or estimator tuning",
+  "source_hashes": {
+    "experiments/foster_feedback_001/model.c": "dec9730f4a1cf0cadc9a629eb88e3ae049a138174b97825729db0581c9228959",
+    "experiments/foster_feedback_001/estimator.py": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41",
+    "experiments/foster_feedback_001/history.py": "ed98c1aac0ec8fbe59c46470adb856450498e19dccbfd5ab12e71e987341b0f4",
+    "experiments/foster_feedback_001/calibration.json": "fda46915cd25d1ed5321f208f4edff99f7020c592b4e162aac8f1124374bcd00",
+    "experiments/foster_feedback_001/verification.json": "95bf4f3d68539367a04218d665a24ae9fd75c6677434b79b1ead74bfd9f8ff29",
+    "specifications/evidence_feedback_001/contract.json": "74d2912d86001f9f8a6c0477f49bbf3574fa3120538c9a9294ed85ec2a56fac3"
+  },
+  "tests": [
+    "independent NumPy Gaussian conditioning and full covariance",
+    "token quadratic likelihood and float32 codec",
+    "one-block and short-stream Python parity",
+    "chronology, interval, atomic failure and pending retry",
+    "saved four-hour CCCV and weak-excitation replay",
+    "host profiling and Cortex-M23 cross-build/stack accounting"
+  ],
+  "criteria": {
+    "local_mean_atol": 1e-09,
+    "local_covariance_atol": 1e-10,
+    "local_logZ_atol": 1e-07,
+    "long_run_comparison": "Report all discrepancies, never abort other arms; application scales 0.5 percent Q and 0.5 SOC points are assessment scales, not proof of numerical equality"
+  },
+  "limits": [
+    "stationary reference parameters; aging not added",
+    "local Gaussian coverage unvalidated",
+    "host timing is not target timing",
+    "synchronous in-process retirement; distributed/persistent transaction protocol outside baseline scope"
+  ]
+}

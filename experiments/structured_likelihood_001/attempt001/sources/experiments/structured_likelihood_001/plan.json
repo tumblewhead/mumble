@@ -1,0 +1,32 @@
+{
+  "schema": "mumble_structured_likelihood_plan_v1",
+  "status": "frozen_before_evaluation",
+  "inputs": "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json",
+  "reference": "experiments/forced_rc_kernel_001/attempt001/receipt.json",
+  "fixed": {"prefixes": [64,4096], "domains": ["public_half_SD","full_public"], "RC_family": "time_kernel", "K": [9,13], "queries": "same97local/129full", "other_components": "unchanged physical hysteresis degree4 and charge OCV degree12"},
+  "source_cases": 8,
+  "exact_packing": {
+    "off_diagonal": "Keep every cross-block Gram entry. RC self blocks use seven length(2K-1) anti-diagonal arrays per mode: H0,Hnm for each forced/free self block and H0,Hn,Hnm for their cross block. Reconstruct first moments of symmetric blocks as s*H0/2 and cross Hm=s*H0-Hn.",
+    "OCV": "25 source charge Chebyshev moments reconstruct its13x13 self Gram; retain all OCV cross blocks.",
+    "purpose": "Exact cost, original-coordinate gradient and Gauss-Newton on the represented feature manifold in mathematical arithmetic. Raw moments retain possible numerical cancellation; no clipping."
+  },
+  "rank_storage": {
+    "ranks": [1,2,4,8,16,32],
+    "scaling": "Fixed positive feature envelopes: full public amplitude support; |Chebyshev|<=1 in declared nonlinear domain; RC amplitudes times rho^n; OCV |inverse| row sums times4.23V/sigma. No fitted center, truth, query-dependent rank or singular-value threshold.",
+    "batch": "SVD of scaled full QR, retain exactly r rows. delta=sigma_(r+1)^2 bounds the discarded PSD Gram in scaled coordinates. Diagnostic oracle only.",
+    "stream": "Append one scaled source row to r-row factor, truncate to fixed r by SVD. Accumulate discarded largest singular value squared in delta. This carries a PSD remainder bound instead of treating truncated information as zero.",
+    "query": "psi=phi/envelope; cost interval [||Bpsi||^2/2, ||Bpsi||^2/2+delta||psi||^2/2]. Gradient component remainder<=delta||psi||||Jpsi_j||; GN remainder PSD bounded by delta*Jpsi^T Jpsi. Exact-arithmetic certificates only; finite floating-point controls separate.",
+    "merge": "Globally aligned adjacent source blocks only; concatenate retained rows, truncate, add inherited deltas and new discarded spectral bound. Reject overlap, gap, domain/config mismatch. No independent physical entry-domain transport claim."
+  },
+  "checks": {
+    "numerics": "Inherited abs2e-8+rel2e-10 for direct/reference arithmetic; record finite mismatches without aborting. Nonfinite/source/domain violations hard stop. No tolerance adaptation.",
+    "exact_packing": "Cost and gradient at all points; GN at mean; compare direct rows and full QR. Demonstrate cost-only anti-diagonal compression loses GN with a fixed PSD 3x3 counterexample.",
+    "bounds": "All query cost/gradient envelopes; GN spectral upper and lower bound at mean; global scaled Gram residual eigenvalue check with allowance 128eps*max(1,||A||F^2). No inference from this tolerance to physical accuracy.",
+    "merge": "Rank8 split17/rest for each source case; compare represented-reference gaps against merged envelope; reject duplicate source and nonadjacent merge. No equality required after lossy merge.",
+    "cancellation": "4096 local K9: replace observed-voltage column to zero represented residual at public mean; compare exact packed, QR and rank8 interval, no clipping.",
+    "provenance": "Reproduce predecessor represented costs versus saved reference; source hashes before/after. Original artifacts unchanged."
+  },
+  "memory": "Full inherited boundary,metadata,nonbank and query-work reservations retained. Packed ledger replaces only full QR numeric payload. Rank retained payload=8*r*F+8delta; fixed envelopes may be ROM. Add explicit append/SVD matrix and factor output/small U/S storage lower bounds; LAPACK workspace and target code not qualified. No target pass based on retained payload alone.",
+  "caps": {"model_node_steps": 2000000, "full_convolution_products": 10000000, "svd_calls": 250000, "automatic_retries": 0},
+  "decision": "Compare exact algebraic savings, cancellation, added likelihood distortion and explicit uncertainty widths against complete SRAM. Do not choose ranks by a new physical threshold. No solver, aging, prior or physical model change; no long-trajectory claim."
+}

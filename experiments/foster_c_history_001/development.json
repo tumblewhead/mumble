@@ -1,0 +1,11 @@
+{
+  "initial": "attempt001/summary.json",
+  "final": "attempt002/summary.json",
+  "source_archive_mapping": {
+    "experiments/foster_c_history_001/rolling.c": "experiments/foster_c_history_001/rolling_before_matrix_helper.c",
+    "experiments/foster_c_history_001/history.c": "experiments/foster_c_history_001/history_before_restrict.c"
+  },
+  "finding": "First workspace pass increased fit_s due to moving matrix scratch from separate automatic arrays into shared context storage. CPU gain was partly lost.",
+  "repair": "Phase-scoped prepare_step with restrict-qualified disjoint inputs/workspaces; restrict lifetime ends before trial reuses the storage. History worker also declares existing no-alias contract explicitly.",
+  "result": "Final workspace variant saves8.0-9.3% host time with lower rolling stack; CPU-only variant remains slightly faster. No arithmetic, stopping or encoding change."
+}

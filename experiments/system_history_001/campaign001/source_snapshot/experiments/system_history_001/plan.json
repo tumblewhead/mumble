@@ -1,0 +1,24 @@
+{
+  "schema": "system_history_comparison_v1",
+  "status": "registered_before_execution",
+  "priority": "Assess overall behavior before optimization; preferred scales are0.5% relativeQ and0.5SOC percentage points, not coverage certificates.",
+  "duration_s": 14400,
+  "nominal_Hz": 35,
+  "records_per_case": 504000,
+  "cases": [
+    {"id":"matched", "Q_ref_Ah":0.06,"R0_ref_ohm":0.1,"noise_sd_V":0.001,"temperature_C":25,"meaning":"Finite-support stationary control with original centralRC/hysteresis"},
+    {"id":"between_nodes", "Q_ref_Ah":0.0567,"R0_ref_ohm":0.107,"noise_sd_V":0.001,"temperature_C":25,"meaning":"OnlyQ/R0 moved between finite support nodes; same stimulus/noise sequence as matched"},
+    {"id":"gradual", "Q_ref_Ah":[0.06,0.054],"R0_ref_ohm":[0.1,0.112],"noise_sd_V":0.001,"temperature_C":25,"meaning":"Smooth monotone change from1h to4h; deliberately accelerated, not real aging-rate calibration"},
+    {"id":"combined", "Q_ref_Ah":[0.0576,0.052416],"R0_ref_ohm":[0.104,0.11648],"noise_sd_V":0.012,"temperature_range_C":[17,33],"meaning":"Off-support cell/thermal/RC/hysteresis, gradualQ/R/RC-C aging and varied balanced pulse amplitudes"}
+  ],
+  "phases": "0-90min cycling;90-180min rest;180-240min renewed cycling. Combined case cycles amplitudes0.0125,0.025,0.05A; other cases0.03A. No sample skipping.",
+  "shared_acquisition": "Frozen12bit V/I/T samples decoded identically for all arms, actualdt=1/35s. Vstep1/1024V, Istep0.000125A,Tstep0.0625C. Temperature is known piecewise-linear between decoded endpoints, no sensor error. Voltage Gaussian noise before ADC; no clipping allowed.",
+  "arms": ["unchanged_continuous_SOC_binary64", "unchanged_continuous_SOC_binary32_log_weights", "unchanged_legacy_C_rolling_estimator"],
+  "inference": "History prior and aging_scale0.01 unchanged, initial_SOC_conditional_sd0.03. Legacy public prior,16-record blocks,one refinement round and fixed1mV noise unchanged. Legacy has no thermal/aging model; history uses declared noise plus ADCvariance. This baseline difference is explicit, not a pure compressor causal contrast.",
+  "ownership_boundary": "Independent estimators own the same frozen source separately. No estimate becomes a measurement; no posterior added to an objective that already owns its source. Binary32/binary64 is the controlled encoding contrast. Legacy baseline has its original approximate history; rolling-only here means no new history feedback, not no retained evidence.",
+  "future_feedback": "A marginal current-boundary message must replace retired evidence, retain shared nuisance/physical-state dependence, and expose source intervals. The existing original-entering16-coordinate cost/GN provider is not this object. Do not silently turn marginalized posterior into profile likelihood or duplicate the original prior.",
+  "metrics": ["completion and explicit failure", "phasewise and fullstreamQ/SOC point errors", "within preferred fractions", "history32vs64 differences", "3SD miss fractions as descriptive diagnostics, not validated coverage", "checkpoint one-step predictive voltage innovations", "legacy accepted_steps/stops/source counts", "time and fixed retained numeric storage"],
+  "stop_policy": "Run all four registered cases even after an arm fails. No retuning, precision sweep, pruning, forgetting or retry to turn failures into passes. Analyze discrepancies before proposing changes.",
+  "truth_boundary": "Only native generator and scoring harness see truth; inference functions accept observations/source only. Shared prior is not set from cell truth.",
+  "limits": "Not integrated rolling feedback, general-cell qualification, ten-year proof or M23 fit. Combined RC aging freezes coefficients per interval with continuousRC voltages; capacitor-charge aging convention is not calibrated. Only one deterministic noise realization per case."
+}

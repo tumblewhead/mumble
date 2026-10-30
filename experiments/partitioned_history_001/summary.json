@@ -1,0 +1,96 @@
+{
+  "schema": "mumble_partitioned_history_decision_v1",
+  "status": "comparison_complete_partition_improves_fidelity_no_qualified_candidate",
+  "branch": "experiments/partitioned-history-001",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "plan": "experiments/partitioned_history_001/plan.json",
+  "report": "experiments/partitioned_history_001/README.md",
+  "comparison": "experiments/partitioned_history_001/comparison001/receipt.json",
+  "manuscript": "/home/easy/Downloads/SCM_PEER_REVIEW_MANUSCRIPT_v1.2.pdf",
+  "manuscript_sha256": "f739744ae7756f4c22970298b06a123291ca53f32cd6fd609d923bbb20bf808a",
+  "candidate_prefix_cases": 48,
+  "fidelity_passes": 0,
+  "cases_within_declared_memory_plan": 12,
+  "qualified_candidates": 0,
+  "representative_results": [
+    {
+      "records": 64,
+      "queries": 97,
+      "dynamic_degree": 4,
+      "OCV_charge_degree": 12,
+      "old_uniform_error_oscillation_NLL": 319.7397427702381,
+      "partitioned_error_oscillation_NLL": 0.19529693422373384,
+      "improvement_ratio": 1637.1979623804104,
+      "exact_OCV_control_error_oscillation_NLL": 0.1953012105077505,
+      "sampled_max_OCV_error_V": 6.1691025621257726e-12,
+      "planned_subsystem_bytes": 29808
+    },
+    {
+      "records": 4096,
+      "queries": 97,
+      "dynamic_degree": 4,
+      "OCV_charge_degree": 12,
+      "old_uniform_error_oscillation_NLL": 27922.62154950574,
+      "partitioned_error_oscillation_NLL": 103.49412854202092,
+      "improvement_ratio": 269.79908853639495,
+      "exact_OCV_control_error_oscillation_NLL": 103.49423747695982,
+      "sampled_max_OCV_error_V": 6.910340744070709e-12,
+      "planned_subsystem_bytes": 29808
+    }
+  ],
+  "checks": 13269,
+  "numerical_mismatch_count": 16,
+  "mismatch_types": {
+    "partition_vs_QR_gradient": 15,
+    "zero_residual_cancellation": 1
+  },
+  "cancellation_control": {
+    "moment_cost_NLL": -1.0951122460360585e-05,
+    "direct_cost_NLL": 2.8631812479419853e-22,
+    "QR_cost_NLL": 1.7286677892178718e-19,
+    "scope": "Constructed represented-row arithmetic only; no battery inference."
+  },
+  "model_steps_upper": 1784640,
+  "OCV_node_evaluations_upper": 69552,
+  "solver_modified": false,
+  "aging_added": false,
+  "uncertainty_qualified": false,
+  "target_measured": false,
+  "canonical_runs": 0,
+  "decision": {
+    "retain": [
+      "physical dependency partition",
+      "charge-coordinate OCV query representation",
+      "all joint cross terms and original parameter uncertainty",
+      "full square-root representation as numerical control"
+    ],
+    "do_not_promote": [
+      "raw moment implementation with observed cancellation failure",
+      "narrow 33-axis-query pass to complete97-query fidelity",
+      "planned memory allocation to measured SRAM qualification"
+    ],
+    "next": "Derive RC/hysteresis dependency-block representation and joint cross-term storage with cost/gradient/GN preserved; do not expand all polynomial degrees or launch a long rolling trajectory."
+  },
+  "evidence_identities": {
+    "experiments/partitioned_history_001/plan.json": {
+      "bytes": 5592,
+      "sha256": "23ac2726de127d26ac52e4a63a70df7b9ea07795c3f14b99b7b5e3ea3de318f1"
+    },
+    "experiments/partitioned_history_001/comparison001/receipt.json": {
+      "bytes": 398554,
+      "sha256": "dd498f43dda1751eecc34ac7efc63ca0984eb46be8dd787923d0b803892509d7"
+    },
+    "experiments/partitioned_history_001/comparison001/reservation.json": {
+      "bytes": 14219,
+      "sha256": "26cccb6531e78522edcf891cc51c7ef79ff7db87f802e9e380f0e7f6de54e26d"
+    },
+    "experiments/partitioned_history_001/analytic_controls.json": {
+      "bytes": 1902,
+      "sha256": "1341c4a3e3f9aab1d191ced6c68c8eacfa17d303afeef39820c2036e8e4f7108"
+    },
+    "experiments/history_basis_comparison_001/summary.json": {
+      "bytes": 4127,
+      "sha256": "16f2bab8e86f08725628cc9585528c15192330d89475d2e0a21effe5a31de365"
+    }
+  }
+}

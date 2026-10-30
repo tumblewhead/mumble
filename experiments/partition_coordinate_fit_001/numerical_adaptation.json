@@ -1,0 +1,10 @@
+{
+  "schema": "partition_fit_arithmetic_adaptation_v1",
+  "reason": "The first frozen run reached subnormal erfc values while fitting physical hysteresis rates. The inherited direct-difference branch checked only positivity/cancellation and lost relative precision before its scaled fallback triggered.",
+  "witness": "Standard normal interval[38.4,38.5]: inherited log-mass differs from scaled quadrature by about0.06822. At40 the old erfc value is zero and fallback already worked, so earlier extreme-tail controls missed the gap.",
+  "repair": "Use direct erfc differences only when the larger mass is a normal binary64 number, also retaining the original cancellation guard. Use the existing qualified scaled integral otherwise.",
+  "scope": "Arithmetic implementation only. Same normalized density, coordinates, data split, initial guesses, region membership, optimizer settings/caps and probes. No heldout-driven model selection or regularization.",
+  "preservation": "attempt001 and every original source remain byte-identical. compare_repaired.py injects the new normalizer only in its own process and adds source identities to attempt002 reservation.",
+  "control_additions": "Check both signs near the normal/subnormal transition and a full objective gradient at the witness. Retain original log-mass errors in attempt002/tail_control.json.",
+  "limits": "This repair does not establish optimizer convergence, a globally optimal bounded mixture, or ideality of physical-rate probability coordinates."
+}

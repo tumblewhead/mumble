@@ -1,0 +1,1569 @@
+{
+  "status": "review_complete; three_history_domain_failures_reproduced; one_sustained_Q_bias_case",
+  "source": "experiments/foster_campaign_001/run_20261030_174341_464520",
+  "configuration": {
+    "jobs": 8,
+    "hours": 96.0,
+    "backend": "c",
+    "sample_rate_hz": 35,
+    "cells": [
+      "A"
+    ],
+    "cell_file": null,
+    "loads": [
+      "charge-discharge"
+    ],
+    "current_a": 0.03,
+    "nominal_capacity_ah": 0.06,
+    "charge_c": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "discharge_c": [
+      0.2,
+      0.01,
+      0.45,
+      0.08
+    ],
+    "charge_step_s": 900.0,
+    "discharge_step_s": 600.0,
+    "cv_voltage": 4.06,
+    "discharge_cutoff_v": 3.18,
+    "cycle_rest_s": 300.0,
+    "taper_end_c": 0.05,
+    "taper_hold_s": 30.0,
+    "cv_gain": 0.5,
+    "noise_v": [
+      0.02
+    ],
+    "seeds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007
+    ],
+    "temperature": "cycle",
+    "temperature_mean_c": 25.0,
+    "temperature_amplitude_c": 8.0,
+    "temperature_period_s": 3600.0,
+    "encoding": "both",
+    "sample_csv": false,
+    "no_plots": false,
+    "out": null
+  },
+  "cases": [
+    {
+      "directory": "case_0000",
+      "seed": 1000,
+      "status": "completed",
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 17.228532541222418,
+            "max_SOC_pp": 1.815741662325221,
+            "joint_within_target": 730764,
+            "Q_3sd_misses": 88070,
+            "SOC_3sd_misses": 87971,
+            "final_Q_percent": -0.027149495376554977,
+            "final_SOC_pp": -0.0012031641732801468,
+            "Q_RMSE_percent": 0.22695250842456544,
+            "SOC_RMSE_pp": 0.06285714682738076,
+            "joint_within_target_fraction": 0.9666190476190476
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.116494708994709,
+            "SOC": 0.11636375661375661
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.059983710302774065,
+            "R0_ohm_ref": 0.10267192855070462,
+            "R1_ohm_ref": 0.05429612836158729,
+            "tau1_s_ref": 0.08850162692154233,
+            "R2_ohm_ref": 0.06898836203316887,
+            "tau2_s_ref": 0.6340285390357183,
+            "R3_ohm_ref": 0.11498891338373338,
+            "tau3_s_ref": 5.323048240133086,
+            "H_V_ref": 0.015113712929481651,
+            "gamma_plus_ref": 5.95113254236522,
+            "gamma_minus_ref": 9.001649182517877
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.027149495376554977,
+            "R0_ohm_ref": 2.6719285507046164,
+            "R1_ohm_ref": 35.74032090396821,
+            "tau1_s_ref": 77.00325384308464,
+            "R2_ohm_ref": -13.764547458538912,
+            "tau2_s_ref": 26.805707807143662,
+            "R3_ohm_ref": -4.175905513555511,
+            "tau3_s_ref": 6.460964802661717,
+            "H_V_ref": 0.7580861965443386,
+            "gamma_plus_ref": -0.8144576272463344,
+            "gamma_minus_ref": 0.018324250198631375
+          },
+          "final_approx_Q_three_SD_percent": 0.03389368329383881,
+          "final_SOC_three_SD_pp": 0.003093478014008876,
+          "solver_stops": {
+            "round_limit": 2975,
+            "gradient": 753024,
+            "no_descent": 1
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.0666374686529192,
+            "max_percent": -0.02581508338127536,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        },
+        "float32": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 17.22837635350848,
+            "max_SOC_pp": 1.8157463607985536,
+            "joint_within_target": 730764,
+            "Q_3sd_misses": 88047,
+            "SOC_3sd_misses": 87967,
+            "final_Q_percent": -0.02714759729880445,
+            "final_SOC_pp": -0.001203141487293724,
+            "Q_RMSE_percent": 0.2269534048871505,
+            "SOC_RMSE_pp": 0.06285621388725744,
+            "joint_within_target_fraction": 0.9666190476190476
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.11646428571428571,
+            "SOC": 0.1163584656084656
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.059983711441620714,
+            "R0_ohm_ref": 0.1026708476089586,
+            "R1_ohm_ref": 0.054294608116381565,
+            "tau1_s_ref": 0.08849862969998779,
+            "R2_ohm_ref": 0.0689889095623594,
+            "tau2_s_ref": 0.6339737936568783,
+            "R3_ohm_ref": 0.11499090324619336,
+            "tau3_s_ref": 5.3229777484563545,
+            "H_V_ref": 0.015113704176388793,
+            "gamma_plus_ref": 5.951136298892791,
+            "gamma_minus_ref": 9.001650046678138
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.02714759729880445,
+            "R0_ohm_ref": 2.670847608958593,
+            "R1_ohm_ref": 35.73652029095391,
+            "tau1_s_ref": 76.99725939997558,
+            "R2_ohm_ref": -13.763863047050762,
+            "tau2_s_ref": 26.794758731375666,
+            "R3_ohm_ref": -4.174247294838862,
+            "tau3_s_ref": 6.45955496912709,
+            "H_V_ref": 0.7580278425919573,
+            "gamma_plus_ref": -0.8143950184534732,
+            "gamma_minus_ref": 0.01833385197931303
+          },
+          "final_approx_Q_three_SD_percent": 0.0338937267889506,
+          "final_SOC_three_SD_pp": 0.0030934751411633996,
+          "solver_stops": {
+            "round_limit": 2975,
+            "gradient": 753025
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.06663438236080843,
+            "max_percent": -0.025812999317709195,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 0.00018869752915762206,
+        "SOC_pp": 8.395217687695578e-05,
+        "paired_outputs": 756000
+      }
+    },
+    {
+      "directory": "case_0001",
+      "seed": 1001,
+      "status": "unresolved",
+      "arms": {
+        "float64": {
+          "status": "unresolved",
+          "valid_outputs": 33,
+          "last_valid_time_s": 15.085714285714285,
+          "failure": {
+            "index": 543,
+            "reason": "C estimator status -4"
+          },
+          "Q_SOC_statistics": {
+            "outputs": 33,
+            "max_Q_percent": 11.221783062045743,
+            "max_SOC_pp": 1.2578152867809833,
+            "joint_within_target": 0,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": -11.137234565429521,
+            "final_SOC_pp": 1.2578152867809833,
+            "Q_RMSE_percent": 7.329619811372911,
+            "SOC_RMSE_pp": 0.6037093416778021,
+            "joint_within_target_fraction": 0.0
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.0,
+            "SOC": 0.0
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.053317659260742285,
+            "R0_ohm_ref": 0.10084642551097016,
+            "R1_ohm_ref": 0.0351252868210979,
+            "tau1_s_ref": 0.07278690828892115,
+            "R2_ohm_ref": 0.07214885453219907,
+            "tau2_s_ref": 0.6702644321667042,
+            "R3_ohm_ref": 0.08897515726653174,
+            "tau3_s_ref": 6.565947456905105,
+            "H_V_ref": 0.01134727755342469,
+            "gamma_plus_ref": 4.999999999999999,
+            "gamma_minus_ref": 8.562091673043854
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -11.137234565429521,
+            "R0_ohm_ref": 0.8464255109701613,
+            "R1_ohm_ref": -12.18678294725526,
+            "tau1_s_ref": 45.573816577842294,
+            "R2_ohm_ref": -9.813931834751155,
+            "tau2_s_ref": 34.05288643334083,
+            "R3_ohm_ref": -25.854035611223548,
+            "tau3_s_ref": 31.318949138102113,
+            "H_V_ref": -24.351482977168725,
+            "gamma_plus_ref": -16.666666666666686,
+            "gamma_minus_ref": -4.8656480772905075
+          },
+          "final_approx_Q_three_SD_percent": 85.69446728679192,
+          "final_SOC_three_SD_pp": 2.7268177157838664,
+          "solver_stops": {
+            "round_limit": 33
+          }
+        },
+        "float32": {
+          "status": "unresolved",
+          "valid_outputs": 33,
+          "last_valid_time_s": 15.085714285714285,
+          "failure": {
+            "index": 543,
+            "reason": "C estimator status -4"
+          },
+          "Q_SOC_statistics": {
+            "outputs": 33,
+            "max_Q_percent": 11.221787716305453,
+            "max_SOC_pp": 1.2578138091134394,
+            "joint_within_target": 0,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": -11.137280493368573,
+            "final_SOC_pp": 1.2578138091134394,
+            "Q_RMSE_percent": 7.329625285475437,
+            "SOC_RMSE_pp": 0.603708665206814,
+            "joint_within_target_fraction": 0.0
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.0,
+            "SOC": 0.0
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.05331763170397886,
+            "R0_ohm_ref": 0.10084715182555379,
+            "R1_ohm_ref": 0.035125287031711645,
+            "tau1_s_ref": 0.07278690769934452,
+            "R2_ohm_ref": 0.07214883744130614,
+            "tau2_s_ref": 0.6702644004461156,
+            "R3_ohm_ref": 0.08897517616436294,
+            "tau3_s_ref": 6.565951176597557,
+            "H_V_ref": 0.01134733302019835,
+            "gamma_plus_ref": 4.999999999999999,
+            "gamma_minus_ref": 8.562095076729266
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -11.137280493368563,
+            "R0_ohm_ref": 0.8471518255537713,
+            "R1_ohm_ref": -12.186782420720888,
+            "tau1_s_ref": 45.573815398689035,
+            "R2_ohm_ref": -9.813953198367331,
+            "tau2_s_ref": 34.052880089223116,
+            "R3_ohm_ref": -25.854019863030874,
+            "tau3_s_ref": 31.319023531951153,
+            "H_V_ref": -24.351113198677666,
+            "gamma_plus_ref": -16.666666666666686,
+            "gamma_minus_ref": -4.865610258563713
+          },
+          "final_approx_Q_three_SD_percent": 85.69447016651492,
+          "final_SOC_three_SD_pp": 2.7268194013067335,
+          "solver_stops": {
+            "round_limit": 33
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 5.168412081646423e-05,
+        "SOC_pp": 7.766867859970716e-06,
+        "paired_outputs": 33
+      }
+    },
+    {
+      "directory": "case_0002",
+      "seed": 1002,
+      "status": "completed",
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 20.856105657867918,
+            "max_SOC_pp": 1.830031717242886,
+            "joint_within_target": 747542,
+            "Q_3sd_misses": 51,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": -0.01263636423722847,
+            "final_SOC_pp": -0.00011716596332034257,
+            "Q_RMSE_percent": 0.234297843871913,
+            "SOC_RMSE_pp": 0.025890569915731795,
+            "joint_within_target_fraction": 0.9888121693121693
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 6.746031746031745e-05,
+            "SOC": 0.0
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.05999241818145766,
+            "R0_ohm_ref": 0.1126670357889879,
+            "R1_ohm_ref": 0.043947647234770806,
+            "tau1_s_ref": 0.13077340438443613,
+            "R2_ohm_ref": 0.07123063509024492,
+            "tau2_s_ref": 0.7156510412581245,
+            "R3_ohm_ref": 0.11288777296257604,
+            "tau3_s_ref": 5.05300413373807,
+            "H_V_ref": 0.015049314619950476,
+            "gamma_plus_ref": 5.985510488239136,
+            "gamma_minus_ref": 9.009135685704042
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.01263636423722847,
+            "R0_ohm_ref": 12.66703578898789,
+            "R1_ohm_ref": 9.86911808692701,
+            "tau1_s_ref": 161.54680876887224,
+            "R2_ohm_ref": -10.96170613719385,
+            "tau2_s_ref": 43.1302082516249,
+            "R3_ohm_ref": -5.926855864519965,
+            "tau3_s_ref": 1.060082674761409,
+            "H_V_ref": 0.32876413300317875,
+            "gamma_plus_ref": -0.2414918626810647,
+            "gamma_minus_ref": 0.10150761893379379
+          },
+          "final_approx_Q_three_SD_percent": 0.03341729029896195,
+          "final_SOC_three_SD_pp": 0.003301863432668882,
+          "solver_stops": {
+            "round_limit": 2157,
+            "gradient": 753842,
+            "no_descent": 1
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.027307115585084585,
+            "max_percent": -0.0001532643769786013,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        },
+        "float32": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 20.8549234801526,
+            "max_SOC_pp": 1.8300386555166637,
+            "joint_within_target": 747543,
+            "Q_3sd_misses": 51,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": -0.012608878781916744,
+            "final_SOC_pp": -0.00011797421832770993,
+            "Q_RMSE_percent": 0.23430913139245169,
+            "SOC_RMSE_pp": 0.025866936938964195,
+            "joint_within_target_fraction": 0.9888134920634921
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 6.746031746031745e-05,
+            "SOC": 0.0
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.05999243467273085,
+            "R0_ohm_ref": 0.11267177335945272,
+            "R1_ohm_ref": 0.04393432987464981,
+            "tau1_s_ref": 0.13079640434283682,
+            "R2_ohm_ref": 0.07120878919004073,
+            "tau2_s_ref": 0.715000032757973,
+            "R3_ohm_ref": 0.11291729872634423,
+            "tau3_s_ref": 5.052120520966346,
+            "H_V_ref": 0.015049193451157104,
+            "gamma_plus_ref": 5.985572168335276,
+            "gamma_minus_ref": 9.009174449169615
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.012608878781916744,
+            "R0_ohm_ref": 12.67177335945271,
+            "R1_ohm_ref": 9.835824686624516,
+            "tau1_s_ref": 161.59280868567362,
+            "R2_ohm_ref": -10.989013512449098,
+            "tau2_s_ref": 43.000006551594595,
+            "R3_ohm_ref": -5.902251061379804,
+            "tau3_s_ref": 1.0424104193269113,
+            "H_V_ref": 0.32795634104736404,
+            "gamma_plus_ref": -0.2404638610787324,
+            "gamma_minus_ref": 0.10193832410683168
+          },
+          "final_approx_Q_three_SD_percent": 0.03341652620136428,
+          "final_SOC_three_SD_pp": 0.0033017921012230464,
+          "solver_stops": {
+            "round_limit": 2157,
+            "gradient": 753842,
+            "no_descent": 1
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.027263224769924488,
+            "max_percent": -9.266088827342145e-05,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 0.003355078364186692,
+        "SOC_pp": 0.0006721125500264158,
+        "paired_outputs": 756000
+      }
+    },
+    {
+      "directory": "case_0003",
+      "seed": 1003,
+      "status": "completed",
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 21.323462963700845,
+            "max_SOC_pp": 1.3828897222298187,
+            "joint_within_target": 742203,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 1681,
+            "final_Q_percent": -0.01583027920205593,
+            "final_SOC_pp": -0.0003416187021598738,
+            "Q_RMSE_percent": 0.28327298092969766,
+            "SOC_RMSE_pp": 0.028377031549071265,
+            "joint_within_target_fraction": 0.98175
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.0,
+            "SOC": 0.0022235449735449734
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.05999050183247876,
+            "R0_ohm_ref": 0.1698833255765955,
+            "R1_ohm_ref": 0.022760566062773355,
+            "tau1_s_ref": 0.13370586996621162,
+            "R2_ohm_ref": 0.04636087000931008,
+            "tau2_s_ref": 1.7219879053593865,
+            "R3_ohm_ref": 0.10121362683206712,
+            "tau3_s_ref": 5.351625307513042,
+            "H_V_ref": 0.015076370714116327,
+            "gamma_plus_ref": 5.964048974836594,
+            "gamma_minus_ref": 8.948452916009453
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.01583027920205593,
+            "R0_ohm_ref": 69.8833255765955,
+            "R1_ohm_ref": -43.09858484306661,
+            "tau1_s_ref": 167.41173993242322,
+            "R2_ohm_ref": -42.0489124883624,
+            "tau2_s_ref": 244.3975810718773,
+            "R3_ohm_ref": -15.655310973277391,
+            "tau3_s_ref": 7.032506150260831,
+            "H_V_ref": 0.509138094108863,
+            "gamma_plus_ref": -0.5991837527234423,
+            "gamma_minus_ref": -0.5727453776727454
+          },
+          "final_approx_Q_three_SD_percent": 0.033603048001580066,
+          "final_SOC_three_SD_pp": 0.00311816701185807,
+          "solver_stops": {
+            "round_limit": 2309,
+            "gradient": 753691
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.018488447769415828,
+            "max_percent": 8.551191459371665e-05,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        },
+        "float32": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 21.32634442715795,
+            "max_SOC_pp": 1.3829167806359344,
+            "joint_within_target": 742219,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 1659,
+            "final_Q_percent": -0.015785581068017418,
+            "final_SOC_pp": -0.0003459922698012541,
+            "Q_RMSE_percent": 0.28277072235875184,
+            "SOC_RMSE_pp": 0.028369877840437804,
+            "joint_within_target_fraction": 0.981771164021164
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.0,
+            "SOC": 0.0021944444444444446
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.05999052865135918,
+            "R0_ohm_ref": 0.1698549926803972,
+            "R1_ohm_ref": 0.022819325164937277,
+            "tau1_s_ref": 0.13393836842546844,
+            "R2_ohm_ref": 0.04637110967186392,
+            "tau2_s_ref": 1.7238551843868568,
+            "R3_ohm_ref": 0.10117117897819174,
+            "tau3_s_ref": 5.352696917745416,
+            "H_V_ref": 0.01507613613609948,
+            "gamma_plus_ref": 5.964199465677565,
+            "gamma_minus_ref": 8.948291951534497
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.01578558106802852,
+            "R0_ohm_ref": 69.85499268039719,
+            "R1_ohm_ref": -42.95168708765681,
+            "tau1_s_ref": 167.87673685093685,
+            "R2_ohm_ref": -42.0361129101701,
+            "tau2_s_ref": 244.77103687737136,
+            "R3_ohm_ref": -15.69068418484022,
+            "tau3_s_ref": 7.053938354908307,
+            "H_V_ref": 0.5075742406631889,
+            "gamma_plus_ref": -0.5966755720405836,
+            "gamma_minus_ref": -0.5745338718389226
+          },
+          "final_approx_Q_three_SD_percent": 0.03359712786735657,
+          "final_SOC_three_SD_pp": 0.003118007732455175,
+          "solver_stops": {
+            "round_limit": 2320,
+            "gradient": 753680
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.018335476558706265,
+            "max_percent": 0.00030300135200889144,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 0.03278898943187558,
+        "SOC_pp": 0.00353764557605718,
+        "paired_outputs": 756000
+      }
+    },
+    {
+      "directory": "case_0004",
+      "seed": 1004,
+      "status": "unresolved",
+      "arms": {
+        "float64": {
+          "status": "unresolved",
+          "valid_outputs": 983,
+          "last_valid_time_s": 449.37142857142857,
+          "failure": {
+            "index": 15743,
+            "reason": "C estimator status -4"
+          },
+          "Q_SOC_statistics": {
+            "outputs": 983,
+            "max_Q_percent": 25.193127708347763,
+            "max_SOC_pp": 1.3412604510773085,
+            "joint_within_target": 0,
+            "Q_3sd_misses": 746,
+            "SOC_3sd_misses": 131,
+            "final_Q_percent": 4.185285582835863,
+            "final_SOC_pp": -1.1313256791680493,
+            "Q_RMSE_percent": 8.062208033888199,
+            "SOC_RMSE_pp": 0.7395976443980057,
+            "joint_within_target_fraction": 0.0
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.7589013224821973,
+            "SOC": 0.13326551373346898
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.06251117134970152,
+            "R0_ohm_ref": 0.12538975056673107,
+            "R1_ohm_ref": 0.07681519343103971,
+            "tau1_s_ref": 0.0671328775287518,
+            "R2_ohm_ref": 0.09175616260576248,
+            "tau2_s_ref": 0.6312145414262846,
+            "R3_ohm_ref": 0.11266058168000435,
+            "tau3_s_ref": 3.4925703354513757,
+            "H_V_ref": 0.008094252189612981,
+            "gamma_plus_ref": 4.999999999999999,
+            "gamma_minus_ref": 15.705957047130143
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": 4.185285582835885,
+            "R0_ohm_ref": 25.389750566731074,
+            "R1_ohm_ref": 92.03798357759926,
+            "tau1_s_ref": 34.2657550575036,
+            "R2_ohm_ref": 14.695203257203104,
+            "tau2_s_ref": 26.242908285256927,
+            "R3_ohm_ref": -6.116181933329701,
+            "tau3_s_ref": -30.14859329097248,
+            "H_V_ref": -46.03831873591345,
+            "gamma_plus_ref": -16.666666666666686,
+            "gamma_minus_ref": 74.51063385700158
+          },
+          "final_approx_Q_three_SD_percent": 3.1335292182328227,
+          "final_SOC_three_SD_pp": 1.125795974521031,
+          "solver_stops": {
+            "round_limit": 712,
+            "gradient": 271
+          }
+        },
+        "float32": {
+          "status": "unresolved",
+          "valid_outputs": 983,
+          "last_valid_time_s": 449.37142857142857,
+          "failure": {
+            "index": 15743,
+            "reason": "C estimator status -4"
+          },
+          "Q_SOC_statistics": {
+            "outputs": 983,
+            "max_Q_percent": 25.193103389751425,
+            "max_SOC_pp": 1.3412536364942995,
+            "joint_within_target": 0,
+            "Q_3sd_misses": 746,
+            "SOC_3sd_misses": 131,
+            "final_Q_percent": 4.1852660887965465,
+            "final_SOC_pp": -1.1313185321618735,
+            "Q_RMSE_percent": 8.062168906367631,
+            "SOC_RMSE_pp": 0.7395937241511951,
+            "joint_within_target_fraction": 0.0
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.7589013224821973,
+            "SOC": 0.13326551373346898
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.06251115965327793,
+            "R0_ohm_ref": 0.12539087227046722,
+            "R1_ohm_ref": 0.07681383817763549,
+            "tau1_s_ref": 0.0671328707783518,
+            "R2_ohm_ref": 0.0917571238968451,
+            "tau2_s_ref": 0.6312144261675118,
+            "R3_ohm_ref": 0.11265961911151097,
+            "tau3_s_ref": 3.492566488742608,
+            "H_V_ref": 0.008094304124727435,
+            "gamma_plus_ref": 4.999999999999999,
+            "gamma_minus_ref": 15.705963045364706
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": 4.1852660887965465,
+            "R0_ohm_ref": 25.390872270467213,
+            "R1_ohm_ref": 92.03459544408872,
+            "tau1_s_ref": 34.26574155670359,
+            "R2_ohm_ref": 14.696404871056368,
+            "tau2_s_ref": 26.242885233502356,
+            "R3_ohm_ref": -6.11698407374085,
+            "tau3_s_ref": -30.148670225147832,
+            "H_V_ref": -46.037972501817094,
+            "gamma_plus_ref": -16.666666666666686,
+            "gamma_minus_ref": 74.51070050405228
+          },
+          "final_approx_Q_three_SD_percent": 3.133533372104569,
+          "final_SOC_three_SD_pp": 1.125792437022404,
+          "solver_stops": {
+            "round_limit": 712,
+            "gradient": 271
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 0.00021485754160277537,
+        "SOC_pp": 1.737344347274572e-05,
+        "paired_outputs": 983
+      }
+    },
+    {
+      "directory": "case_0005",
+      "seed": 1005,
+      "status": "completed",
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 24.954213538834914,
+            "max_SOC_pp": 0.8711916006014397,
+            "joint_within_target": 741653,
+            "Q_3sd_misses": 4801,
+            "SOC_3sd_misses": 7570,
+            "final_Q_percent": -0.01724403816811826,
+            "final_SOC_pp": -0.0022916644497439354,
+            "Q_RMSE_percent": 0.3131965403735908,
+            "SOC_RMSE_pp": 0.0223431424194464,
+            "joint_within_target_fraction": 0.9810224867724868
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.0063505291005291,
+            "SOC": 0.010013227513227514
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.05998965357709913,
+            "R0_ohm_ref": 0.12074582403483666,
+            "R1_ohm_ref": 0.035849963863308396,
+            "tau1_s_ref": 0.08951262144071724,
+            "R2_ohm_ref": 0.06544814963474183,
+            "tau2_s_ref": 0.6748843582157735,
+            "R3_ohm_ref": 0.11828604575131216,
+            "tau3_s_ref": 4.87440703871494,
+            "H_V_ref": 0.015078335715374112,
+            "gamma_plus_ref": 5.958501101879432,
+            "gamma_minus_ref": 8.933633068078596
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.01724403816811826,
+            "R0_ohm_ref": 20.745824034836645,
+            "R1_ohm_ref": -10.37509034172901,
+            "tau1_s_ref": 79.02524288143447,
+            "R2_ohm_ref": -18.189812956572716,
+            "tau2_s_ref": 34.97687164315471,
+            "R3_ohm_ref": -1.4282952072398603,
+            "tau3_s_ref": -2.5118592257011962,
+            "H_V_ref": 0.522238102494077,
+            "gamma_plus_ref": -0.6916483020094621,
+            "gamma_minus_ref": -0.7374103546822663
+          },
+          "final_approx_Q_three_SD_percent": 0.033281291834753556,
+          "final_SOC_three_SD_pp": 0.004547638959793832,
+          "solver_stops": {
+            "round_limit": 3412,
+            "gradient": 752588
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.039112771795135615,
+            "max_percent": -0.0116755569847804,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        },
+        "float32": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 24.95461430017305,
+            "max_SOC_pp": 0.8711892185776504,
+            "joint_within_target": 741653,
+            "Q_3sd_misses": 4801,
+            "SOC_3sd_misses": 7570,
+            "final_Q_percent": -0.01724362051109818,
+            "final_SOC_pp": -0.0022916432944275478,
+            "Q_RMSE_percent": 0.3131987261526929,
+            "SOC_RMSE_pp": 0.02234361743643796,
+            "joint_within_target_fraction": 0.9810224867724868
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.0063505291005291,
+            "SOC": 0.010013227513227514
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.05998965382769334,
+            "R0_ohm_ref": 0.12074543969789943,
+            "R1_ohm_ref": 0.035850269854535176,
+            "tau1_s_ref": 0.08951253406041457,
+            "R2_ohm_ref": 0.0654480706744781,
+            "tau2_s_ref": 0.6748818121963246,
+            "R3_ohm_ref": 0.11828620142733243,
+            "tau3_s_ref": 4.874401007017039,
+            "H_V_ref": 0.015078334364321499,
+            "gamma_plus_ref": 5.9585018611737866,
+            "gamma_minus_ref": 8.933634337990002
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": -0.01724362051109818,
+            "R0_ohm_ref": 20.745439697899414,
+            "R1_ohm_ref": -10.374325363662063,
+            "tau1_s_ref": 79.02506812082912,
+            "R2_ohm_ref": -18.18991165690238,
+            "tau2_s_ref": 34.97636243926492,
+            "R3_ohm_ref": -1.4281654772229757,
+            "tau3_s_ref": -2.511979859659219,
+            "H_V_ref": 0.5222290954766562,
+            "gamma_plus_ref": -0.6916356471035612,
+            "gamma_minus_ref": -0.7373962445555327
+          },
+          "final_approx_Q_three_SD_percent": 0.03328117223342416,
+          "final_SOC_three_SD_pp": 0.0045476341498570435,
+          "solver_stops": {
+            "round_limit": 3412,
+            "gradient": 752588
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": -0.0391106496936966,
+            "max_percent": -0.011674181912746384,
+            "within_half_percent_fraction": 1.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 0.0003207265499849399,
+        "SOC_pp": 2.0482850382474993e-05,
+        "paired_outputs": 756000
+      }
+    },
+    {
+      "directory": "case_0006",
+      "seed": 1006,
+      "status": "completed",
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 23.985829867925055,
+            "max_SOC_pp": 1.6276530330341266,
+            "joint_within_target": 4752,
+            "Q_3sd_misses": 747840,
+            "SOC_3sd_misses": 736606,
+            "final_Q_percent": 0.6155532793282958,
+            "final_SOC_pp": 0.0012634268599542864,
+            "Q_RMSE_percent": 1.0337771823296524,
+            "SOC_RMSE_pp": 0.19920438773704582,
+            "joint_within_target_fraction": 0.006285714285714286
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.9892063492063492,
+            "SOC": 0.9743465608465608
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.06036933196759697,
+            "R0_ohm_ref": 0.08693920949591678,
+            "R1_ohm_ref": 0.03255634411488977,
+            "tau1_s_ref": 0.05833337531013234,
+            "R2_ohm_ref": 0.10290671228345875,
+            "tau2_s_ref": 0.5017613587076709,
+            "R3_ohm_ref": 0.11824330294518018,
+            "tau3_s_ref": 6.336613230792859,
+            "H_V_ref": 0.012872670960538736,
+            "gamma_plus_ref": 7.51323397660467,
+            "gamma_minus_ref": 13.93939837753614
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": 0.6155532793282958,
+            "R0_ohm_ref": -13.060790504083219,
+            "R1_ohm_ref": -18.60913971277557,
+            "tau1_s_ref": 16.66675062026468,
+            "R2_ohm_ref": 28.63339035432344,
+            "tau2_s_ref": 0.3522717415341825,
+            "R3_ohm_ref": -1.4639142123498483,
+            "tau3_s_ref": 26.732264615857183,
+            "H_V_ref": -14.182193596408421,
+            "gamma_plus_ref": 25.220566276744492,
+            "gamma_minus_ref": 54.882204194846
+          },
+          "final_approx_Q_three_SD_percent": 0.01906190023674912,
+          "final_SOC_three_SD_pp": 0.00273801038914479,
+          "solver_stops": {
+            "round_limit": 4246,
+            "gradient": 751754
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": 0.6155149212462518,
+            "max_percent": 0.9230069051049616,
+            "within_half_percent_fraction": 0.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        },
+        "float32": {
+          "status": "completed",
+          "valid_outputs": 756000,
+          "last_valid_time_s": 345600.0,
+          "failure": null,
+          "Q_SOC_statistics": {
+            "outputs": 756000,
+            "max_Q_percent": 23.985825220191504,
+            "max_SOC_pp": 1.632206880903242,
+            "joint_within_target": 4782,
+            "Q_3sd_misses": 747777,
+            "SOC_3sd_misses": 736562,
+            "final_Q_percent": 0.6182327537104904,
+            "final_SOC_pp": 0.001283515233385657,
+            "Q_RMSE_percent": 1.0331239157894612,
+            "SOC_RMSE_pp": 0.19988178285986719,
+            "joint_within_target_fraction": 0.006325396825396825
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.9891230158730159,
+            "SOC": 0.9742883597883598
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.06037093965222629,
+            "R0_ohm_ref": 0.08871373439109279,
+            "R1_ohm_ref": 0.03201066875383921,
+            "tau1_s_ref": 0.06016438949377966,
+            "R2_ohm_ref": 0.10239614492382536,
+            "tau2_s_ref": 0.5114658661173936,
+            "R3_ohm_ref": 0.11746330016904477,
+            "tau3_s_ref": 6.359246017377229,
+            "H_V_ref": 0.01286378085220383,
+            "gamma_plus_ref": 7.520005341192619,
+            "gamma_minus_ref": 13.953149923331909
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": 0.6182327537104904,
+            "R0_ohm_ref": -11.28626560890722,
+            "R1_ohm_ref": -19.973328115401966,
+            "tau1_s_ref": 20.328778987559314,
+            "R2_ohm_ref": 27.9951811547817,
+            "tau2_s_ref": 2.2931732234787283,
+            "R3_ohm_ref": -2.1139165257960224,
+            "tau3_s_ref": 27.184920347544583,
+            "H_V_ref": -14.241460985307796,
+            "gamma_plus_ref": 25.333422353210324,
+            "gamma_minus_ref": 55.03499914813232
+          },
+          "final_approx_Q_three_SD_percent": 0.019031004987798392,
+          "final_SOC_three_SD_pp": 0.002737770608840448,
+          "solver_stops": {
+            "round_limit": 4258,
+            "gradient": 751742
+          },
+          "last72h_Q_reference_error": {
+            "min_percent": 0.6181945666518196,
+            "max_percent": 0.9272060224559731,
+            "within_half_percent_fraction": 0.0,
+            "method": "All valid boundaries; known common Arrhenius factor cancels in Q error."
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 0.08586299098173322,
+        "SOC_pp": 0.021608175836543286,
+        "paired_outputs": 756000
+      }
+    },
+    {
+      "directory": "case_0007",
+      "seed": 1007,
+      "status": "unresolved",
+      "arms": {
+        "float64": {
+          "status": "unresolved",
+          "valid_outputs": 1342,
+          "last_valid_time_s": 613.4857142857143,
+          "failure": {
+            "index": 21487,
+            "reason": "C estimator status -4"
+          },
+          "Q_SOC_statistics": {
+            "outputs": 1342,
+            "max_Q_percent": 14.984365774332131,
+            "max_SOC_pp": 1.2467612544983409,
+            "joint_within_target": 2,
+            "Q_3sd_misses": 15,
+            "SOC_3sd_misses": 189,
+            "final_Q_percent": 1.7498203285154945,
+            "final_SOC_pp": -0.738624448335623,
+            "Q_RMSE_percent": 5.096719330806794,
+            "SOC_RMSE_pp": 0.8276155894416576,
+            "joint_within_target_fraction": 0.0014903129657228018
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.011177347242921014,
+            "SOC": 0.14083457526080476
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.06104989219710929,
+            "R0_ohm_ref": 0.15616370618563966,
+            "R1_ohm_ref": 0.03397073443529661,
+            "tau1_s_ref": 0.07465514101030449,
+            "R2_ohm_ref": 0.058633825185667295,
+            "tau2_s_ref": 0.7868968052389228,
+            "R3_ohm_ref": 0.0949898956323041,
+            "tau3_s_ref": 9.231948933913525,
+            "H_V_ref": 0.005847653565003841,
+            "gamma_plus_ref": 4.999999999999999,
+            "gamma_minus_ref": 18.351667111186146
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": 1.7498203285154945,
+            "R0_ohm_ref": 56.16370618563964,
+            "R1_ohm_ref": -15.073163911758481,
+            "tau1_s_ref": 49.310282020608966,
+            "R2_ohm_ref": -26.70771851791588,
+            "tau2_s_ref": 57.37936104778456,
+            "R3_ohm_ref": -20.841753639746575,
+            "tau3_s_ref": 84.6389786782705,
+            "H_V_ref": -61.01564289997439,
+            "gamma_plus_ref": -16.666666666666686,
+            "gamma_minus_ref": 103.90741234651273
+          },
+          "final_approx_Q_three_SD_percent": 2.237980766992988,
+          "final_SOC_three_SD_pp": 0.37892967293192975,
+          "solver_stops": {
+            "round_limit": 850,
+            "gradient": 492
+          }
+        },
+        "float32": {
+          "status": "unresolved",
+          "valid_outputs": 1342,
+          "last_valid_time_s": 613.4857142857143,
+          "failure": {
+            "index": 21487,
+            "reason": "C estimator status -4"
+          },
+          "Q_SOC_statistics": {
+            "outputs": 1342,
+            "max_Q_percent": 14.98450261155757,
+            "max_SOC_pp": 1.2467735167310812,
+            "joint_within_target": 2,
+            "Q_3sd_misses": 15,
+            "SOC_3sd_misses": 189,
+            "final_Q_percent": 1.7498883876079674,
+            "final_SOC_pp": -0.7386396318842858,
+            "Q_RMSE_percent": 5.096862772032018,
+            "SOC_RMSE_pp": 0.8276216086512781,
+            "joint_within_target_fraction": 0.0014903129657228018
+          },
+          "nominal_three_SD_miss_fraction": {
+            "Q": 0.011177347242921014,
+            "SOC": 0.14083457526080476
+          },
+          "final_reference_parameters": {
+            "Q_Ah_ref": 0.06104993303256478,
+            "R0_ohm_ref": 0.15616262569957293,
+            "R1_ohm_ref": 0.03397165188457028,
+            "tau1_s_ref": 0.07465514175204993,
+            "R2_ohm_ref": 0.05863303387558887,
+            "tau2_s_ref": 0.7868946230322658,
+            "R3_ohm_ref": 0.0949909685626164,
+            "tau3_s_ref": 9.231922730181763,
+            "H_V_ref": 0.005847467823108927,
+            "gamma_plus_ref": 4.999999999999999,
+            "gamma_minus_ref": 18.35238033659984
+          },
+          "final_parameter_error_percent": {
+            "Q_Ah_ref": 1.7498883876079674,
+            "R0_ohm_ref": 56.162625699572914,
+            "R1_ohm_ref": -15.070870288574312,
+            "tau1_s_ref": 49.31028350409985,
+            "R2_ohm_ref": -26.70870765551391,
+            "tau2_s_ref": 57.378924606453154,
+            "R3_ohm_ref": -20.84085953115299,
+            "tau3_s_ref": 84.63845460363527,
+            "H_V_ref": -61.01688117927382,
+            "gamma_plus_ref": -16.666666666666686,
+            "gamma_minus_ref": 103.91533707333154
+          },
+          "final_approx_Q_three_SD_percent": 2.237908208438503,
+          "final_SOC_three_SD_pp": 0.37892786771774,
+          "solver_stops": {
+            "round_limit": 850,
+            "gradient": 492
+          }
+        }
+      },
+      "encoding_difference": {
+        "Q_percent": 0.00036105067908742683,
+        "SOC_pp": 7.088507486541218e-05,
+        "paired_outputs": 1342
+      }
+    }
+  ],
+  "seed1006_reference_peaks": {
+    "gamma_plus": {
+      "value": 26.989705362995277,
+      "time_h": 0.6561269841269841,
+      "trace_index": 5166
+    },
+    "gamma_minus": {
+      "value": 386.7563479316561,
+      "time_h": 3.8101587301587303,
+      "trace_index": 30004
+    },
+    "H_V": {
+      "value": 0.03496447711507737,
+      "time_h": 4.464253968253969,
+      "trace_index": 35155
+    }
+  },
+  "comparison_with_500Hz": {
+    "configuration_changes": {
+      "hours": {
+        "previous": 48.0,
+        "current": 96.0
+      },
+      "sample_rate_hz": {
+        "previous": 500,
+        "current": 35
+      },
+      "seeds": {
+        "previous": [
+          5,
+          6,
+          7,
+          500,
+          600,
+          700,
+          54,
+          321
+        ],
+        "current": [
+          1000,
+          1001,
+          1002,
+          1003,
+          1004,
+          1005,
+          1006,
+          1007
+        ]
+      }
+    },
+    "physical_cell_definitions_equal": true,
+    "native_source_hashes_equal": true,
+    "scope": "Different seeds, rates and durations prevent causal sample-rate comparison."
+  },
+  "short_failure_reproductions": {
+    "command": [
+      "cc",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-pedantic",
+      "-shared",
+      "-fPIC",
+      "-I",
+      "/home/easy/proj/mumble/experiments/foster_campaign_001/run_20261030_174341_464520/backend_c/source_snapshot/experiments/foster_c_history_001",
+      "/home/easy/proj/mumble/experiments/foster_96h_review_001/inspect.c",
+      "-o",
+      "/home/easy/proj/mumble/experiments/foster_96h_review_001/inspect.so"
+    ],
+    "binary": {
+      "bytes": 33408,
+      "sha256": "4f6bd1532aac24b486648411a87ac82b9af2e018edf9a66183bde88442d4a433"
+    },
+    "header": {
+      "bytes": 4058,
+      "sha256": "799a5ca3d656fe8b68bd38d48abf72c621f32cfd3e0c4dd0d9f6ba9abca68f20"
+    },
+    "failures": [
+      {
+        "case": "case_0001",
+        "seed": 1001,
+        "encoding": "float64",
+        "status": -4,
+        "physical_candidate_rejection": "physical model domain/status -4",
+        "received_records": 544,
+        "retired_records": 528,
+        "pending_records": 16,
+        "generation": 33,
+        "failure_time_s": 15.542857142857143,
+        "committed_message_byte_equal": true,
+        "committed_SOC": 0.6509571423207422,
+        "committed_h": -0.7764936332628755,
+        "prior_propagated_h": -0.777040351879139,
+        "fit_anchor_h": -0.9952823124927015,
+        "fitted_endpoint_h": -0.9952939633958022,
+        "candidate_h": -1.1245359405514987,
+        "candidate_SOC": 0.6557909598197664,
+        "candidate_all_finite": true,
+        "candidate_history_h_shift_from_fitted_endpoint": -0.12924197715569652,
+        "diagnosis": "valid prior propagation and fitted trajectory; unconstrained local-Gaussian history update produces out-of-domain candidate before commit"
+      },
+      {
+        "case": "case_0001",
+        "seed": 1001,
+        "encoding": "float32",
+        "status": -4,
+        "physical_candidate_rejection": "physical model domain/status -4",
+        "received_records": 544,
+        "retired_records": 528,
+        "pending_records": 16,
+        "generation": 33,
+        "failure_time_s": 15.542857142857143,
+        "committed_message_byte_equal": true,
+        "committed_SOC": 0.6509571275440668,
+        "committed_h": -0.7764985655213611,
+        "prior_propagated_h": -0.7770452725721148,
+        "fit_anchor_h": -0.9952823923323034,
+        "fitted_endpoint_h": -0.9952940430397184,
+        "candidate_h": -1.1245331781341326,
+        "candidate_SOC": 0.6557908267910777,
+        "candidate_all_finite": true,
+        "candidate_history_h_shift_from_fitted_endpoint": -0.1292391350944142,
+        "diagnosis": "valid prior propagation and fitted trajectory; unconstrained local-Gaussian history update produces out-of-domain candidate before commit"
+      },
+      {
+        "case": "case_0004",
+        "seed": 1004,
+        "encoding": "float64",
+        "status": -4,
+        "physical_candidate_rejection": "physical model domain/status -4",
+        "received_records": 15744,
+        "retired_records": 15728,
+        "pending_records": 16,
+        "generation": 983,
+        "failure_time_s": 449.8285714285714,
+        "committed_message_byte_equal": true,
+        "committed_SOC": 0.8666917531046382,
+        "committed_h": -0.9985092562366268,
+        "prior_propagated_h": -0.9985150927248652,
+        "fit_anchor_h": -0.9999924151161919,
+        "fitted_endpoint_h": -0.9999924452319247,
+        "candidate_h": -1.0012411572003501,
+        "candidate_SOC": 0.8671277128835381,
+        "candidate_all_finite": true,
+        "candidate_history_h_shift_from_fitted_endpoint": -0.0012487119684254644,
+        "diagnosis": "valid prior propagation and fitted trajectory; unconstrained local-Gaussian history update produces out-of-domain candidate before commit"
+      },
+      {
+        "case": "case_0004",
+        "seed": 1004,
+        "encoding": "float32",
+        "status": -4,
+        "physical_candidate_rejection": "physical model domain/status -4",
+        "received_records": 15744,
+        "retired_records": 15728,
+        "pending_records": 16,
+        "generation": 983,
+        "failure_time_s": 449.8285714285714,
+        "committed_message_byte_equal": true,
+        "committed_SOC": 0.8666918245747,
+        "committed_h": -0.9985091822844026,
+        "prior_propagated_h": -0.99851501906549,
+        "fit_anchor_h": -0.9999922927928492,
+        "fitted_endpoint_h": -0.9999923233942817,
+        "candidate_h": -1.001240995585808,
+        "candidate_SOC": 0.8671277859773859,
+        "candidate_all_finite": true,
+        "candidate_history_h_shift_from_fitted_endpoint": -0.0012486721915262455,
+        "diagnosis": "valid prior propagation and fitted trajectory; unconstrained local-Gaussian history update produces out-of-domain candidate before commit"
+      },
+      {
+        "case": "case_0007",
+        "seed": 1007,
+        "encoding": "float64",
+        "status": -4,
+        "physical_candidate_rejection": "physical model domain/status -4",
+        "received_records": 21488,
+        "retired_records": 21472,
+        "pending_records": 16,
+        "generation": 1342,
+        "failure_time_s": 613.9428571428572,
+        "committed_message_byte_equal": true,
+        "committed_SOC": 0.9230067088146116,
+        "committed_h": -0.9999230581205509,
+        "prior_propagated_h": -0.9999231335429303,
+        "fit_anchor_h": -0.999999283067633,
+        "fitted_endpoint_h": -0.9999992837709409,
+        "candidate_h": -1.0001020793157402,
+        "candidate_SOC": 0.9230394955813042,
+        "candidate_all_finite": true,
+        "candidate_history_h_shift_from_fitted_endpoint": -0.00010279554479930564,
+        "diagnosis": "valid prior propagation and fitted trajectory; unconstrained local-Gaussian history update produces out-of-domain candidate before commit"
+      },
+      {
+        "case": "case_0007",
+        "seed": 1007,
+        "encoding": "float32",
+        "status": -4,
+        "physical_candidate_rejection": "physical model domain/status -4",
+        "received_records": 21488,
+        "retired_records": 21472,
+        "pending_records": 16,
+        "generation": 1342,
+        "failure_time_s": 613.9428571428572,
+        "committed_message_byte_equal": true,
+        "committed_SOC": 0.9230065569791249,
+        "committed_h": -0.9999264767091229,
+        "prior_propagated_h": -0.9999265487831777,
+        "fit_anchor_h": -0.9999987930373424,
+        "fitted_endpoint_h": -0.9999987942213673,
+        "candidate_h": -1.000105472198843,
+        "candidate_SOC": 0.9230393465256395,
+        "candidate_all_finite": true,
+        "candidate_history_h_shift_from_fitted_endpoint": -0.00010667797747565544,
+        "diagnosis": "valid prior propagation and fitted trajectory; unconstrained local-Gaussian history update produces out-of-domain candidate before commit"
+      }
+    ],
+    "scope": "Only saved prefixes through their first rejection; no full96h campaign rerun, no original file modified, no repair applied."
+  },
+  "independent_Python_reproductions": [
+    {
+      "case": "case_0001",
+      "seed": 1001,
+      "failure_index": 543,
+      "failure": "physical model domain/status -4",
+      "candidate_h": -1.1245359405516402,
+      "candidate_SOC": 0.6557909598197686,
+      "counts": {
+        "received_records": 544,
+        "retired_records": 528,
+        "pending_records": 16,
+        "tokens": 33
+      }
+    },
+    {
+      "case": "case_0004",
+      "seed": 1004,
+      "failure_index": 15743,
+      "failure": "physical model domain/status -4",
+      "candidate_h": -1.0012411572004116,
+      "candidate_SOC": 0.8671277128834657,
+      "counts": {
+        "received_records": 15744,
+        "retired_records": 15728,
+        "pending_records": 16,
+        "tokens": 983
+      }
+    },
+    {
+      "case": "case_0007",
+      "seed": 1007,
+      "failure_index": 21487,
+      "failure": "physical model domain/status -4",
+      "candidate_h": -1.000102079315609,
+      "candidate_SOC": 0.9230394955813056,
+      "counts": {
+        "received_records": 21488,
+        "retired_records": 21472,
+        "pending_records": 16,
+        "tokens": 1342
+      }
+    }
+  ],
+  "source_manifest": {
+    "bytes": 44506,
+    "sha256": "681abc5184bbcfb8701dc02f59662d9ed6bcd8d8d6d3de1330203bac0ba150a6"
+  },
+  "selective_manifest_verification": {
+    "summary.json": {
+      "bytes": 57507,
+      "sha256": "6803c043d34f7a17e02f713485cf96508f56fcf4873aa1a7cf239eba1d5addca"
+    },
+    "campaign_plan.json": {
+      "bytes": 26591,
+      "sha256": "0fc96fd193432d05669c44c62ea7d7ed1520bbb82f27db5497249def61524b2b"
+    },
+    "calibration.json": {
+      "bytes": 1567,
+      "sha256": "ea681258debcb80616ffec246feb9a529626d17ae6466198d1e18cb02dacb5d6"
+    },
+    "backend_c/build.json": {
+      "bytes": 6979,
+      "sha256": "ac54df3ea2e3d5f8c775e4d3012215fb6812912e56b1c25d4d63448ccf1dc1e5"
+    },
+    "backend_c/estimator.so": {
+      "bytes": 33408,
+      "sha256": "4f6bd1532aac24b486648411a87ac82b9af2e018edf9a66183bde88442d4a433"
+    },
+    "case_0000/result.json": {
+      "bytes": 6434,
+      "sha256": "02e1fe5fb5a386462619bf6a6c0a061fa25c2c7af02ade6fbdd1f9e6d5643452"
+    },
+    "case_0000/telemetry.json": {
+      "bytes": 1843,
+      "sha256": "14bdf1b82e26a3e60bb8df3e869b27c5e944ac448c6c9a73317aa0e0916eee71"
+    },
+    "case_0000/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "ce5c9bd708c2012fa3b260d1d986a124bfa50ee2a9cb1960038aadfb20696998"
+    },
+    "case_0000/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "1aaf23b87ee570f4e49c3da3a5e190417f28ab47f1f8ac4a79d1269956e0a996"
+    },
+    "case_0000/stimulus_events.csv": {
+      "bytes": 65127,
+      "sha256": "a13e400211f5a3622d1fc59a004d38618a78b3a8b319f6bd796c36aaa53bf454"
+    },
+    "case_0001/result.json": {
+      "bytes": 6088,
+      "sha256": "f4a2aaff3b6b3819ae8d4a55be4fa85449dd035f3bf3c3bff4a20b4d643cdb67"
+    },
+    "case_0001/telemetry.json": {
+      "bytes": 1835,
+      "sha256": "18b741d807082d5e1c20b5991c51dd76f44d533f513495ff20baafdaaa9379ad"
+    },
+    "case_0001/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "cc07b78586077bf4bc958696d97eeb16ad0ac407355ddd18916a40042492c74d"
+    },
+    "case_0001/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "a1372ae87e54d30d664690f72a05768f44d086066d605eea04e03c463229628c"
+    },
+    "case_0001/stimulus_events.csv": {
+      "bytes": 65345,
+      "sha256": "10c1ad37959e34ecf8d921aa6446515ee383cd03879203c0c4f0c7f7b2dad0a4"
+    },
+    "case_0002/result.json": {
+      "bytes": 6425,
+      "sha256": "6db669e0941df6b923232a1c9e8bc7e96fac3c4d2c402cce0353f538164b52f8"
+    },
+    "case_0002/telemetry.json": {
+      "bytes": 1843,
+      "sha256": "14bdf1b82e26a3e60bb8df3e869b27c5e944ac448c6c9a73317aa0e0916eee71"
+    },
+    "case_0002/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "ac0d9729105b0bab25cac6246dfd132dc0fdbbb5d53aba6c79568f2fd5a1fa05"
+    },
+    "case_0002/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "53aab043ff5174cf272d90c28d648e907c94f98c3b64439bd81654177d88af52"
+    },
+    "case_0002/stimulus_events.csv": {
+      "bytes": 65150,
+      "sha256": "f3eeded43abbb2b8189e98402db89a3ca699a56fa4ff6628950c4bf7393b30a4"
+    },
+    "case_0003/result.json": {
+      "bytes": 6376,
+      "sha256": "7fd79a7cd282e4c0c15121b16761eb54e7647cc44adcd122286cb6da810b9cef"
+    },
+    "case_0003/telemetry.json": {
+      "bytes": 1843,
+      "sha256": "14bdf1b82e26a3e60bb8df3e869b27c5e944ac448c6c9a73317aa0e0916eee71"
+    },
+    "case_0003/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "851c369defb62443bc60fcf964a54c6146c85fbb78b2a67b3ae51526c707d7e2"
+    },
+    "case_0003/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "f3c81bf6b3e1613996ca5fa1655bf840403b6afea2d37dea25e001d2c39cf1a6"
+    },
+    "case_0003/stimulus_events.csv": {
+      "bytes": 65258,
+      "sha256": "e44ffaa4b8d8ae2a26ba0d5a082060821fee8a400a28bfc5f1392d5ce0beb561"
+    },
+    "case_0004/result.json": {
+      "bytes": 6177,
+      "sha256": "dd795c27ded805e64e07c537f9cbb787ca33fcd4c96d778bdeeedf9dc7c9204c"
+    },
+    "case_0004/telemetry.json": {
+      "bytes": 1837,
+      "sha256": "6c4505074e676f16bca363c6726efd815d9947480bf38ea42e780ad27b02f434"
+    },
+    "case_0004/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "d88070d13150075ef6047912166ff4a9384b77e7cfa1ebc5066176496ea094f0"
+    },
+    "case_0004/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "10ff4675ecf25d9fc75b694fbcda6fe33f8500c9bae4303fa188190f0f1007e9"
+    },
+    "case_0004/stimulus_events.csv": {
+      "bytes": 65553,
+      "sha256": "04cc6c1f1748e3589e934c2aaf7b5f20ecf1e59eff2ee525fd4801936b096faa"
+    },
+    "case_0005/result.json": {
+      "bytes": 6404,
+      "sha256": "fae24019a64379934ed4f2e931a69df04578825de2486d0ffb8cf0453a6d6943"
+    },
+    "case_0005/telemetry.json": {
+      "bytes": 1843,
+      "sha256": "14bdf1b82e26a3e60bb8df3e869b27c5e944ac448c6c9a73317aa0e0916eee71"
+    },
+    "case_0005/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "1b8e729c2ac288df201eaf441d8d9eb92945e16e45777bc6a1b82815a19da93a"
+    },
+    "case_0005/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "74f9eb44a538ef848134a299726ad9631d1f4605f4cbcb2b1e1888e928f00e7e"
+    },
+    "case_0005/stimulus_events.csv": {
+      "bytes": 65027,
+      "sha256": "26922c666cb69026faaf927fcdcbcaf9ff27305e46e35ce7c847b2a3be3339ed"
+    },
+    "case_0006/result.json": {
+      "bytes": 6394,
+      "sha256": "c0a9d314466b317b1b5e15cbc4ec39c9660e2c73e4015d3ab5b26c5710f8c8ed"
+    },
+    "case_0006/telemetry.json": {
+      "bytes": 1843,
+      "sha256": "14bdf1b82e26a3e60bb8df3e869b27c5e944ac448c6c9a73317aa0e0916eee71"
+    },
+    "case_0006/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "53b2b9d2586359108ad2f06b6101b5de40590e58fbdb0398b8ed78d2370addfe"
+    },
+    "case_0006/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "8754429d3aa57e8a806fe386a75f21d214b925446a72ab86290f434f09651177"
+    },
+    "case_0006/stimulus_events.csv": {
+      "bytes": 65045,
+      "sha256": "1631de81e10c79f6b8e33d41d7fd648edc9488915d0a17f89a6229852499b66e"
+    },
+    "case_0007/result.json": {
+      "bytes": 6252,
+      "sha256": "651074f50f6fe1c1fc3f7876790a2216ed64974b0f886e4180a11b6bda9d141b"
+    },
+    "case_0007/telemetry.json": {
+      "bytes": 1839,
+      "sha256": "1b9619e482c02b257f629a4097147080dc959d55057900a2b674af7690bcaea1"
+    },
+    "case_0007/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "15a0c55e2666c33058afc49f0b13dc0e61bb7b3e83fc738ddd0173b796ace624"
+    },
+    "case_0007/float32_message.npy": {
+      "bytes": 2312,
+      "sha256": "9fc094ee80985f7752ee68950d2010785db51b139f5922da863fed87bac5f05c"
+    },
+    "case_0007/stimulus_events.csv": {
+      "bytes": 65787,
+      "sha256": "71f546f7291185a0d66f506d116177b96ab607361e0589f99f05a7e60ba09981"
+    }
+  },
+  "large_arrays": "Original memmaps, valid prefixes only. Whole-array hashes not recomputed. Full-run metrics from original summaries; last72h Q scans all valid boundaries; plots use minute samples, all rows for failed prefixes.",
+  "limits": "No coverage certificate, aging qualification, new production code or full96h rerun. Failure location is identified; bounded joint repair is not implemented."
+}

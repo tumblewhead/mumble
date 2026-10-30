@@ -1,0 +1,21 @@
+{
+  "schema": "physical_rc_scale_plan_v1",
+  "status": "frozen_before_battery_fitting",
+  "parent": "experiments/natural_hysteresis_001/attempt001/result.json",
+  "diagnosis": "experiments/backward_response_001/verification.json",
+  "prefixes": [8, 32],
+  "arms": {"baseline": [], "slow_only": [11], "all_carried": [9, 10, 11]},
+  "family": "Existing bounded Gaussian means beta'f in F coordinates; scales a_j(tau_j)*s_j only at selected carried coordinates. Other conditionals and weights unchanged.",
+  "ownership": "Same construction/heldout split and fixed memberships; posterior owns prior and source interval once; no fresh inference or truth.",
+  "optimizer": {"iterations_per_conditional": 128, "evaluations_per_conditional": 2048, "gradient_infinity_tolerance": 1e-7, "backtracking_attempts": 32, "armijo": 0.0001, "curvature_relative_guard": 1e-12},
+  "initialization": "QR regression of F/a on all existing feature columns divided by a, including intercept; construction samples only. Residual scale standardization without target centering.",
+  "draws_per_batch": 16384,
+  "batches": 4,
+  "seeds": "Reuse saved natural-refit batch seeds for each arm; common seeds are not a guarantee of paired draws after rejection decisions differ.",
+  "work_caps": {"conditional_fits": 12, "fit_objective_rows": 110000000, "heldout_density_points": 49152, "generated_rows": 393216, "inverse_OCV_sample_iterations": 20447232, "predictive_sample_steps": 20447232, "decomposition_sample_steps": 20447232, "factor_rows": 393216, "fresh_posterior_steps": 0},
+  "checks": ["Density/Jacobian and scaled-support equivalence", "Every regression derivative including nonconstant intercept column", "Bounded synthetic physical-scale recovery", "Explicit failure status", "Baseline serialization/density/draw equivalence", "Unchanged unselected coefficients and2496B payload", "All13probes, source/construction disagreement, full covariance and mixed response moments"],
+  "decision": "Report all arms and failures; assess variance correction against construction and heldout, with all probe regressions and batch variability visible. No heldout optimization, no arbitrary scalar accuracy threshold.",
+  "adaptation_policy": "Preserve first results and hashes. Freeze each justified adaptation separately before evaluating; no silent tuning.",
+  "storage_B": {"retained_numeric": 2496, "complete_target_SRAM": null},
+  "limits": ["Offline builder only", "Only0.229/0.914seconds of source history", "Finite population agreement is not coverage", "No physical aging or causal update qualification"]
+}

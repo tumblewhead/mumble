@@ -1,0 +1,327 @@
+"""Small finite checks of the partitioned closure derivation; no fitting."""
+import argparse
+import ctypes as C
+from dataclasses import replace
+from fractions import Fraction
+import hashlib
+import json
+import math
+from pathlib import Path
+import platform
+import resource
+import shutil
+import subprocess
+import time
+import traceback
+import numpy as np
+from scipy.special import ndtr
+from experiments.minimal_health_kernels_001 import kernel
+from . import conditional as op
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[1]
+PROOF = ROOT/'proofs/partitioned_battery_001'
+
+
+def identity(p):
+    b = p.read_bytes()
+    return dict(bytes=len(b), sha256=hashlib.sha256(b).hexdigest())
+
+
+def write(p, value):
+    with p.open('x') as f:
+        json.dump(value, f, indent=2, allow_nan=False); f.write('\n')
+
+
+class Census:
+    def __init__(self):
+        self.checks = []
+
+    def check(self, name, passed, **details):
+        self.checks.append(dict(name=name, passed=bool(passed), **details))
+
+    def close(self, name, a, b, atol=2e-12, rtol=2e-11):
+        a, b = np.asarray(a), np.asarray(b)
+        error = np.abs(a-b)
+        self.check(name, np.all(np.isfinite(a)) and np.all(error <= atol+rtol*np.abs(b)),
+                   max_absolute_error=float(np.max(error, initial=0.)))
+
+    def reject(self, name, fun):
+        try:
+            fun()
+        except ValueError:
+            self.check(name, True)
+        else:
+            self.check(name, False)
+
+    def case(self, name, fun):
+        try:
+            return fun()
+        except Exception:
+            self.check(name+'/exception', False, traceback=traceback.format_exc())
+
+
+class Physical(C.Structure):
+    _fields_ = [('modes', C.c_int), ('R0', C.c_double), ('R', C.c_double*3),
+                ('tau', C.c_double*3), ('H', C.c_double), ('gp', C.c_double),
+                ('gm', C.c_double), ('Q', C.c_double)]
+
+
+class State(C.Structure):
+    _fields_ = [('z', C.c_double), ('v', C.c_double*3), ('h', C.c_double)]
+
+
+def c_replay(lib, x, rows, sigma):
+    p = Physical(3, x[6], (C.c_double*3)(*x[7:10]), (C.c_double*3)(*np.exp(x[:3])),
+                 x[10], math.exp(x[3]), math.exp(x[4]), math.exp(x[5]))
+    s = State(x[11], (C.c_double*3)(*x[12:15]), x[15])
+    out = C.c_double(); volts = []
+    for dt, current, _ in rows:
+        status = lib.scm_physical_step(C.byref(p), C.byref(s), None, dt, current, C.byref(out))
+        if status:
+            raise ValueError('C physical oracle failed: '+str(status))
+        volts.append(out.value)
+    volts = np.array(volts)
+    nll = math.fsum(.5*((v-y)/sigma)**2 for v, y in zip(volts, rows[:, 2]))
+    nll += len(rows)*math.log(sigma*math.sqrt(2*math.pi))
+    return volts, nll, np.r_[s.z, list(s.v), s.h]
+
+
+def conditional_case(c, lib, rng, index, plan):
+    n = plan['fixture']['records']; sigma = plan['fixture']['sigma_V']
+    rows = np.empty((n, 3))
+    rows[:, 0] = rng.uniform(.02, .9, n); rows[::11, 0] = 0.
+    rows[:, 1] = rng.uniform(-.25, .25, n); rows[::7, 1] = 0.
+    # Observations are fabricated independently of queried physical parameters.
+    rows[:, 2] = 3.6+.1*np.sin(np.arange(n)*.7)
+    eta = np.r_[rng.uniform(kernel.LOW[:5], kernel.HIGH[:5]), rng.uniform(.3, .85),
+                rng.uniform(kernel.LOW[5], kernel.HIGH[5])]
+    block = op.build(eta, rows, sigma)
+    a = op.build(eta, rows[:13], sigma)
+    b = op.build(a.next_eta, rows[13:31], sigma, 13)
+    d = op.build(b.next_eta, rows[31:], sigma, 31)
+    left = a.then(b).then(d); right = a.then(b.then(d))
+    name = f'conditional/{index}'
+    c.close(name+'/gram_merge', left.S.T@left.S, block.S.T@block.S, atol=2e-7)
+    c.close(name+'/gram_associativity', left.S.T@left.S, right.S.T@right.S, atol=2e-7)
+    c.close(name+'/boundary_map', left.T, block.T)
+    c.close(name+'/boundary_associativity', left.T, right.T)
+    c.close(name+'/charge_extrema', [left.charge_min, left.charge_max], [block.charge_min, block.charge_max])
+    c.close(name+'/next_eta', left.next_eta, block.next_eta)
+    c.close(name+'/elapsed', left.elapsed, np.sum(rows[:, 0]))
+    c.reject(name+'/overlap_reject', lambda:a.then(a))
+    bad_eta = b.eta.copy(); bad_eta[0] += .001
+    c.reject(name+'/changed_rate_reject', lambda:a.then(replace(b, eta=bad_eta)))
+    wrong_z = b.eta.copy(); wrong_z[5] += .001
+    c.reject(name+'/wrong_entering_SOC_reject', lambda:a.then(replace(b, eta=wrong_z)))
+    for j in range(plan['fixture']['amplitudes_per_node']):
+        x = kernel.MEAN.copy(); x[:5] = eta[:5]; x[11] = eta[5]; x[5] = eta[6]
+        x[6:10] = rng.uniform(0, 1, 4); x[10] = 0. if j == 0 else rng.uniform(0, .1)
+        x[12:15] = rng.uniform(-.08, .08, 3); x[15] = rng.uniform(-1, 1)
+        _, alpha = op.from_original(x)
+        volts, nll, endpoint = c_replay(lib, x, rows, sigma)
+        c.close(name+f'/amp{j}/C_likelihood', block.nll(alpha), nll, atol=2e-8)
+        c.close(name+f'/amp{j}/merged_likelihood', left.nll(alpha), nll, atol=2e-8)
+        c.close(name+f'/amp{j}/associated_likelihood', right.nll(alpha), nll, atol=2e-8)
+        last = block.T@alpha
+        c.close(name+f'/amp{j}/C_endpoint_z_v', np.r_[block.next_eta[5], last[5:8]], endpoint[:4])
+        # H=0 remains valid without dividing the transformed amplitude B by H.
+        c.close(name+f'/amp{j}/C_endpoint_Hh', last[8], x[10]*endpoint[4])
+        # Independent rowwise predictions through single-record conditional blocks.
+        state_alpha = alpha.copy(); local_eta = eta.copy(); predictions = []
+        for k, row in enumerate(rows):
+            one = op.build(local_eta, [row], sigma, k)
+            state_alpha = one.T@state_alpha; local_eta = one.next_eta
+            predictions.append(op.ocv(local_eta[5])-row[1]*state_alpha[0]
+                               -sum(state_alpha[5:8])-state_alpha[8])
+        c.close(name+f'/amp{j}/C_voltage_series', predictions, volts, rtol=0.)
+    return dict(node=index, records=n, elapsed_s=block.elapsed,
+                full_rate_and_amplitude_support_sampled=True,
+                logical_fixed_node_payload_B=600)
+
+
+def determinant(matrix):
+    m = [[Fraction(v) for v in row] for row in matrix]; value = Fraction(1)
+    for k in range(len(m)):
+        pivot = next((j for j in range(k, len(m)) if m[j][k]), None)
+        if pivot is None:
+            return Fraction(0)
+        if pivot != k:
+            m[k], m[pivot] = m[pivot], m[k]; value *= -1
+        p = m[k][k]; value *= p
+        for j in range(k+1, len(m)):
+            factor = m[j][k]/p
+            for i in range(k+1, len(m)):
+                m[j][i] -= factor*m[k][i]
+    return value
+
+
+def transforms(c):
+    for z in np.linspace(.1, .9, 9):
+        for d in [-.08, 0., .07]:
+            t = math.tanh(8*(z-.5))
+            c.close('OCV/mobius', op.mobius(t, d), math.tanh(8*(z-d-.5)))
+            d2 = -.03
+            c.close('OCV/composition', op.mobius(op.mobius(t, d), d2), op.mobius(t, d+d2))
+    for n in range(1, 9):
+        rc = [[Fraction(1, (j+2)**(i+1)) for j in range(n)] for i in range(n)]
+        # Shifted rational denominators evaluated at positive w. Their Cauchy
+        # matrix has the same distinct-pole independence mechanism.
+        ocv = [[Fraction(1, i+j+3) for j in range(n)] for i in range(n)]
+        c.check('span/RC_exact_rational_rank/'+str(n), determinant(rc) != 0)
+        c.check('span/OCV_exact_rational_rank/'+str(n), determinant(ocv) != 0)
+    # A legal endpoint is not enough to certify all-prefix SOC.
+    eta = np.r_[kernel.MEAN[:5], .001, math.log(.03)]
+    rows = np.array([[1., .25, 3.5], [1., -.25, 3.5]])
+    c.check('support/legal_final_SOC', eta[5]-np.sum(rows[:, 0]*rows[:, 1])/3600/math.exp(eta[6]) > 0)
+    c.reject('support/illegal_intermediate_SOC', lambda:op.build(eta, rows))
+    # Simple transformed measure identity: uniform original H,h on a restricted
+    # positive-H interval, solely a chart control, not a replacement prior.
+    points, weights = np.polynomial.legendre.leggauss(64)
+    H = .055+.045*points; hw = .045*weights
+    exact, missing = 0., 0.
+    for h, w in zip(H, hw):
+        Bweight = h*weights
+        exact += w*np.sum(Bweight/(.18*h))
+        missing += w*np.sum(Bweight/.18)
+    c.close('chart/Jacobian_normalization', exact, 1.)
+    c.check('chart/omitting_Jacobian_changes_measure', abs(exact-missing) > .5)
+
+
+def aging(c):
+    x = kernel.MEAN.copy(); x[5] = math.log(.07)
+    endpoints = []
+    for path in ((.068, .06), (.061, .06)):
+        state = kernel.initial_state(x, 'aging-proof-fixture')
+        for k, Q in enumerate(path):
+            row = kernel.Record('aging-proof-fixture', k, 1., .18, None, measurement_valid=False)
+            state, *_ = kernel.advance(state, row, [math.log(Q), x[6]])
+        expected = x[11]-sum(.18/3600/Q for Q in path)
+        c.close('aging/weighted_charge_path', state.fast[0], expected)
+        endpoints.append(state.fast[0])
+    c.check('aging/equal_final_Q_not_equal_SOC', abs(endpoints[0]-endpoints[1]) > 1e-5)
+    old_C, new_C, old_v, new_R, dt, current = 5., 4., .02, .11, .1, .1
+    e = math.exp(-dt/(new_R*new_C))
+    voltage_continuous = e*old_v+(1-e)*new_R*current
+    charge_continuous = e*(old_C/new_C)*old_v+(1-e)*new_R*current
+    c.close('aging/branch_charge_jump_conserves_Cv', new_C*(old_C/new_C)*old_v, old_C*old_v)
+    c.close('aging/convention_prediction_difference', charge_continuous-voltage_continuous,
+            e*old_v*(old_C/new_C-1))
+    c.check('aging/conventions_are_distinct', charge_continuous != voltage_continuous)
+    return dict(Q_path_final_SOC=endpoints, RC_v_after_voltage_continuity=voltage_continuous,
+                RC_v_after_charge_continuity=charge_continuous, selected_RC_convention=None)
+
+
+def tn(y, x, variance):
+    sd = math.sqrt(variance)
+    return np.exp(-.5*((np.asarray(y)-np.asarray(x))/sd)**2)/(math.sqrt(2*math.pi)*sd*(ndtr((1-np.asarray(x))/sd)-ndtr(-np.asarray(x)/sd)))
+
+
+def bounded_kernel(c, plan):
+    grid = np.linspace(0, 1, 41); prior = None; last = None
+    for order in plan['numerics']['quadrature_orders']:
+        nodes, weights = np.polynomial.legendre.leggauss(order); nodes = (nodes+1)/2; weights = weights/2
+        first = tn(nodes, .02, .04)
+        density = tn(grid[:, None], nodes[None, :], .04)@(weights*first)
+        at_nodes = tn(nodes[:, None], nodes[None, :], .04)@(weights*first)
+        c.close('bounded_kernel/normalization/'+str(order), weights@at_nodes, 1., atol=2e-10)
+        if prior is not None:
+            c.close('bounded_kernel/quadrature_refinement', density, prior, atol=2e-10)
+        prior = density; last = dict(density=density, mean=float(weights@(nodes*at_nodes)))
+    coarse = tn(grid, .02, .08)
+    difference = float(np.max(abs(last['density']-coarse)))
+    c.check('bounded_kernel/no_coarse_Gaussian_semigroup', difference > .01,
+            maximum_density_difference=difference)
+    return dict(two_step_mean=last['mean'], maximum_coarse_density_difference=difference,
+                meaning='Dimensionless bounded scalar fixture, not calibrated health diffusion')
+
+
+def error_budget(c):
+    theta = np.linspace(0, 1, 151); phases = np.arange(8)*.3
+    mu = 3.7+.005*np.sin(theta[:, None]*math.pi+phases)
+    observed = 3.7+.004*np.cos(phases)
+    residual = mu-observed
+    eps = np.full(8, 5e-6); delta = eps*np.cos(theta[:, None]*2+phases)
+    sigma = .001
+    L = .5*np.sum((residual/sigma)**2, axis=1)
+    approx = .5*np.sum(((residual+delta)/sigma)**2, axis=1)
+    exact_difference = np.sum((residual*delta+.5*delta**2)/sigma**2, axis=1)
+    c.close('error/exact_residual_identity', approx-L, exact_difference)
+    bound = op.nll_bound(np.max(abs(residual), axis=0), eps, sigma)
+    c.check('error/uniform_NLL_bound_on_fixture', np.max(abs(approx-L)) <= bound)
+    p = np.exp(-L+np.min(L))*(1+theta); p /= sum(p)
+    q = np.exp(-approx+np.min(approx))*(1+theta); q /= sum(q)
+    D = float(np.ptp(approx-L)); tv = float(np.sum(abs(p-q))*.5)
+    c.check('error/oscillation_bound', D <= 2*bound)
+    c.check('error/TV_bound', tv <= math.tanh(bound/2))
+    for label, g, width in [('SOC', theta, 1.), ('Q_Ah', .03+.07*theta, .07)]:
+        c.check('error/'+label+'_mean_bound', abs((p-q)@g) <= width*math.tanh(bound/2))
+    c.close('error/repetition_budget_not_reset', op.nll_bound(np.tile(np.max(abs(residual), axis=0), 10), np.tile(eps, 10), sigma), 10*bound)
+    U0, U1 = float(op.ocv(0)), float(op.ocv(1))
+    return dict(finite_grid_NLL_bound=bound, finite_grid_observed_oscillation=D,
+                finite_grid_TV=tv, supported_voltage_interval_V=[U0-1.1, U1+1.1],
+                physical_query_allocation=None, lifetime_certificate=False)
+
+
+def main():
+    parser = argparse.ArgumentParser(); parser.add_argument('destination', type=Path)
+    args = parser.parse_args(); dest = args.destination.resolve(); dest.mkdir(parents=True, exist_ok=False)
+    plan = json.loads((HERE/'plan.json').read_text())
+    sources = [*plan['sources'], 'include/scm_model.h',
+               'experiments/minimal_health_kernels_001/kernel.py',
+               'experiments/partitioned_battery_closure_001/plan.json',
+               'experiments/partitioned_battery_closure_001/conditional.py',
+               'experiments/partitioned_battery_closure_001/witnesses.py']
+    preserved = {}
+    for path in ['experiments/ten_year_history_001/verification.json', 'experiments/incremental_history_001/verification.json']:
+        preserved[path] = identity(ROOT/path)
+        preserved.update(json.loads((ROOT/path).read_text())['artifacts'])
+    identities = {p: identity(ROOT/p) for p in sources}
+    command = ['cc', '-std=c99', '-O2', '-Wall', '-Wextra', '-Werror', '-shared', '-fPIC',
+               '-Iinclude', 'src/scm_model.c', '-lm', '-o', str(dest/'reference.so')]
+    write(dest/'reservation.json', dict(source_identities=identities, preserved_artifacts=preserved,
+          git_revision=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+          branch=subprocess.check_output(['git', 'branch', '--show-current'], text=True).strip(),
+          python=platform.python_version(), numpy=np.__version__,
+          command=['python3', '-B', '-m', 'experiments.partitioned_battery_closure_001.witnesses', str(args.destination)],
+          C_build=command, status='reserved_before_execution'))
+    for p in sources:
+        target = dest/'source_snapshot'/p; target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT/p, target)
+    built = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+    write(dest/'build.json', dict(command=command, status=built.returncode,
+          stdout=built.stdout, stderr=built.stderr,
+          compiler=subprocess.check_output(['cc', '--version'], text=True).splitlines()[0]))
+    if built.returncode:
+        return 1
+    lib = C.CDLL(str(dest/'reference.so'))
+    lib.scm_physical_step.argtypes = [C.POINTER(Physical), C.POINTER(State), C.c_void_p,
+                                     C.c_double, C.c_double, C.POINTER(C.c_double)]
+    lib.scm_physical_step.restype = C.c_int
+    c = Census(); rng = np.random.default_rng(plan['fixture']['seed'])
+    start = time.process_time(); wall = time.perf_counter()
+    evidence = dict(nodes=[])
+    for index in range(plan['fixture']['conditional_nodes']):
+        evidence['nodes'].append(c.case('conditional/'+str(index), lambda index=index: conditional_case(c, lib, rng, index, plan)))
+    c.case('transforms', lambda:transforms(c))
+    evidence['aging'] = c.case('aging', lambda:aging(c))
+    evidence['bounded_kernel'] = c.case('bounded_kernel', lambda:bounded_kernel(c, plan))
+    evidence['error_budget'] = c.case('error_budget', lambda:error_budget(c))
+    for p, expected in {**preserved, **identities}.items():
+        c.check('preservation/'+p, identity(ROOT/p) == expected)
+    failed = [q for q in c.checks if not q['passed']]
+    result = dict(status='passed' if not failed else 'failed', checks=c.checks,
+                  checks_passed=len(c.checks)-len(failed), checks_failed=len(failed), evidence=evidence,
+                  cpu_seconds=time.process_time()-start, wall_seconds=time.perf_counter()-wall,
+                  maximum_RSS_B=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,
+                  battery_fits=0, particle_steps=0, production_solver_changed=False,
+                  aging_convention_selected=False, full_battery_closure=False, ten_year_certificate=False)
+    write(dest/'result.json', result)
+    print(json.dumps({k: v for k, v in result.items() if k not in ('checks', 'evidence')}, indent=2))
+    if failed:
+        print(json.dumps(failed, indent=2))
+    return bool(failed)
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

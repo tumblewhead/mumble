@@ -1,0 +1,49 @@
+{
+  "schema": "foster_c_cpu_receipt_v1",
+  "status": "first_three_CPU_optimizations_qualified_on_saved_controls",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "optimization/foster-c-cpu-001",
+  "changes": [
+    "reuse initial full model evaluation",
+    "gradient stop before Gram assembly",
+    "symmetric lower Gram assembly and Cholesky fit solve"
+  ],
+  "tests": 15,
+  "sanitizers": "Clang ASan/UBSan passed4097-record standalone control; leakcheckdisabled",
+  "preserved": {
+    "C_baseline_artifacts": 83,
+    "C_baseline_changed": [],
+    "original_Foster_artifacts": 68,
+    "original_Foster_changed": []
+  },
+  "benchmark": "experiments/foster_c_cpu_001/attempt001/summary.json",
+  "repetitions": 3,
+  "host_runtime_reduction_percent_range": [
+    14.808456348679977,
+    17.75317200875297
+  ],
+  "stages1_2_bit_identical": true,
+  "stage3_max_Q_percent": 2.2876020370444256e-05,
+  "stage3_max_SOC_pp": 7.430609472169891e-06,
+  "stage3_max_logZ_abs": 0.0013439343310892582,
+  "stage3_max_final_covariance_relative_Frobenius": 2.4016255180610804e-06,
+  "memory": {
+    "context_B": 22360,
+    "largest_M23_own_frame_B": 11440,
+    "context_plus_largest_own_frame_lower_bound_B": 33800,
+    "complete_SRAM_B": null,
+    "target_budget_B": 10240,
+    "probe_text_B": 26228,
+    "probe_data_B": 296,
+    "probe_bss_B": 25048
+  },
+  "target_cycles_measured": false,
+  "production_campaign_backend_changed": false,
+  "limits": [
+    "stationary model and local Gaussian coverage limitations unchanged",
+    "host timing not Cortex-M23 utilization",
+    "no heap, acquisition or interrupt deadline qualification",
+    "compiler frames exclude library stack"
+  ],
+  "next": "Specialize structural physical derivatives and reuse known thermal factors in a separate measured pass; obtain RTL cycle timing."
+}

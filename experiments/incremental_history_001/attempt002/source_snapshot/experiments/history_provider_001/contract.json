@@ -1,0 +1,132 @@
+{
+  "schema": "mumble_history_provider_v1",
+  "status": "registered_before_fabricated_qualification",
+  "scope": "Step1: common history-query boundary with adapters for unchanged exact C replay and legacy rolling history. Step2: bounded representation comparison harness. No new compressor, solver rewrite, full-history canonical replay or aging implementation.",
+  "objects": {
+    "EstimateView": {
+      "meaning": "A solver query result, never a new observation or replacement historical evidence.",
+      "fields": [
+        "original16 chart and query point",
+        "current physical endpoint and epoch",
+        "optimization stop/status",
+        "provider identity and owned source intervals",
+        "uncertainty status separate from GN"
+      ],
+      "not_sufficient": "Different histories can have the same optimum, or the same optimum and local curvature, but different likelihood away from it and different future implications."
+    },
+    "HistoryMessage": {
+      "meaning": "Authoritative conditional evidence and physical transport, independent of chosen optimizer.",
+      "fields": [
+        "source/model/calibration identity",
+        "contiguous observation and transition ownership",
+        "entry/exit state epochs",
+        "likelihood or explicitly declared profile/marginal semantics",
+        "parameter-dependent physical transport",
+        "domain/support and approximation status"
+      ],
+      "prior_ownership": "Adapters return likelihood only; original prior remains separate once. Solver outputs never appended as observations."
+    },
+    "QueryResult": {
+      "implemented_fields": [
+        "likelihood NLL",
+        "gradient in original16 coordinates",
+        "packed136-entry Gauss-Newton matrix",
+        "5current physical endpoint coordinates",
+        "represented and retained observation counts",
+        "status/provider kind/legacy flags"
+      ],
+      "not_supplied": [
+        "posterior covariance",
+        "exact Hessian",
+        "endpoint Jacobian",
+        "certified approximation bound",
+        "full posterior or aging marginal"
+      ]
+    }
+  },
+  "operators": {
+    "identity": "Zero observations, zero likelihood, identity physical transport.",
+    "append": "Inject one validated chronological observation and its input/state propagation once.",
+    "compose": "Only adjacent disjoint source intervals with matching model/calibration, state epochs and parameter chart may compose. Source mismatch, overlap, gap and contract mismatch reject.",
+    "deterministic_rule": "Phi_AB=Phi_B o Phi_A; L_AB=L_A+L_B o Phi_A. Parameters are included in the transport domain and carried unchanged in stationary mode.",
+    "domain_rule": "D_AB=D_A intersect Phi_A^(-1)(D_B). Candidate validity across the whole path cannot be inferred from a final endpoint alone.",
+    "query": "Read-only evaluation at a candidate. Query must not advance physical time, consume observations or mutate authoritative history.",
+    "rechart": "Allowed only with a valid coefficient conversion and declared error. Moving a query point does not change stored evidence.",
+    "aging": "General boundary kernels compose by integrating over the shared physical/health state for marginal semantics; min-plus composition defines a different profile objective. Deterministic algebra alone does not solve stochastic aging.",
+    "laws": [
+      "identity",
+      "associativity of exact mathematical ordered composition",
+      "source-once ownership",
+      "query immutability",
+      "physical continuity",
+      "noncommutativity under reordered input"
+    ],
+    "limits": "Exact associative function composition does not prove a finite representation closes. Ordinary float associativity is not exact. Existing compact-bank append does not implement a new generic block-compose operator."
+  },
+  "implementation": {
+    "C_boundary": "provider.h",
+    "exact_adapter": "provider.c calls unchanged desktop_eval and packs its GN matrix.",
+    "compact_adapter": "provider.c queries a desktop scratch copy of unchanged re_context using re_query(...,1,0). It never mutates the owned bank, state, counters or workspace.",
+    "construction": "Fabricated append and atomic commit-at-query controls call unchanged re_offer/re_admit/re_commit. The moving query schedule is a representation-only diagnostic, not causal optimization.",
+    "production_integration": "re_refine, its prior, step selection and commit policy remain unchanged. A generic callback has not yet been wired into the production optimizer; adapter tests precede that refactor.",
+    "memory": "This harness is desktop-only and deliberately uses extra scratch and stored observations. The8680B context is the old candidate, not proof that adapters or a future provider fit10240B."
+  },
+  "qualification": {
+    "records": 64,
+    "query_nodes": 33,
+    "nodes": "public mean and plus/minus0.1publicSD on each original coordinate, frozen before evaluations",
+    "stimuli": "Fabricated ADC12 voltage codes, positive/zero/negative currents and jittered actual intervals. No plant/fit truth or saved canonical inputs.",
+    "arms": [
+      "fixed public anchor,8record commits",
+      "fixed public anchor,16record commits",
+      "declared moving rate anchor,16record commits"
+    ],
+    "controls": [
+      "raw-block exact/compact costs gradients GN endpoints",
+      "exact adapter bitwise match to native desktop_eval",
+      "at-origin commit behavior",
+      "read-only query bytes and ownership before/after commit",
+      "invalid input/source/order/point and full-block atomicity",
+      "original16 gradient finite differences",
+      "legacy representation discrepancy census without asserting compaction fidelity"
+    ],
+    "numeric_parity": {
+      "rtol": 2e-11,
+      "atol": 2e-9,
+      "scope": "Finite host cross-path regression allowance, not a physical noise threshold or forward-error proof."
+    },
+    "finite_difference": {
+      "public_scaled_step": 0.00001,
+      "scaled_error": 0.00001,
+      "scope": "Finite derivative check, not confidence calibration."
+    },
+    "caps": {
+      "model_step_upper": 100000,
+      "canonical_replays": 0,
+      "optimizer_calls": 0,
+      "automatic_retries": 0
+    },
+    "next_gate": "Read measured representation discrepancies. A separate representation must demonstrate closure, original-model fidelity and complete bytes/work feasibility before the four-hour solver comparison; aging follows a specified transition/semantics."
+  },
+  "complex_analysis": {
+    "status": "candidate_representation_research_not_implemented",
+    "promising": "For the frozen linear RC part, Z_RC(s)=R0+sum_i R_i/(1+s*tau_i) describes stable real-negative poles and nonnegative RC residues. Rational/complex-domain tools may provide compact response bases and approximation diagnostics.",
+    "caution": "This transfer function is not the full historical likelihood. It omits state initialization, observation values, nonlinear OCV, switching/history-dependent hysteresis and aging. A nonconstant real-valued likelihood is not generally a holomorphic function of complexified parameters. Complex coordinates do not recover information discarded in a point estimate.",
+    "testable_question": "Can a fixed passive/stable rational or other response basis retain original-model transport and likelihood contrasts with fewer complete live bytes/work than the moving polynomial, across declared nuisance ranges and actual intervals?",
+    "criteria": [
+      "fixed representation selected before evidence is discarded",
+      "preserved chronological input forcing and boundary dependence",
+      "stability/passivity where implied by the model",
+      "real outputs and original support",
+      "centered likelihood and gradient agreement",
+      "memory/work and accumulation error",
+      "no new unobserved model dynamics hidden by rational fitting"
+    ],
+    "geometry": "Use distinguishability of physical response/evidence on declared candidate and continuation domains as the proposed geometric notion. Separate this from solver GN geometry and from Bayesian posterior uncertainty. No SCM/NAIA/D2 proof claim.",
+    "primary_reference": {
+      "title": "Nakatsukasa, Sète, Trefethen: The AAA algorithm for rational approximation",
+      "url": "https://arxiv.org/abs/1612.00337",
+      "supports": "Rational approximation on real/complex sampled domains; not a battery history-compression guarantee."
+    }
+  }
+}

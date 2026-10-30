@@ -1,5 +1,74 @@
 # Longer-prefix posterior scaling
 
+## Local follow-ups and overnight comparison
+
+The user-authorized local runs extend the original closed study below. All
+original artifacts remain unchanged:
+
+| Local run | Moves per stage | Outcome | Wall time |
+| --- | --- | --- | --- |
+| [32 records](local32_20261027_132917_446367/results/result.json) | 48 | All8 populations complete;4/8 numerical checks fail | 7.05 min |
+| [32 records](local32_moves96_20261027_140648_988888/results/result.json) | 96 | All8 numerical checks pass | 14.38 min |
+| [128 records](local128_moves96_20261027_212508_513488/results/result.json) | 96 | All8 populations complete;7/8 numerical checks fail | 88.42 min |
+| [128 records](local_overnight192_20261027_230259_090309/prefix_128/result.json) | 192 | All8 populations complete;6/8 numerical checks fail | 2.77 h |
+| [256 records](local_overnight192_20261027_230259_090309/prefix_256/result.json) | 192 | All8 populations complete;6/8 numerical checks fail; exploratory | 8.34 h |
+
+The [overnight review](overnight_review001/summary.json) recomputes levels and
+adequacy exactly from all16 saved populations and verifies the recorded source
+and input hashes. No model evaluations or truth scoring were performed. Neither
+worker hit its work cap. At128, more moves improve most numerical diagnostics;
+pooled capacity means at2048/4096 particles agree at59.877/59.949mAh, but replicate
+variability and other quantities remain unresolved. At256, the corresponding
+capacity means are58.296/60.895mAh and SOC tails also remain unstable.
+
+These are numerical integration tests on3.66/7.31seconds of observations. The
+earlier17.76minute SOC and33.01minute capacity point-accuracy crossings belong to
+a different, four-hour synthetic run. Weak excitation can leave a broad physical
+posterior; numerical integration must still represent that uncertainty
+consistently. No additional cost-doubling run follows automatically. The next
+recommended work is to diagnose sampling efficiency and plan practical
+minute/hour desktop inference while preserving this short-fixture comparator.
+
+The completed user-requested comparison ran **128 then256 records with192 moves**,
+four populations each at2048/4096 particles, unchanged model and numerical
+thresholds. This separates increased sampling work at128 from doubled input
+duration at256 (7.314 seconds at nominal35Hz). More observations also enlarge the
+latent problem, from272 to528 coordinates; they do not replace numerical draws.
+
+From the repository root, run locally:
+
+```bash
+python3 -u -B experiments/posterior_prefix_scaling_001/overnight.py
+```
+
+The launcher creates a unique `local_overnight192_*` directory, records its
+plan, source/input hashes and Git revision, and verifies exact frozen128
+observation bytes and physical-state continuity before launching inference.
+Only observations and inference configuration enter the separate worker
+processes. Plant truth stays in the generation directory.
+
+Both lengths run once, including256 if128 is numerically unresolved, as an
+explicit exploratory extension requested by the user. This does not promote a
+failed prefix through the original gated study. An execution error stops the
+batch. There are no automatic retries or threshold changes. Each population,
+each worker's log/result, and the final `summary.json` are saved separately.
+
+The stage limit stays96. Per-population path limits are80M; shared prospective
+model-step limits are64B for128 and128B for256, enough for the maximum admitted
+stages including bounded prior initialization. These are ceilings, not fixed
+work targets. This direct local runner does not enforce CPU, wall, RSS or output
+caps. Rough planning is about3hours for128 and several additional hours for256;
+the longer runtime is an extrapolation, not a measured promise.
+
+`--prepare-only` generates and verifies inputs without sampling; `--run PATH`
+executes that prepared directory once after rechecking source/input hashes.
+`test_overnight.py` tests frozen-generation compatibility, stream extension,
+inference separation, unchanged settings, cap sufficiency and dispatch behavior
+without posterior sampling. Physical aging calibration, coverage, compression
+density fidelity and target resources remain open.
+
+## Original closed study
+
 This study measures how the unchanged full-path posterior solver scales with
 record count. It uses nested prefixes of **8, 32 and 128 records** from one
 frozen synthetic stream at nominal 35 Hz, with the actual jittered intervals

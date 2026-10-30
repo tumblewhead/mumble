@@ -1,0 +1,14 @@
+{
+  "schema": "physical_rc_scale_repair_proposal_v1",
+  "status": "derived_proposal_not_implemented",
+  "evidence": ["experiments/backward_response_001/attempt001/result.json", "experiments/backward_response_001/rc_factor001/result.json"],
+  "problem": "Marginal response-amplitude variances are approximately preserved, but their mixed moments with pole-dependent gains inflate longer reversal variance.",
+  "change": "For carried RC coordinates F_j=a_j(tau_j)*v_j, replace constant scale in F_j with a_j(tau_j)*s_j. Fit the normalized bounded conditional in physical-v units using feature columns divided by a_j.",
+  "arms": ["Saved natural-hysteresis baseline", "Refit slowest carried RC conditional only", "Refit all three carried RC conditionals"],
+  "fixed": ["Both prefixes and original construction/heldout split", "Existing physical frame, mixture weights and all other coefficients", "Same full conditioning features, all16 uncertain variables and joint support", "All13prediction probes and explicit source disagreement", "Source/prior ownership exactly once"],
+  "required_controls": ["Density/Jacobian equivalence under F=a*v", "Correct scaled bounds and normalization", "Synthetic transformed physical density including tau-dependent variance", "Objective derivatives and explicit convergence failures", "Mixed moments E[rF] and E[r_i*r_j*F_i*F_j] with every covariance", "Heldout generalization and repeated draw variability", "Unchanged unaffected coefficients and payload size"],
+  "retained_numeric_B": 2496,
+  "complete_subsystem_SRAM_B": null,
+  "implementation_work_caps": "Freeze separately before new fitting; no caps or performance qualification are inferred from this derivation.",
+  "limits": ["Proposed physical scale law is not guaranteed to match posterior heteroscedasticity", "No mean correction calibrated to heldout populations", "No coverage, aging, causal history or Cortex-M23 claim"]
+}

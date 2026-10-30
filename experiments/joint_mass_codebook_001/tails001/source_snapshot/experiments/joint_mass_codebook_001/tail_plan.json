@@ -1,0 +1,12 @@
+{
+  "schema": "joint_mass_tail_followup_v1",
+  "primary_result": "attempt001/result.json",
+  "motivation": "Small TV and mean distortion do not by themselves qualify rare tails or variances; audit both before promoting a probability codebook.",
+  "adversary": "Two-state prior rare mass1e-12 and future likelihood [1e-10,1]; evaluate amplification without changing original codebooks.",
+  "additional_representation": "12-bit fixed-log-relative-square-root-amplitude codebook, span512 binary amplitude exponent units, zero reserved for impossible states; out-of-domain dynamic range rejects.",
+  "coordinate_reason": "Bounded quantization error in log amplitudes controls oscillation of the log density ratio, which is unchanged by a common likelihood and nonexpansive under a common Markov transition.",
+  "checks": ["variances and Q/SOC covariance", "joint-event probability", "rare-tail update", "empty reencoding idempotence", "local and accumulated log-oscillation bounds"],
+  "data_policy": "Reuse frozen dictionary and existing held-out inputs. This follow-up is designed after primary outcomes; it is a separate prospective audit, not retroactively preregistered primary evidence.",
+  "no_new_success_threshold": true,
+  "lifetime_limit": "An additive distortion ledger is not a uniform-in-time bound; fixed precision alone does not prove ten-year stability."
+}

@@ -1,0 +1,92 @@
+{
+  "schema": "mumble_partitioned_history_plan_v1",
+  "status": "frozen_before_candidate_evaluation",
+  "question": "Does a charge-coordinate OCV representation preserve the joint cost/gradient/GN better per byte than a uniform parameter basis?",
+  "scope": "Stationary known-tanh-OCV representation diagnostic. No optimizer, plant truth, aging, thermal learning or canonical trajectory.",
+  "sources": {
+    "manuscript": "/home/easy/Downloads/SCM_PEER_REVIEW_MANUSCRIPT_v1.2.pdf",
+    "manuscript_sha256": "f739744ae7756f4c22970298b06a123291ca53f32cd6fd609d923bbb20bf808a",
+    "sections": [
+      "4.1: eight targets share one candidate",
+      "6.2: dependency separator",
+      "9.7: future operations and finite storage",
+      "I.2: physically scaled orthogonality"
+    ],
+    "fixture": "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json",
+    "references": "experiments/history_basis_comparison_001/comparison002/reference_{64,4096}.json"
+  },
+  "arms": {
+    "dynamic_degrees": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "OCV_charge_degrees": [
+      4,
+      8,
+      12
+    ],
+    "rate_coordinate": "log_chebyshev",
+    "domains": [
+      "full_public",
+      "public_half_SD"
+    ],
+    "prefixes": [
+      64,
+      4096
+    ],
+    "candidate_prefix_cases": 48,
+    "uniform_baseline": "Same dynamic degree used also for total-degree z0/chi OCV as predecessor. Degrees2/3/4 compared to saved predecessor results; degree1 new low-memory control."
+  },
+  "charge_domain": {
+    "rule": "Use the same fixed interval for every candidate: [(public_z_upper-1)/chi_max,public_z_lower/chi_max], chi_max=exp(-public_logQ_lower). Every public z0/Q candidate remains physically legal throughout this charge interval.",
+    "no_future_fit": "Interval comes from public support, never data extrema, truth or observed errors.",
+    "failure": "Source prefix outside interval unavailable; no regridding, extrapolation, resetting or dropping history.",
+    "OCV": "At query interpolate the original U(z0-chi*C) at degree+1 fixed charge Chebyshev nodes. Keep original curve and all alpha/rate uncertainty."
+  },
+  "representation": {
+    "dynamic_row": "Fixed inherited response basis plus -observed_voltage as a constant feature; amplitudes remain original query functions, including H*h0.",
+    "blocks": [
+      "G=sum dynamic_row outer dynamic_row, full packed triangle",
+      "B=sum dynamic_row outer charge_Chebyshev_row",
+      "M_l=sum T_l(normalized_charge), l=0..2*OCV_degree"
+    ],
+    "reconstruction": "H_ij=(M_(i+j)+M_abs(i-j))/2; full feature Gram=[[G,B],[B^T,H]]. This reconstructs cost,gradient and GN of the represented residual exactly in real arithmetic.",
+    "cross_terms": "All dynamic-dynamic and dynamic-OCV mixed terms retained; no observation split into independent evidence.",
+    "controls": "Full QR over the same residual rows, direct row evaluation, partitioned/global-row summation; positive-semidefinite matrix controls on frozen cases.",
+    "not_selected": "Collapsing parameter-basis products can preserve cost but lose the residual-Jacobian Gram needed by unchanged rolling solver; do not count that cost-only saving as query-complete storage.",
+    "exact_OCV_control": "Desktop raw-history control: exact OCV at each actual charge combined with the same approximated dynamic response. Separates remaining rate-basis error from OCV representation error; not a bounded candidate."
+  },
+  "memory": {
+    "complete_target_B": 10240,
+    "original_nonbank_reserved_B": 3848,
+    "new_bank_metadata_estimate_domains_B": 400,
+    "boundary_B": "8*(6*(d+1)+2*(d+1)^2+1)",
+    "moment_numeric_B": "8*(M*(M+1)/2+M*K+2*K-1), M=6*(d+1)+2*(d+1)*(d+2)/2+2, K=OCV_degree+1",
+    "QR_numeric_B": "8*(M+K)*(M+K+1)/2",
+    "extra_candidate_query_scratch_B": "8*(3*(M+K)+3*K+10*(d+1)+16); additive conservative phase allocation, no unproved aliasing",
+    "limitations": "Includes planned solver workspace,raw queue,calibration,auxiliary,project stack,runtime/IRQ reservations from old ledger. New C solver integration,stack,latency and target execution unmeasured. Diagnostic Python full matrices excluded from deployment proposal; not claimed firmware-ready. Static basis tables may reside in program ROM, never historical evidence."
+  },
+  "checks": {
+    "numerical_rtol": 2e-10,
+    "numerical_atol": 2e-08,
+    "gradient_FD_scaled_tolerance": 1e-05,
+    "gradient_FD_epsilon_SD": 1e-05,
+    "finite_cost_gate_NLL": 0.1,
+    "criterion_scope": "Inherited descriptive finite-stencil contrast gate, not physical battery accuracy or replacement for canonical545 query gate.",
+    "numerical_failures": "Collect all finite mismatches without changing tolerances; hard source/domain/ownership violations stop. Preserve first result and any correction separately.",
+    "PSD": "Record smallest Gram eigenvalue relative to matrix norm; allowance128*eps*F*norm. No clipping/ridge.",
+    "work_cap_model_steps_upper": 10000000,
+    "cap_OCV_node_evaluations": 2000000,
+    "no_automatic_retry": true,
+    "cancellation_control": "At4096/dynamic_degree2/OCV_degree8/full_public, replace the observed constant row coefficient so represented residual at public mean cancels. Compare direct/QR/moment arithmetic; no new physical model or inference."
+  },
+  "outputs": [
+    "frozen source/input identities and source snapshots",
+    "cost/gradient/endpoint comparisons and GN numerical controls",
+    "full storage ledger for both layouts",
+    "per-arm unavailable/failure status",
+    "decision with failure severity and no scope promotion"
+  ]
+}

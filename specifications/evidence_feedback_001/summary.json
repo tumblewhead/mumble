@@ -1,0 +1,55 @@
+{
+  "schema": "mumble.evidence_feedback.receipt.v1",
+  "status": "contract_and_finite_protocol_controls_complete",
+  "branch": "design/evidence-feedback-contract-001",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "contract": "specifications/evidence_feedback_001/contract.json",
+  "model": "specifications/evidence_feedback_001/model.json",
+  "targeted_checks": 143,
+  "earlier_artifacts_preserved": 354,
+  "adopted_user_model": {
+    "states": 5,
+    "learned_parameters": 11,
+    "voltage_hysteresis_sign": "+Hh",
+    "normalized_throughput": "abs(I)*dt/(3600*Q_Ah)",
+    "gamma_units": "dimensionless"
+  },
+  "ownership": "EstimateView is reporting only; EvidenceToken owns a disjoint prior-free retirement interval; FeedbackMessage owns one root prior plus the retired prefix",
+  "semantics": "Marginal joint boundary kernel/message; no posterior-as-measurement, repeated prior, hidden aging rate, or test-rig input in compressor",
+  "OCV": "Nearly linear reference with explicit calibration/residual support; unknownslope/capacity/normalizedhysteresis scaling ambiguity is tested",
+  "storage": {
+    "scope": "Illustrative float64 Gaussian numeric payloads for16boundary coordinates, not nonlinear battery representation or completeSRAM",
+    "boundary_mean_and_packed_covariance_B": 1216,
+    "prior_free_two_boundary_Gaussian_operator_B": 4488,
+    "two_messages_plus_one_operator_B": 6920,
+    "excludes": [
+      "normalizer/status/identities",
+      "thermal/OCV/path variables",
+      "deterministic constraints if additional",
+      "representation bounds",
+      "raw window",
+      "solver",
+      "composition workspace",
+      "stack/runtime"
+    ],
+    "complete_SRAM_B": null
+  },
+  "implemented": "Pure generic transaction/ownership protocol plus separate analytic qualification backend",
+  "not_implemented": [
+    "Foster evidence-token producer",
+    "C rolling feedback adapter",
+    "nonlinear compressed representation",
+    "Arrhenius forward implementation",
+    "parameter-drift learner",
+    "completeSRAM layout",
+    "power-loss durability"
+  ],
+  "next": "Implement producer/export and feedback query adapter around a small stationary continuous-parameter linearOCV Foster control, against independent retained-data reference. Check prior/source-once ownership and joint uncertainty before aging trajectories or storage optimization.",
+  "production_changed": false,
+  "physical_coverage_validated": false,
+  "lifetime_qualified": false,
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m specifications.evidence_feedback_001.qualification",
+    "python3 -B -m specifications.evidence_feedback_001.closeout"
+  ]
+}

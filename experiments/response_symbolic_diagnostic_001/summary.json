@@ -1,0 +1,89 @@
+{
+  "schema": "mumble_symbolic_response_decision_v1",
+  "status": "symbolic_hysteresis_coordinate_mechanism_supported_remaining_RC_error_localized",
+  "branch": "experiments/response-symbolic-diagnostic-001",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "plan": "experiments/response_symbolic_diagnostic_001/plan.json",
+  "report": "experiments/response_symbolic_diagnostic_001/README.md",
+  "primary": "experiments/response_symbolic_diagnostic_001/attempt001/receipt.json",
+  "followup": "experiments/response_symbolic_diagnostic_001/followup001/receipt.json",
+  "representative_results": [
+    {
+      "records": 64,
+      "queries": 97,
+      "baseline_error_NLL": 0.1952968737535522,
+      "physical_hysteresis_error_NLL": 0.19126123719780597,
+      "improvement_ratio": 1.021100127840188,
+      "baseline_hysteresis_witness_percent": 2.066414286788941,
+      "new_slowest_RC_free_witness_percent": 82.17450941099555,
+      "QR_planned_subsystem_bytes": 30336
+    },
+    {
+      "records": 4096,
+      "queries": 97,
+      "baseline_error_NLL": 103.49412402228597,
+      "physical_hysteresis_error_NLL": 4.70751177015795,
+      "improvement_ratio": 21.984889061427342,
+      "baseline_hysteresis_witness_percent": 97.36561824250066,
+      "new_slowest_RC_free_witness_percent": 92.63701362129088,
+      "QR_planned_subsystem_bytes": 30336
+    }
+  ],
+  "candidate_prefix_cases": 28,
+  "primary_checks": 1217,
+  "primary_numerical_mismatches": [
+    {
+      "case": "4096/full_public/physical_RC",
+      "label": "full square-root GN",
+      "max_gap": 0.00016880035400390625,
+      "max_allowance_ratio": 1.0920934425494773
+    },
+    {
+      "case": "4096/full_public/both_physical",
+      "label": "full square-root GN",
+      "max_gap": 0.00017070770263671875,
+      "max_allowance_ratio": 1.0920934425494773
+    },
+    {
+      "case": "4096/full_public/tensor_both_physical",
+      "label": "full square-root GN",
+      "max_gap": 0.00017070770263671875,
+      "max_allowance_ratio": 1.0920934425494773
+    }
+  ],
+  "aggregate_model_steps_upper": 8715328,
+  "optimizer_calls": 0,
+  "truth_reads": 0,
+  "solver_modified": false,
+  "aging_added": false,
+  "deployment_qualified": false,
+  "decision": {
+    "retain": "Physical hysteresis rate coordinates; same original log-parameter prior/query chart, same feature count and all joint couplings.",
+    "reject_for_next_step": "Blanket physical inverse-time-constant RC coordinate change; it worsens these frozen comparisons. Tensor expansion adds memory with little benefit after the hysteresis change.",
+    "next": "Derive separate free-RC history via source-time Laplace kernels with observation/OCV/forced-response cross weights. Preserve cost,gradient,GN and source chronology. Endpoint exponential alone is not retained-evidence repair.",
+    "fidelity_policy": "Historical0.1NLL is a descriptive engineering marker; this study diagnoses mechanisms and does not impose it as a universal physical or task-accuracy gate.",
+    "limits": "Finite fabricated prefixes, not fitted battery accuracy, posterior coverage, lifetime stability or M23 qualification; no promised next improvement factor."
+  },
+  "evidence_identities": {
+    "experiments/response_symbolic_diagnostic_001/plan.json": {
+      "bytes": 5353,
+      "sha256": "777736d6177ce95105473574d9e9c3e49574affb4d54abd547704046d0e94545"
+    },
+    "experiments/response_symbolic_diagnostic_001/attempt001/receipt.json": {
+      "bytes": 305425,
+      "sha256": "c054a7d5e562916fc2db579201d37a81351dd6b734a6a5d8d38d52bd3af466ee"
+    },
+    "experiments/response_symbolic_diagnostic_001/followup_plan.json": {
+      "bytes": 1099,
+      "sha256": "d03363dc9612a291315e495dde68bda3a33361f3ffabf95e5a44f8f37f00ebd8"
+    },
+    "experiments/response_symbolic_diagnostic_001/followup001/receipt.json": {
+      "bytes": 83666,
+      "sha256": "104f157fa16f3927d50d50e77fe1b6658443e4aadfd4bb0b9349f6f11d356353"
+    },
+    "experiments/partitioned_history_001/summary.json": {
+      "bytes": 3923,
+      "sha256": "fef811f816c46e44c46b268a6ea0789fc6421d1a4da5b06c5b07b86ec3400d87"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "partition_analytic_controls_v1",
+  "new_model_steps": 0,
+  "OCV_error_formula": "0.08*(8*chi_max)^K*L1(P_K)*charge_halfwidth^K*2^(1-K)/K!, K=q+1; P_0(t)=t; P_(n+1)=(1-t^2)P_n_prime(t).",
+  "scope": "Exact-arithmetic interpolation bound for original tanh curve over declared public charge/query domains. Numeric bounds evaluated in binary64 without directed rounding; not machine-certified upper endpoints.",
+  "bounds": [
+    {
+      "domain": "full_public",
+      "degree": 4,
+      "tanh_derivative_polynomial_L1": 512,
+      "OCV_error_bound_V": 0.02133333333333335
+    },
+    {
+      "domain": "full_public",
+      "degree": 8,
+      "tanh_derivative_polynomial_L1": 4063232,
+      "OCV_error_bound_V": 0.0034991181657848375
+    },
+    {
+      "domain": "full_public",
+      "degree": 12,
+      "tanh_derivative_polynomial_L1": 183240753152,
+      "OCV_error_bound_V": 0.000574740485851598
+    },
+    {
+      "domain": "public_half_SD",
+      "degree": 4,
+      "tanh_derivative_polynomial_L1": 512,
+      "OCV_error_bound_V": 0.001589512587087863
+    },
+    {
+      "domain": "public_half_SD",
+      "degree": 8,
+      "tanh_derivative_polynomial_L1": 4063232,
+      "OCV_error_bound_V": 3.265337400836269e-05
+    },
+    {
+      "domain": "public_half_SD",
+      "degree": 12,
+      "tanh_derivative_polynomial_L1": 183240753152,
+      "OCV_error_bound_V": 6.717465524962427e-07
+    }
+  ],
+  "GN_counterexample": {
+    "residual_A": [
+      "x^2-1",
+      "2*x"
+    ],
+    "residual_B": [
+      "x^2+1",
+      "0"
+    ],
+    "same_twice_cost": "(x^2+1)^2",
+    "GN_A": "4*x^2+4",
+    "GN_B": "4*x^2",
+    "meaning": "Cost polynomial alone does not generally determine residual-Jacobian GN; do not collapse parameter-feature products without extra proof. This is an algebraic counterexample, not a pair of fabricated physical batteries."
+  },
+  "integer_counterexample_checks": 10
+}

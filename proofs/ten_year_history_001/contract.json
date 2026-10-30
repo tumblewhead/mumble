@@ -1,0 +1,55 @@
+{
+  "schema": "ten_year_history_foundation_v1",
+  "status": "mathematical_foundation_conditional_lemmas_not_battery_lifetime_certificate",
+  "purpose": "Support the rolling estimator with bounded-storage retained evidence over an approximately ten-year horizon; replace candidate thrashing by explicit error obligations and a proof dependency graph.",
+  "user_decisions": {
+    "horizon_years": 10,
+    "days_per_year_for_planning": 365.25,
+    "nominal_stream_Hz": 35,
+    "nominal_records_over_horizon": 11045160000,
+    "C_meaning": "User confirmed RC-branch capacitances C_i=tau_i/R_i, distinct from Q",
+    "aging_trends": "R increases, Q and RC-branch C decrease as intended aging directions; not yet certified monotone laws for fitted effective quantities",
+    "proposed_relative_envelope": [0.5, 1.5],
+    "likely_relative_envelope_for_sensitivity_only": [0.7, 1.3],
+    "envelope_status": "Approximate design assumptions, not empirical calibration, hard truncation or probability coverage",
+    "history_medium": "SRAM only",
+    "complete_subsystem_target_B": 10240
+  },
+  "inherited_targets": "plans/estimation_targets_001.json: capacity5percent hard/preferred0.5percent relative point error; SOC10pp hard/preferred0.5pp. Not estimator certificates; unresolved/weak-stimulus periods remain explicit.",
+  "state_contract": {
+    "fast": ["SOC", "v1", "v2", "v3", "hysteresis"],
+    "aging_candidates": ["Q", "R0", "R1", "R2", "R3", "C1", "C2", "C3"],
+    "remaining_uncertain": ["gamma_plus", "gamma_minus", "H"],
+    "equivalence": "Replace tau_i by R_i*C_i; do not estimate R,C,tau as three independent quantities for one mode.",
+    "positive_reference_requirement": "Relative R/C aging needs positive reference branch parameters with carried uncertainty, not truth-derived point anchors. Existing support touching R=0 cannot silently become a certified positive lower bound.",
+    "baseline_uncertainty": "Relative envelopes are around declared reference quantities; their uncertainty and relationship to current health must be retained or bounded.",
+    "existing_model_gap": "Current minimal health model evolves Q,R0 only. RC aging, its state-continuity convention and transition uncertainty are not yet implemented or calibrated.",
+    "no_silent_physics_change": "Do not infer v-continuity versus C*v charge continuity from tau=R*C alone. An aging state-transfer convention is a separate physical assumption. Preserve actual charge, intervals and chronology."
+  },
+  "proof_objects": {
+    "exact_model_filter": "pi_k = normalize(L_k * (pi_(k-1) K_k)); augmented state includes all variables needed to make the admitted model Markov",
+    "token": "Prior-free incremental evidence plus chronological transition/context, unique source ownership and model/noise version; a rolling posterior is not automatically such a token",
+    "gallery": "Finite dictionary of conditional stimulus/response operators or likelihood basis functions, with accumulated coefficients and an aging-aware boundary belief; not a histogram of posterior point estimates",
+    "core_error": "Distance between decoded compressed belief and exact admitted-model belief; physical model discrepancy and finite-reference error are separate",
+    "strong_audit_distance": "D(p,q)=essential oscillation of log(dp/dq), finite only under common support and bounded likelihood ratio",
+    "query_distance": "Physical SOC/Q/response and uncertainty functionals, with declared domain and closure/stability obligations; marginal moment matches alone are insufficient"
+  },
+  "ten_year_theorem_obligations": [
+    "Specify useful query-error budgets separately from point targets and confidence/coverage",
+    "Specify admitted stimuli, weak-excitation status and maximum informative-gap or drift uncertainty",
+    "Specify a calibrated aging kernel or defensible set-valued transition; envelopes alone are insufficient",
+    "Prove token ownership and exact/proved-approximate chronological operator composition",
+    "Prove a finite gallery/message closure or a uniform approximation defect bound over reachable states",
+    "Prove lifetime error budget under no contraction, or actual block contraction in the chosen metric; do not invent a forgetting factor",
+    "Prove arithmetic range/error and maximum event/update rate for the ten-year horizon;35Hz is nominal only",
+    "Account for complete SRAM and work, not just retained numeric payload"
+  ],
+  "nonclaims": [
+    "Recent8/32record comparisons prove error grows with calendar time",
+    "Bounded parameter values imply useful tracking accuracy or filter contraction",
+    "A finite gallery of similar inputs is an exact sufficient statistic for aging histories",
+    "Independent repeated noise observations can be deleted without preserving their information weight",
+    "Written conditional lemmas or finite controls qualify the nonlinear battery estimator for ten years",
+    "Conventional probability/operator lemmas prove SCM,NAIA,D2 or D2E"
+  ]
+}

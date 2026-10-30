@@ -1,0 +1,138 @@
+{
+  "adaptation": "User-requested duration doubling and 192 moves; separate from original closed study",
+  "base_revision": "f1e270a69cd2aa477bcae18f617ea8cb4e6cb533",
+  "caps": {
+    "CPU_s": null,
+    "RSS_bytes": null,
+    "automatic_retries": 0,
+    "output_bytes": null,
+    "prefix_conservative_steps": {
+      "128": 64000000000,
+      "256": 128000000000
+    },
+    "wall_s": null
+  },
+  "cost_probes": {
+    "prefixes": [
+      8,
+      32,
+      128
+    ],
+    "prior_paths": 256,
+    "purpose": "Prior/density arithmetic timing and path-array dimensions only; not posterior adequacy or full-runtime prediction",
+    "repeated_density_batches": 3,
+    "seed_rule": "900000+prefix",
+    "total_conservative_steps_cap": 1000000
+  },
+  "inference": {
+    "ess_fraction": 0.8,
+    "initialization": "Exact original bounded prior draws; no warm posterior, plant values or fitted centers",
+    "max_paths_per_population": 80000000,
+    "max_stages": 96,
+    "mode_diagnostics": "Initial low-capacity component responsibility mean and replicate MCSE; no requirement to force both modes if data disfavor one",
+    "mutations": 192,
+    "no_uncertainty_substitution": true,
+    "particle_levels": [
+      2048,
+      4096
+    ],
+    "proposal_factor": 0.5,
+    "query": "Conditioned current marginal only; separate final-voltage prediction not rerun at each length",
+    "replicates_per_level": 4,
+    "seed_rule": "800000+1000*prefix+100*level+replicate; level0/1, replicate1..4",
+    "thresholds": "Unchanged smc.assess on all20 reported coordinates/functions, with original posterior.SCALES"
+  },
+  "input_fixture": {
+    "current_A_repeated": [
+      0.04,
+      0.04,
+      0.04,
+      0.04,
+      0,
+      0,
+      0,
+      0,
+      -0.03,
+      -0.03,
+      -0.03,
+      -0.03,
+      0.08,
+      0.08,
+      0.08,
+      0.08
+    ],
+    "dt_multipliers_repeated": [
+      1,
+      1.05,
+      0.95,
+      1.1,
+      0.9,
+      1,
+      1.02,
+      0.98
+    ],
+    "generation": "Same seeded scalar generator, extended chronologically to256; verify frozen128 prefix before inference",
+    "generation_seed": 71001,
+    "health_rate_order": [
+      "a_Q_day",
+      "a_Q_Ah",
+      "a_R_day",
+      "a_R_Ah",
+      "s_Q_day",
+      "s_Q_Ah",
+      "s_R_day",
+      "s_R_Ah"
+    ],
+    "health_rates": [
+      -0.001,
+      -0.01,
+      0.0001,
+      0.001,
+      0.2,
+      0.5,
+      0.1,
+      0.3
+    ],
+    "observation_representation": "float64 fabricated voltage/current; no ADC12 hardware claim",
+    "plant_initial_x": [
+      -2.953102351578809,
+      -0.8511879540469427,
+      1.9986414246894848,
+      5.0106352940962555,
+      5.703782474656201,
+      -2.7333680090865,
+      0.12,
+      0.11,
+      0.09,
+      0.12,
+      0.024,
+      0.7,
+      0.01,
+      -0.005,
+      0.008,
+      0.1
+    ],
+    "rate_scope": "Inherited artificial conditioning profile; no physical aging calibration",
+    "source_id": "posterior_prefix_scaling_001_fabricated",
+    "temperature_C": 25,
+    "truth_boundary": "Generator owns plant initial state and latent path. Solver workers read only one observation-prefix file and inference.json, never this plant configuration or latent path. No truth scoring in this scaling study.",
+    "voltage_noise_sd_V": 0.001
+  },
+  "interpretation_limits": [
+    "At nominal35Hz even128records is only about3.66seconds, not physical long-term aging",
+    "Finite Monte Carlo checks are not convergence proofs or coverage validation",
+    "No0.1NLL message-density fidelity claim",
+    "No M23 runtime/memory qualification; deployment still SRAM-only within complete10240B"
+  ],
+  "nominal_Hz": 35,
+  "prefixes": [
+    128,
+    256
+  ],
+  "progression": "Run both prefixes once, including256 if128 is numerically unresolved. Execution failure stops dispatch. No automatic retries or threshold changes. A256 result after failed128 is exploratory, not gated promotion.",
+  "purpose": "Measure complete-path posterior numerical adequacy and work/memory growth before longer aging trajectories or compression comparisons",
+  "qualification": "Targeted fabricated guard boundary/atomicity, shared accounting across populations, inherited-arithmetic parity, record order and deterministic fixture-prefix checks before experiment",
+  "resource_accounting": "Direct workers enforce shared prospective model-step and per-population path/stage caps. CPU, wall, RSS and output caps are not enforced by this local runner.",
+  "schema": "mumble_posterior_prefix_scaling_v1",
+  "solver": "experiments/joint_health_posterior_001; unchanged arithmetic/configuration and finite adequacy thresholds"
+}

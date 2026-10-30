@@ -1,0 +1,145 @@
+{
+  "schema": "monotone_codebook_summary_v1",
+  "status": "recenterable_square_root_monotone_curve_support_and_codecs_finitely_qualified",
+  "report": "experiments/monotone_codebook_001/README.md",
+  "derivation": "experiments/monotone_codebook_001/derivation.md",
+  "result": "experiments/monotone_codebook_001/attempt001/result.json",
+  "packing": "experiments/monotone_codebook_001/packing001/result.json",
+  "verification": "experiments/monotone_codebook_001/verification.json",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "experiments/monotone-spline-codebook-001",
+  "identity_scope": "Uncommitted source hashes and snapshots, not revision alone",
+  "user_model_direction": {
+    "monotone_reference_condition_aging": true,
+    "R0_Ri": "nondecreasing",
+    "Q_Ci": "nonincreasing",
+    "tau": "no monotonicity implied",
+    "temperature_representations": [
+      "measured T(t)",
+      "reversible parameter response g(T)"
+    ],
+    "physical_calibration": false
+  },
+  "finite_checks": 1118,
+  "main_checks": 1082,
+  "packing_checks": 36,
+  "principal_results": [
+    "Upper-square-root re-centering updates the last column and preserves likelihood/gradient/normalization/cross terms in real arithmetic",
+    "Quantized chart centers with compensated residual factors preserve the target; physical curve quantization has a separate bound",
+    "Ordered coefficients and common-grid rounding preserve monotonicity for degree-one splines and cubic Bernstein segments",
+    "Reference-anchored thermal functions separate reversible response from latent aging but do not remove age-temperature confounding",
+    "60 coefficient values pack into90B at12bits; joint uncertainty remains the main unresolved storage obligation"
+  ],
+  "curve_quantization_controls": [
+    {
+      "family": "linear",
+      "bits": 8,
+      "age_curve_bound": 0.00196078431372549,
+      "temperature_path_bound_C": 0.1568627450980392,
+      "thermal_response_bound": 0.002352941176470588,
+      "composed_bound": 0.004784313725490196,
+      "observed_composed_error": 0.001857450980392028,
+      "eight_health_age_values_B": 32,
+      "temperature_values_B": 4,
+      "eight_health_thermal_values_B": 24
+    },
+    {
+      "family": "linear",
+      "bits": 12,
+      "age_curve_bound": 0.0001221001221001221,
+      "temperature_path_bound_C": 0.009768009768009768,
+      "thermal_response_bound": 0.00014652014652014652,
+      "composed_bound": 0.00029792429792429795,
+      "observed_composed_error": 9.645909645916717e-05,
+      "eight_health_age_values_B": 48,
+      "temperature_values_B": 6,
+      "eight_health_thermal_values_B": 40
+    },
+    {
+      "family": "linear",
+      "bits": 16,
+      "age_curve_bound": 7.629510948348211e-06,
+      "temperature_path_bound_C": 0.0006103608758678569,
+      "thermal_response_bound": 9.155413138017853e-06,
+      "composed_bound": 1.8616006713969634e-05,
+      "observed_composed_error": 6.027313649292765e-06,
+      "eight_health_age_values_B": 64,
+      "temperature_values_B": 8,
+      "eight_health_thermal_values_B": 48
+    },
+    {
+      "family": "bernstein",
+      "bits": 8,
+      "age_curve_bound": 0.00196078431372549,
+      "temperature_path_bound_C": 0.1568627450980392,
+      "thermal_response_bound": 0.002352941176470588,
+      "composed_bound": 0.004784313725490196,
+      "observed_composed_error": 0.0015509297247147114,
+      "eight_health_age_values_B": 32,
+      "temperature_values_B": 4,
+      "eight_health_thermal_values_B": 24
+    },
+    {
+      "family": "bernstein",
+      "bits": 12,
+      "age_curve_bound": 0.0001221001221001221,
+      "temperature_path_bound_C": 0.009768009768009768,
+      "thermal_response_bound": 0.00014652014652014652,
+      "composed_bound": 0.00029792429792429795,
+      "observed_composed_error": 9.646652451755777e-05,
+      "eight_health_age_values_B": 48,
+      "temperature_values_B": 6,
+      "eight_health_thermal_values_B": 40
+    },
+    {
+      "family": "bernstein",
+      "bits": 16,
+      "age_curve_bound": 7.629510948348211e-06,
+      "temperature_path_bound_C": 0.0006103608758678569,
+      "thermal_response_bound": 9.155413138017853e-06,
+      "composed_bound": 1.8616006713969634e-05,
+      "observed_composed_error": 6.027307560163564e-06,
+      "eight_health_age_values_B": 64,
+      "temperature_values_B": 8,
+      "eight_health_thermal_values_B": 48
+    }
+  ],
+  "battery_control": {
+    "records": 128,
+    "queries": 32,
+    "maximum_NLL_difference": 1.210719347000122e-08,
+    "scope": "Original stationary fixed-eta amplitude likelihood; no temperature or aging model modification"
+  },
+  "storage_B": {
+    "eight_health_age_coefficients_12bit": 48,
+    "temperature_history_coefficients_12bit": 6,
+    "eight_health_thermal_coefficients_contiguous_12bit": 36,
+    "combined_contiguous_12bit": 90,
+    "combined_per_curve_padded_12bit": 94,
+    "combined_float64_coefficients": 480,
+    "scalar_p8_packed_square_root": 360,
+    "scalar_p8_center_12bit": 12,
+    "scalar_p8_factor_plus_center": 372,
+    "dense_p64_augmented_factor": 17160,
+    "complete_subsystem": null
+  },
+  "next": "Structured joint square-root layout from physical dependencies, preserving age/thermal/residual coupling and curve/nonlinear-response remainders before battery aging integration",
+  "resources": {
+    "cpu_seconds": 0.600067256,
+    "wall_seconds": 0.6069375299848616,
+    "maximum_RSS_B": 108351488,
+    "scope": "Main finite controls including plots, excluding compilation; not estimator throughput"
+  },
+  "monotone_trajectory_support_implemented": true,
+  "monotone_normalized_health_kernel_implemented": false,
+  "temperature_representations_implemented": true,
+  "temperature_calibrated": false,
+  "full_support_aware_posterior_qualified": false,
+  "production_solver_changed": false,
+  "old_zero_order_nonlinear_field_repaired": false,
+  "curve_model_remainder_bound": null,
+  "numerical_lifetime_bound": null,
+  "coverage_validated": false,
+  "ten_year_certificate": false,
+  "deployment_qualified": false
+}

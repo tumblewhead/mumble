@@ -1,0 +1,55 @@
+{
+  "schema": "foster_campaign_c_plan_v1",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "scope": [
+    "default optimized C backend with explicit --backend python fallback",
+    "--sample-rate-hz integer default35; actual constant intervals, schedules/timestamps in seconds",
+    "unchanged telemetry, plots, independent --jobs workers and arm failure continuation"
+  ],
+  "archive_mapping": {
+    "experiments/foster_campaign_001/run.py": {
+      "archive": "experiments/foster_campaign_c_001/baseline/experiments/foster_campaign_001/run.py",
+      "sha256": "b8316a7e0bba3347f39ac8b44da3df174ac518fe5ae0ea50e1766e55de42d70d"
+    },
+    "experiments/foster_campaign_001/README.md": {
+      "archive": "experiments/foster_campaign_c_001/baseline/experiments/foster_campaign_001/README.md",
+      "sha256": "3128b5f6e5ef266c58cfb89a68575188e7b3c0e550421abd4d1e35df47dd3200"
+    },
+    "experiments/foster_campaign_001/stimulus.py": {
+      "archive": "experiments/foster_campaign_c_001/baseline/experiments/foster_campaign_001/stimulus.py",
+      "sha256": "0ba264ea68186b9a84fa6f56b9a4391e3e1c04a4137909c8f5cdd76ba014f3ff"
+    },
+    "experiments/foster_campaign_001/charger.py": {
+      "archive": "experiments/foster_campaign_c_001/baseline/experiments/foster_campaign_001/charger.py",
+      "sha256": "457bc341c776fb129bc2880d17a11be8f0f687a447359e0693459e3e1b9de53c"
+    },
+    "experiments/foster_campaign_001/telemetry.py": {
+      "archive": "experiments/foster_campaign_c_001/baseline/experiments/foster_campaign_001/telemetry.py",
+      "sha256": "90711870e6ac0b1bff324f31284a99e4c90a0ddbc6f9c689e909c6883410827d"
+    },
+    "experiments/foster_campaign_001/plot.py": {
+      "archive": "experiments/foster_campaign_c_001/baseline/experiments/foster_campaign_001/plot.py",
+      "sha256": "5e7944a066db3ca3d2be2fc344d93e5f4c9db31108590ee39514a87982e503fe"
+    },
+    "experiments/foster_campaign_001/test_campaign.py": {
+      "archive": "experiments/foster_campaign_c_001/baseline/experiments/foster_campaign_001/test_campaign.py",
+      "sha256": "3db403eef6f8ddedf294d5054855e9b0c0902f6783cbec3b7cbd14934adde01a"
+    }
+  },
+  "clock": "lcm(1050,sample_rate_hz), bounded to signed32-bit clock; retain exact integer sample periods and original35Hz clock",
+  "math": "immutable optimized C code except clock constant generalized by campaign build; Python original fit/history with rate-specific clock-binding adapter",
+  "tests": [
+    "default35Hz archived input generation byte parity",
+    "backend telemetry and full-message comparisons",
+    "sample rate10/35/70/100 duration, clock, charger and plots",
+    "serial/parallel C equality and failure controls",
+    "C adapter error ownership and partial-block ingestion",
+    "short real campaigns, end-to-end timing and plots"
+  ],
+  "limits": [
+    "fixed16-record fitting window changes duration with sample rate",
+    "noise_v remains per-sample SD; no spectral-density rescaling",
+    "plant/plots/CSV remain Python; total speedup smaller than C-kernel speedup",
+    "C in-process ownership is not distributed SHA transaction protocol"
+  ]
+}

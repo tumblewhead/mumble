@@ -1,0 +1,113 @@
+{
+  "status": "implemented_and_single_four_hour_cycle_completed",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "command": [
+    "/home/easy/proj/mumble/experiments/foster_campaign_001/run.py",
+    "--hours",
+    "4",
+    "--cells",
+    "A",
+    "--loads",
+    "charge-discharge",
+    "--charge-c",
+    "2",
+    "1",
+    "1.5",
+    "--discharge-c",
+    "0.2",
+    "0.45",
+    "0.7",
+    "--noise-v",
+    "0.004",
+    "--out",
+    "experiments/foster_cccv_stimulus_001/cycle001"
+  ],
+  "tests": {
+    "controller_campaign_process": 22,
+    "parent_solver": 55,
+    "status": "passed",
+    "serial_parallel_cccv_byte_parity": true
+  },
+  "preserved_parent_artifacts": 68,
+  "original_run_manifest_verified": true,
+  "settings": {
+    "nominal_capacity_ah": 0.06,
+    "charge_c": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "discharge_c": [
+      0.2,
+      0.45,
+      0.7
+    ],
+    "charge_step_s": 900.0,
+    "discharge_step_s": 600.0,
+    "cv_voltage": 4.06,
+    "discharge_cutoff_v": 3.18,
+    "cycle_rest_s": 300.0,
+    "taper_end_c": 0.05,
+    "taper_hold_s": 30.0,
+    "cv_gain": 0.5
+  },
+  "records_per_arm": 504000,
+  "tokens_per_arm": 31500,
+  "physical_state_reset": false,
+  "controller_reads_truth": false,
+  "stimulus_transitions": [
+    {
+      "reason": "measured voltage reached CV setpoint",
+      "time_s": 473.1714285714286,
+      "true_SOC_scored_afterward": 0.8910606953973118
+    },
+    {
+      "reason": "CV taper current dwell completed",
+      "time_s": 752.8857142857142,
+      "true_SOC_scored_afterward": 0.9335063938205831
+    },
+    {
+      "reason": "measured voltage reached discharge cutoff",
+      "time_s": 6983.742857142857,
+      "true_SOC_scored_afterward": 0.16412038006898924
+    },
+    {
+      "reason": "measured voltage reached CV setpoint",
+      "time_s": 8815.057142857142,
+      "true_SOC_scored_afterward": 0.8920679912729265
+    },
+    {
+      "reason": "CV taper current dwell completed",
+      "time_s": 9104.057142857142,
+      "true_SOC_scored_afterward": 0.9344418113294186
+    }
+  ],
+  "final_errors": {
+    "float64": {
+      "final_Q_percent": -0.04009683363522809,
+      "final_SOC_pp": -0.007367824217552332
+    },
+    "float32": {
+      "final_Q_percent": -0.040348265171008535,
+      "final_SOC_pp": -0.007424707167891231
+    }
+  },
+  "max_encoding_difference": {
+    "Q_percent": 0.008447994566740391,
+    "SOC_pp": 0.0030052687736148442,
+    "paired_outputs": 31500
+  },
+  "phase_records": {
+    "cc": 70157,
+    "cv": 19905,
+    "rest_after_charge": 21000,
+    "discharge": 382438,
+    "rest_after_discharge": 10500
+  },
+  "completed_discharge_cycles": 1,
+  "history_storage_B": {
+    "one_message": 2184,
+    "two_messages_plus_float32_token": 6269
+  },
+  "limits": "Synthetic knownOCV/thermal model; no complete memory, calibrated uncertainty, aging or long-run qualification; voltage cutoff only approximately sets SOC; exogenous T and scheduled charger capability are independent"
+}

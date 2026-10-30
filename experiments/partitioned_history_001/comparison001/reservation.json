@@ -1,0 +1,303 @@
+{
+  "plan": {
+    "schema": "mumble_partitioned_history_plan_v1",
+    "status": "frozen_before_candidate_evaluation",
+    "question": "Does a charge-coordinate OCV representation preserve the joint cost/gradient/GN better per byte than a uniform parameter basis?",
+    "scope": "Stationary known-tanh-OCV representation diagnostic. No optimizer, plant truth, aging, thermal learning or canonical trajectory.",
+    "sources": {
+      "manuscript": "/home/easy/Downloads/SCM_PEER_REVIEW_MANUSCRIPT_v1.2.pdf",
+      "manuscript_sha256": "f739744ae7756f4c22970298b06a123291ca53f32cd6fd609d923bbb20bf808a",
+      "sections": [
+        "4.1: eight targets share one candidate",
+        "6.2: dependency separator",
+        "9.7: future operations and finite storage",
+        "I.2: physically scaled orthogonality"
+      ],
+      "fixture": "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json",
+      "references": "experiments/history_basis_comparison_001/comparison002/reference_{64,4096}.json"
+    },
+    "arms": {
+      "dynamic_degrees": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "OCV_charge_degrees": [
+        4,
+        8,
+        12
+      ],
+      "rate_coordinate": "log_chebyshev",
+      "domains": [
+        "full_public",
+        "public_half_SD"
+      ],
+      "prefixes": [
+        64,
+        4096
+      ],
+      "candidate_prefix_cases": 48,
+      "uniform_baseline": "Same dynamic degree used also for total-degree z0/chi OCV as predecessor. Degrees2/3/4 compared to saved predecessor results; degree1 new low-memory control."
+    },
+    "charge_domain": {
+      "rule": "Use the same fixed interval for every candidate: [(public_z_upper-1)/chi_max,public_z_lower/chi_max], chi_max=exp(-public_logQ_lower). Every public z0/Q candidate remains physically legal throughout this charge interval.",
+      "no_future_fit": "Interval comes from public support, never data extrema, truth or observed errors.",
+      "failure": "Source prefix outside interval unavailable; no regridding, extrapolation, resetting or dropping history.",
+      "OCV": "At query interpolate the original U(z0-chi*C) at degree+1 fixed charge Chebyshev nodes. Keep original curve and all alpha/rate uncertainty."
+    },
+    "representation": {
+      "dynamic_row": "Fixed inherited response basis plus -observed_voltage as a constant feature; amplitudes remain original query functions, including H*h0.",
+      "blocks": [
+        "G=sum dynamic_row outer dynamic_row, full packed triangle",
+        "B=sum dynamic_row outer charge_Chebyshev_row",
+        "M_l=sum T_l(normalized_charge), l=0..2*OCV_degree"
+      ],
+      "reconstruction": "H_ij=(M_(i+j)+M_abs(i-j))/2; full feature Gram=[[G,B],[B^T,H]]. This reconstructs cost,gradient and GN of the represented residual exactly in real arithmetic.",
+      "cross_terms": "All dynamic-dynamic and dynamic-OCV mixed terms retained; no observation split into independent evidence.",
+      "controls": "Full QR over the same residual rows, direct row evaluation, partitioned/global-row summation; positive-semidefinite matrix controls on frozen cases.",
+      "not_selected": "Collapsing parameter-basis products can preserve cost but lose the residual-Jacobian Gram needed by unchanged rolling solver; do not count that cost-only saving as query-complete storage.",
+      "exact_OCV_control": "Desktop raw-history control: exact OCV at each actual charge combined with the same approximated dynamic response. Separates remaining rate-basis error from OCV representation error; not a bounded candidate."
+    },
+    "memory": {
+      "complete_target_B": 10240,
+      "original_nonbank_reserved_B": 3848,
+      "new_bank_metadata_estimate_domains_B": 400,
+      "boundary_B": "8*(6*(d+1)+2*(d+1)^2+1)",
+      "moment_numeric_B": "8*(M*(M+1)/2+M*K+2*K-1), M=6*(d+1)+2*(d+1)*(d+2)/2+2, K=OCV_degree+1",
+      "QR_numeric_B": "8*(M+K)*(M+K+1)/2",
+      "extra_candidate_query_scratch_B": "8*(3*(M+K)+3*K+10*(d+1)+16); additive conservative phase allocation, no unproved aliasing",
+      "limitations": "Includes planned solver workspace,raw queue,calibration,auxiliary,project stack,runtime/IRQ reservations from old ledger. New C solver integration,stack,latency and target execution unmeasured. Diagnostic Python full matrices excluded from deployment proposal; not claimed firmware-ready. Static basis tables may reside in program ROM, never historical evidence."
+    },
+    "checks": {
+      "numerical_rtol": 2e-10,
+      "numerical_atol": 2e-08,
+      "gradient_FD_scaled_tolerance": 1e-05,
+      "gradient_FD_epsilon_SD": 1e-05,
+      "finite_cost_gate_NLL": 0.1,
+      "criterion_scope": "Inherited descriptive finite-stencil contrast gate, not physical battery accuracy or replacement for canonical545 query gate.",
+      "numerical_failures": "Collect all finite mismatches without changing tolerances; hard source/domain/ownership violations stop. Preserve first result and any correction separately.",
+      "PSD": "Record smallest Gram eigenvalue relative to matrix norm; allowance128*eps*F*norm. No clipping/ridge.",
+      "work_cap_model_steps_upper": 10000000,
+      "cap_OCV_node_evaluations": 2000000,
+      "no_automatic_retry": true,
+      "cancellation_control": "At4096/dynamic_degree2/OCV_degree8/full_public, replace the observed constant row coefficient so represented residual at public mean cancels. Compare direct/QR/moment arithmetic; no new physical model or inference."
+    },
+    "outputs": [
+      "frozen source/input identities and source snapshots",
+      "cost/gradient/endpoint comparisons and GN numerical controls",
+      "full storage ledger for both layouts",
+      "per-arm unavailable/failure status",
+      "decision with failure severity and no scope promotion"
+    ]
+  },
+  "sources": {
+    "experiments/history_provider_001/provider.c": {
+      "bytes": 3568,
+      "sha256": "8397829b2afe5cc83689a5c3d0c2bc8d1def90fbdfc3694147c1c12745bd7fb8"
+    },
+    "experiments/desktop_history_001/replay.c": {
+      "bytes": 2741,
+      "sha256": "ffba2ee6f475d6423f1b151e2b636cf4df7d27dbf568a8b20e11fb8e855656ba"
+    },
+    "experiments/live_anchor_integration_001/rolling_engine.c": {
+      "bytes": 24502,
+      "sha256": "65ec07983569d0a31ae7a1a573d0b374909badcc3a95cc81f5bce8c6fedc4088"
+    },
+    "experiments/live_anchor_integration_001/rolling_model.c": {
+      "bytes": 13781,
+      "sha256": "7b97ce9aea7596f2e6f76b7e411d53c5a7d60fa94e7abd1fefbab22f2b059dc8"
+    },
+    "experiments/live_anchor_integration_001/public_contract.c": {
+      "bytes": 1442,
+      "sha256": "500e9f20893d66570607d268cb1e5e6eccf37c8078127ff345cbcce92a73c2a9"
+    },
+    "experiments/live_anchor_integration_001/host_input.c": {
+      "bytes": 4940,
+      "sha256": "3b9d00f0a1c07618a64dabaee5f75d3f5e70746c4f401393ce845aed69955a05"
+    },
+    "experiments/live_anchor_bootstrap_001/adc12.c": {
+      "bytes": 9444,
+      "sha256": "c79f6f394bd83d75ab2c85ac645919b031371f5052cbb5c5915e455f5b4ec343"
+    },
+    "experiments/live_anchor_bootstrap_001/history_translation.c": {
+      "bytes": 3318,
+      "sha256": "fc466d7893c8bd1b981e9a753dec04e46575badd597b969f0d2fd8b337877eba"
+    },
+    "experiments/live_anchor_bootstrap_001/support_step.c": {
+      "bytes": 14782,
+      "sha256": "9629fa7f700097770b96ff4349bafe06c15ab8b876300d6e54bce51ecca8ee95"
+    },
+    "src/scm_model.c": {
+      "bytes": 5765,
+      "sha256": "05d7ddd5ec2736875b809c3f8cdd48910804d10873043bc366e314e3b5cb4646"
+    },
+    "experiments/partitioned_history_001/partition.py": {
+      "bytes": 3115,
+      "sha256": "fa754e18bfc7487ebb3b22f28374944c3b9d712d680d3316d6c7d6d23737431d"
+    },
+    "experiments/partitioned_history_001/compare.py": {
+      "bytes": 15015,
+      "sha256": "50bcf631b1b4b8925dc009e0085e5b3f12166f9be1f5368e9bb628341445f71e"
+    },
+    "experiments/partitioned_history_001/moments.c": {
+      "bytes": 1026,
+      "sha256": "3039357dc2bdf5b039877dc2cfc2d81df4c78754ac728b2bbd8a98c9a0d2b379"
+    },
+    "experiments/partitioned_history_001/plan.json": {
+      "bytes": 5592,
+      "sha256": "23ac2726de127d26ac52e4a63a70df7b9ea07795c3f14b99b7b5e3ea3de318f1"
+    },
+    "experiments/history_basis_comparison_001/basis.py": {
+      "bytes": 5749,
+      "sha256": "a3b146046bd8e95faaf44f30eac1f1e26b5cc50dbc016de93df5b436fc21c780"
+    },
+    "experiments/history_basis_comparison_001/qr.c": {
+      "bytes": 1106,
+      "sha256": "30a06584795bc9a4d54baa8759b83062a2ec3a44c24f8e0fb08ac0e337ba7829"
+    },
+    "experiments/history_provider_001/qualify.py": {
+      "bytes": 11434,
+      "sha256": "0a4c3d718501ecaaf06703061cfa7a1f3dc11edb22fcd9e4e0e45ce96300b630"
+    },
+    "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json": {
+      "bytes": 57302,
+      "sha256": "fc112ec9c4047f45256cf462dd52fdee772999c9d631e7d7729bf0e2290dd4ac"
+    },
+    "experiments/history_basis_comparison_001/comparison002/reference_64.json": {
+      "bytes": 77443,
+      "sha256": "8b371abafd6980945165a04d2e6fc68ac927167ff163c0d00c8f6e6142023012"
+    },
+    "experiments/history_basis_comparison_001/comparison002/reference_4096.json": {
+      "bytes": 77354,
+      "sha256": "a0743502741c5cf74112742b3828793b435caf25b463bd5789bb96a537bbb397"
+    },
+    "experiments/history_basis_comparison_001/comparison002/receipt.json": {
+      "bytes": 173177,
+      "sha256": "40a7f8af7a01382b6e2abc7b011880879b6b82fb8efccc710ea54c8527e21e2a"
+    },
+    "experiments/live_anchor_integration_001/REPORT.md": {
+      "bytes": 15401,
+      "sha256": "01c062853f15112f31a0ed3b3c7fc6a33d134ca314d772d6e1bac9f42d52340a"
+    },
+    "include/scm_assess.h": {
+      "bytes": 3863,
+      "sha256": "87b4d26d512c51ebaec5a46d46588c6249f85d91a71b7dbaf2bf387163c4bff5"
+    },
+    "include/scm_certificate.h": {
+      "bytes": 4610,
+      "sha256": "2281e779967257dba8938f843b7f7ec8775ebd941bd698146d0184128ed903dd"
+    },
+    "include/scm_certificate_box.h": {
+      "bytes": 5388,
+      "sha256": "58a3ff28bd875af48ff1933449e02589334d0bf3b839f82d702e70cb8090a1cf"
+    },
+    "include/scm_compact_assess.h": {
+      "bytes": 2435,
+      "sha256": "d8a9ae4d4fe2e9948f9b68b3c26731e130ba839dd7e07fb2be6a56558eda5aa8"
+    },
+    "include/scm_compact_evidence.h": {
+      "bytes": 2658,
+      "sha256": "2b2eaa7a6734c460d4b3326c59a95c91cd0321516c8c435249bf58a6973082ec"
+    },
+    "include/scm_compact_remainder.h": {
+      "bytes": 4413,
+      "sha256": "289604bff5e7e23df6b3724b132e876d05497eb5595b6a6f1394fea40088bd3e"
+    },
+    "include/scm_estimator.h": {
+      "bytes": 1807,
+      "sha256": "f654bf1e369d59891a6c54832fcc6439994026b68bc9267c8d16d06e0354f3c4"
+    },
+    "include/scm_evidence.h": {
+      "bytes": 5227,
+      "sha256": "8ff50bb2e1e5f14bfb96aac766ce9005e85a1fbb16829fe1b5964a87596962d6"
+    },
+    "include/scm_features.h": {
+      "bytes": 2489,
+      "sha256": "f5f859cd54fc02290d5deca3795b811f9cfe14a4eeb34e4eb7da5f7fb23842b6"
+    },
+    "include/scm_hypothesis.h": {
+      "bytes": 7399,
+      "sha256": "0f5dc3bcb19b10912445696c4bfbd77923c419e561d9699450b9dcafcf1b64fc"
+    },
+    "include/scm_hypothesis_checkpoint.h": {
+      "bytes": 2825,
+      "sha256": "1e1743300cf17635828c8d8cf2d95aa6fc00066b377e3238de880dcb284b5545"
+    },
+    "include/scm_model.h": {
+      "bytes": 2763,
+      "sha256": "ddc9db76f6884b918fc821dcf5b9cdcac3885a33a306694b7a68c74e51918a0c"
+    },
+    "include/scm_online.h": {
+      "bytes": 6639,
+      "sha256": "2eb88d4ea3776e79b62a0e16b73ba3cce05c2410258cc9c51c02aeb0bc53cc84"
+    },
+    "include/scm_online_checkpoint.h": {
+      "bytes": 1975,
+      "sha256": "49b559aa1b4d87887770c018da8b76273e0d6283e3a34fd5f22bddd6ea44c0ee"
+    },
+    "include/scm_remainder.h": {
+      "bytes": 4812,
+      "sha256": "c7185d39d0ec9e3aaebb8ca415e6b3076a0570ba836ae652bbf3bd331fbcd494"
+    },
+    "include/scm_session.h": {
+      "bytes": 7030,
+      "sha256": "935a18e8c4eca60ce23dd2712651e1ae14ddb24867691044903c95cc7c7f2383"
+    },
+    "include/scm_session_checkpoint.h": {
+      "bytes": 2230,
+      "sha256": "d23850139655d4bfd2899bcbae22684a969a2c9467823db282e0efc5d82d137b"
+    },
+    "include/scm_stable.h": {
+      "bytes": 3679,
+      "sha256": "783ca8042850d4ccc5449de31122b7ab2da50280702ad5871e35fc489890415b"
+    },
+    "experiments/history_provider_001/provider.h": {
+      "bytes": 1938,
+      "sha256": "3521055b8a120ca64f429e70308a08ac4522a25d41baffa316770235351b1d19"
+    },
+    "experiments/live_anchor_integration_001/host_input.h": {
+      "bytes": 1976,
+      "sha256": "cfffb2f2244d9dfdc3476f5d56de5c357c1e57a8072aba0d7168e288c2fb615f"
+    },
+    "experiments/live_anchor_integration_001/rolling_engine.h": {
+      "bytes": 4463,
+      "sha256": "01d8b6002d9e788b0fcc8e20ade30cbf6d11222a98bf6fedf8b08c01141bea20"
+    },
+    "experiments/live_anchor_integration_001/rolling_model.h": {
+      "bytes": 3170,
+      "sha256": "b98e16fe08eab172c12230b1899ace122f08085b527c976f394e9a873c703a0f"
+    },
+    "experiments/live_anchor_bootstrap_001/adc12.h": {
+      "bytes": 4830,
+      "sha256": "f05e46ee9a01b7dd9bbf2c3da6313061c5df46adfe4d00155b66c4d72c46d4aa"
+    },
+    "experiments/live_anchor_bootstrap_001/history_translation.h": {
+      "bytes": 1634,
+      "sha256": "5aab00671e32f3e3e5323e2e97e8922610f2d06206b34d2cf9df4283885fb31e"
+    },
+    "experiments/live_anchor_bootstrap_001/live_layout.h": {
+      "bytes": 2427,
+      "sha256": "24d37d7f298dfdbce40bb2da7ae2d39c8a76479c90d835b00c18383e511f7ba5"
+    },
+    "experiments/live_anchor_bootstrap_001/support_step.h": {
+      "bytes": 3587,
+      "sha256": "e30ad444760167cbcf1a1dd33911cb6fd9b5e58a9dabe4d4f877c9ad75bc371e"
+    },
+    "experiments/compact_nonlinear_history_001/compact_history.h": {
+      "bytes": 6435,
+      "sha256": "f115ae16915937b84ecf284377b3db96bac3f45f36c12dd444b9a2c7aa05fc3e"
+    }
+  },
+  "manuscript": {
+    "bytes": 775829,
+    "sha256": "f739744ae7756f4c22970298b06a123291ca53f32cd6fd609d923bbb20bf808a"
+  },
+  "command": [
+    "experiments/partitioned_history_001/compare.py",
+    "experiments/partitioned_history_001/comparison001"
+  ],
+  "revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "experiments/partitioned-history-001",
+  "status": "reserved_before_build_or_evaluation"
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "CC-CV charging and variable-rate discharge in harness only",
+  "request": "User requests2Ccharge and0.2-0.7Cdischarge, then CC-CV taper near90%SOC and changing charger/load capability",
+  "control": "Declared nominal60mAh, schedules in C, terminal measuredV control, no true SOC/Q in controller, no estimator change",
+  "defaults": {
+    "charge_C": [
+      2,
+      1,
+      1.5
+    ],
+    "charge_step_s": 900,
+    "discharge_C": [
+      0.2,
+      0.45,
+      0.7
+    ],
+    "discharge_step_s": 600,
+    "CV_V": 4.06,
+    "discharge_cutoff_V": 3.18,
+    "rest_s": 300,
+    "taper_end_C": 0.05,
+    "taper_hold_s": 30,
+    "CV_integral_A_per_V_s": 0.5
+  },
+  "preserved_sources": {
+    "experiments/foster_campaign_001/run.py": {
+      "archive": "experiments/foster_cccv_stimulus_001/baseline/run.py",
+      "sha256": "2f826dfceb274ffc0edcb618a952d028eed1b52702d45c0cc2c3eceb6d97753d"
+    },
+    "experiments/foster_campaign_001/stimulus.py": {
+      "archive": "experiments/foster_cccv_stimulus_001/baseline/stimulus.py",
+      "sha256": "f5c3922895d95e6b9e7b8d79a1e449c31b1fd4af723671aca98bbc8f9469b20e"
+    },
+    "experiments/foster_campaign_001/README.md": {
+      "archive": "experiments/foster_cccv_stimulus_001/baseline/README.md",
+      "sha256": "e2d967a5f3094450c9d49313e94fa2eed3058341ce464c372ce920a768d1b504"
+    }
+  },
+  "qualification": "Measured-only control, CV stable regulation, cutoff dwell and rests, C-ratequantization/limits, chunk seed continuity, serial/parallel preservation, one full plant/estimatorcycle diagnostic; no long campaign by default",
+  "limits": "Synthetic characterizedOCV/thermalmodel; CV near90%isapproximate, not trueSOC threshold; finalSOCnotpromised100%; no learnedaging or physicalcharger safety certification"
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "voltage_coordinate_comparison_plan_v1",
+  "status": "frozen_before_candidate_evaluation",
+  "baseline": "experiments/region_compression_001/attempt001/result.json",
+  "derivation": "experiments/voltage_coordinates_001/derivation.md",
+  "change": "Replace SOC logit with physical predicted rest voltage; normalize its Gaussian conditional on other quantities over the exact dependent support. Keep three arm names, K=2/4, source populations, training/heldout split, placement and probes identical to baseline.",
+  "construction": "Untruncated moment/regression projection followed by conditional support normalization, not truncated-family MLE. Report all removed support masses, preserve all16 uncertainty. No truth or extra prior.",
+  "regions": [2, 4],
+  "arms": ["fixed_partition_gaussian_mixture", "fixed_probability_atlas", "adaptive_probability_atlas"],
+  "draws_per_case": 16384,
+  "seed_base": 928001,
+  "numerics": {
+    "inverse_OCV_bisections": 52,
+    "inverse_voltage_absolute_check_V": 2e-13,
+    "density_batch_size": 512,
+    "truncated_sampler_round_cap": 128,
+    "normalizer": "erfc difference on well-resolved intervals; inherited scaled quadrature with refinement/tail allowance on tiny or extreme-tail differences",
+    "sampler": "Exact rejection using normal, finite uniform, or truncated-exponential proposals according to interval geometry; cap failure unavailable, no clipping",
+    "placement_passes": 16,
+    "minimum_region_samples": 32,
+    "atlas_quadrature": "Inherited128/256 checked normalization and1e-9 moment tolerance"
+  },
+  "controls": [
+    "Global OCV inverse round-trip including near support boundaries",
+    "Full16 transform determinant and exact dependent voltage support",
+    "Truncated normal log-mass against existing independent scaled quadrature including extreme tails and narrow intervals",
+    "Truncated sampler moments/quantiles against quadrature across proposal branches",
+    "Conditional physical SOC density integrates to one for fixed other quantities",
+    "Conditional Gaussian cross terms and analytical untruncated regression control",
+    "Physical prediction parity with baseline probes",
+    "Replication leaves posterior uncertainty unchanged; serialization and source ownership retained",
+    "Old source/artifact hashes unchanged"
+  ],
+  "assessment": "Report every case; compare same physical-coordinate heldout negative log density, all16 moments and marginal quantiles, boundary and future voltage distributions. Report population variation, support corrections, bytes, work and CPU. No new physical/NLL acceptance threshold.",
+  "work_caps": {"cases": 12, "fresh_posterior_steps": 0, "predictive_sample_steps": 786432, "heldout_density_points": 98304, "inverse_OCV_sample_iterations": 10223616, "placement_sample_visits": 524288},
+  "failure_policy": "Numerical controls precede candidates. Record unavailable candidate cases without aborting others. Do not tune against heldout results; preserve any failed attempt separately.",
+  "out_of_scope": ["Four-hour causal run", "Physical aging transition", "MCU implementation", "Likelihood atlas", "General full16 self-organizing network", "Coverage validation"]
+}

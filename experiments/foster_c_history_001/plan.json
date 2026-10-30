@@ -1,0 +1,55 @@
+{
+  "schema": "foster_c_history_plan_v1",
+  "branch": "optimization/foster-c-history-001",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "parent_manifest_sha256": "fbb8c569cde656e86a25da8a5383bf0ff28d542ff8d1e5a022e52d036f532e81",
+  "variants": [
+    "previous model+cache C",
+    "structured history arithmetic",
+    "structured streamed history and phase workspace reuse"
+  ],
+  "mathematics": [
+    "upper triangular likelihood A: multiply only supported entries",
+    "form only lower half of I+B^T B",
+    "detect exact identity transport rows; retain generic dense fallback",
+    "orthogonal residual17 remains in normalization",
+    "retain full covariance and token format; no prior/feedback duplication"
+  ],
+  "lifetime_plan": [
+    "B/P fitter matrices share trial-physical-output storage; dead before line search",
+    "decoded likelihood row is consumed into B and residual, no full A storage",
+    "B is reused as posterior root only after fitted-residual normalization has consumed B",
+    "F decoded one row at a time after conditioning; no full decoded F storage",
+    "entire model/thermal/trial workspace reused for history after token serialization",
+    "domain check reuses model scratch only after history output is complete; n=0 reads no thermal cache",
+    "failure leaves authoritative history and pending rows intact; retry rebuilds transient workspace"
+  ],
+  "qualification": [
+    "independent Gaussian oracle for arbitrary and identity/mixed transport",
+    "explicit residual-only likelihood normalization",
+    "frozen tests and parity for multiple/partial windows",
+    "post-fit history/domain failures and retry invariants",
+    "paired3-repeat4h and12h controls, both encodings",
+    "full-final covariance and logZ comparisons",
+    "ASan/UBSan, M23 stack and call-path audit"
+  ],
+  "criteria": {
+    "local_mean_atol": 1e-09,
+    "local_covariance_atol": 1e-10,
+    "local_logZ_atol": 1e-07,
+    "workspace_vs_structured": "bit-identical finite tested outputs expected; report differences",
+    "sustained": "report all numerical differences and do not abort other arms;0.5%Q/0.5SOCpp application scales are not a numerical equivalence proof"
+  },
+  "unchanged": [
+    "model/calibration/prior",
+    "double arithmetic",
+    "QR including subnormal fix",
+    "encoding formats",
+    "fitting tolerances and limits",
+    "chronology and atomic retirement"
+  ],
+  "limits": [
+    "no target cycles",
+    "no aging or uncertainty-coverage improvement claimed"
+  ]
+}

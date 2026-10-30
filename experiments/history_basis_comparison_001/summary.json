@@ -1,0 +1,116 @@
+{
+  "schema": "mumble_history_basis_decision_v1",
+  "status": "comparison_complete_all_candidates_fail_fidelity_one_arithmetic_mismatch_preserved",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "experiments/history-basis-comparison-001",
+  "plan": "experiments/history_basis_comparison_001/plan.json",
+  "report": "experiments/history_basis_comparison_001/README.md",
+  "comparison": "experiments/history_basis_comparison_001/comparison002/receipt.json",
+  "attribution": "experiments/history_basis_comparison_001/diagnostic002/receipt.json",
+  "evidence_identities": {
+    "experiments/history_basis_comparison_001/plan.json": {
+      "bytes": 5770,
+      "sha256": "c61c9ea760283e8eaf85c60b36996ae6a26288bcf6c4fd29ac7569937f2fea1b"
+    },
+    "experiments/history_basis_comparison_001/completion_plan.json": {
+      "bytes": 847,
+      "sha256": "8bad2cba867cc23db505068b607fc51fbb52ab576007b8ea9c0328abdeef1c5c"
+    },
+    "experiments/history_basis_comparison_001/diagnostic_plan.json": {
+      "bytes": 1125,
+      "sha256": "382b8fc967e012c59943c5cc1c7ff20c903d0db5ae23c3937e4aa25f3bfb685d"
+    },
+    "experiments/history_basis_comparison_001/comparison001/receipt.json": {
+      "bytes": 115716,
+      "sha256": "9e2fe1da5886d02696b3500460fcee1a002fa376242a2515af5826d2bc9d8143"
+    },
+    "experiments/history_basis_comparison_001/comparison002/receipt.json": {
+      "bytes": 173177,
+      "sha256": "40a7f8af7a01382b6e2abc7b011880879b6b82fb8efccc710ea54c8527e21e2a"
+    },
+    "experiments/history_basis_comparison_001/diagnostic001/receipt.json": {
+      "bytes": 50489,
+      "sha256": "808096596a5a4bfae59dea861d3d6b1d7d37d5768b9b09bd11c67f5839497887"
+    },
+    "experiments/history_basis_comparison_001/diagnostic002/receipt.json": {
+      "bytes": 51173,
+      "sha256": "cce3568d7f98395e708442c298d5691ae11857cc623107126227f610fda6a6db"
+    },
+    "experiments/history_provider_001/qualification/development001/receipt.json": {
+      "bytes": 4441,
+      "sha256": "5934e000ffc26bba1caf47a5e7d1032d270773fe2408d11272c13b64e7735005"
+    }
+  },
+  "candidates": 12,
+  "prefix_cases": 24,
+  "observations": [
+    64,
+    4096
+  ],
+  "elapsed_seconds": [
+    1.874285714285714,
+    119.95428571428573
+  ],
+  "query_counts": {
+    "full_domain": 129,
+    "local_domain": 97
+  },
+  "finite_cost_gate_NLL": 0.1,
+  "candidate_prefix_cases_passing_cost_gate": 0,
+  "numerical_checks": 1148,
+  "numerical_mismatches": [
+    {
+      "case": "4096/log_chebyshev/4/full_public",
+      "check": "factor gradient versus rows",
+      "max_absolute_gap": 1.811981201171875e-05,
+      "max_tolerance_ratio": 1.9442180769463906,
+      "worst_index": [
+        73,
+        6
+      ],
+      "actual": 233.24846167959564,
+      "reference": 233.2484615500141
+    }
+  ],
+  "orthogonal_cost_checks_passed": 24,
+  "exact_composition": {
+    "queries": 33,
+    "partition": [
+      17,
+      4079
+    ],
+    "max_cost_gap_NLL": 1.0244548320770264e-08,
+    "max_endpoint_gap_by_coordinate": [
+      0.0,
+      0.0,
+      0.0,
+      4.336808689942018e-19,
+      1.3877787807814457e-16
+    ],
+    "passed": true,
+    "scope": "Exact physical two-block control; not finite-basis closure."
+  },
+  "aggregate_model_steps_upper": 8362304,
+  "model_steps_cap": 10000000,
+  "optimizer_calls": 0,
+  "truth_reads": 0,
+  "canonical_runs": 0,
+  "solver_modified": false,
+  "aging_added": false,
+  "compressor_qualified": false,
+  "coverage_qualified": false,
+  "complete_SRAM_qualified": false,
+  "decision": {
+    "keep": [
+      "history/solver separation",
+      "exact conditional amplitude structure",
+      "physical free/forced response pair and chronological transport",
+      "source-once likelihood ownership"
+    ],
+    "reject": [
+      "these fixed uniform-degree polynomial/rational factors as deployable replacements",
+      "orthogonal rotation alone as dimensional compression"
+    ],
+    "next": "Derive charge-domain OCV evidence representation with response cross terms and bounded-error/resource accounting before another implementation. No automatic degree/domain tuning or four-hour run."
+  }
+}

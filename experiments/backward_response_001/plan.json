@@ -1,0 +1,16 @@
+{
+  "schema": "backward_response_plan_v1",
+  "status": "frozen_before_new_decomposition_results",
+  "baseline": "experiments/natural_hysteresis_001/attempt001/result.json",
+  "purpose": "Backward symbolic isolation of finite predictive moment discrepancies; no new fitting or estimator changes",
+  "prefixes": [8, 32],
+  "populations": "Original two construction and two heldout populations plus exact regeneration of all four saved natural-refit batches at each prefix",
+  "probes": "All thirteen saved boundary/rest/load/reversal probes, unchanged",
+  "decomposition": "Boundary voltage + OCV shift + terminal ohmic term + three carried RC terms + three forced RC terms + carried/positive/negative hysteresis terms; retain every covariance",
+  "comparisons": ["Exact term sum against inherited recurrence", "Exact mean and full covariance decomposition", "Construction-versus-heldout and generated-batch variation separately", "Equal-charge reversal closed form and zero OCV shift", "Directional hysteresis amplitude inverse/Jacobian and response equivalence", "Physical-rate transformed prior curvature versus actual prior constants", "Existing conditional second-moment residuals without refitting"],
+  "work_caps": {"source_rows": 32768, "generated_rows": 131072, "recurrence_sample_steps": 8519680, "decomposition_sample_steps": 8519680, "inverse_OCV_sample_iterations": 6815744, "fresh_posterior_steps": 0, "new_conditional_fits": 0},
+  "arithmetic_controls": {"voltage_sum_absolute_tolerance_V": 2e-12, "variance_sum_absolute_tolerance_V2": 2e-15},
+  "decision_rule": "Rank signed mean and variance contributions; do not infer latent conditional causation from an additive partition or select a model by heldout improvement. Derive prospective reformulations only.",
+  "storage": {"unchanged_retained_message_B": 2496, "complete_target_SRAM_B": null, "one_12term_mean_covariance_numeric_B": 720, "diagnostic_moments_are_not_a_replacement_posterior": true},
+  "limits": ["Finite source samples are not exact posterior truth", "Population and draw ranges are descriptive, not confidence intervals", "No streaming, aging, coverage or deployment qualification", "Source prior is a density reference, never new independent evidence"]
+}

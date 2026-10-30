@@ -1,0 +1,11 @@
+{
+  "schema": "incremental_history_development_review_v1",
+  "attempt001": "1240 finite checks passed, one case stopped at an arithmetic asymmetry guard. All other cases continued. This is not a passing receipt.",
+  "evidence": "attempt001/cancellation_diagnostic.json",
+  "source_preservation": "Original reserved source identities have matching copies under attempt001/source_snapshot. Results and reservation are unchanged.",
+  "cause": "Effective entry information D=J-J*S*J subtracts nearly equal matrices. In vector case18, asymmetry2.1316282072803006e-14 exceeded the scale-dependent guard1.713488673891029e-14; minimum symmetric eigenvalue was-6.311095281159984e-17.",
+  "repair": "Use D=solve(I+J*Q,J) and g=solve(I+J*Q,h), algebraically equivalent formulas without the subtractive cancellation. Preserve the same PSD/asymmetry guards and all qualification tolerances. No process-noise injection or parameter clipping.",
+  "qualification_change": "Future attempts snapshot reserved sources before evaluation. Same seed, fixtures and finite comparison tolerances are rerun because implementation changed.",
+  "arithmetic_certificate": false,
+  "independent_review": false
+}

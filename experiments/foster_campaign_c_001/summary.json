@@ -1,0 +1,64 @@
+{
+  "status": "qualified_for_local_campaign_backend_and_rate_controls",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "implementation/foster-campaign-c-001",
+  "default_backend": "c",
+  "fallback": "--backend python",
+  "default_sample_rate_Hz": 35,
+  "sample_rate_flag": "--sample-rate-hz INTEGER",
+  "tested_rates_Hz": [
+    10,
+    35,
+    70,
+    100
+  ],
+  "tests": 32,
+  "timing_single_measurement": {
+    "python_estimator_s": 1.690112212439999,
+    "C_estimator_s": 0.10703679046127945,
+    "estimator_speedup": 15.790012061800349,
+    "python_case_wall_s": 2.06715244310908,
+    "C_case_wall_s": 0.4402882190188393,
+    "case_speedup": 4.694998307507814,
+    "python_entire_command_s": 2.4926056570839137,
+    "C_entire_command_s": 1.188668831018731,
+    "scope": "One four-case run per backend at35Hz; case time includes generation/export, command time also includes build and startup qualification; plots excluded from paired runs"
+  },
+  "max_C_vs_python_Q_percent": 0.0022643993243587346,
+  "max_C_vs_python_SOC_pp": 0.0002305821408254971,
+  "C_context_B": 19416,
+  "complete_M23_SRAM_B": null,
+  "target_cycles_measured": false,
+  "limits": [
+    "fixed16-record fitting window changes duration with sample rate",
+    "noise_v remains per-sample SD; no spectral-density rescaling",
+    "plant/plots/CSV remain Python; total speedup smaller than C-kernel speedup",
+    "C in-process ownership is not distributed SHA transaction protocol",
+    "No new aging, long-duration accuracy or coverage qualification"
+  ],
+  "report": "experiments/foster_campaign_c_001/README.md",
+  "validation": "experiments/foster_campaign_c_001/validation.json",
+  "preserved": {
+    "foster_c_history_001": {
+      "artifacts": 114,
+      "changed": []
+    },
+    "foster_c_model_001": {
+      "artifacts": 88,
+      "changed": []
+    },
+    "foster_c_cpu_001": {
+      "artifacts": 98,
+      "changed": []
+    },
+    "foster_c_baseline_001": {
+      "artifacts": 83,
+      "changed": []
+    },
+    "foster_feedback_001": {
+      "artifacts": 68,
+      "changed": []
+    }
+  },
+  "archived_campaign_sources": 7
+}

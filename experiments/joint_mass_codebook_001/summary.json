@@ -1,0 +1,473 @@
+{
+  "schema": "joint_mass_codebook_summary_v1",
+  "status": "finite_joint_model_and_codecs_qualified_log16_reference_selected_continuous_transport_open",
+  "report": "experiments/joint_mass_codebook_001/README.md",
+  "derivation": "experiments/joint_mass_codebook_001/derivation.md",
+  "tail_derivation": "experiments/joint_mass_codebook_001/tail_derivation.md",
+  "verification": "experiments/joint_mass_codebook_001/verification.json",
+  "result": "experiments/joint_mass_codebook_001/attempt001/result.json",
+  "tail_result": "experiments/joint_mass_codebook_001/tails001/result.json",
+  "log16_result": "experiments/joint_mass_codebook_001/log16_001/result.json",
+  "figure": "experiments/joint_mass_codebook_001/figures001/joint_mass_geometry.png",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "experiments/joint-mass-codebook-001",
+  "identity_scope": "Uncommitted source hashes and snapshots; no claim git HEAD contains this work",
+  "finite_checks": 2064,
+  "checks_by_stage": {
+    "attempt001": 1234,
+    "tails001": 589,
+    "log16_001": 241
+  },
+  "preserved_earlier_artifacts": 185,
+  "model": "Six-coordinate joint finite-state comparator, monotone Q/R0 pure-birth boundary transition, separate T(t)/g(T), carried SOC and three joint RC/hysteresis nuisance candidates",
+  "model_limit": "Discrete prior/support and barycentric SOC transport; boundary aging split; engineering rates, not calibrated continuous aging or replacement of original16-coordinate prior",
+  "criteria": "Finite algebra/integrity checks and all comparative distortion measurements; no selected physical accuracy or arbitrary NLL success threshold",
+  "main_findings": [
+    "Probability geometry is encodable: joint square roots lie on a sphere; log relative amplitudes additionally control rare-tail ratios",
+    "Linear-amplitude quantization can preserve means but severely distort variance and future rare-event inference",
+    "Log-ratio oscillation is common-likelihood invariant and Markov nonexpansive; quantization adds an explicit error increment",
+    "Codebook idempotence prevents unchanged storage from drifting; it does not prove indefinite stability under successive physical updates",
+    "A five-template Gaussian dictionary loses substantial non-Gaussian shape on held-out fixtures",
+    "SOC-grid refinement moves Q/SOC estimates substantially; codebook quality does not repair that discretization"
+  ],
+  "codec_metrics": {
+    "sphere8": {
+      "payload_B": 4131,
+      "dictionary_parameter_B": 0,
+      "max_TV": 0.005407773594589408,
+      "max_Q_mean_relative_error_percent": 0.030013187358470004,
+      "max_SOC_mean_error_pp": 0.0027287336234360637,
+      "SOC_std_ratio_range": [
+        0.9985444716422258,
+        1906.1728559879134
+      ],
+      "Q_std_ratio_range": [
+        0.9996193691462083,
+        1.00136341032624
+      ],
+      "max_local_log_oscillation": 85.82002338840617
+    },
+    "sphere12": {
+      "payload_B": 6197,
+      "dictionary_parameter_B": 0,
+      "max_TV": 0.0002683395187654259,
+      "max_Q_mean_relative_error_percent": 0.0015495616183447349,
+      "max_SOC_mean_error_pp": 0.0001170243501769086,
+      "SOC_std_ratio_range": [
+        0.9910510753119285,
+        118.36714600066931
+      ],
+      "Q_std_ratio_range": [
+        0.999964681845036,
+        1.000018682991548
+      ],
+      "max_local_log_oscillation": 85.12366470252913
+    },
+    "shapes": {
+      "payload_B": 518,
+      "dictionary_parameter_B": 864,
+      "max_TV": 0.41918038527062096,
+      "max_Q_mean_relative_error_percent": 2.171798726000751,
+      "max_SOC_mean_error_pp": 2.1642094236686504,
+      "SOC_std_ratio_range": [
+        0.7587661784421601,
+        31413.237256332915
+      ],
+      "Q_std_ratio_range": [
+        0.843866373449469,
+        0.8655305566331518
+      ],
+      "max_local_log_oscillation": 57.97564557490898
+    },
+    "log12": {
+      "payload_B": 6197,
+      "dictionary_parameter_B": 0,
+      "max_TV": 0.060702577360108305,
+      "max_Q_mean_relative_error_percent": 0.7162047691718044,
+      "max_SOC_mean_error_pp": 0.03398583216533968,
+      "SOC_std_ratio_range": [
+        0.9685484569791477,
+        1.031963238325226
+      ],
+      "Q_std_ratio_range": [
+        0.9950990093996975,
+        1.0078277168131122
+      ],
+      "max_local_log_oscillation": 0.1733486852760162
+    },
+    "log16": {
+      "payload_B": 8262,
+      "dictionary_parameter_B": 0,
+      "max_TV": 0.0038431455419057053,
+      "max_Q_mean_relative_error_percent": 0.029580901301386825,
+      "max_SOC_mean_error_pp": 0.001742891392397805,
+      "SOC_std_ratio_range": [
+        0.9980677261321744,
+        1.0025448221509663
+      ],
+      "Q_std_ratio_range": [
+        0.9997141465590613,
+        1.0006384072584185
+      ],
+      "max_local_log_oscillation": 0.010828481800731815,
+      "max_accumulated_TV_bound": 0.021564384803495335
+    }
+  },
+  "rare_tail": [
+    {
+      "codec": "sphere8",
+      "encoded_rare_mass": 1.5378463999015778e-05,
+      "prior_TV": 1.5378462999027058e-05,
+      "posterior_TV": 0.9900925074432625,
+      "actual_rare_posterior": 0.009900990099019704,
+      "encoded_rare_posterior": 0.9999934975422822,
+      "prior_log_oscillation": 16.548494025610697,
+      "posterior_log_oscillation": 16.548494025610697
+    },
+    {
+      "codec": "sphere12",
+      "encoded_rare_mass": 5.963375571127387e-08,
+      "prior_TV": 5.963275572233515e-08,
+      "posterior_TV": 0.9884249146954158,
+      "actual_rare_posterior": 0.009900990099019704,
+      "encoded_rare_posterior": 0.9983259047944354,
+      "prior_log_oscillation": 10.995977123353207,
+      "posterior_log_oscillation": 10.99597712335321
+    },
+    {
+      "codec": "log12",
+      "encoded_rare_mass": 1.067117083971251e-12,
+      "prior_TV": 6.714278848053653e-14,
+      "posterior_TV": 0.0006575091909696226,
+      "actual_rare_posterior": 0.009900990099019704,
+      "encoded_rare_posterior": 0.01055849928998932,
+      "prior_log_oscillation": 0.06496069823139516,
+      "posterior_log_oscillation": 0.06496069823139493
+    },
+    {
+      "codec": "log16",
+      "encoded_rare_mass": 1.001766095512723e-12,
+      "reference_rare_posterior": 0.009900990099019704,
+      "encoded_rare_posterior": 0.009918302760828881,
+      "posterior_TV": 1.731266180916586e-05,
+      "log_oscillation": 0.0017645377998219622
+    }
+  ],
+  "batch_oracle": [
+    {
+      "fixture": "weak",
+      "unmerged_paths": 8100,
+      "TV": 5.792609510345483e-17,
+      "log_evidence_difference": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "reversal",
+      "unmerged_paths": 16200,
+      "TV": 7.757466591258657e-17,
+      "log_evidence_difference": 1.6653345369377348e-16
+    }
+  ],
+  "C_control": {
+    "max_voltage_difference_V": 4.440892098500626e-16,
+    "scope": "Stationary physical response submodel only; no aging/SOC-grid certification"
+  },
+  "geometry_code": [
+    {
+      "bits": 8,
+      "payload_B": 3,
+      "original": [
+        -3.0,
+        -3.0,
+        0.8
+      ],
+      "decoded": [
+        -2.996078431372549,
+        -2.996078431372549,
+        0.8011764705882353
+      ],
+      "mass": 0.00037209239626782907,
+      "decoded_mass": 0.00037978190824158295,
+      "absolute_error": 7.689511973753879e-06,
+      "real_arithmetic_bound": 0.005229616291685025,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 0.020454961785273618
+    },
+    {
+      "bits": 12,
+      "payload_B": 5,
+      "original": [
+        -3.0,
+        -3.0,
+        0.8
+      ],
+      "decoded": [
+        -2.9997557997557998,
+        -2.9997557997557998,
+        0.8002197802197802
+      ],
+      "mass": 0.00037209239626782907,
+      "decoded_mass": 0.0003728293036581252,
+      "absolute_error": 7.36907390296135e-07,
+      "real_arithmetic_bound": 0.0005860374794687624,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 0.001978483458726643
+    },
+    {
+      "bits": 8,
+      "payload_B": 3,
+      "original": [
+        -2.0,
+        1.0,
+        -0.8
+      ],
+      "decoded": [
+        -1.992156862745098,
+        0.9882352941176471,
+        -0.8011764705882353
+      ],
+      "mass": 0.0018905480159238856,
+      "decoded_mass": 0.001867116154646591,
+      "absolute_error": 2.3431861277294682e-05,
+      "real_arithmetic_bound": 0.00992305488464304,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 0.012471665339738536
+    },
+    {
+      "bits": 12,
+      "payload_B": 5,
+      "original": [
+        -2.0,
+        1.0,
+        -0.8
+      ],
+      "decoded": [
+        -1.9995115995115995,
+        0.9992673992673993,
+        -0.8002197802197802
+      ],
+      "mass": 0.0018905480159238856,
+      "decoded_mass": 0.001885912665656096,
+      "absolute_error": 4.6353502677896116e-06,
+      "real_arithmetic_bound": 0.0008783028863562579,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 0.002454866069841799
+    },
+    {
+      "bits": 8,
+      "payload_B": 3,
+      "original": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "decoded": [
+        0.015686274509803866,
+        0.015686274509803866,
+        0.003529411764705892
+      ],
+      "mass": 0.2500000000000038,
+      "decoded_mass": 0.25685840636200885,
+      "absolute_error": 0.006858406362005076,
+      "real_arithmetic_bound": 0.01428055861726373,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 0.02706406719758836
+    },
+    {
+      "bits": 12,
+      "payload_B": 5,
+      "original": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "decoded": [
+        0.0009768009768009733,
+        0.0009768009768009733,
+        0.0002197802197801968
+      ],
+      "mass": 0.2500000000000038,
+      "decoded_mass": 0.2504248180785725,
+      "absolute_error": 0.0004248180785687006,
+      "real_arithmetic_bound": 0.0008892645322377981,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 0.001697830184558713
+    },
+    {
+      "bits": 8,
+      "payload_B": 3,
+      "original": [
+        0.2,
+        -0.3,
+        0.6
+      ],
+      "decoded": [
+        0.20392156862745114,
+        -0.29803921568627434,
+        0.5964705882352942
+      ],
+      "mass": 0.31411612037229036,
+      "decoded_mass": 0.3144881684418352,
+      "absolute_error": 0.00037204806954482805,
+      "real_arithmetic_bound": 0.0055449220198505456,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 0.0011837275679105197
+    },
+    {
+      "bits": 12,
+      "payload_B": 5,
+      "original": [
+        0.2,
+        -0.3,
+        0.6
+      ],
+      "decoded": [
+        0.20024420024420042,
+        -0.2998778998778997,
+        0.5997802197802197
+      ],
+      "mass": 0.31411612037229036,
+      "decoded_mass": 0.3141392007537896,
+      "absolute_error": 2.3080381499229752e-05,
+      "real_arithmetic_bound": 0.00034630351309530724,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 7.347452773909247e-05
+    },
+    {
+      "bits": 8,
+      "payload_B": 3,
+      "original": [
+        3.0,
+        3.0,
+        0.89
+      ],
+      "decoded": [
+        2.996078431372549,
+        2.996078431372549,
+        0.8929411764705882
+      ],
+      "mass": 0.9978797071469705,
+      "decoded_mass": 0.9978619273164783,
+      "absolute_error": 1.777983049222609e-05,
+      "real_arithmetic_bound": 0.012770095299022483,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 1.7817767776815915e-05
+    },
+    {
+      "bits": 12,
+      "payload_B": 5,
+      "original": [
+        3.0,
+        3.0,
+        0.89
+      ],
+      "decoded": [
+        2.9997557997557998,
+        2.9997557997557998,
+        0.8898901098901099
+      ],
+      "mass": 0.9978797071469705,
+      "decoded_mass": 0.9978777217984185,
+      "absolute_error": 1.985348552002719e-06,
+      "real_arithmetic_bound": 0.000548406895846295,
+      "quadrature_omitted_tail_upper": 1.776482112077702e-33,
+      "numerical_bound_certified": false,
+      "log_mass_error": 1.989568995919809e-06
+    }
+  ],
+  "grid_refinement": {
+    "results": [
+      {
+        "SOC_nodes": 17,
+        "states": 4131,
+        "posterior_B": 33048,
+        "queries": {
+          "Q": 0.048932511155056514,
+          "R": 0.11709396395133997,
+          "soc": 0.5625157311536476
+        },
+        "log_evidence": 11.286433063392842,
+        "SOC_variance": 3.2384020785964682e-06
+      },
+      {
+        "SOC_nodes": 33,
+        "states": 8019,
+        "posterior_B": 64152,
+        "queries": {
+          "Q": 0.048814910379340014,
+          "R": 0.11736136923316867,
+          "soc": 0.5836526176170399
+        },
+        "log_evidence": 11.238931070490896,
+        "SOC_variance": 0.0002261793700076782
+      },
+      {
+        "SOC_nodes": 65,
+        "states": 15795,
+        "posterior_B": 126360,
+        "queries": {
+          "Q": 0.047896359275046485,
+          "R": 0.11772718541612756,
+          "soc": 0.5854886722941428
+        },
+        "log_evidence": 10.11717977185772,
+        "SOC_variance": 0.0001244573624813253
+      }
+    ],
+    "scope": "SOC-grid sensitivity only; fixed discrete health/thermal/nuisance support. Not continuous convergence or calibrated coverage."
+  },
+  "coarse_to_fine_changes": {
+    "Q_relative_percent": 2.163320752752608,
+    "SOC_pp": -2.2972941140495196
+  },
+  "storage": {
+    "joint_cells": 4131,
+    "float64_probability_B": 33048,
+    "linear8_B": 4131,
+    "linear12_or_log12_B": 6197,
+    "log16_B": 8262,
+    "shape_index_and_mask_B": 518,
+    "shape_dictionary_parameters_B": 864,
+    "complete_SRAM_B": null,
+    "python_cached_dictionary_B": 165240,
+    "python_feature_grid_B": 198288
+  },
+  "resources": {
+    "cpu_seconds_by_stage": {
+      "attempt001": 0.444709193,
+      "tails001": 0.4650284189999999,
+      "log16_001": 0.234037385
+    },
+    "main_maximum_RSS_B": 53698560,
+    "scope": "Qualification runs, not battery-estimator throughput; plots excluded"
+  },
+  "selected_diagnostic_reference": "Log16 fixed-span512 amplitude codec; preserve joint support and log-ratio error ledger",
+  "next": "Control/replace coarse SOC-grid transport while retaining capacity-path and temperature dependence; then reduce shape coordinates with bounded log-residual distortion and complete workspace accounting. Keep exactly composable pending physical transport separate where commutation permits.",
+  "original_rounding_failure": {
+    "scope": "Pre-qualification analytic codec audit; original version preserved",
+    "original_packet": "e5701a",
+    "reencoding_changed": true,
+    "TV_after_100_empty_reencodings": 0.0014111264224768976,
+    "cause": "Unit-sphere normalization changes amplitude lattice scale after every encoding",
+    "repair": "Use max-normalized relative square-root amplitudes with nearest-integer nonzero codes; derive normalization error bound and test idempotence",
+    "source_identities": {
+      "codecs.py": "c36be16e3a9320d5a580f2fe6303cb691a4386229ce6ebf2fa53ec1f00a8dacb",
+      "plan.json": "762bbc8cb1b6f700d3e4229420cfed08b2d8776c77977a252a718346d627b25f"
+    }
+  },
+  "no_remote_execution": true,
+  "production_changed": false,
+  "aging_calibrated": false,
+  "continuous_posterior_qualified": false,
+  "coverage_validated": false,
+  "complete_memory_qualified": false,
+  "lifetime_qualified": false
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "joint_mass_codebook_plan_v1",
+  "branch": "experiments/joint-mass-codebook-001",
+  "objective": "Implement a small normalized monotone/thermal joint history comparator; compare explicit geometric codebooks against exact finite-state marginalization and an unretired path-sum oracle.",
+  "model": {
+    "kind": "finite-state numerical comparator, not calibrated continuous battery posterior",
+    "health": "reference capacity loss and R0 growth, each 0/0.15/0.30 of declared reference",
+    "references": {"Q_Ah": 0.06, "R0_ohm": 0.1},
+    "aging": "continuous-time pure-birth generator with separate Q/R and shared damage jumps; rates supplied, not inferred; forward moves only, absorbing at design-envelope edges",
+    "rate_interpretation": "Engineering qualification assumptions. Slow and accelerated stress profiles are separate. No ten-year aging-rate calibration or hidden exponential forgetting.",
+    "temperature": "measured piecewise-linear history; separate uncertain reversible linear-in-temperature Q/R laws anchored at25C; common measured thermal activity modulates supplied aging rates",
+    "carried_state": "SOC distribution transported using actual held-current durations and current effective capacity; positive barycentric deposition onto a declared SOC grid",
+    "nuisance": "three public joint RC/H/gamma/entering-state candidates; uncertainty retained across all observations, never fixed to synthetic truth",
+    "noise": "independent Gaussian voltage errors with declared sigma; original illustrative OCV shape",
+    "normalization": "every stochastic transition and observation normalizer retained; outside-domain SOC probability raises an unresolved error instead of clipping",
+    "base_SOC_nodes": 17,
+    "refinement_SOC_nodes": [33,65],
+    "continuous_model_limit": "SOC-grid transport and discrete health/thermal/nuisance support are explicit approximations; same-grid agreement alone cannot certify the continuous battery"
+  },
+  "representations": [
+    "Single bivariate Gaussian support mass: quantized standardized thresholds and correlation, with a displacement/normal-distribution TV bound",
+    "Full joint discrete posterior: positive square-root mass on a unit sphere, upward lattice encoding at8/12bits preserving exact support zeros",
+    "Small frozen dictionary of joint Gaussian shapes fitted to separate public training fixtures, plus an exact support bitmap; index, dictionary parameters and evaluation scratch counted separately"
+  ],
+  "evaluation": [
+    "Normalizers, monotone paths, time/exposure semigroup controls, covariance and unknown nuisance persistence",
+    "Chronological filter vs an explicit unmerged two-step path sum, with normalization and all joint coordinates",
+    "Held-out weak/driven/temperature-reversal fixtures, quantizing after each update; no truth-guided centering or dictionary retraining on held-out data",
+    "Exact finite-grid TV, Hellinger angle, covariance and SOC/Q mean distortion; explicit conservative accumulated TV ledger",
+    "SOC-grid refinement reported independently of compression error; no arbitrary NLL success threshold",
+    "Actual packed sizes, full dictionary cost and Python peak memory; no index-only SRAM claim"
+  ],
+  "no_production_change": true,
+  "no_long_sweep": true,
+  "no_new_remote_SCM_execution": true,
+  "qualification_limit": "Finite mathematical/numerical controls and comparative measurements, not posterior coverage, physical aging calibration, full SRAM or lifetime qualification"
+}

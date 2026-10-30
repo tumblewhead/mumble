@@ -1,0 +1,18 @@
+{
+  "schema":"foster_feedback_implementation_v1",
+  "registered_before_execution":true,
+  "user_direction":"Continuous physical states and all11 rolling parameters; history is likelihood plus state transport. Encode coefficients, never a discrete battery population. Judge practical accuracy and sustained behavior before optimization.",
+  "model_contract":"specifications/evidence_feedback_001/model.json",
+  "implementation":"New desktop rolling-boundary adapter using bounded Gauss-Newton refinement, independently compiled Foster sensitivities, and a generic Gaussian message backend under the evidence-feedback protocol. Previous original-entering C rolling implementation remains preserved; it is not silently relabeled as this adapter.",
+  "state_chart":"z,v1,v2,v3,h,logQ,logR0,logR1,logtau1,logR2,log(tau2-tau1),logR3,log(tau3-tau2),logH,loggamma_plus,loggamma_minus. Strictly positive R0/H subdomain for this reference; exact zero requires another chart.",
+  "rolling":"16-record nonoverlapping retirement blocks,4Gauss-Newton rounds maximum,8backtracking fractions; every35Hz record processed. Fits use feedback once. Public prior and numeric stopping rules are fixed before results.",
+  "token":"Prior-free square-root quadratic likelihood centered at the rolling fit, with deterministic first-order joint state transport. Joint parameter/state covariance retained in feedback. Exactly Gaussian only for that local linearization; global nonlinear posterior and coverage unresolved.",
+  "encoding":"Compare binary64 coefficients with binary32 coefficients for likelihood root and transport Jacobian. Centers/endpoints/likelihood normalization remain binary64. No physical parameter grid, tail pruning, artificial health decay or process noise.",
+  "temperature":"Exogenous known cell T, held per sample; public known Arrhenius coefficients (not learned). Common tau thermal coefficient preserves ordering. OCV intercept/slope are public characterized calibration, not fitted from truth; residual0 is a declared synthetic control.",
+  "health":"Stationary reference parameters in this first integrated four-hour control. No hidden deterioration rate. Observation-supported parameter trajectories remain later work; no aging tracking claim from this run.",
+  "qualification":["C forward model against independent scalar plant","all16 analytic sensitivities against finite differences","Gaussian token against retained linearized rows including log normalizer and transport","continuous between-node capacities","no prior/source duplication and atomic retirement","short retained nonlinear-data fit diagnostic","short runtime benchmark before4h execution"],
+  "four_hour":"504000samples35Hz;90min informative balanced pulses,90min zero current,60min renewed pulses;T17-33C;4mV measurement noise plus12bitADC. One frozen off-grid continuous cell and one deterministic noise seed. Truth only in plant/scorer.",
+  "assessment":"0.5%relativeQ and0.5SOCpp preferred; all block outputs, phases, uncertainty misses, query/encoding differences, numerical stops, ownership, time and actual/packed storage. Preserve failures; no truth-tuned retries.",
+  "outputs":"Portable command generates, qualifies and runs into new output directory; explicit source hashes, calibration, configuration, inputs, result and plots. No hardcoded owner filesystem path.",
+  "limits":"Local Gaussian projection, characterized OCV/thermal laws, no complete10KiBSRAM or M23timing, no calibrated coverage or ten-year proof. Physical integration is new experimental adapter, not production release."
+}

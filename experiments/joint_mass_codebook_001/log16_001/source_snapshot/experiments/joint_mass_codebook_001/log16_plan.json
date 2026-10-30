@@ -1,0 +1,8 @@
+{
+  "schema": "joint_mass_log16_followup_v1",
+  "motivation": "The separate tail audit found that the12bit fixed-log-span encoding preserves relative tails but degrades core precision. Measure16bit tradeoffs before choosing a diagnostic reference.",
+  "representation": "Same fixed512 binary-amplitude-exponent span and zero-support semantics as log12, using16bits per coordinate; no held-out dictionary adaptation or range tuning.",
+  "controls": ["same six held-out fixture/profile combinations", "same rare-tail observation adversary", "local and cumulative log-oscillation bounds", "idempotence", "mean and standard-deviation distortion", "actual packed bytes"],
+  "decision_scope": "Compare metrics and costs without inventing a pass threshold or claiming continuous/posterior/lifetime qualification.",
+  "preservation": "All primary, tail and prequalification artifacts remain hash-bound and unchanged."
+}

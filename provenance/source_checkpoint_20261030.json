@@ -1,0 +1,317 @@
+{
+  "schema": "mumble_source_checkpoint_v1",
+  "branch": "checkpoint/source-only-20261030",
+  "parent_revision": "c925d51e69f4d8d34505e0561082cf4cb4f852ea",
+  "source_local_revision": "c9571cfc020470ff5b1ada95c20260119325da31",
+  "large_local_checkpoint_is_ancestor": false,
+  "selection": "All changed source code, documentation, configuration and small receipts up to 256 KiB each; no new plots, raw trajectories, archives, compiled objects/libraries or large generated JSON. Existing published history is retained.",
+  "selected_existing_files": 2859,
+  "selected_existing_bytes": 33418919,
+  "source_files_copied_exactly_before_test_adaptation": 1003,
+  "excluded_new_files": 1667,
+  "excluded_new_bytes": 1995509764,
+  "largest_exclusions": [
+    {
+      "path": "experiments/foster_cccv_stimulus_001/cycle001/case_0000/truth.npy",
+      "bytes": 68544128
+    },
+    {
+      "path": "experiments/foster_cccv_stimulus_001/cycle001/case_0000/float32_trace.csv",
+      "bytes": 33206872
+    },
+    {
+      "path": "experiments/foster_cccv_stimulus_001/cycle001/case_0000/float64_trace.csv",
+      "bytes": 33205583
+    },
+    {
+      "path": "experiments/foster_c_baseline_001/weak001/float32_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_baseline_001/weak001/float64_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_baseline_001/weak002/float32_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_baseline_001/weak002/float64_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_cpu_001/attempt001/weak_4_stage0_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_cpu_001/attempt001/weak_4_stage3_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_cpu_001/attempt001/weak_8_stage0_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_cpu_001/attempt001/weak_8_stage3_trace.npy",
+      "bytes": 27216128
+    },
+    {
+      "path": "experiments/foster_c_history_001/attempt001/weak_4_stage0_trace.npy",
+      "bytes": 27216128
+    }
+  ],
+  "local_originals_modified": false,
+  "test_adaptation": "Active campaign integration test rebuilds its frozen C reference in a temporary directory and uses an exact 1027-row prefix fixture instead of the full generated trajectory. Estimator/model/history code is unchanged.",
+  "fixture": {
+    "path": "tests/fixtures/foster_cccv_prefix_1027.npy",
+    "bytes": 41208,
+    "sha256": "26206b3a6d0625eda82ab1fe7e420a5983f3a54e3871922717fa946b28702886",
+    "source_local_path": "experiments/foster_cccv_stimulus_001/cycle001/case_0000/observations.npy",
+    "rows": [
+      0,
+      1027
+    ],
+    "exact_prefix_verified": true
+  },
+  "limitations": [
+    "Historical evidence manifests retain their original hashes; not all referenced artifacts are distributed.",
+    "Older qualification suites may need local historical fixtures or regenerated artifacts.",
+    "This commit excludes new large files; it does not purge existing published Git history."
+  ],
+  "validation": {
+    "status": "passed",
+    "targeted_tests": 35,
+    "clean_source_checkout": true,
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MPLCONFIGDIR=/tmp/mumble-source-checkpoint-matplotlib python3 -B -m unittest experiments.foster_campaign_001.test_campaign experiments.foster_campaign_parallel_001.test_parallel experiments.foster_cccv_stimulus_001.test_charger experiments.foster_campaign_001.test_plot_summary experiments.foster_campaign_c_001.test_integration experiments.foster_campaign_001.test_evidence -v",
+    "log_sha256": "6a239ff7bbbf160eed1a819b2bed1c10f2ddae0fa273de59c1a57a04b63f720f",
+    "test_log": "provenance/source_checkpoint_20261030_tests.txt",
+    "initial_packaging_check": "32 tests initially exposed 4 failures/errors from missing historical artifacts; repaired runner packaging and reran all 35 successfully."
+  },
+  "omitted_parent_artifacts": {
+    "experiments/foster_feedback_001/development001/errors.pdf": {
+      "bytes": 19935,
+      "sha256": "ad59de91dcaa4ecbff61375b844769c0df1788dde794209d6f2db645bcdfeb86"
+    },
+    "experiments/foster_feedback_001/development001/errors.png": {
+      "bytes": 70050,
+      "sha256": "030c313113c0ba6ff91c0e2baa9f0c729fbee32d8b9e6e52f6ff33b1d54bc1e6"
+    },
+    "experiments/foster_feedback_001/development001/float32_trace.npy": {
+      "bytes": 10240,
+      "sha256": "5522f64d3dcea6411a111a2f30795cdb419d207b6816e0886b2a743c22d78c45"
+    },
+    "experiments/foster_feedback_001/development001/float64_trace.npy": {
+      "bytes": 10240,
+      "sha256": "bd9ebf276110ff900629b2b200cadbbb9348b6b059cd19f5b9495a2bb159bd05"
+    },
+    "experiments/foster_feedback_001/development001/model.so": {
+      "bytes": 15616,
+      "sha256": "11b016569733faef8cf6fe64cece47a894b95fb59c95aec8977b7ebde7b50c43"
+    },
+    "experiments/foster_feedback_001/development001/observations.npy": {
+      "bytes": 100928,
+      "sha256": "5cf5e6eaaf749f8d727947b076329040433025f90abb6f4390f27ec95b346f80"
+    },
+    "experiments/foster_feedback_001/development001/truth.npy": {
+      "bytes": 80768,
+      "sha256": "e919576ba35d49854f85b5f62a292d621420eff62bf88bceac95c619a12c60c2"
+    },
+    "experiments/foster_feedback_001/four_hour001/errors.pdf": {
+      "bytes": 174255,
+      "sha256": "783d06ce36f3c8f459a9b3dd646f2fc612d7a0bffb644b20d066c7253540b71d"
+    },
+    "experiments/foster_feedback_001/four_hour001/errors.png": {
+      "bytes": 108131,
+      "sha256": "8c5378c65249ac5e62b157221d6595b481c3eda1eb110f2c34b9e17be6582f19"
+    },
+    "experiments/foster_feedback_001/four_hour001/float32_trace.npy": {
+      "bytes": 2016128,
+      "sha256": "d9231a3da878ea5740f086451de55c87f3264a55ce5c598b88f9d5c5e548f69a"
+    },
+    "experiments/foster_feedback_001/four_hour001/float64_trace.npy": {
+      "bytes": 2016128,
+      "sha256": "f660dcad3ce5c30407843fd08b015c93f88eb047d0c6b2b4314600f3f5254e76"
+    },
+    "experiments/foster_feedback_001/four_hour001/model.so": {
+      "bytes": 15616,
+      "sha256": "11b016569733faef8cf6fe64cece47a894b95fb59c95aec8977b7ebde7b50c43"
+    },
+    "experiments/foster_feedback_001/four_hour001/observations.npy": {
+      "bytes": 20160128,
+      "sha256": "2afea5d91cedc0324f795023b50d502f4d0560bbc195dae0f9914c5c02477b1d"
+    },
+    "experiments/foster_feedback_001/four_hour001/result.json": {
+      "bytes": 857751,
+      "sha256": "ee1922461ad0b420ef6ed5d77abe8e26c0f60d3e41c29dbb894224f376943c40"
+    },
+    "experiments/foster_feedback_001/four_hour001/truth.npy": {
+      "bytes": 16128128,
+      "sha256": "2e1d3addeb8588570b5d607e4b736708c0327e19bc48cf38bf5493a8d370f21c"
+    },
+    "experiments/operator_envelope_001/attempt001/envelope_and_centroid.pdf": {
+      "bytes": 23884,
+      "sha256": "3e4666e25ef0af6df276bda32cc3178372464907e484a17e2a8ddc91e4f601b1"
+    },
+    "experiments/operator_envelope_001/attempt001/envelope_and_centroid.png": {
+      "bytes": 143208,
+      "sha256": "ed986dc8cc9958e448bc7bf11c3c3c10a67a4f0364680a52a297ac6d7993bd23"
+    },
+    "experiments/operator_envelope_001/attempt001/reference.so": {
+      "bytes": 20064,
+      "sha256": "e6e16c87102d388a76346cb06b2f88483b0a8301b31d161edb5e29d364984e31"
+    },
+    "experiments/partitioned_battery_closure_001/attempt001/reference.so": {
+      "bytes": 20064,
+      "sha256": "e6e16c87102d388a76346cb06b2f88483b0a8301b31d161edb5e29d364984e31"
+    },
+    "experiments/ten_year_history_001/attempt001/error_mechanisms.pdf": {
+      "bytes": 24914,
+      "sha256": "6a15921e5419130e7d2ae439c294fe1de29088faccce7a382c004a01b6b942bb"
+    },
+    "experiments/ten_year_history_001/attempt001/error_mechanisms.png": {
+      "bytes": 250324,
+      "sha256": "b09f585ebf9de16531507abc418d28722cb9650c072bc6586d1b4781c971f9f8"
+    },
+    "experiments/monotone_codebook_001/attempt001/monotone_temperature_codebook.pdf": {
+      "bytes": 21318,
+      "sha256": "aaead28a0726f498b678f00c03fe37db0ce6813b4bc222bb429e4020be3c994d"
+    },
+    "experiments/monotone_codebook_001/attempt001/monotone_temperature_codebook.png": {
+      "bytes": 151085,
+      "sha256": "de24448f3190379d948df86469c4f45bcb5d20931b0ae2d70e7f1a2576eac8a2"
+    },
+    "experiments/monotone_codebook_001/attempt001/reference.so": {
+      "bytes": 20064,
+      "sha256": "e6e16c87102d388a76346cb06b2f88483b0a8301b31d161edb5e29d364984e31"
+    },
+    "experiments/joint_mass_codebook_001/attempt001/result.json": {
+      "bytes": 325869,
+      "sha256": "7fa79a18269191b273e63e8860306ec60452902e284c0716d9dbdd0dfbda7ee2"
+    },
+    "experiments/joint_mass_codebook_001/attempt001/source_snapshot/experiments/monotone_codebook_001/attempt001/reference.so": {
+      "bytes": 20064,
+      "sha256": "e6e16c87102d388a76346cb06b2f88483b0a8301b31d161edb5e29d364984e31"
+    },
+    "experiments/joint_mass_codebook_001/figures001/joint_mass_geometry.pdf": {
+      "bytes": 26447,
+      "sha256": "74042c3755a056cfc6a3aced50d1dc775feedda5aac960810501207dfe739b85"
+    },
+    "experiments/joint_mass_codebook_001/figures001/joint_mass_geometry.png": {
+      "bytes": 169823,
+      "sha256": "581383b763ff76b9415214be84c9e4c64bd061eca4d2cce88da43c83078381de"
+    },
+    "experiments/continuous_soc_001/campaign001/generator.so": {
+      "bytes": 20440,
+      "sha256": "4b7e559c055f08f57e3c242049fb5cf38a0cb0e535cf64ec95bb8368fbfd0698"
+    },
+    "experiments/continuous_soc_001/campaign001/inputs/monotone_stress_observations.npy": {
+      "bytes": 20160128,
+      "sha256": "878192fab1fc9055258c574988f6be7b5559c351e1320f8504413a346176952d"
+    },
+    "experiments/continuous_soc_001/campaign001/inputs/monotone_stress_truth.npy": {
+      "bytes": 16128128,
+      "sha256": "4ca9af7889cf8558e4e2d08182eb56c948d4b7dd353f497b9e0b3588d4ebbd96"
+    },
+    "experiments/continuous_soc_001/campaign001/inputs/stationary_observations.npy": {
+      "bytes": 20160128,
+      "sha256": "0396f79f96b64998c19b60c5ffbc8d8ff283455951c8ecd79f46440cb0f6b533"
+    },
+    "experiments/continuous_soc_001/campaign001/inputs/stationary_truth.npy": {
+      "bytes": 16128128,
+      "sha256": "9a32171fba939be622a9e7a755d214b2ba69ac613e7292bb4b40daf786cb32b5"
+    },
+    "experiments/continuous_soc_001/campaign001/monotone_stress/result.json": {
+      "bytes": 327378,
+      "sha256": "e61f0e13294727cec9f33fa035260809994eef6884a24dc758a76a589804725a"
+    },
+    "experiments/continuous_soc_001/campaign001/stationary/result.json": {
+      "bytes": 327475,
+      "sha256": "76b22c3e763199777dea2900279f28de2d39420c98ecd689ce2e107fbf79586a"
+    },
+    "experiments/continuous_soc_001/review001/long_run_errors.pdf": {
+      "bytes": 21926,
+      "sha256": "d957e8d1a4e31ba86a084b008ea619d53c280ae09bec6bff0d74421439d0ad50"
+    },
+    "experiments/continuous_soc_001/review001/long_run_errors.png": {
+      "bytes": 119172,
+      "sha256": "421ca2d8a7d4715f7a26d602e3946df7aaf29aacfa6d911729e2da4bb77c7557"
+    },
+    "experiments/system_history_001/campaign001/between_nodes/legacy_blocks.npy": {
+      "bytes": 1512128,
+      "sha256": "8b1fdd1ccb5dfb9ac0894547daea12618d76d1fcb53f019afddb953d47efd5d9"
+    },
+    "experiments/system_history_001/campaign001/between_nodes/result.json": {
+      "bytes": 359290,
+      "sha256": "6d0bb75727cd5e8ccd42c060daa09e61142169e3d693d704ec6eecfd7388921d"
+    },
+    "experiments/system_history_001/campaign001/combined/legacy_blocks.npy": {
+      "bytes": 1512128,
+      "sha256": "d8cbe5a06dc54ddb80b0c93ee58c20b3c79399512b8660d9e2112c2c9815206e"
+    },
+    "experiments/system_history_001/campaign001/combined/result.json": {
+      "bytes": 364580,
+      "sha256": "cdba4fa7bb187f9ba2d5944c49807569b11a140bf3f7f908c815f276dbc53f54"
+    },
+    "experiments/system_history_001/campaign001/gradual/legacy_blocks.npy": {
+      "bytes": 1512128,
+      "sha256": "54b8eb579c9dc78c8fce17debf22fffd51b26f8dbf43c0898ce3d6a13899b4ba"
+    },
+    "experiments/system_history_001/campaign001/gradual/result.json": {
+      "bytes": 361609,
+      "sha256": "189938c4680ea3050793c42005cd94e0b53cc5a4e816a9e5e1c0b7bc69b9db71"
+    },
+    "experiments/system_history_001/campaign001/inputs/between_nodes_observations.npy": {
+      "bytes": 20160128,
+      "sha256": "1ce53b8fa4a132cae6e5ab5dcd236f84c53d14a0f593c94a6bb9ae0e2ad8b419"
+    },
+    "experiments/system_history_001/campaign001/inputs/between_nodes_truth.npy": {
+      "bytes": 24192128,
+      "sha256": "27e2e8df256fd91dfff532eff936b5ad5e0fd00af64618d0868dc2776bb48f14"
+    },
+    "experiments/system_history_001/campaign001/inputs/combined_observations.npy": {
+      "bytes": 20160128,
+      "sha256": "b7e5863e3eb5cf9edd94cd23af64d519f8b9d9d4d83893169b9654554b750fe7"
+    },
+    "experiments/system_history_001/campaign001/inputs/combined_truth.npy": {
+      "bytes": 24192128,
+      "sha256": "710312472f21a7b792f63f8c1e43b007eb58754e23dabbca62a9cc2bbe8e66a1"
+    },
+    "experiments/system_history_001/campaign001/inputs/gradual_observations.npy": {
+      "bytes": 20160128,
+      "sha256": "0aff001a67ec2b46dc29188a40d736c9199acb6c2a9b1148acbe3f0908091c71"
+    },
+    "experiments/system_history_001/campaign001/inputs/gradual_truth.npy": {
+      "bytes": 24192128,
+      "sha256": "3e41850e6e004d877f13d580880f9623dd2a164bed31b1fb40a706f09b352b7e"
+    },
+    "experiments/system_history_001/campaign001/inputs/matched_observations.npy": {
+      "bytes": 20160128,
+      "sha256": "e71712ed79ca4c59d413dca3ffb160a68316f03f53de3a70fd764200f3ec1dee"
+    },
+    "experiments/system_history_001/campaign001/inputs/matched_truth.npy": {
+      "bytes": 24192128,
+      "sha256": "21b79c4f2eb9782685f32d384624a5bf9b2a6d53773b8798d1609110190f912e"
+    },
+    "experiments/system_history_001/campaign001/matched/legacy_blocks.npy": {
+      "bytes": 1512128,
+      "sha256": "b60628a6ff173af0fe22c7ae33a212fc94f240a0c673577b2fb880bb066b5653"
+    },
+    "experiments/system_history_001/campaign001/matched/result.json": {
+      "bytes": 359214,
+      "sha256": "b931249254e2150af8de8036c7c73c5a4a8634da221d88f26f44bc7ad639fe28"
+    },
+    "experiments/system_history_001/campaign001/native.so": {
+      "bytes": 72168,
+      "sha256": "038b800b3738e57cbf57c594b5d9e39583b3e9088f7aa47b3828cf4bcf1350b5"
+    },
+    "experiments/system_history_001/review001/system_errors.pdf": {
+      "bytes": 43044,
+      "sha256": "d1bed18bf037748d76fb3d0ef7b44deebac723d1d100590c4ff3b97fd7b63d51"
+    },
+    "experiments/system_history_001/review001/system_errors.png": {
+      "bytes": 358146,
+      "sha256": "1b5b20bfa4a62d39425bd1b567f806bc4a489e9638f887eca09ff3558b82ab54"
+    }
+  },
+  "runner_adaptation": "Campaign startup verifies all present historical artifacts, rejects missing source/unlisted artifacts, and records explicitly omitted historical outputs separately. Frozen historical runners/manifests remain unchanged."
+}

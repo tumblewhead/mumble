@@ -1,0 +1,80 @@
+{
+  "status": "generated",
+  "valid_records": 1512000,
+  "charger": {
+    "settings": {
+      "nominal_capacity_ah": 0.06,
+      "charge_c": [
+        2.0,
+        1.0,
+        1.5
+      ],
+      "discharge_c": [
+        0.2,
+        0.45,
+        0.7
+      ],
+      "charge_step_s": 900.0,
+      "discharge_step_s": 600.0,
+      "cv_voltage": 4.06,
+      "discharge_cutoff_v": 3.18,
+      "cycle_rest_s": 300.0,
+      "taper_end_c": 0.05,
+      "taper_hold_s": 30.0,
+      "cv_gain": 0.5
+    },
+    "phase": "cc",
+    "phase_records": {
+      "cc": 257850,
+      "cv": 62737,
+      "rest_after_charge": 52500,
+      "discharge": 1086413,
+      "rest_after_discharge": 52500
+    },
+    "completed_cycles": 5,
+    "charge_Ah": 0.2102320297624449,
+    "discharge_Ah": 0.22771611904753172,
+    "authority": "Harness only: nominal nameplate capacity, global-time schedules and measured terminal V; no true SOC/Q or estimator feedback",
+    "current_grid_A": 0.000125,
+    "reference": "C-rates use nominal_capacity_ah, not unknown actual capacity",
+    "CV_scope": "Finite-bandwidth integral controller, not algebraic exact voltage clamp; current-limited CC/CV",
+    "timing": "Phase changes apply to the sample after the triggering measurement"
+  },
+  "requested_records": 1512000,
+  "sample_rate_Hz": 35,
+  "observation_columns": [
+    "dt_s",
+    "current_A",
+    "temperature_C",
+    "voltage_V",
+    "sigma_V"
+  ],
+  "truth_columns": [
+    "SOC",
+    "v1_V",
+    "v2_V",
+    "v3_V",
+    "h",
+    "Q_Ah",
+    "R0_ohm",
+    "R1_ohm",
+    "tau1_s",
+    "R2_ohm",
+    "tau2_s",
+    "R3_ohm",
+    "tau3_s",
+    "H_V",
+    "gamma_plus",
+    "gamma_minus",
+    "noiseless_voltage_V"
+  ],
+  "observation_identity": {
+    "bytes": 60480128,
+    "sha256": "61880c45bf64e7ce5eaa6e307a64ac4d485c4eb68943a8412c94809cec1da2f8"
+  },
+  "truth_identity": {
+    "bytes": 205632128,
+    "sha256": "b30ca53f32b070670591e9401f55afaca1b7e63d5a4445f251466a61575cfd20"
+  },
+  "incomplete_array_rule": "Only rows below valid_records are valid; unused preallocated rows must not be read."
+}

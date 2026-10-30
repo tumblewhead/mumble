@@ -1,0 +1,58 @@
+{
+  "caps": {
+    "CPU_s": null,
+    "RSS_bytes": 536870912,
+    "automatic_retries": 0,
+    "output_bytes": 67108864,
+    "prefix_conservative_steps": {
+      "128": 32000000000,
+      "32": 4000000000,
+      "8": 300000000
+    },
+    "wall_s": null
+  },
+  "cost_probes": {
+    "prefixes": [
+      8,
+      32,
+      128
+    ],
+    "prior_paths": 256,
+    "purpose": "Prior/density arithmetic timing and path-array dimensions only; not posterior adequacy or full-runtime prediction",
+    "repeated_density_batches": 3,
+    "seed_rule": "900000+prefix",
+    "total_conservative_steps_cap": 1000000
+  },
+  "ess_fraction": 0.8,
+  "initialization": "Exact original bounded prior draws; no warm posterior, plant values or fitted centers",
+  "max_paths_per_population": 40000000,
+  "max_stages": 96,
+  "mode_diagnostics": "Initial low-capacity component responsibility mean and replicate MCSE; no requirement to force both modes if data disfavor one",
+  "mutations": 96,
+  "no_uncertainty_substitution": true,
+  "particle_levels": [
+    2048,
+    4096
+  ],
+  "prefixes": [
+    8,
+    32,
+    128
+  ],
+  "profile_rates": [
+    -0.001,
+    -0.01,
+    0.0001,
+    0.001,
+    0.2,
+    0.5,
+    0.1,
+    0.3
+  ],
+  "proposal_factor": 0.5,
+  "query": "Conditioned current marginal only; separate final-voltage prediction not rerun at each length",
+  "replicates_per_level": 4,
+  "seed_rule": "800000+1000*prefix+100*level+replicate; level0/1, replicate1..4",
+  "source_id": "posterior_prefix_scaling_001_fabricated",
+  "thresholds": "Unchanged smc.assess on all20 reported coordinates/functions, with original posterior.SCALES"
+}

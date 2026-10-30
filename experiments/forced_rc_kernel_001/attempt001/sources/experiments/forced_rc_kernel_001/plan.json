@@ -1,0 +1,32 @@
+{
+  "schema": "mumble_forced_rc_kernel_plan_v1",
+  "status": "frozen_before_evaluation",
+  "question": "Does the physical forced RC coefficient recurrence remove the discrepancy left after free-response repair?",
+  "inputs": "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json",
+  "predecessor": "experiments/free_rc_kernel_001/attempt001/receipt.json",
+  "fixed": {"prefixes": [64,4096], "domains": ["public_half_SD","full_public"], "queries": "same97local/129full", "hysteresis": "physical rate degree4 total degree", "OCV": "charge degree12", "sigma_V": 0.001},
+  "baselines": ["original_physical_hysteresis", "free_time_kernel_K9", "free_time_kernel_K13"],
+  "candidates": {"families": ["time_kernel","log_tau_interpolation"], "K": [5,9,13], "scope": "all three modes, both forced and free; same K per component"},
+  "primary_cases": 36,
+  "recurrence": "f_new=truncate(beta(dt)*f_old)+I*(e0-beta(dt)); f_0=0; Cayley pivot c=sqrt(lambda_min*lambda_max), frozen from declared support. beta_0 subtraction uses -expm1(-c*dt). No forgetting, threshold or state reset.",
+  "log_control": "K fixed log-tau Chebyshev nodes, exact forced physical recurrence at nodes, project to K coefficients; same feature count. K5 reproduces original degree4 representation.",
+  "history": "Full QR of complete normalized residual rows retains all cross terms. Original16 parameter coordinates and priors. Query Jacobian analytic, no density-coordinate transformation.",
+  "endpoint": "Forced endpoint from retained coefficients or interpolation nodes; exact free endpoint from queried tau and actual elapsed time, as in predecessor. Report endpoint error separately from historical row error.",
+  "controls": {
+    "raw": "For each prefix/domain, exact-all-RC substitution in inherited baseline; exact-forced substitution in freeK13. For each joint K13 candidate, exact-free, exact-forced, exact-hysteresis, exact-OCV and exact-all-RC substitutions. Diagnostic only, not deployable.",
+    "state_algebra": "For every time-kernel candidate: zero input and constant0.23A at the first64 original intervals; independent current-step superposition at prefix1,17,64; synthetic zero/uneven intervals with signed current; chronological affine blocks split17,45,last, two merge trees; carried state across split17. Compare coefficients before decoding.",
+    "likelihood": "Direct rows, QR and globally aligned merged QR costs/gradients; GN at public mean. No implicit independent event-history closure claim.",
+    "numerics": "Inherited abs2e-8 plus rel2e-10; derivative central differences eps=1e-5publicSD, scaled error<=1e-5. Finite numerical mismatches recorded without aborting. Source/domain/nonfinite and work-cap violations hard stop.",
+    "arithmetic_diagnostic": "For 4096, each domain, baseline and joint timeK9/K13: compare optional column-norm-equilibrated QR and long-double direct-row gradients at public mean and largest raw-QR allowance-ratio witness. Same tolerances, primary raw QR preserved. No adaptive retry.",
+    "cancellation": "4096 local joint timeK9 zero represented residual, QR/direct costs without clipping",
+    "source_reference": "Original recurrence cost/endpoint versus saved C references. Predecessor costs reproduced on same queries. No truth or fitting."
+  },
+  "forced_bounds": {
+    "variation": "|f-fK| <= TV(I)*rho^K/(1-rho), TV includes initial step from0; derive from current-step superposition",
+    "bounded_input": "For rho<r<1, |f-fK| <= Imax*(1+r^2)/(1-r^2)*(rho/r)^K/(1-rho/r); use fixed r=(1+rho)/2. Follows from integral response with complex lambda in right half plane. Symbolic exact arithmetic; not a lifetime NLL or floating-point certificate.",
+    "check": "Use minimum of the two bounds at each observed time for all original query points. Multiply by uncertain R only when converting normalized forced state to voltage."
+  },
+  "memory": "F=45+6K, full packed binary64 QR. Retain inherited648B boundary conservatively plus3K forced state,32B elapsed/pivots; metadata400B, nonbank3848B, old2640B query scratch plus24*(F-75)+8*(6K+16) kernel work. Optional QR scaling adds8F, separately. Prospective C ledger, not Python or measured M23.",
+  "work_caps": {"model_node_steps": 3000000, "coefficient_convolution_multiply_adds": 30000000, "carrier_values": 10000000, "automatic_retries": 0},
+  "limits": ["stationary short fabricated prefixes","no rolling solver or aging changes","no inferred posterior support narrowing","0.1NLL not an acceptance gate","do not promote a compressor based on this representation study"]
+}

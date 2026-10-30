@@ -1,0 +1,17 @@
+{
+  "schema": "monotone_spline_codebook_plan_v1",
+  "status": "registered_before_execution",
+  "user_decisions": {
+    "aging": "Assume latent reference-condition R0/R_i are nondecreasing and Q/C_i nonincreasing. This is the chosen model direction, not empirical validation or a drift/curvature bound.",
+    "temperature": "User selected BOTH measured T(t) history and parameter dependence on temperature, as separate representations.",
+    "compression": "Investigate quantized spline codebooks with retained remainder and joint uncertainty."
+  },
+  "scope": "Implement exact real-arithmetic square-root re-centering, support-aware monotone spline families, explicit product-codebook packing, and separate temperature representations. Qualify algebra and original conditional battery factors; no full aging posterior or new physical-temperature calibration.",
+  "spline_families": ["degree-one spline through four ordered knot sites", "single cubic Bernstein segment with four control coefficients; these are not four interpolation knots"],
+  "codebook": {"kind": "implicit uniform scalar product codebook, monotone coefficient order checked", "bits": [8,12,16], "health_relative_range": [0.5,1.5], "temperature_C_range": [-20,60], "thermal_coefficient_range": [-0.3,0.3], "scope": "Frozen engineering codebook envelopes, not calibrated physical support; no clipping or extrapolation"},
+  "fixtures": {"seed": 291205, "regression_records": 256, "queries": 32, "recenter_operations": 64, "battery_records": 128, "curve_queries": 401, "T_reference_C": 25},
+  "checks": ["Square-root versus independent batch residuals, gradients and Gaussian algebra control", "Atomic append, disjoint merge, normalization, source/basis/order rejection", "Re-centering and quantized-center packets preserve full likelihood and all error-ledger entries", "Ordered coefficients guarantee monotonicity in both families", "Code packing, exact decode identities, no overflow/clipping, monotonic rounding", "Uniform curve quantization and composed age/T(t)/g(T) error bounds", "Reference-temperature anchoring and age-temperature confounding", "No loss of joint age/thermal/residual cross terms", "Existing C conditional battery likelihood survives amplitude-center recharting"],
+  "tolerances": {"absolute": 2e-10, "relative": 2e-10, "battery_NLL_absolute": 2e-6, "meaning": "Finite host regression allowance, not a physical noise threshold or ten-year rounding certificate"},
+  "caps": {"battery_fits": 0, "particle_steps": 0, "canonical_trajectories": 0, "automatic_retries": 0},
+  "open": ["Curve remainder between knots/control points", "Calibrated monotone aging transition and temperature dependence", "Reference-quantity uncertainty and RC state-transfer convention", "Full joint support-aware marginalization", "Richer nonlinear battery history representation", "Complete SRAM and lifetime arithmetic bounds"]
+}

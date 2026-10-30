@@ -1,0 +1,14 @@
+{
+  "schema": "incremental_history_plan_v1",
+  "status": "registered_before_qualification",
+  "parent": "proofs/ten_year_history_001/roadmap.json",
+  "scope": "P1 ownership/operator prototype and P2 exact real-arithmetic linear-Gaussian reference; no battery integration or calibrated aging model",
+  "model": "x_next=F*x+b+w; y=H*x_next+v. Independent zero-mean Gaussian w,v, known matrices, Q positive semidefinite including zero, R positive definite. Full Euclidean support; no truncation or nonlinear battery substitution.",
+  "token": "Prior-free normalized transition conditional on interval observations, multiplied by the interval evidence likelihood of its entering state. Full cross terms and evidence normalizer retained.",
+  "ownership": "Single immutable source/model/noise/calibration contract, contiguous half-open sequence intervals and matching integer-tick boundaries. Reject overlap, gaps and incompatible contracts. Only observations, never estimate views, enter the queue.",
+  "fixtures": {"seed": 290103, "vector_cases": 24, "maximum_batch_records": 12, "repetition_records": 4096, "rolling_capacity": 4},
+  "checks": ["Independent batch conditioning of the full joint Gaussian versus sequential and grouped operators", "Both composition parenthesizations and identity", "Evidence constants and off-anchor conditional queries", "Zero and rank-deficient process covariance without added noise", "Repeated static observations equal summed sufficient statistics", "No excitation preserves unobserved uncertainty; correlation permits indirect correction", "Explicit aging covariance adds uncertainty, with no discount factor", "Source/order/boundary/type/finite-input rejection and atomicity", "Overlapping rolling windows do not duplicate evidence; repeated queries do not mutate state", "Actual irregular and zero intervals, signed charge and throughput", "Original proof and source hashes preserved"],
+  "comparison": {"rtol": 2e-10, "atol": 2e-10, "meaning": "Finite float64 regression allowance; not a physical acceptance threshold or lifetime arithmetic bound"},
+  "caps": {"battery_fits": 0, "particle_steps": 0, "long_trajectory_runs": 0, "automatic_retries": 0},
+  "open": ["Battery closure and RC aging state continuity", "Calibrated aging uncertainty and useful query budgets", "Ten-year arithmetic and actual maximum update count", "Complete SRAM/work accounting and C integration"]
+}

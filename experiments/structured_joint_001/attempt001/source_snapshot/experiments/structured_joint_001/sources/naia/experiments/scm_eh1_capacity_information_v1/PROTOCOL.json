@@ -1,0 +1,133 @@
+{
+  "schema": "scm.eh1.capacity_information.protocol.v1",
+  "status": "PROSPECTIVE_FROZEN_BEFORE_OUTCOMES_NOT_EXECUTED",
+  "rate_hz": 35,
+  "duration_s": 1170,
+  "frames_per_arm": 40950,
+  "cases": [
+    "cell_A",
+    "cell_B"
+  ],
+  "arms": [
+    "informative",
+    "zero_current"
+  ],
+  "informative_schedule": [
+    {
+      "start_s": 0,
+      "end_s": 30,
+      "current_A": 0
+    },
+    {
+      "start_s": 30,
+      "end_s": 1110,
+      "current_A": 0.01
+    },
+    {
+      "start_s": 1110,
+      "end_s": 1170,
+      "current_A": 0
+    }
+  ],
+  "control_current_A": 0,
+  "public_chamber_command_K": 298.15,
+  "ambient_support_K": [
+    296.65,
+    299.65
+  ],
+  "Pc_support_W": [
+    -0.002,
+    0.006
+  ],
+  "Ps_support_W": [
+    -0.002,
+    0.006
+  ],
+  "thermal_scope": "Original dynamic Tc/Ts/Tm and temperature-dependent laws; constant public chamber command is not fixed core temperature. Hidden actual boundary sinusoids unchanged.",
+  "initial_Q_support_Ah": [
+    0.048,
+    0.084
+  ],
+  "new_information_design": {
+    "charge_excursion_mAh": 3,
+    "shared_initial_SOC_extreme_Q_separation_pp": 2.678571428571429,
+    "claim": "Design signal comparison, not an identifiability proof."
+  },
+  "snapshots_at_samples": [
+    1050,
+    38850,
+    40950
+  ],
+  "benchmark_frames_per_arm": 100,
+  "expected_final_individual_rows": 127,
+  "individual_row_budget": 128,
+  "control_rest_pair_saturation": "Allowed and reported; Q-independent rest rows do not become capacity information.",
+  "gates": {
+    "Q_informative_max_final_width_fraction": 0.9,
+    "Q_control_max_abs_width_change_Ah": 1e-12,
+    "Q_retention_max_widening_Ah": 1e-12,
+    "sampled_containment_outside_count": 0,
+    "finite_chronological_causal_output": true,
+    "individual_row_budget_full": false,
+    "all_four_arms_complete": true,
+    "reference_receipt_required": true,
+    "benchmark_receipt_required": true,
+    "structural_receipt_required": true,
+    "Q_contraction_checkpoint_s": 1170,
+    "Q_stroke_end_checkpoint_s": 1110,
+    "Q_stroke_end_role": "Diagnostic only: final rest can expose capacity information by reducing polarization ambiguity.",
+    "no_estimator_tube_domain_straddling": true,
+    "Q_information_threshold_basis": "Prospective10%width-contraction research screen. Not product accuracy, capacity convergence deadline, or proof of identifiability. Report all contraction, including below screen; unsuccessful informative arms require diagnosis rather than concluding Q cannot be learned.",
+    "known_joint_witness": "At fresh prior and each30/1110/1170s saved milestone: one common active candidate for12D joint coordinates plus z0 and immutable eta/H wedge and all authoritative factors; dynamic-state truth separately checked as union containment.",
+    "Q_detectable_width_reduction_Ah": 1e-12,
+    "Q_detection_tolerance_basis": "Arithmetic comparison tolerance only, not a metrology floor or product threshold; separately report raw width reduction and10%research screen."
+  },
+  "reference": {
+    "primary_rtol": 2e-11,
+    "primary_max_step_s": 0.025,
+    "tighter_rtol": 2e-12,
+    "tighter_max_step_s": 0.0125,
+    "max_abs_difference": {
+      "soc": 1e-09,
+      "voltage_V": 1e-08,
+      "h": 1e-08,
+      "polarization_V": 1e-08,
+      "temperature_K": 1e-06
+    },
+    "scope": "Full-workload independent numerical consistency only; not validated ODE or physical proof."
+  },
+  "scientific_limits": [
+    "No month-long or indefinite stability qualification",
+    "No target capacity accuracy or total convergence-time claim",
+    "No posterior coverage",
+    "No M23 qualification",
+    "N03 and full numerical proof obligations remain open",
+    "Historical U01 failure is preserved, not reinterpreted as estimator impossibility"
+  ],
+  "execution_authority": "Owner runs tests and experiments. Preparation did not execute these modes.",
+  "domain_event_semantics": "Sampled reference thermal domain exits fail. Estimator conservative tube straddling separately fails scope gate as unresolved, not as physical-exit proof.",
+  "evidence_chunk_frames": 1400,
+  "execution_budget": {
+    "structural_estimator_updates": 0,
+    "reference_estimator_updates": 0,
+    "benchmark_estimator_updates": 400,
+    "full_primary_estimator_updates": 163800,
+    "all_stages_estimator_updates": 164200,
+    "reference_full_trajectory_integrations": 8,
+    "benchmark_short_trajectory_integrations": 4,
+    "full_primary_repeat_integrations": 4,
+    "all_stages_trajectory_integrations": 16,
+    "piecewise_ODE_solver_calls": 40,
+    "generated_sample_frames_across_all_integrations": 491800,
+    "scope": "Integration invocations and piecewise solver calls, not adaptive internal RHS evaluations. No automatic repetitions, extension or threshold search."
+  },
+  "source_checkpoint_reviewed": "61ce499b5cc1ea25ebd10145083ddfea1ef3daae",
+  "outcomes": {
+    "execution": "PASS only if all4fixed arms complete and integrity,containment,domain,nonwidening,coherent witness and zero-current controls pass. No10%benefit is not execution failure.",
+    "research_pass": "Q_INFORMATION_RESEARCH_SCREEN_PASS when both informative arms narrow by>=10%initial width.",
+    "below_screen": "DETECTABLE_Q_NARROWING_BELOW_RESEARCH_SCREEN when both informative arms exceed arithmetic detection tolerance but not both10%screen.",
+    "mixed": "MIXED_Q_INFORMATION_SIGNAL when only one informative arm exceeds arithmetic detection tolerance.",
+    "inconclusive": "INCONCLUSIVE_NO_DETECTABLE_Q_INFORMATION when neither informative arm exceeds arithmetic tolerance; not proof of structural unidentifiability or impossible learning.",
+    "invalid": "INVALID_OR_INCOMPLETE_RUN when integrity/containment/domain/control/requiredcompletion fails; stop later stages/arms, preserve all outputs."
+  }
+}

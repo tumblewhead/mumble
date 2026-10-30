@@ -1,0 +1,63 @@
+{
+  "schema": "foster_c_history_receipt_v1",
+  "status": "structured_history_and_phase_workspace_qualified_on_saved_controls",
+  "source_revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "optimization/foster-c-history-001",
+  "changes": [
+    "triangular likelihood and symmetric precision operations",
+    "exact identity-row transport shortcut with generic fallback",
+    "streamed token decoding and B-to-root reuse",
+    "model/history phase workspace sharing",
+    "fitter matrices share dead trial-output storage with phase-scoped nonaliasing"
+  ],
+  "tests": 22,
+  "sanitizers": "Clang ASan/UBSan passed4097records; leakcheckdisabled",
+  "preserved": {
+    "CPU_pass1_artifacts": 98,
+    "CPU_pass1_changed": [],
+    "model_pass_artifacts": 88,
+    "model_pass_changed": [],
+    "C_baseline_artifacts": 83,
+    "C_baseline_changed": [],
+    "original_Foster_artifacts": 68,
+    "original_Foster_changed": []
+  },
+  "benchmark": "experiments/foster_c_history_001/attempt002/summary.json",
+  "initial_benchmark": "experiments/foster_c_history_001/attempt001/summary.json",
+  "repetitions": 3,
+  "host_runtime_reduction_vs_previous_percent": [
+    7.992162867989205,
+    9.337897516246674
+  ],
+  "CPU_only_runtime_reduction_percent": [
+    9.150369720126717,
+    10.997062353845244
+  ],
+  "all_tested_stages_trace_estimates_SD_logZ_stops_and_final_messages_byte_identical": true,
+  "memory": {
+    "context_B": 19416,
+    "history_workspace_B": 4744,
+    "history_worker_M23_own_frame_B": 192,
+    "standalone_history_adapter_M23_own_frame_B": 4760,
+    "fit_M23_own_frame_B": 656,
+    "largest_integrated_M23_own_frame_B": 2416,
+    "context_plus_largest_integrated_own_frame_lower_bound_B": 21832,
+    "previous_comparable_lower_bound_B": 30856,
+    "known_offer_token_QR_C_chain_B": 2680,
+    "context_plus_known_C_chain_B": 22096,
+    "complete_SRAM_B": null,
+    "target_budget_B": 10240,
+    "probe_text_B": 27444,
+    "probe_data_B": 296,
+    "probe_bss_B": 22104
+  },
+  "target_cycles_measured": false,
+  "campaign_default_backend_changed": false,
+  "limits": [
+    "byte equality is measured on specified controls, not universal proof",
+    "complete stack includes unmeasured math/runtime and caller/interrupt frames",
+    "standalone history adapter has its own local workspace and is outside integrated path",
+    "physical model, stationary aging assumptions and Gaussian coverage unchanged"
+  ],
+  "next": "Reduce persistent/evaluation transport and covariance-root storage while preserving joint information; obtain RTL cycles."
+}

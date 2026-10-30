@@ -1,0 +1,125 @@
+{
+  "schema": "mumble_response_symbolic_diagnostic_v1",
+  "status": "frozen_before_new_evaluation",
+  "question": "Which physical response terms explain the remaining partitioned-history discrepancy, and do natural decay coordinates remove the predicted leading error?",
+  "scope": "Stationary representation and symbolic mechanism study on saved fabricated inputs. No optimizer, truth, aging, deployment qualification or long causal trajectory.",
+  "reference": "experiments/partitioned_history_001/comparison001/receipt.json",
+  "inputs": "experiments/history_basis_comparison_001/comparison002/frozen_inputs.json",
+  "baseline": {
+    "dynamic_degree": 4,
+    "OCV_charge_degree": 12,
+    "domains": [
+      "public_half_SD",
+      "full_public"
+    ],
+    "prefixes": [
+      64,
+      4096
+    ],
+    "queries": "Unchanged saved129 points; local domain retains97."
+  },
+  "hypotheses_before_evaluation": [
+    "At short exposure, the exact free/forced hysteresis responses are 1-gamma_plus*Qplus-gamma_minus*Qminus+O(Q^2) and gamma_plus*Qplus-gamma_minus*Qminus+O(Q^2). A polynomial in log gamma approximates even these first-order terms; a polynomial in physical gamma reproduces them exactly.",
+    "At degree4 the physical-gamma total-degree projection reproduces every throughput expansion term through degree4; approximation has O(exposure^5) behavior near zero. Log-gamma projection generally retains an O(exposure) error.",
+    "Free RC response is exp(-lambda*t) and forced response is a sum of exponential differences, lambda=1/tau. Direct inverse-time-constant coordinates may improve the physical Laplace-response approximation; no universal improvement is presumed.",
+    "A total-degree4 bivariate hysteresis basis omits terms with i+j>4 even though values were sampled on a5x5 grid. Full tensor4 isolates this omitted mixed-coefficient effect at a larger feature count.",
+    "Likelihood error equals sum(r*delta)+0.5*sum(delta^2); coherent small response errors can dominate through their correlation with fabricated residuals, independently of numerical roundoff."
+  ],
+  "candidate_arms": [
+    {
+      "name": "baseline",
+      "physical_RC": false,
+      "physical_hysteresis": false,
+      "tensor_hysteresis": false
+    },
+    {
+      "name": "physical_hysteresis",
+      "physical_RC": false,
+      "physical_hysteresis": true,
+      "tensor_hysteresis": false
+    },
+    {
+      "name": "physical_RC",
+      "physical_RC": true,
+      "physical_hysteresis": false,
+      "tensor_hysteresis": false
+    },
+    {
+      "name": "both_physical",
+      "physical_RC": true,
+      "physical_hysteresis": true,
+      "tensor_hysteresis": false
+    },
+    {
+      "name": "tensor_log",
+      "physical_RC": false,
+      "physical_hysteresis": false,
+      "tensor_hysteresis": true
+    },
+    {
+      "name": "tensor_physical_hysteresis",
+      "physical_RC": false,
+      "physical_hysteresis": true,
+      "tensor_hysteresis": true
+    },
+    {
+      "name": "tensor_both_physical",
+      "physical_RC": true,
+      "physical_hysteresis": true,
+      "tensor_hysteresis": true
+    }
+  ],
+  "diagnostics": {
+    "components": [
+      "RC1_forced",
+      "RC1_free",
+      "RC2_forced",
+      "RC2_free",
+      "RC3_forced",
+      "RC3_free",
+      "hysteresis_forced",
+      "hysteresis_free",
+      "OCV"
+    ],
+    "attribution": "Preserve all cross terms. At each query contribution_j=sum(delta_j*(r+0.5*delta_total)); report signed differences at the SAME maximum/minimum total-gap pair.",
+    "raw_history_substitutions": [
+      "exact_hysteresis",
+      "exact_RC",
+      "exact_free_attenuations",
+      "exact_forced_hysteresis"
+    ],
+    "substitution_scope": "Mechanism controls only; not compressed implementations or data-driven state corrections.",
+    "arithmetic": "Use long-double accumulation of the residual-gap identity; compare direct squared residuals and inherited C reference. No normal-moment cost evaluation in scientific scores.",
+    "weak_exposure": {
+      "prefix": 4096,
+      "domain": "public_half_SD",
+      "queries": "same97local",
+      "current_scale": [
+        1,
+        0.5,
+        0.25,
+        0.125
+      ],
+      "arms": [
+        "baseline",
+        "physical_hysteresis"
+      ],
+      "outputs": "free/forced hysteresis peak approximation error, normalized order ratios and roundoff qualification; scaled decoded currents are declared analytical controls, not new ADC records."
+    }
+  },
+  "checks": {
+    "reference_cost_rtol": 2e-10,
+    "reference_cost_atol": 2e-08,
+    "feature_derivative_scaled_allowance": 1e-05,
+    "feature_derivative_epsilon_SD": 1e-05,
+    "source_and_domain_errors": "hard stop",
+    "finite_numerical_mismatches": "record and continue, no tolerance changes",
+    "model_steps_upper_cap": 10000000,
+    "automatic_retries": 0
+  },
+  "reporting": {
+    "criterion": "Report continuous error and physical response discrepancies. Historical0.1NLL shown only as a comparison marker, never a new physical acceptance requirement.",
+    "memory": "Report factor/boundary lower bounds and prior complete planning convention. Tensor expansion is a diagnostic, not a proposed SRAM fit.",
+    "limits": "Finite query results do not prove task accuracy, support-wide bounds, coverage or deployability. No promise of another particular improvement factor."
+  }
+}

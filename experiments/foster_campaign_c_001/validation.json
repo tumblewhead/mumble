@@ -1,0 +1,151 @@
+{
+  "status": "passed",
+  "paired_cases": [
+    {
+      "scenario": {
+        "cell": "A",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "max_Q_percent": 3.450852936737192e-08,
+          "max_SOC_pp": 1.1738277017059318e-09,
+          "max_fitted_voltage_V": 3.3018032752352156e-12,
+          "max_logZ_abs": 8.138158591464162e-09
+        },
+        "float32": {
+          "max_Q_percent": 6.556905129961876e-07,
+          "max_SOC_pp": 1.6201668895376997e-07,
+          "max_fitted_voltage_V": 8.068523627002833e-11,
+          "max_logZ_abs": 3.035314875887707e-06
+        }
+      }
+    },
+    {
+      "scenario": {
+        "cell": "A",
+        "load": "charge-discharge",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "max_Q_percent": 8.275030660698235e-08,
+          "max_SOC_pp": 1.449060871294705e-08,
+          "max_fitted_voltage_V": 1.3853362901272703e-11,
+          "max_logZ_abs": 4.53474058303982e-08
+        },
+        "float32": {
+          "max_Q_percent": 4.9206880547991716e-05,
+          "max_SOC_pp": 2.6329015989645654e-05,
+          "max_fitted_voltage_V": 1.6347246223347156e-08,
+          "max_logZ_abs": 2.9036871637799777e-05
+        }
+      }
+    },
+    {
+      "scenario": {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "max_Q_percent": 3.7555686338563987e-07,
+          "max_SOC_pp": 1.889742806682193e-08,
+          "max_fitted_voltage_V": 1.3597567516399067e-11,
+          "max_logZ_abs": 7.323615136556327e-08
+        },
+        "float32": {
+          "max_Q_percent": 5.064599406523485e-07,
+          "max_SOC_pp": 2.8300661814029127e-08,
+          "max_fitted_voltage_V": 4.054978575140922e-11,
+          "max_logZ_abs": 2.736969690886326e-06
+        }
+      }
+    },
+    {
+      "scenario": {
+        "cell": "B",
+        "load": "charge-discharge",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "max_Q_percent": 3.9289627107308434e-08,
+          "max_SOC_pp": 2.5745849896452455e-09,
+          "max_fitted_voltage_V": 1.3584688929313415e-12,
+          "max_logZ_abs": 9.589712135493755e-09
+        },
+        "float32": {
+          "max_Q_percent": 0.0022643993243587346,
+          "max_SOC_pp": 0.0002305821408254971,
+          "max_fitted_voltage_V": 2.599669994829412e-07,
+          "max_logZ_abs": 0.001070409984095022
+        }
+      }
+    }
+  ],
+  "timing_single_measurement": {
+    "python_estimator_s": 1.690112212439999,
+    "C_estimator_s": 0.10703679046127945,
+    "estimator_speedup": 15.790012061800349,
+    "python_case_wall_s": 2.06715244310908,
+    "C_case_wall_s": 0.4402882190188393,
+    "case_speedup": 4.694998307507814,
+    "python_entire_command_s": 2.4926056570839137,
+    "C_entire_command_s": 1.188668831018731,
+    "scope": "One four-case run per backend at35Hz; case time includes generation/export, command time also includes build and startup qualification; plots excluded from paired runs"
+  },
+  "rate100": {
+    "case": "/home/easy/proj/mumble/experiments/foster_campaign_c_001/c100_plots/case_0000",
+    "records": 54000,
+    "simulated_s": 540,
+    "case_and_summary_plots": "completed",
+    "charger": {
+      "settings": {
+        "nominal_capacity_ah": 0.06,
+        "charge_c": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "discharge_c": [
+          0.2,
+          0.45,
+          0.7
+        ],
+        "charge_step_s": 900.0,
+        "discharge_step_s": 600.0,
+        "cv_voltage": 4.06,
+        "discharge_cutoff_v": 3.18,
+        "cycle_rest_s": 300.0,
+        "taper_end_c": 0.05,
+        "taper_hold_s": 30.0,
+        "cv_gain": 0.5
+      },
+      "sample_rate_Hz": 100,
+      "phase": "cv",
+      "phase_records": {
+        "cc": 47672,
+        "cv": 6328,
+        "rest_after_charge": 0,
+        "discharge": 0,
+        "rest_after_discharge": 0
+      },
+      "completed_cycles": 0,
+      "charge_Ah": 0.017552534722217832,
+      "discharge_Ah": 0.0,
+      "authority": "Harness only: nominal nameplate capacity, global-time schedules and measured terminal V; no true SOC/Q or estimator feedback",
+      "current_grid_A": 0.000125,
+      "reference": "C-rates use nominal_capacity_ah, not unknown actual capacity",
+      "CV_scope": "Finite-bandwidth integral controller, not algebraic exact voltage clamp; current-limited CC/CV",
+      "timing": "Phase changes apply to the sample after the triggering measurement"
+    }
+  },
+  "limits": "Small integration controls; long-run C numerical qualification remains in frozen core receipts. No new physical coverage/aging claims."
+}

@@ -6,8 +6,9 @@ import numpy as np
 from common import HERE,save,runner
 
 
-def generate(out):
-    plan=json.loads((HERE/'plan.json').read_text())
+def generate(out, plan_path=None):
+    plan_path=HERE/'plan.json' if plan_path is None else Path(plan_path)
+    plan=json.loads(plan_path.read_text())
     fixture=plan['input_fixture'];rng=np.random.default_rng(fixture['generation_seed'])
     x=fixture['plant_initial_x']
     z,rc,h=x[11],list(x[12:15]),x[15]
@@ -47,7 +48,7 @@ def generate(out):
     inference=dict(profile_rates=fixture['health_rates'],source_id=fixture['source_id'],
                    **plan['inference'],prefixes=plan['prefixes'],caps=plan['caps'],cost_probes=plan['cost_probes'])
     save(out/'inference.json',inference)
-    save(out/'manifest.json',dict(plan=runner.identity(HERE/'plan.json'),
+    save(out/'manifest.json',dict(plan=runner.identity(plan_path),
         generator=runner.identity(HERE/'generate.py'),
         files={p.name:runner.identity(p) for p in out.iterdir() if p.is_file()},
         plant_inference_separation='No solver worker receives plan.json or plant_truth_not_inference.json'))

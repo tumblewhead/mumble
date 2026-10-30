@@ -1,0 +1,518 @@
+{
+  "status": "before_controls_and_evaluation",
+  "plan": {
+    "schema": "rc_response_coordinate_plan_v1",
+    "status": "frozen_before_candidate_evaluation",
+    "baseline": "experiments/voltage_coordinates_001/attempt001/result.json",
+    "frames": [
+      "physical_amplitude_control",
+      "response_1s",
+      "response_public_mode_scale"
+    ],
+    "frame_selection": "Amplitude a=1; common1s; or geometric midpoint of each public tau support. No fitted/truth timescale.",
+    "arms": [
+      "fixed_partition_gaussian_mixture",
+      "fixed_probability_atlas",
+      "adaptive_probability_atlas"
+    ],
+    "regions": [
+      2,
+      4
+    ],
+    "source_selection": "Same saved8/32-record populations and frozen construction/heldout split as baseline. No new inference or truth reads.",
+    "chain": [
+      "F1",
+      "F2",
+      "F3",
+      "G1",
+      "G2",
+      "G3",
+      "boundary_rest_voltage"
+    ],
+    "conditional_model": "Full linear dependence on every preceding coordinate, scalar Gaussian residual, exact dependent-support normalizer. Moment projection then support correction; not truncated MLE.",
+    "probe_horizons_s": [
+      0.02857142857142857,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "probe_profiles": [
+      "rest",
+      "load_0.05A",
+      "load_then_reversal_0.05A"
+    ],
+    "probe_semantics": "Rest/load last the stated horizon; reversal has one such positive segment followed by one negative segment. Constant segments split into intervals<=1s. Health stationary; preserve physical state and invalid mass.",
+    "draws_per_case": 16384,
+    "draw_seed_base": 1029001,
+    "numerics": "Reuse qualified bounded transforms,52-step OCV inverse,erfc/scaled normalizer and128-round exact rejection sampler; density batches512. Inherit capacity placement16passes and quadratic128/256 quadrature.",
+    "controls": [
+      "Full16 inverse and Jacobian for all frames",
+      "Exact RC response across horizons",
+      "Dependent scalar support normalization",
+      "Linear conditional cross terms and chain normalization",
+      "Replication, serialization and payload",
+      "Prior controls and unchanged source identities"
+    ],
+    "assessment": "All16 moments, heldout physical-coordinate density, SOC/Q/R0 marginals, prediction mean/SD/quantiles across all horizons, support-correction mass, packed bytes, full offline memory lower bound and CPU. No new physical or NLL threshold.",
+    "work_caps": {
+      "cases": 36,
+      "fresh_posterior_steps": 0,
+      "heldout_density_points": 294912,
+      "serialization_density_points": 1152,
+      "inverse_OCV_sample_iterations": 30670848,
+      "placement_sample_visits": 1572864,
+      "predictive_sample_steps": 43000000
+    },
+    "baseline_extension": "Regenerate each saved voltage-coordinate population with its original seed and score new probes; do not refit. Include pooled heldout and per-population predictions. This control work is included in predictive-step cap.",
+    "failure_policy": "Qualify before cases; preserve each unavailable case and continue census. No tuning after heldout results.",
+    "storage_estimate_B": {
+      "two_region_mixture": 2496,
+      "two_region_atlas": 2512,
+      "four_region_mixture": 4960,
+      "four_region_atlas": 4992,
+      "frame_values": 24,
+      "complete_target_SRAM": null
+    },
+    "limits": [
+      "Short offline snapshot study, not long-term learning",
+      "Reused finite-moment reference, not new independent coverage validation",
+      "No causal aging update",
+      "No general full16 self-organizing graph",
+      "No complete MCU memory or speed claim"
+    ]
+  },
+  "identities": {
+    "experiments/region_compression_001/plan.json": {
+      "bytes": 4874,
+      "sha256": "998cc365cf913fa0f482b6386dc9448ac107e2497c49afa474861c7265dadc5d"
+    },
+    "experiments/region_compression_001/regions.py": {
+      "bytes": 10137,
+      "sha256": "5268c4c19a269094d89e0b8e83586e14f2a3f7267d1d0ecd67a16f2bdedce8c3"
+    },
+    "experiments/region_compression_001/test_regions.py": {
+      "bytes": 6394,
+      "sha256": "c4df39858e3cf19d4fc21d59d86a1bc141be90ac619e2428f0bb51ed0b3b4e11"
+    },
+    "experiments/region_compression_001/compare.py": {
+      "bytes": 11400,
+      "sha256": "0e75fba0ae61a266dd7b1f084d37174f7c1254f7e372c9b8faca002a53726a66"
+    },
+    "experiments/minimal_health_kernels_001/kernel.py": {
+      "bytes": 12423,
+      "sha256": "b994262640a87eddeca7f27201d5c1225739442eb9f78b020d4ed7b3b8b00654"
+    },
+    "experiments/joint_health_posterior_001/model.py": {
+      "bytes": 9811,
+      "sha256": "26a6fcc2a705cd093ec8125a03ad9f4540251c120f8bb3c3e8b58a338ba3e11c"
+    },
+    "experiments/joint_health_posterior_001/smc.py": {
+      "bytes": 6878,
+      "sha256": "dcd55fba9921a5f795e149cd6121243baaee50f1014ddc10827e9b1132de8419"
+    },
+    "specifications/minimal_health_model_001/model.json": {
+      "bytes": 20713,
+      "sha256": "b304bee8ddf0dbf26df9009dd8880b6bf541b173bb2a2a625d185d0f9e0504b0"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/result.json": {
+      "bytes": 13823,
+      "sha256": "407f4c261d23c73587eff99ad0807ce0714036df9c34ebaa5744cc39af7af90e"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808101.npz": {
+      "bytes": 1636119,
+      "sha256": "c0b7ee09191eaf16c11ad22a8280fd4ca13d12222436d4f17ff5158fd13b8069"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808102.npz": {
+      "bytes": 1636071,
+      "sha256": "4f7cc69c7b38c16529ff898d0cf7b0c817c89b3551974ff99520fdd1961de258"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808103.npz": {
+      "bytes": 1636309,
+      "sha256": "fa91322f8bd6e98c46e0a3286314dcb63949628e16198aa83910389a9f6e4cb5"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808104.npz": {
+      "bytes": 1636222,
+      "sha256": "a63b6156b6cb759abb064350f426856cb67830917d5f9fbd993f5c76b8b1b793"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808101.json": {
+      "bytes": 4389,
+      "sha256": "346b4713899427da4117dd07eab82c1a97ac355fef828398451b7a86be6c6aba"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808102.json": {
+      "bytes": 4390,
+      "sha256": "f1a8bcbace582af411eebfb1f9c8eaabcaf5a92ded7f968d9a7c0cee6987e7e5"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808103.json": {
+      "bytes": 4382,
+      "sha256": "2a3a2da57b21c86b1ed5f78bc5bcdd8663c2c9a4d9fbd4c0a48f535fc4f28940"
+    },
+    "experiments/posterior_prefix_scaling_001/attempt001/prefix_8/population_n4096_seed808104.json": {
+      "bytes": 4370,
+      "sha256": "d6c32df199725f211935791d6e2a4e6981f48ec7721055e38e52f513e0ed479a"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/result.json": {
+      "bytes": 13853,
+      "sha256": "1a8be58fbd68a4e536cbde7726059d73022c650149dd6e68d88e595796698963"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832101.npz": {
+      "bytes": 3146930,
+      "sha256": "8d20d358bd84ee23ea1a46fec4afc09ab3e437525df6eeebdf6a95f3122d6f3a"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832102.npz": {
+      "bytes": 3147186,
+      "sha256": "0a6fc0e6d84493e7466ff46bd19c6cc137781df6d67fdd5fd094801f14d6d0b4"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832103.npz": {
+      "bytes": 3139430,
+      "sha256": "1b5da29234ca81ab8c997ea58fad91dc538642d34481a424e92fa5fcb7d67222"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832104.npz": {
+      "bytes": 3147022,
+      "sha256": "49f7d543d9a20fe2bc10034b52ac6e634727ccccf424aeedf378e0a58e8d7f5a"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832101.json": {
+      "bytes": 5897,
+      "sha256": "2a711bb280a62d662eb63efeafbad0be5bf188a30ec5f4f1629aa61c449b7d07"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832102.json": {
+      "bytes": 5893,
+      "sha256": "defe3b3284e080bb726c2d90ecd8ce256f5fc845e3802ffdf294d47a4746aa1f"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832103.json": {
+      "bytes": 5910,
+      "sha256": "4e0650d2fd2e08ddb8e3c0abcc336e062750981da2f8d6de5eaeda5f133036f9"
+    },
+    "experiments/posterior_prefix_scaling_001/local32_moves96_20261027_140648_988888/results/population_n4096_seed832104.json": {
+      "bytes": 5894,
+      "sha256": "63627fff87439a00fd5412fe0dd68c26a59ab032cf946e283159c4d6c89cde8d"
+    },
+    "experiments/region_compression_001/README.md": {
+      "bytes": 11396,
+      "sha256": "e04980bbd194b67c39dd3a417750ec49967c5d0b42e51132dc11b480856a9b93"
+    },
+    "experiments/region_compression_001/attempt001/case_01.json": {
+      "bytes": 13512,
+      "sha256": "bfa504fe60b6b97abb6f29f44fb96c9e90615ffd06bac72cef146417054657c9"
+    },
+    "experiments/region_compression_001/attempt001/case_02.json": {
+      "bytes": 13776,
+      "sha256": "42039d8bc128a450923bfacdad57b46cc9d4481cd088ef1878e9a84e13a8cc5a"
+    },
+    "experiments/region_compression_001/attempt001/case_03.json": {
+      "bytes": 13764,
+      "sha256": "f0aedc8871a48138c52a9722ef22a3ee7fc6d9ecf61d62533724d1074afe7720"
+    },
+    "experiments/region_compression_001/attempt001/case_04.json": {
+      "bytes": 13688,
+      "sha256": "550215aa7376bf6abed875209888ffdaf3c5989556bf882eeee04e3f1593e80c"
+    },
+    "experiments/region_compression_001/attempt001/case_05.json": {
+      "bytes": 14165,
+      "sha256": "1bdb38d8b9d6a6772e4dc4f7a39907c04d9db89df9a5625c033796f33644f23f"
+    },
+    "experiments/region_compression_001/attempt001/case_06.json": {
+      "bytes": 14232,
+      "sha256": "79a6ad9a933393f857c93a917aebc8d7ba92edcec85f04535f59abc16decd60d"
+    },
+    "experiments/region_compression_001/attempt001/case_07.json": {
+      "bytes": 13532,
+      "sha256": "239af9c3b8dba768d23c4264943049d39e6bb63ddefabcd404569bf975cca59a"
+    },
+    "experiments/region_compression_001/attempt001/case_08.json": {
+      "bytes": 13794,
+      "sha256": "bdc1d961fa073c624bf0e5e43d6bfa68d12988f1333cd115f7371ffde07569c4"
+    },
+    "experiments/region_compression_001/attempt001/case_09.json": {
+      "bytes": 13818,
+      "sha256": "dc9012d05ecdda3112b2fbf55c3d40e0071fd81cd9dfb59f256959031476dbbd"
+    },
+    "experiments/region_compression_001/attempt001/case_10.json": {
+      "bytes": 13732,
+      "sha256": "dd2d47dfe675fd6fcf412fd6fa46034b2e5e700242d7928ced4f355c96751ca8"
+    },
+    "experiments/region_compression_001/attempt001/case_11.json": {
+      "bytes": 14216,
+      "sha256": "bab8cd9815c4eb9db0e90e63d028531fb1f9a3946cef3585c953a0753e93db3b"
+    },
+    "experiments/region_compression_001/attempt001/case_12.json": {
+      "bytes": 14215,
+      "sha256": "c71c0cd8048e235f3b3613bcd228b8e7b5cf3b00feacec95328df9c88a10573a"
+    },
+    "experiments/region_compression_001/attempt001/controls.json": {
+      "bytes": 72,
+      "sha256": "0147524694d3e10736614b87ed28b1630e14bd0525e86f9b91bf3f4cafae47bd"
+    },
+    "experiments/region_compression_001/attempt001/controls.txt": {
+      "bytes": 1571,
+      "sha256": "c5f2a369093c41994628f0576ddd987560e49c0c54b322bc18fd564acbc8f55b"
+    },
+    "experiments/region_compression_001/attempt001/prefix32_K2_adaptive_probability_atlas.json": {
+      "bytes": 11102,
+      "sha256": "f23f85c431fba62482e46e96a8a59c423a90be81152021b50df1a25b26b7b42b"
+    },
+    "experiments/region_compression_001/attempt001/prefix32_K2_fixed_partition_gaussian_mixture.json": {
+      "bytes": 10911,
+      "sha256": "ec5f863d9ce57ab9e9a6c9794d279732435d0406bfa403b8551c171e0141a339"
+    },
+    "experiments/region_compression_001/attempt001/prefix32_K2_fixed_probability_atlas.json": {
+      "bytes": 11097,
+      "sha256": "36c7b3c4e7fa1e8356d8a7a7edddfb52ff1fb9bc5061ee92f1fc3c6e3d0cee6f"
+    },
+    "experiments/region_compression_001/attempt001/prefix32_K4_adaptive_probability_atlas.json": {
+      "bytes": 21285,
+      "sha256": "c040a6cfff026fa18e916d2be2f0857a2a0723f89cee6e81cf1dd19e4d42774d"
+    },
+    "experiments/region_compression_001/attempt001/prefix32_K4_fixed_partition_gaussian_mixture.json": {
+      "bytes": 20862,
+      "sha256": "ccf12c1894fb22d0846d2fb72a0eeaae720b561935279de96b464e81083df54a"
+    },
+    "experiments/region_compression_001/attempt001/prefix32_K4_fixed_probability_atlas.json": {
+      "bytes": 21244,
+      "sha256": "92669a88a53f965aa4f165b1d6ca148a06fb1a4575ed093a721cc0dabae04ef6"
+    },
+    "experiments/region_compression_001/attempt001/prefix8_K2_adaptive_probability_atlas.json": {
+      "bytes": 11112,
+      "sha256": "a240157e8d7e5429fb20835adea25c54f4375f580d89dd5d492f1e91d464132f"
+    },
+    "experiments/region_compression_001/attempt001/prefix8_K2_fixed_partition_gaussian_mixture.json": {
+      "bytes": 10907,
+      "sha256": "ccb1926c88fa00019917281ec3bf991241a80875aec816199899cd7129201ae1"
+    },
+    "experiments/region_compression_001/attempt001/prefix8_K2_fixed_probability_atlas.json": {
+      "bytes": 11081,
+      "sha256": "9aa82393794b99e41c8237015dfb0356da646c49b1a3019444f187a948fda80c"
+    },
+    "experiments/region_compression_001/attempt001/prefix8_K4_adaptive_probability_atlas.json": {
+      "bytes": 21292,
+      "sha256": "702e92b527e396d6e6e8fb006a72bd711b140daefcb3f7a6acf467fb0c1843ca"
+    },
+    "experiments/region_compression_001/attempt001/prefix8_K4_fixed_partition_gaussian_mixture.json": {
+      "bytes": 20851,
+      "sha256": "2bcf4241f409c943a09aed8575d93f97561793c15199fab40fa84273c024dcf6"
+    },
+    "experiments/region_compression_001/attempt001/prefix8_K4_fixed_probability_atlas.json": {
+      "bytes": 21240,
+      "sha256": "72c4e8ad112faec91cd2369ab2b156681985402f4f1e7701fea4a7f8fc29e1ae"
+    },
+    "experiments/region_compression_001/attempt001/reservation.json": {
+      "bytes": 11323,
+      "sha256": "80028ae9edc08977d9a8a4b9bf49c72e553a2aa6ee79366a762e9c7088446f0d"
+    },
+    "experiments/region_compression_001/attempt001/result.json": {
+      "bytes": 225542,
+      "sha256": "93908afa948d7e2f00888a70740799d820b949cd090df890ce4dd940010571e5"
+    },
+    "experiments/region_compression_001/audit.py": {
+      "bytes": 6496,
+      "sha256": "304851ac68d4d4f8e33237fd7580763e87b3295fab75e3c4d0e5a49ec3e76f44"
+    },
+    "experiments/region_compression_001/audit001/reservation.json": {
+      "bytes": 1017,
+      "sha256": "20115d176f0544f463cd16d539730efc21f6d73400258e69f7c851a07c217dee"
+    },
+    "experiments/region_compression_001/audit001/result.json": {
+      "bytes": 25864,
+      "sha256": "ced03c4628aeacb941f6ff04ad4f26783443ef56559f5b07e3816fe08d25eb4b"
+    },
+    "experiments/region_compression_001/closeout.py": {
+      "bytes": 5233,
+      "sha256": "93862ee2cc511ca87a59715c26895f4c56ae25e4e676ba2590019b5d74ee3227"
+    },
+    "experiments/region_compression_001/summary.json": {
+      "bytes": 7546,
+      "sha256": "73f2cc52858d82361629b28ee39f5989f5a026e6a921f101ed63af0a68589e24"
+    },
+    "experiments/voltage_coordinates_001/plan.json": {
+      "bytes": 3205,
+      "sha256": "bc943ff887a3d91cd0aefa47ce719a45ccc5d9ee501ae50290a9655c36a0fc6c"
+    },
+    "experiments/voltage_coordinates_001/derivation.md": {
+      "bytes": 3921,
+      "sha256": "30061934e30353b6a515987fb85b7040ae27407c58b386269f68b079c754b6e0"
+    },
+    "experiments/voltage_coordinates_001/coordinates.py": {
+      "bytes": 11226,
+      "sha256": "bfaad737b3b37476afc70d4993bc441496395d65daaed26277f9977908e2fb9b"
+    },
+    "experiments/voltage_coordinates_001/test_coordinates.py": {
+      "bytes": 5585,
+      "sha256": "a2800c9d95f271723652d229f470d51c9e1499d82c2b44ee5b862f75eaf6ffdb"
+    },
+    "experiments/voltage_coordinates_001/compare.py": {
+      "bytes": 9446,
+      "sha256": "b578d8a3764dd9cda28e7f0fdd966f82c2abc07152f16cb69ffa7eae5bdb5a16"
+    },
+    "experiments/voltage_coordinates_001/README.md": {
+      "bytes": 9111,
+      "sha256": "8bac86e08c42263635fbb0208b2621f5a28e1d37c5bc8176cd296afc5d24a25b"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_01.json": {
+      "bytes": 14189,
+      "sha256": "58fa77634fc6856bda13965f3838ceddfb8d97e298f98c38ef81f9cf05940b1c"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_02.json": {
+      "bytes": 14418,
+      "sha256": "2e9d4424bc425e2279b1ec0ab17ec78d8052349ff4f788dc4cec96cf6e9c1f85"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_03.json": {
+      "bytes": 14451,
+      "sha256": "e74e0af8fb5d4f5ecfddae0a67e0d7b2c3fa76b21299f7750c3c0bc4465d8a55"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_04.json": {
+      "bytes": 14564,
+      "sha256": "75393f31752e0aa9b1f848b7b77d6bf1f08f556ed810f19bdbc15f259ca5feba"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_05.json": {
+      "bytes": 15021,
+      "sha256": "f0d8537847c078f68c77b1569cc516cec3d47d0a6de513507aa58735a821fff8"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_06.json": {
+      "bytes": 15051,
+      "sha256": "e8ea7f801b7b447bbe79e1c5e645e8cbe219c47692ebf194e92e0035bb263782"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_07.json": {
+      "bytes": 14236,
+      "sha256": "10ef62b9920134d8af811ad7f0eb67ff3a179ef42ca5d4e441690e236a150f0e"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_08.json": {
+      "bytes": 14453,
+      "sha256": "72515209eba5702ca5901aaf13c6de4f31a9948173aca86d68ed3191933df4bf"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_09.json": {
+      "bytes": 14448,
+      "sha256": "18ce4b6fb1d619a915b4daab2cf6d4966909e16523da710710ddc023977ad247"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_10.json": {
+      "bytes": 14599,
+      "sha256": "9ff703e10e7823953e9e373e00c57a696edae51d09818db4f5d9d7ceafae1fb3"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_11.json": {
+      "bytes": 15073,
+      "sha256": "9c05b9be9c463609f6f83fec7d69a10ac571c4fa4b310727aed8e18a33aff175"
+    },
+    "experiments/voltage_coordinates_001/attempt001/case_12.json": {
+      "bytes": 15099,
+      "sha256": "24857a21c6e799e2cb411acc776047e8d362dacd71f16781d928a8aef4cf2730"
+    },
+    "experiments/voltage_coordinates_001/attempt001/controls.json": {
+      "bytes": 72,
+      "sha256": "c68adfbed32f37dcbd95af67caa2e4cf26fc87fed3582415698ff689c384e0bb"
+    },
+    "experiments/voltage_coordinates_001/attempt001/controls.txt": {
+      "bytes": 3037,
+      "sha256": "80ba627f4131c1f49661e98d033ae53164e5defc1977d5752463274509ff3748"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix32_K2_adaptive_probability_atlas.json": {
+      "bytes": 11394,
+      "sha256": "470fff78ba3d33ec2e041d11dd1e005686aa990f72106812d81da12412cedc08"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix32_K2_fixed_partition_gaussian_mixture.json": {
+      "bytes": 11210,
+      "sha256": "648d57d66eae9ade375f32098e3c3b0a5263ef8b9daeb1fa0ac87114a4114fd3"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix32_K2_fixed_probability_atlas.json": {
+      "bytes": 11386,
+      "sha256": "1635a8ee9ebdcaba44efeaaf9a62d34070dd711260ec2f2c57377af43caa3865"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix32_K4_adaptive_probability_atlas.json": {
+      "bytes": 21720,
+      "sha256": "2cb3eb1bed66648a5ab1248d4c588da8ded0e071bd822f893458d935106cb923"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix32_K4_fixed_partition_gaussian_mixture.json": {
+      "bytes": 21280,
+      "sha256": "eaa544d08f6304bb1e85c80881a4b41d3f9f7071c390e3cfacd463635881daa1"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix32_K4_fixed_probability_atlas.json": {
+      "bytes": 21678,
+      "sha256": "2a8ce22b0c02d67c371cddc3d71583cb49d506350136199378cd087d5b9c9e98"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix8_K2_adaptive_probability_atlas.json": {
+      "bytes": 11406,
+      "sha256": "740bb3fa2ddba9ba3141b3cad7016cfc091164a14525c4a660d41be88604803e"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix8_K2_fixed_partition_gaussian_mixture.json": {
+      "bytes": 11208,
+      "sha256": "70892c0fbccaf6a843aeeae43f5e494236dee6c1fdd4016e199e817b945e40ff"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix8_K2_fixed_probability_atlas.json": {
+      "bytes": 11383,
+      "sha256": "c82db60550e536de7e2082e895f64e03aa7139a30e2361afc233e5520bbb850a"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix8_K4_adaptive_probability_atlas.json": {
+      "bytes": 21745,
+      "sha256": "de352fa90dcdd9db2b362796e6493c36a2672a6fd168669b31759a05acf4148d"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix8_K4_fixed_partition_gaussian_mixture.json": {
+      "bytes": 21305,
+      "sha256": "3de0c0d9dfaff52a9c288069e59516efe9566443a488317ffb483135488e7425"
+    },
+    "experiments/voltage_coordinates_001/attempt001/prefix8_K4_fixed_probability_atlas.json": {
+      "bytes": 21677,
+      "sha256": "760b8cb35620937ecf47a64a012e4bede99d0791bd7d83dbc169086a6313db8e"
+    },
+    "experiments/voltage_coordinates_001/attempt001/reservation.json": {
+      "bytes": 16625,
+      "sha256": "319ed7345aa2bacf24110389a43473c8572286cbd8112607f419cf0be00ce4a0"
+    },
+    "experiments/voltage_coordinates_001/attempt001/result.json": {
+      "bytes": 235903,
+      "sha256": "7319c877391c7849782cc9cca4614735aa7072cb39ba39d446b979ae414b01c7"
+    },
+    "experiments/voltage_coordinates_001/audit.py": {
+      "bytes": 4970,
+      "sha256": "10f1cee341051deef678b994212fd035fb37bb189146f92e4f466a1950f608d8"
+    },
+    "experiments/voltage_coordinates_001/audit001/reservation.json": {
+      "bytes": 1036,
+      "sha256": "1c59528964c655dc68712fd7bbcfebb01d1dd9213a3b6cc20d8abe634a9a1be9"
+    },
+    "experiments/voltage_coordinates_001/audit001/result.json": {
+      "bytes": 108287,
+      "sha256": "9fcc669f1323cbdaf5f67b2433ed1c81a36ebc7766e0a3dbf7c552234f5e0771"
+    },
+    "experiments/voltage_coordinates_001/closeout.py": {
+      "bytes": 5493,
+      "sha256": "d94e626f18779b80ed8b262c632c87576c1f83ea9a06822d5528f2571c10a92b"
+    },
+    "experiments/voltage_coordinates_001/summary.json": {
+      "bytes": 8468,
+      "sha256": "923eb0cd466af339536feca24eb7a2977b5d5044343dbc899699b714457a093b"
+    },
+    "experiments/rc_response_coordinates_001/plan.json": {
+      "bytes": 3194,
+      "sha256": "63cc4f3f7bec82223c3618752198dd5662fbb7cedae8ed13ca0a6d70fddbd313"
+    },
+    "experiments/rc_response_coordinates_001/derivation.md": {
+      "bytes": 3731,
+      "sha256": "2f5ea11a0cd9cb6b318a20a0b28f9b46dc288ab88a0678decca4707140a5eb1f"
+    },
+    "experiments/rc_response_coordinates_001/coordinates.py": {
+      "bytes": 9429,
+      "sha256": "be40eb3e58735ced73c0a07e5726c522b3d3ab7b57ee70773a49612b0425b220"
+    },
+    "experiments/rc_response_coordinates_001/probes.py": {
+      "bytes": 1333,
+      "sha256": "f7d9a20fa3036606083616d419a9bbd71e0e62c6f8bf323d796f59afe3fd193b"
+    },
+    "experiments/rc_response_coordinates_001/test_coordinates.py": {
+      "bytes": 5575,
+      "sha256": "7c6a61f044cb35010d56e5ebaf6fc478b3d309384a38832eb70dc690f095581c"
+    },
+    "experiments/rc_response_coordinates_001/compare.py": {
+      "bytes": 10343,
+      "sha256": "8a1113eef5c5e579e08ce6f06f0856a00685474a3996c3c11fe0f0be608e8b60"
+    }
+  },
+  "command": [
+    "/home/easy/proj/mumble/experiments/rc_response_coordinates_001/compare.py"
+  ],
+  "revision": "a3878e17c720ee399b458a005f47e809e4bdd5cc",
+  "branch": "experiments/rc-response-coordinates-001",
+  "python": "3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728]",
+  "numpy": "2.5.2",
+  "thread_environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "foster_local_campaign_v1",
+  "registered_before_execution": true,
+  "purpose": "Local duration/cell/load/noise sweeps and complete physical telemetry, using the preserved continuous estimator unchanged.",
+  "parent": "experiments/foster_feedback_001/verification.json",
+  "controls": "Frozen public prior, model, thermal calibration and history backend; synthetic stationary cells supplied only to the plant/scorer. No truth-driven state corrections or aging.",
+  "loads": "Original one-time rest schedule, repeated four-hour schedule, balanced pulses, multiscale balanced pulses, and rest. Explicit amplitude and exogenous temperature controls.",
+  "telemetry": "All sample V/I/T and all plant states/effective parameters; all retired-boundary estimates, reference/effective parameters, derived capacitances and chart marginal SDs. Block endpoint reconstructed voltage is an assimilated fit, not a forecast.",
+  "storage": "Disk-backed arrays, chunked generation/hashing and bounded plotting previews; logs grow with requested duration, estimator history does not.",
+  "qualification": "Legacy input parity, physical chart/temperature decoding, load balance and boundaries, custom input rejection, chunk invariance, full telemetry alignment, source retirement, and failed-case continuation. Short campaign smoke only; no long sweep by default.",
+  "limits": "Local Gaussian uncertainty unvalidated; stationary reference parameters and known OCV/Arrhenius. More duration does not establish aging or ten-year performance. Failures are explicit and other independent cases continue."
+}

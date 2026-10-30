@@ -1,0 +1,30 @@
+{
+  "schema": "continuous_soc_longrun_plan_v1",
+  "branch": "experiments/continuous-soc-longrun-001",
+  "user_priority": "Analyze then optimize. Avoid polishing errors already below useful0.5% scales; prioritize long-run history preservation and overall estimation effects.",
+  "practical_comparison_scales": {"Q_relative_percent":0.5,"SOC_percentage_points":0.5,"meaning":"Preferred application scales for query differences and point scoring, not uncertainty coverage or universal compressor certificates"},
+  "repair": "Replace barycentric SOC-grid deposition with continuously carried conditional means/variances. Preserve initial-SOC mixture identities, health/temperature/nuisance coupling and physical charge-path dependence.",
+  "approximation": "Exact conditional first two moments for health-mixture transport, followed by first-order Gaussian OCV conditioning. Moment projection is explicit and checked against a continuous unmerged-path oracle on short prefixes; no claim of exact nonlinear posterior closure.",
+  "stages": [
+    "Derive artificial grid variance; compare old grid and continuous transport on the same frozen8-event fixtures against an exact continuous-SOC path sum",
+    "Stop local accuracy work when practical query scales are met; preserve residual likelihood/uncertainty differences rather than tuning to machine precision",
+    "Benchmark a short causal stream before a long run; implement only necessary execution improvements justified by measurement",
+    "Run two prospective four-hour35Hz physical streams: stationary and one monotone Q/R stress change, with informative, weak-use and renewed-excitation phases",
+    "Compare uncompressed history, the existing fixed-range16bit log codec, and a binary32 log-weight diagnostic. Continue independent arms after a representation failure; never clip tails or reset evidence to hide it"
+  ],
+  "long_run": {
+    "duration_s":14400,"nominal_rate_Hz":35,"records_per_case":504000,
+    "sources":["stationary","monotone_stress"],
+    "phases":"First90min informative cycling, next90min zero-current weak use, final60min renewed cycling",
+    "stress":"One15% Q loss and15% R0 increase at60min; accelerated model-support stress, not realistic aging-rate calibration",
+    "prior":"Shared public three-component SOC prior centered at0.5/0.625/0.75 with0.03 conditional SD; same health, thermal and nuisance supports in both cases",
+    "inference_aging_scale":0.01,
+    "physical_model":"Original C3RC/hysteresis/OCV recurrence, with explicit boundary effective-Q convention and separate thermal laws",
+    "truth_boundary":"Generator/scorer only. Inference sees source, index, actualdt, current, measured temperature, voltage and declared noise; no truth-based initialization or correction.",
+    "scope":"Whole-stream history/estimation diagnostic on the reduced joint model. Not a new generic callback inside the original rolling optimizer, not firmware qualification."
+  },
+  "resources":"Record actual live arrays, packed payload estimates, cumulative work and history size. No complete10KiB fit assumed.",
+  "no_unprincipled_forgetting":true,
+  "no_precision_sweep":true,
+  "preserve_original_evidence":true
+}
