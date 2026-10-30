@@ -1,3 +1,16 @@
+> Retention update (2026-10-30): the owner requested removal of large,
+> reproducible experiment CSV payloads from GitHub. The four chunks for
+> `trajectory_csv_gzip` (14,400,050 bytes combined) are no longer retained in
+> this branch's current tree. Local chunks were preserved and their individual
+> and combined SHA-256 identities verified. The original manifest, reproduction
+> code, and non-CSV chunks are unchanged. Earlier Git commits still contain the
+> removed chunks; this cleanup does not purge Git history.
+>
+> The restoration instructions below describe the original complete bundle.
+> A fresh checkout no longer contains all parts needed by the full-bundle
+> restore/verify commands. Supply the preserved CSV chunks to use those commands.
+> See `provenance/experimental_csv_cleanup_20261030.json` for the removal receipt.
+
 # Chunked distribution of three existing gzip files
 
 The repository connector failed to upload the 14,400,050-byte trajectory gzip
