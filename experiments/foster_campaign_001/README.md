@@ -55,6 +55,119 @@ before cases and snapshots source, public calibration and exact cell definitions
 Dependencies are Python with NumPy/Matplotlib and a C compiler. No network,
 SciPy or interactive display is needed. `--help` lists all options.
 
+## Compact recording and interval replay
+
+For long runs, add **`--recording compact`** to the campaign command. This opt-in
+mode uses the C backend, processes every original observation, and stores compact
+plotting summaries plus periodic restart checkpoints. It writes no full sample
+arrays, per-block trace/chart arrays, or per-block CSVs. `--recording full` remains
+the default for compatibility with existing analysis tools; `--sample-csv` and
+the Python backend are rejected in compact mode.
+
+```sh
+python3 -B -m experiments.foster_campaign_001.run \
+  --recording compact --hours 720 --sample-rate-hz 50 \
+  --cells A --loads charge-discharge --noise-v 0.02 \
+  --seeds 1100 1101 1102 1103 --jobs 4
+```
+
+Each case's `plot_summary.npz` retains counts, means, minima and maxima in at most
+`--summary-bins 2000` time bins. Q/SOC errors, voltage residuals and capacitances
+are evaluated **before** reduction, so narrow excursions are retained in the
+envelopes. Summary bins never enter the estimator. The full-run scores still
+include every successful estimator output. Individual plots and `case_summary/`
+overlays read these small summaries directly. The default 2,000 bins roughly match a plot’s horizontal pixel budget.
+A 6,000-hour run has three hours per bin; zooming these plots cannot recover finer detail.
+
+Checkpoints under `checkpoints/` retain the complete joint C context (including
+uncertainty and source/retirement counters), plant state, CC–CV controller state,
+and random-generator state. `--checkpoint-hours 1` defaults to approximately
+hourly checkpoints; the interval rounds upward to an8192-sample boundary so
+generation and all live estimators share a committed boundary. At50Hz the default
+is3604.48seconds. An initial checkpoint is always saved. Files and their checksum
+index are published atomically. An interrupted write leaves earlier checkpoints
+available. This is a local host replay format bound to the exact binary, relevant
+sources and runtime; it is not a portable firmware checkpoint format.
+
+To regenerate ten seconds near hour350, with full-resolution arrays and all six
+plots, use a fresh destination:
+
+```sh
+python3 -B -m experiments.foster_campaign_001.replay \
+  experiments/foster_campaign_001/run_TIMESTAMP/case_0000 \
+  --start-hour 350 --duration-s 10 --out /tmp/foster_hour350
+```
+
+For an explicit three-hour debug window, specify its absolute start and stop:
+
+```sh
+python3 -B -m experiments.foster_campaign_001.replay \
+  experiments/foster_campaign_001/run_TIMESTAMP/case_0000 \
+  --debug-start-hour 350 --debug-stop-hour 353 --out /tmp/foster_350_353
+```
+
+Start is inclusive and stop is exclusive in sample indices, rounded down to the
+sample grid; stop is clipped to the requested campaign duration. `--start-hour`
+is an alias for `--debug-start-hour`, and `--end-hour` aliases `--debug-stop-hour`.
+Use either a stop hour or `--duration-s`, not both. Debug output grows with the
+selected window, not the whole campaign. A three-hour window at 50 Hz contains
+540,000 samples; numeric arrays for both arms need approximately 133 MB, plus
+plots and interval event logs. It does not enable raw logging in the original run.
+
+Replay restores the latest preceding checkpoint and advances through the warmup
+interval without exporting it. It retains the original source and block
+boundaries; the checkpoint posterior is continued without counting old samples
+again. The final solve may advance to the next original16-sample boundary, while
+saved trajectories cover only the requested interval. `result.json` records
+the checkpoint, absolute sample offset, warmup and valid output counts. The full
+joint final message corresponds to the recorded solver stop boundary. Failures
+remain explicit. Use `--no-plots` to export only the interval's data. This command
+creates a separate diagnostic replay; it does not append to the original run.
+
+For both encodings and 2,000 bins, numeric summary arrays occupy about **8.5 MB**
+uncompressed, independent of duration and sampling rate. Every bin retains its
+count, mean and extrema; it does not preserve the ordering inside the bin.
+Temporary reduction buffers, Python/NumPy and plotting need additional RAM.
+This controls saved telemetry, not the estimator’s likelihood/history compression.
+
+Compact mode also replaces controller/workload event CSVs with bounded counts
+and ordered SHA-256 digests in `events_summary.json`. Workload state dwell totals
+remain in `result.json`. Both independent workload RNG streams and their event
+deadlines are checkpointed. Interval replay exports event detail as well as
+V/I/T, states and parameters. No raw event list grows throughout the campaign.
+
+Each uncompressed C context is 19,416 bytes. With two encodings and hourly
+checkpoints, 6,000 hours needs about **233 MB of context payload**, plus the fixed
+summary and checkpoint metadata/index, plots and source snapshots. NPZ compression
+usually reduces the payload; the startup sizing report is an uncompressed numeric
+estimate, not a filesystem quota. Checkpoint storage grows with duration; increasing
+`--checkpoint-hours` reduces it at the cost of longer replay warmup. This format
+supports interval diagnostics, not automatic resumption of campaign scoring after
+interruption. None of these host figures changes Cortex-M23 SRAM accounting.
+
+For a long embedded-workload run:
+
+```sh
+python3 -B -m experiments.foster_campaign_001.run \
+  --hours 6000 --sample-rate-hz 50 --recording compact \
+  --loads embedded --cells A --noise-v 0.02 \
+  --load-seeds 7 8 --seeds 1100 1103 --jobs 4
+```
+
+That command runs four independent cases (two load seeds × two noise seeds),
+with both coefficient encodings. Every observation is still simulated and fitted;
+CPU time grows with duration. Storage/index tests at 6,000-hour counts do **not**
+qualify 6,000-hour estimation accuracy, aging or uncertainty coverage.
+
+Existing full recordings and their running processes are left intact. They do
+not acquire historical checkpoints automatically. Preserve the recorded binary,
+source snapshots, campaign metadata and compatible runtime with compact runs;
+replay rejects changed inputs/code or damaged checkpoints instead of silently
+substituting another execution. [Targeted tests](test_compact.py) compare compact
+recording and interval replay against full recording, including joint messages,
+noise/controller continuation and failure boundaries.
+
+
 ## Backend and sampling rate
 
 The optimized C backend is now the default. Use `--backend python` for the

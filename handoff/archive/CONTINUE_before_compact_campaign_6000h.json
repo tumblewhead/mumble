@@ -1,0 +1,63 @@
+{
+  "schema": "mumble_continue_v41",
+  "repository": "https://github.com/tumblewhead/mumble",
+  "work_branch": "feature/embedded-semi-markov-load-001",
+  "base_revision": "a9d001c",
+  "read_current_branch_tip": true,
+  "read_first": [
+    "AGENTS.md",
+    "README.md",
+    "PROJECT_STATE.json",
+    "experiments/foster_campaign_001/README.md",
+    "experiments/foster_96h_review_001/README.md",
+    "provenance/source_checkpoint_20261030.json",
+    "experiments/foster_bounded_hysteresis_001/README.md",
+    "experiments/foster_bounded_196h_review_001/README.md",
+    "experiments/foster_summary_labels_001/README.md",
+    "experiments/foster_uncertainty_audit_001/README.md",
+    "provenance/mainline_foster_20261030/receipt.json",
+    "experiments/vi_event_windows_001/README.md",
+    "experiments/foster720h_rc_review_001/README.md",
+    "experiments/embedded_workload_001/README.md"
+  ],
+  "current": "Reviewed720h legacy run: case3 RC parameters compensate while total resistance is accurate; uncertainty remains overconfident. Added semi-Markov embedded load with independent --load-seeds and --seeds(noise), CC/CV cycling and seed labels.52tests plus11plot follow-ups pass; all8arms of4case4h smoke complete. No capacity convergence or bias-repair claim.",
+  "next_proposed_not_implemented": "Extend the tested11-amplitude/5-rate conditional likelihood packet into a joint uncertain-rate representation; retain original prior/support and bound compression error. Avoid selecting rounds/window size or variance inflation from truth errors.",
+  "user_reported_run": "Completed bounded196h run reviewed: experiments/foster_campaign_001/run_bounded_20261030_185906_868310",
+  "resources": {
+    "target": "Cortex-M23 custom RTL,16MHz,~10KiB SRAM",
+    "C_context_bytes": 19416,
+    "known_context_plus_C_chain_bytes": 22096,
+    "target_cycles_measured": false
+  },
+  "constraints": [
+    "Truth stays in harness/scoring",
+    "Preserve actual dt and source sequence",
+    "No arbitrary forgetting/decay or hidden health rule",
+    "SRAM-only deployable history; current core is not firmware-ready",
+    "No long campaigns by default",
+    "Bulk campaign telemetry listed in checkpoint scope stays local; clone does not contain excluded raw arrays",
+    "Experiments are ignored by default; explicitly stage source/configuration and small reviewed fixtures. Do not add generated campaign outputs or merge the canceled large checkpoint."
+  ],
+  "latest_receipts": [
+    "experiments/embedded_workload_001/qualification.json",
+    "experiments/vi_event_windows_001/summary.json",
+    "experiments/foster_96h_review_001/review.json",
+    "experiments/foster_500hz_review_001/review.json",
+    "experiments/foster_rate_audit_001/result.json",
+    "experiments/foster_campaign_c_001/summary.json",
+    "experiments/foster_c_history_001/summary.json"
+  ],
+  "previous_handoff": {
+    "path": "handoff/archive/CONTINUE_before_progress_checkpoint_20261030.json",
+    "sha256": "d7d809f119153a33cd0988561adcb88f7fa05753d9505819af240d693367f99c"
+  },
+  "checkpoint_publication": "Source-only replacement based on cleaned published history. Canceled large checkpoint is not an ancestor. See source checkpoint receipt; bulk evidence remains local.",
+  "source_checkpoint_validation": {
+    "tests": 35,
+    "status": "passed",
+    "receipt": "provenance/source_checkpoint_20261030.json"
+  },
+  "mainline_promotion": "provenance/mainline_foster_20261030/receipt.json",
+  "vi_event_next": "Keep fixed16/Gaussian baseline. Treat sparse I/VI scheduling and sensor-grounded mixture as separate experimental candidates; qualify phase sensitivity and model-mismatch before promotion. Joint uncertain-rate history repair remains necessary.",
+  "embedded_next": "Owner may run longer crossed load/noise seeds. Compare same cell/prior/settings across conventional and embedded stimuli; quantify full-cycle learning and uncertainty. Current model uses held interval-average envelopes, not unresolved RF/PWM dynamics."
+}

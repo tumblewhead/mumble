@@ -5,6 +5,12 @@ bounded hysteresis, continuous physical parameters, and likelihood/state-transpo
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
 physical telemetry, and individual plots plus labeled all-arm overlays.
 See the [campaign guide](experiments/foster_campaign_001/README.md).
+For long runs, add `--recording compact`: bounded 2,000-bin plots, event summaries,
+and full-state local replay checkpoints replace full trajectories. Explicit
+`--debug-start-hour` / `--debug-stop-hour` flags on the replay tool recover a
+selected interval. See the [recording qualification](provenance/compact_campaign_6000h/README.md)
+for 6,000-hour storage sizing; long-duration inference is not newly qualified.
+
 
 ```sh
 python3 -B -m experiments.foster_campaign_001.run \

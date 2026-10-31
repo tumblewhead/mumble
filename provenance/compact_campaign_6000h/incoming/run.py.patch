@@ -1,0 +1,61 @@
+diff --git a/experiments/foster_campaign_001/run.py b/experiments/foster_campaign_001/run.py
+index a4827f9..fd58651 100644
+--- a/experiments/foster_campaign_001/run.py
++++ b/experiments/foster_campaign_001/run.py
+@@ -6,6 +6,7 @@ from datetime import datetime, timezone
+ import hashlib
+ import itertools
+ import json
++import math
+ import os
+ from pathlib import Path
+ import shutil
+@@ -69,6 +70,9 @@ def finish(m):
+ 
+ 
+ def run_case(out, campaign, config, model_id, scenario, cell, args):
++    if getattr(args, 'recording', 'full') == 'compact':
++        from .compact import run_compact
++        return run_compact(out, campaign, config, model_id, scenario, cell, args)
+     out.mkdir()
+     rate=getattr(args,'sample_rate_hz',DEFAULT_RATE);backend=getattr(args,'backend','python')
+     charger_settings={k:getattr(args,k,v) for k,v in CHARGER_DEFAULTS.items()} if scenario['load']=='charge-discharge' else None
+@@ -223,6 +227,12 @@ def parser():
+     p.add_argument('--temperature-period-s', type=float, default=3600.)
+     p.add_argument('--encoding', choices=['both', 'float32', 'float64'], default='both')
+     p.add_argument('--sample-csv', action='store_true', help='also export all samples and truth to large CSV')
++    p.add_argument('--recording', choices=['full', 'compact'], default='full',
++                   help='compact: streaming summaries and replay checkpoints, no full telemetry (C backend only)')
++    p.add_argument('--summary-bins', type=int, default=4000,
++                   help='maximum time bins per compact case (default:4000; extrema and means retained)')
++    p.add_argument('--checkpoint-hours', type=float, default=1.,
++                   help='compact replay checkpoint interval, rounded up to an8192-sample boundary (default:1h)')
+     p.add_argument('--no-plots', action='store_true')
+     p.add_argument('--out')
+     return p
+@@ -237,6 +247,10 @@ def main():
+     p = parser(); args = p.parse_args()
+     if args.jobs < 1:
+         p.error('--jobs must be a positive integer')
++    if args.summary_bins < 1 or not math.isfinite(args.checkpoint_hours) or args.checkpoint_hours <= 0:
++        p.error('positive --summary-bins and finite positive --checkpoint-hours required')
++    if args.recording == 'compact' and (args.backend != 'c' or args.sample_csv):
++        p.error('--recording compact requires --backend c and cannot use --sample-csv')
+     try:clock_hz(args.sample_rate_hz)
+     except ValueError as e:p.error(str(e))
+     if 'charge-discharge' in args.loads:
+@@ -283,8 +297,12 @@ def main():
+           scope='Independent case workers; chronological samples within each case; no retries or truth-based tuning; point errors are not coverage'))
+     print(json.dumps(dict(output=str(out), cases=len(scenarios), hours_per_case=args.hours,
+                           jobs=min(args.jobs,len(scenarios)),
+-                          numeric_disk_MB_per_case=round(args.hours*3600*args.sample_rate_hz*(176+35.5*(2 if args.encoding=='both' else 1))/1e6, 1),
+-                          disk_note='Plus block CSV, plots, snapshots; --sample-csv substantially increases disk use')), flush=True)
++                          numeric_disk_MB_per_case=(round(args.hours*3600*args.sample_rate_hz*(176+35.5*(2 if args.encoding=='both' else 1))/1e6, 1)
++                                                    if args.recording == 'full' else None),
++                          recording=args.recording,
++                          disk_note=('Plus block CSV, plots, snapshots; --sample-csv substantially increases disk use'
++                                     if args.recording == 'full' else
++                                     'Bounded min/max/mean bins plus periodic full-state checkpoints; no raw stream files'))), flush=True)
+     completed = {}
+     for index, result in completed_cases(out, config, model_id, scenarios, definitions, args):
+         case = out / ('case_%04d' % index)

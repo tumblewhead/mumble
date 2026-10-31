@@ -4,6 +4,7 @@ Current fractions are generic synthetic battery-side assumptions. Operations are
 activity episodes (e.g. a radio exchange or a batch of flash writes), not packets
 or individual page-program timing. Separate LED activity may overlap operations.
 """
+import copy
 import math
 import numpy as np
 from .rate import DEFAULT_RATE, sample_period_s
@@ -72,5 +73,22 @@ class EmbeddedWorkload:
         return value
     def take_events(self):
         return sorted([e for c in self.chains for e in c.take_events()],key=lambda e:(e['start_us'],e['chain'],e['event_index']))
+    def snapshot(self):
+        return copy.deepcopy(dict(schema='embedded_workload_checkpoint_v1', seed=self.seed,
+            rate=self.rate, peak=self.peak, next_index=self.next_index,
+            chains=[dict(name=c.name, rng=c.rng.bit_generator.state,
+                         **{k:getattr(c,k) for k in ['state','end_us','count','events','dwell_us','fraction']})
+                    for c in self.chains]))
+    def restore(self, saved):
+        if (saved['schema'],saved['seed'],saved['rate'],saved['peak']) != (
+                'embedded_workload_checkpoint_v1',self.seed,self.rate,self.peak):
+            raise ValueError('workload checkpoint configuration mismatch')
+        if [c.name for c in self.chains] != [c['name'] for c in saved['chains']]:
+            raise ValueError('workload checkpoint chain mismatch')
+        self.next_index=saved['next_index']
+        for chain, state in zip(self.chains,saved['chains']):
+            chain.rng.bit_generator.state=copy.deepcopy(state['rng'])
+            for key in ['state','end_us','count','events','dwell_us','fraction']:
+                setattr(chain,key,copy.deepcopy(state[key]))
     def summary(self):
         return dict(kind='semi_markov_embedded_envelope_v1',load_seed=self.seed,noise_seed_used=False,peak_current_A=self.peak,sample_rate_Hz=self.rate,event_clock_hz=CLOCK_HZ,rng='PCG64 via SeedSequence(load_seed).spawn(2)',operations=OPERATIONS,transitions=TRANSITIONS,LED=LED,LED_transitions=LED_TRANSITIONS,chains={c.name:dict(events=c.count,elapsed_seconds_by_state={s:v/CLOCK_HZ for s,v in c.dwell_us.items()}) for c in self.chains},scope='Generic battery-side activity envelopes; interval-average command physically held for1/Fs. No sub-sample RF/PWM circuit or real board fidelity claim.',seed_scope='Logical workload independent of noise and cell; charger phase gating and terminal current may depend on measured voltage.')

@@ -80,20 +80,27 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
     import matplotlib.pyplot as plt
     destination = destination or case
     destination.mkdir(parents=True, exist_ok=True)
+    if result.get('recording') == 'compact':
+        from .compact_plot import render_compact
+        return render_compact(case, result, cell, destination, start_hour, end_hour, overlays, alpha, styles, case_style)
     obs = np.load(case/'observations.npy', mmap_mode='r')
     truth = np.load(case/'truth.npy', mmap_mode='r')
+    if result.get('recording') == 'replay':
+        obs = obs[:result['records']]
+        truth = truth[:result['records']]
+    record_offset = result.get('record_offset', 0)
     rate = result.get('sample_rate_Hz', LEGACY_RATE)
-    begin = max(0, int(start_hour*3600*rate))
-    end = min(len(obs), int(end_hour*3600*rate) if end_hour is not None else len(obs))
+    begin = max(0, int(start_hour*3600*rate)-record_offset)
+    end = min(len(obs), int(end_hour*3600*rate)-record_offset if end_hour is not None else len(obs))
     if end <= begin:
         raise ValueError('plot time range contains no samples')
     o = obs[begin:end]; tr = truth[begin:end]
-    sample_time = lambda ix: (begin+ix+1)/rate
+    sample_time = lambda ix: (record_offset+begin+ix+1)/rate
     traces = {}
     for k, stat in result['arms'].items():
         rows = np.load(case/(k+'_trace.npy'), mmap_mode='r')[:stat['outputs']]
-        first = np.searchsorted(rows[:,1], begin/rate, side='right')
-        last = np.searchsorted(rows[:,1], end/rate, side='right')
+        first = np.searchsorted(rows[:,1], (record_offset+begin)/rate, side='right')
+        last = np.searchsorted(rows[:,1], (record_offset+end)/rate, side='right')
         traces[k] = rows[first:last]
     colors = dict(float64='#3165b4', float32='#dc7822')
     styles = styles or {k:dict(label=k,color=colors[k],linestyle='-') for k in traces}
@@ -170,10 +177,10 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
     fig,axes = panels('errors',4,1,figsize=(12,12),layout='constrained',sharex=True)
     for k,rows in traces.items():
         t = lambda i,r=rows:r[i,1]
-        draw_derived(axes[0],len(rows),lambda sl,r=rows:100*(r[sl,11]/truth[r[sl,0].astype(int)-1,5]-1),t,**styles[k])
-        draw_derived(axes[1],len(rows),lambda sl,r=rows:100*(r[sl,6]-truth[r[sl,0].astype(int)-1,0]),t,**styles[k])
+        draw_derived(axes[0],len(rows),lambda sl,r=rows:100*(r[sl,11]/truth[r[sl,0].astype(int)-record_offset-1,5]-1),t,**styles[k])
+        draw_derived(axes[1],len(rows),lambda sl,r=rows:100*(r[sl,6]-truth[r[sl,0].astype(int)-record_offset-1,0]),t,**styles[k])
         draw_derived(axes[2],len(rows),lambda sl,r=rows:1000*(r[sl,5]-r[sl,4]),t,**styles[k])
-        draw_derived(axes[3],len(rows),lambda sl,r=rows:1000*(r[sl,5]-truth[r[sl,0].astype(int)-1,16]),t,**styles[k])
+        draw_derived(axes[3],len(rows),lambda sl,r=rows:1000*(r[sl,5]-truth[r[sl,0].astype(int)-record_offset-1,16]),t,**styles[k])
     for a in axes[:2]:
         if first_case:
             a.axhspan(-.5,.5,color='#cfe5ce',alpha=.5)
@@ -221,15 +228,17 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
     try:
         for report in reports:
             case = campaign/report['directory']
-            required = ['observations.npy', 'truth.npy', 'scenario.json']
-            required += [k+'_trace.npy' for k in report.get('arms', {})]
+            compact = report.get('recording') == 'compact'
+            required = (['plot_summary.npz', 'scenario.json'] if compact else
+                        ['observations.npy', 'truth.npy', 'scenario.json']+
+                        [k+'_trace.npy' for k in report.get('arms', {})])
             missing = [name for name in required if not (case/name).is_file()]
             if not report.get('arms') or missing:
                 skipped.append(dict(directory=case.name, status=report['status'],
                                     reason='No arm telemetry' if not report.get('arms') else
                                            'Missing files: '+', '.join(missing)))
                 continue
-            n = len(np.load(case/'observations.npy', mmap_mode='r'))
+            n = report['records'] if compact else len(np.load(case/'observations.npy', mmap_mode='r'))
             rate = report.get('sample_rate_Hz', LEGACY_RATE)
             end = min(n, int(end_hour*3600*rate) if end_hour is not None else n)
             if end <= int(start_hour*3600*rate):
@@ -243,6 +252,8 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
                                  scenario=report['scenario']))
         title = (f'{len(included)} cases overlaid; trace opacity {alpha:g}; '
                  f'{len(skipped)} cases skipped (see cases.json)')
+        if any(r.get('recording') == 'compact' for r in reports):
+            title += '\nCompact traces show bin means and min/max ranges; use replay for detail.'
         for name, (fig, axes, heading) in overlays.items():
             save_plot(fig, axes, destination, name, heading, title)
         receipt = dict(status='completed' if included else 'no_plottable_cases',
@@ -273,7 +284,10 @@ def main():
         render_summary(args.case,args.out,args.start_hour,args.end_hour)
     else:
         result = json.loads((args.case/'result.json').read_text())
-        config = json.loads((args.case.parent/'calibration.json').read_text())
+        calibration = args.case/'calibration.json'
+        if not calibration.exists():
+            calibration = args.case.parent/'calibration.json'
+        config = json.loads(calibration.read_text())
         cell = json.loads((args.case/'scenario.json').read_text())['cell_definition']
         render(args.case,result,config,cell,args.out,args.start_hour,args.end_hour)
     print(args.out.resolve())
