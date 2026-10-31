@@ -1,0 +1,391 @@
+{
+  "schema": "uncertainty_weak_stimulus_plan_v1",
+  "status": "planning_only_not_executed",
+  "base_main_revision": "311218af167acad715e3738015c34568a62c3f98",
+  "branch": "design/uncertainty-weak-stimulus-001",
+  "scope": "Diagnosis and experiment specification only; no estimator edits, numerical runs or new long campaigns this turn.",
+  "objectives": [
+    "Attribute the low-noise center/precision discrepancy before selecting a repair.",
+    "Distinguish weak capacity identification from avoidable representation or solver error.",
+    "Preserve useful state estimates and joint uncertainty through repetitive or quiet use."
+  ],
+  "physical_application_targets": {
+    "Q_relative_error_percent": 0.5,
+    "SOC_error_percentage_points": 0.5,
+    "nuisance_parameters_required_to_match_same_target": false
+  },
+  "stage0": {
+    "purpose": "Exact source/chronology reconstruction controls",
+    "source_inventory": "inputs.json",
+    "regenerate_from_original_origin_for_exact_reference": true,
+    "source_binding": "Original sources, binary, public calibration, input chronology and controller/RNG recipe; compare at saved checkpoints, hash regenerated prefix.",
+    "truth_interface": "Harness may simulate truth; fitting API receives indexed dt/I/T/V and declared sensor calibration only. Truth scoring separate after fits freeze.",
+    "new_outputs_only": true
+  },
+  "stage1": {
+    "status": "next_execution_stage_after_diagnostic_implementation",
+    "cases": [
+      {
+        "label": "owner_case_0000",
+        "question": "uncertainty",
+        "requested_fit_hours": 4,
+        "source_campaign": "/home/easy/proj/mumble/.worktrees/rolling-joint-field/experiments/foster_campaign_001/run_20261031_182600_810547",
+        "source_case": "case_0000",
+        "sample_rate_Hz": 50,
+        "selection": "scheduled refresh at/before target; retain rejected attempts"
+      },
+      {
+        "label": "owner_case_0002",
+        "question": "uncertainty",
+        "requested_fit_hours": 4,
+        "source_campaign": "/home/easy/proj/mumble/.worktrees/rolling-joint-field/experiments/foster_campaign_001/run_20261031_182600_810547",
+        "source_case": "case_0002",
+        "sample_rate_Hz": 50,
+        "selection": "scheduled refresh at/before target; retain rejected attempts"
+      },
+      {
+        "label": "owner_case_0004",
+        "question": "uncertainty",
+        "requested_fit_hours": 4,
+        "source_campaign": "/home/easy/proj/mumble/.worktrees/rolling-joint-field/experiments/foster_campaign_001/run_20261031_182600_810547",
+        "source_case": "case_0004",
+        "sample_rate_Hz": 50,
+        "selection": "scheduled refresh at/before target; retain rejected attempts"
+      },
+      {
+        "label": "owner_case_0006",
+        "question": "uncertainty",
+        "requested_fit_hours": 4,
+        "source_campaign": "/home/easy/proj/mumble/.worktrees/rolling-joint-field/experiments/foster_campaign_001/run_20261031_182600_810547",
+        "source_case": "case_0006",
+        "sample_rate_Hz": 50,
+        "selection": "scheduled refresh at/before target; retain rejected attempts"
+      },
+      {
+        "label": "weak_B_cycle",
+        "question": "weak_stimulus",
+        "requested_fit_hours": 4,
+        "source_campaign": "/home/easy/proj/mumble/.worktrees/field-mainline/experiments/field_mainline_001/default35_control4h",
+        "source_case": "case_0000",
+        "sample_rate_Hz": 35,
+        "selection": "exact original4h endpoint; fresh offline field fit separately labeled"
+      }
+    ],
+    "requested_holdout_hours": 0.5,
+    "weak_holdout_origin": "New declared continuation; absent from4h archive.",
+    "arms": [
+      "saved_original_rolling",
+      "saved_field_assisted_before_after_refresh",
+      "fresh_degree5_full_prefix_field_fit_native_transport",
+      "retained_data_original_prior_local_joint_MAP_GN_exact_transport",
+      "field_fit_with_exact_transport"
+    ],
+    "prior": "Original public prior once per complete prefix. Never add replayed-data likelihood to a posterior from the same data.",
+    "initializations": {
+      "public_prior_whitened_w": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "slow_offset_nonzero_coordinates": {
+        "5": 0.3,
+        "13": -0.3,
+        "14": 0.3,
+        "15": 0.3
+      },
+      "also_negative_of_slow_offset": true,
+      "saved_field_origin_w_permitted": true,
+      "truth_initialization_permitted": false,
+      "selection": "lowest converged training objective; keep unresolved starts"
+    },
+    "profile_grid": {
+      "broad_logQ": "log(public_prior_Q)+public_prior_logQ_SD*k; k=-3,-2,-1,0,1,2,3",
+      "local_logQ": "log(reference_fit_Q)+reference_logQ_GN_SD*k; k=-3,-2,-1,0,1,2,3",
+      "extra_queries": [
+        "saved rolling logQ",
+        "saved field logQ",
+        "fresh field fit logQ"
+      ],
+      "nuisance": "reoptimize other15 initial-chart coordinates preserving joint prior",
+      "interpretation": "objective profiles, not marginal posterior or exact exclusions"
+    },
+    "common_anchor_metrics": [
+      "full and partitioned weighted residual/Jacobian defect",
+      "gradient defect",
+      "GN curvature and directional exact-Hessian check",
+      "predicted vs refitted Q/SOC correction",
+      "local widths/correlations",
+      "source/refresh/domain/solver statuses",
+      "chunk-size sensitivity",
+      "pre/post refresh and between-refresh behavior"
+    ],
+    "partition_attribution": "g_j=B_exact.T@d_j+DeltaB_j.T@r_field; sum over physical response groups equals total gradient defect; cross terms retained",
+    "prediction": "No refit on heldout samples; local joint predictive covariance, conditional on recorded I/T; common score measure; no coverage claim from selected witnesses"
+  },
+  "stage2_uncertainty": {
+    "conditional": true,
+    "primary_labels": [
+      "owner_case_0000",
+      "owner_case_0002"
+    ],
+    "requested_fit_hours": [
+      24,
+      72
+    ],
+    "high_noise_extension": "Only if needed to discriminate noise scaling; paired cases0004/0006.",
+    "growth_metrics": [
+      "physical center displacement",
+      "displacement/local SD",
+      "gradient-defect direction and magnitude",
+      "joint curvature disagreement",
+      "SOC excursion/throughput and record count"
+    ],
+    "sensor_control": "Exact physical response with discrete Gaussian-integrated ADC-bin likelihood; public delta=1/1024V and analog sigma. Optional unquantized matched-innovation control with frozen recorded I/T; never silently change closed-loop load.",
+    "720h_reference": "Deferred unless shorter prefixes leave a duration-specific ambiguity; must regenerate complete prefix for exact-data claim.",
+    "repair_rule": "Select a response/transport/solver/sensor or discrepancy representation only after attribution. No automatic scalar inflation, forgetting or decay."
+  },
+  "stage2_weak_stimulus": {
+    "conditional": true,
+    "parent_label": "weak_B_cycle",
+    "shared_parent_hours": 4,
+    "fork_temperature_C": 25,
+    "branches": [
+      {
+        "label": "repeat",
+        "first_hour": "original cycle at absolute phase",
+        "following_three_hours": "cycle"
+      },
+      {
+        "label": "rest_after_prefix",
+        "first_hour": "zero current",
+        "following_three_hours": "zero current"
+      },
+      {
+        "label": "short_excursions",
+        "repeat": 24,
+        "segments_A_s": [
+          [
+            0.03,
+            50
+          ],
+          [
+            0,
+            25
+          ],
+          [
+            -0.03,
+            50
+          ],
+          [
+            0,
+            25
+          ]
+        ],
+        "following_three_hours": "cycle"
+      },
+      {
+        "label": "wide_excursion",
+        "repeat": 1,
+        "segments_A_s": [
+          [
+            0.03,
+            1200
+          ],
+          [
+            0.0,
+            600
+          ],
+          [
+            -0.03,
+            1200
+          ],
+          [
+            0.0,
+            600
+          ]
+        ],
+        "following_three_hours": "cycle"
+      }
+    ],
+    "fork_rules": [
+      "Same physical/estimator parent boundary and original prior/history.",
+      "Distinct source lineage per continuation; same input stream across inference arms.",
+      "Measured-voltage/domain guards only; report any truncated intervention.",
+      "Fixed registered noise continuation state/counter mapping, no reselection."
+    ],
+    "scoring_endpoints_hours": [
+      4,
+      5,
+      8
+    ],
+    "forecast": "Freeze estimates at4h and score first-hour continuation separately from online assimilation.",
+    "standalone_null": {
+      "cell": "B",
+      "sample_rate_Hz": 35,
+      "hours": 4,
+      "noise_v": 0.004,
+      "seed": 314159,
+      "temperature_C": 25,
+      "current_A": 0,
+      "identity": "Physical voltage likelihood independent of Q and gamma; independent Q prior is preserved. Not asserted for rest after excitation."
+    },
+    "sensitivity": "Compare nuisance-residualized Q Jacobian, data-only information, prior contribution, full joint profile, prior sensitivity, state and heldout errors.",
+    "prior_sensitivity": {
+      "reference_Q_log_SD": [
+        0.3,
+        0.6
+      ],
+      "mean": "unchanged public mean",
+      "covariance": "Scale Q row of prior root by2 for alternative; retain cross-correlations.",
+      "scope": "Retained-data diagnostic first, separately labeled field-domain limits; no truth-based prior selection or production inflation."
+    }
+  },
+  "routing": [
+    {
+      "finding": "field gradient correction explains reference displacement",
+      "next": "partition-specific representation or justified joint discrepancy/error envelope"
+    },
+    {
+      "finding": "fresh field agrees with reference but hybrid endpoint drifts",
+      "next": "transport and between-refresh feedback/cadence diagnostic"
+    },
+    {
+      "finding": "reference and field both too narrow/displaced",
+      "next": "sensor likelihood, observed curvature and local-Gaussian adequacy"
+    },
+    {
+      "finding": "weak reference profile broad or strongly prior-dependent",
+      "next": "explicit unresolved status and stimulus support; do not force point convergence"
+    },
+    {
+      "finding": "weak exact reference identifies Q but field differs",
+      "next": "measured representation/optimization repair"
+    },
+    {
+      "finding": "incomplete optimizer or computational-domain issue",
+      "next": "report unresolved; no physical exclusion or coverage conclusion"
+    }
+  ],
+  "conditional_validation": {
+    "status": "not_scheduled;requires_frozen_candidate",
+    "noise_seeds": [
+      2100,
+      2101,
+      2102,
+      2103,
+      2104,
+      2105,
+      2106,
+      2107,
+      2108,
+      2109,
+      2110,
+      2111,
+      2112,
+      2113,
+      2114,
+      2115,
+      2116,
+      2117,
+      2118,
+      2119,
+      2120,
+      2121,
+      2122,
+      2123,
+      2124,
+      2125,
+      2126,
+      2127,
+      2128,
+      2129,
+      2130,
+      2131
+    ],
+    "strata": [
+      {
+        "cell": "A",
+        "load": "embedded",
+        "load_seed": 17,
+        "noise_v": 0.002,
+        "sample_rate_Hz": 50,
+        "hours": 24
+      },
+      {
+        "cell": "A",
+        "load": "embedded",
+        "load_seed": 17,
+        "noise_v": 0.02,
+        "sample_rate_Hz": 50,
+        "hours": 24
+      },
+      {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "sample_rate_Hz": 35,
+        "hours": 8
+      },
+      {
+        "cell": "B",
+        "load": "cycle4h_then_wide_excursion1h_then_cycle3h",
+        "noise_v": 0.004,
+        "sample_rate_Hz": 35,
+        "hours": 8
+      }
+    ],
+    "candidate_and_promoted_control_on_same_stream": true,
+    "metrics": [
+      "50/80/95% marginal coverage with binomial uncertainty",
+      "joint calibration diagnostics",
+      "Q/SOC errors and nuisance uncertainty",
+      "forecast scores",
+      "refresh failures",
+      "memory/operations/latency"
+    ],
+    "limits": "32 seeds per stratum is a calibration pilot, not proof of3-sigma tail coverage. Do not pool correlated time samples or paired strata as independent trials."
+  },
+  "storage": {
+    "observation_float64_columns": 5,
+    "case_cache_policy": "One case at a time; no raw truth/trace CSV. Original evidence untouched.",
+    "current_field_payload_and_live_state_B": 28864,
+    "diagnostic_gradient16_B": 128,
+    "packed_curvature16_B": 1088,
+    "illustrative_discrepancy_payload_B": {
+      "rank2": 296,
+      "rank4": 624
+    },
+    "discrepancy_payload_scope": "Directions16*k, meansk and triangular k*k covariance root; excludes metadata/workspace/online statistics. Not a selected or qualified repair."
+  },
+  "deliverables": [
+    "source/recipe identities and compact regeneration receipt",
+    "exact versus field Q profiles and joint sensitivities",
+    "gradient/curvature/transport attribution",
+    "weak-stimulus matched-throughput comparison",
+    "separate postfit truth and predictive scoring",
+    "resource estimate and evidence-based next repair decision"
+  ],
+  "prohibited_shortcuts": [
+    "truth-centered fits or priors",
+    "replayed evidence double counting",
+    "posterior diagonalization",
+    "arbitrary0.1NLL gate",
+    "automatic covariance inflation",
+    "exponential forgetting or hidden health decay",
+    "claiming exact full history from a late compressed checkpoint",
+    "calling finite local coverage an aging or M23 certificate"
+  ]
+}
