@@ -10,9 +10,10 @@ from experiments.foster_feedback_001.plant import CELLS, scalar_step
 from .rate import DEFAULT_RATE, sample_period_s
 from .telemetry import PARAMETERS, thermal
 from .charger import ChargeDischarge, DEFAULTS, EVENT_COLUMNS
+from .workload import EmbeddedWorkload, EVENT_COLUMNS as WORKLOAD_COLUMNS
 
 INITIAL = [.63, .001, -.002, .001, .15]
-LOADS = ['legacy', 'cycle', 'pulses', 'multiscale', 'rest', 'charge-discharge']
+LOADS = ['legacy', 'cycle', 'pulses', 'multiscale', 'rest', 'charge-discharge', 'embedded']
 
 
 def cells(path=None):
@@ -43,8 +44,8 @@ def current(indices, load, amplitude, sample_rate_hz=DEFAULT_RATE):
     rate = sample_rate_hz
     if load not in LOADS:
         raise ValueError('unknown load')
-    if load == 'charge-discharge':
-        raise ValueError('charge-discharge requires the measured-voltage controller')
+    if load in ('charge-discharge','embedded'):
+        raise ValueError('this load requires the measured-voltage controller')
     if load == 'rest':
         return np.zeros(indices.shape)
     if load == 'multiscale':
@@ -86,21 +87,25 @@ def temperatures(indices, mode, mean, amplitude, period, sample_rate_hz=DEFAULT_
 
 def generate(out, config, n, cell, load, amplitude, noise, seed, temperature,
              temperature_mean=25., temperature_amplitude=8., temperature_period=3600., chunk=8192,
-             progress=None, charger_settings=None, sample_rate_hz=DEFAULT_RATE):
+             progress=None, charger_settings=None, sample_rate_hz=DEFAULT_RATE, load_seed=0):
     """Write every observation/truth row at the declared rate with bounded buffers."""
     dt = sample_period_s(sample_rate_hz)
     obs = np.lib.format.open_memmap(out / 'observations.npy', mode='w+', dtype='float64', shape=(n, 5))
     truth = np.lib.format.open_memmap(out / 'truth.npy', mode='w+', dtype='float64', shape=(n, 17))
     ref = np.array([cell['parameters'][k] for k in PARAMETERS])
     state = cell['initial_state'].copy()
-    controller=ChargeDischarge(charger_settings or DEFAULTS, sample_rate_hz=sample_rate_hz) if load=='charge-discharge' else None
+    controller=ChargeDischarge(charger_settings or DEFAULTS, sample_rate_hz=sample_rate_hz) if load in ('charge-discharge','embedded') else None
+    workload=EmbeddedWorkload(load_seed,amplitude,sample_rate_hz) if load=='embedded' else None
     rng = np.random.default_rng(seed)
     sigma = math.sqrt(noise ** 2 + (1 / 1024) ** 2 / 12)
     valid = 0
     last_progress = time.perf_counter()
-    with ((out/'stimulus_events.csv').open('x',newline='') if controller else nullcontext()) as events_file:
+    with ((out/'stimulus_events.csv').open('x',newline='') if controller else nullcontext()) as events_file, \
+         ((out/'workload_events.csv').open('x',newline='') if workload else nullcontext()) as workload_file:
         writer=csv.DictWriter(events_file,fieldnames=EVENT_COLUMNS) if controller else None
         if writer:writer.writeheader()
+        workwriter=csv.DictWriter(workload_file,fieldnames=WORKLOAD_COLUMNS) if workload else None
+        if workwriter:workwriter.writeheader()
         for begin in range(0, n, chunk):
             end = min(n, begin + chunk)
             ix = np.arange(begin, end)
@@ -110,7 +115,9 @@ def generate(out, config, n, cell, load, amplitude, noise, seed, temperature,
             errors = rng.normal(0, noise, len(ix))
             for j, k in enumerate(ix):
                 if controller:
-                    I[j]=controller.current(int(k));writer.writerows(controller.take_events())
+                    requested=workload.current(int(k)) if workload else None
+                    if workwriter:workwriter.writerows(workload.take_events())
+                    I[j]=controller.current(int(k),requested);writer.writerows(controller.take_events())
                 try:
                     state, voltage = scalar_step(state, params[j], dt, float(I[j]),
                                                  config['ocv_intercept_V'], config['ocv_slope_V_per_SOC'])
@@ -121,6 +128,7 @@ def generate(out, config, n, cell, load, amplitude, noise, seed, temperature,
                     obs.flush(); truth.flush()
                     return obs, truth, dict(status='plant_failed', valid_records=valid,
                                             failure=dict(index=int(k), reason=str(e)),
+                                            **({'workload':workload.summary()} if workload else {}),
                                             **({'charger':controller.summary()} if controller else {}))
                 measured_voltage=1.5+code/1024
                 obs[k] = dt, I[j], T[j], measured_voltage, sigma
@@ -133,4 +141,5 @@ def generate(out, config, n, cell, load, amplitude, noise, seed, temperature,
                 last_progress = time.perf_counter()
     obs.flush(); truth.flush()
     return obs, truth, dict(status='generated', valid_records=valid,
+                            **({'workload':workload.summary()} if workload else {}),
                             **({'charger':controller.summary()} if controller else {}))

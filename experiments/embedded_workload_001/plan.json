@@ -1,0 +1,12 @@
+{
+  "schema":"embedded_workload_plan_v1",
+  "request":"Semi-Markov embedded workload with a load seed independent of measurement-noise seed.",
+  "cli":"--loads embedded --load-seeds 7 8 --seeds 1100 1101. Cartesian product for embedded workloads; deterministic loads do not duplicate cases for unused load seeds.",
+  "model":"MCU/radio/flash operation chain plus independent LED activity chain; explicit transition probabilities and bounded operation-duration distributions. Generic synthetic battery-side current envelopes, not a specific board or protocol simulator.",
+  "randomness":"Independent PCG64 generators derived from load seed for operation and LED scheduling. Noise generator remains initialized only by --seeds. Event deadlines use integer microseconds, independent of ADC sample rate, cell and noise.",
+  "acquisition_scope":"Average logical envelope current over each sample interval, quantize to existing125uA grid, and hold that command physically for dt=1/Fs. Plant and estimator see the same held current. This does not simulate unresolved real RF packets/PWM pulses or assert that arbitrary fast currents are equivalent to their average for RC dynamics.",
+  "cycling":"Existing measured-voltage CC/CV controller supplies charging/rest. Embedded envelope replaces its discharge C-rate schedule. Workload clock runs through charge/rest, so event schedule remains noise-independent; actual phase-gated terminal current can differ when measurement noise changes controller decisions.",
+  "defaults":"Existing loads and estimator defaults unchanged. Current-a sets30mA default peak workload scale; conventional charger settings retained.",
+  "validation":["same load seed reproduces schedule across noise seeds and chunk sizes","different load seeds alter schedules without consuming noise RNG","event schedule invariant across sample rates and interval charge conserved before quantization","valid transitions, finite positive dwells and current bounds","serial/parallel deterministic outputs","labels and metadata carry both seeds","legacy campaign and charger regressions","short crossed seed campaign and one practical multi-hour run"],
+  "limits":"No guarantee richer stimulation repairs history bias. No change to estimator, history weighting or truth separation. Subsample circuit/ADC fidelity is a separate future qualification."
+}

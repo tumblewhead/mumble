@@ -54,6 +54,7 @@ class ChargeDischarge:
         self.last_signature=None;self.last_current=0.;self.last_charge_limit=0.
         self.counts={p:0 for p in ['cc','cv','rest_after_charge','discharge','rest_after_discharge']}
         self.charge_Ah=0.;self.discharge_Ah=0.
+        self.external_discharge_current=None
 
     def schedule(self,index):
         charge=self.s['charge_c'][(index//round(self.s['charge_step_s']*self.rate))%len(self.s['charge_c'])]
@@ -62,13 +63,19 @@ class ChargeDischarge:
 
     def event(self,index,reason,current):
         charge,discharge=self.schedule(index)
+        if self.phase=='discharge' and self.external_discharge_current is not None:
+            discharge=self.external_discharge_current/self.s['nominal_capacity_ah']
         self.events.append(dict(record_count=index,time_s=index/self.rate,phase=self.phase,reason=reason,
             measured_voltage_V=self.last_voltage,current_A=current,charger_limit_C=charge,
             discharge_load_C=discharge,completed_cycles=self.completed_cycles))
 
-    def current(self,index):
+    def current(self,index,discharge_current=None):
         if index!=self.next_index:raise ValueError('controller source order')
+        if discharge_current is not None and (not math.isfinite(discharge_current) or not 0<=discharge_current<=.25):
+            raise ValueError('external discharge current must be0..0.25A')
+        self.external_discharge_current=discharge_current
         charge,discharge=self.schedule(index);q=self.s['nominal_capacity_ah']
+        if discharge_current is not None:discharge=discharge_current/q
         cap=quantize(charge*q);self.last_charge_limit=cap
         if self.phase=='cc':current=-cap
         elif self.phase=='cv':

@@ -59,7 +59,12 @@ def save_plot(fig, axes, destination, name, heading, title):
                 ax.legend(unique.values(), unique.keys(), fontsize=7)
     if shared and figure_labels:
         fig.legend(figure_labels.values(), figure_labels.keys(), loc='outside right upper', fontsize=7, title='Seed / arm', frameon=False)
-    fig.suptitle(heading+'\n'+title, fontsize=12)
+    heading_artist=fig.suptitle(heading+'\n'+title, fontsize=12)
+    if shared:
+        # Center the heading over the panels, excluding the wide seed legend.
+        fig.canvas.draw()
+        bounds=[ax.get_position() for ax in np.asarray(axes).ravel() if ax.get_visible()]
+        heading_artist.set_x((min(b.x0 for b in bounds)+max(b.x1 for b in bounds))/2)
     for suffix in ['png','pdf']:
         path = destination/(name+'.'+suffix)
         if path.exists():
@@ -98,6 +103,7 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
     truth_prefix=(truth_label+' / ') if truth_label else ''
     truth_style=case_style.get('truth_linestyle','-')
     title = ', '.join(str(result['scenario'][k]) for k in ['cell','load','noise_v','seed'])
+    if 'load_seed' in result['scenario']:title+=f", load seed {result['scenario']['load_seed']}"
     draw_line = partial(draw, alpha=alpha)
     draw_derived = partial(derived, alpha=alpha)
     first_case = overlays is None or not overlays
@@ -199,16 +205,18 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
     total = sum(len(r.get('arms',{})) for r in ordered)
     palette=plt.get_cmap('tab20' if total<=20 else 'hsv')
     style_map={};style_receipt=[];position=0
-    seeds=[r.get('scenario',{}).get('seed') for r in ordered]
+    seed_pairs=[(r.get('scenario',{}).get('seed'),r.get('scenario',{}).get('load_seed')) for r in ordered]
     for report in ordered:
         seed=report.get('scenario',{}).get('seed','?')
         label=f'seed {seed}'
-        if seeds.count(seed)>1:label+=f" ({report['directory']})"
+        load_seed=report.get('scenario',{}).get('load_seed')
+        if load_seed is not None:label=f'noise seed {seed}, load seed {load_seed}'
+        if seed_pairs.count((seed,load_seed))>1:label+=f" ({report['directory']})"
         arms={}
         for arm in sorted(report.get('arms',{}),reverse=True):
             color=palette(position if total<=20 else position/max(total,1))
             style=dict(label=label+' / '+arm,color=color,linestyle='-' if arm=='float64' else '--')
-            arms[arm]=style;style_receipt.append(dict(directory=report['directory'],seed=seed,arm=arm,**style));position+=1
+            arms[arm]=style;style_receipt.append(dict(directory=report['directory'],seed=seed,load_seed=load_seed,arm=arm,**style));position+=1
         style_map[report['directory']]=(arms,dict(label=label,color=next(iter(arms.values()))['color'] if arms else '#555555',truth_linestyle=':'))
     try:
         for report in reports:

@@ -72,7 +72,7 @@ def finish(m):
 def run_case(out, campaign, config, model_id, scenario, cell, args):
     out.mkdir()
     rate=getattr(args,'sample_rate_hz',DEFAULT_RATE);backend=getattr(args,'backend','python')
-    charger_settings={k:getattr(args,k,v) for k,v in CHARGER_DEFAULTS.items()} if scenario['load']=='charge-discharge' else None
+    charger_settings={k:getattr(args,k,v) for k,v in CHARGER_DEFAULTS.items()} if scenario['load'] in ('charge-discharge','embedded') else None
     write(out / 'scenario.json', dict(**scenario, cell_definition=cell,
           stimulus_sign='positive discharge', reference_parameters='stationary', sample_rate_Hz=rate, backend=backend,
           charger=charger_settings,
@@ -83,7 +83,7 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
     obs, truth, generated = generate(out, config, n, cell, scenario['load'], args.current_a,
         scenario['noise_v'], scenario['seed'], args.temperature, args.temperature_mean_c,
         args.temperature_amplitude_c, args.temperature_period_s,
-        charger_settings=charger_settings, sample_rate_hz=rate,
+        charger_settings=charger_settings, sample_rate_hz=rate,load_seed=scenario.get('load_seed',0),
         progress=lambda count: print(json.dumps(dict(case=out.name, generating_records=count,
                                                      simulated_hours=count/(3600*rate))), flush=True))
     generation_s=time.perf_counter()-started
@@ -178,6 +178,7 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
                   encoding_difference=encoding_difference, simulation_hours=n/(3600*rate), sample_rate_Hz=rate, backend=backend,
                   timing=dict(generation_s=generation_s,estimator_s=backend_s),
                   charger=generated.get('charger'),
+                  workload=generated.get('workload'),
                   wall_s_before_plots=time.perf_counter()-started, coverage_validated=False, aging_implemented=False)
     if args.sample_csv:
         with (out / 'samples.csv').open('x', newline='') as f:
@@ -219,7 +220,8 @@ def parser():
     p.add_argument('--taper-hold-s', type=float, default=30., help='continuous low-current dwell before charge ends')
     p.add_argument('--cv-gain', type=float, default=.5, help='voltage-loop integral gain in A/(V s); harness only')
     p.add_argument('--noise-v', type=float, nargs='+', default=[.004], help='Gaussian voltage noise SD in V; ADC remains')
-    p.add_argument('--seeds', type=int, nargs='+', default=[314159])
+    p.add_argument('--seeds', type=int, nargs='+', default=[314159],help='measurement-noise seeds; independent of --load-seeds')
+    p.add_argument('--load-seeds', type=int, nargs='+', default=[0],help='independent semi-Markov workload seeds for --loads embedded; crossed with noise seeds')
     p.add_argument('--temperature', choices=['cycle', 'constant'], default='cycle')
     p.add_argument('--temperature-mean-c', type=float, default=25.)
     p.add_argument('--temperature-amplitude-c', type=float, default=8.)
@@ -243,14 +245,14 @@ def main():
         p.error('--jobs must be a positive integer')
     try:clock_hz(args.sample_rate_hz)
     except ValueError as e:p.error(str(e))
-    if 'charge-discharge' in args.loads:
+    if any(load in ('charge-discharge','embedded') for load in args.loads):
         try:validate_charger({k:getattr(args,k) for k in CHARGER_DEFAULTS}, args.sample_rate_hz)
         except ValueError as e:p.error(str(e))
     numbers = [args.hours, args.current_a, *args.noise_v, args.temperature_mean_c,
                args.temperature_amplitude_c, args.temperature_period_s]
     if not np.isfinite(numbers).all() or args.hours <= 0 or round(args.hours*3600*args.sample_rate_hz) < 16:
         p.error('finite values and at least16samples required')
-    if not 0 <= args.current_a <= .25 or min(args.noise_v) < 0 or min(args.seeds) < 0:
+    if not 0 <= args.current_a <= .25 or min(args.noise_v) < 0 or min(args.seeds) < 0 or min(args.load_seeds)<0:
         p.error('current amplitude must be0..0.25A; noise and seeds nonnegative')
     amp = args.temperature_amplitude_c if args.temperature == 'cycle' else 0.
     if args.temperature_amplitude_c < 0 or args.temperature_period_s <= 0 or not (15 <= args.temperature_mean_c-amp <= args.temperature_mean_c+amp <= 35):
@@ -261,9 +263,12 @@ def main():
             raise ValueError('unknown cell; use A/B or supply --cell-file')
     except (ValueError, TypeError, KeyError, OSError) as e:
         p.error(str(e))
-    scenarios = [dict(cell=c, load=l, noise_v=v, seed=s) for c, l, v, s in
-                 itertools.product(dict.fromkeys(args.cells), dict.fromkeys(args.loads),
-                                   dict.fromkeys(args.noise_v), dict.fromkeys(args.seeds))]
+    scenarios = []
+    for c,l,v,s in itertools.product(dict.fromkeys(args.cells),dict.fromkeys(args.loads),dict.fromkeys(args.noise_v),dict.fromkeys(args.seeds)):
+        for load_seed in (dict.fromkeys(args.load_seeds) if l=='embedded' else [None]):
+            scenario=dict(cell=c,load=l,noise_v=v,seed=s)
+            if load_seed is not None:scenario['load_seed']=load_seed
+            scenarios.append(scenario)
     out = Path(args.out).resolve() if args.out else HERE / ('run_'+datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f'))
     preserved = json.loads((BASE / 'verification.json').read_text())['artifacts']
     parent_verification = verify_parent(ROOT, preserved)
@@ -304,13 +309,14 @@ def main():
         temp.replace(out / 'summary.json')
         with (out / 'summary.csv').open('w', newline='') as f:
             writer=csv.writer(f)
-            writer.writerow(['case','cell','load','noise_v','seed','encoding','status','retired_records',
+            writer.writerow(['case','cell','load','noise_v','seed','load_seed','encoding','status','retired_records',
                              'final_Q_percent','final_SOC_pp','max_Q_percent','max_SOC_pp',
                              'joint_within_target_fraction','Q_3sd_misses','SOC_3sd_misses'])
             for r in reports:
                 for kind,arm in r.get('arms',{'none':dict(status=r['status'])}).items():
                     m=arm.get('all',{})
                     writer.writerow([r['directory'],*[r['scenario'][key] for key in ['cell','load','noise_v','seed']],
+                                     r['scenario'].get('load_seed'),
                                      kind,arm['status'],arm.get('retired_records'),
                                      *[m.get(key) for key in ['final_Q_percent','final_SOC_pp','max_Q_percent',
                                        'max_SOC_pp','joint_within_target_fraction','Q_3sd_misses','SOC_3sd_misses']]])
