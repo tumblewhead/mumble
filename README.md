@@ -8,6 +8,11 @@ Use `--history compare` for both field and original rolling arms, or
 [720-hour review](provenance/rolling_field_720h_20261031/README.md).
 Low-noise uncertainty, aging and M23 deployment remain unqualified.
 
+The isolated [uncertainty and weak-stimulus diagnosis](experiments/uncertainty_weak_stimulus_001/README.md)
+now separates a hysteresis approximation gradient defect from weak-case
+uncertainty loss between field refreshes. Five matched prefixes and a short
+cadence control are complete; no uncertainty repair or default change is promoted.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

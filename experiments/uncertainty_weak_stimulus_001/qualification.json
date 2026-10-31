@@ -1,0 +1,1931 @@
+{
+  "schema": "uncertainty_weak_stimulus_stage1_v1",
+  "status": "five_matched_diagnostics_and_short_adaptive_replay_complete_with_explicit_limits",
+  "work_branch": "experiment/uncertainty-weak-stimulus-001",
+  "base_main": "311218a",
+  "planning_commit": "060a706",
+  "report": "experiments/uncertainty_weak_stimulus_001/README.md",
+  "tests": {
+    "passed": 8,
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.uncertainty_weak_stimulus_001.test_diagnostics -v",
+    "controls": [
+      "instrumented C parity and finite-difference component derivatives",
+      "partition gradient identity retaining cross terms",
+      "chunked/dense joint objective",
+      "correlated-prior fixed-Q constraints",
+      "joint predictive covariance",
+      "Q/gamma rest-from-origin null",
+      "unconverged starts cannot win selection",
+      "changed input/message hash rejection"
+    ]
+  },
+  "original_metadata_identities_verified": 35,
+  "original_evidence_changed": false,
+  "production_estimator_changed": false,
+  "cases": [
+    {
+      "label": "owner_case_0000",
+      "status": "diagnostic_complete_with_explicit_profile_limits",
+      "fit_hours": 3.9939555555555555,
+      "scores": {
+        "rolling": {
+          "Q_error_percent": 0.5026198748424582,
+          "SOC_error_pp": 0.03578708466956959,
+          "Q_local_SD_percent": 0.04141918437198334,
+          "SOC_local_SD_pp": 0.0023859890353009026,
+          "Q_error_local_SD": 12.104558922816414,
+          "SOC_error_local_SD": 14.99884707770939
+        },
+        "saved_field": {
+          "Q_error_percent": 0.0797374170485865,
+          "SOC_error_pp": 0.004151929240292507,
+          "Q_local_SD_percent": 0.08691966686175219,
+          "SOC_local_SD_pp": 0.004820955155655433,
+          "Q_error_local_SD": 0.9170035566983608,
+          "SOC_error_local_SD": 0.8612254431410556
+        },
+        "fresh_field": {
+          "Q_error_percent": 0.07973718196456758,
+          "SOC_error_pp": 0.004151914380789989,
+          "Q_local_SD_percent": 0.08691967412713374,
+          "SOC_local_SD_pp": 0.00482095596657551,
+          "Q_error_local_SD": 0.9170007775910783,
+          "SOC_error_local_SD": 0.8612222160036107
+        },
+        "retained_reference": {
+          "Q_error_percent": 0.06655265811668087,
+          "SOC_error_pp": 0.003349475790315193,
+          "Q_local_SD_percent": 0.08766119001439017,
+          "SOC_local_SD_pp": 0.004844138963613672,
+          "Q_error_local_SD": 0.7589507015054763,
+          "SOC_error_local_SD": 0.6914491544265119
+        }
+      },
+      "field_reference": {
+        "field_minus_exact_Q_percent": 0.013175755032671219,
+        "field_minus_exact_Q_local_SD": 0.15029327236079576,
+        "field_minus_exact_SOC_pp": 0.0008024385904747966,
+        "saved_field_minus_fresh_Q_percent": 2.3489672456965842e-07,
+        "saved_field_minus_fresh_SOC_pp": 1.4859502517339251e-08
+      },
+      "predicted_Q_correction_percent": -0.013205183841375857,
+      "same_anchor_Q_SD_ratio": 0.992909868503023,
+      "gradient_Q_correction_by_group": {
+        "OCV_charge": -1.0302559018437821e-09,
+        "ohmic": -1.4708285934248648e-16,
+        "RC1": -9.3831193716033e-06,
+        "RC2": -0.00022847333613193718,
+        "RC3": 4.852213206007116e-05,
+        "hysteresis": -0.0130166806776118
+      },
+      "profile_limits": [
+        {
+          "label": "prior_-3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "outside computational rate box; unresolved, not excluded"
+        },
+        {
+          "label": "prior_-2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_-1",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_0",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_1",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        }
+      ],
+      "partition_checks": {
+        "contribution_sum_max_abs_error": 2.5327608454972506e-07,
+        "partition_sum_vs_objective_gradient_max_abs": 0.001465005407226272,
+        "voltage_partition_sum_max_abs_error": 1.6453644002822898e-12,
+        "jacobian_partition_sum_max_abs_error": 6.727951529228449e-14,
+        "instrumented_vs_archived_model_max_abs": {
+          "voltage": 0.0,
+          "jacobian": 0.0,
+          "endpoint": 0.0,
+          "transport": 0.0
+        }
+      },
+      "data_Q_information": {
+        "coordinate": "logQ with all15 original-chart nuisance coordinates free",
+        "information": 1297848.4425532448,
+        "local_SD_if_full_rank": 0.0008777847063454012,
+        "nuisance_singular_values": [
+          482774.5184699977,
+          5681.426989982734,
+          3128.985612189431,
+          1609.1250440242106,
+          1411.6584481706648,
+          424.54226814615646,
+          319.7345273368687,
+          257.085424246971,
+          133.09389447862554,
+          94.46576026241395,
+          59.41607671694192,
+          36.45284235548031,
+          20.921765769481063,
+          9.86032194928021,
+          4.145197961544682
+        ],
+        "nuisance_rank": 15,
+        "numerical_rank_tolerance": 1.7151596355446858e-09,
+        "projection_relative_residual": 0.011361241681921555,
+        "prior_included": false
+      },
+      "inference_identity": {
+        "bytes": 415533,
+        "sha256": "79c0ae21a5e6e73efe74926bc047910c89ff16dc0d77a7f496f06889c88cda99"
+      },
+      "truth_identity": {
+        "bytes": 719,
+        "sha256": "cc2a5cd38083e20a65cbc35a9147672f20446bf1fc23dc2d7db20411bf58801e"
+      },
+      "partition_vs_objective_assembly_Q_error_local_SD": -4.5422658509923005e-09,
+      "forecast_NLL": {
+        "field_pre_refresh": 45510.72774957606,
+        "field_post_refresh": 45510.72785466239,
+        "float64": 45533.13954201908,
+        "field64": 45510.72785466239,
+        "exact": 45510.608919490805,
+        "field_exact_transport": 45510.70776844913,
+        "field_native_transport": 45510.72785449941
+      },
+      "chunk_Q_shift_local_SD": 3.622003567787107e-11,
+      "fits": {
+        "exact": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 3.054763544932939
+          },
+          {
+            "start": "declared_offset",
+            "status": "unresolved_local_fit",
+            "stop": "no_descent",
+            "wall_s": 12.928982522920705
+          },
+          {
+            "start": "negative_offset",
+            "status": "unresolved_local_fit",
+            "stop": "no_descent",
+            "wall_s": 15.555377702927217
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 1.158905682968907
+          }
+        ],
+        "field": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.0029000299982726574
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.002641273895278573
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.002738099079579115
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.0006842940347269177
+          }
+        ]
+      },
+      "diagnostic_wall_s": 127.3756556790322,
+      "profile_summary": {
+        "exact": {
+          "converged": 11,
+          "unresolved": 6,
+          "minimum_converged_delta": 0.0
+        },
+        "field": {
+          "converged": 10,
+          "unresolved": 7,
+          "minimum_converged_delta": 0.0
+        }
+      }
+    },
+    {
+      "label": "owner_case_0002",
+      "status": "diagnostic_complete_with_explicit_profile_limits",
+      "fit_hours": 3.9939555555555555,
+      "scores": {
+        "rolling": {
+          "Q_error_percent": 0.7878721510935272,
+          "SOC_error_pp": 0.03983947959956824,
+          "Q_local_SD_percent": 0.03859990824366298,
+          "SOC_local_SD_pp": 0.003833188292380259,
+          "Q_error_local_SD": 20.331256747341197,
+          "SOC_error_local_SD": 10.393300970568678
+        },
+        "saved_field": {
+          "Q_error_percent": -0.0647642978362728,
+          "SOC_error_pp": -0.004839413907486989,
+          "Q_local_SD_percent": 0.09032696389036197,
+          "SOC_local_SD_pp": 0.005267445923564242,
+          "Q_error_local_SD": -0.7172307822238267,
+          "SOC_error_local_SD": -0.9187401214386605
+        },
+        "fresh_field": {
+          "Q_error_percent": -0.06476413105531709,
+          "SOC_error_pp": -0.004839402615963717,
+          "Q_local_SD_percent": 0.09032695691710138,
+          "SOC_local_SD_pp": 0.005267445218345013,
+          "Q_error_local_SD": -0.7172289899836308,
+          "SOC_error_local_SD": -0.918738100798743
+        },
+        "retained_reference": {
+          "Q_error_percent": -0.08015129413057043,
+          "SOC_error_pp": -0.005742521135432277,
+          "Q_local_SD_percent": 0.09109259466176887,
+          "SOC_local_SD_pp": 0.005301605413951024,
+          "Q_error_local_SD": -0.8802409542954812,
+          "SOC_error_local_SD": -1.0831664537539885
+        }
+      },
+      "field_reference": {
+        "field_minus_exact_Q_percent": 0.015399505978586345,
+        "field_minus_exact_Q_local_SD": 0.16904030929797834,
+        "field_minus_exact_SOC_pp": 0.0009031185194685598,
+        "saved_field_minus_fresh_Q_percent": -1.668890357848407e-07,
+        "saved_field_minus_fresh_SOC_pp": -1.1291523271950155e-08
+      },
+      "predicted_Q_correction_percent": -0.015377959630228682,
+      "same_anchor_Q_SD_ratio": 0.993183658048019,
+      "gradient_Q_correction_by_group": {
+        "OCV_charge": -1.1722474769395948e-09,
+        "ohmic": 5.652305416235158e-16,
+        "RC1": -5.065937331538922e-05,
+        "RC2": 2.3359859692584927e-05,
+        "RC3": 4.4491285852575386e-05,
+        "hysteresis": -0.015396261010728515
+      },
+      "profile_limits": [
+        {
+          "label": "prior_-3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "outside computational rate box; unresolved, not excluded"
+        },
+        {
+          "label": "prior_-2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_-1",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_0",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_1",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "round_limit"
+        },
+        {
+          "label": "prior_2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        }
+      ],
+      "partition_checks": {
+        "contribution_sum_max_abs_error": 2.2730091586709023e-08,
+        "partition_sum_vs_objective_gradient_max_abs": 0.0014179177524056286,
+        "voltage_partition_sum_max_abs_error": 1.5913381723464681e-12,
+        "jacobian_partition_sum_max_abs_error": 6.616929226765933e-14,
+        "instrumented_vs_archived_model_max_abs": {
+          "voltage": 0.0,
+          "jacobian": 0.0,
+          "endpoint": 0.0,
+          "transport": 0.0
+        }
+      },
+      "data_Q_information": {
+        "coordinate": "logQ with all15 original-chart nuisance coordinates free",
+        "information": 1204542.057138237,
+        "local_SD_if_full_rank": 0.0009111481881614726,
+        "nuisance_singular_values": [
+          482775.22934190376,
+          5584.570309027594,
+          3189.2969987792258,
+          1633.404147951805,
+          1407.8204315863477,
+          426.36494690152114,
+          379.7683603723763,
+          264.3335038456172,
+          135.4556263954119,
+          93.24505468991873,
+          58.602599163771764,
+          35.560663969338066,
+          19.40951394292349,
+          8.790729836494405,
+          4.570596364800316
+        ],
+        "nuisance_rank": 15,
+        "numerical_rank_tolerance": 1.7151621610690304e-09,
+        "projection_relative_residual": 0.010936065471054378,
+        "prior_included": false
+      },
+      "inference_identity": {
+        "bytes": 415797,
+        "sha256": "8e476dba0603c1267d0e2e370a51312774040b64094d69589011792ba323ae8b"
+      },
+      "truth_identity": {
+        "bytes": 719,
+        "sha256": "e9b290ec99103aa340a37a3178d8f77f376d238d564a948396d394771e7aa61e"
+      },
+      "partition_vs_objective_assembly_Q_error_local_SD": -2.7127752505085737e-09,
+      "forecast_NLL": {
+        "field_pre_refresh": 45020.87118350619,
+        "field_post_refresh": 45020.85923733976,
+        "float64": 45051.67222717193,
+        "field64": 45020.85923733976,
+        "exact": 45020.80641811153,
+        "field_exact_transport": 45020.89656611061,
+        "field_native_transport": 45020.85923444322
+      },
+      "chunk_Q_shift_local_SD": 1.850078797882206e-11,
+      "fits": {
+        "exact": [
+          {
+            "start": "public_prior",
+            "status": "unresolved_local_fit",
+            "stop": "no_descent",
+            "wall_s": 15.76193860906642
+          },
+          {
+            "start": "declared_offset",
+            "status": "unresolved_local_fit",
+            "stop": "no_descent",
+            "wall_s": 22.54369337996468
+          },
+          {
+            "start": "negative_offset",
+            "status": "unresolved_local_fit",
+            "stop": "no_descent",
+            "wall_s": 28.635069133946672
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 1.9278333919355646
+          }
+        ],
+        "field": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.005969049991108477
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.005351181956939399
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.005418491899035871
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.0011512120254337788
+          }
+        ]
+      },
+      "diagnostic_wall_s": 297.4651689089369,
+      "profile_summary": {
+        "exact": {
+          "converged": 11,
+          "unresolved": 6,
+          "minimum_converged_delta": 0.0
+        },
+        "field": {
+          "converged": 10,
+          "unresolved": 7,
+          "minimum_converged_delta": -5.820766091346741e-11
+        }
+      }
+    },
+    {
+      "label": "owner_case_0004",
+      "status": "diagnostic_complete_with_explicit_profile_limits",
+      "fit_hours": 3.9939555555555555,
+      "scores": {
+        "rolling": {
+          "Q_error_percent": 1.081703693804803,
+          "SOC_error_pp": 0.018570846421506193,
+          "Q_local_SD_percent": 0.2463962908817445,
+          "SOC_local_SD_pp": 0.013751420731266095,
+          "Q_error_local_SD": 4.366523236381299,
+          "SOC_error_local_SD": 1.3504674741921283
+        },
+        "saved_field": {
+          "Q_error_percent": 0.4503847851825782,
+          "SOC_error_pp": 0.020617698464608925,
+          "Q_local_SD_percent": 0.6822430715881347,
+          "SOC_local_SD_pp": 0.030418818841178422,
+          "Q_error_local_SD": 0.6586707973621763,
+          "SOC_error_local_SD": 0.6777941830107628
+        },
+        "fresh_field": {
+          "Q_error_percent": 0.4503810116982532,
+          "SOC_error_pp": 0.02061750829686071,
+          "Q_local_SD_percent": 0.6822437008636153,
+          "SOC_local_SD_pp": 0.0304188919425098,
+          "Q_error_local_SD": 0.6586646836365762,
+          "SOC_error_local_SD": 0.6777863025328726
+        },
+        "retained_reference": {
+          "Q_error_percent": 0.44806362041232006,
+          "SOC_error_pp": 0.020321606844886375,
+          "Q_local_SD_percent": 0.6866852879392709,
+          "SOC_local_SD_pp": 0.03048447093686674,
+          "Q_error_local_SD": 0.6510446803524831,
+          "SOC_error_local_SD": 0.6666216017647927
+        }
+      },
+      "field_reference": {
+        "field_minus_exact_Q_percent": 0.0023070542152631504,
+        "field_minus_exact_Q_local_SD": 0.003359657828260799,
+        "field_minus_exact_SOC_pp": 0.00029590145197433415,
+        "saved_field_minus_fresh_Q_percent": 3.756565484851287e-06,
+        "saved_field_minus_fresh_SOC_pp": 1.9016774821523086e-07
+      },
+      "predicted_Q_correction_percent": -0.0026431916901206594,
+      "same_anchor_Q_SD_ratio": 0.9936575304761781,
+      "gradient_Q_correction_by_group": {
+        "OCV_charge": -6.270667112335582e-11,
+        "ohmic": -5.281107849004913e-16,
+        "RC1": 7.3808882448866996e-06,
+        "RC2": -1.2029628001758726e-05,
+        "RC3": 0.0003060657352568689,
+        "hysteresis": -0.0029460730726560778
+      },
+      "profile_limits": [
+        {
+          "label": "prior_-3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "outside computational rate box; unresolved, not excluded"
+        },
+        {
+          "label": "prior_-2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_-1",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_0",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "round_limit"
+        },
+        {
+          "label": "prior_2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "round_limit"
+        },
+        {
+          "label": "prior_3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        }
+      ],
+      "partition_checks": {
+        "contribution_sum_max_abs_error": 5.931610758125316e-10,
+        "partition_sum_vs_objective_gradient_max_abs": 1.5224105140987376e-06,
+        "voltage_partition_sum_max_abs_error": 1.4277121151984318e-13,
+        "jacobian_partition_sum_max_abs_error": 8.11156697366755e-15,
+        "instrumented_vs_archived_model_max_abs": {
+          "voltage": 0.0,
+          "jacobian": 0.0,
+          "endpoint": 0.0,
+          "transport": 0.0
+        }
+      },
+      "data_Q_information": {
+        "coordinate": "logQ with all15 original-chart nuisance coordinates free",
+        "information": 16706.884959252668,
+        "local_SD_if_full_rank": 0.007736637686231327,
+        "nuisance_singular_values": [
+          48749.63926890487,
+          669.8581987981435,
+          307.8077159445082,
+          177.63365184182558,
+          158.05094087401326,
+          42.3525944853949,
+          41.627951251938974,
+          23.373579749921074,
+          13.324351391927465,
+          9.610187095652282,
+          6.462004175584648,
+          3.501940562032862,
+          1.9534008333701924,
+          1.0769056036322933,
+          0.47498499543714856
+        ],
+        "nuisance_rank": 15,
+        "numerical_rank_tolerance": 1.731935102672284e-10,
+        "projection_relative_residual": 0.012390078953997461,
+        "prior_included": false
+      },
+      "inference_identity": {
+        "bytes": 413889,
+        "sha256": "9f3cbdecc3282198894c15310f0ffd1179dab1bfaa3a6af6aad9b1b986c99cab"
+      },
+      "truth_identity": {
+        "bytes": 718,
+        "sha256": "9e7706aa4528ae72dac8da1e3d4fad4bc74bf91019ba74dc6e97df6a4378d952"
+      },
+      "partition_vs_objective_assembly_Q_error_local_SD": -6.715288473896431e-11,
+      "forecast_NLL": {
+        "field_pre_refresh": 45566.60924059444,
+        "field_post_refresh": 45566.60292801724,
+        "float64": 45566.87307130786,
+        "field64": 45566.60292801724,
+        "exact": 45566.603032291656,
+        "field_exact_transport": 45566.60346693245,
+        "field_native_transport": 45566.60292132137
+      },
+      "chunk_Q_shift_local_SD": 1.14062506772927e-12,
+      "fits": {
+        "exact": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 3.2394158710958436
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 3.2026709830388427
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 3.8445917459903285
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 1.9219232460018247
+          }
+        ],
+        "field": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.006552026025019586
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.00630386802367866
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.0062685610027983785
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.0011668429942801595
+          }
+        ]
+      },
+      "diagnostic_wall_s": 139.08754893299192,
+      "profile_summary": {
+        "exact": {
+          "converged": 12,
+          "unresolved": 5,
+          "minimum_converged_delta": 0.0
+        },
+        "field": {
+          "converged": 10,
+          "unresolved": 7,
+          "minimum_converged_delta": -1.1641532182693481e-10
+        }
+      }
+    },
+    {
+      "label": "owner_case_0006",
+      "status": "diagnostic_complete_with_explicit_profile_limits",
+      "fit_hours": 3.9939555555555555,
+      "scores": {
+        "rolling": {
+          "Q_error_percent": 3.179605796152951,
+          "SOC_error_pp": 0.15075855795111393,
+          "Q_local_SD_percent": 0.1968642530675059,
+          "SOC_local_SD_pp": 0.017883354692630818,
+          "Q_error_local_SD": 15.899803437267854,
+          "SOC_error_local_SD": 8.43010500782814
+        },
+        "saved_field": {
+          "Q_error_percent": -0.5340103857314316,
+          "SOC_error_pp": -0.04779676028441315,
+          "Q_local_SD_percent": 0.8911362630626504,
+          "SOC_local_SD_pp": 0.06432649780723775,
+          "Q_error_local_SD": -0.6008523498323868,
+          "SOC_error_local_SD": -0.7430337716758966
+        },
+        "fresh_field": {
+          "Q_error_percent": -0.5340103857314316,
+          "SOC_error_pp": -0.04779676028441315,
+          "Q_local_SD_percent": 0.8911362630628382,
+          "SOC_local_SD_pp": 0.06432649780725956,
+          "Q_error_local_SD": -0.6008523498322602,
+          "SOC_error_local_SD": -0.7430337716756445
+        },
+        "retained_reference": {
+          "Q_error_percent": -0.5489953914363466,
+          "SOC_error_pp": -0.04874065780404724,
+          "Q_local_SD_percent": 0.895788040719831,
+          "SOC_local_SD_pp": 0.06491428404071092,
+          "Q_error_local_SD": -0.6145515282862464,
+          "SOC_error_local_SD": -0.7508464203884554
+        }
+      },
+      "field_reference": {
+        "field_minus_exact_Q_percent": 0.015067726830810332,
+        "field_minus_exact_Q_local_SD": 0.016819371411524817,
+        "field_minus_exact_SOC_pp": 0.0009438975196340849,
+        "saved_field_minus_fresh_Q_percent": 0.0,
+        "saved_field_minus_fresh_SOC_pp": 0.0
+      },
+      "predicted_Q_correction_percent": -0.014999733613631052,
+      "same_anchor_Q_SD_ratio": 0.9966625978245749,
+      "gradient_Q_correction_by_group": {
+        "OCV_charge": -4.0632715822574783e-10,
+        "ohmic": -2.6110966050391456e-16,
+        "RC1": 2.5822430444976278e-05,
+        "RC2": -0.0001088212726384372,
+        "RC3": -4.4353226521149074e-05,
+        "hysteresis": -0.014873612444798266
+      },
+      "profile_limits": [
+        {
+          "label": "prior_-3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "outside computational rate box; unresolved, not excluded"
+        },
+        {
+          "label": "prior_-2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_-1",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "physical model domain/status -7"
+        },
+        {
+          "label": "prior_-1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "physical trajectory support"
+        },
+        {
+          "label": "prior_0",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_3",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "round_limit"
+        },
+        {
+          "label": "prior_3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "outside computational rate box; unresolved, not excluded"
+        },
+        {
+          "label": "rolling",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        }
+      ],
+      "partition_checks": {
+        "contribution_sum_max_abs_error": 1.5556906873825938e-09,
+        "partition_sum_vs_objective_gradient_max_abs": 8.128058652800974e-07,
+        "voltage_partition_sum_max_abs_error": 1.6557935578198624e-13,
+        "jacobian_partition_sum_max_abs_error": 7.799316747991725e-15,
+        "instrumented_vs_archived_model_max_abs": {
+          "voltage": 0.0,
+          "jacobian": 0.0,
+          "endpoint": 0.0,
+          "transport": 0.0
+        }
+      },
+      "data_Q_information": {
+        "coordinate": "logQ with all15 original-chart nuisance coordinates free",
+        "information": 9104.018347207759,
+        "local_SD_if_full_rank": 0.01048053464310058,
+        "nuisance_singular_values": [
+          48750.14535577585,
+          548.8524534441381,
+          345.04911722831594,
+          170.20520046387864,
+          147.03922971499856,
+          44.92795300773308,
+          43.22439325713096,
+          28.784193742568977,
+          13.462940184241484,
+          8.575972008328907,
+          5.810829686623491,
+          3.247481984208703,
+          1.591907819670505,
+          0.9248629296469635,
+          0.5299887830443256
+        ],
+        "nuisance_rank": 15,
+        "numerical_rank_tolerance": 1.7319530824897758e-10,
+        "projection_relative_residual": 0.00924064974783707,
+        "prior_included": false
+      },
+      "inference_identity": {
+        "bytes": 405770,
+        "sha256": "d0b35574f89f9cc0b63911125b80925f9a0518f772e1ae3458157787b2bf76a8"
+      },
+      "truth_identity": {
+        "bytes": 718,
+        "sha256": "234b7ff9d05cfbb3f2ada678cfb1b9752560b2dab41cab7961ad4884d1cc4ed9"
+      },
+      "partition_vs_objective_assembly_Q_error_local_SD": 1.4979126797148375e-11,
+      "forecast_NLL": {
+        "field_pre_refresh": 45010.992900017394,
+        "field_post_refresh": 45010.98926634,
+        "float64": 45014.84591493839,
+        "field64": 45010.98926634,
+        "exact": 45010.98164196929,
+        "field_exact_transport": 45010.99161815541,
+        "field_native_transport": 45010.98926634
+      },
+      "chunk_Q_shift_local_SD": 2.3111724346718125e-12,
+      "fits": {
+        "exact": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 4.7744875269709155
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 4.773472958942875
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 4.772504992084578
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 3.1797877999488264
+          }
+        ],
+        "field": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.00854517996776849
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.008617157931439579
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.008594945073127747
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.0011530059855431318
+          }
+        ]
+      },
+      "diagnostic_wall_s": 129.39199484791607,
+      "profile_summary": {
+        "exact": {
+          "converged": 13,
+          "unresolved": 4,
+          "minimum_converged_delta": 0.0
+        },
+        "field": {
+          "converged": 9,
+          "unresolved": 8,
+          "minimum_converged_delta": 0.0
+        }
+      }
+    },
+    {
+      "label": "weak_B_cycle",
+      "status": "diagnostic_complete_with_explicit_profile_limits",
+      "fit_hours": 4.0,
+      "scores": {
+        "rolling": {
+          "Q_error_percent": 1.6650085960276728,
+          "SOC_error_pp": -0.059520562168169366,
+          "Q_local_SD_percent": 0.4203565427251114,
+          "SOC_local_SD_pp": 0.017532606279940282,
+          "Q_error_local_SD": 3.9283301788611844,
+          "SOC_error_local_SD": -3.3948496428776305
+        },
+        "saved_field": {
+          "Q_error_percent": -1.8938238922058037,
+          "SOC_error_pp": 0.05548600371526602,
+          "Q_local_SD_percent": 1.1151644728470371,
+          "SOC_local_SD_pp": 0.041337476602927664,
+          "Q_error_local_SD": -1.7145331113078042,
+          "SOC_error_local_SD": 1.342268766142738
+        },
+        "fresh_field": {
+          "Q_error_percent": 0.275970515804036,
+          "SOC_error_pp": 0.04877017563864605,
+          "Q_local_SD_percent": 4.303326644851406,
+          "SOC_local_SD_pp": 0.04137221049329098,
+          "Q_error_local_SD": 0.06404124972793687,
+          "SOC_error_local_SD": 1.1788148386839217
+        },
+        "retained_reference": {
+          "Q_error_percent": -0.14514889438100864,
+          "SOC_error_pp": 0.0490629896579331,
+          "Q_local_SD_percent": 4.540408751597166,
+          "SOC_local_SD_pp": 0.04159295784559342,
+          "Q_error_local_SD": -0.03199146715214015,
+          "SOC_error_local_SD": 1.1795984753012965
+        }
+      },
+      "field_reference": {
+        "field_minus_exact_Q_percent": 0.42173154886548675,
+        "field_minus_exact_Q_local_SD": 0.09268873724415067,
+        "field_minus_exact_SOC_pp": -0.00029281401928704653,
+        "saved_field_minus_fresh_Q_percent": -2.1638228948059646,
+        "saved_field_minus_fresh_SOC_pp": 0.006715828076619967
+      },
+      "predicted_Q_correction_percent": -0.42172878605146336,
+      "same_anchor_Q_SD_ratio": 0.9818816449794818,
+      "gradient_Q_correction_by_group": {
+        "OCV_charge": 6.778366148284421e-10,
+        "ohmic": -2.1597840815395072e-15,
+        "RC1": -0.0005958575916224485,
+        "RC2": 0.0002721955890451858,
+        "RC3": -0.015143508976318939,
+        "hysteresis": -0.4071537417162505
+      },
+      "profile_limits": [
+        {
+          "label": "prior_-3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "outside computational rate box; unresolved, not excluded"
+        },
+        {
+          "label": "prior_1",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "round_limit"
+        },
+        {
+          "label": "prior_1",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_2",
+          "method": "exact",
+          "status": "unresolved",
+          "reason": "round_limit"
+        },
+        {
+          "label": "prior_2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "prior_3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "local_2",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        },
+        {
+          "label": "local_3",
+          "method": "field",
+          "status": "unresolved",
+          "reason": "no_descent"
+        }
+      ],
+      "partition_checks": {
+        "contribution_sum_max_abs_error": 3.6878191167488694e-08,
+        "partition_sum_vs_objective_gradient_max_abs": 0.00018686441762838513,
+        "voltage_partition_sum_max_abs_error": 4.3942627314663696e-13,
+        "jacobian_partition_sum_max_abs_error": 1.0737938316296436e-15,
+        "instrumented_vs_archived_model_max_abs": {
+          "voltage": 0.0,
+          "jacobian": 0.0,
+          "endpoint": 0.0,
+          "transport": 0.0
+        }
+      },
+      "data_Q_information": {
+        "coordinate": "logQ with all15 original-chart nuisance coordinates free",
+        "information": 161.65903871393115,
+        "local_SD_if_full_rank": 0.0786502312711482,
+        "nuisance_singular_values": [
+          203606.10361012572,
+          2490.4201307424205,
+          684.9926113588036,
+          624.0271039914102,
+          522.1667971064552,
+          158.22884301632473,
+          135.018704579521,
+          59.9505923801095,
+          50.052884264430595,
+          32.17634723503261,
+          18.164670799251315,
+          16.057553940843654,
+          9.143154705431558,
+          3.268676849542567,
+          1.3540807859840485
+        ],
+        "nuisance_rank": 15,
+        "numerical_rank_tolerance": 7.233541893829657e-10,
+        "projection_relative_residual": 0.016406172446809062,
+        "prior_included": false
+      },
+      "inference_identity": {
+        "bytes": 440009,
+        "sha256": "29d9fa710026e9296656e6217b66badefa087ad83e74c686d7734a059a0cf96e"
+      },
+      "truth_identity": {
+        "bytes": 580,
+        "sha256": "642b9cf6527c5e5751c8746ee324bfc061847f34a536c20e738e8a343e6345b2"
+      },
+      "partition_vs_objective_assembly_Q_error_local_SD": -1.8566707181363334e-09,
+      "forecast_NLL": {
+        "float64": 31710.274783971443,
+        "field64": 31711.633334861348,
+        "exact": 31709.048572232594,
+        "field_exact_transport": 31709.42313887287,
+        "field_native_transport": 31709.228458033784
+      },
+      "chunk_Q_shift_local_SD": 8.762670536559537e-12,
+      "fits": {
+        "exact": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 1.807966600987129
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 1.959779525990598
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 2.709326989017427
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 1.5160492280265316
+          }
+        ],
+        "field": [
+          {
+            "start": "public_prior",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.00747644598595798
+          },
+          {
+            "start": "declared_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.0074388840002939105
+          },
+          {
+            "start": "negative_offset",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.007396192057058215
+          },
+          {
+            "start": "saved_field_origin",
+            "status": "converged_local_fit",
+            "stop": "GN_decrement_at_cost_roundoff",
+            "wall_s": 0.005632380023598671
+          }
+        ]
+      },
+      "diagnostic_wall_s": 192.3655543429777,
+      "profile_summary": {
+        "exact": {
+          "converged": 15,
+          "unresolved": 2,
+          "minimum_converged_delta": 0.0
+        },
+        "field": {
+          "converged": 11,
+          "unresolved": 6,
+          "minimum_converged_delta": 0.0
+        }
+      }
+    }
+  ],
+  "regeneration_checks": [
+    {
+      "label": "owner_case_0000",
+      "checks": [
+        {
+          "sequence": 540672,
+          "identity": {
+            "sequence": 540672,
+            "file": "checkpoint_000000540672.npz",
+            "bytes": 48654,
+            "sha256": "acf204d6c31f03e19c7a51347342f22d9ca3e161d8238966a05a12e97a798d27"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        },
+        {
+          "sequence": 1081344,
+          "identity": {
+            "sequence": 1081344,
+            "file": "checkpoint_000001081344.npz",
+            "bytes": 46730,
+            "sha256": "77a92f97fb7157491d35732f9ffdb7ac1cfa25853208cd43652fa22aa60b61bb"
+          },
+          "stimulus_exact": true
+        }
+      ],
+      "regeneration_wall_s": 19.558622367912903
+    },
+    {
+      "label": "owner_case_0002",
+      "checks": [
+        {
+          "sequence": 540672,
+          "identity": {
+            "sequence": 540672,
+            "file": "checkpoint_000000540672.npz",
+            "bytes": 48570,
+            "sha256": "65e86448fd62aa978d9b69f9a3f271f0ca313a7cecd784f7e924c0344d563340"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        },
+        {
+          "sequence": 1081344,
+          "identity": {
+            "sequence": 1081344,
+            "file": "checkpoint_000001081344.npz",
+            "bytes": 46742,
+            "sha256": "f639a2e5fd29cbabf6b54660c7b9116a34e6fbb31d994a6861c12e04933249ad"
+          },
+          "stimulus_exact": true
+        }
+      ],
+      "regeneration_wall_s": 17.791450362070464
+    },
+    {
+      "label": "owner_case_0004",
+      "checks": [
+        {
+          "sequence": 540672,
+          "identity": {
+            "sequence": 540672,
+            "file": "checkpoint_000000540672.npz",
+            "bytes": 51403,
+            "sha256": "2ddbd6c650bff0e1cc017ce4c5f23b385b82f1946171049a5b1e82c0e6cec72b"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        },
+        {
+          "sequence": 1081344,
+          "identity": {
+            "sequence": 1081344,
+            "file": "checkpoint_000001081344.npz",
+            "bytes": 48566,
+            "sha256": "35c62569ce31b08dd79577f92254a1b6ed7465d82103018c397e3b36341f35d2"
+          },
+          "stimulus_exact": true
+        }
+      ],
+      "regeneration_wall_s": 16.29359250795096
+    },
+    {
+      "label": "owner_case_0006",
+      "checks": [
+        {
+          "sequence": 540672,
+          "identity": {
+            "sequence": 540672,
+            "file": "checkpoint_000000540672.npz",
+            "bytes": 51447,
+            "sha256": "cf1e6fa21486ef7500583fbb83e7d766886c1f88009b109d6f880e91511c606b"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        },
+        {
+          "sequence": 1081344,
+          "identity": {
+            "sequence": 1081344,
+            "file": "checkpoint_000001081344.npz",
+            "bytes": 48541,
+            "sha256": "2c3097288922046f0c938b4eecc46aff5a4bf8c8000e9c0f255ca8230713b616"
+          },
+          "stimulus_exact": true
+        }
+      ],
+      "regeneration_wall_s": 19.200660789967515
+    },
+    {
+      "label": "weak_B_cycle",
+      "checks": [
+        {
+          "sequence": 131072,
+          "identity": {
+            "sequence": 131072,
+            "file": "checkpoint_000000131072.npz",
+            "bytes": 46462,
+            "sha256": "4a24d146539604ecdc9929bb760204a6c5c2c68591bdefe3b926d70c6d34cead"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        },
+        {
+          "sequence": 262144,
+          "identity": {
+            "sequence": 262144,
+            "file": "checkpoint_000000262144.npz",
+            "bytes": 41975,
+            "sha256": "d0acaf6cff84dafcbc7523a459843ff99ddb501683320020cc4c6508e43d1845"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        },
+        {
+          "sequence": 393216,
+          "identity": {
+            "sequence": 393216,
+            "file": "checkpoint_000000393216.npz",
+            "bytes": 46855,
+            "sha256": "76b8e849f17270204a5a19eed2dba27bda95367d231592c6c7135156b12d9688"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        },
+        {
+          "sequence": 504000,
+          "identity": {
+            "sequence": 504000,
+            "file": "checkpoint_000000504000.npz",
+            "bytes": 45765,
+            "sha256": "8478557b8a8a67051187f9b91d52b10b9bc144f8a297ed626387081140a3951c"
+          },
+          "stimulus_exact": true,
+          "messages_exact": {
+            "float64": true,
+            "field64": true
+          },
+          "field_arrays_exact": {
+            "root": true,
+            "state": true,
+            "w": true,
+            "pending": true,
+            "metadata": true
+          }
+        }
+      ],
+      "regeneration_wall_s": 9.749670456978492
+    }
+  ],
+  "boundary_followup": {
+    "initial": {
+      "Q_Ah": 0.05688728992324837,
+      "SOC": 0.6263240865116548,
+      "Q_log_sd": 0.04277738038658854,
+      "SOC_sd": 0.00040762173335375326,
+      "Q_SOC_covariance": 3.221187491101702e-06
+    },
+    "rolling": {
+      "Q_Ah": 0.05562620185311931,
+      "SOC": 0.630553652194122,
+      "Q_log_sd": 0.011151644728470371,
+      "SOC_sd": 0.0004133747660292767,
+      "Q_SOC_covariance": -3.524705910389288e-06
+    },
+    "original_prior_full_prefix_reference": {
+      "Q_Ah": 0.05661770057688597,
+      "SOC": 0.6304894220535486,
+      "Q_log_sd": 0.045404087515971664,
+      "SOC_sd": 0.00041592957845593424,
+      "Q_SOC_covariance": -5.153450271942271e-06
+    },
+    "original_prior_full_prefix_field": {
+      "Q_Ah": 0.05685647528246089,
+      "SOC": 0.6304864939133558,
+      "Q_log_sd": 0.04303326644851406,
+      "SOC_sd": 0.00041372210493290974,
+      "Q_SOC_covariance": -4.442518743975308e-06
+    },
+    "field_every16": {
+      "Q_Ah": 0.056856475745821464,
+      "SOC": 0.630486493806021,
+      "Q_log_sd": 0.04303326466136629,
+      "SOC_sd": 0.00041372210399820273,
+      "Q_SOC_covariance": -4.442518389314464e-06
+    },
+    "joint_suffix_status": "unresolved after initial60 rounds and up to240 continuation rounds; no_descent",
+    "joint_suffix_stops": [
+      {
+        "start": "boundary_mean",
+        "status": "unresolved",
+        "diagnostic": {
+          "stop": "no_descent",
+          "rounds": 157,
+          "cost": 649.8959392568743,
+          "domain_rejections": 0,
+          "free_gradient_inf": 7.77112365211996e-06,
+          "free_GN_decrement_squared": 8.461281173782578e-11,
+          "cost_ulp": 1.1368683772161603e-13,
+          "fixed_logQ": null
+        }
+      },
+      {
+        "start": "offset",
+        "status": "unresolved",
+        "diagnostic": {
+          "stop": "no_descent",
+          "rounds": 38,
+          "cost": 649.9207149427028,
+          "domain_rejections": 0,
+          "free_gradient_inf": 4.602383585489145e-06,
+          "free_GN_decrement_squared": 2.926539643234462e-11,
+          "cost_ulp": 1.1368683772161603e-13,
+          "fixed_logQ": null
+        }
+      },
+      {
+        "start": "negative_offset",
+        "status": "unresolved",
+        "diagnostic": {
+          "stop": "no_descent",
+          "rounds": 149,
+          "cost": 649.8959392570886,
+          "domain_rejections": 0,
+          "free_gradient_inf": 8.224049204294537e-06,
+          "free_GN_decrement_squared": 9.476323605530616e-11,
+          "cost_ulp": 1.1368683772161603e-13,
+          "fixed_logQ": null
+        }
+      }
+    ],
+    "every16_steps": 84,
+    "saved_message_max_abs_difference": 0.0,
+    "wall_s": 3.1653596779797226
+  },
+  "curvature_refinement": {
+    "cases": [
+      {
+        "label": "owner_case_0000",
+        "fit": {
+          "bytes": 415533,
+          "sha256": "79c0ae21a5e6e73efe74926bc047910c89ff16dc0d77a7f496f06889c88cda99"
+        },
+        "checks": [
+          {
+            "step_GN_SD": 0.01,
+            "observed_curvature": 1.0120443580181662,
+            "GN_curvature": 0.9999999999990863,
+            "cost_second_difference": 1.0127050336450338
+          },
+          {
+            "step_GN_SD": 0.003,
+            "observed_curvature": 1.01203886761192,
+            "GN_curvature": 0.9999999999990863,
+            "cost_second_difference": 1.0182589499486816
+          },
+          {
+            "step_GN_SD": 0.001,
+            "observed_curvature": 1.0120330365798713,
+            "GN_curvature": 0.9999999999990863,
+            "cost_second_difference": 1.0790536180138588
+          },
+          {
+            "step_GN_SD": 0.0003,
+            "observed_curvature": 1.0120329180636547,
+            "GN_curvature": 0.9999999999990863,
+            "cost_second_difference": 2.845061115092702
+          },
+          {
+            "step_GN_SD": 0.0001,
+            "observed_curvature": 1.012057304037352,
+            "GN_curvature": 0.9999999999990863,
+            "cost_second_difference": 10.16305759549141
+          }
+        ]
+      },
+      {
+        "label": "owner_case_0002",
+        "fit": {
+          "bytes": 415797,
+          "sha256": "8e476dba0603c1267d0e2e370a51312774040b64094d69589011792ba323ae8b"
+        },
+        "checks": [
+          {
+            "step_GN_SD": 0.01,
+            "observed_curvature": 0.9999711411835965,
+            "GN_curvature": 1.0000000000007936,
+            "cost_second_difference": 1.0001420741900802
+          },
+          {
+            "step_GN_SD": 0.003,
+            "observed_curvature": 0.9999595694752277,
+            "GN_curvature": 1.0000000000007936,
+            "cost_second_difference": 1.0012558454440699
+          },
+          {
+            "step_GN_SD": 0.001,
+            "observed_curvature": 0.9999594597528257,
+            "GN_curvature": 1.0000000000007936,
+            "cost_second_difference": 0.9798677638173103
+          },
+          {
+            "step_GN_SD": 0.0003,
+            "observed_curvature": 0.999978014329356,
+            "GN_curvature": 1.0000000000007936,
+            "cost_second_difference": 1.9124450369013684
+          },
+          {
+            "step_GN_SD": 0.0001,
+            "observed_curvature": 0.9999745386752134,
+            "GN_curvature": 1.0000000000007936,
+            "cost_second_difference": 4.94765117764473
+          }
+        ]
+      },
+      {
+        "label": "owner_case_0004",
+        "fit": {
+          "bytes": 413889,
+          "sha256": "9f3cbdecc3282198894c15310f0ffd1179dab1bfaa3a6af6aad9b1b986c99cab"
+        },
+        "checks": [
+          {
+            "step_GN_SD": 0.01,
+            "observed_curvature": 1.1134570772349415,
+            "GN_curvature": 1.0000000000019342,
+            "cost_second_difference": 1.113475882448256
+          },
+          {
+            "step_GN_SD": 0.003,
+            "observed_curvature": 1.1133210046705846,
+            "GN_curvature": 1.0000000000019342,
+            "cost_second_difference": 1.114282187902265
+          },
+          {
+            "step_GN_SD": 0.001,
+            "observed_curvature": 1.1133092930147968,
+            "GN_curvature": 1.0000000000019342,
+            "cost_second_difference": 1.1247466318309307
+          },
+          {
+            "step_GN_SD": 0.0003,
+            "observed_curvature": 1.1133074226479127,
+            "GN_curvature": 1.0000000000019342,
+            "cost_second_difference": 1.348477477828662
+          },
+          {
+            "step_GN_SD": 0.0001,
+            "observed_curvature": 1.1133051183737432,
+            "GN_curvature": 1.0000000000019342,
+            "cost_second_difference": 1.0593794286251068
+          }
+        ]
+      },
+      {
+        "label": "owner_case_0006",
+        "fit": {
+          "bytes": 405770,
+          "sha256": "d0b35574f89f9cc0b63911125b80925f9a0518f772e1ae3458157787b2bf76a8"
+        },
+        "checks": [
+          {
+            "step_GN_SD": 0.01,
+            "observed_curvature": 0.9977965659715189,
+            "GN_curvature": 1.000000000001397,
+            "cost_second_difference": 0.9968475205823779
+          },
+          {
+            "step_GN_SD": 0.003,
+            "observed_curvature": 0.9958477331589435,
+            "GN_curvature": 1.000000000001397,
+            "cost_second_difference": 0.9970260887510246
+          },
+          {
+            "step_GN_SD": 0.001,
+            "observed_curvature": 0.9956768535752665,
+            "GN_curvature": 1.000000000001397,
+            "cost_second_difference": 1.0015210136771202
+          },
+          {
+            "step_GN_SD": 0.0003,
+            "observed_curvature": 0.9956565802196147,
+            "GN_curvature": 1.000000000001397,
+            "cost_second_difference": 1.1266416145695581
+          },
+          {
+            "step_GN_SD": 0.0001,
+            "observed_curvature": 0.9956638241600102,
+            "GN_curvature": 1.000000000001397,
+            "cost_second_difference": 1.9848812371492386
+          }
+        ]
+      },
+      {
+        "label": "weak_B_cycle",
+        "fit": {
+          "bytes": 440009,
+          "sha256": "29d9fa710026e9296656e6217b66badefa087ad83e74c686d7734a059a0cf96e"
+        },
+        "checks": [
+          {
+            "step_GN_SD": 0.01,
+            "observed_curvature": 2.0846789616667802,
+            "GN_curvature": 1.0000000000006815,
+            "cost_second_difference": 1.5626513049937785
+          },
+          {
+            "step_GN_SD": 0.003,
+            "observed_curvature": 1.1342629488999971,
+            "GN_curvature": 1.0000000000006815,
+            "cost_second_difference": 1.0884315189388063
+          },
+          {
+            "step_GN_SD": 0.001,
+            "observed_curvature": 1.0507089181296851,
+            "GN_curvature": 1.0000000000006815,
+            "cost_second_difference": 1.0602525435388088
+          },
+          {
+            "step_GN_SD": 0.0003,
+            "observed_curvature": 1.041204058384167,
+            "GN_curvature": 1.0000000000006815,
+            "cost_second_difference": 1.1363428913884694
+          },
+          {
+            "step_GN_SD": 0.0001,
+            "observed_curvature": 1.040373127981117,
+            "GN_curvature": 1.0000000000006815,
+            "cost_second_difference": 3.8155121728777885
+          }
+        ]
+      }
+    ],
+    "inference_truth_reads": 0,
+    "status": "complete",
+    "scope": "Directional derivatives only; small cost differences may reach floating-point cancellation. Not full Hessian or validated covariance."
+  },
+  "artifacts": {
+    "diagnostic001/reservation.json": {
+      "bytes": 2847,
+      "sha256": "89cdad4a30ec22d08ccc89823cd56b073f9b9eea841b85a0beb435f427e9b1b2"
+    },
+    "diagnostic001/index.json": {
+      "bytes": 1503,
+      "sha256": "06edbffcad3e4c63a0ef5600eaad1e296f7b55ed0dd8ead40048d8b59c7fc969"
+    },
+    "scoring003/scores.json": {
+      "bytes": 1457321,
+      "sha256": "d515cfba19c7ae0d2de028f9ef3272ec2e114b71319d72119cfa96dbd8bf6094"
+    },
+    "scoring003/diagnostics.png": {
+      "bytes": 301131,
+      "sha256": "36ac5071f742bc68754e02e0a528fe7dc2255c75c1ee158aa402f203c942c410"
+    },
+    "weak_boundary001/result.json": {
+      "bytes": 71325,
+      "sha256": "2e5af14ce5bf68e1c837ec35e2c1be4f5b568731e2ba1b1c6a6411f6fff89ce9"
+    },
+    "weak_boundary002/registration.json": {
+      "bytes": 1288,
+      "sha256": "e149298723b87ec1e17cc2d4f64f852fc6f2146de9609a32352edb0163fb6b36"
+    },
+    "weak_boundary002/result.json": {
+      "bytes": 96565,
+      "sha256": "5c252abe13680d26d064c202cbaa7cbdf9b492a67bb03b042873420aadf5c0d3"
+    },
+    "curvature001/registration.json": {
+      "bytes": 409,
+      "sha256": "0cf48332b8c53592e955b57575bdbbbe91f2820d38d29a56e27010aa87d358f9"
+    },
+    "curvature001/result.json": {
+      "bytes": 8934,
+      "sha256": "cd610079de09c512b8db8293e5036e9c300d3e2b2b81882a5dbd3aada51292d2"
+    },
+    "attempt001/owner_case_0000/regeneration.json": {
+      "bytes": 2079,
+      "sha256": "5e2da2aa9d846035dde58519ef9d0d8f7ce312bff7de267099a592bab75cfd45"
+    },
+    "attempt001/owner_case_0002/regeneration.json": {
+      "bytes": 2078,
+      "sha256": "227f12f5e7c01a4cd9e0b9efa14e788a919f803e15f17b6e03c0e55fd0826d7d"
+    },
+    "attempt001/owner_case_0004/regeneration.json": {
+      "bytes": 2077,
+      "sha256": "6d6963e319b80ae62c3508a099ff0981402d086cdb34520c9c39b4f8d8ed52cd"
+    },
+    "attempt001/owner_case_0006/regeneration.json": {
+      "bytes": 2078,
+      "sha256": "dd906d3813648e09cc0d49765a93053a5eca6dc694b07142665e86db5b083952"
+    },
+    "attempt001/weak_B_cycle/regeneration.json": {
+      "bytes": 3425,
+      "sha256": "f0360f2562d144f85644ae587e7c17f45e9d993ded8933a03ac29e99c2e864a0"
+    }
+  },
+  "implementation_sources": {
+    "experiments/uncertainty_weak_stimulus_001/regenerate.py": {
+      "bytes": 7252,
+      "sha256": "1e63546539a739efd49669c2319d0823db1937ef8e04a72f5ae035c6f5b4a7df"
+    },
+    "experiments/uncertainty_weak_stimulus_001/diagnostics.py": {
+      "bytes": 10034,
+      "sha256": "28c5142e7c379e36898e962349cb23ff75ebedcf6fb8f80bcef7cbba9fbd36e8"
+    },
+    "experiments/uncertainty_weak_stimulus_001/test_diagnostics.py": {
+      "bytes": 6650,
+      "sha256": "04412c2cf81dd85c29a52727fa22d9070a86cd02a63056059708797af6fafad1"
+    },
+    "experiments/uncertainty_weak_stimulus_001/run.py": {
+      "bytes": 10444,
+      "sha256": "566c3e14dc530e0393a00823e6e9a10e666714d856f9015b50d4421a4a37851c"
+    },
+    "experiments/uncertainty_weak_stimulus_001/postfit.py": {
+      "bytes": 6134,
+      "sha256": "6fef6bdff9e5477adbc77816af8abca0c072433ea12d06986cbf5b9b81cd9134"
+    },
+    "experiments/uncertainty_weak_stimulus_001/execute.py": {
+      "bytes": 2084,
+      "sha256": "4561e3dc0ef223742ee8a9b19551454190c64c49d40448fd7d3d4738faa0a1a6"
+    },
+    "experiments/uncertainty_weak_stimulus_001/boundary.py": {
+      "bytes": 6622,
+      "sha256": "9ee2c4f3a5b3f8c42cfa33eb0aabe66a29c104708120e2b83b78bee7cdb6d211"
+    },
+    "experiments/uncertainty_weak_stimulus_001/curvature.py": {
+      "bytes": 2658,
+      "sha256": "643a10f2e9fb6f4ec27c9bba8d609446b7f177caaa168ae5a05194b431721902"
+    }
+  },
+  "deviations_and_preserved_attempts": [
+    "Five small input caches retained on disk rather than one; only one case evaluated at a time. Six caches including adaptive replay total174786688B; no full truth/trace CSVs.",
+    "Initial C instrumentation setup test caught duplicate internal/exported signature match before inference; fixed and all8 targeted tests pass.",
+    "scoring001 stopped before result on Q versus Q_Ah truth schema key; scoring002 succeeded; scoring003 adds online field to the plot. All original fit results unchanged.",
+    "Weak between-refresh narrowing triggered separately registered38.4s boundary experiment. weak_boundary001 joint suffix fits hit60 rounds; weak_boundary002 preserved them and continued up to240 rounds, still unresolved. No exclusion or promoted repair inferred.",
+    "Initial0.1/0.03SD directional-curvature checks lacked step stability; curvature001 refines only those derivatives at frozen fits.",
+    "Input/message/calibration preflight checks added after initial numerical run; current guards separately qualified; frozen numerical source snapshots retained in diagnostic001."
+  ],
+  "resources": {
+    "field_payload_and_live_B": 28864,
+    "production_memory_change_B": 0,
+    "observation_cache_B": 174786688,
+    "diagnostic_wall_s": 885.6859227118548,
+    "M23_qualified": false
+  },
+  "limitations": [
+    "selected witnesses, not coverage validation",
+    "local MAP/GN not global posterior",
+    "broad profile domain/solver failures retained",
+    "joint suffix Gaussian control unresolved",
+    "no24/72h growth or720h exact audit yet",
+    "no matched-excursion or prior-sensitivity fork yet",
+    "aging and M23 qualification open"
+  ],
+  "next": [
+    "Repair/diagnose weak-case joint likelihood preservation between refreshes against every16 full-field oracle; distinguish Gaussian boundary shape from repeated projection.",
+    "Run24/72h low-noise gradient-growth controls before selecting hysteresis representation/discrepancy repair.",
+    "Matched charge-excursion and prior-sensitivity followup after separating feedback defect; no arbitrary inflation."
+  ]
+}
