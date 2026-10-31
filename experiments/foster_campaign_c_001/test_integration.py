@@ -104,7 +104,7 @@ class IntegrationTests(unittest.TestCase):
         import matplotlib;matplotlib.use('Agg')
         from experiments.foster_campaign_001.plot import render
         folder=self.root/'100';out=folder/'plot_case'
-        args=parser().parse_args(['--hours','0.001','--sample-rate-hz','100','--no-plots','--encoding','float64'])
+        args=parser().parse_args(['--history','rolling','--hours','0.001','--sample-rate-hz','100','--no-plots','--encoding','float64'])
         result=run_case(out,folder,CONFIG,'b'*64,dict(cell='B',load='rest',noise_v=.004,seed=9),cells()['B'],args)
         seen=[]
         def save(fig,axes,destination,name,heading,title):

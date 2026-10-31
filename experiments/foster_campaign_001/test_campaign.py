@@ -100,7 +100,7 @@ class CampaignTests(unittest.TestCase):
         np.testing.assert_allclose(out[33:36],p[[3,5,7]]/p[[2,4,6]])
 
     def test_full_telemetry_alignment_and_single_arm(self):
-        args=parser().parse_args(['--backend','python','--hours','0.001','--encoding','float32','--no-plots','--sample-csv'])
+        args=parser().parse_args(['--history','rolling','--backend','python','--hours','0.001','--encoding','float32','--no-plots','--sample-csv'])
         scenario=dict(cell='B',load='multiscale',noise_v=.002,seed=17)
         out=self.root/'case'
         report=run_case(out,self.root,CONFIG,digest('telemetry_model'),scenario,cells()['B'],args)
@@ -120,7 +120,7 @@ class CampaignTests(unittest.TestCase):
 
     def test_plant_domain_failure_is_explicit(self):
         bad=copy.deepcopy(cells()['B']);bad['parameters']['Q_Ah']=1e-7
-        args=parser().parse_args(['--backend','python','--hours','0.001','--no-plots'])
+        args=parser().parse_args(['--history','rolling','--backend','python','--hours','0.001','--no-plots'])
         report=run_case(self.root/'bad_case',self.root,CONFIG,digest('bad_model'),
                         dict(cell='bad',load='pulses',noise_v=0.,seed=1),bad,args)
         self.assertEqual(report['status'],'plant_failed')
@@ -131,7 +131,7 @@ class CampaignTests(unittest.TestCase):
         bad=copy.deepcopy(cells()['B']);bad['parameters']['Q_Ah']=1e-7
         fixture=self.root/'failure_cells.json';fixture.write_text(json.dumps({'bad':bad}))
         out=self.root/'failure_campaign'
-        command=[sys.executable,'-B','-m','experiments.foster_campaign_001.run',
+        command=[sys.executable,'-B','-m','experiments.foster_campaign_001.run','--history','rolling',
                  '--hours','0.001','--cell-file',str(fixture),'--cells','bad','B',
                  '--loads','pulses','--encoding','float32','--no-plots','--out',str(out)]
         process=subprocess.run(command,capture_output=True,text=True)

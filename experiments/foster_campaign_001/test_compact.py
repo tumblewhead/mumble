@@ -24,7 +24,7 @@ class CompactTests(unittest.TestCase):
         cls.root = Path(cls.temp.name)
         for recording in ['full', 'compact']:
             out = cls.root/recording
-            command = [sys.executable,'-B','-m','experiments.foster_campaign_001.run',
+            command = [sys.executable,'-B','-m','experiments.foster_campaign_001.run','--history','rolling','--encoding','both',
                        '--recording',recording,'--backend','c','--hours','0.20002',
                        '--sample-rate-hz','50','--cells','A','--loads','charge-discharge',
                        '--checkpoint-hours','0.01','--summary-bins','37','--no-plots','--out',str(out)]
@@ -186,14 +186,14 @@ class CompactTests(unittest.TestCase):
     def test_cli_rejects_invalid_compact_settings_before_creating_output(self):
         for options in [['--backend','python'],['--sample-csv'],['--summary-bins','0'],['--checkpoint-hours','nan']]:
             out=self.root/'invalid'
-            p=subprocess.run([sys.executable,'-B','-m','experiments.foster_campaign_001.run',
+            p=subprocess.run([sys.executable,'-B','-m','experiments.foster_campaign_001.run','--history','rolling','--encoding','both',
                               '--recording','compact','--out',str(out),*options],capture_output=True,text=True)
             self.assertEqual(p.returncode,2,p.stdout+p.stderr)
             self.assertFalse(out.exists())
 
     def test_failure_checkpoint_replay_preserves_original_failure_boundary(self):
         out = self.root/'failed_run'
-        command = [sys.executable,'-B','-m','experiments.foster_campaign_001.run',
+        command = [sys.executable,'-B','-m','experiments.foster_campaign_001.run','--history','rolling','--encoding','both',
                    '--recording','compact','--hours','0.14','--sample-rate-hz','50',
                    '--cells','A','--loads','charge-discharge','--noise-v','0.02','--seeds','1104',
                    '--hysteresis-chart','legacy',

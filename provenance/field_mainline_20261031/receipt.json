@@ -1,0 +1,194 @@
+{
+  "schema": "field_mainline_promotion_v1",
+  "status": "validated_for_mainline_promotion",
+  "integration_branch": "integration/field-mainline-001",
+  "previous_main_revision": "b9731e89c7ef9ab969858fc969aecf1ac695b5db",
+  "promoted_experiment_tip": "10a0ec9",
+  "owner_run_revision": "7d8b6ae09e76951722b092071e2d81cf9dd44959",
+  "default": {
+    "history": "joint-field",
+    "encoding": "float64",
+    "backend": "c",
+    "hysteresis_chart": "bounded",
+    "sample_rate_Hz": 35,
+    "refresh_seconds_requested": 60
+  },
+  "controls": [
+    "--history compare",
+    "--history rolling",
+    "--history rolling --encoding both",
+    "--history rolling --backend python"
+  ],
+  "tests": {
+    "passed": 66,
+    "final_log": {
+      "bytes": 12309,
+      "sha256": "efb08be1072728d4d862147a94a9f09f9289e0675041f8538945d68d3e6fa586"
+    },
+    "initial_log": {
+      "bytes": 13449,
+      "sha256": "a38c8b6640ee95227d033684e40edd4c8c0429dcca1f085fb6c29afab4a2c0fe"
+    },
+    "initial_failure": "One old workload parity fixture implicitly selected the previous default and expected float64 filenames; it now explicitly selects --history rolling. No estimator math changed."
+  },
+  "unchanged_inference_sources": {
+    "experiments/foster_campaign_001/field_backend.py": {
+      "bytes": 8781,
+      "sha256": "bf0ad49113038da0071ed0c6eb2571633fd09e989ac780fa0d166b31bbccc140"
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "bytes": 6989,
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+    },
+    "experiments/joint_rate_history_001/probe.c": {
+      "bytes": 2273,
+      "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+    },
+    "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+      "bytes": 5204,
+      "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+    },
+    "experiments/foster_campaign_001/backend.py": {
+      "bytes": 10513,
+      "sha256": "b8fe774f282aeb577bb6b99cbd70c3dfd35380555040595e73a5c35ac9c41af4"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 22593,
+      "sha256": "f4431c52697ca0ada6462deeb5e1ce8729c9ad439f0a05f42cf67f5284873d64"
+    },
+    "experiments/foster_campaign_c_001/bridge.c": {
+      "bytes": 1566,
+      "sha256": "f630307721490d0d895aa0ca55bb4a3bcf2e49578aec0f24ae35b7fe099e99fb"
+    }
+  },
+  "default_vs_explicit_field": {
+    "tests_passed": true,
+    "35Hz_default_vs_compare_final_message_bit_exact": true
+  },
+  "smoke_runs": [
+    {
+      "path": "experiments/field_mainline_001/default35h4",
+      "status": "completed",
+      "plots": "completed",
+      "scenario": {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "hours": 4,
+      "rate_Hz": 35,
+      "arms": {
+        "field64": {
+          "final_Q_error_percent": -1.8938238922058037,
+          "final_SOC_error_pp": 0.05548600371526602,
+          "field_history": {
+            "refresh_interval_records": 2112,
+            "attempts": 238,
+            "accepted": 237,
+            "rejected": 1,
+            "last_attempt_record": 502656,
+            "last_accepted_record": 502656,
+            "last_rejection": {
+              "record": 59136,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 16.0799393530234,
+            "max_abs_SOC_replacement_pp": 1.1857943992256148,
+            "accumulated_records": 502656,
+            "buffered_records": 1344,
+            "status": "some_refreshes_unresolved"
+          }
+        }
+      },
+      "commands": [
+        "/home/easy/proj/mumble/.worktrees/field-mainline/experiments/foster_campaign_001/run.py",
+        "--hours",
+        "4",
+        "--recording",
+        "compact",
+        "--summary-bins",
+        "200",
+        "--out",
+        "experiments/field_mainline_001/default35h4"
+      ],
+      "result_identity": {
+        "bytes": 4046,
+        "sha256": "d55972a782d1bcdb526ca597dc50a37a618ce7b90f2e792db25413562779ed01"
+      }
+    },
+    {
+      "path": "experiments/field_mainline_001/default35_control4h",
+      "status": "completed",
+      "plots": "not_requested",
+      "scenario": {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "hours": 4,
+      "rate_Hz": 35,
+      "arms": {
+        "float64": {
+          "final_Q_error_percent": 1.6650085960276728,
+          "final_SOC_error_pp": -0.059520562168169366
+        },
+        "field64": {
+          "final_Q_error_percent": -1.8938238922058037,
+          "final_SOC_error_pp": 0.05548600371526602,
+          "field_history": {
+            "refresh_interval_records": 2112,
+            "attempts": 238,
+            "accepted": 237,
+            "rejected": 1,
+            "last_attempt_record": 502656,
+            "last_accepted_record": 502656,
+            "last_rejection": {
+              "record": 59136,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 16.0799393530234,
+            "max_abs_SOC_replacement_pp": 1.1857943992256148,
+            "accumulated_records": 502656,
+            "buffered_records": 1344,
+            "status": "some_refreshes_unresolved"
+          }
+        }
+      },
+      "commands": [
+        "/home/easy/proj/mumble/.worktrees/field-mainline/experiments/foster_campaign_001/run.py",
+        "--hours",
+        "4",
+        "--history",
+        "compare",
+        "--recording",
+        "compact",
+        "--summary-bins",
+        "200",
+        "--no-plots",
+        "--out",
+        "experiments/field_mainline_001/default35_control4h"
+      ],
+      "result_identity": {
+        "bytes": 6193,
+        "sha256": "f3ee5e6d75c78e347fc72f4c7a6812883fd5ddaf60e398d164b46d4726f0f92c"
+      }
+    }
+  ],
+  "evidence": {
+    "owner_720h_review": "provenance/rolling_field_720h_20261031/review.json",
+    "owner_review_identity": {
+      "bytes": 149555,
+      "sha256": "1e2920008beb0ae42310d613f961449fbf5f52f0d3db149505dfde85ce791a7b"
+    },
+    "integration_qualification": "experiments/rolling_joint_field_001/qualification.json"
+  },
+  "preserved_owner_replay_worktree": "/home/easy/proj/mumble/.worktrees/rolling-joint-field",
+  "limitations": [
+    "Low-noise joint uncertainty remains overconfident.",
+    "Balanced-cycle cell B at 35Hz remains outside 0.5% capacity error after4h in both arms; field -1.89%, baseline +1.67%. Promotion is not universal point-error superiority.",
+    "Aging and Cortex-M23 deployment are not qualified."
+  ],
+  "publication_scope": "Source, tests, documentation and small receipts only. No generated campaign arrays, binaries, checkpoints or plots."
+}

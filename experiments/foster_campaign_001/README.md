@@ -1,8 +1,10 @@
+> Field-assisted estimation is now the default (`--history joint-field --encoding float64`). Use `--history compare` for field versus original rolling overlays, or `--history rolling --encoding both` for the original encoding comparison. The [720-hour review](../../provenance/rolling_field_720h_20261031/README.md) supports this promotion; low-noise uncertainty, aging and M23 deployment remain unqualified.
+
 > New `--loads embedded` profile uses a semi-Markov MCU/radio/flash/LED activity envelope. `--load-seeds` controls workload randomness independently of measurement-noise `--seeds`; both appear in plots and metadata. See the [workload guide](../embedded_workload_001/README.md) for timing assumptions and a crossed-seed command.
 
 > Default plotting keeps all six individual plot families and adds the six all-case overlays in `case_summary/`. Overlays label every seed/arm with consistent colors and precision line styles; no extra `--summary` flag is needed for a new campaign. See [plot controls](../foster_summary_labels_001/README.md).
 
-> The default estimator now uses bounded hysteresis coordinates. See [repair and qualification](../foster_bounded_hysteresis_001/README.md). Use `--hysteresis-chart legacy` for the original control. Physical plot/CSV h remains in [-1,1]; raw chart coordinate4 is eta for bounded runs.
+> The default estimator now uses bounded hysteresis coordinates. See [repair and qualification](../foster_bounded_hysteresis_001/README.md). Use `--history rolling --hysteresis-chart legacy` for the original control. Physical plot/CSV h remains in [-1,1]; raw chart coordinate4 is eta for bounded runs.
 
 # Local continuous Foster campaigns and telemetry
 
@@ -10,7 +12,7 @@ Run longer durations, independent synthetic cells, load profiles, voltage-noise
 levels and noise seeds without changing the continuous estimator or its prior.
 The campaign defaults to the optimized C implementation of the
 [preserved Foster model](../foster_feedback_001/README.md), with an explicit
-`--backend python` reference option. It adds harness controls, saved physical
+`--history rolling --backend python` reference option. It adds harness controls, saved physical
 quantities, plots and summaries.
 The history backend receives no cell definitions or truth. The original four-hour
 results and source files remain untouched.
@@ -27,16 +29,18 @@ For eight cases, each lasting 12 simulated hours, with up to four running at onc
 ```sh
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m experiments.foster_campaign_001.run \
   --jobs 4 --hours 12 --cells A B --loads cycle multiscale \
-  --noise-v 0.002 0.008 --seeds 314159 --encoding both
+  --noise-v 0.002 0.008 --seeds 314159 --history compare
 ```
 
 The runner takes the Cartesian product of cells, loads, noise levels and seeds.
-Both coefficient encodings are compared by default. Use `--encoding float32`
-for a compact-only run when that comparison is not needed.
+One field-assisted float64 arm runs by default. `--history compare` adds the
+original float64 rolling arm. Use `--history rolling --encoding both` to compare
+the original coefficient encodings, or `--history rolling --encoding float32`
+for that original single-precision coefficient control.
 Add another number after `--seeds` to repeat every case with another noise
 realization. `--jobs N` runs independent cases in separate processes, up to the
 smaller of N and the number of cases. The default is `--jobs 1` (serial).
-Samples and the two encoding arms within a case remain sequential. Each process
+Samples and any comparison arms within a case remain sequential. Each process
 gets one native math thread; the CLI sets BLAS/OpenMP thread limits before
 loading NumPy, so the environment prefix above is optional. More workers increase
 concurrent RAM and disk activity. A single case cannot use extra workers.
@@ -81,7 +85,8 @@ A 6,000-hour run has three hours per bin; zooming these plots cannot recover fin
 
 Checkpoints under `checkpoints/` retain the complete joint C context (including
 uncertainty and source/retirement counters), plant state, CC–CV controller state,
-and random-generator state. `--checkpoint-hours 1` defaults to approximately
+and random-generator state. Field runs also retain the likelihood root,
+collocation state, optimizer warm start and pending rows. `--checkpoint-hours 1` defaults to approximately
 hourly checkpoints; the interval rounds upward to an8192-sample boundary so
 generation and all live estimators share a committed boundary. At50Hz the default
 is3604.48seconds. An initial checkpoint is always saved. Files and their checksum
@@ -124,7 +129,7 @@ joint final message corresponds to the recorded solver stop boundary. Failures
 remain explicit. Use `--no-plots` to export only the interval's data. This command
 creates a separate diagnostic replay; it does not append to the original run.
 
-For both encodings and 2,000 bins, numeric summary arrays occupy about **8.5 MB**
+For two arms and 2,000 bins, numeric summary arrays occupy about **8.5 MB**
 uncompressed, independent of duration and sampling rate. Every bin retains its
 count, mean and extrema; it does not preserve the ordering inside the bin.
 Temporary reduction buffers, Python/NumPy and plotting need additional RAM.
@@ -136,14 +141,19 @@ remain in `result.json`. Both independent workload RNG streams and their event
 deadlines are checkpointed. Interval replay exports event detail as well as
 V/I/T, states and parameters. No raw event list grows throughout the campaign.
 
-Each uncompressed C context is 19,416 bytes. With two encodings and hourly
+Each uncompressed C context is 19,416 bytes. For the original rolling control
+with two encodings and hourly
 checkpoints, 6,000 hours needs about **233 MB of context payload**, plus the fixed
 summary and checkpoint metadata/index, plots and source snapshots. NPZ compression
 usually reduces the payload; the startup sizing report is an uncompressed numeric
 estimate, not a filesystem quota. Checkpoint storage grows with duration; increasing
 `--checkpoint-hours` reduces it at the cost of longer replay warmup. This format
 supports interval diagnostics, not automatic resumption of campaign scoring after
-interruption. None of these host figures changes Cortex-M23 SRAM accounting.
+interruption. A field arm adds up to about 221 kB per checkpoint in this conservative desktop
+layout. For 720 hours, two comparison arms, 2,000 bins and checkpoints every
+three hours, plan about 71 MB of numeric payload per case before compression
+and other artifacts. The startup report accounts for the selected history.
+None of these host figures changes Cortex-M23 SRAM accounting.
 
 For a long embedded-workload run:
 
@@ -155,7 +165,8 @@ python3 -B -m experiments.foster_campaign_001.run \
 ```
 
 That command runs four independent cases (two load seeds × two noise seeds),
-with both coefficient encodings. Every observation is still simulated and fitted;
+with one field-assisted arm each. Add `--history compare` for the original
+rolling control alongside it. Every observation is still simulated and fitted;
 CPU time grows with duration. Storage/index tests at 6,000-hour counts do **not**
 qualify 6,000-hour estimation accuracy, aging or uncertainty coverage.
 
@@ -170,11 +181,16 @@ noise/controller continuation and failure boundaries.
 
 ## Backend and sampling rate
 
-The optimized C backend is now the default. Use `--backend python` for the
+The optimized C rolling core with field refresh is the default. Use
+`--history rolling --backend python` for the
 preserved reference implementation. The C library is compiled once per campaign
 before workers start; its exact source snapshots, build commands and binary hash
 are saved under `backend_c/`. There is no silent fallback if compilation fails.
-Plant generation, telemetry and plotting remain Python.
+Field fitting and QR accumulation use Python/NumPy with C response kernels;
+plant generation, telemetry and plotting also remain Python. The validated
+field math is unchanged by promotion. Refreshes replace the same-prefix belief
+using the original prior once; they do not add the old posterior as evidence.
+See [field semantics and failure reporting](../rolling_joint_field_001/README.md).
 
 Set an integer sample rate of at least1Hz with `--sample-rate-hz`, for example:
 

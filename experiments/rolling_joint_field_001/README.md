@@ -1,3 +1,5 @@
+> Promoted to the mainline desktop default after the [720-hour owner review](../../provenance/rolling_field_720h_20261031/README.md). New commands default to `--history joint-field --encoding float64`; `--history compare` retains the two-arm experiment. Use `/home/easy/proj/mumble/.worktrees/mainline-foster` for the promoted version. The original experiment worktree remains frozen for owner-run replay. Historical integration details and evidence below are preserved.
+
 # Rolling estimator with experimental joint-field refresh
 
 Branch `experiment/rolling-joint-field-001` starts directly from main at

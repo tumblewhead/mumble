@@ -205,10 +205,10 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--jobs', type=int, default=1, help='maximum independent case workers (default:1; native math threads:1 each)')
     p.add_argument('--hours', type=float, default=4.)
-    p.add_argument('--history', choices=['rolling','joint-field','compare'], default='rolling',
-                   help='experimental joint-field replaces rolling belief periodically; compare adds unchanged float64 arm')
+    p.add_argument('--history', choices=['rolling','joint-field','compare'], default='joint-field',
+                   help='joint-field (default) refreshes rolling belief; compare adds the original rolling arm; rolling selects the control')
     p.add_argument('--field-refresh-seconds', type=float, default=60.,
-                   help='experimental fit cadence, rounded up to a 16-record boundary; default 60s')
+                   help='field fit cadence, rounded up to a 16-record boundary; default 60s')
     p.add_argument('--backend', choices=['c','python'], default='c', help='estimator implementation (default:c optimized; python retains reference)')
     p.add_argument('--sample-rate-hz', type=int, default=DEFAULT_RATE, help='integer sample rate >=1 Hz (default:%(default)s); dt=1/Fs seconds; window remains16records')
     p.add_argument('--cells', nargs='+', default=['B'])
@@ -233,7 +233,7 @@ def parser():
     p.add_argument('--temperature-mean-c', type=float, default=25.)
     p.add_argument('--temperature-amplitude-c', type=float, default=8.)
     p.add_argument('--temperature-period-s', type=float, default=3600.)
-    p.add_argument('--encoding', choices=['both', 'float32', 'float64'], default='both')
+    p.add_argument('--encoding', choices=['both', 'float32', 'float64'], default='float64')
     p.add_argument('--hysteresis-chart', choices=['bounded','legacy'], default='bounded', help='bounded: eta=atanh(h) history coordinates; legacy: original unbounded h Gaussian')
     p.add_argument('--sample-csv', action='store_true', help='also export all samples and truth to large CSV')
     p.add_argument('--recording', choices=['full', 'compact'], default='full',
@@ -257,7 +257,7 @@ def main():
     if not math.isfinite(args.field_refresh_seconds) or args.field_refresh_seconds<=0:
         p.error('finite positive --field-refresh-seconds required')
     if args.history!='rolling' and (args.backend!='c' or args.hysteresis_chart!='bounded' or args.encoding!='float64'):
-        p.error('experimental field requires --backend c --hysteresis-chart bounded --encoding float64')
+        p.error('field history requires --backend c --hysteresis-chart bounded --encoding float64; use --history rolling for other backends/charts/encodings')
     if args.jobs < 1:
         p.error('--jobs must be a positive integer')
     if args.summary_bins < 1 or not math.isfinite(args.checkpoint_hours) or args.checkpoint_hours <= 0:

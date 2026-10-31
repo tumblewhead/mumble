@@ -24,7 +24,7 @@ class CompactWorkloadTests(unittest.TestCase):
         cls.temp=tempfile.TemporaryDirectory(prefix='compact-workload-')
         cls.root=Path(cls.temp.name)
         for recording in ['full','compact']:
-            command=[sys.executable,'-B','-m','experiments.foster_campaign_001.run',
+            command=[sys.executable,'-B','-m','experiments.foster_campaign_001.run','--history','rolling','--encoding','both',
                 '--recording',recording,'--hours','0.06002','--sample-rate-hz','50',
                 '--loads','embedded','--cells','A','--load-seeds','7','8','--seeds','1000','1001',
                 '--cv-voltage','3.7','--taper-end-c','0.4','--taper-hold-s','0.1','--cycle-rest-s','0',

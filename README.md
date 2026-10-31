@@ -1,9 +1,12 @@
 # Current mainline baseline
 
-This experiment branch adds opt-in joint-field feedback via `--history compare`.
-See the [long-run experiment guide](experiments/rolling_joint_field_001/README.md)
-for baseline/field comparison, compact recording and replay. The default remains
-the mainline rolling estimator; the new history is not yet qualified for aging.
+Field-assisted estimation is now the desktop campaign default: the optimized C
+rolling estimator receives periodic joint-likelihood/state-transport refreshes.
+Use `--history compare` for both field and original rolling arms, or
+`--history rolling` for the original control. See the
+[promotion receipt](provenance/field_mainline_20261031/receipt.json) and
+[720-hour review](provenance/rolling_field_720h_20261031/README.md).
+Low-noise uncertainty, aging and M23 deployment remain unqualified.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
@@ -14,7 +17,8 @@ For long runs, add `--recording compact`: bounded 2,000-bin plots, event summari
 and full-state local replay checkpoints replace full trajectories. Explicit
 `--debug-start-hour` / `--debug-stop-hour` flags on the replay tool recover a
 selected interval. See the [recording qualification](provenance/compact_campaign_6000h/README.md)
-for 6,000-hour storage sizing; long-duration inference is not newly qualified.
+for recording controls. The field comparison has stationary-cell evidence across
+eight 720-hour cases; 6,000-hour inference is not qualified.
 
 
 ```sh
@@ -23,16 +27,11 @@ python3 -B -m experiments.foster_campaign_001.run \
   --loads charge-discharge --seeds 1000 1001 1002 1003
 ```
 
-The [196-hour review](experiments/foster_bounded_196h_review_001/README.md)
-reports completion for eight seeds in both coefficient encodings. Uncertainty
-remains overconfident on some paths; aging and Cortex-M23 deployment are not
-qualified. The [uncertainty prototypes](experiments/foster_uncertainty_audit_001/README.md)
-remain experimental and are not enabled in the campaign backend.
-
-[Mainline promotion receipt](provenance/mainline_foster_20261030/receipt.json)
-records the tested revision and validation. New generated campaigns stay local.
-Previously published archives remain in Git history and the tracked tree; this
-promotion does not upload new bulk results or rewrite that history.
+The original rolling mode and its encoding controls remain available. Generated
+campaign data stay local; promotion includes source, tests and small receipts.
+The [field guide](experiments/rolling_joint_field_001/README.md) describes refresh
+failures, checkpoint replay and resource limits. Field inference remains a
+Python/C desktop implementation and exceeds the M23 SRAM target.
 
 ---
 

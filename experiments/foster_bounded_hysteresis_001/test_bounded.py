@@ -92,7 +92,7 @@ class BoundedTests(unittest.TestCase):
     def test_python_parallel_build_once_and_telemetry_chart(self):
         import sys
         destination=self.folder/'parallel_python'
-        result=subprocess.run([sys.executable,'-B','-m','experiments.foster_campaign_001.run',
+        result=subprocess.run([sys.executable,'-B','-m','experiments.foster_campaign_001.run','--history','rolling','--encoding','both',
             '--backend','python','--hysteresis-chart','bounded','--hours','0.001',
             '--sample-rate-hz','50','--jobs','2','--cells','A','--loads','rest',
             '--noise-v','0.02','--seeds','1001','1002','--no-plots','--out',str(destination)],

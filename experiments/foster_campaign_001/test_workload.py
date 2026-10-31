@@ -53,7 +53,7 @@ class WorkloadTests(unittest.TestCase):
             root=Path(tmp);results=[]
             for jobs in [1,2]:
                 out=root/f'jobs{jobs}'
-                cmd=[sys.executable,'-B','-m','experiments.foster_campaign_001.run','--hours','.003','--jobs',str(jobs),'--sample-rate-hz','50','--loads','embedded','--load-seeds','7','8','--seeds','17','18','--cells','A','--encoding','float64','--no-plots','--out',str(out)]
+                cmd=[sys.executable,'-B','-m','experiments.foster_campaign_001.run','--history','rolling','--hours','.003','--jobs',str(jobs),'--sample-rate-hz','50','--loads','embedded','--load-seeds','7','8','--seeds','17','18','--cells','A','--encoding','float64','--no-plots','--out',str(out)]
                 proc=subprocess.run(cmd,cwd=ROOT,capture_output=True,text=True);self.assertEqual(proc.returncode,0,proc.stdout+proc.stderr)
                 summary=json.loads((out/'summary.json').read_text());self.assertEqual(summary['requested_cases'],4);results.append(summary)
                 self.assertEqual({(c['scenario']['seed'],c['scenario']['load_seed']) for c in summary['cases']},{(17,7),(17,8),(18,7),(18,8)})
