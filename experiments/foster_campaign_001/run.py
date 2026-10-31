@@ -29,7 +29,7 @@ from specifications.evidence_feedback_001.protocol import digest
 from .stimulus import cells, LOADS, generate
 from .telemetry import OBS_COLUMNS, TRUTH_COLUMNS, TRACE_COLUMNS, trace_row
 from .charger import DEFAULTS as CHARGER_DEFAULTS, validate as validate_charger
-from .backend import CBackend, PythonBackend, prepare_c
+from .backend import CBackend, PythonBackend, prepare_c, arm_kinds, make_backend
 from .rate import clock_hz, DEFAULT_RATE
 
 HERE = Path(__file__).resolve().parent
@@ -100,18 +100,17 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
         write(out / 'result.json', result)
         return result
     source = digest(dict(observations=ident(out / 'observations.npy'), model_id=model_id))
-    kinds = ['float64', 'float32'] if args.encoding == 'both' else [args.encoding]
-    backend_type=CBackend if backend=='c' else PythonBackend
-    banks = {k: backend_type(campaign,config,source,model_id,k,rate) for k in kinds}
+    kinds = arm_kinds(args)
+    banks = {k: make_backend(campaign,config,source,model_id,k,rate,args) for k in kinds}
     backend_s={k:0. for k in kinds}
     max_outputs = (n + config['numerical']['block_records'] - 1) // config['numerical']['block_records']
     stats = {k: dict(status='running', all=metrics(), current_nonzero=metrics(), current_zero=metrics(),
-                    stops={}, outputs=0, storage={**numeric_storage(k),**banks[k].storage()}) for k in kinds}
+                    stops={}, outputs=0, storage={**numeric_storage('float64' if k=='field64' else k),**banks[k].storage()}) for k in kinds}
     arrays = {k: np.lib.format.open_memmap(out / (k+'_trace.npy'), mode='w+', dtype='float64',
                                          shape=(max_outputs, len(TRACE_COLUMNS))) for k in kinds}
     charts = {k: np.lib.format.open_memmap(out / (k+'_chart.npy'), mode='w+', dtype='float64',
                                          shape=(max_outputs, 32)) for k in kinds}
-    encoding_difference = dict(Q_percent=0., SOC_pp=0., paired_outputs=0) if len(kinds) == 2 else None
+    encoding_difference = dict(Q_percent=0., SOC_pp=0., paired_outputs=0) if set(kinds)=={'float64','float32'} else None
     last_print = time.perf_counter()
     with ExitStack() as stack:
         writers = {}
@@ -146,7 +145,7 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
                 score(stat['current_nonzero' if row[1] != 0 else 'current_zero'], r, truth[i])
                 stat['stops'][d['stop']] = stat['stops'].get(d['stop'], 0)+1
                 reads[k] = r
-            if len(reads) == 2:
+            if 'float64' in reads and 'float32' in reads:
                 a, b = reads['float64'], reads['float32']
                 encoding_difference['paired_outputs'] += 1
                 encoding_difference['Q_percent'] = max(encoding_difference['Q_percent'], abs(100*(b['Q']/a['Q']-1)))
@@ -206,6 +205,10 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--jobs', type=int, default=1, help='maximum independent case workers (default:1; native math threads:1 each)')
     p.add_argument('--hours', type=float, default=4.)
+    p.add_argument('--history', choices=['rolling','joint-field','compare'], default='rolling',
+                   help='experimental joint-field replaces rolling belief periodically; compare adds unchanged float64 arm')
+    p.add_argument('--field-refresh-seconds', type=float, default=60.,
+                   help='experimental fit cadence, rounded up to a 16-record boundary; default 60s')
     p.add_argument('--backend', choices=['c','python'], default='c', help='estimator implementation (default:c optimized; python retains reference)')
     p.add_argument('--sample-rate-hz', type=int, default=DEFAULT_RATE, help='integer sample rate >=1 Hz (default:%(default)s); dt=1/Fs seconds; window remains16records')
     p.add_argument('--cells', nargs='+', default=['B'])
@@ -251,6 +254,10 @@ def read_config_for_worker(out):
 
 def main():
     p = parser(); args = p.parse_args()
+    if not math.isfinite(args.field_refresh_seconds) or args.field_refresh_seconds<=0:
+        p.error('finite positive --field-refresh-seconds required')
+    if args.history!='rolling' and (args.backend!='c' or args.hysteresis_chart!='bounded' or args.encoding!='float64'):
+        p.error('experimental field requires --backend c --hysteresis-chart bounded --encoding float64')
     if args.jobs < 1:
         p.error('--jobs must be a positive integer')
     if args.summary_bins < 1 or not math.isfinite(args.checkpoint_hours) or args.checkpoint_hours <= 0:
@@ -290,7 +297,11 @@ def main():
     backend_build=None
     if args.backend=='c' or config.get('hysteresis_chart')=='bounded':
         _,backend_build=prepare_c(out,args.sample_rate_hz,config)
+    if args.history!='rolling':
+        from .field_backend import prepare_field, DEPENDENCIES
+        prepare_field(out)
     sources = list(HERE.glob('*.py')) + list(HERE.glob('*.json')) + list(HERE.glob('*.md'))
+    if args.history!='rolling':sources += [ROOT/name for name in DEPENDENCIES]
     for path in sources:
         target = out / 'source_snapshot' / path.relative_to(ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -315,7 +326,7 @@ def main():
     if args.recording == 'compact':
         from .compact import storage_plan
         print(json.dumps(dict(compact_storage_per_case=storage_plan(args.hours,args.sample_rate_hz,
-              args.summary_bins,args.checkpoint_hours,2 if args.encoding=='both' else 1))),flush=True)
+              args.summary_bins,args.checkpoint_hours,len(arm_kinds(args)),field_arms=int(args.history!='rolling')))),flush=True)
     completed = {}
     for index, result in completed_cases(out, config, model_id, scenarios, definitions, args):
         case = out / ('case_%04d' % index)
@@ -342,7 +353,8 @@ def main():
                                      kind,arm['status'],arm.get('retired_records'),
                                      *[m.get(key) for key in ['final_Q_percent','final_SOC_pp','max_Q_percent',
                                        'max_SOC_pp','joint_within_target_fraction','Q_3sd_misses','SOC_3sd_misses']]])
-        print(json.dumps(dict(case=case.name, status=result['status'], result=str(case/'result.json'))), flush=True)
+        print(json.dumps(dict(case=case.name, status=result['status'], result=str(case/'result.json'),
+                              field_history={k:a['field_history'] for k,a in result.get('arms',{}).items() if 'field_history' in a})), flush=True)
     if not args.no_plots:
         from .plot import render_summary
         try:

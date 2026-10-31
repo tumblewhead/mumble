@@ -12,12 +12,13 @@ import math
 import platform
 import sys
 import time
+from types import SimpleNamespace
 
 import numpy as np
 
 from experiments.foster_feedback_001.plant import scalar_step
 from specifications.evidence_feedback_001.protocol import digest
-from .backend import CBackend, identity
+from .backend import CBackend, identity, arm_kinds, make_backend
 from .charger import ChargeDischarge, DEFAULTS
 from .stimulus import current, temperatures
 from .workload import EmbeddedWorkload
@@ -26,7 +27,7 @@ from .telemetry import PARAMETERS, TRACE_COLUMNS, thermal, trace_row
 CHUNK = 8192  # Multiple of the unchanged 16-record estimation window.
 
 
-def storage_plan(hours, rate, bins, checkpoint_hours, arms):
+def storage_plan(hours, rate, bins, checkpoint_hours, arms, field_arms=0):
     """Numeric sizing, not a compressed filesystem quota or runtime promise."""
     records = round(hours*3600*rate)
     interval = max(CHUNK, math.ceil(checkpoint_hours*3600*rate/CHUNK)*CHUNK)
@@ -34,11 +35,12 @@ def storage_plan(hours, rate, bins, checkpoint_hours, arms):
     columns = 25+arms*(len(TRACE_COLUMNS)+36)
     summary_bytes = min(records,bins)*8*(3*columns+3*(1+arms))
     context_bytes = 19416  # Current profiled host C context, checked by tests/receipts.
-    return dict(records=records, summary_bin_hours=hours/min(records,bins),
+    field_bytes = field_arms*(82*82*8+111*8+16*8+4096*5*8+2048)  # dense checkpoint + bounded audit allowance
+    return dict(field_checkpoint_extra_B_per_checkpoint=field_bytes, records=records, summary_bin_hours=hours/min(records,bins),
                 summary_numeric_MB=summary_bytes/1e6, checkpoint_count=checkpoints,
                 checkpoint_interval_hours=interval/(3600*rate),
-                checkpoint_context_MB=checkpoints*arms*context_bytes/1e6,
-                numeric_payload_planning_MB=(summary_bytes+checkpoints*arms*context_bytes)/1e6,
+                checkpoint_context_MB=checkpoints*(arms*context_bytes+field_bytes)/1e6,
+                numeric_payload_planning_MB=(summary_bytes+checkpoints*(arms*context_bytes+field_bytes))/1e6,
                 limits='Uncompressed numeric payload estimate only; add checkpoint JSON/NPZ/index, plots, source snapshots and host workspace. Event counts/digests are bounded; no event CSV in compact mode. Runtime still scales with every sample.')
 
 
@@ -192,6 +194,11 @@ def replay_binding(campaign, case):
     names = ['compact.py', 'replay.py', 'backend.py', 'stimulus.py', 'charger.py', 'rate.py', 'telemetry.py', 'workload.py', 'coordinates.py']
     expected = {f'experiments/foster_campaign_001/{n}': plan['campaign_sources'][f'experiments/foster_campaign_001/{n}']
                 for n in names}
+    field = plan['configuration'].get('history','rolling')!='rolling'
+    if field:
+        from .field_backend import DEPENDENCIES
+        for name in ['experiments/foster_campaign_001/field_backend.py', *DEPENDENCIES]:
+            expected[name]=plan['campaign_sources'][name]
     name = 'experiments/foster_feedback_001/plant.py'
     expected[name] = reserved[name]
     for name, value in expected.items():
@@ -201,10 +208,12 @@ def replay_binding(campaign, case):
     # Bind its actual bytes too; metadata comparison rejects a later change.
     adapter = 'experiments/foster_c_baseline_001/reference.py'
     expected[adapter] = identity(ROOT/adapter)
-    return dict(runtime=runtime_identity(), sources=expected,
+    result = dict(runtime=runtime_identity(), sources=expected,
                 binary=identity(campaign/'backend_c/estimator.so'),
                 calibration=identity(campaign/'calibration.json'),
                 plan=identity(campaign/'campaign_plan.json'), scenario=identity(case/'scenario.json'))
+    if field:result['field_binary']=identity(campaign/'backend_field/response.so')
+    return result
 
 
 def checkpoint(out, stream, banks, stats, source, model_id, binding, entries):
@@ -220,6 +229,9 @@ def checkpoint(out, stream, banks, stats, source, model_id, binding, entries):
                     source_id=source, model_id=model_id, binding=binding,
                     stimulus=stream.snapshot(), active=active, stats=copy.deepcopy(stats))
     arrays = {k: np.frombuffer(bytes(bank.context), dtype=np.uint8) for k, bank in banks.items()}
+    for kind, bank in banks.items():
+        if hasattr(bank,'checkpoint_arrays'):
+            arrays.update({kind+'__'+name:value for name,value in bank.checkpoint_arrays().items()})
     arrays['metadata'] = np.frombuffer(json.dumps(metadata, allow_nan=False).encode(), dtype=np.uint8)
     temp = directory/(name+'.tmp')
     with temp.open('xb') as f:
@@ -245,11 +257,13 @@ def restore_checkpoint(case, entry, config, cell, scenario, settings):
         stream.restore(metadata['stimulus'])
         banks = {}
         for kind in metadata['active']:
-            bank = CBackend(campaign, config, metadata['source_id'], metadata['model_id'], kind, stream.rate)
+            bank = make_backend(campaign, config, metadata['source_id'], metadata['model_id'], kind, stream.rate,SimpleNamespace(**settings))
             state = data[kind].tobytes()
             if len(state) != C.sizeof(bank.context):
                 raise ValueError('Checkpoint context size mismatch')
             C.memmove(bank.context, state, len(state))
+            if hasattr(bank,'restore_arrays'):
+                bank.restore_arrays({name.split('__',1)[1]:data[name] for name in data.files if name.startswith(kind+'__')})
             if bank.counts()['retired_records'] != stream.index or bank.counts()['pending_records']:
                 raise ValueError('Restored context boundary mismatch')
             banks[kind] = bank
@@ -264,16 +278,16 @@ def run_compact(out, campaign, config, model_id, scenario, cell, args):
     settings = vars(args).copy()
     rate = args.sample_rate_hz
     n = round(args.hours*3600*rate)
-    kinds = ['float64', 'float32'] if args.encoding == 'both' else [args.encoding]
+    kinds = arm_kinds(args)
     recipe = dict(scenario=scenario, cell_definition=cell, settings=settings, model_id=model_id)
     # Identity is bound before streaming; actual observation bytes are hashed below.
     source = digest(dict(kind='deterministic_stimulus_recipe_v1', recipe=recipe))
     atomic_json(out/'scenario.json', dict(**scenario, cell_definition=cell, sample_rate_Hz=rate,
                 backend='c', recording='compact', recipe=recipe))
     stream = StimulusStream(config, cell, scenario, settings)
-    banks = {k: CBackend(campaign, config, source, model_id, k, rate) for k in kinds}
+    banks = {k: make_backend(campaign, config, source, model_id, k, rate,args) for k in kinds}
     stats = {k: dict(status='running', all=metrics(), current_nonzero=metrics(), current_zero=metrics(),
-                    outputs=0, stops={}, storage={**numeric_storage(k), **banks[k].storage()}) for k in kinds}
+                    outputs=0, stops={}, storage={**numeric_storage('float64' if k=='field64' else k), **banks[k].storage()}) for k in kinds}
     bins = {'plant': Bins(n, args.summary_bins, 25)}
     bins.update({k: Bins(n, args.summary_bins, len(TRACE_COLUMNS)+32+4) for k in kinds})
     interval = max(CHUNK, math.ceil(args.checkpoint_hours*3600*rate/CHUNK)*CHUNK)
@@ -281,7 +295,7 @@ def run_compact(out, campaign, config, model_id, scenario, cell, args):
     entries = []
     checkpoint(out, stream, banks, stats, source, model_id, binding, entries)
     obs_hash, truth_hash = hashlib.sha256(), hashlib.sha256()
-    encoding = dict(Q_percent=0., SOC_pp=0., paired_outputs=0) if len(kinds) == 2 else None
+    encoding = dict(Q_percent=0., SOC_pp=0., paired_outputs=0) if set(kinds)=={'float64','float32'} else None
     event_summary = {k: EventSummary() for k in ['controller','workload']}
     while stream.index < n:
         begin = stream.index
@@ -317,7 +331,7 @@ def run_compact(out, campaign, config, model_id, scenario, cell, args):
                 score(stat['current_nonzero' if row[1] != 0 else 'current_zero'], r, target)
                 stat['stops'][d['stop']] = stat['stops'].get(d['stop'], 0)+1
                 reads[k] = r
-            if len(reads) == 2:
+            if 'float64' in reads and 'float32' in reads:
                 a, b = reads['float64'], reads['float32']
                 encoding['paired_outputs'] += 1
                 encoding['Q_percent'] = max(encoding['Q_percent'], abs(100*(b['Q']/a['Q']-1)))

@@ -14,7 +14,7 @@ def render_compact(case, result, cell, destination, start_hour, end_hour, overla
     if 'load_seed' in result['scenario']:
         title += f", load seed {result['scenario']['load_seed']}"
     title += ' — compact bin means/ranges; zoom resolution limited by stored bins'
-    colors = dict(float64='#3165b4', float32='#dc7822')
+    colors = dict(float64='#3165b4', float32='#dc7822', field64='#009E73')
     styles = styles or {k:dict(label=k,color=colors[k],linestyle='-') for k in result['arms']}
     case_style = case_style or {}
     truth_color = case_style.get('color','#151515')

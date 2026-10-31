@@ -1,5 +1,10 @@
 # Current mainline baseline
 
+This experiment branch adds opt-in joint-field feedback via `--history compare`.
+See the [long-run experiment guide](experiments/rolling_joint_field_001/README.md)
+for baseline/field comparison, compact recording and replay. The default remains
+the mainline rolling estimator; the new history is not yet qualified for aging.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

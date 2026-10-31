@@ -1,0 +1,357 @@
+{
+  "schema": "rolling_joint_field_qualification_v1",
+  "branch": "experiment/rolling-joint-field-001",
+  "base_main_revision": "b9731e89c7ef9ab969858fc969aecf1ac695b5db",
+  "status": "opt_in_integration_checks_pass;owner_long_run_pending",
+  "tests": {
+    "campaign_tests": 47,
+    "C_adapter_and_bounded_model_tests": 16,
+    "total": 63,
+    "all_passed": true,
+    "logs": {
+      "experiments/rolling_joint_field_001/campaign_tests.txt": {
+        "bytes": 9617,
+        "sha256": "2f9e0d79c1f4e61475d666c0e7be65021d16a3d1d3eb5d32b0d27caa3c42a2b4"
+      },
+      "experiments/rolling_joint_field_001/core_adapter_tests.txt": {
+        "bytes": 2991,
+        "sha256": "d6826a8bcfa9b230fcd944f256d8729bd320b906355fb37aed95fba1cb13be8a"
+      }
+    },
+    "discovery_note": "Initial unittest discovery did not support the namespace package; explicit module suite was used."
+  },
+  "source_imports": {
+    "experiments/joint_rate_history_001/field.py": "5270ab0",
+    "experiments/joint_rate_history_001/probe.c": "5270ab0",
+    "experiments/slow_likelihood_diagnostic_001/numerics.py": "aa9977b"
+  },
+  "source_identities": {
+    "experiments/foster_campaign_001/backend.py": {
+      "bytes": 10513,
+      "sha256": "b8fe774f282aeb577bb6b99cbd70c3dfd35380555040595e73a5c35ac9c41af4"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 22593,
+      "sha256": "f4431c52697ca0ada6462deeb5e1ce8729c9ad439f0a05f42cf67f5284873d64"
+    },
+    "experiments/foster_campaign_001/compact_plot.py": {
+      "bytes": 5866,
+      "sha256": "50c857e3a88586392a86ea08c4bfadd283c13bf4ae102b4e698bcb8503ad0f48"
+    },
+    "experiments/foster_campaign_001/plot.py": {
+      "bytes": 16065,
+      "sha256": "0b44acf9bc11663b19511ddab253dd1f3a2374f4273c213da390d784be1d7743"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 24591,
+      "sha256": "2f0f0b8d0c18ee08b8168896624a2bd9d53f44709f5fb09908fa98f0dd96bcca"
+    },
+    "experiments/foster_campaign_c_001/bridge.c": {
+      "bytes": 1566,
+      "sha256": "f630307721490d0d895aa0ca55bb4a3bcf2e49578aec0f24ae35b7fe099e99fb"
+    },
+    "experiments/foster_campaign_001/field_backend.py": {
+      "bytes": 8781,
+      "sha256": "bf0ad49113038da0071ed0c6eb2571633fd09e989ac780fa0d166b31bbccc140"
+    },
+    "experiments/foster_campaign_001/test_field_backend.py": {
+      "bytes": 6781,
+      "sha256": "c745757e05dda0d219c61657233c41c2afb4522cc3cbfa87de155877d8b93c43"
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "bytes": 6989,
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+    },
+    "experiments/joint_rate_history_001/probe.c": {
+      "bytes": 2273,
+      "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+    },
+    "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+      "bytes": 5204,
+      "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "bytes": 4357,
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+    },
+    "experiments/foster_feedback_001/estimator.py": {
+      "bytes": 6724,
+      "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+    }
+  },
+  "cases": [
+    {
+      "campaign": "qualification4h",
+      "case": "case_0000",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1100,
+        "load_seed": 7
+      },
+      "status": "completed",
+      "hours": 4.0,
+      "plots": "completed",
+      "arms": {
+        "float64": {
+          "Q_error_percent": 0.5039891403111341,
+          "SOC_error_pp": 0.036102036016472105,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          }
+        },
+        "field64": {
+          "Q_error_percent": 0.0874678880473656,
+          "SOC_error_pp": 0.0047024968795161826,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          },
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 239,
+            "accepted": 239,
+            "rejected": 0,
+            "last_attempt_record": 718912,
+            "last_accepted_record": 718912,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 3.2779168036887163,
+            "max_abs_SOC_replacement_pp": 0.9330552907433343,
+            "accumulated_records": 718912,
+            "buffered_records": 1088,
+            "status": "all_refreshes_accepted"
+          }
+        }
+      }
+    },
+    {
+      "campaign": "qualification4h",
+      "case": "case_0001",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1103,
+        "load_seed": 7
+      },
+      "status": "completed",
+      "hours": 4.0,
+      "plots": "completed",
+      "arms": {
+        "float64": {
+          "Q_error_percent": 0.7888358264471318,
+          "SOC_error_pp": 0.040246702337087825,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          }
+        },
+        "field64": {
+          "Q_error_percent": -0.05551425882469596,
+          "SOC_error_pp": -0.004213270083808229,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          },
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 239,
+            "accepted": 239,
+            "rejected": 0,
+            "last_attempt_record": 718912,
+            "last_accepted_record": 718912,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 4.676300741657342,
+            "max_abs_SOC_replacement_pp": 0.8771746181878037,
+            "accumulated_records": 718912,
+            "buffered_records": 1088,
+            "status": "all_refreshes_accepted"
+          }
+        }
+      }
+    },
+    {
+      "campaign": "qualification_cycles4h",
+      "case": "case_0000",
+      "scenario": {
+        "cell": "A",
+        "load": "charge-discharge",
+        "noise_v": 0.02,
+        "seed": 1000
+      },
+      "status": "completed",
+      "hours": 4.0,
+      "plots": "not_requested",
+      "arms": {
+        "float64": {
+          "Q_error_percent": 0.09459224387831089,
+          "SOC_error_pp": 0.04092729721952293,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          }
+        },
+        "field64": {
+          "Q_error_percent": 0.004672448708431531,
+          "SOC_error_pp": 0.005709288596578155,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          },
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 239,
+            "accepted": 239,
+            "rejected": 0,
+            "last_attempt_record": 718912,
+            "last_accepted_record": 718912,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 8.6900233413576,
+            "max_abs_SOC_replacement_pp": 1.8790145683507675,
+            "accumulated_records": 718912,
+            "buffered_records": 1088,
+            "status": "all_refreshes_accepted"
+          }
+        }
+      }
+    },
+    {
+      "campaign": "qualification_cycles4h",
+      "case": "case_0001",
+      "scenario": {
+        "cell": "A",
+        "load": "charge-discharge",
+        "noise_v": 0.02,
+        "seed": 1006
+      },
+      "status": "completed",
+      "hours": 4.0,
+      "plots": "not_requested",
+      "arms": {
+        "float64": {
+          "Q_error_percent": 0.5597945702681129,
+          "SOC_error_pp": 0.13946834112579243,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          }
+        },
+        "field64": {
+          "Q_error_percent": 0.010337732039378267,
+          "SOC_error_pp": 0.0043222433481815425,
+          "counts": {
+            "received_records": 720000,
+            "retired_records": 720000,
+            "pending_records": 0,
+            "tokens": 45000
+          },
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 239,
+            "accepted": 239,
+            "rejected": 0,
+            "last_attempt_record": 718912,
+            "last_accepted_record": 718912,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 4.087747607211374,
+            "max_abs_SOC_replacement_pp": 1.7645410583253862,
+            "accumulated_records": 718912,
+            "buffered_records": 1088,
+            "status": "all_refreshes_accepted"
+          }
+        }
+      }
+    }
+  ],
+  "debug_replay": {
+    "status": "completed",
+    "hours": [
+      3.1,
+      3.12
+    ],
+    "plots": "six families generated",
+    "checkpoint_hour": 3.0037333333333334
+  },
+  "evidence_identities": {
+    "experiments/rolling_joint_field_001/qualification4h/summary.json": {
+      "bytes": 23784,
+      "sha256": "81e0312278d30fe382f516dfec557a5be5ddea092bed85807aac0302081c57ce"
+    },
+    "experiments/rolling_joint_field_001/qualification4h/case_0000/result.json": {
+      "bytes": 10205,
+      "sha256": "08a9ca8ee49c859d1f472f3a724975f246a65ba4ce54381235bae2d7b6410945"
+    },
+    "experiments/rolling_joint_field_001/qualification4h/case_0001/result.json": {
+      "bytes": 10174,
+      "sha256": "7c9db41f6aa1f76690a79426af3828240131d69f371b0df9871113c10d501ab4"
+    },
+    "experiments/rolling_joint_field_001/qualification4h/campaign_plan.json": {
+      "bytes": 35698,
+      "sha256": "8178f3879e0f9e2655a92d15e12aa8a9c3413109db5a5bc6311429289c73847b"
+    },
+    "experiments/rolling_joint_field_001/qualification4h/reservation.json": {
+      "bytes": 113914,
+      "sha256": "51e45aa84340c2fac865e7da5d2f2264ffcba3a0103be568b574a1beba0f06b6"
+    },
+    "experiments/rolling_joint_field_001/qualification_cycles4h/summary.json": {
+      "bytes": 16382,
+      "sha256": "c4c19eecfc950f343bf34cbc3556d7fdc82b2a88dd84ab1e8940801fe45e3acb"
+    },
+    "experiments/rolling_joint_field_001/qualification_cycles4h/case_0000/result.json": {
+      "bytes": 7212,
+      "sha256": "e8abfe1ec14d4c6a01f4aade9c3b2520be938615fddb7497a119311340818a34"
+    },
+    "experiments/rolling_joint_field_001/qualification_cycles4h/case_0001/result.json": {
+      "bytes": 7219,
+      "sha256": "9d84cc1eb07b56518ce575350d7cc8d8ef0ab206fa05b64feac9884226065192"
+    },
+    "experiments/rolling_joint_field_001/qualification_cycles4h/campaign_plan.json": {
+      "bytes": 35863,
+      "sha256": "381a3e43180f63f37ea63333fd865af7acee7429dc8198ce39a83770d768f6d2"
+    },
+    "experiments/rolling_joint_field_001/qualification_cycles4h/reservation.json": {
+      "bytes": 113930,
+      "sha256": "f4634062e4b417f1127dab27aeea53c92684973ba5ae9b2e5a88cfb4871d8d4f"
+    },
+    "experiments/rolling_joint_field_001/debug_qualification4h/result.json": {
+      "bytes": 2269,
+      "sha256": "f7e9553e1ee214ba4c1ad8f71678fc91fc6eac30cad6637d93876bec38ff8ec9"
+    }
+  },
+  "planned_720h_storage_per_case": {
+    "field_checkpoint_extra_B_per_checkpoint": 220696,
+    "records": 129600000,
+    "summary_bin_hours": 0.36,
+    "summary_numeric_MB": 8.544,
+    "checkpoint_count": 241,
+    "checkpoint_interval_hours": 3.0037333333333334,
+    "checkpoint_context_MB": 62.546248,
+    "numeric_payload_planning_MB": 71.090248,
+    "limits": "Uncompressed numeric payload estimate only; add checkpoint JSON/NPZ/index, plots, source snapshots and host workspace. Event counts/digests are bounded; no event CSV in compact mode. Runtime still scales with every sample."
+  },
+  "inference_contract": "Original prior plus full-prefix field likelihood once; same-prefix distribution replacement, followed by ordinary C rolling windows. No truth in inference. Fixed origin, stationary parameters.",
+  "limits": [
+    "Local MAP/GN and finite-domain polynomial approximation; uncertainty coverage unvalidated.",
+    "No 720h integration run executed here.",
+    "No aging or M23 deployment qualification.",
+    "Failed refresh leaves rolling distribution and records diagnostic; completed stream is not a guarantee of accepted refreshes."
+  ],
+  "mainline_modified": false,
+  "bulk_generated_files_staged": false
+}

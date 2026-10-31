@@ -102,7 +102,7 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
         first = np.searchsorted(rows[:,1], (record_offset+begin)/rate, side='right')
         last = np.searchsorted(rows[:,1], (record_offset+end)/rate, side='right')
         traces[k] = rows[first:last]
-    colors = dict(float64='#3165b4', float32='#dc7822')
+    colors = dict(float64='#3165b4', float32='#dc7822', field64='#009E73')
     styles = styles or {k:dict(label=k,color=colors[k],linestyle='-') for k in traces}
     case_style = case_style or {}
     truth_color=case_style.get('color','#151515')

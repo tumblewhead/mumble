@@ -125,6 +125,8 @@ class CBackend:
         failure=C.c_uint64(first);status=self.lib.campaign_block(self.context,first,ptr(rows),len(rows),C.byref(failure))
         self.failure_index=failure.value;self.refresh()
         if status<0:raise ValueError('C estimator status '+str(status))
+        return self.readout(rows)
+    def readout(self,rows):
         a=self.full_message();m=a[:16];L=a[16:272].reshape(16,16);sd=np.sqrt(np.sum(L*L,axis=1))
         factor=math.exp(self.config['arrhenius_A_K'][0]*(1/(float(rows[-1,2])+273.15)-1/self.config['reference_temperature_K']))
         q=math.exp(m[5])*factor
@@ -136,3 +138,18 @@ class CBackend:
     def full_message(self):
         a=np.empty(273);self.lib.fb_get_message(self.context,ptr(a));return a
     def storage(self):return dict(C_context_B=self.lib.fb_context_bytes(),C_stack_excluded=True)
+
+
+def arm_kinds(settings):
+    history=getattr(settings,'history','rolling')
+    if history=='compare':return ['float64','field64']
+    if history=='joint-field':return ['field64']
+    return ['float64','float32'] if settings.encoding=='both' else [settings.encoding]
+
+
+def make_backend(campaign,config,source,model_id,kind,rate,settings):
+    if kind=='field64':
+        from .field_backend import FieldBackend
+        return FieldBackend(campaign,config,source,model_id,rate,settings)
+    backend=CBackend if getattr(settings,'backend','python')=='c' else PythonBackend
+    return backend(campaign,config,source,model_id,kind,rate)
