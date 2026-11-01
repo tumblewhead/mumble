@@ -5137,9 +5137,23 @@
     "branch": "experiment/shared-uncertainty-growth-001",
     "tests": 11,
     "finding": "Shared hysteresis likelihood approximation displaces Q about1.75 referenceSD at24h and4.05 at72h; widths agree within1%. More than99.9% of gradient-predicted Q displacement attributed to hysteresis. Retained-data72h Q scores within1SD for both selected seeds; no coverage claim.",
-    "next": "Partition-specific hysteresis basis/transport refinement against retained prefixes, full joint factors and forecasts; measure cost before promotion. No scalar inflation or forgetting.",
+    "next": "Partition-specific refinement completed; see hysteresis_refinement. H7 is offline fidelity reference, not promoted.",
     "default_changed": false,
     "mainline_changed": false,
     "additional_production_storage_B": 0
+  },
+  "hysteresis_refinement": {
+    "status": "eight_matched_refinements_and_fixed_grid_ablations_complete",
+    "branch": "experiment/hysteresis-refinement-001",
+    "report": "experiments/hysteresis_refinement_001/README.md",
+    "receipt": "provenance/hysteresis_refinement_001/receipt.json",
+    "tests": 20,
+    "finding": "RC5/H7 reducesQ likelihood displacement from1.75 to0.028SD at24h and4.05 to0.057SD at72h (62x/71x); widths within0.031%reference. Forecast approximation RMS5..10xsmaller. Fixed-grid controls confirm missingpure/mixedmodes, not just collocation density.",
+    "packed_H7_joint_factor_B": 50624,
+    "H7_live_state_B": 1336,
+    "production_changed": false,
+    "default_changed": false,
+    "mainline_changed": false,
+    "next": "UseH7 as fidelity reference; design sparse/separable pure+mixedhysteresis with fulljointlikelihood/transport error budget. Validate weak/reversinguse andothercells before campaignintegration. Preserve residualbias/lifetime caveat."
   }
 }

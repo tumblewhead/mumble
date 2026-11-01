@@ -40,8 +40,10 @@ It is active in the opt-in tangent modes on this work branch; defaults and
 mainline remain unchanged. The [shared uncertainty audit](experiments/shared_uncertainty_growth_001/README.md)
 now attributes over99.9% of the measured24/72hour Q gradient displacement to
 hysteresis approximation. Field/reference widths agree within1%, while their
-centers separate by about1.75/4.05 local SD. A hysteresis-specific repair is next;
-no uncertainty repair is promoted.
+centers separate by about1.75/4.05 local SD. The [hysteresis refinement](experiments/hysteresis_refinement_001/README.md)
+reduces that separation to0.028/0.057 SD with RC fixed, while improving agreement
+of joint fits and forecasts. Its49.4KiB packed factor is a fidelity reference for
+a smaller representation; no campaign or mainline change is promoted.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
