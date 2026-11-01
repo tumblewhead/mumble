@@ -1,0 +1,500 @@
+{
+  "schema": "tangent_development_plan_v1",
+  "status": "planning_only_not_executed",
+  "branch": "design/tangent-development-001",
+  "base_revision": "a35994cfea4219bece4da710410b4bb04af49815",
+  "leading_candidate": "tangent64",
+  "control": "field64",
+  "default_change": false,
+  "objective": "Select and develop a bounded-resource estimator/history path by proposed-load voltage prediction, joint uncertainty and execution cost; keep SOC/Q stable while focusing RC/EOD utility.",
+  "application_targets": {
+    "Q_relative_error_percent": 1.0,
+    "Q_target_status": "user accepted approximate practical target, not proof of observability or hard exclusion",
+    "SOC_error_percentage_points": 0.5,
+    "uniform_RC_parameter_error_target": null,
+    "voltage_margin_target_V": null,
+    "admission_risk_budget": null,
+    "rule": "Report existing0.5%Qmetrics alongside the new1%working target for continuity. Weak/unresolved Q remains explicit. Hardware voltage/risk requirements must be supplied before an operational pass/fail claim."
+  },
+  "first_study": {
+    "input_manifest": "inputs.json",
+    "prefixes": 12,
+    "arms": [
+      "field64",
+      "tangent64"
+    ],
+    "sample_rate_Hz": 50,
+    "records_per_prefix": 16384,
+    "unique_source_records": 196608,
+    "timing_repetitions": 5,
+    "repetition_rule": "Restore the complete same starting state before every repeat; alternate arm timing order and exclude truth generation, plotting and IO. No repeated observations added to an already-updated history.",
+    "forecast_anchor_phases": [
+      "one16-record block immediately before the next scheduled full refresh",
+      "immediately after that same refresh attempt",
+      "halfway through the following cadence interval"
+    ],
+    "phase_rule": "Match source boundaries and observation prefixes across arms. Record accepted/rejected refresh status; do not force success.",
+    "forecast_anchors": 36,
+    "workloads_per_anchor": 20,
+    "paired_forecast_tasks": 720,
+    "additional_tangent_geometry_ablation": true,
+    "temperature_rule": "Hold measured checkpoint/anchor temperature constant over each controlled fork; label forecast conditional on that declared schedule. Later temperature-change tasks separate.",
+    "workload_bank": [
+      {
+        "id": "pulse_15mA_0.1s",
+        "segments": [
+          {
+            "duration_s": 0.1,
+            "current_A": 0.015
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_15mA_1s",
+        "segments": [
+          {
+            "duration_s": 1,
+            "current_A": 0.015
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_15mA_10s",
+        "segments": [
+          {
+            "duration_s": 10,
+            "current_A": 0.015
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_15mA_60s",
+        "segments": [
+          {
+            "duration_s": 60,
+            "current_A": 0.015
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_30mA_0.1s",
+        "segments": [
+          {
+            "duration_s": 0.1,
+            "current_A": 0.03
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_30mA_1s",
+        "segments": [
+          {
+            "duration_s": 1,
+            "current_A": 0.03
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_30mA_10s",
+        "segments": [
+          {
+            "duration_s": 10,
+            "current_A": 0.03
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_30mA_60s",
+        "segments": [
+          {
+            "duration_s": 60,
+            "current_A": 0.03
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_60mA_0.1s",
+        "segments": [
+          {
+            "duration_s": 0.1,
+            "current_A": 0.06
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_60mA_1s",
+        "segments": [
+          {
+            "duration_s": 1,
+            "current_A": 0.06
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_60mA_10s",
+        "segments": [
+          {
+            "duration_s": 10,
+            "current_A": 0.06
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_60mA_60s",
+        "segments": [
+          {
+            "duration_s": 60,
+            "current_A": 0.06
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_120mA_0.1s",
+        "segments": [
+          {
+            "duration_s": 0.1,
+            "current_A": 0.12
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_120mA_1s",
+        "segments": [
+          {
+            "duration_s": 1,
+            "current_A": 0.12
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_120mA_10s",
+        "segments": [
+          {
+            "duration_s": 10,
+            "current_A": 0.12
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "pulse_120mA_60s",
+        "segments": [
+          {
+            "duration_s": 60,
+            "current_A": 0.12
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "rest60",
+        "segments": [
+          {
+            "duration_s": 60,
+            "current_A": 0
+          }
+        ]
+      },
+      {
+        "id": "burst_60mA",
+        "repeat": 10,
+        "segments": [
+          {
+            "duration_s": 0.1,
+            "current_A": 0.06
+          },
+          {
+            "duration_s": 0.9,
+            "current_A": 0.015
+          }
+        ],
+        "recovery_s": 30
+      },
+      {
+        "id": "burst_120mA",
+        "repeat": 10,
+        "segments": [
+          {
+            "duration_s": 0.1,
+            "current_A": 0.12
+          },
+          {
+            "duration_s": 0.9,
+            "current_A": 0.015
+          }
+        ],
+        "recovery_s": 30
+      },
+      {
+        "id": "mixed_load",
+        "segments": [
+          {
+            "duration_s": 5,
+            "current_A": 0.015
+          },
+          {
+            "duration_s": 0.1,
+            "current_A": 0.12
+          },
+          {
+            "duration_s": 5,
+            "current_A": 0.03
+          },
+          {
+            "duration_s": 30,
+            "current_A": 0
+          }
+        ]
+      }
+    ],
+    "current_rule": "Positive current is discharge. Same absolute public current commands for both cells; never derive commands from hidden Q. Label poorly excited or out-of-training loads as extrapolation even inside physical domain.",
+    "timing_rule": "Initial witness50Hz; all listed durations are integral samples. For other rates report any duration rounding and preserve actual1/Fs intervals; evaluate instantaneous load edges separately.",
+    "stop_rule": "Domain/support failures remain unresolved. Do not clamp SOC/hysteresis, discard problematic points, or silently renormalize away unsupported uncertainty."
+  },
+  "forecast_contract": {
+    "inputs": [
+      "source identity and committed record boundary",
+      "read-only estimate/history handle with original prior and joint state/parameter uncertainty",
+      "declared current or power task and temperature assumption",
+      "optional battery-terminal cutoff and path requirements"
+    ],
+    "outputs": [
+      "voltage trajectory or bounded summary",
+      "minimum voltage and occurrence time, including initial edge",
+      "recovery trajectory",
+      "joint local uncertainty/support status and numerical evaluation error",
+      "diagnostic margin/decision if requirements supplied"
+    ],
+    "prohibitions": [
+      "No truth, future observed voltage or true parameters supplied to forecast.",
+      "No reusing a forecast as new observation evidence.",
+      "No independently varying RC parameters while discarding their covariance.",
+      "No raw endpoint Gaussian treated as a certificate for the nonlinear original-coordinate history."
+    ],
+    "power_load": "Start with prescribed current. Constant-power/regulated tasks require voltage-dependent I=P/(eta*V), a declared efficiency/power-path model and explicit low-voltage failure; do not substitute fixed current.",
+    "minima": "Include0+ and every command transition, search intra-segment extrema and check numerical refinement; sampling only50Hzendpoints may miss minimum voltage.",
+    "decision_status": "diagnostic_until_calibrated"
+  },
+  "stages": [
+    {
+      "id": "T0",
+      "name": "Bind replay and export complete state",
+      "depends_on": [],
+      "work": [
+        "Restore original checkpoints under original source/binary/runtime binding. Never weaken replay checks.",
+        "A new experiment wrapper may read/call the preserved environment; record wrapper identity and derived exports separately.",
+        "Export source/count/interval/config identities, full joint readout and all tangent/field state required to reproduce continuation. Isolate plant truth in a scoring-only object.",
+        "If importing into instrumented/new implementation, validate same-stream numerical continuation before benchmarking; do not relabel it as original replay."
+      ],
+      "deliverables": [
+        "bound input manifest",
+        "derived state schema and ownership rules",
+        "short restore/export/import parity receipt"
+      ],
+      "gate": "All source/chronology checks pass; snapshots leave original banks unchanged. Import and readout do not add evidence."
+    },
+    {
+      "id": "T1",
+      "name": "Matched resource ledger",
+      "depends_on": [
+        "T0"
+      ],
+      "work": [
+        "Replay16384newobservations from each of12prefixes for field64/tangent64 only.",
+        "Separate validation/adapter, response recurrence, lifted-field QR, tangent-or-rolling update, full refresh, mean transport and covariance/application readout.",
+        "Measure uninstrumented complete advance separately from instrumented phase costs; report instrumentation overhead.",
+        "Measure persistent data, active workspace, stack and simultaneous peak occupancy by lifetime; report Python heap and C/target estimates separately.",
+        "Count double arithmetic, division, transcendental calls, square roots, matrix/QR dimensions and maximum solver iterations; identify workload-dependent work.",
+        "Measure mean/median/p95/p99/max and refresh bursts; report host/compiler/thread setup. Use compiler/RTL measurements for target cycles if available."
+      ],
+      "deliverables": [
+        "per-phase timing and operation ledger",
+        "complete memory lifetime ledger",
+        "accuracy/cost paired scorecard"
+      ],
+      "gate": "No whole-system memory or M23 timing claim from partial payloads or host timings; include all refresh work and distinguish bounded work from average cost."
+    },
+    {
+      "id": "T2",
+      "name": "Causal proposed-load prediction and error attribution",
+      "depends_on": [
+        "T0"
+      ],
+      "work": [
+        "Freeze estimates before each workload; no future voltage assimilation or fit. Preserve inherited z/v1/v2/v3/h, reference parameters and full joint dependence.",
+        "Compare published full endpoint messages from both arms; additionally evaluate tangent original-coordinate nonlinear transport as a separately labeled geometry ablation.",
+        "Forecast noiseless battery terminal voltage at event boundaries including0+, through the task and recovery. Score against an independent scalar plant fork only after predictions are frozen.",
+        "Propagate full joint local covariance; add deterministic joint-direction nonlinear/support probes, labeled diagnostics rather than probability bounds.",
+        "Inspect voltage-margin threshold sweeps without asserting a hardware cutoff or calibrated admission risk.",
+        "Separate point forecast, state error, RC-response error, hysteresis/OCV/capacity contribution and uncertainty. Truth substitutions permitted only as post-prediction scoring ablations, never candidate inputs.",
+        "If near-EOD states are absent, declare a separate causal discharge continuation using public controls and measured-voltage stopping. Never set estimated SOC or RC states from truth."
+      ],
+      "deliverables": [
+        "per-task voltage minimum/time/recovery errors",
+        "joint uncertainty and support diagnostics",
+        "threshold-sweep decision tradeoffs",
+        "next-repair attribution"
+      ],
+      "gate": "Uncertainty remains provisional until independent calibration; evaluate path minima jointly, not pointwise3SD bounds treated as trajectory guarantees."
+    },
+    {
+      "id": "T3",
+      "name": "Profile-selected tangent improvements",
+      "depends_on": [
+        "T1",
+        "T2"
+      ],
+      "work": [
+        "Select the largest demonstrated cost with clear semantics; change one candidate at a time.",
+        "First candidates: reduce crossings/allocations, reuse explicit buffers, fuse response/update operations, and remove duplicated recurrence without retaining unbounded lifted rows.",
+        "Evaluate mean/domain validation every commit separately from application-requested covariance readout; all samples still update history and failures remain visible.",
+        "Cache only values keyed to unchanged prior/config/source, anchor, factor or transport generation; include invalidation tests across temperature, interval and refresh changes.",
+        "If shared field storage dominates, open a separate history-factor representation study. Preserve cross terms and chronological state;32bitstorage alone cannot fit the current82Dfactor in10KiB.",
+        "Route shared prediction bias to partition/transport/sensor diagnostics before changing estimator behavior; do not improve plots by smoothing reported parameters."
+      ],
+      "deliverables": [
+        "one-change-at-a-time measured ROI",
+        "parity and numerical-error attribution",
+        "updated complete memory/CPU ledger"
+      ],
+      "gate": "Preserve owned evidence, joint uncertainty, domain checks and useful predictions. Report small roundoff changes with severity; do not tune tolerances after results or add arbitrary forgetting/inflation."
+    },
+    {
+      "id": "T4",
+      "name": "Freeze and qualify selected candidate",
+      "depends_on": [
+        "T3"
+      ],
+      "work": [
+        "Retest replay/checkpoints, original controls, weak/rest/reversal cases and interval handling at35Hz and50Hz.",
+        "Use fresh independent noise seeds and independent embedded load seeds; retain paired inputs for candidate/control. Include both cells, weak/wide traversal and low-SOC episodes.",
+        "Run short coverage/prediction pilot before new72h/720h campaigns. Treat trajectories, not correlated samples, as independent uncertainty units.",
+        "Promote only on recorded prediction stability, decision utility, failures, resources and explicit limitations; keep default promotion distinct from merging an optional backend.",
+        "After stationary qualification, schedule separately designed aging and model-mismatch studies;72hstationary evidence does not establish ten-year behavior."
+      ],
+      "deliverables": [
+        "frozen candidate qualification",
+        "resource/performance promotion decision",
+        "remaining target and aging gaps"
+      ],
+      "gate": "No deployment claim without calibrated application risk, hardware power-path assumptions and measured target memory/deadlines."
+    }
+  ],
+  "target": {
+    "core": "baseline Cortex-M23 custom silicon / Verilog simulation",
+    "clock_Hz": 16000000,
+    "nominal_sample_rate_Hz": 35,
+    "working_history": "SRAM only",
+    "SRAM_goal_B": 10240,
+    "cycles_per_sample_nominal": 457142.85714285716,
+    "cycles_per_16_record_window_nominal": 7314285.714285715,
+    "schedule_rule": "Average window cycle budget is not a sample-latency guarantee; account for buffering and full-refresh scheduling. No dropped/reordered samples.",
+    "current_factor_dimension": 82,
+    "packed_triangular_entries": 3403,
+    "factor_float64_B": 27224,
+    "factor_float32_B": 13612,
+    "memory_rule": "This is a lower bound for retaining this dense triangular numeric layout, not an information-theoretic lower bound. Include all contexts/prior/live state/tables/workspace/output/buffers in target peak ledger."
+  },
+  "repair_routing": [
+    {
+      "finding": "both arms have same consequential voltage bias",
+      "action": "shared field/transport/hysteresis/OCV/sensor attribution"
+    },
+    {
+      "finding": "only field64 admission changes with refresh phase",
+      "action": "carry tangent forward; preserve evidence-based stability benefit"
+    },
+    {
+      "finding": "RC parameters differ but predicted voltage is acceptable",
+      "action": "avoid spending resources forcing each nuisance parameter to its truth"
+    },
+    {
+      "finding": "uncertainty misses or unsupported geometry change admission",
+      "action": "repair or explicitly bound the identified approximation; retain unresolved status"
+    },
+    {
+      "finding": "performance dominated by common history factor",
+      "action": "prioritize shared factor compaction, not micro-optimizing only the tangent context"
+    }
+  ],
+  "open_requirements": [
+    "Battery-side voltage cutoff, allowable transient duration and hardware power path.",
+    "Representative current/power tasks, regulator efficiency and acceptable admission risk.",
+    "Target compiler/ABI and access to cycle/stack measurements in the Verilog environment.",
+    "Independent validation budget after candidate freeze; existing witnesses cannot certify rare brownout risk."
+  ],
+  "invariants": [
+    "Truth isolated to harness/scoring.",
+    "Original public prior once; chronological ownership and actual intervals unchanged.",
+    "Full cross terms retained; no arbitrary exponential forgetting, variance inflation or parameter smoothing.",
+    "No new long campaign needed for the first resource/forecast scorecard.",
+    "All old artifacts and replay sources preserved."
+  ],
+  "evidence": [
+    "provenance/field_tangent_72h_20261101/receipt.json",
+    "experiments/field_tangent_native_001/qualification.json",
+    "provenance/field_comparison_plots_20261101/receipt.json"
+  ]
+}

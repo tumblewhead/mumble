@@ -24,6 +24,12 @@ identifies refresh-related Q/H/gamma swings that the tangent update suppresses.
 The default estimator remains unchanged. The packed field/update subtotal is
 29.5 KiB, excluding workspace and other subsystem memory.
 
+The [tangent development plan](specifications/tangent_development_001/README.md)
+now specifies matched resource profiling and causal proposed-load forecasts from
+12 saved checkpoints, followed by one measured optimization or repair. It is
+planning-only; the working Q target is approximately 1%, with RC/EOD utility the
+next focus.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
