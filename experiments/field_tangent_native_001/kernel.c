@@ -1,12 +1,15 @@
 #include "kernel.h"
 #include <math.h>
 #include <string.h>
-#define MAGIC UINT64_C(0x465454414e473031)
+#define MAGIC (UINT64_C(0x465454414e473031)+(FT_HDEG-5))
 static size_t ix(int i,int j) { return (size_t)(i*17-i*(i-1)/2+j-i); }
 static int finite_array(const double *x,size_t n) {
     for(size_t i=0;i<n;i++)if(!isfinite(x[i]))return 0;
     return 1;
 }
+int ft_width(void) { return FT_WIDTH; }
+int ft_state_count(void) { return FT_STATE; }
+int ft_hysteresis_degree(void) { return FT_HDEG; }
 size_t ft_context_bytes(void) { return sizeof(FTContext); }
 size_t ft_work_bytes(void) { return sizeof(FTWork); }
 size_t ft_step_work_bytes(void) { return sizeof(FTStepWork); }
@@ -29,7 +32,7 @@ static int basis(FTBasis *b,const double *x,const double *center,const double *h
         double t=log(s/center[i])/half[i];
         if(!isfinite(t)||fabs(t)>1+1e-12)return -3;
         b->T[i][0]=1;b->D[i][0]=0;b->T[i][1]=t;b->D[i][1]=1;
-        for(int k=2;k<6;k++) {
+        for(int k=2;k<FT_M;k++) {
             b->T[i][k]=2*t*b->T[i][k-1]-b->T[i][k-2];
             b->D[i][k]=2*b->T[i][k-1]+2*t*b->D[i][k-1]-b->D[i][k-2];
         }
@@ -39,7 +42,7 @@ static int basis(FTBasis *b,const double *x,const double *center,const double *h
 /* Direct row contraction with phi and Dphi: never allocate82x16 derivatives. */
 static double project(const FTBasis *b,const double *x,const double *half,const double *row,double *g) {
     memset(g,0,16*sizeof(double));
-    double q=1/b->p[0],r=row[0]*x[0]+row[1]*q+row[2]*b->p[1]+row[81];
+    double q=1/b->p[0],r=row[0]*x[0]+row[1]*q+row[2]*b->p[1]+row[FT_WIDTH-1];
     g[0]=row[0];g[5]=-row[1]*q;g[6]=row[2]*b->p[1];
     for(int i=0;i<3;i++) {
         double v=0,u=0,dv=0,du=0;int start=3+12*i;
@@ -52,10 +55,10 @@ static double project(const FTBasis *b,const double *x,const double *half,const 
         for(int k=0;k<=i;k++)g[8+2*k]+=slope*b->gaps[k]/b->p[3+2*i];
     }
     double a=0,dap=0,dam=0,c=0,dcp=0,dcm=0;int k=0;
-    for(int i=0;i<6;i++)for(int j=0;j<6-i;j++,k++) {
+    for(int i=0;i<FT_M;i++)for(int j=0;j<FT_M-i;j++,k++) {
         double t=b->T[3][i]*b->T[4][j],dp=b->D[3][i]*b->T[4][j],dm=b->T[3][i]*b->D[4][j];
         a+=row[39+k]*t;dap+=row[39+k]*dp;dam+=row[39+k]*dm;
-        c+=row[60+k]*t;dcp+=row[60+k]*dp;dcm+=row[60+k]*dm;
+        c+=row[39+FT_B+k]*t;dcp+=row[39+FT_B+k]*dp;dcm+=row[39+FT_B+k]*dm;
     }
     double H=b->p[8],B=H*b->h,hv=H*a+B*c;
     r+=hv;g[13]=hv;g[4]=H*b->dh*c;
@@ -77,25 +80,25 @@ static int append(double *R,double *row) {
     return finite_array(R,153)?0:-4;
 }
 int ft_init(FTContext *c,FTWork *w,uint64_t source,uint64_t count,const double *mean,const double *L,const double *anchor,const double *root,const double *center,const double *half) {
-    if(!finite_array(mean,16)||!finite_array(L,256)||!finite_array(anchor,16)||!finite_array(root,82*82))return -2;
+    if(!finite_array(mean,16)||!finite_array(L,256)||!finite_array(anchor,16)||!finite_array(root,FT_WIDTH*FT_WIDTH))return -2;
     chart(mean,L,anchor,w->x);int status=basis(&w->basis,w->x,center,half);if(status)return status;
     memset(w->phase.trial,0,153*sizeof(double));
     for(int i=0;i<16;i++) {memset(w->bw,0,17*sizeof(double));w->bw[i]=1;w->bw[16]=anchor[i];if(append(w->phase.trial,w->bw))return -4;}
-    for(int i=0;i<82;i++) {if(whiten(w,root+82*i,half,L)||append(w->phase.trial,w->bw))return -4;}
+    for(int i=0;i<FT_WIDTH;i++) {if(whiten(w,root+FT_WIDTH*i,half,L)||append(w->phase.trial,w->bw))return -4;}
     memcpy(c->factor,w->phase.trial,sizeof(c->factor));memcpy(c->anchor,anchor,sizeof(c->anchor));
     c->source=source;c->count=count;c->magic=MAGIC;return 0;
 }
 int ft_update(FTContext *c,FTWork *w,uint64_t source,uint64_t first,const double *rows,size_t n,const double *mean,const double *L,const double *center,const double *half) {
     if(c->magic!=MAGIC||c->source!=source||c->count!=first||n>UINT64_MAX-first)return -1;
-    if(n>4096||!finite_array(rows,n*82)||!finite_array(mean,16)||!finite_array(L,256))return -2;
+    if(n>4096||!finite_array(rows,n*FT_WIDTH)||!finite_array(mean,16)||!finite_array(L,256))return -2;
     chart(mean,L,c->anchor,w->x);int status=basis(&w->basis,w->x,center,half);if(status)return status;
     memcpy(w->phase.trial,c->factor,sizeof(c->factor));
-    for(size_t i=0;i<n;i++)if(whiten(w,rows+82*i,half,L)||append(w->phase.trial,w->bw))return -4;
+    for(size_t i=0;i<n;i++)if(whiten(w,rows+FT_WIDTH*i,half,L)||append(w->phase.trial,w->bw))return -4;
     memcpy(c->factor,w->phase.trial,sizeof(c->factor));c->count+=n;return 0;
 }
 int ft_query(const FTContext *c,FTWork *w,uint64_t count,const double *mean,const double *L,const double *center,const double *half,const double *state,const double *p1,const double *p2,double *out) {
     if(c->magic!=MAGIC||c->count!=count)return -1;
-    if(!finite_array(mean,16)||!finite_array(L,256)||!finite_array(state,111)||!finite_array(p1,36)||!finite_array(p2,21*36))return -2;
+    if(!finite_array(mean,16)||!finite_array(L,256)||!finite_array(state,FT_STATE)||!finite_array(p1,36)||!finite_array(p2,FT_B*FT_M*FT_M))return -2;
     double logdet=0,displacement=0;
     for(int i=15;i>=0;i--) {
         double d=c->factor[ix(i,i)];if(!(fabs(d)>0)||!isfinite(d))return -4;
@@ -104,7 +107,7 @@ int ft_query(const FTContext *c,FTWork *w,uint64_t count,const double *mean,cons
         displacement+=c->factor[ix(i,16)]*c->factor[ix(i,16)];
     }
     chart(mean,L,out,w->x);int status=basis(&w->basis,w->x,center,half);if(status)return status;
-    double q=1/w->basis.p[0];if(w->x[0]-q*state[110]<0||w->x[0]-q*state[109]>1)return -3;
+    double q=1/w->basis.p[0];if(w->x[0]-q*state[FT_STATE-1]<0||w->x[0]-q*state[FT_STATE-2]>1)return -3;
     memcpy(out+16,w->x,16*sizeof(double));memcpy(out+32,w->x,16*sizeof(double));
     double *inverse=w->phase.query.inverse,*origin=w->phase.query.origin;
     memset(inverse,0,256*sizeof(double));
@@ -115,16 +118,16 @@ int ft_query(const FTContext *c,FTWork *w,uint64_t count,const double *mean,cons
     for(int i=0;i<16;i++)for(int j=0;j<16;j++) {double s=0;for(int k=0;k<16;k++)s+=L[16*i+k]*inverse[16*k+j];origin[16*i+j]=s;}
     memcpy(out+48,origin,256*sizeof(double));
     for(int dynamic=0;dynamic<5;dynamic++) {
-        memset(w->row,0,82*sizeof(double));
-        if(dynamic==0){w->row[0]=1;w->row[1]=-state[108];}
+        memset(w->row,0,FT_WIDTH*sizeof(double));
+        if(dynamic==0){w->row[0]=1;w->row[1]=-state[FT_STATE-3];}
         else if(dynamic<4) {
             int i=dynamic-1;
             for(int k=0;k<6;k++)for(int j=0;j<6;j++) {
                 w->row[3+12*i+k]+=p1[6*k+j]*state[6*i+j];
                 w->row[9+12*i+k]+=p1[6*k+j]*state[18+6*i+j];
             }
-        } else for(int k=0;k<21;k++)for(int j=0;j<36;j++) {
-            w->row[39+k]+=p2[36*k+j]*state[72+j];w->row[60+k]+=p2[36*k+j]*state[36+j];
+        } else for(int k=0;k<FT_B;k++)for(int j=0;j<FT_M*FT_M;j++) {
+            w->row[39+k]+=p2[FT_M*FT_M*k+j]*state[36+FT_M*FT_M+j];w->row[39+FT_B+k]+=p2[FT_M*FT_M*k+j]*state[36+j];
         }
         double value=project(&w->basis,w->x,half,w->row,w->gx);
         if(dynamic==4) {
@@ -141,15 +144,20 @@ int ft_query(const FTContext *c,FTWork *w,uint64_t count,const double *mean,cons
     return finite_array(out,307)?0:-4;
 }
 int ft_projection(FTWork *w,const double *x,const double *row,const double *center,const double *half,double *out) {
-    if(!finite_array(row,82))return -2;
+    if(!finite_array(row,FT_WIDTH))return -2;
     int status=basis(&w->basis,x,center,half);if(status)return status;
     out[16]=project(&w->basis,x,half,row,out);return finite_array(out,17)?0:-4;
 }
 
 /* Same response implementation as the field batch accumulator. Keeping this
  * function in a separate translation unit preserves its arithmetic ordering. */
+#if FT_HDEG == 5
 int response_rows(const double *,size_t,const double *,int,int,const double *,
                   const double *,const double *,double *,double *);
+#else
+int response_rows(const double *,size_t,const double *,int,int,int,const double *,
+                  const double *,const double *,double *,double *);
+#endif
 int ft_step(FTContext *c,FTWork *w,FTStepWork *s,uint64_t source,uint64_t first,
             const double *obs,size_t n,uint64_t hz,int query,
             const double *mean,const double *L,const double *center,const double *half,
@@ -157,8 +165,8 @@ int ft_step(FTContext *c,FTWork *w,FTStepWork *s,uint64_t source,uint64_t first,
     uint64_t actual_source,actual_count;
     if(ft_info(c,&actual_source,&actual_count)||actual_source!=source||actual_count!=first||n>UINT64_MAX-first)return -1;
     if(n<1||n>16||hz<1||hz>INT32_MAX||!finite_array(obs,5*n)||
-       !finite_array(mean,16)||!finite_array(L,256)||!finite_array(state,111)||
-       !finite_array(cal,14)||!finite_array(rates,30)||!finite_array(p1,36)||!finite_array(p2,756))return -2;
+       !finite_array(mean,16)||!finite_array(L,256)||!finite_array(state,FT_STATE)||
+       !finite_array(cal,14)||!finite_array(rates,18+2*FT_M)||!finite_array(p1,36)||!finite_array(p2,FT_B*FT_M*FT_M))return -2;
     s->ticks=0;s->query_status=0;
     for(size_t k=0;k<n;k++) {
         const double *o=obs+5*k;
@@ -172,8 +180,12 @@ int ft_step(FTContext *c,FTWork *w,FTStepWork *s,uint64_t source,uint64_t first,
     memcpy(w->phase.trial,c->factor,sizeof(c->factor));
     memcpy(s->state,state,sizeof(s->state));
     for(size_t k=0;k<n;k++) {
+        #if FT_HDEG == 5
         status=response_rows(obs+5*k,1,cal,6,21,rates,p1,p2,s->state,w->row);
-        if(status||!finite_array(w->row,82))return -4;
+#else
+        status=response_rows(obs+5*k,1,cal,6,FT_M,FT_B,rates,p1,p2,s->state,w->row);
+#endif
+        if(status||!finite_array(w->row,FT_WIDTH))return -4;
         if(whiten(w,w->row,half,L)||append(w->phase.trial,w->bw))return -4;
     }
     /* Validation/response/update failures leave both owned objects unchanged.

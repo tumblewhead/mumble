@@ -1,0 +1,25 @@
+{
+  "base_revision": "39e892d",
+  "branch": "implementation/h7-campaign-001",
+  "objective": "Integrate qualified RC5/H7 into sustained native tangent feedback and compare against RC5/H5 on identical streamed observations",
+  "campaign": {
+    "hours": 72,
+    "sample_rate_hz": 50,
+    "cells": ["A", "B"],
+    "loads": ["embedded", "charge-discharge"],
+    "seeds": [1100, 1103],
+    "load_seeds": [7],
+    "noise_v": [0.002],
+    "history": "compare-h7",
+    "jobs": 4,
+    "recording": "compact",
+    "checkpoint_hours": 3,
+    "summary_bins": 2000
+  },
+  "arms": {"tangent64": "RC5/H5 fused original-origin tangent", "tangent_h7": "RC5/H7 fused original-origin tangent"},
+  "evidence": "Each sample owns one likelihood update per independent arm; no readout Gaussian fed back as prior; original prior once",
+  "controls": ["H5 native bitwise comparison with frozen preintegration code", "H7 native joint dense reference", "full/compact parity", "pending-buffer replay parity", "partial-window overflow", "cross-degree snapshot rejection", "plots and parameter-error overlays"],
+  "failure_policy": "Keep arm failures and refresh rejections visible; do not reset or retry with truth-dependent settings",
+  "limits": ["No aging or calibrated coverage claim", "H7 remains above M23 SRAM target", "Default history unchanged", "H5 checkpoints are not migrated to H7"],
+  "output": "experiments/h7_campaign_001/run72_001"
+}

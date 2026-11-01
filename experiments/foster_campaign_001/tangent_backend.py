@@ -32,16 +32,22 @@ def prepare_tangent(campaign):
     return binary
 
 class TangentBackend:
+    def _make_field(self,campaign,config,source):
+        return Field(config,partition(self.mean)[1],1.,5,prepare_field(campaign),source)
+    def _make_native(self,campaign):
+        return Native(prepare_tangent(campaign),self.field,self.mean,self.prior_root)
+    def _make_objective(self):
+        return Compressed(self.field,self.mean,self.prior_root)
     def __init__(self,campaign,config,source,model_id,rate,settings):
         if config.get('hysteresis_chart')!='bounded' or config['numerical']['block_records']!=16:
             raise ValueError('native tangent requires bounded chart and16-record windows')
         self.config=config;self.hz=clock_hz(rate);self.failure_index=0;self.failed=False
         self.mean,self.prior_root=prior(config)
-        self.field=Field(config,partition(self.mean)[1],1.,5,prepare_field(campaign),source)
+        self.field=self._make_field(campaign,config,source)
         self.live_state=self.field.state.copy();self.live_count=0;self.noise=0.
-        self.native=Native(prepare_tangent(campaign),self.field,self.mean,self.prior_root)
+        self.native=self._make_native(campaign)
         self.native.prepare_step()
-        self.objective=Compressed(self.field,self.mean,self.prior_root)
+        self.objective=self._make_objective()
         self.interval=max(16,math.ceil(settings.field_refresh_seconds*rate/16)*16)
         self.pending_rows=np.empty((BUFFER_RECORDS,5));self.buffered=0;self.w=np.zeros(16)
         self.context=C.create_string_buffer(C.sizeof(Carrier));self.carrier=Carrier.from_buffer(self.context)
@@ -96,8 +102,9 @@ class TangentBackend:
             if first!=self.native.count or not np.isfinite(rows).all():raise ValueError('invalid observation/source')
             ticks=np.rint(rows[:,0]*self.hz)
             if np.any(abs(ticks/self.hz-rows[:,0])>1e-12):raise ValueError('interval not represented by declared clock')
-            state=self.live_state.copy();lifted=np.empty((len(rows),82));f=self.field
-            if f.fn(ptr(rows),len(rows),ptr(f.cal),f.n,f.b,ptr(f.rates),ptr(f.p1),ptr(f.p2),ptr(state),ptr(lifted)):
+            state=self.live_state.copy();lifted=np.empty((len(rows),self.field.width));f=self.field
+            shape=(f.n,f.m,f.b) if hasattr(f,'m') else (f.n,f.b)
+            if f.fn(ptr(rows),len(rows),ptr(f.cal),*shape,ptr(f.rates),ptr(f.p1),ptr(f.p2),ptr(state),ptr(lifted)):
                 raise ValueError('response recurrence failed')
             self._flush_field();self.native.update(first,lifted);self.live_state=state
             tick_sum=int(ticks.sum())
@@ -148,7 +155,7 @@ class TangentBackend:
     def restore_arrays(self,arrays):
         meta=json.loads(arrays['metadata'].tobytes())
         if meta['interval']!=self.interval or meta['failed']:raise ValueError('tangent checkpoint cadence/status')
-        for name,shape in [('root',(82,82)),('state',(111,)),('live_state',(111,)),('w',(16,))]:
+        for name,shape in [('root',self.field.root.shape),('state',self.field.state.shape),('live_state',self.live_state.shape),('w',(16,))]:
             if arrays[name].shape!=shape or not np.isfinite(arrays[name]).all():raise ValueError('tangent checkpoint shape/values')
         pending=arrays['pending'];buffered=len(pending)
         if pending.shape!=(buffered,5) or buffered>BUFFER_RECORDS or not np.isfinite(pending).all():raise ValueError('tangent pending checkpoint')

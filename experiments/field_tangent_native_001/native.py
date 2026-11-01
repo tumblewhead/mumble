@@ -14,21 +14,27 @@ def array(a,shape):
     if a.shape!=shape or not np.isfinite(a).all():raise ValueError('finite array shape '+str(shape))
     return a
 
-def build(destination):
+def build(destination,hdegree=5):
+    if hdegree not in (5,7):raise ValueError("supported hysteresis degrees: 5 and7")
     destination=Path(destination);destination.mkdir(parents=True,exist_ok=True)
     for name in ('kernel.c','kernel.h'):shutil.copy2(HERE/name,destination/name)
-    shutil.copy2(HERE.parent/'joint_rate_history_001/probe.c',destination/'response.c')
+    response=HERE.parent/('joint_rate_history_001/probe.c' if hdegree==5 else 'hysteresis_refinement_001/response.c')
+    shutil.copy2(response,destination/'response.c')
     binary=destination/'tangent.so'
-    subprocess.run(['cc','-std=c11','-O2','-fno-fast-math','-ffp-contract=off','-Wall','-Wextra','-Werror',
+    subprocess.run(['cc',f'-DFT_HDEG={hdegree}','-std=c11','-O2','-fno-fast-math','-ffp-contract=off','-Wall','-Wextra','-Werror',
                     '-pedantic','-fPIC','-fstack-usage','-shared',str(destination/'kernel.c'),str(destination/'response.c'),'-lm','-o',str(binary)],check=True)
     return binary
 
 class Native:
     def __init__(self,binary,field,mean,L):
-        if field.degree!=5 or field.width!=82:raise ValueError('native tangent requires degree5 width82')
+        self.width=field.width;self.state_count=len(field.state)
+        self.hdegree=getattr(field,'hdegree',5)
+        if field.degree!=5 or self.hdegree not in (5,7):raise ValueError('native tangent requires RC5 andH5/H7')
         self.field=field;self.mean=array(mean,(16,));self.L=array(L,(16,16))
         self.source=int.from_bytes(hashlib.sha256(str(field.source).encode()).digest()[:8],'little')
         self.lib=C.CDLL(str(Path(binary).resolve()))
+        if (self.lib.ft_width(),self.lib.ft_state_count(),self.lib.ft_hysteresis_degree())!=(self.width,self.state_count,self.hdegree):
+            raise ValueError('native field/binary representation mismatch')
         self.lib.ft_context_bytes.restype=C.c_size_t;self.lib.ft_work_bytes.restype=C.c_size_t
         self.context=C.create_string_buffer(self.lib.ft_context_bytes());self.work=C.create_string_buffer(self.lib.ft_work_bytes())
         self.lib.ft_init.argtypes=[C.c_void_p,C.c_void_p,C.c_uint64,C.c_uint64]+[DP]*6
@@ -44,7 +50,7 @@ class Native:
         self._step_cache=None
         w=array(w,(16,));f=self.field
         self.check(self.lib.ft_init(self.context,self.work,self.source,f.count,ptr(self.mean),ptr(self.L),ptr(w),
-                                   ptr(array(f.root,(82,82))),ptr(f.center),ptr(f.halfwidth)))
+                                   ptr(array(f.root,(self.width,self.width))),ptr(f.center),ptr(f.halfwidth)))
     @property
     def count(self):
         source=C.c_uint64();count=C.c_uint64()
@@ -55,7 +61,7 @@ class Native:
         self._step_cache=None
         if source is not None and source!=self.field.source:raise ValueError('native tangent source mismatch')
         if not isinstance(first,(int,np.integer)) or first<0:raise ValueError('native tangent chronology')
-        rows=np.asarray(rows);rows=array(rows,(len(rows),82));f=self.field
+        rows=np.asarray(rows);rows=array(rows,(len(rows),self.width));f=self.field
         self.check(self.lib.ft_update(self.context,self.work,self.source,first,ptr(rows),len(rows),ptr(self.mean),ptr(self.L),ptr(f.center),ptr(f.halfwidth)))
     def query(self,state=None,count=None,reuse=False):
         if reuse and self._step_cache is not None:
@@ -65,7 +71,7 @@ class Native:
                 self.check(status)
                 out=self._step_output if reuse else self._step_output.copy()
                 return self._decode(out,copy_arrays=False)
-        f=self.field;state=array(f.state if state is None else state,(111,));out=np.empty(307)
+        f=self.field;state=array(f.state if state is None else state,(self.state_count,));out=np.empty(307)
         self.check(self.lib.ft_query(self.context,self.work,f.count if count is None else count,ptr(self.mean),ptr(self.L),
                                     ptr(f.center),ptr(f.halfwidth),ptr(state),ptr(f.p1),ptr(f.p2),ptr(out)))
         return self._decode(out)
@@ -86,7 +92,7 @@ class Native:
         rows=np.ascontiguousarray(rows,dtype=np.float64)
         if rows.ndim!=2 or rows.shape[1]!=5 or not 1<=len(rows)<=16:
             raise ValueError('finite observation block required')
-        if state.shape!=(111,) or state.dtype!=np.float64 or not state.flags.c_contiguous or not state.flags.writeable:
+        if state.shape!=(self.state_count,) or state.dtype!=np.float64 or not state.flags.c_contiguous or not state.flags.writeable:
             raise ValueError('owned contiguous live state required')
         if not isinstance(hz,int) or not 1<=hz<=2**31-1:raise ValueError('invalid clock')
         self.prepare_step()
@@ -99,7 +105,7 @@ class Native:
         """Allocate before campaign storage accounting and timed advances."""
         if self._step_work is None:
             class StepWork(C.Structure):
-                _fields_=[('state',C.c_double*111),('out',C.c_double*307),('ticks',C.c_uint64),('query_status',C.c_int)]
+                _fields_=[('state',C.c_double*self.state_count),('out',C.c_double*307),('ticks',C.c_uint64),('query_status',C.c_int)]
             self.lib.ft_step_work_bytes.restype=C.c_size_t
             if C.sizeof(StepWork)!=self.lib.ft_step_work_bytes():raise ValueError('fused workspace ABI mismatch')
             self._step_work=StepWork();self._step_output=np.ctypeslib.as_array(self._step_work.out)
@@ -108,7 +114,7 @@ class Native:
             # Only immutable per-instance calibration/prior/projection arrays.
             self._step_arguments=tuple(ptr(a) for a in (self.mean,self.L,f.center,f.halfwidth,f.cal,f.rates,f.p1,f.p2))
     def projection(self,x,row):
-        x=array(x,(16,));row=array(row,(82,));out=np.empty(17);f=self.field
+        x=array(x,(16,));row=array(row,(self.width,));out=np.empty(17);f=self.field
         self.check(self.lib.ft_projection(self.work,ptr(x),ptr(row),ptr(f.center),ptr(f.halfwidth),ptr(out)))
         return out[16],out[:16]
     def snapshot(self):return np.frombuffer(bytes(self.context),dtype=np.uint8).copy()

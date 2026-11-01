@@ -142,6 +142,8 @@ class CBackend:
 
 def arm_kinds(settings):
     history=getattr(settings,'history','rolling')
+    if history=='tangent-h7':return ['tangent_h7']
+    if history=='compare-h7':return ['tangent64','tangent_h7']
     if history=='field-tangent':return ['tangent64']
     if history=='compare-tangent':return ['field64','tangent64']
     if history=='compare':return ['float64','field64']
@@ -150,6 +152,9 @@ def arm_kinds(settings):
 
 
 def make_backend(campaign,config,source,model_id,kind,rate,settings):
+    if kind=='tangent_h7':
+        from .h7_backend import H7Backend
+        return H7Backend(campaign,config,source,model_id,rate,settings)
     if kind=='tangent64':
         from .tangent_backend import TangentBackend
         return TangentBackend(campaign,config,source,model_id,rate,settings)

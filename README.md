@@ -45,6 +45,11 @@ reduces that separation to0.028/0.057 SD with RC fixed, while improving agreemen
 of joint fits and forecasts. Its49.4KiB packed factor is a fidelity reference for
 a smaller representation; no campaign or mainline change is promoted.
 
+The [H7 campaign integration](experiments/h7_campaign_001/README.md) adds opt-in
+`--history tangent-h7` and `--history compare-h7`, including native streaming,
+compact checkpoints/replay and plots. Targeted qualification passes; the registered
+eight-case72hour comparison is next. Defaults and mainline remain unchanged.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

@@ -1,3 +1,5 @@
+> Opt-in `--history tangent-h7` runs RC5/H7 with native tangent feedback. `--history compare-h7` compares H5 and H7 tangent arms, with compact recording, checkpoint replay and labeled plots. See the [integration guide](../h7_campaign_001/README.md). Start a fresh campaign; H5 checkpoints cannot supply omitted H7 coefficients.
+
 > Field-assisted estimation is now the default (`--history joint-field --encoding float64`). Use `--history compare` for field versus original rolling overlays, or `--history rolling --encoding both` for the original encoding comparison. The [720-hour review](../../provenance/rolling_field_720h_20261031/README.md) supports this promotion; low-noise uncertainty, aging and M23 deployment remain unqualified.
 
 > Experimental `--history field-tangent` keeps the joint tangent likelihood in original field coordinates; `--history compare-tangent` compares it with the current field arm (two arms; no original rolling baseline). It supports compact recording and checkpoint replay. See [native qualification and memory limits](../field_tangent_native_001/README.md). This is opt-in; the default is unchanged.
