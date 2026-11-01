@@ -9,6 +9,7 @@ static int finite_array(const double *x,size_t n) {
 }
 size_t ft_context_bytes(void) { return sizeof(FTContext); }
 size_t ft_work_bytes(void) { return sizeof(FTWork); }
+size_t ft_step_work_bytes(void) { return sizeof(FTStepWork); }
 int ft_info(const FTContext *c,uint64_t *source,uint64_t *count) {
     if(c->magic!=MAGIC||!finite_array(c->factor,153)||!finite_array(c->anchor,16))return -1;
     *source=c->source;*count=c->count;return 0;
@@ -143,4 +144,42 @@ int ft_projection(FTWork *w,const double *x,const double *row,const double *cent
     if(!finite_array(row,82))return -2;
     int status=basis(&w->basis,x,center,half);if(status)return status;
     out[16]=project(&w->basis,x,half,row,out);return finite_array(out,17)?0:-4;
+}
+
+/* Same response implementation as the field batch accumulator. Keeping this
+ * function in a separate translation unit preserves its arithmetic ordering. */
+int response_rows(const double *,size_t,const double *,int,int,const double *,
+                  const double *,const double *,double *,double *);
+int ft_step(FTContext *c,FTWork *w,FTStepWork *s,uint64_t source,uint64_t first,
+            const double *obs,size_t n,uint64_t hz,int query,
+            const double *mean,const double *L,const double *center,const double *half,
+            const double *cal,const double *rates,const double *p1,const double *p2,double *state) {
+    uint64_t actual_source,actual_count;
+    if(ft_info(c,&actual_source,&actual_count)||actual_source!=source||actual_count!=first||n>UINT64_MAX-first)return -1;
+    if(n<1||n>16||hz<1||hz>INT32_MAX||!finite_array(obs,5*n)||
+       !finite_array(mean,16)||!finite_array(L,256)||!finite_array(state,111)||
+       !finite_array(cal,14)||!finite_array(rates,30)||!finite_array(p1,36)||!finite_array(p2,756))return -2;
+    s->ticks=0;s->query_status=0;
+    for(size_t k=0;k<n;k++) {
+        const double *o=obs+5*k;
+        if(o[0]<0||o[0]>1||fabs(o[1])>.25||o[2]<15||o[2]>35||o[4]<=0)return -2;
+        double ticks=nearbyint(o[0]*(double)hz);
+        if(fabs(ticks/(double)hz-o[0])>1e-12)return -5;
+        s->ticks+=(uint64_t)ticks;
+    }
+    chart(mean,L,c->anchor,w->x);
+    int status=basis(&w->basis,w->x,center,half);if(status)return status;
+    memcpy(w->phase.trial,c->factor,sizeof(c->factor));
+    memcpy(s->state,state,sizeof(s->state));
+    for(size_t k=0;k<n;k++) {
+        status=response_rows(obs+5*k,1,cal,6,21,rates,p1,p2,s->state,w->row);
+        if(status||!finite_array(w->row,82))return -4;
+        if(whiten(w,w->row,half,L)||append(w->phase.trial,w->bw))return -4;
+    }
+    /* Validation/response/update failures leave both owned objects unchanged.
+     * Query failure is different: retain the committed evidence for recovery. */
+    memcpy(c->factor,w->phase.trial,sizeof(c->factor));c->count+=n;
+    memcpy(state,s->state,sizeof(s->state));
+    if(query)s->query_status=ft_query(c,w,c->count,mean,L,center,half,state,p1,p2,s->out);
+    return 0;
 }

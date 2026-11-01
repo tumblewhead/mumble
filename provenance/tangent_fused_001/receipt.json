@@ -1,0 +1,401 @@
+{
+  "schema": "tangent_fused_qualification_v1",
+  "status": "qualified_bitwise_on_registered_prefixes",
+  "branch": "implementation/tangent-fused-001",
+  "base_revision": "4dea324a9283cbe543367d7e461509005e623599",
+  "sources": {
+    "experiments/tangent_fused_001/checks.py": {
+      "bytes": 2161,
+      "sha256": "b7cf4c3ba5d1fc74463db6286c2e80f4a9813c34a21a82b4a25a502bbc036f00"
+    },
+    "experiments/tangent_fused_001/compare.py": {
+      "bytes": 7503,
+      "sha256": "d33f49427da7a3b7e0e61f7e44f419755b3a3ebfe7ea91c276c2b18c44b7550a"
+    },
+    "experiments/tangent_fused_001/reference.py": {
+      "bytes": 1713,
+      "sha256": "8e60cde6bce77f784895f582f41774e89e81351142a5653beaace246f3ee147c"
+    },
+    "experiments/field_tangent_native_001/kernel.c": {
+      "bytes": 10461,
+      "sha256": "96ac0e1a0bbb8efc375d9b06097799e80010773701e9c5ca72e238779fbf6983"
+    },
+    "experiments/field_tangent_native_001/kernel.h": {
+      "bytes": 1843,
+      "sha256": "779c4c0bc0887695f8a152866d6fa7ad2d766d6ceb42dae50f02978c69d7f042"
+    },
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 8065,
+      "sha256": "715e7126cf98a8adafbdaf18b69c8127f93143aab1dc4af741f012fc014059fa"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 11179,
+      "sha256": "e26eac5ece7bd79e2e422f24ce0ddd5e6824e06677941692889a8b6f1188c5f1"
+    },
+    "experiments/joint_rate_history_001/probe.c": {
+      "bytes": 2273,
+      "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+    }
+  },
+  "tests": {
+    "total": 51,
+    "commands": [
+      "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.field_tangent_native_001.test_native experiments.field_tangent_native_001.test_fused experiments.foster_campaign_001.test_fused_backend",
+      "OPENBLAS_NUM_THREADS=1 python3 -B experiments/tangent_development_001/test_study.py"
+    ],
+    "suite_counts": [
+      38,
+      13
+    ]
+  },
+  "qualification_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B experiments/tangent_fused_001/compare.py experiments/tangent_development_001/run_20261031_204002_375373 --out experiments/tangent_fused_001/qualified001",
+  "prefixes": 12,
+  "unique_source_records": 196608,
+  "bitwise_committed_boundaries": 12288,
+  "forecast_anchors_identical": 36,
+  "timing_repetitions": 5,
+  "timed_windows_per_arm": 61440,
+  "reference_total_s": 16.94279027695302,
+  "fused_total_s": 12.189405076322146,
+  "reference_mean_us": 275.76156049728223,
+  "fused_mean_us": 198.39526491409742,
+  "speedup": 1.3899603935440867,
+  "CPU_time_reduction_percent": 28.055503980928222,
+  "prefix_speedup_range": [
+    1.2718597477421751,
+    1.4699661569231726
+  ],
+  "largest_host_advance_ms": {
+    "reference": 51.5933339484036,
+    "fused": 51.50569404941052
+  },
+  "storage": {
+    "native_context_B": 1376,
+    "existing_native_workspace_B": 5880,
+    "fused_scratch_B": 3360,
+    "explicit_native_workspace_total_B": 9240,
+    "ordinary_lifted_matrix_removed_B": 10496,
+    "original_live_state_temporary_B": 888,
+    "scope": "Scratch includes trial state and output; no double-counted savings. Raw batch, field matrix, prior/tables, refresh/fallback allocation and whole-stack costs remain.",
+    "packed_field_factor_B": 27224,
+    "desktop_raw_batch_B": 163840,
+    "desktop_dense_field_B": 53792
+  },
+  "host_compiler": "cc (GCC) 16.2.1 20260810",
+  "host_individual_stack_frames_B": {
+    "ft_step": 272,
+    "response_rows": 448,
+    "scope": "Frames can nest; excludes libm; not a total stack or ARM bound"
+  },
+  "arithmetic": "Existing recurrence/projection/QR/query order retained per observation; entire numerical state and joint roots match original isolated replay at every tested boundary.",
+  "forecast_rule": "No new accuracy claim or720task rerun: identical joint messages and original-coordinate history at all36anchors preserve the previous deterministic forecasts.",
+  "original_12_checkpoint_hashes_unchanged": true,
+  "original_study_summary_unchanged": true,
+  "default_changed": false,
+  "mainline_changed": false,
+  "limits": [
+    "Desktop overhead optimization is not a measured M23 instruction reduction.",
+    "Refresh bursts and shared dense history remain unchanged.",
+    "Shared overconfidence, computational rate-box support and low-SOC/power qualification remain unresolved.",
+    "Complete target memory and16MHzdeadline not qualified."
+  ],
+  "next": "Investigate shared uncertainty discrepancy using selected rest/low-noise anchors; keep fused tangent as development candidate. Target needs separate shared-factor compaction.",
+  "evidence": {
+    "experiments/tangent_fused_001/qualified001/summary.json": {
+      "bytes": 105909,
+      "sha256": "4901b0d749ff4808bca270428817a956deec362470c52f7bcc8759c3793bba80"
+    },
+    "experiments/tangent_fused_001/qualified001/manifest.json": {
+      "bytes": 2046,
+      "sha256": "2436a5e3a399a3adf756189d7d773f31e894317a074b1277568a8174f54570b9"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h24/reference.json": {
+      "bytes": 79618,
+      "sha256": "25102e438e024fecc072500c6b6e28e623440cb564d04a8ac331f6a4474fa7a6"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h24/result.json": {
+      "bytes": 7676,
+      "sha256": "0344f63a9e61cf28dbc297127725533206057647ea7fac2ad9638f19a5400e87"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h24/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h24/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h24/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "d54aa8d45527e56500dc2bb49a5d044b340e97f4d386fa83582a98661e4590ff"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h24/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "8d5d196b4315d1408eaf467f46b659bf454f12ffaea762e2a1a7ed13fa84ee1c"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h3/reference.json": {
+      "bytes": 79608,
+      "sha256": "8bbcdbb1cbe5ece4a9c1647edd9ff15fdc09af4b5f33d793f17b7f9458f18963"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h3/result.json": {
+      "bytes": 7642,
+      "sha256": "cc686993da8d08ba0428f9cd131d1d39eab88591a7f767877044466b2ad83bc0"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h3/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h3/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h3/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2521,
+      "sha256": "7418c1b37a00e617851e2ac9efe0b518150a6878297c75626c825b50e2fcdd57"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h3/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 185,
+      "sha256": "07feb99b3d8b81f5411073be090912f60ae4738e083f73d77ac9f2ae3be400b5"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h69/reference.json": {
+      "bytes": 79623,
+      "sha256": "194962384bbba4f38e52c87fb598f847563ecdd79e55e5f06e4727286206128d"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h69/result.json": {
+      "bytes": 7687,
+      "sha256": "9f3dc032d44e9b4247b9fce9d5278839ccb8ad4daf51c7159e4245ae743a6d31"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h69/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h69/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h69/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "6ac1d876fd5b71e4ac12330a9151d70c05590352a3a5db936450428f83ea1ee6"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0000_h69/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "feaabc62645b503239014c93f5c87d38b12830feca8de018c9984c0021f1dfb1"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h24/reference.json": {
+      "bytes": 79740,
+      "sha256": "b2dd7261b485798a016ded5e4d05f86c3e55a1897147b98d85fe63531b0ba1a1"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h24/result.json": {
+      "bytes": 7919,
+      "sha256": "d50ac02f14592f5073494f6549e0d72225b3681a1553eda7164dea8e1de9b501"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h24/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h24/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h24/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "f7158aaab5f6e5b84e3af6cff7eb8bf7ccd2714be7a3d3738989925452a8c95d"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h24/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "82880889d5524a9253e31374a5d6426c872961ee6fc4566899d003e95141ad7c"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h3/reference.json": {
+      "bytes": 79606,
+      "sha256": "ce51e7ac3d5333fbe5eae31132c32f1c7ba2223a998609c35c1f0b7ad910ce82"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h3/result.json": {
+      "bytes": 7642,
+      "sha256": "60f5f01bd111908558a48b9f8f39bf5b197f1852fccad53c3c165f8af392112b"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h3/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h3/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h3/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2521,
+      "sha256": "ff5d42b95a2fdd2457d261f385e254c8b1dd70e5bc1a7c45413cb9126f10e571"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h3/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 185,
+      "sha256": "aab885f5edafa105c30e8104f53cc641306d9af0fa29133d6569b59765efe76d"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h69/reference.json": {
+      "bytes": 79745,
+      "sha256": "412471b11b5eefe677e0ac75338085ac91f64e355625fed3bd6c181f044d0ca7"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h69/result.json": {
+      "bytes": 7939,
+      "sha256": "4f39bbc0754de36dbecac70b8d039da5cc1e58ba4c4663a4af9eac74cd10b39a"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h69/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h69/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h69/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "a778528ed838dc5e7d50b1a34975c7365badff70d1e75d446d34476831bd2423"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0006_h69/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "3bfe43678409333ae4ad41a880ecd9ac3cc1c1b7559026af6cf3e3b5b1de1dea"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h24/reference.json": {
+      "bytes": 79740,
+      "sha256": "34ea6834de6b27ac055b5246db49c25c9b7c4260d5c6f9fae06f13cbac6b39c3"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h24/result.json": {
+      "bytes": 7927,
+      "sha256": "f5974c44c1731ab89b1c7726a4550f1093e4b119d1850bde66f684409d663d6e"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h24/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h24/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h24/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "6bed17d82b7ca813bdf619707f6faf10e4dccd04d25f2932f20215f6d20167b6"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h24/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "cba5174b57c9757f1a181425515fcc26a54da6a62a382fe585d116ff39b5cb26"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h3/reference.json": {
+      "bytes": 79730,
+      "sha256": "9cb229bca52f46bf2f680a85a16a72af5a7aac67bdbcd17a96a8a201e3ff468b"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h3/result.json": {
+      "bytes": 7906,
+      "sha256": "6392eb97b5d1a7729a844010a1fe3449965871a4afb7eca01088cc7771b5a0c4"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h3/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h3/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h3/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2521,
+      "sha256": "cec3ec5cd3c258fc1637bb758ec4a08e75f33d06d11b1f8416a56bc1cc8d860d"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h3/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 185,
+      "sha256": "1a4f1e6d372f035990d86c123c5e8c5ea190c0c1e8b2046cb9a2ddf890147d99"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h69/reference.json": {
+      "bytes": 79745,
+      "sha256": "ecbc855675e161d654d42f8a54f7b760cb579135aa67b0da66969dad66fbe9e3"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h69/result.json": {
+      "bytes": 7935,
+      "sha256": "47c6532c13542faeae68b064ca7795f5ec2bb1e9a50842c55b283cfd6f10f7f9"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h69/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h69/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h69/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "50b38dc9061c67ae52699c4378aaeeb78de972532586fbdc9126ddb6840bc564"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0011_h69/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "135210d9d16a55cff53b82f7030a5d22afc3d933ff0f230778625f85f9d7ec2e"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h24/reference.json": {
+      "bytes": 79742,
+      "sha256": "3c163bec1f3134a6ea9c18ef1bd4cb470219b0320160ef1eb53e1ba35f2ab197"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h24/result.json": {
+      "bytes": 7942,
+      "sha256": "1121bca804ad0eeb42881779876db26d5169f6d5d2741ec213fbb71eeb37e042"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h24/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h24/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h24/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "2c2a28cd83de608d60b03ea070838c623efb22f03baa8f781bc079104cf4a3e3"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h24/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "d196756c59628b9fdf348683c234b9568cbf1b7c349d068c5e647c9f208ee250"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h3/reference.json": {
+      "bytes": 79730,
+      "sha256": "54fdae987dc84a1df23097470f6907ccbd8a7be18bc5dcba1d57783f75363de4"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h3/result.json": {
+      "bytes": 7901,
+      "sha256": "220485235807ec189be5d9132cafb67fce7a0dd13a9fd9666bdf8c4f29abb98b"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h3/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h3/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h3/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2521,
+      "sha256": "780137500e28ccae2c3549daf343863afc54d6bd2d256c63207849a56356d7da"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h3/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 185,
+      "sha256": "ce80a3a3b94ea387546d3675323468f217dc8a158b2a303e859d6974afeaadce"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h69/reference.json": {
+      "bytes": 79747,
+      "sha256": "c1823504c4b5f533c3c0c2050f68781ea2183b7474c03e37eb00f075c5db2484"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h69/result.json": {
+      "bytes": 7950,
+      "sha256": "d90fcb21f59a22f5f9f000e4c8e8dfef75ace5bb43404e7e5f090f596391fead"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h69/candidate_build/backend_tangent/build.json": {
+      "bytes": 805,
+      "sha256": "0e79f549541392e265b36a53ba129261166d6d554ef8ae19007ccdcbd70ff5b2"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h69/candidate_build/backend_tangent/tangent.so": {
+      "bytes": 28816,
+      "sha256": "c9572c6cff63c4b02b85fe451d15ba86b13252ce1f4d8a78b209d4c3afeeabad"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h69/candidate_build/backend_tangent/tangent.so-kernel.su": {
+      "bytes": 2535,
+      "sha256": "8f6a1321b618cda9faeee716fdb87b72f778990a2652f78bc4d8732fe8af4ac5"
+    },
+    "experiments/tangent_fused_001/qualified001/case_0015_h69/candidate_build/backend_tangent/tangent.so-response.su": {
+      "bytes": 186,
+      "sha256": "88415a8afe4b2359fd63a73b41ce4d32504ac3b2cc3a7776b711c6f2385cf65e"
+    }
+  }
+}

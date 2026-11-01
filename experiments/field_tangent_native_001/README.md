@@ -5,6 +5,12 @@ The C tangent kernel and opt-in campaign adapter are implemented on
 `joint-field` default are unchanged. The [qualification receipt](qualification.json)
 records source hashes, preserved inputs, tests, measurements and limits.
 
+The [fused follow-up](../tangent_fused_001/README.md) now removes the ordinary
+lifted-row allocation and combines response/update/readout calls. It preserves
+all 12,288 tested window states bitwise and reduces matched host advance time by
+28%. The measurements below describe the original port; the follow-up reports
+its additional reusable scratch and current resource limits separately.
+
 The original public prior enters once. A packed 17-column square-root factor
 retains the joint local likelihood in original field coordinates. New response
 rows enter once, in order. Direct physical-partition contractions replace the

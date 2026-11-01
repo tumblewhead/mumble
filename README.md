@@ -34,6 +34,10 @@ no optimization or default change has been promoted.
 The [completed full study](provenance/tangent_development_001/full_study_review.json)
 finds about fivefold lower tangent recovery RMS at 1.55 times the host advance
 cost; shared uncertainty and target-memory limitations remain unresolved.
+The [fused tangent update](experiments/tangent_fused_001/README.md) preserves all
+12,288 checked window states bitwise while reducing matched host CPU time by 28%.
+It is active in the opt-in tangent modes on this work branch; defaults and
+mainline remain unchanged. Shared uncertainty is the next investigation.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport

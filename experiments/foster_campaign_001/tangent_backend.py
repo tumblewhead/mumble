@@ -16,7 +16,7 @@ from experiments.foster_uncertainty_audit_001.conditional_packet import partitio
 from experiments.joint_rate_history_001.field import Field
 from experiments.slow_likelihood_diagnostic_001.numerics import Compressed,solve
 
-DEPENDENCIES=['experiments/field_tangent_native_001/'+name for name in ('kernel.c','kernel.h','native.py')]
+DEPENDENCIES=['experiments/field_tangent_native_001/'+name for name in ('kernel.c','kernel.h','native.py')]+['experiments/joint_rate_history_001/probe.c']
 
 class Carrier(C.Structure):
     _fields_=[('message',C.c_double*273),('sequence',C.c_uint64),('ticks',C.c_uint64),('tokens',C.c_uint64)]
@@ -40,10 +40,13 @@ class TangentBackend:
         self.field=Field(config,partition(self.mean)[1],1.,5,prepare_field(campaign),source)
         self.live_state=self.field.state.copy();self.live_count=0;self.noise=0.
         self.native=Native(prepare_tangent(campaign),self.field,self.mean,self.prior_root)
+        self.native.prepare_step()
         self.objective=Compressed(self.field,self.mean,self.prior_root)
         self.interval=max(16,math.ceil(settings.field_refresh_seconds*rate/16)*16)
         self.pending_rows=np.empty((BUFFER_RECORDS,5));self.buffered=0;self.w=np.zeros(16)
         self.context=C.create_string_buffer(C.sizeof(Carrier));self.carrier=Carrier.from_buffer(self.context)
+        self._message_view=np.ctypeslib.as_array(self.carrier.message)
+        self.diag=np.zeros(7);self.diag[6]=1376
         self.audit=dict(refresh_interval_records=self.interval,attempts=0,accepted=0,rejected=0,
                         emergency_attempts=0,last_attempt_record=0,last_accepted_record=0,last_rejection=None,
                         max_abs_Q_replacement_percent=0.,max_abs_SOC_replacement_pp=0.)
@@ -71,52 +74,60 @@ class TangentBackend:
             return None
 
     def _publish(self,result,sequence,ticks):
-        message=np.r_[result['end'],result['endpoint_root'].ravel(),-result['linearized_cost']-self.noise-.5*result['logdet_precision']]
-        if not np.isfinite(message).all():raise ValueError('nonfinite tangent readout')
-        np.ctypeslib.as_array(self.carrier.message)[:]=message
+        logZ=-result['linearized_cost']-self.noise-.5*result['logdet_precision']
+        if not np.isfinite(result['end']).all() or not np.isfinite(result['endpoint_root']).all() or not math.isfinite(logZ):
+            raise ValueError('nonfinite tangent readout')
+        message=self._message_view
+        message[:16]=result['end'];message[16:272]=result['endpoint_root'].ravel()
+        message[272]=logZ
         self.carrier.sequence=sequence;self.carrier.ticks=ticks
-        self.w=result['w'].copy()
+        self.w[:]=result['w']
 
     def advance(self,first,rows):
         self.failure_index=first
         if self.failed:raise ValueError('tangent arm already unresolved')
-        if first!=self.carrier.sequence or first!=self.native.count or first!=self.field.count+self.buffered:
+        if first!=self.carrier.sequence or first!=self.field.count+self.buffered:
             raise ValueError('tangent source/order mismatch')
         rows=np.ascontiguousarray(rows,dtype=float)
-        if rows.ndim!=2 or rows.shape[1]!=5 or not 1<=len(rows)<=16 or not np.isfinite(rows).all():raise ValueError('finite observation block required')
-        if np.any(rows[:,0]<0) or np.any(rows[:,0]>1) or np.any(abs(rows[:,1])>.25) or np.any(rows[:,2]<15) or np.any(rows[:,2]>35) or np.any(rows[:,4]<=0):raise ValueError('observation support')
-        ticks=np.rint(rows[:,0]*self.hz)
-        if np.any(abs(ticks/self.hz-rows[:,0])>1e-12):raise ValueError('interval not represented by declared clock')
-        state=self.live_state.copy();lifted=np.empty((len(rows),82));f=self.field
-        if f.fn(ptr(rows),len(rows),ptr(f.cal),f.n,f.b,ptr(f.rates),ptr(f.p1),ptr(f.p2),ptr(state),ptr(lifted)):
-            raise ValueError('response recurrence failed')
-        if self.buffered+len(rows)>BUFFER_RECORDS:self._flush_field()
-        self.native.update(first,lifted)
+        if rows.ndim!=2 or rows.shape[1]!=5 or not 1<=len(rows)<=16:raise ValueError('finite observation block required')
+        if self.buffered+len(rows)>BUFFER_RECORDS:
+            # Irregular partial windows crossing the raw batch boundary retain
+            # the previous response -> flush -> update transaction ordering.
+            if first!=self.native.count or not np.isfinite(rows).all():raise ValueError('invalid observation/source')
+            ticks=np.rint(rows[:,0]*self.hz)
+            if np.any(abs(ticks/self.hz-rows[:,0])>1e-12):raise ValueError('interval not represented by declared clock')
+            state=self.live_state.copy();lifted=np.empty((len(rows),82));f=self.field
+            if f.fn(ptr(rows),len(rows),ptr(f.cal),f.n,f.b,ptr(f.rates),ptr(f.p1),ptr(f.p2),ptr(state),ptr(lifted)):
+                raise ValueError('response recurrence failed')
+            self._flush_field();self.native.update(first,lifted);self.live_state=state
+            tick_sum=int(ticks.sum())
+        else:
+            tick_sum=self.native.step(first,rows,self.live_state,self.hz,
+                                      query=(first+len(rows))%self.interval!=0)
         self.pending_rows[self.buffered:self.buffered+len(rows)]=rows;self.buffered+=len(rows)
-        self.live_state=state;self.live_count=first+len(rows)
+        self.live_count=first+len(rows)
         self.noise+=float(np.log(rows[:,4]).sum()+len(rows)*.5*math.log(2*math.pi))
         if self.buffered==BUFFER_RECORDS:self._flush_field()
         stop='native_tangent';result=None
         if self.live_count%self.interval==0:
             result=self._refresh('scheduled');stop='tangent_field_refresh' if result is not None else 'tangent_refresh_unresolved'
         if result is None:
-            try:result=self.native.query(state=self.live_state,count=self.live_count)
+            try:result=self.native.query(state=self.live_state,count=self.live_count,reuse=True)
             except ValueError as error:
                 result=self._refresh('readout_domain: '+str(error));stop='tangent_domain_refresh'
                 if result is None:
                     self.failed=True;raise ValueError('tangent readout and full-field recovery unresolved: '+str(error))
-        before=self.full_message()
-        self._publish(result,self.live_count,self.carrier.ticks+int(ticks.sum()));self.carrier.tokens+=1
+        before_Q=float(self._message_view[5]);before_SOC=float(self._message_view[0])
+        self._publish(result,self.live_count,self.carrier.ticks+tick_sum);self.carrier.tokens+=1
         if 'refresh' in stop and stop!='tangent_refresh_unresolved':
-            self.audit['max_abs_Q_replacement_percent']=max(self.audit['max_abs_Q_replacement_percent'],abs(100*np.expm1(result['end'][5]-before[5])))
-            self.audit['max_abs_SOC_replacement_pp']=max(self.audit['max_abs_SOC_replacement_pp'],abs(100*(result['end'][0]-before[0])))
+            self.audit['max_abs_Q_replacement_percent']=max(self.audit['max_abs_Q_replacement_percent'],abs(100*np.expm1(result['end'][5]-before_Q)))
+            self.audit['max_abs_SOC_replacement_pp']=max(self.audit['max_abs_SOC_replacement_pp'],abs(100*(result['end'][0]-before_SOC)))
         read,diagnostic=self.readout(rows);diagnostic['stop']=stop;diagnostic['cost']=result['linearized_cost']
         return read,diagnostic
 
-    def full_message(self):return np.ctypeslib.as_array(self.carrier.message).copy()
+    def full_message(self):return self._message_view.copy()
     def readout(self,rows):
         self.state=[self.carrier.sequence,self.carrier.sequence,0,self.carrier.tokens,self.carrier.ticks]
-        self.diag=np.zeros(7);self.diag[6]=1376
         # Shared formatting only; no rolling fitter or Gaussian history is invoked.
         return CBackend.readout(self,rows)
     def counts(self):
