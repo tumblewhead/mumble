@@ -1,0 +1,147 @@
+{
+  "schema": "optimization_proof_contracts_v1",
+  "status": "conditional_lemmas_not_candidate_certification",
+  "branch": "design/optimization-contracts-001",
+  "source_parent": "484e0724b756228d8e4b18b2cef5176bd16f1688",
+  "theorems": "specifications/optimization_contracts_001/THEOREMS.md",
+  "previous_lemmas": {
+    "O_E_N": "specifications/h7_proofs_001/claims.json",
+    "D": "specifications/unattended_assurance_001/THEOREMS.md",
+    "O5": "specifications/h7_proofs_001/OWNERSHIP.md"
+  },
+  "contracts": [
+    {
+      "id": "K0",
+      "claim": "Exact trace refinement",
+      "depends_on": [],
+      "inherited_lemmas": [
+        "O3",
+        "O5",
+        "D7"
+      ],
+      "application": "Kernel fusion, specialization, guard removal",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    },
+    {
+      "id": "K1",
+      "claim": "Numerical and decision bounds",
+      "depends_on": [],
+      "inherited_lemmas": [
+        "E4",
+        "E5",
+        "E6",
+        "D2",
+        "D6"
+      ],
+      "application": "Approximate kernels and early solver termination",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    },
+    {
+      "id": "K2",
+      "claim": "Cumulative optimization budgets",
+      "depends_on": [
+        "K1"
+      ],
+      "inherited_lemmas": [
+        "E2",
+        "E4"
+      ],
+      "application": "Successive changes relative to immutable anchor",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    },
+    {
+      "id": "K3",
+      "claim": "Graph scheduling and memoization",
+      "depends_on": [
+        "K0",
+        "K1"
+      ],
+      "inherited_lemmas": [
+        "O3"
+      ],
+      "application": "Registry keys, dependency versions, invalidation",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    },
+    {
+      "id": "K4",
+      "claim": "Lifetime-based storage reuse",
+      "depends_on": [
+        "K0"
+      ],
+      "inherited_lemmas": [
+        "O5",
+        "D7"
+      ],
+      "application": "Scratch sharing, in-place layouts, rollback preservation",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    },
+    {
+      "id": "K5",
+      "claim": "Resource and deadline bounds",
+      "depends_on": [
+        "K3",
+        "K4"
+      ],
+      "inherited_lemmas": [
+        "D4",
+        "D7"
+      ],
+      "application": "Full target costs including cold/error paths",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    },
+    {
+      "id": "K6",
+      "claim": "Cadence and closed-loop behavior",
+      "depends_on": [
+        "K0",
+        "K1",
+        "K2",
+        "K5"
+      ],
+      "inherited_lemmas": [
+        "O1",
+        "O2",
+        "D2",
+        "D4"
+      ],
+      "application": "Refresh grouping, latency and load feedback",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    },
+    {
+      "id": "K7",
+      "claim": "Representation equivalence",
+      "depends_on": [
+        "K1",
+        "K2"
+      ],
+      "inherited_lemmas": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E6"
+      ],
+      "application": "Bases, elimination, sparse/quantized history",
+      "status": "hand_proved_conditional",
+      "implementation_correspondence": "open_per_candidate"
+    }
+  ],
+  "rules": [
+    "Preserve exact source ownership and physical time/order",
+    "Never equate local numerical refinement with physical deployment certification",
+    "Carry baseline limitations explicitly when accepting research-only candidates",
+    "Keep one cumulative error ledger against immutable anchor",
+    "Separate common-input replay from closed-loop behavior",
+    "Include certificate/executive/cache/recovery costs in target bounds",
+    "No arbitrary per-change tolerance or automatic guard removal"
+  ],
+  "candidate_implemented": false,
+  "production_changed": false
+}

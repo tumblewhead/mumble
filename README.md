@@ -84,6 +84,12 @@ target resources. Eight conditional lemmas distinguish lifetime risk from
 pointwise uncertainty and safe refusal from useful availability. This is a
 proof/requirements collection; H7 has no deployed trust certificate yet.
 
+The [optimization proof contracts](specifications/optimization_contracts_001/README.md)
+add eight conditional lemmas and a per-change record for exact or bounded
+refinement. They cover cumulative error, decision margins, graph/cache validity,
+storage lifetimes, worst-case resources and cadence/control behavior. No numerical
+allowance or target speedup is assumed, and no estimator optimization is included.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
