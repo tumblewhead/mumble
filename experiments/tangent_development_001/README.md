@@ -85,8 +85,13 @@ The [receipt](../../provenance/tangent_development_001/receipt.json) records 13
 focused new tests and 23 existing native/campaign tests, a negative checksum
 control, and four selected checkpoint smoke controls. The two late controls
 exercise all 20 tasks; the middle-age embedded control exercises the full
-16,384-record profile suffix. The full 12-prefix/five-repeat study is left for
-the owner to run locally.
+16,384-record profile suffix. The owner's full 12-prefix/five-repeat study is
+now complete; the [full review](../../provenance/tangent_development_001/full_study_review.json)
+records all 720 paired forecasts, source identities and remaining limitations.
+Tangent's recovery RMS is 0.0103 mV versus 0.0523 mV for field; mean host advance
+cost is 246 versus 158 microseconds per 16 records. The next candidate is an
+arithmetic-preserving fused update with reusable buffers, followed by matched
+parity/profiling. Shared uncertainty overconfidence and target storage remain open.
 
 These smoke controls score 135 paired tasks and 135 geometry ablations. All
 point forecasts complete. The early weak-cycle geometry control retains two

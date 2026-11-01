@@ -31,6 +31,9 @@ now passes 36 targeted tests and four checkpoint smoke controls. Run
 `python3 -B experiments/tangent_development_001/run.py --jobs 1` for the full study.
 The working Q target is approximately 1%, with RC/EOD utility the next focus;
 no optimization or default change has been promoted.
+The [completed full study](provenance/tangent_development_001/full_study_review.json)
+finds about fivefold lower tangent recovery RMS at 1.55 times the host advance
+cost; shared uncertainty and target-memory limitations remain unresolved.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
