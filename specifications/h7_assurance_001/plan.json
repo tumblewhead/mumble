@@ -1,0 +1,71 @@
+{
+  "status": "draft_not_launched",
+  "reference_revision": "92e47167119da07bfbeb9bdeadf90335c6f836a2",
+  "branch": "experiment/h7-late-soc-assurance-001",
+  "scope": "Stationary reference assurance plus separately labeled mismatch and aging challenges; not ten-year certification",
+  "capacity_guidance": {
+    "nominal_mAh": 60,
+    "reported_variation_mAh": [
+      2.6,
+      3.6
+    ],
+    "interpretation": "pending clarification: SD, plus/minus deviation or total spread",
+    "distribution_shape": "unknown; do not assume measured Gaussian law"
+  },
+  "exploration_proposal": {
+    "cell_draws": 20,
+    "load_recipes": 20,
+    "noise_replicates_per_pair": 3,
+    "cases": 1200,
+    "purpose": "Interactions and falsification, not iid population risk certificate",
+    "duration_hours": 72,
+    "long_subset": "preselected balanced subset at 720 hours; count/budget to freeze after pilot"
+  },
+  "independent_confirmation_proposal": {
+    "scenarios": 500,
+    "hours": 720,
+    "unit": "fresh independent full cell/load/temperature/noise draw",
+    "primary_risk_max": 0.01,
+    "one_sided_alpha": 0.05,
+    "maximum_composite_failures_for_acceptance": 1,
+    "primary_event_definition": "Must freeze acquisition/stimulus contract and practical failure event before launch"
+  },
+  "coverage_power_example": {
+    "scenarios": 5000,
+    "hours": 720,
+    "quantities": [
+      "Q",
+      "SOC"
+    ],
+    "nominal_coverage": 0.95,
+    "null_coverage_max": 0.94,
+    "alpha_per_quantity": 0.025,
+    "power_at_nominal": 0.8713868661784888,
+    "status": "sample size example; engineering tolerance and full endpoint family not approved/frozen"
+  },
+  "practical_targets_proposed": {
+    "Q_relative_error_percent": 0.5,
+    "SOC_error_pp": 0.5
+  },
+  "must_implement": [
+    "Versioned population generator with independent RNG streams and admissibility accounting",
+    "Outcome and per-horizon full-joint telemetry",
+    "Independent versus crossed-factor analysis",
+    "Matched prior/likelihood/support lane before SBC claims",
+    "Task-specific voltage/brownout criteria before EOD safety claims",
+    "Reproducible target footprint and cycle harness before optimization claims"
+  ],
+  "proof_status": {
+    "P0": "assumptions enumerated",
+    "P1": "exact-arithmetic recurrence lemmas; implementation enclosure open",
+    "P2": "exact feature-model QR and ownership induction; code refinement open",
+    "P3": "local quadratic positivity; floating-point and calibration open",
+    "P4": "SOC transport identity and Gaussian moments; independently tested",
+    "P5": "conditional joint perturbation bounds; domain constants not certified",
+    "P6": "persistent-bias counterexample; no indefinite H7 coverage claim",
+    "P7": "prior-predictive identity; matched generative lane not ready",
+    "P8": "resource/refinement obligations; target size/cycles not qualified"
+  },
+  "no_production_change": true,
+  "no_monte_carlo_launched": true
+}

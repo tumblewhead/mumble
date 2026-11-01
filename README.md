@@ -60,6 +60,13 @@ data in both arms; no additional refresh rejections occur after 72 hours.
 The remaining SOC uncertainty issue needs a focused diagnostic, not another
 long sweep before storage work. Aging and lifetime behavior remain unqualified.
 
+The [focused SOC diagnostic](provenance/h7_late_soc_001/README.md) now reproduces
+both selected windows exactly and finds no material native-update, SOC-transport
+or local-solver explanation for the small 3SD crossings. The
+[assurance plan](specifications/h7_assurance_001/README.md) separates independent
+Monte Carlo confirmation, crossed-factor exploration and conditional mathematical
+proofs before optimization. No broad campaign or production repair was launched.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

@@ -5191,5 +5191,24 @@
       "RC improvement with duration occurs in H5 and H7; no new brownout forecast qualification",
       "Packed H7 factor alone 49.4KiB; M23 target remains unmet"
     ]
+  },
+  "h7_late_soc_assurance": {
+    "status": "diagnostic_complete_assurance_plan_draft",
+    "branch": "experiment/h7-late-soc-assurance-001",
+    "reference_revision": "92e4716",
+    "diagnostic_report": "provenance/h7_late_soc_001/README.md",
+    "receipt": "provenance/h7_late_soc_001/receipt.json",
+    "assurance_plan": "specifications/h7_assurance_001/MONTE_CARLO.md",
+    "proof_foundation": "specifications/h7_assurance_001/PROOFS.md",
+    "tests_passed": 7,
+    "finding": "Two ~3h windows reproduce both arms exactly. H7 peak SOC z scores 3.00361/3.09315. Dense solve, SOC cross-covariance/transport, nonlinear Gaussian moments and local solver/curvature checks do not explain misses; no production repair justified by these controls.",
+    "next": "Clarify 60mAh capacity spread interpretation; implement versioned randomized scenario manifest and outcome reducer, small pilot, then freeze confirmation criteria. Preserve H7 as optimization control.",
+    "population_guidance": "Nominal60mAh; owner reports2.6\u20133.6mAh variation; SD vs bounds vs total spread pending clarification.",
+    "limits": [
+      "Selected witnesses do not prove calibrated coverage",
+      "No exact raw-history likelihood rebuild",
+      "Proofs are conditional handwritten lemmas; numerical/domain/calibration obligations open",
+      "No large Monte Carlo launched; production unchanged"
+    ]
   }
 }
