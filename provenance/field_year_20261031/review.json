@@ -1,0 +1,5211 @@
+{
+  "schema": "stationary_field_year_review_v1",
+  "status": "completed_review",
+  "source_run": "/home/easy/proj/mumble/.worktrees/rolling-joint-field/experiments/foster_campaign_001/run_20261031_195758_061865",
+  "source_revision": "10a0ec9305b2177c16eb71699458bfa32d8233e4",
+  "source_branch": "experiment/rolling-joint-field-001",
+  "configuration": {
+    "jobs": 8,
+    "hours": 8766.0,
+    "history": "compare",
+    "field_refresh_seconds": 60.0,
+    "backend": "c",
+    "sample_rate_hz": 50,
+    "cells": [
+      "A"
+    ],
+    "cell_file": null,
+    "loads": [
+      "embedded"
+    ],
+    "current_a": 0.03,
+    "nominal_capacity_ah": 0.06,
+    "charge_c": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "discharge_c": [
+      0.2,
+      0.45,
+      0.7
+    ],
+    "charge_step_s": 900.0,
+    "discharge_step_s": 600.0,
+    "cv_voltage": 4.06,
+    "discharge_cutoff_v": 3.18,
+    "cycle_rest_s": 300.0,
+    "taper_end_c": 0.05,
+    "taper_hold_s": 30.0,
+    "cv_gain": 0.5,
+    "noise_v": [
+      0.002,
+      0.02
+    ],
+    "seeds": [
+      11100,
+      11103
+    ],
+    "load_seeds": [
+      17,
+      18
+    ],
+    "temperature": "cycle",
+    "temperature_mean_c": 25.0,
+    "temperature_amplitude_c": 8.0,
+    "temperature_period_s": 3600.0,
+    "encoding": "float64",
+    "hysteresis_chart": "bounded",
+    "sample_csv": false,
+    "recording": "compact",
+    "summary_bins": 2000,
+    "checkpoint_hours": 24.0,
+    "no_plots": false,
+    "out": null
+  },
+  "scope": "Stationary synthetic reference parameters, known linearOCV/Arrhenius; same equations/prior/settings with selected implementation",
+  "cases": [
+    {
+      "directory": "case_0000",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 11100,
+        "load_seed": 17
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 25.953336451047093,
+            "max_SOC_pp": 0.7706089119645987,
+            "joint_within_target": 98545672,
+            "Q_3sd_misses": 98607138,
+            "SOC_3sd_misses": 94605415,
+            "final_Q_percent": 0.0018617679715449142,
+            "final_SOC_pp": -0.0007711519540709588,
+            "Q_RMSE_percent": 0.05820696060737811,
+            "SOC_RMSE_pp": 0.0064724581308213585,
+            "joint_within_target_fraction": 0.999271650569118
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": 0.0018617679715449142,
+            "R0_ohm": 18.1445106677431,
+            "R1_ohm": 42.13271621327106,
+            "tau1_s": 296.1032895004378,
+            "R2_ohm": -25.33466808431597,
+            "tau2_s": 88.68823884711313,
+            "R3_ohm": -12.05931790435958,
+            "tau3_s": 13.69166192912672,
+            "H_V": -0.034061073552771326,
+            "gamma_plus": 0.08808915057845201,
+            "gamma_minus": 0.13373521010862088
+          },
+          "final_Q_log_SD_percent": 9.353926290267191e-05,
+          "final_Q_signed_local_SD": 19.903413637005446,
+          "final_SOC_SD_pp": 3.171996047258163e-05,
+          "Q_3SD_miss_fraction": 0.9998949273709027,
+          "SOC_3SD_miss_fraction": 0.9593167034248485,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.04035140829223156,
+                  "maximum_absolute": 0.14308645962095579,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00326699302993114,
+                  "maximum_absolute": 0.06915257890198756,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0004893853322683973,
+                  "maximum_absolute": 0.0013621941426517788,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00012344104638857276,
+                  "maximum_absolute": 0.000567727510330136,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00680598002561965,
+                  "maximum_absolute": 1.49115223007934,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.010134830814870622,
+                  "maximum_absolute": 0.01733071771454764,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0008028782560256094,
+                  "maximum_absolute": 0.007954128340381672,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0002324604596559492,
+                  "maximum_absolute": 0.00031107090279493987,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.686776021841148e-05,
+                  "maximum_absolute": 0.00013142744577631686,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0022317894523281997,
+                  "maximum_absolute": 1.2019682130861575,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.004645419397092126,
+                  "maximum_absolute": 0.006463100676912248,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00043842460198601163,
+                  "maximum_absolute": 0.0030609282927529513,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015462385546436308,
+                  "maximum_absolute": 0.0001855350583220547,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.768888199006456e-05,
+                  "maximum_absolute": 7.881302795223546e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.001186965968785435,
+                  "maximum_absolute": 1.2428810192033346,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.002874164755024977,
+                  "maximum_absolute": 0.003526744214266131,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00030049183447783244,
+                  "maximum_absolute": 0.0017212907516883647,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00011930324235659107,
+                  "maximum_absolute": 0.00013246101565168508,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.9045776163835647e-05,
+                  "maximum_absolute": 5.6377944724415694e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0007316886181117847,
+                  "maximum_absolute": 1.355809452744161,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.002114640529405727,
+                  "maximum_absolute": 0.002459305594970651,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00022958070101122211,
+                  "maximum_absolute": 0.0012138963447649864,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00010048486365212858,
+                  "maximum_absolute": 0.00010856791714537433,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.4467682974638488e-05,
+                  "maximum_absolute": 4.625092858360677e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0004914790774313745,
+                  "maximum_absolute": 1.2657032198246654,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 18.47600137458285,
+                "R1_ohm": 43.316369516343656,
+                "tau1_s": 302.71402186574807,
+                "R2_ohm": 25.341163696805847,
+                "tau2_s": 93.60787370056241,
+                "R3_ohm": 12.790730651475446,
+                "tau3_s": 14.556292000759985
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.004429365116974925,
+                  "maximum_absolute": 0.01733071771454764,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0004074840116214874,
+                  "maximum_absolute": 0.007954128340381672,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00014363271709223142,
+                  "maximum_absolute": 0.00031107090279493987,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.503353915500269e-05,
+                  "maximum_absolute": 0.00013142744577631686,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0010530925664054382,
+                  "maximum_absolute": 1.355809452744161,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 25.953336451047093,
+            "max_SOC_pp": 1.584149182900596,
+            "joint_within_target": 98613621,
+            "Q_3sd_misses": 97893848,
+            "SOC_3sd_misses": 92656508,
+            "final_Q_percent": -0.004480128905293146,
+            "final_SOC_pp": 0.002023578482324151,
+            "Q_RMSE_percent": 0.021564072180459828,
+            "SOC_RMSE_pp": 0.003537136555582141,
+            "joint_within_target_fraction": 0.9999606662103582
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.004480128905304248,
+            "R0_ohm": -0.0015915276353029029,
+            "R1_ohm": 0.2515400071527063,
+            "tau1_s": 0.3795779297429025,
+            "R2_ohm": -0.17468411005326923,
+            "tau2_s": 0.12573609542156916,
+            "R3_ohm": 0.00258303244198288,
+            "tau3_s": -0.14384590372905626,
+            "H_V": 0.09663194627542726,
+            "gamma_plus": -0.20808188507132064,
+            "gamma_minus": -0.10874157719391597
+          },
+          "final_Q_log_SD_percent": 9.517378120614279e-05,
+          "final_Q_signed_local_SD": -47.07419637309971,
+          "final_SOC_SD_pp": 3.234755331642108e-05,
+          "Q_3SD_miss_fraction": 0.9926620326007047,
+          "SOC_3SD_miss_fraction": 0.9395544198544883,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524561,
+            "rejected": 0,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 18.080796195248453,
+            "max_abs_SOC_replacement_pp": 1.2990424768556164,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "all_refreshes_accepted"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004094008483952739,
+                  "maximum_absolute": 0.005065676319970791,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006745235635707177,
+                  "maximum_absolute": 0.0026259292561725545,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00054931995534002,
+                  "maximum_absolute": 0.001632988299282095,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0001335498060349799,
+                  "maximum_absolute": 0.0006755481454953215,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00022141142018876307,
+                  "maximum_absolute": 0.06800988218902404,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004314149146455991,
+                  "maximum_absolute": 0.004518742593162539,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006754335381369366,
+                  "maximum_absolute": 0.00243328228015649,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0002425435614964436,
+                  "maximum_absolute": 0.0003297741233548563,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.8690552817119076e-05,
+                  "maximum_absolute": 0.00013989453791663178,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00020360237638860252,
+                  "maximum_absolute": 0.017373504715312293,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004441590611562874,
+                  "maximum_absolute": 0.004517015876825958,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006678516602070461,
+                  "maximum_absolute": 0.0024236607399030774,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015881636663536206,
+                  "maximum_absolute": 0.00019155975448111907,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.845855723814534e-05,
+                  "maximum_absolute": 8.161620358342698e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00023386251092616609,
+                  "maximum_absolute": 0.013033958475627827,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004470180114496758,
+                  "maximum_absolute": 0.004545339377237667,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006789398223864101,
+                  "maximum_absolute": 0.0024491829627382167,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00012182608015624496,
+                  "maximum_absolute": 0.00013551928894468707,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.9512126187979023e-05,
+                  "maximum_absolute": 5.782407480071053e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00013653304472012316,
+                  "maximum_absolute": 0.0116057207124598,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0044803472833656165,
+                  "maximum_absolute": 0.00452092359326528,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006926101557874305,
+                  "maximum_absolute": 0.0024592775684117996,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0001023372942046285,
+                  "maximum_absolute": 0.00011068375450387158,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.4811837893141575e-05,
+                  "maximum_absolute": 4.7262324909206625e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -6.779793058323418e-05,
+                  "maximum_absolute": 0.011045076077742522,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 0.04309419994837915,
+                "R1_ohm": 0.3501212706950696,
+                "tau1_s": 0.578759847428123,
+                "R2_ohm": 0.26284133229685924,
+                "tau2_s": 0.18038965056488276,
+                "R3_ohm": 0.05047899860370908,
+                "tau3_s": 0.20793422456144572
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004437524133624559,
+                  "maximum_absolute": 0.004545339377237667,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006795914118428577,
+                  "maximum_absolute": 0.0024592775684117996,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00014776211819967147,
+                  "maximum_absolute": 0.0003297741233548563,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.5788951369126155e-05,
+                  "maximum_absolute": 0.00013989453791663178,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00015506614408666283,
+                  "maximum_absolute": 0.017373504715312293,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "directory": "case_0001",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 11100,
+        "load_seed": 18
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 25.953336451047093,
+            "max_SOC_pp": 0.7706089119645987,
+            "joint_within_target": 98546254,
+            "Q_3sd_misses": 98607584,
+            "SOC_3sd_misses": 94794298,
+            "final_Q_percent": 0.0018333347659771349,
+            "final_SOC_pp": -0.0005895183942339344,
+            "Q_RMSE_percent": 0.05851750402319617,
+            "SOC_RMSE_pp": 0.006569305505963189,
+            "joint_within_target_fraction": 0.9992775521585926
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": 0.0018333347659771349,
+            "R0_ohm": 18.02014639316154,
+            "R1_ohm": 40.91607269689923,
+            "tau1_s": 293.1977525266361,
+            "R2_ohm": -25.922553408154016,
+            "tau2_s": 83.577721026785,
+            "R3_ohm": -11.16545038214598,
+            "tau3_s": 12.822958462792645,
+            "H_V": -0.03504618375645974,
+            "gamma_plus": 0.08429138655365875,
+            "gamma_minus": 0.1281043332349352
+          },
+          "final_Q_log_SD_percent": 9.34579587018804e-05,
+          "final_Q_signed_local_SD": 19.616499076829694,
+          "final_SOC_SD_pp": 2.4864740385454156e-05,
+          "Q_3SD_miss_fraction": 0.9998994498947955,
+          "SOC_3SD_miss_fraction": 0.9612320125738333,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.04101205658057459,
+                  "maximum_absolute": 0.14474525117023074,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0033571394871431165,
+                  "maximum_absolute": 0.07220075748560761,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0004883551449729297,
+                  "maximum_absolute": 0.001333106555179436,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00012311252453698745,
+                  "maximum_absolute": 0.0005314647954857637,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.006713523708400086,
+                  "maximum_absolute": 0.9529935642342835,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.010462103702886656,
+                  "maximum_absolute": 0.017610393985134642,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0007922893384407402,
+                  "maximum_absolute": 0.008109120188670715,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0002320178312621134,
+                  "maximum_absolute": 0.0003103550628275073,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.6800771493737796e-05,
+                  "maximum_absolute": 0.00013118643135301905,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0021968850548172367,
+                  "maximum_absolute": 1.1457624854847026,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.004768453280481297,
+                  "maximum_absolute": 0.00672058733492964,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0004191216952733318,
+                  "maximum_absolute": 0.003155266928966949,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015430037291724145,
+                  "maximum_absolute": 0.0001850895859679009,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.763113640282223e-05,
+                  "maximum_absolute": 7.868999229123347e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.001158913464010624,
+                  "maximum_absolute": 0.975459814249735,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0028959245715197922,
+                  "maximum_absolute": 0.003546674964338692,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0002767026754525358,
+                  "maximum_absolute": 0.0017092781520955391,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00011918925850781372,
+                  "maximum_absolute": 0.00013224693020709278,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.9028012479019094e-05,
+                  "maximum_absolute": 5.63254524625408e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0006862593454135608,
+                  "maximum_absolute": 1.1932430512571202,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0021348427117723126,
+                  "maximum_absolute": 0.0024841348075010927,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00020897269851038078,
+                  "maximum_absolute": 0.0012029510330968662,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0001004068472451016,
+                  "maximum_absolute": 0.00010846252390254982,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.4457769831955378e-05,
+                  "maximum_absolute": 4.623436979983102e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0004914009676041533,
+                  "maximum_absolute": 1.2771007726368744,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 18.381038687839425,
+                "R1_ohm": 42.33017678238538,
+                "tau1_s": 300.9115264296308,
+                "R2_ohm": 25.998352367590293,
+                "tau2_s": 88.77027447805183,
+                "R3_ohm": 11.92597009738111,
+                "tau3_s": 13.665608582333322
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.004532406363398236,
+                  "maximum_absolute": 0.017610393985134642,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00038809189521521757,
+                  "maximum_absolute": 0.008109120188670715,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.000143413987600191,
+                  "maximum_absolute": 0.0003103550628275073,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.4998792891274026e-05,
+                  "maximum_absolute": 0.00013118643135301905,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0010256553065171427,
+                  "maximum_absolute": 1.2771007726368744,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 25.953336451047093,
+            "max_SOC_pp": 1.584149182900596,
+            "joint_within_target": 98613335,
+            "Q_3sd_misses": 97891922,
+            "SOC_3sd_misses": 92420540,
+            "final_Q_percent": -0.004542634101289966,
+            "final_SOC_pp": 0.001693083824050312,
+            "Q_RMSE_percent": 0.021999344624516127,
+            "SOC_RMSE_pp": 0.0033390257418440387,
+            "joint_within_target_fraction": 0.9999577661165615
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.004542634101289966,
+            "R0_ohm": -0.011483563254544027,
+            "R1_ohm": 0.01730996364879278,
+            "tau1_s": -0.08668426333717782,
+            "R2_ohm": -0.0346733203208438,
+            "tau2_s": -0.03325585296692912,
+            "R3_ohm": -0.007456101064673426,
+            "tau3_s": -0.013930289361518966,
+            "H_V": 0.09719969212025337,
+            "gamma_plus": -0.21211360909658694,
+            "gamma_minus": -0.11837583108721406
+          },
+          "final_Q_log_SD_percent": 9.510118366747406e-05,
+          "final_Q_signed_local_SD": -47.767410528933034,
+          "final_SOC_SD_pp": 2.535176264804517e-05,
+          "Q_3SD_miss_fraction": 0.9926425025984232,
+          "SOC_3SD_miss_fraction": 0.9371616599487921,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524560,
+            "rejected": 1,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": {
+              "record": 66176,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 18.080796195248453,
+            "max_abs_SOC_replacement_pp": 1.2990424768556164,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "some_refreshes_unresolved"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004006701329205505,
+                  "maximum_absolute": 0.005104002730538237,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006661139120960876,
+                  "maximum_absolute": 0.002583620089591232,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00054804563592007,
+                  "maximum_absolute": 0.0016197606909614806,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00013334481196284047,
+                  "maximum_absolute": 0.0006725002550660017,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00022825047050565266,
+                  "maximum_absolute": 0.06680135983527791,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004080089522884978,
+                  "maximum_absolute": 0.004299626896009379,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006792885705499783,
+                  "maximum_absolute": 0.002343881829247607,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00024208080397427736,
+                  "maximum_absolute": 0.00032905322066291746,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.8621962738694735e-05,
+                  "maximum_absolute": 0.0001396685477926605,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00018244359823780225,
+                  "maximum_absolute": 0.02037438078117404,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004371404653613627,
+                  "maximum_absolute": 0.004450203186268098,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.000673611171719154,
+                  "maximum_absolute": 0.002413800864931037,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015849692939103838,
+                  "maximum_absolute": 0.0001911068326501457,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.840119202216912e-05,
+                  "maximum_absolute": 8.149002263424349e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00022594757798790374,
+                  "maximum_absolute": 0.01250028670263248,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0044828603967624935,
+                  "maximum_absolute": 0.004556006263933821,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006898132783851647,
+                  "maximum_absolute": 0.002469915451264182,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00012172188269083948,
+                  "maximum_absolute": 0.00013531486327323457,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.9495680571142544e-05,
+                  "maximum_absolute": 5.77770516994727e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00013529222744962662,
+                  "maximum_absolute": 0.010207775536841268,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004484014248371938,
+                  "maximum_absolute": 0.004546589975562565,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007030095935417635,
+                  "maximum_absolute": 0.0024794513554970976,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0001022653892577515,
+                  "maximum_absolute": 0.00011058568120678479,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.4802855117005008e-05,
+                  "maximum_absolute": 4.7250013022241044e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -7.309737550926586e-05,
+                  "maximum_absolute": 0.010435817476395215,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 0.05196363218002986,
+                "R1_ohm": 0.19885316140536569,
+                "tau1_s": 0.300379727504696,
+                "R2_ohm": 0.07794353146399757,
+                "tau2_s": 0.11710940156872685,
+                "R3_ohm": 0.0321684296850977,
+                "tau3_s": 0.08939169930929358
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004381353100113535,
+                  "maximum_absolute": 0.004556006263933821,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006876474125787377,
+                  "maximum_absolute": 0.0024794513554970976,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00014754525088154377,
+                  "maximum_absolute": 0.00032905322066291746,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.5754621781325765e-05,
+                  "maximum_absolute": 0.0001396685477926605,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00015031800097069448,
+                  "maximum_absolute": 0.02037438078117404,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "directory": "case_0002",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 11103,
+        "load_seed": 17
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 18.973634391343975,
+            "max_SOC_pp": 0.9272310184889387,
+            "joint_within_target": 98562362,
+            "Q_3sd_misses": 78493796,
+            "SOC_3sd_misses": 44368091,
+            "final_Q_percent": -0.00023631491543607552,
+            "final_SOC_pp": 7.521233762464163e-05,
+            "Q_RMSE_percent": 0.02737905073833775,
+            "SOC_RMSE_pp": 0.0029459381787110567,
+            "joint_within_target_fraction": 0.9994408903085152
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.00023631491543607552,
+            "R0_ohm": 0.09132972145322604,
+            "R1_ohm": 0.2973709631961752,
+            "tau1_s": 1.3472279063128312,
+            "R2_ohm": -0.17089970327902604,
+            "tau2_s": 0.29924592728198807,
+            "R3_ohm": -0.05012382232170154,
+            "tau3_s": 0.07548031711361869,
+            "H_V": 0.006189417577795453,
+            "gamma_plus": -0.00986212278157872,
+            "gamma_minus": -0.008103597360431536
+          },
+          "final_Q_log_SD_percent": 9.421201594990512e-05,
+          "final_Q_signed_local_SD": -2.5083339134025207,
+          "final_SOC_SD_pp": 3.1913648834327904e-05,
+          "Q_3SD_miss_fraction": 0.7959418561614318,
+          "SOC_3SD_miss_fraction": 0.44990078839962483,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005537058436541292,
+                  "maximum_absolute": 0.038845997436054436,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0005474312039624689,
+                  "maximum_absolute": 0.018302379463064344,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0005385797813607338,
+                  "maximum_absolute": 0.0015605319628972036,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00013172653952378264,
+                  "maximum_absolute": 0.0006432336094221508,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.001486503817237677,
+                  "maximum_absolute": 0.1730664404679949,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0011029333646324073,
+                  "maximum_absolute": 0.001768878269847729,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.00011116092025139288,
+                  "maximum_absolute": 0.0008700531460181793,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0002402191127398741,
+                  "maximum_absolute": 0.0003269461961139699,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.82435092481246e-05,
+                  "maximum_absolute": 0.00013839434470177222,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00012245500371548288,
+                  "maximum_absolute": 0.046710847476649775,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0006484277461649139,
+                  "maximum_absolute": 0.000836003598980728,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 4.6310679123549486e-05,
+                  "maximum_absolute": 0.0004063867181103298,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015714209610571213,
+                  "maximum_absolute": 0.00018952467936916842,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.8146878913947844e-05,
+                  "maximum_absolute": 8.061196390825289e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00011808741383079156,
+                  "maximum_absolute": 0.025364890989809652,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0004336889205623692,
+                  "maximum_absolute": 0.0005272862819039048,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 2.2408806233135818e-05,
+                  "maximum_absolute": 0.00023785064405812406,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00012059977488320854,
+                  "maximum_absolute": 0.00013414129274220174,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.928062642291568e-05,
+                  "maximum_absolute": 5.714492997555755e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 7.969643849410239e-05,
+                  "maximum_absolute": 0.015616167904131117,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.00027697298811502134,
+                  "maximum_absolute": 0.0003738987672807781,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 5.187716822684374e-06,
+                  "maximum_absolute": 0.00015623897512417884,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0001013030094095423,
+                  "maximum_absolute": 0.00010956336189129703,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.4619373052942723e-05,
+                  "maximum_absolute": 4.669066987135729e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 1.0299725518438309e-06,
+                  "maximum_absolute": 0.01275036882653069,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 0.16209834396909706,
+                "R1_ohm": 0.48183433482853477,
+                "tau1_s": 2.038667161783825,
+                "R2_ohm": 0.30450045519245794,
+                "tau2_s": 0.4261616909887467,
+                "R3_ohm": 0.07036318499364924,
+                "tau3_s": 0.09521378850976259
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0005662225487684328,
+                  "maximum_absolute": 0.001768878269847729,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 3.981560369449706e-05,
+                  "maximum_absolute": 0.0008700531460181793,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00014627407192757292,
+                  "maximum_absolute": 0.0003269461961139699,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.5508544204286824e-05,
+                  "maximum_absolute": 0.00013839434470177222,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 7.541581924639352e-05,
+                  "maximum_absolute": 0.046710847476649775,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 26.408671647480418,
+            "max_SOC_pp": 2.1435057143912917,
+            "joint_within_target": 98616358,
+            "Q_3sd_misses": 97989990,
+            "SOC_3sd_misses": 92819401,
+            "final_Q_percent": -0.004799999728444249,
+            "final_SOC_pp": 0.002125846589040581,
+            "Q_RMSE_percent": 0.030293015893582066,
+            "SOC_RMSE_pp": 0.0033147166385079176,
+            "joint_within_target_fraction": 0.9999884199051893
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.004799999728444249,
+            "R0_ohm": 0.1605201646272425,
+            "R1_ohm": -0.7078658618886124,
+            "tau1_s": 0.20037477819587757,
+            "R2_ohm": -0.012113493242493778,
+            "tau2_s": -0.4046529339422067,
+            "R3_ohm": 0.08179606042564291,
+            "tau3_s": -0.19374315716419455,
+            "H_V": 0.1050533649174179,
+            "gamma_plus": -0.22159743352676564,
+            "gamma_minus": -0.1264742476333458
+          },
+          "final_Q_log_SD_percent": 9.513170128523047e-05,
+          "final_Q_signed_local_SD": -50.457574785938476,
+          "final_SOC_SD_pp": 3.229480108761612e-05,
+          "Q_3SD_miss_fraction": 0.993636930565062,
+          "SOC_3SD_miss_fraction": 0.9412061855147413,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524561,
+            "rejected": 0,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 34.973219743899385,
+            "max_abs_SOC_replacement_pp": 1.9198185207415785,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "all_refreshes_accepted"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0038444789891028688,
+                  "maximum_absolute": 0.004738034068518804,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007207310080170238,
+                  "maximum_absolute": 0.002476974234855156,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0005465852759341841,
+                  "maximum_absolute": 0.0016235768086623845,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0001330731796008298,
+                  "maximum_absolute": 0.0006629423544883342,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 8.511903826129742e-05,
+                  "maximum_absolute": 0.05269575442889973,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004691233394126558,
+                  "maximum_absolute": 0.004948557126460695,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007313822843205877,
+                  "maximum_absolute": 0.002668646698078536,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00024241752290232933,
+                  "maximum_absolute": 0.00032987321174828444,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.866015268370131e-05,
+                  "maximum_absolute": 0.00013985331558409846,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00010220916754235709,
+                  "maximum_absolute": 0.016355823855729312,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004900256198010073,
+                  "maximum_absolute": 0.0049537431675683585,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007167863031999144,
+                  "maximum_absolute": 0.0026539666694858077,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015863716060118813,
+                  "maximum_absolute": 0.00019129524468329732,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.8432723957023826e-05,
+                  "maximum_absolute": 8.151594266885067e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 2.876982189607251e-05,
+                  "maximum_absolute": 0.018213938955291553,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004886075557866263,
+                  "maximum_absolute": 0.004941061774854649,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007075993275193827,
+                  "maximum_absolute": 0.002629021064382009,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00012176635919372592,
+                  "maximum_absolute": 0.00013543130294481017,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.950402847205746e-05,
+                  "maximum_absolute": 5.780482532021484e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 3.0114732319463645e-05,
+                  "maximum_absolute": 0.015516306802965119,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0048140712074666815,
+                  "maximum_absolute": 0.004880344919144797,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006952761778489171,
+                  "maximum_absolute": 0.0026014294139953265,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00010228808813625912,
+                  "maximum_absolute": 0.0001106277350284368,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.4808375702309805e-05,
+                  "maximum_absolute": 4.723552785974688e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -3.19749586597398e-05,
+                  "maximum_absolute": 0.010945842167764397,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 0.22902378133700108,
+                "R1_ohm": 0.8016319909362135,
+                "tau1_s": 0.5433282427963926,
+                "R2_ohm": 0.09036056594557973,
+                "tau2_s": 0.536583310812111,
+                "R3_ohm": 0.11990710757385781,
+                "tau3_s": 0.26951162014432484
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0048346696718012255,
+                  "maximum_absolute": 0.0049537431675683585,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007111071699520956,
+                  "maximum_absolute": 0.002668646698078536,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00014766141059617722,
+                  "maximum_absolute": 0.00032987321174828444,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.5773499040116235e-05,
+                  "maximum_absolute": 0.00013985331558409846,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -1.1289966651659505e-05,
+                  "maximum_absolute": 0.018213938955291553,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "directory": "case_0003",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 11103,
+        "load_seed": 18
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 18.973634391343975,
+            "max_SOC_pp": 0.9272310184889387,
+            "joint_within_target": 98564136,
+            "Q_3sd_misses": 71945814,
+            "SOC_3sd_misses": 40108380,
+            "final_Q_percent": -0.0002055632924546913,
+            "final_SOC_pp": 6.188937696771646e-05,
+            "Q_RMSE_percent": 0.026514684568341235,
+            "SOC_RMSE_pp": 0.0028851667561567737,
+            "joint_within_target_fraction": 0.9994588790022055
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.0002055632924546913,
+            "R0_ohm": -0.05047499189962945,
+            "R1_ohm": 1.0360718345189035,
+            "tau1_s": 1.7861554349561048,
+            "R2_ohm": -0.2291750632275491,
+            "tau2_s": 0.6757486282985781,
+            "R3_ohm": -0.1355366529736668,
+            "tau3_s": 0.22922866863746005,
+            "H_V": 0.00499222096783658,
+            "gamma_plus": -0.010146522379750333,
+            "gamma_minus": 0.003327709338774021
+          },
+          "final_Q_log_SD_percent": 9.420576690342112e-05,
+          "final_Q_signed_local_SD": -2.1820692138823587,
+          "final_SOC_SD_pp": 2.532087391048959e-05,
+          "Q_3SD_miss_fraction": 0.7295440870028139,
+          "SOC_3SD_miss_fraction": 0.4067065176059016,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005250317284577835,
+                  "maximum_absolute": 0.036962185087852095,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0005287007417820105,
+                  "maximum_absolute": 0.01712560832186627,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0005404066676905544,
+                  "maximum_absolute": 0.001570976165708269,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00013208340558018206,
+                  "maximum_absolute": 0.0006591077977791395,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.0014225288564721653,
+                  "maximum_absolute": 0.1850024837759534,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0010133480797496386,
+                  "maximum_absolute": 0.0016670030756782417,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.00012128707577219438,
+                  "maximum_absolute": 0.0008335774847156863,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00024003710718388887,
+                  "maximum_absolute": 0.00032662199704468317,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.8229809490957936e-05,
+                  "maximum_absolute": 0.0001383379416484854,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 9.827259322043718e-05,
+                  "maximum_absolute": 0.04880144436869571,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0005471111474760726,
+                  "maximum_absolute": 0.0006731573843232752,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 5.2387047489567805e-05,
+                  "maximum_absolute": 0.0003454093227106547,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015713578474349716,
+                  "maximum_absolute": 0.00018936029585103005,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.8147581071371845e-05,
+                  "maximum_absolute": 8.057705413861118e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00010466498161097905,
+                  "maximum_absolute": 0.043654403728332625,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.00037899182621278267,
+                  "maximum_absolute": 0.00044777787194805185,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 3.65109173448058e-05,
+                  "maximum_absolute": 0.00021444336623099858,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00012065209125797223,
+                  "maximum_absolute": 0.0001341642591945927,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.9289751510558648e-05,
+                  "maximum_absolute": 5.7141114088787456e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 7.234817840194997e-05,
+                  "maximum_absolute": 0.032175768481135236,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.00025104105954370224,
+                  "maximum_absolute": 0.00036664379741147,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 1.816900732035067e-05,
+                  "maximum_absolute": 0.00017132913032735786,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00010130626830529361,
+                  "maximum_absolute": 0.00010959692772971915,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.4623374644407024e-05,
+                  "maximum_absolute": 4.671199220092886e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -2.5020995428618895e-06,
+                  "maximum_absolute": 0.021856010808285475,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 0.0600266053561338,
+                "R1_ohm": 1.1562661792944295,
+                "tau1_s": 2.8301479354108983,
+                "R2_ohm": 0.3410335240885076,
+                "tau2_s": 0.9014834363112456,
+                "R3_ohm": 0.17430285288915215,
+                "tau3_s": 0.29521153495948305
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0005009485662539399,
+                  "maximum_absolute": 0.0016670030756782417,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 5.0718071144486953e-05,
+                  "maximum_absolute": 0.0008335774847156863,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00014625483844252498,
+                  "maximum_absolute": 0.00032662199704468317,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.5510774233186545e-05,
+                  "maximum_absolute": 0.0001383379416484854,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 6.453184904236916e-05,
+                  "maximum_absolute": 0.04880144436869571,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 26.408671647480418,
+            "max_SOC_pp": 2.1435057143912917,
+            "joint_within_target": 98616364,
+            "Q_3sd_misses": 97871075,
+            "SOC_3sd_misses": 92809869,
+            "final_Q_percent": -0.00478107325847521,
+            "final_SOC_pp": 0.0017675954531726212,
+            "Q_RMSE_percent": 0.0303060141503716,
+            "SOC_RMSE_pp": 0.003261095613910689,
+            "joint_within_target_fraction": 0.9999884807463179
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.00478107325847521,
+            "R0_ohm": -0.06416451840378645,
+            "R1_ohm": 0.02755323780725405,
+            "tau1_s": 0.032757878315803346,
+            "R2_ohm": -0.000499649687057957,
+            "tau2_s": -0.1717361434925624,
+            "R3_ohm": 0.018020311047650672,
+            "tau3_s": -0.06416378426216118,
+            "H_V": 0.10411628313384824,
+            "gamma_plus": -0.22239508501611382,
+            "gamma_minus": -0.11560732616303637
+          },
+          "final_Q_log_SD_percent": 9.512727898132041e-05,
+          "final_Q_signed_local_SD": -50.26095150228934,
+          "final_SOC_SD_pp": 2.5624857512897797e-05,
+          "Q_3SD_miss_fraction": 0.9924311100970923,
+          "SOC_3SD_miss_fraction": 0.9411095292417674,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524561,
+            "rejected": 0,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 34.973219743899385,
+            "max_abs_SOC_replacement_pp": 1.9198185207415785,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "all_refreshes_accepted"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.003887177973689038,
+                  "maximum_absolute": 0.0046090104901419515,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007350214977229293,
+                  "maximum_absolute": 0.00254880841304983,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0005475877675360075,
+                  "maximum_absolute": 0.001623592485315099,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00013331913359361877,
+                  "maximum_absolute": 0.0006737447774718777,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00010179507046281631,
+                  "maximum_absolute": 0.06489940808052097,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004678212103867856,
+                  "maximum_absolute": 0.004909503274963534,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.000746598128552332,
+                  "maximum_absolute": 0.002661450423924183,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00024220942064017619,
+                  "maximum_absolute": 0.00032945089416268857,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 5.864276417169396e-05,
+                  "maximum_absolute": 0.00013976404007474464,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00011430275401651084,
+                  "maximum_absolute": 0.02501211406036319,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004831743323357039,
+                  "maximum_absolute": 0.004898057603863748,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007249838016099601,
+                  "maximum_absolute": 0.0026348668284326138,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00015862403436923148,
+                  "maximum_absolute": 0.000191117877752243,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.843223962854132e-05,
+                  "maximum_absolute": 8.147412338966883e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 1.532030350051061e-05,
+                  "maximum_absolute": 0.018737063512297425,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004850038071390716,
+                  "maximum_absolute": 0.0048907141119047814,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007235606600093385,
+                  "maximum_absolute": 0.0026290904882042554,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00012181874215407201,
+                  "maximum_absolute": 0.0001354507962179177,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.951307188668527e-05,
+                  "maximum_absolute": 5.779985973981522e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 2.486794837262418e-05,
+                  "maximum_absolute": 0.01633999023598065,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004801283645912621,
+                  "maximum_absolute": 0.004886708032936227,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007100496693646553,
+                  "maximum_absolute": 0.0026243780811729955,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00010229316529583268,
+                  "maximum_absolute": 0.00011066501431681746,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 2.481272994080802e-05,
+                  "maximum_absolute": 4.725865716604395e-05,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -3.191776179383388e-05,
+                  "maximum_absolute": 0.009706094694639233,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 0.07205675877507423,
+                "R1_ohm": 0.2197169367712859,
+                "tau1_s": 0.6553773080870018,
+                "R2_ohm": 0.06191504096548783,
+                "tau2_s": 0.2466203905243214,
+                "R3_ohm": 0.05594911804243097,
+                "tau3_s": 0.1056814229770553
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004800617355033058,
+                  "maximum_absolute": 0.004909503274963534,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007244261364610735,
+                  "maximum_absolute": 0.002661450423924183,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00014763622679560235,
+                  "maximum_absolute": 0.00032945089416268857,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 3.577483086419664e-05,
+                  "maximum_absolute": 0.00013976404007474464,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -1.887948106988354e-05,
+                  "maximum_absolute": 0.02501211406036319,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "directory": "case_0004",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.02,
+        "seed": 11100,
+        "load_seed": 17
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 24.7848442810624,
+            "max_SOC_pp": 1.969657618382492,
+            "joint_within_target": 98512754,
+            "Q_3sd_misses": 75014902,
+            "SOC_3sd_misses": 52037747,
+            "final_Q_percent": 0.002747005870062935,
+            "final_SOC_pp": 0.0009002250139666934,
+            "Q_RMSE_percent": 0.06127802472751534,
+            "SOC_RMSE_pp": 0.011339112320915523,
+            "joint_within_target_fraction": 0.9989378558572262
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": 0.002747005870062935,
+            "R0_ohm": 22.38394844352034,
+            "R1_ohm": -24.213022013008278,
+            "tau1_s": 238.425324026589,
+            "R2_ohm": -22.424324882884918,
+            "tau2_s": 2.3519064926131428,
+            "R3_ohm": 4.460014308313087,
+            "tau3_s": -7.93224852203771,
+            "H_V": -0.07516077765427065,
+            "gamma_plus": 0.07346113377431074,
+            "gamma_minus": 0.07073217444153457
+          },
+          "final_Q_log_SD_percent": 0.0011141356742726774,
+          "final_Q_signed_local_SD": 2.46555980926451,
+          "final_SOC_SD_pp": 0.0003503858089862065,
+          "Q_3SD_miss_fraction": 0.7606652166197683,
+          "SOC_3SD_miss_fraction": 0.5276725429056709,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.06344216839573862,
+                  "maximum_absolute": 0.20432821266225254,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0017912579369439494,
+                  "maximum_absolute": 0.06646363662817789,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0051840057931649515,
+                  "maximum_absolute": 0.010802791818478423,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0012135152319992723,
+                  "maximum_absolute": 0.004265161458351594,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.009485746988227826,
+                  "maximum_absolute": 2.5373236912069608,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.018570233400237186,
+                  "maximum_absolute": 0.03277512386798964,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0006120092319321393,
+                  "maximum_absolute": 0.012396525715330231,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.002689948637268533,
+                  "maximum_absolute": 0.003543884007642415,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.000596099827534363,
+                  "maximum_absolute": 0.0013793500820722957,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0038387061387193523,
+                  "maximum_absolute": 1.2784823913083443,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.008447321810467407,
+                  "maximum_absolute": 0.011978836684378713,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00030008845975565076,
+                  "maximum_absolute": 0.004782080458587412,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.001822469492751431,
+                  "maximum_absolute": 0.00217521437742753,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00040097223264576917,
+                  "maximum_absolute": 0.0008505174215536392,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0032070546605934775,
+                  "maximum_absolute": 1.9146912419012452,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.004948222617095659,
+                  "maximum_absolute": 0.00636237600313283,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00012771724938665538,
+                  "maximum_absolute": 0.002395813718436557,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0014167480255445053,
+                  "maximum_absolute": 0.0015688463435742863,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00031079270361372734,
+                  "maximum_absolute": 0.0006151364593583325,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.001949082341844416,
+                  "maximum_absolute": 1.8395798535353336,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.003251171969958288,
+                  "maximum_absolute": 0.004209878852923232,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 1.6945768041606986e-05,
+                  "maximum_absolute": 0.0015093504996760432,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0011955312615226047,
+                  "maximum_absolute": 0.0012904038680282364,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0002619346188717786,
+                  "maximum_absolute": 0.0005063345841736121,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00121847513467525,
+                  "maximum_absolute": 1.2326680137819679,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 22.922806005369022,
+                "R1_ohm": 25.440030668908786,
+                "tau1_s": 251.09196234060613,
+                "R2_ohm": 23.63328141505222,
+                "tau2_s": 2.6761648978562924,
+                "R3_ohm": 5.0529231888087445,
+                "tau3_s": 8.686052488579588
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.007836048318548845,
+                  "maximum_absolute": 0.03277512386798964,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0002196252395521569,
+                  "maximum_absolute": 0.012396525715330231,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0016900357817186574,
+                  "maximum_absolute": 0.003543884007642415,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00037185250607537187,
+                  "maximum_absolute": 0.0013793500820722957,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.002422395348615385,
+                  "maximum_absolute": 1.9146912419012452,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 24.7848442810624,
+            "max_SOC_pp": 2.237909746251532,
+            "joint_within_target": 98584609,
+            "Q_3sd_misses": 50883830,
+            "SOC_3sd_misses": 41669490,
+            "final_Q_percent": -0.005625450179258529,
+            "final_SOC_pp": -0.0008878119606814394,
+            "Q_RMSE_percent": 0.0343156287874536,
+            "SOC_RMSE_pp": 0.007289566057844463,
+            "joint_within_target_fraction": 0.9996664790731868
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.005625450179258529,
+            "R0_ohm": 0.19972511041923546,
+            "R1_ohm": 2.727662562754918,
+            "tau1_s": 5.081070828771872,
+            "R2_ohm": -1.6102926363805614,
+            "tau2_s": 2.3685612350274665,
+            "R3_ohm": -0.05548809672252242,
+            "tau3_s": -0.6893663537318573,
+            "H_V": 0.12790558687041376,
+            "gamma_plus": -0.26811250022430455,
+            "gamma_minus": -0.19336591662555414
+          },
+          "final_Q_log_SD_percent": 0.0011409849764821831,
+          "final_Q_signed_local_SD": -4.930484212845837,
+          "final_SOC_SD_pp": 0.00035618443358268294,
+          "Q_3SD_miss_fraction": 0.5159716074733186,
+          "SOC_3SD_miss_fraction": 0.4225364666514564,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524561,
+            "rejected": 0,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 6.458172018069995,
+            "max_abs_SOC_replacement_pp": 1.596234133231722,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "all_refreshes_accepted"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0013133077437831328,
+                  "maximum_absolute": 0.0130597406079902,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.00023389587998575424,
+                  "maximum_absolute": 0.004118900391494873,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.006532639203105837,
+                  "maximum_absolute": 0.019546389548118447,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.001429292941733787,
+                  "maximum_absolute": 0.006473340170493738,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0027971448975698293,
+                  "maximum_absolute": 1.1484655179976322,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.003731417612515335,
+                  "maximum_absolute": 0.005379487680745587,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006629413739038208,
+                  "maximum_absolute": 0.0025952347567859135,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0028984257868155954,
+                  "maximum_absolute": 0.003939565540317013,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0006322371161678055,
+                  "maximum_absolute": 0.0015427624991841697,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0018362789928363403,
+                  "maximum_absolute": 0.19522257211823657,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.004927380788052481,
+                  "maximum_absolute": 0.006025018324473663,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007311858389432366,
+                  "maximum_absolute": 0.0028888590300368833,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0019024502966953113,
+                  "maximum_absolute": 0.0022943342217016014,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00041511867326687223,
+                  "maximum_absolute": 0.0009012497075178278,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.002177690818344283,
+                  "maximum_absolute": 0.14656817453850834,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005329705234044359,
+                  "maximum_absolute": 0.0060532932208423595,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0008110024223760756,
+                  "maximum_absolute": 0.002993081379609741,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0014615063043983071,
+                  "maximum_absolute": 0.0016248705855597928,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00031879674318697365,
+                  "maximum_absolute": 0.0006396289073229418,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0012905887595764773,
+                  "maximum_absolute": 0.09073949320637098,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005602980364719031,
+                  "maximum_absolute": 0.006041461698380601,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0009112436248853278,
+                  "maximum_absolute": 0.0030941607939927174,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0012266661146364505,
+                  "maximum_absolute": 0.0013266179141705914,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00026753679829168815,
+                  "maximum_absolute": 0.0005224630255337827,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0007013729014036329,
+                  "maximum_absolute": 0.05160206160592651,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 0.7982020913638976,
+                "R1_ohm": 4.508968170420813,
+                "tau1_s": 6.7005624737374925,
+                "R2_ohm": 2.1596997772673654,
+                "tau2_s": 2.8577696911449957,
+                "R3_ohm": 0.4306452896392754,
+                "tau3_s": 1.3033438344544401
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005014078729794571,
+                  "maximum_absolute": 0.0060532932208423595,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007920625140779639,
+                  "maximum_absolute": 0.0030941607939927174,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0017695870059548117,
+                  "maximum_absolute": 0.003939565540317013,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0003858324517341515,
+                  "maximum_absolute": 0.0015427624991841697,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0014593838687388303,
+                  "maximum_absolute": 0.19522257211823657,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "directory": "case_0005",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.02,
+        "seed": 11100,
+        "load_seed": 18
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 24.7848442810624,
+            "max_SOC_pp": 1.969657618382492,
+            "joint_within_target": 98504139,
+            "Q_3sd_misses": 84347376,
+            "SOC_3sd_misses": 65105884,
+            "final_Q_percent": 0.003029723973035914,
+            "final_SOC_pp": 0.00012660725577373633,
+            "Q_RMSE_percent": 0.06414636156349689,
+            "SOC_RMSE_pp": 0.011805110217035151,
+            "joint_within_target_fraction": 0.9988504981367404
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": 0.003029723973035914,
+            "R0_ohm": 15.91237817284239,
+            "R1_ohm": 10.300377409131013,
+            "tau1_s": 161.97165388526642,
+            "R2_ohm": -2.8555019722614094,
+            "tau2_s": 63.856176440050305,
+            "R3_ohm": -14.554536786772498,
+            "tau3_s": 20.0821782220006,
+            "H_V": -0.06867644835422126,
+            "gamma_plus": 0.12407707792669864,
+            "gamma_minus": 0.1330086644891093
+          },
+          "final_Q_log_SD_percent": 0.0011122213058197409,
+          "final_Q_signed_local_SD": 2.723988528168139,
+          "final_SOC_SD_pp": 0.00016836255241311875,
+          "Q_3SD_miss_fraction": 0.8552982584226937,
+          "SOC_3SD_miss_fraction": 0.6601859102086344,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.06601662677114507,
+                  "maximum_absolute": 0.2512440156315243,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.002505482542770984,
+                  "maximum_absolute": 0.07713645013852632,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.005270394078775292,
+                  "maximum_absolute": 0.011795856516368362,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.001224368291333467,
+                  "maximum_absolute": 0.004315605083885971,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.011486649579975632,
+                  "maximum_absolute": 0.8614794766037548,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.019927312324108028,
+                  "maximum_absolute": 0.03208412290096607,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0011908290849984772,
+                  "maximum_absolute": 0.012808407762932017,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0026791937101135897,
+                  "maximum_absolute": 0.003527751710124569,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0005953868416766255,
+                  "maximum_absolute": 0.0013753286451237026,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00445463828913,
+                  "maximum_absolute": 1.4913577384261245,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.010207091567706095,
+                  "maximum_absolute": 0.014710031438180948,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0007533337308680988,
+                  "maximum_absolute": 0.006280759554944115,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.001814175501897395,
+                  "maximum_absolute": 0.002163111961802078,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00039966358735850946,
+                  "maximum_absolute": 0.0008472140499855756,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0034738416454405973,
+                  "maximum_absolute": 1.2540023827347646,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0048178012803934125,
+                  "maximum_absolute": 0.0065846075521180936,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00044498198564846655,
+                  "maximum_absolute": 0.0028917327619559785,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0014114820788693968,
+                  "maximum_absolute": 0.001562822582950553,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00030974218435594235,
+                  "maximum_absolute": 0.0006133193530452413,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0021520881147849987,
+                  "maximum_absolute": 1.2022252545089707,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0035538648302097364,
+                  "maximum_absolute": 0.0041484867944197035,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00034054042250996475,
+                  "maximum_absolute": 0.0019056062182887246,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0011931866665464905,
+                  "maximum_absolute": 0.0012865146995741953,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0002614011711311807,
+                  "maximum_absolute": 0.0005047494653728611,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.001348544314269242,
+                  "maximum_absolute": 1.2056699209255228,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 16.635423623543446,
+                "R1_ohm": 11.588662485810431,
+                "tau1_s": 174.34203372226474,
+                "R2_ohm": 3.012279519776384,
+                "tau2_s": 69.45500522056103,
+                "R3_ohm": 15.700320453227656,
+                "tau3_s": 21.585971130160896
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.008602326074961605,
+                  "maximum_absolute": 0.03208412290096607,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0006327723168207637,
+                  "maximum_absolute": 0.012808407762932017,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0016838058527327993,
+                  "maximum_absolute": 0.003527751710124569,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00037118719743516846,
+                  "maximum_absolute": 0.0013753286451237026,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0026892799299580534,
+                  "maximum_absolute": 1.4913577384261245,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 24.7848442810624,
+            "max_SOC_pp": 2.237909746251532,
+            "joint_within_target": 98580848,
+            "Q_3sd_misses": 49756898,
+            "SOC_3sd_misses": 32820587,
+            "final_Q_percent": -0.005224233041334347,
+            "final_SOC_pp": 7.997475014454025e-05,
+            "Q_RMSE_percent": 0.03811360438012291,
+            "SOC_RMSE_pp": 0.007805052674036397,
+            "joint_within_target_fraction": 0.9996283418257409
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.005224233041334347,
+            "R0_ohm": 0.8699270979626528,
+            "R1_ohm": -2.0025580345356064,
+            "tau1_s": 1.2814096946772935,
+            "R2_ohm": 0.18438466964225686,
+            "tau2_s": 0.8424581609251192,
+            "R3_ohm": -0.22047470740552688,
+            "tau3_s": 0.8563627812115726,
+            "H_V": 0.11911089444371914,
+            "gamma_plus": -0.2309134419485992,
+            "gamma_minus": -0.11144531052578177
+          },
+          "final_Q_log_SD_percent": 0.0011392566053964135,
+          "final_Q_signed_local_SD": -4.585770654645632,
+          "final_SOC_SD_pp": 0.00016930027504806743,
+          "Q_3SD_miss_fraction": 0.5045443050168581,
+          "SOC_3SD_miss_fraction": 0.33280692574847265,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524376,
+            "rejected": 185,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": {
+              "record": 14062400,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 6.458172018069995,
+            "max_abs_SOC_replacement_pp": 1.596234133231722,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "some_refreshes_unresolved"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.007810091411206609,
+                  "maximum_absolute": 0.01873711686076751,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.00023306061183185853,
+                  "maximum_absolute": 0.006179399657679774,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.006548056662295666,
+                  "maximum_absolute": 0.018833705348054366,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.001431182647549099,
+                  "maximum_absolute": 0.00634928794911622,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0027420256558008775,
+                  "maximum_absolute": 1.341031400920567,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.003053476952135722,
+                  "maximum_absolute": 0.005070880923241372,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.00038762482755279906,
+                  "maximum_absolute": 0.002026917134889672,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00288378385029022,
+                  "maximum_absolute": 0.00391647904302036,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0006306969991296249,
+                  "maximum_absolute": 0.0015368244009885217,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0018501416656358455,
+                  "maximum_absolute": 0.13129377079978966,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0031016767206586446,
+                  "maximum_absolute": 0.0047724367142398805,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0004985590934284674,
+                  "maximum_absolute": 0.0023041857899586127,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0018929272643635894,
+                  "maximum_absolute": 0.0022788706134609232,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0004134536837506372,
+                  "maximum_absolute": 0.0008968297413132191,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0021942715693095325,
+                  "maximum_absolute": 0.11154422965864441,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0053919408287223585,
+                  "maximum_absolute": 0.0061325806378964565,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006964287299649987,
+                  "maximum_absolute": 0.0029144913421985663,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0014570065335960775,
+                  "maximum_absolute": 0.0016191831189905001,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00031778504962032614,
+                  "maximum_absolute": 0.0006380601985341967,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0013035764950446243,
+                  "maximum_absolute": 0.0903417771977999,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005169194061974494,
+                  "maximum_absolute": 0.005404099877248658,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.000747178896080229,
+                  "maximum_absolute": 0.002715560184052279,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0012245192055618018,
+                  "maximum_absolute": 0.0013232881887332835,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00026697026277076093,
+                  "maximum_absolute": 0.0005210544621557423,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0007085807550920848,
+                  "maximum_absolute": 0.06632734951272923,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 1.2537922101979238,
+                "R1_ohm": 3.4580499512898433,
+                "tau1_s": 3.3715449853593205,
+                "R2_ohm": 0.542839641196502,
+                "tau2_s": 1.536853244435199,
+                "R3_ohm": 0.29200688124281227,
+                "tau3_s": 0.9818018189570843
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.0042955709115515064,
+                  "maximum_absolute": 0.0061325806378964565,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0006030666174725011,
+                  "maximum_absolute": 0.0029144913421985663,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0017625950160411337,
+                  "maximum_absolute": 0.00391647904302036,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0003849392736171189,
+                  "maximum_absolute": 0.0015368244009885217,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0014707145843175225,
+                  "maximum_absolute": 0.13129377079978966,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "directory": "case_0006",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.02,
+        "seed": 11103,
+        "load_seed": 17
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 21.991837148067496,
+            "max_SOC_pp": 1.462821929192526,
+            "joint_within_target": 98543343,
+            "Q_3sd_misses": 31271440,
+            "SOC_3sd_misses": 17700370,
+            "final_Q_percent": 0.0015411268015297352,
+            "final_SOC_pp": -3.140612334640025e-05,
+            "Q_RMSE_percent": 0.038696158951534734,
+            "SOC_RMSE_pp": 0.008626062672208492,
+            "joint_within_target_fraction": 0.999248034071032
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": 0.0015411268015297352,
+            "R0_ohm": 16.792873954026355,
+            "R1_ohm": -8.134895392608133,
+            "tau1_s": 180.96917959201218,
+            "R2_ohm": -19.306668732824573,
+            "tau2_s": 9.86731963550378,
+            "R3_ohm": 1.8609790082999789,
+            "tau3_s": -2.7687551566330293,
+            "H_V": -0.03886773354416784,
+            "gamma_plus": 0.07482088999744008,
+            "gamma_minus": 0.4232278292132241
+          },
+          "final_Q_log_SD_percent": 0.0011182106746009913,
+          "final_Q_signed_local_SD": 1.3781972943922383,
+          "final_SOC_SD_pp": 0.00011137752558110567,
+          "Q_3SD_miss_fraction": 0.317098283773164,
+          "SOC_3SD_miss_fraction": 0.17948508124825716,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.03484731074163848,
+                  "maximum_absolute": 0.0696093988670432,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0031303684526291678,
+                  "maximum_absolute": 0.038702766039733216,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.006111370293848718,
+                  "maximum_absolute": 0.01824780396076853,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0013509756176961004,
+                  "maximum_absolute": 0.006062956494044999,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.003994338061905214,
+                  "maximum_absolute": 1.5127644661854234,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.011365979358444914,
+                  "maximum_absolute": 0.02339322485875872,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0006380759942979159,
+                  "maximum_absolute": 0.009354290309326885,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.002777627405583921,
+                  "maximum_absolute": 0.0037391731487945927,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0006110484151775877,
+                  "maximum_absolute": 0.0014688092930883686,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0008264351242945273,
+                  "maximum_absolute": 1.4768557510262958,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.005465916242010787,
+                  "maximum_absolute": 0.006545861244644513,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -9.973216740477002e-05,
+                  "maximum_absolute": 0.002575737957521973,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0018470614562468325,
+                  "maximum_absolute": 0.0022167575801940683,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0004053899435974273,
+                  "maximum_absolute": 0.0008710347424603567,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00040742870227120624,
+                  "maximum_absolute": 1.4255357909318533,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0023208296408454483,
+                  "maximum_absolute": 0.003552787027039095,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 2.9483605578164456e-05,
+                  "maximum_absolute": 0.001318238866651611,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0014264211053189896,
+                  "maximum_absolute": 0.0015833800817750738,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0003124408410545351,
+                  "maximum_absolute": 0.0006234041441458875,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00036524790889487063,
+                  "maximum_absolute": 1.2542476053925,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0018309170809102102,
+                  "maximum_absolute": 0.0023719608955419247,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -9.059303023760992e-05,
+                  "maximum_absolute": 0.0009173166157561141,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0012008607297786886,
+                  "maximum_absolute": 0.0012972695092378572,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0002629285472640084,
+                  "maximum_absolute": 0.0005105903619195947,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00023990394125766548,
+                  "maximum_absolute": 0.904338018077766,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 17.318507044235876,
+                "R1_ohm": 8.643967781494144,
+                "tau1_s": 191.27481985885987,
+                "R2_ohm": 21.023986585652445,
+                "tau2_s": 10.248132083016248,
+                "R3_ohm": 2.2751505675528083,
+                "tau3_s": 3.0424280236943213
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.004639204301192173,
+                  "maximum_absolute": 0.02339322485875872,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00015847907867878655,
+                  "maximum_absolute": 0.009354290309326885,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.001716395061386,
+                  "maximum_absolute": 0.0037391731487945927,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0003765458613714919,
+                  "maximum_absolute": 0.0014688092930883686,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -8.887670499512869e-06,
+                  "maximum_absolute": 1.4768557510262958,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 21.991837148067496,
+            "max_SOC_pp": 2.096888439612743,
+            "joint_within_target": 98592582,
+            "Q_3sd_misses": 64310035,
+            "SOC_3sd_misses": 48728894,
+            "final_Q_percent": -0.0058289070625772155,
+            "final_SOC_pp": 0.0006437999162889341,
+            "Q_RMSE_percent": 0.025573696296531903,
+            "SOC_RMSE_pp": 0.0052601519646593735,
+            "joint_within_target_fraction": 0.999747326792912
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.0058289070625772155,
+            "R0_ohm": -1.12451057057662,
+            "R1_ohm": 0.49162082669138574,
+            "tau1_s": -3.8053241866788823,
+            "R2_ohm": 0.6225145101195872,
+            "tau2_s": -2.1653524227482346,
+            "R3_ohm": 0.3145473966988277,
+            "tau3_s": -0.15439918719634127,
+            "H_V": 0.1320541733351499,
+            "gamma_plus": -0.251260473981052,
+            "gamma_minus": -0.16943402843944133
+          },
+          "final_Q_log_SD_percent": 0.0011389653199787525,
+          "final_Q_signed_local_SD": -5.117870445852557,
+          "final_SOC_SD_pp": 0.00011185991866434724,
+          "Q_3SD_miss_fraction": 0.6521158516490481,
+          "SOC_3SD_miss_fraction": 0.4941201510888027,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524408,
+            "rejected": 153,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": {
+              "record": 18818048,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 7.73011521389755,
+            "max_abs_SOC_replacement_pp": 1.4857653600492848,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "some_refreshes_unresolved"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.006970379705981506,
+                  "maximum_absolute": 0.02093391899702368,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0008747153640211526,
+                  "maximum_absolute": 0.009567307136204573,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.00653322583683491,
+                  "maximum_absolute": 0.01896487593235101,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0014308563131627805,
+                  "maximum_absolute": 0.006290280248772546,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00030843030262793036,
+                  "maximum_absolute": 0.47779069327802404,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.006179789298371771,
+                  "maximum_absolute": 0.009407601061839355,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007029586142082596,
+                  "maximum_absolute": 0.00414622005975307,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.002898088465108787,
+                  "maximum_absolute": 0.00393974940165632,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0006328582927814779,
+                  "maximum_absolute": 0.0015452232487676155,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0012131985800348862,
+                  "maximum_absolute": 0.2758848632593569,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005495748356672717,
+                  "maximum_absolute": 0.007789061592433644,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0009268317402587253,
+                  "maximum_absolute": 0.0037342165658427184,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0019005300366836924,
+                  "maximum_absolute": 0.0022951309938729456,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0004151184580248657,
+                  "maximum_absolute": 0.0009021966300426085,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00020410553024216804,
+                  "maximum_absolute": 0.06237595057134726,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.006375802130188575,
+                  "maximum_absolute": 0.007064879851470529,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.000971560204171438,
+                  "maximum_absolute": 0.003508884397562806,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.001459504958016291,
+                  "maximum_absolute": 0.001623276119735984,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0003184769322932626,
+                  "maximum_absolute": 0.0006398424352309198,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.0002543475388007481,
+                  "maximum_absolute": 0.048760023236393835,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005867464573431412,
+                  "maximum_absolute": 0.006206266874186905,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0008236226990844513,
+                  "maximum_absolute": 0.0030944764268459046,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0012244742476333586,
+                  "maximum_absolute": 0.0013246036755886286,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00026725674694102325,
+                  "maximum_absolute": 0.0005220781018054002,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0003596127811150366,
+                  "maximum_absolute": 0.06081524150669537,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 1.3029810249959972,
+                "R1_ohm": 1.6923261873986961,
+                "tau1_s": 4.526829592382775,
+                "R2_ohm": 0.7356550976399978,
+                "tau2_s": 2.5094133087163906,
+                "R3_ohm": 0.41202739937049593,
+                "tau3_s": 0.2933294050277535
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005960885416133738,
+                  "maximum_absolute": 0.009407601061839355,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0008694987312169912,
+                  "maximum_absolute": 0.00414622005975307,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0017678517595171648,
+                  "maximum_absolute": 0.00393974940165632,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0003858990583094443,
+                  "maximum_absolute": 0.0015452232487676155,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0001946532460490658,
+                  "maximum_absolute": 0.2758848632593569,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "directory": "case_0007",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.02,
+        "seed": 11103,
+        "load_seed": 18
+      },
+      "hours": 8766.0,
+      "records": 1577880000,
+      "arms": {
+        "float64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 21.991837148067496,
+            "max_SOC_pp": 1.462821929192526,
+            "joint_within_target": 98544725,
+            "Q_3sd_misses": 20579735,
+            "SOC_3sd_misses": 11988454,
+            "final_Q_percent": 0.001463367631071577,
+            "final_SOC_pp": -0.0005406818677999858,
+            "Q_RMSE_percent": 0.03838691454352792,
+            "SOC_RMSE_pp": 0.008640437308002718,
+            "joint_within_target_fraction": 0.9992620478109869
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": 0.001463367631071577,
+            "R0_ohm": 16.917412915975728,
+            "R1_ohm": -10.352694192716449,
+            "tau1_s": 179.32004892184074,
+            "R2_ohm": -18.250610133299528,
+            "tau2_s": 8.971663473743984,
+            "R3_ohm": 1.759065753645328,
+            "tau3_s": -2.4691797955965766,
+            "H_V": -0.03156601708584894,
+            "gamma_plus": 0.05973285553431129,
+            "gamma_minus": 0.3573972370032985
+          },
+          "final_Q_log_SD_percent": 0.0011202249681901554,
+          "final_Q_signed_local_SD": 1.3063062915940111,
+          "final_SOC_SD_pp": 0.0004077811032298178,
+          "Q_3SD_miss_fraction": 0.20868238395822242,
+          "SOC_3SD_miss_fraction": 0.12156517859406292,
+          "field_history": null,
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.031382697082608296,
+                  "maximum_absolute": 0.06841680178468756,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0028282350516160427,
+                  "maximum_absolute": 0.039238727802892726,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.006135013684606634,
+                  "maximum_absolute": 0.018244243667452732,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0013528227514233492,
+                  "maximum_absolute": 0.005979030027491422,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.0038286439506507383,
+                  "maximum_absolute": 1.8992496785261714,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.009205775618024182,
+                  "maximum_absolute": 0.021116271298859957,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.0006296096691329326,
+                  "maximum_absolute": 0.00849748088076474,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.002782758334351992,
+                  "maximum_absolute": 0.003747195117959553,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0006118661213195763,
+                  "maximum_absolute": 0.0014721682733049844,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0008667880858735723,
+                  "maximum_absolute": 1.2202521459920845,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.004939620586164769,
+                  "maximum_absolute": 0.005730445461149536,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00011046569588507447,
+                  "maximum_absolute": 0.00221159026250195,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0018507813022940172,
+                  "maximum_absolute": 0.002220546529604934,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0004056826074598473,
+                  "maximum_absolute": 0.000874146190010243,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.000267362501901795,
+                  "maximum_absolute": 1.2459067139607427,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0020297072584319494,
+                  "maximum_absolute": 0.0034190507850473395,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 1.9047260076037168e-06,
+                  "maximum_absolute": 0.0012377323673679053,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0014288128229420008,
+                  "maximum_absolute": 0.0015863899171189078,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00031269293078723943,
+                  "maximum_absolute": 0.0006237820593112998,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.0003379825962661722,
+                  "maximum_absolute": 1.1947151037365877,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0017535960886770469,
+                  "maximum_absolute": 0.0021159897291456176,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -6.63319775836725e-05,
+                  "maximum_absolute": 0.0008256682559881767,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0012032745153137453,
+                  "maximum_absolute": 0.001299578413213552,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00026324940396985346,
+                  "maximum_absolute": 0.0005116895574539061,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0002898974865489087,
+                  "maximum_absolute": 1.192274978386365,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 17.34399662506394,
+                "R1_ohm": 11.028639068376267,
+                "tau1_s": 191.64900097833905,
+                "R2_ohm": 19.620364270612423,
+                "tau2_s": 9.210229439526607,
+                "R3_ohm": 2.445610142924548,
+                "tau3_s": 3.4299481051371705
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": 0.0040125397498014794,
+                  "maximum_absolute": 0.021116271298859957,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": -0.00016074597075078047,
+                  "maximum_absolute": 0.00849748088076474,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0017196381757840456,
+                  "maximum_absolute": 0.003747195117959553,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00037691244096598007,
+                  "maximum_absolute": 0.0014721682733049844,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -7.470263055529486e-05,
+                  "maximum_absolute": 1.2459067139607427,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        },
+        "field64": {
+          "status": "completed",
+          "all": {
+            "outputs": 98617500,
+            "max_Q_percent": 21.991837148067496,
+            "max_SOC_pp": 2.096888439612743,
+            "joint_within_target": 98597779,
+            "Q_3sd_misses": 74803391,
+            "SOC_3sd_misses": 50967160,
+            "final_Q_percent": -0.0058849831284568666,
+            "final_SOC_pp": 0.002765761962231217,
+            "Q_RMSE_percent": 0.025816606072650135,
+            "SOC_RMSE_pp": 0.005322693025391037,
+            "joint_within_target_fraction": 0.9998000253504703
+          },
+          "final_reference_parameter_errors_percent": {
+            "Q_Ah": -0.0058849831284568666,
+            "R0_ohm": -1.2908281286306944,
+            "R1_ohm": 1.5395829510553627,
+            "tau1_s": -2.1187725102544963,
+            "R2_ohm": 0.9108531453133617,
+            "tau2_s": -1.123036145782652,
+            "R3_ohm": -0.11728689167853634,
+            "tau3_s": 0.6585970925338858,
+            "H_V": 0.13935699824345615,
+            "gamma_plus": -0.26491800002234056,
+            "gamma_minus": -0.2299772983017423
+          },
+          "final_Q_log_SD_percent": 0.0011405074848871717,
+          "final_Q_signed_local_SD": -5.1601207167529655,
+          "final_SOC_SD_pp": 0.0004158460595017034,
+          "Q_3SD_miss_fraction": 0.7585204552944457,
+          "SOC_3SD_miss_fraction": 0.5168165893477324,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 524561,
+            "accepted": 524561,
+            "rejected": 0,
+            "last_attempt_record": 1577879488,
+            "last_accepted_record": 1577879488,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 7.73011521389755,
+            "max_abs_SOC_replacement_pp": 1.4857653600492848,
+            "accumulated_records": 1577879488,
+            "buffered_records": 512,
+            "status": "all_refreshes_accepted"
+          },
+          "storage": {
+            "message_payload_B": 2184,
+            "token_payload_B": 3537,
+            "two_messages_plus_token_B": 7905,
+            "raw_window_numeric_B": 640,
+            "excludes": "Python objects, protocol metadata, native Jacobians, optimizer matrices, QR/solve scratch, allocator/stack",
+            "complete_subsystem_B": null,
+            "C_context_B": 19416,
+            "C_stack_excluded": true,
+            "experimental_field": {
+              "degree": 5,
+              "lifted_width": 82,
+              "packed_root_B": 27224,
+              "packed_likelihood_transport_domain_B": 27976,
+              "live_collocation_state_B": 888,
+              "exclusions": "Binding metadata, projection matrices, prior, solver/window workspace; Python allocations exceed packed estimate"
+            },
+            "field_pending_buffer_B": 163840,
+            "field_actual_dense_root_B": 53792,
+            "scope": "Desktop Python/C experiment; other Python/QR workspace excluded, not M23-ready"
+          },
+          "bands": [
+            {
+              "requested_hours": [
+                24,
+                720
+              ],
+              "actual_hours": [
+                26.298044444444447,
+                718.812
+              ],
+              "outputs": 7790783,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.012878444061825877,
+                  "maximum_absolute": 0.03603255327980781,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0011419495078045072,
+                  "maximum_absolute": 0.013040742322834031,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.006567437442329099,
+                  "maximum_absolute": 0.019284934745917894,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0014351652610928274,
+                  "maximum_absolute": 0.006289726171434503,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.000311845161810483,
+                  "maximum_absolute": 0.6126347659418663,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                2160
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                2156.4359999999997
+              ],
+              "outputs": 16123962,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.008426189510382728,
+                  "maximum_absolute": 0.010640821945906431,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0007116988599504803,
+                  "maximum_absolute": 0.004534032691694279,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.002900670978367896,
+                  "maximum_absolute": 0.003943376423545233,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0006332786555090906,
+                  "maximum_absolute": 0.0015463744307648993,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0012141854054449701,
+                  "maximum_absolute": 0.1204545497288656,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                2160,
+                4320
+              ],
+              "actual_hours": [
+                2160.8190222222224,
+                4317.254933333334
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.006105951117836052,
+                  "maximum_absolute": 0.00854916976343878,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0009122965319973946,
+                  "maximum_absolute": 0.004009394586057535,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0019026206099409077,
+                  "maximum_absolute": 0.002296012958724461,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0004151320837382193,
+                  "maximum_absolute": 0.0009041051653951975,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00018876805865755217,
+                  "maximum_absolute": 0.17845547493910985,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                4320,
+                6480
+              ],
+              "actual_hours": [
+                4321.638044444445,
+                6478.073955555555
+              ],
+              "outputs": 24259905,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.006742209251412467,
+                  "maximum_absolute": 0.0073871672466974125,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0009335761299492381,
+                  "maximum_absolute": 0.003596879687894905,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0014608786284159916,
+                  "maximum_absolute": 0.00162492101998126,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0003185575009931708,
+                  "maximum_absolute": 0.0006395975065809512,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": 0.00022512789958339247,
+                  "maximum_absolute": 0.23026104799450664,
+                  "scale": 1
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                6480,
+                8766
+              ],
+              "actual_hours": [
+                6482.457066666667,
+                8766.0
+              ],
+              "outputs": 25689859,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.005945709431362675,
+                  "maximum_absolute": 0.006527234939734949,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0008373534302298807,
+                  "maximum_absolute": 0.0032231398901516606,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0012263660915144145,
+                  "maximum_absolute": 0.001326376161346158,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.0002674866613620001,
+                  "maximum_absolute": 0.0005229239678049109,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.0003659407412880343,
+                  "maximum_absolute": 0.13384376973712975,
+                  "scale": 1
+                }
+              },
+              "RC_maximum_absolute_percent": {
+                "R0_ohm": 2.051441704725787,
+                "R1_ohm": 3.214561191695098,
+                "tau1_s": 3.1986477677732883,
+                "R2_ohm": 1.0364858791028553,
+                "tau2_s": 2.0178594502038627,
+                "R3_ohm": 0.22926826764004815,
+                "tau3_s": 0.6920644382633068
+              }
+            },
+            {
+              "requested_hours": [
+                720,
+                8766
+              ],
+              "actual_hours": [
+                723.1950222222223,
+                8766.0
+              ],
+              "outputs": 90481557,
+              "metrics": {
+                "Q_error_percent": {
+                  "weighted_mean": -0.006645962410118085,
+                  "maximum_absolute": 0.010640821945906431,
+                  "scale": 1
+                },
+                "SOC_error_pp": {
+                  "weighted_mean": 0.0008624258208609585,
+                  "maximum_absolute": 0.004534032691694279,
+                  "scale": 1
+                },
+                "Q_log_sd": {
+                  "weighted_mean": 0.0017697801112751806,
+                  "maximum_absolute": 0.003943376423545233,
+                  "scale": 100
+                },
+                "SOC_sd": {
+                  "weighted_mean": 0.00038604853457591,
+                  "maximum_absolute": 0.0015463744307648993,
+                  "scale": 100
+                },
+                "V_truth_error_mV": {
+                  "weighted_mean": -0.00020752068196854277,
+                  "maximum_absolute": 0.23026104799450664,
+                  "scale": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "pooled": {
+    "0.002": {
+      "float64": {
+        "Q_RMSE_percent": 0.04545599371189885,
+        "SOC_RMSE_pp": 0.005051020393186247,
+        "joint_0p5_target_fraction": 0.9993622430096079,
+        "Q_3SD_miss_fraction": 0.881320080107486,
+        "SOC_3SD_miss_fraction": 0.694289005501052
+      },
+      "field64": {
+        "Q_RMSE_percent": 0.026387031277332277,
+        "SOC_RMSE_pp": 0.003364614350642633,
+        "joint_0p5_target_fraction": 0.9999738332446066,
+        "Q_3SD_miss_fraction": 0.9928431439653206,
+        "SOC_3SD_miss_fraction": 0.9397579486399472
+      }
+    },
+    "0.02": {
+      "float64": {
+        "Q_RMSE_percent": 0.05205934100167666,
+        "SOC_RMSE_pp": 0.010210315978963137,
+        "joint_0p5_target_fraction": 0.9990746089689964,
+        "Q_3SD_miss_fraction": 0.5354360356934621,
+        "SOC_3SD_miss_fraction": 0.37222717823915635
+      },
+      "field64": {
+        "Q_RMSE_percent": 0.031427377830883715,
+        "SOC_RMSE_pp": 0.0065202929437644325,
+        "joint_0p5_target_fraction": 0.9997105432605775,
+        "Q_3SD_miss_fraction": 0.6077880548584176,
+        "SOC_3SD_miss_fraction": 0.44157003320911603
+      }
+    }
+  },
+  "total_samples": 12623040000,
+  "total_case_hours": 70128.0,
+  "refresh_attempts": 4196488,
+  "refresh_rejections": 339,
+  "file_storage_B": {
+    "total": 309342562,
+    "by_category": {
+      ".json": 1215959,
+      ".so": 64784,
+      ".csv": 3116,
+      ".py": 264964,
+      ".c": 31674,
+      ".md": 26229,
+      ".o": 35440,
+      ".h": 4058,
+      ".npy": 36992,
+      ".npz": 52939322,
+      ".png": 22479658,
+      ".pdf": 87076341,
+      "checkpoints": 145164025
+    }
+  },
+  "summary_semantics": "Global RMSE from original every-update counters, including startup. Time-band means are weighted by counts; extrema are extrema of actual updates in fully contained4.383hbins. No RMS of bin means is presented as sample RMS.",
+  "interpretation": [
+    "Eight8766hstationary-cell cases completed, with both arms surviving. This does not test tangent, aging, cellB or real battery mismatch.",
+    "Field point errors remain small late; RC identification greatly improves over the rolling-only arm on difficult seeds.",
+    "Low-noise Q bias persists around minus0.0045..0.0048percent while final localSD is0.000095percent:47..50localSD. High-noise finalQ is4.6..5.2localSD.",
+    "Observed behavior is consistent with a persistent approximation/model bias plus shrinking local curvature uncertainty, not proof of its cause. No full retained-data reference was solved here.",
+    "Repeated outputs are correlated; miss fractions are diagnostics, not independent coverage trials. Assimilated voltage residuals are not proposed-load forecast errors."
+  ],
+  "next": "Use early,720h and late checkpoints to separate compressed-likelihood gradient/state-transport error, numerical accumulation and sensor/model likelihood bias. Propagate identified discrepancy jointly; no arbitrary forgetting or scalar inflation.",
+  "evidence": {
+    "summary.json": {
+      "bytes": 96812,
+      "sha256": "9e65f6fc0bf4cb0e98b912433fd77c0e3efb21c0f5ad542396555cfb1f088ad1"
+    },
+    "campaign_plan.json": {
+      "bytes": 36611,
+      "sha256": "fad727210ae884016f9a33b2df83108b8d6fd4fcea50ba6f1763d67110d453bd"
+    },
+    "reservation.json": {
+      "bytes": 113854,
+      "sha256": "190216a6ce2f9a270cdd4c9b833716fd18748cb3fdae702c738a4d3a75061f03"
+    },
+    "calibration.json": {
+      "bytes": 1795,
+      "sha256": "b1017e47d05b027e9fa4d75fe2a2903b404b68e67742a8ed72eec6022a809e7a"
+    },
+    "case_0000/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0000/scenario.json": {
+      "bytes": 2469,
+      "sha256": "31b913a64751956e4aa15e41ae2ab053ee3d79dafeedb6d232b7bf04dce776f4"
+    },
+    "case_0000/result.json": {
+      "bytes": 10487,
+      "sha256": "a9e7b17295facc0a70bb157cc13858afdfb96c6737c4d63311284a66123670f3"
+    },
+    "case_0000/plot_summary.npz": {
+      "bytes": 6561586,
+      "sha256": "863a9d66b8c04616e92fc2e2863dc9cb5abb3e3308b67ae0b5c0065452249a96"
+    },
+    "case_0000/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "bf9b57f2b0fbc0c410c0ab567bb9fcb9f1dd395d4b45c62b552dd85674e8cc88"
+    },
+    "case_0000/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "8129e24935eebfd85b70e207ad7a842e3b34ec2ae4b5f2557f9704f7b14b70f1"
+    },
+    "case_0001/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0001/scenario.json": {
+      "bytes": 2469,
+      "sha256": "6c09e7f53bc4307f1d0052a58e6a8e804d593e0984e7c5cc88bbd56c06f58fea"
+    },
+    "case_0001/result.json": {
+      "bytes": 10620,
+      "sha256": "4dec37c011826cc20ea2142deed0719c67e56b567ded6d839be788215179760c"
+    },
+    "case_0001/plot_summary.npz": {
+      "bytes": 6561438,
+      "sha256": "e7e8d38f42232a45d89c591248d30502a500e99b470af96c011539a65d3a56a6"
+    },
+    "case_0001/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "c715ff92c4e86145f8f503f1f08024a1182a9b6ad0d600a228e63ab9c0965fe9"
+    },
+    "case_0001/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "9fb890adb58d2daf736ca9373af0f4852ac337aad1510fc69dbe0070a4d2748d"
+    },
+    "case_0002/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0002/scenario.json": {
+      "bytes": 2469,
+      "sha256": "472bd39042d69f5deb792fca3a04944614ee1ac97dd746a931418bb65a42c556"
+    },
+    "case_0002/result.json": {
+      "bytes": 10478,
+      "sha256": "0e75be07d049727b3edbf7da2c3950fb9f0ed02ba15af387c8b1f1373a492db7"
+    },
+    "case_0002/plot_summary.npz": {
+      "bytes": 6532814,
+      "sha256": "46492c2b7cbc7480d841ffb9b1e0272324b651466c88f5538278f5e4f30e6ef3"
+    },
+    "case_0002/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "dea4b76ef5fa17c9b85d03bb616c7e853727d450e02338057a21516a632d1663"
+    },
+    "case_0002/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "8e72f72c7f5b60e38ef23047a7b902fb917b5d745a124d10206bec29cb0fc1e5"
+    },
+    "case_0003/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0003/scenario.json": {
+      "bytes": 2469,
+      "sha256": "81a8c388c3b6c450168e4ac1cfd9575e7630c023fdb897e6b2fb2debec676245"
+    },
+    "case_0003/result.json": {
+      "bytes": 10474,
+      "sha256": "d9063921ce7af0d678431f7685c7cf906873eba211e14b90941b14ca583a2309"
+    },
+    "case_0003/plot_summary.npz": {
+      "bytes": 6532682,
+      "sha256": "620f85ecff562e2a9071f51d55054774ade6d95d08ae88be9ce856e2a1f6350a"
+    },
+    "case_0003/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "7b6eaf0df0a64ba456b5ecdcb5fcb69ae58b9618a04b9d1efaccd760e3807cb7"
+    },
+    "case_0003/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "efec3e5042198fb89c69b63a5929c4dd7bfbb7e2e852014bf0b881f3e9d5ebe7"
+    },
+    "case_0004/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0004/scenario.json": {
+      "bytes": 2467,
+      "sha256": "f0130fd29bf44660d0289faa7cc21a9ba82fc387ad3385aa18b3e772d4b82918"
+    },
+    "case_0004/result.json": {
+      "bytes": 10433,
+      "sha256": "329bdbcd45d470dc36ced85f67d498292c58ba8dc7e9d63a856bea72cb3dff98"
+    },
+    "case_0004/plot_summary.npz": {
+      "bytes": 6687430,
+      "sha256": "06386d6af6268a464e4790a244fa6e618502832c36d49d9eeb2236e2f36a27b2"
+    },
+    "case_0004/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "6796974ab7a2361ddd0bc4962f0533c199d9e4d0de00b9ad7603b77fcadc65d2"
+    },
+    "case_0004/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "b4db34ff311a1a4ebd2669ac13ae2a3cc58e81186879bd6fb01d2c1e9a4d9d2e"
+    },
+    "case_0005/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0005/scenario.json": {
+      "bytes": 2467,
+      "sha256": "47de7ce1be775d76da0022a0e390a4efe61afe20bf63c8f4996272a1e9dc5ea5"
+    },
+    "case_0005/result.json": {
+      "bytes": 10551,
+      "sha256": "de981ad56093a3746216b4115b9eac7cdb72cf52b2518617d1fea9292e09e648"
+    },
+    "case_0005/plot_summary.npz": {
+      "bytes": 6694182,
+      "sha256": "51f9b674f67c521fdb271835a0a15b1a0bcd6c5964eb8e7f9ddfcd82c655fb7f"
+    },
+    "case_0005/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "4cf2b5fec2394863fc062bb75ed6e85ce7af4aa20d5270c493a18ec0384642ef"
+    },
+    "case_0005/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "19f89edd40e8d0ac969ed9abb926331619a0aff37e0ef69fed315aacc854c271"
+    },
+    "case_0006/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0006/scenario.json": {
+      "bytes": 2467,
+      "sha256": "23492054e1a0d14a786bf13b3bbef75749ac59d22491733dc271a93b32ad9282"
+    },
+    "case_0006/result.json": {
+      "bytes": 10592,
+      "sha256": "77f1848c66163efc34f643ea9049f85728bd3a8163b0df58c77964b20f846b9e"
+    },
+    "case_0006/plot_summary.npz": {
+      "bytes": 6685123,
+      "sha256": "9324da7cc654a7b14e7a13901a139ec6d862d928fc9658624f9b9f6fac1b970b"
+    },
+    "case_0006/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "936d67f64d68d84fbf2ac425a40ef0e2302cb054de87b594ca01c8a2a770b3a6"
+    },
+    "case_0006/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "5a7d71f732020a0e46779b551c36b9107f7c24604a25b615cefebd265dee45bb"
+    },
+    "case_0007/telemetry.json": {
+      "bytes": 2266,
+      "sha256": "096133715ce606a9f077d4f0f3d4d198a8c11a0eabfa88e2bb7afd1608464d18"
+    },
+    "case_0007/scenario.json": {
+      "bytes": 2467,
+      "sha256": "a18cab028b5b291b8475269a852fadab7fa8188b264d589c9222c05c2919ce58"
+    },
+    "case_0007/result.json": {
+      "bytes": 10450,
+      "sha256": "263f2e35b53dba446496949fa867b493c49110c1d52268a8834bb8b8d35bb150"
+    },
+    "case_0007/plot_summary.npz": {
+      "bytes": 6684067,
+      "sha256": "165fef54d2359faf3414df3bd409019f21ff5303a8141e610ff8e5b10e437f68"
+    },
+    "case_0007/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "2d8b228830f6001f7f3350cf6fd666343c677ac13ada20455a99340d48f3e42c"
+    },
+    "case_0007/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "0e14901822688d9ce8662b97e31a1b7349d58a2c8a0695053ff89fede6fdbf1a"
+    }
+  },
+  "derived_plots": {
+    "/home/easy/proj/mumble/.worktrees/field-comparison-plots/experiments/field_year_review_001/review001/uncertainty.png": {
+      "bytes": 586351,
+      "sha256": "32545d3e2f33e5b1125fe5845b6ba52214fafd59c37ff34a6724e5885f0f877d"
+    },
+    "/home/easy/proj/mumble/.worktrees/field-comparison-plots/experiments/field_year_review_001/review001/rc_tau1.png": {
+      "bytes": 480969,
+      "sha256": "ddba3856fbe4279f966542ebaa5f3f446abb2dd66a6c1b78072b0acf12794479"
+    }
+  }
+}

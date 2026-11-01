@@ -48,8 +48,10 @@ For long runs, add `--recording compact`: bounded 2,000-bin plots, event summari
 and full-state local replay checkpoints replace full trajectories. Explicit
 `--debug-start-hour` / `--debug-stop-hour` flags on the replay tool recover a
 selected interval. See the [recording qualification](provenance/compact_campaign_6000h/README.md)
-for recording controls. The field comparison has stationary-cell evidence across
-eight 720-hour cases; 6,000-hour inference is not qualified.
+for recording controls. The [one-year field review](provenance/field_year_20261031/review.json) adds eight
+8,766-hour stationary cell-A cases with sustained small point errors and useful
+RC estimates. Joint uncertainty, aging and year-long tangent behavior remain
+unqualified.
 
 
 ```sh
