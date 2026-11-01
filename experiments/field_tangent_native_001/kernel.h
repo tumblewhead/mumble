@@ -1,0 +1,24 @@
+#ifndef FIELD_TANGENT_NATIVE_H
+#define FIELD_TANGENT_NATIVE_H
+#include <stdint.h>
+#include <stddef.h>
+/* Degree5, 82 lifted features, 16 original chart coordinates. */
+typedef struct {
+    double factor[153],anchor[16];
+    uint64_t source,count,magic;
+} FTContext;
+typedef struct { double T[5][6],D[5][6],p[11],gaps[3],h,dh; } FTBasis;
+typedef struct {
+    FTBasis basis;
+    double row[82],gx[16],bw[17],delta[16],x[16];
+    union { double trial[153]; struct { double inverse[256],origin[256]; } query; } phase;
+} FTWork;
+size_t ft_context_bytes(void);
+size_t ft_work_bytes(void);
+int ft_info(const FTContext *,uint64_t *,uint64_t *);
+int ft_init(FTContext *,FTWork *,uint64_t,uint64_t,const double *,const double *,const double *,const double *,const double *,const double *);
+int ft_update(FTContext *,FTWork *,uint64_t,uint64_t,const double *,size_t,const double *,const double *,const double *,const double *);
+/* output = w16, initial_chart16, endpoint16, endpoint_root256, cost/logdet/displacement3. */
+int ft_query(const FTContext *,FTWork *,uint64_t,const double *,const double *,const double *,const double *,const double *,const double *,const double *,double *);
+int ft_projection(FTWork *,const double *,const double *,const double *,const double *,double *);
+#endif

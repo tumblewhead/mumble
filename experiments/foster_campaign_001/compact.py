@@ -35,7 +35,7 @@ def storage_plan(hours, rate, bins, checkpoint_hours, arms, field_arms=0):
     columns = 25+arms*(len(TRACE_COLUMNS)+36)
     summary_bytes = min(records,bins)*8*(3*columns+3*(1+arms))
     context_bytes = 19416  # Current profiled host C context, checked by tests/receipts.
-    field_bytes = field_arms*(82*82*8+111*8+16*8+4096*5*8+2048)  # dense checkpoint + bounded audit allowance
+    field_bytes = field_arms*(82*82*8+111*8+16*8+4096*5*8+8192)  # dense checkpoint + bounded audit allowance
     return dict(field_checkpoint_extra_B_per_checkpoint=field_bytes, records=records, summary_bin_hours=hours/min(records,bins),
                 summary_numeric_MB=summary_bytes/1e6, checkpoint_count=checkpoints,
                 checkpoint_interval_hours=interval/(3600*rate),
@@ -199,6 +199,11 @@ def replay_binding(campaign, case):
         from .field_backend import DEPENDENCIES
         for name in ['experiments/foster_campaign_001/field_backend.py', *DEPENDENCIES]:
             expected[name]=plan['campaign_sources'][name]
+    tangent = plan['configuration'].get('history') in ('field-tangent','compare-tangent')
+    if tangent:
+        from .tangent_backend import DEPENDENCIES as TANGENT_DEPENDENCIES
+        for name in ['experiments/foster_campaign_001/tangent_backend.py', *TANGENT_DEPENDENCIES]:
+            expected[name]=plan['campaign_sources'][name]
     name = 'experiments/foster_feedback_001/plant.py'
     expected[name] = reserved[name]
     for name, value in expected.items():
@@ -213,6 +218,7 @@ def replay_binding(campaign, case):
                 calibration=identity(campaign/'calibration.json'),
                 plan=identity(campaign/'campaign_plan.json'), scenario=identity(case/'scenario.json'))
     if field:result['field_binary']=identity(campaign/'backend_field/response.so')
+    if tangent:result['tangent_binary']=identity(campaign/'backend_tangent/tangent.so')
     return result
 
 
@@ -287,7 +293,7 @@ def run_compact(out, campaign, config, model_id, scenario, cell, args):
     stream = StimulusStream(config, cell, scenario, settings)
     banks = {k: make_backend(campaign, config, source, model_id, k, rate,args) for k in kinds}
     stats = {k: dict(status='running', all=metrics(), current_nonzero=metrics(), current_zero=metrics(),
-                    outputs=0, stops={}, storage={**numeric_storage('float64' if k=='field64' else k), **banks[k].storage()}) for k in kinds}
+                    outputs=0, stops={}, storage={**({} if k=='tangent64' else numeric_storage('float64' if k=='field64' else k)), **banks[k].storage()}) for k in kinds}
     bins = {'plant': Bins(n, args.summary_bins, 25)}
     bins.update({k: Bins(n, args.summary_bins, len(TRACE_COLUMNS)+32+4) for k in kinds})
     interval = max(CHUNK, math.ceil(args.checkpoint_hours*3600*rate/CHUNK)*CHUNK)

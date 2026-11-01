@@ -16,7 +16,10 @@ cadence control are complete; no uncertainty repair or default change is promote
 The follow-up [fixed-origin feedback prototype](experiments/field_feedback_preservation_001/README.md)
 preserves joint uncertainty through five short controls and an hour of weak use.
 It keeps a square-root update in original field coordinates between refreshes;
-native porting and campaign integration remain pending, and defaults are unchanged.
+the [native port and opt-in campaign adapter](experiments/field_tangent_native_001/README.md)
+now pass parity, checkpoint and two four-hour controls. Use `--history compare-tangent`
+for all three arms; defaults remain unchanged. The packed field/update subtotal is
+29.5 KiB, excluding workspace and other subsystem memory.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport

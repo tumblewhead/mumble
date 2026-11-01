@@ -1,0 +1,667 @@
+{
+  "schema": "field_tangent_native_v1",
+  "status": "qualified_for_opt_in_short_desktop_controls",
+  "base_revision": "375ef47",
+  "branch": "implementation/field-tangent-native-001",
+  "mainline_changed": false,
+  "default_changed": false,
+  "tests": {
+    "native": 10,
+    "campaign": 37,
+    "commands": [
+      "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.field_tangent_native_001.test_native -q",
+      "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_tangent_backend experiments.foster_campaign_001.test_field_backend experiments.foster_campaign_001.test_field_default experiments.foster_campaign_001.test_compact experiments.foster_campaign_001.test_plot_summary -q"
+    ]
+  },
+  "parity": {
+    "schema": "native_tangent_parity_v1",
+    "cases": [
+      {
+        "label": "owner_case_0000",
+        "windows": 188,
+        "first_record": 715904,
+        "end_record": 718912,
+        "errors": {
+          "w_abs": 5.051514762044462e-14,
+          "endpoint_abs": 3.019806626980426e-14,
+          "covariance_abs": 4.2327252813834093e-16,
+          "Q_percent": 8.881784197001256e-14,
+          "SOC_pp": 3.3306690738754696e-14,
+          "Q_SD_relative": 1.6653345369377348e-14
+        },
+        "timing": {
+          "native_s": 0.01442849647719413,
+          "python_s": 0.11149016313720495
+        },
+        "storage": {
+          "native_context_B": 1376,
+          "native_explicit_workspace_B": 5880,
+          "dense_derivative_cache_B": 0,
+          "scope": "C tangent only; borrowed prior/field, caller rows/output and stack excluded"
+        },
+        "observations": {
+          "bytes": 32356608,
+          "sha256": "c19275b3f9b37ffc646e864fa0492161ccabbc64b3aa51ed0718904f165f0bd2"
+        },
+        "status": "passed"
+      },
+      {
+        "label": "owner_case_0002",
+        "windows": 188,
+        "first_record": 715904,
+        "end_record": 718912,
+        "errors": {
+          "w_abs": 8.135159212940835e-14,
+          "endpoint_abs": 4.884981308350689e-14,
+          "covariance_abs": 4.996003610813204e-16,
+          "Q_percent": 1.776356839400252e-13,
+          "SOC_pp": 5.551115123125783e-14,
+          "Q_SD_relative": 3.086420008457935e-14
+        },
+        "timing": {
+          "native_s": 0.013308203779160976,
+          "python_s": 0.11165903462097049
+        },
+        "storage": {
+          "native_context_B": 1376,
+          "native_explicit_workspace_B": 5880,
+          "dense_derivative_cache_B": 0,
+          "scope": "C tangent only; borrowed prior/field, caller rows/output and stack excluded"
+        },
+        "observations": {
+          "bytes": 32356608,
+          "sha256": "4f0799865e41e115b6c7524edfceaf2ca68c576aa0191d1579b26f690b1798e7"
+        },
+        "status": "passed"
+      },
+      {
+        "label": "owner_case_0004",
+        "windows": 188,
+        "first_record": 715904,
+        "end_record": 718912,
+        "errors": {
+          "w_abs": 2.864375403532904e-14,
+          "endpoint_abs": 1.7319479184152442e-14,
+          "covariance_abs": 2.1649348980190553e-15,
+          "Q_percent": 1.3322676295501889e-13,
+          "SOC_pp": 3.3306690738754696e-14,
+          "Q_SD_relative": 1.7541523789077473e-14
+        },
+        "timing": {
+          "native_s": 0.01238042931072414,
+          "python_s": 0.1106772436760366
+        },
+        "storage": {
+          "native_context_B": 1376,
+          "native_explicit_workspace_B": 5880,
+          "dense_derivative_cache_B": 0,
+          "scope": "C tangent only; borrowed prior/field, caller rows/output and stack excluded"
+        },
+        "observations": {
+          "bytes": 32356608,
+          "sha256": "04e453d5141e48fbfcdac8bb26fb327b5465e8e05befdc658bd0f52f0acf4dcf"
+        },
+        "status": "passed"
+      },
+      {
+        "label": "owner_case_0006",
+        "windows": 188,
+        "first_record": 715904,
+        "end_record": 718912,
+        "errors": {
+          "w_abs": 2.425837308805967e-14,
+          "endpoint_abs": 1.4432899320127035e-14,
+          "covariance_abs": 4.496403249731884e-15,
+          "Q_percent": 4.4408920985006274e-14,
+          "SOC_pp": 3.3306690738754696e-14,
+          "Q_SD_relative": 1.532107773982716e-14
+        },
+        "timing": {
+          "native_s": 0.012834907160140574,
+          "python_s": 0.11084940121509135
+        },
+        "storage": {
+          "native_context_B": 1376,
+          "native_explicit_workspace_B": 5880,
+          "dense_derivative_cache_B": 0,
+          "scope": "C tangent only; borrowed prior/field, caller rows/output and stack excluded"
+        },
+        "observations": {
+          "bytes": 32356608,
+          "sha256": "a33df46f80375c8ec87884fa499d6e3ca0abe93613d315c22c2840035819c502"
+        },
+        "status": "passed"
+      },
+      {
+        "label": "weak_B_cycle",
+        "windows": 84,
+        "first_record": 502656,
+        "end_record": 504000,
+        "errors": {
+          "w_abs": 3.805289416902724e-14,
+          "endpoint_abs": 2.220446049250313e-14,
+          "covariance_abs": 2.3592239273284576e-15,
+          "Q_percent": 2.2204460492503154e-13,
+          "SOC_pp": 1.1102230246251565e-14,
+          "Q_SD_relative": 1.2323475573339238e-14
+        },
+        "timing": {
+          "native_s": 0.005903823301196098,
+          "python_s": 0.050723201711662114
+        },
+        "storage": {
+          "native_context_B": 1376,
+          "native_explicit_workspace_B": 5880,
+          "dense_derivative_cache_B": 0,
+          "scope": "C tangent only; borrowed prior/field, caller rows/output and stack excluded"
+        },
+        "observations": {
+          "bytes": 22680128,
+          "sha256": "88a8fda4aa0a063a88ef3e63b26e6f0f4dc70477f1593a79c3275d00a8de59f4"
+        },
+        "status": "passed"
+      }
+    ],
+    "truth_reads": 0,
+    "binary": {
+      "bytes": 20192,
+      "sha256": "d52f8feb75d4e78fe8a1b25b80c0e09fde75c118d37702956424adc42c0811db"
+    },
+    "sources": {
+      "kernel.c": {
+        "bytes": 8186,
+        "sha256": "47a7d9ede5ff4b3950180595d6cd963c5610a124de73501b987b59ee8436da7f"
+      },
+      "kernel.h": {
+        "bytes": 1281,
+        "sha256": "5616be5f59871338805d001ad1603fc0a08c3b218c19a833e06fe1d6df118c5b"
+      },
+      "native.py": {
+        "bytes": 4819,
+        "sha256": "a510ad701f894c0a361bfa5ca679531f11cc3e585fc2868496b972a04cfb0074"
+      },
+      "qualify.py": {
+        "bytes": 4008,
+        "sha256": "ed9539b852ae6d2e6ce14537df6965ba01cae7a40e2725595598311b3d7c58fd"
+      }
+    },
+    "timing_scope": "Same preserved suffixes, single BLAS thread; ctypes update+nonlinear readout, common field accumulation and refresh excluded; host only"
+  },
+  "kernel_host_timing": {
+    "windows": 836,
+    "native_update_query_us": 70.40174644547358,
+    "python_update_query_us": 592.5825889485234,
+    "speed_ratio": 8.417157511958608,
+    "exclusions": "Common field accumulation, scheduled nonlinear fitting, campaign adapter, disk, plots; not MCU timing"
+  },
+  "storage": {
+    "previous_partial_packed_B": 41368,
+    "field_packed_plus_live_B": 28864,
+    "native_context_B": 1376,
+    "combined_partial_packed_B": 30240,
+    "native_explicit_workspace_B": 5880,
+    "packed_plus_native_workspace_B": 36120,
+    "original_prior_mean_root_B": 2176,
+    "desktop_readout_carrier_B": 2208,
+    "desktop_extra_live_state_B": 888,
+    "desktop_pending_raw_B": 163840,
+    "desktop_dense_field_root_B": 53792,
+    "kernel_host_max_reported_function_frame_B": 160,
+    "kernel_host_frame_scope": "Compiler -fstack-usage per function; excludes nested calls/libm/ctypes/ARM ABI; not total stack",
+    "scope": "Partial layout accounting, not whole subsystem SRAM. Projection tables, caller lifted rows/query output, field QR/full-fit workspace, binding metadata and Python overhead additional. No M23 timing or10KiB qualification."
+  },
+  "campaigns": {
+    "weak": {
+      "path": "experiments/field_tangent_native_001/weak4h002",
+      "configuration": {
+        "jobs": 1,
+        "hours": 4.0,
+        "history": "compare-tangent",
+        "field_refresh_seconds": 60.0,
+        "backend": "c",
+        "sample_rate_hz": 35,
+        "cells": [
+          "B"
+        ],
+        "cell_file": null,
+        "loads": [
+          "cycle"
+        ],
+        "current_a": 0.03,
+        "nominal_capacity_ah": 0.06,
+        "charge_c": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "discharge_c": [
+          0.2,
+          0.45,
+          0.7
+        ],
+        "charge_step_s": 900.0,
+        "discharge_step_s": 600.0,
+        "cv_voltage": 4.06,
+        "discharge_cutoff_v": 3.18,
+        "cycle_rest_s": 300.0,
+        "taper_end_c": 0.05,
+        "taper_hold_s": 30.0,
+        "cv_gain": 0.5,
+        "noise_v": [
+          0.004
+        ],
+        "seeds": [
+          314159
+        ],
+        "load_seeds": [
+          0
+        ],
+        "temperature": "cycle",
+        "temperature_mean_c": 25.0,
+        "temperature_amplitude_c": 8.0,
+        "temperature_period_s": 3600.0,
+        "encoding": "float64",
+        "hysteresis_chart": "bounded",
+        "sample_csv": false,
+        "recording": "compact",
+        "summary_bins": 200,
+        "checkpoint_hours": 1.0,
+        "no_plots": false,
+        "out": "experiments/field_tangent_native_001/weak4h002"
+      },
+      "records": 504000,
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 31500,
+            "max_Q_percent": 27.681426105899586,
+            "max_SOC_pp": 0.7710876815511969,
+            "joint_within_target": 203,
+            "Q_3sd_misses": 18208,
+            "SOC_3sd_misses": 25237,
+            "final_Q_percent": 1.6650085960276728,
+            "final_SOC_pp": -0.059520562168169366,
+            "Q_RMSE_percent": 2.1884231770236475,
+            "SOC_RMSE_pp": 0.10707441525620763,
+            "joint_within_target_fraction": 0.0064444444444444445
+          },
+          "final_Q_log_SD_percent": 0.4203565427251114,
+          "field_history": null,
+          "status": "completed"
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 31500,
+            "max_Q_percent": 27.681426105899586,
+            "max_SOC_pp": 1.9541412553576665,
+            "joint_within_target": 2264,
+            "Q_3sd_misses": 3033,
+            "SOC_3sd_misses": 6955,
+            "final_Q_percent": -1.8938238922058037,
+            "final_SOC_pp": 0.05548600371526602,
+            "Q_RMSE_percent": 3.8752308082493525,
+            "SOC_RMSE_pp": 0.3444922737606011,
+            "joint_within_target_fraction": 0.07187301587301587
+          },
+          "final_Q_log_SD_percent": 1.1151644728470371,
+          "field_history": {
+            "refresh_interval_records": 2112,
+            "attempts": 238,
+            "accepted": 237,
+            "rejected": 1,
+            "last_attempt_record": 502656,
+            "last_accepted_record": 502656,
+            "last_rejection": {
+              "record": 59136,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 16.0799393530234,
+            "max_abs_SOC_replacement_pp": 1.1857943992256148,
+            "accumulated_records": 502656,
+            "buffered_records": 1344,
+            "status": "some_refreshes_unresolved"
+          },
+          "status": "completed"
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 31500,
+            "max_Q_percent": 19.57317989099562,
+            "max_SOC_pp": 1.450964484300421,
+            "joint_within_target": 7740,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 330,
+            "final_Q_percent": 0.2774906947228928,
+            "final_SOC_pp": 0.04877312607204365,
+            "Q_RMSE_percent": 1.4162766336796464,
+            "SOC_RMSE_pp": 0.21541401499904622,
+            "joint_within_target_fraction": 0.24571428571428572
+          },
+          "final_Q_log_SD_percent": 4.277509694204044,
+          "field_history": {
+            "refresh_interval_records": 2112,
+            "attempts": 238,
+            "accepted": 238,
+            "rejected": 0,
+            "emergency_attempts": 0,
+            "last_attempt_record": 502656,
+            "last_accepted_record": 502656,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 7.449283380522667,
+            "max_abs_SOC_replacement_pp": 0.7786999216984891,
+            "accumulated_records": 502656,
+            "buffered_records": 1344,
+            "status": "all_refreshes_accepted"
+          },
+          "status": "completed"
+        }
+      },
+      "backend_microseconds_per_window": {
+        "float64": 57.21371064737468,
+        "field64": 176.34852702030912,
+        "tangent64": 265.34092683050403
+      },
+      "plotted": true
+    },
+    "embedded": {
+      "path": "experiments/field_tangent_native_001/embedded4h002",
+      "configuration": {
+        "jobs": 1,
+        "hours": 4.0,
+        "history": "compare-tangent",
+        "field_refresh_seconds": 60.0,
+        "backend": "c",
+        "sample_rate_hz": 50,
+        "cells": [
+          "A"
+        ],
+        "cell_file": null,
+        "loads": [
+          "embedded"
+        ],
+        "current_a": 0.03,
+        "nominal_capacity_ah": 0.06,
+        "charge_c": [
+          2.0,
+          1.0,
+          1.5
+        ],
+        "discharge_c": [
+          0.2,
+          0.45,
+          0.7
+        ],
+        "charge_step_s": 900.0,
+        "discharge_step_s": 600.0,
+        "cv_voltage": 4.06,
+        "discharge_cutoff_v": 3.18,
+        "cycle_rest_s": 300.0,
+        "taper_end_c": 0.05,
+        "taper_hold_s": 30.0,
+        "cv_gain": 0.5,
+        "noise_v": [
+          0.002
+        ],
+        "seeds": [
+          1103
+        ],
+        "load_seeds": [
+          7
+        ],
+        "temperature": "cycle",
+        "temperature_mean_c": 25.0,
+        "temperature_amplitude_c": 8.0,
+        "temperature_period_s": 3600.0,
+        "encoding": "float64",
+        "hysteresis_chart": "bounded",
+        "sample_csv": false,
+        "recording": "compact",
+        "summary_bins": 200,
+        "checkpoint_hours": 1.0,
+        "no_plots": false,
+        "out": "experiments/field_tangent_native_001/embedded4h002"
+      },
+      "records": 720000,
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 45000,
+            "max_Q_percent": 12.321740152241667,
+            "max_SOC_pp": 1.1606647745842524,
+            "joint_within_target": 0,
+            "Q_3sd_misses": 44617,
+            "SOC_3sd_misses": 29819,
+            "final_Q_percent": 0.7888358264471318,
+            "final_SOC_pp": 0.040246702337087825,
+            "Q_RMSE_percent": 0.9883700169915408,
+            "SOC_RMSE_pp": 0.11560649907534692,
+            "joint_within_target_fraction": 0.0
+          },
+          "final_Q_log_SD_percent": 0.03853065320041152,
+          "field_history": null,
+          "status": "completed"
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 45000,
+            "max_Q_percent": 12.321740152241667,
+            "max_SOC_pp": 1.1606647745842524,
+            "joint_within_target": 43581,
+            "Q_3sd_misses": 105,
+            "SOC_3sd_misses": 3308,
+            "final_Q_percent": -0.05551425882469596,
+            "final_SOC_pp": -0.004213270083808229,
+            "Q_RMSE_percent": 0.5660735419130747,
+            "SOC_RMSE_pp": 0.13403137175771834,
+            "joint_within_target_fraction": 0.9684666666666667
+          },
+          "final_Q_log_SD_percent": 0.09000664579243822,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 239,
+            "accepted": 239,
+            "rejected": 0,
+            "last_attempt_record": 718912,
+            "last_accepted_record": 718912,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 4.676300741657342,
+            "max_abs_SOC_replacement_pp": 0.8771746181878037,
+            "accumulated_records": 718912,
+            "buffered_records": 1088,
+            "status": "all_refreshes_accepted"
+          },
+          "status": "completed"
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 45000,
+            "max_Q_percent": 26.733831516489037,
+            "max_SOC_pp": 0.5746622534451906,
+            "joint_within_target": 44283,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": -0.05535463827986975,
+            "final_SOC_pp": -0.004206352769886568,
+            "Q_RMSE_percent": 0.6452627278306629,
+            "SOC_RMSE_pp": 0.0625154342942393,
+            "joint_within_target_fraction": 0.9840666666666666
+          },
+          "final_Q_log_SD_percent": 0.09000130145474292,
+          "field_history": {
+            "refresh_interval_records": 3008,
+            "attempts": 239,
+            "accepted": 239,
+            "rejected": 0,
+            "emergency_attempts": 0,
+            "last_attempt_record": 718912,
+            "last_accepted_record": 718912,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 0.3948688618307838,
+            "max_abs_SOC_replacement_pp": 0.09728880210297941,
+            "accumulated_records": 718912,
+            "buffered_records": 1088,
+            "status": "all_refreshes_accepted"
+          },
+          "status": "completed"
+        }
+      },
+      "backend_microseconds_per_window": {
+        "float64": 55.37611093586747,
+        "field64": 183.7345245121469,
+        "tangent64": 277.66069649715064
+      },
+      "plotted": true
+    }
+  },
+  "final_debug_replay_bitwise_equal": true,
+  "prior_study_artifacts_and_sources_preserved": true,
+  "adaptations": [
+    "First smoke found duplicate storage scope metadata key; fixed before qualification.",
+    "001 campaigns retained before removal of misleading legacy rolling-token storage fields for tangent64. 002 repeats with final recording code and plots; all final messages bitwise identical.",
+    "C streaming Givens replaces Python Householder QR; structured contractions replace dense derivative cache. Mathematical tangent objective unchanged.",
+    "Live16-sample response transport plus bounded4096-row raw batching retains prior field accumulation order; response recurrence is computed twice across batch flushes."
+  ],
+  "limits": [
+    "Local GN uncertainty, not calibrated posterior coverage; same-stream miss counts are correlated diagnostics.",
+    "Stationary parameters only; long-duration hysteresis compression error, aging and24/72/720h inference unqualified.",
+    "Default/mainline unchanged. Integrated native tangent is about1.5x slower than current field arm in suffix profiles, despite8.4x kernel improvement over Python prototype.",
+    "Original public prior once; outgoing Gaussian never fed back. Invalid readout triggers explicit full-field recovery; unresolved recovery stops arm."
+  ],
+  "sources": {
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 4819,
+      "sha256": "a510ad701f894c0a361bfa5ca679531f11cc3e585fc2868496b972a04cfb0074"
+    },
+    "experiments/field_tangent_native_001/test_native.py": {
+      "bytes": 3600,
+      "sha256": "1cbf940766d036efc690166c444529fe3c155f2482fbe68172f8839216e96f5c"
+    },
+    "experiments/field_tangent_native_001/qualify.py": {
+      "bytes": 4008,
+      "sha256": "ed9539b852ae6d2e6ce14537df6965ba01cae7a40e2725595598311b3d7c58fd"
+    },
+    "experiments/field_tangent_native_001/profile_campaign.py": {
+      "bytes": 1967,
+      "sha256": "783bbcb37206287544da6388ff862008a8725d4c524b6678f7e927e2e48167e9"
+    },
+    "experiments/field_tangent_native_001/summarize.py": {
+      "bytes": 6824,
+      "sha256": "dd7509972a94812b614563424fb26901605a33f51e7961790e3229b8a709bda1"
+    },
+    "experiments/field_tangent_native_001/kernel.h": {
+      "bytes": 1281,
+      "sha256": "5616be5f59871338805d001ad1603fc0a08c3b218c19a833e06fe1d6df118c5b"
+    },
+    "experiments/field_tangent_native_001/kernel.c": {
+      "bytes": 8186,
+      "sha256": "47a7d9ede5ff4b3950180595d6cd963c5610a124de73501b987b59ee8436da7f"
+    },
+    "experiments/foster_campaign_001/backend.py": {
+      "bytes": 10796,
+      "sha256": "0089221d088e6ed9bf31868e4d1966b0f6063b3ce8d2de6bda9b023f9c408935"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 10630,
+      "sha256": "17fc44e9778bb45908effd4b53befb529188798528ca57f1fd2f11b00401ebaa"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23046,
+      "sha256": "52aa058eff84baf4091ef953fcd2b032186c9481704a9aa505ddd075e11e56ce"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25056,
+      "sha256": "82ff873fd090ae0335132b9369ce6af2fb2761db54a49a3c93752a875e5e5307"
+    },
+    "experiments/foster_campaign_001/plot.py": {
+      "bytes": 16086,
+      "sha256": "a54c703c0c914043851c874362e1ad2b5601cfae06d097efef3b8534e29e562d"
+    },
+    "experiments/foster_campaign_001/compact_plot.py": {
+      "bytes": 5887,
+      "sha256": "befa6340a4be8f776f0e8ee0499b419cace95e5671d56ccdb62ef7272a500a1e"
+    },
+    "experiments/foster_campaign_001/test_tangent_backend.py": {
+      "bytes": 4406,
+      "sha256": "fd793d6050f3628bc2c15e7281dd9a94b59a6e270c8591c8d6a02a3d81fb294a"
+    },
+    "experiments/foster_campaign_001/test_field_backend.py": {
+      "bytes": 6815,
+      "sha256": "433635cc4673217010c8025d3ae31f0a4736c1ffed43976f120feb266af94c3c"
+    }
+  },
+  "artifacts": {
+    "weak4h002/summary.json": {
+      "bytes": 10653,
+      "sha256": "f9ac90bc32efe90229139f930c51c936e030e374a46278ed1e2e7af65315050e"
+    },
+    "weak4h002/campaign_plan.json": {
+      "bytes": 36598,
+      "sha256": "a29b15ccc433f4ff85e8fe5932bd58f8016ffe5507a51062493cf26890d5b041"
+    },
+    "weak4h002/backend_tangent/build.json": {
+      "bytes": 641,
+      "sha256": "693a3a1129ceb838d4cfacc8ff09fa34d4d1479bb86111e811224cae7e9e1440"
+    },
+    "weak4h002/case_0000/result.json": {
+      "bytes": 9253,
+      "sha256": "3820e8db8a1a26a58551cce0587e80f484d71b0d6e3f7dbd01efdd85a7c53779"
+    },
+    "weak4h002/case_0000/inputs.json": {
+      "bytes": 475,
+      "sha256": "d52e664e4cd71ef4b184846106e29ce6b65021f1b942194b2c44b5e1c1e4a5c1"
+    },
+    "weak4h002/case_0000/checkpoints/index.json": {
+      "bytes": 1013,
+      "sha256": "8be409a25edd470e303b9467fcad862454cf5565586d2d71388e5841700da680"
+    },
+    "embedded4h002/summary.json": {
+      "bytes": 15395,
+      "sha256": "c79c93f096b4d5f0b84f0a8f7b1a7009a720eeca3dc724a334ae672840ce6586"
+    },
+    "embedded4h002/campaign_plan.json": {
+      "bytes": 36721,
+      "sha256": "d5ab00b7440e0f75fd03ca0215969b5a217c8f379a4ff8ad5c7be99bfc86e6c2"
+    },
+    "embedded4h002/backend_tangent/build.json": {
+      "bytes": 641,
+      "sha256": "693a3a1129ceb838d4cfacc8ff09fa34d4d1479bb86111e811224cae7e9e1440"
+    },
+    "embedded4h002/case_0000/result.json": {
+      "bytes": 13203,
+      "sha256": "7b01ae8cd19ba89f6e5e4b7cf17941830556d002f9cd3c1882eca4b9575aa9d0"
+    },
+    "embedded4h002/case_0000/inputs.json": {
+      "bytes": 475,
+      "sha256": "474c516f3eb9621ab472d2b74261ad4d4fab2a6e28b5853849bef3c9751db164"
+    },
+    "embedded4h002/case_0000/checkpoints/index.json": {
+      "bytes": 1013,
+      "sha256": "48ffe74a12f62cdd49954dcfbcb2226e55ae51bc337d9442d0fcd7699cbaefef"
+    },
+    "parity001/result.json": {
+      "bytes": 5614,
+      "sha256": "91d7df5bb7d9844e327a56e2fcb14f9ece9b9dbd7e8cf488c2cebbd3a129d221"
+    },
+    "weak_profile.json": {
+      "bytes": 2446,
+      "sha256": "cead2f75feb305adef12fc8c097791afafdcdcadda5b9006c0fb8b108d504507"
+    },
+    "embedded_profile.json": {
+      "bytes": 2354,
+      "sha256": "8aab18bec56b8d3d52c47bcb223c0faef40277accda28fca625bba07310ecf1a"
+    },
+    "weak_replay001/result.json": {
+      "bytes": 3065,
+      "sha256": "0a4a34d25e22702b47c16ed734b74e62b585f687c220df2a58416823738ad61d"
+    },
+    "weak4h001/case_0000/result.json": {
+      "bytes": 9545,
+      "sha256": "aee08043922a2556627cf6c423450b47a2c89e76e0700d48afa8ce57d33e156e"
+    },
+    "embedded4h001/case_0000/result.json": {
+      "bytes": 13496,
+      "sha256": "a1a169e3d90ea664c145c39f4eb97fb50d4804965fb83143cef0055d3d30b799"
+    }
+  },
+  "next": "Run24/72h mixed/weak controls with identical streams and local-uncertainty diagnostics; inspect hysteresis drift separately before promotion. Profile adapter/duplicate recurrence before optimizing; retain physical-domain/source guards."
+}

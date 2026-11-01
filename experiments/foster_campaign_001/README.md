@@ -1,5 +1,7 @@
 > Field-assisted estimation is now the default (`--history joint-field --encoding float64`). Use `--history compare` for field versus original rolling overlays, or `--history rolling --encoding both` for the original encoding comparison. The [720-hour review](../../provenance/rolling_field_720h_20261031/README.md) supports this promotion; low-noise uncertainty, aging and M23 deployment remain unqualified.
 
+> Experimental `--history field-tangent` keeps the joint tangent likelihood in original field coordinates; `--history compare-tangent` overlays it with rolling and the current field arm. It supports compact recording and checkpoint replay. See [native qualification and memory limits](../field_tangent_native_001/README.md). This is opt-in; the default is unchanged.
+
 > New `--loads embedded` profile uses a semi-Markov MCU/radio/flash/LED activity envelope. `--load-seeds` controls workload randomness independently of measurement-noise `--seeds`; both appear in plots and metadata. See the [workload guide](../embedded_workload_001/README.md) for timing assumptions and a crossed-seed command.
 
 > Default plotting keeps all six individual plot families and adds the six all-case overlays in `case_summary/`. Overlays label every seed/arm with consistent colors and precision line styles; no extra `--summary` flag is needed for a new campaign. See [plot controls](../foster_summary_labels_001/README.md).

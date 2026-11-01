@@ -19,6 +19,8 @@ from experiments.slow_likelihood_diagnostic_001.numerics import solve
 
 
 class FieldCampaignTests(unittest.TestCase):
+    history="compare"
+    kinds=["float64","field64"]
     @classmethod
     def setUpClass(cls):
         cls.temp=tempfile.TemporaryDirectory(prefix='mumble-field-campaign-');cls.root=Path(cls.temp.name)
@@ -26,7 +28,7 @@ class FieldCampaignTests(unittest.TestCase):
             command=[sys.executable,'-B','-m','experiments.foster_campaign_001.run',
                      '--hours','.10002','--sample-rate-hz','50','--cells','A',
                      '--loads','embedded','--load-seeds','7','--seeds','1100','--noise-v','.002',
-                     '--history','compare','--encoding','float64','--field-refresh-seconds','17',
+                     '--history',cls.history,'--encoding','float64','--field-refresh-seconds','17',
                      '--recording',recording,'--checkpoint-hours','.01','--summary-bins','37',
                      '--no-plots','--out',str(cls.root/recording)]
             proc=subprocess.run(command,capture_output=True,text=True,timeout=90)
@@ -46,7 +48,7 @@ class FieldCampaignTests(unittest.TestCase):
 
     def test_full_compact_joint_message_and_metrics_match(self):
         other=json.loads((self.full/'result.json').read_text())
-        for kind in ['float64','field64']:
+        for kind in self.kinds:
             np.testing.assert_array_equal(np.load(self.case/(kind+'_message.npy')),np.load(self.full/(kind+'_message.npy')))
             self.assertEqual(self.result['arms'][kind],other['arms'][kind])
         audit=self.result['arms']['field64']['field_history']
@@ -68,7 +70,7 @@ class FieldCampaignTests(unittest.TestCase):
         self.assertGreater(banks['field64'].buffered,0)
         dest=self.root/'debug';start=entry['sequence']/50/3600
         result=replay(self.case,dest,start,plots=False,stop_hour=start+.015)
-        for kind in ['float64','field64']:
+        for kind in self.kinds:
             expected=np.load(self.full/(kind+'_trace.npy'))
             actual=np.load(dest/(kind+'_trace.npy'))[:result['arms'][kind]['outputs']]
             selected=expected[(expected[:,0]>entry['sequence'])&(expected[:,0]<=int((start+.015)*3600*50))]

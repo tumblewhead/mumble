@@ -142,12 +142,17 @@ class CBackend:
 
 def arm_kinds(settings):
     history=getattr(settings,'history','rolling')
+    if history=='field-tangent':return ['tangent64']
+    if history=='compare-tangent':return ['float64','field64','tangent64']
     if history=='compare':return ['float64','field64']
     if history=='joint-field':return ['field64']
     return ['float64','float32'] if settings.encoding=='both' else [settings.encoding]
 
 
 def make_backend(campaign,config,source,model_id,kind,rate,settings):
+    if kind=='tangent64':
+        from .tangent_backend import TangentBackend
+        return TangentBackend(campaign,config,source,model_id,rate,settings)
     if kind=='field64':
         from .field_backend import FieldBackend
         return FieldBackend(campaign,config,source,model_id,rate,settings)

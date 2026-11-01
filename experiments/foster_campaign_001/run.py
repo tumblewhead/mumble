@@ -105,7 +105,7 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
     backend_s={k:0. for k in kinds}
     max_outputs = (n + config['numerical']['block_records'] - 1) // config['numerical']['block_records']
     stats = {k: dict(status='running', all=metrics(), current_nonzero=metrics(), current_zero=metrics(),
-                    stops={}, outputs=0, storage={**numeric_storage('float64' if k=='field64' else k),**banks[k].storage()}) for k in kinds}
+                    stops={}, outputs=0, storage={**({} if k=='tangent64' else numeric_storage('float64' if k=='field64' else k)),**banks[k].storage()}) for k in kinds}
     arrays = {k: np.lib.format.open_memmap(out / (k+'_trace.npy'), mode='w+', dtype='float64',
                                          shape=(max_outputs, len(TRACE_COLUMNS))) for k in kinds}
     charts = {k: np.lib.format.open_memmap(out / (k+'_chart.npy'), mode='w+', dtype='float64',
@@ -205,8 +205,8 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--jobs', type=int, default=1, help='maximum independent case workers (default:1; native math threads:1 each)')
     p.add_argument('--hours', type=float, default=4.)
-    p.add_argument('--history', choices=['rolling','joint-field','compare'], default='joint-field',
-                   help='joint-field (default) refreshes rolling belief; compare adds the original rolling arm; rolling selects the control')
+    p.add_argument('--history', choices=['rolling','joint-field','compare','field-tangent','compare-tangent'], default='joint-field',
+                   help='joint-field (default) refreshes rolling belief; compare adds the original rolling arm; field-tangent selects the experimental native tangent; compare-tangent runs all three')
     p.add_argument('--field-refresh-seconds', type=float, default=60.,
                    help='field fit cadence, rounded up to a 16-record boundary; default 60s')
     p.add_argument('--backend', choices=['c','python'], default='c', help='estimator implementation (default:c optimized; python retains reference)')
@@ -302,6 +302,10 @@ def main():
         prepare_field(out)
     sources = list(HERE.glob('*.py')) + list(HERE.glob('*.json')) + list(HERE.glob('*.md'))
     if args.history!='rolling':sources += [ROOT/name for name in DEPENDENCIES]
+    if args.history in ('field-tangent','compare-tangent'):
+        from .tangent_backend import prepare_tangent, DEPENDENCIES as TANGENT_DEPENDENCIES
+        prepare_tangent(out)
+        sources += [ROOT/name for name in TANGENT_DEPENDENCIES]
     for path in sources:
         target = out / 'source_snapshot' / path.relative_to(ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -326,7 +330,7 @@ def main():
     if args.recording == 'compact':
         from .compact import storage_plan
         print(json.dumps(dict(compact_storage_per_case=storage_plan(args.hours,args.sample_rate_hz,
-              args.summary_bins,args.checkpoint_hours,len(arm_kinds(args)),field_arms=int(args.history!='rolling')))),flush=True)
+              args.summary_bins,args.checkpoint_hours,len(arm_kinds(args)),field_arms=sum(k in ('field64','tangent64') for k in arm_kinds(args))))),flush=True)
     completed = {}
     for index, result in completed_cases(out, config, model_id, scenarios, definitions, args):
         case = out / ('case_%04d' % index)
