@@ -1,0 +1,4669 @@
+{
+  "schema": "field_tangent_72h_review_v1",
+  "source_campaign": "experiments/foster_campaign_001/run_20261101_005759_788073",
+  "source_summary": {
+    "bytes": 209190,
+    "sha256": "e0c0c7eecc966712a3bc940ab287c07ef2010ca1ec6147ba9a9c752dbdb08f53"
+  },
+  "configuration": {
+    "jobs": 4,
+    "hours": 72.0,
+    "history": "compare-tangent",
+    "field_refresh_seconds": 60.0,
+    "backend": "c",
+    "sample_rate_hz": 50,
+    "cells": [
+      "A",
+      "B"
+    ],
+    "cell_file": null,
+    "loads": [
+      "embedded",
+      "cycle"
+    ],
+    "current_a": 0.03,
+    "nominal_capacity_ah": 0.06,
+    "charge_c": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "discharge_c": [
+      0.2,
+      0.45,
+      0.7
+    ],
+    "charge_step_s": 900.0,
+    "discharge_step_s": 600.0,
+    "cv_voltage": 4.06,
+    "discharge_cutoff_v": 3.18,
+    "cycle_rest_s": 300.0,
+    "taper_end_c": 0.05,
+    "taper_hold_s": 30.0,
+    "cv_gain": 0.5,
+    "noise_v": [
+      0.002,
+      0.004
+    ],
+    "seeds": [
+      1103,
+      314159
+    ],
+    "load_seeds": [
+      7
+    ],
+    "temperature": "cycle",
+    "temperature_mean_c": 25.0,
+    "temperature_amplitude_c": 8.0,
+    "temperature_period_s": 3600.0,
+    "encoding": "float64",
+    "hysteresis_chart": "bounded",
+    "sample_csv": false,
+    "recording": "compact",
+    "summary_bins": 2000,
+    "checkpoint_hours": 3.0,
+    "no_plots": false,
+    "out": null
+  },
+  "source_differences": [],
+  "completed_cases": 16,
+  "completed_arms": 48,
+  "pooled_by_load": {
+    "embedded": {
+      "float64": {
+        "Q_RMSE_percent": 0.5802224609033172,
+        "SOC_RMSE_pp": 0.1176472753633598,
+        "Q_3sd_misses_percent": 99.17282407407407,
+        "SOC_3sd_misses_percent": 92.60706790123457,
+        "refresh_rejections": 0
+      },
+      "field64": {
+        "Q_RMSE_percent": 0.1880536227878647,
+        "SOC_RMSE_pp": 0.034004758944383436,
+        "Q_3sd_misses_percent": 7.972638888888889,
+        "SOC_3sd_misses_percent": 27.786172839506172,
+        "refresh_rejections": 9
+      },
+      "tangent64": {
+        "Q_RMSE_percent": 0.15154760187757044,
+        "SOC_RMSE_pp": 0.020171263620365632,
+        "Q_3sd_misses_percent": 7.823703703703703,
+        "SOC_3sd_misses_percent": 27.454753086419753,
+        "refresh_rejections": 10
+      }
+    },
+    "cycle": {
+      "float64": {
+        "Q_RMSE_percent": 2.3801573143388106,
+        "SOC_RMSE_pp": 0.12236190503767849,
+        "Q_3sd_misses_percent": 97.19007716049383,
+        "SOC_3sd_misses_percent": 77.92888888888889,
+        "refresh_rejections": 0
+      },
+      "field64": {
+        "Q_RMSE_percent": 1.9385995023871008,
+        "SOC_RMSE_pp": 0.04705080167200128,
+        "Q_3sd_misses_percent": 4.50121913580247,
+        "SOC_3sd_misses_percent": 1.747253086419753,
+        "refresh_rejections": 1165
+      },
+      "tangent64": {
+        "Q_RMSE_percent": 1.6356257699380161,
+        "SOC_RMSE_pp": 0.024137501428462094,
+        "Q_3sd_misses_percent": 0.0,
+        "SOC_3sd_misses_percent": 0.0,
+        "refresh_rejections": 1288
+      }
+    }
+  },
+  "Q_RMSE_improved_cases": 13,
+  "SOC_RMSE_improved_cases": 16,
+  "cases": [
+    {
+      "case": "case_0000",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1103,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 12.321740152241667,
+            "max_SOC_pp": 1.1606647745842524,
+            "joint_within_target": 751165,
+            "Q_3sd_misses": 797929,
+            "SOC_3sd_misses": 676224,
+            "final_Q_percent": 0.011632407474104767,
+            "final_SOC_pp": -0.0018897366512615754,
+            "Q_RMSE_percent": 0.25645828014839644,
+            "SOC_RMSE_pp": 0.029355895086153543,
+            "joint_within_target_fraction": 0.9273641975308642
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 0.011632407474104767,
+            "R0_ohm": -2.8806298411948816,
+            "R1_ohm": -32.56636677766828,
+            "tau1_s": -53.0963014200391,
+            "R2_ohm": 10.097889835365859,
+            "tau2_s": -27.312270830220918,
+            "R3_ohm": 7.2711006562739655,
+            "tau3_s": -7.346973088973141,
+            "H_V": -0.21261108739563106,
+            "gamma_plus": 0.4964339916177618,
+            "gamma_minus": 1.2026362667700852
+          },
+          "final_C_errors_percent": [
+            -30.44465152082596,
+            -33.97899879963895,
+            -13.627224532810022
+          ],
+          "final_Q_log_SD_percent": 0.0009512054087137979,
+          "final_SOC_SD_pp": 0.00014950471308961113,
+          "Q_H_log_correlation": -0.9534159427898597,
+          "final_SOC_standardized_error": -12.63998045418737,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.618056965449151e-05,
+            "R0_ohm": 0.04915758454016386,
+            "R1_ohm": 0.046855467260872946,
+            "tau1_s": 0.16350340842319344,
+            "R2_ohm": 0.03862675972605024,
+            "tau2_s": 0.05552019895422311,
+            "R3_ohm": 0.022109392325854,
+            "tau3_s": 0.035776907909723654,
+            "H_V": 0.00225660424547335,
+            "gamma_plus": 0.003735440864194306,
+            "gamma_minus": 0.0034297717499705747
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.5780580788426815
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.5288558154839783
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.48589400506963365
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 12.321740152241667,
+            "max_SOC_pp": 1.1606647745842524,
+            "joint_within_target": 808581,
+            "Q_3sd_misses": 358621,
+            "SOC_3sd_misses": 426608,
+            "final_Q_percent": -0.003502994864357234,
+            "final_SOC_pp": 0.001079798649927799,
+            "Q_RMSE_percent": 0.1337281831623401,
+            "SOC_RMSE_pp": 0.03164490046551069,
+            "joint_within_target_fraction": 0.9982481481481481
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 4.676300741657342,
+            "max_abs_SOC_replacement_pp": 0.8771746181878037,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "all_refreshes_accepted"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.003502994864357234,
+            "R0_ohm": -0.1888580161315545,
+            "R1_ohm": 1.7057574393868347,
+            "tau1_s": 1.6173500242309569,
+            "R2_ohm": -0.4103416265074378,
+            "tau2_s": 0.48234724698625886,
+            "R3_ohm": -0.09585092029971154,
+            "tau3_s": 0.009589663814457694,
+            "H_V": 0.08461895652114304,
+            "gamma_plus": -0.19505896502405307,
+            "gamma_minus": -0.07472912637312978
+          },
+          "final_C_errors_percent": [
+            -0.08692469077627996,
+            0.8963670405875312,
+            0.10554174684982431
+          ],
+          "final_Q_log_SD_percent": 0.0010234788926396796,
+          "final_SOC_SD_pp": 0.00015545061123317698,
+          "Q_H_log_correlation": -0.9597934965891739,
+          "final_SOC_standardized_error": 6.946248981344265,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.266220919619077e-05,
+            "R0_ohm": 0.07868135769422899,
+            "R1_ohm": 0.14805995473832384,
+            "tau1_s": 0.3776528831119542,
+            "R2_ohm": 0.05425268946636103,
+            "tau2_s": 0.10075665749128826,
+            "R3_ohm": 0.026545798637181775,
+            "tau3_s": 0.04094151449955952,
+            "H_V": 0.002206525005913132,
+            "gamma_plus": 0.003505732977563773,
+            "gamma_minus": 0.004058200599427803
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.02793562543846217
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.02616661334847836
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.024527694309839365
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 26.733831516489037,
+            "max_SOC_pp": 0.5746622534451906,
+            "joint_within_target": 809283,
+            "Q_3sd_misses": 358522,
+            "SOC_3sd_misses": 423301,
+            "final_Q_percent": -0.0035030119609258392,
+            "final_SOC_pp": 0.00107980087132864,
+            "Q_RMSE_percent": 0.15235582303860007,
+            "SOC_RMSE_pp": 0.014849169167747318,
+            "joint_within_target_fraction": 0.9991148148148148
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 0.3948688618307838,
+            "max_abs_SOC_replacement_pp": 0.09728880210297941,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "all_refreshes_accepted"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.0035030119609369414,
+            "R0_ohm": -0.1892500790895868,
+            "R1_ohm": 1.705962000504635,
+            "tau1_s": 1.6150268157373748,
+            "R2_ohm": -0.41015683310237083,
+            "tau2_s": 0.48171274189090507,
+            "R3_ohm": -0.09571531022994906,
+            "tau3_s": 0.009410744612292632,
+            "H_V": 0.08461932678183182,
+            "gamma_plus": -0.19505957908036997,
+            "gamma_minus": -0.07472930247741649
+          },
+          "final_C_errors_percent": [
+            -0.08940988608593381,
+            0.8955427045894915,
+            0.10522677297442051
+          ],
+          "final_Q_log_SD_percent": 0.0010234788890502362,
+          "final_SOC_SD_pp": 0.00015545061159675228,
+          "Q_H_log_correlation": -0.9597934958252258,
+          "final_SOC_standardized_error": 6.946263255172677,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.272597481224203e-05,
+            "R0_ohm": 0.07819435126914243,
+            "R1_ohm": 0.1472595708424274,
+            "tau1_s": 0.3764916041155489,
+            "R2_ohm": 0.05419742671011491,
+            "tau2_s": 0.1007898569250626,
+            "R3_ohm": 0.02646768265804518,
+            "tau3_s": 0.04083563871656093,
+            "H_V": 0.0022066717293306912,
+            "gamma_plus": 0.0035045559002688798,
+            "gamma_minus": 0.004026402829923923
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.02792837460758979
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.02616089143405942
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.024523190730153518
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0001",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 314159,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 16.697620518559976,
+            "max_SOC_pp": 1.0418796736242797,
+            "joint_within_target": 776324,
+            "Q_3sd_misses": 806303,
+            "SOC_3sd_misses": 794944,
+            "final_Q_percent": -0.018817356464284618,
+            "final_SOC_pp": 0.010383140203407137,
+            "Q_RMSE_percent": 0.36051854180579773,
+            "SOC_RMSE_pp": 0.040230865483338735,
+            "joint_within_target_fraction": 0.9584246913580247
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.018817356464284618,
+            "R0_ohm": 14.527107657552762,
+            "R1_ohm": 17.21427338699577,
+            "tau1_s": 180.240632011007,
+            "R2_ohm": -10.911576474865248,
+            "tau2_s": 52.40353363738146,
+            "R3_ohm": -9.800175534228972,
+            "tau3_s": 28.918903904812197,
+            "H_V": -0.08672672533982517,
+            "gamma_plus": -0.9809073085380038,
+            "gamma_minus": 2.847583160329359
+          },
+          "final_C_errors_percent": [
+            139.08405001647012,
+            71.06996353390794,
+            42.925892226912524
+          ],
+          "final_Q_log_SD_percent": 0.0010147126452113814,
+          "final_SOC_SD_pp": 0.0001567807140253728,
+          "Q_H_log_correlation": -0.959308869510811,
+          "final_SOC_standardized_error": 66.22715215933236,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00022351436774920946,
+            "R0_ohm": 0.015368194844628258,
+            "R1_ohm": 0.014669256835266736,
+            "tau1_s": 0.22533299018488717,
+            "R2_ohm": 0.008337232530099964,
+            "tau2_s": 0.0683546064289442,
+            "R3_ohm": 0.011920783526683684,
+            "tau3_s": 0.0653216641861265,
+            "H_V": 0.004561698976699585,
+            "gamma_plus": 0.012274235193680353,
+            "gamma_minus": 0.018619186437791098
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 2.0026433827416903
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 1.743252918906331
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 1.52850059128407
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 16.697620518559976,
+            "max_SOC_pp": 1.4320543032408262,
+            "joint_within_target": 807894,
+            "Q_3sd_misses": 149059,
+            "SOC_3sd_misses": 260960,
+            "final_Q_percent": -0.0037028042790820948,
+            "final_SOC_pp": 0.0007253642325899534,
+            "Q_RMSE_percent": 0.16941903999108254,
+            "SOC_RMSE_pp": 0.02410659233114511,
+            "joint_within_target_fraction": 0.9974
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 3.761657759937622,
+            "max_abs_SOC_replacement_pp": 0.6220647149994596,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "all_refreshes_accepted"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.0037028042790820948,
+            "R0_ohm": -0.6131942317775918,
+            "R1_ohm": 1.2147259606140492,
+            "tau1_s": 0.2736734606030078,
+            "R2_ohm": -0.7464424409828196,
+            "tau2_s": -1.59744583549426,
+            "R3_ohm": 0.629903262148801,
+            "tau3_s": -1.047738951726962,
+            "H_V": 0.10219687135135658,
+            "gamma_plus": -0.16664412169689058,
+            "gamma_minus": 0.03269556955285413
+          },
+          "final_C_errors_percent": [
+            -0.9297584823548477,
+            -0.8574034175101719,
+            -1.6671408393441278
+          ],
+          "final_Q_log_SD_percent": 0.0010221342739266744,
+          "final_SOC_SD_pp": 0.00015582749488220443,
+          "Q_H_log_correlation": -0.959812589204077,
+          "final_SOC_standardized_error": 4.654918139692114,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 8.636565203741972e-05,
+            "R0_ohm": 0.07819517661183245,
+            "R1_ohm": 0.15675120607693255,
+            "tau1_s": 0.37583653559774066,
+            "R2_ohm": 0.053487282479893275,
+            "tau2_s": 0.09907850329020085,
+            "R3_ohm": 0.02707110623809244,
+            "tau3_s": 0.037827618593646584,
+            "H_V": 0.0021280938806295113,
+            "gamma_plus": 0.0035518882168424546,
+            "gamma_minus": 0.0038485753100392373
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.08453226888329113
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.07358330781331134
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.06451853789055884
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 17.445994570049137,
+            "max_SOC_pp": 0.5835624201598999,
+            "joint_within_target": 808867,
+            "Q_3sd_misses": 148454,
+            "SOC_3sd_misses": 258487,
+            "final_Q_percent": -0.00370281020803942,
+            "final_SOC_pp": 0.0007253651950867024,
+            "Q_RMSE_percent": 0.12334309767785467,
+            "SOC_RMSE_pp": 0.01670270135138202,
+            "joint_within_target_fraction": 0.9986012345679013
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4307,
+            "rejected": 1,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 114304,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 1.0796017063622259,
+            "max_abs_SOC_replacement_pp": 0.11117565076250724,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.00370281020803942,
+            "R0_ohm": -0.6128983533835175,
+            "R1_ohm": 1.21417456922579,
+            "tau1_s": 0.2751280750594498,
+            "R2_ohm": -0.7466145197090657,
+            "tau2_s": -1.597513743447343,
+            "R3_ohm": 0.6299532248035034,
+            "tau3_s": -1.0478226394879164,
+            "H_V": 0.10219698514202236,
+            "gamma_plus": -0.16664444538406764,
+            "gamma_minus": 0.03269204609095411
+          },
+          "final_C_errors_percent": [
+            -0.9277816058501642,
+            -0.8572999496397338,
+            -1.6672728253617874
+          ],
+          "final_Q_log_SD_percent": 0.0010221342787096693,
+          "final_SOC_SD_pp": 0.00015582749523288013,
+          "Q_H_log_correlation": -0.9598125893204724,
+          "final_SOC_standardized_error": 4.654924305897769,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 8.63622610144249e-05,
+            "R0_ohm": 0.0780689781040636,
+            "R1_ohm": 0.15750598573615726,
+            "tau1_s": 0.3748842548793839,
+            "R2_ohm": 0.053333526275865795,
+            "tau2_s": 0.09863069593037954,
+            "R3_ohm": 0.02689382855350017,
+            "tau3_s": 0.03764460302889905,
+            "H_V": 0.002127808752053669,
+            "gamma_plus": 0.0035575857741017756,
+            "gamma_minus": 0.0038401733657187106
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.08449148038485398
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.0735478024060221
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.06448740641477156
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0002",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.004,
+        "seed": 1103,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 26.19675030648151,
+            "max_SOC_pp": 1.1542819161495799,
+            "joint_within_target": 749868,
+            "Q_3sd_misses": 808401,
+            "SOC_3sd_misses": 683043,
+            "final_Q_percent": 0.02708904848838234,
+            "final_SOC_pp": -0.002476017728125779,
+            "Q_RMSE_percent": 0.2537489578873084,
+            "SOC_RMSE_pp": 0.04101017617369902,
+            "joint_within_target_fraction": 0.925762962962963
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 0.02708904848838234,
+            "R0_ohm": -25.945372694682778,
+            "R1_ohm": 61.7718431191139,
+            "tau1_s": -36.88669960460895,
+            "R2_ohm": -15.286480266634307,
+            "tau2_s": -20.502608883469865,
+            "R3_ohm": 12.402203091783948,
+            "tau3_s": -14.07097455817512,
+            "H_V": -0.5529556957939108,
+            "gamma_plus": 1.0860186070064781,
+            "gamma_minus": 2.943340568725805
+          },
+          "final_C_errors_percent": [
+            -60.98622654072117,
+            -6.157374446550246,
+            -23.552187521041688
+          ],
+          "final_Q_log_SD_percent": 0.001883293467135126,
+          "final_SOC_SD_pp": 0.0002656632291011604,
+          "Q_H_log_correlation": -0.9514153810793998,
+          "final_SOC_standardized_error": -9.320137139426812,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00015773117192571795,
+            "R0_ohm": 0.03420487349218085,
+            "R1_ohm": 0.1222747508537389,
+            "tau1_s": 0.19795156004549438,
+            "R2_ohm": 0.07287848075768384,
+            "tau2_s": 0.15849944452196174,
+            "R3_ohm": 0.04483482024374846,
+            "tau3_s": 0.0656999467706898,
+            "H_V": 0.003784709486136818,
+            "gamma_plus": 0.007261075500986092,
+            "gamma_minus": 0.007086693513312802
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 3.5767153493048776
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 3.1134447233619333
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 2.7298976809254896
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 26.19675030648151,
+            "max_SOC_pp": 1.23925288879001,
+            "joint_within_target": 803836,
+            "Q_3sd_misses": 1430,
+            "SOC_3sd_misses": 340206,
+            "final_Q_percent": -0.0023669705182527423,
+            "final_SOC_pp": 0.0014006816294598323,
+            "Q_RMSE_percent": 0.17372369995655315,
+            "SOC_RMSE_pp": 0.03283904400026688,
+            "joint_within_target_fraction": 0.9923901234567901
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4304,
+            "rejected": 4,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 57152,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 7.059510586146879,
+            "max_abs_SOC_replacement_pp": 0.8003383963406829,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.0023669705182527423,
+            "R0_ohm": 0.9174981184074893,
+            "R1_ohm": 0.6356610151988518,
+            "tau1_s": 7.286432243545216,
+            "R2_ohm": -0.5429475801619454,
+            "tau2_s": 1.529867991962286,
+            "R3_ohm": -0.6424601075790348,
+            "tau3_s": 1.2899736873969392,
+            "H_V": 0.03303208403326874,
+            "gamma_plus": -0.20031655006450544,
+            "gamma_minus": 0.06034425849190672
+          },
+          "final_C_errors_percent": [
+            6.608761905326888,
+            2.084131312653681,
+            1.9449291891368459
+          ],
+          "final_Q_log_SD_percent": 0.002066485016114541,
+          "final_SOC_SD_pp": 0.0002708225479151023,
+          "Q_H_log_correlation": -0.9609342649170715,
+          "final_SOC_standardized_error": 5.171953518061279,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00016479606896983856,
+            "R0_ohm": 0.14961418108038957,
+            "R1_ohm": 0.2872606645396491,
+            "tau1_s": 0.7142313646629067,
+            "R2_ohm": 0.10854137561015775,
+            "tau2_s": 0.2019292846614451,
+            "R3_ohm": 0.053276397574564954,
+            "tau3_s": 0.08257119721609918,
+            "H_V": 0.004004362392714955,
+            "gamma_plus": 0.006750488168594249,
+            "gamma_minus": 0.008144174509154094
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.12648226879157287
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.1100997742088977
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.09653651983220102
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 23.87559284186257,
+            "max_SOC_pp": 0.6707420129197672,
+            "joint_within_target": 806780,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 338137,
+            "final_Q_percent": -0.002366993613234225,
+            "final_SOC_pp": 0.001400683732943886,
+            "Q_RMSE_percent": 0.17560244136535122,
+            "SOC_RMSE_pp": 0.016240495631215362,
+            "joint_within_target_fraction": 0.9960246913580247
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4306,
+            "rejected": 2,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 57152,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 0.49825583734778534,
+            "max_abs_SOC_replacement_pp": 0.05373089037158385,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.002366993613234225,
+            "R0_ohm": 0.9167184881750501,
+            "R1_ohm": 0.6359542029650722,
+            "tau1_s": 7.281325481576095,
+            "R2_ohm": -0.5425108245643906,
+            "tau2_s": 1.5285656753511345,
+            "R3_ohm": -0.6421997780165167,
+            "tau3_s": 1.2896391237144922,
+            "H_V": 0.033032573595903614,
+            "gamma_plus": -0.20031746773273573,
+            "gamma_minus": 0.060342439260718805
+          },
+          "final_C_errors_percent": [
+            6.603376826147511,
+            2.082373602114873,
+            1.9443253548437234
+          ],
+          "final_Q_log_SD_percent": 0.0020664850254802723,
+          "final_SOC_SD_pp": 0.0002708225538924421,
+          "Q_H_log_correlation": -0.9609342651489013,
+          "final_SOC_standardized_error": 5.171961170930288,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00016479385263797516,
+            "R0_ohm": 0.14982978503707764,
+            "R1_ohm": 0.2886391174205605,
+            "tau1_s": 0.7091877325148475,
+            "R2_ohm": 0.10837512631263047,
+            "tau2_s": 0.20012359816601877,
+            "R3_ohm": 0.05274606895235012,
+            "tau3_s": 0.08275064397731846,
+            "H_V": 0.00402742701219432,
+            "gamma_plus": 0.0067546381754176234,
+            "gamma_minus": 0.00809504793290018
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.12637479238520488
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.11000621858100634
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.09645448937580513
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0003",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.004,
+        "seed": 314159,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 23.869757814907857,
+            "max_SOC_pp": 0.8996334089113933,
+            "joint_within_target": 739029,
+            "Q_3sd_misses": 809510,
+            "SOC_3sd_misses": 744044,
+            "final_Q_percent": 0.07656205324608756,
+            "final_SOC_pp": -0.010382737701930544,
+            "Q_RMSE_percent": 0.3956766112007807,
+            "SOC_RMSE_pp": 0.06481202292029205,
+            "joint_within_target_fraction": 0.9123814814814815
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 0.07656205324608756,
+            "R0_ohm": 20.505333163965656,
+            "R1_ohm": -0.8431573849432272,
+            "tau1_s": 234.48634586824392,
+            "R2_ohm": -21.01633034460325,
+            "tau2_s": 25.291031636947704,
+            "R3_ohm": -0.8277101654704855,
+            "tau3_s": 2.720265807595923,
+            "H_V": -1.4459833148665502,
+            "gamma_plus": 3.4899633550289355,
+            "gamma_minus": 6.256365417852305
+          },
+          "final_C_errors_percent": [
+            237.3305735104688,
+            58.62903329712141,
+            3.5775880328933196
+          ],
+          "final_Q_log_SD_percent": 0.001739954869084136,
+          "final_SOC_SD_pp": 0.000260090426660513,
+          "Q_H_log_correlation": -0.9418829676348217,
+          "final_SOC_standardized_error": -39.919722672002734,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0002086922965225761,
+            "R0_ohm": 0.04191224640725036,
+            "R1_ohm": 0.04542531913569788,
+            "tau1_s": 0.9460939232763116,
+            "R2_ohm": 0.05711331862312194,
+            "tau2_s": 0.205178137675055,
+            "R3_ohm": 0.04744838030491169,
+            "tau3_s": 0.08212345873841453,
+            "H_V": 0.004722636720875506,
+            "gamma_plus": 0.009349487333065731,
+            "gamma_minus": 0.011590551950430635
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 2.8267753457708804
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 2.4606399796758773
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 2.1575123282922157
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 23.869757814907857,
+            "max_SOC_pp": 1.791488887454984,
+            "joint_within_target": 805268,
+            "Q_3sd_misses": 1627,
+            "SOC_3sd_misses": 2351,
+            "final_Q_percent": -0.004591883175930622,
+            "final_SOC_pp": 0.0003193650560895378,
+            "Q_RMSE_percent": 0.2103938200706802,
+            "SOC_RMSE_pp": 0.03815464392014145,
+            "joint_within_target_fraction": 0.994158024691358
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4306,
+            "rejected": 2,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 126336,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 4.708594795057502,
+            "max_abs_SOC_replacement_pp": 1.5275707843229291,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.004591883175930622,
+            "R0_ohm": 0.37035587407900916,
+            "R1_ohm": -1.5736106282952966,
+            "tau1_s": 4.088026020751778,
+            "R2_ohm": -1.8854278343801267,
+            "tau2_s": -3.7135552252980153,
+            "R3_ohm": 1.5585536600471128,
+            "tau3_s": -1.8132896195965587,
+            "H_V": 0.1481387354288044,
+            "gamma_plus": -0.17461754165851717,
+            "gamma_minus": -0.01277950330386135
+          },
+          "final_C_errors_percent": [
+            5.75215314224935,
+            -1.8632577715693044,
+            -3.320097774265718
+          ],
+          "final_Q_log_SD_percent": 0.0020583706433022144,
+          "final_SOC_SD_pp": 0.0002776170213548498,
+          "Q_H_log_correlation": -0.9610485552670984,
+          "final_SOC_standardized_error": 1.1503799534010766,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00017828257887058757,
+            "R0_ohm": 0.14591405426742782,
+            "R1_ohm": 0.2944438370697678,
+            "tau1_s": 0.6998184912887263,
+            "R2_ohm": 0.10521504118771782,
+            "tau2_s": 0.18550118517832448,
+            "R3_ohm": 0.05296577205008158,
+            "tau3_s": 0.07452663773251711,
+            "H_V": 0.004435470246887119,
+            "gamma_plus": 0.00713481697233916,
+            "gamma_minus": 0.008360651595178896
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.06950798324490748
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.05429704022213322
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.0493415869203323
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 14.927426788733412,
+            "max_SOC_pp": 0.7335194652453914,
+            "joint_within_target": 806829,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": -0.004591883247961892,
+            "final_SOC_pp": 0.0003193691312408653,
+            "Q_RMSE_percent": 0.14109736863459088,
+            "SOC_RMSE_pp": 0.01760780042414188,
+            "joint_within_target_fraction": 0.9960851851851852
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4304,
+            "rejected": 4,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 129344,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 1.4273972222826956,
+            "max_abs_SOC_replacement_pp": 0.14173913111896752,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.004591883247972994,
+            "R0_ohm": 0.37089859559051863,
+            "R1_ohm": -1.574523791624871,
+            "tau1_s": 4.091034801866655,
+            "R2_ohm": -1.8857610262697722,
+            "tau2_s": -3.7136040971077255,
+            "R3_ohm": 1.558627820291414,
+            "tau3_s": -1.8134061788921962,
+            "H_V": 0.14813852713524422,
+            "gamma_plus": -0.174617862977533,
+            "gamma_minus": -0.012778888294839863
+          },
+          "final_C_errors_percent": [
+            5.756191193321802,
+            -1.8629743143880995,
+            -3.320283142413516
+          ],
+          "final_Q_log_SD_percent": 0.0020583706618015883,
+          "final_SOC_SD_pp": 0.0002776170216373212,
+          "Q_H_log_correlation": -0.9610485550302924,
+          "final_SOC_standardized_error": 1.1503946312704452,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00017814474302541944,
+            "R0_ohm": 0.1455477814366439,
+            "R1_ohm": 0.2945372070773007,
+            "tau1_s": 0.7037768777356026,
+            "R2_ohm": 0.10510391753634774,
+            "tau2_s": 0.18365949589417285,
+            "R3_ohm": 0.052622339535802684,
+            "tau3_s": 0.07356479390126403,
+            "H_V": 0.004436082434224979,
+            "gamma_plus": 0.007134815589271426,
+            "gamma_minus": 0.008359039187381494
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.0695137007494373
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.054300387468686484
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.049358215733182324
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0004",
+      "scenario": {
+        "cell": "A",
+        "load": "cycle",
+        "noise_v": 0.002,
+        "seed": 1103
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 33.94924250223441,
+            "max_SOC_pp": 0.9878328664742475,
+            "joint_within_target": 5,
+            "Q_3sd_misses": 792652,
+            "SOC_3sd_misses": 809640,
+            "final_Q_percent": 1.384978539301862,
+            "final_SOC_pp": -0.024709747991247255,
+            "Q_RMSE_percent": 1.3983893966105179,
+            "SOC_RMSE_pp": 0.056453059450895196,
+            "joint_within_target_fraction": 6.172839506172839e-06
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.384978539301862,
+            "R0_ohm": -9.493201583455392,
+            "R1_ohm": 20.526695125508134,
+            "tau1_s": -21.691742144621927,
+            "R2_ohm": 1.41413500459453,
+            "tau2_s": -1.7416540275157377,
+            "R3_ohm": 0.13846605084522068,
+            "tau3_s": -0.21145864667199143,
+            "H_V": -7.090406262494165,
+            "gamma_plus": -6.489947913172312,
+            "gamma_minus": -6.735467296101438
+          },
+          "final_C_errors_percent": [
+            -35.02828748947834,
+            -3.1117842024361853,
+            -0.3494408405852134
+          ],
+          "final_Q_log_SD_percent": 0.053937368836083036,
+          "final_SOC_SD_pp": 0.0034958926881720064,
+          "Q_H_log_correlation": -0.5987503664573927,
+          "final_SOC_standardized_error": -7.068222681677315,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.003108458718747524,
+            "R0_ohm": 0.05007824767163174,
+            "R1_ohm": 0.10350756342386841,
+            "tau1_s": 0.22274906914110035,
+            "R2_ohm": 0.053662825185945943,
+            "tau2_s": 0.09570357485763348,
+            "R3_ohm": 0.020068027989898995,
+            "tau3_s": 0.020092520385177615,
+            "H_V": 0.014918928247688545,
+            "gamma_plus": 0.02638843950693026,
+            "gamma_minus": 0.016536301521603076
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 1.3086911572693976
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 1.1391841900146464
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.9988474358105547
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 33.94924250223441,
+            "max_SOC_pp": 0.9878328664742475,
+            "joint_within_target": 59268,
+            "Q_3sd_misses": 26830,
+            "SOC_3sd_misses": 10138,
+            "final_Q_percent": 1.2639184142482662,
+            "final_SOC_pp": -0.002773578789416753,
+            "Q_RMSE_percent": 1.716853019417248,
+            "SOC_RMSE_pp": 0.0403452154748948,
+            "joint_within_target_fraction": 0.07317037037037037
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4259,
+            "rejected": 49,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1410752,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 13.851941673976603,
+            "max_abs_SOC_replacement_pp": 0.7864281155755992,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.2639184142482662,
+            "R0_ohm": -1.5538946666073805,
+            "R1_ohm": 0.060957086253377035,
+            "tau1_s": -8.227329588135168,
+            "R2_ohm": 1.769566405040246,
+            "tau2_s": -1.992288498579886,
+            "R3_ohm": 0.027679426401139295,
+            "tau3_s": -0.28889987374574044,
+            "H_V": -11.220326012696047,
+            "gamma_plus": -3.7230113676720578,
+            "gamma_minus": 2.0204322764059146
+          },
+          "final_C_errors_percent": [
+            -8.28323745418903,
+            -3.6964438746334594,
+            -0.31649169706053915
+          ],
+          "final_Q_log_SD_percent": 0.9317249272384356,
+          "final_SOC_SD_pp": 0.004448171399744348,
+          "Q_H_log_correlation": -0.9988772691242043,
+          "final_SOC_standardized_error": -0.6235323552451599,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.6055261144837012,
+            "R0_ohm": 0.11810911512597985,
+            "R1_ohm": 0.2713832828291377,
+            "tau1_s": 0.46881330003808314,
+            "R2_ohm": 0.06807748747376767,
+            "tau2_s": 0.10525984997446225,
+            "R3_ohm": 0.019883632034192397,
+            "tau3_s": 0.01977982808310408,
+            "H_V": 5.705708187485805,
+            "gamma_plus": 1.5639846440750635,
+            "gamma_minus": 2.064102468612851
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.214213107310523
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.18646735999288566
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.16349633889218837
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 30.425978602495253,
+            "max_SOC_pp": 0.31047268756719815,
+            "joint_within_target": 60984,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 1.2650414544237876,
+            "final_SOC_pp": -0.0027751145847854097,
+            "Q_RMSE_percent": 1.4972504488716964,
+            "SOC_RMSE_pp": 0.013565231510213398,
+            "joint_within_target_fraction": 0.07528888888888889
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4244,
+            "rejected": 64,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1413760,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 2.584207835898665,
+            "max_abs_SOC_replacement_pp": 0.12174698558657937,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.2650414544237876,
+            "R0_ohm": -1.5538392504246157,
+            "R1_ohm": 0.061149939572047174,
+            "tau1_s": -8.226580528365545,
+            "R2_ohm": 1.769321558387138,
+            "tau2_s": -1.9921574696469602,
+            "R3_ohm": 0.027710904453082108,
+            "tau3_s": -0.2889793356734893,
+            "H_V": -11.231168390981539,
+            "gamma_plus": -3.7255841930765143,
+            "gamma_minus": 2.024101113653054
+          },
+          "final_C_errors_percent": [
+            -8.28266562291422,
+            -3.6960834271417053,
+            -0.31660250670845214
+          ],
+          "final_Q_log_SD_percent": 0.9317284135066489,
+          "final_SOC_SD_pp": 0.004448142129720855,
+          "Q_H_log_correlation": -0.9988772774194543,
+          "final_SOC_standardized_error": -0.6238817249662756,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.08224378005339955,
+            "R0_ohm": 0.111745451624852,
+            "R1_ohm": 0.2345388569520695,
+            "tau1_s": 0.4588584314947318,
+            "R2_ohm": 0.06836913118756904,
+            "tau2_s": 0.10582182151877562,
+            "R3_ohm": 0.019907431763691495,
+            "tau3_s": 0.019642060388775917,
+            "H_V": 0.7790497713767043,
+            "gamma_plus": 0.20954065786895626,
+            "gamma_minus": 0.28064654086439567
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.21420546787848105
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.18646071005095355
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.16349050816041932
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0005",
+      "scenario": {
+        "cell": "A",
+        "load": "cycle",
+        "noise_v": 0.002,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 22.687399449355528,
+            "max_SOC_pp": 0.6565425563831995,
+            "joint_within_target": 14,
+            "Q_3sd_misses": 807744,
+            "SOC_3sd_misses": 264,
+            "final_Q_percent": 2.816429407953547,
+            "final_SOC_pp": -0.008757925753122286,
+            "Q_RMSE_percent": 2.84887603846941,
+            "SOC_RMSE_pp": 0.012197506020122277,
+            "joint_within_target_fraction": 1.728395061728395e-05
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 2.816429407953547,
+            "R0_ohm": -6.581060229889745,
+            "R1_ohm": 11.539015606745906,
+            "tau1_s": -15.70147348883415,
+            "R2_ohm": 2.003936542296514,
+            "tau2_s": -2.1724484208909822,
+            "R3_ohm": 0.30150806597317725,
+            "tau3_s": -0.43778973248507214,
+            "H_V": -26.090042631365417,
+            "gamma_plus": -7.084261042885343,
+            "gamma_minus": 8.098968490405433
+          },
+          "final_C_errors_percent": [
+            -24.422386146585772,
+            -4.094337046939101,
+            -0.7370754565045989
+          ],
+          "final_Q_log_SD_percent": 0.07418664259531385,
+          "final_SOC_SD_pp": 0.0037044967522148354,
+          "Q_H_log_correlation": -0.8394989049579287,
+          "final_SOC_standardized_error": -2.3641337377030007,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00242931074721497,
+            "R0_ohm": 0.06303823418384383,
+            "R1_ohm": 0.15030438656599837,
+            "tau1_s": 0.29461109419269205,
+            "R2_ohm": 0.06029062515542499,
+            "tau2_s": 0.0994796133369058,
+            "R3_ohm": 0.0184504187709586,
+            "tau3_s": 0.01940370780930678,
+            "H_V": 0.014969704204556452,
+            "gamma_plus": 0.03717585979549076,
+            "gamma_minus": 0.024023904740157045
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.9072361155085851
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.7897272275867695
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.6924402771554272
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 22.687399449355528,
+            "max_SOC_pp": 1.0493467266536438,
+            "joint_within_target": 101481,
+            "Q_3sd_misses": 17675,
+            "SOC_3sd_misses": 11248,
+            "final_Q_percent": 1.7441944243643759,
+            "final_SOC_pp": -0.007724563939992546,
+            "Q_RMSE_percent": 1.3224836105350144,
+            "SOC_RMSE_pp": 0.043280725072101796,
+            "joint_within_target_fraction": 0.1252851851851852
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4174,
+            "rejected": 134,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 688832,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 9.816509851530904,
+            "max_abs_SOC_replacement_pp": 0.7848085326284338,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.7441944243643759,
+            "R0_ohm": 0.4604610447541013,
+            "R1_ohm": -2.4313839938950643,
+            "tau1_s": 6.0408153810687315,
+            "R2_ohm": 0.15527063591840307,
+            "tau2_s": -0.7879896204533443,
+            "R3_ohm": 0.27441589960259805,
+            "tau3_s": -0.4339092604608963,
+            "H_V": -16.32675513418944,
+            "gamma_plus": -3.6868998677873854,
+            "gamma_minus": 4.424781840624581
+          },
+          "final_C_errors_percent": [
+            8.68332433293273,
+            -0.9417979207511418,
+            -0.7063867225840514
+          ],
+          "final_Q_log_SD_percent": 0.9302407963158933,
+          "final_SOC_SD_pp": 0.004442202553286509,
+          "Q_H_log_correlation": -0.9989225737339117,
+          "final_SOC_standardized_error": -1.7389040340534725,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.3472628040847506,
+            "R0_ohm": 0.10208018363902852,
+            "R1_ohm": 0.23507255666212462,
+            "tau1_s": 0.569739320068402,
+            "R2_ohm": 0.08469503663070549,
+            "tau2_s": 0.11617148694789137,
+            "R3_ohm": 0.019942462321419798,
+            "tau3_s": 0.020068510295025987,
+            "H_V": 3.341443852388747,
+            "gamma_plus": 0.7605649756044534,
+            "gamma_minus": 1.1135300291584087
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.1275911201562396
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.11599756480910828
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.10592107312012988
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 23.696183852453068,
+            "max_SOC_pp": 0.7377276234033281,
+            "joint_within_target": 86431,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 1.74366382279183,
+            "final_SOC_pp": -0.0077237994904444385,
+            "Q_RMSE_percent": 1.1238535109676104,
+            "SOC_RMSE_pp": 0.02615999330230108,
+            "joint_within_target_fraction": 0.10670493827160493
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4165,
+            "rejected": 143,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 688832,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 1.6143460432188919,
+            "max_abs_SOC_replacement_pp": 0.15550542951378032,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.74366382279183,
+            "R0_ohm": 0.46059238754916354,
+            "R1_ohm": -2.4315894963663376,
+            "tau1_s": 6.041819952823957,
+            "R2_ohm": 0.15521934966093998,
+            "tau2_s": -0.7880044624826166,
+            "R3_ohm": 0.2744107545845642,
+            "tau3_s": -0.4339077284913784,
+            "H_V": -16.32176772766384,
+            "gamma_plus": -3.685538332654703,
+            "gamma_minus": 4.422916109643893
+          },
+          "final_C_errors_percent": [
+            8.684582853663203,
+            -0.9417620152680994,
+            -0.706380100112991
+          ],
+          "final_Q_log_SD_percent": 0.9302407940423238,
+          "final_SOC_SD_pp": 0.004442215787707316,
+          "Q_H_log_correlation": -0.9989225736926372,
+          "final_SOC_standardized_error": -1.7387267660022407,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.08013224418997565,
+            "R0_ohm": 0.10259085508070379,
+            "R1_ohm": 0.22140474650344122,
+            "tau1_s": 0.5658993201371267,
+            "R2_ohm": 0.08506024415013119,
+            "tau2_s": 0.11571535001980993,
+            "R3_ohm": 0.019667385000174516,
+            "tau3_s": 0.020198078528670393,
+            "H_V": 0.7602432688414279,
+            "gamma_plus": 0.17100274970373402,
+            "gamma_minus": 0.2524875638831809
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.12759915376555409
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.11600518758708378
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.1059282956994928
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0006",
+      "scenario": {
+        "cell": "A",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 1103
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 25.005166809181787,
+            "max_SOC_pp": 0.3362740565217903,
+            "joint_within_target": 3464,
+            "Q_3sd_misses": 769071,
+            "SOC_3sd_misses": 809518,
+            "final_Q_percent": 4.247933046499086,
+            "final_SOC_pp": 0.09725153394795072,
+            "Q_RMSE_percent": 3.135513785631694,
+            "SOC_RMSE_pp": 0.14724867934238045,
+            "joint_within_target_fraction": 0.004276543209876543
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 4.247933046499086,
+            "R0_ohm": -10.321677430473308,
+            "R1_ohm": 31.915501501927945,
+            "tau1_s": -8.870031777332532,
+            "R2_ohm": -3.0115793113524636,
+            "tau2_s": 1.8186829204127175,
+            "R3_ohm": -0.09811408187306858,
+            "tau3_s": -0.7598085355051687,
+            "H_V": -36.33258377966584,
+            "gamma_plus": -24.576994593943812,
+            "gamma_minus": 32.055311429064595
+          },
+          "final_C_errors_percent": [
+            -30.917923075677646,
+            4.980246298959035,
+            -0.6623443066674395
+          ],
+          "final_Q_log_SD_percent": 0.16955133226817,
+          "final_SOC_SD_pp": 0.0049784953483628285,
+          "Q_H_log_correlation": -0.8883273860664266,
+          "final_SOC_standardized_error": 19.534322549870765,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.013425501088996466,
+            "R0_ohm": 0.08246092131448599,
+            "R1_ohm": 0.19219108603789598,
+            "tau1_s": 0.39974749121362074,
+            "R2_ohm": 0.09749488059775623,
+            "tau2_s": 0.1887662180666938,
+            "R3_ohm": 0.04397514829605764,
+            "tau3_s": 0.040568618707053083,
+            "H_V": 0.09449363968802352,
+            "gamma_plus": 0.025962863611450615,
+            "gamma_minus": 0.07458203679563526
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 1.422901205952362
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 1.2386012916567972
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 1.0860172876408392
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 25.005166809181787,
+            "max_SOC_pp": 0.999102166772925,
+            "joint_within_target": 55059,
+            "Q_3sd_misses": 49738,
+            "SOC_3sd_misses": 17129,
+            "final_Q_percent": 2.1265194496195683,
+            "final_SOC_pp": -0.004464270734261255,
+            "Q_RMSE_percent": 2.6475580209254193,
+            "SOC_RMSE_pp": 0.05726986653419069,
+            "joint_within_target_fraction": 0.06797407407407408
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4244,
+            "rejected": 64,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 2899712,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 10.878838887619406,
+            "max_abs_SOC_replacement_pp": 0.9245527587357416,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 2.1265194496195683,
+            "R0_ohm": -2.7608366886611835,
+            "R1_ohm": 0.5768670092015205,
+            "tau1_s": -13.014688288424892,
+            "R2_ohm": 3.02971476485705,
+            "tau2_s": -3.518917055063886,
+            "R3_ohm": -0.026894290442291968,
+            "tau3_s": -0.4711208046061288,
+            "H_V": -19.397348151127925,
+            "gamma_plus": -6.510398999105272,
+            "gamma_minus": 4.276863157438915
+          },
+          "final_C_errors_percent": [
+            -13.51359979863258,
+            -6.35606129247932,
+            -0.44434601787245454
+          ],
+          "final_Q_log_SD_percent": 1.7368497933228157,
+          "final_SOC_SD_pp": 0.00870002960647154,
+          "Q_H_log_correlation": -0.9988516374792199,
+          "final_SOC_standardized_error": -0.5131328209435627,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 5.301687898274293,
+            "R0_ohm": 0.2930033451143399,
+            "R1_ohm": 0.8127089149172162,
+            "tau1_s": 0.9100161804072131,
+            "R2_ohm": 0.12624178379853565,
+            "tau2_s": 0.19442446341327857,
+            "R3_ohm": 0.03937867793878866,
+            "tau3_s": 0.04635644625832658,
+            "H_V": 53.53839955749895,
+            "gamma_plus": 20.505427720822304,
+            "gamma_minus": 22.69951316314637
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.38059684389433357
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.33130040263934235
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.2904873158879223
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 31.29654951026113,
+            "max_SOC_pp": 0.37399110431204363,
+            "joint_within_target": 25202,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 2.147300316093914,
+            "final_SOC_pp": -0.004496870784387319,
+            "Q_RMSE_percent": 2.3280018497821198,
+            "SOC_RMSE_pp": 0.02377690031756294,
+            "joint_within_target_fraction": 0.03111358024691358
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4228,
+            "rejected": 80,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 2920768,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 4.746275529301584,
+            "max_abs_SOC_replacement_pp": 0.1460669868406983,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 2.147300316093914,
+            "R0_ohm": -2.7605399152324406,
+            "R1_ohm": 0.5751095400573725,
+            "tau1_s": -13.01512042886117,
+            "R2_ohm": 3.0297684456813023,
+            "tau2_s": -3.519416025344846,
+            "R3_ohm": -0.026790159311429473,
+            "tau3_s": -0.47123169236987783,
+            "H_V": -19.593328562750933,
+            "gamma_plus": -6.570764985159538,
+            "gamma_minus": 4.353893108573392
+          },
+          "final_C_errors_percent": [
+            -13.51251818771898,
+            -6.356594380272695,
+            -0.4445606315598871
+          ],
+          "final_Q_log_SD_percent": 1.7369405130580262,
+          "final_SOC_SD_pp": 0.008699985049018668,
+          "Q_H_log_correlation": -0.9988517582595539,
+          "final_SOC_standardized_error": -0.5168825876194526,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.12803948258084213,
+            "R0_ohm": 0.21259107651831755,
+            "R1_ohm": 0.47244655382498807,
+            "tau1_s": 0.8166047888833912,
+            "R2_ohm": 0.12771101780677166,
+            "tau2_s": 0.1936469497639398,
+            "R3_ohm": 0.038573666986451684,
+            "tau3_s": 0.03877313288924267,
+            "H_V": 1.1618642098438787,
+            "gamma_plus": 0.47264437215655725,
+            "gamma_minus": 0.5422438188730351
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.38055593201033966
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.33126478982789254
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.29045609023915564
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0007",
+      "scenario": {
+        "cell": "A",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 18.609402676477714,
+            "max_SOC_pp": 0.6384760592983207,
+            "joint_within_target": 2476,
+            "Q_3sd_misses": 773346,
+            "SOC_3sd_misses": 808709,
+            "final_Q_percent": -1.1674312209918103,
+            "final_SOC_pp": 0.038700914823930344,
+            "Q_RMSE_percent": 1.1046160803252698,
+            "SOC_RMSE_pp": 0.0764721039314248,
+            "joint_within_target_fraction": 0.00305679012345679
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": -1.1674312209918103,
+            "R0_ohm": -3.4167310115732596,
+            "R1_ohm": -8.618646766186366,
+            "tau1_s": -23.135557742457134,
+            "R2_ohm": 7.618574424727065,
+            "tau2_s": -7.841714101028252,
+            "R3_ohm": 0.6348621607743743,
+            "tau3_s": -1.121372562354228,
+            "H_V": 1.3686926349989248,
+            "gamma_plus": 6.281331353994335,
+            "gamma_minus": 11.681531226923724
+          },
+          "final_C_errors_percent": [
+            -15.886075728301986,
+            -14.365817990433316,
+            -1.745155391898734
+          ],
+          "final_Q_log_SD_percent": 0.10716383037160841,
+          "final_SOC_SD_pp": 0.0060797970718201675,
+          "Q_H_log_correlation": 0.2222551435824288,
+          "final_SOC_standardized_error": 6.365494500352472,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0050987473949968415,
+            "R0_ohm": 0.14580918026650333,
+            "R1_ohm": 0.2181903855584316,
+            "tau1_s": 0.6816124311869731,
+            "R2_ohm": 0.088752850481719,
+            "tau2_s": 0.1463211450520585,
+            "R3_ohm": 0.033913058398154367,
+            "tau3_s": 0.03526367367578498,
+            "H_V": 0.02580134931079332,
+            "gamma_plus": 0.057670072032226884,
+            "gamma_minus": 0.04536206353847759
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.4710155601674809
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.4100077213887915
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.3594986348664625
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 18.609402676477714,
+            "max_SOC_pp": 0.8779888232509858,
+            "joint_within_target": 66523,
+            "Q_3sd_misses": 39368,
+            "SOC_3sd_misses": 12213,
+            "final_Q_percent": 3.1503631721093273,
+            "final_SOC_pp": -0.014921947185053686,
+            "Q_RMSE_percent": 2.2616038717472025,
+            "SOC_RMSE_pp": 0.04695635232581156,
+            "joint_within_target_fraction": 0.08212716049382716
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4025,
+            "rejected": 283,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1404736,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 11.784604134503144,
+            "max_abs_SOC_replacement_pp": 0.9099181794077316,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 3.1503631721093273,
+            "R0_ohm": 1.1273643425768975,
+            "R1_ohm": -5.451666852738946,
+            "tau1_s": 13.450923349030175,
+            "R2_ohm": 0.47123885892759176,
+            "tau2_s": -1.4894841192333086,
+            "R3_ohm": 0.477492952746128,
+            "tau3_s": -0.7720485970195257,
+            "H_V": -29.624913577804058,
+            "gamma_plus": -7.408038225629188,
+            "gamma_minus": 9.896169614724549
+          },
+          "final_C_errors_percent": [
+            19.992515544750987,
+            -1.9515266263552045,
+            -1.2436034310224109
+          ],
+          "final_Q_log_SD_percent": 1.6933557734406888,
+          "final_SOC_SD_pp": 0.008643280665350219,
+          "Q_H_log_correlation": -0.9988863052600127,
+          "final_SOC_standardized_error": -1.7264216867183104,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 4.268980650456497,
+            "R0_ohm": 0.21775207663611226,
+            "R1_ohm": 0.6468477181911401,
+            "tau1_s": 1.1487999166330218,
+            "R2_ohm": 0.16698944313097222,
+            "tau2_s": 0.23843525227361106,
+            "R3_ohm": 0.03850302360562201,
+            "tau3_s": 0.03967787990116989,
+            "H_V": 42.86738950707942,
+            "gamma_plus": 12.037318926906542,
+            "gamma_minus": 15.859876822404145
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.26085641720914765
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.23780256856977933
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.21767627631373185
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 21.863940496599955,
+            "max_SOC_pp": 0.4680807021312128,
+            "joint_within_target": 44689,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 3.1415108047049944,
+            "final_SOC_pp": -0.014908184747242093,
+            "Q_RMSE_percent": 1.800558661611836,
+            "SOC_RMSE_pp": 0.0310509794422028,
+            "joint_within_target_fraction": 0.055171604938271605
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4011,
+            "rejected": 297,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1407744,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 3.78966238247792,
+            "max_abs_SOC_replacement_pp": 0.125403683840708,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 3.1415108047049944,
+            "R0_ohm": 1.1275959028183236,
+            "R1_ohm": -5.451012706562485,
+            "tau1_s": 13.454517017044164,
+            "R2_ohm": 0.4708155304292916,
+            "tau2_s": -1.489005645515895,
+            "R3_ohm": 0.47744208046716086,
+            "tau3_s": -0.7720190655710168,
+            "H_V": -29.545917901857443,
+            "gamma_plus": -7.374508161711891,
+            "gamma_minus": 9.857376995482303
+          },
+          "final_C_errors_percent": [
+            19.995486218093884,
+            -1.9506372727228771,
+            -1.2435240389952917
+          ],
+          "final_Q_log_SD_percent": 1.6934438293150316,
+          "final_SOC_SD_pp": 0.008643451629838293,
+          "Q_H_log_correlation": -0.9988864199550984,
+          "final_SOC_standardized_error": -1.7247953000369836,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.12973523744689727,
+            "R0_ohm": 0.1836862651249209,
+            "R1_ohm": 0.43590996143714855,
+            "tau1_s": 1.1459942425830552,
+            "R2_ohm": 0.16551284200679983,
+            "tau2_s": 0.23330448702058304,
+            "R3_ohm": 0.03792956619522459,
+            "tau3_s": 0.03962540360558542,
+            "H_V": 1.205986713842854,
+            "gamma_plus": 0.3691291997211336,
+            "gamma_minus": 0.47286222307690984
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.26087005019942433
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.2378153750163092
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.2176881852440271
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0008",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1103,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 22.453874825003094,
+            "max_SOC_pp": 1.1420985771150916,
+            "joint_within_target": 749324,
+            "Q_3sd_misses": 806566,
+            "SOC_3sd_misses": 753585,
+            "final_Q_percent": 0.021901506551680328,
+            "final_SOC_pp": 0.002186799093395475,
+            "Q_RMSE_percent": 0.2606971044249489,
+            "SOC_RMSE_pp": 0.045609538515604585,
+            "joint_within_target_fraction": 0.9250913580246913
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 0.021901506551680328,
+            "R0_ohm": -17.329309264131187,
+            "R1_ohm": 43.77244559221709,
+            "tau1_s": -22.98559557522023,
+            "R2_ohm": -19.4684244565171,
+            "tau2_s": -19.41733546471295,
+            "R3_ohm": 12.478056630899204,
+            "tau3_s": -14.23041180461958,
+            "H_V": -0.47476778266705155,
+            "gamma_plus": 1.0290267557593546,
+            "gamma_minus": 2.104225701343987
+          },
+          "final_C_errors_percent": [
+            -46.433126245055114,
+            0.06343970232713936,
+            -23.745492441395555
+          ],
+          "final_Q_log_SD_percent": 0.0009687980322140013,
+          "final_SOC_SD_pp": 0.00021607472296625264,
+          "Q_H_log_correlation": -0.9548016152690231,
+          "final_SOC_standardized_error": 10.120568770725752,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.830601582686382e-05,
+            "R0_ohm": 0.035050598242254274,
+            "R1_ohm": 0.10005797200554628,
+            "tau1_s": 0.14413704936699004,
+            "R2_ohm": 0.06597395810863708,
+            "tau2_s": 0.09702613123738257,
+            "R3_ohm": 0.022637897679317343,
+            "tau3_s": 0.02908603986411846,
+            "H_V": 0.0025211956069734476,
+            "gamma_plus": 0.004570365152453012,
+            "gamma_minus": 0.005920759604830409
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 2.556168595801741
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 2.225083309514445
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 1.9509740195260161
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 22.453874825003094,
+            "max_SOC_pp": 1.3721190848904885,
+            "joint_within_target": 808658,
+            "Q_3sd_misses": 6,
+            "SOC_3sd_misses": 416644,
+            "final_Q_percent": -0.0018568480296354828,
+            "final_SOC_pp": 0.00048481106266207163,
+            "Q_RMSE_percent": 0.10866293370112425,
+            "SOC_RMSE_pp": 0.03697929273780419,
+            "joint_within_target_fraction": 0.9983432098765432
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 2.3424210943299157,
+            "max_abs_SOC_replacement_pp": 1.0713836708605706,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "all_refreshes_accepted"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.0018568480296354828,
+            "R0_ohm": 0.6876718646512847,
+            "R1_ohm": -0.9475488692862521,
+            "tau1_s": 2.5273197151167937,
+            "R2_ohm": 0.044643736465665995,
+            "tau2_s": 0.5365101723409982,
+            "R3_ohm": -0.35402718173814796,
+            "tau3_s": -0.07278874871198271,
+            "H_V": 0.03343457064473032,
+            "gamma_plus": -0.14091230289260404,
+            "gamma_minus": -0.002304354082327542
+          },
+          "final_C_errors_percent": [
+            3.508109637607504,
+            0.4916469463082773,
+            0.2822376309568275
+          ],
+          "final_Q_log_SD_percent": 0.0010699157465902042,
+          "final_SOC_SD_pp": 0.0002218913255558991,
+          "Q_H_log_correlation": -0.9636971776415048,
+          "final_SOC_standardized_error": 2.184903179281506,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.561627684380843e-05,
+            "R0_ohm": 0.058292304518209485,
+            "R1_ohm": 0.13166215594464298,
+            "tau1_s": 0.29231123883895416,
+            "R2_ohm": 0.054840066526748006,
+            "tau2_s": 0.10548758584189201,
+            "R3_ohm": 0.02879041106108593,
+            "tau3_s": 0.03812430904973125,
+            "H_V": 0.002479840935131845,
+            "gamma_plus": 0.0042093266723062924,
+            "gamma_minus": 0.004377403957877754
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.10143538890360736
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.08829706742122578
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.07741970100739291
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 25.330659887587437,
+            "max_SOC_pp": 0.8672937954251614,
+            "joint_within_target": 809349,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 413574,
+            "final_Q_percent": -0.001856853762061128,
+            "final_SOC_pp": 0.00048481119557797214,
+            "Q_RMSE_percent": 0.1378012672092329,
+            "SOC_RMSE_pp": 0.02138235363884976,
+            "joint_within_target_fraction": 0.9991962962962962
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 0.31335406011902395,
+            "max_abs_SOC_replacement_pp": 0.0685582919910277,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "all_refreshes_accepted"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.001856853762061128,
+            "R0_ohm": 0.6875207385588222,
+            "R1_ohm": -0.9475811555479052,
+            "tau1_s": 2.526251659799117,
+            "R2_ohm": 0.044731527754082734,
+            "tau2_s": 0.5361112879411767,
+            "R3_ohm": -0.35394037490696917,
+            "tau3_s": -0.07289079612866622,
+            "H_V": 0.03343468171972397,
+            "gamma_plus": -0.14091266791501633,
+            "gamma_minus": -0.0023047398417852527
+          },
+          "final_C_errors_percent": [
+            3.5070651033794364,
+            0.4911600567899743,
+            0.28204786003152016
+          ],
+          "final_Q_log_SD_percent": 0.0010699157475720952,
+          "final_SOC_SD_pp": 0.00022189132221012018,
+          "Q_H_log_correlation": -0.9636971775760257,
+          "final_SOC_standardized_error": 2.1849038112399897,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.548245297801886e-05,
+            "R0_ohm": 0.058361826235551445,
+            "R1_ohm": 0.13172177143024497,
+            "tau1_s": 0.29294331935427015,
+            "R2_ohm": 0.054872478590707305,
+            "tau2_s": 0.10581176608931431,
+            "R3_ohm": 0.028774718605698024,
+            "tau3_s": 0.03777234675217804,
+            "H_V": 0.0024800430651701227,
+            "gamma_plus": 0.004203166274643038,
+            "gamma_minus": 0.004377471926939435
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.10141309697230982
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.08827766283095284
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.07740268687973284
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0009",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 314159,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 27.562228538125687,
+            "max_SOC_pp": 1.0489432821511713,
+            "joint_within_target": 756908,
+            "Q_3sd_misses": 796460,
+            "SOC_3sd_misses": 751213,
+            "final_Q_percent": 0.018156055923479464,
+            "final_SOC_pp": 0.00216491456100365,
+            "Q_RMSE_percent": 0.30302578517245987,
+            "SOC_RMSE_pp": 0.05231786530903734,
+            "joint_within_target_fraction": 0.9344543209876544
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 0.018156055923479464,
+            "R0_ohm": 0.29929270862243396,
+            "R1_ohm": 5.2629229797181765,
+            "tau1_s": 10.444602687637182,
+            "R2_ohm": -1.5344165508105134,
+            "tau2_s": 4.493288749985913,
+            "R3_ohm": -0.3843032821299164,
+            "tau3_s": 0.7096900699623099,
+            "H_V": -0.36569395951647765,
+            "gamma_plus": 0.725692672185807,
+            "gamma_minus": 2.2376791564882703
+          },
+          "final_C_errors_percent": [
+            4.922606708268384,
+            6.121636707618605,
+            1.0982138238621486
+          ],
+          "final_Q_log_SD_percent": 0.0010110828416568553,
+          "final_SOC_SD_pp": 0.00021805210979629797,
+          "Q_H_log_correlation": -0.9596939872660937,
+          "final_SOC_standardized_error": 9.928427489310197,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00010515586395470281,
+            "R0_ohm": 0.04423091847941011,
+            "R1_ohm": 0.051597391727175215,
+            "tau1_s": 0.20444271350931914,
+            "R2_ohm": 0.04323646556467786,
+            "tau2_s": 0.08988159418218418,
+            "R3_ohm": 0.027223929956532444,
+            "tau3_s": 0.03053692988273162,
+            "H_V": 0.002671387251972897,
+            "gamma_plus": 0.0051283132668261105,
+            "gamma_minus": 0.0050217670858941224
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.12140952477345923
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.1123909424628966
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.10426103443802014
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 27.562228538125687,
+            "max_SOC_pp": 1.5996225365143113,
+            "joint_within_target": 803065,
+            "Q_3sd_misses": 1277,
+            "SOC_3sd_misses": 236041,
+            "final_Q_percent": -0.002108301132774937,
+            "final_SOC_pp": 0.00017634964960544508,
+            "Q_RMSE_percent": 0.16990896937743577,
+            "SOC_RMSE_pp": 0.03312153971745588,
+            "joint_within_target_fraction": 0.9914382716049382
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 2.609670934133503,
+            "max_abs_SOC_replacement_pp": 1.3197784898942633,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "all_refreshes_accepted"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.002108301132774937,
+            "R0_ohm": -0.553985372686272,
+            "R1_ohm": 2.0262092873486237,
+            "tau1_s": 0.13235194138170314,
+            "R2_ohm": -0.6275152775792825,
+            "tau2_s": -0.31936393979218325,
+            "R3_ohm": 0.1220833588040815,
+            "tau3_s": -0.3391816039419071,
+            "H_V": 0.06913953516158866,
+            "gamma_plus": -0.15811761786388434,
+            "gamma_minus": 0.035859054748055286
+          },
+          "final_C_errors_percent": [
+            -1.8562459187648983,
+            0.3100972453771833,
+            -0.4607025216334937
+          ],
+          "final_Q_log_SD_percent": 0.0010715555985112166,
+          "final_SOC_SD_pp": 0.00022251670394107616,
+          "Q_H_log_correlation": -0.9638062596734529,
+          "final_SOC_standardized_error": 0.7925231970546517,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.066384438656355e-05,
+            "R0_ohm": 0.0643656999522513,
+            "R1_ohm": 0.12960308773772386,
+            "tau1_s": 0.30101429788341993,
+            "R2_ohm": 0.0545880660394166,
+            "tau2_s": 0.11268419624004661,
+            "R3_ohm": 0.03168680289721837,
+            "tau3_s": 0.0373354283911518,
+            "H_V": 0.0024725396558922847,
+            "gamma_plus": 0.004036832194026698,
+            "gamma_minus": 0.0047933474952589206
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.08171589476594077
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.07113172185291726
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.06236896421171645
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 18.78176021698842,
+            "max_SOC_pp": 0.6424861071342769,
+            "joint_within_target": 803412,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 232763,
+            "final_Q_percent": -0.002108314488424856,
+            "final_SOC_pp": 0.00017634845712599656,
+            "Q_RMSE_percent": 0.12224323121379481,
+            "SOC_RMSE_pp": 0.024210184639193173,
+            "joint_within_target_fraction": 0.9918666666666667
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4307,
+            "rejected": 1,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 102272,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 0.257064866198447,
+            "max_abs_SOC_replacement_pp": 0.11603021842112593,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.002108314488424856,
+            "R0_ohm": -0.553979127353943,
+            "R1_ohm": 2.0261622004440705,
+            "tau1_s": 0.13241340707412785,
+            "R2_ohm": -0.6275629234705704,
+            "tau2_s": -0.31947196024962876,
+            "R3_ohm": 0.12212219335558938,
+            "tau3_s": -0.33923828548650947,
+            "H_V": 0.0691398549309108,
+            "gamma_plus": -0.15811830392936654,
+            "gamma_minus": 0.035857777181091954
+          },
+          "final_C_errors_percent": [
+            -1.856140378630955,
+            0.3100366382115194,
+            -0.460797742531982
+          ],
+          "final_Q_log_SD_percent": 0.001071555607731073,
+          "final_SOC_SD_pp": 0.00022251670244846948,
+          "Q_H_log_correlation": -0.9638062597445706,
+          "final_SOC_standardized_error": 0.792517843314865,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 9.06760156715115e-05,
+            "R0_ohm": 0.06423818086352115,
+            "R1_ohm": 0.12935076995498734,
+            "tau1_s": 0.301530680445029,
+            "R2_ohm": 0.05466828347522634,
+            "tau2_s": 0.11232828972385717,
+            "R3_ohm": 0.03151428804915035,
+            "tau3_s": 0.03717467674319928,
+            "H_V": 0.002472630710802672,
+            "gamma_plus": 0.004037008000277483,
+            "gamma_minus": 0.0047856468224331105
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.08171497354501289
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.0711309199522464
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.06236826109764948
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0010",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.004,
+        "seed": 1103,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 16.767020828110013,
+            "max_SOC_pp": 1.29214223764349,
+            "joint_within_target": 310152,
+            "Q_3sd_misses": 791735,
+            "SOC_3sd_misses": 795231,
+            "final_Q_percent": 0.44092390408805304,
+            "final_SOC_pp": 0.07744926494418491,
+            "Q_RMSE_percent": 1.0538668332537315,
+            "SOC_RMSE_pp": 0.15246362401774505,
+            "joint_within_target_fraction": 0.3829037037037037
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 0.44092390408805304,
+            "R0_ohm": -45.93249869811085,
+            "R1_ohm": -40.88305784645772,
+            "tau1_s": -91.6851877760254,
+            "R2_ohm": 105.3558590636698,
+            "tau2_s": -42.71546053488407,
+            "R3_ohm": -2.4953620091113793,
+            "tau3_s": 26.863590582845397,
+            "H_V": -9.631758836680914,
+            "gamma_plus": 22.755148547970848,
+            "gamma_minus": 50.59285872146442
+          },
+          "final_C_errors_percent": [
+            -85.93497579360779,
+            -72.10474552500833,
+            30.110313926502897
+          ],
+          "final_Q_log_SD_percent": 0.0012862212388625746,
+          "final_SOC_SD_pp": 0.0004214429020443385,
+          "Q_H_log_correlation": -0.889500248989538,
+          "final_SOC_standardized_error": 183.7716676885372,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0006345579055199583,
+            "R0_ohm": 0.02407508700575426,
+            "R1_ohm": 0.08291449898874195,
+            "tau1_s": 0.025628060644309048,
+            "R2_ohm": 0.0832367751403478,
+            "tau2_s": 0.03942112828806392,
+            "R3_ohm": 0.045370809248096444,
+            "tau3_s": 0.15442967414032777,
+            "H_V": 0.022095206865862117,
+            "gamma_plus": 0.02683749896034034,
+            "gamma_minus": 0.049689576441030225
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 6.775296632384369
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 5.897732832837432
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 5.1711877401490645
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 16.767020828110013,
+            "max_SOC_pp": 1.2867785526946118,
+            "joint_within_target": 808209,
+            "Q_3sd_misses": 357,
+            "SOC_3sd_misses": 115313,
+            "final_Q_percent": -0.002398901557643107,
+            "final_SOC_pp": 0.0003918277379777457,
+            "Q_RMSE_percent": 0.1826531620504644,
+            "SOC_RMSE_pp": 0.029970794422886197,
+            "joint_within_target_fraction": 0.9977888888888888
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4307,
+            "rejected": 1,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 6016,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 5.558523869353073,
+            "max_abs_SOC_replacement_pp": 0.8619575670262947,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.002398901557643107,
+            "R0_ohm": -0.2653840839613286,
+            "R1_ohm": 3.164442499696518,
+            "tau1_s": 1.976306399190686,
+            "R2_ohm": 0.4659823811784092,
+            "tau2_s": 2.4917385851234153,
+            "R3_ohm": -1.1750642786394483,
+            "tau3_s": 1.3379096666145118,
+            "H_V": 0.03505063180369028,
+            "gamma_plus": -0.1470265718527597,
+            "gamma_minus": -0.03772059020030749
+          },
+          "final_C_errors_percent": [
+            -1.1516914856679716,
+            2.016360320112187,
+            2.542854115624582
+          ],
+          "final_Q_log_SD_percent": 0.002158665286425171,
+          "final_SOC_SD_pp": 0.0005054926747104604,
+          "Q_H_log_correlation": -0.9649954352786007,
+          "final_SOC_standardized_error": 0.7751402890302604,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0001981043662018453,
+            "R0_ohm": 0.11144996665083333,
+            "R1_ohm": 0.25631831619575407,
+            "tau1_s": 0.5487368673112831,
+            "R2_ohm": 0.1120970951126394,
+            "tau2_s": 0.2068058543819038,
+            "R3_ohm": 0.056713668166163966,
+            "tau3_s": 0.08106038049782362,
+            "H_V": 0.004965056744566143,
+            "gamma_plus": 0.00852531379639369,
+            "gamma_minus": 0.009379010798308404
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.05812500190317538
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.05441728094695342
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.05098821766428729
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 23.13802289103901,
+            "max_SOC_pp": 0.9947157417386943,
+            "joint_within_target": 809226,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 112806,
+            "final_Q_percent": -0.0023989041315730653,
+            "final_SOC_pp": 0.0003918284271209327,
+            "Q_RMSE_percent": 0.1560288576234266,
+            "SOC_RMSE_pp": 0.019394936409845753,
+            "joint_within_target_fraction": 0.9990444444444444
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": null,
+            "max_abs_Q_replacement_percent": 0.880070915753536,
+            "max_abs_SOC_replacement_pp": 0.06989742118497233,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "all_refreshes_accepted"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.0023989041315730653,
+            "R0_ohm": -0.26554070081091785,
+            "R1_ohm": 3.164404678485866,
+            "tau1_s": 1.9752504524104042,
+            "R2_ohm": 0.4660533480204343,
+            "tau2_s": 2.4912867434874197,
+            "R3_ohm": -1.1749608469418527,
+            "tau3_s": 1.3377814256647858,
+            "H_V": 0.03505064526005963,
+            "gamma_plus": -0.1470268361513316,
+            "gamma_minus": -0.037721214326169594
+          },
+          "final_C_errors_percent": [
+            -1.1526788040715052,
+            2.015838512588375,
+            2.5426170271634962
+          ],
+          "final_Q_log_SD_percent": 0.002158665284634275,
+          "final_SOC_SD_pp": 0.0005054927004009911,
+          "Q_H_log_correlation": -0.9649954347778905,
+          "final_SOC_standardized_error": 0.7751416129453657,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00019811294729146135,
+            "R0_ohm": 0.11158228131779901,
+            "R1_ohm": 0.2564431911404734,
+            "tau1_s": 0.5393115037862473,
+            "R2_ohm": 0.11217311973553942,
+            "tau2_s": 0.20731929554695402,
+            "R3_ohm": 0.056357697587497424,
+            "tau3_s": 0.08096104496811468,
+            "H_V": 0.004964421032095136,
+            "gamma_plus": 0.008527043027213528,
+            "gamma_minus": 0.009392631331191567
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.058121632749525975
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.05441449141285969
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.05098587767821572
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0011",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.004,
+        "seed": 314159,
+        "load_seed": 7
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 29.072913801451318,
+            "max_SOC_pp": 1.6124694086933178,
+            "joint_within_target": 672403,
+            "Q_3sd_misses": 809495,
+            "SOC_3sd_misses": 802654,
+            "final_Q_percent": 0.22499824231478893,
+            "final_SOC_pp": -0.027083645809233836,
+            "Q_RMSE_percent": 1.003069758991738,
+            "SOC_RMSE_pp": 0.27258353131102087,
+            "joint_within_target_fraction": 0.8301271604938272
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 0.22499824231478893,
+            "R0_ohm": 66.73177060735051,
+            "R1_ohm": 155.4690996337421,
+            "tau1_s": 15285.396750946424,
+            "R2_ohm": 1.6872107010163173,
+            "tau2_s": 1514.0909456573513,
+            "R3_ohm": -65.89518256146067,
+            "tau3_s": 70379.70899086219,
+            "H_V": 0.5163941685267792,
+            "gamma_plus": 18.848744751159163,
+            "gamma_minus": 29.663862026737853
+          },
+          "final_C_errors_percent": [
+            5922.410057812854,
+            1487.3096867640004,
+            206556.1684954756
+          ],
+          "final_Q_log_SD_percent": 0.0012657273409831082,
+          "final_SOC_SD_pp": 0.0003850404250162485,
+          "Q_H_log_correlation": -0.8064271273399558,
+          "final_SOC_standardized_error": -70.33974629570628,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00023222760396533404,
+            "R0_ohm": 0.028778031941905837,
+            "R1_ohm": 0.05762593113046967,
+            "tau1_s": 5.387304546811304,
+            "R2_ohm": 0.029624439037243537,
+            "tau2_s": 0.5640759126008237,
+            "R3_ohm": 0.00999283197370554,
+            "tau3_s": 38.534168946357156,
+            "H_V": 0.018083695176448113,
+            "gamma_plus": 0.01931675554734219,
+            "gamma_minus": 0.017533439418809863
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 9.843303836802233
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 8.568359345983806
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 7.512818240331513
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 29.072913801451318,
+            "max_SOC_pp": 1.6484738261515641,
+            "joint_within_target": 792855,
+            "Q_3sd_misses": 4250,
+            "SOC_3sd_misses": 2421,
+            "final_Q_percent": -0.00041351031557779194,
+            "final_SOC_pp": 0.0004967472326478095,
+            "Q_RMSE_percent": 0.296383080105334,
+            "SOC_RMSE_pp": 0.04208478182343967,
+            "joint_within_target_fraction": 0.9788333333333333
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4306,
+            "rejected": 2,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 135360,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 5.8109268278644555,
+            "max_abs_SOC_replacement_pp": 1.277503314452122,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.00041351031557779194,
+            "R0_ohm": -2.4753739198561053,
+            "R1_ohm": 6.6479886530435905,
+            "tau1_s": -3.7785688809666818,
+            "R2_ohm": -1.1298043926911472,
+            "tau2_s": -1.5109566509404315,
+            "R3_ohm": 0.3866949367464345,
+            "tau3_s": -0.8007584496545261,
+            "H_V": 0.030570123360673662,
+            "gamma_plus": -0.12111600382940235,
+            "gamma_minus": 0.07296504686742367
+          },
+          "final_C_errors_percent": [
+            -9.776609634834132,
+            -0.38550774164859414,
+            -1.1828792522247777
+          ],
+          "final_Q_log_SD_percent": 0.0021705911228771463,
+          "final_SOC_SD_pp": 0.0005243092224907472,
+          "Q_H_log_correlation": -0.9649758570573419,
+          "final_SOC_standardized_error": 0.9474318042471128,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0001934999796190063,
+            "R0_ohm": 0.14198751914339972,
+            "R1_ohm": 0.2611177514173328,
+            "tau1_s": 0.5717423533010461,
+            "R2_ohm": 0.10706974485909676,
+            "tau2_s": 0.21993018111875073,
+            "R3_ohm": 0.06233405895771926,
+            "tau3_s": 0.07823892098544667,
+            "H_V": 0.005011113352049179,
+            "gamma_plus": 0.008060986050539459,
+            "gamma_minus": 0.010053165585466794
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.3651312917531957
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.3178380113095236
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.27868336427277984
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 17.647713133422283,
+            "max_SOC_pp": 0.7269256440211036,
+            "joint_within_target": 792425,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": -0.0004135048675690811,
+            "final_SOC_pp": 0.0004967500567887306,
+            "Q_RMSE_percent": 0.19048701382979946,
+            "SOC_RMSE_pp": 0.0276092551704297,
+            "joint_within_target_fraction": 0.9783024691358024
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4306,
+            "rejected": 2,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 135360,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 0.8846711959680318,
+            "max_abs_SOC_replacement_pp": 0.10215980351715448,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.0004135048675690811,
+            "R0_ohm": -2.475256833751449,
+            "R1_ohm": 6.647711695248271,
+            "tau1_s": -3.7779556858141827,
+            "R2_ohm": -1.12997590195697,
+            "tau2_s": -1.5111944693606993,
+            "R3_ohm": 0.38679285510376804,
+            "tau3_s": -0.8008949351107075,
+            "H_V": 0.030569890529852373,
+            "gamma_plus": -0.1211160577023529,
+            "gamma_minus": 0.07296317016376452
+          },
+          "final_C_errors_percent": [
+            -9.77580035739949,
+            -0.38557547738200526,
+            -1.1831115990813212
+          ],
+          "final_Q_log_SD_percent": 0.002170591122884955,
+          "final_SOC_SD_pp": 0.0005243092102666496,
+          "Q_H_log_correlation": -0.9649758569914838,
+          "final_SOC_standardized_error": 0.9474372127395909,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.00019350455666701107,
+            "R0_ohm": 0.14262414145978958,
+            "R1_ohm": 0.26116771248728365,
+            "tau1_s": 0.5708387638185247,
+            "R2_ohm": 0.10744941142133008,
+            "tau2_s": 0.21849581546657465,
+            "R3_ohm": 0.0623921583998599,
+            "tau3_s": 0.07781848047845522,
+            "H_V": 0.00501307753880513,
+            "gamma_plus": 0.008060578575018702,
+            "gamma_minus": 0.010054973251502768
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.3651140209076503
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.31782297745368665
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.27867018244627284
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0012",
+      "scenario": {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.002,
+        "seed": 1103
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 27.007000736214827,
+            "max_SOC_pp": 0.8228466655635147,
+            "joint_within_target": 1,
+            "Q_3sd_misses": 808063,
+            "SOC_3sd_misses": 436326,
+            "final_Q_percent": 2.8230155824475966,
+            "final_SOC_pp": -0.013431208689973495,
+            "Q_RMSE_percent": 2.8246856092137524,
+            "SOC_RMSE_pp": 0.025136166973093135,
+            "joint_within_target_fraction": 1.234567901234568e-06
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 2.8230155824475966,
+            "R0_ohm": -10.818514976569427,
+            "R1_ohm": 15.183844912749667,
+            "tau1_s": -34.519113371589874,
+            "R2_ohm": 5.529814969375346,
+            "tau2_s": -7.467425114545612,
+            "R3_ohm": 0.6346329394556482,
+            "tau3_s": -0.6119606951119017,
+            "H_V": -12.417670280220182,
+            "gamma_plus": -21.641696925653253,
+            "gamma_minus": -16.534893913287917
+          },
+          "final_C_errors_percent": [
+            -43.15098034970869,
+            -12.316178217210695,
+            -1.2387322317929272
+          ],
+          "final_Q_log_SD_percent": 0.0452906358156421,
+          "final_SOC_SD_pp": 0.003334824063734591,
+          "Q_H_log_correlation": -0.5448288963913446,
+          "final_SOC_standardized_error": -4.027561404523452,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0021546575312301527,
+            "R0_ohm": 0.04558536609899275,
+            "R1_ohm": 0.11946351978656655,
+            "tau1_s": 0.16777142296180053,
+            "R2_ohm": 0.04707818403184944,
+            "tau2_s": 0.07820346293982516,
+            "R3_ohm": 0.01913984902019994,
+            "tau3_s": 0.01854787421917692,
+            "H_V": 0.024395248833265718,
+            "gamma_plus": 0.028723629763230684,
+            "gamma_minus": 0.0050428232773440515
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 1.5957905658453853
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 1.3890973229915144
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 1.2179736264980465
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 27.007000736214827,
+            "max_SOC_pp": 0.8228466655635147,
+            "joint_within_target": 60566,
+            "Q_3sd_misses": 31448,
+            "SOC_3sd_misses": 9301,
+            "final_Q_percent": 1.3148656470939546,
+            "final_SOC_pp": -0.0029280244297047453,
+            "Q_RMSE_percent": 1.5749260540315064,
+            "SOC_RMSE_pp": 0.03819334332645495,
+            "joint_within_target_fraction": 0.07477283950617283
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4155,
+            "rejected": 153,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1344576,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 9.834586436185363,
+            "max_abs_SOC_replacement_pp": 0.6729573608426742,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.3148656470939546,
+            "R0_ohm": -1.7166280172037807,
+            "R1_ohm": 0.003696238064909707,
+            "tau1_s": -8.477263932550871,
+            "R2_ohm": 1.8715377582082526,
+            "tau2_s": -3.343048253269454,
+            "R3_ohm": 0.24840996912163238,
+            "tau3_s": -0.4359279886418599,
+            "H_V": -12.425062329661973,
+            "gamma_plus": -4.78008348179928,
+            "gamma_minus": 2.7414527765735164
+          },
+          "final_C_errors_percent": [
+            -8.480646705724105,
+            -5.118785998749242,
+            -0.6826422064691973
+          ],
+          "final_Q_log_SD_percent": 0.867574810837371,
+          "final_SOC_SD_pp": 0.004435234791208676,
+          "Q_H_log_correlation": -0.9988190514184963,
+          "final_SOC_standardized_error": -0.6601734896895525,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.6495187421794943,
+            "R0_ohm": 0.09560751378742488,
+            "R1_ohm": 0.21682343121865644,
+            "tau1_s": 0.4073032481315104,
+            "R2_ohm": 0.07286756986360736,
+            "tau2_s": 0.10472287132233034,
+            "R3_ohm": 0.020405147956609193,
+            "tau3_s": 0.019891378383383375,
+            "H_V": 6.35065141081312,
+            "gamma_plus": 2.229066828200443,
+            "gamma_minus": 2.5994399233556447
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.2532120906476132
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.2204150374089647
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.19326198244306814
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 25.72216112194663,
+            "max_SOC_pp": 0.286383626917075,
+            "joint_within_target": 70330,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 1.316160413227796,
+            "final_SOC_pp": -0.002930093117115007,
+            "Q_RMSE_percent": 1.3956110987529164,
+            "SOC_RMSE_pp": 0.01315624715294012,
+            "joint_within_target_fraction": 0.08682716049382716
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4152,
+            "rejected": 156,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1341568,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 2.8211236225072884,
+            "max_abs_SOC_replacement_pp": 0.07770598985108457,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.316160413227796,
+            "R0_ohm": -1.7164954247289144,
+            "R1_ohm": 0.0037429541297484548,
+            "tau1_s": -8.476260363486421,
+            "R2_ohm": 1.8713063019228926,
+            "tau2_s": -3.34279740403719,
+            "R3_ohm": 0.24839851604363528,
+            "tau3_s": -0.43595657049718683,
+            "H_V": -12.438102663721985,
+            "gamma_plus": -4.784214581288526,
+            "gamma_minus": 2.746316545670502
+          },
+          "final_C_errors_percent": [
+            -8.47968592686158,
+            -5.118324182971312,
+            -0.6826593707941364
+          ],
+          "final_Q_log_SD_percent": 0.8675785946904583,
+          "final_SOC_SD_pp": 0.004435206982694316,
+          "Q_H_log_correlation": -0.9988190616833857,
+          "final_SOC_standardized_error": -0.6606440530392164,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.07339632178165557,
+            "R0_ohm": 0.09329986152728886,
+            "R1_ohm": 0.19090326837092145,
+            "tau1_s": 0.410438123402439,
+            "R2_ohm": 0.07256311265307738,
+            "tau2_s": 0.10527314122177514,
+            "R3_ohm": 0.020433560380606064,
+            "tau3_s": 0.01953831094243519,
+            "H_V": 0.7281235045056871,
+            "gamma_plus": 0.25694002902590674,
+            "gamma_minus": 0.2851213953774326
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.2531925325270251
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.2203980125351923
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.19324705487326788
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0013",
+      "scenario": {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.002,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 23.257621704677923,
+            "max_SOC_pp": 0.6726883857446353,
+            "joint_within_target": 2870,
+            "Q_3sd_misses": 791479,
+            "SOC_3sd_misses": 566022,
+            "final_Q_percent": -0.9021504602867547,
+            "final_SOC_pp": 0.010507684574367904,
+            "Q_RMSE_percent": 0.8938312485257249,
+            "SOC_RMSE_pp": 0.04287487238471418,
+            "joint_within_target_fraction": 0.00354320987654321
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": -0.9021504602867547,
+            "R0_ohm": 16.219322068640054,
+            "R1_ohm": -37.01119166544486,
+            "tau1_s": 78.3426980766886,
+            "R2_ohm": -1.04561663353131,
+            "tau2_s": 2.4906024827280993,
+            "R3_ohm": -0.3907666061017223,
+            "tau3_s": 0.29778351904128364,
+            "H_V": 4.297682708791473,
+            "gamma_plus": 4.97691594589198,
+            "gamma_minus": 4.129741726241254
+          },
+          "final_C_errors_percent": [
+            183.13394520729696,
+            3.573585116652511,
+            0.6912513044048829
+          ],
+          "final_Q_log_SD_percent": 0.05039049778615718,
+          "final_SOC_SD_pp": 0.0035552255169642036,
+          "Q_H_log_correlation": 0.11904042843765164,
+          "final_SOC_standardized_error": 2.955560631591209,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0023970911678971633,
+            "R0_ohm": 0.03295870124268968,
+            "R1_ohm": 0.0967239997121512,
+            "tau1_s": 0.4723718514918036,
+            "R2_ohm": 0.06430886048408507,
+            "tau2_s": 0.09576124656891827,
+            "R3_ohm": 0.0199405046741985,
+            "tau3_s": 0.020013968700545573,
+            "H_V": 0.01694437758031338,
+            "gamma_plus": 0.03564973205088127,
+            "gamma_minus": 0.027196692550091286
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 2.392439368767325
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 2.082560953613382
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 1.826009074449289
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 23.257621704677923,
+            "max_SOC_pp": 1.1824233145974583,
+            "joint_within_target": 82160,
+            "Q_3sd_misses": 18849,
+            "SOC_3sd_misses": 8795,
+            "final_Q_percent": 1.7414892739875398,
+            "final_SOC_pp": -0.007093723921969275,
+            "Q_RMSE_percent": 1.3873140182291956,
+            "SOC_RMSE_pp": 0.04334733409278779,
+            "joint_within_target_fraction": 0.1014320987654321
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4287,
+            "rejected": 21,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 598592,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 9.587014185359779,
+            "max_abs_SOC_replacement_pp": 0.6162054242670578,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.7414892739875398,
+            "R0_ohm": -0.03376463416577824,
+            "R1_ohm": -1.7472620605571088,
+            "tau1_s": 2.809761289108592,
+            "R2_ohm": 0.32978597163757506,
+            "tau2_s": -1.4338790104153398,
+            "R3_ohm": 0.356706634827586,
+            "tau3_s": -0.5375596447649733,
+            "H_V": -17.306745001595935,
+            "gamma_plus": -5.0374929243462985,
+            "gamma_minus": 5.422611343091277
+          },
+          "final_C_errors_percent": [
+            4.638062455291969,
+            -1.7578677807122078,
+            -0.8910877106066861
+          ],
+          "final_Q_log_SD_percent": 0.8631664403527355,
+          "final_SOC_SD_pp": 0.004427259891519602,
+          "Q_H_log_correlation": -0.9988516748311281,
+          "final_SOC_standardized_error": -1.6022831493487142,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.4339493250150691,
+            "R0_ohm": 0.08368001739591563,
+            "R1_ohm": 0.19758040316631867,
+            "tau1_s": 0.4389140631109424,
+            "R2_ohm": 0.07876017474071029,
+            "tau2_s": 0.11295277444658522,
+            "R3_ohm": 0.01958472786772747,
+            "tau3_s": 0.01925130799547148,
+            "H_V": 4.26046459385207,
+            "gamma_plus": 1.2880007675919305,
+            "gamma_minus": 1.5694509674744777
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.10938891851440813
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.09821348206160428
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.08867353387801091
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 20.809853801781596,
+            "max_SOC_pp": 0.878461662315444,
+            "joint_within_target": 55655,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 1.7410399465012771,
+            "final_SOC_pp": -0.007092979138922928,
+            "Q_RMSE_percent": 1.223131013969936,
+            "SOC_RMSE_pp": 0.027304358116390256,
+            "joint_within_target_fraction": 0.06870987654320988
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4273,
+            "rejected": 35,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 598592,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 1.8184990830590233,
+            "max_abs_SOC_replacement_pp": 0.23545282983687965,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.7410399465012771,
+            "R0_ohm": -0.03386873108550681,
+            "R1_ohm": -1.747240859055943,
+            "tau1_s": 2.8091839279723807,
+            "R2_ohm": 0.3298641595336438,
+            "tau2_s": -1.434114692786359,
+            "R3_ohm": 0.35673762468686476,
+            "tau3_s": -0.5375974060859101,
+            "H_V": -17.30235459387588,
+            "gamma_plus": -5.035905668640961,
+            "gamma_minus": 5.42078892648532
+          },
+          "final_C_errors_percent": [
+            4.6374522475161495,
+            -1.7581792491168313,
+            -0.8911559422322024
+          ],
+          "final_Q_log_SD_percent": 0.8631663083343722,
+          "final_SOC_SD_pp": 0.004427269513012782,
+          "Q_H_log_correlation": -0.998851673478983,
+          "final_SOC_standardized_error": -1.6021114409400652,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.0721432908165898,
+            "R0_ohm": 0.08279257372246818,
+            "R1_ohm": 0.18658886658266077,
+            "tau1_s": 0.4337527466916656,
+            "R2_ohm": 0.07927450720820725,
+            "tau2_s": 0.11173944347704948,
+            "R3_ohm": 0.019724935942366795,
+            "tau3_s": 0.01942470942793277,
+            "H_V": 0.7172254911678833,
+            "gamma_plus": 0.22422566950068987,
+            "gamma_minus": 0.2638324091619364
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.10938783585622835
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.09821220277754893
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.08867212294725535
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0014",
+      "scenario": {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 1103
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 27.70709132863565,
+            "max_SOC_pp": 0.3060803940698964,
+            "joint_within_target": 16994,
+            "Q_3sd_misses": 765093,
+            "SOC_3sd_misses": 809481,
+            "final_Q_percent": 3.5360469569814867,
+            "final_SOC_pp": 0.09270215665767578,
+            "Q_RMSE_percent": 2.530269466381879,
+            "SOC_RMSE_pp": 0.13833099996733908,
+            "joint_within_target_fraction": 0.020980246913580247
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": 3.5360469569814867,
+            "R0_ohm": -15.799261543416875,
+            "R1_ohm": 34.11088534990328,
+            "tau1_s": -32.9515022268953,
+            "R2_ohm": 1.661494778792405,
+            "tau2_s": -5.192517333015056,
+            "R3_ohm": 0.6686100786206017,
+            "tau3_s": -1.3106742013578976,
+            "H_V": -30.951910583121954,
+            "gamma_plus": -24.816538154080813,
+            "gamma_minus": 27.126241160902765
+          },
+          "final_C_errors_percent": [
+            -50.00517847736881,
+            -6.741994229694603,
+            -1.96613847994197
+          ],
+          "final_Q_log_SD_percent": 0.16673041959908022,
+          "final_SOC_SD_pp": 0.004950824620657292,
+          "Q_H_log_correlation": -0.8847032232119705,
+          "final_SOC_standardized_error": 18.724589085801277,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.01233899979738922,
+            "R0_ohm": 0.08073571324251982,
+            "R1_ohm": 0.17625724975146653,
+            "tau1_s": 0.2608489464051065,
+            "R2_ohm": 0.09115339810215017,
+            "tau2_s": 0.16652645558784362,
+            "R3_ohm": 0.042417805654326735,
+            "tau3_s": 0.03823417623164102,
+            "H_V": 0.09460865309074343,
+            "gamma_plus": 0.030597053589278632,
+            "gamma_minus": 0.06027764278627329
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 2.3304781268882913
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 2.0286251821747276
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 1.7787176816506656
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 27.70709132863565,
+            "max_SOC_pp": 0.9891044946921168,
+            "joint_within_target": 66790,
+            "Q_3sd_misses": 61420,
+            "SOC_3sd_misses": 13978,
+            "final_Q_percent": 1.8087408928927795,
+            "final_SOC_pp": -0.003624893129738904,
+            "Q_RMSE_percent": 2.2244781898645596,
+            "SOC_RMSE_pp": 0.054299145216267206,
+            "joint_within_target_fraction": 0.08245679012345679
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4164,
+            "rejected": 144,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 2743296,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 9.504172244192615,
+            "max_abs_SOC_replacement_pp": 0.9113684293981628,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.8087408928927795,
+            "R0_ohm": -3.2628914896404293,
+            "R1_ohm": 0.2273683134272897,
+            "tau1_s": -16.148858403397583,
+            "R2_ohm": 3.685386895681786,
+            "tau2_s": -5.606755760247994,
+            "R3_ohm": 0.3380599527176509,
+            "tau3_s": -0.719790666405451,
+            "H_V": -17.288644697709167,
+            "gamma_plus": -7.103208059840094,
+            "gamma_minus": 3.9246510964149106
+          },
+          "final_C_errors_percent": [
+            -16.33907683339918,
+            -8.96186331954244,
+            -1.0542864986841427
+          ],
+          "final_Q_log_SD_percent": 1.6200673247181445,
+          "final_SOC_SD_pp": 0.008687132642363843,
+          "Q_H_log_correlation": -0.9987473501442155,
+          "final_SOC_standardized_error": -0.4172715300859663,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 4.883574180552416,
+            "R0_ohm": 0.24502111369912877,
+            "R1_ohm": 0.6975747878234257,
+            "tau1_s": 0.7313185455954629,
+            "R2_ohm": 0.1333031001582395,
+            "tau2_s": 0.19776718267848895,
+            "R3_ohm": 0.03923209666696903,
+            "tau3_s": 0.04425739328642774,
+            "H_V": 50.49280536808855,
+            "gamma_plus": 22.277920195451436,
+            "gamma_minus": 22.51533962226013
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.4812944722840789
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.41895526726983046
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.367343927434961
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 28.668432246945542,
+            "max_SOC_pp": 0.34705233350266207,
+            "joint_within_target": 61703,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 1.8260529721705998,
+            "final_SOC_pp": -0.00365463654258269,
+            "Q_RMSE_percent": 1.845709757314157,
+            "SOC_RMSE_pp": 0.021928395489212812,
+            "joint_within_target_fraction": 0.07617654320987655
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 4130,
+            "rejected": 178,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 2755328,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 4.421532445334642,
+            "max_abs_SOC_replacement_pp": 0.1332499439773316,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 1.8260529721705998,
+            "R0_ohm": -3.262087040177375,
+            "R1_ohm": 0.2256903252404685,
+            "tau1_s": -16.14594622552471,
+            "R2_ohm": 3.685020780738868,
+            "tau2_s": -5.606323962762161,
+            "R3_ohm": 0.3379981480037264,
+            "tau3_s": -0.7197400250851804,
+            "H_V": -17.460887446546426,
+            "gamma_plus": -7.166305282516062,
+            "gamma_minus": 3.995003990463819
+          },
+          "final_C_errors_percent": [
+            -16.334770553974632,
+            -8.961125409956082,
+            -1.0541750808389594
+          ],
+          "final_Q_log_SD_percent": 1.6201487315649608,
+          "final_SOC_SD_pp": 0.00868708924554728,
+          "Q_H_log_correlation": -0.9987474773585072,
+          "final_SOC_standardized_error": -0.42069747866996277,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.11879331903336836,
+            "R0_ohm": 0.18213112501732343,
+            "R1_ohm": 0.39241531929867907,
+            "tau1_s": 0.6964637607565445,
+            "R2_ohm": 0.13367084649088967,
+            "tau2_s": 0.19016939842840036,
+            "R3_ohm": 0.03898863315405232,
+            "tau3_s": 0.038260416021392143,
+            "H_V": 1.1578519168701362,
+            "gamma_plus": 0.5185586658084184,
+            "gamma_minus": 0.5333739988445769
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.4811758115560005
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.41885197595877444
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.3672533606397993
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0015",
+      "scenario": {
+        "cell": "B",
+        "load": "cycle",
+        "noise_v": 0.004,
+        "seed": 314159
+      },
+      "arms": {
+        "float64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 17.89819279708711,
+            "max_SOC_pp": 0.7581745437051257,
+            "joint_within_target": 509,
+            "Q_3sd_misses": 790469,
+            "SOC_3sd_misses": 809832,
+            "final_Q_percent": -4.079400278862522,
+            "final_SOC_pp": 0.2001313850565678,
+            "Q_RMSE_percent": 3.002987361252475,
+            "SOC_RMSE_pp": 0.2594379617351305,
+            "joint_within_target_fraction": 0.0006283950617283951
+          },
+          "history": null,
+          "final_parameter_errors_percent": {
+            "Q_Ah": -4.079400278862522,
+            "R0_ohm": 12.386069097683027,
+            "R1_ohm": -18.076456648787687,
+            "tau1_s": 80.56095153105562,
+            "R2_ohm": -6.658284180584085,
+            "tau2_s": 6.042359842891432,
+            "R3_ohm": -0.28238643942312125,
+            "tau3_s": -0.9155587960778977,
+            "H_V": 4.131727758049486,
+            "gamma_plus": 21.491024817864137,
+            "gamma_minus": 64.22021117724145
+          },
+          "final_C_errors_percent": [
+            120.40178457244876,
+            13.606610840588008,
+            -0.6349654128757654
+          ],
+          "final_Q_log_SD_percent": 0.15464106268852063,
+          "final_SOC_SD_pp": 0.00472589515928271,
+          "Q_H_log_correlation": 0.3768465265528564,
+          "final_SOC_standardized_error": 42.347825821625605,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.006340911390655709,
+            "R0_ohm": 0.06434028156394268,
+            "R1_ohm": 0.18532680249652922,
+            "tau1_s": 1.0062521243784937,
+            "R2_ohm": 0.13410137425089652,
+            "tau2_s": 0.21460848406187624,
+            "R3_ohm": 0.04150148778256646,
+            "tau3_s": 0.038637185331979004,
+            "H_V": 0.025643712402085655,
+            "gamma_plus": 0.11328004092992716,
+            "gamma_minus": 0.08718518559725896
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 1.8270134354668444
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 1.5903712721425012
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 1.3944525223316877
+            }
+          ]
+        },
+        "field64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 17.89819279708711,
+            "max_SOC_pp": 0.9367526946657656,
+            "joint_within_target": 87875,
+            "Q_3sd_misses": 46351,
+            "SOC_3sd_misses": 30420,
+            "final_Q_percent": 2.81387451667352,
+            "final_SOC_pp": -0.012992793009902748,
+            "Q_RMSE_percent": 1.972573453621997,
+            "SOC_RMSE_pp": 0.04938025186377823,
+            "joint_within_target_fraction": 0.10848765432098766
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 3991,
+            "rejected": 317,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1383680,
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 10.6619871147644,
+            "max_abs_SOC_replacement_pp": 0.8941523697246323,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 2.813874516673498,
+            "R0_ohm": 0.03673998317481608,
+            "R1_ohm": -2.918858149703929,
+            "tau1_s": 7.428227990418801,
+            "R2_ohm": 0.4680590395861328,
+            "tau2_s": -2.3024689193662184,
+            "R3_ohm": 0.5764096326335011,
+            "tau3_s": -0.865998034983595,
+            "H_V": -27.973659428505858,
+            "gamma_plus": -8.94103568016078,
+            "gamma_minus": 10.132506657078121
+          },
+          "final_C_errors_percent": [
+            10.658183394750775,
+            -2.757620666146965,
+            -1.4341411399409143
+          ],
+          "final_Q_log_SD_percent": 1.5692257517627786,
+          "final_SOC_SD_pp": 0.008624125622656869,
+          "Q_H_log_correlation": -0.998762293188495,
+          "final_SOC_standardized_error": -1.5065635147717162,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 4.082541758053557,
+            "R0_ohm": 0.18550683387008554,
+            "R1_ohm": 0.591161807093608,
+            "tau1_s": 0.8432938328520803,
+            "R2_ohm": 0.1626393093625499,
+            "tau2_s": 0.23020002087094327,
+            "R3_ohm": 0.03861081235421171,
+            "tau3_s": 0.0400227410281915,
+            "H_V": 44.55903311534872,
+            "gamma_plus": 15.119862356172446,
+            "gamma_minus": 16.765760533411317
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.22158155706964663
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.19911197246637702
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.17990841932519983
+            }
+          ]
+        },
+        "tangent64": {
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 20.36256032068745,
+            "max_SOC_pp": 0.4229606003434694,
+            "joint_within_target": 70251,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 2.8049017435606505,
+            "final_SOC_pp": -0.012977497654653725,
+            "Q_RMSE_percent": 1.5444543445778487,
+            "SOC_RMSE_pp": 0.029387367917352972,
+            "joint_within_target_fraction": 0.08672962962962963
+          },
+          "history": {
+            "refresh_interval_records": 3008,
+            "attempts": 4308,
+            "accepted": 3973,
+            "rejected": 335,
+            "emergency_attempts": 0,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "last_rejection": {
+              "record": 1380672,
+              "trigger": "scheduled",
+              "reason": "field solve unresolved: round_limit"
+            },
+            "max_abs_Q_replacement_percent": 2.5460267467095985,
+            "max_abs_SOC_replacement_pp": 0.0933884767121751,
+            "accumulated_records": 12958464,
+            "buffered_records": 1536,
+            "status": "some_refreshes_unresolved"
+          },
+          "final_parameter_errors_percent": {
+            "Q_Ah": 2.8049017435606505,
+            "R0_ohm": 0.03615671756238559,
+            "R1_ohm": -2.917804034124405,
+            "tau1_s": 7.4253087791205985,
+            "R2_ohm": 0.46832851986708945,
+            "tau2_s": -2.302834758980876,
+            "R3_ohm": 0.5764601804814307,
+            "tau3_s": -0.8660677504079839,
+            "H_V": -27.889707594428636,
+            "gamma_plus": -8.898422541252193,
+            "gamma_minus": 10.088959140562558
+          },
+          "final_C_errors_percent": [
+            10.653974923353182,
+            -2.758245627924427,
+            -1.434259993144349
+          ],
+          "final_Q_log_SD_percent": 1.5693397598469154,
+          "final_SOC_SD_pp": 0.00862432018117055,
+          "Q_H_log_correlation": -0.9987624710422263,
+          "final_SOC_standardized_error": -1.5047560134638152,
+          "late48_72h_p95_within_bin_parameter_span_percent": {
+            "Q_Ah": 0.11822453212327683,
+            "R0_ohm": 0.1574463895239233,
+            "R1_ohm": 0.37364572428502374,
+            "tau1_s": 0.8313288253585601,
+            "R2_ohm": 0.15572769591847369,
+            "tau2_s": 0.21685623829212533,
+            "R3_ohm": 0.038091099863235556,
+            "tau3_s": 0.03818285552354972,
+            "H_V": 1.1691687609662904,
+            "gamma_plus": 0.4365861813491534,
+            "gamma_minus": 0.48029508902259604
+          },
+          "isolated_RC_step_120mA": [
+            {
+              "temperature_C": 17,
+              "max_abs_RC_step_error_mV": 0.22156238319258056
+            },
+            {
+              "temperature_C": 25,
+              "max_abs_RC_step_error_mV": 0.19909290297428495
+            },
+            {
+              "temperature_C": 33,
+              "max_abs_RC_step_error_mV": 0.17988950469202347
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "replay_diagnostics": {
+    "case_0006": {
+      "interval_hours": [
+        53.35,
+        53.6
+      ],
+      "arms": {
+        "float64": {
+          "span_percent_of_true": {
+            "Q_Ah": 0.013066712022569149,
+            "H_V": 0.07398189950298217,
+            "gamma_plus": 0.03242556784959305,
+            "gamma_minus": 0.05906166778850519
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 3.7629469562538986e-05,
+            "H_V": 0.0004933048680655361,
+            "gamma_plus": 0.0001843617128400865,
+            "gamma_minus": 0.0005251159755914614
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 9.307881145836916e-05,
+            "H_V": 0.0005802136180008688,
+            "gamma_plus": 0.0002633755387897452,
+            "gamma_minus": 0.0005293550392018176
+          },
+          "log_Q_H_increment_correlation": -0.8498911135952093,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 7.450580596923828e-09
+        },
+        "field64": {
+          "span_percent_of_true": {
+            "Q_Ah": 9.12062552084455,
+            "H_V": 108.14592395348765,
+            "gamma_plus": 42.29761490876521,
+            "gamma_minus": 40.69274050300862
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 1.0927914071185985,
+            "H_V": 9.086521033050765,
+            "gamma_plus": 4.455386941334005,
+            "gamma_minus": 5.184573918775316
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 0.005409338354223081,
+            "H_V": 0.04770687380069205,
+            "gamma_plus": 0.022757464588218923,
+            "gamma_minus": 0.02546884780001335
+          },
+          "log_Q_H_increment_correlation": -0.9999978603993407,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 2.2351741790771484e-08
+        },
+        "tangent64": {
+          "span_percent_of_true": {
+            "Q_Ah": 0.10230898895664531,
+            "H_V": 0.9192376305606196,
+            "gamma_plus": 0.4389706658083252,
+            "gamma_minus": 0.4956383300644518
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 0.0009015620134888991,
+            "H_V": 0.008061822031216082,
+            "gamma_plus": 0.0033566045292587887,
+            "gamma_minus": 0.004208443886710711
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 0.0002652507816502947,
+            "H_V": 0.002575823040150027,
+            "gamma_plus": 0.0009871895359161442,
+            "gamma_minus": 0.001173771385644784
+          },
+          "log_Q_H_increment_correlation": -0.997343551856974,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 1.4901161193847656e-08
+        }
+      },
+      "result_identity": {
+        "bytes": 3228,
+        "sha256": "8c4cea6b04306d8b905fa89829391d0624496f2a0f5ef3a13f11c4032b913af2"
+      },
+      "plot": "experiments/field_tangent_native_001/review72h001/case_0006_Q_H_gamma.png"
+    },
+    "case_0007": {
+      "interval_hours": [
+        52.7,
+        52.95
+      ],
+      "arms": {
+        "float64": {
+          "span_percent_of_true": {
+            "Q_Ah": 0.002498143202278591,
+            "H_V": 0.0208964273106238,
+            "gamma_plus": 0.07800719025443659,
+            "gamma_minus": 0.044063539286565145
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 2.1522143023311457e-05,
+            "H_V": 0.0003288283130009617,
+            "gamma_plus": 0.0007032387402627904,
+            "gamma_minus": 0.0006907725182312419
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 1.931528386678316e-05,
+            "H_V": 0.00026261264439719767,
+            "gamma_plus": 0.0008262288054616818,
+            "gamma_minus": 0.0005683229489461539
+          },
+          "log_Q_H_increment_correlation": -0.6232963253358306,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 2.9802322387695312e-08
+        },
+        "field64": {
+          "span_percent_of_true": {
+            "Q_Ah": 6.099599690498891,
+            "H_V": 63.611223504735385,
+            "gamma_plus": 15.764722493501171,
+            "gamma_minus": 20.736451673270107
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 0.2640179419849842,
+            "H_V": 2.521336934597283,
+            "gamma_plus": 0.6652201071068786,
+            "gamma_minus": 0.9075022278388634
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 0.0036916042145063166,
+            "H_V": 0.034862151497423,
+            "gamma_plus": 0.009123766258151145,
+            "gamma_minus": 0.012493359931287085
+          },
+          "log_Q_H_increment_correlation": -0.9999897118096541,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 3.725290298461914e-08
+        },
+        "tangent64": {
+          "span_percent_of_true": {
+            "Q_Ah": 0.23193314831562173,
+            "H_V": 2.1719022568048025,
+            "gamma_plus": 0.663160687682196,
+            "gamma_minus": 0.8331573270833559
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 0.0010296277229038253,
+            "H_V": 0.009199370720569533,
+            "gamma_plus": 0.0025134168361140574,
+            "gamma_minus": 0.003469456039661978
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 0.0014110654420251834,
+            "H_V": 0.013175932898446874,
+            "gamma_plus": 0.003449009955369675,
+            "gamma_minus": 0.004727360892697874
+          },
+          "log_Q_H_increment_correlation": -0.9999235426477998,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 2.2351741790771484e-08
+        }
+      },
+      "result_identity": {
+        "bytes": 3230,
+        "sha256": "67d172a691079aad71b2532fdae6075bbc765230bd7f7116287fa18ef4c26c8b"
+      },
+      "plot": "experiments/field_tangent_native_001/review72h001/case_0007_Q_H_gamma.png"
+    },
+    "case_0011": {
+      "interval_hours": [
+        49.45,
+        49.7
+      ],
+      "arms": {
+        "float64": {
+          "span_percent_of_true": {
+            "Q_Ah": 0.004363835000287253,
+            "H_V": 0.10974483400538748,
+            "gamma_plus": 0.22641478279328453,
+            "gamma_minus": 1.1562709260125388
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 8.22349521811816e-07,
+            "H_V": 2.762171287251647e-05,
+            "gamma_plus": 5.3487927420547976e-05,
+            "gamma_minus": 0.00037014228413312367
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 1.0471412403845193e-06,
+            "H_V": 3.860932527022243e-05,
+            "gamma_plus": 5.9118644514910557e-05,
+            "gamma_minus": 0.00021967113388399184
+          },
+          "log_Q_H_increment_correlation": -0.9142113392184353,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 2.9802322387695312e-08
+        },
+        "field64": {
+          "span_percent_of_true": {
+            "Q_Ah": 0.0004614855910856086,
+            "H_V": 0.011610229589109622,
+            "gamma_plus": 0.01948869313548318,
+            "gamma_minus": 0.07485991916460488
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 6.108419359218686e-06,
+            "H_V": 0.00015307670528930117,
+            "gamma_plus": 0.00018783810062927841,
+            "gamma_minus": 0.000371826645739759
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 3.3624246831287508e-06,
+            "H_V": 9.616670084700019e-05,
+            "gamma_plus": 0.00012132112566787256,
+            "gamma_minus": 0.0002935233789802538
+          },
+          "log_Q_H_increment_correlation": -0.9694318194052828,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 2.9802322387695312e-08
+        },
+        "tangent64": {
+          "span_percent_of_true": {
+            "Q_Ah": 0.00046146359938825654,
+            "H_V": 0.011609671278289824,
+            "gamma_plus": 0.019322184107384288,
+            "gamma_minus": 0.07479902582177012
+          },
+          "median_abs_refresh_jump_percentage_points": {
+            "Q_Ah": 4.643761530864765e-06,
+            "H_V": 0.0001534996672436506,
+            "gamma_plus": 0.0001880991586600267,
+            "gamma_minus": 0.0002865003670304844
+          },
+          "median_abs_other_jump_percentage_points": {
+            "Q_Ah": 3.33389672535489e-06,
+            "H_V": 9.427284821672544e-05,
+            "gamma_plus": 0.00012062869049200842,
+            "gamma_minus": 0.00029299644850322437
+          },
+          "log_Q_H_increment_correlation": -0.9690598285259384,
+          "verified_complete_bin_min_max_pairs": 6,
+          "max_physical_bin_mean_difference": 2.9802322387695312e-08
+        }
+      },
+      "result_identity": {
+        "bytes": 3248,
+        "sha256": "ba8383ce3c7553b661afc568a53133c622692b586469921a439b1b026f42f3f3"
+      },
+      "plot": "experiments/field_tangent_native_001/review72h001/case_0011_Q_H_gamma.png"
+    }
+  },
+  "original_artifacts": {
+    "case_0000/result.json": {
+      "bytes": 13418,
+      "sha256": "8154e8c5c9337bb921b22c5f3f4852157251d3d08504d6467fa6bce1bfcd22e0"
+    },
+    "case_0000/scenario.json": {
+      "bytes": 2488,
+      "sha256": "902518528199531aa9eb7d641671b02f44ac8af562535e9b24029b8a1e708600"
+    },
+    "case_0000/plot_summary.npz": {
+      "bytes": 9975447,
+      "sha256": "2515d991aee534e0f017602943fa84df8908e2e7a1f60060127767bd040e6c1f"
+    },
+    "case_0000/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "2e92e89de020a97f8b11db3799dd5bdda7ba42f04f8ed4c03ff939d74342ef67"
+    },
+    "case_0000/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "396375e413bb310bf342892ef85272748b2c767dbd2b0f15cc741acd4fa2faf0"
+    },
+    "case_0000/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "1f7c6d26cf854decaa4ac37cceafc2312288881855bcd47def9e615a5b6157e5"
+    },
+    "case_0000/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "468ae2e44ff2204758b703bdbf217b8356053015ac2d52a5b367ece49fb5ef35"
+    },
+    "case_0001/result.json": {
+      "bytes": 13592,
+      "sha256": "203e7769aa1d380cdbb6a6c18839c6fd1387a61a99cd3765cc016af817cb7878"
+    },
+    "case_0001/scenario.json": {
+      "bytes": 2492,
+      "sha256": "e111a5702f387aa9e153babdef305158114d5e79ecb0efbf81aae6d13909241b"
+    },
+    "case_0001/plot_summary.npz": {
+      "bytes": 9970867,
+      "sha256": "6de029422f1fee94b76a7e59ef4f96bbf0b1048f11bfad3004266aeb7376539b"
+    },
+    "case_0001/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "f02ef6ba880a90360bdf1966eff7b6e9c91af2847230f0f489ed0bc2a86bb87d"
+    },
+    "case_0001/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "932abf50826120864192685cc0385daf8e98619f7f84e0b5dca01241a76b4750"
+    },
+    "case_0001/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "34f42f4f99afc61e795838aecc8e158ab9fa0f5a1925a54e4c8ed31bb0867854"
+    },
+    "case_0001/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "8e25031b57f3054ed1551916f3061a09ad1113fdaff9676b0f0dee09808a73ea"
+    },
+    "case_0002/result.json": {
+      "bytes": 13708,
+      "sha256": "73612638a1ce3be9e672c1969f8f05a2873f65022b80cdff1af6bd7c6a13d454"
+    },
+    "case_0002/scenario.json": {
+      "bytes": 2488,
+      "sha256": "5068b974671b27238bb0268736140c806882f7d49a75bed57467c4fdee8fa8c3"
+    },
+    "case_0002/plot_summary.npz": {
+      "bytes": 10014856,
+      "sha256": "d16fb2517aa64c8be45c26767fd2c272a660e27309f0b5fbeaf2754aaf45875b"
+    },
+    "case_0002/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "c1956d78dfc7d24f559f1a0fceae779eb52369e4e5a87b9e6ad21a9901a2a4f8"
+    },
+    "case_0002/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "c958a744ac9443e3678890136fda4d49956ba06c475beca4206b6cca9040e49a"
+    },
+    "case_0002/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "671490e53dba86b0bbb0e906ede47cdf47c60d3c19e6e806dd3e8998479914ca"
+    },
+    "case_0002/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "2ee17d27b0a581b7a74ec8dc29d54ceb1f9286fd370eda1d6f1da6b1fda6b8b5"
+    },
+    "case_0003/result.json": {
+      "bytes": 13705,
+      "sha256": "d98f72ffd7f8faa7ee5508d14b2d43b15d29137a0367b5d60cef43120d4e9be2"
+    },
+    "case_0003/scenario.json": {
+      "bytes": 2492,
+      "sha256": "bfa92a84c155d16d545c41711128357254aa912ff98f2a7f0b7de508927b76b7"
+    },
+    "case_0003/plot_summary.npz": {
+      "bytes": 10015347,
+      "sha256": "482f8302262d5127c011445a5f9e6b942237ebff29307bf44958ab6af792e0af"
+    },
+    "case_0003/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "a64f8a06bc7f70879a8e0d032560c235be69b1d0c6217e9d69b9c78a806264ef"
+    },
+    "case_0003/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "095abfa6954f31a1dd9d6e575f1aa82e7f5fe1c90bde1e4246207b81e56763c6"
+    },
+    "case_0003/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "9cda4e6ff2177056bb03aca5854099e5bea2153cae89a66f05d2385929f2a89f"
+    },
+    "case_0003/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "10beaf9662252ccbb0805f4e963965aa7918863ba6d619cbec35b88ed8c7272c"
+    },
+    "case_0004/result.json": {
+      "bytes": 9499,
+      "sha256": "732cc211a32c7380ba8d857207f286613e6315ff0f2d5773f40d26768d6475de"
+    },
+    "case_0004/scenario.json": {
+      "bytes": 2442,
+      "sha256": "c6f73a84ac35f8b907bf1fe164571a3de4e5df1d646c091bb19662238af29970"
+    },
+    "case_0004/plot_summary.npz": {
+      "bytes": 9623191,
+      "sha256": "c7a33d567992eb17d12aced8c721324f85f5157f70c66a817530268e4f66a333"
+    },
+    "case_0004/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "574c7a8e2df2ec1d7e48e0b504dae4aaaaac6218499d4f00637f1a6b5c0b713d"
+    },
+    "case_0004/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "78fcec52958d0e7e24d990fad2c8635636208fcfc8c9fc50baebf92a4a0f1591"
+    },
+    "case_0004/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "1d7da817f80e9b6123153a12367c943f1f9a9a1dcd8bdbddbe54cc46641729ca"
+    },
+    "case_0004/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "e444139dfbb9a246da07f597fd41c991e046410baf89321df9578f778ff4dd0d"
+    },
+    "case_0005/result.json": {
+      "bytes": 9495,
+      "sha256": "fb63ddc7900abfdd5f4e95be86938b7ec558c2b0acc48b06806fdcc318aee253"
+    },
+    "case_0005/scenario.json": {
+      "bytes": 2446,
+      "sha256": "24048647b7ccf08eaf9bbd1e164af784d99483eacb5ba3a04244a29b1f9b3646"
+    },
+    "case_0005/plot_summary.npz": {
+      "bytes": 9620423,
+      "sha256": "fa05b27af8e24571c74fd4a3b9d31edb3622aa4cde573a05e5b28a321e6c96d7"
+    },
+    "case_0005/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "4f79a64f3ee25a8b050436a8c2817744a8b0c54aa3b0e1cde3771677a91b6864"
+    },
+    "case_0005/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "7b8875bff5aca226077a51fcdc77fa3cd8582189f73adfb36bdc6fe1282303e0"
+    },
+    "case_0005/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "1f80f36927a62ac33561344b3e1eb1d9f0c6e693e8f1db3e5fdde0ece0433b0e"
+    },
+    "case_0005/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "9a4396d4b55febd09f5377165107e6a5bb1214aaad1e67b6555e79b34d4b0327"
+    },
+    "case_0006/result.json": {
+      "bytes": 9505,
+      "sha256": "a0315576b83be68a99e7b412bb0f03b21fc3325387d76cb0ba3e5119eb3e492f"
+    },
+    "case_0006/scenario.json": {
+      "bytes": 2442,
+      "sha256": "b909ca2c0cabdd65f61cabe3bb66e37877a0ad06c70213d4370592bdce009897"
+    },
+    "case_0006/plot_summary.npz": {
+      "bytes": 9677049,
+      "sha256": "84c18c2b1613e5210debc1c90f561e7eeb35f5df077fcfdce45fe4b8940697a9"
+    },
+    "case_0006/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "d823fcece8d7ad088a9e9ed3c8a1c9c78ecb2f25ff9ae27c37745792bb991c6a"
+    },
+    "case_0006/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "a8bc6a6c7bdf57d5f1a6daae1649ba458cecc793520e97f34bb5b031683a0669"
+    },
+    "case_0006/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "9db58ad1d28dfec65fa444f758ca492c22dc77df4639ab2d687cf32a2211b72a"
+    },
+    "case_0006/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "7951568e0bd737245e7f03a578f3dc44c4d207e72b92723a65b94b607bf6bd1b"
+    },
+    "case_0007/result.json": {
+      "bytes": 9522,
+      "sha256": "3f5f918512ddb2b0ee20e4424300fc76d559f61643673b853cd31d27f11458a1"
+    },
+    "case_0007/scenario.json": {
+      "bytes": 2446,
+      "sha256": "0da9b400aba0d364238a1454e56243626a083b8013c089256255740b61fe91ec"
+    },
+    "case_0007/plot_summary.npz": {
+      "bytes": 9669429,
+      "sha256": "0210fe175c781896a6c1b9a8a0eae1b4599ce154894a577253a608ceda84294a"
+    },
+    "case_0007/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "abf5f60bfd5c8da56714803dd77c53cfda911bcaa5bd61052a82a81bd9259711"
+    },
+    "case_0007/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "d6ce8e991eda2fd5e8c01daec7569da7f20c4e934540da1c5a25c773f0bb8e54"
+    },
+    "case_0007/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "4291d79c971f7dc87a68daef9b26f97681448ed7946061e31792445575fa37ce"
+    },
+    "case_0007/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "9a354291eb48e8fb0f27dd5af8ca69116f31bb17571da6dcb2e5e5ddfc981268"
+    },
+    "case_0008/result.json": {
+      "bytes": 13403,
+      "sha256": "411872c828804869d61901f048d1a017c3db8c70be1c8b955c0da4400f5d0249"
+    },
+    "case_0008/scenario.json": {
+      "bytes": 2506,
+      "sha256": "a4d61267df2ae86c7a72b262d3a03f7796f6d37d0f4dd5704cd06eda72269230"
+    },
+    "case_0008/plot_summary.npz": {
+      "bytes": 9980702,
+      "sha256": "75cc7f99f5eb64fb817e45fd2041e0e7429998d4d7f127fa04efa879a3293d8d"
+    },
+    "case_0008/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "72afb65f31befa4d86da7697b9ff31c3fe0c82102e5893c13f6dded20b8678f2"
+    },
+    "case_0008/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "1d72922166c259e73089adeb2573d1a46d5c71e049080f41bb21b42525bb89ac"
+    },
+    "case_0008/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "241b6b90c8f1a614b1a753d429eda715fcc56e476180019aee7a00d700f150d3"
+    },
+    "case_0008/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "e1c04d7b7d8cef5ae15f3da4b9124de80b63c7c9a571a04eed4afc26f6bd31ae"
+    },
+    "case_0009/result.json": {
+      "bytes": 13600,
+      "sha256": "ccc2f7937db960eedf358c45809e5b7f345a6514b6344eeecb827c7c0ebbd25f"
+    },
+    "case_0009/scenario.json": {
+      "bytes": 2510,
+      "sha256": "4f094d57830e6657fb3208478a6cefcec7030935a6763a31d355ff88b79a6fb0"
+    },
+    "case_0009/plot_summary.npz": {
+      "bytes": 9974345,
+      "sha256": "019681c1c01b2fba1f9c6718bee82c0352a7c09721430b9b2d579ab5bf561f68"
+    },
+    "case_0009/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "53e673b60b133dc4767fd8c01ecd4cafcebe3d3e511ddd0aae1aa574b37b50b6"
+    },
+    "case_0009/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "688d27a647209a4c617569ad1848147408bbc8935d5586006fb54008b17baba5"
+    },
+    "case_0009/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "e401c0591eeb01017cdd8693601467d77bf9773df15ea08041650891c108c70f"
+    },
+    "case_0009/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "7f51dee1b182fb65bd8a190880e840cc5ead42140439e8f1712c61ea0cde8426"
+    },
+    "case_0010/result.json": {
+      "bytes": 13528,
+      "sha256": "84b6b0bb83f4ea006942a5eb2021c87769816ca2b047b79790f6aa76f518e8bf"
+    },
+    "case_0010/scenario.json": {
+      "bytes": 2506,
+      "sha256": "63808e2146af9570841757ed4b7f36b71249162b54742f1b3317c09ddf9f7b6f"
+    },
+    "case_0010/plot_summary.npz": {
+      "bytes": 10019211,
+      "sha256": "ef830510c1d97dd8d43114daa8d33406edf5c0481a2c655950449fbfcfb078f1"
+    },
+    "case_0010/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "ec21ae584d049cbdd53b99b3942afaa1702003c330b6de7558993b03056b5508"
+    },
+    "case_0010/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "59a42d04064a80c446a4e5fda8f33e694abdb7b9ca049f7b7f0dbfbb50dfa4ce"
+    },
+    "case_0010/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "e359ecea40663647506d6e496a2adffbf9badbf9505caee3c66341c717a4d19c"
+    },
+    "case_0010/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "570a83c4a9989a741e8f311bcca2ea57cb0ba75ca82333b66a2ea5e75a7fba12"
+    },
+    "case_0011/result.json": {
+      "bytes": 13712,
+      "sha256": "8a788fd2b220afa077be8e3a8cc2d273590181e511ac55514bacdce3f34463cb"
+    },
+    "case_0011/scenario.json": {
+      "bytes": 2510,
+      "sha256": "e18e9fac631313532a01c3f4e1dc13a420cd1a020ece437b7f712c4751b850e9"
+    },
+    "case_0011/plot_summary.npz": {
+      "bytes": 10006125,
+      "sha256": "4fe0b2213167d9a4d466c2ee30a946468825711ebb1cc909da6a8f109eb7c55c"
+    },
+    "case_0011/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "95054189236f973527afbc9ae23d3e5d5d480060ba106eadb4c9bfbdd164ab38"
+    },
+    "case_0011/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "81e66dd9be43d900a15ecc0caa232e1bf911ead2c2405ba89eeff20d15886d64"
+    },
+    "case_0011/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "749ad563c0d94b572fbe7177919ef98d47d63507b862e5f11e9b55188744d5f8"
+    },
+    "case_0011/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "239e599e06f4555b456f437dba6d5eb8a5c8e1a5942ed758224c2c11c4d7c094"
+    },
+    "case_0012/result.json": {
+      "bytes": 9505,
+      "sha256": "e14c221af42cbbb262dd1c2974d11a870f7c3b0e86c5666e8441ee37ee8227f2"
+    },
+    "case_0012/scenario.json": {
+      "bytes": 2460,
+      "sha256": "a318156f7fc646f9320467ba6d3b77b94c6d765fb2b44b60018c5df4040c734d"
+    },
+    "case_0012/plot_summary.npz": {
+      "bytes": 9614941,
+      "sha256": "87cbcbc0a9745be3b5adf0e6556c0eae5e3bfd5d950d85b74295087e0199a0ff"
+    },
+    "case_0012/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "b4e88fe82a62cc1d0df600cf6db3cea5ea29020a9bccad61eb63369eec80e745"
+    },
+    "case_0012/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "87a59acf303156d2b49dbe9087f4f8f26b91e87801fc5b6f9ca1102062b9225c"
+    },
+    "case_0012/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "cfdf84b93f58190a890e34048832cb5ad59bfc2969543bfda323a3d28ab8a51c"
+    },
+    "case_0012/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "2649a725d3519823b70b8c6c585dc6678bbda9fa450971298c703774d9fb1810"
+    },
+    "case_0013/result.json": {
+      "bytes": 9518,
+      "sha256": "d57793434286ab50ac20aadd0ce758461949d1313e160c6ce5383ea647177663"
+    },
+    "case_0013/scenario.json": {
+      "bytes": 2464,
+      "sha256": "2d147b27f0fed1417ddc9548c0f7c4fa462bf214e009870ad52c8c1f91f5c5e2"
+    },
+    "case_0013/plot_summary.npz": {
+      "bytes": 9627523,
+      "sha256": "ac573f779b23f3ab4e4cc231a98d9d38ef27d3cb3a92ae72dd0ce60b1419bc39"
+    },
+    "case_0013/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "eb69a7f3cf8fb792a3818142cd6b23082818af20daf1df707cdae4bc8251d204"
+    },
+    "case_0013/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "e961b127945e6dfe5313afed4b932ff72f9b3f362d56c99103d1eb6b5c169892"
+    },
+    "case_0013/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "4c490fe1ef64d51d4778bfe746c5c3175e9edf0ce70cc410200c091c2db3297f"
+    },
+    "case_0013/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "a4a905c63279f2371eb5683bbebc67e149a234cf5bb4157886330707e68231a9"
+    },
+    "case_0014/result.json": {
+      "bytes": 9512,
+      "sha256": "c2005fc7060fb36b407bb95c763e66f4560c60a612099576a9ccef8e5ef7e12f"
+    },
+    "case_0014/scenario.json": {
+      "bytes": 2460,
+      "sha256": "7d5d88cc4aaca1bc3f198087ef816ac7e49216ac619a7b89ca7f4501b7e2e495"
+    },
+    "case_0014/plot_summary.npz": {
+      "bytes": 9673454,
+      "sha256": "b2c75839d5b9674034a71ced26621b6a745b5c48f65c64f5b86a549b73262d3a"
+    },
+    "case_0014/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "e740a6f4d147643899eb96bdbf1355994037ce6a6dc342dcae0dcb303403ceea"
+    },
+    "case_0014/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "b699e7c67a9f89fe4fb23f5744f3cf62f0f92e77bf8680f9521c7ed00936968d"
+    },
+    "case_0014/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "d74e75cc49dacd346fa823120d7a2896d3f46dfb79c03a02c2b020e207cabf83"
+    },
+    "case_0014/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "6c90b37a930fb24c51d9c3a6ecad2a6554b57c45ae85a6f36a47e057472ac2ac"
+    },
+    "case_0015/result.json": {
+      "bytes": 9510,
+      "sha256": "e2ea0fa77c129e25d88b49e73efd443a86e35804481e31bd573dd16002e14a9a"
+    },
+    "case_0015/scenario.json": {
+      "bytes": 2464,
+      "sha256": "b35479296b9dae04636952d3a26a5866f6a5daf8f437aca99664ee4043c000c5"
+    },
+    "case_0015/plot_summary.npz": {
+      "bytes": 9680396,
+      "sha256": "57e74984add1c44f14879f9acf8e492f46da343dd6ae80bcfcb95f36c03691e4"
+    },
+    "case_0015/checkpoints/index.json": {
+      "bytes": 4822,
+      "sha256": "52ad4d313d63dec1a6bdc95060895b0454919b348059ced7c70abec51d0de211"
+    },
+    "case_0015/float64_message.npy": {
+      "bytes": 2312,
+      "sha256": "842a4619a5eb300193340087012defd20827bace87596bce473255c491922f3e"
+    },
+    "case_0015/field64_message.npy": {
+      "bytes": 2312,
+      "sha256": "6a99731bfc84d9ad9f6d65eda1e10e6e943d7da27086804ebe20deebd6520876"
+    },
+    "case_0015/tangent64_message.npy": {
+      "bytes": 2312,
+      "sha256": "0e2d5daf66f3a7e413d6203d9611c6d4150df3f1a6116dd70d8443ed3385b130"
+    }
+  },
+  "response_diagnostic": {
+    "formula": "DeltaV_RC(t)=-DeltaI*(R0+sum Ri*(1-exp(-t/taui)))",
+    "current_step_A": 0.12,
+    "time_grid_s": [
+      0,
+      0.001,
+      60
+    ],
+    "positive_grid_points": 1500,
+    "scope": "Final point parameters; isolated incremental ohmic/Foster step at fixed temperature. Excludes SOC/OCV/hysteresis changes, existing polarization, joint uncertainty, wiring/regulator and cutoff. Not a brownout qualification. Sub-sample times are model extrapolation."
+  },
+  "interpretation": [
+    "48/48 arms complete; candidate reduces SOC RMSE in16/16 and Q RMSE in13/16 cases.",
+    "Large late Q/H/gamma excursions are primarily current field arm in weak cycle controls; replay confirms reset-aligned jumps. Candidate strongly suppresses them.",
+    "Both field arms share weak-cycle capacity/hysteresis ambiguity and late embedded overconfidence. Neither current result proves calibrated brownout bounds.",
+    "Final RC estimates nearly identical between field and tangent; RC accuracy and held-out voltage forecasts remain separate work."
+  ],
+  "recommendation": "Merge as an opt-in implementation; retain current default until explicit promotion review. Next qualify causal proposed-load forecasts with joint uncertainty, keeping weak-Q/H ambiguity and field approximation bias visible.",
+  "limits": [
+    "16 stationary synthetic cases, two noise seeds and one embedded load seed; no aging or real hardware.",
+    "Empirical3SD misses count correlated time outputs, not independent coverage trials.",
+    "Compact-bin span metrics do not identify frequency; full-resolution replays cover selected intervals only.",
+    "Reference-temperature parameter comparisons use truth for scoring only; inference and replay are unchanged."
+  ]
+}
