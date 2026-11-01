@@ -13,6 +13,11 @@ now separates a hysteresis approximation gradient defect from weak-case
 uncertainty loss between field refreshes. Five matched prefixes and a short
 cadence control are complete; no uncertainty repair or default change is promoted.
 
+The follow-up [fixed-origin feedback prototype](experiments/field_feedback_preservation_001/README.md)
+preserves joint uncertainty through five short controls and an hour of weak use.
+It keeps a square-root update in original field coordinates between refreshes;
+native porting and campaign integration remain pending, and defaults are unchanged.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

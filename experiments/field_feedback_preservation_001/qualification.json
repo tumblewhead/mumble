@@ -1,0 +1,364 @@
+{
+  "schema": "field_feedback_preservation_v1",
+  "status": "prototype_qualified_on_five_short_and_one_hour_weak_replays",
+  "branch": "experiment/field-feedback-preservation-001",
+  "base_revision": "18878d1",
+  "report": "experiments/field_feedback_preservation_001/README.md",
+  "production_changes": false,
+  "mainline_changed": false,
+  "tests": {
+    "passed": 6,
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.field_feedback_preservation_001.test_numerics -v"
+  },
+  "gaussian_boundary_modes": [
+    {
+      "start": "boundary_mean",
+      "cost": 649.8959392553431,
+      "stop": "observed_decrement_at_cost_roundoff",
+      "GN_decrement": 1.366392904081199e-15,
+      "observed_decrement": 2.463480405853002e-15,
+      "Hessian_min_eigenvalue": 0.02797353448065465,
+      "Hessian_step_relative_difference": 1.0885729610891143e-06,
+      "observed_curvature_Q_log_SD": 0.015216477185523358,
+      "Q_Ah": 0.05594396435154746,
+      "Q_log_SD": 0.013926125420147784
+    },
+    {
+      "start": "offset",
+      "cost": 649.9207149426113,
+      "stop": "observed_decrement_at_cost_roundoff",
+      "GN_decrement": 1.2396750407200506e-18,
+      "observed_decrement": 4.043513918592108e-18,
+      "Hessian_min_eigenvalue": 0.09114009992889749,
+      "Hessian_step_relative_difference": 1.1734825204286645e-06,
+      "observed_curvature_Q_log_SD": 0.019054081337343525,
+      "Q_Ah": 0.05791701170316805,
+      "Q_log_SD": 0.017146906954929354
+    },
+    {
+      "start": "negative_offset",
+      "cost": 649.8959392554951,
+      "stop": "observed_decrement_at_cost_roundoff",
+      "GN_decrement": 1.7281255542216455e-15,
+      "observed_decrement": 3.1021845032355535e-15,
+      "Hessian_min_eigenvalue": 0.027973506422179772,
+      "Hessian_step_relative_difference": 1.0579337087161898e-06,
+      "observed_curvature_Q_log_SD": 0.015216516302825105,
+      "Q_Ah": 0.05594396434774089,
+      "Q_log_SD": 0.013926125372241499
+    }
+  ],
+  "short": {
+    "cases": [
+      {
+        "label": "owner_case_0000",
+        "status": "complete",
+        "windows": 188,
+        "timing": {
+          "accumulation_s": 0.06065919483080506,
+          "tangent_s": 0.11194707383401692,
+          "oracle_s": 0.5525856867898256,
+          "rolling_s": 0.010489107109606266,
+          "scheduled_refresh_s": 0.0035363060887902975
+        },
+        "max_abs_Q_difference_percent": 0.0001615470771154648,
+        "max_abs_SOC_difference_pp": 1.1729044935293587e-05,
+        "Q_width_ratio_range": [
+          0.996704129371811,
+          1.0004303985468959
+        ]
+      },
+      {
+        "label": "owner_case_0002",
+        "status": "complete",
+        "windows": 188,
+        "timing": {
+          "accumulation_s": 0.060938370996154845,
+          "tangent_s": 0.11220458149909973,
+          "oracle_s": 0.6016321695642546,
+          "rolling_s": 0.01038555079139769,
+          "scheduled_refresh_s": 0.004595199949108064
+        },
+        "max_abs_Q_difference_percent": 0.0001655371470898892,
+        "max_abs_SOC_difference_pp": 1.1406049960083209e-05,
+        "Q_width_ratio_range": [
+          0.9994141901009315,
+          1.0021082901991187
+        ]
+      },
+      {
+        "label": "owner_case_0004",
+        "status": "complete",
+        "windows": 188,
+        "timing": {
+          "accumulation_s": 0.061057146871462464,
+          "tangent_s": 0.11212330323178321,
+          "oracle_s": 0.6669646112713963,
+          "rolling_s": 0.011073022382333875,
+          "scheduled_refresh_s": 0.0051596349803730845
+        },
+        "max_abs_Q_difference_percent": 0.006014192129100149,
+        "max_abs_SOC_difference_pp": 0.00015298627549231725,
+        "Q_width_ratio_range": [
+          0.9806100817364221,
+          1.0031286134603155
+        ]
+      },
+      {
+        "label": "owner_case_0006",
+        "status": "complete",
+        "windows": 188,
+        "timing": {
+          "accumulation_s": 0.06028525298461318,
+          "tangent_s": 0.11250880965963006,
+          "oracle_s": 0.8183138978201896,
+          "rolling_s": 0.01098320062737912,
+          "scheduled_refresh_s": 0.0051891920156776905
+        },
+        "max_abs_Q_difference_percent": 0.0006969766342512784,
+        "max_abs_SOC_difference_pp": 0.00010949912819802066,
+        "Q_width_ratio_range": [
+          0.9907033357875086,
+          1.009074700903774
+        ]
+      },
+      {
+        "label": "weak_B_cycle",
+        "status": "complete",
+        "windows": 84,
+        "timing": {
+          "accumulation_s": 0.0272313883760944,
+          "tangent_s": 0.05012609891127795,
+          "oracle_s": 0.3076417281990871,
+          "rolling_s": 0.0053235708037391305,
+          "scheduled_refresh_s": 0.0
+        },
+        "max_abs_Q_difference_percent": 0.0017841788777062106,
+        "max_abs_SOC_difference_pp": 7.459600848136461e-06,
+        "Q_width_ratio_range": [
+          0.9916342463381134,
+          0.9998585212260073
+        ]
+      }
+    ],
+    "truth_reads": 0
+  },
+  "extended": {
+    "first_record": 439296,
+    "end_record": 566992,
+    "seconds": 3648.457142857143,
+    "windows": 7981,
+    "scheduled_refreshes": 60,
+    "status": "complete",
+    "failures": [],
+    "max_abs_Q_difference_percent": 0.03582603707819043,
+    "max_abs_SOC_difference_pp": 0.00046841761082161426,
+    "Q_width_ratio_range": [
+      0.9408731421685276,
+      1.0793232836943447
+    ],
+    "timing": {
+      "accumulation_s": 2.6165944094536826,
+      "tangent_s": 4.831516813253984,
+      "oracle_s": 29.056554707232863,
+      "rolling_s": 0.5117473321733996,
+      "scheduled_refresh_s": 0.3085411760257557
+    }
+  },
+  "guard_replay": {
+    "numerical_history_and_endpoints_exactly_match_short002": true,
+    "timing": {
+      "accumulation_s": 0.027406083536334336,
+      "tangent_s": 0.05041137686930597,
+      "oracle_s": 0.3084847201826051,
+      "rolling_s": 0.005397664965130389,
+      "scheduled_refresh_s": 0.0
+    }
+  },
+  "weak_Q_at4h": {
+    "tangent": {
+      "Q_Ah": 0.05685733709841584,
+      "Q_log_sd": 0.04277509566102201,
+      "SOC": 0.6304865234458783,
+      "SOC_sd": 0.00041357331137633637
+    },
+    "oracle": {
+      "Q_Ah": 0.05685647574582141,
+      "Q_log_sd": 0.04303326466133747,
+      "SOC": 0.6304864938060208,
+      "SOC_sd": 0.00041372210399857364
+    },
+    "rolling_before_refresh": {
+      "Q_Ah": 0.055626202244060056,
+      "Q_log_sd": 0.011151644678674447,
+      "SOC": 0.6305536521123237,
+      "SOC_sd": 0.0004133747655964834
+    }
+  },
+  "weak_geometry": {
+    "numerical_rank": 13,
+    "singular_values": [
+      0.5021604852109217,
+      0.4594426908288569,
+      0.26231982341074067,
+      0.10740824592165418,
+      0.05816915125978299,
+      0.05459138987300326,
+      0.021124187272143248,
+      0.016823110991707874,
+      0.008411612822967672,
+      0.001974455363719355,
+      0.0014593807398624878,
+      5.358372692669747e-06,
+      2.549849514288167e-07,
+      1.6798166273174232e-17,
+      8.167445531181846e-18,
+      3.147353106082419e-18
+    ],
+    "Q_direction_probe": {
+      "0.25": {
+        "normal_curvature_residual_norm": 2.18300745696249e-09,
+        "dynamic_chart_nonlinearity": [
+          -2.3730597057573729e-07,
+          -2.1731737646926044e-09,
+          -1.1090965978496625e-10,
+          1.7476844706501401e-10,
+          -2.4386820718320934e-05
+        ]
+      },
+      "0.5": {
+        "normal_curvature_residual_norm": 8.726398280381175e-09,
+        "dynamic_chart_nonlinearity": [
+          -9.458551352848607e-07,
+          -8.687012060320943e-09,
+          -4.4368290176343694e-10,
+          6.993681800314366e-10,
+          -9.860981855676354e-05
+        ]
+      },
+      "1.0": {
+        "normal_curvature_residual_norm": 3.486060821072041e-08,
+        "dynamic_chart_nonlinearity": [
+          -3.756685228591014e-06,
+          -3.470265109279018e-08,
+          -1.775085793491854e-09,
+          2.799826749604044e-09,
+          -0.00039481345945388546
+        ]
+      }
+    }
+  },
+  "storage": {
+    "additional_packed_prototype_B": 12504,
+    "additional_factor_anchor_features_B": 2008,
+    "dense_derivative_cache_B": 10496,
+    "existing_field_payload_live_B": 28864,
+    "combined_partial_B": 41368,
+    "complete_SRAM_measured": false
+  },
+  "inference_truth_reads": 0,
+  "scoring": "Separate report.py opens truth only after inference frozen.",
+  "source_identities": {
+    "numerics.py": {
+      "bytes": 5464,
+      "sha256": "4f0accfa4043bd4dec76e1a5e66356c8179d434dbc0f14ff5503caffaff89d4f"
+    },
+    "run.py": {
+      "bytes": 9052,
+      "sha256": "4a6e54138fced3867f21def6a9bca708e6ce990713744c590bf2475ab5a00076"
+    },
+    "test_numerics.py": {
+      "bytes": 4530,
+      "sha256": "699b26ff777d67166cddc209810c3854340a0e85dbd93be57dce84be5b5e059c"
+    },
+    "diagnose_boundary.py": {
+      "bytes": 2488,
+      "sha256": "6384b8004c1e624e3ffd71f7b5579a2b9e2ef0de103ce86003d9359159434003"
+    },
+    "report.py": {
+      "bytes": 2787,
+      "sha256": "9f75b14fd8e0b940918c37929874e420a7322ae9fcb339b02304b5d08c35390e"
+    }
+  },
+  "artifacts": {
+    "gaussian001/result.json": {
+      "bytes": 64332,
+      "sha256": "5c056adf9e37aa492252fd24b85fd8ad976bea4d852cdaaad8d755706ce8410b"
+    },
+    "gaussian002/result.json": {
+      "bytes": 64650,
+      "sha256": "8a226d69943cd9fd509b2feb19c944f439558acd169d4cc76811fdaa1c32e931"
+    },
+    "gaussian002/registration.json": {
+      "bytes": 683,
+      "sha256": "40862aa38d8322d1fa6a2e93a4a3211f3f45ce74c4addd94d363f323355858cf"
+    },
+    "short001/summary.json": {
+      "bytes": 2832,
+      "sha256": "eb7457f57f39377f7bad169a98242aa17399c83caef73135bb71b6b92bd99e95"
+    },
+    "short002/summary.json": {
+      "bytes": 2828,
+      "sha256": "9344cca82419353d1e58698c98c991cbe4d53cc2062033651cd5b9157de39227"
+    },
+    "extended001/summary.json": {
+      "bytes": 591,
+      "sha256": "98e7282ba032fe93186ceb237febcc9cd76a295d376df67d49d35963c13eb307"
+    },
+    "guard003/summary.json": {
+      "bytes": 581,
+      "sha256": "8afc92908d83c905f873f6b2b441ec32ba8977c0119b212e7276b380538b668c"
+    },
+    "report001/scores.json": {
+      "bytes": 7197,
+      "sha256": "41ecaccd37a1b0545025aab9630cb52190c6d4714ee6dc55a4ee66b2f01abb38"
+    },
+    "report001/weak_feedback.png": {
+      "bytes": 355001,
+      "sha256": "c68ec3d8a46d90c643a7fa9acdd72a47b15b2ffb271241722314fae26531a421"
+    },
+    "short002/owner_case_0000/result.json": {
+      "bytes": 170269,
+      "sha256": "92c2756f5b9f680b44aea41804918bf9623d43b3738f71545cc07b1f3788047f"
+    },
+    "short002/owner_case_0002/result.json": {
+      "bytes": 170604,
+      "sha256": "947a13fe2ceef6e19d2c58d649480252248c613ce338c93b97d635b54dff1030"
+    },
+    "short002/owner_case_0004/result.json": {
+      "bytes": 169712,
+      "sha256": "2b572afb2074b8bc78c12c84fcd1656163ce94a51b57171f993c0a1bb97debd9"
+    },
+    "short002/owner_case_0006/result.json": {
+      "bytes": 169625,
+      "sha256": "4214280a13ab8d91b1f732e89fb746b3ac044e953b752619809971b77a545c09"
+    },
+    "short002/weak_B_cycle/result.json": {
+      "bytes": 97769,
+      "sha256": "e409edf1dedda48e3535f6859db96e8f0f41812ab7e93d9768cd4d974752307d"
+    },
+    "extended001/weak_B_cycle/result.json": {
+      "bytes": 5704689,
+      "sha256": "aca36ccda38ce0b65c50deec6ccf22f33f33e600df6cdd9e62c13d4a9d695f50"
+    },
+    "guard003/weak_B_cycle/result.json": {
+      "bytes": 97769,
+      "sha256": "00624885d3aef35a9eb1406ead7fa5be8c97a05062610cdb4ae57675d3d67927"
+    }
+  },
+  "prior_study_artifacts_and_sources_preserved": true,
+  "adaptations": [
+    "short001 uses normal equations, preserved before square-root replacement; source snapshots retained.",
+    "short002 and extended001 use QR factor updates; same numerical results reproduced after source/count/readout guards in guard003.",
+    "gaussian001 independent observed-Newton continuations retained; gaussian002 adds reproducible CLI and observed-curvature widths."
+  ],
+  "limits": [
+    "Local stationary modes, not global marginal posterior or coverage.",
+    "Oracle is existing degree5 approximate field; long-duration hysteresis bias unchanged.",
+    "Shared82D QR every16rows in diagnostics differs from batched production accumulation; measured query speed is not campaign or MCU speed.",
+    "No native C port or opt-in campaign integration yet.",
+    "No new age/drift, weak/strong transition sweep,24/72h attribution or720h qualification.",
+    "Query/refresh failures are explicit; production fallback/checkpoint integration pending."
+  ],
+  "next": "Port/update workspace and structured derivative cache; qualify C parity; integrate opt-in campaign backend with checkpoint parity, then longer mixed/weak controls before default promotion."
+}
