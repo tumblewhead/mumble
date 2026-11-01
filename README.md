@@ -47,8 +47,11 @@ a smaller representation; no campaign or mainline change is promoted.
 
 The [H7 campaign integration](experiments/h7_campaign_001/README.md) adds opt-in
 `--history tangent-h7` and `--history compare-h7`, including native streaming,
-compact checkpoints/replay and plots. Targeted qualification passes; the registered
-eight-case72hour comparison is next. Defaults and mainline remain unchanged.
+compact checkpoints/replay and plots. All eight matched 72-hour cases completed:
+H7 removes the observed Q 3SD misses and greatly reduces SOC misses, while RC
+accuracy is largely unchanged. See the [streaming review](provenance/h7_campaign_001/README.md).
+These correlated traces do not establish calibrated coverage or aging performance.
+Defaults and mainline remain unchanged.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport

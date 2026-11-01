@@ -1,0 +1,67 @@
+{
+  "status": "completed_and_reviewed",
+  "source_revision": "d300f742355a50876cede0f9ba4b921429b055fe",
+  "branch": "implementation/h7-campaign-001",
+  "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MPLCONFIGDIR=/tmp/mumble-h7-mpl python3 -B -m experiments.foster_campaign_001.run --history compare-h7 --hours 72 --jobs 4 --sample-rate-hz 50 --cells A B --loads embedded charge-discharge --seeds 1100 1103 --load-seeds 7 --noise-v .002 --recording compact --checkpoint-hours 3 --summary-bins 2000 --out experiments/h7_campaign_001/run72_001",
+  "campaign_exit_code": 0,
+  "cases_completed": 8,
+  "arms_completed": 16,
+  "aggregates": {
+    "tangent64": {
+      "outputs": 6480000,
+      "arm_failures": 0,
+      "max_final_abs_Q_percent": 0.006284272453027651,
+      "max_final_abs_SOC_pp": 0.00107980087132864,
+      "max_final_abs_Q_local_SD": 7.561970742431788,
+      "Q_3sd_misses": 3973397,
+      "SOC_3sd_misses": 3502106,
+      "refresh_attempts": 34464,
+      "refresh_rejections": 570,
+      "max_final_abs_RC_error_percent": 26.901725366424635,
+      "Q_3sd_miss_fraction": 0.6131785493827161,
+      "SOC_3sd_miss_fraction": 0.5404484567901234
+    },
+    "tangent_h7": {
+      "outputs": 6480000,
+      "arm_failures": 0,
+      "max_final_abs_Q_percent": 0.001793819503859151,
+      "max_final_abs_SOC_pp": 0.00044932164305344635,
+      "max_final_abs_Q_local_SD": 2.050783771469377,
+      "Q_3sd_misses": 0,
+      "SOC_3sd_misses": 34,
+      "refresh_attempts": 34464,
+      "refresh_rejections": 671,
+      "max_final_abs_RC_error_percent": 27.36231205983146,
+      "Q_3sd_miss_fraction": 0.0,
+      "SOC_3sd_miss_fraction": 5.246913580246914e-06
+    }
+  },
+  "campaign_bytes_including_plots": 257224148,
+  "local_uncertainty_plots": "experiments/h7_campaign_001/review002",
+  "identities": {
+    "qualification.json": {
+      "bytes": 3462,
+      "sha256": "2905175d71a57813dd1ecf80848e01f7c93c487348630615735356d57c9552e3"
+    },
+    "prefix24.json": {
+      "bytes": 2177,
+      "sha256": "f75b354153ede5d1c120b16b59279f5c171b77afbac52b07cd36cada38915c5e"
+    },
+    "run72_review.json": {
+      "bytes": 109649,
+      "sha256": "253d0d0500c428e78e0a111a12cc05b69c82224a7860c436996217104a518e7b"
+    },
+    "run72_preplot_review.json": {
+      "bytes": 109648,
+      "sha256": "e52485a7c8a937f0be03b6e2cc812c5ba0ddf7eb92ce2a7e475df7a5e5226048"
+    }
+  },
+  "preplot_receipt_note": "Preserves the initial review taken after all cases completed but before summary plotting finished; final review records the finalized summary identity and artifact sizes. Case evidence is unchanged.",
+  "qualification_limits": [
+    "Stationary cells, two noise seeds, one embedded load seed, 50 Hz, 2 mV noise; correlated time samples do not establish calibrated coverage.",
+    "No aging, indefinite accumulation or M23 resource qualification.",
+    "Q/SOC uncertainty mismatch reduced without covariance inflation; RC accuracy is not repaired.",
+    "Scheduled round_limit rejections remain visible; no reset, evidence drop or truth correction.",
+    "Default and mainline unchanged; no push performed."
+  ]
+}
