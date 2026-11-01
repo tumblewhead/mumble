@@ -77,6 +77,13 @@ transactional flushing and uniform physical-response approximation bounds;
 coverage and ten-year behavior remain open. Capacity guidance is now interpreted
 as +/-3sigma=2.6–3.6 mAh around 60 mAh, without assuming a distribution shape.
 
+The [unattended deployment assurance case](specifications/unattended_assurance_001/README.md)
+organizes twelve required claims: lifetime numerical validity, sound query
+authorization, useful autonomous recovery, aging, resets, faults and bounded
+target resources. Eight conditional lemmas distinguish lifetime risk from
+pointwise uncertainty and safe refusal from useful availability. This is a
+proof/requirements collection; H7 has no deployed trust certificate yet.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

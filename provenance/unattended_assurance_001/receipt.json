@@ -1,0 +1,61 @@
+{
+  "schema": "unattended_assurance_receipt_v1",
+  "status": "deployment_case_and_conditional_lemmas_written_finite_examples_pass",
+  "source_parent": "7d318f90925fbead067c96dfd532bc028a05f798",
+  "branch": "design/unattended-assurance-001",
+  "claims": 12,
+  "conditional_lemmas": 8,
+  "proof_method": "Handwritten conditional derivations; exact rational finite examples/counterexamples. No proof assistant or full program/hardware verification.",
+  "checks_command": [
+    "/usr/sbin/python3",
+    "-B",
+    "specifications/unattended_assurance_001/check_contracts.py"
+  ],
+  "checks": "provenance/unattended_assurance_001/checks.json",
+  "checks_groups": 6,
+  "dependency_graph": "12 claim identifiers resolved; acyclic",
+  "source_identities": {
+    "specifications/unattended_assurance_001/README.md": {
+      "bytes": 10597,
+      "sha256": "98d65842afdedb0011e4b6df262197976c3a056e83433dc72771b8b19dd10b7b"
+    },
+    "specifications/unattended_assurance_001/THEOREMS.md": {
+      "bytes": 13056,
+      "sha256": "d2a31c53b2144f7b2610a1c35dfa8a71995349bd508c2e4953e67619ad2658ea"
+    },
+    "specifications/unattended_assurance_001/check_contracts.py": {
+      "bytes": 5119,
+      "sha256": "c62b323c596fa75cd05dcacb7d609f112d6478450dff40d154b1bc0ef71c7931"
+    },
+    "specifications/unattended_assurance_001/case.json": {
+      "bytes": 8884,
+      "sha256": "a02a65497ac3bbd60df571d02ad5a13c5429020732a930808c28a1e755c848ce"
+    },
+    "provenance/unattended_assurance_001/checks.json": {
+      "bytes": 982,
+      "sha256": "6d53a6eb8d8b15e461b16c6ba7eca4a8a5b5a8b10ee8da0f2ac51c69015574cb"
+    }
+  },
+  "previous_proof_receipt": {
+    "bytes": 15485,
+    "sha256": "3d13df83fe6c65d98c4062f572d66cf9b0e90df01a6d0ff971eba37f91c6699b"
+  },
+  "qualified_implementation_sources_unchanged": 13,
+  "external_reference": {
+    "url": "https://arxiv.org/abs/1810.08240v9",
+    "title": "Time-uniform, nonparametric, nonasymptotic confidence sequences",
+    "authors": "Howard, Ramdas, McAuliffe, Sekhon",
+    "journal": "Annals of Statistics49(2),1055\u20131080(2021)",
+    "use": "Background for time-uniform coverage; D3 states and proves its own sufficient martingale contract, not an H7 implementation certificate."
+  },
+  "production_changed": false,
+  "monitor_implemented": false,
+  "large_experiments_run": false,
+  "release_approved": false,
+  "limits": [
+    "All12 deployment claims remain undischarged",
+    "Conditional lemmas require actual model/implementation correspondence",
+    "Lifetime risk, physical envelope, fallback and recovery requirements need qualification",
+    "No added flash/FRAM history requirement; boot accounting unresolved with SRAM loss"
+  ]
+}

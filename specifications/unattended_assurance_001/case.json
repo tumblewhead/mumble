@@ -1,0 +1,299 @@
+{
+  "schema": "unattended_deployment_case_v1",
+  "status": "requirements_and_conditional_lemmas_not_release_certificate",
+  "source_parent": "7d318f90925fbead067c96dfd532bc028a05f798",
+  "branch": "design/unattended-assurance-001",
+  "scope": "Approximately ten-year unattended battery estimation; stationary H7 is fidelity reference, not aging-qualified firmware.",
+  "target": {
+    "cpu": "baseline Cortex-M23 custom silicon / Verilog simulation",
+    "clock_Hz": 16000000,
+    "SRAM_target_bytes": 10240,
+    "history_policy": "SRAM-only; no persistent working-history requirement added",
+    "nominal_sample_Hz": 35,
+    "mission_years": 10
+  },
+  "requirements_pending": {
+    "alpha_lifetime": null,
+    "query_error_requirements": null,
+    "brownout_voltage_and_margin": null,
+    "fallback_service_policy": null,
+    "reacquisition_deadline": null,
+    "availability_beta": null,
+    "qualified_maximum_rate": null,
+    "sensor_error_and_fault_envelope": null,
+    "aging_rate_and_model_error_envelope": null,
+    "maximum_boots_or_persistent_risk_accounting": null
+  },
+  "proposed_certificate_fields": [
+    "quantity_or_action",
+    "estimate_and_units",
+    "validated_query_enclosure",
+    "error_requirement",
+    "guarantee_type_and_scope",
+    "source_prefix_and_model_configuration_identity",
+    "transported_validity_horizon",
+    "applicable_physical_and_numerical_contracts",
+    "authorization_and_reason",
+    "recovery_requirements",
+    "lifetime_risk_reference_if_statistical"
+  ],
+  "proposed_guarantee_types": [
+    "bounded_error_under_hard_envelope",
+    "simultaneous_statistical_coverage_under_model",
+    "provisional_local_precision_only"
+  ],
+  "proposed_authorizations": [
+    "certified_for_declared_query",
+    "unresolved",
+    "outside_admitted_domain"
+  ],
+  "no_perfect_classifier_claim": "Indistinguishable situations prohibit universal zero false authorization and zero refusal. Soundness and conditional availability are separate requirements.",
+  "theorem_paths": {
+    "D0_D7": "specifications/unattended_assurance_001/THEOREMS.md",
+    "O_E_N": "specifications/h7_proofs_001/claims.json",
+    "O5": "specifications/h7_proofs_001/OWNERSHIP.md"
+  },
+  "claims": [
+    {
+      "id": "A0",
+      "claim": "Declared operating envelope and risk requirements",
+      "depends_on": [],
+      "available_conditional_lemmas": [],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Physical and sensor bounds, rate/gap limits, aging/thermal assumptions",
+        "Lifetime risk and query-specific tolerances",
+        "Fallback load and conditional recovery deadline"
+      ]
+    },
+    {
+      "id": "A1",
+      "claim": "Chronological single-owner evidence",
+      "depends_on": [
+        "A0"
+      ],
+      "available_conditional_lemmas": [
+        "O1",
+        "O2",
+        "O3"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Complete implementation refinement including gaps, reset and source identity"
+      ]
+    },
+    {
+      "id": "A2",
+      "claim": "Lifetime numerical validity",
+      "depends_on": [
+        "A0"
+      ],
+      "available_conditional_lemmas": [
+        "E4",
+        "E5",
+        "E6",
+        "N1",
+        "D6"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Reachable-domain/range bounds for response, feature, QR, solves and libm",
+        "Outward error accounting and overflow/conditioning behavior",
+        "Supported-horizon proof beyond finite numerical witnesses"
+      ]
+    },
+    {
+      "id": "A3",
+      "claim": "Representation and physical evolution fidelity",
+      "depends_on": [
+        "A0",
+        "A1",
+        "A2"
+      ],
+      "available_conditional_lemmas": [
+        "E1",
+        "E2",
+        "E3",
+        "D1",
+        "D5"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Uniform physical/feature/derivative/transport bounds",
+        "Qualified aging and sensor/model discrepancy",
+        "Containment across weak use without arbitrary decay"
+      ]
+    },
+    {
+      "id": "A4",
+      "claim": "Sound query authorization over lifetime",
+      "depends_on": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A7",
+        "A8",
+        "A9",
+        "A10"
+      ],
+      "available_conditional_lemmas": [
+        "D0",
+        "D1",
+        "D2",
+        "D3"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Implemented joint query certificate and applicable lifetime guarantee",
+        "Validity/freshness/source guards with code correspondence",
+        "No conversion of local GN precision into claimed physical coverage"
+      ]
+    },
+    {
+      "id": "A5",
+      "claim": "Useful autonomous reacquisition",
+      "depends_on": [
+        "A0",
+        "A4",
+        "A7",
+        "A8",
+        "A9"
+      ],
+      "available_conditional_lemmas": [
+        "D0",
+        "D4",
+        "D7"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Defined excitation/viable power/sensor/drift class",
+        "Bound N_star and execution latency for certificate recovery",
+        "Bound avoidable refusal; validate against informative held-out cases"
+      ]
+    },
+    {
+      "id": "A6",
+      "claim": "Proposed-load/EOD authorization",
+      "depends_on": [
+        "A4"
+      ],
+      "available_conditional_lemmas": [
+        "D2"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Joint voltage lower bound across entire proposed load horizon",
+        "Actuator/sensor/thermal/model margins",
+        "Qualified system fallback policy"
+      ]
+    },
+    {
+      "id": "A7",
+      "claim": "Fault containment",
+      "depends_on": [
+        "A0",
+        "A1"
+      ],
+      "available_conditional_lemmas": [
+        "O3",
+        "O4",
+        "D7"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Repair field flush partial-commit witness",
+        "Bounded local recovery or explicit quarantine before publication",
+        "Fault injection at every commit/publication boundary under stated fault model"
+      ]
+    },
+    {
+      "id": "A8",
+      "claim": "Reset and history-loss honesty",
+      "depends_on": [
+        "A0",
+        "A1",
+        "A7"
+      ],
+      "available_conditional_lemmas": [
+        "D3",
+        "D5",
+        "D7"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Cold start with aged-cell support rather than original manufacturing prior",
+        "No stale evidence/certificate use after SRAM loss",
+        "Lifetime risk accounting across boots; persistence optional but must be qualified if used"
+      ]
+    },
+    {
+      "id": "A9",
+      "claim": "Bounded resources and deadlines",
+      "depends_on": [
+        "A0"
+      ],
+      "available_conditional_lemmas": [],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Full target SRAM/stack/flash plus peak scratch liveness",
+        "Worst-case cycles, bounded retries/buffers and overflow policy",
+        "Counter conversions and any persistent-write endurance"
+      ]
+    },
+    {
+      "id": "A10",
+      "claim": "Input and assumption fault handling",
+      "depends_on": [
+        "A0"
+      ],
+      "available_conditional_lemmas": [
+        "D0",
+        "D1",
+        "D5"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Specify sensor bias/clipping/gaps/clock/corruption fault classes",
+        "Detection latency/power only for distinguishable faults",
+        "External qualification or conservative envelopes for unmonitorable assumptions"
+      ]
+    },
+    {
+      "id": "A11",
+      "claim": "Optimization and build refinement",
+      "depends_on": [
+        "A0",
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A9",
+        "A10"
+      ],
+      "available_conditional_lemmas": [
+        "O5"
+      ],
+      "deployment_status": "not_discharged",
+      "remaining": [
+        "Per-change proof premises, fixed control and negative controls",
+        "Target compiler/ABI/build identities and matched measurements",
+        "No unchecked removal of validity or recovery logic"
+      ]
+    }
+  ],
+  "implementation_order": [
+    "Query/status and transaction/quarantine contract; field flush repair",
+    "Small-domain conservative SOC/Q and proposed-load certificates against H7 reference",
+    "Aging/quiet/gap propagation and conditional reacquisition",
+    "Lifetime risk, reset and bounded autonomous recovery",
+    "Target range/numerical/resource proof, then contract-preserving optimization"
+  ],
+  "production_changed": false,
+  "monitor_implemented": false,
+  "release_approved": false
+}
