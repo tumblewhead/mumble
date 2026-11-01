@@ -64,7 +64,7 @@ class SummaryPlotTests(unittest.TestCase):
 
         with patch('experiments.foster_campaign_001.plot.save_plot', side_effect=inspect):
             receipt = render_summary(self.root)
-        self.assertEqual(len(captured), 6)
+        self.assertEqual(len(captured), 7)
         self.assertEqual(len(receipt['included']), 2)
         self.assertEqual(receipt['skipped'][0]['directory'], 'case_0002')
         current = captured['signals'][1].lines
@@ -95,7 +95,7 @@ class SummaryPlotTests(unittest.TestCase):
             receipt = render_summary(self.root, start_hour=33/126000)
             self.assertEqual([r['directory'] for r in receipt['included']], ['case_0001'])
             self.assertEqual(len(receipt['skipped']), 2)
-            self.assertEqual(save.call_count, 6)
+            self.assertEqual(save.call_count, 7)
         case = self.root/'case_0000'
         report = json.loads((case/'result.json').read_text())
         cell = json.loads((case/'scenario.json').read_text())['cell_definition']
@@ -124,6 +124,15 @@ class SummaryIdentityTests(unittest.TestCase):
             self.assertIn('seed ',line.get_label())
             self.assertEqual(line.get_linestyle(),'--' if 'float32' in line.get_label() else '-')
         self.assertEqual(len(receipt['arm_styles']),3)
+        plt.close('all')
+    def test_explicit_case_and_arm_selection_receipt(self):
+        with patch('experiments.foster_campaign_001.plot.save_plot'):
+            receipt=render_summary(self.root,arms=['float32'],cases=['case_0001'])
+        self.assertEqual(receipt['selected_arms'],['float32'])
+        self.assertEqual(receipt['selected_cases'],['case_0001'])
+        self.assertEqual([r['directory'] for r in receipt['included']],['case_0001'])
+        self.assertEqual([s['arm'] for s in receipt['arm_styles']],['float32'])
+        import matplotlib.pyplot as plt
         plt.close('all')
     def test_duplicate_seed_disambiguation_and_color_stability(self):
         path=self.root/'summary.json';data=json.loads(path.read_text())

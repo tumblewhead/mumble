@@ -18,7 +18,10 @@ preserves joint uncertainty through five short controls and an hour of weak use.
 It keeps a square-root update in original field coordinates between refreshes;
 the [native port and opt-in campaign adapter](experiments/field_tangent_native_001/README.md)
 now pass parity, checkpoint and two four-hour controls. Use `--history compare-tangent`
-for all three arms; defaults remain unchanged. The packed field/update subtotal is
+for the two field-based arms; the original rolling baseline is omitted from this
+comparison. The [72-hour review](provenance/field_tangent_72h_20261101/README.md)
+identifies refresh-related Q/H/gamma swings that the tangent update suppresses.
+The default estimator remains unchanged. The packed field/update subtotal is
 29.5 KiB, excluding workspace and other subsystem memory.
 
 The supported desktop campaign uses the optimized C rolling estimator with

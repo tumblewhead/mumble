@@ -8,6 +8,20 @@ from .rate import LEGACY_RATE
 from .telemetry import PARAMETERS, TRACE_COLUMNS, STATES
 
 
+ARM_COLORS = dict(float64='#3165b4', float32='#dc7822', field64='#009E73', tangent64='#9b4db5')
+
+def select_arms(result, arms=None):
+    """Filter a view only; original evidence and arm metadata are unchanged."""
+    available=result.get('arms',{})
+    chosen=arms if arms is not None else (['field64','tangent64'] if {'field64','tangent64'}<=available.keys() else list(available))
+    return dict(result,arms={k:v for k,v in available.items() if k in chosen})
+
+def parameter_error(values,truth):
+    """Affine transform preserves compact means and extrema for fixed reference truth."""
+    if not np.isfinite(truth) or truth<=0:raise ValueError('positive reference parameter truth required')
+    return 100*(np.asarray(values)/truth-1)
+
+
 def draw(ax, y, time_at, label, color, points=4000, alpha=1., linestyle='-'):
     """Bin large traces with min/max envelopes so narrow current pulses survive."""
     n = len(y)
@@ -74,10 +88,12 @@ def save_plot(fig, axes, destination, name, heading, title):
 
 
 def render(case, result, config, cell, destination=None, start_hour=0., end_hour=None,
-           *, overlays=None, alpha=1., styles=None, case_style=None):
+           *, overlays=None, alpha=1., styles=None, case_style=None, arms=None):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
+    result=select_arms(result,arms)
+    if not result["arms"]:raise ValueError("No selected arm telemetry")
     destination = destination or case
     destination.mkdir(parents=True, exist_ok=True)
     if result.get('recording') == 'compact':
@@ -102,7 +118,7 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
         first = np.searchsorted(rows[:,1], (record_offset+begin)/rate, side='right')
         last = np.searchsorted(rows[:,1], (record_offset+end)/rate, side='right')
         traces[k] = rows[first:last]
-    colors = dict(float64='#3165b4', float32='#dc7822', field64='#009E73', tangent64='#9b4db5')
+    colors = ARM_COLORS
     styles = styles or {k:dict(label=k,color=colors[k],linestyle='-') for k in traces}
     case_style = case_style or {}
     truth_color=case_style.get('color','#151515')
@@ -166,6 +182,17 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
         save(fig,axes,'parameters_reference' if reference else 'parameters_effective',
              'Eleven continuous parameters at '+('25°C reference' if reference else 'measured temperature'))
 
+    fig,axes = panels('parameter_errors',4,3,figsize=(15,13),layout='constrained')
+    for j,name in enumerate(PARAMETERS):
+        ax=axes.flat[j]
+        for k,rows in traces.items():
+            draw_derived(ax,len(rows),lambda sl,r=rows,j=j,name=name:parameter_error(r[sl,22+j],cell['parameters'][name]),
+                         lambda ix,r=rows:r[ix,1],**styles[k])
+        if first_case:ax.axhline(0,color='#555555',lw=.7)
+        ax.set_ylabel(name+' error (%)');ax.set_yscale('symlog',linthresh=1.)
+    axes.flat[-1].set_visible(False)
+    save(fig,axes,'parameter_errors','Reference-parameter relative errors; zero = truth; signed symlog (linear within ±1%)')
+
     fig,axes = panels('capacitances',3,1,figsize=(12,9),layout='constrained')
     for j,a in enumerate(axes):
         draw_derived(a,len(tr),lambda sl,j=j:tr[sl,8+2*j]/tr[sl,7+2*j],sample_time,truth_prefix+'truth',truth_color,linestyle=truth_style)
@@ -195,7 +222,7 @@ def render(case, result, config, cell, destination=None, start_hour=0., end_hour
     save(fig,axes,'errors','Q / SOC errors and assimilated endpoint voltage fit\nVoltage residuals are in-sample; uncertainty coverage remains unvalidated')
 
 
-def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
+def render_summary(campaign, destination=None, start_hour=0., end_hour=None, *, arms=None, cases=None):
     """Overlay recorded cases once, retaining each trace's own time axis."""
     import matplotlib
     matplotlib.use('Agg')
@@ -204,6 +231,8 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
     destination.mkdir(parents=True, exist_ok=False)
     config = json.loads((campaign/'calibration.json').read_text())
     reports = json.loads((campaign/'summary.json').read_text())['cases']
+    if cases is not None:reports=[r for r in reports if r['directory'] in cases]
+    reports=[select_arms(r,arms) for r in reports]
     overlays = {}
     included, skipped = [], []
     alpha = .8
@@ -219,12 +248,12 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
         load_seed=report.get('scenario',{}).get('load_seed')
         if load_seed is not None:label=f'noise seed {seed}, load seed {load_seed}'
         if seed_pairs.count((seed,load_seed))>1:label+=f" ({report['directory']})"
-        arms={}
+        case_arms={}
         for arm in sorted(report.get('arms',{}),reverse=True):
             color=palette(position if total<=20 else position/max(total,1))
             style=dict(label=label+' / '+arm,color=color,linestyle='-' if arm=='float64' else '--')
-            arms[arm]=style;style_receipt.append(dict(directory=report['directory'],seed=seed,load_seed=load_seed,arm=arm,**style));position+=1
-        style_map[report['directory']]=(arms,dict(label=label,color=next(iter(arms.values()))['color'] if arms else '#555555',truth_linestyle=':'))
+            case_arms[arm]=style;style_receipt.append(dict(directory=report['directory'],seed=seed,load_seed=load_seed,arm=arm,**style));position+=1
+        style_map[report['directory']]=(case_arms,dict(label=label,color=next(iter(case_arms.values()))['color'] if case_arms else '#555555',truth_linestyle=':'))
     try:
         for report in reports:
             case = campaign/report['directory']
@@ -247,7 +276,7 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
                 continue
             cell = json.loads((case/'scenario.json').read_text())['cell_definition']
             render(case, report, config, cell, destination, start_hour, end_hour,
-                   overlays=overlays, alpha=alpha, styles=style_map[case.name][0],case_style=style_map[case.name][1])
+                   overlays=overlays, alpha=alpha, styles=style_map[case.name][0],case_style=style_map[case.name][1],arms=list(report["arms"]))
             included.append(dict(directory=case.name, status=report['status'],
                                  scenario=report['scenario']))
         title = (f'{len(included)} cases overlaid; trace opacity {alpha:g}; '
@@ -256,7 +285,13 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None):
             title += '\nCompact traces show bin means and min/max ranges; use replay for detail.'
         for name, (fig, axes, heading) in overlays.items():
             save_plot(fig, axes, destination, name, heading, title)
+        from .error_comparison import render_error_comparisons
+        selected_reports=[r for r in reports if r['directory'] in {v['directory'] for v in included}]
+        comparisons=[]
+        if any({'field64','tangent64'}<=r.get('arms',{}).keys() for r in selected_reports):
+            comparisons=render_error_comparisons(campaign,selected_reports,destination/'parameter_error_comparison',start_hour,end_hour)
         receipt = dict(status='completed' if included else 'no_plottable_cases',
+                       parameter_error_comparison=comparisons,selected_arms=arms,selected_cases=cases,
                        alpha=alpha, included=included, skipped=skipped, arm_styles=style_receipt,
                        start_hour=start_hour, end_hour=end_hour)
         (destination/'cases.json').write_text(json.dumps(receipt, indent=2)+'\n')
@@ -274,6 +309,8 @@ def main():
     p.add_argument('--out',type=Path,required=True)
     p.add_argument('--summary',action='store_true',
                    help='Treat the input as a campaign directory and overlay its cases')
+    p.add_argument('--arms',nargs='+',choices=list(ARM_COLORS),help='display only these arms; field64/tangent64 are selected automatically when both exist')
+    p.add_argument('--cases',nargs='+',help='case directory names to include in a summary')
     args = p.parse_args()
     if args.out.exists():
         p.error('--out must be a new directory; original plots are preserved')
@@ -281,7 +318,7 @@ def main():
             (not np.isfinite(args.end_hour) or args.end_hour <= args.start_hour)):
         p.error('finite increasing nonnegative hour range required')
     if args.summary:
-        render_summary(args.case,args.out,args.start_hour,args.end_hour)
+        render_summary(args.case,args.out,args.start_hour,args.end_hour,arms=args.arms,cases=args.cases)
     else:
         result = json.loads((args.case/'result.json').read_text())
         calibration = args.case/'calibration.json'
@@ -289,7 +326,7 @@ def main():
             calibration = args.case.parent/'calibration.json'
         config = json.loads(calibration.read_text())
         cell = json.loads((args.case/'scenario.json').read_text())['cell_definition']
-        render(args.case,result,config,cell,args.out,args.start_hour,args.end_hour)
+        render(args.case,result,config,cell,args.out,args.start_hour,args.end_hour,arms=args.arms)
     print(args.out.resolve())
 
 

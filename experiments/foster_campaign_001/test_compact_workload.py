@@ -86,7 +86,7 @@ class CompactWorkloadTests(unittest.TestCase):
         captured={}
         with patch('experiments.foster_campaign_001.plot.save_plot',side_effect=lambda f,a,d,n,h,t:captured.update({n:a})):
             receipt=render_summary(self.campaign)
-        self.assertEqual(len(captured),6);self.assertEqual(len(receipt['included']),4)
+        self.assertEqual(len(captured),7);self.assertEqual(len(receipt['included']),4)
         labels=[line.get_label() for line in captured['errors'][0].lines]
         for style in receipt['arm_styles']:
             self.assertIn(style['label']+' (bin mean/range)',labels)

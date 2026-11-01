@@ -143,7 +143,7 @@ class CBackend:
 def arm_kinds(settings):
     history=getattr(settings,'history','rolling')
     if history=='field-tangent':return ['tangent64']
-    if history=='compare-tangent':return ['float64','field64','tangent64']
+    if history=='compare-tangent':return ['field64','tangent64']
     if history=='compare':return ['float64','field64']
     if history=='joint-field':return ['field64']
     return ['float64','float32'] if settings.encoding=='both' else [settings.encoding]

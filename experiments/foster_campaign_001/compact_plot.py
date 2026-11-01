@@ -22,7 +22,7 @@ def render_compact(case, result, cell, destination, start_hour, end_hour, overla
     with np.load(case/'plot_summary.npz', allow_pickle=False) as stored:
         data = {k: stored[k] for k in stored.files}
 
-    def draw(ax, prefix, column, label, color, linestyle='-'):
+    def draw(ax, prefix, column, label, color, linestyle='-', reference=None):
         if prefix == 'plant':
             label = truth_prefix+label
             color = case_style.get('color',color)
@@ -40,6 +40,9 @@ def render_compact(case, result, cell, destination, start_hour, end_hour, overla
         low = np.repeat(data[prefix+'_low'][mask, column], 2)
         high = np.repeat(data[prefix+'_high'][mask, column], 2)
         mean = np.repeat(data[prefix+'_mean'][mask, column], 2)
+        if reference is not None:
+            from .plot import parameter_error
+            low,high,mean=[parameter_error(v,reference) for v in (low,high,mean)]
         ax.fill_between(t, low, high, color=color, alpha=.2*alpha)
         ax.plot(t, mean, color=color, alpha=alpha, lw=.9, label=label+' (bin mean/range)',linestyle=linestyle)
 
@@ -97,6 +100,15 @@ def render_compact(case, result, cell, destination, start_hour, end_hour, overla
             ax.set_ylabel(parameter)
         group[1][-1].set_visible(False)
         save(group,name)
+
+    group = panels('parameter_errors',4,3,(15,13),'Reference-parameter relative errors; zero = truth; signed symlog (linear within ±1%)')
+    for j,name in enumerate(PARAMETERS):
+        ax=group[1][j]
+        for kind in result['arms']:
+            draw(ax,kind,22+j,**styles[kind],reference=cell['parameters'][name])
+        if first_case:ax.axhline(0,color='#555555',lw=.7)
+        ax.set_ylabel(name+' error (%)');ax.set_yscale('symlog',linthresh=1.)
+    group[1][-1].set_visible(False);save(group,'parameter_errors')
 
     group = panels('capacitances',3,1,(12,9),'Derived RC capacitances at measured temperature')
     for j, ax in enumerate(group[1]):

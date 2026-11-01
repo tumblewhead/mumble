@@ -1,0 +1,169 @@
+{
+  "schema": "field_comparison_plots_v1",
+  "base_revision": "e8a753b",
+  "branch": "implementation/field-comparison-plots-001",
+  "worktree": "/home/easy/proj/mumble/.worktrees/field-comparison-plots",
+  "preserved_replay_worktree": "/home/easy/proj/mumble/.worktrees/uncertainty-weak-stimulus",
+  "mainline_changed": false,
+  "default_estimator_changed": false,
+  "numerical_kernel_changed": false,
+  "changes": [
+    "compare-tangent computes onlyfield64/tangent64. Original rolling remains an explicit diagnostic control.",
+    "Automatic two-field-arm display for historical three-arm results; explicit --arms and --cases selections.",
+    "Eleven signed reference-parameter errors, affine compact transforms retaining means/min/max.",
+    "One parameter per comparison page, one case per panel; at most16cases per page; fixed arm colors and labels."
+  ],
+  "tests": {
+    "passed": 48,
+    "commands": [
+      "MPLCONFIGDIR=/tmp/mumble-mpl-review OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_plot_summary experiments.foster_campaign_001.test_tangent_backend experiments.foster_campaign_001.test_field_default -q",
+      "MPLCONFIGDIR=/tmp/mumble-mpl-review OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_parameter_errors experiments.foster_campaign_001.test_field_backend experiments.foster_campaign_001.test_compact -q",
+      "MPLCONFIGDIR=/tmp/mumble-mpl-review OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_compact_workload -q",
+      "MPLCONFIGDIR=/tmp/mumble-mpl-review OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_plot_summary -q"
+    ]
+  },
+  "rendered_campaign": "/home/easy/proj/mumble/.worktrees/uncertainty-weak-stimulus/experiments/foster_campaign_001/run_20261101_005759_788073",
+  "rendered_summary": "/home/easy/proj/mumble/.worktrees/uncertainty-weak-stimulus/experiments/foster_campaign_001/run_20261101_005759_788073/field_comparison",
+  "rendered_zoom": "/home/easy/proj/mumble/.worktrees/uncertainty-weak-stimulus/experiments/foster_campaign_001/run_20261101_005759_788073/field_comparison_case0006_48_56h",
+  "rendered_cases": 16,
+  "rendered_arms": [
+    "field64",
+    "tangent64"
+  ],
+  "source_artifacts_preserved": true,
+  "original_replay_sources_preserved": true,
+  "sources": {
+    "experiments/foster_campaign_001/backend.py": {
+      "bytes": 10786,
+      "sha256": "bacf755e4d3f9d095d19a18798c687b8492463211ccfd6d1f2d1c9df8fe59692"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25068,
+      "sha256": "36416ae255620df1d96ca48d22859b5a6baf56cdc43e0c12ae85c9d6ab27756b"
+    },
+    "experiments/foster_campaign_001/plot.py": {
+      "bytes": 18569,
+      "sha256": "087ed88aeb2985f28ddd85a446f3fbb56c314ec965cb7cba04226f12d3722127"
+    },
+    "experiments/foster_campaign_001/compact_plot.py": {
+      "bytes": 6589,
+      "sha256": "f918c5eb3d209fecd746633f74b9d68b0451b1291a99528330081dadeb7be4ea"
+    },
+    "experiments/foster_campaign_001/error_comparison.py": {
+      "bytes": 5044,
+      "sha256": "662a49239dc48a94475a4a53946a68a421fc0a0b7d6d5ddbad224c527365fa00"
+    },
+    "experiments/foster_campaign_001/test_parameter_errors.py": {
+      "bytes": 4146,
+      "sha256": "393039ca7f79b02bf68b0f31c245fd24ef2c3b2923a065a3382545c507760afe"
+    },
+    "experiments/foster_campaign_001/test_plot_summary.py": {
+      "bytes": 7541,
+      "sha256": "2cf813963194cadc47aaca314bd8f9843d04769b39639cd6339c53e9a346176c"
+    },
+    "experiments/foster_campaign_001/test_field_default.py": {
+      "bytes": 3061,
+      "sha256": "4b10dc299ca8afcb46ba42a135e863ca83db2c4b443ecec7d3e02846352b1bc9"
+    },
+    "experiments/foster_campaign_001/test_tangent_backend.py": {
+      "bytes": 4731,
+      "sha256": "3e72533e7e436de5b295b57078106d834f2a9046b1bc52836032b3544e54b9df"
+    },
+    "experiments/foster_campaign_001/test_compact_workload.py": {
+      "bytes": 8403,
+      "sha256": "43b6af2f8ab16b9aaf9179f36c87f3e6900f68b17f04b35d9c329885683ab83d"
+    }
+  },
+  "artifacts": {
+    "field_comparison/signals.png": {
+      "bytes": 1131375,
+      "sha256": "d1738a60b0fb66359a74e6feb167ab8f0af143fb823f48e5d6bf558b5d23d98c"
+    },
+    "field_comparison/states.png": {
+      "bytes": 1079829,
+      "sha256": "ec0978a4e63d3ebb3255d8f7a04d351bbb56496a1ea46c2f5171b3da42d31265"
+    },
+    "field_comparison/parameters_effective.png": {
+      "bytes": 1331651,
+      "sha256": "672f34207499105d2b2077301cab2392a846257b6d5cbeb2ac996e892c8398b7"
+    },
+    "field_comparison/parameters_reference.png": {
+      "bytes": 1007465,
+      "sha256": "3d5ac6f7dc6bf1ea9269093454461a41f77ae7ab311860ec67dd94c18361d0ee"
+    },
+    "field_comparison/parameter_errors.png": {
+      "bytes": 2226688,
+      "sha256": "8af8695f8144866506e9ad6f559bdacb9295569c26d11dc16213a20c239974e6"
+    },
+    "field_comparison/capacitances.png": {
+      "bytes": 585212,
+      "sha256": "a995167aee32a095569d381b0f97fa65cd4e70248b30080995a512a1bcb30879"
+    },
+    "field_comparison/errors.png": {
+      "bytes": 1078416,
+      "sha256": "7324bdafdd0e1af302889e11907edd4ea3c66793ad58ffeb95ef6bbac8d6f71e"
+    },
+    "field_comparison/parameter_error_comparison/Q_Ah.png": {
+      "bytes": 875183,
+      "sha256": "cfe2ff75d8b494ab55ea77bfc5cef20e4114f2365b1287a273501852ef55d701"
+    },
+    "field_comparison/parameter_error_comparison/R0_ohm.png": {
+      "bytes": 887881,
+      "sha256": "ba905df42484a6e625f0dcb22bad545c222a780f2500450fcb7b77ba6e70b24b"
+    },
+    "field_comparison/parameter_error_comparison/R1_ohm.png": {
+      "bytes": 937529,
+      "sha256": "d0dbb165e22ccb2ef219aa071f3c2c82dab3acd14ffc7781ac29c619f44106c0"
+    },
+    "field_comparison/parameter_error_comparison/tau1_s.png": {
+      "bytes": 846791,
+      "sha256": "f4af32c3dc4de521b9dc31e28e5724687ea35c36524397cdb8a52f91219834ef"
+    },
+    "field_comparison/parameter_error_comparison/R2_ohm.png": {
+      "bytes": 787440,
+      "sha256": "5f074ba4dd16ceb8e547693ba56d21c39adb0a493be4474c818f678393b063f1"
+    },
+    "field_comparison/parameter_error_comparison/tau2_s.png": {
+      "bytes": 856293,
+      "sha256": "89f020d34692f2cde007bc8d54b0cfe2e95de52dc5920c97eda9ef2f6763ca6c"
+    },
+    "field_comparison/parameter_error_comparison/R3_ohm.png": {
+      "bytes": 769256,
+      "sha256": "927448a74516f78be4e764b1d28b9148ae292cb7186aa99e5d69dedda36de739"
+    },
+    "field_comparison/parameter_error_comparison/tau3_s.png": {
+      "bytes": 783858,
+      "sha256": "780e9f88b1ba45d4ca38366536e59d9d8dae23ac3ef35d66f3237ba2daa3a556"
+    },
+    "field_comparison/parameter_error_comparison/H_V.png": {
+      "bytes": 960398,
+      "sha256": "8cd8daa12f65438085282b4659d9aa5b3ac7ca08189c99d683b73ee429c48c30"
+    },
+    "field_comparison/parameter_error_comparison/gamma_plus.png": {
+      "bytes": 928832,
+      "sha256": "67ca7fe1bf264a4e548348c6a206f9833b9795fbf2079610932c504209ba5ff2"
+    },
+    "field_comparison/parameter_error_comparison/gamma_minus.png": {
+      "bytes": 984756,
+      "sha256": "5e3a5a2a2c6c244f830019d0442587cb22a6178f3d88d65ad4c60518856ce74b"
+    },
+    "field_comparison/cases.json": {
+      "bytes": 13982,
+      "sha256": "a081e221155b4cb2fa0c465c3916501e911b5e6d4cce760c5e66ec5a90e8042c"
+    },
+    "field_comparison/cases_before_selection_metadata_fix.json": {
+      "bytes": 14338,
+      "sha256": "87acb7699fa9bd5f9af8c99ec66aaab1ef869291329c8166311cbcde85427ca1"
+    }
+  },
+  "limits": [
+    "Reference-parameter error assumes known positive stationary reference truth in this synthetic harness.",
+    "Compact plots retain129.6second bins in this run; debug replay is needed to resolve faster behavior.",
+    "Signed symlog linear range\u00b11% is display scaling, not an acceptance threshold.",
+    "Separate axes use their own limits; inspect labels when comparing cases.",
+    "No promotion of estimator default, no new inference or brownout qualification."
+  ],
+  "adaptations": [
+    "Fixed selected_arms receipt field shadowing the requested selection; plots and source evidence unchanged. Preserved pre-correction derived cases receipt separately; added regression test."
+  ]
+}

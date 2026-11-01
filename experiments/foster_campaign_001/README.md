@@ -1,10 +1,10 @@
 > Field-assisted estimation is now the default (`--history joint-field --encoding float64`). Use `--history compare` for field versus original rolling overlays, or `--history rolling --encoding both` for the original encoding comparison. The [720-hour review](../../provenance/rolling_field_720h_20261031/README.md) supports this promotion; low-noise uncertainty, aging and M23 deployment remain unqualified.
 
-> Experimental `--history field-tangent` keeps the joint tangent likelihood in original field coordinates; `--history compare-tangent` overlays it with rolling and the current field arm. It supports compact recording and checkpoint replay. See [native qualification and memory limits](../field_tangent_native_001/README.md). This is opt-in; the default is unchanged.
+> Experimental `--history field-tangent` keeps the joint tangent likelihood in original field coordinates; `--history compare-tangent` compares it with the current field arm (two arms; no original rolling baseline). It supports compact recording and checkpoint replay. See [native qualification and memory limits](../field_tangent_native_001/README.md). This is opt-in; the default is unchanged.
 
 > New `--loads embedded` profile uses a semi-Markov MCU/radio/flash/LED activity envelope. `--load-seeds` controls workload randomness independently of measurement-noise `--seeds`; both appear in plots and metadata. See the [workload guide](../embedded_workload_001/README.md) for timing assumptions and a crossed-seed command.
 
-> Default plotting keeps all six individual plot families and adds the six all-case overlays in `case_summary/`. Overlays label every seed/arm with consistent colors and precision line styles; no extra `--summary` flag is needed for a new campaign. See [plot controls](../foster_summary_labels_001/README.md).
+> Default plotting keeps seven individual plot families, including reference-parameter errors, and adds the seven all-case overlays in `case_summary/`. Overlays label every seed/arm with consistent colors and precision line styles; no extra `--summary` flag is needed for a new campaign. See [plot controls](../foster_summary_labels_001/README.md).
 
 > The default estimator now uses bounded hysteresis coordinates. See [repair and qualification](../foster_bounded_hysteresis_001/README.md). Use `--history rolling --hysteresis-chart legacy` for the original control. Physical plot/CSV h remains in [-1,1]; raw chart coordinate4 is eta for bounded runs.
 
@@ -96,7 +96,7 @@ index are published atomically. An interrupted write leaves earlier checkpoints
 available. This is a local host replay format bound to the exact binary, relevant
 sources and runtime; it is not a portable firmware checkpoint format.
 
-To regenerate ten seconds near hour350, with full-resolution arrays and all six
+To regenerate ten seconds near hour350, with full-resolution arrays and all seven
 plots, use a fresh destination:
 
 ```sh
@@ -361,12 +361,23 @@ python3 -B -m experiments.foster_campaign_001.plot \
 Use a fresh output directory. `--no-plots` skips plots during large sweeps; the
 same command generates them later. Original plots/results are never overwritten.
 
-After all cases finish, `case_summary/` contains the same six PNG/PDF plots with
-all available case trajectories overlaid at 25% opacity. Colors retain their
-meaning (truth, float64, float32); each trajectory keeps its own simulated time
-axis and min/max envelopes. Individual `case_000x` plots remain available.
-`case_summary/cases.json` lists included cases and any skipped cases lacking
-telemetry. Unresolved arms contribute their recorded valid output prefix.
+After all cases finish, `case_summary/` contains seven PNG/PDF plot families.
+When both field arms are present, plots automatically focus on `field64` and
+`tangent64`. For this comparison, `parameter_error_comparison/` adds one page
+per parameter, with one case per panel and at most16cases per page. Green solid
+is field64; purple dashed is tangent64. Case titles identify cell, load, noise,
+noise seed and load seed. Each panel keeps its own limits, stated in the heading.
+
+`parameter_errors.png` plots `100*(estimate_reference/truth_reference-1)` for all
+eleven parameters. Zero means truth; signed symlog scaling is linear within±1%,
+which is a display choice, not an acceptance threshold. Truth is used only for
+reporting. Positive stationary reference truth makes this an affine transform:
+compact means and extrema remain exact for the retained bins. No raw data or
+new simulation is needed. Existing Q/SOC and voltage-error plots remain available.
+
+Individual case plots are retained. `case_summary/cases.json` lists included and
+skipped cases, selected arms and the added comparison pages. Unresolved arms
+contribute only their recorded valid output prefix.
 `--no-plots` also skips this summary. To create overlays from an existing campaign
 without running the estimator, use a fresh destination:
 
@@ -377,6 +388,13 @@ python3 -B -m experiments.foster_campaign_001.plot \
 ```
 
 The summary command also accepts `--start-hour` and `--end-hour` for a shared zoom.
+Use `--arms field64 tangent64` to request the two-arm view explicitly, or
+`--cases case_0006 case_0014` to select cases in a summary. Explicit `--arms` can
+recover any archived baseline for diagnostics; the original files are preserved.
+New `--history compare-tangent` campaigns compute only field64and tangent64;
+`--history rolling` and the older `--history compare` remain explicit controls.
+Both field arms still use float64 arithmetic: the omitted `float64` is the name
+of the original rolling arm, not a change of numeric precision.
 
 Data files preserve full precision and cadence:
 

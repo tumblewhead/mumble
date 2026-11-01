@@ -16,6 +16,7 @@ class FieldDefaultTests(unittest.TestCase):
         self.assertEqual((args.history,args.encoding,args.backend,args.hysteresis_chart),
                          ('joint-field','float64','c','bounded'))
         self.assertEqual(arm_kinds(args),['field64'])
+        self.assertEqual(arm_kinds(parser().parse_args(['--history','compare-tangent'])),['field64','tangent64'])
         self.assertEqual(arm_kinds(parser().parse_args(['--history','compare'])),['float64','field64'])
         self.assertEqual(arm_kinds(parser().parse_args(['--history','rolling','--encoding','both'])),['float64','float32'])
 

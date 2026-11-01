@@ -9,7 +9,13 @@ from .compact import restore_checkpoint
 from experiments.field_feedback_preservation_001.numerics import Tangent
 
 class TangentCampaignTests(fixtures.FieldCampaignTests):
-    history='compare-tangent';kinds=['float64','field64','tangent64']
+    history='compare-tangent';kinds=['field64','tangent64']
+    def test_baseline_arm_unchanged_by_field(self):
+        # Original rolling parity is covered by FieldCampaignTests. This mode
+        # now runs only the two useful field implementations.
+        self.assertEqual(set(self.result['arms']),{'field64','tangent64'})
+        self.assertFalse((self.full/'float64_trace.npy').exists())
+
     def test_tangent_checkpoint_state_matches_python_tangent(self):
         stream,banks,_=self.restore(self.entries[1]);bank=banks['tangent64']
         self.assertGreater(bank.buffered,0);bank._flush_field()

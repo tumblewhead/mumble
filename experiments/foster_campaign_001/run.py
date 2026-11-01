@@ -206,7 +206,7 @@ def parser():
     p.add_argument('--jobs', type=int, default=1, help='maximum independent case workers (default:1; native math threads:1 each)')
     p.add_argument('--hours', type=float, default=4.)
     p.add_argument('--history', choices=['rolling','joint-field','compare','field-tangent','compare-tangent'], default='joint-field',
-                   help='joint-field (default) refreshes rolling belief; compare adds the original rolling arm; field-tangent selects the experimental native tangent; compare-tangent runs all three')
+                   help='joint-field (default) refreshes rolling belief; compare adds the original rolling arm; field-tangent selects the experimental native tangent; compare-tangent compares field and tangent')
     p.add_argument('--field-refresh-seconds', type=float, default=60.,
                    help='field fit cadence, rounded up to a 16-record boundary; default 60s')
     p.add_argument('--backend', choices=['c','python'], default='c', help='estimator implementation (default:c optimized; python retains reference)')
