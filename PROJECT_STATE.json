@@ -1,7 +1,7 @@
 {
   "schema": "mumble_project_state_v1",
   "canonical_repository": "https://github.com/tumblewhead/mumble",
-  "stage": "bounded_estimator_stable_summary_overlays_labeled_nonlinear_history_repair_prototype_next",
+  "stage": "h7_conditional_proofs_tranche1_complete_uniform_error_and_failure_contracts_open",
   "objective": "Deliver a runnable ~10KiB Cortex-M23 C estimator with useful stimulus-supported battery state estimates and aging-aware retained history over approximately ten years; establish exact token/transport semantics, gallery closure, explicit error bounds and complete resources before long-duration qualification.",
   "nominal_rate_Hz": 35,
   "current_model": {
@@ -396,6 +396,7 @@
     "parameter_sensitivity_001 is a saved-state, fixed-model, open-loop point diagnostic. Final joint sampled peak below0.987mV across six future protocols includes signed compensation; it does not qualify uncertainty, nuisance identifiability, arbitrary inputs, estimator feedback, indefinite operation or M23 resources."
   ],
   "next_work": [
+    "Current H7 work: read specifications/h7_proofs_001/README.md and claims.json. Proof tranche1 complete; resolve field-flush failure semantics and uniform physical approximation bounds before compression certification. Historical entries below retain earlier context; handoff/CONTINUE.json gives current branch.",
     "User target clarified: baseline custom-silicon Cortex-M23 in Verilog simulation,16MHz. Current Foster model cross-compiles withARMGCC16.2.0; ownframe3944B; minimal modelcall probe static+knownframes12000B beforemathstack/IRQ; literaltrialphase numericalledger22624B. Onlymodel/sensitivitiescurrentlyC; optimizer/historyPython. See foster_m23_audit_001/README.md.16MHz allows7.31Mcycles/16sampleblock at100%CPU; target timing unmeasured. Next port currentjointfitter/history to explicitCworkspace and measureRTL; do not equatefloat32tokenencoding withfloat32arithmetic.",
     "CC-CV/variable-discharge profile now available as --loads charge-discharge. User wants voltage taper near90%SOC, varying charger/load capabilities; default2/1/1.5C15min charger steps and0.2/0.45/0.7C10min load steps,nominal0.06Ah,4.06V CV/3.18V discharge cutoff,300s rests,0.05C taper dwell30s. Controller sees measuredV only; no trueSOC/Q or estimator feedback.22tests+55parentchecks pass;4hcellA botharms complete504000samples,CVentry89.1/89.2%,finalQ-0.04035%,SOC-0.00742pp,gamma5.886/8.793 vs6/9. One-case point diagnostics only; no coverage/aging repair claim. See foster_cccv_stimulus_001/README.md.",
     "Read hysteresis_diagnosis report: owner12h campaign exposes wrong hysteresis/SOC compensation even withfloat64, plus false precision. Seven completed cases inspected read-only. Separate retained nonlinear likelihood behavior from streaming history approximation before repair; short pulse stimulus relative to13\u201320min hysteresis timescale is a plausible contributor, not proof of nonidentifiability.",
@@ -5202,13 +5203,32 @@
     "proof_foundation": "specifications/h7_assurance_001/PROOFS.md",
     "tests_passed": 7,
     "finding": "Two ~3h windows reproduce both arms exactly. H7 peak SOC z scores 3.00361/3.09315. Dense solve, SOC cross-covariance/transport, nonlinear Gaussian moments and local solver/curvature checks do not explain misses; no production repair justified by these controls.",
-    "next": "Clarify 60mAh capacity spread interpretation; implement versioned randomized scenario manifest and outcome reducer, small pilot, then freeze confirmation criteria. Preserve H7 as optimization control.",
-    "population_guidance": "Nominal60mAh; owner reports2.6\u20133.6mAh variation; SD vs bounds vs total spread pending clarification.",
+    "next": "See h7_proofs for current proof work. Monte Carlo generator/reducer and pilot remain deferred; no arbitrary covariance repair.",
+    "population_guidance": "Owner clarified +/-3sigma=2.6\u20133.6mAh around nominal60mAh; sigma=0.8667\u20131.2mAh; distribution shape unspecified.",
     "limits": [
       "Selected witnesses do not prove calibrated coverage",
       "No exact raw-history likelihood rebuild",
       "Proofs are conditional handwritten lemmas; numerical/domain/calibration obligations open",
       "No large Monte Carlo launched; production unchanged"
+    ]
+  },
+  "h7_proofs": {
+    "status": "first_conditional_proof_tranche_and_finite_certificates_complete",
+    "branch": "proof/h7-contracts-001",
+    "report": "provenance/h7_proofs_001/README.md",
+    "receipt": "provenance/h7_proofs_001/receipt.json",
+    "claims": "specifications/h7_proofs_001/claims.json",
+    "tests_passed": 11,
+    "exact_polynomial_identities": 8,
+    "abstract_states": 969,
+    "finite_native_QR_witnesses": 5,
+    "production_changed": false,
+    "mainline_changed": false,
+    "next": "Prove/repair transactional field flush or backend quarantine, then uniform H7 feature/derivative/transport error bounds on admitted domain and horizon.",
+    "limits": [
+      "Conditional proofs and finite witnesses, not full program verification",
+      "Universal field rollback refuted; campaign contains injected LinAlgError by unresolved-arm handling",
+      "No calibrated coverage, ten-year, aging or M23 qualification"
     ]
   }
 }

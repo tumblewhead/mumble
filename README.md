@@ -67,6 +67,16 @@ or local-solver explanation for the small 3SD crossings. The
 Monte Carlo confirmation, crossed-factor exploration and conditional mathematical
 proofs before optimization. No broad campaign or production repair was launched.
 
+The [first H7 proof tranche](specifications/h7_proofs_001/README.md) now derives
+likelihood-to-probability and full joint uncertainty error bounds, with exact
+algebra checks, bounded ownership exploration and five native QR certificates.
+Fault injection refutes universal field rollback, and a synthetic correlated
+case exposes unsafe unqualified precision reduction. See the
+[proof receipt](provenance/h7_proofs_001/README.md). The next obligations are
+transactional flushing and uniform physical-response approximation bounds;
+coverage and ten-year behavior remain open. Capacity guidance is now interpreted
+as +/-3sigma=2.6–3.6 mAh around 60 mAh, without assuming a distribution shape.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

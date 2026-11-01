@@ -5,6 +5,12 @@ These are not machine-checked proofs of the C program or certificates of H7
 posterior calibration. The local SOC diagnostic supports selected identities;
 it does not discharge the global assumptions below.
 
+The [first detailed proof tranche](../h7_proofs_001/README.md) develops ownership,
+posterior distortion and joint numerical error bounds, and records a refuted
+universal field-rollback claim. Its claim ledger supersedes any interpretation
+of this outline as an implementation-wide certificate. The qualified estimator
+is unchanged.
+
 ## P0. Supported model and units
 
 Use positive-discharge current, Q in Ah, and dt in seconds. Conditional on the

@@ -1,0 +1,394 @@
+{
+  "schema": "h7_proof_receipt_v1",
+  "status": "conditional_proof_tranche_and_finite_checks_complete",
+  "branch": "proof/h7-contracts-001",
+  "source_parent": "c9b68d1dd116e69cdcb18897a46b216dd8c2bf27",
+  "method": "Handwritten proofs, exact polynomial algebra, bounded abstract-state exploration, exact rational finite-array certificates and implementation fault injection; not formal verification of all C/Python executions.",
+  "tests": {
+    "status": "passed",
+    "count": 11,
+    "elapsed_s": 4.7,
+    "command": [
+      "/usr/sbin/python3",
+      "-B",
+      "-m",
+      "unittest",
+      "experiments.h7_proofs_001.test_certificates",
+      "experiments.h7_campaign_001.test_native.H7NativeTests.test_full_joint_batch_reference",
+      "experiments.h7_campaign_001.test_native.H7NativeTests.test_fused_failure_atomicity_and_null_information",
+      "experiments.h7_campaign_001.test_native.H7NativeTests.test_fused_matches_rows_update_and_snapshot",
+      "experiments.h7_campaign_001.test_campaign.H7CampaignTests.test_readout_is_not_feedback_and_refresh_failure_keeps_evidence",
+      "-v"
+    ],
+    "environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MPLCONFIGDIR": "/tmp/mumble-h7-mpl"
+    },
+    "python": "3.14.7"
+  },
+  "algebra": {
+    "identities": 8,
+    "receipt": "provenance/h7_proofs_001/algebra.json",
+    "command": [
+      "/usr/sbin/python3",
+      "-B",
+      "specifications/h7_proofs_001/check_algebra.py"
+    ]
+  },
+  "abstract_ownership": {
+    "prefix_limit": 8,
+    "states": 969,
+    "transitions": 4381,
+    "mutations_detected": 5,
+    "receipt": "provenance/h7_proofs_001/ownership.json",
+    "command": [
+      "/usr/sbin/python3",
+      "-B",
+      "specifications/h7_proofs_001/ownership.py"
+    ]
+  },
+  "qr": {
+    "final": "experiments/h7_proofs_001/qr004",
+    "receipt": "provenance/h7_proofs_001/qr_certificate.json",
+    "cases": 5,
+    "binary64_certified": 5,
+    "binary32_certified": 4,
+    "interpretation": "Finite local precision/covariance certificates; fifth binary32 factor has constructive precision-loss direction; not general C/libm or lifetime proof.",
+    "command": [
+      "/usr/sbin/python3",
+      "-B",
+      "-m",
+      "experiments.h7_proofs_001.certify_qr"
+    ]
+  },
+  "failure_witness": {
+    "receipt": "provenance/h7_proofs_001/flush_failure.json",
+    "command": [
+      "/usr/sbin/python3",
+      "-B",
+      "-m",
+      "experiments.h7_proofs_001.failure_witness"
+    ],
+    "finding": "Field QR exception can leave response/count ahead of root. Campaign LinAlgError containment is not backend rollback."
+  },
+  "development": [
+    {
+      "version": "qr001",
+      "finding": "Four numerical witnesses; original preserved."
+    },
+    {
+      "version": "qr002",
+      "finding": "Added tilted strong-correlation binary32 loss witness. Negative checker suite:8pass/1error from optional zero-whitener Rayleigh division."
+    },
+    {
+      "version": "qr003",
+      "finding": "Zero-whitener reporting repaired without relaxing acceptance;5 checker tests pass."
+    },
+    {
+      "version": "qr004",
+      "finding": "Explicit dimension/nonfinite rejection and sharp TV two-point check; final11 targeted tests pass."
+    }
+  ],
+  "source_identities": {
+    "specifications/h7_proofs_001/check_algebra.py": {
+      "bytes": 3164,
+      "sha256": "a3e1c3f6caa2f278d64ad2ebbc1a45857bf9692551efbd96c686e0748606bbc9"
+    },
+    "specifications/h7_proofs_001/ownership.py": {
+      "bytes": 2735,
+      "sha256": "8a9713e2fca0c2db038b038325b4f395273f5139aba3900e9a16a30684be420e"
+    },
+    "specifications/h7_proofs_001/OWNERSHIP.md": {
+      "bytes": 9375,
+      "sha256": "cfab7924ec288fcc57c148a41638ba915216cded2b1c05364844a34b913651f4"
+    },
+    "specifications/h7_proofs_001/ERROR_BUDGET.md": {
+      "bytes": 11532,
+      "sha256": "9f3f3c87316f5ad81dc46b646eb05809f780f59f98de434ba2a6fc42fa85c466"
+    },
+    "specifications/h7_proofs_001/NUMERICS.md": {
+      "bytes": 7167,
+      "sha256": "8978131b23679baf3d541a3c126cd99aeeee3c8b2b0ffff5bc53665edbfe3ed8"
+    },
+    "specifications/h7_proofs_001/README.md": {
+      "bytes": 2713,
+      "sha256": "8937291013333824309cf69522aed072197d4e053a71634c1b2d37b8f62812a5"
+    },
+    "specifications/h7_proofs_001/claims.json": {
+      "bytes": 10144,
+      "sha256": "ad5d168fd0a268bb15b4585180b0430fc4f99bec0e10782e3b1f8844f7eb3892"
+    },
+    "experiments/h7_proofs_001/certify_qr.py": {
+      "bytes": 5756,
+      "sha256": "1719f6de21ab87b6c43ab7149b5b025b14757932513443c7ef9cfd19a637f5ef"
+    },
+    "experiments/h7_proofs_001/failure_witness.py": {
+      "bytes": 1650,
+      "sha256": "629c17973c27537e44de186f71511715d3e6500cf72dda60a5bc6c7df68fafb7"
+    },
+    "experiments/h7_proofs_001/test_certificates.py": {
+      "bytes": 2255,
+      "sha256": "fa7b2cc24a5f9a01fa14302c3cd9d797d37bc6294d13877955f10955655bf035"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 7906,
+      "sha256": "1b5c33087146b807e16636f1c7347bcb52f7e292c5f7922183b4037073110e88"
+    },
+    "experiments/hysteresis_refinement_001/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    }
+  },
+  "qualified_H7_source_checks": {
+    "experiments/field_tangent_native_001/kernel.c": true,
+    "experiments/field_tangent_native_001/kernel.h": true,
+    "experiments/field_tangent_native_001/native.py": true,
+    "experiments/foster_campaign_001/backend.py": true,
+    "experiments/foster_campaign_001/compact.py": true,
+    "experiments/foster_campaign_001/compact_plot.py": true,
+    "experiments/foster_campaign_001/plot.py": true,
+    "experiments/foster_campaign_001/run.py": true,
+    "experiments/foster_campaign_001/tangent_backend.py": true,
+    "experiments/foster_campaign_001/h7_backend.py": true,
+    "experiments/h7_campaign_001/test_native.py": true,
+    "experiments/h7_campaign_001/test_campaign.py": true,
+    "experiments/h7_campaign_001/plan.json": true
+  },
+  "small_evidence_identities": {
+    "provenance/h7_proofs_001/algebra.json": {
+      "bytes": 1253,
+      "sha256": "92fb7cb76d061de179bf43e80aa8ca4cb246165c6534794074bf1fdbd2f03f15"
+    },
+    "provenance/h7_proofs_001/ownership.json": {
+      "bytes": 422,
+      "sha256": "506bb6645053e97e00877c3006a0b6ed4768a4944043f3cb4fd511a6f1258f53"
+    },
+    "provenance/h7_proofs_001/flush_failure.json": {
+      "bytes": 601,
+      "sha256": "3ff3c22f82bb3823bcbc77d1d916cc5371500ddf72c3527009cab4324fa2ca3a"
+    },
+    "provenance/h7_proofs_001/qr_certificate.json": {
+      "bytes": 23941,
+      "sha256": "a279bf27a4b92e307aae0d3c3c38ec8dbad41896d226126e9f8b7bdc527ea35d"
+    }
+  },
+  "local_artifact_identities": {
+    "experiments/h7_proofs_001/qr001/kernel.c": {
+      "bytes": 11098,
+      "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+    },
+    "experiments/h7_proofs_001/qr001/kernel.h": {
+      "bytes": 2183,
+      "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+    },
+    "experiments/h7_proofs_001/qr001/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    },
+    "experiments/h7_proofs_001/qr001/wrapper.c": {
+      "bytes": 191,
+      "sha256": "d0d3fdcc6c9cf8deff898b795b507f6322bf1af2d457c770cc479a8c820d5190"
+    },
+    "experiments/h7_proofs_001/qr001/proof.so": {
+      "bytes": 28968,
+      "sha256": "9c29468a6c17cd928a83f1e587bb6df8c1b64b84faa7571d75a8f113521cab8a"
+    },
+    "experiments/h7_proofs_001/qr001/ordinary.npz": {
+      "bytes": 20806,
+      "sha256": "0ff62a6a63fa09ce07d00052c692605372f1f7ec2b8b7b0c467ca4ec8ba350a4"
+    },
+    "experiments/h7_proofs_001/qr001/weak_rank_one.npz": {
+      "bytes": 20806,
+      "sha256": "ba8f9c47b727b7a7c4b690129339bd25fe059f4812b6dbb0828d229e8c7bac9e"
+    },
+    "experiments/h7_proofs_001/qr001/scaled.npz": {
+      "bytes": 20806,
+      "sha256": "100b95c48f1c8c3598c4f1875f1b58e3cad59e92f7f29334cd38e44cda49e334"
+    },
+    "experiments/h7_proofs_001/qr001/coupled_large.npz": {
+      "bytes": 20806,
+      "sha256": "8120711a6293c9151bace9ec0827b2f25ac8d145daa8c639ed2357aa1e274329"
+    },
+    "experiments/h7_proofs_001/qr001/receipt.json": {
+      "bytes": 15248,
+      "sha256": "1bfa78e14b542bf671b31bbf560206c78d1db421b3c626e059c02977ebc99a2f"
+    },
+    "experiments/h7_proofs_001/qr001/certify_qr_source.py": {
+      "bytes": 5050,
+      "sha256": "14fca24eaa5b3f23c41e581a8e6931d73dfa37d0af0d44feb83127c26923e793"
+    },
+    "experiments/h7_proofs_001/qr002/kernel.c": {
+      "bytes": 11098,
+      "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+    },
+    "experiments/h7_proofs_001/qr002/kernel.h": {
+      "bytes": 2183,
+      "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+    },
+    "experiments/h7_proofs_001/qr002/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    },
+    "experiments/h7_proofs_001/qr002/wrapper.c": {
+      "bytes": 191,
+      "sha256": "d0d3fdcc6c9cf8deff898b795b507f6322bf1af2d457c770cc479a8c820d5190"
+    },
+    "experiments/h7_proofs_001/qr002/proof.so": {
+      "bytes": 28968,
+      "sha256": "9c29468a6c17cd928a83f1e587bb6df8c1b64b84faa7571d75a8f113521cab8a"
+    },
+    "experiments/h7_proofs_001/qr002/ordinary.npz": {
+      "bytes": 20806,
+      "sha256": "0ff62a6a63fa09ce07d00052c692605372f1f7ec2b8b7b0c467ca4ec8ba350a4"
+    },
+    "experiments/h7_proofs_001/qr002/weak_rank_one.npz": {
+      "bytes": 20806,
+      "sha256": "ba8f9c47b727b7a7c4b690129339bd25fe059f4812b6dbb0828d229e8c7bac9e"
+    },
+    "experiments/h7_proofs_001/qr002/scaled.npz": {
+      "bytes": 20806,
+      "sha256": "100b95c48f1c8c3598c4f1875f1b58e3cad59e92f7f29334cd38e44cda49e334"
+    },
+    "experiments/h7_proofs_001/qr002/coupled_large.npz": {
+      "bytes": 20806,
+      "sha256": "8120711a6293c9151bace9ec0827b2f25ac8d145daa8c639ed2357aa1e274329"
+    },
+    "experiments/h7_proofs_001/qr002/coupled_tilted.npz": {
+      "bytes": 20806,
+      "sha256": "3c6a0552042581012b1dc9edd450da26afa20bcbcbf9be1dae39b15f6258ff4a"
+    },
+    "experiments/h7_proofs_001/qr002/receipt.json": {
+      "bytes": 23941,
+      "sha256": "1c03aafe07d6a9a265c35260aef3de75f5c2a72492086dc2619d8b69899b34e8"
+    },
+    "experiments/h7_proofs_001/qr002/certify_qr_source.py": {
+      "bytes": 5339,
+      "sha256": "b49e5aaa9da87091be3e5c2ea857897ad3a08bfce5b53e8da821c286cf89dc39"
+    },
+    "experiments/h7_proofs_001/qr003/kernel.c": {
+      "bytes": 11098,
+      "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+    },
+    "experiments/h7_proofs_001/qr003/kernel.h": {
+      "bytes": 2183,
+      "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+    },
+    "experiments/h7_proofs_001/qr003/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    },
+    "experiments/h7_proofs_001/qr003/wrapper.c": {
+      "bytes": 191,
+      "sha256": "d0d3fdcc6c9cf8deff898b795b507f6322bf1af2d457c770cc479a8c820d5190"
+    },
+    "experiments/h7_proofs_001/qr003/proof.so": {
+      "bytes": 28968,
+      "sha256": "9c29468a6c17cd928a83f1e587bb6df8c1b64b84faa7571d75a8f113521cab8a"
+    },
+    "experiments/h7_proofs_001/qr003/ordinary.npz": {
+      "bytes": 20806,
+      "sha256": "0ff62a6a63fa09ce07d00052c692605372f1f7ec2b8b7b0c467ca4ec8ba350a4"
+    },
+    "experiments/h7_proofs_001/qr003/weak_rank_one.npz": {
+      "bytes": 20806,
+      "sha256": "ba8f9c47b727b7a7c4b690129339bd25fe059f4812b6dbb0828d229e8c7bac9e"
+    },
+    "experiments/h7_proofs_001/qr003/scaled.npz": {
+      "bytes": 20806,
+      "sha256": "100b95c48f1c8c3598c4f1875f1b58e3cad59e92f7f29334cd38e44cda49e334"
+    },
+    "experiments/h7_proofs_001/qr003/coupled_large.npz": {
+      "bytes": 20806,
+      "sha256": "8120711a6293c9151bace9ec0827b2f25ac8d145daa8c639ed2357aa1e274329"
+    },
+    "experiments/h7_proofs_001/qr003/coupled_tilted.npz": {
+      "bytes": 20806,
+      "sha256": "3c6a0552042581012b1dc9edd450da26afa20bcbcbf9be1dae39b15f6258ff4a"
+    },
+    "experiments/h7_proofs_001/qr003/receipt.json": {
+      "bytes": 23941,
+      "sha256": "c88b6dc13fa9d0fa7c4c4f5d9e48795d50c5e514bfafd177d538649c62cc3a43"
+    },
+    "experiments/h7_proofs_001/qr003/certify_qr_source.py": {
+      "bytes": 5393,
+      "sha256": "3d588bd08ebd584e0786d51bfd9a94927d45799f1e618506cf71f3087612ce00"
+    },
+    "experiments/h7_proofs_001/qr004/kernel.c": {
+      "bytes": 11098,
+      "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+    },
+    "experiments/h7_proofs_001/qr004/kernel.h": {
+      "bytes": 2183,
+      "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+    },
+    "experiments/h7_proofs_001/qr004/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    },
+    "experiments/h7_proofs_001/qr004/wrapper.c": {
+      "bytes": 191,
+      "sha256": "d0d3fdcc6c9cf8deff898b795b507f6322bf1af2d457c770cc479a8c820d5190"
+    },
+    "experiments/h7_proofs_001/qr004/proof.so": {
+      "bytes": 28968,
+      "sha256": "9c29468a6c17cd928a83f1e587bb6df8c1b64b84faa7571d75a8f113521cab8a"
+    },
+    "experiments/h7_proofs_001/qr004/ordinary.npz": {
+      "bytes": 20806,
+      "sha256": "0ff62a6a63fa09ce07d00052c692605372f1f7ec2b8b7b0c467ca4ec8ba350a4"
+    },
+    "experiments/h7_proofs_001/qr004/weak_rank_one.npz": {
+      "bytes": 20806,
+      "sha256": "ba8f9c47b727b7a7c4b690129339bd25fe059f4812b6dbb0828d229e8c7bac9e"
+    },
+    "experiments/h7_proofs_001/qr004/scaled.npz": {
+      "bytes": 20806,
+      "sha256": "100b95c48f1c8c3598c4f1875f1b58e3cad59e92f7f29334cd38e44cda49e334"
+    },
+    "experiments/h7_proofs_001/qr004/coupled_large.npz": {
+      "bytes": 20806,
+      "sha256": "8120711a6293c9151bace9ec0827b2f25ac8d145daa8c639ed2357aa1e274329"
+    },
+    "experiments/h7_proofs_001/qr004/coupled_tilted.npz": {
+      "bytes": 20806,
+      "sha256": "3c6a0552042581012b1dc9edd450da26afa20bcbcbf9be1dae39b15f6258ff4a"
+    },
+    "experiments/h7_proofs_001/qr004/receipt.json": {
+      "bytes": 23941,
+      "sha256": "a279bf27a4b92e307aae0d3c3c38ec8dbad41896d226126e9f8b7bdc527ea35d"
+    }
+  },
+  "capacity_guidance": {
+    "nominal_mAh": 60,
+    "reported_variation_mAh": [
+      2.6,
+      3.6
+    ],
+    "interpretation": "Owner clarified 3 sigma; interpreted as +/-3sigma about nominal60mAh.",
+    "distribution_shape": "Not specified; Gaussian may be an explicit scenario assumption, not a measured law.",
+    "sigma_mAh": [
+      0.8666666666666667,
+      1.2
+    ],
+    "relative_sigma_percent": [
+      1.4444444444444444,
+      2.0
+    ]
+  },
+  "limits": [
+    "No universal physical-domain or ten-year error constants",
+    "No calibrated coverage or aging guarantee",
+    "No full implementation exception/refinement proof",
+    "No M23 memory/timing qualification; field factor alone50624B"
+  ],
+  "production_changed": false,
+  "defaults_changed": false,
+  "mainline_changed": false,
+  "large_campaign_launched": false,
+  "next": [
+    "Transactional flush or explicit backend quarantine proof/repair",
+    "Uniform physical response/derivative/state-transport error bound on declared domain/horizon",
+    "Independent Monte Carlo generator/reducer and frozen pilot protocol remain deferred"
+  ]
+}

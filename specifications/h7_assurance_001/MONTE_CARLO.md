@@ -64,20 +64,20 @@ Keep matched-model calibration separate from model-discrepancy resilience.
 
 ## 3. Candidate engineering envelope
 
-Updated owner guidance: nominal capacity is 60 mAh, with approximately
-2.6–3.6 mAh variation. Whether that describes standard deviation, a plus/minus
-bound or total spread is pending clarification. That is a much narrower primary
-capacity population than the broad challenge envelope below. Keep these distinct;
-do not infer a Gaussian distribution or convert a spread into variance without
-specifying its meaning. If it denotes SD, 2.6/3.1/3.6 mAh can be three sensitivity
-assumptions, rather than an unsupported mixture claimed to be measured reality.
+Updated owner guidance: nominal capacity is 60 mAh, and the 2.6–3.6 mAh
+variation denotes 3 sigma. Interpret this as +/-3sigma about nominal, giving
+sigma = 0.8667–1.2000 mAh, or 1.444–2.000% relative SD. Candidate sensitivity
+settings use 3sigma = 2.6, 3.1 and 3.6 mAh. These are population assumptions,
+not a hard physical support bound, an estimator prior or an aging envelope.
+The distribution's shape is still unspecified: do not infer Gaussian tails or
+truncate at 3sigma merely from the stated spread. Keep broad physical challenge
+ranges separate from the primary manufacturing-capacity population.
 
 Before execution, materialize and hash the exact distributions, bounds,
 correlations, rejection rules and mixture weights. The following is a concrete
 starting proposal to review against the harness, not an already implemented law:
 
-- Cells: use the owner's capacity guidance for the primary Q population once
-  clarified. For other quantities, an equal mixture around the existing A/B
+- Cells: use the owner's clarified 3sigma capacity guidance for the primary Q population. For other quantities, an equal mixture around the existing A/B
   physical anchors with scale multipliers in [0.7,1.3] is an engineering proposal;
   a separate boundary challenge uses [0.5,1.5].
   Sample positive R and RC capacitances jointly, respecting tau=RC, ordered

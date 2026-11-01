@@ -1,0 +1,221 @@
+{
+  "schema": "h7_proof_claims_v1",
+  "reference_source_parent": "c9b68d1dd116e69cdcb18897a46b216dd8c2bf27",
+  "method": "Handwritten proofs plus exact rational/algebra checks and bounded abstract model exploration; not full C/Python formal verification.",
+  "path_convention": "Manuscript/evidence links relative to this directory; experiments paths relative to repository root.",
+  "claims": [
+    {
+      "id": "O1",
+      "status": "hand_proved_exact_model",
+      "statement": "Chronological feature-row generation followed by QR preserves the complete feature likelihood.",
+      "assumptions": [
+        "Fixed feature model; exact orthogonal arithmetic; disjoint source ownership"
+      ],
+      "evidence": [
+        "OWNERSHIP.md#o1-exact-qr-compaction",
+        "../../provenance/h7_proofs_001/algebra.json"
+      ],
+      "optimization_authority": "Exact basis or QR schedule changes subject to separate finite-precision bounds; no raw-input reordering."
+    },
+    {
+      "id": "O2",
+      "status": "hand_proved_exact_model",
+      "statement": "The native tangent represents one full-prefix linearization with original prior once.",
+      "assumptions": [
+        "Original whitened coordinates; prior rows [I,a]; refresh replaces tangent; successful kernels"
+      ],
+      "evidence": [
+        "OWNERSHIP.md#o2-native-tangent-semantics",
+        "experiments/h7_campaign_001/test_native.py"
+      ],
+      "optimization_authority": "Preserve joint quadratic and original prior; never recycle readout as independent evidence."
+    },
+    {
+      "id": "O3",
+      "status": "conditional_induction_with_bounded_model_checks",
+      "statement": "Ownership invariants hold over every finite admitted abstract trace.",
+      "assumptions": [
+        "Elementary transitions obey commit/failure contracts; consumed and published boundaries distinct"
+      ],
+      "evidence": [
+        "OWNERSHIP.md#o3-induction-over-admitted-operations",
+        "../../provenance/h7_proofs_001/ownership.json"
+      ],
+      "optimization_authority": "Storage reuse only after all ordinary and recovery readers finish; partial source correspondence, not full program refinement."
+    },
+    {
+      "id": "O4",
+      "status": "refuted_by_implementation_witness",
+      "statement": "Every Python field/backend exception leaves all live bytes unchanged.",
+      "assumptions": [],
+      "evidence": [
+        "OWNERSHIP.md#o4-source-correspondence-and-a-refuted-stronger-claim",
+        "../../provenance/h7_proofs_001/flush_failure.json"
+      ],
+      "optimization_authority": "None. Do not retry/checkpoint the partial field. Require transactional flush or backend quarantine proof."
+    },
+    {
+      "id": "E1",
+      "status": "hand_proved_algebra",
+      "statement": "Coefficient error maps exactly to centered likelihood, gradient and common-anchor GN precision errors.",
+      "assumptions": [
+        "Same feature map and prior; symmetric Gram error"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e1-exact-joint-error-identity-for-coefficient-storage",
+        "../../provenance/h7_proofs_001/algebra.json"
+      ],
+      "optimization_authority": "Budget error in joint geometry; parameter-independent cost removal still needs solver stopping equivalence."
+    },
+    {
+      "id": "E2",
+      "status": "hand_proved_conditional_probability_bound",
+      "statement": "TV <= tanh(oscillation(F_store-F_ref)/4).",
+      "assumptions": [
+        "Same supported domain/base measure; proper finite normalizers; uniform oscillation bound"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e2-from-log-density-oscillation-to-posterior-mass",
+        "../../provenance/h7_proofs_001/algebra.json",
+        "experiments/h7_proofs_001/test_certificates.py"
+      ],
+      "optimization_authority": "Derive compression tolerance from a declared mass-error budget; no H7-wide oscillation or tail bound yet."
+    },
+    {
+      "id": "E3",
+      "status": "hand_proved_conditional_transport_bound",
+      "statement": "Candidate interval mass transfers to an enlarged reference interval with at most the TV loss.",
+      "assumptions": [
+        "Uniform query transport bound; common support; posterior mass bound"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e3-state-transport-and-probability-statements"
+      ],
+      "optimization_authority": "Separate transport and likelihood errors; does not validate local Gaussian or frequentist coverage."
+    },
+    {
+      "id": "E4",
+      "status": "hand_proved_conditional_joint_matrix_bound",
+      "statement": "Relative precision error epsilon<1 bounds covariance in every direction and changed-query SD.",
+      "assumptions": [
+        "SPD reference precision; certified full matrix relative error and query-Jacobian error"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e4-local-precision-and-query-width-bounds"
+      ],
+      "optimization_authority": "All-direction local quadratic guarantee; scalar diagonal checks insufficient."
+    },
+    {
+      "id": "E5",
+      "status": "hand_proved_conditional_center_bound",
+      "statement": "Reference gradient residual bounds parameter/query displacement in a strong-convexity metric.",
+      "assumptions": [
+        "Reference Hessian lower bound throughout convex segment; interior reference minimizer; uniform query derivative bound"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e5-center-and-practical-query-error"
+      ],
+      "optimization_authority": "Convert representation and solver errors to practical query budget; GN precision alone does not prove convexity."
+    },
+    {
+      "id": "E6",
+      "status": "hand_proved_error_decomposition",
+      "statement": "Residual/Jacobian defects and state-recurrence defects produce explicit accumulated errors.",
+      "assumptions": [
+        "Declared exact residual model; affine recurrence for stated transport bound"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e6-error-in-the-physical-feature-model",
+        "../../provenance/h7_proofs_001/algebra.json"
+      ],
+      "optimization_authority": "No arbitrary forgetting; require excitation-dependent propagation and accumulation bounds."
+    },
+    {
+      "id": "E7",
+      "status": "constructive_impossibility_examples",
+      "statement": "Quiet data cannot uniformly identify Q; persistent bias defeats indefinite fixed-SD calibration; bounded nodes need not give bounded interpolant.",
+      "assumptions": [
+        "Counterexample assumptions stated separately in manuscript"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e7-impossibility-statements-delimit-the-performance-claim",
+        "../../provenance/h7_proofs_001/algebra.json"
+      ],
+      "optimization_authority": "Require information, model-error and reachable-response premises; these are not evidence that the synthetic interpolant occurs in H7."
+    },
+    {
+      "id": "N1",
+      "status": "hand_proved_certificate_with_exact_rational_finite_witnesses",
+      "statement": "Five returned binary64 native factors satisfy an all-direction relative local precision bound.",
+      "assumptions": [
+        "Supplied exact binary arrays; invertible supplied whitener certified by residual; positive reference bound; epsilon<1"
+      ],
+      "evidence": [
+        "NUMERICS.md#n1-a-computable-all-direction-precision-certificate",
+        "../../provenance/h7_proofs_001/qr_certificate.json"
+      ],
+      "optimization_authority": "Only these finite quadratics; feature generation, rounded query solves and future accumulation excluded."
+    },
+    {
+      "id": "N2",
+      "status": "constructive_reduced_precision_counterexample",
+      "statement": "Small entrywise factor changes can destroy precision in a weak joint direction.",
+      "assumptions": [
+        "Synthetic severely correlated columns of scale1e10; same original rows; binary32 factor storage"
+      ],
+      "evidence": [
+        "NUMERICS.md#n2-results",
+        "../../provenance/h7_proofs_001/qr_certificate.json"
+      ],
+      "optimization_authority": "No unqualified binary32 conversion. Scaling or certified mixed precision remains possible."
+    },
+    {
+      "id": "P_physical",
+      "status": "open",
+      "statement": "Uniform H7 physical feature, derivative and endpoint approximation bounds over admitted domain/horizon.",
+      "assumptions": [
+        "Physical parameter/input domain, noise likelihood and horizon to be fixed"
+      ],
+      "evidence": [
+        "ERROR_BUDGET.md#e8-what-must-be-discharged-before-compression-is-certified"
+      ],
+      "optimization_authority": "Required before probability-mass or practical accuracy certification for H7."
+    },
+    {
+      "id": "P_numerical",
+      "status": "open",
+      "statement": "Full supported-horizon floating-point/refinement and exception-safety theorem.",
+      "assumptions": [
+        "Ranges, conditioning, libm, solves, recurrence and all permitted errors bounded"
+      ],
+      "evidence": [
+        "NUMERICS.md#n4-open-finite-precision-and-resource-obligations"
+      ],
+      "optimization_authority": "Finite QR witnesses do not permit removing guards or assuming safe indefinite accumulation."
+    },
+    {
+      "id": "P_calibration",
+      "status": "open",
+      "statement": "Validated population coverage and stimulus-supported estimation objectives.",
+      "assumptions": [
+        "Versioned population and held-out independent endpoints; model/noise calibration"
+      ],
+      "evidence": [
+        "../h7_assurance_001/MONTE_CARLO.md"
+      ],
+      "optimization_authority": "No truth coverage claim from local precision or correlated trace counts."
+    },
+    {
+      "id": "P_resources",
+      "status": "open",
+      "statement": "Cortex-M23 10KiB SRAM and16MHz execution budget.",
+      "assumptions": [
+        "Complete C port, target toolchain, liveness/stack and cycle measurement"
+      ],
+      "evidence": [
+        "NUMERICS.md#n4-open-finite-precision-and-resource-obligations"
+      ],
+      "optimization_authority": "Packed H7 factor alone50624B; no firmware-ready claim."
+    }
+  ]
+}

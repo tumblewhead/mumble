@@ -9,8 +9,16 @@
       2.6,
       3.6
     ],
-    "interpretation": "pending clarification: SD, plus/minus deviation or total spread",
-    "distribution_shape": "unknown; do not assume measured Gaussian law"
+    "interpretation": "Owner clarified 3 sigma; interpreted as +/-3sigma about nominal60mAh.",
+    "distribution_shape": "Not specified; Gaussian may be an explicit scenario assumption, not a measured law.",
+    "sigma_mAh": [
+      0.8666666666666667,
+      1.2
+    ],
+    "relative_sigma_percent": [
+      1.4444444444444444,
+      2.0
+    ]
   },
   "exploration_proposal": {
     "cell_draws": 20,
@@ -58,14 +66,15 @@
   "proof_status": {
     "P0": "assumptions enumerated",
     "P1": "exact-arithmetic recurrence lemmas; implementation enclosure open",
-    "P2": "exact feature-model QR and ownership induction; code refinement open",
+    "P2": "Conditional ownership induction and finite model checks; universal field rollback refuted by injected QR failure.",
     "P3": "local quadratic positivity; floating-point and calibration open",
     "P4": "SOC transport identity and Gaussian moments; independently tested",
-    "P5": "conditional joint perturbation bounds; domain constants not certified",
+    "P5": "Posterior TV/transport and joint precision/center bounds derived; five exact rational native QR witnesses; uniform domain constants remain open.",
     "P6": "persistent-bias counterexample; no indefinite H7 coverage claim",
     "P7": "prior-predictive identity; matched generative lane not ready",
     "P8": "resource/refinement obligations; target size/cycles not qualified"
   },
   "no_production_change": true,
-  "no_monte_carlo_launched": true
+  "no_monte_carlo_launched": true,
+  "proof_tranche": "specifications/h7_proofs_001/claims.json"
 }
