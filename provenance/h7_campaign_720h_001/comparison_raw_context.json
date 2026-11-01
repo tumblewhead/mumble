@@ -1,0 +1,1711 @@
+{
+  "status": "reviewed",
+  "run": "experiments/foster_campaign_001/run_20261101_071802_121297",
+  "source_revision": "92e47167119da07bfbeb9bdeadf90335c6f836a2",
+  "summary_identity": {
+    "bytes": 89406,
+    "sha256": "2305188844d0b81e3e35f04c2038a13749f6c38bc35b840b1564338733170085"
+  },
+  "review_identity": {
+    "bytes": 110033,
+    "sha256": "7f71dc7cb72fd1f3b64996c33fb9dc9a03793b0561a8518091141e3298ab1a75"
+  },
+  "baseline_review_identity": {
+    "bytes": 109649,
+    "sha256": "253d0d0500c428e78e0a111a12cc05b69c82224a7860c436996217104a518e7b"
+  },
+  "bin_policy": "Late ranges include complete 0.36-hour bins intersecting the requested interval; extrema are actual recorded output errors, not ratios of separate extrema.",
+  "first_miss_policy": "Onset bounded by consecutive checkpoint counters, not an exact event time.",
+  "scope": "Stationary cells with cyclic temperature; correlated outputs are descriptive diagnostics, not independent coverage trials.",
+  "aggregates": {
+    "tangent64": {
+      "outputs": 64800000,
+      "Q_misses": 62106003,
+      "SOC_misses": 52465422,
+      "max_final_Q_percent": 0.005574436403465999,
+      "max_final_SOC_pp": 0.00270604494454485,
+      "max_final_RC_percent": 3.268794260902108,
+      "Q_miss_fraction": 0.9584259722222223,
+      "SOC_miss_fraction": 0.8096515740740741
+    },
+    "tangent_h7": {
+      "outputs": 64800000,
+      "Q_misses": 0,
+      "SOC_misses": 75804,
+      "max_final_Q_percent": 0.0006459520282664499,
+      "max_final_SOC_pp": 0.0001445814277079016,
+      "max_final_RC_percent": 2.6661403497053593,
+      "Q_miss_fraction": 0.0,
+      "SOC_miss_fraction": 0.0011698148148148147
+    }
+  },
+  "cases": [
+    {
+      "case": "case_0000",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1100,
+        "load_seed": 7
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.004663667643556302,
+          "final_SOC_pp": 0.0023629456322504794,
+          "Q_local_sd_ratio_720_to_72": 0.3224624905043466,
+          "Q_error_local_SD": -14.132814745488913,
+          "Q_misses": 7921292,
+          "SOC_misses": 6362255,
+          "Q_miss_fraction": 0.9779372839506173,
+          "SOC_miss_fraction": 0.7854635802469135,
+          "additional_Q_misses_after_72": 7290000,
+          "additional_SOC_misses_after_72": 5996978,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 0.7429538946307268,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 9.955913170439645,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              9.0112,
+              12.014933333333333
+            ],
+            "SOC": [
+              12.014933333333333,
+              15.018666666666666
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 632300,
+              "SOC_misses": 366285
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 1443308,
+              "SOC_misses": 849507
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 3876332,
+              "SOC_misses": 2789516
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 7120364,
+              "SOC_misses": 5641454
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 7921292,
+              "SOC_misses": 6362255
+            }
+          ],
+          "last_half_SOC_misses": 3572739,
+          "last_half_SOC_miss_fraction": 0.8832569419722321,
+          "SOC_misses_by_current": {
+            "current_zero": 93747,
+            "current_nonzero": 6268508
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.005042360162998971,
+                -0.003686428039162415
+              ],
+              "SOC_error_pp": [
+                -0.0011890767174060901,
+                0.0027179387068754224
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.005042360162998971,
+                -0.0045791114588022985
+              ],
+              "SOC_error_pp": [
+                -0.0011874551593737959,
+                0.0027179387068754224
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.0048369931051728265,
+                -0.004649799358147355
+              ],
+              "SOC_error_pp": [
+                -0.0011507351093814622,
+                0.0026201224393229694
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": -2.4234068962680766e-05,
+          "final_SOC_pp": 8.538982418926366e-05,
+          "Q_local_sd_ratio_720_to_72": 0.3218018656617104,
+          "Q_error_local_SD": -0.07412554520993415,
+          "Q_misses": 0,
+          "SOC_misses": 0,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 0.0,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 0,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 0.8901220609845772,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 10.39771201925257,
+          "first_miss_checkpoint_interval_hours": {},
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            }
+          ],
+          "last_half_SOC_misses": 0,
+          "last_half_SOC_miss_fraction": 0.0,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 0
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.0004530878716435538,
+                0.0005412454156195068
+              ],
+              "SOC_error_pp": [
+                -0.00017743220975807716,
+                0.0002748764391324876
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0004530878716435538,
+                -2.070729019365558e-05
+              ],
+              "SOC_error_pp": [
+                -2.9770215301261338e-05,
+                0.0002748764391324876
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.00020755888703316572,
+                -2.070729019365558e-05
+              ],
+              "SOC_error_pp": [
+                5.809837066994561e-06,
+                0.00015455967729005593
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "case_0001",
+      "scenario": {
+        "cell": "A",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1103,
+        "load_seed": 7
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.00420797847814347,
+          "final_SOC_pp": 0.002101758053130176,
+          "Q_local_sd_ratio_720_to_72": 0.32223493106179985,
+          "Q_error_local_SD": -12.759426112506931,
+          "Q_misses": 7648522,
+          "SOC_misses": 6308966,
+          "Q_miss_fraction": 0.944261975308642,
+          "SOC_miss_fraction": 0.7788846913580247,
+          "additional_Q_misses_after_72": 7290000,
+          "additional_SOC_misses_after_72": 5885665,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 1.0961410670812466,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 1.705962000504635,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              12.014933333333333,
+              15.018666666666666
+            ],
+            "SOC": [
+              12.014933333333333,
+              15.018666666666666
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 359530,
+              "SOC_misses": 424309
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 1170538,
+              "SOC_misses": 927684
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 3603562,
+              "SOC_misses": 2828594
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 6847594,
+              "SOC_misses": 5597829
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 7648522,
+              "SOC_misses": 6308966
+            }
+          ],
+          "last_half_SOC_misses": 3480372,
+          "last_half_SOC_miss_fraction": 0.8604218583125668,
+          "SOC_misses_by_current": {
+            "current_zero": 93601,
+            "current_nonzero": 6215365
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.0047419143797577945,
+                -0.0033304350596452537
+              ],
+              "SOC_error_pp": [
+                -0.0011519116700220433,
+                0.0025312155028101024
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0043380353426880625,
+                -0.003980472317477446
+              ],
+              "SOC_error_pp": [
+                -0.0010394684248876684,
+                0.002347389308754444
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.004296341833864847,
+                -0.004189546841504299
+              ],
+              "SOC_error_pp": [
+                -0.0010161489203491803,
+                0.002336100882160963
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": 0.00041698681623181244,
+          "final_SOC_pp": -0.0001445814277079016,
+          "Q_local_sd_ratio_720_to_72": 0.32158573454114653,
+          "Q_error_local_SD": 1.2762037892686937,
+          "Q_misses": 0,
+          "SOC_misses": 0,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 0.0,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 0,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 0.9822533559693758,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 2.1113714560199393,
+          "first_miss_checkpoint_interval_hours": {},
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            }
+          ],
+          "last_half_SOC_misses": 0,
+          "last_half_SOC_miss_fraction": 0.0,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 0
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.00042159942569286457,
+                0.0007796157113659774
+              ],
+              "SOC_error_pp": [
+                -0.00022704614442980997,
+                0.0003992554825887895
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                0.0002529084792479708,
+                0.0006165472751451517
+              ],
+              "SOC_error_pp": [
+                -0.00022704614442980997,
+                0.00023942912819596707
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                0.00032866184440649704,
+                0.00042839894982549254
+              ],
+              "SOC_error_pp": [
+                -0.00016014661430308053,
+                0.0001684910929361516
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "case_0002",
+      "scenario": {
+        "cell": "A",
+        "load": "charge-discharge",
+        "noise_v": 0.002,
+        "seed": 1100
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.005574436403465999,
+          "final_SOC_pp": 0.00270604494454485,
+          "Q_local_sd_ratio_720_to_72": 0.3186318683690478,
+          "Q_error_local_SD": -21.064435131043744,
+          "Q_misses": 7928155,
+          "SOC_misses": 7174279,
+          "Q_miss_fraction": 0.9787845679012346,
+          "SOC_miss_fraction": 0.8857134567901235,
+          "additional_Q_misses_after_72": 7290000,
+          "additional_SOC_misses_after_72": 6700708,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 2.010229137001529,
+          "worst_final_RC_parameter": "tau2_s",
+          "previous_max_RC_percent": 4.074415412578936,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              3.0037333333333334,
+              6.007466666666667
+            ],
+            "SOC": [
+              6.007466666666667,
+              9.0112
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 639163,
+              "SOC_misses": 473695
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 1450171,
+              "SOC_misses": 1169068
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 3883195,
+              "SOC_misses": 3371089
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 7127227,
+              "SOC_misses": 6412557
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 7928155,
+              "SOC_misses": 7174279
+            }
+          ],
+          "last_half_SOC_misses": 3803190,
+          "last_half_SOC_miss_fraction": 0.9402293224160436,
+          "SOC_misses_by_current": {
+            "current_zero": 527113,
+            "current_nonzero": 6647166
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.005809490147545837,
+                -0.004937941928839784
+              ],
+              "SOC_error_pp": [
+                -0.0016216752791453626,
+                0.0029220281819286598
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.005596006087171812,
+                -0.005082096979869277
+              ],
+              "SOC_error_pp": [
+                -0.0016133100992854477,
+                0.0027347523794518658
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.005596006087171812,
+                -0.005488192151126281
+              ],
+              "SOC_error_pp": [
+                -0.0016133100992854477,
+                0.0027347523794518658
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": -0.00022247945287157123,
+          "final_SOC_pp": 0.00011155594105138888,
+          "Q_local_sd_ratio_720_to_72": 0.3185018986658129,
+          "Q_error_local_SD": -0.8478816204327324,
+          "Q_misses": 0,
+          "SOC_misses": 0,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 0.0,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 0,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 2.031921063753428,
+          "worst_final_RC_parameter": "tau2_s",
+          "previous_max_RC_percent": 4.487917068484936,
+          "first_miss_checkpoint_interval_hours": {},
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            }
+          ],
+          "last_half_SOC_misses": 0,
+          "last_half_SOC_miss_fraction": 0.0,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 0
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.0006009083224123302,
+                0.0003311126753891003
+              ],
+              "SOC_error_pp": [
+                -0.0001253989874050454,
+                0.0003766679013916807
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0002464404249558072,
+                0.00024107582208277023
+              ],
+              "SOC_error_pp": [
+                -6.671359962240331e-05,
+                0.00012168627731568016
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.0002464404249558072,
+                -0.00014200737114000717
+              ],
+              "SOC_error_pp": [
+                -6.671359962240331e-05,
+                0.00012141765766138235
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "case_0003",
+      "scenario": {
+        "cell": "A",
+        "load": "charge-discharge",
+        "noise_v": 0.002,
+        "seed": 1103
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.005559067610350077,
+          "final_SOC_pp": 0.0026977933864857917,
+          "Q_local_sd_ratio_720_to_72": 0.31843786042230493,
+          "Q_error_local_SD": -21.006595421250687,
+          "Q_misses": 8051286,
+          "SOC_misses": 7334066,
+          "Q_miss_fraction": 0.9939859259259259,
+          "SOC_miss_fraction": 0.9054402469135803,
+          "additional_Q_misses_after_72": 7290000,
+          "additional_SOC_misses_after_72": 6733047,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 3.268794260902108,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 26.901725366424635,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              0.0,
+              3.0037333333333334
+            ],
+            "SOC": [
+              0.0,
+              3.0037333333333334
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 762294,
+              "SOC_misses": 601479
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 1573302,
+              "SOC_misses": 1304990
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 4006326,
+              "SOC_misses": 3523102
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 7250358,
+              "SOC_misses": 6572748
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 8051286,
+              "SOC_misses": 7334066
+            }
+          ],
+          "last_half_SOC_misses": 3810964,
+          "last_half_SOC_miss_fraction": 0.9421512202840078,
+          "SOC_misses_by_current": {
+            "current_zero": 537178,
+            "current_nonzero": 6796888
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.006594662520920114,
+                -0.005485205032706997
+              ],
+              "SOC_error_pp": [
+                -0.0019396743661859173,
+                0.003213642331756361
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.005949715918796006,
+                -0.005485205032706997
+              ],
+              "SOC_error_pp": [
+                -0.0017397025589060977,
+                0.0028669733563968514
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.005631529710503624,
+                -0.005508405543086514
+              ],
+              "SOC_error_pp": [
+                -0.001625140905270328,
+                0.00275057884469021
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": -0.0002068837039015392,
+          "final_SOC_pp": 0.00010172085447290868,
+          "Q_local_sd_ratio_720_to_72": 0.31830433714178524,
+          "Q_error_local_SD": -0.788456873791617,
+          "Q_misses": 0,
+          "SOC_misses": 0,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 0.0,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 0,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 2.6661403497053593,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 27.36231205983146,
+          "first_miss_checkpoint_interval_hours": {},
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            }
+          ],
+          "last_half_SOC_misses": 0,
+          "last_half_SOC_miss_fraction": 0.0,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 0
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.0013816501310492946,
+                -0.00013760036768895034
+              ],
+              "SOC_error_pp": [
+                -0.00044440819220725736,
+                0.000661517505196052
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0006103302111593045,
+                -0.00013760036768895034
+              ],
+              "SOC_error_pp": [
+                -0.00020865869459762987,
+                0.00025691450613596345
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.000280283237119594,
+                -0.0001599968271981389
+              ],
+              "SOC_error_pp": [
+                -7.799728032609199e-05,
+                0.00013585989272479893
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "case_0004",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1100,
+        "load_seed": 7
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.0033101465633067484,
+          "final_SOC_pp": 0.0012217516655255167,
+          "Q_local_sd_ratio_720_to_72": 0.32248781787879965,
+          "Q_error_local_SD": -9.605895097242577,
+          "Q_misses": 7842910,
+          "SOC_misses": 5672090,
+          "Q_miss_fraction": 0.9682604938271605,
+          "SOC_miss_fraction": 0.700258024691358,
+          "additional_Q_misses_after_72": 7290000,
+          "additional_SOC_misses_after_72": 5278056,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 1.4023495222191484,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 5.8385343034454085,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              9.0112,
+              12.014933333333333
+            ],
+            "SOC": [
+              12.014933333333333,
+              15.018666666666666
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 553918,
+              "SOC_misses": 394034
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 1364926,
+              "SOC_misses": 908013
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 3797950,
+              "SOC_misses": 2592038
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 7041982,
+              "SOC_misses": 5048033
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 7842910,
+              "SOC_misses": 5672090
+            }
+          ],
+          "last_half_SOC_misses": 3080052,
+          "last_half_SOC_miss_fraction": 0.7614542541829833,
+          "SOC_misses_by_current": {
+            "current_zero": 89963,
+            "current_nonzero": 5582127
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.004466293178284619,
+                -0.003004009141638342
+              ],
+              "SOC_error_pp": [
+                -0.0008873913331541861,
+                0.002476886302160697
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.003579062418335166,
+                -0.003004009141638342
+              ],
+              "SOC_error_pp": [
+                -0.0006640999640927792,
+                0.0021259207501844735
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.0033423982253810713,
+                -0.003022707835498295
+              ],
+              "SOC_error_pp": [
+                -0.0005991864257676172,
+                0.001999948099884463
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": 8.10594823708044e-05,
+          "final_SOC_pp": 6.803391378040757e-05,
+          "Q_local_sd_ratio_720_to_72": 0.32168690184525617,
+          "Q_error_local_SD": 0.2375243691557227,
+          "Q_misses": 0,
+          "SOC_misses": 0,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 0.0,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 0,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 1.343109158287592,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 6.0150950001801595,
+          "first_miss_checkpoint_interval_hours": {},
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            }
+          ],
+          "last_half_SOC_misses": 0,
+          "last_half_SOC_miss_fraction": 0.0,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 0
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.0012936110846406557,
+                0.0003823026102578453
+              ],
+              "SOC_error_pp": [
+                -0.00028085069312677735,
+                0.000662392389982891
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.00021818940559859001,
+                0.0003823026102578453
+              ],
+              "SOC_error_pp": [
+                -6.811700573594592e-05,
+                0.00021634032706385753
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                6.033187012199903e-05,
+                0.00036865995609591806
+              ],
+              "SOC_error_pp": [
+                -4.7619522325348385e-05,
+                0.0002011798434314871
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "case_0005",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1103,
+        "load_seed": 7
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.003127697862037593,
+          "final_SOC_pp": 0.00103623994465174,
+          "Q_local_sd_ratio_720_to_72": 0.3219304207628561,
+          "Q_error_local_SD": -9.080713800203442,
+          "Q_misses": 7102606,
+          "SOC_misses": 5740811,
+          "Q_miss_fraction": 0.8768649382716049,
+          "SOC_miss_fraction": 0.7087420987654321,
+          "additional_Q_misses_after_72": 7102606,
+          "additional_SOC_misses_after_72": 5327237,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 0.8555289151511936,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 2.526251659799117,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              81.1008,
+              84.10453333333334
+            ],
+            "SOC": [
+              12.014933333333333,
+              15.018666666666666
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 413574
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 624622,
+              "SOC_misses": 944003
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 3057646,
+              "SOC_misses": 2592076
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 6301678,
+              "SOC_misses": 5098587
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 7102606,
+              "SOC_misses": 5740811
+            }
+          ],
+          "last_half_SOC_misses": 3148735,
+          "last_half_SOC_miss_fraction": 0.7784341501522882,
+          "SOC_misses_by_current": {
+            "current_zero": 82871,
+            "current_nonzero": 5657940
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.0034862978214755813,
+                -0.0017657273363114179
+              ],
+              "SOC_error_pp": [
+                -0.0007284795449702397,
+                0.0021369991296649182
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0034830928359208535,
+                -0.0030514829909344954
+              ],
+              "SOC_error_pp": [
+                -0.0007284795449702397,
+                0.00199029477889745
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.003192457449086028,
+                -0.003055959305442446
+              ],
+              "SOC_error_pp": [
+                -0.0006675770329089836,
+                0.0018237878666282903
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": 0.00025745950651412386,
+          "final_SOC_pp": -9.006546412004823e-05,
+          "Q_local_sd_ratio_720_to_72": 0.32114123534845185,
+          "Q_error_local_SD": 0.7547678497805645,
+          "Q_misses": 0,
+          "SOC_misses": 34,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 4.197530864197531e-06,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 0,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 0.7737166431632359,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 2.7131164799675256,
+          "first_miss_checkpoint_interval_hours": {
+            "SOC": [
+              24.029866666666667,
+              27.033600000000003
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 34
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 34
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 34
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 34
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 34
+            }
+          ],
+          "last_half_SOC_misses": 0,
+          "last_half_SOC_miss_fraction": 0.0,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 34
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.00021302093591302196,
+                0.00124696749055353
+              ],
+              "SOC_error_pp": [
+                -0.00020435944737551281,
+                0.0006270198345259548
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.00011756068141188791,
+                0.0003254988687917404
+              ],
+              "SOC_error_pp": [
+                -0.00016822967204843664,
+                0.0001386454953178351
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                0.00018385460118786057,
+                0.0003254988687917404
+              ],
+              "SOC_error_pp": [
+                -0.00016822967204843664,
+                7.211590420663772e-05
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "case_0006",
+      "scenario": {
+        "cell": "B",
+        "load": "charge-discharge",
+        "noise_v": 0.002,
+        "seed": 1100
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.0044840041130367325,
+          "final_SOC_pp": -0.0001113684187703523,
+          "Q_local_sd_ratio_720_to_72": 0.31992501331762896,
+          "Q_error_local_SD": -15.872061515739256,
+          "Q_misses": 7728169,
+          "SOC_misses": 6807181,
+          "Q_miss_fraction": 0.954094938271605,
+          "SOC_miss_fraction": 0.8403927160493827,
+          "additional_Q_misses_after_72": 7290000,
+          "additional_SOC_misses_after_72": 6435894,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 1.309412174025959,
+          "worst_final_RC_parameter": "tau1_s",
+          "previous_max_RC_percent": 18.06356983247398,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              3.0037333333333334,
+              6.007466666666667
+            ],
+            "SOC": [
+              3.0037333333333334,
+              6.007466666666667
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 439177,
+              "SOC_misses": 371828
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 1250185,
+              "SOC_misses": 995636
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 3683209,
+              "SOC_misses": 3084945
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 6927241,
+              "SOC_misses": 6057386
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 7728169,
+              "SOC_misses": 6807181
+            }
+          ],
+          "last_half_SOC_misses": 3722236,
+          "last_half_SOC_miss_fraction": 0.9202157746924567,
+          "SOC_misses_by_current": {
+            "current_zero": 569996,
+            "current_nonzero": 6237185
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.004823569843492859,
+                -0.003912144776485604
+              ],
+              "SOC_error_pp": [
+                -0.001290349596333451,
+                0.002491929363324097
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.004510523632306196,
+                -0.004001151876364961
+              ],
+              "SOC_error_pp": [
+                -0.0011940998563275684,
+                0.002304499371719171
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.004510523632306196,
+                -0.0043513890423341195
+              ],
+              "SOC_error_pp": [
+                -0.0011940998563275684,
+                0.002304499371719171
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": -0.0006459520282664499,
+          "final_SOC_pp": -2.8138527752297193e-05,
+          "Q_local_sd_ratio_720_to_72": 0.3197461803953969,
+          "Q_error_local_SD": -2.310206114857325,
+          "Q_misses": 0,
+          "SOC_misses": 6765,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 0.0008351851851851852,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 6765,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 1.2666909305203422,
+          "worst_final_RC_parameter": "tau2_s",
+          "previous_max_RC_percent": 17.76815509982963,
+          "first_miss_checkpoint_interval_hours": {
+            "SOC": [
+              711.8847999999999,
+              714.8885333333334
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 6765
+            }
+          ],
+          "last_half_SOC_misses": 6765,
+          "last_half_SOC_miss_fraction": 0.0016724516435267592,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 6765
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.001104393186202035,
+                -0.00010152616650715984
+              ],
+              "SOC_error_pp": [
+                -0.00033424378926005804,
+                0.0005635732208020272
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0006736040393806597,
+                -0.0001893349676040934
+              ],
+              "SOC_error_pp": [
+                -0.00019237165935215295,
+                0.0003262508001200537
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.0006736040393806597,
+                -0.0005189463171517694
+              ],
+              "SOC_error_pp": [
+                -0.00019237165935215295,
+                0.0003262508001200537
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "case_0007",
+      "scenario": {
+        "cell": "B",
+        "load": "charge-discharge",
+        "noise_v": 0.002,
+        "seed": 1103
+      },
+      "common_prefix_hours": 69.08586666666666,
+      "common_prefix_all_numeric_arrays_stimulus_stats_exact": false,
+      "arms": {
+        "tangent64": {
+          "final_Q_percent": -0.004331319671602163,
+          "final_SOC_pp": -0.0001861357405485986,
+          "Q_local_sd_ratio_720_to_72": 0.31978923525980374,
+          "Q_error_local_SD": -15.334287699817118,
+          "Q_misses": 7883063,
+          "SOC_misses": 7065774,
+          "Q_miss_fraction": 0.9732176543209876,
+          "SOC_miss_fraction": 0.8723177777777777,
+          "additional_Q_misses_after_72": 7290000,
+          "additional_SOC_misses_after_72": 6605731,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 0.3062312138534251,
+          "worst_final_RC_parameter": "tau2_s",
+          "previous_max_RC_percent": 4.54701957515764,
+          "first_miss_checkpoint_interval_hours": {
+            "Q": [
+              6.007466666666667,
+              9.0112
+            ],
+            "SOC": [
+              0.0,
+              3.0037333333333334
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 594071,
+              "SOC_misses": 460489
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 1405079,
+              "SOC_misses": 1156776
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 3838103,
+              "SOC_misses": 3336096
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 7082135,
+              "SOC_misses": 6320623
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 7883063,
+              "SOC_misses": 7065774
+            }
+          ],
+          "last_half_SOC_misses": 3729678,
+          "last_half_SOC_miss_fraction": 0.9220555951109529,
+          "SOC_misses_by_current": {
+            "current_zero": 579657,
+            "current_nonzero": 6486117
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.0056676059404292545,
+                -0.004313382638376773
+              ],
+              "SOC_error_pp": [
+                -0.0017010629060676408,
+                0.002709151975699431
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0047072135474168775,
+                -0.004313382638376773
+              ],
+              "SOC_error_pp": [
+                -0.001374642486681732,
+                0.0022786953694065026
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.004524488362600554,
+                -0.004313382638376773
+              ],
+              "SOC_error_pp": [
+                -0.0013099395343413311,
+                0.0021971006640475466
+              ]
+            }
+          }
+        },
+        "tangent_h7": {
+          "final_Q_percent": -0.0004941165524630087,
+          "final_SOC_pp": -0.00011749772905189637,
+          "Q_local_sd_ratio_720_to_72": 0.3196030799099507,
+          "Q_error_local_SD": -1.7674891433643718,
+          "Q_misses": 0,
+          "SOC_misses": 69005,
+          "Q_miss_fraction": 0.0,
+          "SOC_miss_fraction": 0.008519135802469135,
+          "additional_Q_misses_after_72": 0,
+          "additional_SOC_misses_after_72": 69005,
+          "refresh_rejections_after_72": 0,
+          "final_max_RC_percent": 0.32093353118073376,
+          "worst_final_RC_parameter": "R1_ohm",
+          "previous_max_RC_percent": 4.185410776647225,
+          "first_miss_checkpoint_interval_hours": {
+            "SOC": [
+              471.58613333333335,
+              474.5898666666667
+            ]
+          },
+          "cumulative_misses_at_checkpoints": [
+            {
+              "requested_hours": 72,
+              "hours": 72.0896,
+              "outputs": 811008,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 144,
+              "hours": 144.1792,
+              "outputs": 1622016,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 360,
+              "hours": 360.44800000000004,
+              "outputs": 4055040,
+              "Q_misses": 0,
+              "SOC_misses": 0
+            },
+            {
+              "requested_hours": 648,
+              "hours": 648.8064,
+              "outputs": 7299072,
+              "Q_misses": 0,
+              "SOC_misses": 69005
+            },
+            {
+              "requested_hours": 720,
+              "hours": 720.0,
+              "outputs": 8100000,
+              "Q_misses": 0,
+              "SOC_misses": 69005
+            }
+          ],
+          "last_half_SOC_misses": 69005,
+          "last_half_SOC_miss_fraction": 0.01705950120643962,
+          "SOC_misses_by_current": {
+            "current_zero": 0,
+            "current_nonzero": 69005
+          },
+          "late_ranges": {
+            "72": {
+              "Q_error_percent": [
+                -0.001961216174151126,
+                -0.00047768093579536597
+              ],
+              "SOC_error_pp": [
+                -0.0007364641216200951,
+                0.0007853785733091811
+              ]
+            },
+            "360": {
+              "Q_error_percent": [
+                -0.0008781232865073818,
+                -0.00047768093579536597
+              ],
+              "SOC_error_pp": [
+                -0.00037697241009049254,
+                0.0003047679999257369
+              ]
+            },
+            "648": {
+              "Q_error_percent": [
+                -0.0006884049077560128,
+                -0.00047768093579536597
+              ],
+              "SOC_error_pp": [
+                -0.00030815354432334185,
+                0.00022019858094690647
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

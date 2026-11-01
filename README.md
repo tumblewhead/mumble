@@ -53,6 +53,13 @@ accuracy is largely unchanged. See the [streaming review](provenance/h7_campaign
 These correlated traces do not establish calibrated coverage or aging performance.
 Defaults and mainline remain unchanged.
 
+The [720-hour H7 review](provenance/h7_campaign_720h_001/README.md) extends all
+eight paired cases successfully. H7 retains zero Q 3SD misses, with small late
+SOC misses in the two cell-B charge-cycle cases. RC estimates improve with more
+data in both arms; no additional refresh rejections occur after 72 hours.
+The remaining SOC uncertainty issue needs a focused diagnostic, not another
+long sweep before storage work. Aging and lifetime behavior remain unqualified.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
