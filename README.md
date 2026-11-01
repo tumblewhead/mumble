@@ -25,10 +25,12 @@ The default estimator remains unchanged. The packed field/update subtotal is
 29.5 KiB, excluding workspace and other subsystem memory.
 
 The [tangent development plan](specifications/tangent_development_001/README.md)
-now specifies matched resource profiling and causal proposed-load forecasts from
-12 saved checkpoints, followed by one measured optimization or repair. It is
-planning-only; the working Q target is approximately 1%, with RC/EOD utility the
-next focus.
+specifies matched resource profiling and causal proposed-load forecasts from
+12 saved checkpoints. The [study runner](experiments/tangent_development_001/README.md)
+now passes 36 targeted tests and four checkpoint smoke controls. Run
+`python3 -B experiments/tangent_development_001/run.py --jobs 1` for the full study.
+The working Q target is approximately 1%, with RC/EOD utility the next focus;
+no optimization or default change has been promoted.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
