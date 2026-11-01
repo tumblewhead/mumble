@@ -37,7 +37,11 @@ cost; shared uncertainty and target-memory limitations remain unresolved.
 The [fused tangent update](experiments/tangent_fused_001/README.md) preserves all
 12,288 checked window states bitwise while reducing matched host CPU time by 28%.
 It is active in the opt-in tangent modes on this work branch; defaults and
-mainline remain unchanged. Shared uncertainty is the next investigation.
+mainline remain unchanged. The [shared uncertainty audit](experiments/shared_uncertainty_growth_001/README.md)
+now attributes over99.9% of the measured24/72hour Q gradient displacement to
+hysteresis approximation. Field/reference widths agree within1%, while their
+centers separate by about1.75/4.05 local SD. A hysteresis-specific repair is next;
+no uncertainty repair is promoted.
 
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport

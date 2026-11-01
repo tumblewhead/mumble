@@ -1,0 +1,14 @@
+{
+  "base_revision": "b854600",
+  "question": "Does shared likelihood approximation shift the center persistently while local precision increases?",
+  "cases": ["owner_case_0000: noise1100/load7/2mV", "owner_case_0002: noise1103/load7/2mV"],
+  "requested_hours": [24, 72],
+  "prefix_rule": "nearest existing checkpoint by sample count, irrespective of refresh acceptance; flush pending owned rows and fresh local field refit",
+  "adaptation": "Replay only the original harness from sample zero, validate every original stimulus/controller/RNG checkpoint, export full-prefix observations and checkpoint field. No costly estimator replay is needed. Partition audit reconstructs response gradients independently from origin.",
+  "fit": "Original prior once. Field initialized from its saved origin. Exact-data local fits initialized from the field optimum and its independently computed GN correction. Only converged local fits eligible; no global uniqueness claim.",
+  "diagnostics": ["full joint gradient/curvature", "hysteresis/RC additive gradient attribution", "actual vs predicted Q displacement", "transport isolation", "chunk-size control", "small-step Q observed curvature"],
+  "truth": "Harness/scoring files are separate; audit never opens them. Score only after fitting is frozen.",
+  "decision": "If compression dominates, next test a partition-specific response refinement. If retained-data reference remains similarly displaced, investigate sensor likelihood/non-Gaussian geometry before repair.",
+  "production_changed": false,
+  "storage": "72h at50Hz: about519MB of five-column observations per case; no full truth or trace CSV. Audit uses blockwise derivatives. No production storage added."
+}
