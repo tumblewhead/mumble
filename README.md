@@ -168,6 +168,16 @@ no candidate or default is promoted. The next step is response-basis error
 attribution while preserving the joint sum-of-squares structure, before another
 campaign or target-kernel selection.
 
+The [response-basis attribution](provenance/response_basis_attribution_001/README.md)
+now identifies joint hysteresis as the largest gradient-error group on302of306
+active-load probes. Raising only log-hysteresis degree2to3 improves the worst
+one-hour gradient defects1.79x/2.36x across the two active loads, but worsens115of306
+individual probes and increases the lower numeric payload5168to7744B. Linear-rate
+coordinates are not a robust improvement. Six targeted tests and two independent
+reviews support the diagnostic scope; no fitted accuracy or target qualification
+is claimed. The next step is a short fitted-query comparison to judge practical
+return on the extra2576B, before more global degree or a long campaign.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

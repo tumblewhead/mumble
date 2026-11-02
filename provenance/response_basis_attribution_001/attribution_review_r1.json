@@ -1,0 +1,151 @@
+{
+  "schema": "mumble_independent_review_v1",
+  "review_id": "response_basis_attribution_001_attribution_review_r1",
+  "reviewer": "fresh_context_subagent_response_attribution_review",
+  "revision": "2ffa4fad081e65f1d7759d1feb120e4d3bcd99df",
+  "scope": "Original signed attribution proof and completed degree2 attribution001 diagnostic; excludes subsequently appended basis intervention.",
+  "verdict": "accepted_conditional_diagnostic_only",
+  "blocking_findings": [],
+  "source_bindings": {
+    "provenance/response_basis_attribution_001/versions/plan_r1.md": {
+      "bytes": 3658,
+      "sha256": "9ae06b5fbae4e2e13097fb11df685026f646c1c36a0ccb74651943623414d7d8"
+    },
+    "provenance/response_basis_attribution_001/versions/attribution_protocol_review_r1.md": {
+      "bytes": 3658,
+      "sha256": "9ae06b5fbae4e2e13097fb11df685026f646c1c36a0ccb74651943623414d7d8"
+    },
+    "experiments/response_basis_attribution_001/attribution.py": {
+      "bytes": 3755,
+      "sha256": "5f21d3738b208240cf07248c3021e1ae049fa3a37b6caa7adc608ecbee2898be"
+    },
+    "experiments/response_basis_attribution_001/run_attribution.py": {
+      "bytes": 4506,
+      "sha256": "e412b0b130b559d4a6bd70bfe68f60fd8cc327e9e3de47c3fe05eac85741092a"
+    },
+    "experiments/partitioned_coefficients_001/run.py": {
+      "bytes": 10632,
+      "sha256": "b302740c4d8fed5a3d1d1723aa4759b958acae882d745cda93c7d4b9cd1dd7fc"
+    },
+    "experiments/conditional_architecture_001/conditional.py": {
+      "bytes": 3493,
+      "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635"
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "bytes": 4357,
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "bytes": 6989,
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+    },
+    "experiments/joint_rate_history_001/probe.c": {
+      "bytes": 2273,
+      "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/foster_feedback_001/estimator.py": {
+      "bytes": 6724,
+      "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+    },
+    "experiments/partitioned_coefficients_001/test_controls.py": {
+      "bytes": 2638,
+      "sha256": "dc892e71988d3202f6c3b41eb5e5b65389bb24e5504253cb0d5a9e172ce32ed3"
+    },
+    "experiments/partitioned_coefficients_001/test_representation.py": {
+      "bytes": 5069,
+      "sha256": "4c824ca9a956ab62a3b2957228633367e9733e77192a8f7e22566d7b82956397"
+    },
+    "experiments/response_basis_attribution_001/attribution001/registration.json": {
+      "bytes": 32002,
+      "sha256": "598a142bd3128a1f402cb59115e04cb9b236ca771ddaa3b3306876e5d2f997e0"
+    },
+    "experiments/response_basis_attribution_001/attribution001/summary.json": {
+      "bytes": 7268265,
+      "sha256": "f0ca982f4bd07047575b7725aed3630df94b9d22d7c3351e36612bceb860dfce"
+    },
+    "experiments/response_basis_attribution_001/attribution001/case_0000.json": {
+      "bytes": 1809226,
+      "sha256": "a42aebf753e7ea0273fbcf189aa9d092a60f8bed4442db0f7c4866821c0144f4"
+    },
+    "experiments/response_basis_attribution_001/attribution001/case_0001.json": {
+      "bytes": 2258077,
+      "sha256": "ffbafa3120962604054da905126b99ab9faf5a051dbc95315527f95e3b4258d7"
+    },
+    "experiments/response_basis_attribution_001/attribution001/case_0002.json": {
+      "bytes": 2260497,
+      "sha256": "496eb4c357d833b4fbab9014f57f946d90a78d7b0f3dacb9ba676d0f86f2afaf"
+    }
+  },
+  "registration_source_bindings_all_match_current_files": true,
+  "registered_protocol_matches_original_snapshot": true,
+  "proof_review": {
+    "identity": "(J+dJ)^T(r+dr)-J^T r = J^T dr + dJ^T r + dJ^T dr. Substitute dr=sum_p dr_p and dJ=sum_p dJ_p: diagonal terms are one-group replacement vectors, and unordered off-diagonal pairs give dJ_p^T dr_q+dJ_q^T dr_p. Exact real algebra.",
+    "partition": "RC1/2/3 include each initial-state/resistance pair and its log-tau column. Joint H includes H/B and both directional log-rate columns; no false separation of directional response histories. At fixed shape residuals are affine in amplitudes, so amplitude-Jacobian column defects times original amplitudes produce group residual defects. Nominally exact columns leave only measured floating-point closure error.",
+    "chain_derivative": "Amplitude chart derivative holds tau and gamma/Q fixed, including Q-induced gamma changes. Shape derivative differentiates log physical tau and log gamma/Q through ordered gaps. Direct D propagates by F at every chunk. Candidate features remain at original coordinates. This is the correct chain rule.",
+    "independence_truth": "Direct C predictions/Jacobians are independent of response collocation/projection but share the stationary physical model; they are not independent physical validation. Queries and center are inherited from frozen public baseline. Generator truth output is discarded and never used in objectives or query selection.",
+    "once_only_evidence": "Each accumulator consumes new chronological rows once. Prefixes reuse the same cumulative history only for diagnostics; no prior/posterior message is added. Baseline replay and many queries remain paired evidence, not independent observations."
+  },
+  "validation": {
+    "existing_test_command": "python3 -B -m unittest experiments.partitioned_coefficients_001.test_controls experiments.partitioned_coefficients_001.test_representation -q",
+    "existing_tests_passed": 7,
+    "independent_checks": {
+      "script_sha256": "1c41f396f0e040ea356fb63175cb1b0219a889230725108760e775e085b92e9b",
+      "random_seed": 2911,
+      "random_rows": 29,
+      "random_one_group_hybrids_checked": 4,
+      "random_signed_expansion_max_abs": 2.1316282072803006e-14,
+      "physical_rows": 211,
+      "stimulus": "Variable1/35 or2/35 second intervals, reversing+0.06/-0.04 A, varying temperature; public query20.",
+      "direct_chunk_chain_max_abs_V": 5.551115123125783e-16,
+      "direct_logshape_FD_max_abs_V": 2.2496953119030636e-11,
+      "candidate_logshape_FD_max_abs_V": 1.715960706860642e-14,
+      "finite_difference_log_step": 1e-05,
+      "physical_relative_closure": 7.59074697765407e-15,
+      "physical_relative_QR_closure": 8.054922278939606e-16
+    },
+    "raw_checks": "All case files equal summary entries; nine observation digests equal bound followup002 prefixes; baseline-result and registered-source hashes match.",
+    "prefixes": 9,
+    "queries_per_prefix": 51,
+    "relative_attribution_closure_max": 9.067287413762077e-10,
+    "relative_QR_gradient_closure_max": 6.792597831358378e-10,
+    "response_partition_closure_max_V": 1.9579242513331787e-12,
+    "jacobian_partition_closure_max_scaled_V": 1.3805376397042545e-13
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "interpretation_limit",
+      "finding": "H is largest on302 of306 active-load queries and has the largest group maximum at all active prefixes. Four early queries rank RC3 first. Rest group maxima are RC3; near-roundoff rest ranks carry no physical significance.",
+      "disposition": "Accept H-focused separate intervention; avoid universal per-query dominance."
+    },
+    {
+      "id": "R2",
+      "severity": "interpretation_limit",
+      "finding": "Group norms are not additive fractions. H one-group maximum0.685229 exceeds total maximum0.575587 because signed cancellation is possible.",
+      "disposition": "Protocol and output preserve signed vectors and six interactions; do not interpret ratios as uncertainty or fitted bias."
+    },
+    {
+      "id": "R3",
+      "severity": "scope_limit",
+      "finding": "Runner filters out outcome-selected domain-exit diagnostic. Refusal evidence is inherited from baseline; no new refusal check is implied.",
+      "disposition": "No blocker to attribution; new basis must separately check refusal/source/order/invalid-update behavior."
+    },
+    {
+      "id": "R4",
+      "severity": "precision_limit",
+      "finding": "Four-group implementation omits floating errors in nominally exact columns; these remain in measured closure.",
+      "disposition": "Accept real-algebra proof and approximate numerical reconstruction, not exact floating-point equality."
+    }
+  ],
+  "limits": [
+    "Finite public probes and short derivative fixtures are not uniform response/gradient bounds.",
+    "Normalized gradients at unfitted queries do not establish fitted SOC/Q/RC accuracy, calibrated coverage, posterior validity or causal health attribution.",
+    "No basis intervention, aging, lifetime availability, target timing, complete SRAM budget or default promotion accepted.",
+    "Seven inherited tests cover controls. No persistent attribution-specific test module existed at this review time; independent reviewer checks cover new expansion and chain use."
+  ],
+  "acceptance": "Accept conditional algebra and completed diagnostic interpretation as support for separately registered H-focused response-basis experiment. Require separate independent review of new basis and results."
+}
