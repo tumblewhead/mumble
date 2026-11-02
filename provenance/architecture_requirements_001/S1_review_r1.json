@@ -1,0 +1,121 @@
+{
+  "schema": "mumble_architecture_requirements_individual_review_v1",
+  "review_id": "S1_review_r1",
+  "reviewer": "independent fresh-context agent /root/requirements_s1_review",
+  "reviewed_at_utc": "2026-11-02T04:49:39.462510+00:00",
+  "source_revision": "e354203e9d513cdf7d76a559ffa821ee0b67ce4d",
+  "branch": "experiment/conditional-architecture-001",
+  "source_status": "S1 and requirements README are untracked candidate documents at review; exact content hashes bind this acceptance.",
+  "verdict": "accept_conditional",
+  "scope": "S1 exact measure/kernel composition and set containment, plus its BoundaryMessage, evolution and risk use in architecture_requirements_001/README.md; consistency with immutable interfaces/A4/A6/A7. No implementation or whole-requirements-set approval.",
+  "source_files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "aff7949b823cc8cfcf5875c32eda2fa4459d9dd3bba06999c45ea411cab3faad",
+      "bytes": 101895
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "c1ef5a7ddd84b60e6e0e76613417b2d8dc1d30166f9d25e5dec0118cfd221b5f",
+      "bytes": 273470
+    },
+    "specifications/architecture_requirements_001/S1.md": {
+      "sha256": "82c6c72308d27f416336a64e0dc867de6355ff581e944ee3ee8e1ef325da5f47",
+      "bytes": 5615
+    },
+    "specifications/architecture_requirements_001/README.md": {
+      "sha256": "cdd7cead87ba4d6c33c053018a43f345cf6ab7176948663f639687ddaece0644",
+      "bytes": 17456
+    },
+    "specifications/architecture_contracts_001/interfaces.json": {
+      "sha256": "e9e2eb52fe13d187ce4f8caf379cc87211162c7bc541182f6c2f894efbe40ce1",
+      "bytes": 8452
+    },
+    "specifications/architecture_contracts_001/A4.md": {
+      "sha256": "c4636c66870a58601817d80fec3485ee9963fed5b322fffe999e47499ef30da7",
+      "bytes": 4822
+    },
+    "specifications/architecture_contracts_001/A6.md": {
+      "sha256": "c091ac3bb7772920fd1164b3802aa6884dad814bb5aa966b2ac8ae360779a9ef",
+      "bytes": 4977
+    },
+    "specifications/architecture_contracts_001/A7.md": {
+      "sha256": "c2b8dbef71af5e4cf3699357b316e7d162c65450e7edf1f50cc8b8f01d8c88df",
+      "bytes": 5490
+    },
+    "provenance/architecture_contracts_001/A7_review_r2.json": {
+      "sha256": "ee29c6ceb9a326189cdd1e4f474651dd485ddf3da879c974e68f6bc8be992039",
+      "bytes": 9365
+    }
+  },
+  "explicit_assumptions": [
+    "Kernel has its standard measurable meaning: K(b,.) is a nonnegative measure and K(.,A) is measurable. Iterated integrals exist and are finite as stipulated, with strictly positive total mass whenever normalized. This review does not extend Tonelli to unspecified nonmeasurable or pathological measures.",
+    "The physical separator contains all latent memory needed for the declared conditional law, including uncertain inputs, sensor correlations, selection/action effects and path dependence; a valid reference observation measure or joint-kernel construction is supplied.",
+    "The initial joint prior is fixed and enters once. Consecutive transition-evidence blocks have disjoint ownership, compatible boundary measures/coordinates and preserved chronology.",
+    "Coordinate changes preserve measures, support masses and required Jacobians; normalizations retain every state-dependent factor. A removable global scalar is distinct from a state-dependent likelihood term.",
+    "For the set alternative, the true initial boundary belongs to C_0, each actual endpoint pair belongs to both admitted relations, and the stored outer operation includes the exact successor projection.",
+    "A physical probabilistic claim requires a qualified simultaneous event or justified finite-query risk allocation including resets. Neither model-posterior identity nor pointwise confidence supplies that event."
+  ],
+  "findings": [
+    {
+      "id": "S1-R1-COMPOSITION",
+      "disposition": "accepted",
+      "reason": "For measurable A, both bracketings equal the nonnegative iterated integral of K_b(c,A) against K_a(b,dc) and mu(db). The stipulated integrability and standard kernel assumptions support the interchange; induction preserves order and yields the prior times the chronological transition/observation factors marginalized over internal boundaries. Deterministic Dirac transitions are correctly treated as measures."
+    },
+    {
+      "id": "S1-R1-OWNERSHIP",
+      "disposition": "accepted",
+      "reason": "TransitionEvidence remains prior-free; BoundaryMessage explicitly includes its original prior and full ancestor prefix. Prohibiting injection beside ancestors preserves interfaces EvidenceObject semantics and A4 once-only consumption. Solver retries and derived Gaussians do not acquire new evidence ownership."
+    },
+    {
+      "id": "S1-R1-NOISY-INPUTS-PATH",
+      "disposition": "accepted",
+      "reason": "S1 explicitly rejects treating noisy current as exact under another actual law and requires augmentation or unsupported status for omitted exposure, thermal, spline or drift memory. The README keeps aging historical constraints tied to transition paths. Equal final health is not asserted to summarize the past."
+    },
+    {
+      "id": "S1-R1-SET-PROBABILITY",
+      "disposition": "accepted",
+      "reason": "The pair-relation intersection followed by existential projection preserves the actual successor before outer enclosure. This is the A7 induction, including measurements depending on both endpoints. Distinct types and risk labels prevent set geometry from being silently normalized into a posterior."
+    },
+    {
+      "id": "S1-R1-EVOLUTION-CONVENTION",
+      "disposition": "accepted",
+      "reason": "The README selects continuous z/v/h and instantaneous effective parameters only for a declared synthetic aging reference. It explicitly separates charge-preserving alternatives, branch identity, reversible temperature and unspecified H/gamma aging. This respects the conditional transport conventions of A7 without claiming real-cell qualification."
+    },
+    {
+      "id": "S1-R1-ERROR-AND-STORAGE",
+      "disposition": "accepted",
+      "reason": "Associativity is not used to prove finite-dimensional closure, floating-point associativity, normalized-kernel contraction or bounded cumulative approximation. A6 obligations and cumulative ancestry/error remain explicit. No arbitrary-aging, correlated-noise, ten-year or 10,240-byte feasibility result follows from this lemma."
+    },
+    {
+      "id": "S1-R1-RISK-USE",
+      "disposition": "accepted",
+      "reason": "README distinguishes diagnostic precision, model fidelity and physical authority; bounded-set assurance is conditional on valid hard bounds and excludes unbounded Gaussian noise. Lifetime probability needs simultaneous accounting and loses authority when risk continuity is unknown after SRAM loss. These are requirements rather than qualified constructions."
+    },
+    {
+      "id": "S1-R1-FUTURE-TYPE-CONTRACT",
+      "disposition": "implementation_obligation",
+      "reason": "When formalizing the two new interfaces, inherit the common source/reset/model/calibration/noise/support/coordinate/representation/prefix bindings and enforce measure/ownership compatibility at composition. The present semantic addition and A4 requirements state the intent but provide no runtime type validation."
+    }
+  ],
+  "blocking_findings": [],
+  "validation": {
+    "method": "Independent symbolic measure/kernel and pair-relation proof audit, selective project-state/context reads, and exact comparison of the four immutable contract files against e354203.",
+    "immutable_contract_diff_empty": true,
+    "implementation_changed": false,
+    "implementation_tests_run": false,
+    "long_sweeps_rerun": false,
+    "artifacts_written": [
+      "provenance/architecture_requirements_001/S1_review_r1.json"
+    ]
+  },
+  "limitations": [
+    "Acceptance applies only to the listed hashes and stated conditional semantics; substantive revisions need fresh review.",
+    "No characterized physical/noise/aging law, simultaneous event, concrete outer representation or numerical approximation bound is established.",
+    "Regrouping, duplication/prior rejection, noisy-input augmentation, equal-final-health paths, reset/gap and migration witnesses remain unexecuted implementation obligations.",
+    "No finite-storage sufficiency, useful-service deadline, firmware readiness, calibrated coverage or target resource qualification is established.",
+    "Root README and PROJECT_STATE were consulted selectively for current architecture context; other proofs, S2, and resolution-wide closure are outside this review."
+  ]
+}

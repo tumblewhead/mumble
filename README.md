@@ -147,6 +147,16 @@ Whole-set composition is accepted conditionally. Physical/runtime/target premise
 remain open; contract completeness is not deployment qualification. Kernel design
 is paused as requested, and no estimator or optimization code changed in this step.
 
+The [architecture requirement decisions](specifications/architecture_requirements_001/README.md)
+now specify all ten architectural responses while keeping their physical, platform
+and representation qualification open. Three independent reviews accept the joint
+boundary-message semantics, storage/counter accounting and whole-set consistency.
+History retains joint state/health uncertainty through an explicit evolution law;
+it does not discount old evidence by age. A full cubic partitioned table would use
+10,224B for likelihood coefficients alone, so the next bounded feasibility study
+compares lower-order/sparse continuous representations and full transport/workspace
+cost. No kernels or estimator code changed; mainline is unchanged.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

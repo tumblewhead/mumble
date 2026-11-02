@@ -1,0 +1,146 @@
+{
+  "schema": "architecture_requirement_resolution_v1",
+  "base_revision": "e354203e9d513cdf7d76a559ffa821ee0b67ce4d",
+  "source_requirements": "specifications/architecture_contracts_001/requirements.json",
+  "status": "architecture_decisions_specified_qualification_partial",
+  "implementation_changed": false,
+  "kernel_design": "paused; no individual code block selected",
+  "policy": "Each resolution is scoped; all original qualification blockers remain open until their named evidence is supplied. Parameterized interfaces resolve architecture choices, not physical constants or representation feasibility.",
+  "decisions": [
+    {
+      "id": "B_PHYSICAL",
+      "architecture_decision": "Versioned continuous Foster/OCV/directional-hysteresis physical model; stationary reference and explicitly synthetic evolution profile",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Actual-cell OCV, thermal law, discrepancy and joint physical support",
+      "blocks": "physical guarantee; broad-family representation acceptance",
+      "closure_owner_or_work": "battery characterization"
+    },
+    {
+      "id": "B_SENSOR",
+      "architecture_decision": "Ordered measured I/V/T/interval with sensor-law identity; uncertain inputs and correlation memory explicit",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "ADC, offset/drift/correlation, current/temperature and physical clock bounds or laws",
+      "blocks": "physical guarantee and sensor-enabled separator sufficiency",
+      "closure_owner_or_work": "hardware characterization"
+    },
+    {
+      "id": "B_AGING",
+      "architecture_decision": "Joint boundary transition; synthetic SOC/RC-voltage continuity convention; stable branch identities; no invented drift rate",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Qualified transition, rates/path family, state conventions, H/gamma evolution and sufficient memory",
+      "blocks": "aging representation acceptance and physical aging guarantee",
+      "closure_owner_or_work": "physical characterization plus S1 closure"
+    },
+    {
+      "id": "B_ERROR",
+      "architecture_decision": "Application remaining-margin rule; separate likelihood/transport/numerical ledgers; no universal NLL gate",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Candidate uniform bounds, computational support, useful budget allocation and long-horizon accumulation",
+      "blocks": "approximate kernel acceptance",
+      "closure_owner_or_work": "representation feasibility"
+    },
+    {
+      "id": "B_ACTION",
+      "architecture_decision": "Voltage floor/margin, complete horizon/input envelope and fallback are mandatory query-policy inputs",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Actual voltage floor, duration, future disturbance envelope and safe fallback",
+      "blocks": "load authorization only",
+      "closure_owner_or_work": "device owner"
+    },
+    {
+      "id": "B_RISK",
+      "architecture_decision": "Diagnostic default; separately typed deterministic set or simultaneous-probability assurance; prior and lifetime risk not restarted",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Qualified physical sets or probability law, lifetime alpha/reset construction and availability beta where probabilistic",
+      "blocks": "physical trust/lifetime risk claims",
+      "closure_owner_or_work": "device owner plus validation"
+    },
+    {
+      "id": "B_AVAILABILITY",
+      "architecture_decision": "Scenario-conditioned useful service distinct from compute service; all refusals/failures included",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Feasible excitation, useful-query/recovery deadlines and outage objectives frozen before confirmation",
+      "blocks": "unattended useful-service guarantee",
+      "closure_owner_or_work": "application profile plus study"
+    },
+    {
+      "id": "B_FAULT",
+      "architecture_decision": "Single inference writer; bounded acquisition queue; immutable publication; explicit gap/reset/quarantine and no stale authority",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Concrete concurrency/interrupt/reset/integrity model and fault containment tests",
+      "blocks": "runtime implementation acceptance",
+      "closure_owner_or_work": "platform integration"
+    },
+    {
+      "id": "B_PLATFORM",
+      "architecture_decision": "10240B all-in engineering ceiling, SRAM-only history, 16MHz nominal, 35Hz nominal configurable, conservative ten-year counter envelope",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Maximum target F_s, useful CPU allocation, blackout/jitter/backlog, stack/ISR and linked-image budgets",
+      "blocks": "target implementation acceptance",
+      "closure_owner_or_work": "platform owner and target measurements"
+    },
+    {
+      "id": "B_REPRESENTATION",
+      "architecture_decision": "First stationary candidate family: dependency-partitioned continuous coefficient functions plus transport; qualified migration only; S1 extension for aging",
+      "architecture_status": "specified",
+      "qualification_status": "open",
+      "remaining": "Concrete basis, PSD/error/closure/migration proof and total-resource feasibility; unknown-rate full support",
+      "blocks": "approximate code-block design freeze",
+      "closure_owner_or_work": "next bounded desktop feasibility study"
+    }
+  ],
+  "selected_profiles": {
+    "stationary_reference": "Existing conditional exact-input, constant-reference-temperature family; original prior and Gaussian-weight likelihood retained as model semantics; no physical coverage",
+    "synthetic_evolution": "Continuous z,v_i,h with time-varying effective parameters; schedules/rates/path family and H/gamma evolution must be registered before execution",
+    "physical_assurance": "First conditional profile is deterministic set containment where qualified hard bounds exist; probabilistic lifetime profile separately requires a valid law/event",
+    "inference_runtime": "Single writer with bounded interrupt-fed acquisition and immutable published generations"
+  },
+  "new_semantic_objects": {
+    "TransitionEvidence": {
+      "prior_included": false,
+      "ownership": "one disjoint chronological interval",
+      "meaning": "joint transition-observation kernel or separately typed relation"
+    },
+    "BoundaryMessage": {
+      "prior_included": true,
+      "ownership": "original prior identity and entire ancestor prefix",
+      "meaning": "unnormalized joint endpoint measure, not independent likelihood",
+      "forbidden": "Never combine this message with its ancestor observations/prior as independent evidence"
+    }
+  },
+  "application_targets": {
+    "SOC_absolute_fraction": 0.005,
+    "Q_relative": 0.01,
+    "status": "development targets; not device safety qualification"
+  },
+  "resource_envelope": {
+    "SRAM_total_B": 10240,
+    "clock_Hz": 16000000,
+    "nominal_F_s_Hz": 35,
+    "target_max_F_s_Hz": null,
+    "useful_CPU_fraction": null,
+    "horizon_seconds": 316224000,
+    "sample_counter_logical_bits": 64,
+    "history_medium": "SRAM only",
+    "status": "design target; not measured feasibility"
+  },
+  "pending_owner_inputs": [
+    "maximum target sample rate and useful CPU share",
+    "brownout floor and maximum proposed-load duration"
+  ],
+  "review_obligations": [
+    "S1 exact boundary-message and set semantics",
+    "S2 storage/counter/resource arithmetic",
+    "whole requirement resolution and scope consistency"
+  ],
+  "next": "Freeze stationary comparison profile and compare low-order/sparse continuous coefficient families and transport before selecting blocks; no large sweep."
+}

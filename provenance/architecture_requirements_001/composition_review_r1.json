@@ -1,0 +1,164 @@
+{
+  "schema": "architecture_requirement_composition_review_v1",
+  "reviewer": "independent_fresh_context_requirements_scope_review",
+  "base_revision": "e354203e9d513cdf7d76a559ffa821ee0b67ce4d",
+  "verdict": "accept_conditional",
+  "acceptance_scope": "Accept the architecture decision and feasibility-study layer as consistent with the reviewed A0-A8 contracts. This does not close the ten qualification blockers, accept a concrete compressor/runtime, or resume individual kernel design.",
+  "source_identities": {
+    "specifications/architecture_requirements_001/README.md": {
+      "sha256": "cdd7cead87ba4d6c33c053018a43f345cf6ab7176948663f639687ddaece0644",
+      "bytes": 17456
+    },
+    "specifications/architecture_requirements_001/resolution.json": {
+      "sha256": "510f2b1d51f5257528a4dfdc9fbd768e8b3ec08a20b61ce6f771efc1779aafe7",
+      "bytes": 8048
+    },
+    "specifications/architecture_requirements_001/S1.md": {
+      "sha256": "82c6c72308d27f416336a64e0dc867de6355ff581e944ee3ee8e1ef325da5f47",
+      "bytes": 5615
+    },
+    "specifications/architecture_requirements_001/S2.md": {
+      "sha256": "6b0c05c1a327887581308c07759558db63a413628cf7a37f94980e5ddea81564",
+      "bytes": 4477
+    },
+    "specifications/architecture_contracts_001/README.md": {
+      "sha256": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+      "bytes": 7065
+    },
+    "specifications/architecture_contracts_001/requirements.json": {
+      "sha256": "8e7706e4188c8bcfb79df7f6bef9364e06b53705d3b319f2f7d96a143c9dcb8e",
+      "bytes": 7235
+    },
+    "specifications/architecture_contracts_001/interfaces.json": {
+      "sha256": "e9e2eb52fe13d187ce4f8caf379cc87211162c7bc541182f6c2f894efbe40ce1",
+      "bytes": 8452
+    },
+    "specifications/architecture_contracts_001/A4.md": {
+      "sha256": "c4636c66870a58601817d80fec3485ee9963fed5b322fffe999e47499ef30da7",
+      "bytes": 4822
+    },
+    "specifications/architecture_contracts_001/A5.md": {
+      "sha256": "4cdc4126cb40a307aad7a3c8cd35ed0613a6c38f8ccd2ba99be2cf70769e120d",
+      "bytes": 4962
+    },
+    "specifications/architecture_contracts_001/A6.md": {
+      "sha256": "c091ac3bb7772920fd1164b3802aa6884dad814bb5aa966b2ac8ae360779a9ef",
+      "bytes": 4977
+    },
+    "specifications/architecture_contracts_001/A7.md": {
+      "sha256": "c2b8dbef71af5e4cf3699357b316e7d162c65450e7edf1f50cc8b8f01d8c88df",
+      "bytes": 5490
+    },
+    "specifications/architecture_contracts_001/A8.md": {
+      "sha256": "7f32912e7284663f0ba52c53dff860cafc03cf90fc9721d60e18089cad581480",
+      "bytes": 5220
+    },
+    "specifications/architecture_reuse_001/A0.md": {
+      "sha256": "affa893764b0ed0891787ae98a6c6c3712f67926c697936fa33cddaa65fb48d1",
+      "bytes": 3090
+    },
+    "specifications/conditional_architecture_001/README.md": {
+      "sha256": "559a39bb82427c88a86d9b7ef134750982d60156a471aae50ab196bed95e4431",
+      "bytes": 3636
+    },
+    "provenance/architecture_contracts_001/receipt.json": {
+      "sha256": "db3f475112380fda2f7b64a8fa17a9df744e0c978451be61429ab2785f13d89b",
+      "bytes": 6006
+    }
+  },
+  "review_method": [
+    "Read repository working instructions and relevant README/PROJECT_STATE entries, prior requirements/interfaces/receipt, new four-file packet and A0/A4-A8 dependencies.",
+    "Compared all ten requirement IDs and acceptance boundaries; checked all qualification states remain open.",
+    "Adversarial review of prior ancestry, computational support versus physical support, synthetic aging restrictions, error semantics, useful availability, reset and all-in resource gates. S1 and S2 individual proof reviews are separate acceptance dependencies.",
+    "Final metadata-only resolution status change inspected: architecture_status=specified; review acceptance remains in a separate receipt. Final current resolution hash bound."
+  ],
+  "findings": [
+    {
+      "id": "C1",
+      "severity": "info",
+      "status": "satisfied",
+      "finding": "No blocker disappears: all ten prior IDs have explicit architecture choices, residual evidence and acceptance boundaries. Parameterized device inputs resolve API responsibilities without inventing device constants.",
+      "qualification": "Describe completion as architecture decisions specified, not all requirements empirically resolved."
+    },
+    {
+      "id": "C2",
+      "severity": "info",
+      "status": "satisfied",
+      "finding": "The prior-free EvidenceObject is preserved. BoundaryMessage explicitly includes the original prior and ancestor prefix; TransitionEvidence owns a new disjoint interval. Reusing a posterior with ancestor evidence is forbidden. S1 explicitly requires sufficient sensor/path memory and does not claim finite closure."
+    },
+    {
+      "id": "C3",
+      "severity": "info",
+      "status": "satisfied",
+      "finding": "The computational box, log coordinates, rate probes and sparse encodings do not redefine allowable batteries. Original prior tails stay explicit, omitted mass requires accounting, full-domain/migration evidence is required and the known 35520-sample box exit remains mandatory."
+    },
+    {
+      "id": "C4",
+      "severity": "info",
+      "status": "satisfied",
+      "finding": "Continuous SOC/RC-voltage/hysteresis states and ordered physical branches are explicit synthetic-profile choices. They do not claim charge-conserving physical aging, arbitrary pole crossings, H/gamma evolution or arbitrary monotone-path closure. Real aging acceptance remains blocked."
+    },
+    {
+      "id": "C5",
+      "severity": "info",
+      "status": "satisfied",
+      "finding": "Remaining-margin error budgeting is a concrete conservative acceptance rule compatible with A5/A6; no fabricated NLL or per-module threshold is needed at this semantic stage. Local precision, model fidelity, physical containment and availability remain distinct. Unknown errors cannot consume a fictitious finite margin."
+    },
+    {
+      "id": "C6",
+      "severity": "info",
+      "status": "satisfied",
+      "finding": "Single-writer/immutable-publication semantics, bounded queues, aged-cell reset support and authority revocation match A4/A8. All-in SRAM and conditional CPU ceilings retain stack/ISR, transaction, migration and useful-service obligations; target deployment is not implied."
+    }
+  ],
+  "required_revisions": [],
+  "remaining_blockers": [
+    {
+      "boundary": "Before selecting or accepting approximate individual blocks",
+      "items": [
+        "Freeze public stationary domain, original prior/measure, sensor weights and common queries independently of fitted truth.",
+        "Establish candidate uniform joint likelihood/transport/derivative and numerical bounds, PSD treatment, full-support or omitted-mass accounting, and sustainable ten-year query margins.",
+        "Derive update state, migration/recovery information and all simultaneously live resources; coefficient bytes alone do not establish closure or feasibility."
+      ]
+    },
+    {
+      "boundary": "Before accepting aging or uncertain-input history",
+      "items": [
+        "Specify and qualify transition family, state convention, H/gamma evolution, input/calibration memory and sufficient boundary separator.",
+        "Re-derive stationary A0 dependencies for any extension; test equal-final-health/different-path and correlated-sensor witnesses."
+      ]
+    },
+    {
+      "boundary": "Before physical authorization or unattended useful-service claims",
+      "items": [
+        "Characterize physical/sensor/ADC/input/clock bounds or probability laws and actual cell support.",
+        "Freeze full load policy, fallback, risk/reset semantics, achievable scenario law, useful-query deadlines and outage objectives before confirmation."
+      ]
+    },
+    {
+      "boundary": "Before runtime or M23 acceptance",
+      "items": [
+        "Bind maximum sample rate, useful CPU allocation, fault/interrupt/reset/integrity models and counter operation envelopes.",
+        "Produce complete layout/link/stack/ISR, target service/backlog/deadline and containment evidence within 10240 bytes."
+      ]
+    },
+    {
+      "boundary": "Before accepting this proof-bearing packet",
+      "items": [
+        "Obtain independent acceptance of S1 and S2 at the recorded hashes; substantively revised packets require renewed independent review."
+      ]
+    }
+  ],
+  "implementation_changed": false,
+  "new_implementation_tests_run": false,
+  "checks": {
+    "original_blocker_ids_preserved": true,
+    "all_ten_qualification_statuses_open": true,
+    "blocking_composition_defects_found": 0
+  },
+  "limits": [
+    "Review covers the recorded specification hashes, not future edits or an implementation.",
+    "No physical characterization, numerical closure, calibrated coverage, target measurement or ten-year experiment performed.",
+    "Acceptance does not certify the whole user objective as finished if it is interpreted to require empirical feasibility or binding device-owner inputs."
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "architecture_requirements_independent_review_v1",
+  "packet": "S2",
+  "review_round": 1,
+  "reviewer": "independent delegated agent /root/requirements_s2_review",
+  "source_revision": "e354203e9d513cdf7d76a559ffa821ee0b67ce4d",
+  "review_date": "2026-11-01",
+  "review_context": "Fresh delegated review of S2 source and relevant source contracts; no implementation or specification edits, benchmarks or kernel design.",
+  "source_bindings": [
+    {
+      "path": "specifications/architecture_requirements_001/S2.md",
+      "sha256": "6b0c05c1a327887581308c07759558db63a413628cf7a37f94980e5ddea81564"
+    },
+    {
+      "path": "specifications/architecture_reuse_001/A0.md",
+      "sha256": "affa893764b0ed0891787ae98a6c6c3712f67926c697936fa33cddaa65fb48d1"
+    },
+    {
+      "path": "specifications/architecture_contracts_001/A8.md",
+      "sha256": "7f32912e7284663f0ba52c53dff860cafc03cf90fc9721d60e18089cad581480"
+    },
+    {
+      "path": "specifications/architecture_requirements_001/README.md",
+      "sha256": "cdd7cead87ba4d6c33c053018a43f345cf6ab7176948663f639687ddaece0644"
+    },
+    {
+      "path": "specifications/architecture_requirements_001/resolution.json",
+      "sha256": "510f2b1d51f5257528a4dfdc9fbd768e8b3ec08a20b61ce6f771efc1779aafe7"
+    },
+    {
+      "path": "specifications/conditional_architecture_001/README.md",
+      "sha256": "559a39bb82427c88a86d9b7ef134750982d60156a471aae50ab196bed95e4431"
+    },
+    {
+      "path": "specifications/architecture_contracts_001/requirements.json",
+      "sha256": "8e7706e4188c8bcfb79df7f6bef9364e06b53705d3b319f2f7d96a143c9dcb8e"
+    }
+  ],
+  "verdict": "accept_conditional",
+  "blockers": [],
+  "findings": [
+    {
+      "id": "S2-R1-01",
+      "status": "pass",
+      "claim": "Dependency counts and tensor cardinality",
+      "assessment": "Independent enumeration of all 78 unordered column pairs reproduces 10 constant, 33 one-argument, 23 two-argument and 12 three-argument entries. N(d) counts dense per-table tensor bases under the expressly stated lack of cross-table sharing. These are continuous-shape functions; no claim of 78 scalar closure is made."
+    },
+    {
+      "id": "S2-R1-02",
+      "status": "pass",
+      "claim": "Storage accounting and necessary versus sufficient conditions",
+      "assessment": "Degree 0 through 3 bytes and remainders are exact. The degree-3 raw subtotal leaves 16 B, insufficient even for the separately known 40 B five-shape record under this storage scheme. The statement explicitly limits this exclusion to its dense binary64 scheme. 8*N(d)+M_other<=10240 is only a necessary feasibility condition without a complete layout/live-path proof. Endpoint transport, priors, transaction state, errors, stack/ISR and update state are explicitly additional."
+    },
+    {
+      "id": "S2-R1-03",
+      "status": "pass",
+      "claim": "Known comparison subtotals",
+      "assessment": "624+72+40+32=768 B agrees with the preserved fixed-public-shape specification; 112*113/2*8=50624 B for the H7 factor. The text correctly avoids adding the overlapping 768 B subtotal wholesale to the proposed table."
+    },
+    {
+      "id": "S2-R1-04",
+      "status": "pass",
+      "claim": "Finite-horizon identifiers",
+      "assessment": "10*366 days is 316224000 seconds. The 35 Hz and 100 Hz counts require 34 and 35 unsigned bits, respectively; an additional initial endpoint does not change either width. Logical sample identifiers are correctly separated from boot identity, operation/generation/retry counts and lifetime-risk accounting. The 64-bit choice is accepted only for the bounded rates/horizon described; maximum admitted target rate remains an obligation."
+    },
+    {
+      "id": "S2-R1-05",
+      "status": "pass",
+      "claim": "CPU service scope",
+      "assessment": "The rate ceilings are necessary amortized conditions under a fixed CPU service allocation. At 35 Hz the displayed 457143 is an approximation; the explicit round-down instruction yields 457142 for a hard integer ceiling at rho=1. A8 service curves, blackouts, arrival/backlog and deadlines are preserved as separate obligations, and nominal 16 MHz is not claimed as guaranteed useful service."
+    },
+    {
+      "id": "S2-R1-06",
+      "status": "pass",
+      "claim": "Resolution-layer consistency",
+      "assessment": "README and resolution.json retain all-in 10240 B, 16 MHz nominal, 35 Hz nominal, 316224000 second horizon, 64-bit logical counters, unresolved maximum rate and CPU share, and open B_PLATFORM/B_REPRESENTATION qualification. Selection of a candidate family is not presented as memory, accuracy or deployment acceptance."
+    }
+  ],
+  "independent_arithmetic": {
+    "method": "Python integer arithmetic and unordered-pair dependency-union enumeration; no source implementation imported",
+    "dependency_argument_histogram": {
+      "0": 10,
+      "1": 33,
+      "2": 23,
+      "3": 12
+    },
+    "degree_rows": [
+      {
+        "degree_per_argument": 0,
+        "coefficients": 78,
+        "binary64_bytes": 624,
+        "remaining_of_10240_B": 9616
+      },
+      {
+        "degree_per_argument": 1,
+        "coefficients": 264,
+        "binary64_bytes": 2112,
+        "remaining_of_10240_B": 8128
+      },
+      {
+        "degree_per_argument": 2,
+        "coefficients": 640,
+        "binary64_bytes": 5120,
+        "remaining_of_10240_B": 5120
+      },
+      {
+        "degree_per_argument": 3,
+        "coefficients": 1278,
+        "binary64_bytes": 10224,
+        "remaining_of_10240_B": 16
+      }
+    ],
+    "horizon_seconds": 316224000,
+    "sample_counts": [
+      {
+        "rate_Hz": 35,
+        "interval_count": 11067840000,
+        "minimum_unsigned_bits_for_max_index": 34,
+        "optional_initial_endpoint_changes_bit_width": false
+      },
+      {
+        "rate_Hz": 100,
+        "interval_count": 31622400000,
+        "minimum_unsigned_bits_for_max_index": 35,
+        "optional_initial_endpoint_changes_bit_width": false
+      }
+    ],
+    "integer_cycles_per_interval_rho_1": {
+      "35": 457142,
+      "50": 320000,
+      "100": 160000
+    },
+    "fixed_shape_numeric_subtotal_B": 768,
+    "H7_factor_B": 50624
+  },
+  "acceptance_conditions": [
+    "A0 stationary exact-input, fixed-reference-temperature, linear-OCV and public fixed-weight premises remain in force.",
+    "Tensor counts apply only to the stated complete per-entry degree-d tensor bases without further compression or sharing.",
+    "Complete SRAM acceptance still requires a concrete layout, verified live storage/stack/interrupt bounds and all update/transport/error metadata.",
+    "Timing acceptance still requires frozen maximum rate, useful service allocation, arrival/backlog and deadline bounds; no target timing was measured.",
+    "Counter safety is conditional on bounded admitted operations, nonwrapping implementation and reset/rollover policy.",
+    "No approximation accuracy, PSD preservation, recurrence closure, useful-query availability or ten-year physical/numerical validity is established."
+  ],
+  "validation_status": "All independent integer and enumeration assertions passed; specification-only scope."
+}
