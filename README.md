@@ -226,6 +226,15 @@ this exploratory result; no candidate is promoted. Next derive duration-independ
 RC remainder bounds and admitted-region/transition semantics, retaining the H2
 joint-uncertainty blocker and full resource accounting.
 
+The [RC remainder proofs](provenance/rc_remainder_bounds_001/README.md) now bound
+stationary RC value and sensitivity approximation independently of elapsed time.
+Exact-rational certificates supply third/fourth derivative envelopes; the companion
+proof maps them to conditional joint precision and forecast-variance bounds.
+Likelihood error can still accumulate, and shared H2 uncertainty remains open.
+Seven targeted tests pass; P2/P3 received individual independent review. No runtime
+change or support restriction is introduced. Next apply the joint metric to saved
+anchors, separating RC and hysteresis defects before another representation repair.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

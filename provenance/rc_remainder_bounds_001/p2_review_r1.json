@@ -1,0 +1,146 @@
+{
+  "schema": "independent_proof_review_v1",
+  "proof_id": "P2",
+  "review_round": 1,
+  "reviewer": "fresh-context independent agent /root/rc_bounds_p2_review",
+  "reviewed_at_utc": "2026-11-02T17:29:31.563922+00:00",
+  "status": "accepted_conditional",
+  "proof_path": "specifications/rc_remainder_bounds_001/P2.md",
+  "proof_sha256": "30b0fc641431e1f8c8a5598a096fac37e0d02d3fabf35852cbdb552f5295e22d",
+  "source_revision": "7cc04213488018c51bd71e03e80386347a4a4f20",
+  "branch": "experiment/conditional-architecture-001",
+  "independence": {
+    "proof_or_implementation_edited": false,
+    "study_checker_consulted": false,
+    "method": "Direct mathematical review plus independently written integer/Fraction certificate. No simulation sweeps, fitted truth, numerical root solver, quadrature, or floating comparison."
+  },
+  "reviewed_reference_identities_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "12c41dd47d2f3b1e971ba85a94358b7943431955497841cb287255928a57be0d",
+    "PROJECT_STATE.json": "f79d7cc36233a4cdf0a6c75fcff34ee8ff29049b36ca96cc7f5bdc13db1e84a0",
+    "specifications/rc_remainder_bounds_001/README.md": "0cfad64537c7de70f3fdc2a1f06c609b33b9e0079922943eff4cfd4f6d041107",
+    "specifications/rc_remainder_bounds_001/P2.md": "30b0fc641431e1f8c8a5598a096fac37e0d02d3fabf35852cbdb552f5295e22d",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "specifications/symbolic_system_001/R1.md": "165dbc52142835f8c0d6cd8eaba225e35948827a09295e438130a8ab8f6d415e"
+  },
+  "findings": [
+    {
+      "id": "P2-R1-01",
+      "severity": "none",
+      "scope": "Convolution and derivatives",
+      "finding": "Solving the stationary linear ODE gives the stated free/forced response. Holding inputs, T, R and b fixed makes both polynomial recurrences correct. Local compact positive tau domination justifies finite-time differentiation for bounded measurable currents. Independent recurrence construction confirms p3, p4, q3, q4 and p_n=q_n-q_n' through n=4; the given induction extends the identity.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "P2-R1-02",
+      "severity": "none",
+      "scope": "Duration-independent envelopes",
+      "finding": "The x=(T-s)/tau substitution cancels kernel scale exactly. Extending the nonnegative integral to infinity proves B_n independent of elapsed time, sample count and minimum interval. The endpoint-adapted sign-current construction establishes the claimed supremal sharpness of the forced bound only, with that chosen current then held fixed for differentiation. Finite T=0 and zero-length intervals are covered.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "P2-R1-03",
+      "severity": "none",
+      "scope": "Root isolation, extrema and total variation",
+      "finding": "All supplied rational endpoint pairs have opposite signs. The disjoint positive brackets exhaust the polynomial degree and force distinct simple roots. Since derivative of exp(-x)q_n is -exp(-x)p_n, zero endpoint limits and the isolated critical points give the stated maximum and variation formulas.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "P2-R1-04",
+      "severity": "none",
+      "scope": "Exact exponential certificate",
+      "finding": "For tail terms beginning at order 49, successive ratios are at most x/50<1. The geometric bound, reciprocal reversal and endpoint monotonicity give valid rational intervals. Independent interval Horner evaluation and interval multiplication verify all four claimed upper constants by exact Fraction comparisons.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "P2-R1-05",
+      "severity": "none",
+      "scope": "P1 consequences and limitations",
+      "finding": "Unit-width fixed log-tau coordinates have d/dt=d/dtheta, so the stated M3 and M4 propagate to Taylor value/slope and Hermite value/Peano slope bounds. Uniform amplitude support requires its own finite amplitude envelopes. No global Peano norm, implementation rounding, uncertainty coverage, aging, temperature extension, or evidence-preserving recentering is proved. These limitations are accurately stated.",
+      "disposition": "accepted"
+    }
+  ],
+  "blocking_findings": [],
+  "required_dispositions": [],
+  "checks": {
+    "command": "python3 -B /tmp/p2_independent_review_check.py",
+    "exit_code": 0,
+    "independent_check_source_sha256": "2d3ad39e357a16decc05195fd01eb808663df4d52f0abff157ab7e44a3a7dbf3",
+    "independent_check_source": "from fractions import Fraction as F\nfrom pathlib import Path\nimport hashlib,json,subprocess\n\ndef derivative(p): return [i*p[i] for i in range(1,len(p))]\ndef recurrence(p,kind):\n    out=[0]*(len(p)+1)\n    for i,c in enumerate(p):\n        out[i+1]+=c\n        out[i]-=(i+(kind=='p'))*c\n    return out\n\ndef horner(p,x):\n    y=F(0)\n    for c in reversed(p): y=y*x+c\n    return y\n\ndef add(a,b): return a[0]+b[0],a[1]+b[1]\ndef mul(a,b):\n    v=[x*y for x in a for y in b]\n    return min(v),max(v)\ndef interval_horner(p,x):\n    y=(F(0),F(0))\n    for c in reversed(p): y=add(mul(y,x),(F(c),F(c)))\n    return y\n\ndef exp_negative(x):\n    assert 0<=x<50\n    term=F(1); s=term\n    for k in range(1,49):\n        term*=x/k;s+=term\n    h=term*x/49\n    return 1/(s+h/(1-x/50)),1/s\n\ndef absupper(x): return max(abs(x[0]),abs(x[1]))\ndef ceiling(x,den=10**12): return F(-(-x.numerator*den//x.denominator),den)\nrootnums={3:[1657568156,13433795689,44908636153],4:[760038343,7621690715,26516929955,65101340985]}\nlimits={3:[F('0.42962'),F('1.78302')],4:[F('1.11875'),F('4.51031')]}\np=q=[1]; out={}\nfor n in range(1,5):\n    p=recurrence(p,'p');q=recurrence(q,'q')\n    qp=derivative(q)+[0]\n    assert p==[a-b for a,b in zip(q,qp)]\n    if n not in rootnums: continue\n    zs=[]; signs=[]\n    for a in rootnums[n]:\n        l,r=F(a,10**10),F(a+1,10**10)\n        pl,pr=horner(p,l),horner(p,r)\n        assert pl*pr<0\n        signs.append([1 if pl>0 else -1,1 if pr>0 else -1])\n        z=mul(interval_horner(q,(l,r)),(exp_negative(r)[0],exp_negative(l)[1]))\n        assert z[0]*z[1]>0\n        zs.append(z)\n    A=max(map(absupper,zs))\n    zs2=[(F(0),F(0))]+zs+[(F(0),F(0))]\n    B=sum(absupper((b[0]-a[1],b[1]-a[0])) for a,b in zip(zs2,zs2[1:]))\n    assert A<limits[n][0] and B<limits[n][1]\n    out[n]={'p_ascending':p,'q_ascending':q,'bracket_endpoint_signs':signs,'A_verified_upper_rational':str(ceiling(A)),'B_verified_upper_rational':str(ceiling(B)),'A_claimed_exact_upper':str(limits[n][0]),'B_claimed_exact_upper':str(limits[n][1]),'all_exact_comparisons_pass':True}\nprint(json.dumps(out,indent=2))\n",
+    "results": {
+      "3": {
+        "p_ascending": [
+          -1,
+          7,
+          -6,
+          1
+        ],
+        "q_ascending": [
+          0,
+          1,
+          -3,
+          1
+        ],
+        "bracket_endpoint_signs": [
+          [
+            -1,
+            1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        "A_verified_upper_rational": "107403667699/250000000000",
+        "B_verified_upper_rational": "356603240779/200000000000",
+        "A_claimed_exact_upper": "21481/50000",
+        "B_claimed_exact_upper": "89151/50000",
+        "all_exact_comparisons_pass": true
+      },
+      "4": {
+        "p_ascending": [
+          1,
+          -15,
+          25,
+          -10,
+          1
+        ],
+        "q_ascending": [
+          0,
+          -1,
+          7,
+          -6,
+          1
+        ],
+        "bracket_endpoint_signs": [
+          [
+            1,
+            -1
+          ],
+          [
+            -1,
+            1
+          ],
+          [
+            1,
+            -1
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        "A_verified_upper_rational": "559372876767/500000000000",
+        "B_verified_upper_rational": "4510301835563/1000000000000",
+        "A_claimed_exact_upper": "179/160",
+        "B_claimed_exact_upper": "451031/100000",
+        "all_exact_comparisons_pass": true
+      }
+    }
+  },
+  "acceptance_scope": "Exact-arithmetic stationary Foster response derivative and resulting P1 remainder bounds under fixed parameter-independent initial voltage and fixed exactly supplied bounded current. Acceptance of the mathematics does not review the separately planned checker implementation/results or discharge physical, lifetime-rounding, whole-likelihood, firmware or deployment obligations."
+}

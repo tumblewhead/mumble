@@ -1,0 +1,171 @@
+{
+  "schema": "independent_code_result_review_v1",
+  "study": "rc_remainder_bounds_001",
+  "review_round": 1,
+  "reviewer": "independent agent /root/rc_bounds_code_review",
+  "reviewed_at_utc": "2026-11-02T17:35:10.692736+00:00",
+  "source_revision": "7cc04213488018c51bd71e03e80386347a4a4f20",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "request_changes",
+  "scope": "Offline implementation, six tests, preserved result, prior native compact mechanism probe and report interpretation. P2/P3 already have separate accepted conditional proof reviews. No estimator, proof, source, result or report edited by reviewer.",
+  "blocking_findings": [
+    {
+      "id": "CODE-R1-01",
+      "severity": "medium",
+      "path": "experiments/rc_remainder_bounds_001/check.py",
+      "line": 74,
+      "finding": "The optional upper argument is not checked for exact finite rational type. certificate(3, upper=(float(\"nan\"), float(\"nan\"))) returns exact_rational_comparisons_passed=true and proved_rational_upper={A:\"nan\",B:\"nan\"}, because both greater-than comparisons against NaN are false. Positive infinity and ordinary float pairs are also accepted and labeled rational. Thus the certificate API can report success without finite rational upper constants.",
+      "impact": "Fail-closed behavior is incomplete at the explicitly exposed alternate-certificate input. This does not invalidate either default Fraction certificate or the preserved result, whose comparisons are exact and reproduce byte-for-byte.",
+      "required_change": "Validate upper as exactly two nonnegative Fraction constants before comparison (or an explicitly documented exact-rational conversion that rejects nonfinite/inexact inputs); add targeted rejection tests for NaN, infinity, ordinary floats and malformed constant sequences. Preserve the original evidence and bind any repaired implementation to a distinct result.",
+      "required_re_review": "Fresh independent implementation/result review after repair."
+    }
+  ],
+  "verified_findings": [
+    {
+      "id": "CODE-R1-02",
+      "scope": "Default exact certificate",
+      "finding": "For n=3,4 the hard-coded polynomials and recurrences agree. All root brackets have positive ordered disjoint endpoints and exact opposite signs; n sign changes exhaust degree n. Horner interval multiplication, rational series remainder with successive ratios bounded by x/50, reciprocal reversal, endpoint monotonicity, and interval differences conservatively enclose the extrema and total variation. The default A/B acceptance comparisons use Fraction throughout; float conversion occurs only in displayed diagnostics after acceptance. Rounded float display fields must not be reused as outward-certified intervals."
+    },
+    {
+      "id": "CODE-R1-03",
+      "scope": "Existing rejections",
+      "finding": "Too-small rational constants, missing roots, reversed/overlapping repeated roots, non-sign-changing intervals and exponential x=50 are rejected. These checks remain useful but do not cover the malformed upper-input defect."
+    },
+    {
+      "id": "CODE-R1-04",
+      "scope": "Independent response reconstruction",
+      "finding": "The new Python implementation uses analytic log-tau derivative product-rule recurrences through order four, with copied pre-interval states, signed current and actual zero/irregular intervals. It does not invoke the prior native field or fit routines. Its suffix-expression test independently checks chronological convolution assembly at every prefix; the polynomial recurrence itself is shared and is separately algebraically tested. Public sample bytes reconstructed during review match the prior observations_sha256."
+    },
+    {
+      "id": "CODE-R1-05",
+      "scope": "Prior native probe comparison",
+      "finding": "All seven offset records have three branch value maxima and three branch derivative maxima, giving 42 compared scalar quantities. The maximum discrepancy is 1.9984014443252818e-15 mV. The prior compact JSON and generator are source-bound, and the generator uses separately verified native binaries. No ignored raw trajectory or native rebuild is needed for this review. Matching finite maxima is a mechanism check, not independent physical validation or a uniform bound."
+    },
+    {
+      "id": "CODE-R1-06",
+      "scope": "Tests and report",
+      "finding": "All six tests pass: exact polynomial identities, rational certificate/rejection cases, chronological derivatives and constant-current identities, public Taylor bounds, dense joint precision/forecast and likelihood identities, and the Gaussian accumulation example. The dense NumPy tests use 30 common-anchor cases and retain cross terms. Reported values, 0.15933665092220123 illustrative radius, 106 uV and 1.802 mV summed bounds, 334 uV sampled largest branch error and -5518.8 ten-year log odds agree with the result."
+    },
+    {
+      "id": "CODE-R1-07",
+      "scope": "Scientific and resource scope",
+      "finding": "Report correctly distinguishes exact stationary mathematical envelopes from floating finite diagnostics and illustrative tolerance inputs. Same-anchor Gauss-Newton precision bounds are not coverage or fit-to-fit guarantees; RC-only analysis leaves H2, uncertain inputs, aging, thermal paths, numerical accumulation and whole-likelihood fidelity open. Storage numbers are unchanged partial candidate totals; this offline code adds no runtime storage or runtime admission gate."
+    },
+    {
+      "id": "CODE-R1-08",
+      "scope": "Source and result integrity",
+      "finding": "Every one of the seven preserved result bindings matches current bytes/SHA256, P2/P3 proof review bindings match the reviewed files, and the fresh run is byte-identical without excluding any fields. The report final-receipt reference is prospective; final acceptance must await repair and re-review."
+    }
+  ],
+  "commands": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.rc_remainder_bounds_001.test_bounds -v",
+      "exit_code": 0,
+      "tests_passed": 6
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.rc_remainder_bounds_001.run --out /tmp/mumble-rc-remainder-review-r1-20261102.json",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -B - [inline Fraction certificate negative checks]",
+      "source": "from experiments.rc_remainder_bounds_001 import check as c\nfor upper in [(float(\"nan\"),float(\"nan\")),(float(\"inf\"),float(\"inf\")),(0.42962,1.78302)]:\n    print(c.certificate(3,upper=upper))\n",
+      "result": "All three incorrectly accepted as exact rational certificates; default constants remain valid."
+    },
+    {
+      "command": "python3 -B - [inline byte/hash/probe audit]",
+      "checks": [
+        "Read preserved and fresh result bytes; compare without field exclusions.",
+        "Recompute each preserved result bytes/SHA256 binding.",
+        "Reconstruct 600-by-5 public observation fixture from prior response_probe.py; compare little-endian float64 byte SHA256.",
+        "Verify P2/P3 review hashes and prior response_probe.py source binding."
+      ],
+      "exit_code": 0,
+      "result": "All listed checks passed."
+    }
+  ],
+  "reproduction": {
+    "path": "/tmp/mumble-rc-remainder-review-r1-20261102.json",
+    "bytes": 10046,
+    "sha256": "66b57c80bc8a81a0116d21c3c9525c79159a26cf2afaaa5bc305f87c0251f95b",
+    "matches_preserved_result_bytes": true,
+    "excluded_fields": [],
+    "max_prior_native_probe_difference_mV": 1.9984014443252818e-15
+  },
+  "bindings": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "README.md": {
+      "bytes": 108310,
+      "sha256": "0444d5df13b254fc926751f43014e3dadd3ffc46dac76335e093cbc32f535ea9"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 288985,
+      "sha256": "05e21600474f944d825a8e2e5415b338e4e4f27966e2b2f42479e5b4df279373"
+    },
+    "specifications/rc_remainder_bounds_001/README.md": {
+      "bytes": 2348,
+      "sha256": "0cfad64537c7de70f3fdc2a1f06c609b33b9e0079922943eff4cfd4f6d041107"
+    },
+    "specifications/rc_remainder_bounds_001/P2.md": {
+      "bytes": 4981,
+      "sha256": "30b0fc641431e1f8c8a5598a096fac37e0d02d3fabf35852cbdb552f5295e22d"
+    },
+    "specifications/rc_remainder_bounds_001/P3.md": {
+      "bytes": 6171,
+      "sha256": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32"
+    },
+    "specifications/rc_sensitivity_basis_001/P1.md": {
+      "bytes": 5746,
+      "sha256": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9"
+    },
+    "experiments/rc_remainder_bounds_001/check.py": {
+      "bytes": 6152,
+      "sha256": "00e27743b3ff6b64bb07b3e95cf7a94c212e02f2477ce1ef2765286513cc0017"
+    },
+    "experiments/rc_remainder_bounds_001/run.py": {
+      "bytes": 3611,
+      "sha256": "eaed4d2962abbcb546756fd726f8692cebacb76b1a9ab91e7ed4330b01414fad"
+    },
+    "experiments/rc_remainder_bounds_001/test_bounds.py": {
+      "bytes": 4385,
+      "sha256": "e8ed7ce3f0fd38c08d543b52f070a1837ded1631de0e0c13c6fc270c15bef9f1"
+    },
+    "experiments/rc_remainder_bounds_001/README.md": {
+      "bytes": 1450,
+      "sha256": "97b68d002fbdae9ad342715809ee1ad67206b4edf9d8e8c25ddcc98041c1a4f8"
+    },
+    "provenance/rc_remainder_bounds_001/result.json": {
+      "bytes": 10046,
+      "sha256": "66b57c80bc8a81a0116d21c3c9525c79159a26cf2afaaa5bc305f87c0251f95b"
+    },
+    "provenance/rc_remainder_bounds_001/README.md": {
+      "bytes": 6355,
+      "sha256": "50eafeefc12724a344cb0798dbcbbacbb92b8ac25545c1e0cf2def0eab4ed8d6"
+    },
+    "provenance/rc_remainder_bounds_001/p2_review_r1.json": {
+      "bytes": 8597,
+      "sha256": "f26403abbf34fde7e84f1c3318e06106b47909ee28cc6b69a37f299eeff5d8ae"
+    },
+    "provenance/rc_remainder_bounds_001/p3_review_r1.json": {
+      "bytes": 8363,
+      "sha256": "84441f7571aad14199f9ece1cb81c463bcd7c5a48e74b4956ccf93dc9c6cb2bb"
+    },
+    "experiments/rc_sensitivity_basis_001/response_probe.py": {
+      "bytes": 4155,
+      "sha256": "2579e3a27228a565c557409f40b753893b86deda6fad87352fd5ac8804aa3973"
+    },
+    "provenance/rc_sensitivity_basis_001/response_probe.json": {
+      "bytes": 21476,
+      "sha256": "9600f5745389ffa8ef3f522591f93f556000cffd4bf02d35b0c72c461e629b35"
+    },
+    "provenance/rc_sensitivity_basis_001/receipt.json": {
+      "bytes": 9208,
+      "sha256": "cfd72a0034569ef5e0ae2206424349f05191ff43b8223f826ba9d03cf176156f"
+    }
+  },
+  "no_long_sweeps": true,
+  "acceptance_limit": "Default constants and original finite evidence are verified, but implementation acceptance is withheld pending the narrow alternate-input fail-closed repair and a fresh review."
+}

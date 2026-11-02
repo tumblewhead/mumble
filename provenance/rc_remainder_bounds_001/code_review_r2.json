@@ -1,0 +1,174 @@
+{
+  "schema": "independent_code_result_review_v1",
+  "study": "rc_remainder_bounds_001",
+  "review_round": 2,
+  "reviewer": "fresh independent agent /root/rc_bounds_code_r2",
+  "reviewed_at_utc": "2026-11-02T17:37:33.669271+00:00",
+  "source_revision": "7cc04213488018c51bd71e03e80386347a4a4f20",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "scope": "Entire offline checker, runner, seven targeted tests, revised report, original/revised results and preserved versions. P2/P3 read for implementation correspondence and verified unchanged against their separately accepted proof reviews. Root README/PROJECT_STATE/handoff are mutable bookkeeping excluded from source bindings. Reviewer changed only this receipt; no long sweeps.",
+  "dispositions": [
+    {
+      "id": "CODE-R1-01",
+      "status": "resolved",
+      "finding": "The upper override is validated before mathematical comparison: only tuple/list containers with exactly two values whose exact type is Fraction and whose values are nonnegative pass. NaN, infinities, ordinary floats, integers, booleans, strings, Decimal, None elements, negative Fractions and malformed containers fail closed. Optional upper=None retains documented default behavior. Both supplied valid Fractions and larger valid rational bounds still pass. Seventh test exercises both orders and both bound positions."
+    }
+  ],
+  "findings": [
+    {
+      "id": "CODE-R2-01",
+      "status": "verified",
+      "finding": "Degree-n polynomials have n positive disjoint sign-changing rational brackets, exhausting roots. Polynomial identities agree with exact recurrence. Horner interval arithmetic, rational exponential tail/reciprocal inequalities and total-variation interval differences implement P2 conservatively. Acceptance uses rational arithmetic throughout; conversion to float occurs only after acceptance. Displayed float extrema and upper fields are diagnostics, not outward-rounded runtime enclosures."
+    },
+    {
+      "id": "CODE-R2-02",
+      "status": "verified",
+      "finding": "Chronological response recursion uses copied prior state, actual irregular/zero intervals and signed currents; derivative product rules and independent suffix assembly agree through order four. Constant-current identities and finite public Taylor value/slope inequalities pass. These are finite diagnostic checks, separate from the mathematical uniform bounds."
+    },
+    {
+      "id": "CODE-R2-03",
+      "status": "verified",
+      "finding": "All seven current and preserved prior query records are present. The runner reproduces 42 native probe scalar maxima with maximum difference 1.9984014443252818e-15 mV. Public inputs and amplitudes are declared and no truth, fitted trajectories or prior posterior are introduced into fitting; there is no fit objective in this study."
+    },
+    {
+      "id": "CODE-R2-04",
+      "status": "verified",
+      "finding": "Thirty dense common-anchor numerical controls retain off-diagonal coupling and verify likelihood identity, precision perturbation and transported-gradient local variance inequalities. Report explicitly limits these to conditional local Gauss-Newton covariance; it does not claim posterior coverage or fit-to-fit guarantees."
+    },
+    {
+      "id": "CODE-R2-05",
+      "status": "verified",
+      "finding": "Reported illustrative radius 0.15933665092220123, summed bounds about 106 uV and 1.802 mV, largest sampled individual-branch defect about 334 uV and abstract ten-year log odds -5518.8 match revised output. The report distinguishes sampled branch maxima from sums of branch envelopes and illustrative budgets from product requirements."
+    },
+    {
+      "id": "CODE-R2-06",
+      "status": "verified",
+      "finding": "All seven revised result bindings match current bytes and hashes. Fresh reproduction is byte-identical to result_r2.json without field exclusions. Original result.json matches the R1 hash; saved original checker, tests and report match R1 bindings. All scientific fields are identical between original and revised results; only checker/test source bindings change."
+    },
+    {
+      "id": "CODE-R2-07",
+      "status": "verified",
+      "finding": "P2/P3 proof bytes remain unchanged. Stationarity, exact supplied inputs, fixed independent initial coordinates and exact arithmetic remain premises; aging, thermal paths, uncertain current, accumulated rounding, H2 error, whole-history likelihood fidelity and full target resources remain open. No runtime gate, support restriction, recentering, estimator or default change is introduced. Storage remains the 4760 B factor / 5168 B partial subtotal with zero new runtime bytes."
+    }
+  ],
+  "commands": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.rc_remainder_bounds_001.test_bounds -v",
+      "exit_code": 0,
+      "tests_passed": 7
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.rc_remainder_bounds_001.run --out /tmp/mumble-rc-remainder-review-r2-20261102-independent.json",
+      "exit_code": 0
+    },
+    {
+      "command": "diff -u preserved R1 checker/tests/report against current counterparts",
+      "exit_code": 1,
+      "interpretation": "Expected differences: three-line validation, one additional rejection test, report updated result link/test count/repair disclosure."
+    },
+    {
+      "command": "python3 -B - [independent byte/hash/negative-input audit]",
+      "exit_code": 0,
+      "checks": [
+        "Fresh result byte equality, all seven revised bindings, original result and preserved source/test/report hashes.",
+        "Original/revised scientific field equality excluding bindings; P2/P3 unchanged and proof-review hashes inspected.",
+        "56 invalid override cases rejected across orders 3 and 4; valid tuple/list and larger exact Fraction bounds accepted.",
+        "Current and prior result query counts both equal seven."
+      ]
+    }
+  ],
+  "reproduction": {
+    "path": "/tmp/mumble-rc-remainder-review-r2-20261102-independent.json",
+    "bytes": 10046,
+    "sha256": "9ee05963039975393f1cd414c036c92b708a4ab266751afe09a6a7ea2d2e5d5f",
+    "matches_preserved_result_r2_bytes": true,
+    "excluded_fields": [],
+    "max_prior_native_probe_difference_mV": 1.9984014443252818e-15
+  },
+  "bindings": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "experiments/rc_remainder_bounds_001/README.md": {
+      "bytes": 1780,
+      "sha256": "2bf9e6a7a11a35fd16c3d387223eb7e86e1a8dc76e735b456da36775a52a6bf4"
+    },
+    "experiments/rc_remainder_bounds_001/check.py": {
+      "bytes": 6363,
+      "sha256": "777f8d9d06dc9ebf27b412979e6af6dd5d4c9af0f31f01e55ce4e0d25815c981"
+    },
+    "experiments/rc_remainder_bounds_001/run.py": {
+      "bytes": 3611,
+      "sha256": "eaed4d2962abbcb546756fd726f8692cebacb76b1a9ab91e7ed4330b01414fad"
+    },
+    "experiments/rc_remainder_bounds_001/test_bounds.py": {
+      "bytes": 5117,
+      "sha256": "7670596f61f1b62c9b4bc1c68880ec843814592d7088514cdc23fbc38bb300d6"
+    },
+    "provenance/rc_remainder_bounds_001/README.md": {
+      "bytes": 6749,
+      "sha256": "5a191dda126fcad71e67b47d7f4c3c7d634a937414a7102d6be502fa9a79a62c"
+    },
+    "provenance/rc_remainder_bounds_001/code_review_r1.json": {
+      "bytes": 10752,
+      "sha256": "cc9a166adc37ebe54b5372f4465d10a2163237838d85c304622fdb792b643d7d"
+    },
+    "provenance/rc_remainder_bounds_001/p2_review_r1.json": {
+      "bytes": 8597,
+      "sha256": "f26403abbf34fde7e84f1c3318e06106b47909ee28cc6b69a37f299eeff5d8ae"
+    },
+    "provenance/rc_remainder_bounds_001/p3_review_r1.json": {
+      "bytes": 8363,
+      "sha256": "84441f7571aad14199f9ece1cb81c463bcd7c5a48e74b4956ccf93dc9c6cb2bb"
+    },
+    "provenance/rc_remainder_bounds_001/result.json": {
+      "bytes": 10046,
+      "sha256": "66b57c80bc8a81a0116d21c3c9525c79159a26cf2afaaa5bc305f87c0251f95b"
+    },
+    "provenance/rc_remainder_bounds_001/result_r2.json": {
+      "bytes": 10046,
+      "sha256": "9ee05963039975393f1cd414c036c92b708a4ab266751afe09a6a7ea2d2e5d5f"
+    },
+    "provenance/rc_remainder_bounds_001/validation.json": {
+      "bytes": 1416,
+      "sha256": "f6bcc90dceeaea8e88b7cb4a94e00bcfd96aee57e2e2d41080548c839888ebda"
+    },
+    "provenance/rc_remainder_bounds_001/versions/README_r1.md": {
+      "bytes": 6355,
+      "sha256": "50eafeefc12724a344cb0798dbcbbacbb92b8ac25545c1e0cf2def0eab4ed8d6"
+    },
+    "provenance/rc_remainder_bounds_001/versions/check_r1.py": {
+      "bytes": 6152,
+      "sha256": "00e27743b3ff6b64bb07b3e95cf7a94c212e02f2477ce1ef2765286513cc0017"
+    },
+    "provenance/rc_remainder_bounds_001/versions/experiment_README_r1.md": {
+      "bytes": 1450,
+      "sha256": "97b68d002fbdae9ad342715809ee1ad67206b4edf9d8e8c25ddcc98041c1a4f8"
+    },
+    "provenance/rc_remainder_bounds_001/versions/test_bounds_r1.py": {
+      "bytes": 4385,
+      "sha256": "e8ed7ce3f0fd38c08d543b52f070a1837ded1631de0e0c13c6fc270c15bef9f1"
+    },
+    "provenance/rc_sensitivity_basis_001/response_probe.json": {
+      "bytes": 21476,
+      "sha256": "9600f5745389ffa8ef3f522591f93f556000cffd4bf02d35b0c72c461e629b35"
+    },
+    "specifications/rc_remainder_bounds_001/P2.md": {
+      "bytes": 4981,
+      "sha256": "30b0fc641431e1f8c8a5598a096fac37e0d02d3fabf35852cbdb552f5295e22d"
+    },
+    "specifications/rc_remainder_bounds_001/P3.md": {
+      "bytes": 6171,
+      "sha256": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32"
+    },
+    "specifications/rc_remainder_bounds_001/README.md": {
+      "bytes": 2348,
+      "sha256": "0cfad64537c7de70f3fdc2a1f06c609b33b9e0079922943eff4cfd4f6d041107"
+    }
+  },
+  "no_long_sweeps": true,
+  "acceptance_limit": "Accepted for the stated offline rational certificates and finite diagnostics. This review does not establish deployment readiness, runtime error control, calibrated coverage, whole-lifetime evidence fidelity or complete M23 resources."
+}

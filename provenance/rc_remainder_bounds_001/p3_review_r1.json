@@ -1,0 +1,110 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/rc_remainder_bounds_001/P3.md",
+  "review_round": 1,
+  "reviewer": "independent agent /root/rc_bounds_p3_review",
+  "date": "2026-11-02",
+  "base_revision": "7cc04213488018c51bd71e03e80386347a4a4f20",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "scope": "Individual review of P3 only. P2 derivative envelopes are dependencies, not independently recertified constants in this review. The proof and source were not edited. Acceptance concerns the conditional mathematics, not runtime certification, full-estimator uncertainty or deployment.",
+  "findings": [
+    {
+      "id": "P3-R1-01",
+      "section": "P3a",
+      "status": "verified",
+      "finding": "Linearity of the independently parameterized branch b*F+R*u gives separate b and R defect derivatives. Applying P1 to F and u with P2 envelopes gives the cubic value bounds and quadratic log-tau slope bound. Summing three branch absolute bounds is valid irrespective of voltage sign. The zero-M case does not erase the separate b/R derivative bounds. Other-chart and dependent-boundary chain derivatives are explicitly required."
+    },
+    {
+      "id": "P3-R1-02",
+      "section": "P3a admission radii",
+      "status": "verified",
+      "finding": "For nonnegative M_j, sum(M_j)*r^3/6 and M_j*r^2/2 are sufficient common-radius bounds. Zero denominators are correctly omitted, the original declared support must still be intersected, and a whole amplitude region requires suprema. These local tests do not establish posterior containment, identifiability or permission to truncate support."
+    },
+    {
+      "id": "P3-R1-03",
+      "section": "P3b residual, likelihood and TV",
+      "status": "verified",
+      "finding": "Expanding one half of the squared whitened residual gives Delta F=sum(r_k*e_k+e_k^2/2) with the stated sign convention. A uniform residual/error bound gives |Delta F|<=L*, hence oscillation<=2L* and E2 yields TV<=tanh(L*/2). Common support/prior and finite positive normalizers are necessary and stated. Restricting the bound to a region compares distributions conditioned on that same region, without an omitted-mass guarantee. Observed-data residual bounds do not imply a deterministic bound over all Gaussian observation sequences."
+    },
+    {
+      "id": "P3-R1-04",
+      "section": "P3b counterexample",
+      "status": "verified",
+      "finding": "The two-label equal-prior Gaussian construction has exact odds one and approximate odds exp(-N*epsilon^2/2), while each response defect is at most |epsilon|. Its posterior TV tends to 1/2 as N increases. It therefore refutes a general small indefinite posterior-error guarantee inferred solely from a small duration-independent response defect. The text correctly identifies this as an abstract likelihood example and does not claim it is a reachable Taylor/Foster pair."
+    },
+    {
+      "id": "P3-R1-05",
+      "section": "P3c full joint precision",
+      "status": "verified",
+      "finding": "With SPD P and identical PSD Lambda, A^T*A=I-P^(-1/2)*Lambda*P^(-1/2) is PSD and at most I, so ||A||_2<=1. Expanding the full Gram difference and applying submultiplicativity gives ||W||_2<=2*eta+eta^2. For epsilon<1 the Loewner sandwiches and their inverted forms follow by congruence and order-reversing inversion. No diagonal approximation is used. Entrywise bounds B on D imply |D*P^(-1/2)|<=B*|P^(-1/2)| and therefore a conservative Frobenius upper bound. Reference conditioning is substantive, as the proof states."
+    },
+    {
+      "id": "P3-R1-06",
+      "section": "P3c transported scalar variance",
+      "status": "verified",
+      "finding": "Apply the inverse-precision sandwich to j+d, then bound ||P^(-1/2)*(j+d)|| between max(0,q-h) and q+h. Squaring gives both stated bounds, including q=0 and exact cancellation d=-j. The same anchor, same coordinate chart, full transported gradient and inclusion of all forecast-relevant quantities are essential. The explicit local Gauss-Newton limitation excludes full-Hessian, fit-to-fit, nonlinear posterior and physical-coverage claims."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "command": "python3 - <<'PY' [independent NumPy response, likelihood, matrix and scalar-variance checks executed inline during review] PY",
+    "seed": 81173,
+    "interpretation": "Finite floating-point checks supplement the analytic review; they do not certify uniform physical bounds or replace P2's exact-rational envelope certificate.",
+    "response": {
+      "method": "Independent ordered free/forced response and first/second log-tau derivative recurrence; signed bounded currents, irregular and zero intervals, three positive pole centres, negative/zero/positive incoming amplitudes, seven offsets from -1 through 1. Compare Taylor value and b/R/t defects against P3a and sum the branch voltage defects.",
+      "pole_offset_cases": 21,
+      "Imax": 0.8,
+      "centres_s": [0.1, 2.0, 15.0],
+      "incoming_voltages": [-0.03, 0.0, 0.04],
+      "resistances": [0.2, 0.5, 0.8],
+      "offsets": [-1.0, -0.7, -0.1, 0.0, 0.1, 0.7, 1.0],
+      "max_defect_to_bound_ratios_value_b_R_t": [0.2819891699057991, 0.6439321438206154, 0.2819891699057991, 0.2902736412111655],
+      "absolute_roundoff_tolerance": 1e-14
+    },
+    "admission": {
+      "voltage_budget": 0.0001,
+      "slope_budgets": [0.001, 0.002, 0.003],
+      "calculated_common_radius": 0.06515044112479446,
+      "result": "The calculated radius satisfies all budgets; zero-M omission was also checked. These are synthetic test budgets, not engineering acceptance thresholds."
+    },
+    "likelihood_and_TV": {
+      "cases": 20,
+      "method": "Five-label, nine-observation synthetic independent-Gaussian comparisons with shared nonuniform priors; direct costs, expanded costs and normalized posterior TV.",
+      "max_cost_identity_float_error": 1.609823385706477e-15,
+      "minimum_TV_bound_slack": 0.3927924151543296
+    },
+    "joint_precision_and_transport": {
+      "dense_correlated_matrix_cases": 32,
+      "scalar_forecast_cases": 96,
+      "method": "Nine-by-four dense Jacobians with near-dependent first/fourth columns and rank-two PSD priors; full eigendecomposition of SPD P, dense metric-scaled perturbations with eta=0.05, both precision and inverse Loewner bounds, and generic/zero/cancelling transported gradients.",
+      "maximum_norm_W_to_epsilon_ratio": 0.7657374152696096,
+      "minimum_variance_bound_slack": 0.0,
+      "absolute_matrix_and_variance_roundoff_tolerance": 1e-9
+    },
+    "counterexample": {
+      "epsilon": 0.1,
+      "cases": [
+        {"N": 1, "approximate_second_label_probability": 0.49875000260416014, "TV": 0.0012499973958398636},
+        {"N": 100, "approximate_second_label_probability": 0.3775406687981454, "TV": 0.1224593312018546},
+        {"N": 10000, "approximate_second_label_probability": 1.928749847963904e-22, "TV": 0.5}
+      ]
+    }
+  },
+  "sha256": {
+    "specifications/rc_remainder_bounds_001/P3.md": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32",
+    "specifications/rc_remainder_bounds_001/P2.md": "30b0fc641431e1f8c8a5598a096fac37e0d02d3fabf35852cbdb552f5295e22d",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "specifications/h7_proofs_001/ERROR_BUDGET.md": "9f3f3c87316f5ad81dc46b646eb05809f780f59f98de434ba2a6fc42fa85c466",
+    "specifications/rc_remainder_bounds_001/README.md": "0cfad64537c7de70f3fdc2a1f06c609b33b9e0079922943eff4cfd4f6d041107",
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+  },
+  "remaining_obligations": [
+    "Independent acceptance of P2 and its envelope certificate remains a separate proof review.",
+    "Uniform residual and amplitude bounds, reference precision conditioning and complete forecast derivatives must be supplied for any actual application.",
+    "Non-RC/H2 defects, numerical accumulation, uncertain inputs, thermal/aging paths, omitted posterior mass and physical calibration remain outside this RC-only result.",
+    "No runtime admission monitor, evidence transition, lifetime guarantee or complete target-resource qualification is established."
+  ]
+}
