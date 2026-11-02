@@ -157,6 +157,17 @@ it does not discount old evidence by age. A full cubic partitioned table would u
 compares lower-order/sparse continuous representations and full transport/workspace
 cost. No kernels or estimator code changed; mainline is unchanged.
 
+The [bounded continuous-coefficient study](provenance/partitioned_coefficients_001/README.md)
+now rejects three small entrywise likelihood encodings: they introduce material
+negative conditional curvature despite preserving cross entries and small endpoint
+RC errors. A paired control using existing low-degree square-root response fields
+removes that structural defect but still has substantial gradient error. Its
+quadratic packed factor is4760B (5168B including live response/domain/scalars,
+excluding tables, scratch, prior, solver and platform memory). Seven tests pass;
+no candidate or default is promoted. The next step is response-basis error
+attribution while preserving the joint sum-of-squares structure, before another
+campaign or target-kernel selection.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

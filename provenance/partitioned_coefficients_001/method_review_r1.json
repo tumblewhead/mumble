@@ -1,0 +1,145 @@
+{
+  "review_id": "partitioned_coefficients_001_method_r1",
+  "reviewer": "independent delegated agent /root/coefficient_method_review",
+  "source_revision": "af1b180166be22769d7fb1fe30b27bf8a82315db",
+  "verdict": "accept_conditional",
+  "scope": "Original preregistered entrywise linear, tensor-quadratic and sparse-total-degree-quadratic study and primary pilot001. Acceptance concerns method and negative-result interpretation, not acceptance of representations for estimation. Any later sum-of-squares control is outside this review.",
+  "reviewed_sources": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "specifications/architecture_reuse_001/A0.md": {
+      "bytes": 3090,
+      "sha256": "affa893764b0ed0891787ae98a6c6c3712f67926c697936fa33cddaa65fb48d1"
+    },
+    "experiments/partitioned_coefficients_001/test_representation.py": {
+      "bytes": 5069,
+      "sha256": "4c824ca9a956ab62a3b2957228633367e9733e77192a8f7e22566d7b82956397"
+    },
+    "experiments/partitioned_coefficients_001/pilot001/registration.json": {
+      "bytes": 32573,
+      "sha256": "4edb71a5ab36f95607e6eb533483b294b2f266cda2b0942dd57dbe1bb1460c99"
+    },
+    "experiments/partitioned_coefficients_001/pilot001/summary.json": {
+      "bytes": 1882393,
+      "sha256": "43017e271826745cba7ab14f3b4ac6a161ca3e2285afcd47a7157cb6bcf081fa"
+    },
+    "provenance/partitioned_coefficients_001/versions/run_r1.py": {
+      "bytes": 9777,
+      "sha256": "7620dd6f16a5f802fd6fea38eb1d9d2b7b7292b196023e782b8c42bef283af6d"
+    },
+    "provenance/partitioned_coefficients_001/versions/plan_r1.md": {
+      "bytes": 4005,
+      "sha256": "5aa300ffc7db7c80d223e9aa11a866b921e88728f905af666418638660063868"
+    },
+    "experiments/partitioned_coefficients_001/representation.py": {
+      "bytes": 7836,
+      "sha256": "352e7586e56f29ef99f04b7c4293cf0fb7a476c620ce071832afc033655da25e"
+    },
+    "experiments/hysteresis_refinement_001/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    }
+  },
+  "source_binding": "Original runner reviewed before follow-up edits and now preserved as versions/run_r1.py; original plan as versions/plan_r1.md. Both match pilot001 registration hashes. Later runner/specification amendments are outside this review.",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "id": "M1",
+      "status": "verified_conditional",
+      "topic": "dependency/index projection",
+      "finding": "DEPS/native bases agree with A0 and native row order: U=(z0,q,R0,const), three RC E/u pairs and H=(uh,Eh). Each upper-triangle pair is retained once; nodal values select its dependency union. Sequential axis inverse-Vandermonde transforms match product/ravel order. All78 cross entries remain."
+    },
+    {
+      "id": "M2",
+      "status": "verified_conditional",
+      "topic": "sparse truncation",
+      "finding": "Mask sum(multi_index)<=2 retains total Chebyshev degree2 from each tensor interpolant. Linear projection permits projection of each increment before addition, up to rounding. Dropped terms cannot be recovered. Separate dense nodal endpoint state/interpolation is not sparsified. Counts264/640/367 agree with2112/5120/2936 coefficient bytes."
+    },
+    {
+      "id": "M3",
+      "status": "verified_conditional",
+      "topic": "once-only chronology/state",
+      "finding": "advance requires current count/source identity, uses new rows only, carries exact nodal physical response state/charge extrema, and adds chunk Gram/noise once. No prior/posterior or plant truth enters accumulator, centering or corrections. State and coefficients are staged before ordinary synchronous numerical failures. Asynchronous/concurrent atomicity is not established."
+    },
+    {
+      "id": "M4",
+      "status": "verified_conditional",
+      "topic": "derivatives/endpoint",
+      "finding": "Candidate derivatives are with respect to normalized log shapes (halfwidth1), matching runner chart_shape_jacobian and direct F@D propagation. Endpoint has correct E/u and Eh/uh order and is separate interpolation, not posterior transport. Amplitude Hessian is compared at fixed shape; full joint second shape derivatives are not reported."
+    },
+    {
+      "id": "M5",
+      "status": "negative_result_requires_no_promotion",
+      "topic": "PSD",
+      "finding": "Entrywise interpolation/truncation does not preserve sum-of-squares form. Active-load probes show material negative scaled amplitude eigenvalues in all3 candidates plus large NLL defects. Small rest/H7 negative eigenvalues near null directions must not be conflated with these material failures. Do not clip, call posteriors, or use these in solvers requiring positive precision."
+    },
+    {
+      "id": "M6",
+      "status": "verified_conditional",
+      "topic": "reference/registration",
+      "finding": "Public prior sets query centers/amplitudes and fixed seed sets interior points. Original rejected candidate is separately outcome-selected, never training input, and computationally refused. Embedded35520 digest matches. Sources/binaries are bound by hashes. Direct independent physical C implementation uses the same finite stream; it is not exact real arithmetic."
+    },
+    {
+      "id": "M7",
+      "status": "limitation",
+      "topic": "resources",
+      "finding": "Storage counts retained NumPy payload and major bounded scratch, not peak allocation or target SRAM. Implementation forms full lifted Gram before selecting dependency-union entries; full Gram scratch is charged. Temporary projection/query arrays, objects, libraries and platform costs remain explicitly additional. Host CPU is not M23 WCET;52-probe direct timing is not an estimator speed comparison."
+    },
+    {
+      "id": "M8",
+      "status": "limitation",
+      "topic": "test sufficiency",
+      "finding": "Six meaningful regression tests plus reviewer full-grid and derivative probes suffice for narrow finite feasibility. They do not prove continuous-domain error, adversarial numerical stability, physical-path enclosure, aging/migration, lifetime coverage, reset behavior or target resources."
+    }
+  ],
+  "verification": {
+    "command": "python3 -B -m unittest experiments.partitioned_coefficients_001.test_representation",
+    "tests_passed": 6,
+    "additional_reviewer_probe_definition": "Reuse Representation fixture with193 rows/public amplitude index1. Compare all n^5 tensor-node shapes to independent Model.evaluate for degrees1/2. At normalized shape[.2,-.3,.1,.4,-.2], compare Direct chunk43 to chunk193, and central log-shape finite differences step1e-4 for Direct and sparse candidate. Executed before runner adaptation.",
+    "additional_results": {
+      "degree1_all_nodes": {
+        "queries": 32,
+        "max_abs_nll_defect": 3.91592038795352e-08,
+        "max_relative_nll_defect": 5.658124640584318e-13,
+        "max_endpoint_defect": 3.552713678800501e-15
+      },
+      "degree2_all_nodes": {
+        "queries": 243,
+        "max_abs_nll_defect": 4.71045495942235e-08,
+        "max_relative_nll_defect": 6.602827604678002e-13,
+        "max_endpoint_defect": 3.552713678800501e-15
+      },
+      "direct_chunk_max_absolute_defects": {
+        "nll": 5.820766091346741e-11,
+        "gradient_amplitude": 1.862645149230957e-09,
+        "gradient_shape": 7.958078640513122e-13,
+        "precision_amplitude": 2.2351741790771484e-07,
+        "endpoint": 0.0
+      },
+      "direct_shape_fd_max_absolute_defect": 1.8874859506468056e-06,
+      "sparse_shape_fd_max_absolute_defect": 1.776283869503459e-05
+    }
+  },
+  "primary_result_check": {
+    "status": "completed_probes_not_qualified",
+    "loads": 3,
+    "prefixes_per_load": 3,
+    "public_queries_per_prefix": 51,
+    "diagnostic_queries_per_prefix": 1,
+    "embedded_35520_digest_matches": true,
+    "embedded_126000_min_scaled_amplitude_eigenvalue": {
+      "linear": -1574341.5641115713,
+      "quadratic": -1141492.745588738,
+      "sparse_quadratic": -1969251.5497234114
+    }
+  },
+  "acceptance_conditions": [
+    "Preserve original primary source/input/result hashes; register adaptations separately.",
+    "Report primary candidates as failed feasibility candidates, with no posterior/coverage or firmware promotion.",
+    "Finite common-query defects and node parity are empirical diagnostics, not uniform certificates.",
+    "Substantive follow-ups require fresh method/result review."
+  ],
+  "implementation_edits_by_reviewer": false
+}
