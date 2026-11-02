@@ -1,0 +1,26 @@
+{
+  "proof_id": "D2",
+  "proof_sha256": "c6bca79cabeba96ae69eacaa30634eae8d4360b74a88063df2faab232f1c8fe4",
+  "reviewer_task": "/root/review_d2_r1",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Independent review of D2.md; read AGENTS.md, README introduction, and PROJECT_STATE stage/objective/unattended_assurance. No other proofs or reviews consulted.",
+  "comprehension": {
+    "simultaneous_event": "One common event E contains every admitted true state and has probability at least 1-alpha. Pathwise interval enclosure and the endpoint condition imply every issued absolute-tolerance certificate is safe on E. Their lifetime failure union is therefore contained in E complement, without independence or an additional union bound.",
+    "adaptive_queries": "Data-dependent query functions, times and scalar estimates preserve the argument when each realized query has a valid enclosure of its whole C_k and its index belongs to the indices covered on E. Adaptivity cannot select an unsafe output on E under those assumptions.",
+    "absolute_condition": "Convexity of distance establishes the maximum at an interval endpoint, including singleton enclosures, zero tolerances and estimates outside the enclosure.",
+    "relative_condition": "For positive l and 0<=t<1, intersecting [(1-t)Q,(1+t)Q] over Q in [l,u] yields [(1-t)u,(1+t)l]. Nonemptiness is equivalent to t>=(u-l)/(u+l). The necessity is correctly limited to the full enclosure.",
+    "proposed_load": "The future-path result requires simultaneous inclusion of the actual action-dependent trajectory in the admitted joint continuation set and a bound uniform over the entire horizon. Current-state containment and checks only at sampled times do not supply that premise.",
+    "selection": "The theorem bounds unconditional lifetime probability of any unsafe authorization. It correctly disclaims a conditional-on-authorization bound: authorizing only on an event of probability alpha and failing there can give conditional error one while lifetime failure remains alpha."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Construct and validate the declared probability law and a single simultaneous event with a quantified alpha for all admitted indices and actual adaptive policies; pointwise intervals and monitor silence are insufficient.",
+    "Make query, authorization and failure events measurable, including any uncountable-time future-path claims, in the concrete stochastic model.",
+    "Verify enclosures for each realized query over the full admitted set, with physical approximation, transport and numerical evaluation error included; validate positivity before using the relative-capacity formula.",
+    "Enforce certificate quantity, physical/source prefix, model configuration and validity horizon; provide proved transport or renewal when these change.",
+    "For proposed loads, construct joint future disturbance and response envelopes under the selected actions and verify the voltage lower bound at every time in the horizon. Charge additional envelope risks jointly.",
+    "Establish useful availability separately; refusing every request satisfies the safety theorem but provides no useful autonomous service.",
+    "Do not interpret this conditional theorem as an existing H7 coverage certificate or as a conditional-on-selected-output reliability guarantee."
+  ]
+}

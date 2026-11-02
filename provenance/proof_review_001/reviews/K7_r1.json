@@ -1,0 +1,41 @@
+{
+  "proof_id": "K7",
+  "proof_sha256": "b5835d56ec39c8706d6a53ce5c0a39816934d801b4f6ac20bb6e7db50917f35b",
+  "reviewer_task": "/root/review_k7_r1",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "reviewed_at_utc": "2026-11-01T23:49:55.218066+00:00",
+  "review_scope": "Fresh-context mathematical review of K7 only, after AGENTS.md, README introduction and PROJECT_STATE stage/objective/optimization_contracts. No earlier reviews consulted. No implementation certification.",
+  "comprehension": {
+    "feature_coordinates": "A fixed invertible feature-basis matrix preserves the represented response and its parameter derivatives exactly in real arithmetic. It does not itself change physical parameter measure or support.",
+    "gaussian_elimination": "Completing the square yields the Schur complement, corrected linear/constant terms, Gaussian determinant normalizer, and a conditional Gaussian support-mass correction. The identity is pointwise; posterior propriety is separate.",
+    "discarded_modes": "Residual and derivative perturbations give exact objective/gradient differences and uniform norm bounds, conditional on a declared domain and verified constants. The oscillation bound is conservative and valid.",
+    "scope": "The proof explicitly leaves floating-point evaluation, chronological state semantics, physical transport/query error, lifetime uniformity, and concrete H7 reductions unverified."
+  },
+  "verdict": "revise",
+  "findings": [
+    {
+      "id": "K7-R1-01",
+      "severity": "medium",
+      "claim": "For an actual smooth invertible parameter map xi=g(theta), the transformed density is p_theta(g^-1(xi)) times abs(det Dg^-1(xi)).",
+      "reason": "Smoothness and bijectivity alone do not ensure a differentiable inverse, or even absolute continuity of the pushed-forward measure. Consequently this assertion requires a stronger change-of-variables hypothesis. This is a mathematical assumption gap, not an application-bound certification obligation.",
+      "counterexample_or_required_revision": "Let C be a positive-Lebesgue-measure nowhere-dense fat Cantor subset of (0,1), and choose a smooth nonnegative h that vanishes exactly on C and is positive elsewhere. Define g(t)=integral_0^t h(s) ds / integral_0^1 h(s) ds. Then g is a smooth strictly increasing bijection of (0,1), but g(C) has Lebesgue measure zero because g is absolutely continuous and g'=0 on C. A uniform theta gives positive probability to g(C), so its pushforward has a singular component and cannot be described by the displayed Lebesgue density. Require a C1 diffeomorphism between the parameter domains (with nonsingular Jacobian), or state sufficient more general a.e. inverse/change-of-variables and absolute-continuity hypotheses."
+    },
+    {
+      "id": "K7-R1-02",
+      "severity": "low",
+      "claim": "Profiling/minimizing over y retains only the square-completion part.",
+      "reason": "This is correct for unconstrained y, or when the unconstrained minimizer is feasible. Its placement directly after the bounded-support discussion leaves its scope overly broad. Constrained profiling also contains the minimum squared distance from y* to the feasible support in the D metric.",
+      "counterexample_or_required_revision": "For F(y)=y^2/2, D=1 and S=[1,2], the square-completion remainder is zero but the constrained profile value is 1/2. Qualify this sentence as unconstrained profiling; optionally state that constrained profiling adds inf_{y in S_x} (y-y*)'D(y-y*)/2. For arbitrary measurable S_x, use infimum because a minimum need not exist."
+    }
+  ],
+  "remaining_application_obligations": [
+    "Verify invertibility and parameter independence of every feature transform, coefficient compatibility, and unchanged or exactly transformed chronological generator and endpoint map.",
+    "Establish rounded-evaluation/conditioning error separately; the feature identity is exact real algebra.",
+    "For parameter-coordinate transformations, transport prior, physical support, state/transport semantics, and the correct Jacobian measure factor under valid change-of-variables assumptions.",
+    "Verify D is SPD for every declared retained coordinate, preserve all retained-coordinate-dependent determinant/completion/support-mass terms, and establish finite total posterior mass before normalization.",
+    "Prove uniform residual, perturbation, Jacobian and derivative-perturbation bounds on a declared domain and applicable prefix horizon; individual small coefficients and bounded storage do not establish these bounds.",
+    "Retain the same prior when claiming prior cancellation, and bound separate query/state-transport errors.",
+    "No concrete H7 mode removal, quantization, ten-year error guarantee, coverage claim, or M23 resource claim follows from this conditional lemma alone."
+  ],
+  "verification": "Manual dimensional, square-completion, normalizer, support-mass and perturbation-algebra checks; constructive counterexamples for the two scope/assumption findings. No long sweeps or production changes."
+}

@@ -1,0 +1,36 @@
+{
+  "proof_id": "K3",
+  "proof_sha256": "5f94ff966897b3b3a636175f3c115dab630751ba37f1d43d1a77f394ccdbe1d1",
+  "reviewer_task": "/root/review_k3_r1",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Fresh-context review of K3 only, after AGENTS.md, README introduction, and PROJECT_STATE stage/objective/optimization_contracts. No other proof or reviewer report consulted.",
+  "comprehension": {
+    "own_words": "A finite dependency-complete DAG of total deterministic value computations has schedule-independent values. An intact cache entry can replace a node when key equality guarantees equality of its complete observable result. An approximate entry instead has a local deterministic error at most eta + L*d, provided both inputs lie in the certified Lipschitz region and eta bounds the stored representative error.",
+    "derivation_checks": [
+      "Longest-predecessor-path induction is valid for every node of a finite DAG, including disconnected components and shared predecessors; ordered inputs preserve noncommutative argument roles. It establishes values, not execution cost or infinite-stream behavior.",
+      "The cache implication is quantified over all admitted colliding keys, not merely observed hits. Completed evaluation, retained value, and lookup-time sufficiency give substitution equality; induction allows arbitrary finite combinations of valid hits.",
+      "The approximate-key inequality is exactly the triangle inequality followed by the assumed pairwise Lipschitz bound. Convexity or differentiability of the bucket is unnecessary when Lipschitz continuity itself is assumed; neither a checked center nor isolated sample derivatives would establish that premise."
+    ],
+    "counterexample_attempts": [
+      "Two otherwise independent nodes accessing mutable state can change results when reordered. This violates the explicit versioned-state/effect-dependency premises, so it is an implementation failure rather than a counterexample.",
+      "A stale pointer key, wrapped generation, hash collision, or torn key/value read can return a wrong result. The proof expressly excludes each through sufficiency, full-key/collision requirements, retained values, and atomic generation premises.",
+      "Treating +0 and -0 as interchangeable numeric values can change a downstream reciprocal to opposite signed infinities. Observable value equality must therefore be preserved by every downstream consumer. The signed-zero and numerical-equality caveat already identifies this boundary; a declaration of coarse equality alone cannot establish the premise.",
+      "A discontinuous authorization/status output at a bucket boundary need not admit a finite Lipschitz bound. Such a bucket is outside the approximate theorem unless the output is handled by an exact guard or separately justified comparison.",
+      "For f(x)=abs(x), the value is 1-Lipschitz, but derivatives at +/-epsilon differ by 2 while the value bound is 2*epsilon. The value theorem cannot be reused as a derivative bound; the instruction to propagate defects including derivative outputs must be discharged for the actual derivative-producing map.",
+      "Repeated reuse of one biased cache value, or a downstream gain A, can produce cumulative error or amplification. The theorem claims only a per-use local defect and explicitly requires propagation; it supplies no independent-noise or global-error guarantee.",
+      "Skipping source consumption, floating-point flags, failure reporting, or a deadline-related effect can change full-machine behavior despite equal numerical values. These are expressly excluded from the pure result and assigned separate transition/refinement obligations."
+    ]
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Specify the admitted domain and complete observable result semantics. Equality must be a congruence for all graph consumers; exact representation equality suffices when bitwise outputs are claimed. Account for signed zeros, NaNs, rounding modes, and exception behavior.",
+    "Construct a finite single-assignment graph with fixed external inputs, immutable configuration, and complete dependencies for physical state, chronology, ownership, and all serialized effects. Establish determinism and totality on the admitted domain.",
+    "Prove cache-key sufficiency for every admitted lookup, including all kernel/configuration/dependency versions; prove retained entry integrity, completed-value publication, generation consistency, and collision/wrap handling.",
+    "Implement and verify once-only effect behavior for source consumption, counters, error/status reporting, floating-point flags, and other declared observables. Establish full-machine fault/timing refinement separately.",
+    "Choose input/output norms and certify L, d, eta and bucket membership on the entire admitted bucket. Include all changing numerical dependencies and match or bound every discrete change.",
+    "If values, Jacobians, gradients, uncertainty, or state transports are cached together, bound the actual joint output map or provide distinct justified component bounds. A value Lipschitz constant alone does not bound derivatives.",
+    "Propagate each deterministic cache-use defect through downstream computation and repeated invocations, preserving correlations and decision margins. No global lifetime bound, measurement-noise model, or physical codebook restriction follows from K3.",
+    "Establish registry/storage lifetimes, worst-case memory and execution time, invalidation latency, guard costs, and fault behavior for the concrete implementation. This acceptance certifies only the conditional mathematics."
+  ]
+}

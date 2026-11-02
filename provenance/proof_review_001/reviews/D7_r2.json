@@ -1,0 +1,26 @@
+{
+  "proof_id": "D7",
+  "proof_sha256": "e67489d05680106f67616bfbe4c30e54199aa7f63ed005c72808100471b1cb17",
+  "reviewer_task": "/root/review_d7_r2",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Independent fresh-context review of current complete D7 only; no earlier proof versions or reviews consulted.",
+  "comprehension": {
+    "claim": "Conditional preservation of publication validity under complete commit, whole-object preservation, or synchronized quarantine; conditional R+T useful recovery from two separately proved bounded obligations.",
+    "induction": "From a valid start, complete commit preserves validity, preservation leaves the old boundary intact, and quarantine prevents affected authorization. From a quarantined start, preservation keeps authorization disabled; only a verified complete valid initialization or commit exits quarantine. The induction concerns authorization safety, not validity of stored data while quarantined.",
+    "consumption_and_publication": "Successful evidence consumption followed by query failure retains the committed prefix and unresolved readout. It does not relabel consumed input as retryable fresh evidence. A preserved older object can authorize only for its actual unchanged boundary.",
+    "read_synchronization": "Endpoint induction alone is insufficient. The explicit synchronization assumption covers intermediate readers, identity/certificate coherence, and invalidation during publication, reset, and restore.",
+    "recovery_and_reset": "R is supplied by a verified bounded recovery controller on a qualified class after faults cease; T is supplied by a useful-authorization guarantee under compatible conditions thereafter. Gap replay or qualified propagation, aged-cell initial support, and lifetime-risk reset accounting are explicit separate prerequisites.",
+    "counterexample_search": "Considered repeated failure from invalid quarantined storage, query failure after committed consumption, reader interleaving with partial mutation, stale publications after restore or faults, repeated rollback/replay, and permanent sensor or power failure. Each is excluded by an explicit premise or scoped limitation; no counterexample to the stated conditional claims was found."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Define and establish the complete admitted update, publication, reset, restore, and fault transition relation, including the initial publication-authority state; the current H7 field-flush backend is explicitly not certified.",
+    "Prove atomic complete-object commit or whole-object preservation, once-only observation ownership, ordered physical transitions, and correct consumed/unconsumed status across every admitted failure and retry.",
+    "Implement and verify reader/mutator synchronization, immutable identity-bound certificates, expiry and revocation enforcement, quarantine authorization suppression, and verified quarantine exit.",
+    "Specify the detectable fault model and separately establish containment; arbitrary undetected corruption is outside this theorem.",
+    "Prove a concrete recovery controller reaches a valid state within R on its qualified recoverable class and prove useful query authorization within T under the same continuing power, sensor, and informative-use scenario.",
+    "Qualify checkpoint integrity and reset/configuration identity, gap replay or uncertain propagation, aged-cell initial support after SRAM loss, and lifetime-risk accounting across resets.",
+    "Qualify any system fallback action for available power and voltage; bounded refusal does not establish useful availability."
+  ]
+}

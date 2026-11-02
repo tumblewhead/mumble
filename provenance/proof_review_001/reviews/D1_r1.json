@@ -1,0 +1,40 @@
+{
+  "proof_id": "D1",
+  "proof_sha256": "253886599327ab54a23059974ac3ce8f065551fb70c5b38f2d061170a0a89587",
+  "reviewer_task": "/root/review_d1_r1",
+  "comprehension": {
+    "claim": "For every admissible true trajectory, outer transition propagation followed by a measurement-compatible intersection and outward storage preserves true-state containment at every finite step.",
+    "quantifiers": "The initial condition and every transition, input, measurement and representation inclusion must hold along that trajectory. On one event E where all these premises hold simultaneously, containment holds simultaneously for all finite indices. Individual per-step probabilities do not establish that event.",
+    "argument_checked": "Inductively x_k in C_k and u_k in U_k place the true successor in the reach union, hence R_k; measurement validity places it in Y_(k+1), hence the decoded outer C_(k+1). No independence or deterministic dynamics is required.",
+    "scope": "A conditional set-containment lemma, not a coverage calibration, Bayesian posterior preservation, bounded-memory construction, useful-contraction result or deployment certificate."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Specify a complete state and transition relation containing actual physical evolution, aging and model discrepancy; establish initial support, including after lost history.",
+    "Provide input sets or a joint input/state relation containing the true possibilities, including missing current, temperature and unknown elapsed intervals. Unbounded sets remain mathematically admissible but may prevent useful estimates.",
+    "Qualify observation compatibility sets so they contain the true successor; use the entire state space when no valid observation constraint is available.",
+    "Prove reach and decoded-storage inclusions for actual numerical algorithms, rounding and compression. Coordinate boxes must bound projections of the relevant joint set; ordinary marginal credible intervals do not automatically suffice.",
+    "For probabilistic assurance construct and validate a single joint event covering initial support and all required time-indexed assumptions, with an explicit horizon or valid lifetime composition. The lemma supplies no such risk budget.",
+    "Prove any required useful contraction, query availability, resource bounds and implementation correspondence separately; containment alone permits arbitrarily loose sets.",
+    "Treat empty propagated/retained sets as an assumption or implementation inconsistency requiring handling; selecting an arbitrary point cannot restore the containment proof."
+  ],
+  "review_scope": {
+    "read": [
+      "AGENTS.md",
+      "README.md introduction",
+      "PROJECT_STATE.json stage/objective/unattended_assurance",
+      "specifications/proof_review_001/proofs/D1.md"
+    ],
+    "other_review_files_read": false,
+    "production_or_proof_changes": false,
+    "checks": [
+      "reachable-set induction",
+      "finite-step and simultaneous-event quantifiers",
+      "correlated state/input outer products",
+      "missing measurements and inputs",
+      "outward representation and marginal-box scope",
+      "separation of application obligations from theorem defects"
+    ]
+  }
+}

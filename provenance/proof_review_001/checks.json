@@ -1,0 +1,212 @@
+{
+  "status": "targeted_proof_artifact_and_example_checks_pass",
+  "groups": [
+    {
+      "command": [
+        "/usr/sbin/python3",
+        "-B",
+        "specifications/proof_review_001/verify.py"
+      ],
+      "result": {
+        "status": "artifact_consistency_pass",
+        "final_proofs": 16,
+        "individual_review_reports": 22,
+        "scope": "Identity/completeness checks only; no mathematical or reviewer-authentication guarantee.",
+        "negative_controls": {
+          "missing_proof": "rejected",
+          "stale_proof": "rejected",
+          "changed_review": "rejected",
+          "nonaccepting_review": "rejected"
+        }
+      }
+    },
+    {
+      "command": [
+        "/usr/sbin/python3",
+        "-B",
+        "specifications/proof_review_001/check_examples.py"
+      ],
+      "result": {
+        "status": "finite_review_examples_pass",
+        "groups": {
+          "K0_enabledness_counterexample": "Vacuous all-steps condition does not imply an enabled step.",
+          "K3_congruence_and_stored_error": "Signed-zero observer distinguishes equality; reuse includes stored-value error.",
+          "K2_noncommuting_precision": "Exact forward and reciprocal covariance inequalities pass.",
+          "K5_D4_deadline_counterexamples": "Average service and build-only deadline both fail; total budget catches them.",
+          "D5_endpoint_narrowness": "Monotone increase plus [0,1] support preserves [0.999,1].",
+          "D7_quarantine_persistence": "Preserve-object transition must also preserve disabled authorization.",
+          "K7_constrained_profile": "Constrained minimum1/2 differs from unconstrained minimum0.",
+          "D2_selection_scope": "Unconditional risk1/100 does not imply conditional-on-selection risk1/100.",
+          "D6_bound_arithmetic": "The bound engine also needs outward arithmetic."
+        },
+        "scope": "Exact finite examples except explicit binary64 signed-zero witness; not full implementation proof."
+      }
+    },
+    {
+      "command": [
+        "/usr/sbin/python3",
+        "-B",
+        "specifications/optimization_contracts_001/check_contracts.py"
+      ],
+      "result": {
+        "status": "exact_finite_examples_pass",
+        "groups": {
+          "K1_propagation_and_margins": {
+            "propagation_cases": 216,
+            "decision_cases": 39
+          },
+          "K2_composition": {
+            "precision_upper": "121/100",
+            "incorrect_additive_upper": "6/5",
+            "parent_step": "1/1000",
+            "anchor_drift": "1/10"
+          },
+          "K3_cache_dependency": {
+            "missing_temperature_counterexample": true,
+            "bounded_bucket_error": "3/2"
+          },
+          "K4_lifetime": {
+            "ordinary_reuse_legal": true,
+            "rollback_reuse_legal": false
+          },
+          "K5_resource_counterexamples": {
+            "cache_hit": 1,
+            "uncached": 10,
+            "cache_miss": 13,
+            "average_block": "24",
+            "worst_block": 96,
+            "illustrative_deadline": 32
+          },
+          "K6_refresh_cadence": {
+            "final_only": "15/4",
+            "prefix_then_final": "51/20",
+            "same_final_data": true
+          },
+          "K7_representation": {
+            "basis_cases": 16,
+            "exact_retained_precision": "3/2",
+            "wrong_diagonal_precision": "2",
+            "marginal_mass_ratio_for_D4_vs_D1": "1/2"
+          }
+        },
+        "scope": "Supporting finite examples only; no optimized estimator, target resource or universal program proof."
+      }
+    },
+    {
+      "command": [
+        "/usr/sbin/python3",
+        "-B",
+        "specifications/unattended_assurance_001/check_contracts.py"
+      ],
+      "result": {
+        "status": "exact_finite_examples_pass",
+        "groups": {
+          "D0_overlapping_laws": {
+            "decision_rules": 4,
+            "minimum_error_sum": "1/2"
+          },
+          "D1_finite_reach_containment": {
+            "cases": 45,
+            "omitted_drift_counterexample": true
+          },
+          "D2_D4_query_authorization": {
+            "absolute_cases": 240,
+            "relative_cases": 2,
+            "arbitrary_point_counterexample": true
+          },
+          "D3_sequential_risk": {
+            "enumerated_paths": 768,
+            "crossing_probabilities": {
+              "1/4": "3/32",
+              "1/2": "0",
+              "3/4": "3/32"
+            },
+            "lookahead_counterexample": true,
+            "reset_risk_counterexample": true
+          },
+          "D5_aging_enclosure": {
+            "finite_cases": 9,
+            "envelope_without_rate_counterexample": true
+          },
+          "D6_error_accumulation": {
+            "cases": 400,
+            "integrator_counterexample": true
+          }
+        },
+        "scope": "Supporting finite examples and counterexamples only; no full estimator or hardware verification."
+      }
+    },
+    {
+      "command": [
+        "/usr/sbin/python3",
+        "-B",
+        "specifications/h7_proofs_001/check_algebra.py"
+      ],
+      "result": {
+        "status": "exact_polynomial_identities_checked",
+        "identities": {
+          "rational_Givens_preserves_every_Gram_entry": "zero polynomial",
+          "convex_state_bound_square": "zero polynomial",
+          "affine_transport_contraction": "zero polynomial",
+          "augmented_prior_at_anchor": "zero polynomial",
+          "perturbed_likelihood_gradient": "zero polynomial",
+          "centered_scalar_Gram_error": "zero polynomial",
+          "TV_extremum_nonnegative_square": "zero polynomial",
+          "SOC_joint_linear_variance": "zero polynomial"
+        },
+        "counterexamples": {
+          "bounded_node_interpolation": {
+            "nodes": [
+              -1,
+              0,
+              1
+            ],
+            "values": [
+              -1,
+              1,
+              1
+            ],
+            "polynomial": "1+x-x^2",
+            "p_at_half": "5/4"
+          },
+          "discarded_SOC_cross_term": {
+            "diagonal_variance": "2",
+            "full_variance": "1/5",
+            "variance_ratio": "10"
+          },
+          "recycled_posterior": {
+            "root_prior_precision": 1,
+            "data_precision": 1,
+            "correct_precision": 2,
+            "posterior_plus_same_data_precision": 3
+          }
+        },
+        "scope": "Exact rational algebra checks. Inequality hypotheses, induction and analytic probability arguments are proved in the accompanying manuscript, not machine-verified here."
+      }
+    },
+    {
+      "command": [
+        "/usr/sbin/python3",
+        "-B",
+        "specifications/h7_proofs_001/ownership.py"
+      ],
+      "result": {
+        "status": "bounded_abstract_model_checked",
+        "exploration": {
+          "prefix_limit": 8,
+          "states": 969,
+          "transitions": 4381
+        },
+        "mutations_detected": {
+          "duplicate_history": true,
+          "recycled_prior": true,
+          "skipped_sample": true,
+          "publish_without_evidence": true,
+          "resume_without_publish": true
+        },
+        "scope": "Finite model, not unbounded model checking or full C/Python refinement proof."
+      }
+    }
+  ],
+  "scope": "Finite examples and artifact consistency only; no long sweeps or estimator changes."
+}

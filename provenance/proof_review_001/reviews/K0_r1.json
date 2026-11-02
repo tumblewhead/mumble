@@ -1,0 +1,73 @@
+{
+  "proof_id": "K0",
+  "proof_sha256": "96d5792ab4f1a563f6f9a85853f08d790bff28d83df00e8154f80692d34018b6",
+  "reviewer_task": "/root/review_k0_r1",
+  "reviewed_at_utc": "2026-11-01T23:47:05.352221+00:00",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Independent review of K0 only, after required repository instructions, README introduction, and selected PROJECT_STATE entries. No other proof or reviewer report consulted.",
+  "comprehension": {
+    "summary": "A forward simulation at event-consuming macrostep boundaries gives inclusion of candidate public traces in reference public traces. Exact public words include evidence/publication identities and status, not merely numerical objective values.",
+    "exact_theorem_scope": "For each admitted finite candidate execution from a related initial pair, there exists a reference execution on the same events, with the same public word at every macrostep and related boundary states. Universal properties of these finite observable traces transfer. Infinite-trace transfer is conditional on infinitely many completed candidate macrosteps and the relevant reference property holding on the resulting matching execution; real-time guarantees require separate timed matching or scheduling premises.",
+    "quantified_premises": "The step premise must hold for every related reachable pair, each admitted next event, and every candidate outcome, including fault/interleaving choices. Reference matching choices are existential. Reference guarantees must apply to all matches used by the proof, as explicitly stipulated. The interface must expose every observation relevant to the claimed property.",
+    "proof_steps": [
+      {
+        "step": "Finite induction base",
+        "assessment": "Valid: related initial states supply the zero-event match."
+      },
+      {
+        "step": "Finite induction extension",
+        "assessment": "Valid: apply the universal candidate-step premise at the current related pair, choose a matching reference step, and concatenate equal public words. The common event contract keeps the event sequence admitted."
+      },
+      {
+        "step": "Internal observations",
+        "assessment": "Valid subject to assumption 3: hidden publication, hidden evidence consumption, and internal divergence are explicitly excluded rather than silently abstracted away."
+      },
+      {
+        "step": "Finite observable properties and bounded event response",
+        "assessment": "Valid for universal trace properties and for response bounds counted in completed subsequent admitted events within an observably specified shared scenario. This is not an enabledness or wall-clock result."
+      },
+      {
+        "step": "Infinite matching and logical liveness",
+        "assessment": "Valid by recursive selection of matching steps for an execution with infinitely many completed macrosteps, using ordinary dependent-choice reasoning. Fairness-sensitive reference properties must hold on the selected match; the explicit requirement that properties hold on every matching reference execution supplies this restriction."
+      },
+      {
+        "step": "Timed availability",
+        "assessment": "Valid as a separate conditional corollary. Neither finite-call termination nor untimed event equality establishes a deadline."
+      },
+      {
+        "step": "Guard specialization",
+        "assessment": "Valid when P is invariant at all reachable entries to the transformed point and evaluating the removed guard has no other interface-visible effect. Substituting true then preserves the branch transition; the rest of the simulation remains an explicit obligation."
+      }
+    ],
+    "limitations_understood": [
+      "This proves no concrete optimized implementation satisfies the simulation relation.",
+      "Reference defects are preserved.",
+      "Bitwise/observable equality cannot be inferred from real-arithmetic objective equality.",
+      "The theorem does not establish deployed estimator validity, target resource bounds, or deadlines."
+    ]
+  },
+  "verdict": "accept",
+  "findings": [
+    {
+      "id": "K0-r1-01",
+      "severity": "informational",
+      "claim": "The transition premise alone does not guarantee candidate enabledness or absence of deadlock.",
+      "reason": "Every possible candidate macrostep is universally quantified; it is vacuously satisfied at a candidate state with no outgoing macrostep. Assumption 3 excludes internal divergence but does not explicitly exclude deadlock. This does not invalidate the finite-prefix theorem or the explicitly qualified infinite-completed-macrostep result.",
+      "counterexample_or_required_revision": "Let the reference answer an offered query, let the candidate initial state have no outgoing transition, and relate those initial states. The candidate-step premise is vacuous, but the candidate provides no answer. The stated finite trace theorem still holds. No theorem revision is required under the proof's stated conditional scope; any application claiming autonomous availability must separately establish enabledness and scheduling/input progress."
+    }
+  ],
+  "remaining_application_obligations": [
+    "Define the complete public interface and event boundaries, including evidence identities, reset/fault semantics, and any observable floating-point, volatile, timing, or side effects.",
+    "Construct the relation S and prove initialization and the quantified matching step for all admitted candidate choices, faults, and interleavings; tests alone are insufficient.",
+    "Establish candidate enabledness and absence of deadlock, plus input/scheduling progress, before claiming an infinite operational execution or autonomous response availability.",
+    "Specify the common admitted finite-prefix language and any additional infinite-execution fairness requirements. Fairness conditions such as eventual scheduling are not established by prefix closure alone. Ensure matching reference executions satisfy the needed fairness conditions or prove the reference property on every possible match as required by K0.",
+    "For event-bounded authorization, specify a shared scenario and show the reference bound holds on every matching execution in it; for real deadlines, prove timed-interface matching or a sufficient candidate scheduling bound.",
+    "For guard removal, prove the predicate invariant at every transformed entry and across intervening mutations and verify that evaluating the removed guard has no additional observable effect.",
+    "Do not extend universal single-execution trace-property preservation to unproved distributional properties, cross-execution properties, firmware resources, or estimator accuracy/coverage claims."
+  ],
+  "validation": {
+    "method": "Direct mathematical proof review and explicit vacuous-step/deadlock countermodel; no implementation tests or long campaigns run.",
+    "production_files_changed": false,
+    "proof_files_changed": false
+  }
+}

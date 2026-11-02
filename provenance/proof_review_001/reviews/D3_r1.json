@@ -1,0 +1,32 @@
+{
+  "proof_id": "D3",
+  "proof_sha256": "4dc3ba44c64fb98f21eda2b15b3772fb04c1d0f281f875bdda1b403bb7d06567",
+  "reviewer_task": "/root/review_d3_r1",
+  "reviewed_at_utc": "2026-11-01T23:53:27.028940+00:00",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "source_branch": "proof/optimization-review-001",
+  "scope": "Independent skeptical mathematical review of D3 only; read AGENTS.md, README introduction and PROJECT_STATE stage/objective/unattended_assurance; no other reviews inspected; no proof or production edits.",
+  "comprehension": {
+    "claim": "Conditional per-epoch allocations with an almost-sure lifetime budget control the countable union of failures. Separately, a nonnegative supermartingale yields time-uniform coverage, and correctly specified causal predictive likelihood ratios construct a martingale.",
+    "conditional_epoch_check": "For each deterministic epoch index e, the tower property applies regardless of dependence or random start time. Nonnegativity permits exchanging expectation and countably infinite sums by monotone convergence. A pathwise budget bounds its expectation. Unstarted epochs contribute zero. No independence or disjointness is used.",
+    "stopping_and_measurability_check": "In discrete time, adaptedness makes threshold hitting a stopping time. At each finite t, stopped variables are integrable because they are finite sums of integrable M_s times indicators. The stopped increment equals 1_{tau>t}(M_{t+1}-M_t), with an F_t-measurable indicator, proving the claimed supermartingale inequality. Nonnegativity supplies the threshold probability bound; increasing finite horizons avoids assumptions about integrability at an unbounded stopping time. Coverage concerns each fixed truth, so no union over an uncountable parameter space is required. Set/event measurability is expressly assumed.",
+    "likelihood_check": "Reading density in its usual conditional-kernel sense with a common dominating measure, past measurability, normalization and q support within positive p give conditional mean one for each ratio. Conditional expectation for nonnegative variables first justifies multiplication by the past product; induction then proves finite mean one and integrability. Adapted actions are included in the conditioning.",
+    "counterexample_search": "Repeated independent positive-risk restarts approach failure probability one, as stated. If q places mass where p is zero, the mean-one identity can fail, though a supermartingale may remain possible; the stated support assumption excludes that case. If q is selected after a fair binary observation to put unit mass on its observed value, the ratio is always two, violating mean one; past measurability excludes this case. Choosing the start of a test after inspecting the data it tests can invalidate conditional calibration, and is excluded by the explicit conditional guarantee premise. None is a counterexample satisfying all stated premises.",
+    "limits": "This proves sufficient mathematical conditions, not their validity for H7, aging battery observations, restart persistence or finite-precision firmware."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Specify the actual filtration, epoch start stopping times and start-information sigma-fields, including recorded actions and all policy information affecting observations; justify measurability of allocations and failure events.",
+    "Prove each actual epoch failure guarantee conditional on its start information, including data-dependent starts and reuse of prior observations; unconditional or fixed-start calibration alone is insufficient.",
+    "Choose a lifetime risk budget and prove its almost-sure accounting across resets, storage loss and every epoch; alternatively prove a valid bounded-boot or other lifetime guarantee.",
+    "Establish a correct admitted conditional measurement law, common density representation, predictable normalized q kernels, support and finite-ratio assumptions, including ADC behavior, noise, hidden state and adaptive actions.",
+    "Establish that a fixed admitted parameter represents the true process, or replace the construction with a separately proved aging/time-varying model.",
+    "Prove measurability and sound finite-precision outer approximation of the confidence sets, plus a practical construction with qualified target memory and runtime.",
+    "Establish useful availability under shrinking risk allocations; probability control alone does not ensure useful battery-state outputs."
+  ],
+  "validation": {
+    "method": "Direct proof audit and adversarial premise-removal examples; no empirical test can establish the application premises.",
+    "artifact_policy": "Created exclusively; original proof and existing review artifacts preserved."
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "proof_id": "D4",
+  "proof_sha256": "cfa5ebe267fb3186f40439c64abde7a948783ad04bfea1a31ba35192a41b1366",
+  "reviewer_task": "/root/review_d4_r1",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "source_branch": "proof/optimization-review-001",
+  "review_scope": "Independent mathematical review of D4 only; read AGENTS.md, README introduction, and PROJECT_STATE stage/objective/unattended_assurance; no other reviews consulted; proof and production unchanged.",
+  "comprehension": {
+    "claim": "A narrow valid enclosure gives a uniformly accurate midpoint; producing and publishing such enclosures under one qualified probability law yields useful availability and joint correctness guarantees.",
+    "exact_vs_outer_range": "For any nonempty bounded real attainable set S, its infimum and supremum determine minimax absolute loss even if unattained. Endpoint-approaching sequences prove the lower bound, and their enclosing interval gives midpoint achievability. A wide outer enclosure alone proves no impossibility for S.",
+    "point_authorization": "A non-midpoint point requires max(abs(q-l), abs(q-u)) <= t. Width alone is insufficient for an arbitrary H7 point.",
+    "probability": "On a common law, P(A) >= 1-beta gives availability if the authorization procedure really publishes on A by the deadline. P(E intersect A) >= max(0,1-alpha-beta) follows without independence, provided E covers the enclosure used for publication.",
+    "selection_and_refusal": "The proof appropriately excludes arbitrary refusal, distinguishes conditional post-event laws from unconditional guarantees, and avoids inferring lifetime outage risk from per-episode beta."
+  },
+  "verdict": "revise",
+  "findings": [
+    {
+      "id": "D4-R1-01",
+      "severity": "major",
+      "claim": "On A it authorizes by T.",
+      "reason": "Assumption 2 guarantees that the checked enclosure is returned by T. Assumption 3 requires a stated execution/scheduling bound but never explicitly requires the total enclosure-production-plus-publication latency to be at most T. A positive publication latency can therefore invalidate the claimed deadline even while both stages meet their individual bounds. The union-bound conclusion is sound for publication by the composed deadline, but the stated premises do not fix that deadline to T.",
+      "counterexample_or_required_revision": "Take a deterministic law with E=A equal to the entire sample space, alpha=beta=0, true query 0, tolerance 0, and checked enclosure [0,0] ready at T=1 second. Let authorization begin immediately on readiness and take exactly 1 second, meeting a declared 1-second execution/scheduling bound. It publishes at 2 seconds, so availability by T is zero despite the claimed lower bound one. Require on A that production, all validity checks, scheduling, and publication finish jointly by T; alternatively assume production finishes by T-B and publication takes at most B, or state the conclusion with deadline T+B. Clarify that T uses a common time origin, especially after recovery."
+    }
+  ],
+  "remaining_application_obligations": [
+    "Prove enclosure containment for the actual published query under the specified scenario law, including simultaneous/adaptive queries where claimed.",
+    "Prove useful width and predicate satisfaction with probability at least 1-beta under that same law; qualify any post-fault conditional law separately.",
+    "Prove the composed deadline including sample arrivals, processing/backlog, validity checking, authorization, scheduling, and externally visible publication.",
+    "Establish observable or conservatively validated information conditions and feasible recovery excitation under power/load constraints.",
+    "Specify lifetime aggregation separately from per-episode availability and preserve explicit refusal outside the qualified class.",
+    "Discharge numerical implementation obligations for enclosure endpoints and midpoint or alternate point predicates; this real-arithmetic lemma alone does not certify floating-point execution.",
+    "Supply concrete N, T, alpha, beta and physical/model/resource qualifications; no H7 release or calibrated-coverage claim follows from this lemma alone."
+  ]
+}

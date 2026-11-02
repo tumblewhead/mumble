@@ -1,0 +1,33 @@
+{
+  "proof_sha256": "ae989941ab01ce29f8cbd617512e94c93d52f1eff7017f09e546546e4a831002",
+  "proof_id": "K1",
+  "reviewer_task": "/root/review_k1_r1",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "source_branch": "proof/optimization-review-001",
+  "review_scope": "Independent mathematical review of K1 only, after AGENTS.md, README.md introductory context, and PROJECT_STATE.json stage/objective/optimization_contracts. No other proofs or reviewer reports consulted.",
+  "comprehension": {
+    "summary": "K1 conditionally bounds reference-versus-candidate numerical state and query discrepancies under common inputs, uses a bound on the actual decision margin for conservative acceptance, and derives a distance/query certificate from a reference objective gradient under a segmentwise SPD Hessian lower bound. It makes no physical coverage or implementation qualification claim.",
+    "checked_derivations": [
+      "The state triangle inequality uses T_k(z_k), whose availability and comparison with T_k(x_k) are covered by the common-space domain and pairwise assumptions. Nonnegative L_k preserves the inductive upper bound.",
+      "The product-sum formula has the correct endpoints: at N=0 it returns b_0, and each e_j is multiplied only by the later L factors. Empty products and zero L factors introduce no exception.",
+      "The query triangle inequality separates candidate evaluation error eta from L_f times state displacement in the declared norms.",
+      "For delta>=0, g_C>=delta guarantees g_R>=0; g_R>=2delta guarantees g_C>=delta. With the declared non-strict acceptance convention both implications remain valid at equality, including delta=0.",
+      "When |g_R|>delta, the candidate margin has the same strict sign. Equality |g_R|=delta is correctly excluded from this assertion: g_R=-delta and g_C=0 can change the unguarded >=0 decision for positive delta.",
+      "The epsilon,-epsilon example has discrepancy 2epsilon. For any positive error allowance delta it demonstrates a flip by choosing 0<epsilon<=delta/2; it does not assert a flip at zero allowance.",
+      "Stationarity removes the initial gradient from the segment integral. The Hessian lower bound gives d^T grad F(z)>=||d||_P^2, and dual metric Cauchy-Schwarz gives the upper bound ||d||_P ||grad F(z)||_(P^-1). Division is valid for d!=0 because P is SPD; d=0 is immediate.",
+      "A query gradient bound in the dual P metric integrates along the same segment to L_f||d||_P. Combining with the residual bound and adding eta is valid. The separate P norm is explicitly identified, so it is not silently substituted for the state theorem norm.",
+      "Enclosing a reference gradient from an approximate gradient requires its error bound in the same P^-1 norm; the stated triangle-inequality argument is valid under that premise."
+    ],
+    "counterexample_search": "Checked zero and expansive propagation factors, N=0, threshold equality on both sides, zero decision error, nonzero stationary solver candidates, anisotropic SPD metrics, and changes of branch/input. None contradicts the stated conditional conclusions. Flat or indefinite objectives and mismatched closed-loop inputs invalidate explicit premises rather than furnish counterexamples."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Establish the declared domains and invariance for every admitted step and branch, with compatible state embeddings, fixed units/norms, common inputs, and valid uniform L_k, e_k and b_0 bounds.",
+    "Evaluate accumulated state/query bounds with outward enclosures, including arithmetic used to compute products, sums and decision thresholds; supply query Lipschitz and evaluation-error bounds on the relevant domains.",
+    "Bound the actual real decision function, including state, uncertainty, transport and arithmetic changes, and establish that reference acceptance has the required safety meaning. Demonstrate useful availability separately.",
+    "For solver certificates, identify the reference objective, an interior stationary minimizer and the connecting admissible segment; establish the fixed SPD Hessian lower bound there, rather than substituting local Gauss-Newton precision.",
+    "Enclose the reference gradient residual in the P^-1 metric and establish the query gradient bound in the same dual metric, including candidate/reference gradient discrepancy and query evaluation error where applicable.",
+    "Supply a coupled-system argument for differing closed-loop inputs. Physical uncertainty calibration, global mode selection, lifetime coverage and concrete H7 or target numerical constants remain separate open work."
+  ]
+}

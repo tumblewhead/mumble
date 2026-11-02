@@ -1,0 +1,32 @@
+{
+  "proof_id": "K5",
+  "proof_sha256": "b41afdf2e169b1cf5baebcfde2267e56f50356617aa29c73b9b71b9c57bdd0c6",
+  "reviewer_task": "/root/review_k5_r1",
+  "reviewed_at_utc": "2026-11-01T23:48:51.664210+00:00",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "scope": "Independent mathematical review of K5 only; read AGENTS.md, README introduction and PROJECT_STATE stage/objective/optimization_contracts. No other reviews consulted. No proof or production edits.",
+  "comprehension": {
+    "overall": "These are conditional composition results, not target feasibility or qualification claims. Uniform path bounds and verified execution/layout premises are inputs to the results.",
+    "counted_cost": "Disjoint accounting and nonnegative uniform costs give the total bound by summation. Setup and other costs bound their whole categories. The block ceiling requires the separately stated grouping contract; retry, replay and flush counts cannot be silently removed. The job bound follows only from the stated per-job call counts.",
+    "fifo_service_deadline": "If a released ready job has not finished by its deadline, its FIFO queue stays backlogged throughout the intervening interval. Consequently the supplied useful service meets the lower envelope, and no later job can consume service ahead of this job. Service at least W+C_job forces completion, including equality. Queue emptiness already implies this job completed. Average utilization cannot replace the strict backlogged service guarantee.",
+    "cache": "Total expectation uses exact conditional means; conditional cost bounds instead yield only an expectation bound. For H<C<M, rearranging hH+(1-h)M<C gives the stated strict threshold. With bounded H and M, the threshold characterizes the bound expression and is sufficient, not necessary, for actual expected savings against an exact baseline C. Worst-case path bounds are independent of the favorable average hit rate.",
+    "memory": "The SRAM bound follows from containment in disjoint concrete regions. Feasible simultaneous ordinary/interrupt stack use must fit its reservation, and all other use must be included. Lifetime aliasing, fragmentation, alignment and checked size arithmetic are premises of containment, not consequences of payload totals."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "counterexample_checks": [
+    "Removing grouping allows repeated single-sample flushes to exceed ceil(N/B); K5 explicitly excludes using that ceiling without grouping.",
+    "A long initial service blackout can miss a deadline despite favorable long-run utilization; K5 explicitly requires a service envelope that includes such blocking.",
+    "Removing FIFO allows later arrivals to consume the guaranteed service before the reviewed job; FIFO and no overtaking are explicit premises.",
+    "Loose conditional upper bounds can predict no cache saving when true means do save cost; K5 states the threshold for the expression and distinguishes an upper bound from an expectation.",
+    "Payload totals can understate fragmentation or simultaneous ISR stack demand; the concrete layout and nesting requirements explicitly prevent deriving a bound from those totals alone."
+  ],
+  "remaining_application_obligations": [
+    "Establish admitted call counts and aggregate setup/other costs, including all retries, replays, recovery, executive, certificates, fault paths and target library/memory costs; justify any block grouping ceiling.",
+    "Certify the per-job cost bound in useful-service units and a uniform service envelope with positive rate and finite latency under actual interrupt, blocking and clock behavior.",
+    "Prove the release-time backlog bound and FIFO/no-overtaking behavior; independently bound arrivals, acquisition interference, sample deadlines and block-collection latency.",
+    "For expected cache savings, declare the workload and justify hit probability, exact conditional means or their conservative bounds, and an appropriate baseline comparison. Independently certify cold/miss worst-case path costs and extra memory.",
+    "Verify the final target memory map, arena containment on every admitted path, lifetime aliasing, allocator overhead/fragmentation, joint interrupt stack nesting, all residual SRAM use and overflow/alignment checks.",
+    "Account for the final linked flash image and target runtime/software arithmetic support. The 10 KiB and 16 MHz target claims remain unproved application obligations, not defects in these conditional theorems."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "proof_id": "K7",
+  "proof_sha256": "e919476ee9e09a945f8cf53720bd40501acbe9a71e2459474a151dd72728d728",
+  "reviewer_task": "/root/review_k7_r2",
+  "reviewed_path": "specifications/proof_review_001/proofs/K7.md",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "independence": {
+    "fresh_context": true,
+    "prior_reviews_read": false,
+    "revision_history_read": false,
+    "proof_or_production_modified": false
+  },
+  "comprehension": {
+    "scope": "Conditional exact algebra and bounded residual perturbation lemmas, not certification of a concrete H7 compression or deployment.",
+    "feature_transform": "A_new phi_new=A phi follows from fixed invertible M; the differentiated identity is valid wherever the feature derivatives exist. A change of feature basis is separate from pushing a parameter density through a C1 diffeomorphism.",
+    "measure": "The inverse-Jacobian determinant belongs to the density with respect to the new Lebesgue coordinates. Support, prior and transported quantities must be mapped consistently. Constant normalization factors can be removed only when independent of all retained coordinates.",
+    "gaussian_elimination": "Completing the square gives mean -D^-1(B^T x+b), precision D, Schur complement A-B D^-1 B^T, linear coefficient a-B D^-1 b, and constant c-b^T D^-1 b/2. The marginal negative log includes +log(det D)/2-m log(2pi)/2. SPD D guarantees each nuisance integral, but not global normalizability.",
+    "constraints_and_profiling": "Restriction to S_x multiplies the unconstrained marginal by its conditional Gaussian probability. Zero probability gives infinite negative log even if S_x is nonempty. Profiling instead takes the infimum of the completed square; constrained and unconstrained profiling are correctly distinguished from integration.",
+    "perturbation": "Direct expansion gives both displayed objective and gradient differences. Euclidean/operator norm compatibility gives ab+a^2/2 and ja+kb+ka; applying the absolute objective bound at two parameter points gives oscillation at most 2ab+a^2.",
+    "adversarial_checks": [
+      "A=0, B=0, D=1 produces a finite nuisance integral for each x but an improper flat marginal over x; the explicit global-integrability caveat excludes normalization claims.",
+      "With retained coordinate z and nuisance precision D(z)=exp(2z), profiling y^2 exp(2z)/2 is zero, while the marginal negative log is z minus a constant. The text explicitly retains this determinant dependence.",
+      "Restricting a scalar nuisance to the singleton containing its minimizer gives zero Gaussian mass but zero constrained profiling penalty. Both identities handle this measure-versus-infimum distinction.",
+      "For theta>0 and xi=theta^2, the transformed density requires 1/(2 sqrt(xi)); the stated inverse-Jacobian formula gives exactly that factor.",
+      "Residual perturbations with either sign and aligned or opposing vectors preserve the objective and gradient bounds; no sign assumption is used."
+    ],
+    "method": "Line-by-line independent algebra, measure and support checks, plus analytic counterexample attempts; no prior review or revision history consulted."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Supply the actual fixed invertible feature map, differentiable feature functions wherever derivative identities are used, and exact chronological generator and endpoint semantics.",
+    "For an actual parameter change, establish the stated diffeomorphism hypotheses and carry the density measure, Jacobian, prior, support and transport consistently.",
+    "For each Gaussian elimination, establish exact quadratic dependence on the eliminated variables, symmetric retained block and SPD nuisance precision; prove finite positive total mass before claiming a normalized posterior.",
+    "For constrained marginal probability models, establish measurable joint support/integration and retain the Gaussian support-mass correction, including zero-mass cases.",
+    "Retain all determinant, square-completion and support terms that depend on any retained coordinate; select profiling or marginalization deliberately.",
+    "Establish uniform residual and Jacobian bounds on the actual declared domain and relevant observation prefixes, including numerical evaluation effects if used in implementation.",
+    "Bound prior changes, rounded computation, state/query transport errors and lifetime error accumulation separately; this lemma supplies no concrete ten-year, coverage or Cortex-M23 resource certificate."
+  ]
+}

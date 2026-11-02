@@ -1,0 +1,26 @@
+{
+  "proof_id": "D4",
+  "proof_sha256": "94ba5ff5481aecd794ece68b41f6ccda1eb3e7aeb202bb7cb6d0a540a2e7af64",
+  "reviewer_task": "/root/review_d4_r2",
+  "reviewed_at_utc": "2026-11-01T23:56:13.624660+00:00",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Fresh-context independent review of the current proof only, after AGENTS.md, README introduction, and PROJECT_STATE stage/objective/unattended_assurance. No previous review or proof version consulted.",
+  "comprehension": {
+    "claim": "A midpoint of a sufficiently narrow valid enclosure gives a uniform absolute-error guarantee; a qualified procedure producing and publishing that enclosure by a deadline gives separate availability and correct-and-available probability bounds under one scenario law.",
+    "deterministic_range_check": "For a finite ordered outer interval, midpoint error is at most half its width. For a nonempty bounded exact attainable range, endpoint-approaching sequences establish the minimax lower bound even for unattained endpoints. A broad outer interval cannot establish physical impossibility.",
+    "probability_check": "With P(E)>=1-alpha and P(A)>=1-beta under the same qualified law, A implies timely authorization and E intersect A implies correctness and timely authorization. The union bound gives max(0,1-alpha-beta) without independence. The separate availability bound is 1-beta. Conditional recovery laws require their own qualifications.",
+    "deadline_check": "Assumption 3 supplies mandatory publication, bounded scheduling and queue delay, a common time basis, T_build+L_pub<=T, and retained query validity through publication. Transport/revalidation belongs to event A and the timing bound, so narrow-enclosure construction alone is not treated as a full service deadline.",
+    "counterexample_search": "Checked narrow intervals with an arbitrary reported point outside their tolerance band; wide outer intervals enclosing a singleton exact range; nonattained exact-range endpoints; disjoint containment and build failure events; data-selected subgroups with concentrated errors; indefinite publication queues; stale transported enclosures; and permanent refusal. Each either obeys the stated bound or violates an explicitly required assumption. No counterexample within the stated assumptions was found.",
+    "limitations": "The result is a conditional composition theorem. It supplies no H7 enclosure construction, calibrated containment probability, arrival schedule, useful recovery stimulus, resource bound, lifetime outage bound, or numerical values for its requirements."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Specify the qualified scenario or conditional recovery law, query boundary/horizon, tolerance, deadlines, and risk budgets; establish all probability claims under that same law.",
+    "Construct and validate simultaneous query containment, including model and numerical error and validity after required state transport.",
+    "Prove narrow-enclosure production and completion of validity checks by T_build with probability at least 1-beta, using observable or conservatively validated information conditions.",
+    "Prove mandatory publication within L_pub, including scheduling, queues, transport/revalidation, and a common clock, with T_build+L_pub<=T.",
+    "For a reported point other than the enclosure midpoint, verify its own worst-endpoint tolerance predicate and include passing that predicate in the availability event.",
+    "Qualify arrival schedules, processing/backlog, achievable excitation, available power/load, and fault recovery conditions; separately derive any lifetime availability guarantee."
+  ]
+}

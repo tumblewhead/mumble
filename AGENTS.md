@@ -32,6 +32,10 @@ file reads; large raw result files are evidence, not required default context.
 - Inspect repository status and current instructions before edits; preserve unrelated work.
 - Use a work branch for new experiments. Do not force-push shared history.
 - Build and use meaningful targeted tests for changed behavior. Do not rerun long sweeps by default.
+- Every proof and every optimization requires independent peer review. Use fresh-context
+  reviewers, record findings and dispositions, and iterate/re-review substantive changes
+  before acceptance. Existing unreviewed work remains provisional; tests alone do not
+  substitute for proof review or optimization review.
 - Keep source revision, assumptions, commands, statuses and uncertainty limits with new evidence.
 - Machine-to-machine handoffs should be compact JSON or YAML.
 - Keep human explanations in plain language, with links to source evidence.

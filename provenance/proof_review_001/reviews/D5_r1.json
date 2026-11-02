@@ -1,0 +1,36 @@
+{
+  "proof_id": "D5",
+  "proof_sha256": "fb4ee29f0d11e60131401fd398d399e2a16c772f7c8089a6b54e811fb3503f39",
+  "reviewer_task": "/root/review_d5_r1: independent fresh-context skeptical mathematical review of D5 only; read AGENTS.md, README introduction, selected PROJECT_STATE fields, and D5; no other review files read",
+  "comprehension": {
+    "bounded_drift": "For a truth-containing interval and a nonnegative finite per-step increment envelope, Minkowski expansion contains the next scalar state. A nondecreasing state preserves the old lower endpoint and a nonincreasing state preserves the old upper endpoint. Induction and valid intersections are sound.",
+    "no_rate": "The piecewise-linear construction is continuous and monotone and reaches the remote global-support endpoint at every prescribed positive time. The smoothness claim also has a valid construction: integrate a nonnegative C-infinity bump supported in (0,1), normalize its integral to one, and rescale its argument by Delta. The resulting transition is smooth including at both endpoints.",
+    "thermal_and_joint_scope": "The proof correctly limits monotone aging to reference-condition health, treats reversible thermal transport separately, and requires joint reachable sets or proved supersets for coupling. It makes no independence, calibrated coverage, or firmware-readiness claim.",
+    "review_boundary": "The mathematical propagation claims were checked without assuming that H7 or the physical device satisfies their premises."
+  },
+  "verdict": "revise",
+  "findings": [
+    {
+      "id": "D5-R1-01",
+      "severity": "medium",
+      "claim": "Thus a quiet interval, however short, cannot renew a narrow current-parameter certificate without qualified drift bounds or informative measurements.",
+      "reason": "This blanket conclusion is stronger than the demonstrated impossibility of an upper endpoint below U. Global support plus monotonicity can itself retain an arbitrarily narrow certificate when the previous lower endpoint is close to U. The text does not define narrowness or restrict the old certificate away from the terminal support endpoint.",
+      "counterexample_or_required_revision": "Let L=0, U=1, p(0)=1-epsilon for arbitrarily small epsilon>0, and assume only monotone increase and global support. At every later time, [1-epsilon,1] remains a valid arbitrarily narrow current certificate without a rate envelope or any new measurement. Replace the sentence with the precise conclusion: monotonicity and support alone cannot justify an upper endpoint below U at any positive elapsed time (analogously a lower endpoint above L for decrease); useful narrowness then depends on the remaining support interval or additional evolution/measurement constraints."
+    },
+    {
+      "id": "D5-R1-02",
+      "severity": "low",
+      "claim": "A smooth monotone transition can be rescaled into arbitrarily short Delta unless a derivative bound is added.",
+      "reason": "A derivative bound is one sufficient quantitative restriction, but it is not the only restriction that prevents arbitrary time compression. A known modulus of continuity can provide a drift envelope without a uniform derivative bound.",
+      "counterexample_or_required_revision": "Use wording such as unless an additional quantitative temporal restriction, for example a derivative bound or qualified modulus of continuity, excludes such rescaling. This keeps the valid smoothness-only impossibility claim without suggesting a derivative bound is necessary."
+    }
+  ],
+  "remaining_application_obligations": [
+    "Qualify drift envelopes or other evolution constraints for each reference-condition health quantity over the required times, usage, and environmental domain; monotonicity itself is a physical premise.",
+    "Establish initial-set containment and validity of every physical-support and measurement intersection; probabilistic validity requires separate joint lifetime accounting.",
+    "Preserve time intervals and physical-state chronology, and propagate coupled state/parameter uncertainty with reachable joint sets or sound supersets.",
+    "Qualify thermal laws, their uncertainty and discrepancy, and transport reversible thermal effects separately from reference-condition aging.",
+    "Prove any codebook or spline coefficient/time constraints and approximation remainder imply the claimed physical trajectory envelope.",
+    "Demonstrate useful certificate widths and a bounded-memory implementation; this conditional theorem establishes neither."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "proof_id": "D0",
+  "proof_sha256": "bd6e179cde891f9d277ec22187483c30e67be96e4919b0ee22e0e4922a66c24e",
+  "reviewer_task": "/root/review_d0_r1",
+  "reviewed_at_utc": "2026-11-01T23:52:13.254773+00:00",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Independent mathematical review of D0 only; read worktree AGENTS.md, README introduction, PROJECT_STATE stage/objective/unattended_assurance and D0; no other reviews consulted.",
+  "comprehension": {
+    "claim": "For two probability laws on a common complete record space and one measurable authorization rule, false authorization under the bad law plus nonauthorization under the good law is at least one minus their total variation distance.",
+    "event_bound": "P_b(A)+P_g(A^c)=1-(P_g(A)-P_b(A)); the one-sided difference is bounded by the stated absolute-value supremum. No density or independence assumption is needed.",
+    "randomized_bound": "For measurable a taking values in [0,1], the subset {(y,t):t<a(y)} is product measurable. Tonelli applies separately under P_g and P_b with Lebesgue measure on [0,1]; subtracting the two finite integrals and bounding each threshold-event difference by TV gives the claimed bound.",
+    "abstention": "Including abstention in A^c correctly measures lost authorization availability under the good law, without asserting an erroneous point estimate. This is not a lower bound on wrong substantive classifications when abstention is excluded from the error metric.",
+    "adaptive_records": "The bound remains valid for adaptive or stopped records because it concerns the resulting probability laws. The text correctly requires full records induced by the actual policy, rather than fixed hypothetical future actions.",
+    "counterexample_checks": "Identical laws give sum exactly one for deterministic and randomized rules. Disjoint laws permit sum zero and do not contradict the theorem. On a two-point space with P_g({1})=p>=q=P_b({1}) and authorization at 1, the sum is q+1-p=1-TV, demonstrating sharpness. Always abstaining gives sum one. No counterexample found within the assumptions."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Exhibit admitted good and bad situations with opposite required authorization decisions and probability laws for their complete observable records.",
+    "Establish or bound TV for those full laws; quiet, repetitive or confounded data alone do not establish equality or small TV.",
+    "Use the same measurable decision rule in both situations. Randomization must be representable by a common measurable conditional authorization probability; any informative side information must belong to the record.",
+    "For adaptive sensing or stimuli, use the full record laws induced by the implemented policy, including informative actions, stopping and information available to the authorization decision.",
+    "Specify separately how conditional false authorization and lost availability are converted, if appropriate, into deployment requirements or population risk; the lemma itself supplies neither an actual error rate nor a deployment certificate."
+  ]
+}

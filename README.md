@@ -90,6 +90,13 @@ refinement. They cover cumulative error, decision margins, graph/cache validity,
 storage lifetimes, worst-case resources and cadence/control behavior. No numerical
 allowance or target speedup is assumed, and no estimator optimization is included.
 
+The [individual proof review](specifications/proof_review_001/README.md) now supplies
+complete conditional D0–D7 and K0–K7 packets, each accepted by a fresh-context
+reviewer. Six revised packets received new independent reviews; original critiques
+are preserved. All proofs and optimizations now require peer review and iteration.
+The accepted mathematics does not discharge H7's physical, implementation or
+target-resource premises; older unreviewed collections remain provisional.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

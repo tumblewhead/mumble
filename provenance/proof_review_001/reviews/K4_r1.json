@@ -1,0 +1,29 @@
+{
+  "proof_id": "K4",
+  "proof_sha256": "e44d1d1a64718f857b417849b4acc72133d44d138d787f49cc59e09664d53323",
+  "reviewer_task": "/root/review_k4_r1",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Independent fresh-context review of K4 only; no prior review reports or implementation inspected.",
+  "context_read": [
+    "AGENTS.md",
+    "README.md introductory section",
+    "PROJECT_STATE.json: stage, objective, optimization_contracts"
+  ],
+  "comprehension": {
+    "claim": "Reusing physical storage preserves initialized logical byte values when competing object/generation lifetimes are ordered on every admitted execution, initialization and language validity are preserved, and all readers including recovery readers are modeled.",
+    "induction": "Matched initialization establishes the invariant for initialized bytes of live objects. Matched writes preserve the target byte and cannot change another live overlapping object under assumption 2; reads return the invariant value. Allocation extends the invariant only for initialized bytes after prior occupants become inaccessible, and release removes its object. Finite-prefix induction covers accesses at arbitrary finite positions of ongoing executions.",
+    "generations_and_in_place": "The general theorem conservatively excludes overlapping whole-object generations. The in-place specialization instead requires a per-read version argument: for a byte invalidated by overwrite, every subsequent read must target its current new version or an independently preserved old copy. This needs a byte/version availability invariant rather than literal simultaneous equality for all bytes of obsolete generations. The text explicitly requests per-read version induction, which supplies this specialization under the surrounding matched-access model.",
+    "concurrency_and_recovery": "All-execution lifetime ordering and the explicit ordered-access/synchronization premise prevent selecting a convenient schedule as proof. Fault handlers, interrupts, serialization, retained pointers and recovery readers participate in the modeled lifetime. The rollback example correctly invalidates reuse based only on successful-path liveness.",
+    "counterexample_search": "Considered partial initialization, live overlapping generations, delayed interrupt/rollback reads, stale pointers after release, concurrent read/write overlap, and old-version reads after in-place overwrite. Each value-corruption case violates an explicit premise or the specialization read condition. Observable addresses, invalid C provenance/aliasing and newly introduced faults are outside the theorem unless separately matched; they are not established by this abstract induction."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Define the actual logical objects, generations, byte mappings, initialization events and admitted executions; prove capacity, alignment, C type/provenance/aliasing validity and initialization for every read, including any padding accessed by serialization.",
+    "Establish lifetime separation for every admitted normal, fault, interrupt and recovery execution, including retained pointers, deferred operations and backup readers; successful-path last-use analysis is insufficient.",
+    "Justify the concurrency premise with actual synchronization or a defined ordered-access semantics; the abstract proof is not a C memory-model or hardware/DMA proof.",
+    "For each in-place operation, establish the intended version of every read and continued availability of independently retained old copies after every overwrite, including fault/recovery reads.",
+    "Match any observable pointer/address identities, timing and other external effects required by the interface; separately address new faults, corruption and resource exhaustion.",
+    "Retain complete resource accounting for stack, scratch, registry metadata, padding, backups and cache payloads; this proof does not establish an SRAM bound or firmware readiness."
+  ]
+}

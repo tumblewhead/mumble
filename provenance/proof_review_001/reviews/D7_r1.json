@@ -1,0 +1,33 @@
+{
+  "proof_id": "D7",
+  "proof_sha256": "254f96cf3ce28e21db9d4f7d83b8052214b608a138ee45eff0737a0efea29f1c",
+  "reviewer_task": "/root/review_d7_r1",
+  "review_scope": "Independent fresh-context review of D7 only; read AGENTS.md, README introduction, and PROJECT_STATE stage/objective/unattended_assurance; no prior reviews consulted.",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "comprehension": {
+    "claim": "Conditional transaction containment and composition of bounded restoration with subsequent bounded useful authorization; explicitly not certification of H7 or deployed recovery.",
+    "transaction_cases": "A complete valid successor may authorize its matching readout; rollback preserves the prior committed prefix and leaves outstanding input unconsumed; quarantine suppresses affected publication authority. Post-consumption query failure must not cause duplicate evidence ingestion.",
+    "read_synchronization": "Endpoint induction relies on separately assumed synchronization to exclude readers observing partial mutation, mixed epochs, or partial certificates.",
+    "recovery": "R + T follows from separately proved restoration and useful-authorization bounds under one compatible scenario contract; bounded retries alone establish neither bound.",
+    "reset_scope": "Current authorization after old-prefix restore requires qualified replay or uncertain propagation; aged-cell initial support, lifetime risk accounting, checkpoint integrity and certificate revocation remain premises."
+  },
+  "verdict": "revise",
+  "findings": [
+    {
+      "id": "D7-R1-001",
+      "severity": "medium",
+      "claim": "The three cases preserve the invariant from an initial state that is either valid or quarantined.",
+      "reason": "The initial disjunction permits quarantine with an invalid committed object. The case-2 induction step nevertheless states that the old object remains valid. Neither preservation of the committed object nor marking outstanding input unconsumed explicitly preserves quarantine or prohibits reauthorization while the retained object is invalid. Read synchronization excludes races but does not supply this missing transition rule. Thus the proof has not covered the quarantined-to-rollback case it admits.",
+      "counterexample_or_required_revision": "A quarantined state may retain an invalid object after a failed mutation. A failed recovery/update can take case 2 and retain that object; validity cannot then be inferred. Make the induction invariant explicit as valid committed object with matching authorization OR quarantine with affected authorization disabled. Require case 2 from quarantine to preserve quarantine and its disabled authority, and require exit from quarantine to establish a complete valid object and a newly validated matching certificate. Alternatively require and justify that a valid committed snapshot always survives quarantine. Then split the case-2 induction by the incoming state."
+    }
+  ],
+  "remaining_application_obligations": [
+    "Instantiate admitted fault/update/reset/restore paths, including interruptions during mutation, publication and invalidation, and prove their coverage by the cases.",
+    "Specify quarantine persistence, authorized recovery transitions and the initial publication-authority invariant; discharge the finding above.",
+    "Prove reader synchronization and revocation/expiry enforcement for all consumers, including cached publications and concurrency during faults.",
+    "Implement once-only observation identity/ownership and preserve the distinction between committed consumption and unsuccessful readout publication.",
+    "Supply a qualified recoverable class, controller termination/service bounds, and compatible power/sensor/stimulus assumptions for both R and T, including fault-free duration where required.",
+    "Qualify old-prefix gaps, aged-cell reset support, lifetime risk accounting, epoch/configuration identity and persistence integrity.",
+    "Repair and verify the acknowledged H7 field-flush partial mutation before applying this conditional contract to that backend."
+  ]
+}

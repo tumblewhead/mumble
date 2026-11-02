@@ -1,0 +1,27 @@
+{
+  "proof_id": "D6",
+  "proof_sha256": "410561ff18add87e3018caf393b0c325c017970e53b1b43cdb9ade63e3f08033",
+  "reviewer_task": "/root/review_d6_r1",
+  "source_revision": "904ae554512f7584cfb03b393b44266ab20be7bf",
+  "review_scope": "Independent mathematical review of D6 only; read repository instructions, README introduction, and PROJECT_STATE stage/objective/unattended_assurance. No other reviews consulted.",
+  "comprehension": {
+    "claim": "A deterministic state-error enclosure propagates through a Lipschitz exact transition plus a certified local implementation defect. Nonnegative outward bounds preserve the enclosure; a certified query bound authorizes only within its allotted implementation budget.",
+    "domain": "Both exact and computed states must remain in the declared domain at every step, and the transition Lipschitz inequality must hold for their pair in the same norm. The local defect must cover every applicable implementation error at the computed state.",
+    "exact_induction": "The decomposition S_k(z_k)-T_k(x_k) = [S_k(z_k)-T_k(z_k)] + [T_k(z_k)-T_k(x_k)] gives the recurrence. The initial enclosure and nonnegative L_k establish containment by induction.",
+    "outward_induction": "With B_k >= b_k >= 0, Lbar_k >= L_k >= 0 and ebar_k >= e_k, monotonicity gives Lbar_k B_k + ebar_k >= L_k b_k + e_k. A certified outward recurrence therefore includes bound-engine rounding.",
+    "uniform_bounds": "Since L_k >= 0 and L_k <= rho, the contraction premise implies 0 <= rho < 1. Repeated substitution yields the displayed finite geometric sum. L_k <= 1 gives the cumulative-defect bound without contraction.",
+    "authorization": "The corollary substitutes an assumed certified query error bound into a valid budget inequality; it supplies neither a query sensitivity constant nor an independent physical uncertainty certificate.",
+    "resets_and_scope": "Replacing the accumulated enclosure requires a fresh proof for the same target semantics. Consistency with an approximate compressed representation alone does not establish agreement with original evidence. Source/model defects remain distinct from independent stochastic sensor noise.",
+    "counterexample_search": "Considered noncontractive integrators, quiescent modes, large initial errors, omitted model bias, finite saturation, domain escape, and unsupported resets. These either satisfy the stated conservative bounds or violate an explicit premise; none refutes the conditional theorem."
+  },
+  "verdict": "accept",
+  "findings": [],
+  "remaining_application_obligations": [
+    "Declare the complete state semantics, norm, domain and time-varying transition maps, including every reset or compressed re-expression; prove trajectory membership or stop authorization when a guard fails.",
+    "Provide certified initial enclosures and nonnegative local Lipschitz and defect bounds covering response approximations, features, quantization, kernels, accumulated factors and solves; do not infer them from finite state dimension or small residuals.",
+    "Implement and verify outward bound arithmetic and the query-budget comparison, including upper constants, products, sums and rounding. Explicit unusable/infinite states must fail finite-budget authorization; handle NaN and 0-times-infinity without producing a usable finite enclosure.",
+    "Certify query error or sensitivity bounds and implementation budget allocation separately from reference model/physical uncertainty, with no double counting or silent reinterpretation of deterministic defects as independent sensor variance.",
+    "For resets, re-centering and compression, retain enough provenance and certificates to prove the replacement enclosure against the required original semantics.",
+    "Supply actual finite-horizon or invariant bounds and useful availability thresholds before making a ten-year claim. This accepted conditional proof establishes no H7 constants, lifetime utility, coverage or deployment readiness."
+  ]
+}
