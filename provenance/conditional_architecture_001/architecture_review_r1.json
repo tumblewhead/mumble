@@ -1,0 +1,604 @@
+{
+  "review_id": "architecture_review_r1",
+  "reviewer": "independent fresh-context agent /root/architecture_review",
+  "reviewed_at_utc": "2026-11-02T02:53:56.497329+00:00",
+  "source_revision": "ea3bd9982d13ab7aeccb3359f4639d31b3b0cae2",
+  "branch": "experiment/conditional-architecture-001",
+  "scope": "Stage A fixed-public-shape prior-free conditional likelihood control, common-query direct C/H7 comparison, numerical retained-payload accounting. No acceptance of continuous unknown-shape inference or complete M23 resources.",
+  "files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "2814a8a8188afe1f3cd4f21e406936f708eb3e4c209a9800cad632ef44befe9d",
+      "bytes": 269759
+    },
+    "README.md": {
+      "sha256": "1cfa8167ec9e69cba34a38de15b62fb4f94a16ad0c03f6ec06748cacd141d40c",
+      "bytes": 99956
+    },
+    "experiments/conditional_architecture_001/conditional.py": {
+      "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635",
+      "bytes": 3493
+    },
+    "experiments/conditional_architecture_001/domain.py": {
+      "sha256": "68b7dbb68bd5c1ce3a4047dfe8087ca7dde7c9ac58fa7be000923416f8d22f27",
+      "bytes": 8096
+    },
+    "experiments/conditional_architecture_001/initial_sources/conditional.py": {
+      "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635",
+      "bytes": 3493
+    },
+    "experiments/conditional_architecture_001/initial_sources/domain.py": {
+      "sha256": "68b7dbb68bd5c1ce3a4047dfe8087ca7dde7c9ac58fa7be000923416f8d22f27",
+      "bytes": 8096
+    },
+    "experiments/conditional_architecture_001/initial_sources/run.py": {
+      "sha256": "ac0638d727466731b2d3ce2113c2aea52ad9f55c481e766c822fe938d65b9510",
+      "bytes": 8720
+    },
+    "experiments/conditional_architecture_001/initial_sources/test_architecture.py": {
+      "sha256": "a0be6a67b9e8e2a2285c10fd0fa28bd1f46e5a46bbc1ac194fb07f8f80ce08dd",
+      "bytes": 6211
+    },
+    "experiments/conditional_architecture_001/pilot001/backend_c/build.json": {
+      "sha256": "d9bb13111a5fdb521381e971adb0e2d867bcb241335723853f5664bb95ea012b",
+      "bytes": 6203
+    },
+    "experiments/conditional_architecture_001/pilot001/backend_h7/build.json": {
+      "sha256": "331f719df586a1a08a8300cff05e4deea911ddfc6b8a93ea8d1d00714c851436",
+      "bytes": 1477
+    },
+    "experiments/conditional_architecture_001/pilot001/case_0000/result.json": {
+      "sha256": "0a318c038cfdfc25b42788c4c5d429933a42118d8b1304f082a53fa296f6850d",
+      "bytes": 26619
+    },
+    "experiments/conditional_architecture_001/pilot001/case_0001/result.json": {
+      "sha256": "570b7b813d2d3ca8c37a845dc16d0f64f95ac301e2f860ef780adc5406bc6076",
+      "bytes": 27504
+    },
+    "experiments/conditional_architecture_001/pilot001/case_0002/result.json": {
+      "sha256": "484c07cbc3c7b8a56ddc4843b4fc575a3a8abad8e3214901e507c6989f106a12",
+      "bytes": 27687
+    },
+    "experiments/conditional_architecture_001/pilot001/registration.json": {
+      "sha256": "8983ce9cd3095e79ee73ba3028eaff0e1a33f9d7db370fe2a7117cb261d5b63d",
+      "bytes": 9860
+    },
+    "experiments/conditional_architecture_001/pilot001/summary.json": {
+      "sha256": "41fa0964fcf5a564e658b1d32cd88373cfc913e57fa5eb6e95a939ec3d78f6aa",
+      "bytes": 89646
+    },
+    "experiments/conditional_architecture_001/pilot002/backend_c/build.json": {
+      "sha256": "e518ff2a5b2cad70ae45ada3ca0bfaa49fad8d8c844f469f2b81174282faeddd",
+      "bytes": 6203
+    },
+    "experiments/conditional_architecture_001/pilot002/backend_h7/build.json": {
+      "sha256": "331f719df586a1a08a8300cff05e4deea911ddfc6b8a93ea8d1d00714c851436",
+      "bytes": 1477
+    },
+    "experiments/conditional_architecture_001/pilot002/case_0000/result.json": {
+      "sha256": "0c2f708442b9b05588db71c4841432b33eb71f0438db59f98e108a7ca8acee5c",
+      "bytes": 28900
+    },
+    "experiments/conditional_architecture_001/pilot002/case_0001/result.json": {
+      "sha256": "0277291700cd7182f4b3355819045aad70d236126981be13b7c1df6478572060",
+      "bytes": 29794
+    },
+    "experiments/conditional_architecture_001/pilot002/case_0002/result.json": {
+      "sha256": "3e3dcb44f5399daae8dd303b59f0922d9d663c1d4081dc7e65e5091c12acf02f",
+      "bytes": 29974
+    },
+    "experiments/conditional_architecture_001/pilot002/registration.json": {
+      "sha256": "80450b754b03c6b7bc7833c14666e58d0485358ecfafe35de28e64f18d3ffbe0",
+      "bytes": 9860
+    },
+    "experiments/conditional_architecture_001/pilot002/summary.json": {
+      "sha256": "35543a7be2e49af794b9b593ce7913adcb2263166e547075ca246c84197ecff7",
+      "bytes": 96936
+    },
+    "experiments/conditional_architecture_001/run.py": {
+      "sha256": "4d15a585ed674671dc5410d5e612219101823930414bc1ddc53cb0ef3353f0b2",
+      "bytes": 8783
+    },
+    "experiments/conditional_architecture_001/test_architecture.py": {
+      "sha256": "a0be6a67b9e8e2a2285c10fd0fa28bd1f46e5a46bbc1ac194fb07f8f80ce08dd",
+      "bytes": 6211
+    },
+    "experiments/foster_bounded_hysteresis_001/model.c": {
+      "sha256": "742d8d808c00c70db6a9f8bfe995059a69c1d1fc999bea4a159a1d465c41212d",
+      "bytes": 4670
+    },
+    "experiments/foster_campaign_001/coordinates.py": {
+      "sha256": "640b63952c85292a0aaeec8692e912a9718fd45a7fabaad09dad448036f6ad08",
+      "bytes": 791
+    },
+    "experiments/foster_feedback_001/calibration.json": {
+      "sha256": "fda46915cd25d1ed5321f208f4edff99f7020c592b4e162aac8f1124374bcd00",
+      "bytes": 1167
+    },
+    "experiments/foster_feedback_001/estimator.py": {
+      "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41",
+      "bytes": 6724
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+      "bytes": 4357
+    },
+    "experiments/h7_history_quality_001/history.py": {
+      "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8",
+      "bytes": 14227
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+      "bytes": 8687
+    },
+    "provenance/conditional_architecture_001/initial_sources.json": {
+      "sha256": "83f2ede629a939b2530ed406bee2e7d068c4d658a84febf9946ea8ff6dc6a1d6",
+      "bytes": 1029
+    },
+    "provenance/h7_history_quality_001/manifest.json": {
+      "sha256": "912ec232dee764e11581da0790a6c58c8b3bed478275e1e329869a63145816ac",
+      "bytes": 1708
+    },
+    "provenance/h7_history_quality_001/response_proof_review_r1.json": {
+      "sha256": "d69be0933b9ad80746f3a7ff62626b33495e3786b2758354cd005c5b26fa2c3d",
+      "bytes": 6294
+    },
+    "specifications/conditional_architecture_001/README.md": {
+      "sha256": "559a39bb82427c88a86d9b7ef134750982d60156a471aae50ab196bed95e4431",
+      "bytes": 3636
+    },
+    "specifications/h7_history_quality_001/R0.md": {
+      "sha256": "4d7bc9e6cc08c1d702dd3afa2eb3e7e39e8079647bf0ac9d02635239819f9912",
+      "bytes": 4479
+    }
+  },
+  "verdict": "accepted_narrow_fixed_public_shape_control",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "id": "ARCH-R1-ISOLATION",
+      "disposition": "accepted",
+      "reason": "public_queries takes public calibration prior mean and fixed perturbations before stimulus creation. Truth stays in generator recipe, outside accumulator, query selection, centering, objective and correction. No posterior feedback."
+    },
+    {
+      "id": "ARCH-R1-JOINT",
+      "disposition": "accepted",
+      "reason": "All78 upper-triangle entries of12-column affine residual root are retained, including all11-amplitude cross terms and residual constant. compose transports right block from original origin before stacked QR and adds normalizers once. Source identity and contiguous chronology prevent duplicate block insertion."
+    },
+    {
+      "id": "ARCH-R1-PRIOR",
+      "disposition": "accepted_for_declared_scope",
+      "reason": "Comparisons are prior-free likelihoods at common physical queries. Original chart prior cost could add identically at each query; no amplitude Gaussian prior, normalized conditional density or marginal posterior is computed. Future probability calculations must explicitly preserve transformed prior measure/Jacobian and gamma/Q coupling."
+    },
+    {
+      "id": "ARCH-R1-DERIVATIVE",
+      "disposition": "accepted",
+      "reason": "Fixed gamma/Q derivative has dlogQ/dq=dloggamma_plus/dq=dloggamma_minus/dq=-1/q. eta derivatives match atanh(B/H). Direct reference propagates complete16-by11 derivative with F through chronological blocks. Full J.T@J is the fixed-shape affine amplitude Hessian."
+    },
+    {
+      "id": "ARCH-R1-TRANSPORT",
+      "disposition": "accepted",
+      "reason": "Actual rows and durations propagate signed-current RC, directional hysteresis, thermal factors and charge in order. Endpoint comparison uses identical11-amplitude coordinates, and charge extrema enforce SOC support. Variable-temperature finite witnesses are not an extension of R0 constant-temperature interval proof."
+    },
+    {
+      "id": "ARCH-R1-CONTAINMENT",
+      "disposition": "accepted_with_scope",
+      "reason": "Block construction, numerical work and finite checks precede retained-state commit. Invalid source/order/observation or QR failure leave history unchanged. Snapshot copies mutable arrays. Acceptance is ordinary synchronous Python containment, not crash/concurrency or arbitrary-range numerical certification."
+    },
+    {
+      "id": "ARCH-R1-STORAGE",
+      "disposition": "accepted_conditional_accounting",
+      "reason": "Tested binary64 root624B+response72B+shape40B+scalar32B=768B numeric retained payload per fixed public shape. Calibration/source/config/Python objects, dense QR/block scratch, prior/optimizer and unknown-shape history are excluded. Host timing sums three conditional factors against one H7 field with different Python/native kernels; no target speedup follows."
+    },
+    {
+      "id": "ARCH-R1-ABS-PRECISION",
+      "disposition": "resolved_before_receipt",
+      "reason": "Initial run.py omitted absolute precision norm despite specification. Author added only scaled_precision_error_norm=np.linalg.norm(dP), preserved all initial sources and pilot001, and reran unchanged protocol to pilot002. Reviewed exact one-line diff, new source binding, both pilots and reran11 targeted tests. All54 pilot002 gates pass."
+    },
+    {
+      "id": "ARCH-R1-FINITE-LIMIT",
+      "disposition": "explicit_limit",
+      "reason": "Public-query finite arithmetic gates do not establish posterior fidelity near fitted optima, application SOC/Q budgets, calibrated coverage, uniform response bounds or continuous-shape memory. H7 approximation deviations are measured without applying the fixed-shape acceptance gates."
+    }
+  ],
+  "independent_checks": {
+    "unittest": {
+      "command": "python3 -B -m unittest experiments.conditional_architecture_001.test_architecture -v",
+      "passed": 11,
+      "failed": 0,
+      "rerun_after_reporting_addition": true
+    },
+    "additional_control": {
+      "command": "PYTHONPATH=. python3 -B /tmp/conditional_architecture_review_checks.py",
+      "script": {
+        "sha256": "e50ea7fe3c7f61e55f6163ffbc3a8ab59c37431167ca69c1607223a3b0ebc0dc",
+        "bytes": 2949
+      },
+      "seed": 410721,
+      "rows": 4351,
+      "design": "Signed random current+/-0.18A, dt in0,1/35,0.019,0.091s, temperature15..35C, sigma0.2..3mV. Packet blocks37 versus direct chronological C blocks4096, three public shapes by three public amplitudes.16 additional invalid observation/amplitude checks; invalid updates preserve root/coeff/count exactly.",
+      "queries": 9,
+      "all_parity_gates_passed": true,
+      "max_relative_nll_error": 1.824381359754138e-14,
+      "max_scaled_gradient_relative_error": 1.2563386499988506e-13,
+      "max_scaled_precision_relative_error": 4.994386362515359e-15,
+      "max_endpoint_amplitude_error": 3.552713678800501e-15,
+      "invalid_inputs_rejected": 16
+    },
+    "pilots": {
+      "pilot001": {
+        "status": "completed",
+        "cases": 3,
+        "queries": 54,
+        "all_conditional_gates_passed": true,
+        "verified_replays_per_query": [
+          1
+        ],
+        "registered_sources": {
+          "experiments/conditional_architecture_001/conditional.py": {
+            "bytes": 3493,
+            "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635"
+          },
+          "experiments/conditional_architecture_001/run.py": {
+            "bytes": 8720,
+            "sha256": "ac0638d727466731b2d3ce2113c2aea52ad9f55c481e766c822fe938d65b9510"
+          },
+          "experiments/field_tangent_native_001/kernel.c": {
+            "bytes": 11098,
+            "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+          },
+          "experiments/field_tangent_native_001/kernel.h": {
+            "bytes": 2183,
+            "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+          },
+          "experiments/field_tangent_native_001/native.py": {
+            "bytes": 8668,
+            "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+          },
+          "experiments/foster_c_baseline_001/reference.py": {
+            "bytes": 3562,
+            "sha256": "9421252aee1bb7776e125904faadef6483579759041bdfd819b7e8dfa53ea438"
+          },
+          "experiments/foster_campaign_001/backend.py": {
+            "bytes": 11041,
+            "sha256": "289b910b26a724a42389740d9cba4a273b4bfb80458fd34979dd0274dd63a453"
+          },
+          "experiments/foster_campaign_001/charger.py": {
+            "bytes": 8547,
+            "sha256": "519963daab9e01c7ad7c2d82c4863bdcbfb9afa7f9ad4c999e931d2148d95e6f"
+          },
+          "experiments/foster_campaign_001/compact.py": {
+            "bytes": 23726,
+            "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+          },
+          "experiments/foster_campaign_001/coordinates.py": {
+            "bytes": 791,
+            "sha256": "640b63952c85292a0aaeec8692e912a9718fd45a7fabaad09dad448036f6ad08"
+          },
+          "experiments/foster_campaign_001/evidence.py": {
+            "bytes": 1404,
+            "sha256": "f16d65ad56d1628f53f3cbbaf1ff95e97cef234af371a7b95cac59ad4b6c1f8a"
+          },
+          "experiments/foster_campaign_001/execution.py": {
+            "bytes": 3695,
+            "sha256": "7e8813c8653836c5baf8334d054f9b72df1d33ab0ed09a855a51ab714a22110f"
+          },
+          "experiments/foster_campaign_001/field_backend.py": {
+            "bytes": 8781,
+            "sha256": "bf0ad49113038da0071ed0c6eb2571633fd09e989ac780fa0d166b31bbccc140"
+          },
+          "experiments/foster_campaign_001/h7_backend.py": {
+            "bytes": 1844,
+            "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+          },
+          "experiments/foster_campaign_001/prepare.py": {
+            "bytes": 2984,
+            "sha256": "a7c667be79f9fa358ea8b09c2aa35a39cdb0aa9821d0cafb77f1a99c6e6ee1e8"
+          },
+          "experiments/foster_campaign_001/rate.py": {
+            "bytes": 764,
+            "sha256": "f3ab347a2dc73b008329ffff6443e51fbb4fd3613473fa4eb0416ae39b2e6813"
+          },
+          "experiments/foster_campaign_001/run.py": {
+            "bytes": 25557,
+            "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+          },
+          "experiments/foster_campaign_001/stimulus.py": {
+            "bytes": 8426,
+            "sha256": "f9b8bdaf807f1b398827efdbf0bcf401d96ca430d28b9f170d6f4759e931acf3"
+          },
+          "experiments/foster_campaign_001/tangent_backend.py": {
+            "bytes": 18216,
+            "sha256": "6a0c01cc9e2b32686582e7a58b0e2fa3a09e7951466945537917a6d58703dad7"
+          },
+          "experiments/foster_campaign_001/telemetry.py": {
+            "bytes": 1847,
+            "sha256": "eab155aad1f9d95155cc8039a654f2d4d6216b30a790f130d420b5531f56327d"
+          },
+          "experiments/foster_campaign_001/workload.py": {
+            "bytes": 5926,
+            "sha256": "3a3e2a7d884cd53fcd90ff90d7a3ab528efd809fa7d1b66e84d784b1736ef9ed"
+          },
+          "experiments/foster_feedback_001/estimator.py": {
+            "bytes": 6724,
+            "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+          },
+          "experiments/foster_feedback_001/history.py": {
+            "bytes": 3265,
+            "sha256": "ed98c1aac0ec8fbe59c46470adb856450498e19dccbfd5ab12e71e987341b0f4"
+          },
+          "experiments/foster_feedback_001/plant.py": {
+            "bytes": 2165,
+            "sha256": "7a68ed253b19c83a6ca8ea51a3d039c5bd88ae742742a2741c975d25d3751c54"
+          },
+          "experiments/foster_feedback_001/qualify.py": {
+            "bytes": 5368,
+            "sha256": "d932f76270caf415604de1e68ce0a154f934cebdec29bf4fa4e6594359681fb2"
+          },
+          "experiments/foster_feedback_001/run.py": {
+            "bytes": 12125,
+            "sha256": "7df5ef8359f9cc7a0642864ca462f5e76c7df3d625a321817aed064c25d99844"
+          },
+          "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+            "bytes": 4357,
+            "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+          },
+          "experiments/h7_history_quality_001/history.py": {
+            "bytes": 14227,
+            "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+          },
+          "experiments/hysteresis_refinement_001/field.py": {
+            "bytes": 8687,
+            "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+          },
+          "experiments/hysteresis_refinement_001/response.c": {
+            "bytes": 2282,
+            "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+          },
+          "experiments/joint_rate_history_001/field.py": {
+            "bytes": 6989,
+            "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+          },
+          "experiments/joint_rate_history_001/probe.c": {
+            "bytes": 2273,
+            "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+          },
+          "experiments/partitioned_battery_closure_001/conditional.py": {
+            "bytes": 4676,
+            "sha256": "9e9991a7399029a7c622d4b77da1f8d70687ada87f8c6045cb258bbfc2eab5f5"
+          },
+          "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+            "bytes": 5204,
+            "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+          },
+          "experiments/structured_joint_001/joint.py": {
+            "bytes": 4959,
+            "sha256": "fde746d37a61a37911a9ce482e7a0f7a4cc7281188f0a5cc96ce0992cc31403e"
+          },
+          "experiments/structured_joint_001/qualify.py": {
+            "bytes": 14275,
+            "sha256": "26db13fc11ca958433f54e41881d442e2fe45887bed94b9391423e3470d8dda1"
+          },
+          "specifications/evidence_feedback_001/protocol.py": {
+            "bytes": 8985,
+            "sha256": "a3fe6a42a3502372d28e9fbba95f790ac0726484e2903aea02a2ca95f022b494"
+          }
+        },
+        "source_bindings_verified": 37,
+        "current_source_differences_verified_against_preserved_initial_sources": [
+          "experiments/conditional_architecture_001/run.py"
+        ],
+        "maximum_absolute_reported_metrics": {
+          "conditional": {
+            "nll_difference": 0.056308746337890625,
+            "relative_nll_error": 4.147444829984678e-10,
+            "scaled_gradient_error_norm": 0.7758619866748016,
+            "scaled_gradient_relative_error": 1.2710082809224277e-09,
+            "scaled_precision_relative_error": 8.31577379899604e-14,
+            "endpoint_amplitude_max_error": 1.759037360216098e-12
+          },
+          "H7": {
+            "nll_difference": 11365.294998168945,
+            "relative_nll_error": 0.003073457712319442,
+            "scaled_gradient_error_norm": 184619.256970746,
+            "scaled_gradient_relative_error": 0.0004022686822762398,
+            "scaled_precision_relative_error": 3.5512575693655177e-07,
+            "endpoint_amplitude_max_error": 7.368726697414701e-07
+          }
+        }
+      },
+      "pilot002": {
+        "status": "completed",
+        "cases": 3,
+        "queries": 54,
+        "all_conditional_gates_passed": true,
+        "verified_replays_per_query": [
+          1
+        ],
+        "registered_sources": {
+          "experiments/conditional_architecture_001/conditional.py": {
+            "bytes": 3493,
+            "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635"
+          },
+          "experiments/conditional_architecture_001/run.py": {
+            "bytes": 8783,
+            "sha256": "4d15a585ed674671dc5410d5e612219101823930414bc1ddc53cb0ef3353f0b2"
+          },
+          "experiments/field_tangent_native_001/kernel.c": {
+            "bytes": 11098,
+            "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+          },
+          "experiments/field_tangent_native_001/kernel.h": {
+            "bytes": 2183,
+            "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+          },
+          "experiments/field_tangent_native_001/native.py": {
+            "bytes": 8668,
+            "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+          },
+          "experiments/foster_c_baseline_001/reference.py": {
+            "bytes": 3562,
+            "sha256": "9421252aee1bb7776e125904faadef6483579759041bdfd819b7e8dfa53ea438"
+          },
+          "experiments/foster_campaign_001/backend.py": {
+            "bytes": 11041,
+            "sha256": "289b910b26a724a42389740d9cba4a273b4bfb80458fd34979dd0274dd63a453"
+          },
+          "experiments/foster_campaign_001/charger.py": {
+            "bytes": 8547,
+            "sha256": "519963daab9e01c7ad7c2d82c4863bdcbfb9afa7f9ad4c999e931d2148d95e6f"
+          },
+          "experiments/foster_campaign_001/compact.py": {
+            "bytes": 23726,
+            "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+          },
+          "experiments/foster_campaign_001/coordinates.py": {
+            "bytes": 791,
+            "sha256": "640b63952c85292a0aaeec8692e912a9718fd45a7fabaad09dad448036f6ad08"
+          },
+          "experiments/foster_campaign_001/evidence.py": {
+            "bytes": 1404,
+            "sha256": "f16d65ad56d1628f53f3cbbaf1ff95e97cef234af371a7b95cac59ad4b6c1f8a"
+          },
+          "experiments/foster_campaign_001/execution.py": {
+            "bytes": 3695,
+            "sha256": "7e8813c8653836c5baf8334d054f9b72df1d33ab0ed09a855a51ab714a22110f"
+          },
+          "experiments/foster_campaign_001/field_backend.py": {
+            "bytes": 8781,
+            "sha256": "bf0ad49113038da0071ed0c6eb2571633fd09e989ac780fa0d166b31bbccc140"
+          },
+          "experiments/foster_campaign_001/h7_backend.py": {
+            "bytes": 1844,
+            "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+          },
+          "experiments/foster_campaign_001/prepare.py": {
+            "bytes": 2984,
+            "sha256": "a7c667be79f9fa358ea8b09c2aa35a39cdb0aa9821d0cafb77f1a99c6e6ee1e8"
+          },
+          "experiments/foster_campaign_001/rate.py": {
+            "bytes": 764,
+            "sha256": "f3ab347a2dc73b008329ffff6443e51fbb4fd3613473fa4eb0416ae39b2e6813"
+          },
+          "experiments/foster_campaign_001/run.py": {
+            "bytes": 25557,
+            "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+          },
+          "experiments/foster_campaign_001/stimulus.py": {
+            "bytes": 8426,
+            "sha256": "f9b8bdaf807f1b398827efdbf0bcf401d96ca430d28b9f170d6f4759e931acf3"
+          },
+          "experiments/foster_campaign_001/tangent_backend.py": {
+            "bytes": 18216,
+            "sha256": "6a0c01cc9e2b32686582e7a58b0e2fa3a09e7951466945537917a6d58703dad7"
+          },
+          "experiments/foster_campaign_001/telemetry.py": {
+            "bytes": 1847,
+            "sha256": "eab155aad1f9d95155cc8039a654f2d4d6216b30a790f130d420b5531f56327d"
+          },
+          "experiments/foster_campaign_001/workload.py": {
+            "bytes": 5926,
+            "sha256": "3a3e2a7d884cd53fcd90ff90d7a3ab528efd809fa7d1b66e84d784b1736ef9ed"
+          },
+          "experiments/foster_feedback_001/estimator.py": {
+            "bytes": 6724,
+            "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+          },
+          "experiments/foster_feedback_001/history.py": {
+            "bytes": 3265,
+            "sha256": "ed98c1aac0ec8fbe59c46470adb856450498e19dccbfd5ab12e71e987341b0f4"
+          },
+          "experiments/foster_feedback_001/plant.py": {
+            "bytes": 2165,
+            "sha256": "7a68ed253b19c83a6ca8ea51a3d039c5bd88ae742742a2741c975d25d3751c54"
+          },
+          "experiments/foster_feedback_001/qualify.py": {
+            "bytes": 5368,
+            "sha256": "d932f76270caf415604de1e68ce0a154f934cebdec29bf4fa4e6594359681fb2"
+          },
+          "experiments/foster_feedback_001/run.py": {
+            "bytes": 12125,
+            "sha256": "7df5ef8359f9cc7a0642864ca462f5e76c7df3d625a321817aed064c25d99844"
+          },
+          "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+            "bytes": 4357,
+            "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+          },
+          "experiments/h7_history_quality_001/history.py": {
+            "bytes": 14227,
+            "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+          },
+          "experiments/hysteresis_refinement_001/field.py": {
+            "bytes": 8687,
+            "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+          },
+          "experiments/hysteresis_refinement_001/response.c": {
+            "bytes": 2282,
+            "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+          },
+          "experiments/joint_rate_history_001/field.py": {
+            "bytes": 6989,
+            "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+          },
+          "experiments/joint_rate_history_001/probe.c": {
+            "bytes": 2273,
+            "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+          },
+          "experiments/partitioned_battery_closure_001/conditional.py": {
+            "bytes": 4676,
+            "sha256": "9e9991a7399029a7c622d4b77da1f8d70687ada87f8c6045cb258bbfc2eab5f5"
+          },
+          "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+            "bytes": 5204,
+            "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+          },
+          "experiments/structured_joint_001/joint.py": {
+            "bytes": 4959,
+            "sha256": "fde746d37a61a37911a9ce482e7a0f7a4cc7281188f0a5cc96ce0992cc31403e"
+          },
+          "experiments/structured_joint_001/qualify.py": {
+            "bytes": 14275,
+            "sha256": "26db13fc11ca958433f54e41881d442e2fe45887bed94b9391423e3470d8dda1"
+          },
+          "specifications/evidence_feedback_001/protocol.py": {
+            "bytes": 8985,
+            "sha256": "a3fe6a42a3502372d28e9fbba95f790ac0726484e2903aea02a2ca95f022b494"
+          }
+        },
+        "source_bindings_verified": 37,
+        "current_source_differences_verified_against_preserved_initial_sources": [],
+        "maximum_absolute_reported_metrics": {
+          "conditional": {
+            "nll_difference": 0.056308746337890625,
+            "relative_nll_error": 4.147444829984678e-10,
+            "scaled_gradient_error_norm": 0.7758619866748016,
+            "scaled_gradient_relative_error": 1.2710082809224277e-09,
+            "scaled_precision_relative_error": 8.31577379899604e-14,
+            "endpoint_amplitude_max_error": 1.759037360216098e-12,
+            "scaled_precision_error_norm": 0.049348588140776355
+          },
+          "H7": {
+            "nll_difference": 11365.294998168945,
+            "relative_nll_error": 0.003073457712319442,
+            "scaled_gradient_error_norm": 184619.256970746,
+            "scaled_gradient_relative_error": 0.0004022686822762398,
+            "scaled_precision_relative_error": 3.5512575693655177e-07,
+            "endpoint_amplitude_max_error": 7.368726697414701e-07,
+            "scaled_precision_error_norm": 210740.5706288956
+          }
+        }
+      }
+    }
+  },
+  "remaining_limits": [
+    "Pilot outputs inspected and registered source hashes verified; full pilot not independently rerun. Targeted independent controls were run.",
+    "Domain diagnostic cause review is assigned separately; this review includes return-code instrumentation reversibility test only.",
+    "No continuous unknown-shape inference, prior/posterior fit, calibrated coverage, aging, replay-free rate adaptation, autonomous recovery or lifetime qualification.",
+    "No firmware readiness, complete SRAM or target timing guarantee.",
+    "R0 proof concerns stationary reference-temperature assumptions and interval arithmetic; current double accumulator has finite numerical regression checks."
+  ],
+  "implementation_changed_by_reviewer": false
+}

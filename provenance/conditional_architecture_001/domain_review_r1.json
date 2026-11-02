@@ -1,0 +1,161 @@
+{
+  "schema": "conditional_architecture_domain_review_v1",
+  "review_id": "domain_review_r1",
+  "created_utc": "2026-11-02T02:52:46.149865+00:00",
+  "reviewer": "independent fresh-context domain_review agent",
+  "scope": "Stage A paired H7 domain diagnosis only; no implementation edits or production acceptance.",
+  "source_revision": "ea3bd9982d13ab7aeccb3359f4639d31b3b0cae2",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accepted_with_explicit_limits",
+  "blockers": [],
+  "reviewed_hashes": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "specifications/conditional_architecture_001/README.md": {
+      "bytes": 3636,
+      "sha256": "559a39bb82427c88a86d9b7ef134750982d60156a471aae50ab196bed95e4431"
+    },
+    "experiments/conditional_architecture_001/domain.py": {
+      "bytes": 8096,
+      "sha256": "68b7dbb68bd5c1ce3a4047dfe8087ca7dde7c9ac58fa7be000923416f8d22f27"
+    },
+    "experiments/conditional_architecture_001/domain001/registration.json": {
+      "bytes": 8377,
+      "sha256": "ff037c335673b2256d5927c31c9fcdf8d1464998cf1c9e5807681cb572dcba88"
+    },
+    "experiments/conditional_architecture_001/domain001/result.json": {
+      "bytes": 6960,
+      "sha256": "0ca2456802157827787bb072c120d3b5c663e05d6da04905ba5a49f54bdf6237"
+    },
+    "experiments/conditional_architecture_001/domain001/diagnostic_native/diagnostic_build.json": {
+      "bytes": 1470,
+      "sha256": "1032c0b16f302f7f52e551a92e1375612cf35db07314b38ff7d67bfec2e0904b"
+    },
+    "experiments/conditional_architecture_001/domain001/backend_h7/build.json": {
+      "bytes": 1477,
+      "sha256": "331f719df586a1a08a8300cff05e4deea911ddfc6b8a93ea8d1d00714c851436"
+    },
+    "experiments/conditional_architecture_001/domain001/backend_c/build.json": {
+      "bytes": 6229,
+      "sha256": "f47dffdb66d498e2640283661b718a0d3061642f1347f6da5a2ed489fc7716c7"
+    },
+    "experiments/foster_feedback_001/calibration.json": {
+      "bytes": 1167,
+      "sha256": "fda46915cd25d1ed5321f208f4edff99f7020c592b4e162aac8f1124374bcd00"
+    },
+    "experiments/h7_history_quality_001/history_pilot002/registration.json": {
+      "bytes": 8718,
+      "sha256": "8f5e56d2472f71763e5b5e0e474df46e6faca4495d1b123edbd599fefff6312b"
+    },
+    "experiments/h7_history_quality_001/history_pilot002/summary.json": {
+      "bytes": 114276,
+      "sha256": "8bb85fbbce6b122c359ec762460164c1afd225acf85d0f7a6d711f24278cf795"
+    },
+    "experiments/h7_history_quality_001/history_pilot002/case_0004/result.json": {
+      "bytes": 18299,
+      "sha256": "3ed6586969f6355252702a80f85982a4f584b462f63062e15341ad37bec54c18"
+    },
+    "provenance/h7_history_quality_001/receipt.json": {
+      "bytes": 12485,
+      "sha256": "d8863790c0a750815ce9d40e80c9efabb6936aa26897a03a36be1dbd043406f9"
+    }
+  },
+  "verification": {
+    "registered_source_build_checks": 56,
+    "registered_source_build_mismatches": [],
+    "scope_of_hash_checks": "All registration source identities, diagnostic sources/binary, H7 build sources/binaries, direct C snapshots/binary; 56 checks including duplicates across manifests.",
+    "instrumentation": "The diagnostic kernel equals the base H7 kernel after exactly the three registered return-code substitutions; original kernel digest and unchanged header/response identities match.",
+    "original_preservation": "Earlier history_pilot002 registration and summary match their preserved receipt identities; case_0004 failure digest equals this replay input digest.",
+    "observation_sha256": "97ba065cb9e563cbefd43373e7ce7c03755b1696efa378bb65dad73ae82e667f",
+    "replay_command": "python3 -B -m experiments.conditional_architecture_001.domain --out /tmp/conditional_domain_review_r1_replay",
+    "replay_exit_code": 0,
+    "replay_result": {
+      "bytes": 6960,
+      "sha256": "0ca2456802157827787bb072c120d3b5c663e05d6da04905ba5a49f54bdf6237"
+    },
+    "replay_result_identical_to_registered_result": true,
+    "replay_path_scope": "Independent local temporary artifacts; result hash retained here. Original experiment evidence untouched."
+  },
+  "findings": [
+    {
+      "id": "D1",
+      "severity": "accepted",
+      "claim": "Only diagnostic error identities change.",
+      "evidence": "Exact source substitution comparison plus fresh paired replay; native context snapshots, live response state and last published numeric message match after every 16-record advance, including failure."
+    },
+    {
+      "id": "D2",
+      "severity": "accepted",
+      "claim": "The first rejection is the positive-current hysteresis computational rate box.",
+      "evidence": {
+        "records": 35520,
+        "last_published": 35504,
+        "status": -301,
+        "coordinate": "gamma_plus/Q",
+        "shape_value": 31.404306659369187,
+        "center": 90.90909090909089,
+        "lower_rate_bound": 33.44358556104021,
+        "normalized_log_coordinate": -1.062914967917432,
+        "other_normalized_coordinates": [
+          0.31517338853737886,
+          0.03312762481051489,
+          -0.1044646874348299,
+          0.09540206925893914
+        ]
+      },
+      "interpretation": "This finite candidate is outside the computational approximation domain. It is not physically excluded by that event."
+    },
+    {
+      "id": "D3",
+      "severity": "accepted",
+      "claim": "The direct C model supports chronological transport of this candidate over the same observations.",
+      "evidence": {
+        "verified_digest_passes": 1,
+        "SOC_path_range": [
+          0.6255088256398004,
+          0.9283492700982776
+        ],
+        "direct_endpoint_SOC": 0.9279651969929205,
+        "direct_endpoint_h": -0.9022341702190683
+      },
+      "interpretation": "Model-domain support at this candidate, not proof of actual battery adequacy, posterior plausibility, likelihood optimum or calibrated uncertainty."
+    },
+    {
+      "id": "D4",
+      "severity": "accepted",
+      "claim": "An outcome-selected larger iteration cap reaches the existing local numerical stop.",
+      "evidence": {
+        "original_default_round_limit": 60,
+        "diagnostic_cap": 240,
+        "observed_rounds": 82,
+        "stop": "GN_decrement_at_cost_roundoff",
+        "decrement_squared": 9.282041420317885e-11,
+        "cost_ulp": 3.637978807091713e-12,
+        "threshold_32_cost_ulp": 1.1641532182693481e-10,
+        "transport": "supported"
+      },
+      "interpretation": "The same flushed objective, original prior coordinates and last published w seed are used. Failed recovery does not publish a new w. This demonstrates a cap-limited local recovery on one prefix; it does not prove global convergence or bound autonomous recovery cost."
+    },
+    {
+      "id": "D5",
+      "severity": "informational",
+      "claim": "Publication parity refers to the numeric last-message payload.",
+      "evidence": "Failure text and field_history trigger intentionally differ (-3 versus -301). Consumed/published prefixes and quarantine/unavailable status agree. The diagnostic does not reauthorize publication."
+    },
+    {
+      "id": "D6",
+      "severity": "informational",
+      "claim": "Truth is used only to regenerate the declared synthetic observations.",
+      "evidence": "Candidate comes from the native triangular solve; direct replay starts at that candidate; extended field solve starts at bank.w; neither fitting objective nor prior is initialized from plant truth."
+    }
+  ],
+  "limits": [
+    "One selected failure prefix and one local solver adaptation; no repeated-sampling or broad-load availability qualification.",
+    "The direct transport witness is within the stated model; it is not a uniform physical response certificate.",
+    "No production fix, default change, automatic recovery policy, global convergence, physical coverage, aging, lifetime or M23 resource claim is accepted.",
+    "Calibration JSON is not separately included in the original dynamic Python-source manifest; its current identity is recorded here. Exact result reproduction and unchanged configuration_id independently bind this observed replay, but future source manifests should include explicit non-Python calibration inputs.",
+    "The larger-cap control evaluates field transport only and does not resume the quarantined backend or test successful future publication."
+  ]
+}

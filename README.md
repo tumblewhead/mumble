@@ -120,6 +120,16 @@ SOC/Q objectives at the approximately30-minute checkpoint while rest refuses. Se
 conditional proofs are individually reviewed. Estimator code/defaults remain
 unchanged; general physical coverage, aging and target resources stay open.
 
+The [architecture experiment](provenance/conditional_architecture_001/README.md)
+now isolates the17-minute failure to a tangent proposal outside the computational
+positive-hysteresis-rate box; direct physical transport supports the candidate.
+A longer diagnostic recovery reaches the existing stop at82rounds, versus the
+baseline60round budget, without resuming the failed arm. A packed fixed-public-
+shape likelihood passes54common-query comparisons and11targeted tests, with
+768B retained numeric payload before scratch/prior/calibration overhead. Two
+independent reviews accept this narrow control; continuous unknown-rate history
+and complete M23 resources remain open. Estimator/default code is unchanged.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
