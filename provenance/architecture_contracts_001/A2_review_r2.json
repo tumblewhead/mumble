@@ -1,0 +1,95 @@
+{
+  "schema": "architecture_contract_individual_review_v1",
+  "contract_id": "A2",
+  "review_round": 2,
+  "reviewer_task": "/root/contract_a2_review_r2",
+  "created_utc": "2026-11-02T04:25:25.761921+00:00",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_files": [
+    {
+      "path": "specifications/architecture_contracts_001/A2.md",
+      "sha256": "7d899ba40e114ad61e75be8f35b82978bf0efa8188304c1764baf2bfa7d71f87"
+    },
+    {
+      "path": "specifications/architecture_contracts_001/README.md",
+      "sha256": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070"
+    },
+    {
+      "path": "specifications/architecture_contracts_001/interfaces.json",
+      "sha256": "e9e2eb52fe13d187ce4f8caf379cc87211162c7bc541182f6c2f894efbe40ce1"
+    },
+    {
+      "path": "specifications/architecture_contracts_001/requirements.json",
+      "sha256": "8e7706e4188c8bcfb79df7f6bef9364e06b53705d3b319f2f7d96a143c9dcb8e"
+    },
+    {
+      "path": "specifications/proof_review_001/proofs/K3.md",
+      "sha256": "631004d28051dac1e4f830b7467a16c28bbc9102b751ff326a05222246c3ed20"
+    },
+    {
+      "path": "provenance/architecture_contracts_001/versions/A2_r1.md",
+      "sha256": "c00588b8292cb29a20d8796b3da5de9b2553cd286a644cd337827986bc3e83e9"
+    },
+    {
+      "path": "provenance/architecture_contracts_001/A2_review_r1.json",
+      "sha256": "ee77bfce52a3991ad3a003dee194eccaedd63638c48bec8b5f91dc0be3c85bbe"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    }
+  ],
+  "review_method": "Fresh-context individual textual re-review of the complete corrected A2 proof and contract against K3 and common semantic interfaces/requirements. The preserved original and round-one critique were read to verify disposition; this is a new reviewer task, not a blind review. No kernels, estimator implementation, numerical experiment or performance claims were developed or tested.",
+  "context_read": [
+    "README.md current mainline and architecture overview",
+    "PROJECT_STATE.json objective, nominal_rate_Hz, h7_transaction_status, conditional_architecture and architecture_reuse",
+    "provenance/proof_review_001/reviews/K3_r2.json"
+  ],
+  "verdict": "accept",
+  "acceptance_scope": "Conditional proof and contract completeness only, for the exact hashes above. This does not accept a concrete implementation or discharge physical, concurrency, representation, lifetime or target-resource premises.",
+  "contract_acceptance_blockers": [],
+  "findings": [],
+  "prior_findings_disposition": [
+    {
+      "id": "A2-R1-01",
+      "status": "resolved",
+      "basis": "Input/output norms, membership of both z and z-prime in the same certified bucket, their distance bound, and stored error relative to f(z-prime) are explicit. Triangle inequality plus the stated Lipschitz condition gives the claimed eta+L*d bound; the old outside-bucket counterexample now violates an explicit premise."
+    },
+    {
+      "id": "A2-R1-02",
+      "status": "resolved",
+      "basis": "Changed-prefix invalidation now applies to prefix-dependent queries/authority. Pure prefix-independent coefficients may remain resident only while the full dependency key matches; affected model changes still invalidate results."
+    }
+  ],
+  "mathematical_assessment": {
+    "exact_substitution": "K(z)=K(z-prime) implies equality of fresh results in every downstream observable. A completed retained hit equals f(z-prime), so substitution gives f(z). Miss evaluation preserves the same result and eviction only changes cost under these premises.",
+    "graph_induction": "Topological induction is sound for the invoked K3 finite pure DAG with ordered predecessors and fixed immutable configuration. Total deterministic kernels include declared errors. Stateful transitions remain explicit A4 effects, so pure substitution cannot authorize omission or repetition of source consumption.",
+    "observable_semantics": "Signed zero, admitted NaN behavior and arithmetic environment are included or excluded by the stated domain. Equality in all downstream observables supplies the needed congruence. errno, flags, traps and external effects require an explicit runtime exclusion or reproduced effects.",
+    "approximate_reuse": "The corrected premises directly establish norm(y-prime-f(z)) <= norm(y-prime-f(z-prime))+norm(f(z-prime)-f(z)) <= eta+L*d. Convexity of the bucket is unnecessary because pairwise Lipschitz continuity is assumed directly. Discrete configuration changes need separate justification, and derivative/transport defects plus every repeated use require their own bounds and accounting.",
+    "storage_and_generations": "Completed atomic key/value publication, retained immutable generations, no surviving wrap/reuse, invalidation before storage reuse, and the no-stale-race premise suffice at the abstract level. Actual memory-model and reclamation proofs remain required.",
+    "failure_behavior": "An unavailable valid cache result triggers fresh supported computation if feasible, otherwise unresolved. Cached errors remain errors, failed fills publish nothing, and missing support or a miss is not physical exclusion.",
+    "shared_interface_consistency": "PureKernelValue explicitly uses kernel identity, ordered immutable dependencies, completed value/error and residency. Shared source/prefix provenance does not permit current QueryResult authority to survive a prefix change; a prefix-independent numerical coefficient can be reused only under A2 sufficiency. Evidence and query bindings, once-only ownership and forbidden conversions are preserved.",
+    "requirements_consistency": "B_SENSOR, B_FAULT and B_PLATFORM remain open at their named acceptance boundaries. Approximate reuse additionally inherits A6 error/representation closure. No numerical sensor, lifetime, resource, or error threshold is invented to obtain acceptance."
+  },
+  "remaining_implementation_acceptance_obligations": [
+    "Trace every actual numerical, discrete configuration, kernel, model, calibration, support, coordinate, representation and arithmetic dependency and prove key sufficiency at lookup time; perturbation tests supplement rather than replace this argument.",
+    "Bind finite invocation DAGs, total deterministic kernels, admitted input domain, ordered values and complete observable/effect semantics, including full-machine timing and fault effects.",
+    "Prove identity collision handling, no generation ABA/wrap/reuse, completed consistent publication/lookup and safe retention/reclamation across readers, eviction, faults, reset and restore under the chosen synchronization model.",
+    "Exercise uncached parity for hits/misses, sign/direction and boundary values, errors, failed fills, eviction, generation reuse attempts and deliberately omitted temperature/rate/epoch dependencies.",
+    "Certify the actual approximate bucket, norms, L, d, eta, rounding-safe membership/distance guards and derivative/transport bounds; propagate every defect through A6 without treating reuse as independent noise.",
+    "Close applicable sensor/fault/platform requirements and bind A3 lifetimes plus A8 total memory, worst-case lookup/miss/invalidation costs and service bounds before corresponding implementation or target acceptance."
+  ],
+  "provenance_checks": {
+    "archived_A2_r1_matches_original_review_hash": true,
+    "original_contract_and_review_preserved": true
+  },
+  "scope_exclusions": [
+    "No whole-system composition acceptance or acceptance of other A0-A8 proof packets.",
+    "No kernel design, production edit, persistent-cache certification, test sweep, physical coverage, lifetime guarantee, target feasibility or mainline promotion.",
+    "Listed implementation witnesses remain obligations, not tests executed by this review."
+  ],
+  "changed_files": [
+    "provenance/architecture_contracts_001/A2_review_r2.json"
+  ]
+}

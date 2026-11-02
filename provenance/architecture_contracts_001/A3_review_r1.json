@@ -1,0 +1,90 @@
+{
+  "schema": "architecture_contract_individual_review_v1",
+  "contract_id": "A3",
+  "review_round": 1,
+  "reviewer_task": "/root/contract_a3_review",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "contract_path": "specifications/architecture_contracts_001/A3.md",
+  "contract_sha256": "3694de6894a35778d5911a7aeb9f7eb0b764ae58a9ef2ae919b44ce9a410c4a9",
+  "source_hashes": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "4f336298b8039c9053394f0f97f9ba2cbfaad58ceaaebaf41def34d8c712247f",
+    "PROJECT_STATE.json": "58c2347a7a0d86775b6fbc6f7a7e827f8ec96f418f4943593a7d1fa5f4b56e8d",
+    "specifications/architecture_contracts_001/README.md": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+    "specifications/architecture_contracts_001/A3.md": "3694de6894a35778d5911a7aeb9f7eb0b764ae58a9ef2ae919b44ce9a410c4a9",
+    "specifications/architecture_contracts_001/A4.md": "c4636c66870a58601817d80fec3485ee9963fed5b322fffe999e47499ef30da7",
+    "specifications/proof_review_001/proofs/K4.md": "e44d1d1a64718f857b417849b4acc72133d44d138d787f49cc59e09664d53323",
+    "provenance/proof_review_001/reviews/K4_r1.json": "2a8ee66b20818240390fc3c266843fea4208c8e9d2e369b2cba321f28dd45ab5"
+  },
+  "scope": "Independent fresh-context review of the A3 conditional ownership/lifetime proof and its stated implementation acceptance obligations, using the common README, K4 and A4 as interface context. No implementation, allocator, concrete byte layout, full composition, interfaces.json, requirements.json or A8 acceptance is reviewed.",
+  "context_selection": {
+    "README.md": "Introductory baseline and architecture history; no bulk result data used.",
+    "PROJECT_STATE.json": [
+      "stage",
+      "objective",
+      "optimization_contracts",
+      "h7_transaction_status",
+      "conditional_architecture",
+      "architecture_reuse"
+    ],
+    "proof_context": "K4 proof and its accepted r1 review read; A3 proof checked independently against its explicit premises."
+  },
+  "verdict": "accept_conditional_contract",
+  "blocking_findings": [],
+  "reasoning": {
+    "theorem": "The conclusion is equality of byte values observed by ordinary and recovery readers under a valid synchronized logical-to-physical mapping. It does not establish equivalence of timing, resource consumption, pointer identity or newly admitted fault behavior.",
+    "induction": "Initialization establishes equality for initialized live logical bytes. A read returns that byte. A matched write preserves its named value and cannot change a distinct live value under the nonoverlap premise. Release is permitted only when no admitted reader can need the old value; subsequent allocation initializes the new occupant. The induction applies to every admitted access trace, including failures and recovery.",
+    "alias_specialization": "The exception for a proved alias denoting the same intended value must hold across every admitted write, not merely at initial equality. Otherwise it violates the premise. In-place updates correctly require a per-read version argument or a retained copy of the old version; algebraic output equality alone is insufficient.",
+    "rollback": "The graph includes failed validation, rollback, checkpoint, reset/restore, diagnostics and admitted concurrent or interrupt readers. The example correctly prevents releasing old state at the successful-path last read when rollback can read it later.",
+    "publication": "Immutable snapshots or checked generation handles prevent untracked scratch pointers. Handle revocation must be synchronized with readers under the proof premise and A4. A retained copy remains a historical statement and supplies no current authority.",
+    "resource_failure": "Preparation that lacks reserved storage cannot partially overwrite committed storage. Rejection without consumption and quarantine after mutation/consumption are correctly separated. Unbounded backup and silent evidence loss are forbidden. Resource exhaustion is a controlled outcome, not a proof of useful recovery.",
+    "fault_boundary": "Power-loss durability and arbitrary corruption are explicitly left to separate admitted fault/storage models; C alignment, effective type, provenance and synchronization remain obligations. The review does not transfer existing desktop containment evidence to these unproved premises."
+  },
+  "counterexample_checks": [
+    {
+      "case": "Reuse after successful last read but before possible rollback read",
+      "disposition": "Excluded by all-path lifetime premise; A3 explicitly gives this counterexample."
+    },
+    {
+      "case": "A retained publication pointer observes scratch reused for another generation",
+      "disposition": "Untracked raw scratch pointers are forbidden; snapshots or checked handles require live storage or fail-closed revocation."
+    },
+    {
+      "case": "Checked handle validates generation, then an interrupt revokes/reuses bytes before the read",
+      "disposition": "Would violate synchronized access/revocation and live-reader premises; a concrete implementation must close this check/use race."
+    },
+    {
+      "case": "Two equal initialized values alias, then only one logical value is changed",
+      "disposition": "Initial equality alone is insufficient to prove the alias denotes the same intended value across the trace; this is outside the permitted alias exception."
+    },
+    {
+      "case": "Old-version in-place read or rollback occurs after overwrite without backup",
+      "disposition": "Violates the explicitly stated per-read version/retained-copy condition."
+    },
+    {
+      "case": "SRAM is exhausted during backup, or serialization reads uninitialized padding",
+      "disposition": "Neither is certified; layout/capacity/failure witnesses and every-byte initialization must establish the premises."
+    }
+  ],
+  "remaining_application_obligations": [
+    "Instantiate semantic object identities, generations, ownership, byte extents/alignment, initialization, final release and intended version of every read for every admitted execution.",
+    "Prove all reader lifetimes including publication retention, rollback, restore, interrupts and asynchronous readers admitted by the actual design; close generation-check/read/reuse races with concrete synchronization.",
+    "For any shared-value alias, prove intended value identity remains valid under all writes; for each in-place operation preserve every later required old-version read.",
+    "Match any externally observable address identity, allocation behavior, timing or new fault effects separately; the accepted result is byte-value refinement only, consistent with K4.",
+    "Supply failure injection at each staged write/commit/publication edge, retained-handle and alias-reuse checks, including a negative rollback-overwrite witness.",
+    "Bind a complete byte layout and maximum overlap to A8 accounting for padding, metadata, stack/ISR nesting, backups and serialization; no total SRAM or target deadline follows here.",
+    "Define admitted storage, fault and power-loss models before making durability or unattended recovery claims."
+  ],
+  "validation": {
+    "method": "Manual conditional proof and adversarial trace review",
+    "implementation_tests_run": false,
+    "reason": "No implementation is supplied or claimed by this specification. Listed failure tests are future acceptance obligations."
+  },
+  "acceptance_limits": [
+    "Accepts the individual conditional A3 contract as written, not discharge of its premises.",
+    "Does not accept full architecture composition or quantitative requirement closure.",
+    "Does not qualify an arena, registry, shared buffer, deployed recovery, physical coverage, firmware readiness, target memory or timing.",
+    "A substantive change to the hashed A3 proof or relied-on interface premises requires a new independent review."
+  ]
+}

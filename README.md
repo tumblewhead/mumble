@@ -139,6 +139,14 @@ throughput improves1.354x with no added persistent storage; the current packed
 history remains50,624B. Persistent caches, a runtime registry, continuous-rate
 compaction and target resources remain open; no default change is promoted.
 
+The [full architecture contracts](specifications/architecture_contracts_001/README.md)
+now specify A0–A8 before further code-block design, with eight semantic interfaces
+and ten explicit requirement-closure items. All seven expanded packets received
+individual review; cache and aging contracts were revised and freshly re-reviewed.
+Whole-set composition is accepted conditionally. Physical/runtime/target premises
+remain open; contract completeness is not deployment qualification. Kernel design
+is paused as requested, and no estimator or optimization code changed in this step.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

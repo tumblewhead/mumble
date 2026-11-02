@@ -1,0 +1,109 @@
+{
+  "schema": "architecture_contract_individual_review_v1",
+  "contract_id": "A6",
+  "review_round": 1,
+  "reviewer_task": "/root/contract_a6_review",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "contract_path": "specifications/architecture_contracts_001/A6.md",
+  "contract_sha256": "c091ac3bb7772920fd1164b3802aa6884dad814bb5aa966b2ac8ae360779a9ef",
+  "source_hashes": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "4f336298b8039c9053394f0f97f9ba2cbfaad58ceaaebaf41def34d8c712247f",
+    "PROJECT_STATE.json": "58c2347a7a0d86775b6fbc6f7a7e827f8ec96f418f4943593a7d1fa5f4b56e8d",
+    "specifications/architecture_contracts_001/README.md": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+    "specifications/architecture_contracts_001/A6.md": "c091ac3bb7772920fd1164b3802aa6884dad814bb5aa966b2ac8ae360779a9ef",
+    "specifications/architecture_contracts_001/A5.md": "4cdc4126cb40a307aad7a3c8cd35ed0613a6c38f8ccd2ba99be2cf70769e120d",
+    "specifications/architecture_contracts_001/A7.md": "53f480bd7f366cda8b2d518669de42da9deb58b963cdfadfb60887f454fd93bb",
+    "specifications/architecture_contracts_001/A8.md": "7f32912e7284663f0ba52c53dff860cafc03cf90fc9721d60e18089cad581480",
+    "specifications/proof_review_001/README.md": "a1c10d86fcb9078e9b3994c61e090b078be00a8b131e1ae65e35594935864b27",
+    "specifications/proof_review_001/proofs/K1.md": "ae989941ab01ce29f8cbd617512e94c93d52f1eff7017f09e546546e4a831002",
+    "specifications/proof_review_001/proofs/K2.md": "8c5cd5675438ee3e748162dbd3968131901e5548ffc3c04373b60d1ece2f32e9",
+    "specifications/proof_review_001/proofs/K7.md": "e919476ee9e09a945f8cf53720bd40501acbe9a71e2459474a151dd72728d728",
+    "specifications/proof_review_001/proofs/D1.md": "253886599327ab54a23059974ac3ce8f065551fb70c5b38f2d061170a0a89587"
+  },
+  "scope": "Independent fresh-context manual review of A6 and the common README against K1/K2/K7/D1. A5/A7/A8 were read to locate query, containment and resource obligations; their independent acceptance and complete architecture composition are outside this review. No implementation is claimed or reviewed.",
+  "context_selection": {
+    "README.md": "Current baseline and architecture history; the initial broad read was truncated, and no conclusions rely on omitted sections.",
+    "PROJECT_STATE.json": [
+      "stage",
+      "objective",
+      "architecture_reuse",
+      "conditional_architecture"
+    ],
+    "proof_context": "Complete K1/K2/K7/D1 read and A6 argument independently checked. No earlier A6 review was provided."
+  },
+  "verdict": "accept_conditional_contract",
+  "blocking_findings": [],
+  "reasoning": {
+    "continuous_support": "The same nonempty continuous domain, prior and base measure bind the scalar theorem. A codebook represents coefficients rather than allowed battery nodes. Computational-domain exits do not exclude physical states. Domain widening, coordinate migration and discarded support mass require separate qualification.",
+    "likelihood_composition": "For any x,y in D, the difference of F_m-F_0 at x and y is the sum of corresponding successive differences. Each is bounded by omega_i, so the oscillation is at most their sum. K2 then gives tanh(Omega/4) total variation for normalized model laws with finite positive normalizers. This is neither physical calibration nor a state-error bound.",
+    "state_composition": "The recurrence is sound under the imported K1 premises: common normed state coordinates and input, bounded initial discrepancy, invariant domains, finite uniform reference Lipschitz constants and local map defects. Products of downstream Lipschitz factors amplify local errors. Query evaluation defects require the query Lipschitz/transport bound; no independence cancellation is assumed.",
+    "reference_alignment": "A6 requires a frozen reference, original prior, measure, support and source prefix. Comparisons of successive approximations and evidence blocks require explicit common coordinates/domain alignment. Local precision comparisons use K2 matrix order and multiplicative bounds rather than marginal percentage sums. A reference-gradient center bound requires K1 reference curvature on the relevant region, not candidate gradient or local GN curvature alone.",
+    "K7_consistency": "Feature compression must preserve or bound residual, gradient and endpoint semantics. K7 allows invertible feature changes without changing physical support and separately requires Jacobians for parameter changes. A5/A7 explicitly retain prior/support/measure, marginal determinant and bounded-support mass terms. A6 makes no stronger exact elimination, finite-basis or coordinate-change claim.",
+    "D1_consistency": "Likelihood fidelity does not establish true-state containment. D1 requires outward reach and measurement intersections including compression and rounding; A7 states this physical propagation obligation and A5 requires qualified joint containment before authorization. A6 conservative bound arithmetic and explicit physical/input versus numerical ledgers are compatible with those obligations; small TV cannot substitute for them.",
+    "finite_vs_uniform": "A6 explicitly identifies finite direct-history probes as diagnostics, not supported-domain bounds. Its mathematical induction and finite-prefix telescoping are conditional proofs over every admitted state, not extrapolations from sampled checks. A finite ten-year horizon still requires the bounds to hold for every admitted prefix and physical/input path.",
+    "lifetime_and_resources": "A6 requires sustainable useful budgets or a qualified recovery/refinement strategy across the declared horizon, including retained information and costs. A8 supplies the complete resource and service obligation. Fixed storage, stable RC endpoints, covariance inflation and arbitrary forgetting do not discharge the cumulative likelihood budget. Refusal is a valid failure state but not useful availability."
+  },
+  "counterexample_checks": [
+    {
+      "case": "A nonzero narrow error spike between all finite probe points",
+      "disposition": "Can invalidate a uniform bound while every sampled diagnostic passes; A6 expressly refuses that inference."
+    },
+    {
+      "case": "Two deterministic state stages with Lipschitz factor greater than one",
+      "disposition": "An early local defect is multiplied by the later factor; A6 K1 recurrence includes amplification and forbids simply summing local state errors."
+    },
+    {
+      "case": "Per-block coherent likelihood discrepancy repeated for many observations",
+      "disposition": "Its oscillation bound can grow with prefix. A6 requires cumulative accounting and does not infer cancellation from repeated or weak excitation."
+    },
+    {
+      "case": "Candidate representation has a narrower support than the physical reference",
+      "disposition": "The same-domain posterior theorem does not apply to whole-support laws; A6 separately requires excluded-mass accounting."
+    },
+    {
+      "case": "A nonlinear parameter transformation omits its density Jacobian or an amplitude elimination omits a shape-dependent determinant",
+      "disposition": "Violates frozen measure/prior/joint-object semantics and K7 obligations carried by A5/A7; no A6 scalar approximation theorem excuses it."
+    },
+    {
+      "case": "Local GN matrix is SPD but reference objective lacks a segmentwise Hessian lower bound",
+      "disposition": "K1 center corollary cannot be invoked. A6 explicitly rejects using GN precision or an iteration-limit return as proof."
+    },
+    {
+      "case": "A fixed-rate statistic is re-centered after raw shape dependence has been discarded",
+      "disposition": "Basis movement cannot recover the missing continuous dependence. A6 requires retained evidence sufficient for any promised refinement."
+    },
+    {
+      "case": "All numerical budgets hold but the true input or aging path lies outside the assumed physical relation",
+      "disposition": "No physical containment follows. D1/A7 premises and A5 authorization fail independently of numerical fidelity."
+    }
+  ],
+  "remaining_application_obligations": [
+    "Bind a concrete frozen likelihood/state reference, support, base measure, original prior, input/path semantics and every source prefix; qualify coordinate/domain alignments.",
+    "Choose a continuous-shape representation and prove supported-domain value, derivative, transport, rounding and accumulation bounds with conservative bound arithmetic.",
+    "Instantiate initial state discrepancy, common norms/inputs, invariant domains, Lipschitz factors, solver reference-gradient and curvature conditions; account for changed query rows and local precision model.",
+    "Allocate likelihood/posterior, physical point-error and query budgets separately from application tolerances; account for excluded support mass where needed.",
+    "Prove sustainable bounds across every admitted ten-year prefix or qualify refinement/recovery using actually retained information within complete A8 SRAM, work, backlog and publication deadlines.",
+    "Establish D1 physical reach/measurement/initial-containment premises and valid simultaneous-risk semantics separately from model-distribution comparisons.",
+    "Supply meaningful domain/reversal/weak/repetition/migration-failure and prefix-scaling witnesses without promoting finite probes into uniform certificates."
+  ],
+  "findings": [
+    {
+      "severity": "scope_note",
+      "disposition": "external_assembly_pending",
+      "detail": "The common README references interfaces.json and requirements.json, which were absent when checked during review. Their eventual contents, requirement closure and whole-set consistency are not accepted by this individual A6 review."
+    }
+  ],
+  "validation": {
+    "method": "Manual conditional proof review and adversarial mathematical cases",
+    "implementation_tests_run": false,
+    "reason": "This step supplies a specification only. No continuous-rate implementation, constants or deployable budgets exist to test."
+  },
+  "acceptance_limits": [
+    "Accepts A6 conditional contract and stated obligations only, not discharge of the numerical or physical premises.",
+    "No continuous-rate basis, ten-year error budget, calibrated coverage, complete target SRAM/timing, useful autonomous recovery or firmware readiness is certified.",
+    "Whole architecture/interface/quantitative requirement acceptance requires its separate review.",
+    "Substantive changes to A6 or relied-on common/interface premises require a new independent review."
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schema": "architecture_contract_review_v1",
+  "contract_id": "A8",
+  "review_round": 1,
+  "reviewer_task": "/root/contract_a8_review",
+  "reviewed_at_utc": "2026-11-02T04:25:49.074186+00:00",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "source_branch": "experiment/conditional-architecture-001",
+  "reviewed_files_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "4f336298b8039c9053394f0f97f9ba2cbfaad58ceaaebaf41def34d8c712247f",
+    "PROJECT_STATE.json": "58c2347a7a0d86775b6fbc6f7a7e827f8ec96f418f4943593a7d1fa5f4b56e8d",
+    "specifications/architecture_contracts_001/A8.md": "7f32912e7284663f0ba52c53dff860cafc03cf90fc9721d60e18089cad581480",
+    "specifications/architecture_contracts_001/README.md": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+    "specifications/architecture_contracts_001/interfaces.json": "e9e2eb52fe13d187ce4f8caf379cc87211162c7bc541182f6c2f894efbe40ce1",
+    "specifications/architecture_contracts_001/requirements.json": "8e7706e4188c8bcfb79df7f6bef9364e06b53705d3b319f2f7d96a143c9dcb8e",
+    "specifications/architecture_contracts_001/A3.md": "3694de6894a35778d5911a7aeb9f7eb0b764ae58a9ef2ae919b44ce9a410c4a9",
+    "specifications/architecture_contracts_001/A4.md": "c4636c66870a58601817d80fec3485ee9963fed5b322fffe999e47499ef30da7",
+    "specifications/architecture_contracts_001/A5.md": "4cdc4126cb40a307aad7a3c8cd35ed0613a6c38f8ccd2ba99be2cf70769e120d",
+    "specifications/architecture_contracts_001/A7.md": "c2b8dbef71af5e4cf3699357b316e7d162c65450e7edf1f50cc8b8f01d8c88df",
+    "specifications/proof_review_001/proofs/K5.md": "b41afdf2e169b1cf5baebcfde2267e56f50356617aa29c73b9b71b9c57bdd0c6",
+    "specifications/proof_review_001/proofs/K6.md": "94077c7c15c8d45509f65bf6ca52e2f5b95d582d6588aa6584adad6cef60689c",
+    "specifications/proof_review_001/proofs/D4.md": "94ba5ff5481aecd794ece68b41f6ccda1eb3e7aeb202bb7cb6d0a540a2e7af64",
+    "provenance/proof_review_001/reviews/K5_r1.json": "4535be877e7226f13842f68eedc25c5d32f7d888e63cb93dde185467a2fea06a",
+    "provenance/proof_review_001/reviews/K6_r1.json": "dde5391657361cd4955b05bfd2fe80a793a80a878bf858fc2a2bc85c7c284385",
+    "provenance/proof_review_001/reviews/D4_r2.json": "228754888fcb121929014417e9b41aa75ecf95688ceaf2288e31d94e918cd1f6"
+  },
+  "scope": "Fresh-context individual A8 proof/contract review against common README, interfaces, requirements, K5/K6/D4 and relevant A3/A4/A5/A7 interfaces. Full A0-A8 composition is reserved for a separate review. Existing K5/K6/D4 acceptance receipts checked after reading the proofs; other architecture review receipts not consulted.",
+  "verdict": "accept_conditional_contract",
+  "findings": [],
+  "acceptance_blockers": [],
+  "reasoning": {
+    "memory": "Summing disjoint concrete physical reservations is valid only with all-path allocation/alias containment, complete residual-memory accounting and joint stack/ISR nesting. A3 supplies checked address/alignment and synchronized lifetime premises. A8 lists backup, input/publication/checkpoint storage, metadata, allocator overhead and linked-code/runtime budgets; payload alone is explicitly inadequate.",
+    "work": "Disjoint operation categories with uniform count and cycle bounds give the sum bound. Retries, failed search, cold/miss, certificates, restores and diagnostics cannot disappear. A solver iteration cap proves bounded execution, not useful availability.",
+    "service": "A ready FIFO job that remains incomplete keeps its queue backlogged; the strict useful-service lower bound then supplies at least W+C by D and FIFO excludes later overtaking. This is a correct conditional K5 theorem. A8 does not prove a concrete arrival/backlog theorem: it expressly requires one to establish W, along with maximum rate, jitter, acquisition latency, publication freshness and a common clock.",
+    "availability": "A8 delegates useful availability and fallback to A5, which binds same-law containment and timely qualifying production/publication to D4. CPU completion alone does not prove useful enclosure construction, mandatory timely authorization, continued validity or lifetime outage limits. No always-refusing policy is accepted as useful.",
+    "faults_and_lifetime": "Overload refusal/quarantine must precede stale authority or ownership loss and invokes explicit missing-interval handling. Reset uses qualified aged-cell loss-of-history semantics; bounded retry, admitted fault/interrupt behavior, finite-horizon counter capacity and qualified rollover/invalidation are explicit obligations. Statistical risk cannot restart per boot. No arbitrary-corruption or reset persistence guarantee is inferred.",
+    "closed_loop": "Exact public value/status/timing refinement on every common prefix with identical controller/environment initialization and common disturbances supports the K6 induction. Bounded changes require all-reachable joint-state decision margins or full joint reachability; one saved-input replay cannot close feedback. The stochastic coupling must cover the full admitted process, as K6 requires.",
+    "target_boundary": "16 MHz is nominal clock, 35 Hz is nominal configurable acquisition, 10240 bytes is an engineering SRAM target, and ten years is a finite design horizon with event/reset counts unbound. They are not measured useful service, a maximum stream rate, a verified full memory fit, or lifetime qualification. Host speedups are explicitly design evidence only."
+  },
+  "counterexample_checks": [
+    "A finite burst or long service blackout can violate deadlines despite acceptable average utilization: excluded by required service and backlog premises.",
+    "Later jobs overtaking or uncounted repeated recovery could defeat deadline/work bounds: excluded by FIFO and explicit disjoint all-path counts.",
+    "Simultaneous rollback/publication/ISR use can exceed payload totals: complete layout and nesting containment required.",
+    "Dropping inputs or relabeling stale results to meet a deadline would break physical chronology/authority: A8 mandates A4/A7 gap handling.",
+    "Reused epochs after reset or wrapping counters can revive stale handles: common nonreused identities and qualified rollover/invalidation required.",
+    "Arbitrarily close estimator outputs can select different threshold actions and future input: exact timed equivalence or joint bounded-change proof required.",
+    "Timely solver termination with permanently unresolved output does not satisfy D4 availability: A8 explicitly separates bounded execution from useful service."
+  ],
+  "remaining_application_obligations": [
+    {
+      "requirements": [
+        "B_PLATFORM",
+        "B_FAULT"
+      ],
+      "obligation": "Bind maximum arrivals, jitter, ready-job definition, interrupt/blocking/service envelope, all work counts/costs, finite backlog/admission policy, acquisition deadlines and publication expiry; prove them on the actual target."
+    },
+    {
+      "requirements": [
+        "B_PLATFORM",
+        "B_REPRESENTATION"
+      ],
+      "obligation": "Select a concrete representation and prove complete 10240-byte-target SRAM layout, checked sizes and counters, all-path workspace/backup/publication liveness, stack/ISR bounds and separately linked flash/runtime support."
+    },
+    {
+      "requirements": [
+        "B_FAULT",
+        "B_PLATFORM"
+      ],
+      "obligation": "Bind exact horizon, maximum event/reset/generation counts, rollover behavior, fault containment and history-loss recovery without reusing identities or restarting lifetime risk."
+    },
+    {
+      "requirements": [
+        "B_AVAILABILITY",
+        "B_ACTION",
+        "B_RISK"
+      ],
+      "obligation": "Qualify achievable informative/power scenarios, useful construction/publication deadlines, fallback safety, same-law probabilities and lifetime outage/risk semantics; resource boundedness is insufficient."
+    },
+    {
+      "requirements": [
+        "B_ACTION",
+        "B_PLATFORM"
+      ],
+      "obligation": "Establish timed public refinement or joint controller/plant/estimator reachability and test admitted controller/load timing on target."
+    }
+  ],
+  "validation": {
+    "method": "Manual premise-by-premise conditional-proof review, counterexample search and foundational-proof receipt hash verification. No implementation tests or sweeps applicable.",
+    "implementation_modified": false,
+    "contract_modified": false,
+    "target_qualified": false,
+    "full_crosscontract_composition_reviewed": false
+  },
+  "artifact_policy": "New immutable review receipt; substantive source revisions require a new receipt and review. No original evidence overwritten."
+}

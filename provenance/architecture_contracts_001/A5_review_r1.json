@@ -1,0 +1,253 @@
+{
+  "schema": "mumble_architecture_individual_contract_review_v1",
+  "review_id": "A5_review_r1",
+  "reviewer": "independent fresh-context agent /root/contract_a5_review",
+  "reviewed_at_utc": "2026-11-02T04:23:06.750540+00:00",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "contract": "A5",
+  "decision": "accepted_conditional_contract_only",
+  "scope": "Individual A5 and common README mathematical/contract review against D0-D4 and K7. Interfaces.json, requirements.json and whole-system composition are reserved for subsequent review. No implementation acceptance.",
+  "source_files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "4f336298b8039c9053394f0f97f9ba2cbfaad58ceaaebaf41def34d8c712247f",
+      "bytes": 101311
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "58c2347a7a0d86775b6fbc6f7a7e827f8ec96f418f4943593a7d1fa5f4b56e8d",
+      "bytes": 272370
+    },
+    "specifications/architecture_contracts_001/README.md": {
+      "sha256": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+      "bytes": 7065
+    },
+    "specifications/architecture_contracts_001/A5.md": {
+      "sha256": "4cdc4126cb40a307aad7a3c8cd35ed0613a6c38f8ccd2ba99be2cf70769e120d",
+      "bytes": 4962
+    },
+    "specifications/proof_review_001/README.md": {
+      "sha256": "a1c10d86fcb9078e9b3994c61e090b078be00a8b131e1ae65e35594935864b27",
+      "bytes": 6200
+    },
+    "specifications/proof_review_001/proofs/D0.md": {
+      "sha256": "bd6e179cde891f9d277ec22187483c30e67be96e4919b0ee22e0e4922a66c24e",
+      "bytes": 2147
+    },
+    "specifications/proof_review_001/proofs/D1.md": {
+      "sha256": "253886599327ab54a23059974ac3ce8f065551fb70c5b38f2d061170a0a89587",
+      "bytes": 3272
+    },
+    "specifications/proof_review_001/proofs/D2.md": {
+      "sha256": "c6bca79cabeba96ae69eacaa30634eae8d4360b74a88063df2faab232f1c8fe4",
+      "bytes": 2976
+    },
+    "specifications/proof_review_001/proofs/D3.md": {
+      "sha256": "4dc3ba44c64fb98f21eda2b15b3772fb04c1d0f281f875bdda1b403bb7d06567",
+      "bytes": 3617
+    },
+    "specifications/proof_review_001/proofs/D4.md": {
+      "sha256": "94ba5ff5481aecd794ece68b41f6ccda1eb3e7aeb202bb7cb6d0a540a2e7af64",
+      "bytes": 3686
+    },
+    "specifications/proof_review_001/proofs/K7.md": {
+      "sha256": "e919476ee9e09a945f8cf53720bd40501acbe9a71e2459474a151dd72728d728",
+      "bytes": 4106
+    },
+    "provenance/proof_review_001/reviews/D4_r2.json": {
+      "sha256": "228754888fcb121929014417e9b41aa75ecf95688ceaf2288e31d94e918cd1f6",
+      "bytes": 3736
+    },
+    "provenance/proof_review_001/reviews/K7_r2.json": {
+      "sha256": "19ce9d3adff77585971c0718a6b4d2acf8258f6b9157922c8b2175c760c19d59",
+      "bytes": 4602
+    }
+  },
+  "assumptions": [
+    "P=R^T R is SPD, R nonsingular upper triangular, and query derivatives include all parameter/state transport in the identical tangent coordinates.",
+    "Projection and residual variance formulas use Euclidean vector norms and their induced operator norm; rounded norm, residual and inverse-norm bounds are outward enclosures.",
+    "R/j errors relative to the intended local model are separately accounted for; a computed residual is not itself a verified bound.",
+    "Authorization uses finite ordered enclosures of a nonempty joint admissible set on a qualified simultaneous event, including the true relevant physical paths and future inputs for action queries.",
+    "Relative-Q authorization requires strictly positive capacity support, an enclosing interval with positive lower endpoint, and 0<=t<1.",
+    "Availability events and containment events use the same qualified scenario law and complete publication deadline, with validity retained through publication.",
+    "Current prefix/configuration/epoch/units/horizon and common identity bindings remain valid; no stale certificate inherits authority without transport or revalidation."
+  ],
+  "findings": [
+    {
+      "id": "A5-R1-PROJECTION",
+      "disposition": "accepted",
+      "reason": "The transpose orientation is correct: P^-1=R^-1 R^-T, u=R^-T j^T, so variance is u^T u and cross-query covariance is u1^T u2. Full joint correlation is preserved without forming an inverse. SPD is sufficient for the algebra but supplies no physical-coverage guarantee."
+    },
+    {
+      "id": "A5-R1-RESIDUAL",
+      "disposition": "accepted",
+      "reason": "R^T(uhat-u)=r gives ||uhat-u||2<=M*rho. Reverse and direct triangle inequalities yield the stated nonnegative norm interval, whose squared endpoints enclose local variance. Bounds on the norm of uhat must themselves be enclosed; estimated conditioning and small residuals cannot replace a verified M."
+    },
+    {
+      "id": "A5-R1-COORDINATES",
+      "disposition": "accepted",
+      "reason": "Common coordinates, transported derivatives, prior/support/measure changes, correlation and K7 determinant/support-mass corrections are explicitly retained. Profiling is not identified with marginalization. Singular precision cannot silently assign zero uncertainty to an unidentifiable query through a pseudoinverse; any support-based finite answer needs separate justification."
+    },
+    {
+      "id": "A5-R1-AUTHORIZATION",
+      "disposition": "accepted",
+      "reason": "Absolute endpoint convexity and positive-capacity relative endpoint intersection are valid D2 predicates. A single simultaneous containment event bounds any unsafe authorization across admitted adaptive decisions; this does not give a conditional-on-authorization failure probability. The contract refers to D2 and makes no such conditional claim."
+    },
+    {
+      "id": "A5-R1-FORECAST",
+      "disposition": "accepted",
+      "reason": "Load admission binds future I/T/duration and uncertainty and requires a voltage lower bound throughout the entire horizon including interior extrema. The qualified continuation set must include future disturbances/aging; current-state precision or sampled endpoints alone cannot satisfy that premise."
+    },
+    {
+      "id": "A5-R1-AVAILABILITY",
+      "disposition": "accepted",
+      "reason": "Under the same scenario law, containment and timely qualifying publication failure probabilities compose by the union bound without independence. Qualifying publication includes an output passing its authorization predicate at its valid boundary; merely finishing an enclosure or reporting an arbitrary point is insufficient. A4/A8 publication service must later instantiate this obligation. Per-episode beta is not automatically a lifetime outage bound."
+    },
+    {
+      "id": "A5-R1-INTERPRETATION",
+      "disposition": "accepted",
+      "reason": "D0 indistinguishability, D1 physical containment, D3 simultaneous risk and D4 useful availability are kept distinct from local GN precision and numerical convergence. An outer enclosure too wide to satisfy the requested predicate does not prove physical impossibility; unresolved status does not say the point is wrong. The contract requires useful informative controls and does not count permanent refusal as availability."
+    }
+  ],
+  "blocking_findings": [],
+  "finite_checks": [
+    {
+      "check": "exact correlated scalar projection",
+      "method": "Python fractions.Fraction arithmetic",
+      "R": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1/10"
+        ]
+      ],
+      "P_inverse": [
+        [
+          "101",
+          "-100"
+        ],
+        [
+          "-100",
+          "100"
+        ]
+      ],
+      "j": [
+        "1",
+        "1"
+      ],
+      "u": [
+        "1",
+        "0"
+      ],
+      "direct_and_triangular_variance": "1",
+      "diagonal_marginal_independence_variance": "201",
+      "status": "pass"
+    },
+    {
+      "check": "cross-query covariance",
+      "queries": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "direct_and_triangular_covariance": "-100",
+      "status": "pass"
+    },
+    {
+      "check": "coordinate invariance",
+      "coordinate_map": "theta=diag(2,3)*xi",
+      "transformed_root": "R_new=R*diag(2,3)",
+      "transformed_query": "j_new=j*diag(2,3)",
+      "result": "same u and variance",
+      "status": "pass"
+    },
+    {
+      "check": "near-singular residual amplification",
+      "R": "diag(1,1/1000000)",
+      "j": [
+        "0",
+        "1/1000000"
+      ],
+      "u": [
+        "0",
+        "1"
+      ],
+      "uhat": [
+        "0",
+        "0"
+      ],
+      "rho": "1/1000000",
+      "M": "1000000",
+      "error_bound": "1",
+      "status": "pass"
+    },
+    {
+      "check": "positive relative-capacity boundary",
+      "interval": [
+        "99",
+        "101"
+      ],
+      "t": "1/100",
+      "q": "9999/100",
+      "result": "endpoint predicate and both relative errors meet tolerance",
+      "status": "pass"
+    },
+    {
+      "check": "same-law union bound",
+      "alpha": "1/10",
+      "beta": "1/5",
+      "disjoint_failure_events_lower_bound": "7/10",
+      "status": "pass"
+    },
+    {
+      "check": "dependency artifact verification",
+      "command": "python3 -B specifications/proof_review_001/verify.py",
+      "result": "artifact_consistency_pass; 16 final proofs; 22 review reports; missing/stale/changed/nonaccepting negative controls rejected",
+      "status": "pass",
+      "scope": "Hash/completeness consistency, not proof correctness or reviewer authentication"
+    }
+  ],
+  "counterexample_search": [
+    "P=diag(1,0), j=(0,1): pseudoinverse gives zero although an unrestricted null direction has unbounded query range; A5 explicitly refuses this inference.",
+    "The exact correlated witness gives variance 1 but dropping covariance yields 201; other query signs can reverse the direction of the error, so diagonalization has no safe generic interpretation.",
+    "A nonlinear query such as theta^2 at theta=0 has zero derivative despite nonzero uncertainty away from the expansion point; the local-only limitation prevents interpreting the projection as physical containment.",
+    "A tiny residual in an ill-conditioned root can coexist with order-one solve error; the verified inverse-norm premise blocks residual-only certification.",
+    "A narrow valid interval with a reported point outside its tolerance band is not qualifying publication; D2 requires checking that actual point.",
+    "Independent repeated pointwise intervals or post-selection of rare failures do not supply the same simultaneous event or qualified conditional law; D3/D4 premises are explicit.",
+    "A forecast dipping below the floor between sampled endpoints fails the all-time lower-bound requirement.",
+    "An accurate historical certificate with a stale prefix or expired horizon cannot authorize a present action; common identities and requested validity remain binding."
+  ],
+  "validation": {
+    "method": "Line-by-line algebra and premise audit, adversarial examples, exact rational checks, and accepted dependency artifact verification.",
+    "implementation_changed": false,
+    "implementation_tests_run": false,
+    "long_sweeps_rerun": false,
+    "artifact_policy": "New review receipt created exclusively. No existing contract, review, result, source or implementation edited.",
+    "read_note": "README introduction and relevant PROJECT_STATE sections were inspected selectively; an initial broad PROJECT_STATE command exceeded the output limit and was replaced by selective parsing. D2_r2 review path did not exist; D2 proof itself was read and dependency verifier confirmed its accepted bound artifacts."
+  },
+  "remaining_application_obligations": [
+    "Qualify the physical/input/noise/support/aging population and simultaneous lifetime law; instantiate D1/D3 or another valid containment/risk construction.",
+    "Bind positive capacity support, finite enclosures, exact tolerance semantics, query definitions, horizon and future input/disturbance envelopes.",
+    "Implement and verify joint transported derivatives, compatible coordinate/measure handling, outward numerical bounds and separate R/j approximation error.",
+    "Handle singular and near-singular directions with justified support/identifiability or unresolved results; never infer physical certainty from a pseudoinverse.",
+    "Prove forecast extrema over the full action horizon, including admitted uncertainty and boundary events.",
+    "Bind useful stimulus/power/sensor/fault scenarios prospectively; establish complete production, transport/revalidation and publication deadlines, alpha/beta semantics and target service bounds.",
+    "Perform later interfaces/requirements and A4/A6/A7/A8 composition review against final content hashes."
+  ],
+  "remaining_limits": [
+    "Acceptance binds the exact A5/common README hashes; substantive revisions require independent re-review.",
+    "Handwritten conditional mathematics with finite supporting checks, not machine-checked proof or full-program verification.",
+    "No H7 physical or calibrated uncertainty certificate, runtime query implementation, autonomous recovery deadline, lifetime availability, target timing or complete M23 memory qualification is established."
+  ]
+}

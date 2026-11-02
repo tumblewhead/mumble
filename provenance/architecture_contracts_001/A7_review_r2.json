@@ -1,0 +1,142 @@
+{
+  "schema": "mumble_architecture_individual_contract_review_v1",
+  "review_id": "A7_review_r2",
+  "reviewer": "independent fresh-context agent /root/contract_a7_review_r2",
+  "reviewed_at_utc": "2026-11-02T04:25:56.905548+00:00",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "contract": "A7",
+  "decision": "accepted_conditional_contract_only",
+  "scope": "Individual revised A7 physical-path and containment theorem audit, including A7-related common README/interfaces/requirements and A5/A8 boundary consistency. No implementation, physical qualification or whole-architecture composition certificate.",
+  "source_files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "4f336298b8039c9053394f0f97f9ba2cbfaad58ceaaebaf41def34d8c712247f",
+      "bytes": 101311
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "58c2347a7a0d86775b6fbc6f7a7e827f8ec96f418f4943593a7d1fa5f4b56e8d",
+      "bytes": 272370
+    },
+    "specifications/architecture_contracts_001/A7.md": {
+      "sha256": "c2b8dbef71af5e4cf3699357b316e7d162c65450e7edf1f50cc8b8f01d8c88df",
+      "bytes": 5490
+    },
+    "specifications/architecture_contracts_001/README.md": {
+      "sha256": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+      "bytes": 7065
+    },
+    "specifications/architecture_contracts_001/interfaces.json": {
+      "sha256": "e9e2eb52fe13d187ce4f8caf379cc87211162c7bc541182f6c2f894efbe40ce1",
+      "bytes": 8452
+    },
+    "specifications/architecture_contracts_001/requirements.json": {
+      "sha256": "8e7706e4188c8bcfb79df7f6bef9364e06b53705d3b319f2f7d96a143c9dcb8e",
+      "bytes": 7235
+    },
+    "specifications/architecture_contracts_001/A5.md": {
+      "sha256": "4cdc4126cb40a307aad7a3c8cd35ed0613a6c38f8ccd2ba99be2cf70769e120d",
+      "bytes": 4962
+    },
+    "specifications/architecture_contracts_001/A8.md": {
+      "sha256": "7f32912e7284663f0ba52c53dff860cafc03cf90fc9721d60e18089cad581480",
+      "bytes": 5220
+    },
+    "specifications/proof_review_001/proofs/D1.md": {
+      "sha256": "253886599327ab54a23059974ac3ce8f065551fb70c5b38f2d061170a0a89587",
+      "bytes": 3272
+    },
+    "specifications/proof_review_001/proofs/D5.md": {
+      "sha256": "664138fc9563a0af6515a22e47d831bc0f2e84e752028a64c618540d46066c5e",
+      "bytes": 3513
+    },
+    "specifications/h7_history_quality_001/R0.md": {
+      "sha256": "4d7bc9e6cc08c1d702dd3afa2eb3e7e39e8079647bf0ac9d02635239819f9912",
+      "bytes": 4479
+    },
+    "proofs/ten_year_history_001/lemmas.md": {
+      "sha256": "4022ab51df0baa8ce43485cd98c4278dd219f4e35ce1087748f830b8089b89dc",
+      "bytes": 19532
+    },
+    "provenance/architecture_contracts_001/A7_review_r1.json": {
+      "sha256": "f6801f675ee11fd9188a3a56211d963d5eaabb159d81f5a86cb7898f0ae8425d",
+      "bytes": 9345
+    },
+    "provenance/architecture_contracts_001/versions/A7_r1.md": {
+      "sha256": "53f480bd7f366cda8b2d518669de42da9deb58b963cdfadfb60887f454fd93bb",
+      "bytes": 4933
+    }
+  },
+  "supersedes_review_decision": "provenance/architecture_contracts_001/A7_review_r1.json",
+  "original_snapshot_matches_original_review_hash": true,
+  "findings": [
+    {
+      "id": "A7-R2-QUIET-NARROWNESS",
+      "disposition": "resolved",
+      "resolves": "A7-R1-QUIET-NARROWNESS",
+      "reason": "Revised text limits the impossibility to endpoints tighter than remaining qualified support and explicitly retains near-endpoint useful narrowness. This matches D5, including a singleton at a monotone support endpoint. No unqualified aging rate is inferred."
+    },
+    {
+      "id": "A7-R2-CAPACITY-STATE-LAW",
+      "disposition": "resolved",
+      "resolves": "A7-R1-CAPACITY-STATE-LAW",
+      "reason": "The SOC sum is explicitly conditional on dz/dt=-I/(3600Q), interval-effective constant capacity and SOC continuity at capacity boundaries. A general F_k must carry separately selected boundary maps/additional terms for other loss or charge-preservation laws. I_k*dt_k is interpreted as the declared interval current integral under the common qualified acquisition/input semantics, not as a claim that an arbitrary instantaneous sample integrates an arbitrary current waveform."
+    },
+    {
+      "id": "A7-R2-CONTAINMENT",
+      "disposition": "accepted",
+      "reason": "Given the actual transition belongs to the qualified F_k, initial containment and actual joint input/state admissibility place the successor in the reach outer set. Qualified measurement semantics place it in Y; the stored outer intersection retains it. Induction establishes finite-prefix pathwise containment. Rounding/compression inclusion and the one joint probability event are premises, not proved physical properties."
+    },
+    {
+      "id": "A7-R2-AGING-AND-THERMAL",
+      "disposition": "accepted",
+      "reason": "Reference R increase and Q/C decrease remain hypotheses; tau=R*C has no monotonic direction. Reversible temperature effects, unknown thermal coefficients and current/clock uncertainty are joint physical inputs. Manufacturing spread, engineering support, spline smoothness and knot count do not create a temporal rate or calibrated population law."
+    },
+    {
+      "id": "A7-R2-PATH-DEPENDENCE",
+      "disposition": "accepted",
+      "reason": "Under the declared SOC-continuous convention, the charge-weighted reciprocal-capacity path determines the decrement, so equal final capacity and equal total signed charge do not suffice. Joint chronology and uncertainty remain necessary unless a separately bounded reduction proves otherwise.",
+      "algebraic_witness": "For three equal charge increments 0.1 in consistent units, monotone capacity paths (2,2,1) and (2,1,1) share initial/final capacity and total charge but give decrements 0.20 and 0.25. At zero current, charge-preserving capacity change 0.06 to 0.05 Ah at SOC 0.4 instead gives SOC 0.48; revised A7 correctly assigns this to a different boundary law."
+    },
+    {
+      "id": "A7-R2-RC-AND-POLES",
+      "disposition": "accepted",
+      "reason": "Voltage preservation and branch-charge C*v preservation require different aging maps. Pole relabeling must transport full branch state/parameters and uncertainty/history to preserve physical response; scalar sorting is explicitly insufficient. The contract leaves selection and qualification open."
+    },
+    {
+      "id": "A7-R2-PROBABILITY-AND-OWNERSHIP",
+      "disposition": "accepted",
+      "reason": "Set propagation is not converted into a probability density. The probabilistic alternative retains normalization, support mass, Jacobians and correlations. Historical observations constrain historical states and enter once; a posterior plus its source observations is not independent evidence. No stationary R0 response map is extended to unqualified varying health."
+    },
+    {
+      "id": "A7-R2-FAILURE-AND-BOUNDARIES",
+      "disposition": "accepted",
+      "reason": "Detected model-support failure suspends affected authorization; history loss requires aged-cell-valid public support. Physical relaxation does not erase information/error. Useful reacquisition needs achievable excitation, power and service deadlines from A5/A8. B_PHYSICAL/B_SENSOR/B_AGING/B_ACTION/B_RISK and associated availability/platform blockers remain explicit; there is no promise of detecting every latent physical model failure."
+    }
+  ],
+  "blocking_findings": [],
+  "validation": {
+    "method": "Premise-by-premise handwritten mathematical/physical contract audit against reviewed D1/D5, stationary R0 and earlier SOC-continuity qualification; original snapshot hash verification; algebraic counterexamples revisited.",
+    "implementation_changed": false,
+    "implementation_tests_run": false,
+    "long_sweeps_rerun": false,
+    "artifact_policy": "Exclusively create this new receipt; do not modify original reviews, snapshots, specifications, implementation or results."
+  },
+  "remaining_application_obligations": [
+    "Qualify actual physical battery/use/thermal/input/noise family, joint initial support and valid evolution relation.",
+    "Select SOC/capacity and RC boundary transport, pole identity and thermal/aging correlations with independent evidence.",
+    "Provide quantitative temporal restrictions when remaining support is too broad for useful quiet-use queries.",
+    "Prove numerical/representation outer inclusions or probability-law fidelity and the simultaneous-risk event.",
+    "Validate sensor drift, temperature cycles, aged-cell reset, path-order effects and achievable useful recovery.",
+    "Complete continuous-shape representation, lifetime availability and full target-memory/service obligations separately."
+  ],
+  "remaining_limits": [
+    "Acceptance is bound to listed exact reviewed hashes and conditional premises; substantive changes require renewed review.",
+    "No qualified aging rate, forgetting factor, process noise, knot count or deployable physical law is supplied.",
+    "No implementation correspondence, calibrated physical coverage, ten-year performance or M23 qualification is claimed.",
+    "Common interfaces/requirements were inspected for A7 consistency only; this is not whole-contract-set composition acceptance."
+  ]
+}

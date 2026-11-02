@@ -1,0 +1,136 @@
+{
+  "schema": "mumble_architecture_individual_contract_review_v1",
+  "review_id": "A7_review_r1",
+  "reviewer": "independent fresh-context agent /root/contract_a7_review",
+  "reviewed_at_utc": "2026-11-02T04:23:14.069678+00:00",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "contract": "A7",
+  "decision": "revision_required",
+  "scope": "Individual A7 and common README proof/contract audit against D1/D5/R0 and declared Foster/path semantics. No implementation, physical qualification or whole-interface composition acceptance.",
+  "source_files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "4f336298b8039c9053394f0f97f9ba2cbfaad58ceaaebaf41def34d8c712247f",
+      "bytes": 101311
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "58c2347a7a0d86775b6fbc6f7a7e827f8ec96f418f4943593a7d1fa5f4b56e8d",
+      "bytes": 272370
+    },
+    "specifications/architecture_contracts_001/README.md": {
+      "sha256": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+      "bytes": 7065
+    },
+    "specifications/architecture_contracts_001/A7.md": {
+      "sha256": "53f480bd7f366cda8b2d518669de42da9deb58b963cdfadfb60887f454fd93bb",
+      "bytes": 4933
+    },
+    "specifications/proof_review_001/proofs/D1.md": {
+      "sha256": "253886599327ab54a23059974ac3ce8f065551fb70c5b38f2d061170a0a89587",
+      "bytes": 3272
+    },
+    "specifications/proof_review_001/proofs/D5.md": {
+      "sha256": "664138fc9563a0af6515a22e47d831bc0f2e84e752028a64c618540d46066c5e",
+      "bytes": 3513
+    },
+    "specifications/h7_history_quality_001/R0.md": {
+      "sha256": "4d7bc9e6cc08c1d702dd3afa2eb3e7e39e8079647bf0ac9d02635239819f9912",
+      "bytes": 4479
+    },
+    "specifications/architecture_reuse_001/A0.md": {
+      "sha256": "affa893764b0ed0891787ae98a6c6c3712f67926c697936fa33cddaa65fb48d1",
+      "bytes": 3090
+    },
+    "proofs/ten_year_history_001/lemmas.md": {
+      "sha256": "4022ab51df0baa8ce43485cd98c4278dd219f4e35ce1087748f830b8089b89dc",
+      "bytes": 19532
+    },
+    "experiments/partitioned_battery_closure_001/README.md": {
+      "sha256": "282b6ad07db418a1e368611ced1dd8cdc49ba4a96ee3a39efa839e93431269f7",
+      "bytes": 8820
+    },
+    "provenance/h7_history_quality_001/manifest.json": {
+      "sha256": "912ec232dee764e11581da0790a6c58c8b3bed478275e1e329869a63145816ac",
+      "bytes": 1708
+    }
+  },
+  "findings": [
+    {
+      "id": "A7-R1-CONTAINMENT",
+      "disposition": "accepted",
+      "reason": "The successor containment argument is the D1 induction with a joint input/state relation. Rounded/compressed representation must contain the reach/measurement intersection. A probabilistic lifetime claim requires a joint event, not repeated independent nominal confidence declarations."
+    },
+    {
+      "id": "A7-R1-AGING-DIRECTIONS",
+      "disposition": "accepted",
+      "reason": "Reference R increases and Q/C decreases remain user-proposed physical hypotheses. Positive tau=R*C has no forced direction. Reversible thermal response is separated, and neither manufacturing spread nor an engineering envelope supplies an aging rate."
+    },
+    {
+      "id": "A7-R1-QUIET-NARROWNESS",
+      "disposition": "blocking_revision",
+      "severity": "medium",
+      "location": "Conditional containment theorem, sentence beginning It cannot justify narrow uncertainty",
+      "reason": "The unconditional narrowness statement is stronger than reviewed D5. Monotonicity plus a narrow remaining physical support can retain useful narrowness without a rate or new measurement. The preceding statement about traversing the remaining support is correct; the inference as written omits the essential support-width qualification.",
+      "counterexample": "For monotone increase with support [0,1] and known p(0)=1-epsilon, every future p lies in [1-epsilon,1], arbitrarily narrow as epsilon tends to zero. At p(0)=1 it is a singleton.",
+      "required_change": "State that monotonicity alone cannot justify an endpoint tighter than the remaining qualified support, or useful narrowness when that remaining support is too wide; retain the near-endpoint exception from D5."
+    },
+    {
+      "id": "A7-R1-CAPACITY-STATE-LAW",
+      "disposition": "blocking_revision",
+      "severity": "medium",
+      "location": "Historical evidence and state consistency, varying-capacity SOC sum",
+      "reason": "The stated sum is valid under the inherited SOC-continuous capacity convention and exact/qualified input integration. Piecewise-constant effective capacity alone does not specify SOC transport at a capacity change. A7 permits a general evolution relation but presents this particular SOC law unconditionally; R0 proves only stationary Q and the older L6 explicitly names SOC continuity.",
+      "counterexample": "At zero current let Q change from 0.06 Ah to 0.05 Ah at z=0.4. A law preserving remaining charge Q*z gives z_next=0.48, whereas the displayed sum with no capacity-jump correction gives 0.4. Both remain inside ordinary SOC support; choosing the physical law is an open premise, not an arithmetic decision.",
+      "required_change": "Explicitly condition the displayed sum on dz/dt=-I/(3600Q(t)) with SOC continuous at capacity changes and the qualified current/interval convention. State that an alternative physical loss/charge/SOC transport law needs its additional terms/maps and qualification. Preserve the path-dependence warning under the chosen law."
+    },
+    {
+      "id": "A7-R1-PATH-DEPENDENCE",
+      "disposition": "accepted_conditional_on_capacity_state_law",
+      "reason": "Under the SOC-continuous law, capacity paths with the same final Q and signed charge can give different SOC. Continuous-time form is z_N=z_0-integral I(t)/(3600Q(t)) dt. A current health centroid cannot replace the joint path without a separate bounded argument.",
+      "witness": "In arbitrary consistent charge/capacity units, three equal charge increments 0.1 with monotone Q paths (2,2,1) and (2,1,1) have common initial/final Q and total charge, but SOC decrements 0.20 and 0.25. This is an algebraic witness, not a calibrated aging rate."
+    },
+    {
+      "id": "A7-R1-POLES-AND-RC",
+      "disposition": "accepted",
+      "reason": "Pole crossings demand a joint relabeling/domain policy, not scalar sorting. Under a permutation all branch R,C,tau,v coordinates and their uncertainty/history must move together to preserve summed voltage and future response. Voltage continuity versus C*v continuity is correctly left as an unresolved physical relation."
+    },
+    {
+      "id": "A7-R1-THERMAL-NOISE-MARGINALIZATION",
+      "disposition": "accepted",
+      "reason": "Unknown I/T/clock, thermal coefficients, hysteresis, sensor-offset drift and correlations remain in the joint evolution/input contract. Set and density semantics are distinct; probabilistic normalizers, support masses and Jacobians are retained, with once-only evidence. No stationary R0 coefficient map is claimed for an unqualified time-varying model."
+    },
+    {
+      "id": "A7-R1-OPEN-PREMISES",
+      "disposition": "accepted",
+      "reason": "Physical calibration, useful reacquisition, aging reset support, state-map controls and false-authorization/availability tests remain acceptance obligations. The contract selects no process noise, drift rate, forgetting factor, knot count or deployable aging law."
+    }
+  ],
+  "blocking_findings": [
+    "A7-R1-QUIET-NARROWNESS",
+    "A7-R1-CAPACITY-STATE-LAW"
+  ],
+  "validation": {
+    "method": "Premise-by-premise handwritten proof audit and algebraic counterexamples against D1/D5/R0 and earlier physical-path qualifications. No simulations or implementation tests needed for this contract-only review.",
+    "implementation_changed": false,
+    "implementation_tests_run": false,
+    "long_sweeps_rerun": false,
+    "artifact_policy": "Exclusive creation of this receipt only; no proof, implementation or existing result edited."
+  },
+  "remaining_application_obligations": [
+    "Qualify the admitted battery/population/use/temperature family and actual joint initial/evolution/measurement uncertainty.",
+    "Select and qualify SOC/capacity and RC voltage/charge transport, including capacity loss, pole crossings and relabeling of full joint state.",
+    "Bind quantitative aging/thermal/input restrictions if useful quiet-period uncertainty requires them; do not infer rates from a prior range or smoothness.",
+    "Prove approximation/rounding reach inclusions or probability-law fidelity and a valid simultaneous risk event.",
+    "Instantiate aged-cell resets, informative reacquisition scenarios/deadlines, sensor drift and thermal-cycle tests.",
+    "Complete separate continuous-shape representation, query, lifetime availability and full M23 resource obligations."
+  ],
+  "remaining_limits": [
+    "Decision is bound to exact listed A7/common README hashes. Required substantive revisions need a renewed independent review.",
+    "This is a conditional mathematical/contract review, not physical coverage or a deployable aging-model certificate.",
+    "No whole-architecture interfaces.json/requirements.json composition acceptance is included."
+  ]
+}

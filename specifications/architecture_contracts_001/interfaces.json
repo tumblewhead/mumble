@@ -1,0 +1,220 @@
+{
+  "schema": "architecture_semantic_interfaces_v1",
+  "status": "abstract_contracts_no_memory_layout_or_code",
+  "common_binding": [
+    "source_id",
+    "reset_epoch",
+    "model_version",
+    "calibration_version",
+    "noise_version",
+    "support_version",
+    "coordinate_version",
+    "representation_version",
+    "prefix"
+  ],
+  "objects": {
+    "Observation": {
+      "owner": "acquisition adapter",
+      "consumers": [
+        "admission",
+        "physical transport",
+        "evidence construction"
+      ],
+      "fields": {
+        "source_id": "immutable stream identity",
+        "reset_epoch": "nonreused acquisition epoch",
+        "nonce": "strict chronological sequence; no evidence duplication",
+        "interval": "dt=1/F_s in declared fixed-rate mode, otherwise actual dt or valid interval set",
+        "I_V_T": "measurements with units, validity and qualified error/noise semantics",
+        "configuration": "clock/calibration/acquisition generations"
+      },
+      "guarantees": [
+        "No hidden truth field enters inference",
+        "Missing input/time requires gap semantics",
+        "A data-dependent ADC rejection/selection policy belongs to the qualified measurement model; it cannot simply remove inconvenient residuals"
+      ]
+    },
+    "PublicModelAndPrior": {
+      "owner": "qualified configuration",
+      "consumers": [
+        "transport",
+        "evidence",
+        "query",
+        "initialization"
+      ],
+      "fields": {
+        "model": "equations, current sign, units, parameterization, domain and transition semantics",
+        "thermal": "known law or qualified joint uncertainty; separate from aging",
+        "prior": "public law/support with measure and valid aged-cell reset support",
+        "noise": "likelihood or bounded-error semantics including ADC/correlations/selection",
+        "identity": [
+          "source_id",
+          "reset_epoch",
+          "model_version",
+          "calibration_version",
+          "noise_version",
+          "support_version",
+          "coordinate_version",
+          "representation_version",
+          "prefix"
+        ]
+      },
+      "guarantees": [
+        "Prior is included once",
+        "Configuration changes require qualified migration or reinitialization",
+        "Prior correlations and physical support remain explicit"
+      ]
+    },
+    "EvidenceObject": {
+      "owner": "single committed-generation owner",
+      "consumers": [
+        "solver",
+        "query",
+        "migration",
+        "checkpoint"
+      ],
+      "fields": {
+        "identity": [
+          "source_id",
+          "reset_epoch",
+          "model_version",
+          "calibration_version",
+          "noise_version",
+          "support_version",
+          "coordinate_version",
+          "representation_version",
+          "prefix"
+        ],
+        "ownership": "ordered disjoint intervals of consumed evidence with explicit gap disposition",
+        "semantics": "prior-free joint likelihood or separately declared joint admissible set",
+        "physical_transport": "carried state/reach relation bound to same prefix and parameter path",
+        "support": "continuous physical support plus distinct computational domain",
+        "approximation_ledger": "reference identity, domains, value/derivative/precision/transport defects and status"
+      },
+      "guarantees": [
+        "No test-rig truth or load seed dependency",
+        "No posterior-as-new-independent-evidence",
+        "Codebooks encode likelihood/transport objects, not allowable battery nodes",
+        "A solve or readout does not consume the prefix again"
+      ]
+    },
+    "PureKernelValue": {
+      "owner": "immutable generation or cache entry",
+      "consumers": [
+        "dependent pure nodes",
+        "prepared transition"
+      ],
+      "fields": {
+        "kernel_identity": "code/semantics/precision version",
+        "dependencies": "ordered immutable values or nonreused generations",
+        "value_or_error": "completed output under declared observable semantics",
+        "residency": "valid lifetime and revocation state"
+      },
+      "guarantees": [
+        "Exact cache keys satisfy A2 sufficiency",
+        "Side effects and state advancement are separate",
+        "Approximate reuse carries A6 error bounds"
+      ]
+    },
+    "CandidateTransaction": {
+      "owner": "single transition owner",
+      "consumers": [
+        "validation",
+        "commit",
+        "rollback"
+      ],
+      "fields": {
+        "base_generation": "borrowed immutable committed object",
+        "proposed_input": "source/nonce/interval ownership",
+        "prepared_successor": "consistent evidence, state, support and ledger",
+        "validation": "numerical/support/ownership checks with explicit scope",
+        "terminal_outcome": "commit, unchanged-unconsumed, or quarantine"
+      },
+      "guarantees": [
+        "No publication authority before consistent commit",
+        "Old generation retained until all recovery readers finish",
+        "Consumed and published prefix may differ"
+      ]
+    },
+    "QueryRequest": {
+      "owner": "consumer/controller",
+      "consumers": [
+        "query evaluator",
+        "authorization"
+      ],
+      "fields": {
+        "quantity": "named physical quantity, units and reference/temperature convention",
+        "prefix_horizon": "actual physical boundary and expiry/validity horizon",
+        "tolerance": "absolute/relative error or proposed-load voltage margin",
+        "guarantee_requested": "diagnostic local precision, model posterior comparison, validated set or simultaneous physical coverage",
+        "future_action": "full load/input/disturbance envelope for forecasts"
+      },
+      "guarantees": [
+        "No implicit conversion of local precision to coverage",
+        "All nuisance correlations affecting the quantity retained",
+        "Query selection and controller feedback are within stated law/policy"
+      ]
+    },
+    "QueryResult": {
+      "owner": "immutable publication generation",
+      "consumers": [
+        "controller",
+        "telemetry",
+        "diagnostics"
+      ],
+      "fields": {
+        "identity": [
+          "source_id",
+          "reset_epoch",
+          "model_version",
+          "calibration_version",
+          "noise_version",
+          "support_version",
+          "coordinate_version",
+          "representation_version",
+          "prefix"
+        ],
+        "point_or_range": "quantity and units with explicit numerical status",
+        "guarantee_kind": "what is proved and under which physical/runtime assumptions",
+        "authorization": "authorized or not_authorized with reason; unresolved is not proof of bad physical truth",
+        "freshness": "actual prefix, expiry and revocation policy",
+        "approximation_and_solver": "bounds/status distinct from local curvature and measured point error"
+      },
+      "guarantees": [
+        "Authority requires A5 predicate and all relevant premises",
+        "A copied old result remains historical",
+        "Current status is revoked after qualifying faults/model changes"
+      ]
+    },
+    "RecoveryRecord": {
+      "owner": "recovery controller",
+      "consumers": [
+        "initialization",
+        "replay",
+        "status consumer"
+      ],
+      "fields": {
+        "consumed_prefix": "actual count or explicitly unknown",
+        "published_prefix": "last diagnostic/publication boundary",
+        "fault_class": "declared recoverable class and active fault model",
+        "replay_or_gap": "ordered once-only replay or qualified uncertainty propagation",
+        "initialization": "aged-cell-valid public support if history lost",
+        "risk_continuity": "lifetime accounting or a valid reset-independent construction",
+        "attempt_service_budget": "bounded attempts and deadline premise"
+      },
+      "guarantees": [
+        "Query failure cannot make consumed observations unconsumed",
+        "No silently renewed lifetime risk per boot",
+        "Fallback power behavior separately qualified"
+      ]
+    }
+  },
+  "forbidden_conversions": [
+    "local_GN_precision_to_physical_coverage_without_qualification",
+    "posterior_to_independent_replayed_evidence",
+    "fixed_rate_factor_to_new_rate_history_by_relabeling",
+    "old_publication_to_current_authority_without_transport",
+    "unresolved_query_to_physical_exclusion",
+    "unknown_error_to_zero_error"
+  ]
+}

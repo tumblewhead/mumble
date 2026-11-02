@@ -1,0 +1,86 @@
+{
+  "schema": "architecture_contract_individual_review_v1",
+  "contract_id": "A2",
+  "review_round": 1,
+  "reviewer_task": "/root/contract_a2_review",
+  "created_utc": "2026-11-02T04:18:24.701293+00:00",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_files": [
+    {
+      "path": "specifications/architecture_contracts_001/A2.md",
+      "sha256": "c00588b8292cb29a20d8796b3da5de9b2553cd286a644cd337827986bc3e83e9"
+    },
+    {
+      "path": "specifications/architecture_contracts_001/README.md",
+      "sha256": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070"
+    },
+    {
+      "path": "specifications/proof_review_001/proofs/K3.md",
+      "sha256": "631004d28051dac1e4f830b7467a16c28bbc9102b751ff326a05222246c3ed20"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    }
+  ],
+  "review_method": "Independent fresh-context textual proof and contract review against K3, repository scientific requirements and the common architecture README. No A2 implementation, numerical results or prior A2 reviews exist or were assessed. Existing K3 acceptance receipt was read as supporting provenance after reviewing its proof.",
+  "context_read": [
+    "AGENTS.md",
+    "README.md current baseline and architecture overview",
+    "PROJECT_STATE.json current objective, nominal rate, architecture_reuse, conditional_architecture and assurance limitations",
+    "specifications/architecture_reuse_001/README.md",
+    "provenance/proof_review_001/reviews/K3_r2.json"
+  ],
+  "verdict": "revise",
+  "contract_acceptance_blockers": [
+    "A2-R1-01"
+  ],
+  "findings": [
+    {
+      "id": "A2-R1-01",
+      "severity": "medium",
+      "blocking": true,
+      "location": "specifications/architecture_contracts_001/A2.md:47",
+      "title": "Approximate reuse must explicitly bind both inputs to the Lipschitz region",
+      "finding": "The paragraph assumes f is L-Lipschitz on a supported bucket and that representative z' is within d, but does not explicitly require query z and representative z' to belong to that same bucket. K3 explicitly requires both memberships. Without them the displayed eta+L*d conclusion is not entailed.",
+      "counterexample": "Let the bucket be [0,1], let f(x)=x there (L=1), and let f(1+epsilon)=100 for 0<epsilon<1. Choose z=1, z'=1+epsilon, d=epsilon, and an exact stored representative (eta=0). The stated distance and on-bucket Lipschitz premises hold, but output error is 99, exceeding epsilon. A nearby representative outside the proved region is not covered.",
+      "required_resolution": "State a normed input/output space, explicitly require z and z' in the same supported bucket over which the Lipschitz inequality is certified, and define eta as the error of the stored representative against f(z'). Re-review the changed proof paragraph."
+    },
+    {
+      "id": "A2-R1-02",
+      "severity": "low",
+      "blocking": false,
+      "location": "specifications/architecture_contracts_001/A2.md:57",
+      "title": "Changed-prefix invalidation is broader than dependency sufficiency requires",
+      "finding": "The blanket sentence that a cached successful result cannot survive a changed prefix could be read to invalidate prefix-independent thermal/rate coefficient entries on every observation. This is conservative for correctness but obscures the intended dependency-specific cache contract. Query/evidence-derived results do depend on the prefix.",
+      "suggested_resolution": "Clarify that changed prefix invalidates entries whose result or authority depends on that prefix; reuse of immutable prefix-independent quantities still requires the complete semantic key and any relevant epoch/model dependencies."
+    }
+  ],
+  "mathematical_assessment": {
+    "exact_substitution": "Sound under the stated total deterministic pure-kernel, sufficient-key and completed retained-value premises. Equality in every downstream observable supplies the congruence required by K3.",
+    "graph_induction": "Sound as an invocation-level application of K3 finite DAG semantics. Actual graphs, ordered dependencies and termination remain implementation obligations.",
+    "generation_and_storage": "The contract prevents surviving generation wrap/reuse, requires invalidation before byte reuse and atomic publication, and excludes stale-generation races. A concrete implementation must prove safe lookup/retention/reclamation under its actual concurrency model.",
+    "errors_and_effects": "Declared error values participate in equality. Partial fills never publish, cached errors cannot become successful estimates, and stateful transitions plus observable runtime effects require separate serialization/effect semantics.",
+    "approximate_reuse": "Triangle-inequality reasoning is correct once the same-bucket membership and norm/error definitions are explicit. Derivative and transported uncertainty bounds and per-use cumulative accounting are appropriately separated.",
+    "scientific_scope": "No truth-dependent fit, independence of repeated defects, physical exclusion from a cache miss, physical coverage, lifetime assurance or firmware qualification is claimed. Actual time intervals and continuous parameters remain semantic inputs."
+  },
+  "remaining_implementation_acceptance_obligations": [
+    "Trace every actual kernel operand and version/configuration dependency; prove sufficient keys at lookup time rather than relying on perturbation tests alone.",
+    "Bind finite invocation graph, ordered dependencies, admitted numerical domain, deterministic total behavior, precise observable semantics and arithmetic environment.",
+    "Validate full key identity or prove collision freedom; rule out pointer ABA and generation wrap/reuse across cache, reader, reset and restore lifetimes.",
+    "Prove atomic completed publication, consistent lookup, safe retention/reclamation and fault behavior under the actual synchronization/memory model.",
+    "Exercise sign and signed-zero semantics, boundary values, declared errors, cold/hit/eviction paths, failed fills and injected omitted temperature/rate/epoch dependencies against uncached semantics.",
+    "Specify once-only source/state transitions and observable effects, including timing-induced and memory-fault paths, before claiming full-machine refinement.",
+    "For approximate reuse supply certified L,d,eta and rounding-safe guards on the declared input region for all required value, derivative and transport outputs; charge every use to the cumulative A6 budget.",
+    "Bind A3 lifetimes and A8 complete key/storage, worst-case lookup/miss/invalidation/service costs; measured hit rates or host speedups do not prove these bounds."
+  ],
+  "scope_exclusions": [
+    "System composition and the pending interfaces.json/requirements.json are outside this individual review.",
+    "No implementation acceptance, performance/resource measurement, physical-coverage qualification or mainline promotion is granted.",
+    "Acceptance witnesses listed in A2 were reviewed as obligations only; no new implementation tests or long sweeps were run."
+  ],
+  "changed_files": [
+    "provenance/architecture_contracts_001/A2_review_r1.json"
+  ]
+}

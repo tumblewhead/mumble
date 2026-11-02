@@ -1,0 +1,248 @@
+{
+  "schema": "architecture_requirements_v1",
+  "status": "contract_parameters_explicit_some_unbound",
+  "known_targets_or_guidance": [
+    {
+      "id": "T_SRAM",
+      "name": "approximately10KiB SRAM",
+      "value": 10240,
+      "units": "bytes",
+      "qualification": "engineering target; final region/reserve budgets open",
+      "contracts": [
+        "A3",
+        "A8"
+      ]
+    },
+    {
+      "id": "T_CLOCK",
+      "name": "baseline M23 Verilog target",
+      "value": 16000000,
+      "units": "Hz",
+      "qualification": "nominal clock, not useful-service lower bound",
+      "contracts": [
+        "A8"
+      ]
+    },
+    {
+      "id": "T_FS",
+      "name": "nominal acquisition",
+      "value": 35,
+      "units": "Hz",
+      "qualification": "configurable single F_s; maximum supported rate unresolved",
+      "contracts": [
+        "A4",
+        "A8"
+      ]
+    },
+    {
+      "id": "T_LIFE",
+      "name": "long duration",
+      "value": 10,
+      "units": "years",
+      "qualification": "finite design horizon; exact maximum intervals/resets to bind",
+      "contracts": [
+        "A6",
+        "A7",
+        "A8"
+      ]
+    },
+    {
+      "id": "T_SOC",
+      "name": "SOC development accuracy",
+      "value": 0.005,
+      "units": "SOC fraction",
+      "qualification": "0.5 percentage point; not frozen device safety requirement",
+      "contracts": [
+        "A5",
+        "A6"
+      ]
+    },
+    {
+      "id": "T_Q",
+      "name": "capacity development accuracy",
+      "value": 0.01,
+      "units": "relative error",
+      "qualification": "1%; reference/effective query convention explicit",
+      "contracts": [
+        "A5",
+        "A6"
+      ]
+    },
+    {
+      "id": "T_HISTORY",
+      "name": "working history medium",
+      "value": "SRAM only",
+      "units": "policy",
+      "qualification": "no assumed external flash/FRAM history",
+      "contracts": [
+        "A3",
+        "A4",
+        "A8"
+      ]
+    },
+    {
+      "id": "G_CAPACITY",
+      "name": "nominal/variation guidance",
+      "value": {
+        "nominal_mAh": 60,
+        "three_sigma_halfwidth_mAh": [
+          2.6,
+          3.6
+        ]
+      },
+      "units": "mAh",
+      "qualification": "guidance only, not a population distribution or hard support",
+      "contracts": [
+        "A5",
+        "A7"
+      ]
+    },
+    {
+      "id": "G_AGING",
+      "name": "proposed health range",
+      "value": {
+        "relative_envelope": [
+          0.5,
+          1.5
+        ],
+        "more_likely_fractional_range": 0.3
+      },
+      "units": "relative to reference",
+      "qualification": "hypothesis awaiting qualification; no aging rate",
+      "contracts": [
+        "A7"
+      ]
+    }
+  ],
+  "open_requirements": [
+    {
+      "id": "B_PHYSICAL",
+      "question": "Actual battery family, OCV/thermal/equivalent-circuit discrepancy and support",
+      "contracts": [
+        "A0",
+        "A5",
+        "A6",
+        "A7"
+      ],
+      "blocks": "before physical guarantee or broad-model representation acceptance",
+      "closure_evidence": "battery characterization + model validation",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_SENSOR",
+      "question": "I/V/T/clock error, ADC, temporal correlation, drift and selection semantics",
+      "contracts": [
+        "A2",
+        "A4",
+        "A5",
+        "A6",
+        "A7"
+      ],
+      "blocks": "before physical guarantee",
+      "closure_evidence": "measurement characterization and acquisition contract",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_AGING",
+      "question": "Reference-condition evolution/rate/trajectory family, RC/SOC boundary state maps and branch identity",
+      "contracts": [
+        "A4",
+        "A5",
+        "A6",
+        "A7"
+      ],
+      "blocks": "before nonstationary history design is accepted",
+      "closure_evidence": "physical evolution evidence and path proof",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_ERROR",
+      "question": "Continuous-shape domain and application-derived likelihood/query/transport/numerical error allocation",
+      "contracts": [
+        "A0",
+        "A5",
+        "A6"
+      ],
+      "blocks": "before approximate representation/kernel acceptance",
+      "closure_evidence": "reference bounds and application tolerance allocation",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_ACTION",
+      "question": "Load voltage floor/margin, horizon, future input/temperature/aging envelope and fallback",
+      "contracts": [
+        "A5",
+        "A7",
+        "A8"
+      ],
+      "blocks": "before load authorization",
+      "closure_evidence": "system power requirements and continuation model",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_RISK",
+      "question": "Guarantee law, lifetime alpha, reset accounting, coverage validation and availability beta semantics",
+      "contracts": [
+        "A4",
+        "A5",
+        "A7"
+      ],
+      "blocks": "before trust/safety claim",
+      "closure_evidence": "owner risk requirements and validated sequential/set construction",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_AVAILABILITY",
+      "question": "Achievable informative scenarios, useful-query/recovery deadlines and outage limits",
+      "contracts": [
+        "A4",
+        "A5",
+        "A8"
+      ],
+      "blocks": "before useful unattended-service claim",
+      "closure_evidence": "power/excitation feasibility + acquisition/solver service bounds",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_FAULT",
+      "question": "Admitted interrupts/concurrency, sensor gaps, resets/power failures, memory corruption and integrity response",
+      "contracts": [
+        "A2",
+        "A3",
+        "A4",
+        "A8"
+      ],
+      "blocks": "before runtime architecture implementation acceptance",
+      "closure_evidence": "platform fault model and containment evidence",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_PLATFORM",
+      "question": "Maximum F_s, clock/jitter/service/backlog, complete SRAM/stack/ISR/flash reserves",
+      "contracts": [
+        "A2",
+        "A3",
+        "A4",
+        "A8"
+      ],
+      "blocks": "before target architecture acceptance",
+      "closure_evidence": "target/platform budgets and executable system measurements",
+      "status": "open_no_numeric_assumption_inferred"
+    },
+    {
+      "id": "B_REPRESENTATION",
+      "question": "Chosen continuous-shape encoding, support migration/refinement strategy, retained data and stability argument",
+      "contracts": [
+        "A0",
+        "A4",
+        "A5",
+        "A6",
+        "A8"
+      ],
+      "blocks": "before approximate code-block design is frozen",
+      "closure_evidence": "representation proof and full-resource feasibility",
+      "status": "open_no_numeric_assumption_inferred"
+    }
+  ],
+  "policy": "Contracts can be reviewed conditionally; named blockers must close before their acceptance boundary. No arbitrary thresholds supplied to make a witness pass."
+}

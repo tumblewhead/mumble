@@ -1,0 +1,144 @@
+{
+  "schema": "mumble_architecture_individual_contract_review_v1",
+  "review_id": "A4_review_r1",
+  "reviewer": "independent fresh-context agent /root/contract_a4_review",
+  "reviewed_at_utc": "2026-11-02T04:18:37.971340+00:00",
+  "source_revision": "b9c898f8d832d033a2b3fa70304321d60ac52676",
+  "branch": "experiment/conditional-architecture-001",
+  "contract": "A4",
+  "decision": "accepted_conditional_contract_only",
+  "scope": "Individual review of A4 and common architecture README against D7, K6 and D3. Contract completeness and conditional proof only; no runtime, physical, target-resource or whole-interface composition acceptance.",
+  "source_files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "4f336298b8039c9053394f0f97f9ba2cbfaad58ceaaebaf41def34d8c712247f",
+      "bytes": 101311
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "58c2347a7a0d86775b6fbc6f7a7e827f8ec96f418f4943593a7d1fa5f4b56e8d",
+      "bytes": 272370
+    },
+    "specifications/architecture_contracts_001/README.md": {
+      "sha256": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+      "bytes": 7065
+    },
+    "specifications/architecture_contracts_001/A4.md": {
+      "sha256": "c4636c66870a58601817d80fec3485ee9963fed5b322fffe999e47499ef30da7",
+      "bytes": 4822
+    },
+    "specifications/proof_review_001/proofs/D7.md": {
+      "sha256": "e67489d05680106f67616bfbe4c30e54199aa7f63ed005c72808100471b1cb17",
+      "bytes": 4789
+    },
+    "specifications/proof_review_001/proofs/K6.md": {
+      "sha256": "94077c7c15c8d45509f65bf6ca52e2f5b95d582d6588aa6584adad6cef60689c",
+      "bytes": 3880
+    },
+    "specifications/proof_review_001/proofs/D3.md": {
+      "sha256": "4dc3ba44c64fb98f21eda2b15b3772fb04c1d0f281f875bdda1b403bb7d06567",
+      "bytes": 3617
+    },
+    "specifications/h7_transaction_status_001/README.md": {
+      "sha256": "5dd3a22c1412a8937493cc6ed4590e7d8bd94d5a18fef4dec70e15ccd0319a96",
+      "bytes": 7208
+    },
+    "provenance/conditional_architecture_001/README.md": {
+      "sha256": "805c63b2efbaed915344036c225226b8c67413782cc26b49e6080f731ba17a46",
+      "bytes": 5554
+    },
+    "provenance/proof_review_001/reviews/D7_r2.json": {
+      "sha256": "bd295789521613fb1d3601fded69c20875c17cf8ed913ff92a998284ce80f0f9",
+      "bytes": 3712
+    },
+    "provenance/proof_review_001/reviews/K6_r1.json": {
+      "sha256": "dde5391657361cd4955b05bfd2fe80a793a80a878bf858fc2a2bc85c7c284385",
+      "bytes": 5092
+    },
+    "provenance/proof_review_001/reviews/D3_r1.json": {
+      "sha256": "9f3a444b76b36a59a909d69c6e99f31eabd89fba1daff5fba3e8bad7ece82842",
+      "bytes": 4846
+    }
+  },
+  "assumptions": [
+    "Initially the semantic-identity-bound object is validated or quarantined.",
+    "All admitted operation and fault paths satisfy exactly one specified terminal outcome, with complete validated successor or unchanged prior object or disabled affected authority.",
+    "Commit, publication and revocation synchronize with all readers; a valid endpoint alone is insufficient.",
+    "Ownership and physical transitions preserve actual source, reset epoch, nonce order and duration; qualified uncertainty is required when input or elapsed time is missing.",
+    "Any authorization separately satisfies A5 at its named prefix, horizon and guarantee class.",
+    "Exact grouping fixes the row generator, feature semantics and initial state and uses real-arithmetic finite-sum identity.",
+    "Useful recovery is conditional on a prospectively qualified scenario class and actual restoration/authorization bounds; permanent faults need a separate qualified fallback.",
+    "Lifetime risk survives reset through a valid D3-type or other whole-life construction."
+  ],
+  "findings": [
+    {
+      "id": "A4-R1-IDENTITY",
+      "disposition": "accepted",
+      "reason": "The common contract binds semantic model/calibration/noise/support/coordinate/source/epoch/prefix identities. A4 additionally binds the original prior, chronological state/reach relation and approximation ledger. Consumed and published prefixes remain distinct; an old publication is not silently current."
+    },
+    {
+      "id": "A4-R1-CONTAINMENT",
+      "disposition": "accepted",
+      "reason": "The three cases preserve the authorization invariant by induction. Complete commit can consume evidence without producing authority; unchanged rollback preserves an existing quarantine; partial/unknown state requires synchronized revocation before readers can rely on it. Valid complete initialization or successor validation is required for meaningful recovery."
+    },
+    {
+      "id": "A4-R1-OWNERSHIP",
+      "disposition": "accepted",
+      "reason": "Ordered physical transitions and once-only likelihood contributions prevent duplicate posterior/prefix evidence. Detector-window overlap gives no ownership duplication. A failed readout after successful consumption does not reopen that input for ingestion; replay requires established actual ownership."
+    },
+    {
+      "id": "A4-R1-GROUPING",
+      "disposition": "accepted",
+      "reason": "For fixed row generation and feature semantics the disjoint finite-sum partition preserves mathematical likelihood. A4 explicitly excludes bitwise QR equality, changing-anchor equivalence and dropping apparently uninteresting samples. K6 closed-loop equivalence is not claimed by this ownership argument."
+    },
+    {
+      "id": "A4-R1-RECOVERY",
+      "disposition": "accepted",
+      "reason": "R+T follows only from the two stated compatible bounds. Maximum attempts, scenario class, service budget and post-recovery informative power/use assumptions are specification obligations. Prospective scenario qualification and permanent-fault controls prevent treating every failed run as excluded after the fact. The 82-round diagnostic witness supplies no universal cap."
+    },
+    {
+      "id": "A4-R1-RESET",
+      "disposition": "accepted",
+      "reason": "Older checkpoints remain historical until known gaps are replayed once or qualified uncertainty is propagated. Lost history requires aged-cell-valid public support, not a new-cell assumption. Risk continuity is required and a checksum alone does not supply physical currentness or universal corruption detection."
+    },
+    {
+      "id": "A4-R1-WITNESSES",
+      "disposition": "accepted",
+      "reason": "Acceptance obligations cover admission/update/validation/commit/query/publication faults, source/nonces, duration/rate changes, reset at consumption boundaries, stale handles, restore identity, useful recovery and permanent faults. These are future implementation witnesses; no claim that they have run or exhaust an unspecified fault model is made."
+    }
+  ],
+  "blocking_findings": [],
+  "counterexample_search": [
+    "An invalid quarantined object preserved unchanged stays quarantined and cannot regain authority through rollback.",
+    "A query failure after consumption cannot be represented as fresh unconsumed evidence; it remains consumed with unresolved or quarantined authority.",
+    "A reader racing partial state violates the explicit synchronization premise, so endpoint induction alone is not being accepted.",
+    "A stale publication after reset or an unobserved physical interval cannot be treated as current without replay/qualified propagation and matching authorization.",
+    "A boundary-dependent anchor or changed generator violates the grouping premises and needs a separate A6 argument.",
+    "Unknown consumption after interruption cannot be repaired by blind retry; actual ownership must be established first.",
+    "A permanent sensor/power fault does not satisfy the conditional useful-recovery claim and cannot be hidden by post-hoc scenario redefinition.",
+    "Restarting per-boot risk at zero violates the stated lifetime-accounting obligation."
+  ],
+  "validation": {
+    "method": "Direct premise-by-premise proof and contract audit with adversarial transition traces; comparison to accepted D7/K6/D3 proofs and linked current containment/recovery scope. No empirical run establishes these universal premises.",
+    "implementation_changed": false,
+    "implementation_tests_run": false,
+    "long_sweeps_rerun": false,
+    "artifact_policy": "Receipt created exclusively; no existing proof, result, review or implementation edited."
+  },
+  "remaining_application_obligations": [
+    "Define the actual transition system and fault, interrupt, power-loss, storage, integrity and consumer models; establish complete commit/rollback/quarantine on every admitted path.",
+    "Implement and verify source-bound ownership, actual-duration chronology, immutable publication identity, expiry/revocation and synchronized readers.",
+    "Bind recoverable scenarios, attempt limits and service budgets prospectively and prove both restoration R and useful query T under compatible continuing conditions, including fault/sensor/power assumptions.",
+    "Qualify gap propagation, aged-cell initialization, checkpoint restoration and lifetime-risk persistence or an alternative valid whole-life construction.",
+    "Complete A5/A6/A8 premises before claiming authorized useful runtime operation; broader-support recovery or basis migration needs its own validity and cost proof.",
+    "Systemwide composition and the separately arriving interfaces.json/requirements.json are outside this individual review. Their final bindings and consistency need the later composition review."
+  ],
+  "remaining_limits": [
+    "Acceptance is bound to exact A4/common README content hashes; substantive changes require independent re-review.",
+    "Handwritten conditional argument, not a machine-checked full-program proof.",
+    "No concrete recovery controller, deadline, implementation fault completeness, physical coverage, lifetime availability, complete M23 SRAM or target timing established.",
+    "Existing desktop containment and an 82-round diagnostic recovery are limited evidence, not fulfillment of this contract."
+  ]
+}
