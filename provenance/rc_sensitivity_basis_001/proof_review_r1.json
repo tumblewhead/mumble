@@ -1,0 +1,115 @@
+{
+  "schema": "mumble_independent_proof_review_v1",
+  "review_id": "rc_sensitivity_basis_001_P1_r1",
+  "reviewer": "independent fresh-context agent /root/rc_sensitivity_proof_review",
+  "created_utc": "2026-11-02T16:50:04.253628+00:00",
+  "base_revision": "f1500badd8160af76953ee1f483fb671eead37f5",
+  "branch": "experiment/conditional-architecture-001",
+  "source_hashes_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "102b50d246317195d0c8e77ae65df31c5c4b6c7cae181c1fa9e74ff90393901c",
+    "PROJECT_STATE.json": "f98959068ed2bdd2843afb8bb15d64913ebdf213088c48c588ed602e547cc7ad",
+    "specifications/rc_sensitivity_basis_001/README.md": "329f58b09ec80674d6af87af286b9778523725fb2a0ad276c4c0fa4f8a955d4e",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "specifications/symbolic_system_001/R1.md": "165dbc52142835f8c0d6cd8eaba225e35948827a09295e438130a8ab8f6d415e",
+    "specifications/partitioned_coefficients_001/README.md": "365d292025f10785f7104d5c7627e3f8339322f03c42dcd46fc9aad03ec310ef",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/hysteresis_mixed_completion_001/rc_control.py": "5d2b5b48c638b804783870278d18ecbcd52ead56d42ced67900de2bc67ff1b49"
+  },
+  "verdict": "accepted_conditionally",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "findings": [
+    {
+      "id": "P1-R1-01",
+      "status": "pass",
+      "subject": "Exact log-tau sensitivity recurrence",
+      "reason": "At a fixed public chart and ordered nonnegative intervals, dE/dt=d*E and d2E/dt2=(d*d-d)*E (with d=dt/tau); product-rule differentiation gives every stated free/forced recurrence using pre-interval states. Induction from stated initial values establishes finite-stream identities. Zero intervals preserve every state. Constant-current identities follow directly. R and incoming branch voltage are held independent as premises require."
+    },
+    {
+      "id": "P1-R1-02",
+      "status": "pass",
+      "subject": "Taylor2 projection and remainders",
+      "reason": "Substituting T0=1,T1=t,T2=2t2-1 gives coefficients [f0+f2/4,f1,f2/4] exactly. C3 suffices for both remainder inequalities: apply second-order integral Taylor to f and first-order integral Taylor to f-prime, using the same third-derivative supremum. Bounds apply to positive and negative t; they do not assert a qualified M3."
+    },
+    {
+      "id": "P1-R1-03",
+      "status": "pass",
+      "subject": "Hermite uniqueness, value remainder and symmetric anchors",
+      "reason": "Two distinct double roots force a homogeneous cubic to vanish. The standard repeated-node Rolle argument remains valid outside the anchor interval provided the encompassing interval lies in [-1,1]. For b=a2 in [0,1], max over y=t2 in [0,1] of (y-b)2 is max(b2,(1-b)2), minimized at b=1/2. The value multiplier is 1/(24*4)=1/96. This establishes no derivative/application optimum."
+    },
+    {
+      "id": "P1-R1-04",
+      "status": "pass",
+      "subject": "Peano derivative kernel",
+      "reason": "C4 Taylor integral at -1 has cubic polynomial plus integral (x-s)+3 f4(s)/6. The derivative-error functional annihilates its cubic part; differentiating the truncated powers and the Hermite cardinals gives the stated K exactly. Triangle inequality yields M4 integral abs(K). No differentiation of xi(t) is used. Exact rational and 100-digit kernel moments independently match the functional, including query points outside the anchors."
+    },
+    {
+      "id": "P1-R1-05",
+      "status": "pass",
+      "subject": "Fourth free-response derivative",
+      "reason": "Repeated application of -D*d/dD to exp(-D) independently produces [0,-1,7,-6,1], hence (D4-6D3+7D2-D)exp(-D). Forced-response bounds still depend on the admitted chronological history family."
+    },
+    {
+      "id": "P1-R1-06",
+      "status": "pass",
+      "subject": "Joint likelihood and transport semantics",
+      "reason": "Sensitivity states determine response coefficients and generate no new residual rows or independent evidence. One joint QR preserves all response cross terms. Applying the same response representation to transport and differentiating in the original fixed chart is consistent; implementation tests must still verify it. Shared physical support, source chronology and once-only prior/evidence are explicit premises."
+    },
+    {
+      "id": "P1-R1-07",
+      "status": "pass_with_stated_scope",
+      "subject": "Storage arithmetic",
+      "reason": "For n=3 or 4 RC coefficients, unchanged six-term H2 gives lifted width 4+6n+12. Binary64 packed factor is 8*w*(w+1)/2; response state is 8*(6n+18+3). These reproduce 4760/6560 B factors, 312/360 B states and 5168/7016 B lower subtotals after 96 B allowance. This count assumes derivative states replace the respective RC node slots; it is an intended layout, not a measured completed native implementation."
+    }
+  ],
+  "checks": {
+    "exact_rational_checks": 91,
+    "exact_kernel_moment_scope": "five query locations, a=1/2, s powers 0..8; includes extrapolation beyond anchors",
+    "fourth_derivative_polynomial": [
+      0,
+      -1,
+      7,
+      -6,
+      1
+    ],
+    "numeric": {
+      "precision_decimal_digits": 100,
+      "chronological_recurrence_component_comparisons": 720,
+      "max_recurrence_vs_suffix_error": "4E-100",
+      "finite_difference_step": "1e-20",
+      "max_first_second_central_finite_difference_error": "8.2457456699914506521061898333289541203458265744697443266967E-43",
+      "max_constant_current_identity_error": "1E-100",
+      "optimal_anchor_polynomial_reproduction_max_error": "4E-99",
+      "optimal_anchor_kernel_moment_max_error": "7.1E-100"
+    },
+    "storage": {
+      "3": {
+        "width": 34,
+        "packed_factor_B": 4760,
+        "response_state_B": 312,
+        "lower_subtotal_B": 5168
+      },
+      "4": {
+        "width": 40,
+        "packed_factor_B": 6560,
+        "response_state_B": 360,
+        "lower_subtotal_B": 7016
+      }
+    }
+  },
+  "reproduction": {
+    "command": "python3 -B /tmp/rc_sensitivity_proof_review_r1.py",
+    "script_sha256": "3338a60e64c9b9aef128e19c3bc4f0d91b8a50de6141f6b7b621838379ec63f1",
+    "script_utf8": "import json, math, hashlib, pathlib, subprocess\nfrom fractions import Fraction as Q\nfrom decimal import Decimal as D, localcontext\n\ndef power(x,n):\n    return x**n if n else 1\n\ndef card(t,a):\n    r=(t+a)/(2*a)\n    return [2*r**3-3*r**2+1,-2*r**3+3*r**2,2*a*(r**3-2*r**2+r),2*a*(r**3-r**2)]\ndef dcard(t,a):\n    r=(t+a)/(2*a)\n    return [(6*r*r-6*r)/(2*a),(-6*r*r+6*r)/(2*a),3*r*r-4*r+1,3*r*r-2*r]\ndef moment(c,p,m):\n    return sum(math.comb(p,j)*power(c,p-j)*(-1)**j*(c**(m+j+1)-(-1)**(m+j+1))/(m+j+1) for j in range(p+1))\ndef kernel_moment(t,a,m):\n    h=dcard(t,a)\n    return moment(t,2,m)/2-h[0]*moment(-a,3,m)/6-h[1]*moment(a,3,m)/6-h[2]*moment(-a,2,m)/2-h[3]*moment(a,2,m)/2\n\na=Q(1,2); exact_checks=0\nfor t in map(Q,[-1,Q(-3,4),0,Q(1,5),1]):\n    for n in range(9):\n        data=[(-a)**n,a**n,n*(-a)**(n-1) if n else 0,n*a**(n-1) if n else 0]\n        h=card(t,a);dh=dcard(t,a)\n        if n<=3:\n            assert sum(x*y for x,y in zip(h,data))==power(t,n)\n            assert sum(x*y for x,y in zip(dh,data))==(n*power(t,n-1) if n else 0)\n            exact_checks+=2\n        if n==4:\n            assert t**4-sum(x*y for x,y in zip(h,data))==(t*t-a*a)**2\n            exact_checks+=1\n    for m in range(9):\n        n=m+4\n        data=[(-a)**n,a**n,n*(-a)**(n-1),n*a**(n-1)]\n        defect=n*power(t,n-1)-sum(x*y for x,y in zip(dcard(t,a),data))\n        assert kernel_moment(t,a,m)==defect/math.prod(range(m+1,m+5))\n        exact_checks+=1\n# Independent formal derivative operator -D*d/dD applied to p(D)*exp(-D).\np=[1]\nfor _ in range(4):\n    out=[0]*(len(p)+1)\n    for j,c in enumerate(p):\n        out[j]-=j*c;out[j+1]+=c\n    p=out\nassert p==[0,-1,7,-6,1]\nexact_checks+=1\nwith localcontext() as ctx:\n    ctx.prec=100\n    a=D(1)/D(2).sqrt(); tol=D('1e-80'); max_poly=D(0);max_kernel=D(0)\n    for t in [D(-1),-a,D('-.31'),D(0),D('.81'),a,D(1)]:\n        for n in range(4):\n            data=[(-a)**n,a**n,n*(-a)**(n-1) if n else D(0),n*a**(n-1) if n else D(0)]\n            max_poly=max(max_poly,abs(sum(x*y for x,y in zip(card(t,a),data))-power(t,n)),abs(sum(x*y for x,y in zip(dcard(t,a),data))-(n*power(t,n-1) if n else 0)))\n        for m in range(9):\n            n=m+4;data=[(-a)**n,a**n,n*(-a)**(n-1),n*a**(n-1)]\n            defect=n*power(t,n-1)-sum(x*y for x,y in zip(dcard(t,a),data))\n            max_kernel=max(max_kernel,abs(kernel_moment(t,a,m)-defect/D(math.prod(range(m+1,m+5)))))\n    assert max_poly<tol and max_kernel<tol\n    times=list(map(D,['0','1e-10','.03','.7','2','0','45','.1']))\n    currents=list(map(D,['.12','-.05','.07','0','-.13','.04','.11','-.02']))\n    max_rec=D(0);max_fd=D(0);max_constant=D(0);comparisons=0\n    for tau_c in map(D,['.7','13','140']):\n      for t in [D(-1),-a,D(0),a,D(1)]:\n        tau=tau_c*t.exp();F,F1,F2,u,u1,u2=D(1),D(0),D(0),D(0),D(0),D(0)\n        for k,(dt,I) in enumerate(zip(times,currents),1):\n            d=dt/tau;E=(-d).exp();E1=d*E;E2=(d*d-d)*E\n            F,F1,F2,u,u1,u2=E*F,E*F1+E1*F,E*F2+2*E1*F1+E2*F,E*u+(1-E)*I,E*u1+E1*(u-I),E*u2+2*E1*u1+E2*(u-I)\n            dose=sum(times[:k])/tau;ef=(-dose).exp();ref=[ef,dose*ef,(dose*dose-dose)*ef]\n            ru=[D(0),D(0),D(0)]\n            for j in range(k):\n                b=sum(times[j+1:k])/tau;c=b+times[j]/tau;eb=(-b).exp();ec=(-c).exp()\n                term=[eb-ec,b*eb-c*ec,(b*b-b)*eb-(c*c-c)*ec]\n                ru=[x+currents[j]*y for x,y in zip(ru,term)]\n            max_rec=max(max_rec,*[abs(x-y) for x,y in zip([F,F1,F2,u,u1,u2],ref+ru)])\n            comparisons+=6\n        def closed_u(x):\n            tau0=tau_c*x.exp()\n            return sum(currents[j]*((-sum(times[j+1:])/tau0).exp()-(-sum(times[j:])/tau0).exp()) for j in range(len(times)))\n        h=D('1e-20');v0=closed_u(t);vp=closed_u(t+h);vm=closed_u(t-h)\n        max_fd=max(max_fd,abs((vp-vm)/(2*h)-u1),abs((vp-2*v0+vm)/(h*h)-u2))\n        fc,fc1,fc2,uc,uc1,uc2=D(1),D(0),D(0),D(0),D(0),D(0);I=D('.12')\n        for dt in times:\n            d=dt/tau;E=(-d).exp();E1=d*E;E2=(d*d-d)*E\n            fc,fc1,fc2,uc,uc1,uc2=E*fc,E*fc1+E1*fc,E*fc2+2*E1*fc1+E2*fc,E*uc+(1-E)*I,E*uc1+E1*(uc-I),E*uc2+2*E1*uc1+E2*(uc-I)\n            max_constant=max(max_constant,abs(uc-I*(1-fc)),abs(uc1+I*fc1),abs(uc2+I*fc2))\n    assert max_rec<tol and max_constant<tol and max_fd<D('1e-35')\n    numeric={'precision_decimal_digits':100,'chronological_recurrence_component_comparisons':comparisons,'max_recurrence_vs_suffix_error':str(max_rec),'finite_difference_step':'1e-20','max_first_second_central_finite_difference_error':str(max_fd),'max_constant_current_identity_error':str(max_constant),'optimal_anchor_polynomial_reproduction_max_error':str(max_poly),'optimal_anchor_kernel_moment_max_error':str(max_kernel)}\nresult={'exact_rational_checks':exact_checks,'exact_kernel_moment_scope':'five query locations, a=1/2, s powers 0..8; includes extrapolation beyond anchors','fourth_derivative_polynomial':p,'numeric':numeric,'storage':{}}\nfor n in [3,4]:\n    width=4+6*n+12;factor=8*width*(width+1)//2;state=8*(6*n+18+3)\n    result['storage'][str(n)]={'width':width,'packed_factor_B':factor,'response_state_B':state,'lower_subtotal_B':factor+state+96}\nprint(json.dumps(result,indent=2))\n",
+    "dependencies": "Python standard library only: Fraction exact rational arithmetic; Decimal at 100 digits. Initial sympy/mpmath import probes found those optional packages absent; no installation needed.",
+    "development_note": "An initial checker run hit Decimal 0**0 at the polynomial constant case. The checker was corrected to use explicit unit zeroth power, then rerun successfully; no specification modification resulted."
+  },
+  "conditions_and_limits": [
+    "Stationary Foster reference subfamily, fixed public log-tau centre and unit halfwidth, fixed ordered inputs/nonnegative actual intervals; amplitude and incoming-state independence as stated.",
+    "Exact-arithmetic proof only. Finite probes are algebra/arithmetic witnesses, not proofs of uniform physical M3/M4 bounds, finite-precision lifetime validity, coverage or identifiability.",
+    "Candidate response derivative states are features of existing observations, not new measurements or pseudomeasurements.",
+    "Native recurrence, feature/transport chain-rule fidelity, joint QR, failure atomicity, complete resource accounting and practical equal-storage cubic comparison remain implementation/study obligations.",
+    "No production promotion, lifetime, aging, physical coverage or firmware qualification; no source implementation files edited by this review."
+  ]
+}

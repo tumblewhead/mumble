@@ -1,0 +1,114 @@
+{
+  "schema": "independent_implementation_review_v1",
+  "reviewer": "/root/rc_sensitivity_code_r2",
+  "round": 2,
+  "created_utc": "2026-11-02T16:53:54.665506+00:00",
+  "source_revision": "f1500badd8160af76953ee1f483fb671eead37f5",
+  "branch": "experiment/conditional-architecture-001",
+  "scope": "Fresh-context independent review of corrected SensitivityField, both native sensitivity kernels, ordinary cubic control, inherited joint QR/feature/transport/storage behavior and targeted tests. Runner, study results and interpretation excluded.",
+  "verdict": "accepted_for_study_scope",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "102b50d246317195d0c8e77ae65df31c5c4b6c7cae181c1fa9e74ff90393901c",
+    "PROJECT_STATE.json": "f98959068ed2bdd2843afb8bb15d64913ebdf213088c48c588ed602e547cc7ad",
+    "specifications/rc_sensitivity_basis_001/README.md": "329f58b09ec80674d6af87af286b9778523725fb2a0ad276c4c0fa4f8a955d4e",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "provenance/rc_sensitivity_basis_001/proof_review_r1.json": "0e5007cde434c956e4061965d564513641df212d496e63783a4dfd361f846421",
+    "provenance/rc_sensitivity_basis_001/code_review_r1.json": "cba6b1c4bfaa2be98ed163df47fc6e5680cc1cc83e8d28a1714d8ec18491024a",
+    "provenance/rc_sensitivity_basis_001/versions/basis_r1.py": "5a637b81e05d0c557428e616bf4ac4e90108c41790a17dcaefb598288bb39ce1",
+    "provenance/rc_sensitivity_basis_001/versions/test_basis_r1.py": "d18faebe37392046d2bc8f112acbf95a40ef8c08522cb33a4c7648981c1c6ca1",
+    "experiments/rc_sensitivity_basis_001/basis.py": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587",
+    "experiments/rc_sensitivity_basis_001/response.c": "b6b83f78997026b0010a1691b1d8142a11ea92fa9247d9aa3e94f3d52f8b8b64",
+    "experiments/rc_sensitivity_basis_001/test_basis.py": "fcfafb3053a11ec83300351733c247e594fea1b9c7afe846e2b7b64d6b6b1eae",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "experiments/joint_rate_history_001/field.py": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9",
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+  },
+  "findings": [
+    {
+      "id": "RC-CODE-R1-01",
+      "severity": "medium",
+      "blocking": false,
+      "disposition": "resolved_and_independently_reverified",
+      "location": "experiments/rc_sensitivity_basis_001/basis.py:26",
+      "summary": "Kernel/representation binding is now bidirectional.",
+      "evidence": "Reproduced original archived failure (maximum whitened-row difference 492.4238541655407). Revised constructor accepts exactly three matching pairs and rejects all six mismatches before advancing observations. Original archives match round-1 hashes; native C hash is unchanged."
+    },
+    {
+      "id": "RC-CODE-R2-01",
+      "status": "pass",
+      "subject": "Native recurrence, slot layout and projection",
+      "detail": "Inspected pre-interval Taylor second/first derivative updates and Hermite value/slope slot separation. Chebyshev projection orientation agrees with C row access and endpoint transport. Independent chronological suffix sums match 5376 free/forced derivative components across 128 signed/zero/tiny/irregular-interval prefixes, maximum absolute error 9.71445146547012e-16."
+    },
+    {
+      "id": "RC-CODE-R2-02",
+      "status": "pass",
+      "subject": "Ownership, H parity, joint factor and failure atomicity",
+      "detail": "Diff against original native response confines functional changes to RC mode guard/recurrence; H response, input validation, charge extrema, row signs and sigma weighting remain unchanged. Inherited staging preserves source/offset ordering and commits state/root/count/noise only after finite QR. Six independent QR fault injections leave all four fields unchanged. One original observation supplies one joint QR row; sensitivity slots introduce no measurements, priors or truth inputs."
+    },
+    {
+      "id": "RC-CODE-R2-03",
+      "status": "pass",
+      "subject": "Features, transport and computational support",
+      "detail": "Seven-test targeted suite passes, including finite differences of all 16 feature/transport chart coordinates, unchanged H rows/state and chunking parity. Independent test rejects all 30 out-of-box faces over three representations. Unit fixed public log halfwidth and shared representation in likelihood and transport are preserved."
+    },
+    {
+      "id": "RC-CODE-R2-04",
+      "status": "pass_with_scope",
+      "subject": "Storage accounting",
+      "detail": "Taylor width34/factor4760B/state312B/lower subtotal5168B; Hermite and cubic width40/factor6560B/state360B/lower subtotal7016B. Actual implementation uses dense Python roots. Tables, metadata, prior, scratch, solver, platform and full-device costs remain excluded as reported."
+    }
+  ],
+  "checks": {
+    "targeted_suite": {
+      "command": "python3 -B -m unittest experiments.rc_sensitivity_basis_001.test_basis -v",
+      "passed": 7,
+      "failed": 0
+    },
+    "independent_checks": {
+      "binding": {
+        "accepted": 3,
+        "rejected": 6,
+        "archived_wrong_kernel_max_row_error": 492.4238541655407,
+        "archive_hashes_match": true,
+        "C_unchanged_since_r1": true
+      },
+      "closed_form_prefixes": {
+        "prefixes_per_candidate": 128,
+        "component_comparisons": 5376,
+        "max_absolute_error": 9.71445146547012e-16,
+        "seed": 913,
+        "reference": "longdouble independent chronological suffix sums; no derivative recurrence"
+      },
+      "atomicity": {
+        "injected_QR_failures_rejected_without_commit": 6,
+        "checked_fields": [
+          "state",
+          "root",
+          "count",
+          "noise"
+        ]
+      },
+      "domain_faces_rejected": 30,
+      "storage_arithmetic": "pass; packed lower subtotals only; dense Python roots and listed scratch remain additional"
+    }
+  },
+  "reproduction": {
+    "command": "python3 -B /tmp/rc_sensitivity_code_review_r2.py",
+    "script_sha256": "9f259c9f99c8778bc243e4694cbac8b496ba211d033c4d1607c144d15dc40724",
+    "script_utf8": "import json, sys, hashlib, importlib.util\nfrom pathlib import Path\nfrom unittest.mock import patch\nimport numpy as np\nsys.path.insert(0, str(Path.cwd()))\nfrom experiments.rc_sensitivity_basis_001.test_basis import Sensitivities\nfrom experiments.rc_sensitivity_basis_001.basis import SensitivityField\n\nSensitivities.setUpClass()\ncase=Sensitivities()\nreport={}\ntry:\n    archive=Path('provenance/rc_sensitivity_basis_001/versions')\n    oldreview=json.loads(Path('provenance/rc_sensitivity_basis_001/code_review_r1.json').read_text())\n    for name in ['basis','test_basis']:\n        assert hashlib.sha256((archive/(name+'_r1.py')).read_bytes()).hexdigest()==oldreview['sha256']['experiments/rc_sensitivity_basis_001/'+name+'.py']\n    assert hashlib.sha256(Path('experiments/rc_sensitivity_basis_001/response.c').read_bytes()).hexdigest()==oldreview['sha256']['experiments/rc_sensitivity_basis_001/response.c']\n    spec=importlib.util.spec_from_file_location('archived_basis',archive/'basis_r1.py')\n    old=importlib.util.module_from_spec(spec);spec.loader.exec_module(old)\n    wrong=old.SensitivityField(case.config,case.center,case.binaries['hermite3'],'chebyshev3')\n    right=case.field('chebyshev3')\n    defect=float(np.max(np.abs(wrong.rows(0,case.rows())-right.rows(0,case.rows()))))\n    assert defect>400\n    rejected=accepted=0\n    for kind in case.binaries:\n        for bk,binary in case.binaries.items():\n            try:f=SensitivityField(case.config,case.center,binary,kind)\n            except ValueError:\n                assert kind!=bk;rejected+=1\n            else:\n                assert kind==bk;accepted+=1\n    report['binding']={'accepted':accepted,'rejected':rejected,'archived_wrong_kernel_max_row_error':defect,'archive_hashes_match':True,'C_unchanged_since_r1':True}\n    rng=np.random.default_rng(913)\n    obs=case.rows(128);obs[:,0]=rng.choice([0.,1e-12,1/35,.19,1.],128)\n    obs[:,1]=rng.uniform(-.25,.25,128)\n    obs[:,4]=rng.uniform(.0005,.002,128)\n    maxerr=0.;components=0\n    for kind in ['taylor2','hermite3']:\n        f=case.field(kind)\n        for k in range(128):\n            f.rows(k,obs[k:k+1])\n            dt=obs[:k+1,0].astype(np.longdouble)\n            current=obs[:k+1,1].astype(np.longdouble)\n            for j in range(3):\n                for q,t in enumerate(f.anchors):\n                    tau=np.longdouble(case.center[j])*np.exp(np.longdouble(t))\n                    # Each forced contribution is I*(exp(-suffix/tau)-exp(-(suffix+dt)/tau)).\n                    suffix=np.r_[np.cumsum(dt[:0:-1])[::-1],np.longdouble(0)]/tau\n                    before=suffix+dt/tau\n                    D=np.sum(dt)/tau;E=np.exp(-D)\n                    exactF=[E,D*E,(D*D-D)*E]\n                    exactU=[np.sum(current*np.exp(-suffix)*(-np.expm1(-dt/tau))),\n                            np.sum(current*(suffix*np.exp(-suffix)-before*np.exp(-before))),\n                            np.sum(current*((suffix*suffix-suffix)*np.exp(-suffix)-(before*before-before)*np.exp(-before)))]\n                    for order in range(3 if kind=='taylor2' else 2):\n                        ix=j*f.n+q+order*len(f.anchors)\n                        actual=np.array([f.state[ix],f.state[3*f.n+ix]])\n                        expected=np.array([exactF[order],exactU[order]],dtype=float)\n                        maxerr=max(maxerr,float(np.max(np.abs(actual-expected))))\n                        np.testing.assert_allclose(actual,expected,rtol=2e-10,atol=2e-14)\n                        components+=2\n    report['closed_form_prefixes']={'prefixes_per_candidate':128,'component_comparisons':components,'max_absolute_error':maxerr,'seed':913,'reference':'longdouble independent chronological suffix sums; no derivative recurrence'}\n    injected=0;faces=0\n    for kind in case.binaries:\n        f=case.field(kind);f.update(0,obs)\n        snap=(f.state.copy(),f.root.copy(),f.count,f.noise)\n        for qr in [lambda *a,**kw: (_ for _ in ()).throw(np.linalg.LinAlgError('injected')),lambda *a,**kw: np.full((f.width,f.width),np.nan)]:\n            with patch('numpy.linalg.qr',qr):\n                try:f.update(128,obs)\n                except (ValueError,np.linalg.LinAlgError):pass\n                else:raise AssertionError('injection not rejected')\n            np.testing.assert_array_equal(f.state,snap[0]);np.testing.assert_array_equal(f.root,snap[1])\n            assert (f.count,f.noise)==snap[2:];injected+=1\n        for j in range(5):\n            for sign in [-1,1]:\n                shape=case.center.copy();shape[j]*=np.exp(sign*1.0001)\n                try:f.evaluate(case.amps[1],shape)\n                except ValueError:faces+=1\n                else:raise AssertionError('outside support admitted')\n        expected=(34,4760,312,5168) if kind=='taylor2' else (40,6560,360,7016)\n        s=f.storage()\n        assert (f.width,s['packed_factor_B'],s['live_response_B'],s['numeric_factor_response_domain_scalars_B'])==expected\n    report['atomicity']={'injected_QR_failures_rejected_without_commit':injected,'checked_fields':['state','root','count','noise']}\n    report['domain_faces_rejected']=faces\n    report['storage_arithmetic']='pass; packed lower subtotals only; dense Python roots and listed scratch remain additional'\nfinally:\n    Sensitivities.tearDownClass()\nprint(json.dumps(report,indent=2))\n",
+    "working_directory": "/home/easy/proj/mumble/.worktrees/h7-campaign",
+    "dependencies": "Existing project Python/NumPy and system C compiler; no dependencies installed."
+  },
+  "conditions_and_limits": [
+    "Acceptance covers declared stationary fixed-public-center study and source-bound builds. Absence of the sensitivity marker identifies the known legacy kernel; it is not general ABI authentication for arbitrary external shared libraries.",
+    "P1 is accepted conditionally in the separately hashed proof review; this implementation review does not establish uniform physical approximation, lifetime rounding bounds, statistical coverage or identifiability.",
+    "Single-owner Python staging provides the checked numerical exception atomicity; direct raw C calls, asynchronous interruption and concurrent readers require separate contracts.",
+    "No complete MCU memory/CPU qualification, firmware readiness, optimization speedup or production promotion established.",
+    "Runner, fitted-query evidence and final interpretation require separate review; no implementation source was edited by this reviewer."
+  ]
+}

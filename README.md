@@ -214,6 +214,18 @@ recorded with the report. Next prioritize a compact response representation that
 controls RC values and sensitivities, retaining H/direct joint-uncertainty checks.
 Campaign defaults, native C and production estimation are unchanged.
 
+The [RC sensitivity-basis study](provenance/rc_sensitivity_basis_001/README.md)
+now derives and tests quadratic Taylor and cubic Hermite response representations.
+Taylor keeps the 4760 B factor while reducing one-hour multiscale Q discrepancy
+from 3.28% to 0.266% and sampled forecast discrepancy from 62.7 to 7.0 uV relative
+to direct fits. It regresses on rest and away from its fixed public centre; the
+shared embedded SOC width remains about 0.525 of direct at the same anchor.
+Hermite does not beat ordinary cubic at equal storage in the multiscale case.
+Seven tests, individual proof/code reviews and independent full replay support
+this exploratory result; no candidate is promoted. Next derive duration-independent
+RC remainder bounds and admitted-region/transition semantics, retaining the H2
+joint-uncertainty blocker and full resource accounting.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

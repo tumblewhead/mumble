@@ -1,0 +1,70 @@
+{
+  "schema": "independent_implementation_review_v1",
+  "reviewer": "/root/rc_sensitivity_code_review",
+  "round": 1,
+  "source_revision": "f1500badd8160af76953ee1f483fb671eead37f5",
+  "branch": "experiment/conditional-architecture-001",
+  "scope": "Study-only SensitivityField, two compiled response modes, ordinary cubic control and targeted tests; runner, results, interpretation and mathematical proof acceptance excluded.",
+  "verdict": "changes_requested",
+  "sha256": {
+    "experiments/rc_sensitivity_basis_001/basis.py": "5a637b81e05d0c557428e616bf4ac4e90108c41790a17dcaefb598288bb39ce1",
+    "experiments/rc_sensitivity_basis_001/response.c": "b6b83f78997026b0010a1691b1d8142a11ea92fa9247d9aa3e94f3d52f8b8b64",
+    "experiments/rc_sensitivity_basis_001/test_basis.py": "d18faebe37392046d2bc8f112acbf95a40ef8c08522cb33a4c7648981c1c6ca1",
+    "specifications/rc_sensitivity_basis_001/README.md": "329f58b09ec80674d6af87af286b9778523725fb2a0ad276c4c0fa4f8a955d4e",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "experiments/joint_rate_history_001/field.py": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+  },
+  "findings": [
+    {
+      "id": "RC-CODE-R1-01",
+      "severity": "medium",
+      "blocking": true,
+      "location": "experiments/rc_sensitivity_basis_001/basis.py:27",
+      "summary": "Ordinary cubic control silently accepts a Hermite sensitivity kernel.",
+      "evidence": "Constructing SensitivityField(config,center,hermite_binary,\"chebyshev3\") succeeds. Both have n=4, so C dimension check also succeeds. Wrongly initialized slope slots and ordinary collocation projection produce maximum absolute whitened row difference 492.4238541655407 versus the intended ordinary binary over test rows(511).",
+      "required_change": "Reject known sensitivity-mode binaries for chebyshev3 before advancing observations, and test the full binary/representation pairing matrix (including ordinary binary with sensitivity kinds). Keep original ordinary kernel unchanged if desired; its absence of sensitivity marker can identify this legacy implementation under source-bound builds.",
+      "disposition": "open"
+    }
+  ],
+  "checks": [
+    {
+      "name": "independent_targeted_suite",
+      "command": "python3 -B -m unittest experiments.rc_sensitivity_basis_001.test_basis -v",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "name": "recurrence_and_projection_inspection",
+      "result": "pass",
+      "detail": "Taylor second derivatives use pre-interval F/F1/u/u1; Hermite slots are [values at -a,+a, slopes at -a,+a]; log-tau derivatives have positive dose*exp(-dose) first decay derivative. Coefficient matrices map samples to Chebyshev coefficients in row-major C access; unit fixed log halfwidth is inherited."
+    },
+    {
+      "name": "unchanged_measurement_ownership_and_H",
+      "result": "pass",
+      "detail": "H recurrence, H projection, charge extrema, measured row and sigma scaling match legacy C. BasisField/MixedField enforce source and chronological offsets; one original-measurement row per observation and one joint QR retain all cross terms. No new truth input, prior, pseudomeasurement, or fitted centre is introduced."
+    },
+    {
+      "name": "QR_fault_injection",
+      "result": "pass",
+      "detail": "For each of three modes, injected QR exception and nonfinite QR output leave state, root, count and noise unchanged."
+    },
+    {
+      "name": "all_box_faces",
+      "result": "pass",
+      "detail": "For each mode, log coordinates +1.0001 and -1.0001 in each of five dimensions are rejected."
+    },
+    {
+      "name": "resource_accounting",
+      "result": "pass_with_scope",
+      "detail": "Taylor width34 gives packed4760B + state312B + allowance96B=5168B. Hermite/cubic width40 gives packed6560B + state360B + allowance96B=7016B. Packed estimates explicitly exclude tables, prior, scratch, calibration/platform allocations; actual implementation retains dense Python roots. No complete M23 resource or CPU improvement established."
+    }
+  ],
+  "limitations": [
+    "Finite fixture checks do not validate trajectory-uniform approximation or physical coverage.",
+    "P1 proof acceptance belongs to separate independent reviewer.",
+    "No fitted-query runner, results or production promotion reviewed."
+  ]
+}
