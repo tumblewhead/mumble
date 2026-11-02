@@ -189,6 +189,19 @@ serialized consistency checks. The next experiment is targeted mixed-term
 completion (hypothetical factor increments 568 B or 1800 B), followed by derivative
 and fitted-query checks. No repair, coverage or full-device memory claim is made.
 
+The [symbolic system plan](specifications/symbolic_system_001/README.md) extends
+that work across RC response, joint uncertainty, history/aging and optimization.
+Four individually reviewed conditional packets now distinguish RC value from
+pole-derivative accuracy, preserve nuisance coupling in error projections, separate
+state contraction from likelihood-error accumulation, and explain equilibrium
+bias from independently quantized decay/forcing coefficients. A short native
+control confirms centre-value exactness with nonzero RC derivative defects in
+the degree-2 study field; this is not a regression test of the H7 campaign.
+The [report](provenance/symbolic_system_001/README.md) records finite controls,
+review corrections and discoveries. No new optimizer, quantizer, cache or estimator
+is promoted. The next intervention combines targeted hysteresis mixed-term tests
+with derivative, joint-fit and load-voltage readouts before broader RC changes.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

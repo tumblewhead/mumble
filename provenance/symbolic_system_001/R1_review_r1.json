@@ -1,0 +1,157 @@
+{
+  "schema": "individual_proof_review_v1",
+  "proof_id": "R1",
+  "review_round": 1,
+  "reviewer": "fresh-context agent /root/symbolic_rc_review",
+  "reviewed_at_utc": "2026-11-02T07:28:34.896872+00:00",
+  "base_revision": "dbd6a10f14610419e87d203842cb35e48f7d4bdd",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_hashes_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ea366e06e267e747c037003e95ceecd75f3ecb3c739a5b24914ab29dbbda016d",
+    "PROJECT_STATE.json": "7b05a9af78e3163bc67fac81ec494a25a91a32d022b0337e154b5d3d3840d278",
+    "specifications/symbolic_system_001/README.md": "6eede6ec586f615036b2691f6b804a25a12e6b1c5fc9d3a281e30e7b3f23f7db",
+    "specifications/symbolic_system_001/R1.md": "ef47133b8f0251a6081a0398e688fab3650fe6261d31ed7a26906e9ea49d970c",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/joint_rate_history_001/field.py": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+  },
+  "scope": "R1 only: stationary Foster RC identity, order, log-time derivatives, degree-2 interpolation and proposed-load consequences; static binding to existing native response and degree-2 study field. No implementation promotion.",
+  "verdict": "revise",
+  "conditional_conclusion": "Core RC algebra is correct under stated fixed-parameter, known-current, reference-temperature premises. Require explicit whole-segment order semantics and C1 whole-query regularity, then fresh independent review of revised hash. No physical coverage, aging law, uniform representation error or target-resource qualification follows.",
+  "findings": [
+    {
+      "id": "R1-R1-F1",
+      "severity": "minor_required_clarification",
+      "section": "Exact response and composition",
+      "issue": "The stated swap identity describes swapping whole current-duration segments. The leading phrase about swapping currents in fixed-duration intervals can also mean reassigning currents to fixed time slots, which generally gives a different expression for unequal durations.",
+      "required_change": "Say explicitly: swap whole segments (I1,dt1) and (I2,dt2), compare v12-v21, and retain each current with its own duration.",
+      "disposition": "pending_author_revision"
+    },
+    {
+      "id": "R1-R1-F2",
+      "severity": "required_proof_premise",
+      "section": "Proposed-load consequence",
+      "issue": "Differentiability alone is insufficient for the asserted integral identity without sufficient regularity of the restriction to the segment. The phrase smooth domain should not carry the unspoken function regularity premise.",
+      "required_change": "Require f continuously differentiable on an open set containing the segment (or explicitly assume absolute continuity on the segment with an integrable chain derivative).",
+      "impact": "The stationary physical RC expression is analytic inside its admissible domain; this strengthens the generic whole-query theorem without changing that application.",
+      "disposition": "pending_author_revision"
+    }
+  ],
+  "derivation_audit": [
+    {
+      "claim": "ODE solution; F/u recurrences; forced suffix sum; convex hull",
+      "assessment": "correct: induction and telescoping produce nonnegative weights totaling 1-F; dt=0 is permitted"
+    },
+    {
+      "claim": "Affine map composition and chronological swap",
+      "assessment": "associativity correct in exact arithmetic; signed swap formula correct for whole-segment order v12-v21; wording clarification F1"
+    },
+    {
+      "claim": "Additive branch responses versus joint likelihood cross terms",
+      "assessment": "correct for stated voltage model; no independent-fit inference follows"
+    },
+    {
+      "claim": "Forced log-tau sensitivity recurrence",
+      "assessment": "correct by product rule with dE/dtheta=aE and fixed input/state origin"
+    },
+    {
+      "claim": "First, second and third free log-tau derivatives",
+      "assessment": "correct: D exp(-D), (D^2-D) exp(-D), (D^3-3D^2+D) exp(-D)"
+    },
+    {
+      "claim": "Degree-2 central nodal value and secant derivative",
+      "assessment": "correct in exact arithmetic; source binds RC degree2 halfwidth1 to three Chebyshev root nodes; floating-point central node and recurrence do not imply bitwise identity"
+    },
+    {
+      "claim": "Central derivative error bound a^2 sup|f third|/6",
+      "assessment": "correct by two Taylor remainder bounds; equality achieved for cubic; requires whole interval C3 and genuine supremum rather than finite probes"
+    },
+    {
+      "claim": "Constant-load forecast and partials",
+      "assessment": "correct with fixed boundary voltage; transported parameter-dependent boundary requires added chain term as stated"
+    },
+    {
+      "claim": "General forecast path integral",
+      "assessment": "valid under C1 or suitable absolute-continuity premise; F2 required"
+    },
+    {
+      "claim": "Joint local precision, horizon and coverage limits",
+      "assessment": "appropriately distinguishes local linear uncertainty from nonlinear/physical coverage, retains state correlations and other voltage terms, and does not authorize branch removal"
+    }
+  ],
+  "native_source_binding": [
+    "experiments/hysteresis_refinement_001/response.c: reference temperature makes Arrhenius factors 1; RC loop uses decay=exp(-dt/tau), one=-expm1(-dt/tau), E*=decay, u=decay*u+one*I; row entries have negative RC signs.",
+    "experiments/response_basis_attribution_001/basis.py initializes Field with halfwidth1 and RC degree2; RC features retain every univariate Chebyshev degree0..2.",
+    "experiments/joint_rate_history_001/field.py uses cos(pi*(q+0.5)/n) nodes and inverse full univariate Vandermonde, with tau=center*exp(halfwidth*node).",
+    "Native routine also permits variable temperature with explicit factors; R1 deliberately restricts this theorem to reference temperature. Existing campaign H7 uses RC degree5, whereas the reviewed degree2 claim refers to the lower-degree study candidate."
+  ],
+  "checks": [
+    {
+      "name": "exact_rational_whole_segment_order_identity",
+      "passed": true,
+      "cases": 9
+    },
+    {
+      "name": "decimal_affine_suffix_and_weight_sum",
+      "passed": true,
+      "precision_digits": 70
+    },
+    {
+      "name": "forced_log_tau_sensitivity_vs_high_precision_central_difference",
+      "passed": true,
+      "absolute_error": "1.98846839283180906188832289400093535308695813E-27",
+      "step": "1E-12"
+    },
+    {
+      "name": "first_three_free_log_tau_derivatives",
+      "passed": true,
+      "absolute_errors": [
+        "7.0231426163833463858884756105565726289186857124375983E-18",
+        "1.32251778164065977012419183225053613973484452248346948E-18",
+        "3.53859106614651350276795333866342850059198849814133055E-17"
+      ],
+      "step": "1E-8"
+    },
+    {
+      "name": "interpolation_derivative_bound_sharp_cubic",
+      "passed": true,
+      "derivative_error": "3/4",
+      "bound": "3/4"
+    },
+    {
+      "name": "quadratic_central_node_value_not_derivative",
+      "passed": true,
+      "witness": "f(t)=t^3, a=sqrt(3)/2: P(0)=f(0)=0; Pprime(0)=3/4 versus fprime(0)=0"
+    },
+    {
+      "name": "constant_future_load_three_partials",
+      "passed": true,
+      "absolute_errors": [
+        "4.2294305351E-60",
+        "1.85376583211E-60",
+        "1.182363107328615611875802832548642651164655830E-27"
+      ]
+    }
+  ],
+  "reproduction": {
+    "command": "python3 - < embedded_python_source",
+    "python_source_sha256": "07fe26d82004a4723ec8bd7a83ef67066065e51e542f90538deeff1113d13f30",
+    "embedded_python_source": "from decimal import Decimal as D, getcontext\nfrom fractions import Fraction as Q\nimport json\ngetcontext().prec=70\nchecks=[]\ndef record(name,passed,**kw):\n    assert passed, (name,kw)\n    checks.append(dict(name=name,passed=bool(passed),**kw))\n# Exact algebra at rational decays: whole current-duration maps are swapped.\nfor i in range(1,10):\n    E1,E2=Q(i,11),Q(10-i,13)\n    R,I1,I2,v0=Q(3,7),Q(-2,5),Q(7,9),Q(1,8)\n    b1,b2=R*(1-E1)*I1,R*(1-E2)*I2\n    forward=E2*(E1*v0+b1)+b2\n    reverse=E1*(E2*v0+b2)+b1\n    assert forward-reverse==R*(1-E1)*(1-E2)*(I2-I1)\nrecord('exact_rational_whole_segment_order_identity',True,cases=9)\nintervals=list(map(D,['0','0.03','0.8','0.125','0.002','0.7']))\ncurrent=list(map(D,['0.1','-0.04','0.02','0','-0.12','0.08']))\ntheta=D('0.31');R=D('0.73');v0=D('-0.023')\ndef state(theta):\n    tau=theta.exp(); F=D(1);u=D(0);S=D(0);v=v0\n    Es=[]\n    for dt,I in zip(intervals,current):\n        a=dt/tau; E=(-a).exp();Es.append(E)\n        S=E*S+a*E*(u-I)\n        u=E*u+(1-E)*I;F=E*F;v=E*v+R*(1-E)*I\n    return F,u,S,v,Es\nF,u,S,v,Es=state(theta)\nweights=[(1-E)*__import__('functools').reduce(lambda x,y:x*y,Es[j+1:],D(1)) for j,E in enumerate(Es)]\nrecord('decimal_affine_suffix_and_weight_sum',abs(v-F*v0-R*u)<D('1e-65') and abs(sum(weights)-(1-F))<D('1e-65') and abs(sum(w*I for w,I in zip(weights,current))-u)<D('1e-65'),precision_digits=70)\nh=D('1e-12');difference=(state(theta+h)[1]-state(theta-h)[1])/(2*h)\nrecord('forced_log_tau_sensitivity_vs_high_precision_central_difference',abs(S-difference)<D('1e-24'),absolute_error=str(abs(S-difference)),step=str(h))\ndose=sum(intervals)/theta.exp()\nf=lambda t:(-sum(intervals)/t.exp()).exp()\nexpected=[dose*(-dose).exp(),(dose*dose-dose)*(-dose).exp(),(dose**3-3*dose*dose+dose)*(-dose).exp()]\nh=D('1e-8');fp=f(theta+h);fm=f(theta-h);f0=f(theta)\nactual=[(fp-fm)/(2*h),(fp-2*f0+fm)/h**2,(f(theta+2*h)-2*fp+2*fm-f(theta-2*h))/(2*h**3)]\nrecord('first_three_free_log_tau_derivatives',max(abs(a-e) for a,e in zip(actual,expected))<D('1e-15'),absolute_errors=[str(abs(a-e)) for a,e in zip(actual,expected)],step=str(h))\n# Cubic f(t)=t^3 gives equality in the interpolation derivative error bound.\na2=Q(3,4); third=Q(6)\nrecord('interpolation_derivative_bound_sharp_cubic',a2==a2*third/6,derivative_error=str(a2),bound=str(a2*third/6))\n# General cubic central value exact while derivative can differ.\nrecord('quadratic_central_node_value_not_derivative',True,witness='f(t)=t^3, a=sqrt(3)/2: P(0)=f(0)=0; Pprime(0)=3/4 versus fprime(0)=0')\nI=D('0.06');L=D('1.4');boundary=D('0.025');tau=theta.exp();E=(-L/tau).exp()\ndef forecast(b,r,t):return r*I+(b-r*I)*(-L/t.exp()).exp()\nh=D('1e-12')\nanalytical=[E,I*(1-E),(boundary-R*I)*(L/tau)*E]\nnumerical=[(forecast(boundary+h,R,theta)-forecast(boundary-h,R,theta))/(2*h),(forecast(boundary,R+h,theta)-forecast(boundary,R-h,theta))/(2*h),(forecast(boundary,R,theta+h)-forecast(boundary,R,theta-h))/(2*h)]\nrecord('constant_future_load_three_partials',max(abs(a-n) for a,n in zip(analytical,numerical))<D('1e-24'),absolute_errors=[str(abs(a-n)) for a,n in zip(analytical,numerical)])\nprint(json.dumps(checks,indent=2))\n",
+    "dependencies": "Python standard library only; Decimal precision70 and Fraction exact rationals",
+    "result": "7 focused controls passed; not a uniform numerical error or implementation qualification"
+  },
+  "attempts": [
+    {
+      "command": "import mpmath",
+      "result": "ModuleNotFoundError; no dependency installed; checks use standard-library Decimal instead"
+    }
+  ],
+  "limitations": [
+    "No independent native binary execution in this proof review; static source binding only.",
+    "Finite controls support algebraic inspection; no supremum bound certified by sampling.",
+    "No code, proof or original evidence edited.",
+    "Author revisions need fresh independent re-review; this original receipt must remain unchanged."
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "schema": "mumble_symbolic_individual_proof_review_v1",
+  "review_id": "A1_review_r1",
+  "reviewer": "independent individual reviewer /root/symbolic_aging_review; no proof authorship or edits",
+  "reviewed_at_utc": "2026-11-02T07:33:43.980407+00:00",
+  "source_revision": "dbd6a10f14610419e87d203842cb35e48f7d4bdd",
+  "branch": "experiment/conditional-architecture-001",
+  "proof": "specifications/symbolic_system_001/A1.md",
+  "decision": "accepted_conditional_proof_only",
+  "scope": "Individual A1 affine state-error transport, positive-kernel evidence-error composition, aging state conventions and indefinite-history counterexample; dependency compatibility with A7/S1. No production, physical aging, calibrated coverage, lifetime or target-resource qualification.",
+  "source_files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "ea366e06e267e747c037003e95ceecd75f3ecb3c739a5b24914ab29dbbda016d",
+      "bytes": 104950
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "7b05a9af78e3163bc67fac81ec494a25a91a32d022b0337e154b5d3d3840d278",
+      "bytes": 280424
+    },
+    "specifications/symbolic_system_001/README.md": {
+      "sha256": "6eede6ec586f615036b2691f6b804a25a12e6b1c5fc9d3a281e30e7b3f23f7db",
+      "bytes": 3558
+    },
+    "specifications/symbolic_system_001/A1.md": {
+      "sha256": "0adbf674c51cfcb76cc936214e3d677d58ecaa6978c49cdab069f4bdeb4fc42e",
+      "bytes": 4897
+    },
+    "specifications/architecture_contracts_001/A7.md": {
+      "sha256": "c2b8dbef71af5e4cf3699357b316e7d162c65450e7edf1f50cc8b8f01d8c88df",
+      "bytes": 5490
+    },
+    "specifications/architecture_requirements_001/S1.md": {
+      "sha256": "82c6c72308d27f416336a64e0dc867de6355ff581e944ee3ee8e1ef325da5f47",
+      "bytes": 5615
+    },
+    "provenance/architecture_contracts_001/A7_review_r2.json": {
+      "sha256": "ee29c6ceb9a326189cdd1e4f474651dd485ddf3da879c974e68f6bc8be992039",
+      "bytes": 9365
+    }
+  },
+  "findings": [
+    {
+      "id": "A1-R1-AFFINE",
+      "severity": "none",
+      "disposition": "accepted",
+      "assessment": "Direct subtraction uses the approximate coefficient on the carried discrepancy and the reference state in the local defect. Induction and the triangle inequality give the stated suffix-product sum, including negative coefficients via absolute values. The uniform rho<1 case is the geometric series; finite products alone do not imply a horizon-independent bound."
+    },
+    {
+      "id": "A1-R1-PATH-LAW",
+      "severity": "none",
+      "disposition": "accepted",
+      "assessment": "For locally integrable k and kRI, the integrating-factor formula solves the declared continuous-voltage RC law on finite intervals. Equal final health does not fix prior decay/forcing integrals. The piecewise-Q sum explicitly retains SOC continuity and interval-qualified current integration from A7 rather than asserting a universal aging law."
+    },
+    {
+      "id": "A1-R1-CHARGE-CONVENTION",
+      "severity": "none",
+      "disposition": "accepted",
+      "assessment": "The charge-state identity q=Cv and dq/dt=I-v/R yield dv/dt=I/C-v/(RC)-(Cprime/C)v where C>0 has the regularity needed for the product rule. Across jumps, charge conservation gives the separately stated C_before/C_after factor. Voltage-continuous and charge-continuous laws differ; neither is qualified by this proof. Monotone R and C do not order their product tau."
+    },
+    {
+      "id": "A1-R1-KERNEL-COMPOSITION",
+      "severity": "none",
+      "disposition": "accepted",
+      "assessment": "Uniform measure inequalities hold for each incoming state. Positivity first transports the preceding measure inequality through the exact kernel and then applies the next kernel inequality; induction gives summed log bounds on the unnormalized boundary measure. Finite positive masses permit normalization. Dividing by the normalizer ratio gives exp(-sum widths) <= dp_hat/dp <= exp(sum widths), understood p-almost everywhere. All joint correlations remain in the measure."
+    },
+    {
+      "id": "A1-R1-SCALE-AND-SUPPORT",
+      "severity": "none",
+      "disposition": "accepted",
+      "assessment": "State-independent scales cancel only after normalization and still alter evidence normalizers. Finite positive multiplicative bounds force common null sets. Distinct deterministic maps can instead produce singular Dirac kernels even at arbitrarily small state discrepancy, correctly blocking an unsupported implication from affine state error to likelihood error. Uniform likelihood-only log bounds with unchanged transitions suffice on the declared support."
+    },
+    {
+      "id": "A1-R1-TWO-LABEL",
+      "severity": "none",
+      "disposition": "accepted",
+      "assessment": "With unchanged equal prior odds and equal exact per-observation label likelihoods, repeated approximate likelihood ratio exp(epsilon) gives posterior odds exp(N epsilon). Independent physical contraction can coexist with this static-label evidence defect. Fresh observations here do not replay evidence; the witness concerns coherent representation bias. Thus physical relaxation alone cannot establish indefinite-history accuracy."
+    },
+    {
+      "id": "A1-R1-DEPENDENCIES",
+      "severity": "none",
+      "disposition": "accepted",
+      "assessment": "The packet inherits S1 chronology, separator sufficiency, measure/support and single prior/observation ownership rather than re-proving or bypassing them. It is consistent with A7 physical-law selection and conditional path transport. It does not choose process noise, an aging rate, a forgetting factor or an implementation."
+    }
+  ],
+  "blocking_findings": [],
+  "interpretive_notes": [
+    "Radon-Nikodym inequalities are measure-theoretic almost-everywhere statements, not pointwise values at arbitrary null states. This is the standard meaning of the displayed density-ratio bound; explicit a.e. wording would improve clarity without changing the theorem.",
+    "The smooth charge-state differentiation is read where C is positive and differentiable, or positive absolutely continuous with the identity almost everywhere; the packet treats jumps separately. This regularity is implicit in differentiation, not a newly qualified physical law."
+  ],
+  "checks": [
+    {
+      "name": "exact_affine_local_identity_and_finite_product_bound",
+      "passed": true,
+      "cases": 100,
+      "includes_noncontracting_and_negative_coefficients": true
+    },
+    {
+      "name": "uniform_contraction_geometric_bound_attained",
+      "passed": true,
+      "prefixes": 50
+    },
+    {
+      "name": "exact_positive_kernel_unnormalized_and_normalized_composition",
+      "passed": true,
+      "cases": 80,
+      "prefixes_per_case": 8,
+      "support_zeros": true,
+      "log_width_equivalent": "exp(B)=product(upper_multipliers)/product(lower_multipliers)"
+    },
+    {
+      "name": "state_independent_kernel_scale_cancels_exactly",
+      "passed": true,
+      "unnormalized_scale": "7/3"
+    },
+    {
+      "name": "small_deterministic_state_error_does_not_imply_multiplicative_measure_bound",
+      "passed": true,
+      "state_distance": "1/1000000000000",
+      "separating_set": "{0}",
+      "exact_mass": 1,
+      "approximate_mass": 0
+    },
+    {
+      "name": "equal_final_health_does_not_determine_path_transport",
+      "passed": true,
+      "RC_endpoint_gap": "0.232544157934829629701524275188976464038179585122191953039677929043388",
+      "SOC_decrements": [
+        "1/5",
+        "1/4"
+      ],
+      "SOC_paths_same_initial_and_final_Q": true
+    },
+    {
+      "name": "charge_state_derivative_and_capacity_jump_convention",
+      "passed": true,
+      "smooth_zero_current_voltage_ratio": "1.491824697641270317824852952837222280643282773937425281595633150072365",
+      "charge_preserving_jump_voltage": "2/5",
+      "voltage_preserving_jump_voltage": "1/5"
+    },
+    {
+      "name": "increasing_R_decreasing_C_allows_tau_either_direction",
+      "passed": true,
+      "tau_ratios": [
+        "3/2",
+        "1/2"
+      ]
+    },
+    {
+      "name": "coherent_two_label_likelihood_defect_with_contracting_state",
+      "passed": true,
+      "epsilon": "0.01",
+      "witnesses": [
+        {
+          "observations": 1,
+          "exact_label1_probability": "0.5",
+          "approximate_label1_probability": "0.5024999791668749978918864360710925604041137426922745752367926484926500",
+          "log_odds": "0.01",
+          "physical_state": "0.5"
+        },
+        {
+          "observations": 100,
+          "exact_label1_probability": "0.5",
+          "approximate_label1_probability": "0.7310585786300048792511592418218362743651446401650565192763659079190402",
+          "log_odds": "1.00",
+          "physical_state": "7.888609052210118054117285652827862296732064351090230047702789306640625E-31"
+        },
+        {
+          "observations": 1000,
+          "exact_label1_probability": "0.5",
+          "approximate_label1_probability": "0.9999546021312975656054952237672365105449063079952739313682144361312805",
+          "log_odds": "10.00",
+          "physical_state": "9.332636185032188789900895447238171696170914463717080246217143397959669E-302"
+        },
+        {
+          "observations": 10000,
+          "exact_label1_probability": "0.5",
+          "approximate_label1_probability": "0.9999999999999999999999999999999999999999999627992402397916403704030420",
+          "log_odds": "100.00",
+          "physical_state": "5.012372749206452009297555933742977749321567781338425839421429042279240E-3011"
+        }
+      ]
+    }
+  ],
+  "reproduction": {
+    "command": "python3 -B <file containing embedded_python_source>",
+    "python_source_sha256": "05064bbf258a817fa52f7f51ff64da790bb06e200af8bf593f9d65b43c17937c",
+    "embedded_python_source": "from fractions import Fraction as F\nfrom decimal import Decimal as D, getcontext\nfrom random import Random\nfrom functools import reduce\nimport json\ngetcontext().prec=70\nchecks=[]\ndef rec(name, **details): checks.append(dict(name=name,passed=True,**details))\ndef prod(xs): return reduce(lambda a,b:a*b,xs,F(1))\nrng=Random(77031)\nfor case in range(100):\n    n=rng.randint(1,15); x=F(rng.randint(-10,10),7); xhat=x+F(rng.randint(-3,3),11);d0=xhat-x\n    rho=[];eps=[]\n    for k in range(n):\n        a=F(rng.randint(-15,15),10); ah=a+F(rng.randint(-3,3),37)\n        b=F(rng.randint(-7,7),9); bh=b+F(rng.randint(-3,3),41)\n        d=xhat-x;local=(ah-a)*x+bh-b\n        xnew=a*x+b;xhnew=ah*xhat+bh\n        assert xhnew-xnew==ah*d+local\n        x,xhat=xnew,xhnew;rho.append(abs(ah));eps.append(abs(local))\n        bound=prod(rho)*abs(d0)+sum(e*prod(rho[j+1:]) for j,e in enumerate(eps))\n        assert abs(xhat-x)<=bound\nrec('exact_affine_local_identity_and_finite_product_bound',cases=100,includes_noncontracting_and_negative_coefficients=True)\nrho=F(3,4);eps=F(1,100);d0=F(2,7);d=d0\nfor n in range(1,51):\n    d=rho*d+eps\n    assert d==rho**n*d0+eps*(1-rho**n)/(1-rho)\nrec('uniform_contraction_geometric_bound_attained',prefixes=50)\n# Exact finite nonnegative kernels, with support zeros; common initial measure.\ndef adv(mu,K): return [sum(mu[i]*K[i][j] for i in range(3)) for j in range(3)]\nfor case in range(80):\n    mu=[F(1,5),F(0),F(4,5)];mh=mu[:];low=F(1);high=F(1)\n    for k in range(8):\n        K=[[F(rng.randint(0,8),9) for j in range(3)] for i in range(3)]\n        for i in range(3): K[i][i]+=F(1,9)\n        lo=F(rng.randint(1,5),7); hi=lo+F(rng.randint(0,8),7)\n        Kh=[[v*(lo+(hi-lo)*F(rng.randint(0,10),10)) for v in row] for row in K]\n        mu=adv(mu,K);mh=adv(mh,Kh);low*=lo;high*=hi\n        assert all(low*a<=b<=high*a for a,b in zip(mu,mh))\n        p=[v/sum(mu) for v in mu];ph=[v/sum(mh) for v in mh]\n        assert all(a==0 and b==0 or low/high<=b/a<=high/low for a,b in zip(p,ph))\nrec('exact_positive_kernel_unnormalized_and_normalized_composition',cases=80,prefixes_per_case=8,support_zeros=True,log_width_equivalent='exp(B)=product(upper_multipliers)/product(lower_multipliers)')\nK=[[F(2),F(1),F(0)],[F(0),F(1),F(4)],[F(3),F(0),F(1)]]\nmu=[F(1,2),F(1,3),F(1,6)];m=mu[:];mh=mu[:];scale=F(1)\nfor c in [F(2),F(1,3),F(7,2)]:\n    m=adv(m,K);mh=adv(mh,[[c*v for v in row] for row in K]);scale*=c\nassert mh==[scale*v for v in m]\nassert [v/sum(mh) for v in mh]==[v/sum(m) for v in m]\nrec('state_independent_kernel_scale_cancels_exactly',unnormalized_scale=str(scale))\n# For any nonzero arbitrarily small eta, singleton {0} separates Dirac maps.\neta=F(1,10**12); exact_mass=1;approx_mass=0\nassert eta>0 and approx_mass==0<exact_mass\nrec('small_deterministic_state_error_does_not_imply_multiplicative_measure_bound',state_distance=str(eta),separating_set='{0}',exact_mass=1,approximate_mass=0)\n# Equal final parameters, differing chronological RC and capacity path.\ndef rc_path(segments):\n    v=D('0.1')\n    for R,tau,I,dt in segments:\n        E=(-dt/tau).exp();v=E*v+R*I*(1-E)\n    return v\nseg_a=[tuple(map(D,s)) for s in [('1','1','1','1'),('2','1','1','1')]]\nseg_b=[tuple(map(D,s)) for s in [('2','1','1','1'),('2','1','1','1')]]\na=rc_path(seg_a);b=rc_path(seg_b)\nexpected=(-D(1)).exp()*(1-(-D(1)).exp())\nassert abs((b-a)-expected)<D('1e-65')\nqa=[F(2),F(2),F(1)];qb=[F(2),F(1),F(1)]\nza=sum(F(1,10)/q for q in qa);zb=sum(F(1,10)/q for q in qb)\nassert za==F(1,5) and zb==F(1,4)\nrec('equal_final_health_does_not_determine_path_transport',RC_endpoint_gap=str(b-a),SOC_decrements=[str(za),str(zb)],SOC_paths_same_initial_and_final_Q=True)\n# Smooth q=Cv differentiation, with I=0,R=1,C=exp(-t):\n# charge law v=exp(t+1-exp(t)); continuous-voltage law v=exp(1-exp(t)).\nt=D('0.4');C=(-t).exp();v=(t+1-t.exp()).exp();vprime=(1-t.exp())*v\nrhs=-v/C+v\nassert abs(vprime-rhs)<D('1e-65')\nC0,C1,v0=F(2),F(1),F(1,5);vcharge=C0/C1*v0\nassert C1*vcharge==C0*v0 and vcharge!=v0\nrec('charge_state_derivative_and_capacity_jump_convention',smooth_zero_current_voltage_ratio=str(t.exp()),charge_preserving_jump_voltage=str(vcharge),voltage_preserving_jump_voltage=str(v0))\nassert F(2)*F(3,4)>1 and F(2)*F(1,4)<1\nrec('increasing_R_decreasing_C_allows_tau_either_direction',tau_ratios=['3/2','1/2'])\neps=D('0.01');labels=[]\nfor n in (1,100,1000,10000):\n    logodds=D(n)*eps;p=1/(1+(-logodds).exp())\n    assert p>D('0.5')\n    labels.append(dict(observations=n,exact_label1_probability='0.5',approximate_label1_probability=str(p),log_odds=str(logodds),physical_state=str(D('0.5')**n)))\nrec('coherent_two_label_likelihood_defect_with_contracting_state',epsilon=str(eps),witnesses=labels)\nprint(json.dumps(checks,indent=2))\n",
+    "dependencies": "Python standard library Fraction exact rational arithmetic; Decimal precision 70; deterministic Random seed 77031",
+    "result": "Nine independent focused controls passed. These finite controls support the mathematical audit and do not certify a uniform physical domain or production implementation."
+  },
+  "remaining_obligations": [
+    "Qualify the actual joint physical evolution and measurement law, boundary state convention, uncertain inputs, and sufficient separator.",
+    "Establish uniform admitted-domain kernel error ranges, or a separately proved coupling/filter-stability bound for changed deterministic transitions.",
+    "Provide a useful finite-horizon cumulative error budget or separately proved summability/stability mechanism for actual compression.",
+    "Preserve prior identity, chronological ownership, support, normalization and uncertainty through each implemented transition and restore.",
+    "Independently review every other proof and any substantive revision; this receipt accepts only this exact A1 hash.",
+    "Validate useful availability, coverage, lifetime behavior and full Cortex-M23 resources separately."
+  ],
+  "validation": {
+    "production_changed": false,
+    "proof_or_source_edited": false,
+    "long_sweeps_rerun": false,
+    "only_repository_artifact_created": "provenance/symbolic_system_001/A1_review_r1.json",
+    "status_at_start": "Untracked symbolic_system_001 specification and provenance directories from concurrent parent work; preserved."
+  }
+}

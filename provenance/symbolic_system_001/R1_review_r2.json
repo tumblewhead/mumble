@@ -1,0 +1,123 @@
+{
+  "schema": "individual_proof_review_v1",
+  "proof_id": "R1",
+  "review_round": 2,
+  "reviewer": "fresh-context agent /root/symbolic_rc_r2",
+  "reviewed_at_utc": "2026-11-02T07:36:12.538527+00:00",
+  "base_revision": "dbd6a10f14610419e87d203842cb35e48f7d4bdd",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_hashes_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ea366e06e267e747c037003e95ceecd75f3ecb3c739a5b24914ab29dbbda016d",
+    "PROJECT_STATE.json": "7b05a9af78e3163bc67fac81ec494a25a91a32d022b0337e154b5d3d3840d278",
+    "specifications/symbolic_system_001/README.md": "6eede6ec586f615036b2691f6b804a25a12e6b1c5fc9d3a281e30e7b3f23f7db",
+    "specifications/symbolic_system_001/R1.md": "165dbc52142835f8c0d6cd8eaba225e35948827a09295e438130a8ab8f6d415e",
+    "provenance/symbolic_system_001/R1_review_r1.json": "e53e6af0ed22f7e9b0c2d8f7a4676c3d6c72deb33236699f79a3dfc7f2a386a4",
+    "provenance/symbolic_system_001/versions/R1_r1.md": "ef47133b8f0251a6081a0398e688fab3650fe6261d31ed7a26906e9ea49d970c",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/joint_rate_history_001/field.py": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+  },
+  "verdict": "accept_conditional",
+  "findings": [],
+  "scope": "Independent complete re-review of revised R1 and static applicability to native response and degree-2 BasisField. No integration-runner or compiled-native execution review.",
+  "prior_findings_disposition": [
+    {
+      "id": "R1-R1-F1",
+      "status": "closed",
+      "reason": "Explicit whole (current,duration) segment swap now retains each input with its own duration and states forward versus reverse comparison. Signed formula matches v12-v21."
+    },
+    {
+      "id": "R1-R1-F2",
+      "status": "closed",
+      "reason": "Whole-query f is now continuously differentiable on its smooth domain containing the segment; this gives C1 pullback and the fundamental theorem of calculus."
+    }
+  ],
+  "derivation_audit": [
+    {
+      "claim": "Stationary affine state, suffix weights, composition and chronology",
+      "assessment": "Accepted. ODE integrating factor yields E and forcing; induction gives suffix weights and telescoping sum 1-F. Nonnegative actual intervals imply nonnegative convex weights. Affine map composition is associative; swap sign is correct, including zero intervals."
+    },
+    {
+      "claim": "Branch response additivity versus likelihood coupling",
+      "assessment": "Accepted. Distinct branch responses add in voltage, while the square of their joint residual retains cross terms; no independent-fit authorization follows."
+    },
+    {
+      "claim": "Forced and free log-time sensitivities",
+      "assessment": "Accepted. Product rule gives S recurrence with fixed origin/state, R and stimulus. Operator -D*d/dD gives all three listed free derivatives; second and third change sign over positive D. These signs do not supply a universal fitted tau bias."
+    },
+    {
+      "claim": "Degree-2 central interpolation value, derivative and remainder",
+      "assessment": "Accepted in exact arithmetic. Full univariate interpolation includes the central node; derivative is the symmetric secant. Two third-order Taylor remainders bound the error by a^2 sup|f third|/6, with equality for a cubic. Node value equality does not imply gradient equality or physical precision."
+    },
+    {
+      "claim": "Constant-load forecast and chain rule",
+      "assessment": "Accepted. Direct ODE solution gives all three partials when boundary voltage is held fixed; E times boundary derivative is required for transported uncertain state. Terminal RC signs reverse. Whole-model uncertainty must retain cross correlations."
+    },
+    {
+      "claim": "C1 segment integral, local variance and horizon relevance",
+      "assessment": "Accepted conditionally. Chain rule plus FTC proves the integral and segment derivative envelope. P must qualify as joint precision for the stated local linear-Gaussian variance. D exp(-D) peaks at D=1 for future nonnegative horizons; other terms and parameter-dependent boundary may dominate. No branch-discard rule follows."
+    }
+  ],
+  "native_source_binding": [
+    "response.c: At reference temperature all Arrhenius factors equal one. The RC loop uses exp(-dt/tau), -expm1(-dt/tau), E*=decay and u=decay*u+one*I; terminal RC rows carry a negative sign.",
+    "BasisField calls Field(config,center,1.,2,...), so three Chebyshev nodes and all univariate degrees 0 through 2 apply. It explicitly restricts observations to 25 C with reference 298.15 K.",
+    "Field constructs cos(pi*(q+0.5)/n) nodes and inverse full univariate Vandermonde; rates are center*exp(halfwidth*node). The mathematical central node is exactly zero; floating-point cos(pi/2) and recurrence rounding do not establish bitwise equality.",
+    "MixedField used for H7 initializes RC degree5. The degree2 claim therefore describes the study candidate, not all deployed/opt-in H7 fields.",
+    "Native input guards additionally restrict dt<=1, abs(I)<=0.25 and temperature15..35 C. R1 is a physical exact-arithmetic theorem for the specified broader nonnegative intervals, not a claim that native code accepts the broader domain."
+  ],
+  "checks": [
+    {
+      "name": "independent_exact_rational_swap_including_identity_map",
+      "passed": true,
+      "cases": 9
+    },
+    {
+      "name": "free_derivative_polynomial_operator",
+      "passed": true,
+      "ascending_coefficients": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          -1,
+          1
+        ],
+        [
+          0,
+          1,
+          -3,
+          1
+        ]
+      ]
+    },
+    {
+      "name": "forced_sensitivity_variable_intervals",
+      "passed": true,
+      "absolute_error": 2.1445865916458473e-13,
+      "difference_step": 1e-05
+    },
+    {
+      "name": "cubic_interpolation_bound_sharpness",
+      "passed": true,
+      "derivative_error": "3/4",
+      "bound": "3/4",
+      "witness": "f(t)=t^3 at a=sqrt(3)/2"
+    },
+    {
+      "name": "preserved_original_packet_hash_matches_r1_review",
+      "passed": true
+    }
+  ],
+  "check_method": "Independent Python standard-library Fraction algebra at nine decay pairs; exact coefficient recurrence for derivative polynomials; finite-difference sensitivity with mixed signs and unequal intervals; exact cubic bound; preservation hash assertion. Finite checks corroborate proof review, not a uniform numerical error certificate.",
+  "conditional_conclusion": "Revised R1 is accepted under fixed positive R/tau, known piecewise-constant current, actual nonnegative intervals, reference temperature, continuous branch-voltage state and the explicit C3/C1 smoothness premises. Both original findings are resolved. Native source is compatible within its narrower admitted domain.",
+  "limitations": [
+    "No native execution or controls-runner integration validation in this review.",
+    "No global representation derivative supremum is certified by finite checks.",
+    "No physical current-error, aging/evolution, calibrated coverage, deployed availability or Cortex-M23 resource qualification.",
+    "No source, proof or previous evidence was modified; only this new review receipt was written."
+  ]
+}

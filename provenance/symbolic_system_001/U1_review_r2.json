@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "proof_id": "U1",
+  "review_round": 2,
+  "reviewer": "/root/symbolic_uncertainty_r2",
+  "independence": "Fresh-context individual reviewer; proof rederived independently; new deterministic controls; no proof or implementation source edits.",
+  "base_revision": "dbd6a10f14610419e87d203842cb35e48f7d4bdd",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_at_utc": "2026-11-02T07:36:29.298659+00:00",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ea366e06e267e747c037003e95ceecd75f3ecb3c739a5b24914ab29dbbda016d",
+    "PROJECT_STATE.json": "7b05a9af78e3163bc67fac81ec494a25a91a32d022b0337e154b5d3d3840d278",
+    "specifications/symbolic_system_001/README.md": "6eede6ec586f615036b2691f6b804a25a12e6b1c5fc9d3a281e30e7b3f23f7db",
+    "specifications/symbolic_system_001/U1.md": "b18026cf78b3087b760a5e985d838151669e7ef746cca8bd7ad9da10863959eb",
+    "provenance/symbolic_system_001/versions/U1_r1.md": "2b136886cdcd6580642272c211f52bd84d94e501ce8f28e29e35d737846a5a8b",
+    "provenance/symbolic_system_001/U1_review_r1.json": "2ae1595795642a3bca005b75fbc8ca80bcd9f95af9439f110be15c7bc69cd693",
+    "specifications/hysteresis_relationships_001/H3.md": "95561f8802c3d1e5876af96b63e2920db2defbc95aab2df5c5ee1021a035a2b0"
+  },
+  "verdict": "revise",
+  "conditional_verdict": "Nuisance projection, exact quadratic displacement, normalized precision/query bounds and retained-prior correction are accepted. Exact repetition claim needs identical full objective blocks, or an expected-center formulation for fresh noisy blocks.",
+  "prior_findings": [
+    {
+      "id": "U1-R1-01",
+      "disposition": "resolved",
+      "reason": "Repetition is now explicitly prior-free; unchanged once-only nonzero prior is excluded from exact displacement and covariance scaling."
+    }
+  ],
+  "findings": [
+    {
+      "id": "U1-R2-01",
+      "severity": "blocking_scope_error",
+      "location": "Repetition and shared overconfidence",
+      "finding": "Identical full-rank design and coherent fixed defect do not imply identical realized quadratic objectives for fresh observations with differing y. Exact constant fitted displacement is false for the allowed nonzero design defect D.",
+      "counterexample": "Scalar prior-free baseline residual b-y and approximate residual 1.5*b-y. N=1 with y=[1] gives displacement -1/3; N=2 with y=[1,3] gives displacement -2/3. A and D repeat identically; epsilon=0.5<1. Formal covariance still scales as 1/N, but realized displacement does not.",
+      "requested_change": "State exact N scaling for identical complete quadratic blocks including y as a deterministic algebraic control, separate from evidence reuse. For fresh Gaussian blocks state expected fitted-center displacement and covariance scaling under common design, coherent defect and common mean; do not assert realized objective multiplication. Alternatively restrict to D=0 additive response defects, where common design gives constant paired displacement despite fresh y.",
+      "disposition": "Requires revision and independent re-review."
+    }
+  ],
+  "accepted_reasoning": [
+    "Moore-Penrose projection eliminates arbitrary rank-deficient nuisance columns; S SPD uniquely identifies p. Consistent unchanged prior rows can be augmented once.",
+    "B^T(r+d)=A^T*d+D^T*r+D^T*d follows from A^T*r=0; SPD B^T*B yields the exact quadratic displacement.",
+    "Q has orthonormal columns. Singular-value perturbation, congruence, inversion and Cauchy-Schwarz give all stated precision and fixed-query displacement bounds.",
+    "Full-rank, fixed whitening, unconstrained support, formal precision, nonlinear remainder and coverage limitations are explicit.",
+    "The narrower prior-free repetition premise resolves the previous retained-prior counterexample, without changing the first three sections."
+  ],
+  "checks": {
+    "seed": 778102,
+    "random_cases": 40,
+    "max_nuisance_projection_error": 1.6136471996107275e-15,
+    "max_exact_displacement_error": 1.071537778393746e-14,
+    "min_normalized_bound_slack": 0.043718994872908236,
+    "fresh_observation_counterexample": [
+      {
+        "N": 1,
+        "y": [
+          1.0
+        ],
+        "baseline": 1.0,
+        "approximate": 0.6666666666666666,
+        "displacement": -0.33333333333333337,
+        "formal_covariance": 0.4444444444444444
+      },
+      {
+        "N": 2,
+        "y": [
+          1.0,
+          3.0
+        ],
+        "baseline": 1.9999999999999993,
+        "approximate": 1.3333333333333333,
+        "displacement": -0.6666666666666661,
+        "formal_covariance": 0.2222222222222222
+      }
+    ]
+  },
+  "check_command": "python3 /tmp/review_u1_r2.py",
+  "check_runtime": {
+    "numpy": "2.5.2"
+  },
+  "check_script_sha256": "83064c8a86f2b6f07ef879c34df0ba4b564d9e08c4c8f9adf5c09f10a1e0093d",
+  "check_script": "import json, hashlib, subprocess, datetime\nfrom pathlib import Path\nimport numpy as np\nrng=np.random.default_rng(778102)\nmax_projection_error=0.; max_displacement_error=0.; min_slack=float('inf')\nfor _ in range(40):\n X=rng.normal(size=(12,2)); z=rng.normal(size=(12,2)); Z=np.column_stack([z,z[:,0]])\n y=rng.normal(size=12); e=rng.normal(size=12)\n M=np.eye(12)-Z@np.linalg.pinv(Z); S=X.T@M@X\n p=np.linalg.lstsq(np.column_stack([X,Z]),y,rcond=None)[0][:2]\n ph=np.linalg.lstsq(np.column_stack([X,Z]),y-e,rcond=None)[0][:2]\n err=np.linalg.norm(ph-p+np.linalg.solve(S,X.T@M@e)); max_projection_error=max(max_projection_error,float(err)); assert err<1e-12\n A=rng.normal(size=(12,4)); P=A.T@A; w,V=np.linalg.eigh(P)\n ir=(V/w**.5)@V.T; root=(V*w**.5)@V.T\n D=rng.normal(size=A.shape); D*=.65/np.linalg.norm(D@ir,2); B=A+D\n e0=rng.normal(size=12); b=np.linalg.lstsq(A,y,rcond=None)[0]; bh=np.linalg.lstsq(B,y-e0,rcond=None)[0]\n r=A@b-y; d=D@b+e0; dg=A.T@d+D.T@r+D.T@d\n err=np.linalg.norm(bh-b+np.linalg.solve(B.T@B,dg)); max_displacement_error=max(max_displacement_error,float(err)); assert err<1e-12\n eps=np.linalg.norm(D@ir,2); eig=np.linalg.eigvalsh(ir@B.T@B@ir); j=rng.normal(size=4)\n v=j@np.linalg.solve(P,j); vh=j@np.linalg.solve(B.T@B,j); bound=np.linalg.norm(ir@dg)/(1-eps)**2\n slacks=[eig.min()-(1-eps)**2,(1+eps)**2-eig.max(),vh-v/(1+eps)**2,v/(1-eps)**2-vh,bound-np.linalg.norm(root@(bh-b)),np.sqrt(v)*bound-abs(j@(bh-b))]\n min_slack=min(min_slack,*map(float,slacks)); assert min(slacks)>-1e-12\ncounterexample=[]\nfor ys in ([1.],[1.,3.]):\n A=np.ones((len(ys),1)); B=1.5*A; y=np.array(ys)\n b=np.linalg.lstsq(A,y,rcond=None)[0][0]; bh=np.linalg.lstsq(B,y,rcond=None)[0][0]\n counterexample.append(dict(N=len(ys),y=ys,baseline=float(b),approximate=float(bh),displacement=float(bh-b),formal_covariance=float(1/(B.T@B)[0,0])))\nassert abs(counterexample[0]['displacement']+1/3)<1e-12\nassert abs(counterexample[1]['displacement']+2/3)<1e-12\nfiles=['AGENTS.md','README.md','PROJECT_STATE.json','specifications/symbolic_system_001/README.md','specifications/symbolic_system_001/U1.md','provenance/symbolic_system_001/versions/U1_r1.md','provenance/symbolic_system_001/U1_review_r1.json','specifications/hysteresis_relationships_001/H3.md']\nreport={\n 'schema_version':1,'proof_id':'U1','review_round':2,'reviewer':'/root/symbolic_uncertainty_r2',\n 'independence':'Fresh-context individual reviewer; proof rederived independently; new deterministic controls; no proof or implementation source edits.',\n 'base_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),\n 'branch':subprocess.check_output(['git','branch','--show-current'],text=True).strip(),\n 'reviewed_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),\n 'source_sha256':{f:hashlib.sha256(Path(f).read_bytes()).hexdigest() for f in files},\n 'verdict':'revise',\n 'conditional_verdict':'Nuisance projection, exact quadratic displacement, normalized precision/query bounds and retained-prior correction are accepted. Exact repetition claim needs identical full objective blocks, or an expected-center formulation for fresh noisy blocks.',\n 'prior_findings':[{'id':'U1-R1-01','disposition':'resolved','reason':'Repetition is now explicitly prior-free; unchanged once-only nonzero prior is excluded from exact displacement and covariance scaling.'}],\n 'findings':[{'id':'U1-R2-01','severity':'blocking_scope_error','location':'Repetition and shared overconfidence','finding':'Identical full-rank design and coherent fixed defect do not imply identical realized quadratic objectives for fresh observations with differing y. Exact constant fitted displacement is false for the allowed nonzero design defect D.','counterexample':'Scalar prior-free baseline residual b-y and approximate residual 1.5*b-y. N=1 with y=[1] gives displacement -1/3; N=2 with y=[1,3] gives displacement -2/3. A and D repeat identically; epsilon=0.5<1. Formal covariance still scales as 1/N, but realized displacement does not.','requested_change':'State exact N scaling for identical complete quadratic blocks including y as a deterministic algebraic control, separate from evidence reuse. For fresh Gaussian blocks state expected fitted-center displacement and covariance scaling under common design, coherent defect and common mean; do not assert realized objective multiplication. Alternatively restrict to D=0 additive response defects, where common design gives constant paired displacement despite fresh y.','disposition':'Requires revision and independent re-review.'}],\n 'accepted_reasoning':[\n  'Moore-Penrose projection eliminates arbitrary rank-deficient nuisance columns; S SPD uniquely identifies p. Consistent unchanged prior rows can be augmented once.',\n  'B^T(r+d)=A^T*d+D^T*r+D^T*d follows from A^T*r=0; SPD B^T*B yields the exact quadratic displacement.',\n  'Q has orthonormal columns. Singular-value perturbation, congruence, inversion and Cauchy-Schwarz give all stated precision and fixed-query displacement bounds.',\n  'Full-rank, fixed whitening, unconstrained support, formal precision, nonlinear remainder and coverage limitations are explicit.',\n  'The narrower prior-free repetition premise resolves the previous retained-prior counterexample, without changing the first three sections.'\n ],\n 'checks':{'seed':778102,'random_cases':40,'max_nuisance_projection_error':max_projection_error,'max_exact_displacement_error':max_displacement_error,'min_normalized_bound_slack':min_slack,'fresh_observation_counterexample':counterexample},\n 'check_command':'python3 /tmp/review_u1_r2.py','check_runtime':{'numpy':np.__version__},\n 'check_script_sha256':hashlib.sha256(Path('/tmp/review_u1_r2.py').read_bytes()).hexdigest(),\n 'check_script':Path('/tmp/review_u1_r2.py').read_text(),\n 'limits':['Finite controls support algebra only; not continuous-domain qualification.','No source edits; check001 and integration are outside this individual proof review.','No physical coverage, deployment, aging or target-resource acceptance.']\n}\nPath('provenance/symbolic_system_001/U1_review_r2.json').write_text(json.dumps(report,indent=2)+'\\n')\nprint(json.dumps({'verdict':report['verdict'],'checks':report['checks'],'source_sha256':report['source_sha256']['specifications/symbolic_system_001/U1.md']},indent=2))\n",
+  "limits": [
+    "Finite controls support algebra only; not continuous-domain qualification.",
+    "No source edits; check001 and integration are outside this individual proof review.",
+    "No physical coverage, deployment, aging or target-resource acceptance."
+  ]
+}

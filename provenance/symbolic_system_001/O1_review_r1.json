@@ -1,0 +1,121 @@
+{
+  "schema": "individual_proof_review_v1",
+  "proof_id": "O1",
+  "review_round": 1,
+  "reviewer": "independent agent /root/symbolic_optimization_review",
+  "reviewed_at_utc": "2026-11-02T07:33:26.607487+00:00",
+  "base_revision": "dbd6a10f14610419e87d203842cb35e48f7d4bdd",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_hashes_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ea366e06e267e747c037003e95ceecd75f3ecb3c739a5b24914ab29dbbda016d",
+    "PROJECT_STATE.json": "7b05a9af78e3163bc67fac81ec494a25a91a32d022b0337e154b5d3d3840d278",
+    "specifications/symbolic_system_001/README.md": "6eede6ec586f615036b2691f6b804a25a12e6b1c5fc9d3a281e30e7b3f23f7db",
+    "specifications/symbolic_system_001/O1.md": "86797f3da6a39c459859a5b3e74b5c74157de8cdd301740068fd9619da6721fc",
+    "specifications/symbolic_system_001/U1.md": "2b136886cdcd6580642272c211f52bd84d94e501ce8f28e29e35d737846a5a8b",
+    "specifications/architecture_contracts_001/A2.md": "7d899ba40e114ad61e75be8f35b82978bf0efa8188304c1764baf2bfa7d71f87",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "provenance/hysteresis_relationships_001/receipt.json": "811ec979030a9f95a3d568fdc2e86c9bc7ba80f26d348aca9bf8ffcda64ecbd2"
+  },
+  "scope": "O1 only: exact-real recurrence and fixed-point identities, semantic dependency conditions for pure coefficient reuse, joint-factor value/gradient and feature-enclosure bounds. Static existing native source inspection and independent small algebra controls; no optimized implementation.",
+  "verdict": "accept_conditional",
+  "findings": [],
+  "conditional_conclusion": "All displayed O1 identities and inequalities are correct under their stated exact-real, unchanged-feature/support, differentiable-query and frozen-factor premises. The source and A2 agree with the pure-coefficient dependency discussion. No blocker or substantive revision is required. This acceptance does not qualify any coefficient format, cache, exp/expm1 replacement, lifetime bound or target implementation.",
+  "derivation_audit": [
+    {
+      "claim": "Paired recurrence error and constant-input closed form",
+      "assessment": "Subtracting recurrences yields ahat*d+(ahat-a)*(x-b). Induction gives the stated closed form; common equilibrium is preserved exactly in real arithmetic. Strict contraction establishes asymptotic decay for constant a, ahat, b, not arbitrary time-varying equilibrium or lost contraction."
+    },
+    {
+      "claim": "Independent coefficient fixed-point bias",
+      "assessment": "Solving (1-a-eta_a)*xhat=((1-a)+eta_b)*b gives the claimed defect. Stability does not bound bias without a denominator margin. eta_b=-eta_a removes this real-arithmetic defect."
+    },
+    {
+      "claim": "Numerical implementation caveat",
+      "assessment": "Current source computes exp and expm1 separately; paired symbolic complements do not establish bitwise equilibrium. The packet correctly retains rounding, cancellation, underflow, overflow and arithmetic-order obligations."
+    },
+    {
+      "claim": "Exact reuse",
+      "assessment": "Pure RC decay excludes current/state but includes actual interval, thermal effective rate and arithmetic semantics. State/row outputs have more dependencies. A2 supplies collision handling, immutable generations, error/side-effect semantics and invalidation; no concrete key is certified."
+    },
+    {
+      "claim": "Factor likelihood and gradient difference",
+      "assessment": "With R and DeltaR fixed in theta and phi differentiable, direct expansion gives both identities exactly. Norm bound follows Cauchy-Schwarz and positivity of squared norm. Common constant c cancels; a changed theta-independent constant cancels only in normalized inference with a finite normalizer, while changing evidence normalization."
+    },
+    {
+      "claim": "Uniform feature-enclosure defect",
+      "assessment": "For an actually proved enclosure phi0+L*z with ||z||<=1, triangle inequality and induced operator norm give the displayed bound. Frobenius norm is a valid conservative substitute. Derivative enclosure and information-normalized query consequences remain separate obligations."
+    },
+    {
+      "claim": "PSD, history and qualification limits",
+      "assessment": "Any factor Gram remains PSD, including rank-deficient factors; PSD does not protect weak precision or centers. U1 supplies conditional joint query bounds, and history composition still requires A1. No tolerance or complete target resource claim is made."
+    }
+  ],
+  "native_source_binding": [
+    "experiments/hysteresis_refinement_001/response.c:14-21 admits dt=0 and computes thermal factors, a=dt/(rates[ix]*f[3+2*j]), decay=exp(-a), one=-expm1(-a). Strict O1 contraction is therefore a conditional subset, not a claim about every admitted native interval.",
+    "response.c:22 updates E and forced u each sample, with forcing one*f[2+2*j]*I; unchanged RC decay across currents cannot justify reusing these state outputs.",
+    "response.c:24-28 selects a directional hysteresis rate and thermal factor using current sign, magnitude and interval; I=0 skips that transition.",
+    "response.c:30-43 row generation also uses accumulated state, basis projection matrices, sigma, calibration and measured voltage. O1 refers to other row inputs and A2; its illustrative dependencies are not a complete key layout."
+  ],
+  "checks": [
+    {
+      "name": "complementary_recurrence_and_closed_form_exact_rationals",
+      "passed": true,
+      "cases": 3,
+      "steps_per_case": 20
+    },
+    {
+      "name": "stable_independent_coefficients_bias",
+      "passed": true,
+      "stable_decay": "9991/10000",
+      "bias": "4/9"
+    },
+    {
+      "name": "paired_coefficients_remove_equilibrium_bias",
+      "passed": true
+    },
+    {
+      "name": "rounded_decay_one_can_freeze_wrong_state",
+      "passed": true
+    },
+    {
+      "name": "joint_factor_likelihood_and_gradient_exact_rationals",
+      "passed": true,
+      "queries": 5,
+      "feature_map": "[1,t,t*t]"
+    },
+    {
+      "name": "PSD_does_not_preserve_rank",
+      "passed": true,
+      "baseline_rank": 3,
+      "encoded_rank": 2,
+      "erased_diagonal": "1/1000"
+    },
+    {
+      "name": "ellipsoid_bound_using_Frobenius_upper_bound",
+      "passed": true,
+      "queries": 7,
+      "bound": 0.022225784728964713,
+      "max_observed": 0.020537229067665818
+    },
+    {
+      "name": "exp_subtraction_loses_tiny_increment",
+      "passed": true,
+      "one_minus_exp": 0.0,
+      "minus_expm1": 1e-20
+    }
+  ],
+  "reproducibility": {
+    "command": "python3 -B /tmp/o1_review_checks.py",
+    "script_source": "from fractions import Fraction as F\nimport math, json\nchecks=[]\ndef record(name, passed, **data):\n    assert passed, name\n    checks.append(dict(name=name,passed=True,**data))\nfor a,ah,b,x,y in [(F(99,100),F(999,1000),F(3),F(-2),F(7)),(F(0),F(1,2),F(-1),F(5),F(5)),(F(3,4),F(1,2),F(2),F(2),F(2))]:\n    xn=a*x+(1-a)*b; yn=ah*y+(1-ah)*b\n    assert yn-xn==ah*(y-x)+(ah-a)*(x-b)\n    x0,y0=x,y\n    for n in range(1,21):\n        x=a*x+(1-a)*b;y=ah*y+(1-ah)*b\n        assert y-x==ah**n*(y0-b)-a**n*(x0-b)\nrecord('complementary_recurrence_and_closed_form_exact_rationals',True,cases=3,steps_per_case=20)\na=F(999,1000);ea=F(1,10000);eb=F(1,10000);b=F(2)\nfixed=b*((1-a)+eb)/(1-a-ea)\nrecord('stable_independent_coefficients_bias', abs(a+ea)<1 and fixed-b==b*(ea+eb)/(1-a-ea),stable_decay=str(a+ea),bias=str(fixed-b))\nrecord('paired_coefficients_remove_equilibrium_bias',b*((1-a)-ea)/(1-a-ea)==b)\nrecord('rounded_decay_one_can_freeze_wrong_state',F(1)*F(0)+(1-F(1))*b==0 and b!=0)\ndef mv(A,x): return [sum(a*b for a,b in zip(row,x)) for row in A]\ndef dot(x,y): return sum(a*b for a,b in zip(x,y))\ndef add(x,y): return [a+b for a,b in zip(x,y)]\ndef norm(x): return math.sqrt(float(dot(x,x)))\nR=[[F(2),F(-1),F(1,3)],[F(0),F(1),F(1,10)],[F(0),F(0),F(1,1000)]]\nD=[[F(1,100),F(1,200),F(0)],[F(1,500),F(-1,300),F(1,1000)],[F(0),F(0),F(-1,1000)]]\nB=[add(r,d) for r,d in zip(R,D)]\nfor t in [F(-1),F(-1,3),F(0),F(2,5),F(1)]:\n    phi=[F(1),t,t*t]; dp=[F(0),F(1),2*t]\n    r=mv(R,phi); e=mv(D,phi); j=mv(R,dp); dj=mv(D,dp)\n    rh=mv(B,phi);jh=mv(B,dp)\n    assert (dot(rh,rh)-dot(r,r))/2==dot(r,e)+dot(e,e)/2\n    assert dot(jh,rh)-dot(j,r)==dot(j,e)+dot(dj,r)+dot(dj,e)\n    assert abs(float((dot(rh,rh)-dot(r,r))/2))<=norm(r)*norm(e)+norm(e)**2/2+1e-15\nrecord('joint_factor_likelihood_and_gradient_exact_rationals',True,queries=5,feature_map='[1,t,t*t]')\n# D erases an initially weak row: its Euclidean size can be arbitrarily small.\nassert R[2][2]!=0 and B[2]==[0,0,0]\nrecord('PSD_does_not_preserve_rank',True,baseline_rank=3,encoded_rank=2,erased_diagonal=str(R[2][2]))\nphi0=[F(1),F(0),F(0)]\nL=[[F(0),F(0)],[F(2),F(0)],[F(0),F(1,3)]]\nDL=[[sum(D[i][k]*L[k][j] for k in range(3)) for j in range(2)] for i in range(3)]\nupper=norm(mv(D,phi0))+math.sqrt(sum(float(x*x) for row in DL for x in row))\nworst=0\nfor z in ([F(0),F(0)],[F(1),F(0)],[F(-1),F(0)],[F(0),F(1)],[F(0),F(-1)],[F(3,5),F(4,5)],[F(-3,5),F(4,5)]):\n    value=norm(mv(D,add(phi0,mv(L,z))))\n    worst=max(worst,value)\n    assert value<=upper\nrecord('ellipsoid_bound_using_Frobenius_upper_bound',True,queries=7,bound=upper,max_observed=worst)\n# Exp/expm1 loss-of-increment witness in host binary64, not a portable target guarantee.\nz=1e-20\nrecord('exp_subtraction_loses_tiny_increment',1-math.exp(-z)==0 and -math.expm1(-z)>0,one_minus_exp=1-math.exp(-z),minus_expm1=-math.expm1(-z))\nprint(json.dumps(checks,indent=2))\n",
+    "dependencies": "Python standard library; Fraction exact rational algebra and math binary64 finite controls",
+    "result": "8 focused controls passed; source embedded so temporary script location is not required for reproduction"
+  },
+  "limitations": [
+    "Finite probes support independent algebra inspection; they are not a uniform approximation certificate.",
+    "No native binary execution or target arithmetic/resource measurement was performed in this review.",
+    "No actual optimized kernel, quantizer, cache implementation or promotion is accepted.",
+    "Floating arithmetic defects, transient likelihood accumulation, derivative enclosures, nonlinear fitting effects, changing-state composition, physical coverage and complete Cortex-M23 resources remain open.",
+    "Only this new review receipt was written in the repository; proof/source and original evidence remain unchanged."
+  ]
+}

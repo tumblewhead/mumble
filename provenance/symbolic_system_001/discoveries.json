@@ -1,0 +1,55 @@
+{
+  "schema": "symbolic_system_discovery_register_v1",
+  "entries": [
+    {
+      "id": "S-D1",
+      "track": "RC",
+      "finding": "Experimental degree-2 univariate RC response is centre-value exact while pole derivatives differ. Hysteresis mixed-term truncation is not the RC mechanism.",
+      "evidence": "check003_result.json#/RC/probes/0",
+      "scope": "Public 600-record diagnostic, not H7 campaign performance",
+      "adaptation": "Require derivative and joint-query checks in any basis intervention; do not add cross-pole response terms without a physical need."
+    },
+    {
+      "id": "S-D2",
+      "track": "uncertainty",
+      "finding": "With unknown nuisance parameters, projection onto residualized target columns determines conditional bias; response-value equality can coexist with incorrect fit updates or precision.",
+      "evidence": "../../specifications/symbolic_system_001/U1.md",
+      "adaptation": "Extend H3 two-column charge diagnostic to nuisance-aware joint sensitivity and weak-direction normalization."
+    },
+    {
+      "id": "S-D3",
+      "track": "history_aging",
+      "finding": "Contracting physical state and accumulating log-likelihood error obey different bounds; neither monotonic aging nor repeated stimuli establishes indefinite compression accuracy.",
+      "evidence": "../../specifications/symbolic_system_001/A1.md",
+      "adaptation": "Keep state transport and evidence error budgets separate; select evolution/state convention before aging compression."
+    },
+    {
+      "id": "S-D4",
+      "track": "optimization",
+      "finding": "Paired decay/complement preserves fixed equilibrium; independent coefficient errors can cause systematic bias despite stable recurrence.",
+      "evidence": "check003_result.json#/optimization/coefficient_example",
+      "adaptation": "Test equilibrium/transient and query-normalized defects before selecting quantizers or exact coefficient caches."
+    },
+    {
+      "id": "S-R1",
+      "track": "review",
+      "finding": "Generic forecast integral needs C1 premise and order comparison must swap entire current-duration segments.",
+      "evidence": "R1_review_r1.json",
+      "adaptation": "Original preserved in versions/R1_r1.md; corrected R1 sent for fresh review."
+    },
+    {
+      "id": "S-R2",
+      "track": "review",
+      "finding": "Retained nonzero prior prevents exact repeated-objective scaling.",
+      "evidence": "U1_review_r1.json",
+      "adaptation": "Original preserved in versions/U1_r1.md; repetition theorem restricted to prior-free blocks and sent for fresh review."
+    },
+    {
+      "id": "S-R3",
+      "track": "review",
+      "finding": "Fresh observation values prevent exact repeated-objective scaling, and design defects can change realized displacement.",
+      "evidence": "U1_review_r2.json",
+      "adaptation": "Preserved U1_r2.md. Restricted repetition theorem to shared design plus additive-only response error, proving constant between-fit displacement for arbitrary fresh observations via normal equations."
+    }
+  ]
+}

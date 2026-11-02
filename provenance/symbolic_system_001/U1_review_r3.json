@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "proof_id": "U1",
+  "review_round": 3,
+  "reviewer": "/root/symbolic_uncertainty_r3",
+  "independence": "Fresh-context individual proof review; independently rederived whole packet and new seeded multivariate controls; no proof or implementation edits.",
+  "base_revision": "dbd6a10f14610419e87d203842cb35e48f7d4bdd",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_at_utc": "2026-11-02T07:40:38.505752+00:00",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ea366e06e267e747c037003e95ceecd75f3ecb3c739a5b24914ab29dbbda016d",
+    "PROJECT_STATE.json": "7b05a9af78e3163bc67fac81ec494a25a91a32d022b0337e154b5d3d3840d278",
+    "specifications/symbolic_system_001/README.md": "6eede6ec586f615036b2691f6b804a25a12e6b1c5fc9d3a281e30e7b3f23f7db",
+    "specifications/symbolic_system_001/U1.md": "40d4a2ff1c135501705650ee63aa06d561d0d74a455edccc94aa880adf785bea",
+    "specifications/hysteresis_relationships_001/H3.md": "95561f8802c3d1e5876af96b63e2920db2defbc95aab2df5c5ee1021a035a2b0",
+    "provenance/symbolic_system_001/versions/U1_r1.md": "2b136886cdcd6580642272c211f52bd84d94e501ce8f28e29e35d737846a5a8b",
+    "provenance/symbolic_system_001/versions/U1_r2.md": "b18026cf78b3087b760a5e985d838151669e7ef746cca8bd7ad9da10863959eb",
+    "provenance/symbolic_system_001/U1_review_r1.json": "2ae1595795642a3bca005b75fbc8ca80bcd9f95af9439f110be15c7bc69cd693",
+    "provenance/symbolic_system_001/U1_review_r2.json": "4dfe685e46b414ab1752781d4b98e1fb1f7408db0035b2ebfe018e64a50d0f45",
+    "experiments/symbolic_system_001/checks.py": "30f389d67708de472862db9a2ca969ff5d979d0a25fd316afafefd2220f6ce08",
+    "experiments/symbolic_system_001/check003/result.json": "0445642e0744dd28f8bc87d93d5b80a627ddec56446e96c73c696b39c1cee089",
+    "experiments/symbolic_system_001/check003/registration.json": "98c0090b417398da03f2fafeb3b6b477b0ef1b78ef6123d3f4464ac902f11c5a"
+  },
+  "verdict": "accept_conditional",
+  "conditional_verdict": "All U1 statements accepted under their explicit finite, whitened, unconstrained quadratic premises. Repetition now correctly restricts to prior-free shared additive defects with D=0 and arbitrary fresh responses.",
+  "prior_findings": [
+    {
+      "id": "U1-R1-01",
+      "disposition": "resolved",
+      "reason": "Prior-free repetition is explicit, and once-only nonzero prior is excluded from exact scaling."
+    },
+    {
+      "id": "U1-R2-01",
+      "disposition": "resolved",
+      "reason": "D=0 and a common fixed e0 allow the response-dependent normal-equation right sides to cancel. The proof explicitly rejects objective multiplication for arbitrary fresh y_i and warns that D!=0 can alter realized displacement."
+    }
+  ],
+  "findings": [],
+  "accepted_reasoning": [
+    "The Moore-Penrose nuisance projector is orthogonal even with redundant nuisance columns. Positive-definite S ensures the target optimum is unique; consistent unchanged prior augmentation is valid.",
+    "Stationarity A^T r=0 and expansion of B^T(r+d) prove the exact gradient defect and quadratic optimum displacement, including the D^T r term when value defect vanishes.",
+    "Orthonormal Q columns and triangle inequalities bound the normalized Hessian spectrum; congruence, inverse Loewner order and Cauchy-Schwarz give the stated precision and query-displacement bounds.",
+    "For repetition, summed normal equations have the same Hessian N P and right sides differing by -N A^T e0. Their difference is -P^-1 A^T e0 for every arbitrary collection of fresh y_i; both formal covariance matrices equal P^-1/N. A fixed nonzero linear-query displacement therefore scales as sqrt(N) in formal SD units.",
+    "Singular directions, physical support, unknown nonlinear shapes, likelihood precision versus physical coverage, and observation ownership remain explicitly outside unconditional acceptance."
+  ],
+  "checks": {
+    "seed": 319481,
+    "random_design_cases": 48,
+    "fresh_multivariate_repeated_fit_cases": 144,
+    "max_nuisance_projection_error": 2.2916425926298183e-15,
+    "max_exact_displacement_error": 6.71043779769424e-15,
+    "min_normalized_bound_slack": 0.01238669515387501,
+    "max_repeated_additive_shift_error": 1.3972609977325903e-14,
+    "retained_prior_counterexample_shifts": [
+      -0.4999999999999998,
+      -0.6666666666666667
+    ],
+    "fresh_response_design_defect_counterexample_shifts": [
+      -0.33333333333333337,
+      -0.6666666666666661
+    ],
+    "check003_uncertainty_rerun_exactly_matches_saved": true,
+    "preserved_r1_r2_source_hashes_match_reviews": true
+  },
+  "check_command": "PYTHONPATH=. python3 -B /tmp/review_u1_r3.py",
+  "check_runtime": {
+    "numpy": "2.5.2"
+  },
+  "check_script_sha256": "befd56d9029797e7eb4592ccd00f9ac3b165bbe2c11860576419123a480356a2",
+  "check_script": "import json, hashlib, subprocess, datetime\nfrom pathlib import Path\nimport numpy as np\n\nrng=np.random.default_rng(319481)\nprojection_errors=[]; identity_errors=[]; bound_slacks=[]; repeat_errors=[]\nfor case in range(48):\n    A=rng.normal(size=(11,4)); y=rng.normal(size=11); e=rng.normal(size=11)\n    X=A[:,:2]; Z=np.column_stack([A[:,2:],A[:,2]])\n    M=np.eye(11)-Z@np.linalg.pinv(Z); S=X.T@M@X\n    joint=np.column_stack([X,Z])\n    p=np.linalg.lstsq(joint,y,rcond=None)[0][:2]\n    ph=np.linalg.lstsq(joint,y-e,rcond=None)[0][:2]\n    projection_errors.append(float(np.linalg.norm(ph-p+np.linalg.solve(S,X.T@M@e))))\n    P=A.T@A; w,V=np.linalg.eigh(P); root=(V*np.sqrt(w))@V.T; ir=(V/np.sqrt(w))@V.T\n    D=rng.normal(size=A.shape); D*=.7/np.linalg.norm(D@ir,2); B=A+D\n    b=np.linalg.lstsq(A,y,rcond=None)[0]; bh=np.linalg.lstsq(B,y-e,rcond=None)[0]\n    r=A@b-y; d=D@b+e; dg=A.T@d+D.T@r+D.T@d\n    identity_errors.append(float(np.linalg.norm(bh-b+np.linalg.solve(B.T@B,dg))))\n    eps=np.linalg.norm(D@ir,2); ev=np.linalg.eigvalsh(ir@B.T@B@ir)\n    j=rng.normal(size=4); v=j@np.linalg.solve(P,j); vh=j@np.linalg.solve(B.T@B,j)\n    bound=np.linalg.norm(ir@dg)/(1-eps)**2\n    bound_slacks.extend(map(float,[ev.min()-(1-eps)**2,(1+eps)**2-ev.max(),vh-v/(1+eps)**2,v/(1-eps)**2-vh,bound-np.linalg.norm(root@(bh-b)),np.sqrt(v)*bound-abs(j@(bh-b))]))\n    predicted=-np.linalg.solve(P,A.T@e)\n    for n in (1,3,17):\n        # Fresh, arbitrary block responses and a shared nonzero additive defect.\n        ys=rng.normal(size=(n,11)) + np.arange(n)[:,None]*.13\n        An=np.tile(A,(n,1)); yn=ys.ravel(); en=np.tile(e,n)\n        bn=np.linalg.lstsq(An,yn,rcond=None)[0]; bhn=np.linalg.lstsq(An,yn-en,rcond=None)[0]\n        repeat_errors.append(float(np.linalg.norm(bhn-bn-predicted)))\n        assert np.allclose(np.linalg.inv(An.T@An),np.linalg.inv(P)/n,rtol=1e-11,atol=1e-12)\nassert max(projection_errors+identity_errors+repeat_errors)<1e-11\nassert min(bound_slacks)>-1e-11\nprior=[]; design=[]\nfor n in (1,2):\n    A=np.ones((n+1,1)); y=np.zeros(n+1); e=np.r_[np.ones(n),0.]\n    prior.append(float((np.linalg.lstsq(A,y-e,rcond=None)[0]-np.linalg.lstsq(A,y,rcond=None)[0])[0]))\nfor ys in ([1.],[1.,3.]):\n    A=np.ones((len(ys),1)); y=np.array(ys)\n    design.append(float((np.linalg.lstsq(1.5*A,y,rcond=None)[0]-np.linalg.lstsq(A,y,rcond=None)[0])[0]))\nassert np.allclose(prior,[-.5,-2/3]) and np.allclose(design,[-1/3,-2/3])\nfrom experiments.symbolic_system_001.checks import uncertainty_checks\nauthored=uncertainty_checks()\nsaved=json.loads(Path('experiments/symbolic_system_001/check003/result.json').read_text())['uncertainty']\nassert authored==saved\nsha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()\nfor round in (1,2):\n    old=json.loads(Path(f'provenance/symbolic_system_001/U1_review_r{round}.json').read_text())\n    assert sha(f'provenance/symbolic_system_001/versions/U1_r{round}.md')==old['source_sha256']['specifications/symbolic_system_001/U1.md']\nfiles=['AGENTS.md','README.md','PROJECT_STATE.json','specifications/symbolic_system_001/README.md','specifications/symbolic_system_001/U1.md','specifications/hysteresis_relationships_001/H3.md','provenance/symbolic_system_001/versions/U1_r1.md','provenance/symbolic_system_001/versions/U1_r2.md','provenance/symbolic_system_001/U1_review_r1.json','provenance/symbolic_system_001/U1_review_r2.json','experiments/symbolic_system_001/checks.py','experiments/symbolic_system_001/check003/result.json','experiments/symbolic_system_001/check003/registration.json']\nreport={\n 'schema_version':1,'proof_id':'U1','review_round':3,'reviewer':'/root/symbolic_uncertainty_r3',\n 'independence':'Fresh-context individual proof review; independently rederived whole packet and new seeded multivariate controls; no proof or implementation edits.',\n 'base_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),\n 'branch':subprocess.check_output(['git','branch','--show-current'],text=True).strip(),\n 'reviewed_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),\n 'source_sha256':{f:sha(f) for f in files},\n 'verdict':'accept_conditional','conditional_verdict':'All U1 statements accepted under their explicit finite, whitened, unconstrained quadratic premises. Repetition now correctly restricts to prior-free shared additive defects with D=0 and arbitrary fresh responses.',\n 'prior_findings':[\n  {'id':'U1-R1-01','disposition':'resolved','reason':'Prior-free repetition is explicit, and once-only nonzero prior is excluded from exact scaling.'},\n  {'id':'U1-R2-01','disposition':'resolved','reason':'D=0 and a common fixed e0 allow the response-dependent normal-equation right sides to cancel. The proof explicitly rejects objective multiplication for arbitrary fresh y_i and warns that D!=0 can alter realized displacement.'}],\n 'findings':[],\n 'accepted_reasoning':[\n  'The Moore-Penrose nuisance projector is orthogonal even with redundant nuisance columns. Positive-definite S ensures the target optimum is unique; consistent unchanged prior augmentation is valid.',\n  'Stationarity A^T r=0 and expansion of B^T(r+d) prove the exact gradient defect and quadratic optimum displacement, including the D^T r term when value defect vanishes.',\n  'Orthonormal Q columns and triangle inequalities bound the normalized Hessian spectrum; congruence, inverse Loewner order and Cauchy-Schwarz give the stated precision and query-displacement bounds.',\n  'For repetition, summed normal equations have the same Hessian N P and right sides differing by -N A^T e0. Their difference is -P^-1 A^T e0 for every arbitrary collection of fresh y_i; both formal covariance matrices equal P^-1/N. A fixed nonzero linear-query displacement therefore scales as sqrt(N) in formal SD units.',\n  'Singular directions, physical support, unknown nonlinear shapes, likelihood precision versus physical coverage, and observation ownership remain explicitly outside unconditional acceptance.'\n ],\n 'checks':{'seed':319481,'random_design_cases':48,'fresh_multivariate_repeated_fit_cases':len(repeat_errors),'max_nuisance_projection_error':max(projection_errors),'max_exact_displacement_error':max(identity_errors),'min_normalized_bound_slack':min(bound_slacks),'max_repeated_additive_shift_error':max(repeat_errors),'retained_prior_counterexample_shifts':prior,'fresh_response_design_defect_counterexample_shifts':design,'check003_uncertainty_rerun_exactly_matches_saved':True,'preserved_r1_r2_source_hashes_match_reviews':True},\n 'check_command':'PYTHONPATH=. python3 -B /tmp/review_u1_r3.py','check_runtime':{'numpy':np.__version__},\n 'check_script_sha256':sha('/tmp/review_u1_r3.py'),'check_script':Path('/tmp/review_u1_r3.py').read_text(),\n 'limits':['Acceptance is conditional mathematical validity, not physical, coverage, aging, lifetime or target-resource qualification.','Finite tests are supporting witnesses, not a uniform-domain proof.','Only check003 uncertainty controls were rerun; other tracks and whole-set integration were not reviewed here.']}\nPath('provenance/symbolic_system_001/U1_review_r3.json').write_text(json.dumps(report,indent=2)+'\\n')\nprint(json.dumps({'verdict':report['verdict'],'checks':report['checks'],'U1_sha256':sha('specifications/symbolic_system_001/U1.md')},indent=2))\n",
+  "limits": [
+    "Acceptance is conditional mathematical validity, not physical, coverage, aging, lifetime or target-resource qualification.",
+    "Finite tests are supporting witnesses, not a uniform-domain proof.",
+    "Only check003 uncertainty controls were rerun; other tracks and whole-set integration were not reviewed here."
+  ]
+}

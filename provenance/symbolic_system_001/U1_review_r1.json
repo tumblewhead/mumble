@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "proof_id": "U1",
+  "review_round": 1,
+  "reviewer": "/root/symbolic_uncertainty_review",
+  "independence": "Individual delegated proof review; no source edits; independent algebra and counterexample controls.",
+  "base_revision": "dbd6a10f14610419e87d203842cb35e48f7d4bdd",
+  "branch": "experiment/conditional-architecture-001",
+  "reviewed_at_utc": "2026-11-02T07:32:17.931214+00:00",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ea366e06e267e747c037003e95ceecd75f3ecb3c739a5b24914ab29dbbda016d",
+    "PROJECT_STATE.json": "7b05a9af78e3163bc67fac81ec494a25a91a32d022b0337e154b5d3d3840d278",
+    "specifications/symbolic_system_001/README.md": "6eede6ec586f615036b2691f6b804a25a12e6b1c5fc9d3a281e30e7b3f23f7db",
+    "specifications/symbolic_system_001/U1.md": "2b136886cdcd6580642272c211f52bd84d94e501ce8f28e29e35d737846a5a8b",
+    "specifications/hysteresis_relationships_001/H3.md": "95561f8802c3d1e5876af96b63e2920db2defbc95aab2df5c5ee1021a035a2b0",
+    "specifications/architecture_contracts_001/README.md": "5a5f2414a10e5890f84dfb1e43699889ebc1871f521adb427f082fc761092070",
+    "specifications/architecture_contracts_001/A5.md": "4cdc4126cb40a307aad7a3c8cd35ed0613a6c38f8ccd2ba99be2cf70769e120d",
+    "specifications/architecture_contracts_001/A6.md": "c091ac3bb7772920fd1164b3802aa6884dad814bb5aa966b2ac8ae360779a9ef"
+  },
+  "verdict": "revise",
+  "conditional_verdict": "Accept nuisance projection, design-defect optimum identity, information-normalized precision and query bounds under stated finite unconstrained quadratic premises. Repetition subsection needs a prior-free premise before entire packet acceptance.",
+  "findings": [
+    {
+      "id": "U1-R1-01",
+      "severity": "blocking_scope_error",
+      "location": "Repetition and shared overconfidence",
+      "finding": "Packet permits unchanged Gaussian prior rows included once, then claims repeated designs multiply both full objectives by N and divide covariance by N. With a once-only nonzero prior this claim is false.",
+      "counterexample": "Scalar data L_N(b)=N*b^2/2 and approximate data N*(b+1)^2/2, with unchanged once-only prior b^2/2. Baseline optimum is 0, approximate optimum is -N/(N+1), precision N+1. Displacement changes with N; covariance 1/(N+1) differs from original covariance divided by N. All finite/full-rank assumptions hold.",
+      "requested_change": "Explicitly limit exact N and sqrt(N) scaling to prior-free repeated-design objectives, and state that an unchanged once-only prior changes those exact formulas; alternatively derive retained-prior expressions. Preserve fresh-observation and no-double-counting caveats.",
+      "disposition": "Author notified; revision and independent re-review required."
+    }
+  ],
+  "accepted_reasoning": [
+    "M is an orthogonal projector even for rank-deficient nuisance Z; S SPD identifies target optimum; nuisance optimum need not be unique. Consistent prior augmentation preserves this result.",
+    "At baseline optimum A^T r=0, expansion of B^T(r+d) gives A^T d+D^T r+D^T d. Full-rank B gives exact quadratic displacement.",
+    "Q has orthonormal columns; reverse triangle inequality bounds singular values of Q+G. Congruence gives Loewner bounds; SPD inversion and Cauchy-Schwarz yield formal query variance and displacement bounds.",
+    "Unresolved ranks, nonlinear remainder, support constraints, formal precision versus physical coverage, and source ownership are correctly separated.",
+    "The H3 moment projection is the fixed-nuisance two-column special case; joint nuisance adjustment correctly replaces raw target columns by projected ones."
+  ],
+  "checks": {
+    "nuisance_rank_deficient_Z_projection_error": 2.42861286636753e-16,
+    "naive_shift": [
+      -0.18000000000000002,
+      0.030000000000000006
+    ],
+    "projected_shift": [
+      -0.21000000000000005,
+      0.030000000000000006
+    ],
+    "random_design_cases": 100,
+    "max_exact_displacement_error": 1.0726919550847495e-14,
+    "min_normalized_bound_slack": 0.02333848038383011,
+    "value_agreement_nonzero_residual_shift": 0.39999999999999997,
+    "weak_absolute_defect": 9e-09,
+    "weak_normalized_epsilon": 0.8999999999999999,
+    "once_only_prior_counterexample": [
+      {
+        "N": 1,
+        "baseline_b": 0,
+        "approx_b": "-1/2",
+        "covariance": "1/2"
+      },
+      {
+        "N": 2,
+        "baseline_b": 0,
+        "approx_b": "-2/3",
+        "covariance": "1/3"
+      },
+      {
+        "N": 10,
+        "baseline_b": 0,
+        "approx_b": "-10/11",
+        "covariance": "1/11"
+      }
+    ]
+  },
+  "check_command": "python3 /tmp/review_u1.py",
+  "check_runtime": {
+    "python": "3",
+    "numpy": "2.5.2",
+    "seed": 29171
+  },
+  "check_script_sha256": "b781e1c6831e319a9b5dc83b6b3692bcb7393e5fb55a3ea0e5a473197f6ce3dd",
+  "check_script": "import numpy as np, json\nfrom fractions import Fraction\nrng=np.random.default_rng(29171)\nX=np.array([[1.,0],[1,1],[1,2],[1,3],[1,4]])\nZ=np.array([[1.,2],[0,0],[1,2],[0,0],[1,2]])\ny=np.array([1.,-1,2,0,4]); e=np.array([.2,-.1,.3,.4,-.2])\nM=np.eye(5)-Z@np.linalg.pinv(Z); S=X.T@M@X\njoint=np.column_stack((X,Z))\np=np.linalg.lstsq(joint,y,rcond=None)[0][:2]\nph=np.linalg.lstsq(joint,y-e,rcond=None)[0][:2]\nprojection_error=float(np.max(np.abs(ph-p+np.linalg.solve(S,X.T@M@e))))\nassert projection_error<1e-12\nnaive=-np.linalg.solve(X.T@X,X.T@e)\nprojected=-np.linalg.solve(S,X.T@M@e)\nassert np.linalg.norm(naive-projected)>.01\nmax_identity=0.; min_slack=float('inf')\nfor _ in range(100):\n A=rng.normal(size=(9,4)); y=rng.normal(size=9)\n P=A.T@A; w,V=np.linalg.eigh(P); root=(V*np.sqrt(w))@V.T; invroot=(V/w**.5)@V.T\n D=rng.normal(size=A.shape); D*=.4/np.linalg.norm(D@invroot,2)\n B=A+D; e0=rng.normal(size=9)*.2\n b=np.linalg.lstsq(A,y,rcond=None)[0]; bh=np.linalg.lstsq(B,y-e0,rcond=None)[0]\n r=A@b-y; d=D@b+e0; dg=A.T@d+D.T@r+D.T@d\n err=np.linalg.norm(bh-b+np.linalg.solve(B.T@B,dg)); max_identity=max(max_identity,float(err)); assert err<1e-12\n eps=np.linalg.norm(D@invroot,2); C=invroot@B.T@B@invroot\n ev=np.linalg.eigvalsh(C)\n slacks=[ev.min()-(1-eps)**2,(1+eps)**2-ev.max()]\n j=rng.normal(size=4); v=j@np.linalg.solve(P,j); vh=j@np.linalg.solve(B.T@B,j)\n slacks += [vh-v/(1+eps)**2,v/(1-eps)**2-vh]\n bound=np.linalg.norm(invroot@dg)/(1-eps)**2\n slacks += [bound-np.linalg.norm(root@(bh-b)),np.sqrt(v)*bound-abs(j@(bh-b))]\n min_slack=min(min_slack,*[float(s) for s in slacks]); assert min(slacks)>-1e-12\nA=np.array([[1.],[0.] ]); y=np.array([0.,1.]); D=np.array([[0.],[.5]])\nb=np.linalg.lstsq(A,y,rcond=None)[0]; bh=np.linalg.lstsq(A+D,y,rcond=None)[0]\nassert b[0]==0 and abs(bh[0]-.4)<1e-14\nweakA=np.diag([1.,1e-8]); weakD=np.diag([0.,9e-9]); eps=np.linalg.norm(weakD@np.diag([1.,1e8]),2)\nassert abs(eps-.9)<1e-14\nprior=[]\nfor N in (1,2,10):\n # Data .5*N*b^2, response defect +1; unchanged prior .5*b^2.\n prior.append({'N':N,'baseline_b':0,'approx_b':str(Fraction(-N,N+1)),'covariance':str(Fraction(1,N+1))})\nprint(json.dumps({'nuisance_rank_deficient_Z_projection_error':projection_error,'naive_shift':naive.tolist(),'projected_shift':projected.tolist(),'random_design_cases':100,'max_exact_displacement_error':max_identity,'min_normalized_bound_slack':min_slack,'value_agreement_nonzero_residual_shift':float(bh[0]),'weak_absolute_defect':9e-9,'weak_normalized_epsilon':eps,'once_only_prior_counterexample':prior},indent=2))\n",
+  "limits": [
+    "100 finite randomized algebra controls do not certify a continuous physical domain.",
+    "No implementation, physical coverage, aging, lifetime, target-resource or deployment qualification.",
+    "No estimator or proof source edited."
+  ]
+}
