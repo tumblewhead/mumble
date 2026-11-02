@@ -97,6 +97,18 @@ are preserved. All proofs and optimizations now require peer review and iteratio
 The accepted mathematics does not discharge H7's physical, implementation or
 target-resource premises; older unreviewed collections remain provisional.
 
+The [H7 implementation check](specifications/h7_transaction_status_001/README.md)
+now makes field flushing transactional and quarantines admitted update/restore
+failures. Current readouts and checkpoints are blocked after failure; diagnostic
+messages name their published and consumed prefixes. All uncertainty remains
+explicitly provisional, with physical authorization unresolved. Independent review
+found three diagnostic/identity defects, repaired and accepted after fresh review.
+The [receipt](provenance/h7_transaction_status_001/receipt.json) records 71 passing
+tests and byte-exact baseline parity over 14,720 observations. This is limited
+desktop containment; lifetime coverage, autonomous recovery and M23 resources
+remain unqualified. Existing campaign checkpoints retain their original source
+binding and must be replayed with that revision.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

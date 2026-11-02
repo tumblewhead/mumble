@@ -161,7 +161,7 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
         if stat['status'] == 'running':
             stat['status'] = 'completed'
         stat.update(bank.counts())
-        np.save(out/(k+'_message.npy'),bank.full_message())
+        np.save(out/(k+'_message.npy'),bank.last_message() if hasattr(bank,'last_message') else bank.full_message())
         for key in ['all', 'current_nonzero', 'current_zero']:
             finish(stat[key])
         arrays[k].flush(); charts[k].flush()

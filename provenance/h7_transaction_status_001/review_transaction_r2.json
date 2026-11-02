@@ -1,0 +1,162 @@
+{
+  "schema": "h7_transaction_independent_review_v1",
+  "review_id": "review_transaction_r2",
+  "reviewer": "fresh-context independent reviewer /root/review_transaction_r2",
+  "base_revision": "feb56b9311dd09249d37e9d65cde01b19173c8cc",
+  "branch": "implementation/h7-transaction-status-001",
+  "verdict": "request_changes",
+  "source_identities": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "README.md": {
+      "bytes": 98289,
+      "sha256": "f9ec3ba7cbad3ed0b7e49efacfbd7b2ae31d1784524ce895f9493a8e8b0e436e"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 265856,
+      "sha256": "39a84261d90a63e87e5f75c68b21ceed6454764c86de5128d3a6b61e1ef8a992"
+    },
+    "specifications/h7_transaction_status_001/README.md": {
+      "bytes": 7004,
+      "sha256": "9e45556152414da9fb9021798ef2dbdf95b795462eb0aeca4404421080d91b77"
+    },
+    "specifications/proof_review_001/proofs/D7.md": {
+      "bytes": 4789,
+      "sha256": "e67489d05680106f67616bfbe4c30e54199aa7f63ed005c72808100471b1cb17"
+    },
+    "specifications/proof_review_001/proofs/D2.md": {
+      "bytes": 2976,
+      "sha256": "c6bca79cabeba96ae69eacaa30634eae8d4360b74a88063df2faab232f1c8fe4"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "bytes": 6989,
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+    },
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 8668,
+      "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 18134,
+      "sha256": "5a8ff6d7c4ebc825e4a9e38e0d82095defc51ba30e4925500f4465c05c00d98e"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/replay.py": {
+      "bytes": 9299,
+      "sha256": "c7bba259cb272d30aa9dabb6b88aff0b3b97c7e1f5a98382c7323b54fae9bd32"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25557,
+      "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+    },
+    "experiments/h7_transaction_status_001/test_transactions.py": {
+      "bytes": 19851,
+      "sha256": "9ed3b85dfe11f9ce2eda610bd330e2df7b31ab2cf5e9ecfea9323e225f8822c8"
+    },
+    "experiments/h7_transaction_status_001/test_recording.py": {
+      "bytes": 5233,
+      "sha256": "7eec71af56be10e97fc9719f941e39383517427e3f0fa3bef634d70df0294dcf"
+    },
+    "experiments/h7_transaction_status_001/check_parity.py": {
+      "bytes": 12750,
+      "sha256": "b1073ddca953695faf00c7a8ed12905db15c62d026093fc0ffa557b16d9dab48"
+    },
+    "provenance/h7_transaction_status_001/baseline.json": {
+      "bytes": 1041,
+      "sha256": "b11c65836c3b0b93f42baefb65d0699f256dbab5fe65c74f3fbc2e1e61b4a999"
+    },
+    "provenance/h7_transaction_status_001/parity_r2.json": {
+      "bytes": 11895,
+      "sha256": "11243fad5e334fcb0fd31cd82023c130fe2273431486d3c922d558e8b4e44e97"
+    },
+    "provenance/h7_transaction_status_001/review_transaction_r1.json": {
+      "bytes": 10550,
+      "sha256": "5f5dbd539e7e9f98e46b3c4ce15afe1c6fe52b3c154c8a352afc8ebcb17fd93f"
+    },
+    "provenance/h7_transaction_status_001/review_status_restore_r1.json": {
+      "bytes": 6245,
+      "sha256": "661fb96c30a3eb38137aab549f8d5fc83512f1f26ef8ec21bd8d6e9ab02e877d"
+    }
+  },
+  "scope": [
+    "MixedField transaction, shallow trial flush, native consumption and guarded publication",
+    "Counter and configuration identity R1 repairs",
+    "Restore/quarantine, campaign failure recording and survivor replay",
+    "Normal-path parity methodology and D2/D7 claim limits"
+  ],
+  "findings": [
+    {
+      "id": "TX-R2-001",
+      "severity": "medium",
+      "status": "open",
+      "location": "experiments/foster_campaign_001/tangent_backend.py:advance initial failure_index assignment; _quarantine",
+      "title": "Rejected noninteger indices can contaminate later restore failure metadata",
+      "evidence": "advance assigns self.failure_index=first before checking its type. A rejected np.float32(0) index leaves that scalar retained. A later failure of restore_arrays, including a trusted saved checkpoint with injected native-query ValueError, records this stale scalar as failure.input_first. json.dumps(bank.counts(), allow_nan=False) then raises TypeError: Object of type float32 is not JSON serializable.",
+      "reproduction": [
+        "Create bank and save checkpoint_arrays().",
+        "Call advance(np.float32(0), rows); catch expected source/order ValueError.",
+        "Patch bank.native.query to raise ValueError; call restore_arrays(saved) and catch it.",
+        "Verify bank.failed is true, then json.dumps(bank.counts(), allow_nan=False) raises TypeError."
+      ],
+      "impact": "Numerical quarantine remains correct, but a rejected call can poison the subsequently exposed machine-readable diagnostic envelope. This is a remaining recording/diagnostic type-contract defect, not a physical authorization failure.",
+      "requested_change": "Do not retain unvalidated first values. Assign failure_index only after accepted integer normalization (preferably after admission), and ensure restore failure input_first has explicit, serializable semantics. Add regression for rejected NumPy floating first followed by a failed trusted restore."
+    }
+  ],
+  "r1_dispositions": [
+    {
+      "id": "TX-R1-001",
+      "status": "repaired_for_admitted_integer_path",
+      "evidence": "Accepted first is converted to Python int before arithmetic; int64/uint64 regression covers two updates, checkpoint/restore, numerical parity and failed-publication JSON. TX-R2-001 identifies a separate rejected-input path."
+    },
+    {
+      "id": "SR1",
+      "status": "resolved",
+      "evidence": "Versioned digest includes calibration, clock_hz, effective refresh_interval_records, RC/hysteresis degrees and width. Regression distinguishes H5/H7, changed clock and changed cadence; cross-identity restore quarantines."
+    }
+  ],
+  "reasoning": [
+    "MixedField computes rows, response state, count, noise and QR root in local objects; finiteness checks precede assignment of four fields. C response receives copied state and allocated rows. Under sequential ordinary-attribute synchronous-Exception execution, the claimed commit boundary is supported.",
+    "The shallow trial is adequate for current H5/H7 implementations: they replace mutable arrays and only read shared calibration/projection/rate tables. Failure of QR or transport parity cannot modify the original field; backend guard quarantines any admitted failure. Future in-place changes require renewed review.",
+    "Native consumption may precede readout. Quarantine marks failed before diagnostics and reads native.count rather than stale live_count. Guarded current access and checkpoints refuse quarantine, and diagnostic messages carry separate published/consumed prefixes. A post-publication exception still invalidates current access.",
+    "Refresh replaces the native factor from original prior plus full field; it does not multiply the prior readout back into evidence. Failed recoverable refresh restores the saved native prefix; an escaping restore failure quarantines the backend.",
+    "Trusted restore checks binding, cadence, shapes, counters, chronology and exact native-query carrier/anchor reproduction. It does not establish authenticity or detect arbitrary coherent finite tampering; those exclusions are explicitly stated. Restoring an old prefix still requires ordered replay of its missing observations.",
+    "Compact checkpoints include only active aligned arms. Dedicated full/compact/debug-replay tests preserve failed diagnostic results, omit quarantined payloads and reproduce surviving-arm traces exactly. Existing parity tests explicitly remove only source identity after checking it matches each recording source; they do not erase other status differences.",
+    "Parity harness compares archived backend/MixedField against current code with shared unchanged Native/Compressed dependencies, identical ordered observations/public prior and no plant truth supplied to fitting. It compares byte payloads/state/root/native snapshots and counters/readouts/audit at every update plus flush/refresh boundaries. This is a focused differential witness, not an independent numerical/physical oracle.",
+    "parity_r2.json hashes match all currently recorded dependencies. Baseline source hashes were independently checked against git show at the pinned revision. Three controls cover 14720 observations, 921 advances, 13 scheduled refresh boundaries and one partial-buffer overflow; all reported comparisons pass. New status metadata is excluded by design.",
+    "Specification correctly limits D2 to unresolved authorization and provisional local precision. It does not claim D7 autonomous useful recovery, coverage or complete runtime verification. Packed H7 root 50624 bytes and additional dense trial root 100352 bytes agree with width112; total process workspace remains unbounded."
+  ],
+  "validation": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B -m unittest experiments.h7_transaction_status_001.test_transactions experiments.h7_transaction_status_001.test_recording experiments.foster_campaign_001.test_tangent_backend experiments.h7_campaign_001.test_campaign -v",
+      "result": "passed",
+      "tests": 46,
+      "elapsed_s": 21.715
+    },
+    {
+      "command": "Reviewer inline rejected np.float32 advance then trusted restore with injected native.query ValueError",
+      "result": "reproduced TX-R2-001; failed=True and counts JSON raises TypeError"
+    },
+    {
+      "command": "Reviewer identity audit of parity_r2 source_identities and baseline git show hashes",
+      "result": "all parity dependencies match; five baseline files match pinned revision"
+    }
+  ],
+  "limits": [
+    "No production edits by reviewer; immutable report records source snapshot before remediation.",
+    "Parity receipt inspected and source identities independently checked; parity suite not rerun by reviewer.",
+    "No exhaustive runtime fault proof, asynchronous/concurrent/native crash containment, power-loss persistence or arbitrary coherent corruption guarantee.",
+    "No physical coverage, load authorization, bounded useful recovery, aging, lifetime or target SRAM/timing certification.",
+    "Full/compact/replay campaign handlers catch selected exception classes; backend containment does not promise completed result artifacts for every arbitrary Exception.",
+    "No long campaigns, performance sweeps or optimization claims."
+  ],
+  "acceptance_condition": "Repair TX-R2-001, preserve this report and evidence, and independently re-review the changed path plus regression results."
+}

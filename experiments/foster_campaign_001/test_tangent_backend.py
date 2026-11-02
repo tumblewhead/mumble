@@ -56,7 +56,8 @@ class TangentCampaignTests(fixtures.FieldCampaignTests):
         with patch.object(bank.native,'query',side_effect=ValueError('test outside domain')),patch('experiments.foster_campaign_001.tangent_backend.solve',side_effect=ValueError('test unresolved')):
             with self.assertRaisesRegex(ValueError,'recovery unresolved'):bank.advance(first,obs)
         self.assertTrue(bank.failed);self.assertEqual(bank.counts()['retired_records'],first)
-        self.assertEqual(bank.counts()['pending_records'],16);np.testing.assert_array_equal(bank.full_message(),before)
+        self.assertEqual(bank.counts()['pending_records'],16);np.testing.assert_array_equal(bank.last_message(),before)
+        with self.assertRaisesRegex(ValueError,'unavailable'):bank.full_message()
         with self.assertRaisesRegex(ValueError,'already unresolved'):bank.advance(first,obs)
     def test_tangent_restore_wrong_count_rejected(self):
         _,banks,_=self.restore(self.entries[1]);bank=banks['tangent64'];arrays=bank.checkpoint_arrays()

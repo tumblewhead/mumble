@@ -102,7 +102,7 @@ def replay(case, destination, start_hour, duration_s=10., plots=True, *, stop_ho
         if arms[kind]['status'] == 'running':
             arms[kind]['status'] = 'plant_failed' if stream.failure else 'completed'
         arms[kind].update(bank.counts())
-        np.save(destination/(kind+'_message.npy'), bank.full_message())
+        np.save(destination/(kind+'_message.npy'), bank.last_message() if hasattr(bank,'last_message') else bank.full_message())
     for array in [*arrays.values(), *traces.values(), *charts.values()]:
         array.flush()
     result = dict(status='completed' if all(a['status']=='completed' for a in arms.values()) else 'unresolved',

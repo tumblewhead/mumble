@@ -244,8 +244,9 @@ def checkpoint(out, stream, banks, stats, source, model_id, binding, entries):
     metadata = dict(schema='foster_local_checkpoint_v1', sequence=stream.index,
                     source_id=source, model_id=model_id, binding=binding,
                     stimulus=stream.snapshot(), active=active, stats=copy.deepcopy(stats))
-    arrays = {k: np.frombuffer(bytes(bank.context), dtype=np.uint8) for k, bank in banks.items()}
-    for kind, bank in banks.items():
+    arrays = {k: np.frombuffer(bytes(banks[k].context), dtype=np.uint8) for k in active}
+    for kind in active:
+        bank=banks[kind]
         if hasattr(bank,'checkpoint_arrays'):
             arrays.update({kind+'__'+name:value for name,value in bank.checkpoint_arrays().items()})
     arrays['metadata'] = np.frombuffer(json.dumps(metadata, allow_nan=False).encode(), dtype=np.uint8)
@@ -372,7 +373,7 @@ def run_compact(out, campaign, config, model_id, scenario, cell, args):
         if stat['status'] == 'running':
             stat['status'] = 'plant_failed' if stream.failure else 'completed'
         stat.update(bank.counts())
-        np.save(out/(k+'_message.npy'), bank.full_message())
+        np.save(out/(k+'_message.npy'), bank.last_message() if hasattr(bank,'last_message') else bank.full_message())
         for bucket in ['all', 'current_nonzero', 'current_zero']:
             finish(stat[bucket])
     atomic_json(out/'events_summary.json', {k:v.result() for k,v in event_summary.items()})

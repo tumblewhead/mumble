@@ -1,0 +1,111 @@
+{
+  "schema": "h7_transaction_peer_review_v1",
+  "reviewer": "independent fresh-context agent /root/review_status_restore_r1",
+  "decision": "request_changes",
+  "source_revision": "feb56b9311dd09249d37e9d65cde01b19173c8cc",
+  "reviewed_worktree": "/home/easy/proj/mumble/.worktrees/h7-campaign",
+  "scope": [
+    "Status meaning and stale readout refusal",
+    "Checkpoint binding, trusted-array restore validation and quarantine",
+    "Full/compact/replay failure recording and survivor checkpoint isolation",
+    "D2/D7 claim scope; no physical safety or coverage certification"
+  ],
+  "source_hashes": {
+    "specifications/h7_transaction_status_001/README.md": {
+      "bytes": 6898,
+      "sha256": "cfd9084906403ae9e66613599dc85cad3459367275d74d8916864caff4d2990b"
+    },
+    "specifications/proof_review_001/proofs/D2.md": {
+      "bytes": 2976,
+      "sha256": "c6bca79cabeba96ae69eacaa30634eae8d4360b74a88063df2faab232f1c8fe4"
+    },
+    "specifications/proof_review_001/proofs/D7.md": {
+      "bytes": 4789,
+      "sha256": "e67489d05680106f67616bfbe4c30e54199aa7f63ed005c72808100471b1cb17"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 17726,
+      "sha256": "6d53362a8b1fd72ccd2ee5748d37716128815c246ad3e6024a6ff0bd8562dab3"
+    },
+    "experiments/foster_campaign_001/h7_backend.py": {
+      "bytes": 1844,
+      "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25557,
+      "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+    },
+    "experiments/foster_campaign_001/replay.py": {
+      "bytes": 9299,
+      "sha256": "c7bba259cb272d30aa9dabb6b88aff0b3b97c7e1f5a98382c7323b54fae9bd32"
+    },
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 8668,
+      "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+    },
+    "experiments/h7_transaction_status_001/test_transactions.py": {
+      "bytes": 17702,
+      "sha256": "bef2e935e3ebd93186ee044e510d4a8b4314a1a535b32eb16147d2f843cc1a24"
+    },
+    "experiments/h7_transaction_status_001/test_recording.py": {
+      "bytes": 5233,
+      "sha256": "7eec71af56be10e97fc9719f941e39383517427e3f0fa3bef634d70df0294dcf"
+    },
+    "provenance/h7_transaction_status_001/parity.json": {
+      "bytes": 11857,
+      "sha256": "448c579c13a661c5042980172edda1ab68292163b0c85ac5d2a219c9ccf94b32"
+    }
+  },
+  "findings": [
+    {
+      "id": "SR1",
+      "severity": "medium",
+      "location": "experiments/foster_campaign_001/tangent_backend.py:48,publication_status",
+      "finding": "configuration_id hashes calibration config only; status does not bind numerical representation, effective refresh cadence or clock despite specification claiming configuration binding. H5 and H7 publications with the same source/model/calibration and prefix have identical complete status identities. Different H7 refresh cadences also have identical identities.",
+      "counterexample": {
+        "construction": "TangentBackend versus H7Backend, same source/model/calibration, rate35, refresh17s; additionally H7Backend refresh1000s",
+        "complete_status_equal_H5_H7": true,
+        "field_widths": [
+          82,
+          112
+        ],
+        "complete_status_equal_H7_different_cadence": true,
+        "effective_intervals": [
+          608,
+          35008
+        ],
+        "configuration_id": "aedb95f5ba02ba595d2b89decfbad93af6ce65712054c070015df2e1ef5cc204",
+        "prefix": 0
+      },
+      "impact": "A copied status alone cannot distinguish these estimator configurations. Authorization remains unresolved, and restore separately checks cadence and array shapes, so this is an identity-contract gap rather than a demonstrated physical authorization or checkpoint bypass.",
+      "requested_change": "Bind versioned backend/representation descriptors, effective refresh interval and clock alongside calibration configuration; add distinguishing-identity regression tests.",
+      "disposition": "Parent accepted finding and plans repair; substantive change requires independent re-review."
+    }
+  ],
+  "positive_observations": [
+    "Current readout refuses quarantine; diagnostic publication explicitly retains unavailable/unresolved status and separate consumed/published counts.",
+    "Native consumption is consulted after exceptions and guarded advance prevents a consumed block from being retried through the quarantined object.",
+    "Trusted restore checks schema, identity, counters, cadence, shapes/finiteness and chronology, then re-queries restored native state and checks exact saved carrier and anchor before clearing quarantine.",
+    "Compact checkpoints serialize only active aligned arms; failed arm diagnostic result recording uses last_message; dedicated campaign tests cover survivor replay.",
+    "Specification clearly excludes concurrent access, arbitrary coherent tampering, physical coverage, autonomous recovery deadlines and target readiness."
+  ],
+  "limitations": [
+    "No exhaustive fault-path proof or independent physical/numerical qualification.",
+    "No source-code optimization or production edits performed by reviewer.",
+    "Successful-prefix parity receipt inspected; parity suite not independently rerun.",
+    "Campaign exception handlers catch selected classes; arbitrary Exceptions still quarantine backend but are not all promised to produce completed recording artifacts."
+  ],
+  "verification": {
+    "counterexample_command": "OPENBLAS_NUM_THREADS=1 python3 -B (inline same-source/config H5/H7/cadence identity witness)",
+    "counterexample_exit_code": 0,
+    "targeted_tests_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.h7_transaction_status_001.test_transactions experiments.foster_campaign_001.test_tangent_backend experiments.h7_campaign_001.test_campaign -v",
+    "targeted_tests_status": "passed",
+    "targeted_tests_count": 41,
+    "targeted_tests_elapsed_s": 18.823,
+    "targeted_tests_exit_code": 0
+  }
+}

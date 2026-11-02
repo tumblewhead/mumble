@@ -35,7 +35,7 @@ class H7CampaignTests(unittest.TestCase):
         self.assertEqual(set(self.result['arms']),set(self.kinds))
         other=json.loads((self.full/'result.json').read_text())
         for kind in self.kinds:
-            self.assertEqual(self.result['arms'][kind],other['arms'][kind])
+            fixtures.assert_arm_parity(self,self.result,other,kind)
             np.testing.assert_array_equal(np.load(self.case/(kind+'_message.npy')),np.load(self.full/(kind+'_message.npy')))
             self.assertGreater(self.result['arms'][kind]['field_history']['accepted'],0)
     def test_checkpoint_pending_rows_replays_bitwise(self):
@@ -80,7 +80,7 @@ class H7CampaignTests(unittest.TestCase):
         a.advance(first,rows);a._flush_field();np.testing.assert_array_equal(a.field.state,a.live_state)
     def test_cross_degree_checkpoint_rejected(self):
         _,banks,_=self.restore(self.entries[1])
-        with self.assertRaisesRegex(ValueError,'shape'):banks['tangent_h7'].restore_arrays(banks['tangent64'].checkpoint_arrays())
+        with self.assertRaisesRegex(ValueError,'identity/configuration'):banks['tangent_h7'].restore_arrays(banks['tangent64'].checkpoint_arrays())
     def test_compact_plot_and_summary_error_comparison(self):
         from experiments.foster_campaign_001.plot import render,render_summary,ARM_COLORS
         self.assertNotEqual(ARM_COLORS['tangent64'],ARM_COLORS['tangent_h7'])

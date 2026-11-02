@@ -1,5 +1,6 @@
 """Joint-history replacement, analytic transport, recording and replay controls."""
 import ctypes as C
+import copy
 import json
 from pathlib import Path
 import subprocess
@@ -16,6 +17,17 @@ from .replay import replay
 from .telemetry import trace_row
 from experiments.foster_c_baseline_001.reference import ptr
 from experiments.slow_likelihood_diagnostic_001.numerics import solve
+
+
+def assert_arm_parity(test, left, right, kind):
+    a=copy.deepcopy(left['arms'][kind]);b=copy.deepcopy(right['arms'][kind])
+    # Full recording names the observation file; compact names its exact recipe.
+    # Both must retain their own real identity in the new status envelope.
+    for case,arm in [(left,a),(right,b)]:
+        if 'publication' in arm:
+            test.assertEqual(arm['publication'].pop('source_id'),case['source_id'])
+            test.assertEqual(arm['publication']['model_id'],case['model_id'])
+    test.assertEqual(a,b)
 
 
 class FieldCampaignTests(unittest.TestCase):
@@ -50,7 +62,7 @@ class FieldCampaignTests(unittest.TestCase):
         other=json.loads((self.full/'result.json').read_text())
         for kind in self.kinds:
             np.testing.assert_array_equal(np.load(self.case/(kind+'_message.npy')),np.load(self.full/(kind+'_message.npy')))
-            self.assertEqual(self.result['arms'][kind],other['arms'][kind])
+            assert_arm_parity(self,self.result,other,kind)
         audit=self.result['arms']['field64']['field_history']
         self.assertGreater(audit['accepted'],0)
         self.assertEqual(audit['accumulated_records']+audit['buffered_records'],self.result['records'])

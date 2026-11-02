@@ -1,0 +1,136 @@
+{
+  "schema": "h7_transaction_independent_review_v1",
+  "review_id": "review_transaction_r1",
+  "reviewer": "fresh-context independent transaction reviewer /root/review_transaction_r1",
+  "base_revision": "feb56b9311dd09249d37e9d65cde01b19173c8cc",
+  "branch": "implementation/h7-transaction-status-001",
+  "verdict": "request_changes",
+  "source_identities": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "README.md": {
+      "bytes": 98289,
+      "sha256": "f9ec3ba7cbad3ed0b7e49efacfbd7b2ae31d1784524ce895f9493a8e8b0e436e"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 265856,
+      "sha256": "39a84261d90a63e87e5f75c68b21ceed6454764c86de5128d3a6b61e1ef8a992"
+    },
+    "specifications/h7_transaction_status_001/README.md": {
+      "bytes": 6898,
+      "sha256": "cfd9084906403ae9e66613599dc85cad3459367275d74d8916864caff4d2990b"
+    },
+    "specifications/proof_review_001/proofs/D7.md": {
+      "bytes": 4789,
+      "sha256": "e67489d05680106f67616bfbe4c30e54199aa7f63ed005c72808100471b1cb17"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/hysteresis_refinement_001/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "bytes": 6989,
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 17726,
+      "sha256": "6d53362a8b1fd72ccd2ee5748d37716128815c246ad3e6024a6ff0bd8562dab3"
+    },
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 8668,
+      "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+    },
+    "experiments/field_tangent_native_001/kernel.c": {
+      "bytes": 11098,
+      "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25557,
+      "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+    },
+    "experiments/foster_campaign_001/replay.py": {
+      "bytes": 9299,
+      "sha256": "c7bba259cb272d30aa9dabb6b88aff0b3b97c7e1f5a98382c7323b54fae9bd32"
+    },
+    "experiments/h7_transaction_status_001/test_transactions.py": {
+      "bytes": 17702,
+      "sha256": "bef2e935e3ebd93186ee044e510d4a8b4314a1a535b32eb16147d2f843cc1a24"
+    },
+    "experiments/h7_transaction_status_001/check_parity.py": {
+      "bytes": 11697,
+      "sha256": "db01a3c17054dff5aa085ae840d35a2966502e7bc31326aa91e956de4848a597"
+    },
+    "provenance/h7_transaction_status_001/baseline.json": {
+      "bytes": 1041,
+      "sha256": "b11c65836c3b0b93f42baefb65d0699f256dbab5fe65c74f3fbc2e1e61b4a999"
+    }
+  },
+  "scope": [
+    "MixedField row staging and all-four-field commit",
+    "H5/H7 shallow trial flush premise",
+    "TangentBackend admission, native consumption, recovery refresh, quarantine, publication and checkpoint boundaries",
+    "Observation ownership across field/native representations",
+    "check_parity.py comparison construction and memory/scope claims"
+  ],
+  "findings": [
+    {
+      "id": "TX-R1-001",
+      "severity": "medium",
+      "status": "open",
+      "location": "experiments/foster_campaign_001/tangent_backend.py:advance, _advance_admitted, publication_status, checkpoint_arrays",
+      "title": "Admitted NumPy sequence integers escape into nonserializable checkpoint/publication metadata",
+      "evidence": "advance explicitly accepts isinstance(first, (int, np.integer)), then _advance_admitted assigns live_count=first+len(rows). On this runtime np.int64 and np.uint64 first values leave the corresponding NumPy scalar in live_count. The update publishes successfully, but checkpoint_arrays json.dumps of live_count raises TypeError. publication_status also exposes that scalar as consumed_records.",
+      "reproduction": [
+        "Use TransactionTests.setUpClass(); case=TransactionTests(); bank=case.bank().",
+        "bank.advance(np.int64(0), case.rows) succeeds; native.count==carrier.sequence==16 and bank.failed==False.",
+        "bank.checkpoint_arrays() raises TypeError: Object of type int64 is not JSON serializable.",
+        "Repeat with np.uint64(0): same outcome with uint64. int(0) control updates and checkpoints successfully."
+      ],
+      "impact": "An explicitly admitted, numerically valid ordered block prevents resumable checkpointing and ordinary JSON recording. Containment of estimation state still holds; this is an API/recording contract defect, not a false authorization or demonstrated evidence duplication.",
+      "requested_change": "Canonicalize the accepted first counter to a Python int before counter arithmetic and retained diagnostic metadata; test int64 and uint64 successful advance, checkpoint and JSON-serializable publication/count metadata.",
+      "origin_note": "The existing arithmetic also retained NumPy scalars before this change. The new explicit admission and machine-readable publication/checkpoint contract expose the unsupported type path, so it should be fixed within this contract implementation."
+    }
+  ],
+  "reasoning": [
+    "MixedField stages the observation array, response rows, copied response state, count, normalizer, stacked QR root and sign normalization before assigning root/state/count/noise. C response output pointers refer to local state/rows. QR operates on vstack output. Under the declared synchronous Exception, ordinary-attribute, single-owner model, no fallible numerical operation follows the final field commit.",
+    "The shallow flush premise currently holds for both Field.update and MixedField.update: they allocate state and root replacements, and their C response functions read calibration/projection/rate arrays. The original field remains the object borrowed by the objective and Native. Successful flush replaces its four mutable attributes only after prefix/state parity and finiteness checks; failure preserves its pending rows and prior committed representation.",
+    "Native ft_step and ft_update stage their factor in workspace before committing. ft_step commits factor/count and live response state before its optional query. The backend guard correctly quarantines failures after that boundary and obtains consumed_records from native.count even when live_count has not yet advanced. Failed native count retrieval produces an unknown count rather than asserting stale Python consumption.",
+    "The overflow path computes new rows into local state, flushes the previous pending prefix, commits native update, then installs the new live state. Any intervening admitted Exception is quarantined. No retry can re-enter advance while quarantined.",
+    "Refresh uses full-field likelihood with the original public prior and replaces the native factor. It does not append an old posterior as another likelihood. If a recoverable refresh error occurs, native.restore(saved, live_count) reinstalls the already-consumed tangent prefix; a failure of restoration escapes to quarantine. MemoryError and other non-recoverable Exceptions also reach quarantine.",
+    "Publication checks counters, numeric shapes and finiteness into a separate carrier before the copy. A later diagnostic exception still enters quarantine, including the case in which published_records equals consumed_records. last_message is intentionally diagnostic, while current readout/checkpoint guards inspect failed state. This does not make previously copied publications live capabilities, consistent with the specification.",
+    "Trusted restore validates identities/counters and reproduces the native readout/anchor before clearing quarantine. It does not independently establish integrity of a coherently tampered field/root/native checkpoint; the specification explicitly excludes malicious substitution and arbitrary corruption. Exact once-only replay of a restored gap remains a caller obligation.",
+    "The parity comparator checks raw carrier, native snapshot, field/root/live state, anchor, pending rows, counters, normalizers, audit and numerical readouts against archived backend/field modules using identical public priors and observations. It tests scheduled refresh and partial-buffer overflow and refuses source changes during the run. Shared unchanged dependencies mean this is a focused differential check, not an independent physical model oracle.",
+    "The 50,624-byte H7 packed root and additional 100,352-byte dense trial root are consistent with width 112. QR/vstack/solver/process peaks remain excluded explicitly; no bounded Cortex-M23 claim is made."
+  ],
+  "validation": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B -m unittest experiments.h7_transaction_status_001.test_transactions -v",
+      "result": "passed",
+      "tests": 20
+    },
+    {
+      "command": "Reviewer inline Python fixture: advance and checkpoint with first=int(0), np.int64(0), np.uint64(0)",
+      "result": "int control passed; int64 and uint64 advance passed but checkpoint raised TypeError",
+      "production_edits": false
+    }
+  ],
+  "limits": [
+    "No production edits by this reviewer. This report hashes the R1 sources before parent remediation.",
+    "No claim of exhaustive runtime fault-path verification, native crash containment, asynchronous interruption safety, concurrent-reader safety, or power-loss persistence.",
+    "No physical coverage, autonomous bounded recovery, sensor fault detection, aging, lifetime precision or target-memory qualification.",
+    "Parent was still adding separate campaign recording integration tests; those new tests are not accepted by this report.",
+    "Configuration identity/status semantics receive a separate independent reviewer; this report does not substitute for that review.",
+    "No long campaigns or performance sweeps rerun. The parity script was inspected; no new parity run was performed by this reviewer."
+  ],
+  "acceptance_condition": "Resolve TX-R1-001, preserve this original review and source hashes, and obtain a fresh follow-up review of substantive changes and the targeted regression result."
+}

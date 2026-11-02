@@ -40,23 +40,33 @@ class MixedField(Field):
         self.state[:3*self.n]=1;self.state[6*self.n:6*self.n+self.m*self.m]=1
         self.fn.argtypes=[DP,C.c_size_t,DP,C.c_int,C.c_int,C.c_int,DP,DP,DP,DP,DP]
 
-    def rows(self,first,observations,source=None):
+    def _stage_rows(self,first,observations,source=None):
         if first!=self.count or (source is not None and source!=self.source):raise ValueError('source/order mismatch')
         obs=np.ascontiguousarray(observations,dtype=float)
-        if obs.ndim!=2 or obs.shape[1]!=5:raise ValueError('observation shape')
+        if obs.ndim!=2 or obs.shape[1]!=5 or not np.isfinite(obs).all():raise ValueError('observation shape/values')
         rows=np.empty((len(obs),self.width));state=self.state.copy()
         status=self.fn(pointer(obs),len(obs),pointer(self.cal),self.n,self.m,self.b,
             pointer(self.rates),pointer(self.p1),pointer(self.p2),pointer(state),pointer(rows))
-        if status or not np.isfinite(rows).all():raise ValueError('response recurrence failed')
-        self.state=state;self.count+=len(obs)
-        self.noise+=float(np.log(obs[:,4]).sum()+len(obs)*.5*math.log(2*math.pi))
+        if status or not np.isfinite(rows).all() or not np.isfinite(state).all():raise ValueError('response recurrence failed')
+        count=self.count+len(obs)
+        noise=self.noise+float(np.log(obs[:,4]).sum()+len(obs)*.5*math.log(2*math.pi))
+        if not math.isfinite(noise):raise ValueError('nonfinite noise normalizer')
+        return rows,state,count,noise
+
+    def rows(self,first,observations,source=None):
+        # Row-generator API: advances response only, deliberately not the root.
+        rows,state,count,noise=self._stage_rows(first,observations,source)
+        self.state,self.count,self.noise=state,count,noise
         return rows
 
     def update(self,first,observations,source=None,return_rows=False):
-        rows=self.rows(first,observations,source)
+        rows,state,count,noise=self._stage_rows(first,observations,source)
         root=np.linalg.qr(np.vstack([self.root,rows]),mode='r')
         root*=np.where(np.diag(root)<0,-1.,1.)[:,None]
-        self.root=root
+        if not np.isfinite(root).all():raise ValueError('nonfinite likelihood root')
+        # No fallible numerical/allocation work follows the commit. Single owner;
+        # asynchronous interruption and concurrent readers require another layer.
+        self.root,self.state,self.count,self.noise=root,state,count,noise
         return rows if return_rows else None
 
     def outgoing(self,chart):

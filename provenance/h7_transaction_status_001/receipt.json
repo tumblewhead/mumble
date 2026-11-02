@@ -1,0 +1,230 @@
+{
+  "schema": "h7_transaction_status_implementation_v1",
+  "status": "accepted_with_declared_scope",
+  "base_revision": "feb56b9311dd09249d37e9d65cde01b19173c8cc",
+  "branch": "implementation/h7-transaction-status-001",
+  "source_identity_note": "Exact working source hashes bind edits before the containing commit; base_revision names the pre-repair parent.",
+  "contract": "specifications/h7_transaction_status_001/README.md",
+  "implementation": {
+    "transactional_field_update": true,
+    "staged_backend_flush": true,
+    "quarantine_after_admitted_exception": true,
+    "consumed_and_published_prefixes_separate": true,
+    "current_readout_and_checkpoint_blocked_in_quarantine": true,
+    "copied_checkpoint_arrays": true,
+    "explicit_diagnostic_message": true,
+    "failed_arms_excluded_from_resumable_checkpoints": true,
+    "source_model_configuration_binding": true,
+    "guarantee": "provisional_local_precision",
+    "physical_authorization": "unresolved",
+    "numerical_kernels_changed": false,
+    "default_changed": false,
+    "mainline_promoted": false
+  },
+  "validation": {
+    "tests": 71,
+    "new_transaction_and_recording_tests": 26,
+    "receipt": "provenance/h7_transaction_status_001/tests_r3.json",
+    "baseline_parity": "provenance/h7_transaction_status_001/parity_r3.json",
+    "observations": 14720,
+    "advances": 921,
+    "scheduled_refresh_boundaries": 13,
+    "explicit_refreshes": 3,
+    "accepted_refreshes": 11,
+    "identical_natural_rejections": 5,
+    "partial_buffer_overflows": 1,
+    "numerical_result": "byte_exact_at_all_checked_boundaries",
+    "parity_command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B experiments/h7_transaction_status_001/check_parity.py --out provenance/h7_transaction_status_001/parity_r3.json",
+    "repeat_note": "Parity refuses evidence overwrite; choose a new --out. Missing ignored baseline archive is reconstructed from pinned git revision and verified."
+  },
+  "review": {
+    "technical_reports": 5,
+    "final": "provenance/h7_transaction_status_001/review_final_r3.json",
+    "decision": "accept_with_declared_scope",
+    "dispositions": [
+      {
+        "id": "TX-R1-001",
+        "status": "resolved",
+        "repair": "Normalize admitted NumPy integer indices before arithmetic and serialization."
+      },
+      {
+        "id": "SR1",
+        "status": "resolved",
+        "repair": "Bind H5/H7 degrees/width, clock and actual refresh interval in configuration digest."
+      },
+      {
+        "id": "TX-R2-001",
+        "status": "resolved",
+        "repair": "Do not retain rejected raw index types; diagnostics name operation and restore input_first is null."
+      }
+    ],
+    "historical_reports": "Prior request-changes reports remain immutable; final fresh review accepts all repairs.",
+    "post_review_completion_summary_updates": {
+      "PROJECT_STATE.json": {
+        "reviewed": {
+          "bytes": 265856,
+          "sha256": "39a84261d90a63e87e5f75c68b21ceed6454764c86de5128d3a6b61e1ef8a992"
+        },
+        "completion_summary": {
+          "bytes": 267324,
+          "sha256": "cb2078cf8a5b67d499dfbc4eab5d215f0a3f0b0d418bfa7cca355c14a222a67b"
+        }
+      },
+      "README.md": {
+        "reviewed": {
+          "bytes": 98289,
+          "sha256": "f9ec3ba7cbad3ed0b7e49efacfbd7b2ae31d1784524ce895f9493a8e8b0e436e"
+        },
+        "completion_summary": {
+          "bytes": 99144,
+          "sha256": "b6792b22d00385ca40effa7e61138a409431c1157f85ce7a7ae6dfb0ecc44ce3"
+        }
+      }
+    }
+  },
+  "assumptions": [
+    "Single-owner sequential API; fixed public calibration/configuration/native dependencies",
+    "Synchronous Python Exception containment only; no asynchronous/concurrent/native-crash/power-loss guarantee",
+    "Trusted complete source/runtime/binary-bound checkpoints; no arbitrary coherent tampering certification",
+    "Private helpers/raw arrays are not public mutation APIs; shallow trial relies on current replacement-only updates"
+  ],
+  "resources": {
+    "packed_H7_root_B": 50624,
+    "dense_H7_root_B": 100352,
+    "full_process_peak_bound": null,
+    "target_timing_bound": null,
+    "scope": "No memory optimization or timing claim; Python status, snapshots and QR workspace remain desktop overhead."
+  },
+  "open_obligations": [
+    "Uniform physical-response/derivative/state-transport approximation bounds",
+    "Useful query enclosure and physical/lifetime coverage law",
+    "Bounded autonomous recovery and post-reset reacquisition",
+    "Complete target memory and 16 MHz timing qualification"
+  ],
+  "preserved": {
+    "original_campaign_results_modified": false,
+    "proof_packets_modified": false,
+    "baseline": "provenance/h7_transaction_status_001/baseline.json",
+    "old_checkpoint_policy": "Use original pinned source/runtime/binaries; do not bypass binding or silently migrate schema."
+  },
+  "source_identities": {
+    "PROJECT_STATE.json": {
+      "bytes": 267324,
+      "sha256": "cb2078cf8a5b67d499dfbc4eab5d215f0a3f0b0d418bfa7cca355c14a222a67b"
+    },
+    "README.md": {
+      "bytes": 99144,
+      "sha256": "b6792b22d00385ca40effa7e61138a409431c1157f85ce7a7ae6dfb0ecc44ce3"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/replay.py": {
+      "bytes": 9299,
+      "sha256": "c7bba259cb272d30aa9dabb6b88aff0b3b97c7e1f5a98382c7323b54fae9bd32"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25557,
+      "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 18216,
+      "sha256": "6a0c01cc9e2b32686582e7a58b0e2fa3a09e7951466945537917a6d58703dad7"
+    },
+    "experiments/foster_campaign_001/test_field_backend.py": {
+      "bytes": 7356,
+      "sha256": "e98cc725cf0e72642a598ad722c7a662c6da1e181c2c8dd2a2eb892ff3bfdc44"
+    },
+    "experiments/foster_campaign_001/test_tangent_backend.py": {
+      "bytes": 4813,
+      "sha256": "ae8f59a0679afc82a391dfc550ddaab178ce2be4db1aec65c8cb103d9421a291"
+    },
+    "experiments/h7_campaign_001/test_campaign.py": {
+      "bytes": 6257,
+      "sha256": "5befe58945c9ab78c3b2720552e47b2817b0c57be04de3420cde11b4f776d493"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "handoff/CONTINUE.json": {
+      "bytes": 1789,
+      "sha256": "a9622c48d0cea4283a63f9347860ced3028a9901620a776874e6a04d10499796"
+    },
+    "specifications/h7_transaction_status_001/README.md": {
+      "bytes": 7208,
+      "sha256": "5dd3a22c1412a8937493cc6ed4590e7d8bd94d5a18fef4dec70e15ccd0319a96"
+    },
+    "experiments/h7_transaction_status_001/check_parity.py": {
+      "bytes": 12750,
+      "sha256": "b1073ddca953695faf00c7a8ed12905db15c62d026093fc0ffa557b16d9dab48"
+    },
+    "experiments/h7_transaction_status_001/test_transactions.py": {
+      "bytes": 21062,
+      "sha256": "7260e1b80504ec46c2c18adc491ad336260e9705d5a0b044e8d3703f4e1c8265"
+    },
+    "experiments/h7_transaction_status_001/test_recording.py": {
+      "bytes": 5233,
+      "sha256": "7eec71af56be10e97fc9719f941e39383517427e3f0fa3bef634d70df0294dcf"
+    },
+    "handoff/archive/CONTINUE_before_h7_transaction_status.json": {
+      "bytes": 1574,
+      "sha256": "6cef67d19a0cce5c45bbd7dd7f641db66eced658983e4937b46fdfd7b78bec21"
+    }
+  },
+  "evidence_identities": {
+    "provenance/h7_transaction_status_001/baseline.json": {
+      "bytes": 1041,
+      "sha256": "b11c65836c3b0b93f42baefb65d0699f256dbab5fe65c74f3fbc2e1e61b4a999"
+    },
+    "provenance/h7_transaction_status_001/parity.json": {
+      "bytes": 11857,
+      "sha256": "448c579c13a661c5042980172edda1ab68292163b0c85ac5d2a219c9ccf94b32"
+    },
+    "provenance/h7_transaction_status_001/parity_r2.json": {
+      "bytes": 11895,
+      "sha256": "11243fad5e334fcb0fd31cd82023c130fe2273431486d3c922d558e8b4e44e97"
+    },
+    "provenance/h7_transaction_status_001/parity_r3.json": {
+      "bytes": 11895,
+      "sha256": "a286ed803af08d70de69e3b06998a034f6f334998c5cebf3ff6a3edde4d37061"
+    },
+    "provenance/h7_transaction_status_001/review_final_r3.json": {
+      "bytes": 15695,
+      "sha256": "82aa9f01a654e317370abf4865d5f05be7ed1af76b28d7c4b0133af270edeff6"
+    },
+    "provenance/h7_transaction_status_001/review_status_restore_r1.json": {
+      "bytes": 6245,
+      "sha256": "661fb96c30a3eb38137aab549f8d5fc83512f1f26ef8ec21bd8d6e9ab02e877d"
+    },
+    "provenance/h7_transaction_status_001/review_status_restore_r2.json": {
+      "bytes": 8934,
+      "sha256": "66bf132654754b4f020cb777234e43ebefcf375d85c3f51d6a2f91cae690aa46"
+    },
+    "provenance/h7_transaction_status_001/review_transaction_r1.json": {
+      "bytes": 10550,
+      "sha256": "5f5dbd539e7e9f98e46b3c4ce15afe1c6fe52b3c154c8a352afc8ebcb17fd93f"
+    },
+    "provenance/h7_transaction_status_001/review_transaction_r2.json": {
+      "bytes": 11137,
+      "sha256": "8b5e9f625fde51582b1558def7f6a9d47f63dd8a938f94b0a736980c24a35955"
+    },
+    "provenance/h7_transaction_status_001/tests_r2.json": {
+      "bytes": 3194,
+      "sha256": "e7835b281a72630612aa3995372f3007642af977864b30397f3f07dac8915180"
+    },
+    "provenance/h7_transaction_status_001/tests_r2.log": {
+      "bytes": 639,
+      "sha256": "061099d2a9b90fecd49f80328137665a8896988192b3dba4ef7c080ea1df2f09"
+    },
+    "provenance/h7_transaction_status_001/tests_r3.json": {
+      "bytes": 3193,
+      "sha256": "13ec3736848dc15d3d3b2da997f253b189bf8e8f2e831a07b4d898604fc62062"
+    },
+    "provenance/h7_transaction_status_001/tests_r3.log": {
+      "bytes": 640,
+      "sha256": "250c374e42c8a06eee63633bac05d5ec650a241e6328fd45ea87891aa668a008"
+    }
+  }
+}

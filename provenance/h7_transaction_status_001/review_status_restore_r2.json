@@ -1,0 +1,137 @@
+{
+  "schema": "h7_transaction_peer_review_v1",
+  "reviewer": "independent fresh-context agent /root/review_status_restore_r2",
+  "decision": "accept_with_declared_scope",
+  "source_revision": "feb56b9311dd09249d37e9d65cde01b19173c8cc",
+  "reviewed_worktree": "/home/easy/proj/mumble/.worktrees/h7-campaign",
+  "source_hashes": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "README.md": {
+      "bytes": 98289,
+      "sha256": "f9ec3ba7cbad3ed0b7e49efacfbd7b2ae31d1784524ce895f9493a8e8b0e436e"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 265856,
+      "sha256": "39a84261d90a63e87e5f75c68b21ceed6454764c86de5128d3a6b61e1ef8a992"
+    },
+    "specifications/h7_transaction_status_001/README.md": {
+      "bytes": 7004,
+      "sha256": "9e45556152414da9fb9021798ef2dbdf95b795462eb0aeca4404421080d91b77"
+    },
+    "specifications/proof_review_001/proofs/D2.md": {
+      "bytes": 2976,
+      "sha256": "c6bca79cabeba96ae69eacaa30634eae8d4360b74a88063df2faab232f1c8fe4"
+    },
+    "specifications/proof_review_001/proofs/D7.md": {
+      "bytes": 4789,
+      "sha256": "e67489d05680106f67616bfbe4c30e54199aa7f63ed005c72808100471b1cb17"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 18134,
+      "sha256": "5a8ff6d7c4ebc825e4a9e38e0d82095defc51ba30e4925500f4465c05c00d98e"
+    },
+    "experiments/foster_campaign_001/h7_backend.py": {
+      "bytes": 1844,
+      "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25557,
+      "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+    },
+    "experiments/foster_campaign_001/replay.py": {
+      "bytes": 9299,
+      "sha256": "c7bba259cb272d30aa9dabb6b88aff0b3b97c7e1f5a98382c7323b54fae9bd32"
+    },
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 8668,
+      "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/h7_transaction_status_001/test_transactions.py": {
+      "bytes": 19851,
+      "sha256": "9ed3b85dfe11f9ce2eda610bd330e2df7b31ab2cf5e9ecfea9323e225f8822c8"
+    },
+    "experiments/h7_transaction_status_001/test_recording.py": {
+      "bytes": 5233,
+      "sha256": "7eec71af56be10e97fc9719f941e39383517427e3f0fa3bef634d70df0294dcf"
+    },
+    "experiments/foster_campaign_001/test_tangent_backend.py": {
+      "bytes": 4813,
+      "sha256": "ae8f59a0679afc82a391dfc550ddaab178ce2be4db1aec65c8cb103d9421a291"
+    },
+    "experiments/h7_campaign_001/test_campaign.py": {
+      "bytes": 6257,
+      "sha256": "5befe58945c9ab78c3b2720552e47b2817b0c57be04de3420cde11b4f776d493"
+    },
+    "provenance/h7_transaction_status_001/parity_r2.json": {
+      "bytes": 11895,
+      "sha256": "11243fad5e334fcb0fd31cd82023c130fe2273431486d3c922d558e8b4e44e97"
+    },
+    "provenance/h7_transaction_status_001/review_status_restore_r1.json": {
+      "bytes": 6245,
+      "sha256": "661fb96c30a3eb38137aab549f8d5fc83512f1f26ef8ec21bd8d6e9ab02e877d"
+    },
+    "provenance/h7_transaction_status_001/review_transaction_r1.json": {
+      "bytes": 10550,
+      "sha256": "5f5dbd539e7e9f98e46b3c4ce15afe1c6fe52b3c154c8a352afc8ebcb17fd93f"
+    }
+  },
+  "scope": [
+    "Publication identity, stale readout refusal and unresolved authorization",
+    "Trusted checkpoint restore validation and quarantine",
+    "Full/compact/debug-replay failure recording and survivor checkpoint isolation",
+    "R1 SR1 identity remediation and TX-R1-001 integer normalization",
+    "Correspondence to limited D2/D7 premises; no physical or deployment certification"
+  ],
+  "findings": [],
+  "prior_findings": [
+    {
+      "id": "SR1",
+      "disposition": "resolved",
+      "reason": "Versioned tangent_configuration_v1 binding hashes calibration, clock_hz, effective refresh interval, RC degree, hysteresis degree and field width. The regression distinguishes H5/H7, alternate clock and cadence, checks stable same-configuration identity, and rejects restore across each variant."
+    },
+    {
+      "id": "TX-R1-001",
+      "disposition": "resolved_in_reviewed_scope",
+      "reason": "Accepted NumPy sequence integers are normalized to Python int before arithmetic and failure metadata assignment. Regression covers signed/unsigned success, exact carrier parity, JSON status/count serialization, checkpoints, restore and post-consumption failure diagnostics."
+    }
+  ],
+  "reasoning": [
+    "Publication status remains explicitly provisional_local_precision and authorization unresolved. Current APIs refuse quarantine; diagnostic copies carry separate published and native-consumed prefixes. A successful earlier copied publication is limited to its named prefix and is not a live authorization capability.",
+    "Configuration identity now distinguishes the actual supported representations and execution timing choices. Calibration and configuration are assumed fixed during object lifetime. The digest is an identity descriptor, not an authenticity or physical correctness certificate.",
+    "Restore validates schema/source/model/configuration/clock, cadence, counters, normalizers, array shapes/finiteness and chronology. It reconstructs the native query and checks exact carrier and anchor reproduction before clearing failure. Exceptions quarantine, including failed native query after partial restore. The outer restore constructs fresh objects and validates file/runtime/source/binary bindings before returning them.",
+    "Trusted-array restore does not independently recompute every field/native relation or authenticate coherent tampering; that is explicitly outside the specified fault model. Replaying a gap from an older checkpoint exactly once remains a caller obligation and is exercised by a fault/recovery test.",
+    "Compact checkpoint payload selection uses the same active arms as alignment checks. A failed arm cannot contribute its stale carrier or private arrays to a resumable survivor checkpoint. Result metadata preserves failed-arm diagnostics, and all three recording exit paths use last_message for diagnostic serialization.",
+    "The injected recording campaign fails the second H7 publication after native consumption: consumed 32, published 16, one completed output, unavailable readout. The H5 survivor finishes 9000 records; its checkpoint excludes H7 payloads and replay trace matches the original continuation exactly.",
+    "D2 and D7 remain conditional mathematical contracts. This implementation supplies limited single-owner synchronous containment and identity behavior, without validated query enclosures, lifetime coverage, autonomous recovery deadlines, concurrent publication guarantees or firmware qualification."
+  ],
+  "verification": {
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python3 -B -m unittest experiments.h7_transaction_status_001.test_transactions experiments.h7_transaction_status_001.test_recording experiments.foster_campaign_001.test_tangent_backend experiments.h7_campaign_001.test_campaign -v",
+    "status": "passed",
+    "tests": 46,
+    "elapsed_s": 21.773,
+    "exit_code": 0,
+    "parity_receipt": "provenance/h7_transaction_status_001/parity_r2.json",
+    "parity_status": "passed",
+    "parity_source_hashes_match_current": true,
+    "parity_independently_rerun": false
+  },
+  "limits": [
+    "This acceptance applies only to the exact source hashes and the declared synchronous Python Exception, single-owner, trusted-checkpoint model; tests are finite evidence, not exhaustive program proof.",
+    "Campaign handlers catch selected exception classes. Arbitrary backend Exceptions cause quarantine but are not all guaranteed to yield completed campaign result files; MemoryError diagnostic allocation is explicitly not promised.",
+    "No physical uncertainty coverage, aging, lifetime accuracy, useful query authorization, autonomous recovery bound, silent-corruption detection, native crash containment, asynchronous interruption safety or power-loss persistence established.",
+    "No M23 memory or execution qualification. The packed H7 field root remains 50,624 bytes, with additional dense trial root and unbounded-by-this-review process workspace.",
+    "Parent-generated R2 parity receipt inspected and its source hashes checked; parity script not independently rerun. No long campaign or performance sweep performed.",
+    "Reviewer changed no production code; this report is a new immutable artifact and leaves both R1 reports intact."
+  ]
+}
