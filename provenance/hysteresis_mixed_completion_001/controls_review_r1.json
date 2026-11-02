@@ -1,0 +1,526 @@
+{
+  "schema": "mumble_independent_review_v1",
+  "review_id": "hysteresis_mixed_completion_001_controls_review_r1",
+  "reviewer": "independent agent /root/mixed_completion_integration_review",
+  "created_utc": "2026-11-02T08:07:47.026642+00:00",
+  "base_revision": "d02bd36c5da9a1c5f750e3faa1786815b3440f99",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "revise_missing_endpoint_SOC_width_diagnostic",
+  "scope": [
+    "run.py and preserved versions/run_r1.py integration",
+    "analyze.py and primary/follow-up results",
+    "experiment README, provenance README and compact summary",
+    "truth separation, common domain/prior, full joint covariance and future-query transport",
+    "source/result integrity, numerical-stop scope and preservation of failures"
+  ],
+  "excluded": [
+    "Root README, PROJECT_STATE and handoff semantic updates pending in parent task",
+    "Candidate classes already covered by separate accepted reviews",
+    "Physical coverage, uniform error bounds, firmware readiness or promotion"
+  ],
+  "source_bindings": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "experiments/conditional_architecture_001/conditional.py": {
+      "bytes": 3493,
+      "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635"
+    },
+    "experiments/conditional_architecture_001/run.py": {
+      "bytes": 8783,
+      "sha256": "4d15a585ed674671dc5410d5e612219101823930414bc1ddc53cb0ef3353f0b2"
+    },
+    "experiments/field_tangent_native_001/kernel.c": {
+      "bytes": 11098,
+      "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+    },
+    "experiments/field_tangent_native_001/kernel.h": {
+      "bytes": 2183,
+      "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+    },
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 8668,
+      "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+    },
+    "experiments/foster_c_baseline_001/reference.py": {
+      "bytes": 3562,
+      "sha256": "9421252aee1bb7776e125904faadef6483579759041bdfd819b7e8dfa53ea438"
+    },
+    "experiments/foster_campaign_001/backend.py": {
+      "bytes": 11041,
+      "sha256": "289b910b26a724a42389740d9cba4a273b4bfb80458fd34979dd0274dd63a453"
+    },
+    "experiments/foster_campaign_001/charger.py": {
+      "bytes": 8547,
+      "sha256": "519963daab9e01c7ad7c2d82c4863bdcbfb9afa7f9ad4c999e931d2148d95e6f"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/coordinates.py": {
+      "bytes": 791,
+      "sha256": "640b63952c85292a0aaeec8692e912a9718fd45a7fabaad09dad448036f6ad08"
+    },
+    "experiments/foster_campaign_001/evidence.py": {
+      "bytes": 1404,
+      "sha256": "f16d65ad56d1628f53f3cbbaf1ff95e97cef234af371a7b95cac59ad4b6c1f8a"
+    },
+    "experiments/foster_campaign_001/execution.py": {
+      "bytes": 3695,
+      "sha256": "7e8813c8653836c5baf8334d054f9b72df1d33ab0ed09a855a51ab714a22110f"
+    },
+    "experiments/foster_campaign_001/field_backend.py": {
+      "bytes": 8781,
+      "sha256": "bf0ad49113038da0071ed0c6eb2571633fd09e989ac780fa0d166b31bbccc140"
+    },
+    "experiments/foster_campaign_001/h7_backend.py": {
+      "bytes": 1844,
+      "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+    },
+    "experiments/foster_campaign_001/prepare.py": {
+      "bytes": 2984,
+      "sha256": "a7c667be79f9fa358ea8b09c2aa35a39cdb0aa9821d0cafb77f1a99c6e6ee1e8"
+    },
+    "experiments/foster_campaign_001/rate.py": {
+      "bytes": 764,
+      "sha256": "f3ab347a2dc73b008329ffff6443e51fbb4fd3613473fa4eb0416ae39b2e6813"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25557,
+      "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+    },
+    "experiments/foster_campaign_001/stimulus.py": {
+      "bytes": 8426,
+      "sha256": "f9b8bdaf807f1b398827efdbf0bcf401d96ca430d28b9f170d6f4759e931acf3"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 18216,
+      "sha256": "6a0c01cc9e2b32686582e7a58b0e2fa3a09e7951466945537917a6d58703dad7"
+    },
+    "experiments/foster_campaign_001/telemetry.py": {
+      "bytes": 1847,
+      "sha256": "eab155aad1f9d95155cc8039a654f2d4d6216b30a790f130d420b5531f56327d"
+    },
+    "experiments/foster_campaign_001/workload.py": {
+      "bytes": 5926,
+      "sha256": "3a3e2a7d884cd53fcd90ff90d7a3ab528efd809fa7d1b66e84d784b1736ef9ed"
+    },
+    "experiments/foster_feedback_001/estimator.py": {
+      "bytes": 6724,
+      "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+    },
+    "experiments/foster_feedback_001/history.py": {
+      "bytes": 3265,
+      "sha256": "ed98c1aac0ec8fbe59c46470adb856450498e19dccbfd5ab12e71e987341b0f4"
+    },
+    "experiments/foster_feedback_001/plant.py": {
+      "bytes": 2165,
+      "sha256": "7a68ed253b19c83a6ca8ea51a3d039c5bd88ae742742a2741c975d25d3751c54"
+    },
+    "experiments/foster_feedback_001/qualify.py": {
+      "bytes": 5368,
+      "sha256": "d932f76270caf415604de1e68ce0a154f934cebdec29bf4fa4e6594359681fb2"
+    },
+    "experiments/foster_feedback_001/run.py": {
+      "bytes": 12125,
+      "sha256": "7df5ef8359f9cc7a0642864ca462f5e76c7df3d625a321817aed064c25d99844"
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "bytes": 4357,
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+    },
+    "experiments/h7_history_quality_001/history.py": {
+      "bytes": 14227,
+      "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+    },
+    "experiments/hysteresis_mixed_completion_001/README.md": {
+      "bytes": 2145,
+      "sha256": "1cfc9c3983673fe0615da543bbe5dc3e0ffcc9ff050894f422798442281a220d"
+    },
+    "experiments/hysteresis_mixed_completion_001/analyze.py": {
+      "bytes": 4629,
+      "sha256": "b9b9735cdd6a4e383f46dbc6ffb69890f3e22dc23f440b82135d330117cfdc1b"
+    },
+    "experiments/hysteresis_mixed_completion_001/basis.py": {
+      "bytes": 1121,
+      "sha256": "8cc4ebc73cd5ed3802408e376c9e71edc2761a932bba757a51004440fc5679a7"
+    },
+    "experiments/hysteresis_mixed_completion_001/rc_control.py": {
+      "bytes": 1376,
+      "sha256": "5d2b5b48c638b804783870278d18ecbcd52ead56d42ced67900de2bc67ff1b49"
+    },
+    "experiments/hysteresis_mixed_completion_001/run.py": {
+      "bytes": 15438,
+      "sha256": "31ec9bfd5981fcbf3f4d0a6e3760183114d74e48be174f5075527231f9291bf8"
+    },
+    "experiments/hysteresis_mixed_completion_001/test_completion.py": {
+      "bytes": 4277,
+      "sha256": "6f3d9cd8c98d97cdb9a1de4baed6f1f6b56ef98a3f1734b2df609b2ae65a8612"
+    },
+    "experiments/hysteresis_mixed_completion_001/test_rc_control.py": {
+      "bytes": 1615,
+      "sha256": "19e234ca7379bd37dc93d3b130c17f3943d88687ea1d27d6fb2c5fc66247965d"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/hysteresis_refinement_001/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "bytes": 6989,
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+    },
+    "experiments/joint_rate_history_001/probe.c": {
+      "bytes": 2273,
+      "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+    },
+    "experiments/partitioned_battery_closure_001/conditional.py": {
+      "bytes": 4676,
+      "sha256": "9e9991a7399029a7c622d4b77da1f8d70687ada87f8c6045cb258bbfc2eab5f5"
+    },
+    "experiments/partitioned_coefficients_001/representation.py": {
+      "bytes": 7836,
+      "sha256": "352e7586e56f29ef99f04b7c4293cf0fb7a476c620ce071832afc033655da25e"
+    },
+    "experiments/partitioned_coefficients_001/run.py": {
+      "bytes": 10632,
+      "sha256": "b302740c4d8fed5a3d1d1723aa4759b958acae882d745cda93c7d4b9cd1dd7fc"
+    },
+    "experiments/response_basis_attribution_001/basis.py": {
+      "bytes": 5514,
+      "sha256": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d"
+    },
+    "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+      "bytes": 5204,
+      "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+    },
+    "experiments/structured_joint_001/joint.py": {
+      "bytes": 4959,
+      "sha256": "fde746d37a61a37911a9ce482e7a0f7a4cc7281188f0a5cc96ce0992cc31403e"
+    },
+    "experiments/structured_joint_001/qualify.py": {
+      "bytes": 14275,
+      "sha256": "26db13fc11ca958433f54e41881d442e2fe45887bed94b9391423e3470d8dda1"
+    },
+    "experiments/uncertainty_weak_stimulus_001/diagnostics.py": {
+      "bytes": 10034,
+      "sha256": "28c5142e7c379e36898e962349cb23ff75ebedcf6fb8f80bcef7cbba9fbd36e8"
+    },
+    "provenance/hysteresis_mixed_completion_001/README.md": {
+      "bytes": 7235,
+      "sha256": "f9a3b9b9ef02d0e5b159e9b24ec9ebd63343e09c163d84ec3fb66fb62bd26c1f"
+    },
+    "provenance/hysteresis_mixed_completion_001/code_review_r1.json": {
+      "bytes": 10836,
+      "sha256": "c6c0505ad4826ea5ff943de29fb1c5f38d7631031fc7ea90e46891e801f96b5e"
+    },
+    "provenance/hysteresis_mixed_completion_001/rc_control_review_r1.json": {
+      "bytes": 19553,
+      "sha256": "c7a327d452e438f194e56be2b6803317edd9d5898160f8f9359e71d8c0c19f5e"
+    },
+    "provenance/hysteresis_mixed_completion_001/summary.json": {
+      "bytes": 297319,
+      "sha256": "0fabff6afe144d5d772c34a9b709f0211029c4b91e4e7b7600afdb39b6d32f38"
+    },
+    "provenance/hysteresis_mixed_completion_001/versions/run_r1.py": {
+      "bytes": 14833,
+      "sha256": "cac012e08f43cb7189aa244a6a42797a99c3d2d999616b1bcc49231a800d83a1"
+    },
+    "specifications/evidence_feedback_001/protocol.py": {
+      "bytes": 8985,
+      "sha256": "a3fe6a42a3502372d28e9fbba95f790ac0726484e2903aea02a2ca95f022b494"
+    },
+    "specifications/hysteresis_mixed_completion_001/RC_FOLLOWUP.md": {
+      "bytes": 1443,
+      "sha256": "e1b692039026afd8f143976b810ec05abb71ccdbfd78b2f4a4c56b56560ca665"
+    },
+    "specifications/hysteresis_mixed_completion_001/README.md": {
+      "bytes": 4762,
+      "sha256": "a634f33a59fdb97524b4ec9b722031d987948540184e2c87675823fbbf0d7e0a"
+    },
+    "specifications/hysteresis_relationships_001/H4.md": {
+      "bytes": 4860,
+      "sha256": "b60686de68a7c9ba446fd3a294a7946e0a9561c89b5befceac67174787c09dfc"
+    },
+    "specifications/symbolic_system_001/R1.md": {
+      "bytes": 4366,
+      "sha256": "165dbc52142835f8c0d6cd8eaba225e35948827a09295e438130a8ab8f6d415e"
+    },
+    "specifications/symbolic_system_001/U1.md": {
+      "bytes": 5705,
+      "sha256": "40d4a2ff1c135501705650ee63aa06d561d0d74a455edccc94aa880adf785bea"
+    }
+  },
+  "findings": [
+    {
+      "id": "INT-R1-01",
+      "severity": "medium",
+      "status": "revision_required",
+      "finding": "The primary protocol explicitly requests Q/SOC width/centre comparisons. fit_prefix reports Q_log_SD_ratio and Q/SOC centre offsets, and forecast voltage width ratios, but no endpoint SOC width comparison. The full selected covariance roots are retained, so a readout-only supplement can fulfill this obligation without changing fits.",
+      "location": "specifications/hysteresis_mixed_completion_001/README.md Matched probes and fits; experiments/hysteresis_mixed_completion_001/run.py fit_prefix same_anchor and fit_comparison",
+      "required_disposition": "Add a separately source/result-bound endpoint SOC-width supplement from frozen selected fits with full correlated covariance and direct/compressed endpoint Jacobians. Distinguish same-anchor approximation width from fit-to-fit width, preserve unresolved reference/candidate statuses and unsupported transports, and independently review the supplement. Preserve original runs, summary and review.",
+      "effect_on_existing_claims": "No defect found in existing Q/forecast calculations or displayed arithmetic. Revision concerns completeness of the registered diagnostic rather than invalidation of recorded results.",
+      "author_disposition": "Parent acknowledged and will produce a separate readout-only supplement followed by fresh-context review; no optimizer or representation changes."
+    }
+  ],
+  "accepted_assessments": {
+    "truth_and_prior": "Public mean/root and domain center derive from frozen public calibration. Hidden plant is confined to StimulusStream observation regeneration; truth return values are discarded. Exact and Compressed objectives each include the same original prior once. No raw-prefix and compressed-factor posterior are jointly counted.",
+    "chronology_and_domain": "Single original stream per load; prefix growth retains response state and ordered actual intervals. All requested observation hashes equal frozen baseline hashes. Direct objective invokes R2_H2 feature-domain gate before direct evaluation; compressed fields share physical amplitudes, charge-extrema path and log-shape box. Native compressed chart-transport failures are preserved separately.",
+    "covariance_and_forecasts": "solve returns origin-chart square root L chol(P)^-T, retaining all 16-variable cross terms. Current runner evaluates endpoint J times that root and future voltage J times endpoint root. Relative precision uses Cholesky congruence in common prior-whitened coordinates; no diagonal replacement or posterior duplication. Independent full-matrix covariance contractions and composite finite differences agree.",
+    "stopping_and_failures": "Both fixed public starts use the unchanged 60-round solve. A converged candidate is preferred over lower-cost unresolved attempts; absent convergence, an unresolved selected attempt and all attempts remain recorded. All comparison/forecast claims require converged direct and candidate fits. Primary 51/54 converged and three unresolved fits, follow-up 26/27 converged and one unresolved are preserved. Numerical stop means cost-scaled GN roundoff or gradient threshold, not physical identifiability, global optimum or coverage.",
+    "source_and_result_integrity": "All pilot/full/follow-up registered Python/native source identities verified. Primary runner hash matches archived run_r1.py; rc001 hash matches current runner. Case, factor snapshot, protocol, baseline registration/result and binary identities match. Native build source snapshots match current unchanged native sources.",
+    "analysis_and_inference": "Analyzer exactly regenerates primary and RC follow-up compact sections. Probe counts, one-hour Q/forecast table, original-arm repeat differences and uncertainty quotations match raw evidence. RC follow-up is labeled outcome-informed and preserves original arms/failures. Nonpromotion and explicit local/finite/coverage/resource limits are justified.",
+    "resources": "Packed factor arithmetic and lower numeric subtotals agree with class receipts; actual host arrays/scratch and excluded overhead are distinct. RC5 factors already exceed 10240 B; no complete target-memory or timing claim."
+  },
+  "checks": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.hysteresis_mixed_completion_001.test_completion experiments.hysteresis_mixed_completion_001.test_rc_control -q",
+      "passed": true,
+      "tests": 9,
+      "reported_duration_s": 0.209
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 PYTHONPATH=. python3 -B /tmp/mixed_integration_check.py",
+      "passed": true,
+      "script_sha256": "0e0c9532a84c5045acfd8a0ef1a5404f661b4a30fa7842b71b51e8e02911aebf",
+      "reproduction": "Save independent_check_source below to the command path and run from repository root; requires preserved ignored local runs.",
+      "results": {
+        "pilot001": {
+          "sources_verified": 43,
+          "cases": 3
+        },
+        "full001": {
+          "sources_verified": 43,
+          "cases": 3
+        },
+        "rc001": {
+          "sources_verified": 44,
+          "cases": 3
+        },
+        "primary_fit_status": {
+          "converged": 51,
+          "unresolved": 3
+        },
+        "RC_followup_fit_status": {
+          "unresolved": 1,
+          "converged": 26
+        },
+        "active_probes": {
+          "R2_H2_c22": {
+            "count": 306,
+            "improved": 161,
+            "worsened": 94,
+            "tied_within_absolute_1e_12": 51
+          },
+          "R2_H2_tensor": {
+            "count": 306,
+            "improved": 206,
+            "worsened": 49,
+            "tied_within_absolute_1e_12": 51
+          },
+          "R2_H3": {
+            "count": 306,
+            "improved": 191,
+            "worsened": 115,
+            "tied_within_absolute_1e_12": 0
+          }
+        },
+        "independent_replay": {
+          "load": "multiscale",
+          "records": 126000,
+          "observation_sha256": "9cff5f499f4544f67f6fff4b6e1c1037921485182be5de0830bc81b463947489",
+          "regeneration_chunk": 777,
+          "objective_chunk": 777,
+          "candidate": "R5_H2",
+          "max_forecast_RMS_gap_mV": 0.0,
+          "max_forecast_SD_ratio_gap": 2.7498714416651637e-10,
+          "full_composite_Jacobian_max_error": 4.875030578874173e-10,
+          "full_covariance_verified": true,
+          "relative_precision_verified": true,
+          "shared_domain_rejections": 2,
+          "selection_failure_controls": 2
+        },
+        "verified_run_bindings": {
+          "experiments/hysteresis_mixed_completion_001/pilot001/rest.json": {
+            "bytes": 299294,
+            "sha256": "7dcfc6dffeb371e3a247323943f752fc27b2e54933e0bc4bc1201690cab020c9"
+          },
+          "experiments/hysteresis_mixed_completion_001/pilot001/multiscale.json": {
+            "bytes": 318506,
+            "sha256": "bd22c5a069cdf32eff4396a3acd82e31745cbcf066c60f5208433d2ce917bcff"
+          },
+          "experiments/hysteresis_mixed_completion_001/pilot001/embedded.json": {
+            "bytes": 320955,
+            "sha256": "70e4c939fae9e1429307f565cc75f3f5734779773c0e9c115f75ea065b0451b5"
+          },
+          "experiments/hysteresis_mixed_completion_001/pilot001/registration.json": {
+            "bytes": 36705,
+            "sha256": "64197d9ab380adc59f4de663ae4af16c65e2bcd9f07e66dd9d434eaf56bb5b40"
+          },
+          "experiments/hysteresis_mixed_completion_001/pilot001/summary.json": {
+            "bytes": 804,
+            "sha256": "a568adda9ac8467218820c7fc25e875f3c27fbfd7229b6d6f9f3d729e9e7b14e"
+          },
+          "experiments/hysteresis_mixed_completion_001/full001/rest.json": {
+            "bytes": 875225,
+            "sha256": "21723b98d6e68762c802dc8610dba3d8339c92294f1c5747f0b7e0007463849d"
+          },
+          "experiments/hysteresis_mixed_completion_001/full001/multiscale.json": {
+            "bytes": 943770,
+            "sha256": "532892f37f96fd5652c7a958cc95bc20f4fad697508a98cc7632cd54a407fb15"
+          },
+          "experiments/hysteresis_mixed_completion_001/full001/embedded.json": {
+            "bytes": 937424,
+            "sha256": "18f30b016aaebdfd75d37ef84f82161e290ffba1fca574e897a239742ac63175"
+          },
+          "experiments/hysteresis_mixed_completion_001/full001/registration.json": {
+            "bytes": 36728,
+            "sha256": "7be3e0215cf935d22eaff29cba469560d30b4469190988f4c6959901bbf5b632"
+          },
+          "experiments/hysteresis_mixed_completion_001/full001/summary.json": {
+            "bytes": 804,
+            "sha256": "dd5b3398e7cd82164fd40c1c7c9246099b510ba76015b02e169c49b679b51a30"
+          },
+          "experiments/hysteresis_mixed_completion_001/rc001/rest.json": {
+            "bytes": 444652,
+            "sha256": "a818ed80aa9bc010a3b843ad6b0a9a3cbf5f83c5b416d11eaa03becf6dfec8f4"
+          },
+          "experiments/hysteresis_mixed_completion_001/rc001/multiscale.json": {
+            "bytes": 490489,
+            "sha256": "571dc9365d378674f30b11a9e8cc1c358a9c56160056f14161d3ea7d9fe46ffc"
+          },
+          "experiments/hysteresis_mixed_completion_001/rc001/embedded.json": {
+            "bytes": 498780,
+            "sha256": "72f3200311479e01598955c45fa0f708f273dddf92d84647894f4f3bda2331f7"
+          },
+          "experiments/hysteresis_mixed_completion_001/rc001/registration.json": {
+            "bytes": 37038,
+            "sha256": "20628f4e3b73c5a027acb747dcdf9012235f3d53069a5914a98b63ee3078486e"
+          },
+          "experiments/hysteresis_mixed_completion_001/rc001/summary.json": {
+            "bytes": 804,
+            "sha256": "5d042c46f4e309cf7691df9a00a9075554a175547852774fcae3cfb0db23ec31"
+          }
+        },
+        "independent_refits": {
+          "direct": {
+            "status": "converged",
+            "selected_stop": "GN_decrement_at_cost_roundoff",
+            "selected_chart_max_gap": 2.871480830890505e-12,
+            "selected_cost_gap": -4.3655745685100555e-11
+          },
+          "R5_H2": {
+            "status": "converged",
+            "selected_stop": "GN_decrement_at_cost_roundoff",
+            "selected_chart_max_gap": 0.0,
+            "selected_cost_gap": 0.0
+          }
+        },
+        "independent_one_hour_table": [
+          {
+            "arm": "R2_H2",
+            "multiscale": {
+              "Q_percent": 3.280685629331584,
+              "forecast_uV": 62.67599888939571
+            },
+            "embedded": {
+              "Q_percent": -0.2779251567590548,
+              "forecast_uV": 78.29541813792545
+            }
+          },
+          {
+            "arm": "R2_H2_c22",
+            "multiscale": {
+              "Q_percent": 4.681449886899975,
+              "forecast_uV": 66.34484626487144
+            },
+            "embedded": {
+              "Q_percent": -0.27788260758992434,
+              "forecast_uV": 78.3255690817382
+            }
+          },
+          {
+            "arm": "R2_H2_tensor",
+            "multiscale": {
+              "Q_percent": 4.252667331691447,
+              "forecast_uV": 64.55769391004384
+            },
+            "embedded": {
+              "Q_percent": -0.2765109431719282,
+              "forecast_uV": 77.98216185966234
+            }
+          },
+          {
+            "arm": "R2_H3",
+            "multiscale": {
+              "Q_percent": 3.770518038727718,
+              "forecast_uV": 73.63486087425734
+            },
+            "embedded": {
+              "Q_percent": -0.2655736682122066,
+              "forecast_uV": 81.21460653342568
+            }
+          },
+          {
+            "arm": "R5_H2",
+            "multiscale": {
+              "Q_percent": 0.32247200074949994,
+              "forecast_uV": 7.660542350059963
+            },
+            "embedded": {
+              "Q_percent": -0.13707004246015309,
+              "forecast_uV": 2.6618938550789992
+            }
+          },
+          {
+            "arm": "R5_H2_c22",
+            "multiscale": {
+              "Q_percent": 1.1465654066225133,
+              "forecast_uV": 8.502105539466292
+            },
+            "embedded": {
+              "Q_percent": -0.1370299255018655,
+              "forecast_uV": 2.7845601289569566
+            }
+          },
+          {
+            "arm": "R5_H2_tensor",
+            "multiscale": {
+              "Q_percent": 0.551848644821896,
+              "forecast_uV": 13.960473010254194
+            },
+            "embedded": {
+              "Q_percent": -0.13594415830095877,
+              "forecast_uV": 2.5269190351038335
+            }
+          },
+          {
+            "arm": "R5_H7",
+            "multiscale": {
+              "Q_percent": 0.0348377282978129,
+              "forecast_uV": 2.9636599373794295
+            },
+            "embedded": {
+              "Q_percent": 0.0003127962242532029,
+              "forecast_uV": 0.550662707316366
+            }
+          }
+        ],
+        "max_original_control_Q_difference_percentage_points": 9.319564586718343e-08,
+        "native_build_sources_verified": true
+      }
+    }
+  ],
+  "independent_check_source": "import json, hashlib\nfrom pathlib import Path\nfrom collections import Counter\nfrom unittest.mock import patch\nimport numpy as np\nfrom experiments.foster_campaign_001.backend import identity\nfrom experiments.foster_campaign_001.coordinates import prior\nfrom experiments.foster_campaign_001.compact import StimulusStream\nfrom experiments.foster_feedback_001.estimator import Model\nfrom experiments.hysteresis_mixed_completion_001.run import CommonDomain,choose_fit,future_tasks\nfrom experiments.hysteresis_mixed_completion_001.rc_control import RC5Control\nfrom experiments.response_basis_attribution_001.basis import BasisField\nfrom experiments.hysteresis_refinement_001.field import Compressed,transported\nfrom experiments.slow_likelihood_diagnostic_001.numerics import Exact\nfrom experiments.hysteresis_mixed_completion_001.analyze import analyze\nbase=Path('experiments/hysteresis_mixed_completion_001'); report={}; binds={}\nfor run in ['pilot001','full001','rc001']:\n d=base/run; reg=json.loads((d/'registration.json').read_text()); manifest=json.loads((d/'summary.json').read_text())\n for name,expected in reg['source']['sources'].items():\n  p=Path(name)\n  if name==str(base/'run.py') and run!='rc001':p=Path('provenance/hysteresis_mixed_completion_001/versions/run_r1.py')\n  assert identity(p)==expected,(run,name)\n for rel,key in [('response/response.so','response_binary'),('backend_c/estimator.so','direct_binary')]:assert identity(d/rel)==reg[key]\n assert identity(Path('specifications/hysteresis_mixed_completion_001/README.md'))==reg['protocol']\n assert identity(Path('experiments/partitioned_coefficients_001/followup002/registration.json'))==reg['baseline_registration']\n if run=='rc001':assert identity(Path('specifications/hysteresis_mixed_completion_001/RC_FOLLOWUP.md'))==reg['rc_followup']\n for case in manifest['cases']:\n  p=d/case['file']; assert identity(p)==case['identity']; c=json.loads(p.read_text())\n  assert identity(Path(c['baseline_result']['path']))==c['baseline_result']['identity']\n  for pre in c['prefixes']:\n   assert identity(Path(pre['snapshot']['path']))==pre['snapshot']['identity']\n   assert len(pre['probes'])==52\n   for name,fit in pre['fits']['arms'].items():\n    assert len(fit['attempts'])==2\n    if fit['status']=='converged':assert fit['selected']['diagnostic']['stop'] in ['gradient','GN_decrement_at_cost_roundoff']\n    if fit.get('fit_comparison',{}).get('status')=='local_converged_diagnostic':assert pre['fits']['arms']['direct']['status']==fit['status']=='converged'\n  binds[str(p)]=identity(p)\n binds[str(d/'registration.json')]=identity(d/'registration.json');binds[str(d/'summary.json')]=identity(d/'summary.json')\n report[run]={'sources_verified':len(reg['source']['sources']),'cases':len(manifest['cases'])}\ns=json.loads(Path('provenance/hysteresis_mixed_completion_001/summary.json').read_text())\nfor name,run in [('primary','full001'),('RC_followup','rc001')]:\n assert analyze(base/run)==s[name]\n report[name+'_fit_status']=dict(Counter(r['status'] for r in s[name]['fit_rows']))\nreport['active_probes']={}\nfor arm in ['R2_H2_c22','R2_H2_tensor','R2_H3']:\n r=[r for r in s['primary']['public_probe_rows'] if r['load']!='rest' and r['arm']==arm]\n report['active_probes'][arm]={k:sum(x[k] for x in r) for k in ['count','improved','worsened','tied_within_absolute_1e_12']}\n# Independent one-hour chronological regeneration; use a different chunking for exact objective.\nd=base/'rc001';reg=json.loads((d/'registration.json').read_text());c=json.loads((d/'multiscale.json').read_text());pre=c['prefixes'][0]\nold=json.loads(Path(c['baseline_result']['path']).read_text());r=old['recipe'];stream=StimulusStream(reg['config'],r['cell'],r['case'],r['settings']);chunks=[]\nwhile stream.index<126000:\n o,_,_=stream.read(min(777,126000-stream.index));assert not stream.failure;chunks.append(o)\nobs=np.vstack(chunks);assert hashlib.sha256(obs.astype('<f8').tobytes()).hexdigest()==pre['observation_sha256']\nmodel=Model(d/'backend_c/estimator.so',reg['config']);mean,L=prior(reg['config']);raw=Exact(model,obs,mean,L,chunk=777)\nfield=RC5Control(reg['config'],reg['center'],d/'response/response.so','td2',old['source_id']);snap=np.load(pre['snapshot']['path']);field.root=snap['R5_H2_root'];field.state=snap['R5_H2_state'];field.count=126000\ncomp=Compressed(field,mean,L);direct=pre['fits']['arms']['direct'];cand=pre['fits']['arms']['R5_H2'];fit=cand['selected'];x=np.array(fit['x']);w=np.array(fit['w']);C=np.array(fit['root'])\ncost,g,P,end,F=raw(w);cc,cg,CP,_,_=comp(w)\n# Independent inverse precision and generalized eigenvalue calculation.\nV=L@np.linalg.inv(P)@L.T;CV=L@np.linalg.inv(CP)@L.T\nnp.testing.assert_allclose(C@C.T,CV,rtol=3e-7,atol=1e-10)\nassert abs(np.sqrt(g@np.linalg.solve(P,g))-cand['same_anchor']['direct_gradient_dual_norm'])<1e-7\nassert abs(np.sqrt((cg-g)@np.linalg.solve(P,cg-g))-cand['same_anchor']['compression_gradient_dual_norm'])<1e-7\nE,U=np.linalg.eigh(P);W=(U/np.sqrt(E))@U.T;ev=np.linalg.eigvalsh(W@CP@W)\nnp.testing.assert_allclose(ev,cand['same_anchor']['relative_joint_GN_precision_eigenvalues'],rtol=2e-7,atol=1e-7)\nrw=np.array(direct['selected']['w']);rx=np.array(direct['selected']['x']);rc,rg,RP,re,rF=raw(rw);RV=L@np.linalg.inv(RP)@L.T\nce,cF=transported(field,x);max_rms_gap=0.;max_sd_gap=0.\nfor transport,(e,T) in [('direct_C',(end,F)),('compressed',(ce,cF))]:\n for name,task in future_tasks().items():\n  v,J,_,_=model.evaluate(e,task);rv,rJ,_,_=model.evaluate(re,task)\n  variance=np.einsum('ij,jk,ik->i',J,T@CV@T.T,J);rvariance=np.einsum('ij,jk,ik->i',rJ,rF@RV@rF.T,rJ)\n  ratio=np.sqrt(variance/rvariance);rms=1000*np.sqrt(np.mean((v-rv)**2))\n  row=next(f for f in cand['forecasts'] if f['transport']==transport and f['task']==name)\n  max_rms_gap=max(max_rms_gap,abs(rms-row['RMS_difference_mV']));max_sd_gap=max(max_sd_gap,float(np.max(abs(np.array([ratio.min(),ratio.max()])-row['local_SD_ratio_range']))))\n  assert abs(rms-row['RMS_difference_mV'])<1e-8\n  np.testing.assert_allclose([ratio.min(),ratio.max()],row['local_SD_ratio_range'],rtol=1e-6,atol=1e-7)\n# Full-composite query derivative checks at a correlated selected-fit anchor.\ntask=future_tasks()['pulse120mA10s_rest30'][::35].copy();task[:,0]*=35\n_,J,_,_=model.evaluate(ce,task);analytic=J@cF;errors=[]\nfor j in range(16):\n xp=x.copy();xm=x.copy();xp[j]+=1e-6;xm[j]-=1e-6\n vp=model.evaluate(transported(field,xp)[0],task)[0];vm=model.evaluate(transported(field,xm)[0],task)[0];fd=(vp-vm)/2e-6\n errors.append(float(np.max(abs(fd-analytic[:,j]))))\n assert np.max(abs(fd-analytic[:,j]))<2e-7\n# Shared computational gate rejects same shape exit before objective evaluation.\ngate=BasisField(reg['config'],reg['center'],d/'response/response.so');gate.state[-3:]=field.state[-3:];wrapped=CommonDomain(raw,gate)\nxx=mean.copy();xx[14]+=4;ww=np.linalg.solve(L,xx-mean)\nfor obj in [wrapped,comp]:\n try:obj(ww)\n except ValueError:pass\n else:raise AssertionError('missing common support rejection')\n# Selection must prefer converged over lower-cost unresolved, and preserve failed attempt.\ndef fake(stop,cost):return {'w':np.zeros(16),'x':mean,'root':L,'diagnostic':{'stop':stop,'cost':cost}}\nwith patch('experiments.hysteresis_mixed_completion_001.run.solve',side_effect=[fake('round_limit',1),fake('gradient',2)]):\n _,a=choose_fit(raw);assert a['selected_start']==1 and a['status']=='converged'\nwith patch('experiments.hysteresis_mixed_completion_001.run.solve',side_effect=[ValueError('injected'),fake('round_limit',1)]):\n _,a=choose_fit(raw);assert a['selected_start']==1 and a['status']=='unresolved' and a['attempts'][0]['status']=='failed'\nreport['independent_replay']={'load':'multiscale','records':126000,'observation_sha256':pre['observation_sha256'],'regeneration_chunk':777,'objective_chunk':777,'candidate':'R5_H2','max_forecast_RMS_gap_mV':max_rms_gap,'max_forecast_SD_ratio_gap':max_sd_gap,'full_composite_Jacobian_max_error':max(errors),'full_covariance_verified':True,'relative_precision_verified':True,'shared_domain_rejections':2,'selection_failure_controls':2}\nreport['verified_run_bindings']=binds\nPath('/tmp/mixed_integration_check_result.json').write_text(json.dumps(report,indent=2)+'\\n');print(json.dumps({k:v for k,v in report.items() if k!='verified_run_bindings'},indent=2))\n# Bounded independent optimization replay at this one saved prefix, two starts per objective.\nrefit={}\nfor name,obj,saved in [('direct',wrapped,direct),('R5_H2',comp,cand)]:\n result,record=choose_fit(obj)\n assert record['status']==saved['status']\n gap=float(np.max(abs(result['x']-np.array(saved['selected']['x']))))\n assert gap<2e-6\n refit[name]={'status':record['status'],'selected_stop':result['diagnostic']['stop'],'selected_chart_max_gap':gap,'selected_cost_gap':result['diagnostic']['cost']-saved['selected']['diagnostic']['cost']}\nreport['independent_refits']=refit\nPath('/tmp/mixed_integration_check_result.json').write_text(json.dumps(report,indent=2)+'\\n');print(json.dumps(refit,indent=2))\n# Baseline observation bindings and displayed summary arithmetic independent of analyzer.\nfor run in ['pilot001','full001','rc001']:\n for case in json.loads((base/run/'summary.json').read_text())['cases']:\n  c=json.loads((base/run/case['file']).read_text());old=json.loads(Path(c['baseline_result']['path']).read_text())\n  for p in c['prefixes']:\n   b=next(z for z in old['prefixes'] if z['records']==p['records']);assert p['observation_sha256']==b['observation_sha256']\ntable=[]\nfor arm in ['R2_H2','R2_H2_c22','R2_H2_tensor','R2_H3','R5_H2','R5_H2_c22','R5_H2_tensor','R5_H7']:\n section='RC_followup' if arm.startswith('R5_H2') else 'primary';row={'arm':arm}\n for load in ['multiscale','embedded']:\n  r=next(x for x in s[section]['fit_rows'] if x['arm']==arm and x['load']==load and x['records']==126000)\n  row[load]={'Q_percent':r['comparison']['Q_relative_difference_percent'],'forecast_uV':max(x['RMS_difference_mV'] for x in r['forecasts'] if x['transport']=='compressed')*1000}\n table.append(row)\nreport['independent_one_hour_table']=table\nreport['max_original_control_Q_difference_percentage_points']=max(abs(r.get('Q_comparison_change_percentage_points',0)) for r in s['repeated_original_fit_controls'])\nfor run in ['pilot001','full001','rc001']:\n d=base/run;build=json.loads((d/'backend_c/build.json').read_text())\n for name,e in build['sources'].items():\n  assert identity(Path(name))==e\n  assert identity(d/'backend_c/source_snapshot'/name)==e\nreport['native_build_sources_verified']=True\nPath('/tmp/mixed_integration_check_result.json').write_text(json.dumps(report,indent=2)+'\\n')\n",
+  "changes_made": "Only this review receipt was written to the repository. Review harness/results are under /tmp. No source, original result or prior review was edited.",
+  "limits": [
+    "One selected active-load prefix was independently regenerated and refit; the full study was not rerun.",
+    "Finite derivative and covariance tests do not establish uniform response accuracy or calibrated uncertainty.",
+    "Existing numerical results are acceptable within their stated scope; overall completion remains revise until INT-R1-01 is fulfilled and reviewed."
+  ]
+}

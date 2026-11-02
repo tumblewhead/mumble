@@ -1,0 +1,102 @@
+{
+  "schema": "hysteresis_mixed_completion_code_review_v1",
+  "review_id": "code_review_r1",
+  "reviewer": "independent fresh-context agent /root/mixed_completion_code_review",
+  "created_utc": "2026-11-02T07:53:51.211205+00:00",
+  "source_revision": "d02bd36c5da9a1c5f750e3faa1786815b3440f99",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accept_within_candidate_class_and_math_contract_scope",
+  "scope": [
+    "CompletedField c22 and full quadratic tensor candidate implementation",
+    "H4 projection and centre-node identity compatibility",
+    "inherited native recurrence, joint QR, feature derivatives and endpoint transport",
+    "source/order ownership, support rejection and lower numeric storage accounting",
+    "four candidate tests and six inherited BasisField tests"
+  ],
+  "excluded": [
+    "Runner, fitting selection, direct-reference domain implementation and forecast/results reporting still under development",
+    "uniform physical approximation or derivative bounds",
+    "calibrated coverage, lifetime behavior and complete target memory/timing qualification",
+    "promotion of any candidate or campaign/default change"
+  ],
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "a62430b74515de4cfb8bb3224d17d481c270393f8504f54906607c0c13b90c2e",
+    "PROJECT_STATE.json": "32fd9262ef1e97363097bef3bb9a81ed7d0553ce4a3f54d73951c1789306abe9",
+    "specifications/hysteresis_mixed_completion_001/README.md": "a634f33a59fdb97524b4ec9b722031d987948540184e2c87675823fbbf0d7e0a",
+    "specifications/hysteresis_relationships_001/H4.md": "b60686de68a7c9ba446fd3a294a7946e0a9561c89b5befceac67174787c09dfc",
+    "experiments/hysteresis_mixed_completion_001/basis.py": "8cc4ebc73cd5ed3802408e376c9e71edc2761a932bba757a51004440fc5679a7",
+    "experiments/hysteresis_mixed_completion_001/test_completion.py": "6f3d9cd8c98d97cdb9a1de4baed6f1f6b56ef98a3f1734b2df609b2ae65a8612",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/response_basis_attribution_001/test_basis.py": "fcad1855501d2bbf92e18d7e12f3202f223d4ec5215c836a1fa5e72df0ef1400",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "experiments/joint_rate_history_001/field.py": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9",
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+    "experiments/foster_feedback_001/calibration.json": "fda46915cd25d1ed5321f208f4edff99f7020c592b4e162aac8f1124374bcd00",
+    "experiments/conditional_architecture_001/run.py": "4d15a585ed674671dc5410d5e612219101823930414bc1ddc53cb0ef3353f0b2"
+  },
+  "findings": [],
+  "contract_assessment": {
+    "projection": "With n=m=3 and logarithmic halfwidth=1, kron(p1,p1) is the full 3x3 tensor inverse in native q*m+r order. Row indices 3*i+j match pairs used by features, Jacobians and native coefficient rows. c22 adds one forced and one free response coefficient; tensor retains all nine products.",
+    "joint_likelihood": "Width-dependent inherited native response_rows and one stacked QR retain all RC/H/amplitude cross terms. No separate factors or prior duplication are introduced.",
+    "derivatives_transport": "Both modes retain the inherited logarithmic coordinates, so features_jacobian and transported apply. Both consult dynamic pairs,b,width; native state layout is unchanged. Full endpoint covariance transport remains a downstream responsibility.",
+    "support_ownership": "The inherited single-owner staged update checks source and first index, carries response state and cumulative charge extrema, and commits factor/state/count/noise only after successful finite QR. Stationary input/temperature/domain constraints are unchanged.",
+    "memory": "c22: width36, packed factor5328B, response312B, stated domain/scalars96B, subtotal5736B. Tensor: width40, factor6560B, same408B addition, subtotal6968B. Actual retained NumPy arrays11592/14168B; per-chunk/scratch quantities remain separately reported. Packed representation is an accounting estimate, not implemented target storage.",
+    "scientific_limit": "Central equality follows H4; c22 does not restore c12/c21 derivative terms, and full tensor still interpolates physical response. Tests do not imply fit improvement or coverage."
+  },
+  "checks": [
+    {
+      "command": "python3 -B -m unittest experiments.hysteresis_mixed_completion_001.test_completion experiments.response_basis_attribution_001.test_basis -v",
+      "status": "pass",
+      "tests": 10,
+      "elapsed_reported_s": 0.261
+    },
+    {
+      "command": "PYTHONPATH=. python3 -B /tmp/mixed_completion_review_checks.py",
+      "status": "pass",
+      "reproduction": "Save independent_check_source below at the command path and execute from repository root.",
+      "seed": 7431,
+      "records_per_candidate": 511,
+      "interval_range_s": [
+        0,
+        1
+      ],
+      "current_values_A": [
+        -0.18,
+        0,
+        0.12
+      ],
+      "checks_per_candidate": {
+        "invalid_input_atomic_rejections": 10,
+        "box_boundary_and_exit_checks": 20,
+        "amplitude_logshape_derivative_columns": 16
+      },
+      "results": {
+        "c22": {
+          "gram_relative_max_gap": 5.792987302916781e-16,
+          "amplitude_logshape_derivative_max_abs_gap": 1.0279563866788521e-09,
+          "central_independent_raw_nll_gap": 6.402842700481415e-09,
+          "central_independent_raw_endpoint_max_gap": 0.0
+        },
+        "tensor": {
+          "gram_relative_max_gap": 5.792987302916781e-16,
+          "amplitude_logshape_derivative_max_abs_gap": 1.0279563866788521e-09,
+          "central_independent_raw_nll_gap": 6.461050361394882e-09,
+          "central_independent_raw_endpoint_max_gap": 0.0
+        }
+      },
+      "other_assertions": [
+        "State exactly matches 31-record chronological regrouping",
+        "Rejected inputs leave root,state,count,noise unchanged",
+        "Chart endpoint converted to amplitudes equals evaluate endpoint",
+        "Independent full tensor inversion matches all retained projection rows",
+        "Tensor evaluation recovers identity at all nine nodes",
+        "Independent raw Python recurrence agrees at central collocation"
+      ]
+    }
+  ],
+  "independent_check_source_sha256": "e0668803d3c19edd162af4de82bac1af681fa2cee840d8b14cba414f2271eb20",
+  "independent_check_source": "import json,tempfile,sys\nfrom pathlib import Path\nimport numpy as np\nfrom numpy.polynomial.chebyshev import chebvander\nfrom experiments.hysteresis_mixed_completion_001.basis import CompletedField\nfrom experiments.response_basis_attribution_001.basis import BasisField\nfrom experiments.hysteresis_refinement_001.field import build,transported\nfrom experiments.conditional_architecture_001.run import public_queries\nfrom experiments.foster_uncertainty_audit_001.conditional_packet import chart_from,partition,make\nconfig=json.loads(Path('experiments/foster_feedback_001/calibration.json').read_text());config['hysteresis_chart']='bounded'\ncenter,_,amps=public_queries(config)\nrng=np.random.default_rng(7431);N=511\nobs=np.column_stack((rng.uniform(0,1,N),rng.choice([-.18,0,.12],N),np.full(N,25.),rng.normal(3.7,.02,N),rng.uniform(.001,.003,N)))\nobs[0,0]=0;obs[1,0]=1\nresults={}\nwith tempfile.TemporaryDirectory() as td:\n binary=build(Path(td)/'build')\n for kind in ('c22','tensor'):\n  f=CompletedField(config,center,binary,kind,source='review');g=CompletedField(config,center,binary,kind,source='review')\n  rows=f.update(0,obs,'review',True)\n  for start in range(0,N,31):g.update(start,obs[start:start+31],'review')\n  np.testing.assert_array_equal(f.state,g.state)\n  gram_gap=float(np.max(abs(f.root.T@f.root-rows.T@rows))/np.max(abs(rows.T@rows)))\n  assert gram_gap<1e-13\n  a=amps[1].copy();shape=center*np.exp([.22,-.31,.16,.53,-.42]);W,D,_=f.basis_query(a,shape)\n  fdgap=0\n  for j in range(16):\n   ap=a.copy();am=a.copy();sp=shape.copy();sm=shape.copy();h=1e-6\n   if j<11:ap[j]+=h;am[j]-=h\n   else:sp[j-11]*=np.exp(h);sm[j-11]*=np.exp(-h)\n   diff=(f.basis_query(ap,sp)[0]-f.basis_query(am,sm)[0])/(2*h)\n   np.testing.assert_allclose(diff,D[:,j],atol=2e-7,rtol=2e-6)\n   fdgap=max(fdgap,float(np.max(abs(diff-D[:,j]))))\n  x=chart_from(a,shape);end,_=transported(f,x);ae,se=partition(end)\n  np.testing.assert_allclose(ae,f.evaluate(a,shape)['end'],atol=1e-13,rtol=1e-13)\n  snapshots=(f.root.copy(),f.state.copy(),f.count,f.noise)\n  invalid=[]\n  for col,value in [(0,-.01),(0,1.01),(1,.251),(2,24.),(3,float('nan')),(4,0.)]:\n   bad=obs[:3].copy();bad[-1,col]=value;invalid.append((N,bad,'review'))\n  invalid.extend([(N,np.empty((0,5)),'review'),(N,np.tile(obs[:1],(1025,1)),'review'),(N+1,obs[:3],'review'),(N,obs[:3],'other')])\n  for args in invalid:\n   try:f.update(*args)\n   except ValueError:pass\n   else:raise AssertionError('accepted invalid input')\n   np.testing.assert_array_equal(f.root,snapshots[0]);np.testing.assert_array_equal(f.state,snapshots[1]);assert (f.count,f.noise)==snapshots[2:]\n  for j in range(5):\n   for sign in (-1,1):\n    s=center.copy();s[j]*=np.exp(sign);f.evaluate(a,s)\n    s[j]*=np.exp(sign*1e-5)\n    try:f.evaluate(a,s)\n    except ValueError:pass\n    else:raise AssertionError('accepted outside box')\n  # At central collocation all components agree with an independent raw Python recurrence.\n  raw=make(obs,center,config);central=f.evaluate(a,center)\n  direct=raw.nll(a);np.testing.assert_allclose(central['end'],raw.outgoing(a),atol=2e-13,rtol=2e-13)\n  assert abs(central['nll']-direct)<1e-6\n  # Native H projected rows match independently evaluated nodal recurrence / tensor inverse.\n  V=chebvander(f.nodes,2);allV=np.kron(V,V);fullinverse=np.linalg.inv(allV)\n  np.testing.assert_allclose(f.p2,fullinverse[[3*i+j for i,j in f.pairs]],atol=2e-15,rtol=2e-15)\n  if kind=='tensor':np.testing.assert_allclose(allV@f.p2,np.eye(9),atol=1e-15)\n  results[kind]={'count':N,'gram_relative_max_gap':gram_gap,'amplitude_logshape_derivative_max_abs_gap':fdgap,'central_raw_nll_gap':float(central['nll']-direct),'central_raw_endpoint_max_gap':float(np.max(abs(central['end']-raw.outgoing(a)))),'atomic_rejections':len(invalid),'box_boundary_and_exit_checks':20,'storage':f.storage()}\nprint(json.dumps(results,indent=2))\n",
+  "disposition": "No blocking or advisory implementation defects found in reviewed candidate class. Acceptance does not cover runner or results; independently review those once complete."
+}

@@ -202,6 +202,18 @@ review corrections and discoveries. No new optimizer, quantizer, cache or estima
 is promoted. The next intervention combines targeted hysteresis mixed-term tests
 with derivative, joint-fit and load-voltage readouts before broader RC changes.
 
+The [mixed-term completion experiment](provenance/hysteresis_mixed_completion_001/README.md)
+now tests c22-only and full quadratic H tensors with joint fits and sampled load
+forecasts. Neither is promoted: one-hour multiscale Q differences from direct fits
+increase from 3.28% (H2) to 4.68%/4.25%. A separately registered control changing
+only RC degree from 2 to 5 reduces the H2 Q discrepancy to 0.32% and improves
+forecast agreement, but its 11024 B factor already exceeds the device budget.
+Joint uncertainty distortions remain, and two direct primary fits are unresolved.
+Nine targeted tests and independent class reviews pass; integration evidence is
+recorded with the report. Next prioritize a compact response representation that
+controls RC values and sensitivities, retaining H/direct joint-uncertainty checks.
+Campaign defaults, native C and production estimation are unchanged.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
