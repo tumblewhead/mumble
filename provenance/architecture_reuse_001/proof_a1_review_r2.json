@@ -1,0 +1,101 @@
+{
+  "schema": "architecture_reuse_individual_review_v1",
+  "review_id": "A1_r2",
+  "reviewer": "fresh_context_agent_proof_a1_review_r2",
+  "reviewed_at_utc": "2026-11-02T04:06:30.303977+00:00",
+  "source_revision": "64fd1240d4e4b5de835777d480b2063530bad0fc",
+  "branch": "experiment/conditional-architecture-001",
+  "scope": "Revised A1 conditional within-observation exact reuse proof, concrete H7 candidate, build and targeted integration tests; individual proof review only",
+  "reviewed_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "specifications/architecture_reuse_001/A1.md": "688a21610a5a167731ae2eac04f814da69c73842ae2694cad4bb17890f3e45da",
+    "specifications/architecture_reuse_001/README.md": "5af39f8c09b965b2ca4306a58de9bfc1b3ed7448feee184fd3e9e52e145cb701",
+    "experiments/architecture_reuse_001/response.c": "61be1882fe8ea716ae3a0eb68a7d1ab9cff26cac221376d711cea7af2ed05022",
+    "experiments/architecture_reuse_001/build.py": "38c7ebd32293a1de31729cdf9dbb02afb6bf15b82a23046551bcbd06f239eb69",
+    "experiments/architecture_reuse_001/test_reuse.py": "854caa26116ebfb5efaf7d0eae133ee6ce06cc84e51b135860ec41d76413f558",
+    "experiments/architecture_reuse_001/contracts.py": "873a606ccc06626cb002bccbdd48876149ea25caedf95f834e115081e0d51e3c",
+    "specifications/architecture_reuse_001/graph.json": "53ef5ab847589bee28375d701180aeda542a5265f32ab2320aeb5e39c8ac22bd",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/field_tangent_native_001/native.py": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad",
+    "experiments/field_tangent_native_001/kernel.c": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a",
+    "experiments/field_tangent_native_001/kernel.h": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2",
+    "experiments/foster_campaign_001/h7_backend.py": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb",
+    "provenance/architecture_reuse_001/proof_a1_review_r1.json": "0d8c15e06636d8dc4b80c1c4c280db0efb7d52d3d28206994cd3dad632f009e1",
+    "provenance/architecture_reuse_001/versions/A1_r1.md": "b0793f23bdea0fd60925ec8eefc16cee833f0cddf7e7ec784cb51dd01f148de6"
+  },
+  "reference_matches_parent_revision": true,
+  "decision": "accepted_conditional_proof_and_source_refinement",
+  "blockers": [],
+  "implementation_defects_found": [],
+  "findings": [
+    {
+      "id": "A1-R1-01",
+      "severity": "proof_scope",
+      "status": "resolved",
+      "statement": "Revised observables cover precisely written valid-prefix rows; full output-buffer equality requires identical initial output bytes. Empty calls and rejected suffixes preserve their initial bytes. Source inspection and unequal-sentinel raw ABI checks confirm this disposition."
+    }
+  ],
+  "accepted_conditional_components": [
+    "H7 ABI n=6,m=8,b=36 yields width112 and state167 doubles. Candidate dimension rejection precedes mutation; equivalence deliberately excludes other reference dimensions.",
+    "For positive current the hysteresis argument depends only on q; for negative current only on r. Immutable nonaliasing inputs and fixed rounding make eight stored exp/expm1 pairs sufficient for all64 positions.",
+    "Candidate preserves argument operand order, state expression grouping and row-major update order. SOC, RC and projection computations are unchanged. Induction applies to arbitrary finite admitted initial states and common chronological call partitions.",
+    "Both signs of zero current skip hysteresis. Both signs of zero dt with nonzero current preserve the same signed-zero arguments and updates under the stated arithmetic premises.",
+    "Validation predicates and valid-prefix mutation agree. The primitive remains nontransactional; MixedField stages state and rows before committing. Downstream equivalence remains conditional on identical consumers, ordering and their own runtime premises.",
+    "Value-equivalence explicitly excludes errno, floating flags/traps, timing, call counts and asynchronous faults. Fixed binary64 rounding, deterministic libm and no reassociation/contraction/excess precision remain premises, not universal portable C guarantees.",
+    "Source counts93/82 to37/26 exp/expm1 for nonzero current and29/18 at rest agree with separately instrumented host runs. These do not imply whole-estimator or target speedup.",
+    "Two local eight-double arrays have128B payload, expire within each observation, and do not change persistent formats or require cross-observation cache validity."
+  ],
+  "checks_performed": [
+    "Read repository instructions, README and relevant PROJECT_STATE entries, architecture contract, revised/original A1 and first review.",
+    "Inspected candidate/reference source diff, build flags, standalone staging, H7 fused ABI and test logic.",
+    "Independently ran all11 targeted tests with OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.architecture_reuse_001.test_reuse -v; all passed.",
+    "Ran120 additional raw ABI comparisons with RNG seed615731:17 observations each, arbitrary uniform[-.25,.25] finite167-value states, dt from {+0,-0,1/35,1}, currents from {+0,-0,+.25,-.25,+1e-300,-1e-300}, invalid NaN at each of five observation columns and varying prefix lengths0..17. Equal status/state/written rows and independently unchanged unequal output sentinels passed.",
+    "Ran two empty-call preservation checks and three candidate invalid-dimension checks; all passed.",
+    "Confirmed reference source bytes match parent64fd124."
+  ],
+  "empirical_validation": {
+    "tests_run": 11,
+    "tests_passed": 11,
+    "additional_raw_ABI_cases": 120,
+    "additional_empty_call_checks": 2,
+    "additional_dimension_checks": 3,
+    "build_reviewed": true,
+    "standalone_and_fused_parity_reviewed": true,
+    "complete_backend_failure_replay_reviewed": false,
+    "benchmark_reviewed": false,
+    "host": {
+      "platform": "Linux x86_64 with glibc2.44",
+      "compiler": "cc (GCC) 16.2.1 20260810",
+      "flags": [
+        "-std=c11",
+        "-O2",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-fPIC",
+        "-fstack-usage"
+      ],
+      "fused_define": "FT_HDEG=7",
+      "FLT_EVAL_METHOD": 0,
+      "DBL_MANT_DIG": 53,
+      "STDC_IEC_559": 1
+    },
+    "test_artifacts": "Temporary independent builds were removed by test cleanup; receipt binds exact reviewed source and records observed results."
+  },
+  "remaining_qualification_gates": [
+    "Complete-backend parity and35520-record failure/quarantine witness, including any benchmark runner not reviewed here.",
+    "Separate normal-build timing and resource measurements with pinned runtime/environment; instrumented counts are not timing evidence.",
+    "Any different compiler, target, rounding/libm environment or downstream implementation must establish the numerical and integration premises again.",
+    "Complete target SRAM, stack/call chain and worst-path timing remain open."
+  ],
+  "limits": [
+    "This individual conditional proof acceptance is not whole-target qualification or production readiness.",
+    "No improvement or guarantee of approximation error, physical uncertainty coverage, rate-box support, recovery availability, aging or lifetime behavior.",
+    "No M23 firmware-ready or complete-resource claim."
+  ],
+  "implementation_or_proof_modified_by_reviewer": false
+}

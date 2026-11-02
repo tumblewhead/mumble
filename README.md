@@ -130,6 +130,15 @@ shape likelihood passes54common-query comparisons and11targeted tests, with
 independent reviews accept this narrow control; continuous unknown-rate history
 and complete M23 resources remain open. Estimator/default code is unchanged.
 
+The [proof-driven architecture stage](provenance/architecture_reuse_001/README.md)
+adds nine architectural contracts, individually reviewed dependency/reuse proofs,
+and a source-bound acceptance gate. An isolated H7 response candidate shares eight
+hysteresis coefficient pairs instead of recomputing64, preserving43,968samples
+bitwise including the existing failure. Fifteen tests pass. Host response median
+throughput improves1.354x with no added persistent storage; the current packed
+history remains50,624B. Persistent caches, a runtime registry, continuous-rate
+compaction and target resources remain open; no default change is promoted.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

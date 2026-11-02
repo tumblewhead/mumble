@@ -1,0 +1,772 @@
+{
+  "schema": "architecture_dependency_plan_v1",
+  "status": "design_only_not_runtime_executive",
+  "leaves": [
+    "dt",
+    "I",
+    "T",
+    "V",
+    "sigma",
+    "calibration",
+    "rates",
+    "projection",
+    "old_state",
+    "old_evidence",
+    "source",
+    "sequence",
+    "anchor",
+    "prior",
+    "representation"
+  ],
+  "nodes": [
+    {
+      "id": "thermal",
+      "deps": [
+        "T",
+        "calibration"
+      ],
+      "cache_key": [
+        "T",
+        "calibration"
+      ],
+      "lifetime": "until T or calibration changes"
+    },
+    {
+      "id": "rc_coefficients",
+      "deps": [
+        "dt",
+        "thermal",
+        "rates"
+      ],
+      "cache_key": [
+        "dt",
+        "T",
+        "calibration",
+        "rates"
+      ],
+      "lifetime": "until dt/T/rates/calibration changes"
+    },
+    {
+      "id": "hysteresis_coefficients",
+      "deps": [
+        "dt",
+        "I",
+        "thermal",
+        "rates"
+      ],
+      "cache_key": [
+        "dt",
+        "I",
+        "T",
+        "calibration",
+        "rates"
+      ],
+      "lifetime": "current observation only in first implementation"
+    },
+    {
+      "id": "trial_state",
+      "deps": [
+        "old_state",
+        "dt",
+        "I",
+        "thermal",
+        "rc_coefficients",
+        "hysteresis_coefficients"
+      ],
+      "lifetime": "through row generation, validation and commit"
+    },
+    {
+      "id": "row",
+      "deps": [
+        "trial_state",
+        "I",
+        "V",
+        "sigma",
+        "thermal",
+        "calibration",
+        "projection"
+      ],
+      "lifetime": "until evidence append completes"
+    },
+    {
+      "id": "trial_evidence",
+      "deps": [
+        "old_evidence",
+        "row"
+      ],
+      "lifetime": "through validation and commit"
+    },
+    {
+      "id": "validated",
+      "deps": [
+        "trial_state",
+        "trial_evidence"
+      ],
+      "lifetime": "until commit decision"
+    },
+    {
+      "id": "committed",
+      "deps": [
+        "validated",
+        "source",
+        "sequence"
+      ],
+      "lifetime": "next admitted transition; source/sequence increment once"
+    },
+    {
+      "id": "query",
+      "deps": [
+        "committed",
+        "anchor",
+        "prior",
+        "representation"
+      ],
+      "lifetime": "until evidence/state/anchor/prior/representation changes"
+    }
+  ],
+  "columns": [
+    {
+      "name": "z0",
+      "shape_dependencies": []
+    },
+    {
+      "name": "v10",
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "name": "v20",
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "name": "v30",
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "name": "q",
+      "shape_dependencies": []
+    },
+    {
+      "name": "R0",
+      "shape_dependencies": []
+    },
+    {
+      "name": "R1",
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "name": "R2",
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "name": "R3",
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "name": "H",
+      "shape_dependencies": [
+        "kplus",
+        "kminus"
+      ]
+    },
+    {
+      "name": "B",
+      "shape_dependencies": [
+        "kplus",
+        "kminus"
+      ]
+    },
+    {
+      "name": "constant",
+      "shape_dependencies": []
+    }
+  ],
+  "old_generation_lifetime": "old_state and old_evidence remain readable through validation failure and rollback; no arena sharing implemented",
+  "cache_key_semantics": "literal immutable values or nonwrapping complete generations; cache entries for stateful effects forbidden",
+  "coefficient_entries": [
+    {
+      "i": 0,
+      "j": 0,
+      "shape_dependencies": []
+    },
+    {
+      "i": 0,
+      "j": 1,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 2,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 3,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 4,
+      "shape_dependencies": []
+    },
+    {
+      "i": 0,
+      "j": 5,
+      "shape_dependencies": []
+    },
+    {
+      "i": 0,
+      "j": 6,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 7,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 8,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 0,
+      "j": 11,
+      "shape_dependencies": []
+    },
+    {
+      "i": 1,
+      "j": 1,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 2,
+      "shape_dependencies": [
+        "tau1",
+        "tau2"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 3,
+      "shape_dependencies": [
+        "tau1",
+        "tau3"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 4,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 5,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 6,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 7,
+      "shape_dependencies": [
+        "tau1",
+        "tau2"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 8,
+      "shape_dependencies": [
+        "tau1",
+        "tau3"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau1"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau1"
+      ]
+    },
+    {
+      "i": 1,
+      "j": 11,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 2,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 3,
+      "shape_dependencies": [
+        "tau2",
+        "tau3"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 4,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 5,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 6,
+      "shape_dependencies": [
+        "tau1",
+        "tau2"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 7,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 8,
+      "shape_dependencies": [
+        "tau2",
+        "tau3"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau2"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau2"
+      ]
+    },
+    {
+      "i": 2,
+      "j": 11,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 3,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 4,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 5,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 6,
+      "shape_dependencies": [
+        "tau1",
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 7,
+      "shape_dependencies": [
+        "tau2",
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 8,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau3"
+      ]
+    },
+    {
+      "i": 3,
+      "j": 11,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 4,
+      "j": 4,
+      "shape_dependencies": []
+    },
+    {
+      "i": 4,
+      "j": 5,
+      "shape_dependencies": []
+    },
+    {
+      "i": 4,
+      "j": 6,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 4,
+      "j": 7,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 4,
+      "j": 8,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 4,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 4,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 4,
+      "j": 11,
+      "shape_dependencies": []
+    },
+    {
+      "i": 5,
+      "j": 5,
+      "shape_dependencies": []
+    },
+    {
+      "i": 5,
+      "j": 6,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 5,
+      "j": 7,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 5,
+      "j": 8,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 5,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 5,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 5,
+      "j": 11,
+      "shape_dependencies": []
+    },
+    {
+      "i": 6,
+      "j": 6,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 6,
+      "j": 7,
+      "shape_dependencies": [
+        "tau1",
+        "tau2"
+      ]
+    },
+    {
+      "i": 6,
+      "j": 8,
+      "shape_dependencies": [
+        "tau1",
+        "tau3"
+      ]
+    },
+    {
+      "i": 6,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau1"
+      ]
+    },
+    {
+      "i": 6,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau1"
+      ]
+    },
+    {
+      "i": 6,
+      "j": 11,
+      "shape_dependencies": [
+        "tau1"
+      ]
+    },
+    {
+      "i": 7,
+      "j": 7,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 7,
+      "j": 8,
+      "shape_dependencies": [
+        "tau2",
+        "tau3"
+      ]
+    },
+    {
+      "i": 7,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau2"
+      ]
+    },
+    {
+      "i": 7,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau2"
+      ]
+    },
+    {
+      "i": 7,
+      "j": 11,
+      "shape_dependencies": [
+        "tau2"
+      ]
+    },
+    {
+      "i": 8,
+      "j": 8,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 8,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau3"
+      ]
+    },
+    {
+      "i": 8,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus",
+        "tau3"
+      ]
+    },
+    {
+      "i": 8,
+      "j": 11,
+      "shape_dependencies": [
+        "tau3"
+      ]
+    },
+    {
+      "i": 9,
+      "j": 9,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 9,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 9,
+      "j": 11,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 10,
+      "j": 10,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 10,
+      "j": 11,
+      "shape_dependencies": [
+        "kminus",
+        "kplus"
+      ]
+    },
+    {
+      "i": 11,
+      "j": 11,
+      "shape_dependencies": []
+    }
+  ]
+}

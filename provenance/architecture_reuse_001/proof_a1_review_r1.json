@@ -1,0 +1,64 @@
+{
+  "schema": "architecture_reuse_individual_review_v1",
+  "review_id": "A1_r1",
+  "reviewer": "fresh_context_agent_proof_a1_review",
+  "reviewed_at_utc": "2026-11-02T04:04:13.877943+00:00",
+  "source_revision": "64fd1240d4e4b5de835777d480b2063530bad0fc",
+  "branch": "experiment/conditional-architecture-001",
+  "scope": "A1 conditional exact within-observation coefficient reuse proof and response.c source inspection; H7 ABI only",
+  "reviewed_sha256": {
+    "specifications/architecture_reuse_001/A1.md": "b0793f23bdea0fd60925ec8eefc16cee833f0cddf7e7ec784cb51dd01f148de6",
+    "experiments/architecture_reuse_001/response.c": "61be1882fe8ea716ae3a0eb68a7d1ab9cff26cac221376d711cea7af2ed05022",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+  },
+  "reference_matches_parent_revision": true,
+  "decision": "revision_requested_for_output_observable_scope",
+  "implementation_defects_found": [],
+  "findings": [
+    {
+      "id": "A1-R1-01",
+      "severity": "proof_scope",
+      "status": "open",
+      "statement": "The observable is response row bytes, but premises require identical initial state/input bytes only. A count=0 call or rejection at an observation leaves some or all output rows unwritten, so full output buffer equality is not implied for arbitrary initial output bytes.",
+      "counterexample": "Same H7 dimensions, count=0, identical state and configuration, different prefilled rows: both return 0 and preserve distinct row bytes.",
+      "required_disposition": "Either require identical initial output buffer bytes for full-buffer equivalence, or define observable rows as precisely the written valid-prefix rows and separately state that the remaining suffix is unchanged. Re-review amended proof hash."
+    }
+  ],
+  "accepted_conditional_components": [
+    "With n=6,m=8,b=36: row width is112, state layout is167doubles, rate offsets are18 and26; candidate rejects other dimensions before mutation.",
+    "Positive-current coefficient expressions depend only on q; negative-current expressions depend only on r. Candidate preserves exact operand grouping, multiplication/division order and unary signs.",
+    "For immutable nonaliasing inputs, no coefficient uses evolving state. Filling8coefficient pairs before the64updates is value-equivalent under fixed binary64 rounding, no contraction/reassociation/excess precision and deterministic exp/expm1 premises.",
+    "All64Eh/uh updates retain reference row-major order and exact expression grouping. RC/SOC/row projection expressions and order are unchanged.",
+    "Positive/negative signed zero current both skip hysteresis. Nonzero-current zero dt retains the original signed-zero argument/update expressions; negative-zero dt is also admitted and unchanged.",
+    "Observation validation occurs before mutation for that observation in both kernels. A valid preceding prefix mutates identically; invalid observation and subsequent row suffix remain unwritten. Primitive partial-prefix semantics are not transactional.",
+    "For a finite sequence and common call partition, equal incoming state and generated rows inductively imply equal outgoing state and generated rows. Downstream equivalence additionally requires unchanged consumers and runtime premises.",
+    "Source-level nonzero-current exp counts93to37 and expm1 counts82to26, rest exp29/expm1 18 are correct. These are not compiler-emitted call counts or a speedup claim.",
+    "Two8double local arrays add128B source payload, no persistent state. Stack frame/call-chain size needs separate measurement; no complete target-resource conclusion follows.",
+    "Excluding errno, floating flags/traps, asynchronous faults and call counts from value equivalence is explicit and necessary; no portable unconditional C/libm bitwise theorem is asserted."
+  ],
+  "checks_performed": [
+    "Read AGENTS.md, README.md and relevant PROJECT_STATE.json entries",
+    "Read full A1.md and architecture README",
+    "Inspected complete candidate and reference kernels and no-index diff",
+    "Independently enumerated ABI layout and source-level elementary call counts",
+    "Verified original reference SHA256 against git show64fd124"
+  ],
+  "empirical_validation": {
+    "tests_run": false,
+    "build_reviewed": false,
+    "runtime_parity_reviewed": false,
+    "resource_measurements_reviewed": false
+  },
+  "remaining_qualification_gates": [
+    "Resolve A1-R1-01 and independently re-review revised proof",
+    "Pinned build/runtime evidence for stated arithmetic and libm premises",
+    "Bitwise standalone and fused/backend parity including invalid-prefix and signed-zero cases",
+    "Instrumented emitted call counts and separately scoped host stack/timing measurements"
+  ],
+  "limits": [
+    "No physical approximation, uncertainty coverage, recovery availability, aging or lifetime claim",
+    "No M23 total SRAM, stack or timing certification",
+    "Source proof acceptance does not establish empirical qualification or production readiness"
+  ],
+  "implementation_or_proof_modified_by_reviewer": false
+}
