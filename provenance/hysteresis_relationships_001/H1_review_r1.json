@@ -1,0 +1,108 @@
+{
+  "schema": "mumble_hysteresis_relationships_individual_review_v1",
+  "review_id": "H1_review_r1",
+  "reviewer": "independent fresh-context agent /root/hysteresis_h1_review",
+  "reviewed_at_utc": "2026-11-02T06:02:05.476354+00:00",
+  "source_revision": "5794b651611bdb04ce8d2d0d85d60290b7c9fd20",
+  "branch": "experiment/conditional-architecture-001",
+  "source_status": "H1 is an untracked candidate proof at review; its exact content hash binds acceptance.",
+  "verdict": "accept_conditional",
+  "scope": "H1 chronological exponential response, affine segment algebra, transport weights, switch/suffix exposure identity and order counterexample. H2/H3 and estimator implementation qualification are excluded.",
+  "source_files": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "6c7964000d2d97345e9584644cfe8e306d35d94d307eff92ab2c9bad04aeb9a6",
+      "bytes": 104132
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "d1a505113a150315c1bb3441dd67d01a4da3e79f6f383091d5b9d81ee772163a",
+      "bytes": 278883
+    },
+    "specifications/hysteresis_relationships_001/H1.md": {
+      "sha256": "ebb9dbbfec106d92d506d68af506b0b7a53d7513f289baf8f83b4a754ea00490",
+      "bytes": 5204
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+      "bytes": 4357
+    },
+    "experiments/response_symbolic_diagnostic_001/README.md": {
+      "sha256": "9c320d2ebea5ee6834d1f6b35f50aea7ad7291789272589945e6ebac9ce7f5da",
+      "bytes": 12857
+    },
+    "experiments/response_symbolic_diagnostic_001/response.py": {
+      "sha256": "d5f553d2314715a59c2633ad2498e362d8974080aad7acf005c31fcc323ab84a",
+      "bytes": 6588
+    }
+  },
+  "explicit_assumptions": [
+    "The declared scalar Foster hysteresis law applies: dh/dU=k_s(s-h), h0 in [-1,1], s in {-1,+1}, nonnegative exact throughput, finite chronological sequence and stationary positive Q and gamma_s.",
+    "Current is in amperes, intervals in seconds, Q and U in Ah; gamma_s is dimensionless in the augmented model, so k_s=gamma_s/Q has units Ah^-1 and k_s U is dimensionless.",
+    "Fixed reference temperature is the base case. Known positive thermal factors may instead be included in every directional exposure as f_gamma_s/f_Q, matching the source recurrence.",
+    "H is fixed for the displayed voltage-amplitude decomposition B=H*h0. Any temperature multiplier of H must be applied when forming observation voltage; an aging H law is not supplied.",
+    "Algebraic associativity and bounds concern exact real arithmetic. The logarithmic coordinate is used only when its argument is strictly positive, and its reversed coordinate is finite only away from the opposite saturation boundary."
+  ],
+  "findings": [
+    {
+      "id": "H1-R1-UNITS-SOURCE",
+      "disposition": "accepted",
+      "reason": "conditional_packet.partition sets shape[3:5] to p[9:11]/p[0]. make multiplies these rates by |I|*dt/3600 and f_gamma/f_Q, and updates uh=e*uh+(1-e)*sign(I). This matches H1, including rest identity. The older response.py exponent uses its own rates directly times Ah; H1 correctly distinguishes that parameterization."
+    },
+    {
+      "id": "H1-R1-LOG",
+      "disposition": "accepted",
+      "reason": "Let d=1-s*h. Then d_prime=-k_s*d, giving log(d_out)-log(d_in)=-k_s*U. Reversing sign replaces d with 2-d, hence log(2-exp(ell_s)). Saturation singularities are explicitly stated; no transformation of noisy residual likelihood is inferred."
+    },
+    {
+      "id": "H1-R1-COMPOSITION",
+      "disposition": "accepted",
+      "reason": "Independent substitution gives T2(T1(h))=E2*E1*h+E2*b1+b2; three-map expansion proves associativity. |b2+E2*b1|<=1-E2+E2*(1-E1)=1-E2*E1 preserves interval invariance. conditional_packet.compose uses the same order r[7]*l[8]+r[8]."
+    },
+    {
+      "id": "H1-R1-CONVEX-WEIGHTS",
+      "disposition": "accepted",
+      "reason": "Induction gives h_M=h0*product(E)+sum s_j*(1-E_j)*F_j. Since E_j is in [0,1], every weight is nonnegative. Writing each summand weight as F_j-E_j*F_j telescopes to 1-product(E), so w0+wplus+wminus=1. These coefficients transport h0 and saturation states and do not assign posterior battery probabilities."
+    },
+    {
+      "id": "H1-R1-SUFFIX-IDENTITY",
+      "disposition": "accepted",
+      "reason": "Write T_j=product over l>=j of E_l and T_(M+1)=1. The forced sum is sum s_j*(T_(j+1)-T_j)=s_M-s_1*T_1+sum_(j<M)(s_j-s_(j+1))*T_(j+1). Combining h0*T_1 proves the stated tail formula with the tail strictly after j. Stationarity groups each tail into exp(-kplus*Uplus_tail-kminus*Uminus_tail). Unchanged-sign terms vanish and the suffix exposures trace a monotone axis-aligned path."
+    },
+    {
+      "id": "H1-R1-ORDER",
+      "disposition": "accepted",
+      "reason": "Plus then minus gives ab*h0+b*(1-a)-(1-b); minus then plus gives ab*h0-a*(1-b)+(1-a). Their difference is -2*(1-a)*(1-b), strictly negative when both finite directional doses are positive. Zero dose makes the difference zero without invalidating the general counterexample. This disproves sufficiency of directional totals for the forced endpoint, not every possible nonlinear representation."
+    },
+    {
+      "id": "H1-R1-LIKELIHOOD-AGING",
+      "disposition": "accepted",
+      "reason": "Two fixed-rate endpoint coefficients are not claimed to retain intermediate voltage evidence or a continuous unknown-rate likelihood. The proof explicitly preserves chronology for observations, distinguishes physical forgetting from statistical discounting, and requires path integration/joint uncertainty when physical rates or calibration vary. No aging, coverage, model universality, fixed-size history, firmware or SCM/NAIA/D2 result is inferred."
+    }
+  ],
+  "blocking_findings": [],
+  "validation": {
+    "method": "Independent symbolic derivation and source comparison, supplemented by exact Fraction arithmetic; finite checks are not substituted for the algebraic proof.",
+    "exact_arithmetic_control": {
+      "status": "pass",
+      "segment_cases": 27990,
+      "order_cases": 27,
+      "construction": "Enumerate all sequences of lengths 1 through 5 with each segment in {-1,+1} x {0,1/3,1}; test h0=-1,0,1. Compare direct recurrence, affine coefficients, convex weights and switch formula exactly, and verify nonnegative weights summing to one and endpoint bounds. E=0 is a saturation-limit extension; E=1 checks zero exposure. Separately enumerate a,b,h0 in {0,1/3,1} for the order identity.",
+      "command": "Inline Python 3 using fractions.Fraction and itertools.product, executed from the reviewed worktree; 27990 segment and 27 order assertions completed with exit code 0."
+    },
+    "implementation_changed": false,
+    "proof_changed": false,
+    "long_sweeps_rerun": false,
+    "artifacts_written": [
+      "provenance/hysteresis_relationships_001/H1_review_r1.json"
+    ]
+  },
+  "limitations": [
+    "Acceptance applies to the bound H1 content and assumptions only; substantive changes need fresh independent review.",
+    "This proves exact endpoint relationships for the declared stationary law, not physical calibration, aging validity, identifiability, estimation bias, uncertainty coverage or the cause of a particular fitted failure.",
+    "The signed suffix formula can cancel numerically; no floating-point stability or error bound is established by this review.",
+    "Root README and PROJECT_STATE were consulted selectively for current model and relevant response/architecture history; H2/H3 and other proof packets were not reviewed here."
+  ]
+}

@@ -178,6 +178,17 @@ reviews support the diagnostic scope; no fitted accuracy or target qualification
 is claimed. The next step is a short fitted-query comparison to judge practical
 return on the extra2576B, before more global degree or a long campaign.
 
+The [symbolic hysteresis investigation](provenance/hysteresis_relationships_001/README.md)
+identifies an exact omitted mixed-quadratic coefficient that explains the current
+H2 centre-value defect. Four individually reviewed conditional proofs connect
+chronological sign segments, repeated-use geometry, that voltage error, and its
+weighted-charge projection onto SOC/inverse-capacity fits. Finite controls agree
+with the centre-voltage identity within 2.09e-14 V. Controls review caught a saved
+prefix-array aliasing bug; the original is preserved and a corrected rerun passes
+serialized consistency checks. The next experiment is targeted mixed-term
+completion (hypothetical factor increments 568 B or 1800 B), followed by derivative
+and fitted-query checks. No repair, coverage or full-device memory claim is made.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

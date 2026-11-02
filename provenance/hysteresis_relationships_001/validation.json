@@ -1,0 +1,59 @@
+{
+  "schema": "hysteresis_relationships_validation_v1",
+  "prior_response_basis_source_artifact_identities_verified": 18,
+  "architecture_gate": {
+    "status": "reviewed_bindings_match",
+    "files": 55
+  },
+  "serialization_regression": {
+    "original_preserved_receipt": {
+      "status": "fail",
+      "prefix_records": 9,
+      "failures": [
+        {
+          "load": "multiscale",
+          "records": 21008,
+          "error": "serialized_gradient_identity_mismatch",
+          "recomputed_relative_error": 67.31686890448427
+        },
+        {
+          "load": "multiscale",
+          "records": 35520,
+          "error": "serialized_gradient_identity_mismatch",
+          "recomputed_relative_error": 17.728263571091034
+        },
+        {
+          "load": "embedded",
+          "records": 21008,
+          "error": "serialized_gradient_identity_mismatch",
+          "recomputed_relative_error": 18861745.44780945
+        },
+        {
+          "load": "embedded",
+          "records": 35520,
+          "error": "serialized_gradient_identity_mismatch",
+          "recomputed_relative_error": 29591.33693556748
+        }
+      ]
+    },
+    "corrected_receipt": {
+      "status": "pass",
+      "prefix_records": 9,
+      "failures": []
+    },
+    "meaning": "Negative control catches later-prefix aliasing; corrected serialized identities recompute consistently"
+  },
+  "finite_controls": {
+    "loads": 3,
+    "prefixes_per_load": 3,
+    "records": [
+      21008,
+      35520,
+      126000
+    ],
+    "public_query": "t0_a0",
+    "centre_mixed_voltage_gap_max_V": 2.0817928544220043e-14,
+    "conditional_fit_displacement_check_max_abs": 4.2327252813834093e-16
+  },
+  "scope": "Finite conditional symbolic checks and frozen artifact identity checks only; no full-estimator performance or universal certificate."
+}

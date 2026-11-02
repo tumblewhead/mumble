@@ -1,0 +1,167 @@
+{
+  "schema": "mumble_independent_review_v1",
+  "review_id": "hysteresis_relationships_001_H3_review_r1",
+  "reviewer": "fresh_context_subagent_hysteresis_h3_review",
+  "source_revision": "5794b651611bdb04ce8d2d0d85d60290b7c9fd20",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accept_conditional",
+  "scope": "H3 symbolic conditional likelihood identities and fit-displacement/bound/repeated-design arguments; no implementation changes or physical validation.",
+  "source_bindings": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "6c7964000d2d97345e9584644cfe8e306d35d94d307eff92ab2c9bad04aeb9a6",
+      "bytes": 104132
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "d1a505113a150315c1bb3441dd67d01a4da3e79f6f383091d5b9d81ee772163a",
+      "bytes": 278883
+    },
+    "specifications/hysteresis_relationships_001/H3.md": {
+      "sha256": "95561f8802c3d1e5876af96b63e2920db2defbc95aab2df5c5ee1021a035a2b0",
+      "bytes": 5269
+    },
+    "specifications/conditional_architecture_001/README.md": {
+      "sha256": "559a39bb82427c88a86d9b7ef134750982d60156a471aae50ab196bed95e4431",
+      "bytes": 3636
+    },
+    "specifications/response_basis_attribution_001/README.md": {
+      "sha256": "338916253d1339f6c2ff7e4c20d9dcdc52a38655dd4bcc3dbd082380195cf433",
+      "bytes": 5881
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+      "bytes": 4357
+    },
+    "experiments/response_basis_attribution_001/attribution.py": {
+      "sha256": "5f21d3738b208240cf07248c3021e1ae049fa3a37b6caa7adc608ecbee2898be",
+      "bytes": 3755
+    },
+    "provenance/response_basis_attribution_001/attribution_review_r1.json": {
+      "sha256": "71b8cd356ed5ce4419ec7018b85abd236d8dc9ff55c442b3a1c1cc5afac933a5",
+      "bytes": 9330
+    }
+  },
+  "blocking_findings": [],
+  "assumptions": [
+    "Displayed stationary exact-input affine SOC/linear-OCV voltage family; m>0; signed A in Ah for I in A and dt in seconds. Thermal factors must be unity or absorbed into explicitly redefined effective inputs before applying this equation to conditional_packet.",
+    "Independent amplitude/shape chart: q=1/Q, B=H*h0; rates kplus,kminus and all nuisance amplitudes/shapes fixed. Hysteresis approximation defect e is independent of z0 and q.",
+    "Fixed positive observation weights; gradient identities use the same data and parameters; objective is exactly the displayed weighted likelihood without prior or regularizer.",
+    "Fit displacement requires unconstrained two-parameter optima or inactive support constraints, with positive weighted charge variance. Both reciprocal-capacity parameters must be positive for the capacity formula.",
+    "Repeated-design precision statement requires identical full-rank design/weights/error pattern and genuinely independent matching Gaussian observations. It is not duplication of the same evidence or an assertion about chronological battery cycles."
+  ],
+  "findings": [
+    {
+      "id": "H3-R1-1",
+      "status": "verified",
+      "claim": "Exact gradient projections",
+      "reason": "At fixed shape J_z=m and J_q=-m*A have zero approximation defect; only J^T W e contributes to these two gradient coordinates. Signs match approximate-minus-reference residual convention and conditional_packet amplitude indices 0 and 4."
+    },
+    {
+      "id": "H3-R1-2",
+      "status": "verified",
+      "claim": "Conditional fit displacement and units",
+      "reason": "Subtracting the two normal equations gives delta_z=mean(A)*delta_q-mean(e)/m and delta_q=Cov(A,e)/(m*Var(A)). Cov has Ah*V units and denominator V*Ah^2 per unit SOC, so delta_q has Ah^-1 units; delta_z is a SOC fraction. No reference-truth assumption is used."
+    },
+    {
+      "id": "H3-R1-3",
+      "status": "verified",
+      "claim": "Finite capacity and endpoint SOC",
+      "reason": "Qhat/Qref=q/(q+delta_q), hence relative change=-delta_q/(q+delta_q). Endpoint transport is delta_z_N=delta_z-A_N*delta_q and matches transport(coeff)[0,4]=-A. The reciprocal formula is finite/exact, while -delta_q/q is local only."
+    },
+    {
+      "id": "H3-R1-4",
+      "status": "verified",
+      "claim": "Rank and diagnostic special cases",
+      "reason": "det(X^T W X)=m^4*(sum w)^2*Var_w(A). Thus constant charge makes the joint fit singular. Constant e changes only intercept and e=b*A changes only q; rest supplies no conditional capacity identification."
+    },
+    {
+      "id": "H3-R1-5",
+      "status": "verified",
+      "claim": "Cauchy-Schwarz and capacity tolerance bound",
+      "reason": "Centered weighted Cauchy-Schwarz bounds |Cov(A,e)| by SD(A)*SD(e). For |delta_q|<=b<q, denominator is at least q-b, yielding b/(q-b); solving b/(q-b)<=t gives b<=t*q/(1+t) for nonnegative tolerance t."
+    },
+    {
+      "id": "H3-R1-6",
+      "status": "verified_with_scope_clarification",
+      "claim": "Repeated-design SD scaling",
+      "reason": "Repeating X, W and e N times scales the precision and gradient defect by N, preserving displacement; inverse precision scales 1/N. Exact formal SD scaling concerns linear z0,q coordinates. Parent clarified the packet during review: Q precision is only a local delta-method statement, with no exact reciprocal-normal moments claim."
+    },
+    {
+      "id": "H3-R1-7",
+      "status": "verified",
+      "claim": "Joint likelihood preservation",
+      "reason": "The two projected moments do not eliminate nuisance derivative terms or interactions. Attribution.py preserves the full J^T dr+dJ^T r+dJ^T dr expansion; H3 explicitly refuses replacing the remaining joint likelihood with two moments."
+    }
+  ],
+  "validation": {
+    "command": "python3 -B /tmp/h3-review-r1.py",
+    "result": {
+      "exact_rational_checks_passed": 22,
+      "checks": [
+        "general_gradient_projection",
+        "general_normal_equation_displacement",
+        "general_centered_residual_orthogonal",
+        "general_cauchy_schwarz_squared",
+        "finite_Q_relative",
+        "endpoint_SOC",
+        "reciprocal_Q_bound",
+        "tolerance_equivalence",
+        "repeat_precision_scales_N",
+        "repeat_displacement_invariant",
+        "repeat_squared_standardized_shift_scales_N",
+        "constant_gradient_projection",
+        "constant_normal_equation_displacement",
+        "constant_centered_residual_orthogonal",
+        "constant_cauchy_schwarz_squared",
+        "constant_capacity_zero",
+        "charge_linear_gradient_projection",
+        "charge_linear_normal_equation_displacement",
+        "charge_linear_centered_residual_orthogonal",
+        "charge_linear_cauchy_schwarz_squared",
+        "linear_intercept_zero",
+        "constant_signed_charge_rank_deficient"
+      ],
+      "fixture": {
+        "A_Ah": [
+          "-2",
+          "0",
+          "1",
+          "4"
+        ],
+        "weights": [
+          "1",
+          "3",
+          "2",
+          "4"
+        ],
+        "m_V_per_SOC": "3/2",
+        "general_defect_V": [
+          "1/100",
+          "-1/50",
+          "3/100",
+          "1/25"
+        ],
+        "arbitrary_reference_residual_V": [
+          "2/7",
+          "-3/8",
+          "5/9",
+          "4/11"
+        ],
+        "repetitions": 7
+      },
+      "roundoff": "none: fractions.Fraction exact arithmetic"
+    },
+    "script_sha256": "bae1ca5f798d5ffbc31f098f7eadba023f178ab9fa17114053bfd26bf1ad25a6",
+    "reproduction_script": "from fractions import Fraction as F\nimport json\nA=list(map(F,[-2,0,1,4])); w=list(map(F,[1,3,2,4])); m=F(3,2)\ne=[F(1,100),F(-1,50),F(3,100),F(1,25)]\nr=[F(2,7),F(-3,8),F(5,9),F(4,11)]\nchecks=[]\ndef ck(name,value):\n assert value,name\n checks.append(name)\ndef mean(v):return sum(a*b for a,b in zip(w,v))/sum(w)\ndef cov(v,u):return mean([x*y for x,y in zip(v,u)])-mean(v)*mean(u)\ndef gradient(res):return [m*sum(x*y for x,y in zip(w,res)),-m*sum(x*y*z for x,y,z in zip(w,A,res))]\nM=[[m*m*sum(w),-m*m*sum(x*y for x,y in zip(w,A))],[-m*m*sum(x*y for x,y in zip(w,A)),m*m*sum(x*y*y for x,y in zip(w,A))]]\ndef inv(M):\n d=M[0][0]*M[1][1]-M[0][1]*M[1][0]\n return [[M[1][1]/d,-M[0][1]/d],[-M[1][0]/d,M[0][0]/d]]\ndef mul(M,v):return [sum(a*b for a,b in zip(row,v)) for row in M]\nMi=inv(M)\nfor label,err in [('general',e),('constant',[F(1,30)]*4),('charge_linear',[F(1,30)*a for a in A])]:\n dq=cov(A,err)/(m*cov(A,A)); dz=-mean(err)/m+mean(A)*dq\n dg=[b-a for a,b in zip(gradient(r),gradient([x+y for x,y in zip(r,err)]))]\n ck(label+'_gradient_projection',dg==gradient(err))\n ck(label+'_normal_equation_displacement',[-v for v in mul(Mi,dg)]==[dz,dq])\n ck(label+'_centered_residual_orthogonal',gradient([m*dz-m*a*dq+x for a,x in zip(A,err)])==[0,0])\n ck(label+'_cauchy_schwarz_squared',dq*dq<=cov(err,err)/(m*m*cov(A,A)))\n if label=='constant':ck('constant_capacity_zero',dq==0 and dz==-err[0]/m)\n if label=='charge_linear':ck('linear_intercept_zero',dz==0 and dq==F(1,30)/m)\n if label=='general':\n  q=F(16); Q=1/q; Qhat=1/(q+dq)\n  ck('finite_Q_relative',(Qhat-Q)/Q==-dq/(q+dq))\n  ck('endpoint_SOC',(F(1,2)+dz)-(q+dq)*A[-1]-(F(1,2)-q*A[-1])==dz-A[-1]*dq)\n  b=abs(dq); t=F(1,100)\n  ck('reciprocal_Q_bound',abs((Qhat-Q)/Q)<=b/(q-b))\n  ck('tolerance_equivalence',(b/(q-b)<=t)==(b<=t*q/(1+t)))\n  N=7; MN=[[N*x for x in row] for row in M]; MNi=inv(MN)\n  ck('repeat_precision_scales_N',MNi==[[x/N for x in row] for row in Mi])\n  ck('repeat_displacement_invariant',[-v for v in mul(MNi,[N*x for x in dg])]==[dz,dq])\n  ck('repeat_squared_standardized_shift_scales_N',dq*dq/MNi[1][1]==N*dq*dq/Mi[1][1])\nrestA=[F(2)]*4\nck('constant_signed_charge_rank_deficient',cov(restA,restA)==0)\nprint(json.dumps({'exact_rational_checks_passed':len(checks),'checks':checks,'fixture':{'A_Ah':list(map(str,A)),'weights':list(map(str,w)),'m_V_per_SOC':str(m),'general_defect_V':list(map(str,e)),'arbitrary_reference_residual_V':list(map(str,r)),'repetitions':7},'roundoff':'none: fractions.Fraction exact arithmetic'},indent=2))\n",
+    "interpretation": "Exact rational fixtures supplement the symbolic audit; they do not establish physical premises, coverage or implementation-wide correctness."
+  },
+  "limits": [
+    "No calibrated physical coverage, full posterior result, joint unknown-nuisance fit-displacement result, or Bayesian prior transformation is established.",
+    "No extension to nonlinear OCV, uncertain inputs, aging, active support constraints, varying weights or fixed bare-gamma coordinates without a separate derivation.",
+    "No firmware readiness, complete M23 memory/timing qualification, lifetime accuracy, uniform response bound or production algorithm is accepted.",
+    "No campaign or long sweep was run. Existing raw result artifacts and implementation were untouched."
+  ]
+}

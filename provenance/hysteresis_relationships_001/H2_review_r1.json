@@ -1,0 +1,85 @@
+{
+  "schema": "independent_conditional_proof_review_v1",
+  "review_id": "H2_review_r1",
+  "reviewer": "fresh_context_agent_hysteresis_h2_review",
+  "reviewed_at_utc": "2026-11-02T06:02:07.847294+00:00",
+  "source_revision": "5794b651611bdb04ce8d2d0d85d60290b7c9fd20",
+  "branch": "experiment/conditional-architecture-001",
+  "proof": "specifications/hysteresis_relationships_001/H2.md",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "6c7964000d2d97345e9584644cfe8e306d35d94d307eff92ab2c9bad04aeb9a6",
+    "PROJECT_STATE.json": "d1a505113a150315c1bb3441dd67d01a4da3e79f6f383091d5b9d81ee772163a",
+    "specifications/hysteresis_relationships_001/H1.md": "ebb9dbbfec106d92d506d68af506b0b7a53d7513f289baf8f83b4a754ea00490",
+    "specifications/hysteresis_relationships_001/H2.md": "14f78c153dc3692b5ab04a9c3eb61bb9a90bf2e37e34c5e3cc0b952b87d6e21f",
+    "experiments/response_symbolic_diagnostic_001/README.md": "9c320d2ebea5ee6834d1f6b35f50aea7ad7291789272589945e6ebac9ce7f5da"
+  },
+  "verdict": "accept_conditional",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "id": "H2-R1-F1",
+      "status": "accepted",
+      "claim": "Repeated affine word and two-segment cycle",
+      "reason": "Iteration follows by induction and the geometric sum. The invariant interval supplies a bounded attracting endpoint when E<1. Direct substitution gives h_minus=(2b-ab-1)/(1-ab), h_plus=(1-2a+ab)/(1-ab), hence the stated midpoint and half-span. Rest is separately handled."
+    },
+    {
+      "id": "H2-R1-F2",
+      "status": "accepted",
+      "claim": "Dose/imbalance geometry and limits",
+      "reason": "Factoring exp(-D/2) gives both hyperbolic identities. With r=delta/D in [-1,1], c=r+O(D^2) and w=D(1-r^2)/4+O(D^3). Balanced dose gives tanh(x/2); at zero total dose there is no unique attracting fixed point. This is physical state geometry only."
+    },
+    {
+      "id": "H2-R1-F3",
+      "status": "accepted",
+      "claim": "Exposure derivatives",
+      "reason": "Applying k_s*d/dk_s to exp(-k_plus*A_plus-k_minus*A_minus) gives -d_s E, (d_s^2-d_s)E and d_plus*d_minus E. The scalar peak follows from d[d exp(-d)]/dd=(1-d)exp(-d). Mixed curvature is compatible with exact separability and does not establish empirical error shares."
+    },
+    {
+      "id": "H2-R1-F4",
+      "status": "accepted",
+      "claim": "Fixed finite word weak-exposure asymptotic",
+      "reason": "Each finite suffix exponential has a uniformly convergent epsilon expansion on fixed compact rate support. Its order-n coefficient is a degree-n rate polynomial; finite sums preserve the degree bound. For a fixed bounded linear polynomial-reproducing projector, applying I-Pi to the uniform remainder gives O(epsilon^(d+1)). A log-rate polynomial generally does not reproduce the first-order exponential-in-log coefficient. This is consistent with the cited earlier argument and does not rank finite large-dose approximations."
+    },
+    {
+      "id": "H2-R1-F5",
+      "status": "accepted",
+      "claim": "Scalar exponential Taylor bound",
+      "reason": "Lagrange remainder is bounded by the largest magnitude derivative on the interval, exp(-min(D,D0)), times the degree-(d+1) distance divided by factorial. Absolute summation bounds finite signed switch expansions, with reversal-dependent constants. It does not certify Chebyshev projection or fitted-query error."
+    },
+    {
+      "id": "H2-R1-F6",
+      "status": "accepted",
+      "claim": "Exact fixed linear basis nonclosure",
+      "reason": "For a one-sign fixed nonzero voltage transient, subtract the known saturated component to leave a constant times E^n. Arbitrary measured values generate every polynomial of degree below N in the cross term. Independence on any nonempty open E interval forces dimension at least N. Shifting indices multiplies by nonzero E and preserves independence. The statement does not exclude nonlinear encodings, approximation or special measurement sequences."
+    }
+  ],
+  "assumptions": [
+    "H1 stationary declared model, positive fixed Q and directional rates, exact currents/intervals and fixed reference temperature; initial hysteresis lies in [-1,1].",
+    "Identical repeated word means identical chronological directional exposures and matching observation phase.",
+    "Weak-exposure scaling is positive epsilon approaching zero for one fixed finite sign/order word, with fixed initial state or free/forced response coefficients treated independently of rates.",
+    "Projector is a fixed bounded linear operator in the response norm on a fixed compact rate domain, reproducing all rate polynomials of total degree at most d; d is a fixed nonnegative integer.",
+    "Nonclosure uses arbitrary measured observation values, a continuously variable E on a nonempty open interval, and a nonzero voltage transient (in the concrete example H*(h0-s) is nonzero)."
+  ],
+  "limits": [
+    "No history-forgetting inference: decay of initial-state influence does not erase historical likelihood evidence.",
+    "No universal or nonlinear encoding memory-impossibility claim; only exact fixed-dimensional linear function bases are excluded in the stated observation family.",
+    "No uniform weak-exposure theorem in word length, dose, all derivative orders, or arbitrary parameter support.",
+    "No quantitative attribution of the actual fixture discrepancy, normalized posterior error, fitted SOC/Q error, calibrated coverage, aging, ten-year behavior, or complete M23 resources.",
+    "Handwritten conditional proof review and finite controls are not full formal verification; H1 premise qualification is inherited, not newly validated here."
+  ],
+  "validation": {
+    "analytic_review": "Independent hand derivation of all displayed identities, operator remainder argument, and polynomial-space independence.",
+    "finite_controls": {
+      "exact_fraction_cycle_cases": 15,
+      "decimal_hyperbolic_cases": 24,
+      "decimal_taylor_bound_cases": 150,
+      "decimal_precision_digits": 80,
+      "status": "passed"
+    },
+    "control_description": "stdlib Fraction cycle substitution on a,b grids including zero/one degeneracies; Decimal hyperbolic identities on nonnegative dose grid; degrees 0..5 Taylor bounds at 25 dose/center pairs.",
+    "unavailable_optional_check": "SymPy import failed with ModuleNotFoundError; no symbolic-package check is claimed and no dependencies were installed.",
+    "production_or_proof_edits": false
+  },
+  "required_disposition": "No substantive revision required. Acceptance applies only to the source hashes and listed premises."
+}

@@ -1,0 +1,175 @@
+{
+  "schema": "mumble_independent_review_v1",
+  "review_id": "hysteresis_relationships_001_H4_review_r1",
+  "reviewer": "fresh_context_subagent_hysteresis_h4_review",
+  "source_revision": "5794b651611bdb04ce8d2d0d85d60290b7c9fd20",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accept_conditional",
+  "scope": "Exact H4 conditional symbolic proof and source/layout correspondence; runtime witness is separate and not accepted by this review.",
+  "source_bindings": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "README.md": {
+      "sha256": "6c7964000d2d97345e9584644cfe8e306d35d94d307eff92ab2c9bad04aeb9a6",
+      "bytes": 104132
+    },
+    "PROJECT_STATE.json": {
+      "sha256": "d1a505113a150315c1bb3441dd67d01a4da3e79f6f383091d5b9d81ee772163a",
+      "bytes": 278883
+    },
+    "specifications/hysteresis_relationships_001/H4.md": {
+      "sha256": "b60686de68a7c9ba446fd3a294a7946e0a9561c89b5befceac67174787c09dfc",
+      "bytes": 4860
+    },
+    "specifications/hysteresis_relationships_001/H1.md": {
+      "sha256": "ebb9dbbfec106d92d506d68af506b0b7a53d7513f289baf8f83b4a754ea00490",
+      "bytes": 5204
+    },
+    "specifications/hysteresis_relationships_001/H3.md": {
+      "sha256": "95561f8802c3d1e5876af96b63e2920db2defbc95aab2df5c5ee1021a035a2b0",
+      "bytes": 5269
+    },
+    "specifications/response_basis_attribution_001/README.md": {
+      "sha256": "338916253d1339f6c2ff7e4c20d9dcdc52a38655dd4bcc3dbd082380195cf433",
+      "bytes": 5881
+    },
+    "experiments/response_basis_attribution_001/basis.py": {
+      "sha256": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+      "bytes": 5514
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9",
+      "bytes": 6989
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+      "bytes": 8687
+    },
+    "experiments/hysteresis_refinement_001/response.c": {
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+      "bytes": 2282
+    }
+  },
+  "blocking_findings": [],
+  "assumptions": [
+    "H1 stationary declared hysteresis model with positive rates, exact ordered current/interval inputs and fixed reference temperature; no aging or calibration uncertainty is discharged.",
+    "Exactly the 3x3 Chebyshev root grid and unweighted TD2 projection in normalized log-rate coordinates; full tensor P interpolates all nine exact nodal response values.",
+    "H and B are held fixed when applying the response identity; B=H*h0 and both directional rates remain in one joint physical/likelihood model.",
+    "Exact arithmetic for the theorem; rounded nodes, native recurrences, pseudoinverse, coefficient evaluation and QR require separate finite-runtime validation."
+  ],
+  "findings": [
+    {
+      "id": "H4-R1-1",
+      "status": "verified",
+      "claim": "Discrete orthogonality and truncation",
+      "reason": "The displayed 1D columns have squared norms 3,3/2,3/2 and zero cross products. Tensor Gram entries factor, so all nine columns are independent and unweighted least squares on the six TD2 columns retains the same coefficients as full interpolation. The omitted pairs are exactly (1,2),(2,1),(2,2). BasisField, Field and MixedField construct the stated unweighted pseudoinverse; this is not a weighted or regularized projection theorem."
+    },
+    {
+      "id": "H4-R1-2",
+      "status": "verified",
+      "claim": "Central value and native voltage sign",
+      "reason": "At the central interpolation node the omitted odd columns vanish and T2(0)^2=1. Approximate minus physical response is therefore -c22. Native response.c emits positive H*uh+B*Eh, matching -H*c22(u)-B*c22(E) at 25C. For a full R2 public-centre query, RC univariate interpolation also includes its centre node, so this identifies the ideal-arithmetic response-value truncation mechanism without establishing actual runtime rounding or likelihood-root parity."
+    },
+    {
+      "id": "H4-R1-3",
+      "status": "verified",
+      "claim": "Derivative distinction",
+      "reason": "Differentiating TD2 minus tensor P gives c12,c21 in normalized t coordinates at the centre; c22 has zero first derivative there. Full interpolation is not Hermite interpolation and need not match physical derivatives. For a different log halfwidth, derivatives in log-rate coordinates additionally divide by that halfwidth. R2/H2/log uses halfwidth one."
+    },
+    {
+      "id": "H4-R1-4",
+      "status": "verified",
+      "claim": "Mixed stencil and separability",
+      "reason": "The 1D quadratic coefficient is the [1,-2,1]/3 stencil. Applying it on both axes gives the stated four-corner, edge-midpoint and centre formula. H1 free response factors exp(-kplus*Uplus)*exp(-kminus*Uminus), hence its c22 factors. A response independent of one axis has zero c22, although this does not ensure physical derivative or off-centre interpolation accuracy."
+    },
+    {
+      "id": "H4-R1-5",
+      "status": "verified",
+      "claim": "Two-run order and curvature sign",
+      "reason": "For s2=-s1, affine composition gives u=-s1+2*s1*E_second-s1*E_first*E_second. Its mixed coefficient is -s1 times the product of the two univariate c2 values, giving the stated voltage formula including B. The log-rate exponential has second derivative D*(D-1)*exp(-D) for D=k_center*U*exp(t); exposures entirely below or above D=1 supply negative or positive curvature respectively. No universal sign follows across all exposures or longer reversal histories."
+    },
+    {
+      "id": "H4-R1-6",
+      "status": "verified",
+      "claim": "Storage estimates",
+      "reason": "With n=3, lifted width=22+2*b. b=6,7,9 give widths34,36,40; packed binary64 upper triangles are4760,5328,6560B. The unchanged m=3 live state is312B and the declared96B domain/scalars give5168,5736,6968B. H3 b=10,m=4 gives width42,7224B factor and7744B subtotal. These are conditional layouts, not complete allocation or implemented-candidate measurements."
+    },
+    {
+      "id": "H4-R1-7",
+      "status": "verified",
+      "claim": "Root-cause scope and H3 connection",
+      "reason": "The formula supplies an exact conditional explanation for baseline centre response error and therefore the response defect entering H3 charge moments. H4 explicitly preserves joint likelihood ownership and separates central values, derivatives, between-node error and fitted accuracy. It does not assert c22 is the sole cause of all joint gradients, posterior shifts or historical finite-runtime errors."
+    }
+  ],
+  "validation": {
+    "command": "python3 -B /tmp/h4-review-r1.py",
+    "result": {
+      "exact_checks_passed": 24,
+      "checks": [
+        "rescaled_1D_orthogonality",
+        "tensor_orthogonality",
+        "omissions",
+        "center_and_stencil_(0, 0)",
+        "center_and_stencil_(0, 1)",
+        "center_and_stencil_(0, 2)",
+        "center_and_stencil_(1, 0)",
+        "center_and_stencil_(1, 1)",
+        "center_and_stencil_(1, 2)",
+        "center_and_stencil_(2, 0)",
+        "center_and_stencil_(2, 1)",
+        "center_and_stencil_(2, 2)",
+        "central_derivative_(1, 2)",
+        "central_derivative_(2, 1)",
+        "central_derivative_(2, 2)",
+        "separable_mixed_coefficient",
+        "two_run_sign_-1",
+        "two_run_voltage_-1",
+        "two_run_sign_1",
+        "two_run_voltage_1",
+        "storage_width_34",
+        "storage_width_36",
+        "storage_width_40",
+        "storage_width_42"
+      ],
+      "resources": [
+        {
+          "width": 34,
+          "packed_factor_B": 4760,
+          "response_B": 312,
+          "lower_subtotal_B": 5168
+        },
+        {
+          "width": 36,
+          "packed_factor_B": 5328,
+          "response_B": 312,
+          "lower_subtotal_B": 5736
+        },
+        {
+          "width": 40,
+          "packed_factor_B": 6560,
+          "response_B": 312,
+          "lower_subtotal_B": 6968
+        },
+        {
+          "width": 42,
+          "packed_factor_B": 7224,
+          "response_B": 424,
+          "lower_subtotal_B": 7744
+        }
+      ],
+      "arithmetic": "fractions.Fraction; T1 column rescaled by 1/a to avoid irrational grid arithmetic"
+    },
+    "script_sha256": "4a3ed8c048c08c33e87aeb0f308e27dbcb1c20e9036bddb7e3ab73b6e906030d",
+    "reproduction_script": "from fractions import Fraction as F\nimport json\nchecks=[]\ndef ck(name,ok):\n    assert ok,name\n    checks.append(name)\n# Rescale T1 by 1/a: basis (1,z,3*z*z/2-1), z=t/a.\n# This nonzero column scaling preserves orthogonality and the TD2 subspace.\nz=[F(1),F(0),F(-1)]\nV=[[F(1),x,F(3,2)*x*x-1] for x in z]\ngram=[[sum(row[i]*row[j] for row in V) for j in range(3)] for i in range(3)]\nck('rescaled_1D_orthogonality',gram==[[F(3),0,0],[0,F(2),0],[0,0,F(3,2)]])\npairs=[(i,j) for i in range(3) for j in range(3)]\ncols={p:[V[q][p[0]]*V[r][p[1]] for q in range(3) for r in range(3)] for p in pairs}\ndot=lambda a,b:sum(x*y for x,y in zip(a,b))\nck('tensor_orthogonality',all(dot(cols[p],cols[q])==0 for p in pairs for q in pairs if p!=q))\nkeep=[p for p in pairs if sum(p)<=2]\nck('omissions',set(pairs)-set(keep)=={(1,2),(2,1),(2,2)})\nw=[F(1),F(-2),F(1)]\ndef c22(v):return sum(w[q]*w[r]*v[3*q+r] for q in range(3) for r in range(3))/9\nfor p in pairs:\n    c={q:dot(cols[q],cols[p])/dot(cols[q],cols[q]) for q in keep}\n    center=sum(c[q]*V[1][q[0]]*V[1][q[1]] for q in keep)\n    ck('center_and_stencil_'+str(p),center-cols[p][4]==-c22(cols[p]) and c22(cols[p])==int(p==(2,2)))\n# In original t coordinates T(0)=(1,0,-1), T'(0)=(0,1,0).\nv=[1,0,-1];d=[0,1,0]\nfor p in [(1,2),(2,1),(2,2)]:\n    ck('central_derivative_'+str(p),(-d[p[0]]*v[p[1]],-v[p[0]]*d[p[1]])==(int(p==(1,2)),int(p==(2,1))))\nf=[F(2,3),F(3,5),F(1,7)];g=[F(4,5),F(1,2),F(1,9)]\nc2=lambda x:sum(a*b for a,b in zip(w,x))/3\nprod=[a*b for a in f for b in g]\nck('separable_mixed_coefficient',c22(prod)==c2(f)*c2(g))\nfor sign in [-1,1]:\n    # First run exponential is f for + then -, or g for - then +.\n    u=[sign*(1-a)*b-sign*(1-b) if sign==1 else sign*(1-b)*a-sign*(1-a) for a in f for b in g]\n    ck('two_run_sign_'+str(sign),c22(u)==-sign*c2(f)*c2(g))\n    H=F(3,10);B=F(1,20)\n    ck('two_run_voltage_'+str(sign),-H*c22(u)-B*c22(prod)==(H*sign-B)*c2(f)*c2(g))\nresources=[]\nfor b,m,width,factor,subtotal in [(6,3,34,4760,5168),(7,3,36,5328,5736),(9,3,40,6560,6968),(10,4,42,7224,7744)]:\n    actual_width=4+6*3+2*b; state=8*(6*3+2*m*m+3); packed=8*actual_width*(actual_width+1)//2\n    ck('storage_width_'+str(width),(actual_width,packed,packed+state+96)==(width,factor,subtotal))\n    resources.append(dict(width=width,packed_factor_B=packed,response_B=state,lower_subtotal_B=packed+state+96))\nprint(json.dumps(dict(exact_checks_passed=len(checks),checks=checks,resources=resources,arithmetic='fractions.Fraction; T1 column rescaled by 1/a to avoid irrational grid arithmetic'),indent=2))\n",
+    "interpretation": "Exact basis/stencil and arithmetic checks supplement the symbolic audit. Product/two-run fixtures exercise the algebra; they are not physical validation or runtime certification."
+  },
+  "limits": [
+    "Acceptance does not establish uniform physical response or derivative bounds, fitted-query improvement, calibrated coverage, posterior factorization, aging or lifetime accuracy.",
+    "Restoring c22 is an unimplemented hypothesis: it fixes central values under these premises but leaves c12/c21 truncation and physical interpolation error.",
+    "All memory figures are packed numeric lower subtotals excluding tables, metadata, prior, solver, scratch, stack/ISR and platform costs; no M23 qualification.",
+    "Runtime witness, historical probe reproduction and numerical error magnitude remain outside this review. No campaign or long sweep was run.",
+    "Source implementation and pre-existing evidence were not edited; the only repository artifact created by this reviewer is this receipt."
+  ]
+}
