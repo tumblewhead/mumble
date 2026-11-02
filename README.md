@@ -235,6 +235,15 @@ Seven targeted tests pass; P2/P3 received individual independent review. No runt
 change or support restriction is introduced. Next apply the joint metric to saved
 anchors, separating RC and hysteresis defects before another representation repair.
 
+The [saved-anchor joint precision diagnosis](provenance/joint_precision_attribution_001/README.md)
+now isolates H2 as the active-use uncertainty defect: one-hour embedded SOC width
+ratios are 0.998 for RC-only error, 0.525 for H-only and 0.525 combined. Taylor RC
+passes the sufficient test at all eight active anchors but fails four rest anchors;
+H7 combined passes all twelve. Approximate transport can mask large precision
+errors, so both remain explicit. Six tests pass and M1 has independent review.
+Next target compact hysteresis value/rate/mixed sensitivities, retaining public
+support and cross terms. No fits or production behavior changed.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

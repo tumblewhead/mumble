@@ -1,0 +1,103 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/joint_precision_attribution_001/M1.md",
+  "review_round": 1,
+  "reviewer": "independent fresh-context agent /root/joint_precision_m1_review",
+  "date": "2026-11-02",
+  "base_revision": "a440e7c519db0a8a00496522f0cba1a3ac9e4d24",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "scope": "Individual conditional mathematics review of M1 and its declared chart/transport dependencies. No proof, implementation or original evidence was changed. No long sweep was run. Existing P2 envelope constants are dependencies; their exact-rational certification is not repeated here.",
+  "findings": [
+    {
+      "id": "M1-R1-01",
+      "section": "Partition and coordinate chain",
+      "status": "verified",
+      "finding": "The physical amplitudes are (z,v1,v2,v3,1/Q,R0,R1,R2,R3,H,H*tanh(eta)); the shape variables are ordered tau1,tau2,tau3,gamma_plus/Q,gamma_minus/Q. The declared R/H/O column sets are disjoint and exhaust all 16 columns. Both chart helpers are derivatives of chart_from at fixed complementary coordinates. Hence B=dx/dc and K=B^-1 L give the stated chain rule. In particular dlog(k_plus)=dlog(gamma_plus)-dlog(Q), and similarly for minus; H defects can change the Q direction after mapping."
+    },
+    {
+      "id": "M1-R1-02",
+      "section": "Amplitude contraction and unchanged columns",
+      "status": "verified",
+      "finding": "At fixed rates both response models are linear in their eleven amplitudes, with the same intercept and observed voltage. Contracting amplitude derivative defects with the amplitudes therefore gives the normalized residual defect, separately for each partition. The O columns have zero exact defect. The requirement to retain numerical O residuals as a control is necessary for finite-arithmetic comparison."
+    },
+    {
+      "id": "M1-R1-03",
+      "section": "Prior and cross interactions",
+      "status": "verified",
+      "finding": "Expanding the three full Gram matrices yields exactly the two symmetric D_R/D_H cross products. Disjoint physical column support does not eliminate their off-diagonal cross block; the transformation K generally spreads it further. Using I once in each counterfactual model preserves the same original prior. No norm of an interaction or partition is a variance fraction."
+    },
+    {
+      "id": "M1-R1-04",
+      "section": "Common QR reduction",
+      "status": "verified",
+      "finding": "A single QR of the horizontally augmented block preserves all mutual inner products, including residual cross products. Right multiplication of its D_Rc/D_Hc blocks by the same K recovers the required original-prior-coordinate products. Incremental QR of stacked prior roots and new chronological rows preserves the aggregate Gram by induction, including rectangular/rank-deficient intermediates and zero-row padding. Separate Q reductions would not preserve these mutual products."
+    },
+    {
+      "id": "M1-R1-05",
+      "section": "Cholesky precision metric",
+      "status": "verified",
+      "finding": "For P=C*C^T and M=C^-T, M^T*P*M=I and M*M^T=P^-1. Thus O=P^(1/2)*M is orthogonal and M=P^-1/2*O. The mapped Jacobian singular values and relative precision spectra agree with the symmetric metric. Expansion gives I+W=M^T*P_S*M, and ||J*M||<=1 gives epsilon=2*eta+eta^2. epsilon>=1 is only an inconclusive sufficient test."
+    },
+    {
+      "id": "M1-R1-06",
+      "section": "Transported queries",
+      "status": "verified",
+      "finding": "The row-gradient form q=||g*M|| and h=||(ghat-g)*M|| is equivalent to P3c. Inverse Loewner bounds followed by triangle/reverse-triangle bounds give the stated variance interval, including zero and cancelling gradients. Physical history transport is separable in branch voltages and H*tanh(eta), with common static H and other parameters; replacing the corresponding full solver-coordinate state rows and derivative rows therefore constructs the stated hybrid endpoint map. The future gradient must be evaluated at that endpoint and multiplied by its complete incoming-state Jacobian. The required support check and same-anchor/counterfactual limits are explicit."
+    },
+    {
+      "id": "M1-R1-07",
+      "section": "P2/P3a envelope",
+      "status": "verified",
+      "finding": "P3a gives absolute partial bounds in independent b,R,log(tau) coordinates, which are exactly the RC subset of c. At each row, |D_Rc*K*M| is bounded entrywise by (b_c/sigma_k)*|K*M|. Squaring row Euclidean bounds and summing gives the stated Frobenius upper bound, hence the spectral upper bound. This is conditional on fixed stationary Taylor centres and a valid prefix Imax; it neither bounds H error nor supplies the reference precision. It may grow with observation count although b_c does not depend on elapsed duration."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "command": "PYTHONPATH=. python3 -B /tmp/m1_review_checks.py",
+    "method": "Independent finite-difference chart check with dense prior mixing; 16 deterministic random full joint matrix cases, common incremental QR, symmetric/Cholesky metric equivalence, all three partition variants, 144 query-gradient inequality cases, and synthetic entrywise envelope checks.",
+    "results": {
+      "seed": 718921,
+      "chart_relative_max_error": 9.193374561622392e-09,
+      "matrix_cases": 16,
+      "variants_per_case": 3,
+      "forecast_cases": 144,
+      "common_QR_chunk_rows": 7,
+      "max_cross_identity_absolute_error": 6.209342401162918e-15,
+      "nonzero_interaction_cases": 16,
+      "max_augmented_Gram_absolute_error": 5.684341886080802e-14,
+      "max_Cholesky_metric_absolute_error": 8.881784197001252e-16,
+      "max_relative_spectrum_absolute_difference": 5.218048215738236e-15,
+      "minimum_forecast_bound_slack": 0.0,
+      "max_entrywise_envelope_observed_to_bound_ratio": 0.387695360190623
+    },
+    "review_harness_correction": "The initial review-only Q-coupling assertion omitted dense-prior gamma-row contributions. It was corrected to K[14,:]=L[14,:]-L[5,:] and K[15,:]=L[15,:]-L[5,:], consistent with the proof; no project defect was found.",
+    "source_sha256": "a7dce88325869d9c7c3946da205a985d670906b1b9bf69eb4fc1fa2cbd19e0fa",
+    "source": "import json\nimport numpy as np\nfrom experiments.foster_uncertainty_audit_001.conditional_packet import partition, chart_from\nfrom experiments.conditional_architecture_001.conditional import chart_amplitude_jacobian\nfrom experiments.partitioned_coefficients_001.run import chart_shape_jacobian\nrng=np.random.default_rng(718921)\na=np.array([.6,.01,-.02,.005,1/.06,.1,.2,.3,.4,.02,.006])\ns=np.array([.1,1.,10.,30.,50.])\nc=np.r_[a,np.log(s)]\nB=np.column_stack((chart_amplitude_jacobian(a),chart_shape_jacobian(s)))\ndef chart(c):return chart_from(c[:11],np.exp(c[11:]))\nfd=np.zeros_like(B)\nfor i in range(16):\n    h=1e-6*max(abs(c[i]),.01);d=np.eye(16)[i]*h\n    fd[:,i]=(chart(c+d)-chart(c-d))/(2*h)\nchart_err=float(np.max(abs(fd-B)/np.maximum(1.,abs(B))))\nassert chart_err<1e-8\npa,ps=partition(chart(c));assert np.allclose(pa,a) and np.allclose(ps,s)\nL=np.diag(np.linspace(.01,.08,16));L+=np.tril(rng.normal(size=(16,16))*.002,-1)\nK=np.linalg.solve(B,L)\n# k_plus=gamma_plus/Q, k_minus=gamma_minus/Q: log-rate rows each subtract log Q.\nassert np.allclose(K[14],L[14]-L[5]) and np.allclose(K[15],L[15]-L[5])\nR=[1,2,3,6,7,8,11,12,13];H=[9,10,14,15];O=[0,4,5]\nassert sorted(R+H+O)==list(range(16))\nmax_cross_err=max_gram_err=max_spectrum_err=max_metric_err=max_var_error=0.\nmin_slack=float('inf');max_bound_ratio=0.;interaction_nonzero=0\nfor case in range(16):\n    n=37+case\n    Jc=rng.normal(size=(n,16));J=Jc@K\n    Rc=np.zeros((n,16));Hc=Rc.copy()\n    Rc[:,R]=rng.normal(size=(n,len(R)))*.0005\n    Hc[:,H]=rng.normal(size=(n,len(H)))*.0005\n    DR=Rc@K;DH=Hc@K\n    P=np.eye(16)+J.T@J; C=np.linalg.cholesky(P);M=np.linalg.solve(C.T,np.eye(16))\n    eig,U=np.linalg.eigh(P);S=(U*(1/np.sqrt(eig)))@U.T\n    max_metric_err=max(max_metric_err,float(np.max(abs(M.T@P@M-np.eye(16)))))\n    delta=lambda D:(J+D).T@(J+D)-J.T@J\n    cross=DR.T@DH+DH.T@DR\n    interaction_nonzero+=int(np.linalg.norm(cross)>1e-12)\n    max_cross_err=max(max_cross_err,float(np.max(abs(delta(DR+DH)-delta(DR)-delta(DH)-cross))))\n    r=rng.normal(size=n);er=Rc[:,:11]@a;eh=Hc[:,:11]@a\n    block=np.column_stack((J,Rc,Hc,r,er,eh));root=np.zeros((0,block.shape[1]))\n    for start in range(0,n,7):root=np.linalg.qr(np.vstack((root,block[start:start+7])),mode='r')\n    max_gram_err=max(max_gram_err,float(np.max(abs(root.T@root-block.T@block))))\n    for D in (DR,DH,DR+DH):\n        A=J@M;E=D@M;eta=np.linalg.norm(E,2);eps=2*eta+eta**2\n        W=A.T@E+E.T@A+E.T@E;Ph=np.eye(16)+(J+D).T@(J+D)\n        max_spectrum_err=max(max_spectrum_err,float(np.max(abs(np.linalg.eigvalsh(np.eye(16)+W)-np.linalg.eigvalsh(S@Ph@S)))))\n        assert abs(eta-np.linalg.norm(D@S,2))<1e-12\n        assert np.linalg.norm(W,2)<=eps+1e-12\n        assert eps<1\n        for kind in range(3):\n            g=rng.normal(size=16) if kind!=1 else np.zeros(16)\n            dg=rng.normal(size=16)*.01 if kind!=2 else -g\n            q=np.linalg.norm(g@M);h=np.linalg.norm(dg@M)\n            var=(g+dg)@np.linalg.solve(Ph,g+dg)\n            lo=max(0.,q-h)**2/(1+eps);hi=(q+h)**2/(1-eps)\n            min_slack=min(min_slack,float(var-lo),float(hi-var))\n            assert lo-1e-11<=var<=hi+1e-11\n    sigma=rng.uniform(.5,2,n);b=np.zeros(16);b[R]=rng.uniform(.01,.03,len(R))\n    bounded=rng.uniform(-1,1,(n,16))*b/sigma[:,None]\n    observed=np.linalg.norm(bounded@K@M,2)\n    upper=np.sqrt(np.sum(sigma**-2))*np.linalg.norm(b@abs(K@M))\n    max_bound_ratio=max(max_bound_ratio,float(observed/upper));assert observed<=upper\nprint(json.dumps(dict(seed=718921,chart_relative_max_error=chart_err,matrix_cases=16,variants_per_case=3,forecast_cases=144,common_QR_chunk_rows=7,max_cross_identity_absolute_error=max_cross_err,nonzero_interaction_cases=interaction_nonzero,max_augmented_Gram_absolute_error=max_gram_err,max_Cholesky_metric_absolute_error=max_metric_err,max_relative_spectrum_absolute_difference=max_spectrum_err,minimum_forecast_bound_slack=min_slack,max_entrywise_envelope_observed_to_bound_ratio=max_bound_ratio),indent=2))\n",
+    "limits": "Finite floating-point checks supplement the analytic review and are not outward-rounded certificates, measured native-prefix verification, or physical coverage evidence."
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "8f240cda648445ea979142c2ccf7e59d4c28f8fe6facf827f84db4420ca18fa7",
+    "PROJECT_STATE.json": "9ee1bf20877858637d5566a0132b22ea4a6132adc7c7db8b2f35afbe8268b838",
+    "specifications/joint_precision_attribution_001/README.md": "45c25c671cf0fdb011a1b8062a91226973f353f4bed684de4bbb62fa17fb9ff6",
+    "specifications/joint_precision_attribution_001/M1.md": "47b6b9c8cccd16adbdd837b2c3c6cc528a034f227a8aea736a15abd0125d84f7",
+    "specifications/rc_remainder_bounds_001/P2.md": "30b0fc641431e1f8c8a5598a096fac37e0d02d3fabf35852cbdb552f5295e22d",
+    "specifications/rc_remainder_bounds_001/P3.md": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+    "experiments/conditional_architecture_001/conditional.py": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635",
+    "experiments/partitioned_coefficients_001/run.py": "b302740c4d8fed5a3d1d1723aa4759b958acae882d745cda93c7d4b9cd1dd7fc",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/hysteresis_mixed_completion_001/run.py": "31ec9bfd5981fcbf3f4d0a6e3760183114d74e48be174f5075527231f9291bf8"
+  },
+  "remaining_obligations": [
+    "Implementation and result review must verify regenerated observation identity, source/binary/snapshot bindings, endpoint state/derivative checks and full compressed precision agreement.",
+    "Measured O-column discrepancies and every unsupported hybrid trajectory must remain visible.",
+    "P2 envelope evaluation must retain original fixed Taylor centres and the actual prefix current bound.",
+    "No fitted accuracy, calibrated uncertainty, aging/lifetime fidelity, runtime authorization or complete M23 memory qualification follows."
+  ]
+}
