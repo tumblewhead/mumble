@@ -1,0 +1,150 @@
+{
+  "schema": "h7_history_quality_method_review_v1",
+  "reviewer_task": "/root/history_review_r1",
+  "reviewed_at_utc": "2026-11-02T01:39:01.891738+00:00",
+  "source_revision": "40c3f04be782028d06b54dadaa6c2847a353adf4",
+  "scope": "Independent review of history.py empirical experiment only. Certificate proofs/implementation are outside this review. Read AGENTS, README introduction, PROJECT_STATE relevant status, reviewed D6/K1/K2, reused Exact/Compressed/Model and stream/backend paths.",
+  "decision": "revisions_observed_fresh_r2_review_required",
+  "acceptance": "Original implementation required changes. Repairs and targeted tests have been inspected and pass; a fresh-context R2 review and separate repaired-run receipt remain required before final method acceptance.",
+  "sources": {
+    "experiments/h7_history_quality_001/history.py": {
+      "bytes": 14227,
+      "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+    },
+    "experiments/h7_history_quality_001/test_quality.py": {
+      "bytes": 11389,
+      "sha256": "cda7852f43d9a52047172e676b409299793a997645035ebeaa9ca7cdf8cd46db"
+    },
+    "experiments/h7_history_quality_001/README.md": {
+      "bytes": 2448,
+      "sha256": "dcc8ba2893a49d278479773e6afdf388960d9cd4a72797cc3320b8949514dafe"
+    },
+    "specifications/h7_history_quality_001/README.md": {
+      "bytes": 6982,
+      "sha256": "05c8947f87c2c67d0c3622fbeb03b25ec01b37c7ccc3a570375f71bf40a34b71"
+    },
+    "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+      "bytes": 5204,
+      "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/foster_feedback_001/estimator.py": {
+      "bytes": 6724,
+      "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/h7_backend.py": {
+      "bytes": 1844,
+      "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 18216,
+      "sha256": "6a0c01cc9e2b32686582e7a58b0e2fa3a09e7951466945537917a6d58703dad7"
+    },
+    "specifications/proof_review_001/proofs/D6.md": {
+      "bytes": 2937,
+      "sha256": "410561ff18add87e3018caf393b0c325c017970e53b1b43cdb9ade63e3f08033"
+    },
+    "specifications/proof_review_001/proofs/K1.md": {
+      "bytes": 3656,
+      "sha256": "ae989941ab01ce29f8cbd617512e94c93d52f1eff7017f09e546546e4a831002"
+    },
+    "specifications/proof_review_001/proofs/K2.md": {
+      "bytes": 3095,
+      "sha256": "8c5cd5675438ee3e748162dbd3968131901e5548ffc3c04373b60d1ece2f32e9"
+    },
+    "experiments/h7_history_quality_001/history_pilot001/registration.json": {
+      "bytes": 8718,
+      "sha256": "9576419707af6198d65f457cd47ea59041748f0765d027492ede9d5268b54c08"
+    },
+    "experiments/h7_history_quality_001/history_pilot001/summary.json": {
+      "bytes": 102108,
+      "sha256": "53beba05e7825b11ffb2b7a50acc60161546e89b63965b5a0b72538a3b5a692f"
+    },
+    "experiments/h7_history_quality_001/history_pilot001/backend_c/build.json": {
+      "bytes": 6255,
+      "sha256": "c3ea71dba33666501e4aedfb8e1a7e213f9b519caf932ccdab6e8269760e99c1"
+    },
+    "experiments/h7_history_quality_001/history_pilot001/backend_h7/build.json": {
+      "bytes": 1477,
+      "sha256": "331f719df586a1a08a8300cff05e4deea911ddfc6b8a93ea8d1d00714c851436"
+    },
+    "provenance/h7_history_quality_001/attempt001_sources.json": {
+      "bytes": 914,
+      "sha256": "5d7d061e42a95480e84e9e2df9767f55300df262d9dca7ebef6525b23d3dc1a1"
+    }
+  },
+  "original_history_source": {
+    "bytes": 13188,
+    "sha256": "3b5b401c54f952215e7b72d3c6f13daa504a2b35ea0ffaf58c4361dc75ed46df"
+  },
+  "findings": [
+    {
+      "id": "H1",
+      "severity": "high",
+      "finding": "The probe loop caught replay integrity ValueError as unsupported parameter support, allowing a later mismatched/incomplete/out-of-order replay to be hidden in a completed case.",
+      "repair": "ReplayIntegrityError derives from RuntimeError and propagates out of the probe support handler. Tests inject a later-probe integrity error and assert propagation.",
+      "disposition": "repair_observed_and_targeted_tests_pass; fresh_R2_required"
+    },
+    {
+      "id": "H2",
+      "severity": "high",
+      "finding": "Intermediate experiment summaries could say completed before all requested cases and final source verification; final source failure could leave a falsely completed summary.",
+      "repair": "Intermediate summaries remain running; final verification/plot failure writes unresolved; only final verified summary can complete and binds build receipts.",
+      "disposition": "repair_observed_and_source_failure_test_pass; fresh_R2_required"
+    },
+    {
+      "id": "H3",
+      "severity": "medium",
+      "finding": "Pilot contains two round_limit field fits and one failed embedded low-noise arm; point diagnostics must not imply convergence or physical exclusion.",
+      "repair": "Specification explicitly retains round_limit/no_descent as convergence limitations and labels gradient/query projections local GN diagnostics. Original pilot remains unresolved and source archived. Failed-backend prefix/hash/publication diagnostics were added for new runs.",
+      "disposition": "documentation_and_failure_recording_observed; new_run_to_be_reviewed_separately"
+    }
+  ],
+  "comprehension": {
+    "chronology": "Each direct objective pass creates a fresh StimulusStream at physical sample zero, retains actual observation intervals/order, transports state and full origin Jacobians between chunks, and verifies the complete prefix byte hash before a successful pass returns.",
+    "truth_separation": "Cell definition/truth belongs to source generation and final scoring; estimator/field objectives use public calibration, original prior, and observations. Directions and fit starts use likelihood geometry/current estimate, not truth.",
+    "likelihood": "Compressed and direct objectives share original mean/root, once-only standard Gaussian prior, residual sigma and common parameter point. Common Gaussian normalization constants cancel from NLL differences. No posterior is reintroduced as independent evidence.",
+    "geometry": "The Cholesky congruence equals C^-1 fP C^-T. Gradient dual norms use P^-1. Query variance ratios use the same direct-anchor query row; separate transport metrics compare endpoint state and query transport. The minus P^-1 gradient-defect projection predicts compression-minus-direct displacement locally only.",
+    "snapshot": "The shallow field copy is safe under replacement-only field.update; count/live-state parity is checked; tests confirm active context and checkpoints are unchanged.",
+    "scope": "Sampled NLL range is not a uniform oscillation enclosure and cannot discharge K2. Direct evaluation is binary64/libm, GN precision is local, and no global mode, physical coverage, lifetime availability or M23 qualification is claimed."
+  },
+  "validation": [
+    {
+      "command": "env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /tmp/mumble-h7-quality-venv/bin/python -B -m unittest experiments.h7_history_quality_001.test_quality.HistoryTests -v",
+      "result": "5 passed independently by this reviewer"
+    },
+    {
+      "command": "Inline independent random 16D SPD matrix witness",
+      "result": "Whitening congruence and both same-query variance formulas match explicit inverse calculations to 1e-13."
+    },
+    {
+      "command": "Inline embedded-source 4096-observation replay control",
+      "result": "128-row versus 4096-row chunks are byte-identical; repeated full replay verifies twice; chronology violation rejected. One exploratory call omitted explicit slice start and correctly failed the Exact-specific ordered-slice interface; rerun with Exact-compatible explicit zero passed."
+    }
+  ],
+  "pilot_observations": {
+    "completed_cases": 5,
+    "unresolved_cases": 1,
+    "available_audits": 17,
+    "verified_replays_per_audit": 7,
+    "unresolved_case": "embedded, cell B, 0.2 mV, seed 1103/load seed 7: native tangent status -3 after the 600-second audit",
+    "round_limit_audits": [
+      "rest 0.2 mV first prefix",
+      "multiscale 2 mV first prefix"
+    ],
+    "source_preservation": "Archived history.py is exactly the 13188-byte SHA256 3b5b401c54f952215e7b72d3c6f13daa504a2b35ea0ffaf58c4361dc75ed46df registered for history_pilot001. Original results are retained. smoke001 lacks a source receipt and is smoke-only evidence."
+  },
+  "remaining_obligations": [
+    "Fresh-context R2 review of substantive integrity/status changes, tests, and final documentation.",
+    "Separate repaired-run registration/result receipt, retaining original pilot and hashes; do not reinterpret original output as produced by repaired code.",
+    "Interpret failed fits/arms as unresolved mechanism evidence, not physical exclusion; retain actual sampled support and solver diagnostics.",
+    "Larger histories, uniform likelihood/derivative/transport error bounds, validated physical coverage and target resources remain outside this pilot."
+  ]
+}

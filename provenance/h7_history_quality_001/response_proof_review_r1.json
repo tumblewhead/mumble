@@ -1,0 +1,107 @@
+{
+  "review_id": "response_proof_review_r1",
+  "reviewer": "independent fresh-context agent /root/response_proof_review_r1",
+  "reviewed_at_utc": "2026-11-02T01:36:57.264724+00:00",
+  "source_revision": "40c3f04be782028d06b54dadaa6c2847a353adf4",
+  "branch": "experiment/h7-history-quality-001",
+  "scope": {
+    "proof": "R0 only",
+    "implementation": [
+      "interval.py integer enclosure arithmetic and exponential cache",
+      "certificate.py Response only"
+    ],
+    "excluded": [
+      "C0 and LP/authorization implementation",
+      "pilot statistical conclusions",
+      "production H7 approximation",
+      "firmware numerical/resource qualification"
+    ]
+  },
+  "files": {
+    "specifications/h7_history_quality_001/R0.md": {
+      "sha256": "7a8367e3ae2f9d98ca63a3e39a7c975c0bfd783af326416bbba04df39a8d30c5",
+      "bytes": 4333
+    },
+    "experiments/h7_history_quality_001/interval.py": {
+      "sha256": "de8616b8add249c37774de23470e44fcf701178f053008c7ea53f88584d1f655",
+      "bytes": 3100
+    },
+    "experiments/h7_history_quality_001/certificate.py": {
+      "sha256": "c8d1ea1e4ffc080ddd66dc7a12a32e1cb4c8630b4894731290a2f86b49435a87",
+      "bytes": 8957
+    },
+    "experiments/foster_bounded_hysteresis_001/model.c": {
+      "sha256": "742d8d808c00c70db6a9f8bfe995059a69c1d1fc999bea4a159a1d465c41212d",
+      "bytes": 4670
+    }
+  },
+  "verdict": "accepted_conditional_mathematical_proof_and_corresponding_response_implementation",
+  "blocking_findings": [],
+  "review_findings": [
+    {
+      "id": "R0-R1-ARITH",
+      "disposition": "accepted",
+      "reason": "Fraction conversion and arbitrary integer floor/ceil enclose rational inputs; addition/negation are exact grid operations. Multiplication scales four endpoint products by S; division scales all four endpoint ratios by S and rejects zero-containing denominator. Both negative and positive denominator intervals are handled."
+    },
+    {
+      "id": "R0-R1-EXP",
+      "disposition": "accepted",
+      "reason": "The implementation computes exact Fraction partial sums S32 and S33 after halving the nonnegative input to [0,1]. Alternating remainder bounds hold, both endpoints are positive, outward conversion retains nonnegative endpoints, and interval multiplication encloses every squaring. Monotonic endpoint reversal for exp(-x) is correct, including zero, large exponents and dyadic underflow to lower endpoint zero."
+    },
+    {
+      "id": "R0-R1-CACHE",
+      "disposition": "accepted_exact_optimization_under_stated_K3_premises",
+      "reason": "A frozen dataclass integer endpoint pair is the complete key. The body depends only on that pair and fixed revision constants/arithmetic semantics. Results are frozen interval values; 128-entry LRU eviction affects cost only. Acceptance assumes ordinary application use without runtime monkeypatching or bypass of dataclass immutability; no persisted or approximate cache is admitted."
+    },
+    {
+      "id": "R0-R1-RESPONSE",
+      "disposition": "accepted",
+      "reason": "RC coefficient recurrence E_next=eE, u_next=I+e(u-I) gives v=E*v0+u*R by direct induction. Directional hysteresis has the same affine induction with B=H*h0, and beta uses the positive H*h voltage sign of current bounded-hysteresis model.c. The k=gamma/Q parameterization is explicit. SOC charge accumulation uses exact input Fractions and every advance, irrespective of voltage retention."
+    },
+    {
+      "id": "R0-R1-DOMAIN",
+      "disposition": "accepted_conditional",
+      "reason": "Each physical trajectory uses one stationary shape in the box throughout; interval dependence loss only enlarges enclosure. Strictly separated tau interval supports are more restrictive than positive ordering, not unsound. Exact input current/dt, fixed linear calibration and reference temperature, endpoint measurements, and absent aging/discrepancy remain essential premises."
+    },
+    {
+      "id": "R0-R1-PATH",
+      "severity": "informational",
+      "disposition": "clarification_recommended_not_blocking",
+      "reason": "Amin/Amax certainly give exact SOC extrema at observation endpoints. Continuous-time path extrema additionally use the constant-current-within-each-interval interpretation implicit in the stated Foster recurrence. State this explicitly if continuous path support is intended."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "command": "PYTHONPATH=. /tmp/mumble-h7-quality-venv/bin/python -B /tmp/r0_review_checks.py",
+    "temporary_check_script_sha256": "7046b4409795617052c3e62f2293bce5cfcb7cd99d33b7deebdea5fcbab26a23",
+    "exact_rational_arithmetic_assertions": 6228,
+    "rational_generator_seed": 18091,
+    "arithmetic_design": "200 signed rational interval pairs; each operation tested at endpoints and midpoint products; division only for zero-excluding denominators",
+    "cache_recompute_equalities": 150,
+    "cache_max_entries_checked": 128,
+    "decimal_precision": 100,
+    "decimal_exponential_witnesses": 9,
+    "decimal_exponent_values": [
+      "0",
+      "1/2^80",
+      "0.01",
+      "1",
+      "1.0001",
+      "2",
+      "16",
+      "100",
+      "10000"
+    ],
+    "decimal_response_coefficient_witnesses": 29040,
+    "response_design": "80 successive steps each for fixed shape and all 32 fixed corners of 1% shape box; dt cycles 0,1/35,0.1,1; current cycles 0,0.12,-0.17,0.25,-0.25; independently rearranged Decimal recurrence",
+    "interpretation": "Supplementary finite controls, not mathematical proof or physical validation. Initial system-python attempt lacked scipy; rerun passed in existing experiment environment. test_quality.py was not yet present at review time."
+  },
+  "remaining_limits": [
+    "Conditional handwritten proof and implementation inspection, not machine-checked full-program verification.",
+    "No proof that physical batteries satisfy declared shape/calibration/current/voltage assumptions.",
+    "No calibrated population coverage, Gaussian coverage, aging or lifetime certification.",
+    "No guaranteed useful width or bounded desktop/target memory/time.",
+    "No generic independently known gamma claim: fixed k couples gamma to unknown Q.",
+    "Proof acceptance does not authorize C0 or H7 queries; those require their separately reviewed premises."
+  ]
+}

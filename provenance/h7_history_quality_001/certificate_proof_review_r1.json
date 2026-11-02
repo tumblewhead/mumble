@@ -1,0 +1,98 @@
+{
+  "schema": "mumble_individual_proof_review_v1",
+  "proof": "C0",
+  "review_round": 1,
+  "reviewer": "independent fresh-context certificate_proof_review_r1 agent",
+  "date_utc": "2026-11-02T01:38:20.151801+00:00",
+  "branch": "experiment/h7-history-quality-001",
+  "base_revision": "40c3f04be782028d06b54dadaa6c2847a353adf4",
+  "decision": "accepted_conditional",
+  "blocking_findings": [],
+  "scope": "One individual proof C0 and its restricted desktop implementation. R0 arithmetic is a dependency reviewed separately; no H7 universal physical coverage, deployment or lifetime acceptance.",
+  "examined_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "specifications/h7_history_quality_001/C0.md": "a6c4b6cd496263b4729af5644ba1a697fed0c717ad1e4765e05f4a46c2b230a7",
+    "specifications/h7_history_quality_001/R0.md": "7ee5af25aa11ec0fd7120b893788ce2ad7cb4b4d0614b9a29407573a0518242c",
+    "specifications/proof_review_001/proofs/D2.md": "c6bca79cabeba96ae69eacaa30634eae8d4360b74a88063df2faab232f1c8fe4",
+    "specifications/proof_review_001/proofs/D4.md": "94ba5ff5481aecd794ece68b41f6ccda1eb3e7aeb202bb7cb6d0a540a2e7af64",
+    "experiments/h7_history_quality_001/certificate.py": "c8d1ea1e4ffc080ddd66dc7a12a32e1cb4c8630b4894731290a2f86b49435a87",
+    "experiments/h7_history_quality_001/certificate_run.py": "9502548bff3c97b689ec65f8b6d79a8959f7604563afd35ee71c9ba4650ca870",
+    "experiments/h7_history_quality_001/interval.py": "de8616b8add249c37774de23470e44fcf701178f053008c7ea53f88584d1f655",
+    "experiments/h7_history_quality_001/history.py": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8",
+    "experiments/h7_history_quality_001/test_quality.py": "cda7852f43d9a52047172e676b409299793a997645035ebeaa9ca7cdf8cd46db",
+    "experiments/h7_history_quality_001/certificate_pilot001/registration.json": "21bb4a7227bcff3fc9784f74d3d309dbff624bd912406642ed37f5a1cfe1d332",
+    "experiments/h7_history_quality_001/certificate_pilot001/rest/result.json": "ec8b06bc7b6f76c90419de45c58c1b5ec00938e933294dcef5ec29dc96dd4b24",
+    "experiments/h7_history_quality_001/certificate_pilot001/informative/result.json": "5dac5691f1bc954806df41910fd4eba802a6e14431b142a6973d50ec2f06704e",
+    "experiments/h7_history_quality_001/certificate_pilot001/summary.json": "04a38608208c82c68b4db6c85a276aa4708cf18e151d0fad42a0b2727c4dd8ff",
+    "provenance/h7_history_quality_001/attempt001_sources.json": "5d7d061e42a95480e84e9e2df9767f55300df262d9dca7ebef6525b23d3dc1a1",
+    "experiments/h7_history_quality_001/attempt001_sources/certificate.py": "dc0637a95fd65d877f8a64b4ba38253f13f0558be6500c7ad29f3315421be99b",
+    "experiments/h7_history_quality_001/attempt001_sources/certificate_run.py": "1e12331f6d44d4aea683a926fbae72c7ee762c929e32a9c59a473d0d06d1fb01",
+    "experiments/h7_history_quality_001/attempt001_sources/interval.py": "de8616b8add249c37774de23470e44fcf701178f053008c7ea53f88584d1f655",
+    "experiments/h7_history_quality_001/attempt001_sources/history.py": "3b5b401c54f952215e7b72d3c6f13daa504a2b35ea0ffaf58c4361dc75ed46df"
+  },
+  "reasoning": [
+    "For all 11 amplitudes in the declared finite public box, coefficient midpoint/radius inflation bounds every signed discrepancy; the proof remains valid with uncertain stationary rates and conservatively discarded rate/amplitude correlation.",
+    "Exact charge accumulation and positive inverse capacity justify the physical SOC constraints at global charge extrema; every actual interval propagates, including unselected voltage rows.",
+    "The dual identity c*a=(c+A^T*lambda)*a-lambda^T*A*a with lambda>=0 gives the stated rational lower bound. Solver stationarity, feasibility of dual proposals and numerical optimality are unnecessary. Negative clipping and zero-proposal fallback preserve soundness; the maximum with the zero-multiplier bound is sound.",
+    "The exact rational check of every primal inequality proves only nonemptiness of the relaxed outer polytope. It does not prove any real shape realizes that witness. Both C0 and result scope correctly retain this distinction; unsuccessful witness search is unresolved rather than physical exclusion.",
+    "Reciprocal monotonicity, outward float display and separate SOC/relative-capacity endpoint predicates are correct. Midpoint availability does not automatically authorize the actual H7 point. Neither covariance nor plant truth enters constraint construction.",
+    "The fixture public support and shape are fixed independently of hidden draws. Hidden exact amplitudes and independent physical-response envelope checks are confined to harness scoring. Selected measurements must enclose the exact declared model within the fixed 1mV envelope, so simulator rounding cannot silently add an undeclared allowance.",
+    "Source ordering and count are checked by Certificate.advance. In this harness the complete registration/prefix record binds source recipe, source hashes, calibration, observation digest, actual H7 point, prefix, certificate configuration and support. This acceptance relies on retaining that complete bundle.",
+    "Zero-data and rest controls refuse useful capacity authorization. Wide outer SOC bounds are not interpreted as proof of physical unidentifiability. Informative-pilot authorizations demonstrate only conditional finite-fixture utility; D4 universal or probabilistic availability assumptions remain uninstantiated."
+  ],
+  "nonblocking_findings": [
+    {
+      "id": "C0-N1",
+      "finding": "Individual certificate dictionaries are context-dependent: they omit the observation digest, full public binding payload and actual H7 point value, which are held by the enclosing prefix/registration records. The source string itself is caller-supplied.",
+      "disposition": "Accepted for this self-contained experiment bundle. Preserve enclosing records and do not advertise a detached dictionary as a portable or independently source-verified certificate. Any standalone consumer needs an explicit binding/validation interface."
+    },
+    {
+      "id": "C0-N2",
+      "finding": "certificate_pilot001 was produced by the preserved attempt001 source hashes, not the current implementation hashes. Current changes include taking the maximum with the exact public-box bound and finalization status checks.",
+      "disposition": "Original pilot data and source snapshots are preserved. Pilot numerical evidence is attributed only to its registered source version; current targeted tests and proof review apply to current hashes. The reviewed dual argument covers the original sound but potentially looser bounds too."
+    }
+  ],
+  "validation": {
+    "targeted_command": "/tmp/mumble-h7-quality-venv/bin/python -B -m unittest experiments.h7_history_quality_001.test_quality.CertificateTests experiments.h7_history_quality_001.test_quality.IntervalTests.test_display_rounds_outward -v",
+    "targeted_tests_passed": 8,
+    "independent_exact_checks": {
+      "all_11_amplitude_extreme_strip_checks_at_1_percent_rate_radius": 4096,
+      "arbitrary_signed_solver_proposals_checked_with_exact_weak_duality": 100,
+      "zero_data_refusal": true,
+      "32_rest_samples_preserve_exact_public_capacity_support": true,
+      "contradictory_voltage_outer_polytope_unresolved": true,
+      "outward_display_endpoint_cases": 3
+    },
+    "independent_check_method": "Exact Fraction evaluations at all 2^11 amplitude box corners and both signed coefficient extrema; random seed 41601 for arbitrary feasible-point/dual checks. No full sweep rerun.",
+    "initial_environment_failure": "System python lacked scipy; repeated with existing /tmp/mumble-h7-quality-venv interpreter successfully."
+  },
+  "pilot_observations": {
+    "cases": [
+      "rest",
+      "informative"
+    ],
+    "rate_radii": [
+      "0",
+      ".01"
+    ],
+    "prefix_records": [
+      0,
+      2112,
+      21008,
+      63008,
+      126000
+    ],
+    "all_reported_truth_containment_and_selected_envelope_checks_pass": true,
+    "rest_no_SOC_or_Q_midpoint_or_H7_authorization": true,
+    "informative_at_63008_and_126000_records_all_SOC_Q_midpoint_and_H7_authorizations": true,
+    "at_21008_records_only_fixed_rate_Q_midpoint_authorizes": true,
+    "meaning": "One selected bounded-error fixture, not independent population coverage or a reacquisition deadline."
+  },
+  "remaining_premises": [
+    "R0 validated arithmetic and response containment under exact current/duration, constant reference temperature and exact public calibration.",
+    "Actual physical trajectory belongs to the public stationary support and selected voltage errors obey the hard envelope.",
+    "Trusted runtime arithmetic and complete unaltered registration/prefix/source bundle.",
+    "No aging, Gaussian-noise lifetime envelope, autonomous useful recovery, bounded target memory or Cortex-M23 qualification is established."
+  ],
+  "implementation_files_edited": false
+}

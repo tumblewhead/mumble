@@ -109,6 +109,17 @@ desktop containment; lifetime coverage, autonomous recovery and M23 resources
 remain unqualified. Existing campaign checkpoints retain their original source
 binding and must be replayed with that revision.
 
+The [history-quality experiments](provenance/h7_history_quality_001/README.md)
+now compare H7 against direct regenerated history through8hours and implement a
+small, independently reviewed bounded-error SOC/Q certificate. Repeated-load
+compression discrepancy grows relative to local precision; practical late point
+errors remain small. One low-noise embedded case exposes an unresolved readout/
+recovery failure at16.91minutes, correctly quarantined. On a separately declared
+stationary bounded-error family, informative use authorizes the development
+SOC/Q objectives at the approximately30-minute checkpoint while rest refuses. Seventeen tests pass; both
+conditional proofs are individually reviewed. Estimator code/defaults remain
+unchanged; general physical coverage, aging and target resources stay open.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

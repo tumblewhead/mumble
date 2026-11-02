@@ -1,0 +1,343 @@
+{
+  "schema": "h7_history_quality_completion_v1",
+  "status": "completed_diagnostics_with_open_estimator_availability_failure",
+  "base_revision": "40c3f04be782028d06b54dadaa6c2847a353adf4",
+  "branch": "experiment/h7-history-quality-001",
+  "source_revision_note": "Exact working-file identities below bind the implementation before this receipt is committed; base_revision is its frozen parent.",
+  "production_estimator_changed": false,
+  "mainline_or_defaults_promoted": false,
+  "runs": [
+    {
+      "name": "history_pilot002",
+      "status": "unresolved",
+      "path": "experiments/h7_history_quality_001/history_pilot002",
+      "registration": {
+        "bytes": 8718,
+        "sha256": "8f5e56d2472f71763e5b5e0e474df46e6faca4495d1b123edbd599fefff6312b"
+      },
+      "summary": {
+        "bytes": 114276,
+        "sha256": "8bb85fbbce6b122c359ec762460164c1afd225acf85d0f7a6d711f24278cf795"
+      },
+      "arguments": {
+        "out": "experiments/h7_history_quality_001/history_pilot002",
+        "prefix_seconds": [
+          60.0,
+          600.0,
+          3600.0
+        ],
+        "loads": [
+          "rest",
+          "multiscale",
+          "embedded"
+        ],
+        "noise_v": [
+          0.0002,
+          0.002
+        ],
+        "cell": "B",
+        "seed": 1103,
+        "load_seed": 7,
+        "sample_rate_hz": 35,
+        "refresh_seconds": 60,
+        "refit": false
+      }
+    },
+    {
+      "name": "certificate_pilot002",
+      "status": "completed",
+      "path": "experiments/h7_history_quality_001/certificate_pilot002",
+      "registration": {
+        "bytes": 9233,
+        "sha256": "105aa2e2dd767921f2dcc55da1a58d204f63c90197ce4efedce6661f93e8b94b"
+      },
+      "summary": {
+        "bytes": 93707,
+        "sha256": "205f7799525c7cfd3248d8d52d33be60e57bf9023ccf0eadd23932aea389d321"
+      },
+      "arguments": {
+        "out": "experiments/h7_history_quality_001/certificate_pilot002",
+        "prefix_seconds": [
+          60.0,
+          600.0,
+          1800.0,
+          3600.0
+        ],
+        "sample_rate_hz": 35,
+        "kinds": [
+          "rest",
+          "informative"
+        ],
+        "rate_radii": [
+          "0",
+          ".01"
+        ],
+        "stride": 175,
+        "cell_seed": 121,
+        "noise_seed": 710
+      }
+    },
+    {
+      "name": "repetition_followup001",
+      "status": "completed",
+      "path": "experiments/h7_history_quality_001/repetition_followup001",
+      "registration": {
+        "bytes": 8697,
+        "sha256": "ac937d97524f78d2d8eb90cfccaf384dcdd89c2c2b4a3ae67f0ac1e5f1d40c7c"
+      },
+      "summary": {
+        "bytes": 38173,
+        "sha256": "444b2fbc2f4ddb0fad3ec20e1114eb53162bbbe0223fa81ad5528547f2da700c"
+      },
+      "arguments": {
+        "out": "experiments/h7_history_quality_001/repetition_followup001",
+        "prefix_seconds": [
+          3600.0,
+          14400.0,
+          28800.0
+        ],
+        "loads": [
+          "multiscale"
+        ],
+        "noise_v": [
+          0.0002,
+          0.002
+        ],
+        "cell": "B",
+        "seed": 1103,
+        "load_seed": 7,
+        "sample_rate_hz": 35,
+        "refresh_seconds": 60,
+        "refit": false
+      }
+    },
+    {
+      "name": "refit_followup001",
+      "status": "completed",
+      "path": "experiments/h7_history_quality_001/refit_followup001",
+      "registration": {
+        "bytes": 8648,
+        "sha256": "2ca37fa2895b3da0cf14398a84d62633154a8d9218f641aacc4f9ae34278d1b1"
+      },
+      "summary": {
+        "bytes": 10198,
+        "sha256": "89090c615e3c289c2ff877674376b452c58307d1d6fb407a354a939d3cc35fdc"
+      },
+      "arguments": {
+        "out": "experiments/h7_history_quality_001/refit_followup001",
+        "prefix_seconds": [
+          3600.0
+        ],
+        "loads": [
+          "multiscale"
+        ],
+        "noise_v": [
+          0.0002
+        ],
+        "cell": "B",
+        "seed": 1103,
+        "load_seed": 7,
+        "sample_rate_hz": 35,
+        "refresh_seconds": 60,
+        "refit": true
+      }
+    }
+  ],
+  "tests": {
+    "count": 17,
+    "receipt": "provenance/h7_history_quality_001/tests.json"
+  },
+  "proofs": {
+    "count": 2,
+    "manifest": "provenance/h7_history_quality_001/manifest.json",
+    "scope": "Conditional stationary exact-input hard-voltage-envelope certificate; no population, Gaussian-coverage or lifetime certificate."
+  },
+  "reviews": {
+    "individual_proofs": [
+      "response_proof_review_r1.json",
+      "certificate_proof_review_r1.json"
+    ],
+    "experiment_iterations": [
+      "history_review_r1.json",
+      "quality_review_r2.json"
+    ],
+    "completion": "completion_review.json",
+    "post_review_metadata": "Proof pending-review headers replaced with manifest links only, originals preserved. R0 explicit current hold already verified in R2. Completion summary clarifies 63008records=1800.22857s, not a strict30mindeadline. No numerical code changed after R2."
+  },
+  "findings": "provenance/h7_history_quality_001/findings.json",
+  "outcome": {
+    "history_completed": 5,
+    "history_unresolved": 1,
+    "history_diagnostic_prefixes": 17,
+    "repetition_followup_hours": [
+      1,
+      4,
+      8
+    ],
+    "direct_refit_hours": 1,
+    "certificate_cases": 2,
+    "certificate_query_prefixes_across_rate_lanes": 20,
+    "certificate_both_objectives_authorized_at_records": 63008,
+    "certificate_query_seconds": 1800.2285714285715,
+    "rest_authorizes": false
+  },
+  "open_failure": {
+    "case": "embedded/cellB/0.2mV/noise1103/load7/fixed25C",
+    "consumed": 35520,
+    "published": 35504,
+    "minutes": 16.914285714285715,
+    "native_readout_status": -3,
+    "emergency_refit_stop": "round_limit",
+    "execution": "quarantined",
+    "scope": "Domain subtype and useful recovery unresolved; failed search does not prove physical exclusion."
+  },
+  "adaptations": [
+    {
+      "step": "attempt001_reporting_repair",
+      "changes": [
+        "Distinct replay-integrity exception cannot be swallowed as a physical probe rejection",
+        "Final summary remains running until all cases/source verification complete",
+        "Capture consumed/published prefix and last rejection on failure"
+      ],
+      "preserved": "attempt001_sources.json and original pilot001 outputs"
+    },
+    {
+      "step": "outcome_selected_followups",
+      "reason": "Initial multiscale gradient growth selected1/4/8h repetition study and1h directrefit; not independent confirmation"
+    },
+    {
+      "step": "R0_clarification",
+      "reason": "State current held constant within each supplied interval explicitly; archived proof version/hash preserved"
+    }
+  ],
+  "resources": {
+    "H7_packed_root_B": 50624,
+    "H7_dense_root_B": 100352,
+    "certificate_LP_matrix_and_rhs_B_per_rate_lane_at_1h": 140736,
+    "certificate_selected_voltage_rows_at_1h": 720,
+    "certificate_retention": "Grows with selected observations; exact rational/Python objects and LP workspace are additional",
+    "history_retention": "Bounded replay buffers plus H7 field/native workspace and small per-prefix output; no raw stream file",
+    "target_qualification": false
+  },
+  "limits": [
+    "Sampled likelihood oscillation is not a uniform bound",
+    "GN displacement/precision metrics are local, not calibrated coverage",
+    "Fixed/1% shape characterization is a restricted engineering family, not measured cell qualification",
+    "Bounded-noise certificate cannot authorize the separate Gaussian-noise history campaign",
+    "No aging, autonomous recovery, lifetime, target SRAM or timing guarantee",
+    "Plots join selected prefixes for visualization only; exact prefix certificates are authoritative"
+  ],
+  "next": "Diagnose the17-minute native-domain/recovery failure and attribute the repeated-load gradient defect by physical partition before selecting an error-budgeted approximation/storage repair.",
+  "source_identities": {
+    "experiments/h7_history_quality_001/certificate.py": {
+      "bytes": 8957,
+      "sha256": "c8d1ea1e4ffc080ddd66dc7a12a32e1cb4c8630b4894731290a2f86b49435a87"
+    },
+    "experiments/h7_history_quality_001/certificate_run.py": {
+      "bytes": 10502,
+      "sha256": "9502548bff3c97b689ec65f8b6d79a8959f7604563afd35ee71c9ba4650ca870"
+    },
+    "experiments/h7_history_quality_001/history.py": {
+      "bytes": 14227,
+      "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+    },
+    "experiments/h7_history_quality_001/interval.py": {
+      "bytes": 3100,
+      "sha256": "de8616b8add249c37774de23470e44fcf701178f053008c7ea53f88584d1f655"
+    },
+    "experiments/h7_history_quality_001/test_quality.py": {
+      "bytes": 11389,
+      "sha256": "cda7852f43d9a52047172e676b409299793a997645035ebeaa9ca7cdf8cd46db"
+    },
+    "experiments/h7_history_quality_001/README.md": {
+      "bytes": 2448,
+      "sha256": "dcc8ba2893a49d278479773e6afdf388960d9cd4a72797cc3320b8949514dafe"
+    },
+    "specifications/h7_history_quality_001/C0.md": {
+      "bytes": 4699,
+      "sha256": "e53715c456909acbfb1709cbbd6ed5f81cbbb35b24faadf6389d5bce48182f81"
+    },
+    "specifications/h7_history_quality_001/R0.md": {
+      "bytes": 4479,
+      "sha256": "4d7bc9e6cc08c1d702dd3afa2eb3e7e39e8079647bf0ac9d02635239819f9912"
+    },
+    "specifications/h7_history_quality_001/README.md": {
+      "bytes": 6982,
+      "sha256": "05c8947f87c2c67d0c3622fbeb03b25ec01b37c7ccc3a570375f71bf40a34b71"
+    },
+    "README.md": {
+      "bytes": 99956,
+      "sha256": "1cfa8167ec9e69cba34a38de15b62fb4f94a16ad0c03f6ec06748cacd141d40c"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 269759,
+      "sha256": "2814a8a8188afe1f3cd4f21e406936f708eb3e4c209a9800cad632ef44befe9d"
+    },
+    "handoff/CONTINUE.json": {
+      "bytes": 1450,
+      "sha256": "9954906797916bf26736f5a363a66159ae8e1fafee335b1e19e32b2df9424f57"
+    },
+    "handoff/archive/CONTINUE_before_h7_history_quality.json": {
+      "bytes": 1789,
+      "sha256": "a9622c48d0cea4283a63f9347860ced3028a9901620a776874e6a04d10499796"
+    }
+  },
+  "evidence_identities": {
+    "provenance/h7_history_quality_001/README.md": {
+      "bytes": 6594,
+      "sha256": "5b39f576feca10df5450908396100c79fe712c6f9d8bed8115b06130d647bd01"
+    },
+    "provenance/h7_history_quality_001/attempt001_sources.json": {
+      "bytes": 914,
+      "sha256": "5d7d061e42a95480e84e9e2df9767f55300df262d9dca7ebef6525b23d3dc1a1"
+    },
+    "provenance/h7_history_quality_001/certificate_proof_review_r1.json": {
+      "bytes": 8941,
+      "sha256": "50ebb97b89f7190b36403e22480ab1d70db72d1365c3162f306f531fd1d42d55"
+    },
+    "provenance/h7_history_quality_001/completion_review.json": {
+      "bytes": 9341,
+      "sha256": "06212bfb6e34f716e2c12004a847d0ff8a5cfe6ea92ec4f334c49da7d0a3f2cb"
+    },
+    "provenance/h7_history_quality_001/findings.json": {
+      "bytes": 62536,
+      "sha256": "b7716d1b2b8dcfdc1cb0743c4739a89f941ba7a98ed9e1a79a0aa2c2bdac597a"
+    },
+    "provenance/h7_history_quality_001/history_review_r1.json": {
+      "bytes": 9484,
+      "sha256": "c63499b0b6303dade3235e66830cd8b25240c506a03958f632f007f9a097c7d8"
+    },
+    "provenance/h7_history_quality_001/manifest.json": {
+      "bytes": 1708,
+      "sha256": "912ec232dee764e11581da0790a6c58c8b3bed478275e1e329869a63145816ac"
+    },
+    "provenance/h7_history_quality_001/quality_review_r2.json": {
+      "bytes": 16127,
+      "sha256": "7e43da5bcdd1ad6862e6041db66939d718626747969855c1c9c40e2929083203"
+    },
+    "provenance/h7_history_quality_001/response_proof_review_r1.json": {
+      "bytes": 6294,
+      "sha256": "d69be0933b9ad80746f3a7ff62626b33495e3786b2758354cd005c5b26fa2c3d"
+    },
+    "provenance/h7_history_quality_001/tests.json": {
+      "bytes": 1391,
+      "sha256": "6d76aff58a34b1052cf16f344c808c861631a3f34d8f5d5859df9559c94477f3"
+    },
+    "provenance/h7_history_quality_001/tests.log": {
+      "bytes": 3126,
+      "sha256": "dc2295df53250caf05468f75113759075ca39239dbf24556c6ccd946e76e428f"
+    },
+    "provenance/h7_history_quality_001/versions/C0_r1.md": {
+      "bytes": 4602,
+      "sha256": "a6c4b6cd496263b4729af5644ba1a697fed0c717ad1e4765e05f4a46c2b230a7"
+    },
+    "provenance/h7_history_quality_001/versions/R0_before_completion.md": {
+      "bytes": 4382,
+      "sha256": "7ee5af25aa11ec0fd7120b893788ce2ad7cb4b4d0614b9a29407573a0518242c"
+    },
+    "provenance/h7_history_quality_001/versions/R0_r1.md": {
+      "bytes": 4333,
+      "sha256": "7a8367e3ae2f9d98ca63a3e39a7c975c0bfd783af326416bbba04df39a8d30c5"
+    }
+  }
+}
