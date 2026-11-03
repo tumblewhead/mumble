@@ -244,6 +244,15 @@ errors, so both remain explicit. Six tests pass and M1 has independent review.
 Next target compact hysteresis value/rate/mixed sensitivities, retaining public
 support and cross terms. No fits or production behavior changed.
 
+The [compact hysteresis sensitivity study](provenance/hysteresis_sensitivity_basis_001/README.md)
+now preserves central H values, both rate derivatives and their mixed derivative
+in the same 4760 B factor. At the saved one-hour embedded anchor, Q/SOC width
+ratios move from 0.657/0.525 to 1.007/1.003 relative to direct inference. H-only
+precision tests pass all twelve anchors; combined tests pass eight active anchors
+while Taylor RC rest failures remain. Off-centre H regressions are preserved.
+H5/H6 and the new study-only kernel have independent reviews; six tests pass.
+Next perform joint refits at unchanged public centres/support before promotion.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

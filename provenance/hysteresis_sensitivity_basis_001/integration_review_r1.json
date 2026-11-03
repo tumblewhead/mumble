@@ -1,0 +1,161 @@
+{
+  "schema": "hysteresis_sensitivity_integration_review_v1",
+  "review_round": 1,
+  "reviewer": "independent h_sensitivity_integration_review agent",
+  "reviewed_at_utc": "2026-11-03T03:52:20.288834+00:00",
+  "status": "accepted_same_anchor_diagnostic_only",
+  "source_revision": "05c67e0a50ac94482a479ed6d7a2500dbb077ad2",
+  "branch": "experiment/conditional-architecture-001",
+  "scope": [
+    "Runner and probe integration, saved source and control preservation, physical partition metrics, P2/H6 bounds, transport support, result interpretation and partial resource accounting.",
+    "H5/H6 mathematics and H kernel accepted reviews treated as dependencies; their bound artifacts verified unchanged."
+  ],
+  "independence": {
+    "implementation_edits": false,
+    "saved_evidence_edits": false,
+    "new_file_only": "provenance/hysteresis_sensitivity_basis_001/integration_review_r1.json",
+    "fresh_build_and_outputs": "/tmp/h-sensitivity-integration-r1-HriTfZ",
+    "mutable_bookkeeping_excluded": [
+      "README.md",
+      "PROJECT_STATE.json"
+    ],
+    "note": "Read root instructions and current project context; root metadata is not an acceptance dependency for immutable scientific artifacts."
+  },
+  "blocking_findings": [],
+  "required_dispositions": [],
+  "findings": [
+    {
+      "id": "INTEGRATION-R1-01",
+      "status": "verified",
+      "scope": "Saved identity and chronology",
+      "finding": "Both saved registration and summary files match compact provenance. Registered source and new-artifact hashes, legacy response/direct binaries, baseline recipes, case files and snapshots are checked before use. All 36 recorded input bindings independently rehashed. Sequential regeneration preserves supplied intervals and source order; all six prefix observation digests reproduce. Anchor x=mean+Lw is checked. No source recentering, posterior recycling or observation duplication enters inference."
+    },
+    {
+      "id": "INTEGRATION-R1-02",
+      "status": "verified",
+      "scope": "Matched controls and no refitting",
+      "finding": "H2/c22/tensor/TaylorH2/H7 are constructed through HField with the same original centre, Taylor RC binary, three RC coefficients, prior and support. R5_H7 is separately labeled. Runner reads only direct and Taylor2_H2 frozen selected anchors and never invokes a fitter. Prior fit selection is by numerical fit diagnostics/objective from public starts, not truth. Hidden plant state belongs to deterministic fixture generation; streamed truth outputs are discarded. Both control endpoint states match original snapshots bitwise. All 24 previous control metric records and anchor metadata match exactly under explicit schema-only controls-key mapping."
+    },
+    {
+      "id": "INTEGRATION-R1-03",
+      "status": "verified",
+      "scope": "Physical partition and common QR",
+      "finding": "Jacobian defects are partitioned in independent amplitudes/log-rates before K=B^-1 L maps them to prior coordinates. RC/H cross interactions and one identity prior are retained. The common augmented 51-column QR preserves residual, Jacobian and both defect inner products. Cost/gradient defects use the residual split, and unchanged columns are checked. New joint factors and saved control factors agree with augmented precision spectra to maximum scaled discrepancy 3.641368305905119e-11; maximum residual partition discrepancy is 4.578047060367629e-09 and maximum other-column defect is 2.234656903965515e-11, within declared numerical checks."
+    },
+    {
+      "id": "INTEGRATION-R1-04",
+      "status": "verified",
+      "scope": "P2/H6 inference bounds",
+      "finding": "Taylor RC P2 and Taylor H H6 per-row derivative envelopes map through entrywise abs(K M) and sqrt(sum sigma^-2), a conservative Frobenius/spectral upper bound. Measured eta, epsilon=2 eta+eta^2, actual joint spectra and query inequalities remain distinct. All envelope consistency checks pass. At full multiscale Taylor anchor H6 eta upper is 153.30674899039957 while measured H eta is 0.24874325816077353; report correctly rejects usefulness as a runtime gate. Floating diagnostics are not outward-rounded or coverage certificates."
+    },
+    {
+      "id": "INTEGRATION-R1-05",
+      "status": "verified",
+      "scope": "State support and forecasts",
+      "finding": "Inherited field features retain original computational box and physical trajectory checks; transported rejects invalid hysteresis/SOC endpoints without clipping. Direct model checks future trajectory support. Runner catches endpoint/future unsupported outcomes explicitly. All 216 saved-anchor hybrid transports and 432 hybrid forecasts happen to be supported; all 90 probe endpoint transports are supported. This finite success does not establish full-support polynomial transport. Direct transport forecasts isolate precision, while hybrid forecasts replace only the relevant RC/H state and full Jacobian rows; unchanged SOC and static parameters persist."
+    },
+    {
+      "id": "INTEGRATION-R1-06",
+      "status": "verified",
+      "scope": "Main local result and unresolved outcomes",
+      "finding": "Taylor-H and matched H7 pass H-only sufficient tests at 12/12 saved anchors and combined tests at eight active anchors; all four rest combined tests remain inconclusive. H2/c22/tensor pass H-only at only four rest anchors; old R5_H7 passes all twelve combined tests. Full-rest direct fit remains unresolved. README width table, precision ranges, gradient norms, forecast ranges and voltage discrepancies agree with result.json. Gradient defects remain nonzero and no candidate refit is claimed."
+    },
+    {
+      "id": "INTEGRATION-R1-07",
+      "status": "verified",
+      "scope": "Locality failures preserved",
+      "finding": "Saved anchors have maximum absolute H log-rate offset 0.1535042106153569. Public probe retains all fifteen declared two-rate queries and verifies central value/rate/mixed identities. Taylor H at (-0.9,+0.9) has maximum voltage discrepancy 201.38719355042094 uV versus H2 13.295834102362619 uV; at (+0.9,+0.9), 95.2082199799175 uV versus 21.016616210953517 uV. Both regressions are disclosed. H7 remains much closer on these finite queries. No shrinking, truncation, training or recentering is used."
+    },
+    {
+      "id": "INTEGRATION-R1-08",
+      "status": "verified",
+      "scope": "Resource and claim limits",
+      "finding": "Packed Taylor factor 4760 B plus padded response 312 B plus domain/scalars 96 B gives partial subtotal 5168 B. c22/tensor/matched-H7 factors are 5328/6560/35720 B, versus old R5_H7 50624 B. Six padding doubles remain counted; prospective 48 B saving is not credited. Desktop augmented root and chunk rows are separately reported as 20808 and 417792 B. These are component accounting, not aggregate live memory. Production runtime/defaults remain unchanged; target SRAM, CPU, lifetime, aging and coverage are unqualified."
+    }
+  ],
+  "checks": {
+    "targeted_tests": {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.hysteresis_sensitivity_basis_001.test_basis -v",
+      "exit_code": 0,
+      "tests_run": 6,
+      "status": "passed",
+      "reported_elapsed_s": 0.184
+    },
+    "full_runner": {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.hysteresis_sensitivity_basis_001.run --build-dir /tmp/h-sensitivity-integration-r1-HriTfZ/build --out /tmp/h-sensitivity-integration-r1-HriTfZ/result.json",
+      "exit_code": 0,
+      "status": "passed",
+      "runs": 2,
+      "loads_per_run": 3,
+      "anchors": 12,
+      "arms_per_anchor": 6,
+      "saved_result_byte_exact": true,
+      "sha256": "e437234591f1c6ad1f777ec0b7682db92e6163330ad5a9d496baa298ada2ed19"
+    },
+    "public_probe": {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.hysteresis_sensitivity_basis_001.probe --build-dir /tmp/h-sensitivity-integration-r1-HriTfZ/build --study /tmp/h-sensitivity-integration-r1-HriTfZ/result.json --out /tmp/h-sensitivity-integration-r1-HriTfZ/probe.json",
+      "exit_code": 0,
+      "status": "passed",
+      "records": 512,
+      "queries": 15,
+      "saved_probe_byte_exact": true,
+      "sha256": "aa802ae43a50bc8f087ba7beeecbe9d0a38cd99141968d2ffe4b992d97f93fcd"
+    },
+    "identities": {
+      "result_source_files": 49,
+      "probe_source_files": 50,
+      "protocol_files": 4,
+      "recorded_run_input_bindings": 36,
+      "kernel_review_bound_files_excluding_root_bookkeeping": 22,
+      "status": "all hashes and recorded sizes match"
+    },
+    "old_control_comparison": {
+      "records": 24,
+      "status": "exact",
+      "mapping": {
+        "TaylorRC_H2": "Taylor2_H2",
+        "R5_H7": "R5_H7"
+      },
+      "schema_adaptations": [
+        "Compare all anchor metadata exactly.",
+        "Remove newly added storage from each new arm, then compare all scientific metric fields exactly.",
+        "Compare controls exactly with factor_relative_eigenvalue_discrepancy mapped to saved_factor_relative_eigenvalue_discrepancy; validate added frozen_control_name separately."
+      ],
+      "snapshot_state_bitwise_matches": 12
+    },
+    "scope": "No sweeps, new fits or changes to saved evidence."
+  },
+  "remaining_obligations": [
+    "Full joint refit with unchanged public starts/prior/centre/support and H2/matched H7 controls.",
+    "Retain direct and hybrid forecast views and all unsupported/off-centre outcomes.",
+    "No uniform likelihood/posterior fidelity, calibrated coverage, aging, complete memory or Cortex-M23 performance qualification follows."
+  ],
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "specifications/hysteresis_sensitivity_basis_001/README.md": "d22ab899e724f7715b6796ea4dfb638ea7500162036c27d152be4ab061b56ebc",
+    "specifications/hysteresis_sensitivity_basis_001/H5.md": "44d41a37a1a0c3224e8365d014c4f53c5b352804a3347425e96ee14d13b09a50",
+    "specifications/hysteresis_sensitivity_basis_001/H6.md": "14dd95e56fb441d976a9d4358b36f7bd96b451cdb9b58187e0d8514a5c827944",
+    "specifications/joint_precision_attribution_001/M1.md": "47b6b9c8cccd16adbdd837b2c3c6cc528a034f227a8aea736a15abd0125d84f7",
+    "specifications/rc_remainder_bounds_001/P2.md": "30b0fc641431e1f8c8a5598a096fac37e0d02d3fabf35852cbdb552f5295e22d",
+    "specifications/rc_remainder_bounds_001/P3.md": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32",
+    "experiments/hysteresis_sensitivity_basis_001/run.py": "0f1f657fec8d5494cdf52ddb8ee6c365b28380c027eb64aadaa7432302f47eea",
+    "experiments/hysteresis_sensitivity_basis_001/probe.py": "6847103c192d7933f05c920f96c2fffdfe0621e542bf43c8c4a1d79f997d1653",
+    "experiments/hysteresis_sensitivity_basis_001/README.md": "84b3e5ed5c8aceffe20c50d94e6384e16cec630c337ed5c46eeb41d93187f855",
+    "experiments/hysteresis_sensitivity_basis_001/basis.py": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca",
+    "experiments/hysteresis_sensitivity_basis_001/response.c": "f9860e2d1130ccb1e1426b08de5f2e1eeaf9d86b69f5683ab80a12a22f644db9",
+    "experiments/hysteresis_sensitivity_basis_001/reference.py": "4c1e3eb7e6de3dd66be7452d2c8c6e2d830e9d19ca39b9af092c5a12fe55d35a",
+    "experiments/hysteresis_sensitivity_basis_001/test_basis.py": "641368587dfa04b1689f0c5376eca6c1d2407834d2c625c2e92e31e386dddb5d",
+    "experiments/joint_precision_attribution_001/metrics.py": "1be2830df88df5d0d08f3f580c848deeb80a50e4c7dd80eb2aaddb7f4f8c17a0",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/hysteresis_mixed_completion_001/run.py": "31ec9bfd5981fcbf3f4d0a6e3760183114d74e48be174f5075527231f9291bf8",
+    "experiments/rc_sensitivity_basis_001/run.py": "eefd96bcb74bca5b815edba3145ab1de23aa162bcaaafac0d3a979699c6f4725",
+    "experiments/h7_history_quality_001/history.py": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8",
+    "provenance/hysteresis_sensitivity_basis_001/h5_review_r1.json": "197eaab69aeca7c4d53fc62563183ab5a581c85142fdb74364717e6fdb6e1c65",
+    "provenance/hysteresis_sensitivity_basis_001/h6_review_r1.json": "5fe1990a98c4f25b38408b50b1ba73d2803dfeb9cb20c5e13acc79f4ca9f669f",
+    "provenance/hysteresis_sensitivity_basis_001/kernel_review_r1.json": "264b76e7c7e73736aa868239d4460e7c68669cd94718f0568be28e93303c6fc3",
+    "provenance/hysteresis_sensitivity_basis_001/result.json": "e437234591f1c6ad1f777ec0b7682db92e6163330ad5a9d496baa298ada2ed19",
+    "provenance/hysteresis_sensitivity_basis_001/probe.json": "aa802ae43a50bc8f087ba7beeecbe9d0a38cd99141968d2ffe4b992d97f93fcd",
+    "provenance/hysteresis_sensitivity_basis_001/README.md": "668c95ea267fc210bda60dbb891fa86fec39d9617df5ad05cb3318e69e41179d",
+    "provenance/joint_precision_attribution_001/result.json": "54f08ec03c4a133d55082cf89906e515b71454fce794ac8de3d0d3c648cc8595"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/hysteresis_sensitivity_basis_001/H5.md",
+  "review_round": 1,
+  "reviewer": "independent fresh-context agent /root/h_sensitivity_h5_review",
+  "date": "2026-11-02",
+  "base_revision": "05c67e0a50ac94482a479ed6d7a2500dbb077ad2",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "scope": "Individual H5 conditional mathematical review. Existing chart and storage sources inspected only to verify stated representation contracts. No implementation review, no campaign, and no implementation or proof edits.",
+  "findings": [
+    {
+      "id": "H5-R1-01",
+      "status": "verified",
+      "finding": "For log rate t, d'=d and E'=-dE; differentiating again yields E''=(d^2-d)E. Product differentiation gives every listed active, inactive, pure-second and mixed recurrence. The mixed E partial is zero per interval, while E_j*f_l correctly preserves accumulated reversal dependence. Pre-interval RHS and initial zero sensitivities are essential and explicitly stated."
+    },
+    {
+      "id": "H5-R1-02",
+      "status": "verified",
+      "finding": "Free F=exp(-Dplus-Dminus) supplies all six closed-form derivatives. Single-sign u=s(1-F) and zero-interval/rest identities hold. Chronological suffix-exponential expansion independently reproduces all recurrence jets; equal directional totals do not determine forced u."
+    },
+    {
+      "id": "H5-R1-03",
+      "status": "verified",
+      "finding": "The declared t coordinates are unscaled log-rate offsets, matching the existing unit-halfwidth log chart. The six Chebyshev coefficients reconstruct the quadratic Taylor polynomial exactly, including f11 without an extra factor of two. Value, both first and all second derivatives agree at the fixed public centre; no off-centre accuracy guarantee follows."
+    },
+    {
+      "id": "H5-R1-04",
+      "status": "verified",
+      "finding": "Independent F/u projection and voltage B*F+H*u preserve central response and amplitude/rate partials. Solver-chart rate changes are dlog(k_j)=dlog(gamma_j)-dlog(Q); therefore log-Q receives the negative sum of both rate sensitivities. B=H*h0 and any nonlinear state chart require their complete existing amplitude chain rule. Rate-independent initial h0 is an explicit premise."
+    },
+    {
+      "id": "H5-R1-05",
+      "status": "verified",
+      "finding": "The one-row-per-voltage and full joint-factor requirements preserve observation ownership and RC/OCV/charge/hysteresis cross terms. Derivative states are features, not extra measurements. Shared response/derivative transport is an appropriate consistency requirement; physical support failure away from the centre remains possible and must not authorize silent clipping or recentering."
+    },
+    {
+      "id": "H5-R1-06",
+      "status": "verified",
+      "finding": "Width 4+6*3+2*6=34 yields 34*35/2 doubles=4760 B. Padded state (6*3+2*9+3) doubles=312 B; adding declared 96 B gives 5168 B. Eliminating six padding doubles would save 48 B. These are partial packed arithmetic counts only; actual implementation storage, scratch and target memory/timing remain separate obligations."
+    }
+  ],
+  "checks": {
+    "status": "passed",
+    "method": "Independent 60-digit Decimal chronological recurrence compared at every prefix against H1 signed suffix-exponential jets; one-sign/free/rest/tiny-dose controls, central coefficient jet, chronology swap, finite-difference log-Q amplitude chain and integer storage arithmetic.",
+    "results": {
+      "decimal_digits": 60,
+      "scalar_derivative_checks": 228,
+      "max_recurrence_vs_suffix_jet_abs_error": "8E-60",
+      "max_one_sign_abs_error": "1E-60",
+      "chebyshev_centre_jet_abs_error": "1E-60",
+      "chronology_order_gap": "-0.337724932806107693358346309426415619917254640566303568246272",
+      "logQ_chain_finite_difference_step": "1E-15",
+      "logQ_chain_abs_error": "3.437658859096467373582000075E-34",
+      "storage_arithmetic_passed": true
+    },
+    "command": "python3 -B - <<'PY'\nimport json\nfrom decimal import Decimal as D, getcontext\ngetcontext().prec=60\nrates=[D(13),D(37)]\nzero=D(0);one=D(1)\nstreams=[\n [(1,D('.003')),(0,zero),(-1,D('.002')),(1,D('.005')),(-1,D('.007'))],\n [(1,D('.002')),(1,zero),(1,D('.007'))],\n [(-1,D('.002')),(-1,D('.007'))],\n [(0,zero),(0,zero)],\n [(1,D('1e-12')),(-1,D('2e-12'))]\n]\ndef jet(seq):\n    doses=[sum((rates[j]*U for s,U in seq if s==(1 if j==0 else -1)),zero) for j in range(2)]\n    a,b=doses;F=(-a-b).exp()\n    return [F,-a*F,-b*F,(a*a-a)*F,a*b*F,(b*b-b)*F]\ndef suffix_jet(seq,free):\n    seq=[(s,U) for s,U in seq if s]\n    if free:return jet(seq)\n    if not seq:return [zero]*6\n    result=[D(seq[-1][0])]+[zero]*5\n    for fac,tail in [(-seq[0][0],seq)]+[(seq[i][0]-seq[i+1][0],seq[i+1:]) for i in range(len(seq)-1)]:\n        result=[x+fac*y for x,y in zip(result,jet(tail))]\n    return result\ndef recur(seq,free):\n    v=[one if free else zero]+[zero]*5\n    for s,U in seq:\n        if not s:continue\n        j=0 if s==1 else 1\n        f,fp,fm,fpp,fpm,fmm=v\n        d=rates[j]*U;E=(-d).exp();e1=-d*E;e2=(d*d-d)*E;c=0 if free else s\n        if j==0:v=[E*f+(1-E)*c,E*fp+e1*(f-c),E*fm,E*fpp+2*e1*fp+e2*(f-c),E*fpm+e1*fm,E*fmm]\n        else:v=[E*f+(1-E)*c,E*fp,E*fm+e1*(f-c),E*fpp,E*fpm+e1*fp,E*fmm+2*e1*fm+e2*(f-c)]\n    return v\nmaxerr=zero;checks=0\nfor seq in streams:\n    for end in range(len(seq)+1):\n        for free in [False,True]:\n            vals=recur(seq[:end],free);refs=suffix_jet(seq[:end],free)\n            maxerr=max(maxerr,*[abs(a-b) for a,b in zip(vals,refs)]);checks+=6\nassert maxerr<D('1e-55')\noneerr=zero\nfor seq in streams[1:3]:\n    f=recur(seq,True);u=recur(seq,False);s=seq[0][0]\n    ref=[s*(1-f[0])]+[-s*x for x in f[1:]]\n    oneerr=max(oneerr,*[abs(a-b) for a,b in zip(u,ref)])\nassert oneerr<D('1e-55')\nv=recur(streams[0],False);v0,vp,vm,vpp,vpm,vmm=v\nc=[v0+(vpp+vmm)/4,vm,vmm/4,vp,vpm,vpp/4]\ncenterjet=[c[0]-c[2]-c[5],c[3],c[1],4*c[5],c[4],4*c[2]]\ncerr=max(abs(x-y) for x,y in zip(centerjet,v))\nassert cerr<D('1e-55')\ndef direct(seq,p,m,free):\n    f=one if free else zero\n    for s,U in seq:\n        if not s:continue\n        j=0 if s==1 else 1\n        E=(-rates[j]*(p if j==0 else m).exp()*U).exp()\n        f=E*f+(1-E)*(0 if free else s)\n    return f\nseq=[(1,D('.03')),(-1,D('.02'))]\nordergap=direct(seq,zero,zero,False)-direct(list(reversed(seq)),zero,zero,False)\nidentity=-2*(1-(-rates[0]*seq[0][1]).exp())*(1-(-rates[1]*seq[1][1]).exp())\nassert abs(ordergap-identity)<D('1e-55') and abs(ordergap)>D('.1')\nB=D('.02');H=D('.04')\ndef V(q):return B*direct(streams[0],-q,-q,True)+H*direct(streams[0],-q,-q,False)\nfv=recur(streams[0],True);uv=recur(streams[0],False)\nqref=-B*(fv[1]+fv[2])-H*(uv[1]+uv[2]);h=D('1e-15')\nqerr=abs((V(h)-V(-h))/(2*h)-qref)\nassert qerr<D('1e-30')\nassert 34*35//2*8==4760 and (18+18+3)*8==312 and 4760+312+96==5168 and 2*(9-6)*8==48\nprint(json.dumps(dict(decimal_digits=60,scalar_derivative_checks=checks,max_recurrence_vs_suffix_jet_abs_error=str(maxerr),max_one_sign_abs_error=str(oneerr),chebyshev_centre_jet_abs_error=str(cerr),chronology_order_gap=str(ordergap),logQ_chain_finite_difference_step=str(h),logQ_chain_abs_error=str(qerr),storage_arithmetic_passed=True),indent=2))\n\nPY",
+    "limits": "Finite high-precision checks supplement analytic product-rule review; they are not native implementation parity, outward-rounded global bounds, lifetime arithmetic qualification or coverage evidence.",
+    "environment_adaptation": "Initial mpmath check could not import mpmath in system Python or the existing /tmp/mumble-h7-quality-venv. No dependencies were installed. Replaced it with standard-library Decimal and independently differentiated closed-form suffix exponentials."
+  },
+  "remaining_obligations": [
+    "Native/Python implementation review must verify pre-interval state updates, zero padding, projection and unit chart bindings, full Q/amplitude chain and one-row ownership.",
+    "Check off-centre/rest and support behavior independently; central exactness does not imply improvement across the admitted support.",
+    "No qualified physical model, aging, lifetime arithmetic, calibrated coverage, full target SRAM or speed guarantee follows."
+  ],
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "e919ab9cacba15845d921857c38a14a43ab625b7fd5589b5d58585786041ebf4",
+    "PROJECT_STATE.json": "6e91b03aee687521ebce58ebddecb91d650b67f9bf1c938719ce5b197c76f126",
+    "specifications/hysteresis_sensitivity_basis_001/README.md": "d22ab899e724f7715b6796ea4dfb638ea7500162036c27d152be4ab061b56ebc",
+    "specifications/hysteresis_sensitivity_basis_001/H5.md": "44d41a37a1a0c3224e8365d014c4f53c5b352804a3347425e96ee14d13b09a50",
+    "specifications/hysteresis_relationships_001/H1.md": "ebb9dbbfec106d92d506d68af506b0b7a53d7513f289baf8f83b4a754ea00490",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "experiments/rc_sensitivity_basis_001/basis.py": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "schema": "independent_proof_review_v1",
+  "proof_id": "H6",
+  "review_round": 1,
+  "reviewer": "independent agent /root/h_sensitivity_h6_review",
+  "reviewed_at_utc": "2026-11-03T03:40:22.823141+00:00",
+  "status": "accepted_conditional",
+  "proof_path": "specifications/hysteresis_sensitivity_basis_001/H6.md",
+  "proof_sha256": "14dd95e56fb441d976a9d4358b36f7bd96b451cdb9b58187e0d8514a5c827944",
+  "source_revision": "05c67e0a50ac94482a479ed6d7a2500dbb077ad2",
+  "branch": "experiment/conditional-architecture-001",
+  "source_status": "H5/H6 and their protocol were untracked new proof files at review; content hashes bind the reviewed versions.",
+  "independence": {
+    "proof_or_implementation_edited": false,
+    "implementation_consulted": false,
+    "method": "Independent analytic derivation and exact integer/Fraction constant and remainder checks; no fitting, truth use or sweeps."
+  },
+  "reviewed_reference_identities_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "e919ab9cacba15845d921857c38a14a43ab625b7fd5589b5d58585786041ebf4",
+    "PROJECT_STATE.json": "6e91b03aee687521ebce58ebddecb91d650b67f9bf1c938719ce5b197c76f126",
+    "specifications/hysteresis_sensitivity_basis_001/README.md": "d22ab899e724f7715b6796ea4dfb638ea7500162036c27d152be4ab061b56ebc",
+    "specifications/hysteresis_sensitivity_basis_001/H5.md": "44d41a37a1a0c3224e8365d014c4f53c5b352804a3347425e96ee14d13b09a50",
+    "specifications/hysteresis_sensitivity_basis_001/H6.md": "14dd95e56fb441d976a9d4358b36f7bd96b451cdb9b58187e0d8514a5c827944",
+    "specifications/hysteresis_relationships_001/H1.md": "ebb9dbbfec106d92d506d68af506b0b7a53d7513f289baf8f83b4a754ea00490",
+    "specifications/rc_remainder_bounds_001/P3.md": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32",
+    "specifications/joint_precision_attribution_001/M1.md": "47b6b9c8cccd16adbdd837b2c3c6cc528a034f227a8aea736a15abd0125d84f7"
+  },
+  "findings": [
+    {
+      "id": "H6-R1-01",
+      "severity": "none",
+      "scope": "Differentiated switched ODE",
+      "finding": "For fixed chronological inputs, differentiating f'= -lambda(f-c) yields f_alpha'= -lambda f_alpha -lambda sum_{l=1}^{alpha_j} binom(alpha_j,l) g_{alpha-l e_j}. All nonzero lambda derivatives are pure in the active log-rate direction and equal lambda. c is parameter independent; switch times produce no parameter-boundary derivatives. Finite ordered affine compositions are smooth for positive rates, so the differentiated finite-prefix equations are valid. The same integrating-factor argument applies to integrable fixed sign inputs with finite directional throughput.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "H6-R1-02",
+      "severity": "none",
+      "scope": "Duration-independent integrating-factor majorants",
+      "finding": "F lies in [0,1] and u lies in [-1,1] by positive affine transport, hence |F|<=1 and |u-s|<=2 during active intervals. For y(0)=0 and y'=-lambda y-lambda q, |y(T)|<=sup|q| integral_0^T exp(-integral_r^T lambda)lambda(r)dr=sup|q|(1-exp(-integral_0^T lambda)). This is valid across any fixed chronological reversals. At rest lambda=0 and all derivative states persist. Induction in total derivative order gives the stated global constants without multiplying a bound by the number of switches or resetting derivatives.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "H6-R1-03",
+      "severity": "none",
+      "scope": "Pure and mixed constants",
+      "finding": "The recurrence gives C10=C01=1, C20=C02=3, C11=1, C30=C03=13 and C21=C12=3. In particular the (2,1) forcing is 2 f11+f01 during plus input and f20 during minus input, both bounded by 3 for F and 6 for u. Inactive-direction forcing is zero but its carried derivative still decays. Thus mixed derivatives are covered without assuming commutative forced transport or an exposure-total summary.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "H6-R1-04",
+      "severity": "none",
+      "scope": "Value and rate-gradient Taylor remainders",
+      "finding": "Along r -> r*t, the third directional derivative has multinomial coefficients 1,3,3,1. Integrating the degree-two remainder gives C30 p^3/6+C21 p^2 m/2+C12 p m^2/2+C03 m^3/6 times S. For each gradient component, first-order Taylor of that component has second derivative equal to the corresponding third response derivatives; integration gives the stated two quadratic bounds. The straight log-rate segment remains in the positive-rate domain. No differentiation of an absolute error inequality is used.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "H6-R1-05",
+      "severity": "none",
+      "scope": "Amplitude partials and chart dependence",
+      "finding": "Linearity vH=B F+H u and H>=0 imply S=|B|+2H. Holding independent log rates and the other amplitude fixed, partial_B(vH-P) is the free-response remainder and partial_H(vH-P) is the forced-response remainder, hence S=1 and S=2 respectively. A uniform amplitude-domain bound needs finite amplitude bounds. Dependent solver coordinates, including Q in both gamma/Q rates or parameter-dependent initial state, require the complete chain rule; H6 correctly limits its direct claim to independent amplitudes/rates.",
+      "disposition": "accepted"
+    },
+    {
+      "id": "H6-R1-06",
+      "severity": "none",
+      "scope": "Scope and downstream inference",
+      "finding": "The bounds are stationary exact-input/exact-arithmetic response statements, independent of duration, sample count and minimum interval. They do not control floating-point accumulation, aging, polynomial state support, posterior fidelity, fit displacement or coverage. P3/M1 can consume the value/derivative bounds only with their additional common-chart, whitening, reference-precision and likelihood premises; H6 describes this as a route rather than automatic qualification. No evidence discount, truncation, support restriction or chart reset is justified.",
+      "disposition": "accepted"
+    }
+  ],
+  "blocking_findings": [],
+  "required_dispositions": [],
+  "checks": {
+    "command": "python3 -B - (embedded independent arithmetic source)",
+    "exit_code": 0,
+    "independent_check_source_sha256": "26b1d5be8382977dbbdcdd0968f87b71e10b947afec020681496f589ab3966cc",
+    "independent_check_source": "from math import comb, factorial\nfrom fractions import Fraction\nC={(0,0):1}\nactive_bounds={}\nfor n in range(1,4):\n    for a in range(n+1):\n        alpha=(a,n-a)\n        choices=[]\n        for j in range(2):\n            if not alpha[j]:\n                choices.append(0)\n                continue\n            total=0\n            for l in range(1,alpha[j]+1):\n                beta=list(alpha); beta[j]-=l\n                total+=comb(alpha[j],l)*C[tuple(beta)]\n            choices.append(total)\n        C[alpha]=max(choices)\n        active_bounds[alpha]=choices\nassert C=={(0,0):1,(0,1):1,(1,0):1,(0,2):3,(1,1):1,(2,0):3,(0,3):13,(1,2):3,(2,1):3,(3,0):13}\nvalue=[Fraction(C[a,3-a],factorial(a)*factorial(3-a)) for a in [3,2,1,0]]\nplus=[Fraction(C[a+1,2-a],factorial(a)*factorial(2-a)) for a in [2,1,0]]\nminus=[Fraction(C[a,3-a],factorial(a)*factorial(2-a)) for a in [2,1,0]]\nassert value==[Fraction(13,6),Fraction(3,2),Fraction(3,2),Fraction(13,6)]\nassert plus==[Fraction(13,2),Fraction(3),Fraction(3,2)]\nassert minus==[Fraction(3,2),Fraction(3),Fraction(13,2)]\nresults={'C':{str(k):v for k,v in C.items()},'active_direction_forcing_bounds':{str(k):v for k,v in active_bounds.items()},'value_coefficients_p_descending':list(map(str,value)),'plus_gradient_coefficients_p_descending':list(map(str,plus)),'minus_gradient_coefficients_p_descending':list(map(str,minus)),'arithmetic':'exact integers and Fraction','all_assertions_pass':True}\n",
+    "results": {
+      "C": {
+        "(0, 0)": 1,
+        "(0, 1)": 1,
+        "(1, 0)": 1,
+        "(0, 2)": 3,
+        "(1, 1)": 1,
+        "(2, 0)": 3,
+        "(0, 3)": 13,
+        "(1, 2)": 3,
+        "(2, 1)": 3,
+        "(3, 0)": 13
+      },
+      "active_direction_forcing_bounds": {
+        "(0, 1)": [
+          0,
+          1
+        ],
+        "(1, 0)": [
+          1,
+          0
+        ],
+        "(0, 2)": [
+          0,
+          3
+        ],
+        "(1, 1)": [
+          1,
+          1
+        ],
+        "(2, 0)": [
+          3,
+          0
+        ],
+        "(0, 3)": [
+          0,
+          13
+        ],
+        "(1, 2)": [
+          3,
+          3
+        ],
+        "(2, 1)": [
+          3,
+          3
+        ],
+        "(3, 0)": [
+          13,
+          0
+        ]
+      },
+      "value_coefficients_p_descending": [
+        "13/6",
+        "3/2",
+        "3/2",
+        "13/6"
+      ],
+      "plus_gradient_coefficients_p_descending": [
+        "13/2",
+        "3",
+        "3/2"
+      ],
+      "minus_gradient_coefficients_p_descending": [
+        "3/2",
+        "3",
+        "13/2"
+      ],
+      "arithmetic": "exact integers and Fraction",
+      "all_assertions_pass": true
+    }
+  },
+  "acceptance_scope": "Conditional exact-arithmetic mathematical proof of duration-uniform pure/mixed stationary hysteresis log-rate derivative majorants and local Taylor value, rate-gradient and independent-amplitude remainders for fixed chronological inputs. H5/H1 are reviewed dependencies for this claim; no separate implementation, finite-results, hardware, physical-coverage or lifetime qualification is implied."
+}

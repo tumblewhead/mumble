@@ -1,0 +1,162 @@
+{
+  "schema": "independent_implementation_review_v1",
+  "review_round": 1,
+  "reviewer": "independent agent /root/h_sensitivity_kernel_review",
+  "reviewed_at_utc": "2026-11-03T03:45:30.951421+00:00",
+  "status": "accepted_study_only",
+  "source_revision": "05c67e0a50ac94482a479ed6d7a2500dbb077ad2",
+  "branch": "experiment/conditional-architecture-001",
+  "scope": [
+    "experiments/hysteresis_sensitivity_basis_001/basis.py",
+    "experiments/hysteresis_sensitivity_basis_001/response.c",
+    "experiments/hysteresis_sensitivity_basis_001/reference.py",
+    "experiments/hysteresis_sensitivity_basis_001/test_basis.py"
+  ],
+  "excluded_scope": [
+    "Experiment runner and saved-anchor study results, still under development",
+    "Proof acceptance, handled by separately accepted H5/H6 reviews",
+    "Production estimator, target-memory/timing and lifetime/coverage qualification"
+  ],
+  "independence": {
+    "implementation_edited": false,
+    "review_method": "Independent analytic source inspection plus separately written high-precision scalar finite differences, orthogonal projection controls, legacy implementation comparisons and failure injection. Reviewed source was held fixed by author during this review."
+  },
+  "blocking_findings": [],
+  "required_dispositions": [],
+  "findings": [
+    {
+      "id": "KERNEL-R1-01",
+      "status": "verified",
+      "scope": "Six chronological derivatives",
+      "finding": "C uses correct log-rate signs e1=-d exp(-d), e2=(d^2-d) exp(-d). A six-element old snapshot preserves pre-interval dependencies for active first/pure-second/mixed updates. Every inactive derivative decays; mixed update e1*old[inactive first] retains reversal history. Rest and zero dt preserve H state. Independent scalar finite differences at 70 Decimal digits confirm six native slots at three rate scales; Python third-order jets also agree."
+    },
+    {
+      "id": "KERNEL-R1-02",
+      "status": "verified",
+      "scope": "Layout and projection",
+      "finding": "Free/forced H states begin at offsets 18/27 for Taylor H; six occupied and three zero padding slots per response match inherited transport. Pair order 00,01,02,10,11,20 and p2 implement the H5 Chebyshev conversion, including mixed coefficient with no extra factor. Row order is forced amplitude H followed by free amplitude B, while state order is free followed by forced, consistently in row generation and transport. Width 34, packed factor 4760 B, live state 312 B and partial subtotal 5168 B match the protocol; six padding doubles are counted, not credited as saved."
+    },
+    {
+      "id": "KERNEL-R1-03",
+      "status": "verified",
+      "scope": "Matched controls",
+      "finding": "All five H variants use identical Taylor RC n=3 and p1/rates/state arithmetic. H2 complete rows are bitwise equal to legacy SensitivityField; all control RC columns match bitwise. Independent DCT orthogonal H projections agree within 2.89e-12 weighted-row absolute error. c22/tensor H rows and H/charge state match old CompletedField bitwise, and H7 matches old MixedField bitwise, for 512 samples each. c22/tensor correctly derive H inverse from collocation V rather than inheriting Taylor RC p1."
+    },
+    {
+      "id": "KERNEL-R1-04",
+      "status": "verified",
+      "scope": "Kernel identity",
+      "finding": "New shared objects export h_sensitivity_rows and h_sensitivity_kind and omit legacy response_rows. Python rejects every derivative/collocation mismatch tested and rejects legacy RC binary as H derivative kernel. The required existing RC initialization library has its independently checked Taylor mode. C rejects unsupported n/m/b layouts before mutation. Mode identifies derivative versus collocation; Python supplies the specific H2/c22/tensor/H7 layout."
+    },
+    {
+      "id": "KERNEL-R1-05",
+      "status": "verified",
+      "scope": "One-row ownership and atomicity",
+      "finding": "Inherited staging validates stationary inputs, source and exact next index and writes into a copied response state. update adds the original observation rows to one dense joint QR, retaining every cross term; derivative slots are features, not observations. Source/order, late invalid input, injected QR exception and nonfinite QR result leave response, root, count and normalizer exactly unchanged. The raw C call may partially mutate its trial state on failure; transaction guarantee belongs to the Python wrapper. rows deliberately advances response ownership without accumulating root, matching its declared row-generator contract."
+    },
+    {
+      "id": "KERNEL-R1-06",
+      "status": "verified",
+      "scope": "Physical query and transport chain",
+      "finding": "Shared fixed-centre support remains unchanged and Q enters both gamma/Q log rates through the existing full chart Jacobian. Endpoint transport and likelihood use the same p1/p2 polynomials; off-centre finite differences across all 16 solver coordinates agree within 3.79e-11 absolute error. Shared outgoing amplitude and transformed endpoint values agree. Physical endpoint/support refusal remains possible and is not corrected or clipped."
+    },
+    {
+      "id": "KERNEL-R1-07",
+      "status": "verified",
+      "scope": "Independent reference and H6 majorants",
+      "finding": "reference.jet uses binomial product differentiation through third order with independent generic multi-indices; constants reproduce H6 integer recurrence. envelope assigns free/forced amplitude bounds to B/H and independent log-rate gradient bounds to columns 14/15 with S=abs(B)+2H. Independent 5x5 public log-rate grid, three amplitude choices and three rate scales (225 combinations) satisfy value, amplitude and both rate-gradient bounds. These finite numerical checks supplement accepted analytic H6; they are not outward-rounded certification."
+    },
+    {
+      "id": "KERNEL-R1-08",
+      "status": "nonblocking_scope_note",
+      "scope": "Reference numerical precision and API contracts",
+      "finding": "Python reference value recurrence uses 1-exp(-d), while native uses -expm1(-d); reference values can lose tiny-dose relative accuracy. Tests and independent comparisons use explicit absolute tolerances, and no relative tiny-dose exactness is claimed. Envelope is an offline formula for finite positive supported shapes and H>=0, not an input validator. Supplied tests depend on saved legacy binaries; independent checks build fresh legacy RC/H libraries from hashed source."
+    }
+  ],
+  "checks": {
+    "targeted_suite": {
+      "command": "python3 -B -m unittest experiments.hysteresis_sensitivity_basis_001.test_basis -v",
+      "status": "passed",
+      "tests": 6,
+      "exit_code": 0
+    },
+    "independent_checks": [
+      {
+        "command": "PYTHONPATH=. python3 -B /tmp/h_sensitivity_kernel_review_check.py",
+        "status": "passed",
+        "exit_code": 0,
+        "source_sha256": "374ff1e755ca43903e1143493b555684a17964c667ccecd086315951bdb024b7",
+        "source": "import ctypes, hashlib, json, tempfile\nfrom decimal import Decimal as D, getcontext\nfrom pathlib import Path\nfrom unittest.mock import patch\nimport numpy as np\nfrom numpy.polynomial.chebyshev import chebvander\nfrom experiments.hysteresis_sensitivity_basis_001.basis import HField, build\nfrom experiments.hysteresis_sensitivity_basis_001.reference import jet, INDICES, SLOTS, envelope\nfrom experiments.rc_sensitivity_basis_001.basis import SensitivityField, build as rcbuild\nfrom experiments.hysteresis_refinement_001.field import transported,features_jacobian\nfrom experiments.foster_uncertainty_audit_001.conditional_packet import partition\ngetcontext().prec=70\nreg=json.loads(Path('experiments/rc_sensitivity_basis_001/full001/registration.json').read_text())\ncenter=np.array(reg['center']); config=reg['config'];rng=np.random.default_rng(187)\nobs=np.c_[rng.choice([0.,1e-12,1/35,.2,1.],size=80),rng.choice([0.,.24,-.22],size=80),np.full(80,25.),rng.normal(3.7,.01,80),rng.uniform(.0002,.002,80)]\nmetrics={}; checks=0\nwith tempfile.TemporaryDirectory() as td:\n    td=Path(td); bins={k:build(td/k,k) for k in ['derivative','collocation']};rc=rcbuild(td/'rc','taylor2')\n    def make(kind='TaylorH2',c=center):return HField(config,c,rc,bins['derivative' if kind=='TaylorH2' else 'collocation'],kind)\n    base=SensitivityField(config,center,rc,'taylor2');base_rows=base.rows(0,obs)\n    metrics['control_max_abs_row_difference']=0.\n    for kind in ['H2','c22','tensor','H7']:\n        f=make(kind);rows=f.rows(0,obs);np.testing.assert_array_equal(rows[:,:21],base_rows[:,:21]);checks+=1\n        if kind=='H2':np.testing.assert_array_equal(rows,base_rows);checks+=1\n        m=f.m;nodes=np.cos(np.pi*(np.arange(m)+.5)/m);V=chebvander(nodes,m-1)\n        F=np.ones((m,m));u=np.zeros((m,m));expected=[]\n        # Direct collocation recurrence, then exact DCT orthogonal projection.\n        transform=(V.T*(np.r_[1.,np.full(m-1,2.)]/m)[:,None])\n        for dt,I,T,y,sigma in obs:\n            if I:\n                rates=center[3 if I>0 else 4]*np.exp(nodes)\n                decay=np.exp(-rates*abs(I)*dt/3600)\n                one=-np.expm1(-rates*abs(I)*dt/3600)\n                decay=decay[:,None] if I>0 else decay[None,:]\n                one=one[:,None] if I>0 else one[None,:]\n                F*=decay;u=decay*u+one*np.sign(I)\n            cf=transform@F@transform.T;cu=transform@u@transform.T\n            expected.append(np.r_[[cu[i,j]/sigma for i,j in f.pairs],[cf[i,j]/sigma for i,j in f.pairs]])\n        diff=np.max(abs(rows[:,21:-1]-expected));metrics['control_max_abs_row_difference']=max(metrics['control_max_abs_row_difference'],float(diff))\n        np.testing.assert_allclose(rows[:,21:-1],expected,atol=1e-10,rtol=2e-11);checks+=1\n    # Decimal differentiation of the scalar recurrence, independent of its jet implementation.\n    maxerr=0.; jeterr=0.; derivatives=0\n    for scale in [1.,100.,10000.]:\n        c=center.copy();c[3:]*=scale;f=make(c=c);f.rows(0,obs)\n        native=np.array([f.state[18:24],f.state[27:33]])\n        ref=jet(obs,c[3:])[-1]\n        memo={};h=D('1e-8')\n        def direct(p,m):\n            key=(p,m)\n            if key in memo:return memo[key]\n            rates=[D(str(c[3]))*(p*h).exp(),D(str(c[4]))*(m*h).exp()];F=D(1);u=D(0)\n            for dt,I,*_ in obs:\n                if I:\n                    dose=rates[0 if I>0 else 1]*abs(D(str(I)))*D(str(dt))/3600;E=(-dose).exp()\n                    F=E*F;u=E*u+(1-E)*(1 if I>0 else -1)\n            memo[key]=(F,u);return F,u\n        def diff(a,b,p=0,m=0):\n            if a:\n                hi,lo=diff(a-1,b,p+1,m),diff(a-1,b,p-1,m)\n            elif b:\n                hi,lo=diff(a,b-1,p,m+1),diff(a,b-1,p,m-1)\n            else:return direct(p,m)\n            return tuple((v-w)/(2*h) for v,w in zip(hi,lo))\n        for slot,alpha in enumerate(INDICES):\n            val=np.array([float(x) for x in diff(*alpha)]);jeterr=max(jeterr,float(np.max(abs(val-ref[:,slot]))));derivatives+=2\n            np.testing.assert_allclose(val,ref[:,slot],atol=2e-12,rtol=2e-10)\n            if alpha in SLOTS:\n                err=float(np.max(abs(val-native[:,SLOTS.index(alpha)])));maxerr=max(maxerr,err)\n                np.testing.assert_allclose(val,native[:,SLOTS.index(alpha)],atol=2e-12,rtol=2e-10)\n        # Value/amplitude/rate gradient bounds across full public 2D grid.\n        for B,H in [(-.02,.03),(0.,.03),(.02,.03)]:\n            amp=np.zeros(11);amp[9]=H;amp[10]=B\n            for p in np.linspace(-1,1,5):\n                for m in np.linspace(-1,1,5):\n                    shape=c.copy();shape[3:]*=np.exp([p,m]);bounds,vb=envelope(amp,shape,c)\n                    exact=jet(obs,shape[3:])[-1];poly=native[:,0]+native[:,1]*p+native[:,2]*m+native[:,3]*p*p/2+native[:,4]*p*m+native[:,5]*m*m/2\n                    grad=np.c_[native[:,1]+native[:,3]*p+native[:,4]*m,native[:,2]+native[:,4]*p+native[:,5]*m]\n                    weights=np.array([B,H]);dval=poly-exact[:,0]\n                    assert abs(weights@dval)<=vb+1e-12\n                    assert abs(dval[0])<=bounds[10]+1e-12 and abs(dval[1])<=bounds[9]+1e-12\n                    dexact=exact[:,[INDICES.index((1,0)),INDICES.index((0,1))]]\n                    assert np.all(abs(weights@(grad-dexact))<=bounds[14:16]+1e-12);checks+=1\n    metrics.update(decimal_precision=70,decimal_difference_step='1e-8',decimal_derivative_checks=derivatives,native_max_abs_derivative_difference=maxerr,reference_jet_max_abs_derivative_difference=jeterr)\n    # Failure atomicity, source/order ownership, and full joint transport Jacobian.\n    f=make();rows=f.update(0,obs,return_rows=True);old=(f.state.copy(),f.root.copy(),f.count,f.noise)\n    def unchanged():\n        np.testing.assert_array_equal(f.state,old[0]);np.testing.assert_array_equal(f.root,old[1]);assert (f.count,f.noise)==old[2:]\n    for call in [lambda:f.update(79,obs),lambda:f.update(80,obs,source='different')]:\n        try:call();raise AssertionError('accepted ownership mismatch')\n        except ValueError:pass\n        unchanged();checks+=1\n    for badkind in ['sigma','temperature','interval','nonfinite']:\n        bad=obs.copy(); col,val={'sigma':(4,-1.),'temperature':(2,26.),'interval':(0,1.1),'nonfinite':(3,np.nan)}[badkind];bad[-1,col]=val\n        try:f.update(80,bad);raise AssertionError('accepted bad input')\n        except ValueError:pass\n        unchanged();checks+=1\n    for result in [np.full_like(f.root,np.nan),RuntimeError('injected QR failure')]:\n        kwargs={'side_effect':result} if isinstance(result,Exception) else {'return_value':result}\n        with patch('numpy.linalg.qr',**kwargs):\n            try:f.update(80,obs);raise AssertionError('accepted QR failure')\n            except (ValueError,RuntimeError):pass\n        unchanged();checks+=1\n    np.testing.assert_allclose(f.root.T@f.root,rows.T@rows,atol=1e-6,rtol=2e-12);checks+=1\n    x=np.array(reg['prior_mean']);x[4]=.3;x[14]+=.3;x[15]-=.2\n    end,J=transported(f,x);maxjac=0.\n    for k in range(16):\n        step=np.eye(16)[k]*1e-5;fd=(transported(f,x+step)[0]-transported(f,x-step)[0])/2e-5\n        maxjac=max(maxjac,float(np.max(abs(fd-J[:,k]))));np.testing.assert_allclose(fd,J[:,k],atol=2e-8,rtol=2e-6);checks+=1\n    a,s=partition(x);np.testing.assert_allclose(f.outgoing(x)[[0,1,2,3]],end[:4],atol=1e-14);checks+=1\n    assert abs(f.outgoing(x)[10]/a[9]-np.tanh(end[4]))<1e-14;checks+=1\n    metrics['maximum_full_transport_jacobian_FD_error']=maxjac\n    # Binding both ways plus wrong H bindings, including ordinary RC binary.\n    for hbin in [rc,bins['collocation']]:\n        try:HField(config,center,rc,hbin,'TaylorH2');raise AssertionError('accepted H binding mismatch')\n        except ValueError:checks+=1\n    for b in bins.values():\n        assert not hasattr(ctypes.CDLL(str(b)),'response_rows');checks+=1\nmetrics['independent_assertion_groups']=checks\nprint(json.dumps(metrics,indent=2))\n",
+        "result": {
+          "control_max_abs_row_difference": 2.884276069934147e-12,
+          "decimal_precision": 70,
+          "decimal_difference_step": "1e-8",
+          "decimal_derivative_checks": 60,
+          "native_max_abs_derivative_difference": 1.2212453270876722e-15,
+          "reference_jet_max_abs_derivative_difference": 1.2212453270876722e-15,
+          "maximum_full_transport_jacobian_FD_error": 3.78578279836006e-11,
+          "independent_assertion_groups": 265
+        }
+      },
+      {
+        "command": "PYTHONPATH=. python3 -B /tmp/h_sensitivity_kernel_legacy_check.py",
+        "status": "passed",
+        "exit_code": 0,
+        "source_sha256": "6f82c672cada4c1e87f65161ec5ce807113e4b866e4b79ad86dbb3c455c889b3",
+        "source": "import json,tempfile\nfrom pathlib import Path\nimport numpy as np\nfrom experiments.hysteresis_sensitivity_basis_001.basis import HField,build\nfrom experiments.hysteresis_mixed_completion_001.basis import CompletedField\nfrom experiments.hysteresis_refinement_001.field import MixedField,build as legacy_build\nfrom experiments.rc_sensitivity_basis_001.basis import build as rc_build\nreg=json.loads(Path('experiments/rc_sensitivity_basis_001/full001/registration.json').read_text())\nk=np.arange(512);obs=np.c_[np.array([0.,1e-12,1/35,.3,1.])[k%5],np.array([0.,.2,-.1,.24,-.22])[(k//13)%5],np.full(512,25.),np.full(512,3.7),np.full(512,.001)]\nresult={}\nwith tempfile.TemporaryDirectory() as tmp:\n    tmp=Path(tmp);binary=build(tmp/'h','collocation');rc=rc_build(tmp/'rc','taylor2');legacy=legacy_build(tmp/'legacy')\n    for kind in ['c22','tensor','H7']:\n        new=HField(reg['config'],reg['center'],rc,binary,kind)\n        old=MixedField(reg['config'],reg['center'],1.,7,legacy) if kind=='H7' else CompletedField(reg['config'],reg['center'],legacy,kind)\n        nr=new.rows(0,obs);rr=old.rows(0,obs)\n        np.testing.assert_array_equal(nr[:,3+6*new.n:-1],rr[:,3+6*old.n:-1])\n        np.testing.assert_array_equal(new.state[6*new.n:],old.state[6*old.n:])\n        result[kind]={'H_rows_bitwise_equal':True,'H_and_charge_state_bitwise_equal':True,'samples':len(obs)}\nprint(json.dumps(result,indent=2))\n",
+        "result": {
+          "c22": {
+            "H_rows_bitwise_equal": true,
+            "H_and_charge_state_bitwise_equal": true,
+            "samples": 512
+          },
+          "tensor": {
+            "H_rows_bitwise_equal": true,
+            "H_and_charge_state_bitwise_equal": true,
+            "samples": 512
+          },
+          "H7": {
+            "H_rows_bitwise_equal": true,
+            "H_and_charge_state_bitwise_equal": true,
+            "samples": 512
+          }
+        }
+      }
+    ],
+    "environment_adaptations": [
+      "mpmath import unavailable; no dependency installed. Used Python standard-library Decimal at 70 digits for independent scalar differentiation."
+    ]
+  },
+  "limits": [
+    "Acceptance is limited to the reviewed study kernel and stated stationary reference-temperature model, supported finite input bounds and synchronous single-owner wrapper.",
+    "No central matching, finite grid or implementation parity result establishes useful full-support likelihood/uncertainty performance; saved-anchor, off-centre, rest and hybrid transport diagnostics still require runner/result review.",
+    "No full SRAM, Cortex-M23 timing, numerical lifetime, aging, coverage or production promotion conclusion.",
+    "Original saved results and binaries were read only and not changed."
+  ],
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "e919ab9cacba15845d921857c38a14a43ab625b7fd5589b5d58585786041ebf4",
+    "PROJECT_STATE.json": "6e91b03aee687521ebce58ebddecb91d650b67f9bf1c938719ce5b197c76f126",
+    "specifications/hysteresis_sensitivity_basis_001/README.md": "d22ab899e724f7715b6796ea4dfb638ea7500162036c27d152be4ab061b56ebc",
+    "specifications/hysteresis_sensitivity_basis_001/H5.md": "44d41a37a1a0c3224e8365d014c4f53c5b352804a3347425e96ee14d13b09a50",
+    "specifications/hysteresis_sensitivity_basis_001/H6.md": "14dd95e56fb441d976a9d4358b36f7bd96b451cdb9b58187e0d8514a5c827944",
+    "provenance/hysteresis_sensitivity_basis_001/h5_review_r1.json": "197eaab69aeca7c4d53fc62563183ab5a581c85142fdb74364717e6fdb6e1c65",
+    "provenance/hysteresis_sensitivity_basis_001/h6_review_r1.json": "5fe1990a98c4f25b38408b50b1ba73d2803dfeb9cb20c5e13acc79f4ca9f669f",
+    "experiments/hysteresis_sensitivity_basis_001/basis.py": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca",
+    "experiments/hysteresis_sensitivity_basis_001/response.c": "f9860e2d1130ccb1e1426b08de5f2e1eeaf9d86b69f5683ab80a12a22f644db9",
+    "experiments/hysteresis_sensitivity_basis_001/reference.py": "4c1e3eb7e6de3dd66be7452d2c8c6e2d830e9d19ca39b9af092c5a12fe55d35a",
+    "experiments/hysteresis_sensitivity_basis_001/test_basis.py": "641368587dfa04b1689f0c5376eca6c1d2407834d2c625c2e92e31e386dddb5d",
+    "experiments/rc_sensitivity_basis_001/basis.py": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587",
+    "experiments/rc_sensitivity_basis_001/response.c": "b6b83f78997026b0010a1691b1d8142a11ea92fa9247d9aa3e94f3d52f8b8b64",
+    "experiments/response_basis_attribution_001/basis.py": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+    "experiments/hysteresis_refinement_001/response.c": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8",
+    "experiments/joint_rate_history_001/field.py": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9",
+    "experiments/hysteresis_mixed_completion_001/basis.py": "8cc4ebc73cd5ed3802408e376c9e71edc2761a932bba757a51004440fc5679a7",
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+    "experiments/joint_precision_attribution_001/metrics.py": "1be2830df88df5d0d08f3f580c848deeb80a50e4c7dd80eb2aaddb7f4f8c17a0",
+    "experiments/rc_sensitivity_basis_001/full001/registration.json": "a216df29cd2d76d2339e0032105c3dd3277e9b71daf9fa0092fcd1fa9ca7e50a",
+    "experiments/rc_sensitivity_basis_001/full001/response_taylor2/response.so": "6680c7e9256b369253bf0a50ce323cf55bb9ccc0c40b8d3d184023b831ea789a",
+    "experiments/rc_sensitivity_basis_001/full001/backend_c/estimator.so": "af59f63e87fb7cac173355918e9a6b0956054d3f34367a6fdf0c1124aebf054a"
+  }
+}
