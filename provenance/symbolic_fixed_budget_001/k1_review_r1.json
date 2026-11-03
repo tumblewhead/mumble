@@ -1,0 +1,70 @@
+{
+  "schema": "symbolic_fixed_budget_proof_review_v1",
+  "proof": "K1",
+  "round": 1,
+  "reviewer": "fresh-context individual agent /root/symbolic_kernel_k1_review",
+  "status": "accepted_conditional",
+  "base_revision": "3f2da5e16917b085140ded8ef86a8d3169be1ea9",
+  "branch": "experiment/symbolic-fixed-budget-001",
+  "proof_source_edited_by_reviewer": false,
+  "blockers": [],
+  "findings": [
+    {
+      "id": "K1-R1-01",
+      "status": "verified",
+      "finding": "For a stationary tau, integrating the Green kernel gives u=I(1-F); log-tau differentiation at fixed time/input gives partial^n u=-I partial^n F. At the fixed-amplitude equilibrium b=RI, the exact voltage and all shape derivatives are independent of tau."
+    },
+    {
+      "id": "K1-R1-02",
+      "status": "verified",
+      "finding": "Substitution of uhat=I(1-Fu) gives vhat-v=(b-RI)(Ff-F)+RI(Ff-Fu). P1 Taylor derivative recurrences preserve the constant-current complement; P4 independently chooses free degree-five collocation and forced degree-two Taylor, hence generally mismatches the two free functions. Zero-origin all-rest current sets the defect to zero and cannot diagnose this inconsistency. This does not attribute any saved active-fit regression."
+    },
+    {
+      "id": "K1-R1-03",
+      "status": "verified",
+      "finding": "The chronological step sum uses the onset t_(j-1) of each held input I_j. Integration and telescoping reproduce the interval recurrence for arbitrary nonnegative intervals, including coincident zero-duration changes. The triangle bound is epsilon times total input variation, with no unjustified elapsed-time independence."
+    },
+    {
+      "id": "K1-R1-04",
+      "status": "verified",
+      "finding": "The fixed-rate auxiliary states have exact interval updates x_l,new=exp(-lambda_l dt)x_l+(1-exp(-lambda_l dt))I. Fixed time/input-independent query weights summing to one yield the shared complementary response for constant input and the same chronological step superposition for arbitrary input. Differentiable weights preserve the shape identity by differentiating sum w=1."
+    },
+    {
+      "id": "K1-R1-05",
+      "status": "verified",
+      "finding": "Positive fixed rates ensure decay of internal homogeneous states; signed weights do not imply a positive, monotone or passive input-output approximation. A weighted sum of exponentials generally lacks a scalar semigroup, so its entire auxiliary state is required for continuation. No fidelity, stable finite-precision recurrence or inference quality is established by internal decay alone."
+    },
+    {
+      "id": "K1-R1-06",
+      "status": "verified",
+      "finding": "A linear projection that reproduces constants preserves L[I(1-F)]=I(1-L[F]) for constant input. This does not collapse arbitrary-input free/forced coefficient blocks or the joint likelihood factor. The packet explicitly rejects unbounded step storage and automatic memory savings."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "source": "import math\n# Nonuniform chronological stream includes coincident current changes.\ndt=[0.,.13,1.7,0.,.04,2.3]; currents=[.2,-.1,.4,-.3,.1,0.];tau=1.9\nu=0.;times=[0.];step_error=0.\nfor k,(h,I) in enumerate(zip(dt,currents)):\n E=math.exp(-h/tau);u=E*u+(-math.expm1(-h/tau))*I;times.append(times[-1]+h)\n direct=sum((currents[j]-(currents[j-1] if j else 0.))*(-math.expm1(-(times[-1]-times[j])/tau)) for j in range(k+1))\n step_error=max(step_error,abs(u-direct))\nassert step_error<1e-15\n# Degree-five free interpolation and degree-two forced Taylor have a concrete mismatch.\ndose=.8;q=.7;nodes=[math.cos(math.pi*(j+.5)/6) for j in range(6)]\nFf=0.\nfor j,x in enumerate(nodes):\n L=1.\n for m,y in enumerate(nodes):\n  if m!=j:L*=(q-y)/(x-y)\n Ff+=L*math.exp(-dose*math.exp(-x))\nF0=math.exp(-dose);Fu=F0+dose*F0*q+(dose*dose-dose)*F0*q*q/2\nF=math.exp(-dose*math.exp(-q));I=.3;R=.2;b=R*I\nC=I*(Ff-Fu);vhat=b*Ff+R*I*(1-Fu);eq_error=vhat-R*I\nassert abs(eq_error-R*C)<1e-17 and abs(C)>1e-5\n# Shared modes preserve the complement even with signed weights, for all checked times.\nrates=[.1,.7,3.];weights=[.3,1.1,-.4];constant_error=0.\nfor T in [0.,.01,.7,9.,100.]:\n ff=sum(w*math.exp(-l*T) for w,l in zip(weights,rates))\n uu=sum(w*I*(-math.expm1(-l*T)) for w,l in zip(weights,rates))\n constant_error=max(constant_error,abs(uu-I*(1-ff)))\nassert constant_error<1e-15\nresults={'variable_step_identity_max_abs':step_error,'mixed_free5_forcedTaylor2_consistency_defect':C,'equilibrium_voltage_defect':eq_error,'equilibrium_identity_gap':abs(eq_error-R*C),'shared_signed_weight_complement_max_abs':constant_error}\n",
+    "source_sha256": "e37825a4be707028bd6cfbb703c78bdb76aecbde8a90dba1a305f0b466701ba6",
+    "results": {
+      "variable_step_identity_max_abs": 2.7755575615628914e-17,
+      "mixed_free5_forcedTaylor2_consistency_defect": -0.00335436047631702,
+      "equilibrium_voltage_defect": -0.0006708720952633973,
+      "equilibrium_identity_gap": 6.7220534694101275e-18,
+      "shared_signed_weight_complement_max_abs": 5.551115123125783e-17
+    },
+    "limits": "Finite floating-point corroboration of hand-checked algebra, not outward error certification or estimator tests."
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "b9485954d16d6b911b367efb638370f23fe3355f5d0ae0a8c6213d8a094a1f9b",
+    "PROJECT_STATE.json": "a0b91bf6e6958d57f54a9922f878bf40a7094615b4421bb66eb4aceb4aab945d",
+    "specifications/symbolic_fixed_budget_001/K1.md": "21c354d286bb7c974d6ee5c304cd97de627579b81099588287b3cbc4f23c8d90",
+    "specifications/rc_partition_repair_001/P4.md": "eac58b980a2c4e7d7e39651ebdfef17e1248e6f334c81ed22ee9d7cbe8a0df37",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "specifications/symbolic_system_001/O1.md": "86797f3da6a39c459859a5b3e74b5c74157de8cdd301740068fd9619da6721fc"
+  },
+  "remaining_obligations": [
+    "Qualify any chosen fixed-rate dictionary, weights, value/sensitivity envelopes and physical query support independently.",
+    "Preserve full state at boundaries and prove any variable-temperature or aging extension separately.",
+    "Establish joint likelihood/transport fidelity and full target resources before accepting a candidate; K1 proves no estimator repair, calibrated coverage, lifetime fidelity or memory reduction."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "status": "symbolic_and_finite_controls_reviewed_no_estimator_change",
+  "reviews": {
+    "j1_review_r1.json": {
+      "status": "bindings_match",
+      "count": 7,
+      "context_bound_to_base_revision": 2,
+      "identity": {
+        "bytes": 5348,
+        "sha256": "cfa27d243cd3f64eecb9b016ac0c1e6d624eb296de5e3c4c12921f169b6dcb1b"
+      }
+    },
+    "k1_review_r1.json": {
+      "status": "bindings_match",
+      "count": 7,
+      "context_bound_to_base_revision": 2,
+      "identity": {
+        "bytes": 6448,
+        "sha256": "ad4260fdcaea0fb9946b7130997f4de0b645b3529b922203036d6d52fdfc1bf0"
+      }
+    },
+    "b1_review_r1.json": {
+      "status": "bindings_match",
+      "count": 8,
+      "context_bound_to_base_revision": 2,
+      "identity": {
+        "bytes": 7616,
+        "sha256": "1452a06835ac4b3c1019b2bb9927ae1ea982629da0600b9c082b686aa94e527b"
+      }
+    },
+    "integration_review_r1.json": {
+      "status": "bindings_match",
+      "count": 80,
+      "context_bound_to_base_revision": 0,
+      "identity": {
+        "bytes": 34490,
+        "sha256": "d5d1a21653c57a4802a919a161b6df6959c9f7efec56035145a0dbfd56d1923c"
+      }
+    }
+  },
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.symbolic_fixed_budget_001.check --out /tmp/symbolic_fixed_budget_anchored.json",
+    "python3 -B -m experiments.architecture_reuse_001.gate"
+  ],
+  "prior_partition_substantive_bindings_match": 18,
+  "architecture_gate": {
+    "status": "reviewed_bindings_match",
+    "files": 55
+  },
+  "finite_controls": {
+    "joint_examples": 20,
+    "max_algebra_defect": 1.0519363158323358e-14,
+    "public_constant_current_offsets": 3,
+    "arms": 3,
+    "new_fits": 0,
+    "new_kernels": 0
+  },
+  "reproduction": {
+    "original_and_final_results_byte_exact": true,
+    "provenance_anchor_revision_numerics_exact": true,
+    "independent_analytic_witness_max_error_in_reported_units": 1.66e-11
+  },
+  "revision": "Strengthened run registration anchor against prior committed result, plus native C/P4 identity checks. Original source/result archived under versions; no mathematical or numerical-result change.",
+  "limits": "Conditional mathematics and finite witnesses, not causal attribution of previous fits, full-support fidelity, complete resource feasibility or lifetime coverage"
+}

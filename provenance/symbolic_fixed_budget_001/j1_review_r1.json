@@ -1,0 +1,71 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/symbolic_fixed_budget_001/J1.md",
+  "review_round": 1,
+  "reviewer": "independent fresh-context agent /root/symbolic_joint_j1_review",
+  "date": "2026-11-02",
+  "base_revision": "3f2da5e16917b085140ded8ef86a8d3169be1ea9",
+  "branch": "experiment/symbolic-fixed-budget-001",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "scope": "Individual mathematical review of J1 and its U1/M1/P3 dependencies. No implementation, proof or existing evidence changed; no long experiments run.",
+  "findings": [
+    {
+      "id": "J1-R1-01",
+      "status": "verified",
+      "section": "Cost, gradient and Hessian identities",
+      "finding": "Expanding half squared residual norm gives r^T e+e^T e/2. Differentiation gives J^T e+E^T r+E^T e. The Jacobian Gram difference is J^T E+E^T J+E^T E, while differentiating the score adds sum e_i Hessian(r_i)+sum (r_i+e_i) Hessian(e_i). Identical prior cancels in cost/score/Hessian differences, but the named GN precision requires its declared consistently represented prior precision."
+    },
+    {
+      "id": "J1-R1-02",
+      "status": "verified",
+      "section": "Component interactions",
+      "finding": "Substituting e=sum e_a and E=sum E_a retains every ordered pair in E^T e and E^T E. Neither disjoint response families nor a component norm reduction removes these cross terms; beneficial cancellation can be lost. No independent-parameter premise is introduced."
+    },
+    {
+      "id": "J1-R1-03",
+      "status": "verified",
+      "section": "Exact affine fit displacement",
+      "finding": "For affine residuals and quadratic prior the approximate gradient is affine with matrix Phat. Stationarity at the reference optimum leaves Delta g as its intercept. Factoring Phat=P^(1/2)(I+A)P^(1/2) yields z=-(I+A)^(-1)b. Symmetric A with spectral norm at most epsilon<1 has inverse norm at most 1/(1-epsilon). The statement remains limited to interior unconstrained quadratic optima and positive definite P,Phat."
+    },
+    {
+      "id": "J1-R1-04",
+      "status": "verified",
+      "section": "Nonlinear stationary branch",
+      "finding": "For F(theta,alpha)=gradient[pi+half||r+alpha e||^2], D_theta F at (theta*,0) is the exact Hessian H; D_alpha F is J^T e+E^T r. C1 F and nonsingular H give the stated IFT derivative. The packet correctly refrains from identifying this with GN, a finite-alpha displacement or a global minimum."
+    },
+    {
+      "id": "J1-R1-05",
+      "status": "verified",
+      "section": "Query covariance and mean",
+      "finding": "Inverting the same positive definite precision factorization and multiplying by Ghat yields (T+D)(I+A)^(-1)(T+D)^T, including transport derivative error. Taylor expansion of qhat about theta* gives the stated same-anchor defect plus Ghat times displacement and remainder. A covariance comparison cannot bound the query mean defect."
+    },
+    {
+      "id": "J1-R1-06",
+      "status": "verified",
+      "section": "Coordinate invariance",
+      "finding": "For theta=f(u) and nonsingular S=Df at the same physical anchor, covectors transform by S^T and the declared GN bilinear form by congruence S^T P S. Inverse congruence proves invariant score quadratic form and query covariance; det(S^T(Phat-lambda P)S)=det(S)^2 det(Phat-lambda P) proves generalized spectral invariance. This uses the consistently represented prior metric, not the ordinary Hessian of a newly Gaussianized nonlinear prior."
+    }
+  ],
+  "verification": {
+    "method": "Independent symbolic expansion, stationarity solve, matrix factorization, implicit-function hypotheses and inverse-congruence review.",
+    "finite_experiments_run": false,
+    "why_no_numeric_suite": "All reviewed claims are elementary conditional identities or inequalities; numerical samples would not prove their universal statements. No implementation changed."
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "b9485954d16d6b911b367efb638370f23fe3355f5d0ae0a8c6213d8a094a1f9b",
+    "PROJECT_STATE.json": "a0b91bf6e6958d57f54a9922f878bf40a7094615b4421bb66eb4aceb4aab945d",
+    "specifications/symbolic_fixed_budget_001/J1.md": "dd446280a8b747f128af224054da0529a8dbb616c300c2623b1b82d229477dbc",
+    "specifications/symbolic_system_001/U1.md": "40d4a2ff1c135501705650ee63aa06d561d0d74a455edccc94aa880adf785bea",
+    "specifications/joint_precision_attribution_001/M1.md": "47b6b9c8cccd16adbdd837b2c3c6cc528a034f227a8aea736a15abd0125d84f7",
+    "specifications/rc_remainder_bounds_001/P3.md": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32"
+  },
+  "remaining_obligations": [
+    "Positive definite reference/approximate precisions are required wherever inverse roots/covariances are used; singular weak directions are not repaired by this theorem.",
+    "Physical query and response approximations must be assessed jointly over their declared support with full transport and nuisance coupling.",
+    "Finite nonlinear fit shifts require an additional justified continuation/remainder argument or remain empirical diagnostics.",
+    "No coverage, global nonlinear optimization, lifetime evidence preservation, fixed-memory feasibility or target resource certificate follows."
+  ]
+}

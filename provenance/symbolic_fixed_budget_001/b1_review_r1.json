@@ -1,0 +1,139 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/symbolic_fixed_budget_001/B1.md",
+  "review_round": 1,
+  "reviewer": "independent fresh-context agent /root/symbolic_budget_b1_review",
+  "date": "2026-11-02",
+  "base_revision": "3f2da5e16917b085140ded8ef86a8d3169be1ea9",
+  "branch": "experiment/symbolic-fixed-budget-001",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "scope": "Individual analytic B1 review with supplementary finite arithmetic checks. Proof and estimator unchanged. Acceptance covers the conditional mathematics and stated accounting only; it does not establish a physical battery impossibility theorem, an approximation byte lower bound, lifetime coverage or a complete target SRAM fit.",
+  "findings": [
+    {
+      "id": "B1-R1-01",
+      "status": "verified",
+      "section": "Retained-prior scalar counterexample",
+      "finding": "For the sum of independent unit-variance Gaussian squared residuals plus the unchanged lambda*theta^2/2 prior, normal equations are (N+lambda)*theta=sum(y) and (N+lambda)*thetahat=sum(y)-N*delta. Both posterior precisions equal N+lambda, while the mean displacement is -N*delta/(N+lambda). Its magnitude in posterior SD units is N*abs(delta)/sqrt(N+lambda), asymptotic to abs(delta)*sqrt(N). The algebra holds for arbitrary observed y, including fresh observations; no replay duplication or discarded prior is used. SD here is the Gaussian posterior width, not a claim about frequentist sampling variance with a fixed prior."
+    },
+    {
+      "id": "B1-R1-02",
+      "status": "verified",
+      "section": "Restricted exact summary obstruction",
+      "finding": "For fixed A with fewer rows than data coordinates, a nonzero null vector v gives equal Ay and squared norms for y=v and -v. Expansion of squared Gaussian residuals yields objective difference -2*b*sum(v_i*exp(-lambda*t_i)); the omitted b^2 response norm is independent of y and cancels. Known common non-unit noise scale only multiplies this difference and does not change the argument."
+    },
+    {
+      "id": "B1-R1-03",
+      "status": "verified",
+      "section": "Vandermonde and parameter-independent normalizer",
+      "finding": "Differentiating a vanishing exponential combination through orders 0 to N-1 at any interior lambda0 gives the product of the distinct-node Vandermonde matrix and a nonzero diagonal exponential matrix. It is invertible. If the combination were constant, its first derivative would vanish; independence and all t_i>0 would force v=0. Thus a nonzero null vector changes parameter-dependent likelihood shape and cannot be hidden by a parameter-independent normalizer, even with b held at any allowed nonzero value."
+    },
+    {
+      "id": "B1-R1-04",
+      "status": "verified",
+      "section": "Scope of impossibility",
+      "finding": "The result covers fixed finite collections of linear data cross moments and a squared-data normalizer, including deterministic encodings of those moments in fixed-feature least-squares factors. It does not cover arbitrary nonlinear/data-adaptive summaries, finite parameter grids, useful approximations or arbitrary real-digit encodings, and supplies no quantitative approximation lower bound in bytes. The manuscript states these exclusions explicitly and does not claim that fixed-memory useful battery inference is impossible."
+    },
+    {
+      "id": "B1-R1-05",
+      "status": "verified",
+      "section": "Memory arithmetic",
+      "finding": "A triangular W-by-W double factor has W*(W+1)/2 entries, costing 4*W*(W+1) bytes. The increment is 4*k*(2*W+k+1). W=34 and W=43 give 4760 and 7568 B, an increment of 2808 B. Prior partial totals 5168 and 8120 B differ by 2952 B, leaving 144 B additional padded response state. The 4760 B proposed comparison ceiling is a design choice, not a full 10 KiB subsystem allocation or an optimality theorem."
+    },
+    {
+      "id": "B1-R1-06",
+      "status": "verified",
+      "section": "Evidence retention and approximation obligations",
+      "finding": "Physical free-state relaxation concerns the current response; it does not erase already accumulated data cross terms evaluated at earlier observation times. The scalar counterexample independently refutes indefinite centered-likelihood fidelity from bounded response error and matching precision alone. The proposed joint score/precision/query and evolution/failure obligations are correctly presented as design requirements, not a sufficient deployment theorem proved by this packet."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "method": "Inline python3 stdlib Fraction exact normal-equation and Vandermonde checks, with floating-point illustrative exponential and SD values; manual analytic derivations above are primary.",
+    "scalar": {
+      "prior_precision": "7/3",
+      "delta": "2/5",
+      "sum_y": "N*(N+1)/14",
+      "N": [
+        1,
+        3,
+        100,
+        10000
+      ],
+      "exact_mean_shift_and_both_normal_equations_passed": true,
+      "shift_in_SD": [
+        0.21908902300206645,
+        0.5196152422706632,
+        3.9541344379136203,
+        39.995334149841234
+      ]
+    },
+    "same_summary": {
+      "A": [
+        [
+          1,
+          1
+        ]
+      ],
+      "v": [
+        1,
+        -1
+      ],
+      "times": [
+        1,
+        2
+      ],
+      "both_Ay": 0,
+      "both_squared_norm": 2,
+      "b": 1,
+      "lambda_values": [
+        0.2,
+        0.8,
+        1.4
+      ],
+      "objective_differences": [
+        -0.296821414084685,
+        -0.49486489224513236,
+        -0.37157380263277706
+      ]
+    },
+    "vandermonde": {
+      "N": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "nodes": "-1 through -N",
+      "method": "Fraction Gaussian elimination determinant equals exact product over j>i of (node_j-node_i), nonzero"
+    },
+    "memory": {
+      "W34_factor_B": 4760,
+      "W43_factor_B": 7568,
+      "factor_increment_B": 2808,
+      "response_increment_B": 144,
+      "partial_subtotal_increment_B": 2952
+    },
+    "limits": "Finite arithmetic checks supplement, and do not replace, the general analytic proof. No estimator execution, refit or campaign performed."
+  },
+  "sha256": {
+    "specifications/symbolic_fixed_budget_001/B1.md": "1a1a8ecc24a873f0db936352286fbe045eb8d80d20e87c069de14981257b1ace",
+    "specifications/symbolic_system_001/U1.md": "40d4a2ff1c135501705650ee63aa06d561d0d74a455edccc94aa880adf785bea",
+    "specifications/symbolic_system_001/A1.md": "0adbf674c51cfcb76cc936214e3d677d58ecaa6978c49cdab069f4bdeb4fc42e",
+    "specifications/rc_remainder_bounds_001/P3.md": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32",
+    "provenance/rc_partition_repair_001/receipt.json": "12a31b9692bab50c0bbe095029e384da0138ab76e40a0fd9d21494b56edf7631",
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "b9485954d16d6b911b367efb638370f23fe3355f5d0ae0a8c6213d8a094a1f9b",
+    "PROJECT_STATE.json": "a0b91bf6e6958d57f54a9922f878bf40a7094615b4421bb66eb4aceb4aab945d"
+  },
+  "remaining_obligations": [
+    "Specify and qualify useful joint approximation/query tolerances on the original admitted physical support.",
+    "Establish evidence/parameter evolution semantics without artificial forgetting, support narrowing or duplicate evidence.",
+    "Account for all owned objects and peak workspace and qualify actual target numerics/resources; the factor ceiling alone is not deployment qualification."
+  ]
+}

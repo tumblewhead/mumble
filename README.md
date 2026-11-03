@@ -274,6 +274,17 @@ large-offset forced-response errors remain explicit. P4, implementation and
 results have independent reviews; all42 fits reproduce exactly. No production
 promotion. Next: compact forced-response fidelity while retaining central matching.
 
+The [symbolic fixed-budget reassessment](provenance/symbolic_fixed_budget_001/README.md)
+supersedes the next-degree-growth direction. Independently reviewed J1/K1/B1 relate
+joint score, precision and transport error; expose the shared-kernel complement
+identity; and delimit fixed-memory/lifetime claims. The mixed free5/forced2 candidate
+violates constant-current RC equilibrium in a public witness (up to0.569mV total),
+while same-family controls preserve it to rounding. This is structural evidence,
+not attribution of a particular fitted regression. Freeze basis growth; next derive
+shared-operator candidates under W<=34/4760B factor ceiling and a complete ~10KiB
+subsystem budget. No estimator change, new fit, automatic memory saving or full
+fixed-budget feasibility is claimed.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

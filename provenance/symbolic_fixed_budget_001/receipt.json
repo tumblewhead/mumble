@@ -1,0 +1,115 @@
+{
+  "schema": "symbolic_fixed_budget_receipt_v1",
+  "status": "independently_reviewed_symbolic_reassessment_no_estimator_change",
+  "base_revision": "3f2da5e16917b085140ded8ef86a8d3169be1ea9",
+  "branch": "experiment/symbolic-fixed-budget-001",
+  "report": "provenance/symbolic_fixed_budget_001/README.md",
+  "proofs": [
+    "specifications/symbolic_fixed_budget_001/J1.md",
+    "specifications/symbolic_fixed_budget_001/K1.md",
+    "specifications/symbolic_fixed_budget_001/B1.md"
+  ],
+  "evidence": "provenance/symbolic_fixed_budget_001/check.json",
+  "validation": "provenance/symbolic_fixed_budget_001/validation.json",
+  "reviews": [
+    "provenance/symbolic_fixed_budget_001/j1_review_r1.json",
+    "provenance/symbolic_fixed_budget_001/k1_review_r1.json",
+    "provenance/symbolic_fixed_budget_001/b1_review_r1.json",
+    "provenance/symbolic_fixed_budget_001/integration_review_r1.json"
+  ],
+  "review_disposition": "All three proofs individually accepted conditionally; source/witness/report independently reviewed and reproduced. Provenance-only checker strengthening re-reviewed; original source/results preserved. Administrative receipt/validation not new proof.",
+  "bindings": {
+    "specifications/symbolic_fixed_budget_001/README.md": {
+      "bytes": 2061,
+      "sha256": "0c9bbafa8022c813324969d52c2d723fbf1c34c23dd78442c9f99783195cdb5b"
+    },
+    "specifications/symbolic_fixed_budget_001/J1.md": {
+      "bytes": 4591,
+      "sha256": "dd446280a8b747f128af224054da0529a8dbb616c300c2623b1b82d229477dbc"
+    },
+    "specifications/symbolic_fixed_budget_001/K1.md": {
+      "bytes": 4009,
+      "sha256": "21c354d286bb7c974d6ee5c304cd97de627579b81099588287b3cbc4f23c8d90"
+    },
+    "specifications/symbolic_fixed_budget_001/B1.md": {
+      "bytes": 4938,
+      "sha256": "1a1a8ecc24a873f0db936352286fbe045eb8d80d20e87c069de14981257b1ace"
+    },
+    "experiments/symbolic_fixed_budget_001/README.md": {
+      "bytes": 735,
+      "sha256": "32b6e209fb1c062f47fd3b396db2170e02993b50168bc1bb48532c789cd48887"
+    },
+    "experiments/symbolic_fixed_budget_001/check.py": {
+      "bytes": 7031,
+      "sha256": "50853b4f356889f0f87e5b594928ebb4f084e9887607c6006d5174d26243b04c"
+    },
+    "provenance/symbolic_fixed_budget_001/README.md": {
+      "bytes": 7751,
+      "sha256": "6cc06f66cdeee44a807967948ec8947254d5d420276be24aea70ecd4625f13d3"
+    },
+    "provenance/symbolic_fixed_budget_001/check.json": {
+      "bytes": 18054,
+      "sha256": "c289c36174a6babf42555c839fd7474152962e438243ef4edc9781eb59888546"
+    },
+    "provenance/symbolic_fixed_budget_001/validation.json": {
+      "bytes": 2314,
+      "sha256": "de9d4b3132328d58b2ef5f0f0b9dcf3950318261a75960be8dd9ff9f2aac86df"
+    },
+    "provenance/symbolic_fixed_budget_001/j1_review_r1.json": {
+      "bytes": 5348,
+      "sha256": "cfa27d243cd3f64eecb9b016ac0c1e6d624eb296de5e3c4c12921f169b6dcb1b"
+    },
+    "provenance/symbolic_fixed_budget_001/k1_review_r1.json": {
+      "bytes": 6448,
+      "sha256": "ad4260fdcaea0fb9946b7130997f4de0b645b3529b922203036d6d52fdfc1bf0"
+    },
+    "provenance/symbolic_fixed_budget_001/b1_review_r1.json": {
+      "bytes": 7616,
+      "sha256": "1452a06835ac4b3c1019b2bb9927ae1ea982629da0600b9c082b686aa94e527b"
+    },
+    "provenance/symbolic_fixed_budget_001/integration_review_r1.json": {
+      "bytes": 34490,
+      "sha256": "d5d1a21653c57a4802a919a161b6df6959c9f7efec56035145a0dbfd56d1923c"
+    },
+    "provenance/symbolic_fixed_budget_001/versions/check_before_registration_anchor.py": {
+      "bytes": 6677,
+      "sha256": "49a878b69197d375ff3bb6b2f6b89020abde6e872ea5baf770a14cd1d6c4b61a"
+    },
+    "provenance/symbolic_fixed_budget_001/versions/check_before_registration_anchor.json": {
+      "bytes": 17200,
+      "sha256": "e69662bf935d65d358448d59f59c753819dcb958a580a069a27a068ef0714fa7"
+    }
+  },
+  "metadata_bindings": {
+    "README.md": {
+      "bytes": 111864,
+      "sha256": "8f8f81a16e47cb7df9849c035e6698a82740fcdfad2e482c971a0eb8dfc447ca"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 298572,
+      "sha256": "16d2bc7c14304d45fbe078189d3db0b6e54483891d1198345941239d6f83facb"
+    },
+    "handoff/CONTINUE.json": {
+      "bytes": 2424,
+      "sha256": "3c90d95c2845a0c0c39e7b248a508e9b561d89d8f74e23304df4a2122e974149"
+    },
+    "handoff/archive/CONTINUE_before_symbolic_fixed_budget.json": {
+      "bytes": 2317,
+      "sha256": "423a7acfe23635fd5e85413534e108ebcd37e2859ffb25060e5ab09c64e48447"
+    }
+  },
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.symbolic_fixed_budget_001.check --out /tmp/symbolic_fixed_budget_anchored.json",
+    "python3 -B -m experiments.architecture_reuse_001.gate"
+  ],
+  "production_changed": false,
+  "campaign_defaults_changed": false,
+  "solver_changed": false,
+  "new_estimator_memory_B": 0,
+  "proposed_comparison_feature_ceiling": 34,
+  "proposed_comparison_packed_factor_ceiling_B": 4760,
+  "total_subsystem_target_B": 10240,
+  "fixed_budget_candidate_qualified": false,
+  "limits": "Conditional mathematics and finite witnesses, not causal attribution of previous fits, full-support fidelity, complete resource feasibility or lifetime coverage",
+  "next": "Derive shared physical-operator closure and joint approximation objective under fixed complete-resource budget before implementation; preserve support/evidence and establish cumulative error/evolution obligations."
+}

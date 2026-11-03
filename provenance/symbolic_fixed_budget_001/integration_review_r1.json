@@ -1,0 +1,443 @@
+{
+  "schema": "symbolic_fixed_budget_integration_review_v1",
+  "review_round": 1,
+  "reviewer": "independent fresh-context agent /root/symbolic_fixed_budget_integration_review",
+  "date": "2026-11-02",
+  "base_revision": "3f2da5e16917b085140ded8ef86a8d3169be1ea9",
+  "branch": "experiment/symbolic-fixed-budget-001",
+  "status": "accepted_for_symbolic_reassessment_and_finite_diagnostic_scope_no_promotion",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "scope": "Source and report integration review, two deterministic reproductions and an independent analytic response check. No estimator implementation, fit, long sweep or target qualification.",
+  "findings": [
+    {
+      "id": "I1",
+      "status": "verified",
+      "topic": "Reproduction and preservation",
+      "finding": "Both original and strengthened checker outputs reproduce byte-exactly with their respective unchanged source receipts. The original checker and result remain archived. The provenance-only change leaves algebra, recipe and all native witness records exactly unchanged; no fit, kernel, solver or estimator was changed."
+    },
+    {
+      "id": "I2",
+      "status": "resolved_before_acceptance",
+      "topic": "Registration and binary source binding",
+      "finding": "Initial checker verified partition binary hashes from a local registration without anchoring that registration. Independent review confirmed it exactly matched the prior committed result.raw_bindings. The author then added that explicit verification and checks of registered response.c/P4 identities; final rerun passes. All 18 prior receipt artifact bindings and all current runtime/proof/native bindings match. No compiled artifact was rebuilt for this review."
+    },
+    {
+      "id": "I3",
+      "status": "verified",
+      "topic": "Public equilibrium witness and units",
+      "finding": "512 ordered samples repeat dt=(0,1/35,.1,.3) seconds with I=.12 A and T=25 C. Public R=(.035,.07,.1) ohm sets b=RI in volts. Frozen public prior tau centers are (.07,.7,6) seconds. The checker extracts only RC columns from normalized native rows and reverses their sign/noise normalization. C and its log-tau slope are in amperes; R*C is volts, scaled by 1e6 for uV. The slope differentiates each branch with respect to its log tau at fixed b,R,I. Independent analytic Chebyshev/Taylor evaluation agrees within 1.66e-11 in the reported units."
+    },
+    {
+      "id": "I4",
+      "status": "verified",
+      "topic": "No truth fitting and causal scope",
+      "finding": "There is no optimizer invocation, fitted objective, fitted initialization, posterior correction or truth-selected center. The arbitrary 3.7 V observation column is excluded by RC-only extraction. Choosing b=RI defines a public test identity rather than informing an estimator of hidden truth. The mixed kernel violates that identity; same-family controls preserve it within floating rounding. This does not identify the cause of any saved active-fit regression or qualify battery accuracy."
+    },
+    {
+      "id": "I5",
+      "status": "verified",
+      "topic": "Joint algebra and report numbers",
+      "finding": "Twenty random joint controls test exact score and GN differences, residual-weighted exact-Hessian difference, affine displacement, score/query coordinate invariance and transported-query covariance. Maximum algebraic defect is 1.0519363158323358e-14. Mixed summed RC errors are 566.4980849987567, 3.568866381810712 and 568.8016293393973 uV at offsets -.9,0,+.9; +.9 branch slope is 1920.5336347514049 uV per log tau. Report rounding is correct. Same-family total voltage errors are below 7e-11 uV; their slope errors are distinct and not covered by that voltage number. The report separates nonlinear local diagnostics from the affine theorem and coverage."
+    },
+    {
+      "id": "I6",
+      "status": "verified",
+      "topic": "Conditional proof composition",
+      "finding": "J1, K1 and B1 each have accepted fresh-context individual reviews bound to unchanged packets. Their combined direction retains score, precision, query means and transport, cross-family terms and nuisance coupling. Constant-bias lifetime failure is a conditional scalar counterexample. The exact-summary obstruction is restricted to fixed linear data moments plus squared norm on the declared rest submodel; it is not a general impossibility result for useful bounded-memory estimators."
+    },
+    {
+      "id": "I7",
+      "status": "verified",
+      "topic": "Fixed-budget direction and memory limits",
+      "finding": "W34 to W43 gives 4760 to 7568 packed double-factor bytes, a 2808 B increment; 144 B added padded response state explains the partial-total increase 5168 to 8120 B. A shared response operator preserves identities without automatically merging arbitrary-input free/forced histories, removing cross terms or saving factor storage. Proposed W<=34 is a comparison ceiling. Full ~10 KiB owned SRAM including peak workspace, useful approximation over original support, cumulative error/evolution laws and runtime failure behavior remain unproved. No candidate, memory saving or production promotion is claimed."
+    }
+  ],
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.symbolic_fixed_budget_001.check --out /tmp/symbolic_fixed_budget_review.json",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.symbolic_fixed_budget_001.check --out /tmp/symbolic_fixed_budget_review_anchored.json",
+    "OPENBLAS_NUM_THREADS=1 python3 -B /tmp/review_symbolic_fixed_budget.py"
+  ],
+  "reproduction": {
+    "original_byte_exact": true,
+    "final_byte_exact": true,
+    "numeric_payloads_unchanged_after_binding_revision": true,
+    "original_result": {
+      "bytes": 17200,
+      "sha256": "e69662bf935d65d358448d59f59c753819dcb958a580a069a27a068ef0714fa7"
+    },
+    "final_result": {
+      "bytes": 18054,
+      "sha256": "c289c36174a6babf42555c839fd7474152962e438243ef4edc9781eb59888546"
+    },
+    "runtime_sources_checked": 52,
+    "prior_partition_receipt_bindings_checked": 18,
+    "independent_analytic_witness": [
+      {
+        "log_tau_offset": -0.9,
+        "metrics": {
+          "max_summed_equilibrium_defect_uV": 566.4980849987596,
+          "max_branch_equilibrium_log_tau_slope_uV": 1905.4527230808571
+        },
+        "absolute_difference_in_reported_units": {
+          "max_summed_equilibrium_defect_uV": 2.9558577807620168e-12,
+          "max_branch_equilibrium_log_tau_slope_uV": 1.659827830735594e-11
+        }
+      },
+      {
+        "log_tau_offset": 0.0,
+        "metrics": {
+          "max_summed_equilibrium_defect_uV": 3.5688663818132493,
+          "max_branch_equilibrium_log_tau_slope_uV": 2.2126426342119476
+        },
+        "absolute_difference_in_reported_units": {
+          "max_summed_equilibrium_defect_uV": 2.5375257450832578e-12,
+          "max_branch_equilibrium_log_tau_slope_uV": 4.860556401808935e-12
+        }
+      },
+      {
+        "log_tau_offset": 0.9,
+        "metrics": {
+          "max_summed_equilibrium_defect_uV": 568.8016293393814,
+          "max_branch_equilibrium_log_tau_slope_uV": 1920.5336347513894
+        },
+        "absolute_difference_in_reported_units": {
+          "max_summed_equilibrium_defect_uV": 1.5916157281026244e-11,
+          "max_branch_equilibrium_log_tau_slope_uV": 1.546140993013978e-11
+        }
+      }
+    ],
+    "review_script_sha256": "f93009f8611b84a2dd677c79834c81e832409b99f535b531d647e40dd1838292",
+    "review_script_source": "import hashlib\nimport json\nimport subprocess\nfrom pathlib import Path\n\nimport numpy as np\nfrom numpy.polynomial.chebyshev import chebvander, chebder\n\nROOT = Path('/home/easy/proj/mumble/.worktrees/h7-campaign')\nDEST = ROOT / 'provenance/symbolic_fixed_budget_001/integration_review_r1.json'\n\ndef identity(path):\n    data = Path(path).read_bytes()\n    return {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}\n\ndef read(path):\n    return json.loads((ROOT / path).read_text())\n\ncurrent_path = 'provenance/symbolic_fixed_budget_001/check.json'\nold_path = 'provenance/symbolic_fixed_budget_001/versions/check_before_registration_anchor.json'\ncurrent, old = read(current_path), read(old_path)\nassert (ROOT/current_path).read_bytes() == Path('/tmp/symbolic_fixed_budget_review_anchored.json').read_bytes()\nassert (ROOT/old_path).read_bytes() == Path('/tmp/symbolic_fixed_budget_review.json').read_bytes()\nassert current['algebra'] == old['algebra']\nassert current['kernel_witness']['records'] == old['kernel_witness']['records']\nassert current['kernel_witness']['recipe'] == old['kernel_witness']['recipe']\nchecked = {}\nfor group in [current['source']['sources'], current['proofs'], current['kernel_witness']['bindings']]:\n    for path, expected in group.items():\n        assert identity(ROOT/path) == expected, path\n        checked[str((ROOT/path).relative_to(ROOT))] = expected\nprior = read('provenance/rc_partition_repair_001/receipt.json')\nfor path, expected in prior['bindings'].items():\n    assert identity(ROOT/path) == expected, path\nfor filename in ['j1_review_r1.json', 'k1_review_r1.json', 'b1_review_r1.json']:\n    review = read('provenance/symbolic_fixed_budget_001/' + filename)\n    for path, sha in review['sha256'].items():\n        if path in ['README.md', 'PROJECT_STATE.json']:\n            original = subprocess.check_output(['git','show',review['base_revision']+':'+path], cwd=ROOT)\n            assert hashlib.sha256(original).hexdigest() == sha, path\n        else:\n            assert identity(ROOT/path)['sha256'] == sha, path\n\n# Independent constant-current formulas: no native response or probe imports.\nreg = read('provenance/rc_sensitivity_basis_001/full001_registration.json')\nelapsed = np.cumsum(np.array([0., 1/35, .1, .3])[np.arange(512) % 4])\ncenters = np.array(reg['center'][:3])\nassert np.array_equal(centers, reg['config']['prior_mean_physical']['tau'])\nnodes = np.cos(np.pi * (np.arange(6) + .5) / 6)\ndose = elapsed[:, None] / centers[None, :]\nF = np.exp(-dose)\nfirst = dose * F\nsecond = (dose*dose - dose) * F\nfree = np.exp(-dose[:, :, None] * np.exp(-nodes)[None, None, :])\ncoeff = np.einsum('ij,abj->abi', np.linalg.inv(chebvander(nodes, 5)), free)\ncurrent_A, resistance = .12, np.array([.035, .07, .1])\nindependent = []\nfor record in current['kernel_witness']['records']:\n    t = record['log_tau_offset']\n    Ff = np.einsum('abi,i->ab', coeff, chebvander(t, 5)[0])\n    Fu = F + first*t + .5*second*t*t\n    slope = np.einsum('abi,i->ab', chebder(coeff, axis=2), chebvander(t, 4)[0]) - first - second*t\n    metrics = {\n        'max_summed_equilibrium_defect_uV': float(1e6*np.max(np.abs(np.sum(resistance*current_A*(Ff-Fu), axis=1)))),\n        'max_branch_equilibrium_log_tau_slope_uV': float(1e6*np.max(np.abs(resistance*current_A*slope))),\n    }\n    differences = {key: abs(value-record['arms']['Free5_Forced2'][key]) for key, value in metrics.items()}\n    assert max(differences.values()) < 1e-8\n    independent.append({'log_tau_offset': t, 'metrics': metrics, 'absolute_difference_in_reported_units': differences})\n\nextra = [\n    'AGENTS.md', 'README.md', 'PROJECT_STATE.json',\n    'experiments/symbolic_fixed_budget_001/README.md',\n    'provenance/symbolic_fixed_budget_001/README.md', current_path, old_path,\n    'provenance/symbolic_fixed_budget_001/versions/check_before_registration_anchor.py',\n    'provenance/symbolic_fixed_budget_001/j1_review_r1.json',\n    'provenance/symbolic_fixed_budget_001/k1_review_r1.json',\n    'provenance/symbolic_fixed_budget_001/b1_review_r1.json',\n    'provenance/rc_partition_repair_001/receipt.json',\n    'provenance/rc_sensitivity_basis_001/full001_registration.json',\n    'provenance/hysteresis_sensitivity_basis_001/result.json',\n]\nfor path in extra:\n    checked[path] = identity(ROOT/path)\nfindings = [\n    {\n        'id': 'I1', 'status': 'verified', 'topic': 'Reproduction and preservation',\n        'finding': 'Both original and strengthened checker outputs reproduce byte-exactly with their respective unchanged source receipts. The original checker and result remain archived. The provenance-only change leaves algebra, recipe and all native witness records exactly unchanged; no fit, kernel, solver or estimator was changed.'\n    },\n    {\n        'id': 'I2', 'status': 'resolved_before_acceptance', 'topic': 'Registration and binary source binding',\n        'finding': 'Initial checker verified partition binary hashes from a local registration without anchoring that registration. Independent review confirmed it exactly matched the prior committed result.raw_bindings. The author then added that explicit verification and checks of registered response.c/P4 identities; final rerun passes. All 18 prior receipt artifact bindings and all current runtime/proof/native bindings match. No compiled artifact was rebuilt for this review.'\n    },\n    {\n        'id': 'I3', 'status': 'verified', 'topic': 'Public equilibrium witness and units',\n        'finding': '512 ordered samples repeat dt=(0,1/35,.1,.3) seconds with I=.12 A and T=25 C. Public R=(.035,.07,.1) ohm sets b=RI in volts. Frozen public prior tau centers are (.07,.7,6) seconds. The checker extracts only RC columns from normalized native rows and reverses their sign/noise normalization. C and its log-tau slope are in amperes; R*C is volts, scaled by 1e6 for uV. The slope differentiates each branch with respect to its log tau at fixed b,R,I. Independent analytic Chebyshev/Taylor evaluation agrees within 1.66e-11 in the reported units.'\n    },\n    {\n        'id': 'I4', 'status': 'verified', 'topic': 'No truth fitting and causal scope',\n        'finding': 'There is no optimizer invocation, fitted objective, fitted initialization, posterior correction or truth-selected center. The arbitrary 3.7 V observation column is excluded by RC-only extraction. Choosing b=RI defines a public test identity rather than informing an estimator of hidden truth. The mixed kernel violates that identity; same-family controls preserve it within floating rounding. This does not identify the cause of any saved active-fit regression or qualify battery accuracy.'\n    },\n    {\n        'id': 'I5', 'status': 'verified', 'topic': 'Joint algebra and report numbers',\n        'finding': 'Twenty random joint controls test exact score and GN differences, residual-weighted exact-Hessian difference, affine displacement, score/query coordinate invariance and transported-query covariance. Maximum algebraic defect is 1.0519363158323358e-14. Mixed summed RC errors are 566.4980849987567, 3.568866381810712 and 568.8016293393973 uV at offsets -.9,0,+.9; +.9 branch slope is 1920.5336347514049 uV per log tau. Report rounding is correct. Same-family total voltage errors are below 7e-11 uV; their slope errors are distinct and not covered by that voltage number. The report separates nonlinear local diagnostics from the affine theorem and coverage.'\n    },\n    {\n        'id': 'I6', 'status': 'verified', 'topic': 'Conditional proof composition',\n        'finding': 'J1, K1 and B1 each have accepted fresh-context individual reviews bound to unchanged packets. Their combined direction retains score, precision, query means and transport, cross-family terms and nuisance coupling. Constant-bias lifetime failure is a conditional scalar counterexample. The exact-summary obstruction is restricted to fixed linear data moments plus squared norm on the declared rest submodel; it is not a general impossibility result for useful bounded-memory estimators.'\n    },\n    {\n        'id': 'I7', 'status': 'verified', 'topic': 'Fixed-budget direction and memory limits',\n        'finding': 'W34 to W43 gives 4760 to 7568 packed double-factor bytes, a 2808 B increment; 144 B added padded response state explains the partial-total increase 5168 to 8120 B. A shared response operator preserves identities without automatically merging arbitrary-input free/forced histories, removing cross terms or saving factor storage. Proposed W<=34 is a comparison ceiling. Full ~10 KiB owned SRAM including peak workspace, useful approximation over original support, cumulative error/evolution laws and runtime failure behavior remain unproved. No candidate, memory saving or production promotion is claimed.'\n    },\n]\nreview = {\n    'schema': 'symbolic_fixed_budget_integration_review_v1',\n    'review_round': 1,\n    'reviewer': 'independent fresh-context agent /root/symbolic_fixed_budget_integration_review',\n    'date': '2026-11-02',\n    'base_revision': subprocess.check_output(['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),\n    'branch': subprocess.check_output(['git','branch','--show-current'], cwd=ROOT, text=True).strip(),\n    'status': 'accepted_for_symbolic_reassessment_and_finite_diagnostic_scope_no_promotion',\n    'blocking_findings': [],\n    'required_revisions': [],\n    'scope': 'Source and report integration review, two deterministic reproductions and an independent analytic response check. No estimator implementation, fit, long sweep or target qualification.',\n    'findings': findings,\n    'commands': [\n        'OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.symbolic_fixed_budget_001.check --out /tmp/symbolic_fixed_budget_review.json',\n        'OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.symbolic_fixed_budget_001.check --out /tmp/symbolic_fixed_budget_review_anchored.json',\n        'OPENBLAS_NUM_THREADS=1 python3 -B /tmp/review_symbolic_fixed_budget.py',\n    ],\n    'reproduction': {\n        'original_byte_exact': True, 'final_byte_exact': True,\n        'numeric_payloads_unchanged_after_binding_revision': True,\n        'original_result': identity(ROOT/old_path), 'final_result': identity(ROOT/current_path),\n        'runtime_sources_checked': len(current['source']['sources']),\n        'prior_partition_receipt_bindings_checked': len(prior['bindings']),\n        'independent_analytic_witness': independent,\n        'review_script_sha256': identity(__file__)['sha256'],\n        'review_script_source': Path(__file__).read_text(),\n    },\n    'bindings': dict(sorted(checked.items())),\n    'administrative_note': 'Root metadata was updated during this review; prior proof-review README/PROJECT_STATE bindings were checked against the base git revision, and their current symbolic reassessment additions were inspected. Current root files and final substantive checker/report/proof artifacts are bound here. Final receipt administration follows; later administrative links do not extend scientific acceptance.',\n    'remaining_obligations': [\n        'Derive and independently review shared-operator candidate closure and complete memory accounting before implementation.',\n        'Keep original support, public prior, chronology, carried state and single ownership of evidence; retain unresolved weak directions and cross terms.',\n        'Set useful physical query tolerances and assess joint score, precision, mean and transport at equal storage without treating sampled passes as uniform certificates.',\n        'Supply justified cumulative approximation and aging/evolution laws for long use; no artificial forgetting or silent support narrowing.',\n        'Qualify full target numerics, all owned objects and peak workspace separately; present replay software is not firmware-ready.',\n    ],\n}\nassert not DEST.exists(), 'preserve existing review'\nDEST.write_text(json.dumps(review, indent=2, allow_nan=False) + '\\n')\nprint(json.dumps({'path': str(DEST.relative_to(ROOT)), 'status': review['status'], 'bindings': len(checked), 'identity': identity(DEST)}, indent=2))\n"
+  },
+  "bindings": {
+    "AGENTS.md": {
+      "bytes": 2500,
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 298572,
+      "sha256": "16d2bc7c14304d45fbe078189d3db0b6e54483891d1198345941239d6f83facb"
+    },
+    "README.md": {
+      "bytes": 111864,
+      "sha256": "8f8f81a16e47cb7df9849c035e6698a82740fcdfad2e482c971a0eb8dfc447ca"
+    },
+    "experiments/conditional_architecture_001/conditional.py": {
+      "bytes": 3493,
+      "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635"
+    },
+    "experiments/conditional_architecture_001/run.py": {
+      "bytes": 8783,
+      "sha256": "4d15a585ed674671dc5410d5e612219101823930414bc1ddc53cb0ef3353f0b2"
+    },
+    "experiments/field_tangent_native_001/kernel.c": {
+      "bytes": 11098,
+      "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+    },
+    "experiments/field_tangent_native_001/kernel.h": {
+      "bytes": 2183,
+      "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+    },
+    "experiments/field_tangent_native_001/native.py": {
+      "bytes": 8668,
+      "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+    },
+    "experiments/foster_c_baseline_001/reference.py": {
+      "bytes": 3562,
+      "sha256": "9421252aee1bb7776e125904faadef6483579759041bdfd819b7e8dfa53ea438"
+    },
+    "experiments/foster_campaign_001/backend.py": {
+      "bytes": 11041,
+      "sha256": "289b910b26a724a42389740d9cba4a273b4bfb80458fd34979dd0274dd63a453"
+    },
+    "experiments/foster_campaign_001/charger.py": {
+      "bytes": 8547,
+      "sha256": "519963daab9e01c7ad7c2d82c4863bdcbfb9afa7f9ad4c999e931d2148d95e6f"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 23726,
+      "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+    },
+    "experiments/foster_campaign_001/coordinates.py": {
+      "bytes": 791,
+      "sha256": "640b63952c85292a0aaeec8692e912a9718fd45a7fabaad09dad448036f6ad08"
+    },
+    "experiments/foster_campaign_001/evidence.py": {
+      "bytes": 1404,
+      "sha256": "f16d65ad56d1628f53f3cbbaf1ff95e97cef234af371a7b95cac59ad4b6c1f8a"
+    },
+    "experiments/foster_campaign_001/execution.py": {
+      "bytes": 3695,
+      "sha256": "7e8813c8653836c5baf8334d054f9b72df1d33ab0ed09a855a51ab714a22110f"
+    },
+    "experiments/foster_campaign_001/field_backend.py": {
+      "bytes": 8781,
+      "sha256": "bf0ad49113038da0071ed0c6eb2571633fd09e989ac780fa0d166b31bbccc140"
+    },
+    "experiments/foster_campaign_001/h7_backend.py": {
+      "bytes": 1844,
+      "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+    },
+    "experiments/foster_campaign_001/prepare.py": {
+      "bytes": 2984,
+      "sha256": "a7c667be79f9fa358ea8b09c2aa35a39cdb0aa9821d0cafb77f1a99c6e6ee1e8"
+    },
+    "experiments/foster_campaign_001/rate.py": {
+      "bytes": 764,
+      "sha256": "f3ab347a2dc73b008329ffff6443e51fbb4fd3613473fa4eb0416ae39b2e6813"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 25557,
+      "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+    },
+    "experiments/foster_campaign_001/stimulus.py": {
+      "bytes": 8426,
+      "sha256": "f9b8bdaf807f1b398827efdbf0bcf401d96ca430d28b9f170d6f4759e931acf3"
+    },
+    "experiments/foster_campaign_001/tangent_backend.py": {
+      "bytes": 18216,
+      "sha256": "6a0c01cc9e2b32686582e7a58b0e2fa3a09e7951466945537917a6d58703dad7"
+    },
+    "experiments/foster_campaign_001/telemetry.py": {
+      "bytes": 1847,
+      "sha256": "eab155aad1f9d95155cc8039a654f2d4d6216b30a790f130d420b5531f56327d"
+    },
+    "experiments/foster_campaign_001/workload.py": {
+      "bytes": 5926,
+      "sha256": "3a3e2a7d884cd53fcd90ff90d7a3ab528efd809fa7d1b66e84d784b1736ef9ed"
+    },
+    "experiments/foster_feedback_001/estimator.py": {
+      "bytes": 6724,
+      "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+    },
+    "experiments/foster_feedback_001/history.py": {
+      "bytes": 3265,
+      "sha256": "ed98c1aac0ec8fbe59c46470adb856450498e19dccbfd5ab12e71e987341b0f4"
+    },
+    "experiments/foster_feedback_001/plant.py": {
+      "bytes": 2165,
+      "sha256": "7a68ed253b19c83a6ca8ea51a3d039c5bd88ae742742a2741c975d25d3751c54"
+    },
+    "experiments/foster_feedback_001/qualify.py": {
+      "bytes": 5368,
+      "sha256": "d932f76270caf415604de1e68ce0a154f934cebdec29bf4fa4e6594359681fb2"
+    },
+    "experiments/foster_feedback_001/run.py": {
+      "bytes": 12125,
+      "sha256": "7df5ef8359f9cc7a0642864ca462f5e76c7df3d625a321817aed064c25d99844"
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "bytes": 4357,
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+    },
+    "experiments/h7_history_quality_001/history.py": {
+      "bytes": 14227,
+      "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+    },
+    "experiments/hysteresis_mixed_completion_001/basis.py": {
+      "bytes": 1121,
+      "sha256": "8cc4ebc73cd5ed3802408e376c9e71edc2761a932bba757a51004440fc5679a7"
+    },
+    "experiments/hysteresis_mixed_completion_001/run.py": {
+      "bytes": 15438,
+      "sha256": "31ec9bfd5981fcbf3f4d0a6e3760183114d74e48be174f5075527231f9291bf8"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/hysteresis_refinement_001/response.c": {
+      "bytes": 2282,
+      "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+    },
+    "experiments/hysteresis_sensitivity_basis_001/basis.py": {
+      "bytes": 3441,
+      "sha256": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca"
+    },
+    "experiments/hysteresis_sensitivity_basis_001/build001/collocation/response.so": {
+      "bytes": 15664,
+      "sha256": "bac43ea50e6528a39c8ce565578a4955824d8931ffc0edd3197cefe7a8daa110"
+    },
+    "experiments/hysteresis_sensitivity_basis_001/build001/derivative/response.so": {
+      "bytes": 15664,
+      "sha256": "2548abc7e98ee6d9b44d243157b8dcd5bcdfb1fa5e279b9d643e60106576d5a8"
+    },
+    "experiments/hysteresis_sensitivity_basis_001/reference.py": {
+      "bytes": 1903,
+      "sha256": "4c1e3eb7e6de3dd66be7452d2c8c6e2d830e9d19ca39b9af092c5a12fe55d35a"
+    },
+    "experiments/hysteresis_sensitivity_basis_001/run.py": {
+      "bytes": 11417,
+      "sha256": "0f1f657fec8d5494cdf52ddb8ee6c365b28380c027eb64aadaa7432302f47eea"
+    },
+    "experiments/joint_precision_attribution_001/metrics.py": {
+      "bytes": 7177,
+      "sha256": "1be2830df88df5d0d08f3f580c848deeb80a50e4c7dd80eb2aaddb7f4f8c17a0"
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "bytes": 6989,
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+    },
+    "experiments/joint_rate_history_001/probe.c": {
+      "bytes": 2273,
+      "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+    },
+    "experiments/partitioned_battery_closure_001/conditional.py": {
+      "bytes": 4676,
+      "sha256": "9e9991a7399029a7c622d4b77da1f8d70687ada87f8c6045cb258bbfc2eab5f5"
+    },
+    "experiments/partitioned_coefficients_001/representation.py": {
+      "bytes": 7836,
+      "sha256": "352e7586e56f29ef99f04b7c4293cf0fb7a476c620ce071832afc033655da25e"
+    },
+    "experiments/partitioned_coefficients_001/run.py": {
+      "bytes": 10632,
+      "sha256": "b302740c4d8fed5a3d1d1723aa4759b958acae882d745cda93c7d4b9cd1dd7fc"
+    },
+    "experiments/rc_partition_repair_001/field.py": {
+      "bytes": 6519,
+      "sha256": "eaaf9789db35937f6cc49b4ed973bc49bc86e91458bc890f75e32c52b6fd975e"
+    },
+    "experiments/rc_partition_repair_001/probe.py": {
+      "bytes": 4341,
+      "sha256": "efa1ecb6e7eaae29045c113c6a49d04c1367a98edb413794bddd2f6125246b7e"
+    },
+    "experiments/rc_partition_repair_001/response.c": {
+      "bytes": 3953,
+      "sha256": "8721989f871a3b8a7e83bda300ef33cee4feebbc56461fde4d52fc18e55dbf5f"
+    },
+    "experiments/rc_partition_repair_001/run001/forced2/response.so": {
+      "bytes": 15664,
+      "sha256": "94235a63711b141d8e210df8634c728098439d0281d7e938cc1ef8bc612edd36"
+    },
+    "experiments/rc_partition_repair_001/run001/forced5/response.so": {
+      "bytes": 15664,
+      "sha256": "028cd51491424f8d2aba879d328c861ef17f49f78eb9134ed518522e42d3718a"
+    },
+    "experiments/rc_partition_repair_001/run001/registration.json": {
+      "bytes": 12234,
+      "sha256": "641afa1134a819f890488a1466cf81cf6c99dbd0af2fd13babeb4eea71663e70"
+    },
+    "experiments/rc_remainder_bounds_001/check.py": {
+      "bytes": 6363,
+      "sha256": "777f8d9d06dc9ebf27b412979e6af6dd5d4c9af0f31f01e55ce4e0d25815c981"
+    },
+    "experiments/rc_sensitivity_basis_001/basis.py": {
+      "bytes": 3178,
+      "sha256": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587"
+    },
+    "experiments/rc_sensitivity_basis_001/full001/registration.json": {
+      "bytes": 37889,
+      "sha256": "a216df29cd2d76d2339e0032105c3dd3277e9b71daf9fa0092fcd1fa9ca7e50a"
+    },
+    "experiments/rc_sensitivity_basis_001/full001/response_taylor2/response.so": {
+      "bytes": 15656,
+      "sha256": "6680c7e9256b369253bf0a50ce323cf55bb9ccc0c40b8d3d184023b831ea789a"
+    },
+    "experiments/response_basis_attribution_001/basis.py": {
+      "bytes": 5514,
+      "sha256": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d"
+    },
+    "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+      "bytes": 5204,
+      "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+    },
+    "experiments/structured_joint_001/joint.py": {
+      "bytes": 4959,
+      "sha256": "fde746d37a61a37911a9ce482e7a0f7a4cc7281188f0a5cc96ce0992cc31403e"
+    },
+    "experiments/structured_joint_001/qualify.py": {
+      "bytes": 14275,
+      "sha256": "26db13fc11ca958433f54e41881d442e2fe45887bed94b9391423e3470d8dda1"
+    },
+    "experiments/symbolic_fixed_budget_001/README.md": {
+      "bytes": 735,
+      "sha256": "32b6e209fb1c062f47fd3b396db2170e02993b50168bc1bb48532c789cd48887"
+    },
+    "experiments/symbolic_fixed_budget_001/check.py": {
+      "bytes": 7031,
+      "sha256": "50853b4f356889f0f87e5b594928ebb4f084e9887607c6006d5174d26243b04c"
+    },
+    "experiments/uncertainty_weak_stimulus_001/diagnostics.py": {
+      "bytes": 10034,
+      "sha256": "28c5142e7c379e36898e962349cb23ff75ebedcf6fb8f80bcef7cbba9fbd36e8"
+    },
+    "provenance/hysteresis_sensitivity_basis_001/result.json": {
+      "bytes": 1538972,
+      "sha256": "e437234591f1c6ad1f777ec0b7682db92e6163330ad5a9d496baa298ada2ed19"
+    },
+    "provenance/rc_partition_repair_001/receipt.json": {
+      "bytes": 6328,
+      "sha256": "12a31b9692bab50c0bbe095029e384da0138ab76e40a0fd9d21494b56edf7631"
+    },
+    "provenance/rc_partition_repair_001/result.json": {
+      "bytes": 1187269,
+      "sha256": "9f009032a09f715875652bb5e0e8501061992b128b50dac784218a3ba085b79b"
+    },
+    "provenance/rc_sensitivity_basis_001/full001_registration.json": {
+      "bytes": 37889,
+      "sha256": "a216df29cd2d76d2339e0032105c3dd3277e9b71daf9fa0092fcd1fa9ca7e50a"
+    },
+    "provenance/symbolic_fixed_budget_001/README.md": {
+      "bytes": 7751,
+      "sha256": "6cc06f66cdeee44a807967948ec8947254d5d420276be24aea70ecd4625f13d3"
+    },
+    "provenance/symbolic_fixed_budget_001/b1_review_r1.json": {
+      "bytes": 7616,
+      "sha256": "1452a06835ac4b3c1019b2bb9927ae1ea982629da0600b9c082b686aa94e527b"
+    },
+    "provenance/symbolic_fixed_budget_001/check.json": {
+      "bytes": 18054,
+      "sha256": "c289c36174a6babf42555c839fd7474152962e438243ef4edc9781eb59888546"
+    },
+    "provenance/symbolic_fixed_budget_001/j1_review_r1.json": {
+      "bytes": 5348,
+      "sha256": "cfa27d243cd3f64eecb9b016ac0c1e6d624eb296de5e3c4c12921f169b6dcb1b"
+    },
+    "provenance/symbolic_fixed_budget_001/k1_review_r1.json": {
+      "bytes": 6448,
+      "sha256": "ad4260fdcaea0fb9946b7130997f4de0b645b3529b922203036d6d52fdfc1bf0"
+    },
+    "provenance/symbolic_fixed_budget_001/versions/check_before_registration_anchor.json": {
+      "bytes": 17200,
+      "sha256": "e69662bf935d65d358448d59f59c753819dcb958a580a069a27a068ef0714fa7"
+    },
+    "provenance/symbolic_fixed_budget_001/versions/check_before_registration_anchor.py": {
+      "bytes": 6677,
+      "sha256": "49a878b69197d375ff3bb6b2f6b89020abde6e872ea5baf770a14cd1d6c4b61a"
+    },
+    "specifications/evidence_feedback_001/protocol.py": {
+      "bytes": 8985,
+      "sha256": "a3fe6a42a3502372d28e9fbba95f790ac0726484e2903aea02a2ca95f022b494"
+    },
+    "specifications/rc_partition_repair_001/P4.md": {
+      "bytes": 3901,
+      "sha256": "eac58b980a2c4e7d7e39651ebdfef17e1248e6f334c81ed22ee9d7cbe8a0df37"
+    },
+    "specifications/symbolic_fixed_budget_001/B1.md": {
+      "bytes": 4938,
+      "sha256": "1a1a8ecc24a873f0db936352286fbe045eb8d80d20e87c069de14981257b1ace"
+    },
+    "specifications/symbolic_fixed_budget_001/J1.md": {
+      "bytes": 4591,
+      "sha256": "dd446280a8b747f128af224054da0529a8dbb616c300c2623b1b82d229477dbc"
+    },
+    "specifications/symbolic_fixed_budget_001/K1.md": {
+      "bytes": 4009,
+      "sha256": "21c354d286bb7c974d6ee5c304cd97de627579b81099588287b3cbc4f23c8d90"
+    },
+    "specifications/symbolic_fixed_budget_001/README.md": {
+      "bytes": 2061,
+      "sha256": "0c9bbafa8022c813324969d52c2d723fbf1c34c23dd78442c9f99783195cdb5b"
+    }
+  },
+  "administrative_note": "Root metadata was updated during this review; prior proof-review README/PROJECT_STATE bindings were checked against the base git revision, and their current symbolic reassessment additions were inspected. Current root files and final substantive checker/report/proof artifacts are bound here. Final receipt administration follows; later administrative links do not extend scientific acceptance.",
+  "remaining_obligations": [
+    "Derive and independently review shared-operator candidate closure and complete memory accounting before implementation.",
+    "Keep original support, public prior, chronology, carried state and single ownership of evidence; retain unresolved weak directions and cross terms.",
+    "Set useful physical query tolerances and assess joint score, precision, mean and transport at equal storage without treating sampled passes as uniform certificates.",
+    "Supply justified cumulative approximation and aging/evolution laws for long use; no artificial forgetting or silent support narrowing.",
+    "Qualify full target numerics, all owned objects and peak workspace separately; present replay software is not firmware-ready."
+  ]
+}
