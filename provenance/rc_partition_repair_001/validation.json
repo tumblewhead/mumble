@@ -1,0 +1,67 @@
+{
+  "status": "passed_focused_exploratory_study_no_promotion",
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.rc_partition_repair_001.test_field -v",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.rc_partition_repair_001.run --out experiments/rc_partition_repair_001/run001",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.rc_partition_repair_001.probe --run experiments/rc_partition_repair_001/run001 --out provenance/rc_partition_repair_001/probe.json",
+    "python3 -B -m experiments.rc_partition_repair_001.summarize --run experiments/rc_partition_repair_001/run001 --out provenance/rc_partition_repair_001/result.json",
+    "python3 -B -m experiments.architecture_reuse_001.gate"
+  ],
+  "targeted_tests_passed": 5,
+  "architecture_gate": {
+    "status": "reviewed_bindings_match",
+    "files": 55
+  },
+  "prior_joint_refit_substantive_bindings_match": 11,
+  "reviews": {
+    "p4_review_r1.json": {
+      "status": "matched",
+      "count": 11,
+      "root_context_verified_at_base_revision": 2,
+      "identity": {
+        "bytes": 11331,
+        "sha256": "0749d9a931791ae2fa3b00df2c54b5613a86e32631a8d4cc97ee2607fc3d79c8"
+      }
+    },
+    "implementation_review_r1.json": {
+      "status": "matched",
+      "count": 25,
+      "root_context_verified_at_base_revision": 2,
+      "identity": {
+        "bytes": 13838,
+        "sha256": "2157f3fbcd19c136554b58caddf4ad74c41c857698626ff9fcc4bc0f061df3b7"
+      }
+    },
+    "results_review_r1.json": {
+      "status": "matched",
+      "count": 17,
+      "root_context_verified_at_base_revision": 0,
+      "identity": {
+        "bytes": 7043,
+        "sha256": "9798dcfb97892e05b0b328a458e1c2d84bd2ab424b62898c033dbaa5be166d1b"
+      }
+    },
+    "results_report_review_r1.json": {
+      "status": "matched",
+      "count": 5,
+      "root_context_verified_at_base_revision": 0,
+      "identity": {
+        "bytes": 2063,
+        "sha256": "68d682196ab0501c14319dad33a1882d2dedcf27400bd64e8f9004c4d22a22df"
+      }
+    }
+  },
+  "reproduction": {
+    "cases": 6,
+    "selected_fits_exact": 42,
+    "attempts_exact": 84,
+    "QR_readouts_exact": 42,
+    "unchanged_controls_exact": 24,
+    "snapshot_arrays_exact": 72,
+    "new_binaries_hash_exact": 2,
+    "probe_records_exact": 36,
+    "compact_same_run_reextraction_exact": true,
+    "independent_probe_convolution_max_defect": 1.59e-14
+  },
+  "limits": "Local finite stationary agreement, not coverage/full-support/lifetime/target qualification; full-hour direct rest unresolved, active regressions and forced/H off-centre issues retained"
+}

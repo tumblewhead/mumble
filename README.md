@@ -264,6 +264,16 @@ factor/partial subtotal stay 4760/5168 B; no production promotion or lifetime
 coverage claim follows. Next: focused RC rest/large-offset representation work
 and a useful locality/remainder contract.
 
+The [free/forced RC partition](provenance/rc_partition_repair_001/README.md)
+repairs the observed rest discrepancy: degree-five free response with degree-two
+Taylor forced response reduces the short-rest pulse forecast difference from
+462 to 3.94 microvolts versus direct. All six selected candidate anchors pass the
+measured local precision test; the one-hour direct rest fit remains unresolved.
+The factor/partial subtotal is 7568/8120 B. Active forecast regressions and
+large-offset forced-response errors remain explicit. P4, implementation and
+results have independent reviews; all42 fits reproduce exactly. No production
+promotion. Next: compact forced-response fidelity while retaining central matching.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

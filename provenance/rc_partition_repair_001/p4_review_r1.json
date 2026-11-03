@@ -1,0 +1,113 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/rc_partition_repair_001/P4.md",
+  "review_round": 1,
+  "reviewer": "independent fresh-context agent /root/rc_partition_p4_review",
+  "date": "2026-11-02",
+  "base_revision": "8ebf9b4733e9ee103e50e82d8c8208111f559476",
+  "branch": "experiment/rc-free-forced-repair-001",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "required_revisions": [],
+  "scope": "Individual P4 mathematical review and protocol compatibility. Reviewed final premise clarification. No implementation edits or experiment runs; numerical checks below supplement the algebra and do not establish native behavior.",
+  "findings": [
+    {
+      "id": "P4-R1-01",
+      "status": "verified",
+      "section": "Free/forced decomposition and origin",
+      "finding": "Induction establishes v=bF+Ru with F0=1,u0=0 for every ordered finite prefix, including zero intervals and known independent thermal multipliers. Identically zero current from that retained origin makes u identically zero as a function of tau and all its shape derivatives zero. A later rest only multiplies carried u by decay; it does not erase active-history forced state or make its sensitivities zero."
+    },
+    {
+      "id": "P4-R1-02",
+      "status": "verified",
+      "section": "One joint likelihood",
+      "finding": "Independent polynomial degrees change the lifted feature count, not evidence ownership. A common QR preserves the squared norm for every lifted query and thus every free/forced/H/OCV cross product. This is exactness of compression of the approximate voltage model, not exactness to physical voltage. Prior is appended once; independent covariance blocks are not justified."
+    },
+    {
+      "id": "P4-R1-03",
+      "status": "verified",
+      "section": "Forced Taylor dependency",
+      "finding": "P1 applies with effective j=f_R I and d=dt/(tau f_tau) because both thermal multipliers are independent of learned shape/amplitudes. Product-rule derivatives are pre-interval states. The coefficient map [u+u_tt/4,u_t,u_tt/4] follows from T2=2t^2-1 and reproduces value, slope and curvature at the fixed centre. It does not supply a free-response collocation derivative envelope."
+    },
+    {
+      "id": "P4-R1-04",
+      "status": "verified",
+      "section": "Zero-origin rest equivalences",
+      "finding": "At zero-origin current all forced coefficient blocks are zero; the identical public six free nodes give identical degree-five free polynomials. H5 remains F=1,u=0 with zero derivatives, and the H7 total-degree basis contains the constant function exactly. With identical remaining model/prior/support, free5/forced2 TaylorH, fullRC5 TaylorH and R5/H7 therefore have the same objective in exact arithmetic. Constant-space projection and different QR dimensions can introduce floating differences; no fit convergence or bitwise equivalence is promised."
+    },
+    {
+      "id": "P4-R1-05",
+      "status": "verified",
+      "section": "Defect identities and transport",
+      "finding": "At fixed independent b,R,t, the amplitude and slope defect identities are direct linearity/differentiation. Positive R permits the stated triangle bounds. Physical solver coordinates must add full chains, including dependent initial states where applicable. Compensation in a fit or endpoint transport does not invalidate an underlying likelihood defect; protocol appropriately reports both likelihood and transport diagnostics."
+    },
+    {
+      "id": "P4-R1-06",
+      "status": "verified",
+      "section": "Resource arithmetic",
+      "finding": "Four scalar features plus twelve H features give W=16+3(p+1)+3(q+1). W is 34,37,43,52 for the stated pairs; packed double upper triangles require 4760,5624,7568,11024 bytes. These are factor-only counts. Padded state, dense NumPy roots, tables, scratch, solver/prior and platform costs remain separate; no full-device memory or CPU claim follows."
+    },
+    {
+      "id": "P4-R1-07",
+      "status": "verified",
+      "section": "Support and uncertainty scope",
+      "finding": "Protocol fixes original public centres/support, chronology, starts and solver budget; it preserves unresolved direct rest and uses pointwise M1/P3 metrics without misapplying the all-Taylor P2/P3a envelope to the collocation free response. Finite public probes cannot certify global support fidelity, calibrated coverage, aging, lifetime fidelity or deployment."
+    },
+    {
+      "id": "P4-R1-08",
+      "status": "resolved_before_acceptance",
+      "section": "Explicit well-defined premises",
+      "finding": "Reviewer requested explicit positive finite thermal time multipliers and observation sigma. Parent added them before acceptance; final P4 bytes below were reread. This is a premise clarification, not a substantive derivation change. No proof source was edited by this reviewer."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "command": "python3 -B /tmp/rc_p4_review_checks.py",
+    "results": {
+      "seed": 40401,
+      "intervals": 72,
+      "decomposition_max_abs": 1.3877787807814457e-17,
+      "forced_slope_fd_abs": 2.9548630209319526e-10,
+      "forced_curvature_fd_abs": 5.980947292982819e-09,
+      "taylor_chebyshev_max_abs": 2.7755575615628914e-17,
+      "zero_origin_forced_and_derivatives": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "later_rest_forced": -0.004380948207022968,
+      "rest_free5_forced2_vs_full5_abs": 0.0,
+      "H7_constant_projection_max_abs": 1.5543122344752192e-15,
+      "joint_incremental_QR_Gram_max_abs": 1.7053025658242404e-13,
+      "cross_block_nonzero_norm": 57.501534839140966,
+      "packed_factor_bytes": {
+        "2/2": 4760,
+        "3/2": 5624,
+        "5/2": 7568,
+        "5/5": 11024
+      }
+    },
+    "source_sha256": "21bcf6019be983c8a8cd2509bd7811450f136a79a40a5022f73cb600a0dd6946",
+    "source": "import json\nimport numpy as np\nfrom numpy.polynomial.chebyshev import chebvander,chebval\nrng=np.random.default_rng(40401)\ndt=np.r_[0.,rng.uniform(.001,2.,71)]\ncur=rng.uniform(-.3,.3,len(dt));fr=rng.uniform(.7,1.4,len(dt));ft=rng.uniform(.6,1.5,len(dt))\ntau=2.3;b=-.043;R=.31\nF=1.;u=ut=utt=0.;v=b;max_dec=0.\nfor dtime,I,r,t in zip(dt,cur,fr,ft):\n d=dtime/(tau*t);E=np.exp(-d);E1=d*E;E2=(d*d-d)*E;j=r*I\n v=E*v+(1-E)*R*j\n F,u,ut,utt=E*F,E*u+(1-E)*j,E*ut+E1*(u-j),E*utt+2*E1*ut+E2*(u-j)\n max_dec=max(max_dec,abs(v-b*F-R*u))\ndef forced(t):\n z=0.\n for dtime,I,r,tm in zip(dt,cur,fr,ft):\n  E=np.exp(-dtime/(tau*np.exp(t)*tm));z=E*z+(1-E)*r*I\n return z\nh=1e-4\nslope_error=abs((forced(h)-forced(-h))/(2*h)-ut)\ncurvature_error=abs((forced(h)-2*forced(0)+forced(-h))/(h*h)-utt)\nassert max_dec<1e-15 and slope_error<1e-8 and curvature_error<1e-7\ncoeff=np.array([u+utt/4,ut,utt/4]);ts=np.linspace(-1,1,19)\ntaylor_error=np.max(abs(chebval(ts,coeff)-(u+ut*ts+utt*ts*ts/2)))\nassert taylor_error<1e-15\n# Zero-origin forced responses and both derivatives remain zero; a later rest does not reset them.\nz=z1=z2=0.\nfor dtime,tm in zip(dt,ft):\n d=dtime/(tau*tm);E=np.exp(-d);E1=d*E;E2=(d*d-d)*E\n z,z1,z2=E*z,E*z1+E1*z,E*z2+2*E1*z1+E2*z\nassert z==z1==z2==0.\nlater_rest_forced=np.exp(-1/tau)*u\nassert abs(later_rest_forced)>1e-5\n# At zero-origin rest free degree-five rows evaluate identically regardless of stored zero forced degree.\nnodes=np.cos(np.pi*(np.arange(6)+.5)/6);V=chebvander(nodes,5)\ndose=float(np.sum(dt/ft)/tau);fc=np.linalg.solve(V,np.exp(-dose*np.exp(-nodes)))\nrest_diff=max(abs(b*chebval(t,fc)+R*chebval(t,[0,0,0])-(b*chebval(t,fc)+R*chebval(t,np.zeros(6)))) for t in ts)\nassert rest_diff==0.\n# Constant H free and zero forced functions lie in both Taylor and H7 polynomial spaces.\nn7=np.cos(np.pi*(np.arange(8)+.5)/8);VV=chebvander(n7,7)\npairs=[(i,j) for i in range(8) for j in range(8) if i+j<=7]\nH=np.column_stack([np.outer(VV[:,i],VV[:,j]).ravel() for i,j in pairs])\nhc=np.linalg.lstsq(H,np.ones(64),rcond=None)[0];hc0=np.zeros(len(pairs));hc0[0]=1\nhconst_error=float(np.max(abs(hc-hc0)));assert hconst_error<1e-14\n# One joint QR retains cross-family inner products, including underdetermined and chunked prefixes.\nmax_gram=0.;cross_norm=0.\nfor p,q in [(2,2),(3,2),(5,2),(5,5)]:\n W=16+3*(p+1)+3*(q+1);rows=rng.normal(size=(2*W+3,W));root=np.empty((0,W))\n for start in range(0,len(rows),7):root=np.linalg.qr(np.vstack([root,rows[start:start+7]]),mode='r')\n max_gram=max(max_gram,float(np.max(abs(root.T@root-rows.T@rows))))\n cross_norm=max(cross_norm,float(np.linalg.norm(rows[:,:p+1].T@rows[:,p+1:p+q+2])))\nassert max_gram<1e-12 and cross_norm>0\nstorage={f'{p}/{q}':4*(16+3*(p+1)+3*(q+1))*(17+3*(p+1)+3*(q+1)) for p,q in [(2,2),(3,2),(5,2),(5,5)]}\nassert list(storage.values())==[4760,5624,7568,11024]\nprint(json.dumps(dict(seed=40401,intervals=len(dt),decomposition_max_abs=max_dec,forced_slope_fd_abs=slope_error,forced_curvature_fd_abs=curvature_error,taylor_chebyshev_max_abs=float(taylor_error),zero_origin_forced_and_derivatives=[z,z1,z2],later_rest_forced=float(later_rest_forced),rest_free5_forced2_vs_full5_abs=rest_diff,H7_constant_projection_max_abs=hconst_error,joint_incremental_QR_Gram_max_abs=max_gram,cross_block_nonzero_norm=cross_norm,packed_factor_bytes=storage),indent=2))\n",
+    "limits": "Finite floating checks are neither outward-rounded certificates nor tests of the new native implementation. Analytic review supplies the conditional exact-arithmetic argument."
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "b87dcdb2b85b4169c15c89a1dc432bcc46de52c5bf8f0b16ea0c38f3109f2a42",
+    "PROJECT_STATE.json": "ee09db43c17ad08e15e2af6106399d278c2f663f63ea553612d6d67a558c752f",
+    "specifications/rc_partition_repair_001/README.md": "518702e8a38970a5320c8e5dc0b158587921e57bae16518e8ea56c61861ee15b",
+    "specifications/rc_partition_repair_001/P4.md": "eac58b980a2c4e7d7e39651ebdfef17e1248e6f334c81ed22ee9d7cbe8a0df37",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "specifications/hysteresis_sensitivity_basis_001/H5.md": "44d41a37a1a0c3224e8365d014c4f53c5b352804a3347425e96ee14d13b09a50",
+    "specifications/joint_precision_attribution_001/M1.md": "47b6b9c8cccd16adbdd837b2c3c6cc528a034f227a8aea736a15abd0125d84f7",
+    "specifications/rc_remainder_bounds_001/P3.md": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32",
+    "provenance/hysteresis_joint_refit_001/README.md": "54d7f05ef474e3421ff62a874a390df7c73bee932fb1e100f57ddf4097115cf3",
+    "experiments/hysteresis_refinement_001/field.py": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+  },
+  "remaining_obligations": [
+    "Review native implementation independently, especially layout routing, shared support, chronological chunking, finite/atomic refusal and complete derivative chains.",
+    "Verify exact unchanged control/source identities and preserve every fit attempt/status; unresolved direct rest cannot qualify fit-to-fit performance.",
+    "Report actual allocations independently from the four factor-only formulas and retain off-centre regressions.",
+    "No proof of uniform collocation error, nonlinear posterior coverage, aging, lifetime fidelity or complete M23 resources is supplied."
+  ]
+}
