@@ -1,0 +1,95 @@
+{
+  "schema": "hysteresis_joint_refit_receipt_v1",
+  "status": "independently_reviewed_and_reproduced_no_promotion",
+  "base_revision": "0f02271233a0eaa1bf9f5a91588486e1cd74b8a1",
+  "branch": "experiment/conditional-architecture-001",
+  "report": "provenance/hysteresis_joint_refit_001/README.md",
+  "result": "provenance/hysteresis_joint_refit_001/result.json",
+  "validation": "provenance/hysteresis_joint_refit_001/validation.json",
+  "reviews": [
+    "provenance/hysteresis_joint_refit_001/implementation_review_r1.json",
+    "provenance/hysteresis_joint_refit_001/results_review_r1.json"
+  ],
+  "review_disposition": "Both accepted with no blocking findings; sources/results/report independently bound. This receipt and mutable root metadata are administrative records.",
+  "bindings": {
+    "specifications/hysteresis_joint_refit_001/README.md": {
+      "bytes": 3277,
+      "sha256": "51f3cef9d5a1ebe3511a3d62902c594c3cd076a3ad5ddada498eb63321f89e1b"
+    },
+    "experiments/hysteresis_joint_refit_001/README.md": {
+      "bytes": 1150,
+      "sha256": "6e51f847e4e97743e99f6465b12b2ca7d622f4c0b5cc1d07fc00685cb633b99c"
+    },
+    "experiments/hysteresis_joint_refit_001/run.py": {
+      "bytes": 8031,
+      "sha256": "63c428bda8a45ae392d86357ac7bfb19823ed744aad3a4e24f4985c5ee14a1ec"
+    },
+    "experiments/hysteresis_joint_refit_001/readouts.py": {
+      "bytes": 7856,
+      "sha256": "6181d1f3254aa17b8603192e58d97eda4c7534b3ef16a5e82396fd236b65fe69"
+    },
+    "experiments/hysteresis_joint_refit_001/summarize.py": {
+      "bytes": 3305,
+      "sha256": "5ac18a8b9ec73403dfec0d92ced813545297116ca0275e5115fefe6d10dd8845"
+    },
+    "experiments/hysteresis_joint_refit_001/test_refit.py": {
+      "bytes": 4898,
+      "sha256": "ec0c8d59e931b329d46b1896e1d1be8cc0c654145b00bd83d53ace37ef636494"
+    },
+    "provenance/hysteresis_joint_refit_001/README.md": {
+      "bytes": 7058,
+      "sha256": "54d7f05ef474e3421ff62a874a390df7c73bee932fb1e100f57ddf4097115cf3"
+    },
+    "provenance/hysteresis_joint_refit_001/result.json": {
+      "bytes": 862884,
+      "sha256": "32d645e83a9596e1f3e0fb02141aabe2af4b6c1bd7ce8f32223b08b4c52419ba"
+    },
+    "provenance/hysteresis_joint_refit_001/validation.json": {
+      "bytes": 1910,
+      "sha256": "b4986c2d0d75c71b139bf8ef2555e01195d56ce41cf35579918342acdddd2640"
+    },
+    "provenance/hysteresis_joint_refit_001/implementation_review_r1.json": {
+      "bytes": 8696,
+      "sha256": "9a5a9eb9a95d8b188d69293a6d97fc7490abdcb07728967e04035075bec8319c"
+    },
+    "provenance/hysteresis_joint_refit_001/results_review_r1.json": {
+      "bytes": 21824,
+      "sha256": "4a0a25b49d607fbc707b45d73f408cff61fddb4d5ee90daed8089db46b62d98c"
+    }
+  },
+  "metadata_bindings": {
+    "README.md": {
+      "bytes": 110365,
+      "sha256": "b87dcdb2b85b4169c15c89a1dc432bcc46de52c5bf8f0b16ea0c38f3109f2a42"
+    },
+    "PROJECT_STATE.json": {
+      "bytes": 295955,
+      "sha256": "ee09db43c17ad08e15e2af6106399d278c2f663f63ea553612d6d67a558c752f"
+    },
+    "handoff/CONTINUE.json": {
+      "bytes": 2099,
+      "sha256": "cc0e3f9d360ffb9ff9e08c853cad65d40e34d81a23463248136227e1b3da438f"
+    },
+    "handoff/archive/CONTINUE_before_hysteresis_joint_refit.json": {
+      "bytes": 2223,
+      "sha256": "b32853fce2ec3ab8acb95987dc6033ad7d0280bd0edd9157cbaafb53d5c2850e"
+    }
+  },
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.hysteresis_joint_refit_001.test_refit -v",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.hysteresis_joint_refit_001.run --out experiments/hysteresis_joint_refit_001/run001",
+    "python3 -B -m experiments.hysteresis_joint_refit_001.summarize --run experiments/hysteresis_joint_refit_001/run001 --out provenance/hysteresis_joint_refit_001/result.json",
+    "python3 -B -m experiments.architecture_reuse_001.gate"
+  ],
+  "unchanged_controls_exact": 18,
+  "candidate_factor_B": 4760,
+  "candidate_partial_subtotal_B": 5168,
+  "complete_target_resources_qualified": false,
+  "production_changed": false,
+  "solver_changed": false,
+  "kernels_changed": false,
+  "campaign_defaults_changed": false,
+  "mainline_changed": false,
+  "limits": "Local numerical agreement only; unresolved rest, off-centre H and loose global bound remain; no production promotion",
+  "next": "Focused RC rest/large-offset representation and useful locality/remainder contract; retain provisional TaylorH and H7 reference, no silent support narrowing/recentering."
+}

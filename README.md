@@ -253,6 +253,17 @@ while Taylor RC rest failures remain. Off-centre H regressions are preserved.
 H5/H6 and the new study-only kernel have independent reviews; six tests pass.
 Next perform joint refits at unchanged public centres/support before promotion.
 
+The [full joint refits](provenance/hysteresis_joint_refit_001/README.md) now
+confirm the compact Taylor hysteresis improvement with the original centres,
+prior and support. All 18 unchanged fitted controls reproduce exactly. Across
+four active-load cases, candidate Q/SOC shifts relative to direct are at most
+0.058%/0.00160 pp and local width ratios stay within 2.08%/1.16% of one. Direct
+and compressed forecast transport are checked separately. The RC rest defect,
+unresolved one-hour rest reference and off-centre limitations remain. Packed
+factor/partial subtotal stay 4760/5168 B; no production promotion or lifetime
+coverage claim follows. Next: focused RC rest/large-offset representation work
+and a useful locality/remainder contract.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

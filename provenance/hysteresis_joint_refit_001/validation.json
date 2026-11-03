@@ -1,0 +1,56 @@
+{
+  "status": "passed_registered_diagnostic_only",
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.hysteresis_joint_refit_001.test_refit -v",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.hysteresis_joint_refit_001.run --out experiments/hysteresis_joint_refit_001/run001",
+    "python3 -B -m experiments.hysteresis_joint_refit_001.summarize --run experiments/hysteresis_joint_refit_001/run001 --out provenance/hysteresis_joint_refit_001/result.json",
+    "python3 -B -m experiments.architecture_reuse_001.gate"
+  ],
+  "targeted_tests_passed": 5,
+  "architecture_review_gate": {
+    "status": "reviewed_bindings_match",
+    "files": 55
+  },
+  "preceding_study_substantive_bindings": {
+    "matched": 18,
+    "mutable_metadata_excluded": true
+  },
+  "independent_review_checks": {
+    "implementation_review_r1.json": {
+      "status": "all_bound_files_match",
+      "count": 21,
+      "identity": {
+        "bytes": 8696,
+        "sha256": "9a5a9eb9a95d8b188d69293a6d97fc7490abdcb07728967e04035075bec8319c"
+      }
+    },
+    "results_review_r1.json": {
+      "status": "all_bound_files_match",
+      "count": 11,
+      "identity": {
+        "bytes": 21824,
+        "sha256": "4a0a25b49d607fbc707b45d73f408cff61fddb4d5ee90daed8089db46b62d98c"
+      }
+    }
+  },
+  "independent_reproduction": {
+    "cases": 6,
+    "selected_fits_exact": 30,
+    "QR_readouts_exact": 30,
+    "factor_state_arrays_exact": 48,
+    "frozen_controls_exact": 18,
+    "compact_summary_byte_exact": true,
+    "excluded": [
+      "host CPU time",
+      "snapshot path/identity metadata"
+    ]
+  },
+  "fit_statuses": {
+    "selected_converged": 29,
+    "selected_unresolved": 1,
+    "attempt_converged": 56,
+    "attempt_unresolved": 4,
+    "attempt_failed": 0
+  },
+  "limits": "Local numerical agreement only; unresolved rest, off-centre H and loose global bound remain; no production promotion"
+}

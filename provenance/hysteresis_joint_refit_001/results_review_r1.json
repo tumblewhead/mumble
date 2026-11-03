@@ -1,0 +1,458 @@
+{
+  "status": "accepted_for_registered_finite_desktop_diagnostic_only",
+  "reviewer": "independent fresh-context results/reproduction reviewer",
+  "base_revision": "0f02271233a0eaa1bf9f5a91588486e1cd74b8a1",
+  "scope": [
+    "Registered six-case five-arm study, all 60 attempts, 30 selected fits and QR readouts",
+    "Independent complete replay with one OpenBLAS thread",
+    "Recursive per-case equality, frozen controls, factor/state array equality, compact-summary byte reproduction",
+    "Report numerical claims, convergence/support gating, preserved rest and previous off-centre limitations"
+  ],
+  "findings": [],
+  "blocking_findings": 0,
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.hysteresis_joint_refit_001.run --out experiments/hysteresis_joint_refit_001/review001",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.hysteresis_joint_refit_001.test_refit -v",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.hysteresis_joint_refit_001.summarize --run experiments/hysteresis_joint_refit_001/run001 --out /tmp/hysteresis_joint_refit_results_review_summary.json",
+    "Independent Python JSON recursive exact comparison and numpy.array_equal on every saved factor/state array; see review001/comparison.json"
+  ],
+  "verification": {
+    "tests_passed": 5,
+    "registered_cases_completed": 6,
+    "registration_bytes_identical": true,
+    "recursive_comparison": {
+      "counts": {
+        "leaves_exact": 23714,
+        "selected_fits_exact": 30,
+        "QR_readouts_exact": 30,
+        "frozen_controls_exact": 18,
+        "factor_arrays_exact": 48
+      },
+      "differences": [],
+      "excluded": [
+        "pilot001_rest.json/fits/host_cpu_s",
+        "pilot001_rest.json/snapshot",
+        "pilot001_multiscale.json/fits/host_cpu_s",
+        "pilot001_multiscale.json/snapshot",
+        "pilot001_embedded.json/fits/host_cpu_s",
+        "pilot001_embedded.json/snapshot",
+        "full001_rest.json/fits/host_cpu_s",
+        "full001_rest.json/snapshot",
+        "full001_multiscale.json/fits/host_cpu_s",
+        "full001_multiscale.json/snapshot",
+        "full001_embedded.json/fits/host_cpu_s",
+        "full001_embedded.json/snapshot"
+      ]
+    },
+    "compact_summary_bytes_identical": true,
+    "regenerated_summary_identity": {
+      "sha256": "32d645e83a9596e1f3e0fb02141aabe2af4b6c1bd7ce8f32223b08b4c52419ba",
+      "bytes": 862884
+    },
+    "fit_statuses": {
+      "converged": 29,
+      "unresolved": 1
+    },
+    "attempt_statuses": {
+      "converged": 56,
+      "unresolved": 4,
+      "failed": 0
+    },
+    "unresolved_reference_gate": "full001_rest direct is unresolved with no_descent; all five QR comparisons are unresolved_candidate_or_reference, with no forecast rows or qualified physical fit differences.",
+    "support": "Original fixed centres and public box/path gate retained; all selected fits remain inside original rate box; minimum recorded box margin 0.0617341135144196. No failed attempt or unsupported forecast was omitted in these completed cases.",
+    "truth_and_evidence": "Runner discards fixture truth outputs; frozen observation SHA256 and original factors/states are checked. Public starts and prior are unchanged; QR diagnostics are read-only and never update fits.",
+    "report_claims": "Checked all table entries and reported extrema against result.json, including own-anchor versus direct-fit width distinction, both forecast transport paths, resource subtotal scopes and nonuniform scalar improvement."
+  },
+  "limitations_preserved": [
+    "29/30 selected fits converge numerically, not a physical accuracy or coverage statement.",
+    "Taylor-H combined sufficient precision test passes four active fits but is inconclusive at both rest fits; rest pulse RMS discrepancy remains 0.4619936751031196 mV.",
+    "Short multiscale absolute Q discrepancy increases from 0.003271725404214023% to 0.027249605901527817%; report explicitly disclaims universal scalar dominance.",
+    "Earlier off-centre Taylor-H regressions were not rerun; source report/probe are bound and retained explicitly. Local fitted anchors do not qualify full support.",
+    "H6 conservative active-anchor epsilon upper bounds remain approximately 1.39e3 to 6.66e4; measured local passes do not supply a usable uniform guarantee.",
+    "Compact factor 4760 B and partial subtotal 5168 B exclude full prior/solver/workspace/platform resources; up to 5040000 B observations remain in desktop replay.",
+    "No proof of global optima, calibrated coverage, truth accuracy, aging, indefinite history, target resources or production promotion."
+  ],
+  "reviewed_bindings": {
+    "AGENTS.md": {
+      "sha256": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+      "bytes": 2500
+    },
+    "specifications/hysteresis_joint_refit_001/README.md": {
+      "sha256": "51f3cef9d5a1ebe3511a3d62902c594c3cd076a3ad5ddada498eb63321f89e1b",
+      "bytes": 3277
+    },
+    "experiments/hysteresis_joint_refit_001/README.md": {
+      "sha256": "6e51f847e4e97743e99f6465b12b2ca7d622f4c0b5cc1d07fc00685cb633b99c",
+      "bytes": 1150
+    },
+    "experiments/hysteresis_joint_refit_001/run.py": {
+      "sha256": "63c428bda8a45ae392d86357ac7bfb19823ed744aad3a4e24f4985c5ee14a1ec",
+      "bytes": 8031
+    },
+    "experiments/hysteresis_joint_refit_001/readouts.py": {
+      "sha256": "6181d1f3254aa17b8603192e58d97eda4c7534b3ef16a5e82396fd236b65fe69",
+      "bytes": 7856
+    },
+    "experiments/hysteresis_joint_refit_001/summarize.py": {
+      "sha256": "5ac18a8b9ec73403dfec0d92ced813545297116ca0275e5115fefe6d10dd8845",
+      "bytes": 3305
+    },
+    "experiments/hysteresis_joint_refit_001/test_refit.py": {
+      "sha256": "ec0c8d59e931b329d46b1896e1d1be8cc0c654145b00bd83d53ace37ef636494",
+      "bytes": 4898
+    },
+    "provenance/hysteresis_joint_refit_001/README.md": {
+      "sha256": "54d7f05ef474e3421ff62a874a390df7c73bee932fb1e100f57ddf4097115cf3",
+      "bytes": 7058
+    },
+    "provenance/hysteresis_joint_refit_001/result.json": {
+      "sha256": "32d645e83a9596e1f3e0fb02141aabe2af4b6c1bd7ce8f32223b08b4c52419ba",
+      "bytes": 862884
+    },
+    "provenance/hysteresis_sensitivity_basis_001/README.md": {
+      "sha256": "668c95ea267fc210bda60dbb891fa86fec39d9617df5ad05cb3318e69e41179d",
+      "bytes": 7759
+    },
+    "provenance/hysteresis_sensitivity_basis_001/probe.json": {
+      "sha256": "aa802ae43a50bc8f087ba7beeecbe9d0a38cd99141968d2ffe4b992d97f93fcd",
+      "bytes": 63598
+    }
+  },
+  "run_source_bindings": {
+    "revision": "0f02271233a0eaa1bf9f5a91588486e1cd74b8a1",
+    "python": "3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728]",
+    "numpy": "2.5.2",
+    "sources": {
+      "experiments/conditional_architecture_001/conditional.py": {
+        "bytes": 3493,
+        "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635"
+      },
+      "experiments/conditional_architecture_001/run.py": {
+        "bytes": 8783,
+        "sha256": "4d15a585ed674671dc5410d5e612219101823930414bc1ddc53cb0ef3353f0b2"
+      },
+      "experiments/field_tangent_native_001/kernel.c": {
+        "bytes": 11098,
+        "sha256": "d157b928ab86048fd7d2dc786c9a039a017ca8659bbd1b620f0b5a73e2baba5a"
+      },
+      "experiments/field_tangent_native_001/kernel.h": {
+        "bytes": 2183,
+        "sha256": "a96e76098cb9d60001a9fa82b170521e989e2ecfa03e41b47b84d944f46c29d2"
+      },
+      "experiments/field_tangent_native_001/native.py": {
+        "bytes": 8668,
+        "sha256": "ee446861ad6bef1e7e760b358de24dd45098e5b46cb616312149a42c6e7a49ad"
+      },
+      "experiments/foster_c_baseline_001/reference.py": {
+        "bytes": 3562,
+        "sha256": "9421252aee1bb7776e125904faadef6483579759041bdfd819b7e8dfa53ea438"
+      },
+      "experiments/foster_campaign_001/backend.py": {
+        "bytes": 11041,
+        "sha256": "289b910b26a724a42389740d9cba4a273b4bfb80458fd34979dd0274dd63a453"
+      },
+      "experiments/foster_campaign_001/charger.py": {
+        "bytes": 8547,
+        "sha256": "519963daab9e01c7ad7c2d82c4863bdcbfb9afa7f9ad4c999e931d2148d95e6f"
+      },
+      "experiments/foster_campaign_001/compact.py": {
+        "bytes": 23726,
+        "sha256": "a14eb2b4fee9854b981f31efc101231b78f381ecf1e250477fb11833f07c77ec"
+      },
+      "experiments/foster_campaign_001/coordinates.py": {
+        "bytes": 791,
+        "sha256": "640b63952c85292a0aaeec8692e912a9718fd45a7fabaad09dad448036f6ad08"
+      },
+      "experiments/foster_campaign_001/evidence.py": {
+        "bytes": 1404,
+        "sha256": "f16d65ad56d1628f53f3cbbaf1ff95e97cef234af371a7b95cac59ad4b6c1f8a"
+      },
+      "experiments/foster_campaign_001/execution.py": {
+        "bytes": 3695,
+        "sha256": "7e8813c8653836c5baf8334d054f9b72df1d33ab0ed09a855a51ab714a22110f"
+      },
+      "experiments/foster_campaign_001/field_backend.py": {
+        "bytes": 8781,
+        "sha256": "bf0ad49113038da0071ed0c6eb2571633fd09e989ac780fa0d166b31bbccc140"
+      },
+      "experiments/foster_campaign_001/h7_backend.py": {
+        "bytes": 1844,
+        "sha256": "4b10819ea6fe742440a2fa66ef3ed208318db4a3b066332e34bed2eb16ead1bb"
+      },
+      "experiments/foster_campaign_001/prepare.py": {
+        "bytes": 2984,
+        "sha256": "a7c667be79f9fa358ea8b09c2aa35a39cdb0aa9821d0cafb77f1a99c6e6ee1e8"
+      },
+      "experiments/foster_campaign_001/rate.py": {
+        "bytes": 764,
+        "sha256": "f3ab347a2dc73b008329ffff6443e51fbb4fd3613473fa4eb0416ae39b2e6813"
+      },
+      "experiments/foster_campaign_001/run.py": {
+        "bytes": 25557,
+        "sha256": "1d6f2801ace7c8686313e8cb10d6244d3742ea1e32f5fd0328fd1b29e637ac5e"
+      },
+      "experiments/foster_campaign_001/stimulus.py": {
+        "bytes": 8426,
+        "sha256": "f9b8bdaf807f1b398827efdbf0bcf401d96ca430d28b9f170d6f4759e931acf3"
+      },
+      "experiments/foster_campaign_001/tangent_backend.py": {
+        "bytes": 18216,
+        "sha256": "6a0c01cc9e2b32686582e7a58b0e2fa3a09e7951466945537917a6d58703dad7"
+      },
+      "experiments/foster_campaign_001/telemetry.py": {
+        "bytes": 1847,
+        "sha256": "eab155aad1f9d95155cc8039a654f2d4d6216b30a790f130d420b5531f56327d"
+      },
+      "experiments/foster_campaign_001/workload.py": {
+        "bytes": 5926,
+        "sha256": "3a3e2a7d884cd53fcd90ff90d7a3ab528efd809fa7d1b66e84d784b1736ef9ed"
+      },
+      "experiments/foster_feedback_001/estimator.py": {
+        "bytes": 6724,
+        "sha256": "2b3abd0c66cd34139b769fb3de55fcb3c7c1939d030b0d03730ce6e5be160e41"
+      },
+      "experiments/foster_feedback_001/history.py": {
+        "bytes": 3265,
+        "sha256": "ed98c1aac0ec8fbe59c46470adb856450498e19dccbfd5ab12e71e987341b0f4"
+      },
+      "experiments/foster_feedback_001/plant.py": {
+        "bytes": 2165,
+        "sha256": "7a68ed253b19c83a6ca8ea51a3d039c5bd88ae742742a2741c975d25d3751c54"
+      },
+      "experiments/foster_feedback_001/qualify.py": {
+        "bytes": 5368,
+        "sha256": "d932f76270caf415604de1e68ce0a154f934cebdec29bf4fa4e6594359681fb2"
+      },
+      "experiments/foster_feedback_001/run.py": {
+        "bytes": 12125,
+        "sha256": "7df5ef8359f9cc7a0642864ca462f5e76c7df3d625a321817aed064c25d99844"
+      },
+      "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+        "bytes": 4357,
+        "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976"
+      },
+      "experiments/h7_history_quality_001/history.py": {
+        "bytes": 14227,
+        "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+      },
+      "experiments/hysteresis_joint_refit_001/readouts.py": {
+        "bytes": 7856,
+        "sha256": "6181d1f3254aa17b8603192e58d97eda4c7534b3ef16a5e82396fd236b65fe69"
+      },
+      "experiments/hysteresis_joint_refit_001/run.py": {
+        "bytes": 8031,
+        "sha256": "63c428bda8a45ae392d86357ac7bfb19823ed744aad3a4e24f4985c5ee14a1ec"
+      },
+      "experiments/hysteresis_mixed_completion_001/basis.py": {
+        "bytes": 1121,
+        "sha256": "8cc4ebc73cd5ed3802408e376c9e71edc2761a932bba757a51004440fc5679a7"
+      },
+      "experiments/hysteresis_mixed_completion_001/run.py": {
+        "bytes": 15438,
+        "sha256": "31ec9bfd5981fcbf3f4d0a6e3760183114d74e48be174f5075527231f9291bf8"
+      },
+      "experiments/hysteresis_refinement_001/field.py": {
+        "bytes": 8687,
+        "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+      },
+      "experiments/hysteresis_refinement_001/response.c": {
+        "bytes": 2282,
+        "sha256": "6acc08ad9d9ede01274f3d56574697904905b70048ea4d62055edeb7051ba8a8"
+      },
+      "experiments/hysteresis_sensitivity_basis_001/basis.py": {
+        "bytes": 3441,
+        "sha256": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca"
+      },
+      "experiments/hysteresis_sensitivity_basis_001/reference.py": {
+        "bytes": 1903,
+        "sha256": "4c1e3eb7e6de3dd66be7452d2c8c6e2d830e9d19ca39b9af092c5a12fe55d35a"
+      },
+      "experiments/hysteresis_sensitivity_basis_001/run.py": {
+        "bytes": 11417,
+        "sha256": "0f1f657fec8d5494cdf52ddb8ee6c365b28380c027eb64aadaa7432302f47eea"
+      },
+      "experiments/joint_precision_attribution_001/metrics.py": {
+        "bytes": 7177,
+        "sha256": "1be2830df88df5d0d08f3f580c848deeb80a50e4c7dd80eb2aaddb7f4f8c17a0"
+      },
+      "experiments/joint_rate_history_001/field.py": {
+        "bytes": 6989,
+        "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9"
+      },
+      "experiments/joint_rate_history_001/probe.c": {
+        "bytes": 2273,
+        "sha256": "cf8276c7485aba4675c106643692d14cd28c0a85806a63dcdd1524505d20cde3"
+      },
+      "experiments/partitioned_battery_closure_001/conditional.py": {
+        "bytes": 4676,
+        "sha256": "9e9991a7399029a7c622d4b77da1f8d70687ada87f8c6045cb258bbfc2eab5f5"
+      },
+      "experiments/partitioned_coefficients_001/representation.py": {
+        "bytes": 7836,
+        "sha256": "352e7586e56f29ef99f04b7c4293cf0fb7a476c620ce071832afc033655da25e"
+      },
+      "experiments/partitioned_coefficients_001/run.py": {
+        "bytes": 10632,
+        "sha256": "b302740c4d8fed5a3d1d1723aa4759b958acae882d745cda93c7d4b9cd1dd7fc"
+      },
+      "experiments/rc_remainder_bounds_001/check.py": {
+        "bytes": 6363,
+        "sha256": "777f8d9d06dc9ebf27b412979e6af6dd5d4c9af0f31f01e55ce4e0d25815c981"
+      },
+      "experiments/rc_sensitivity_basis_001/basis.py": {
+        "bytes": 3178,
+        "sha256": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587"
+      },
+      "experiments/response_basis_attribution_001/basis.py": {
+        "bytes": 5514,
+        "sha256": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d"
+      },
+      "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+        "bytes": 5204,
+        "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750"
+      },
+      "experiments/structured_joint_001/joint.py": {
+        "bytes": 4959,
+        "sha256": "fde746d37a61a37911a9ce482e7a0f7a4cc7281188f0a5cc96ce0992cc31403e"
+      },
+      "experiments/structured_joint_001/qualify.py": {
+        "bytes": 14275,
+        "sha256": "26db13fc11ca958433f54e41881d442e2fe45887bed94b9391423e3470d8dda1"
+      },
+      "experiments/uncertainty_weak_stimulus_001/diagnostics.py": {
+        "bytes": 10034,
+        "sha256": "28c5142e7c379e36898e962349cb23ff75ebedcf6fb8f80bcef7cbba9fbd36e8"
+      },
+      "specifications/evidence_feedback_001/protocol.py": {
+        "bytes": 8985,
+        "sha256": "a3fe6a42a3502372d28e9fbba95f790ac0726484e2903aea02a2ca95f022b494"
+      }
+    }
+  },
+  "reproduction_artifact_bindings": {
+    "run001": {
+      "experiments/hysteresis_joint_refit_001/run001/registration.json": {
+        "sha256": "700eace211f7db1fe184f1bb93c6003c44b838acf2061d5ccacb697e0fda0eac",
+        "bytes": 11287
+      },
+      "experiments/hysteresis_joint_refit_001/run001/summary.json": {
+        "sha256": "7c07d66b71b9a5c6ee0c18ddf7693bc8d91fdd7f066df52fadc1b0938bf6c26c",
+        "bytes": 2006
+      },
+      "experiments/hysteresis_joint_refit_001/run001/pilot001_rest.json": {
+        "sha256": "631d9c63ae43c8ef5bf660fbafe06f9e457dfbb6fe336633325767776d98dfbb",
+        "bytes": 168201
+      },
+      "experiments/hysteresis_joint_refit_001/run001/pilot001_rest_factors.npz": {
+        "sha256": "d22a811d92bb6d31ae07eb55ca33758971922f41d94bceb03e3082ef06e74488",
+        "bytes": 19899
+      },
+      "experiments/hysteresis_joint_refit_001/run001/pilot001_multiscale.json": {
+        "sha256": "7eac6df0722b56989afda1c00ad27fbf2fb3510f59943afb732ace93c9894e21",
+        "bytes": 189815
+      },
+      "experiments/hysteresis_joint_refit_001/run001/pilot001_multiscale_factors.npz": {
+        "sha256": "16bf039002dcf11a21078f31132dc1af5d8c281aea3d120de169c813ee56dd70",
+        "bytes": 99481
+      },
+      "experiments/hysteresis_joint_refit_001/run001/pilot001_embedded.json": {
+        "sha256": "6da238def54cec062b305823e2d9fb8461a2f64d06c61e0cafb30d3ba31e9418",
+        "bytes": 189058
+      },
+      "experiments/hysteresis_joint_refit_001/run001/pilot001_embedded_factors.npz": {
+        "sha256": "c6304ee78525f968d1ba5ffd8898db683fed30e7f2f781273f017294387498bd",
+        "bytes": 94006
+      },
+      "experiments/hysteresis_joint_refit_001/run001/full001_rest.json": {
+        "sha256": "decf396b0dad7a1b04980dcda60b0d0fd56e1032872464259b5ddb14b3385ef6",
+        "bytes": 145413
+      },
+      "experiments/hysteresis_joint_refit_001/run001/full001_rest_factors.npz": {
+        "sha256": "78e9b081a0c31250eab8fe3bcd928e763f63958623af3a6dfd771348a5e21ede",
+        "bytes": 19905
+      },
+      "experiments/hysteresis_joint_refit_001/run001/full001_multiscale.json": {
+        "sha256": "08732dbeada0165df9797090f41a78227fc012892d0d930ed1e067447d1af286",
+        "bytes": 189597
+      },
+      "experiments/hysteresis_joint_refit_001/run001/full001_multiscale_factors.npz": {
+        "sha256": "74e7fec45ebe422bb7e8564378827e4411f2a18362d05bc8458ce82da7f7091e",
+        "bytes": 99356
+      },
+      "experiments/hysteresis_joint_refit_001/run001/full001_embedded.json": {
+        "sha256": "2168d36f5e2410cf53c0b656545036302e0b0d59fbc89a5c070f4c9d58b421e5",
+        "bytes": 190325
+      },
+      "experiments/hysteresis_joint_refit_001/run001/full001_embedded_factors.npz": {
+        "sha256": "fcc57ab6298038d0e040b2f7953376fdb9cea424db8a8686ce0642095aae6647",
+        "bytes": 93028
+      }
+    },
+    "review001": {
+      "experiments/hysteresis_joint_refit_001/review001/registration.json": {
+        "sha256": "700eace211f7db1fe184f1bb93c6003c44b838acf2061d5ccacb697e0fda0eac",
+        "bytes": 11287
+      },
+      "experiments/hysteresis_joint_refit_001/review001/summary.json": {
+        "sha256": "22fa2f312009b8ed07f991800e457f35478e1ba28744e6c37d515a229ec8b99e",
+        "bytes": 2006
+      },
+      "experiments/hysteresis_joint_refit_001/review001/pilot001_rest.json": {
+        "sha256": "94bb890f6356db21f49d21b7d12aafd39bf8d8946dd6ef61f09f920b1c73434d",
+        "bytes": 168211
+      },
+      "experiments/hysteresis_joint_refit_001/review001/pilot001_rest_factors.npz": {
+        "sha256": "d22a811d92bb6d31ae07eb55ca33758971922f41d94bceb03e3082ef06e74488",
+        "bytes": 19899
+      },
+      "experiments/hysteresis_joint_refit_001/review001/pilot001_multiscale.json": {
+        "sha256": "2f2799de17a7e5dd34557d8e34f2676e06df42e47b5a25c07b9f7e0a901aebaa",
+        "bytes": 189817
+      },
+      "experiments/hysteresis_joint_refit_001/review001/pilot001_multiscale_factors.npz": {
+        "sha256": "16bf039002dcf11a21078f31132dc1af5d8c281aea3d120de169c813ee56dd70",
+        "bytes": 99481
+      },
+      "experiments/hysteresis_joint_refit_001/review001/pilot001_embedded.json": {
+        "sha256": "085faf81de76394a59acad3e496b70a9b28114632e11b7d8ad548870f2c2c3c7",
+        "bytes": 189061
+      },
+      "experiments/hysteresis_joint_refit_001/review001/pilot001_embedded_factors.npz": {
+        "sha256": "c6304ee78525f968d1ba5ffd8898db683fed30e7f2f781273f017294387498bd",
+        "bytes": 94006
+      },
+      "experiments/hysteresis_joint_refit_001/review001/full001_rest.json": {
+        "sha256": "2ce8b9dee670071e9b9735a6e3884dd87c5a1d597090fc26770ac0164bd773e6",
+        "bytes": 145416
+      },
+      "experiments/hysteresis_joint_refit_001/review001/full001_rest_factors.npz": {
+        "sha256": "78e9b081a0c31250eab8fe3bcd928e763f63958623af3a6dfd771348a5e21ede",
+        "bytes": 19905
+      },
+      "experiments/hysteresis_joint_refit_001/review001/full001_multiscale.json": {
+        "sha256": "3a9025abfbe0cea86c37651f81574cdf93a7497f54f49d9081618e5f77becac9",
+        "bytes": 189600
+      },
+      "experiments/hysteresis_joint_refit_001/review001/full001_multiscale_factors.npz": {
+        "sha256": "74e7fec45ebe422bb7e8564378827e4411f2a18362d05bc8458ce82da7f7091e",
+        "bytes": 99356
+      },
+      "experiments/hysteresis_joint_refit_001/review001/full001_embedded.json": {
+        "sha256": "6b18104a57e5e4d73aab7a9b73b33ee92fbebca5f023588f202382bf01c28dee",
+        "bytes": 190328
+      },
+      "experiments/hysteresis_joint_refit_001/review001/full001_embedded_factors.npz": {
+        "sha256": "fcc57ab6298038d0e040b2f7953376fdb9cea424db8a8686ce0642095aae6647",
+        "bytes": 93028
+      }
+    }
+  },
+  "comparison_evidence": {
+    "path": "experiments/hysteresis_joint_refit_001/review001/comparison.json",
+    "identity": {
+      "sha256": "d12868f1a3a0ffadfc89ff4eeff4ada506734d42bed1e77562e5aef91b3d4a47",
+      "bytes": 709
+    }
+  },
+  "review_artifact_scope": "Later validation, receipt and root handoff bookkeeping are outside this exact report binding; no source or fitted-result changes were made by this reviewer."
+}

@@ -1,0 +1,159 @@
+{
+  "schema": "independent_implementation_review_v1",
+  "reviewer": "fresh-context agent /root/joint_refit_implementation_review",
+  "revision": "0f02271233a0eaa1bf9f5a91588486e1cd74b8a1",
+  "branch": "experiment/conditional-architecture-001",
+  "verdict": "accepted_for_registered_study_only",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "scope": "Implementation and compact extraction review of unchanged-solver five-arm finite-prefix joint refits. No new proof acceptance, production promotion, coverage or target qualification.",
+  "reviewed_bindings": {
+    "specifications/hysteresis_joint_refit_001/README.md": {
+      "sha256": "51f3cef9d5a1ebe3511a3d62902c594c3cd076a3ad5ddada498eb63321f89e1b",
+      "bytes": 3277
+    },
+    "experiments/hysteresis_joint_refit_001/run.py": {
+      "sha256": "63c428bda8a45ae392d86357ac7bfb19823ed744aad3a4e24f4985c5ee14a1ec",
+      "bytes": 8031
+    },
+    "experiments/hysteresis_joint_refit_001/readouts.py": {
+      "sha256": "6181d1f3254aa17b8603192e58d97eda4c7534b3ef16a5e82396fd236b65fe69",
+      "bytes": 7856
+    },
+    "experiments/hysteresis_joint_refit_001/test_refit.py": {
+      "sha256": "ec0c8d59e931b329d46b1896e1d1be8cc0c654145b00bd83d53ace37ef636494",
+      "bytes": 4898
+    },
+    "experiments/hysteresis_joint_refit_001/summarize.py": {
+      "sha256": "5ac18a8b9ec73403dfec0d92ced813545297116ca0275e5115fefe6d10dd8845",
+      "bytes": 3305
+    },
+    "experiments/hysteresis_mixed_completion_001/run.py": {
+      "sha256": "31ec9bfd5981fcbf3f4d0a6e3760183114d74e48be174f5075527231f9291bf8",
+      "bytes": 15438
+    },
+    "experiments/slow_likelihood_diagnostic_001/numerics.py": {
+      "sha256": "a2aa7303f468fe32c28506c727559e6d4c8847be7c93be0fa25730ec55f90750",
+      "bytes": 5204
+    },
+    "experiments/joint_precision_attribution_001/metrics.py": {
+      "sha256": "1be2830df88df5d0d08f3f580c848deeb80a50e4c7dd80eb2aaddb7f4f8c17a0",
+      "bytes": 7177
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+      "bytes": 8687
+    },
+    "experiments/hysteresis_sensitivity_basis_001/run.py": {
+      "sha256": "0f1f657fec8d5494cdf52ddb8ee6c365b28380c027eb64aadaa7432302f47eea",
+      "bytes": 11417
+    },
+    "experiments/hysteresis_sensitivity_basis_001/basis.py": {
+      "sha256": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca",
+      "bytes": 3441
+    },
+    "experiments/rc_sensitivity_basis_001/basis.py": {
+      "sha256": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587",
+      "bytes": 3178
+    },
+    "experiments/h7_history_quality_001/history.py": {
+      "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8",
+      "bytes": 14227
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+      "bytes": 4357
+    },
+    "experiments/conditional_architecture_001/conditional.py": {
+      "sha256": "b9bfeb21305954a45ac73e55d66c83bee2d8c30191a89d43e536e9f746434635",
+      "bytes": 3493
+    },
+    "experiments/partitioned_coefficients_001/run.py": {
+      "sha256": "b302740c4d8fed5a3d1d1723aa4759b958acae882d745cda93c7d4b9cd1dd7fc",
+      "bytes": 10632
+    },
+    "specifications/joint_precision_attribution_001/M1.md": {
+      "sha256": "47b6b9c8cccd16adbdd837b2c3c6cc528a034f227a8aea736a15abd0125d84f7",
+      "bytes": 5090
+    },
+    "specifications/rc_remainder_bounds_001/P3.md": {
+      "sha256": "6c77ffe83edc6247935cfd95c3c272e1c9e57b95aca80589cee5b5f143b94d32",
+      "bytes": 6171
+    }
+  },
+  "checks": {
+    "fit_contract": "Refit delegates to the original fit_prefix/choose_fit/solve. R2_H2 is only an internal gate alias to the TaylorRC_H2 object. Zero and alternating +/-0.05 prior-whitened starts, 60 rounds, original fixed centres, prior and declared support are unchanged.",
+    "joint_uncertainty": "QR of stacked identity prior and whitened likelihood rows gives C=L R^-1. Direct replay transports J through every previous state Jacobian. Canonical B=dx/dc and K=B^-1 L retain inverse-Q/rate coupling; augmented QR jointly reduces direct, RC/H defects and residuals. No independent covariance blocks or duplicated prior.",
+    "convergence": "Same-anchor selected-fit diagnostics remain explicitly local even when unresolved. Fit-to-fit, physical delta and forecast comparisons require both selected candidate and direct reference to converge.",
+    "ownership_and_truth": "Frozen registrations/manifests, dependencies, binaries, recipes, snapshots and regenerated observation digest are checked. Original factor/state controls are compared bitwise. Stimulus truth outputs are discarded; fitting uses observations and the frozen public prior/centre only.",
+    "controls": "Direct, TaylorRC_H2 and R5_H7 selected status/start/coordinates/root/diagnostics must match frozen controls exactly; all 18 saved controls passed.",
+    "summary": "Physical differences subtract direct physical readouts only after convergence gating. Compact extraction retains all attempts and bindings. Per-partition transport/forecast details remain in hash-bound raw cases; combined QR forecast readouts remain in compact output."
+  },
+  "tests": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.hysteresis_joint_refit_001.test_refit -v",
+      "result": "passed",
+      "tests": 5
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B - (independent native multi-chunk and finite-difference check)",
+      "result": "passed",
+      "records": 2305,
+      "prior_source": "experiments/rc_sensitivity_basis_001/full001/registration.json",
+      "anchor": "mean + prior_root @ (0.05 * (-1)**arange(16))",
+      "observations": {
+        "dt": "0.02+(k%5)*0.004",
+        "current": "[0.12,0,-0.08][(k//71)%3]",
+        "temperature": 25,
+        "voltage": 3.7,
+        "sigma": 0.001
+      },
+      "assertions": [
+        "Multi-chunk direct endpoint and F agree with one native evaluate call (atol 1e-13 endpoint, rtol 2e-11/atol 2e-12 F).",
+        "Multi-chunk QR covariance agrees with direct full rows (rtol 1e-7, atol 1e-11).",
+        "All four fields: feature Jacobian times L agrees with central finite differences at step 2e-6 (rtol 3e-6, atol 2e-7).",
+        "All four fields: transported Jacobian times L agrees with central finite differences (rtol 2e-5, atol 2e-8).",
+        "All four fields: full covariance from independent factor QR agrees with augmented partition QR (rtol 3e-6, atol 1e-10)."
+      ],
+      "maximum_unchanged_column_defect": 1.4210854715202004e-14,
+      "maximum_residual_partition_defect": 2.3005876085136302e-11
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B - (independent support and convergence-gating check)",
+      "result": "passed",
+      "support_refusals": 12,
+      "support_cases": "Each of four fields rejects H-plus log-rate offsets -1.01/+1.01 and negative origin SOC.",
+      "convergence_combinations": 4,
+      "gating_cases": "direct/candidate converged or unresolved crossed; candidate forecasts and qualified comparisons present iff both converge."
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B - (summarize(run001), delta/gating assertions, byte comparison)",
+      "result": "passed",
+      "byte_exact_result_reproduction": true,
+      "cases": 6,
+      "exact_control_matches": 18,
+      "qualified_physical_delta_groups": 25,
+      "unresolved_reference_readouts_with_comparisons_withheld": 5
+    }
+  ],
+  "evidence_bindings": {
+    "experiments/hysteresis_joint_refit_001/run001/registration.json": {
+      "sha256": "700eace211f7db1fe184f1bb93c6003c44b838acf2061d5ccacb697e0fda0eac",
+      "bytes": 11287
+    },
+    "experiments/hysteresis_joint_refit_001/run001/summary.json": {
+      "sha256": "7c07d66b71b9a5c6ee0c18ddf7693bc8d91fdd7f066df52fadc1b0938bf6c26c",
+      "bytes": 2006
+    },
+    "provenance/hysteresis_joint_refit_001/result.json": {
+      "sha256": "32d645e83a9596e1f3e0fb02141aabe2af4b6c1bd7ce8f32223b08b4c52419ba",
+      "bytes": 862884
+    }
+  },
+  "limits": [
+    "No full sweep repeated by this implementation review; an independent result/reproduction review remains separately required.",
+    "Legacy normal-matrix solver/covariance preserved intentionally. New QR diagnostics do not establish calibrated coverage or nonlinear/global optimality.",
+    "Finite synthetic controls do not remove prior rest/off-centre failures, qualify aging/indefinite history, or prove complete Cortex-M23 memory/timing feasibility."
+  ],
+  "implementation_modified": false
+}
