@@ -285,6 +285,17 @@ shared-operator candidates under W<=34/4760B factor ceiling and a complete ~10Ki
 subsystem budget. No estimator change, new fit, automatic memory saving or full
 fixed-budget feasibility is claimed.
 
+The [shared-operator fixed-budget feasibility study](provenance/shared_operator_budget_001/README.md)
+now derives a closed Cayley query using the same W34/4760B factor and centre-jet
+state. Equilibrium and central sensitivities hold; all30 fits reproduce exactly.
+It is insufficient as a replacement: rest forecast discrepancy improves only
+462->403uV, rest precision remains distorted, and a negative free-response witness
+persists inside support. No rank growth or promotion followed. The provisional
+packed-C ledger also exposes11600B streaming/11912B inference live-set subtotals
+before stack/other costs. Next formulate constrained joint operator selection and
+a transactional memory schedule before another implementation; these subtotals
+do not establish general10KiB infeasibility.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

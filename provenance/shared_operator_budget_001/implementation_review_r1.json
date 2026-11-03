@@ -1,0 +1,180 @@
+{
+  "schema": "independent_implementation_review_v1",
+  "reviewer": "fresh-context /root/shared_operator_implementation_review",
+  "base_revision": "7522d273114668eb5ce788ae0bb9b0d320ff9d7f",
+  "branch": "experiment/shared-operator-budget-001",
+  "disposition": "accepted_for_isolated_fixed_budget_feasibility_study",
+  "implementation_changed_by_reviewer": false,
+  "bindings": {
+    "specifications/shared_operator_budget_001/README.md": {
+      "bytes": 2639,
+      "sha256": "88392a0561cb58626c724a43ccf2987b58f5da377da46017a14ef936e40879cf"
+    },
+    "specifications/shared_operator_budget_001/C1.md": {
+      "bytes": 5533,
+      "sha256": "6f87ad148c7a593255496bd4194b34182a140169c650e33bd9b8be21fe0b48c6"
+    },
+    "experiments/shared_operator_budget_001/field.py": {
+      "bytes": 4454,
+      "sha256": "9ec1447430efe8052843a8daecc90feb6fc8a7a789855c8711a89116f2b150b9"
+    },
+    "experiments/shared_operator_budget_001/run.py": {
+      "bytes": 9524,
+      "sha256": "ed8389d87dd4b5edec2caad0052c7aba030beaf20c7d3202769f3cb5d14e03e4"
+    },
+    "experiments/shared_operator_budget_001/readouts.py": {
+      "bytes": 7855,
+      "sha256": "42ccd149101afaeaeeb65e859db5e5465522a776b865dce3f33b3c72bbecc7a0"
+    },
+    "experiments/shared_operator_budget_001/summarize.py": {
+      "bytes": 3373,
+      "sha256": "2c115d009ea37e0ed135d3bd2e51aaa6140db6d6a236f3bc9e8b4f9a682932aa"
+    },
+    "experiments/shared_operator_budget_001/test_shared.py": {
+      "bytes": 4805,
+      "sha256": "6dea607da6850785b66281378278630048158fa83b0c42e0a20e8bc1a75da906"
+    }
+  },
+  "reviewed_dependency_bindings": {
+    "experiments/hysteresis_sensitivity_basis_001/basis.py": {
+      "bytes": 3441,
+      "sha256": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca"
+    },
+    "experiments/rc_sensitivity_basis_001/basis.py": {
+      "bytes": 3178,
+      "sha256": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587"
+    },
+    "experiments/response_basis_attribution_001/basis.py": {
+      "bytes": 5514,
+      "sha256": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d"
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "bytes": 8687,
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3"
+    },
+    "experiments/hysteresis_mixed_completion_001/run.py": {
+      "bytes": 15438,
+      "sha256": "31ec9bfd5981fcbf3f4d0a6e3760183114d74e48be174f5075527231f9291bf8"
+    },
+    "experiments/joint_precision_attribution_001/metrics.py": {
+      "bytes": 7177,
+      "sha256": "1be2830df88df5d0d08f3f580c848deeb80a50e4c7dd80eb2aaddb7f4f8c17a0"
+    },
+    "experiments/h7_history_quality_001/history.py": {
+      "bytes": 14227,
+      "sha256": "24144edc12f784ff33f4edaa0e547e6f0436ccc35fe1d830de87a0eaa399c8b8"
+    }
+  },
+  "findings": [
+    {
+      "id": "I1",
+      "severity": "pass",
+      "subject": "Original physical support and Cayley derivative chain",
+      "evidence": "SharedField.basis_query invokes inherited original log-rate/physical-path gate before transforming only the three RC coordinates. Both canonical basis derivative and chart derivative apply 1-tanh(t/2)^2. H/Q coupling remains unchanged; halfwidth is fixed to one by the inherited constructor."
+    },
+    {
+      "id": "I2",
+      "severity": "pass",
+      "subject": "One unchanged native joint factor and chronological state",
+      "evidence": "No recurrence/native kernel changes. SharedField inherits exact central-jet streaming; unit test verifies rows, root, state and numeric storage bitwise against TaylorRC/TaylorH2, W34, factor4760B. Runner independently checks every completed case against baseline and predecessor snapshots. Source/order mismatches are rejected."
+    },
+    {
+      "id": "I3",
+      "severity": "pass",
+      "subject": "Inherited query/evaluate/transport consistency",
+      "evidence": "Inherited BasisField.features/evaluate/outgoing dynamically use SharedField.basis_query including transformed T. Supplemental checks at original RC log offsets [0,0,0],[-0.8,0.7,0.5],[-1,-1,-1],[1,1,1] agree with analytic chart chain and new transported endpoint."
+    },
+    {
+      "id": "I4",
+      "severity": "pass",
+      "subject": "Joint likelihood, prior and readout separation",
+      "evidence": "Compressed objective retains one whitened prior and full root-feature Jacobian. Readouts use QR including a single identity prior, preserve RC/H cross effects, and compare direct and compressed transport. choose_fit is unchanged with two public starts and60rounds. Nonconverged reference/candidate fits do not receive fit-to-fit or forecast qualification."
+    },
+    {
+      "id": "I5",
+      "severity": "pass",
+      "subject": "Twenty-four unchanged controls and source identity protocol",
+      "evidence": "Runner compares four unchanged selected arms per six default frozen cases, checking status, selected start, selected w/x/root/diagnostic exactly. It verifies frozen registration, summary, recipes, binary/source identities, observation hashes, predecessor cases and snapshots. Source receipt includes candidate field/run/readouts and is checked after the run.",
+      "limitation": "This review verifies enforcement code, not completion or successful equality of all24 results; independent results review must establish that outcome."
+    },
+    {
+      "id": "I6",
+      "severity": "pass",
+      "subject": "No old Taylor remainder misapplication",
+      "evidence": "readouts.py requests m.rc_envelope only for names starting TaylorRC_. CayleyRC_TaylorH2 receives no P2_RC_envelope. H6 applies only to unchanged TaylorH2 H representation. P3 measured joint-precision diagnostics are algebraic same-anchor checks, not Cayley response remainder certificates."
+    },
+    {
+      "id": "I7",
+      "severity": "pass",
+      "subject": "Negative response witness and limited scope",
+      "evidence": "Protocol and C1 disclose negative free response inside support. Test verifies witness and transfer identity numerically. Width/precision/fit diagnostics are not labeled physical coverage or deployment qualification. Packed subtotal explicitly excludes full resources."
+    },
+    {
+      "id": "I8",
+      "severity": "nonblocking_limit",
+      "subject": "Acceptance boundary",
+      "evidence": "Public signed-current response probe and complete resource ledger are outside this five-file review and require separate review. Numerical transfer tests supplement but do not replace independent C1 proof review. No full-support accuracy, positivity, calibrated coverage, lifetime, WCET or complete-M23-resource acceptance is granted."
+    }
+  ],
+  "validation": {
+    "command": "python3 -B -m unittest experiments.shared_operator_budget_001.test_shared -v",
+    "exit_code": 0,
+    "tests_passed": 5,
+    "tests": [
+      "test_central_jet_and_equilibrium",
+      "test_feature_and_transport_derivatives_full_support",
+      "test_joint_QR_and_unresolved_gate",
+      "test_streaming_factor_state_and_storage_unchanged",
+      "test_transfer_identity_and_negative_free_counterexample"
+    ],
+    "supplemental": {
+      "fixture": "SharedTests.fixture():512 ordered mixed-sign observations with dt in{0,1/35,0.2,0.7}",
+      "offsets": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          -0.8,
+          0.7,
+          0.5
+        ],
+        [
+          -1,
+          -1,
+          -1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "canonical_jacobian_max_abs": 2.7755575615628914e-17,
+      "inherited_transport_endpoint_max_abs": 8.673617379884035e-19,
+      "inherited_gradient_max_abs": 0.0,
+      "nll_residual_max_abs": 2.9103830456733704e-11,
+      "nll_note": "Different dot/norm reduction order; no objective inconsistency.",
+      "rejected_source_order_calls": [
+        {
+          "first": 0,
+          "source": "fixture"
+        },
+        {
+          "first": 512,
+          "source": "wrong"
+        }
+      ],
+      "prefix_after_rejections": 512,
+      "reviewer_script_correction": "Initial supplemental script compared11-amplitude endpoint with5-chart endpoint and failed shape validation; corrected comparison uses partition(transported_endpoint)[0]. No implementation change."
+    }
+  },
+  "remaining_acceptance": [
+    "Independent C1 proof review",
+    "Completed six-case study and all24 unchanged selected-control matches",
+    "Independent full results/reproduction review",
+    "Public signed-current response probe review",
+    "Complete owned-memory ledger review"
+  ]
+}

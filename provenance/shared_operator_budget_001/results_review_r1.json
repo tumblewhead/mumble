@@ -1,0 +1,168 @@
+{
+  "schema": "shared_operator_budget_results_review_v1",
+  "reviewer": "fresh-context /root/shared_operator_results_review",
+  "round": 1,
+  "status": "accepted_finite_results_no_promotion",
+  "base_revision": "7522d273114668eb5ce788ae0bb9b0d320ff9d7f",
+  "branch": "experiment/shared-operator-budget-001",
+  "implementation_edited": false,
+  "blockers": [],
+  "findings": [
+    {
+      "id": "R1",
+      "status": "verified",
+      "topic": "Independent frozen-study reproduction",
+      "finding": "Six frozen cases, five arms, 30 selected records (including unresolved direct rest) and all 60 attempt records match exactly. All 24 prior selected controls, 30 QR readouts, 48 rerun factor/state arrays and 12 candidate/baseline arrays match exactly. Observation hashes, prior, centres, configuration, storage and input bindings are identical.",
+      "disposition": "Accept finite reproduction; no fit reselection or implementation edits."
+    },
+    {
+      "id": "R2",
+      "status": "verified",
+      "topic": "Compact evidence and source bindings",
+      "finding": "Re-extracting run001 compact result reproduces provenance result.json byte for byte. Re-running probe reproduces provenance probe.json byte for byte. The runner and summarizer verify registered source/binary/evidence identities. Fresh raw replay files differ in host CPU timing, snapshot path and consequent containing hashes; numerical fit and QR contents are exactly equal.",
+      "disposition": "Original evidence preserved; rerun artifacts separately bound below."
+    },
+    {
+      "id": "R3",
+      "status": "verified",
+      "topic": "Independent public probe calculation",
+      "finding": "Rebuilt exact free response exp(-sum(dt)/tau), its log-tau derivative, and forced response/slope as chronological sums of input steps. Rebuilt centre value/first/second jets by the same independent closed-form step sum and applied s=2*tanh(t/2), ds/dt=1-tanh(t/2)^2. Reference and all nine-offset probe metrics agree at floating precision. The implementation exact recurrence has correct signs and retains state across signed-current/rest intervals.",
+      "disposition": "Accept numerical probe; it is finite sampled evidence, not a uniform response or inference certificate."
+    },
+    {
+      "id": "R4",
+      "status": "verified_limitation",
+      "topic": "Physical support failure and nonuniform gains",
+      "finding": "At physical offset -1 the free witness is negative while the exact free response is positive. Candidate sampled voltage error slightly worsens at offsets -0.13 and +0.13 even though sampled derivative errors improve. The physical support remains original and the witness must remain an explicit candidate limitation.",
+      "disposition": "No unqualified positivity/passivity or full-support accuracy claim; no support narrowing or degree/rank increase."
+    },
+    {
+      "id": "R5",
+      "status": "verified_limitation",
+      "topic": "Joint inference and forecasts",
+      "finding": "Candidate fits converge for all six cases; direct full-hour rest remains unresolved, suppressing fit-to-fit forecasts there. Rest combined local epsilon remains above 7 at both prefixes. Short-rest pulse RMS improves only from 461.994 to 403.465 uV. Active joint epsilon worsens slightly in three of four cases, and several forecast/RMS/width metrics regress despite other improvements. Same-anchor precision and converged-fit comparisons remain local diagnostics, not validated coverage.",
+      "disposition": "Accept no-promotion conclusion; preserve all regressions and unresolved reference."
+    },
+    {
+      "id": "R6",
+      "status": "verified_conditional",
+      "topic": "Resource accounting",
+      "finding": "Ledger arithmetic independently sums to 6216 B persistent, 11600 B streaming and 11912 B inference, with persistent storage counted once in each serialized phase. The factor stays W34/4760 B; response 312 B and old partial numeric allowance 5168 B are unchanged. A generic full 16D prior root requires 960 B more than the fixture diagonal scale. Ledger assumptions describe illustrative packed C layouts, including staged rollback and materialized Jacobian, and explicitly exclude stack/alignment/other live buffers. Actual Python allocations are separately recorded in native_factor_storage.",
+      "disposition": "Accept ledger only as lower subtotals for the declared hypothetical layouts. It neither establishes implemented allocation/peak, complete target feasibility, WCET, nor general impossibility at 10 KiB."
+    },
+    {
+      "id": "R7",
+      "status": "verified",
+      "topic": "Targeted tests and scope",
+      "finding": "All five shared study tests pass, covering bitwise streaming, central jet/equilibrium, feature/transport finite differences, support rejection, transfer/witness and unresolved-reference gating.",
+      "disposition": "Tests supplement independent proof and results review; no implementation promotion follows."
+    }
+  ],
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.shared_operator_budget_001.run --out experiments/shared_operator_budget_001/review001",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.shared_operator_budget_001.probe --out experiments/shared_operator_budget_001/review_probe.json",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.shared_operator_budget_001.summarize --run experiments/shared_operator_budget_001/run001 --out experiments/shared_operator_budget_001/review_original_compact.json",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.shared_operator_budget_001.summarize --run experiments/shared_operator_budget_001/review001 --out experiments/shared_operator_budget_001/review001/compact.json",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.shared_operator_budget_001.test_shared",
+    "OPENBLAS_NUM_THREADS=1 PYTHONPATH=. python3 -B /tmp/shared_operator_results_review_checks.py"
+  ],
+  "execution_notes": [
+    "First ad hoc check invocation lacked PYTHONPATH and failed before computation; rerun with PYTHONPATH=. passed.",
+    "Host pyenv rehash warning is unrelated to scientific execution."
+  ],
+  "independent_checks": {
+    "counts": {
+      "cases": 6,
+      "selected": 30,
+      "attempts": 60,
+      "unchanged_controls": 24,
+      "QR_readouts": 30,
+      "factor_arrays": 48,
+      "candidate_baseline_arrays": 12
+    },
+    "original_compact_byte_exact": true,
+    "probe_byte_exact": true,
+    "independent_step_sum_reference_max_abs": 1.63202784619898e-14,
+    "independent_probe_metric_max_abs_mixed_units": 7.275957614183426e-12,
+    "tests_passed": 5,
+    "source": "import json,hashlib\nfrom pathlib import Path\nimport numpy as np\nfrom experiments.rc_partition_repair_001.probe import exact\nbase=Path('experiments/shared_operator_budget_001');old=base/'run001';new=base/'review001'\nload=lambda p:json.loads(p.read_text())\ncounts=dict(cases=0,selected=0,attempts=0,unchanged_controls=0,QR_readouts=0,factor_arrays=0,candidate_baseline_arrays=0)\nfor entry in load(old/'summary.json')['cases']:\n a=load(old/entry['file']);b=load(new/entry['file']);counts['cases']+=1\n for name,fit in a['fits']['arms'].items():\n  assert fit==b['fits']['arms'][name];counts['selected']+=1;counts['attempts']+=len(fit['attempts'])\n assert a['fits']['QR_readouts']==b['fits']['QR_readouts'];counts['QR_readouts']+=len(a['fits']['QR_readouts'])\n assert a['control_parity']==b['control_parity'];counts['unchanged_controls']+=len(a['control_parity'])\n for k in ['observation_sha256','prior_mean','prior_root','center','config','storage','input_bindings']:assert a[k]==b[k],k\n with np.load(a['snapshot']['path']) as aa,np.load(b['snapshot']['path']) as bb:\n  for name in aa.files:assert np.array_equal(aa[name],bb[name]);counts['factor_arrays']+=1\n  for typ in ['root','state']:assert np.array_equal(bb['CayleyRC_TaylorH2_'+typ],bb['TaylorRC_TaylorH2_'+typ]);counts['candidate_baseline_arrays']+=1\nassert (base/'review_original_compact.json').read_bytes()==Path('provenance/shared_operator_budget_001/result.json').read_bytes()\nassert (base/'review_probe.json').read_bytes()==Path('provenance/shared_operator_budget_001/probe.json').read_bytes()\n# Independent finite sum over input steps, without either recurrence or projected-row helper.\nreg=load(Path('experiments/rc_sensitivity_basis_001/full001/registration.json'));tau=np.array(reg['center'][:3]);probe=load(base/'review_probe.json')\nk=np.arange(600);dt=np.array([0.,1/35,.1,.3,.7])[k%5];I=np.array([.12,0.,-.08,.05,0.])[(k//19)%5];obs=np.c_[dt,I,np.full(600,25.),np.full(600,3.7),np.full(600,.001)]\ntimes=np.cumsum(dt);begins=times-dt;steps=np.diff(np.r_[0.,I]);elapsed=times[:,None]-begins[None,:];mask=np.arange(600)[None,:]<=np.arange(600)[:,None]\ndef reference(tau):\n d=times[:,None]/tau;F=np.exp(-d);Ft=d*F\n z=np.maximum(elapsed,0)[:,:,None]/tau;E=np.exp(-z);weights=(mask*steps[None,:])[:,:,None]\n u=np.sum(weights*(-np.expm1(-z)),axis=1);ut=-np.sum(weights*z*E,axis=1)\n return np.stack([F,Ft,u,ut],axis=1)\ndef jets(tau):\n d=times[:,None]/tau;F=np.exp(-d);Ft=d*F;Ftt=(d*d-d)*F\n z=np.maximum(elapsed,0)[:,:,None]/tau;E=np.exp(-z);weights=(mask*steps[None,:])[:,:,None]\n u=np.sum(weights*(-np.expm1(-z)),axis=1);ut=-np.sum(weights*z*E,axis=1);utt=-np.sum(weights*(z*z-z)*E,axis=1)\n return F,Ft,Ftt,u,ut,utt\nF,Ft,Ftt,u,ut,utt=jets(tau);b=np.array([.003,-.004,.002]);R=np.array([.035,.07,.1]);reference_max=0;metric_max=0\nfor record in probe['results']:\n t=record['log_tau_offset'];ref=reference(tau*np.exp(t));reference_max=max(reference_max,float(np.max(abs(ref-exact(obs,tau*np.exp(t))))))\n for name,reported in record['arms'].items():\n  s=2*np.tanh(t/2) if name.startswith('Cayley') else t;chain=1-np.tanh(t/2)**2 if name.startswith('Cayley') else 1\n  pred=np.stack([F+s*Ft+s*s*Ftt/2,chain*(Ft+s*Ftt),u+s*ut+s*s*utt/2,chain*(ut+s*utt)],axis=1);delta=pred-ref\n  vals={label:float(np.max(abs(delta[:,idx,:]))) for label,idx in [('free_value',0),('free_log_tau_slope',1),('forced_value_A',2),('forced_log_tau_slope_A',3)]}\n  vals['max_total_RC_voltage_defect_uV']=float(1e6*np.max(abs(delta[:,0,:]@b+delta[:,2,:]@R)))\n  vals['max_sum_absolute_RC_log_tau_derivative_defects_uV']=float(1e6*np.max(np.sum(abs(delta[:,1,:]*b+delta[:,3,:]*R),axis=1)))\n  metric_max=max(metric_max,max(abs(vals[k]-reported[k]) for k in vals))\nassert reference_max<1e-12;assert metric_max<1e-8\nresult=dict(counts=counts,original_compact_byte_exact=True,probe_byte_exact=True,independent_step_sum_reference_max_abs=reference_max,independent_probe_metric_max_abs_mixed_units=metric_max)\n(base/'review001/independent_checks.json').write_text(json.dumps(result,indent=2)+'\\n');print(json.dumps(result,indent=2))\n",
+    "source_sha256": "95be59088e46cc57c289188dfc8aaf10fdbda16e28766fc793cfad332d2888e9"
+  },
+  "negative_free_witness": {
+    "log_tau_offset": -1.0,
+    "dose_at_centre": 1.5819767068693265,
+    "Fhat": -0.01416227997048242,
+    "exact_F": 0.013565051513766854
+  },
+  "resource_subtotals_B": {
+    "persistent_subtotal_B": 6216,
+    "streaming_subtotal_B": 11600,
+    "inference_subtotal_B": 11912,
+    "target_B": 10240
+  },
+  "candidate_local_combined_epsilon": {
+    "pilot001_rest": 7.0712366011809635,
+    "pilot001_multiscale": 0.3106854170095152,
+    "pilot001_embedded": 0.317888087125537,
+    "full001_rest": 7.014551010732637,
+    "full001_multiscale": 0.4958274498602479,
+    "full001_embedded": 0.21291456651114352
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "PROJECT_STATE.json": "16d2bc7c14304d45fbe078189d3db0b6e54483891d1198345941239d6f83facb",
+    "README.md": "8f8f81a16e47cb7df9849c035e6698a82740fcdfad2e482c971a0eb8dfc447ca",
+    "experiments/shared_operator_budget_001/field.py": "9ec1447430efe8052843a8daecc90feb6fc8a7a789855c8711a89116f2b150b9",
+    "experiments/shared_operator_budget_001/probe.py": "7a66b5edb71aa979a2aef0eaeb14c10007adebabe33dabb1a8261280d797093c",
+    "experiments/shared_operator_budget_001/readouts.py": "42ccd149101afaeaeeb65e859db5e5465522a776b865dce3f33b3c72bbecc7a0",
+    "experiments/shared_operator_budget_001/review001/compact.json": "b2f55d04addef2e6254b8caf8d9f58d726906c25d86bd2662269b58c49c2514a",
+    "experiments/shared_operator_budget_001/review001/full001_embedded.json": "ddde7f0a5a9ca160710d7f5ed18d16c566bdc68b2e9191b0b820441ecb27e690",
+    "experiments/shared_operator_budget_001/review001/full001_embedded_factors.npz": "f6fbc2c2c52e555dfc95005797cebc3c7efff48cde803d18569a603a17972951",
+    "experiments/shared_operator_budget_001/review001/full001_multiscale.json": "e9f6fe1f36e1200ac696e2a7aa5880be384ac07b5052d2239bf7e08070eba3da",
+    "experiments/shared_operator_budget_001/review001/full001_multiscale_factors.npz": "0b2dabc27076a740e2d6c54ca5a30965f99ddea33aa9734396fa231cff848c48",
+    "experiments/shared_operator_budget_001/review001/full001_rest.json": "fa49a5e8a43d0d59b427e36efc694640f6dbfb21378cc69e622cd7b4e0a8db32",
+    "experiments/shared_operator_budget_001/review001/full001_rest_factors.npz": "9fe3e14dc1b280551e257d08c9f01622615bc2566cc4500289fb613957b5de58",
+    "experiments/shared_operator_budget_001/review001/independent_checks.json": "a0789b41263be911f4122df59bf8ad42e586c10b9a446d9a5ca123a482d4ac09",
+    "experiments/shared_operator_budget_001/review001/pilot001_embedded.json": "85c09f063a019a02f9c21faf1d2eec30f29d35bfbb22272347de4d43bf56f7a5",
+    "experiments/shared_operator_budget_001/review001/pilot001_embedded_factors.npz": "63c2cb60789a3a960c5959ede375e8f71957b04a1c7164f7f44da6a3f1dde971",
+    "experiments/shared_operator_budget_001/review001/pilot001_multiscale.json": "9e4099cd04b7feefda3325d305e0d63aa61516c7beade3723fde49d51aac22f8",
+    "experiments/shared_operator_budget_001/review001/pilot001_multiscale_factors.npz": "246deec44f987869b95bca285c4f029dad0408341e5125a06ca52ae7547fdb1f",
+    "experiments/shared_operator_budget_001/review001/pilot001_rest.json": "e066f513c058929f9ae70ff3534036a21495779c0fab95bb2eb9210760299026",
+    "experiments/shared_operator_budget_001/review001/pilot001_rest_factors.npz": "482d808ad077b1bdcb7decf7c7e56f88e1da6dcdfa3531da8335d81ab5dd3b26",
+    "experiments/shared_operator_budget_001/review001/registration.json": "d2c1a67a50969c991d4aa3201304f3239aa9aad7f317e8fe1690ed9e0048b2f4",
+    "experiments/shared_operator_budget_001/review001/summary.json": "8c358160d65798f721b99598afbcc07c8a8ce26134fffa87c49856f5a281a5ec",
+    "experiments/shared_operator_budget_001/review_original_compact.json": "2949d92c3cc99149ee79e2ee18eb390662b724d1e053c0ce4ddfee5f98e8a9cd",
+    "experiments/shared_operator_budget_001/review_probe.json": "dc9e019bdc8ddc49a6a81b4a38b0649a219aafdf410eafaa55319020a2b3c4c1",
+    "experiments/shared_operator_budget_001/run.py": "ed8389d87dd4b5edec2caad0052c7aba030beaf20c7d3202769f3cb5d14e03e4",
+    "experiments/shared_operator_budget_001/run001/full001_embedded.json": "80a2a03f7b6fc6cd4b9e03fc3d4cecc0ec0d8c61c9d05604b34396e74f5f5522",
+    "experiments/shared_operator_budget_001/run001/full001_embedded_factors.npz": "f6fbc2c2c52e555dfc95005797cebc3c7efff48cde803d18569a603a17972951",
+    "experiments/shared_operator_budget_001/run001/full001_multiscale.json": "49ee307a67210ff86710d1e9f130655d8d8938f9684549e94ac158a0ab5c581e",
+    "experiments/shared_operator_budget_001/run001/full001_multiscale_factors.npz": "0b2dabc27076a740e2d6c54ca5a30965f99ddea33aa9734396fa231cff848c48",
+    "experiments/shared_operator_budget_001/run001/full001_rest.json": "06fb5f9742514d3c51487096a3ca58975c6c211ff7a0a5f51668a90ca5c57c1e",
+    "experiments/shared_operator_budget_001/run001/full001_rest_factors.npz": "9fe3e14dc1b280551e257d08c9f01622615bc2566cc4500289fb613957b5de58",
+    "experiments/shared_operator_budget_001/run001/pilot001_embedded.json": "665eca349d0c499639f039a55c5a7d0ca13e3bfc893324b99e4f65e16b58e0f9",
+    "experiments/shared_operator_budget_001/run001/pilot001_embedded_factors.npz": "63c2cb60789a3a960c5959ede375e8f71957b04a1c7164f7f44da6a3f1dde971",
+    "experiments/shared_operator_budget_001/run001/pilot001_multiscale.json": "65c14d5bfa478e31f306bbba21bdf86b67989a336f689b32ee38e66a17b40277",
+    "experiments/shared_operator_budget_001/run001/pilot001_multiscale_factors.npz": "246deec44f987869b95bca285c4f029dad0408341e5125a06ca52ae7547fdb1f",
+    "experiments/shared_operator_budget_001/run001/pilot001_rest.json": "568cc1732b7a0bcddc679401d11fa0706ee22f85fccf77db0017eaa1b21e86c3",
+    "experiments/shared_operator_budget_001/run001/pilot001_rest_factors.npz": "482d808ad077b1bdcb7decf7c7e56f88e1da6dcdfa3531da8335d81ab5dd3b26",
+    "experiments/shared_operator_budget_001/run001/registration.json": "d2c1a67a50969c991d4aa3201304f3239aa9aad7f317e8fe1690ed9e0048b2f4",
+    "experiments/shared_operator_budget_001/run001/summary.json": "a93cd247eb1d1454b4ee7603256f18936605419cfdf047255b0adc0991f5a248",
+    "experiments/shared_operator_budget_001/summarize.py": "2c115d009ea37e0ed135d3bd2e51aaa6140db6d6a236f3bc9e8b4f9a682932aa",
+    "experiments/shared_operator_budget_001/test_shared.py": "6dea607da6850785b66281378278630048158fa83b0c42e0a20e8bc1a75da906",
+    "provenance/shared_operator_budget_001/c1_review_r1.json": "83527054da3e5e274004978a9af5f121dca62f65fec488ec554d21bee41c40e7",
+    "provenance/shared_operator_budget_001/probe.json": "dc9e019bdc8ddc49a6a81b4a38b0649a219aafdf410eafaa55319020a2b3c4c1",
+    "provenance/shared_operator_budget_001/result.json": "2949d92c3cc99149ee79e2ee18eb390662b724d1e053c0ce4ddfee5f98e8a9cd",
+    "specifications/shared_operator_budget_001/C1.md": "6f87ad148c7a593255496bd4194b34182a140169c650e33bd9b8be21fe0b48c6",
+    "specifications/shared_operator_budget_001/README.md": "88392a0561cb58626c724a43ccf2987b58f5da377da46017a14ef936e40879cf"
+  },
+  "candidate_promoted": false,
+  "rank_increase_authorized": false,
+  "remaining_limits": [
+    "Full-hour direct rest unresolved.",
+    "Negative free response exists within original support.",
+    "No useful uniform Cayley response/sensitivity or cumulative inference bound established.",
+    "Local precision is not coverage; no aging/lifetime qualification.",
+    "No implemented C allocation, complete subsystem peak, target WCET or general 10KiB impossibility result."
+  ]
+}

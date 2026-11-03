@@ -1,0 +1,76 @@
+{
+  "status": "finite_feasibility_verified_candidate_insufficient_no_promotion",
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.shared_operator_budget_001.test_shared -v",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.shared_operator_budget_001.run --out experiments/shared_operator_budget_001/run001",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.shared_operator_budget_001.probe --out provenance/shared_operator_budget_001/probe.json",
+    "python3 -B -m experiments.shared_operator_budget_001.summarize --run experiments/shared_operator_budget_001/run001 --out provenance/shared_operator_budget_001/result.json",
+    "python3 -B -m experiments.architecture_reuse_001.gate"
+  ],
+  "targeted_tests_passed": 5,
+  "reviews": {
+    "c1_review_r1.json": {
+      "status": "matched",
+      "count": 11,
+      "root_context_verified_at_base_revision": 2,
+      "identity": {
+        "bytes": 10207,
+        "sha256": "83527054da3e5e274004978a9af5f121dca62f65fec488ec554d21bee41c40e7"
+      }
+    },
+    "implementation_review_r1.json": {
+      "status": "matched",
+      "count": 14,
+      "root_context_verified_at_base_revision": 0,
+      "identity": {
+        "bytes": 8576,
+        "sha256": "9b71fec70a6e75791d66384c436946e6f232b208aed1865e5992d015251c39d8"
+      }
+    },
+    "results_review_r1.json": {
+      "status": "matched",
+      "count": 46,
+      "root_context_verified_at_base_revision": 2,
+      "identity": {
+        "bytes": 18274,
+        "sha256": "a1da83ba210d30638d826df699cd146ab0f18052bb59374476394193b6205346"
+      }
+    },
+    "results_report_review_r1.json": {
+      "status": "matched",
+      "count": 14,
+      "root_context_verified_at_base_revision": 0,
+      "identity": {
+        "bytes": 6329,
+        "sha256": "ad4b6de7a664c818d6fc4565b919aa981d033df8d730a753b31068c6dc4c6a8f"
+      }
+    }
+  },
+  "prior_symbolic_substantive_bindings_match": 15,
+  "architecture_gate": {
+    "status": "reviewed_bindings_match",
+    "files": 55
+  },
+  "reproduction": {
+    "selected_fits_exact": 30,
+    "attempts_exact": 60,
+    "QR_readouts_exact": 30,
+    "unchanged_controls_exact": 24,
+    "snapshot_arrays_exact": 48,
+    "candidate_baseline_arrays_exact": 12,
+    "compact_result_and_probe_byte_exact": true
+  },
+  "candidate_fit_statuses": {
+    "converged": 6,
+    "direct_converged": 5,
+    "direct_unresolved": 1
+  },
+  "retained_failures": [
+    "negative free response inside declared box",
+    "rest local combined epsilon above7 and actual relative precision above5 on a direction",
+    "full-hour direct rest unresolved",
+    "small active forecast and near-centre probe value regressions",
+    "provisional named packedC live sets exceed10KiB beforestack"
+  ],
+  "resource_scope": "No new numeric states or native recurrence. 4760B packedfactor/5168B partial only; proposed packed C live sets11600/11912B are not compiled allocation or universal lower bound."
+}

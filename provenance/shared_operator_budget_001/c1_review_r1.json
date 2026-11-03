@@ -1,0 +1,120 @@
+{
+  "schema": "shared_operator_budget_proof_review_v1",
+  "proof": "C1",
+  "round": 1,
+  "reviewer": "fresh-context individual agent /root/shared_cayley_c1_review",
+  "status": "accepted_conditional",
+  "base_revision": "7522d273114668eb5ce788ae0bb9b0d320ff9d7f",
+  "branch": "experiment/shared-operator-budget-001",
+  "proof_source_edited_by_reviewer": false,
+  "blockers": [],
+  "findings": [
+    {
+      "id": "C1-R1-01",
+      "status": "verified",
+      "topic": "Closed centre jet and chronological shared query",
+      "location": "C1:14-18; P1 exact derivative states",
+      "finding": "Differentiation of E=exp(-dt/tau) gives E_t=dE and E_tt=(d^2-d)E. The P1 product-rule recurrences propagate exactly three free plus three forced central jet entries per branch from F0=1,u0=0 and zero derivative entries. Query-independent recurrence preserves actual ordered intervals, including zero intervals, without storing steps. A shared linear functional commutes with each finite chronological step sum.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    },
+    {
+      "id": "C1-R1-02",
+      "status": "verified",
+      "topic": "Central value, slope and curvature",
+      "location": "C1:20-25",
+      "finding": "For s=2*tanh(t/2), s(0)=0, s_prime(0)=1, s_second(0)=0. Differentiating L gives s_prime*(f_t+s*f_tt); differentiating again at zero gives f_tt. This matches all three central quantities without shrinking physical t support. Non-RC coordinates and the full physical chain still require implementation checks.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    },
+    {
+      "id": "C1-R1-03",
+      "status": "verified",
+      "topic": "DC gain and constant-current equilibrium",
+      "location": "C1:29-35,58-62; K1",
+      "finding": "Linearity and L(1)=1 preserve uhat=I*(1-Fhat), including its query derivatives. Thus vhat=RI+(b-RI)*Fhat and b=RI gives exact equilibrium. Fhat(0)=1 and decay imply Ghat=1-z*Fhat_L and Ghat(0)=1. Arbitrary-input continuation carries the full jet and must not reset the forced state during rest.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    },
+    {
+      "id": "C1-R1-04",
+      "status": "verified",
+      "topic": "Laplace remainder and sign",
+      "location": "C1:47-62",
+      "finding": "Independent rational-polynomial expansion after nondimensionalizing z by a proves the displayed F_L-Fhat_L numerator is +2*a*w^3*(z-a)^2. Consequently the forced remainder is -z times the free remainder. Approximate poles are confined to -a, with multiplicity at most three; that stability says nothing about positivity.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    },
+    {
+      "id": "C1-R1-05",
+      "status": "verified_conditional",
+      "topic": "Uniform finite response functionals",
+      "location": "C1:64-79",
+      "finding": "On t in [-1,1], lambda is in [a/e,a*e]. Exact k and its t derivative are dominated by (a*e+(a*e)^2*T)*exp(-a*T/e). Approximate Fhat, khat and their t derivatives are fixed-degree polynomials in T times exp(-a*T), with bounded continuous coefficients in t. These give integrable uniform kernel dominators and bounded free-response suprema. Convolution yields the two bounds for fixed independent amplitudes b,R and parameter-independent bounded input. These are existence bounds, with no numerical useful envelope, accumulated likelihood bound, full physical-chain certificate or rounding claim.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    },
+    {
+      "id": "C1-R1-06",
+      "status": "verified_limitation",
+      "topic": "Negative free response within original support",
+      "location": "C1:83-90",
+      "finding": "At t=-1 the minimizing d=1/q+1/2 gives polynomial 1-(1+q/2)^2/2. The exact bound exp(1)>5/2 implies q>6/7 and this polynomial<-1/49, proving negativity without a floating sign test. Continuity also supplies nearby interior failures. This obstructs an unqualified positive physical-realization claim but not a declared bounded-approximation comparison; no rank increase or support repair is justified.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    },
+    {
+      "id": "C1-R1-07",
+      "status": "verified_conditional",
+      "topic": "Fixed feature closure and resource scope",
+      "location": "C1:37-43,94-99; P1 resource section",
+      "finding": "The existing coefficient row [f+f_tt/4,f_t,f_tt/4] dotted into [1,s,2*s^2-1] equals f+s*f_t+s^2*f_tt/2. Therefore W=34 and the same streamed coefficient rows suffice; packed double triangular factor bytes are 8*34*35/2=4760. Existing 312 B response and 96 B domain/scalar allowance sum to partial 5168 B. This is no new storage reduction, full prior allocation or subsystem budget. Bitwise identity is possible by unchanged streaming execution but is explicitly deferred to implementation validation.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    },
+    {
+      "id": "C1-R1-08",
+      "status": "verified_scope",
+      "topic": "Joint inference and acceptance boundary",
+      "location": "C1:41-43,75-79; J1/B1; study protocol",
+      "finding": "A common QR factor with changed physical feature map represents a changed likelihood. Full score, cross precision and transported query errors remain necessary; central matching, stable poles and bounded voltage defects do not prove full-support inference or lifetime coverage. Larger reference controls do not authorize candidate growth. No candidate acceptance or firmware qualification follows from this proof review.",
+      "disposition": "accepted within stated exact-arithmetic stationary scope"
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "command": "python3 -B; execute the source below with standard library only",
+    "source": "from fractions import Fraction as Q\nimport math\n# Sparse exact rational polynomials in (z,w); scale all rates by a>0.\ndef add(*ps):\n r={}\n for p in ps:\n  for k,v in p.items(): r[k]=r.get(k,Q(0))+v\n return {k:v for k,v in r.items() if v}\ndef scale(p,c): return {k:v*c for k,v in p.items() if v*c}\ndef mul(p,q):\n r={}\n for (i,j),v in p.items():\n  for (k,l),u in q.items(): r[(i+k,j+l)]=r.get((i+k,j+l),Q(0))+v*u\n return {k:v for k,v in r.items() if v}\ndef power(p,n):\n r={(0,0):Q(1)}\n for _ in range(n): r=mul(r,p)\n return r\none={(0,0):Q(1)}; z={(1,0):Q(1)}; w={(0,1):Q(1)}\np=add(z,one)\nA=add(power(p,2),mul(add(scale(w,2),scale(power(w,2),-2)),p),scale(power(w,2),4))\nD=add(mul(add(one,w),z),one,scale(w,-1))\nres=add(mul(add(one,w),power(p,3)),scale(mul(A,D),-1),scale(mul(power(w,3),power(add(z,scale(one,-1)),2)),-2))\nassert res=={}\n# exp(1)>5/2 implies q>6/7, hence minimum polynomial<-1/49.\nq_lower=Q(6,7)\nminimum_upper=1-(1+q_lower/2)**2/2\nassert minimum_upper==Q(-1,49)\nq=2*math.tanh(.5); d=1/q+.5\nminimum=1-(1+q/2)**2/2\nfree=math.exp(-d)*minimum\nexact=math.exp(-d*math.e)\nassert free<0<exact\nassert 8*34*35//2==4760\nassert 4760+312+96==5168\nresults={'exact_transfer_residual_polynomial':{},'witness_polynomial_exact_upper':str(minimum_upper),'witness':{'t':-1,'q':q,'d':d,'polynomial':minimum,'Fhat':free,'F_exact':exact},'factor_B':4760,'partial_subtotal_B':5168}\n",
+    "source_sha256": "e77a342b77deb5851eba2502c4d979253828c67d64cf3d334a3dc933da39a7f5",
+    "results": {
+      "exact_transfer_residual_polynomial": {},
+      "witness_polynomial_exact_upper": "-1/49",
+      "witness": {
+        "t": -1,
+        "q": 0.9242343145200195,
+        "d": 1.5819767068693265,
+        "polynomial": -0.06889329077704609,
+        "Fhat": -0.014162279970482465,
+        "F_exact": 0.013565051513766854
+      },
+      "factor_B": 4760,
+      "partial_subtotal_B": 5168
+    },
+    "limits": "Exact rational polynomial verification of transfer identity and witness bound; floating witness values illustrate the exact sign proof. Manual proof review supplies the uniform domination argument. No estimator tests or implementation approval."
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "8f8f81a16e47cb7df9849c035e6698a82740fcdfad2e482c971a0eb8dfc447ca",
+    "PROJECT_STATE.json": "16d2bc7c14304d45fbe078189d3db0b6e54483891d1198345941239d6f83facb",
+    "specifications/shared_operator_budget_001/README.md": "88392a0561cb58626c724a43ccf2987b58f5da377da46017a14ef936e40879cf",
+    "specifications/shared_operator_budget_001/C1.md": "6f87ad148c7a593255496bd4194b34182a140169c650e33bd9b8be21fe0b48c6",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "specifications/symbolic_fixed_budget_001/J1.md": "dd446280a8b747f128af224054da0529a8dbb616c300c2623b1b82d229477dbc",
+    "specifications/symbolic_fixed_budget_001/K1.md": "21c354d286bb7c974d6ee5c304cd97de627579b81099588287b3cbc4f23c8d90",
+    "specifications/symbolic_fixed_budget_001/B1.md": "1a1a8ecc24a873f0db936352286fbe045eb8d80d20e87c069de14981257b1ace",
+    "provenance/rc_sensitivity_basis_001/receipt.json": "cfd72a0034569ef5e0ae2206424349f05191ff43b8223f826ba9d03cf176156f",
+    "provenance/symbolic_fixed_budget_001/receipt.json": "bd15075995cc609b2dab08ab166da445abc94551b8150ccab153cfa4b820c872"
+  },
+  "remaining_obligations": [
+    "Test unchanged streamed rows, response state and QR factor bitwise against the Taylor baseline and differentiate all physical feature/transport maps.",
+    "Keep physical support, fixed centres, public prior and full joint cross terms unchanged.",
+    "Measure all declared score/precision/fit/transport diagnostics and preserve negative-response and numerical failure cases without increasing rank.",
+    "Establish useful quantitative response/sensitivity and cumulative inference bounds separately; old Taylor-in-t bounds do not transfer.",
+    "Provide the complete owned-memory and peak live-set ledger, including prior, solver, scratch and rollback; 5168 B is only a partial numeric subtotal."
+  ],
+  "candidate_promoted": false,
+  "rank_increase_authorized": false
+}
