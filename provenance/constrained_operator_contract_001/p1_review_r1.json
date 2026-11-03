@@ -1,0 +1,91 @@
+{
+  "schema": "constrained_operator_contract_proof_review_v1",
+  "proof": "P1",
+  "round": 1,
+  "reviewer": "independent individual agent /root/constraint_p1_review",
+  "status": "changes_requested",
+  "base_revision": "e6464caaae7599c4414c9219967489f840448e53",
+  "branch": "experiment/constrained-operator-contract-001",
+  "proof_source_edited_by_reviewer": false,
+  "blockers": [
+    "P1-R1-01"
+  ],
+  "findings": [
+    {
+      "id": "P1-R1-01",
+      "severity": "scope_correction",
+      "status": "open",
+      "location": "A closed family: All six free/forced states per branch remain necessary",
+      "finding": "The shared functional does not identify arbitrary-input free and forced triples, but this does not establish six stored states as necessary. At a stationary retained origin, free central jets are explicitly exp(-d), d*exp(-d), (d*d-d)*exp(-d); a stored elapsed-age scalar permits reconstructing all three. The stated necessity is therefore stronger than the proved unchanged-recurrence design.",
+      "requested_change": "Say that the existing six free/forced state slots are retained in this unchanged recurrence and that sharing the functional does not identify the two triples. Do not imply a universal storage lower bound."
+    },
+    {
+      "id": "P1-R1-02",
+      "status": "verified",
+      "topic": "Shared central jets and central matching",
+      "finding": "Applying L gives exp(-d)*(1+alpha*d+beta*d^2). Central coefficient comparison gives exactly the six displayed alpha/beta jet conditions. Product-rule differentiation of the actual-interval recurrence closes the three centre derivatives; linearity and reproduction of constants preserve complements, finite chronological step superposition, and the common impulse kernel. Query changes must not replace carried auxiliary state."
+    },
+    {
+      "id": "P1-R1-03",
+      "status": "verified",
+      "topic": "Half-line quadratic positivity",
+      "finding": "For C>0 and B<0 the unique half-line minimum is A-B^2/(4*C); for B>=0 the minimum is at zero; C=0 and negative B fails at infinity. These cases prove (Q), including degeneracies. Differentiating Fhat gives the stated impulse polynomial. Nonnegative khat and the endpoint values give unit mass, monotone 0<=Fhat<=1 and the zero-state bounded-input gain by convolution."
+    },
+    {
+      "id": "P1-R1-04",
+      "status": "verified",
+      "topic": "Driven frequency and energy identity",
+      "finding": "Laplace integration of each exponential monomial gives the three displayed terms. Independent exact rational polynomial expansion confirms numerator 1+(2-2*alpha-6*beta)*y+(1-2*alpha+2*beta)*y^2. Its denominator is strictly positive for y>=0, so (Q) is necessary and sufficient. The stable real L1 convolution acts boundedly on L2; extending causal input by zero, Plancherel yields nonnegative real inner product when Re Ghat>=0. This proves the stated zero-state energy inequality only, with R>0."
+    },
+    {
+      "id": "P1-R1-05",
+      "status": "verified",
+      "topic": "Local compatibility and Cayley exclusion",
+      "finding": "For alpha=t-t^2/2,beta=t^2/2, the impulse margin is exactly t^2*(1+t-5*t^2/4). On |t|<=1/4, its bracket is at least 43/64, A>=3/4 and C>=0; energy B=2-2*t-2*t^2>=11/8 and C=1-2*t+2*t^2>=1/2. Thus both constraints hold on an explicit two-sided neighbourhood while matching all central jets. C1 proves a negative free response at t=-1 for the Cayley map; nonnegative khat would force nonnegative Fhat, so this map fails the impulse condition."
+    },
+    {
+      "id": "P1-R1-06",
+      "status": "verified",
+      "topic": "Finite positive-bank obstruction",
+      "finding": "Differentiation in response age at zero gives mean lambda_c and second moment lambda_c^2, hence zero weighted variance. For distinct finite positive rates all mass is on the central rate. Every inactive nonnegative C1 weight has an interior minimum and derivative zero; the remaining derivative is zero by normalization. The bank sensitivity is therefore zero, contradicting physical sensitivity at positive age. The conclusion is limited to the exact-center fixed finite convex bank described."
+    },
+    {
+      "id": "P1-R1-07",
+      "status": "verified_conditional",
+      "topic": "Uniform response/sensitivity bounds and scope",
+      "finding": "For fixed b,R and input independent of query t, triangle and convolution inequalities give the two bounds. Compact t in [-1,1] keeps exact rate >=a/e; bounded alpha,beta and their derivatives provide polynomial-times-exponential dominators for all approximate kernels and derivatives. These prove finite uniform quantities, without useful numerical constants. Full physical-coordinate chains, joint uncertainty, H error, accumulated inference error, finite arithmetic, target resources and aging remain separate obligations."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "method": "Manual differentiation, quadratic case split, finite-bank moment argument and Fourier proof; standard-library Fraction sparse-polynomial identity checks in Q[alpha,beta,y] and Q[t].",
+    "command": "python3 -B - (standard-library fractions.Fraction polynomial expansion via heredoc)",
+    "exact_results": {
+      "frequency_numerator_residual": "zero polynomial",
+      "local_impulse_margin": "t^2*(1+t-5*t^2/4)",
+      "local_interval": "[-1/4,1/4]",
+      "local_margin_bracket_lower_bound": "43/64",
+      "local_energy_linear_coefficient_lower_bound": "11/8",
+      "local_energy_quadratic_coefficient_lower_bound": "1/2"
+    },
+    "tool_note": "An initial optional SymPy check was unavailable (ModuleNotFoundError); checks were completed with exact rational standard-library polynomial arithmetic.",
+    "limits": "No numerical sampling is used as proof. No estimator implementation, optimization, refit, support-wide useful error bound or target-memory qualification is reviewed."
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ae4ff8509b6b23dc169db92f6b3f0972bfeb6d49d0de56ad08f082fa4de791ba",
+    "PROJECT_STATE.json": "d6c0650fc2056dec7ab9c3e8e3a6084bb0ecd50ff549e2a53638a7d67775a2b8",
+    "specifications/constrained_operator_contract_001/P1.md": "a848e7444b1e9ca66ad54942128315c8620c20b3ecaa820f40e17c2355fe1140",
+    "specifications/shared_operator_budget_001/C1.md": "6f87ad148c7a593255496bd4194b34182a140169c650e33bd9b8be21fe0b48c6",
+    "specifications/symbolic_fixed_budget_001/K1.md": "21c354d286bb7c974d6ee5c304cd97de627579b81099588287b3cbc4f23c8d90",
+    "provenance/shared_operator_budget_001/c1_review_r1.json": "83527054da3e5e274004978a9af5f121dca62f65fec488ec554d21bee41c40e7",
+    "provenance/symbolic_fixed_budget_001/k1_review_r1.json": "ad4260fdcaea0fb9946b7130997f4de0b645b3529b922203036d6d52fdfc1bf0"
+  },
+  "remaining_obligations": [
+    "Correct the six-state necessity wording and independently re-review that revision.",
+    "Prove feasible useful full-support response and sensitivity bounds for any selected alpha/beta functions.",
+    "Retain the P2 joint inference/application and cumulative-error obligations; count implementation constants, derivatives, rounding and complete resources."
+  ],
+  "candidate_promoted": false,
+  "optimization_reviewed": false
+}

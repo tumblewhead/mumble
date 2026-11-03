@@ -1,0 +1,107 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/constrained_operator_contract_001/P2.md",
+  "review_round": 2,
+  "reviewer": "independent fresh-context agent /root/constraint_p2_review_r2",
+  "date": "2026-11-02",
+  "base_revision": "e6464caaae7599c4414c9219967489f840448e53",
+  "branch": "experiment/constrained-operator-contract-001",
+  "verdict": "accepted_conditional",
+  "scope": "Fresh independent whole-packet P2 proof and selection-protocol re-review after candidate-stationarity repair. P1 consulted only for admission definitions; no independent P1 acceptance or estimator qualification is implied.",
+  "blocking_findings": [],
+  "prior_findings_disposition": [
+    {
+      "id": "P2-R1-01",
+      "status": "resolved",
+      "reason": "Both direct and candidate fits must now be interior stationary points. With positive direct precision and ||A||<1, their quadratic objectives have positive-definite Hessians, so the stationary equation applies regardless of support convexity. Constrained nonstationary candidates are explicitly excluded. The preserved counterexample candidate theta=3 has gradient 1/2 and fails the new premise."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P2-R2-01",
+      "status": "verified",
+      "section": "Joint errors",
+      "finding": "Expansion of the residual score and Gram precision reproduces Delta g and A, retaining all state/nuisance derivatives, unchanged prior and RC/H cross terms. The affine theorem uses b at theta*, as specified by referenced J1; other common-anchor diagnostics retain their own declared anchor."
+    },
+    {
+      "id": "P2-R2-02",
+      "status": "verified_conditional",
+      "section": "Affine fitted-query bound",
+      "finding": "Subtracting the two stationary equations gives Phat d=-Delta g(theta*). Whiten to (I+A)z=-b. Since A is symmetric and ||A||<=epsilon<1, the inverse norm is at most 1/(1-epsilon). For affine qhat the fitted query difference is delta_q(theta*)+Ghat P^-1/2 z. The triangle and operator-norm inequalities give (1), with Lq applied to both the query defect and query derivative for a scaled vector query. No constrained optimum or truth error is covered."
+    },
+    {
+      "id": "P2-R2-03",
+      "status": "verified",
+      "section": "Covariance bound",
+      "finding": "With B=(I+A)^-1, ||B||<=1/(1-eA) and ||B-I||<=eA/(1-eA). Expanding the covariance difference as T(B-I)T^T+TBD^T+DBT^T+DBD^T proves (2) without any commutation assumptions. The covariance formula follows directly from the whitened precision factorization. It is restricted to a common-anchor local GN covariance."
+    },
+    {
+      "id": "P2-R2-04",
+      "status": "verified_conditional",
+      "section": "Nonlinear exact-Hessian bound",
+      "finding": "Integrating the exact candidate Hessian over the segment gives Hbar d=-Delta g(theta*) and Hbar>=m P0. Whitening yields the claimed displacement inequality. Integrating the candidate query derivative gives the stated scalar query consequence. Both stationary fits, the segment domain and uniform exact-Hessian lower bound are essential; GN positivity alone is not used."
+    },
+    {
+      "id": "P2-R2-05",
+      "status": "verified_scope",
+      "section": "Selection protocol",
+      "finding": "The fixed width/factor/state ceilings, whole-support physical admission, chronology/evidence ownership, full joint root, finite coefficient and derivative program, unit-scaled query consequences, Pareto ordering, predeclared optional minimax budgets and held-out streams form a consistent conditional comparison protocol. Regression reuse is not mislabeled independent confirmation. Failed sufficient bounds and unresolved fits do not establish physical exclusion."
+    },
+    {
+      "id": "P2-R2-06",
+      "status": "verified_scope",
+      "section": "Sustained use",
+      "finding": "For the B1 coherent response offset, E=0, A=0 and b=N delta/sqrt(N+lambda), so constant response error and unchanged covariance do not bound standardized fit displacement for all prefixes. P2 appropriately leaves uniform history/prefix error, deterministic approximation propagation, rounding, health/thermal evolution and lifetime authorization open."
+    }
+  ],
+  "independent_checks": {
+    "analytic": "Full independent matrix expansion, symmetric inverse spectral bounds, noncommuting covariance expansion, and stationary-gradient/query integration as detailed in findings.",
+    "exact_rational_witness": {
+      "method": "Python fractions.Fraction",
+      "J": "3/4",
+      "E": "-1/2",
+      "r": "0",
+      "e": "-4",
+      "Lambda": "7/16",
+      "P": "1",
+      "Phat": "1/2",
+      "Delta_g": "-1",
+      "stationary_candidate": "2",
+      "affine_displacement_bound": "2",
+      "R1_constrained_candidate_gradient": "1/2",
+      "status": "all assertions passed; repaired bound is attained by the admitted stationary candidate"
+    },
+    "supplemental_numerical_algebra": {
+      "method": "NumPy default_rng(20261102), 64 cases; J,E shapes (7,3), G,Ghat shapes (2,3), Lambda=I; E scaled by .03 and query perturbation by .1; symmetric eigendecomposition computes P^-1/2; checked score expansion, covariance identity against directly inverted candidate precision and inequality (2).",
+      "seed": 20261102,
+      "cases": 64,
+      "max_score_identity_absolute_error": 2.220446049250313e-15,
+      "max_covariance_identity_absolute_error": 3.552713678800501e-15,
+      "max_covariance_discrepancy_to_bound_ratio": 0.9415120290919923,
+      "status": "all assertions passed",
+      "interpretation": "Supplemental finite algebra checks only; the analytic proof supplies the general claim."
+    },
+    "original_preservation": "SHA256 of originals/P2_r1.md equals the P2 binding in p2_review_r1.json.",
+    "finite_estimator_experiments_run": false,
+    "new_tolerances_allocated": false,
+    "proof_or_implementation_edited": false
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ae4ff8509b6b23dc169db92f6b3f0972bfeb6d49d0de56ad08f082fa4de791ba",
+    "PROJECT_STATE.json": "d6c0650fc2056dec7ab9c3e8e3a6084bb0ecd50ff549e2a53638a7d67775a2b8",
+    "specifications/constrained_operator_contract_001/README.md": "276ce0138421f8dc3a7514466db91b434762ecb6627f2bf9b74c7ab9477779f3",
+    "specifications/constrained_operator_contract_001/P1.md": "1f16ae3d7d157ed9a2cb52d8b847a3f3b165eca5bd4404fb6e1930afe1870aae",
+    "specifications/constrained_operator_contract_001/P2.md": "867391b6e42044f3a7de15251217cabe2346105c2303d4504f53551ffa51cf69",
+    "specifications/symbolic_fixed_budget_001/J1.md": "dd446280a8b747f128af224054da0529a8dbb616c300c2623b1b82d229477dbc",
+    "specifications/symbolic_fixed_budget_001/B1.md": "1a1a8ecc24a873f0db936352286fbe045eb8d80d20e87c069de14981257b1ace",
+    "provenance/constrained_operator_contract_001/p2_review_r1.json": "a46f1f840e5f47abe73ed2e69f6f10076fb2304ffca66853bf0d1fb6fd062854",
+    "provenance/constrained_operator_contract_001/originals/P2_r1.md": "7aabf13fc92a2f4b4fc561889039273eaac3343f93fc9ffb94a99271b830a4a5"
+  },
+  "remaining_obligations": [
+    "Prove full-support physical feasibility and useful joint response/sensitivity/query error for any actual selected coefficient functions.",
+    "Verify numerical fit statuses and exact-Hessian premises before invoking fitted-query bounds; local GN covariance is not calibrated coverage.",
+    "Measure full resources including code/constants, scratch, stack, platform and fault recovery; the factor ceiling is not a device qualification.",
+    "Qualify uniform sustained-use approximation, rounding and health/thermal evolution separately."
+  ]
+}

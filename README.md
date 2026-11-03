@@ -296,6 +296,18 @@ before stack/other costs. Next formulate constrained joint operator selection an
 a transactional memory schedule before another implementation; these subtotals
 do not establish general10KiB infeasibility.
 
+The [constrained operator contracts](provenance/constrained_operator_contract_001/README.md)
+now derive exact monotone-response and driven-energy constraints, joint error
+criteria and a conditional memory schedule. A new lower bound shows the current
+three-jet family cannot reduce monotone free-kernel error below0.0745294 at the
+fast support edge; this is not a fitted battery-error bound. Stop map-only tuning
+below that floor. Proposed serialized named memory peaks at8568B (9528B with a
+general prior), excluding unqualified helpers/stack/queues/recovery. Prevalidation
+can avoid a duplicate factor; mid-write faults require quarantine, not rollback.
+Four proofs received individual review, including fresh reviews of two corrections.
+No estimator or default changed. Next validate the memory schedule in an isolated
+kernel and derive a different fixed-rank response family before another fit.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

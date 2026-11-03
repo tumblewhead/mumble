@@ -1,0 +1,87 @@
+{
+  "schema": "constrained_operator_contract_proof_review_v1",
+  "proof": "P1",
+  "round": 2,
+  "reviewer": "fresh independent individual agent /root/constraint_p1_review_r2",
+  "status": "accepted_conditional",
+  "verdict": "accept revised P1 within its explicitly stationary exact-arithmetic scope",
+  "base_revision": "e6464caaae7599c4414c9219967489f840448e53",
+  "branch": "experiment/constrained-operator-contract-001",
+  "proof_source_edited_by_reviewer": false,
+  "blockers": [],
+  "findings": [
+    {
+      "id": "P1-R2-01",
+      "status": "resolved",
+      "prior_finding": "P1-R1-01",
+      "finding": "The sole proof change replaces six-state necessity with retention of the existing slots, distinguishes free and forced triples, and explicitly disclaims a minimal-storage theorem. This accurately states the chosen unchanged recurrence. The preserved original exactly matches the r1 proof hash."
+    },
+    {
+      "id": "P1-R2-02",
+      "status": "verified",
+      "topic": "Shared operator and central matching",
+      "finding": "Independent differentiation gives F_t=d exp(-d), F_tt=(d^2-d)exp(-d); applying L yields the stated quadratic. Independence of d and d^2 on all ages gives precisely the six central matching conditions. Differentiating each actual-interval exponential update twice closes the retained central jets. Linearity, constant reproduction and time differentiation preserve complementary step response and arbitrary finite chronological input superposition."
+    },
+    {
+      "id": "P1-R2-03",
+      "status": "verified",
+      "topic": "Impulse constraints",
+      "finding": "Differentiating the free polynomial gives A=1-alpha, B=alpha-2 beta, C=beta. The half-line quadratic case split covers C=0, A=0 and zero discriminant. With endpoints 1 and 0, nonnegative impulse implies monotone free relaxation in [0,1], unit kernel mass and zero-state L-infinity gain at most one."
+    },
+    {
+      "id": "P1-R2-04",
+      "status": "verified",
+      "topic": "Energy constraints",
+      "finding": "Laplace integrals yield coefficients 1-alpha, alpha-2 beta, 2 beta over the three repeated stable poles. Independent exact expansion confirms the real-part numerator. Applying the same half-line criterion is both necessary and sufficient for nonnegative real part. The stable L1 kernel permits the L2 Fourier inner-product argument, proving precisely the zero-state integrated energy inequality for positive R. Arbitrary-state storage and whole-cell passivity are expressly excluded."
+    },
+    {
+      "id": "P1-R2-05",
+      "status": "verified",
+      "topic": "Local feasibility and Cayley rejection",
+      "finding": "The local quadratic choice has impulse margin t^2*(1+t-5*t^2/4). On |t|<=1/4 its bracket is >=43/64 and A>0, beta>=0. The energy linear coefficient 2-2t-2t^2 is >=11/8 and quadratic coefficient 1-2t+2t^2 is >=1/2. This proves a two-sided local feasible neighbourhood including the degenerate central impulse polynomial. C1 negative free response at t=-1 contradicts the implication of a nonnegative impulse, so rejection is justified."
+    },
+    {
+      "id": "P1-R2-06",
+      "status": "verified",
+      "topic": "Positive finite bank obstruction",
+      "finding": "Exact centre equality supplies zero weighted rate variance from the first two age derivatives. Fixed distinct rates therefore permit only the central pole to carry mass. Each inactive C1 nonnegative weight has derivative zero at its interior minimum; normalization gives the active derivative zero too. The resulting zero query sensitivity contradicts the positive physical sensitivity at positive age. The conclusion is correctly limited to this fixed finite convex bank."
+    },
+    {
+      "id": "P1-R2-07",
+      "status": "verified_conditional",
+      "topic": "Response error and scope",
+      "finding": "With initial branch voltage b, R and current held fixed in the partial log-tau derivative, the displayed triangle/convolution bounds follow. Compact physical t support gives exact decay at least a/e, while bounded coefficient derivatives give integrable polynomial-exponential dominators. Finite uniform bounds follow but no useful numerical certificate is claimed. Full joint coordinate chains, inference error, H error, cumulative error, rounding, aging and complete target resources remain open."
+    }
+  ],
+  "independent_checks": {
+    "status": "passed",
+    "method": "Fresh full proof read, direct differentiation and quadratic case analysis, Fourier and moment arguments; independent standard-library Fraction multivariate polynomial arithmetic.",
+    "exact_results": {
+      "frequency_numerator_residual": "zero polynomial",
+      "local_impulse_margin": "t^2*(1+t-5*t^2/4)",
+      "local_interval": "[-1/4,1/4]",
+      "local_margin_bracket_lower_bound": "43/64",
+      "original_matches_r1_hash": true
+    },
+    "command": "python3 -B - via heredoc; exact Fraction sparse polynomial expansion and SHA256 source bindings",
+    "limits": "Algebraic checks support the conditional proof; no estimator, optimization, candidate full-support fit, numerical coverage, or target qualification was reviewed."
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ae4ff8509b6b23dc169db92f6b3f0972bfeb6d49d0de56ad08f082fa4de791ba",
+    "PROJECT_STATE.json": "d6c0650fc2056dec7ab9c3e8e3a6084bb0ecd50ff549e2a53638a7d67775a2b8",
+    "specifications/constrained_operator_contract_001/README.md": "276ce0138421f8dc3a7514466db91b434762ecb6627f2bf9b74c7ab9477779f3",
+    "specifications/constrained_operator_contract_001/P1.md": "1f16ae3d7d157ed9a2cb52d8b847a3f3b165eca5bd4404fb6e1930afe1870aae",
+    "specifications/shared_operator_budget_001/C1.md": "6f87ad148c7a593255496bd4194b34182a140169c650e33bd9b8be21fe0b48c6",
+    "specifications/symbolic_fixed_budget_001/K1.md": "21c354d286bb7c974d6ee5c304cd97de627579b81099588287b3cbc4f23c8d90",
+    "provenance/constrained_operator_contract_001/p1_review_r1.json": "ce5d36cf7cae30f41a369f97f954761a8aa0ead599e886fbcf141e775c4af727",
+    "provenance/constrained_operator_contract_001/originals/P1_r1.md": "a848e7444b1e9ca66ad54942128315c8620c20b3ecaa820f40e17c2355fe1140"
+  },
+  "remaining_obligations": [
+    "Select and prove a feasible coefficient map over original full support with useful response/sensitivity error bounds.",
+    "Discharge P2 full joint inference/application and accumulated-error requirements.",
+    "Count actual code/constants, derivative cost, arithmetic error and complete target resources; retain stationary scope and separate aging contracts."
+  ],
+  "candidate_promoted": false,
+  "optimization_reviewed": false
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "mumble_independent_proof_review_v1",
+  "proof": "specifications/constrained_operator_contract_001/P4.md",
+  "reviewer": "fresh independent agent /root/constraint_p4_review",
+  "reviewed_at_utc": "2026-11-03T05:18:13.449949+00:00",
+  "source_revision": "e6464caaae7599c4414c9219967489f840448e53",
+  "branch": "experiment/constrained-operator-contract-001",
+  "verdict": "accept_conditional",
+  "findings": [],
+  "checks": [
+    {
+      "id": "impulse_polynomial",
+      "status": "pass",
+      "method": "independent differentiation",
+      "detail": "For P=1+alpha*d+beta*d^2, -d(exp(-d)P)/dd = exp(-d)(P-Pprime), giving (1-alpha)+(alpha-2*beta)*d+beta*d^2. Positive a does not alter signs."
+    },
+    {
+      "id": "feasible_set",
+      "status": "pass",
+      "method": "independent half-line quadratic minimum and exact rational polynomial arithmetic",
+      "detail": "Nonnegativity implies beta>=0, alpha<=1; for B=alpha-2*beta>=0 the cone has alpha>=2*beta>=0. For B<0 its discriminant condition is alpha^2+(2*beta-1)^2<=1. Exact polynomial expansion matched alpha^2-4*beta+4*beta^2."
+    },
+    {
+      "id": "all_age_envelope",
+      "status": "pass",
+      "method": "independent Cauchy-Schwarz derivation",
+      "detail": "With v=2*beta-1 the disk contribution alpha*d+v*d^2/2 is at least -sqrt(d^2+d^4/4)=-d*sqrt(1+d^2/4) for d>=0. The cone gives polynomial>=1; the disk lower envelope is <=1 because d/2<=sqrt(1+d^2/4). Thus all admissible coefficients, including beta=0 and equality cases, obey the envelope."
+    },
+    {
+      "id": "fast_support_floor",
+      "status": "pass",
+      "method": "independent dimension and support substitution",
+      "detail": "At t=log(tau/tau_c)=-1 and d=age/tau_c=1, exact response is exp(-e). The approximate lower value is exp(-1)*(3-sqrt(5))/2, so the positive signed discrepancy bounds absolute discrepancy and the supremum over age/support."
+    },
+    {
+      "id": "analytic_positive_floor",
+      "status": "pass",
+      "method": "manual strict inequalities plus executed exact Fraction arithmetic",
+      "detail": "sqrt(5)<9/4 gives coefficient>3/8. Positive factorial series gives e>8/3, and factorial geometric majorant gives e<3. Thus exp(e-1)>1+5/3+(5/3)^2/2=73/18>4, giving discrepancy>exp(-1)/8>1/24."
+    },
+    {
+      "id": "initial_slope",
+      "status": "pass",
+      "method": "independent set bound",
+      "detail": "Cone alpha>=0 and disk alpha>=-1 imply khat(0)/a=1-alpha<=2, while exact k(0)/a=e. P4 correctly avoids using slope mismatch alone as proof of a value-error floor."
+    },
+    {
+      "id": "additional_constraints",
+      "status": "pass",
+      "method": "set inclusion",
+      "detail": "Centre matching, query smoothness and dissipativity restrict the feasible family, so cannot reduce this universal lower bound. The proof needs no existence or attainment claim for simultaneous full-support constraints."
+    },
+    {
+      "id": "scope_and_decision",
+      "status": "pass",
+      "method": "independent review of P4 and stage README",
+      "detail": "The result concerns stationary degree-two exponential-polynomial responses at the original fast query. Scaling by fixed incoming branch voltage is valid. Refitting, cancellation, small incoming state, and task tolerance remain explicit exclusions. Stopping map-only searches below the proven floor follows; rejecting all practical use, all W34 representations, or deployment on a numerical cutoff would not follow and is not claimed."
+    }
+  ],
+  "numerical_crosscheck": {
+    "method": "Python math float; illustrative, not certificate",
+    "free_response_lower": 0.14051744276517353,
+    "exact_free_response": 0.06598803584531254,
+    "discrepancy_floor": 0.07452940691986099,
+    "strict_rational_floor": "1/24"
+  },
+  "tool_note": "SymPy was unavailable. No package installation was needed; exact polynomial identity was checked with a small independent Fraction coefficient-ring implementation, and the inequalities were independently derived by hand.",
+  "scope_limits": [
+    "Not an impossibility theorem for all rank-three or W34 summaries.",
+    "No fitted battery-error, coverage, aging, full-support candidate construction or deployment qualification follows.",
+    "P1 reviewed here only for premises relevant to P4; this does not replace its separate full review."
+  ],
+  "source_sha256": {
+    "specifications/constrained_operator_contract_001/P4.md": "05373774e8cd2a8167f02adef5084766cd39683703fa062b7828b08aa720360d",
+    "specifications/constrained_operator_contract_001/P1.md": "1f16ae3d7d157ed9a2cb52d8b847a3f3b165eca5bd4404fb6e1930afe1870aae",
+    "specifications/constrained_operator_contract_001/README.md": "374728c18fe3a2738483bd01d8f847df7936cd725478489aee87fc999e4186eb",
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ae4ff8509b6b23dc169db92f6b3f0972bfeb6d49d0de56ad08f082fa4de791ba",
+    "PROJECT_STATE.json": "d6c0650fc2056dec7ab9c3e8e3a6084bb0ecd50ff549e2a53638a7d67775a2b8"
+  },
+  "changes": "Only this review receipt was written; no specification or implementation edits."
+}

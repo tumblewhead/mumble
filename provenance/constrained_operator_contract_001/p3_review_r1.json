@@ -1,0 +1,87 @@
+{
+  "schema": "constrained_operator_individual_review_v1",
+  "packet": "P3",
+  "round": 1,
+  "reviewer": "independent fresh-context agent /root/constraint_p3_review",
+  "source_revision": "e6464caaae7599c4414c9219967489f840448e53",
+  "branch": "experiment/constrained-operator-contract-001",
+  "scope": "Conditional paper proof and optimization-design review only; no implemented C savings, actual allocator or deployment qualification.",
+  "verdict": "accepted_conditionally",
+  "blocking_findings": [],
+  "bindings_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ae4ff8509b6b23dc169db92f6b3f0972bfeb6d49d0de56ad08f082fa4de791ba",
+    "PROJECT_STATE.json": "d6c0650fc2056dec7ab9c3e8e3a6084bb0ecd50ff549e2a53638a7d67775a2b8",
+    "specifications/constrained_operator_contract_001/README.md": "276ce0138421f8dc3a7514466db91b434762ecb6627f2bf9b74c7ab9477779f3",
+    "specifications/constrained_operator_contract_001/P3.md": "427e1686bc19423d3b5192fdfec30cc4caffbe63eaed84d5f7376e8eb0f457cc",
+    "specifications/architecture_contracts_001/A3.md": "3694de6894a35778d5911a7aeb9f7eb0b764ae58a9ef2ae919b44ce9a410c4a9",
+    "specifications/architecture_contracts_001/A4.md": "c4636c66870a58601817d80fec3485ee9963fed5b322fffe999e47499ef30da7",
+    "provenance/shared_operator_budget_001/probe.json": "dc9e019bdc8ddc49a6a81b4a38b0649a219aafdf410eafaa55319020a2b3c4c1"
+  },
+  "reviewed_arguments": [
+    {
+      "id": "P3-R1-1",
+      "topic": "Read-only validation and deterministic replay",
+      "disposition": "accepted_under_explicit_premises",
+      "reason": "At rotation k only old row k and evolving scratch x are read. No previously overwritten row is read by later k. Read-only candidate evaluation therefore has the same operand sequence as copied-factor or in-place insertion. Fixed scalar order, rounding, canonicalization, frozen input/configuration and reproducible row generation are indispensable. The complete real validation predicate set and generator scratch remain implementation obligations."
+    },
+    {
+      "id": "P3-R1-2",
+      "topic": "Rollback, ownership and quarantine",
+      "disposition": "accepted_under_explicit_premises",
+      "reason": "Prevalidation rejection leaves the complete old generation unchanged and the same input unconsumed. After overwrite begins there is no rollback factor; synchronized updating/quarantine must revoke current authority, and uncertain completion cannot be retried as ordinary unconsumed input. Qualified replay/checkpoint or information-losing public aged-support initialization is correctly required. This is consistent with A3/A4 and does not establish arbitrary-fault detection, durable resets or useful availability."
+    },
+    {
+      "id": "P3-R1-3",
+      "topic": "Rowwise augmented joint QR",
+      "disposition": "accepted_under_explicit_premises",
+      "reason": "The streamed rows equal [U Dphi,U phi] rowwise, followed by original prior Jacobian/residual rows. Orthogonal insertion preserves the full augmented Gram matrix, including all cross terms and residual norm. For full-column-rank parameter Jacobian, R step=-c and R^T y=gq give joint GN step and local covariance; singularity remains explicitly unresolved. A general prior retains its full root and transformed derivatives. Damping is not evidence. Floating equality to dense BLAS and statistical coverage are not claimed."
+    },
+    {
+      "id": "P3-R1-4",
+      "topic": "Phase lifetimes and buffers",
+      "disposition": "accepted_as_named_partial_ledger",
+      "reason": "Streaming retains old and staged response plus held sample and single QR row. Fit names root, features, emitted derivative, augmented row, distinct current/trial/step and scalar allowance. Trial rejection may recompute old linearization from immutable U. Query root and theta can survive the fit-to-query transition while fit-only buffers are released; query gradients can occupy the two in-place triangular-solve buffers. Five dynamic states and 5x16 sensitivities require 680 B. Streaming output and serialized phases are necessary; actual feature/response generators, helper frames, buffering and synchronization are explicitly excluded."
+    },
+    {
+      "id": "P3-R1-5",
+      "topic": "Savings and complete feasibility",
+      "disposition": "accepted_without_deployment_claim",
+      "reason": "The comparisons use the source-bound old named ledger, not a universal lower bound or measured implementation. New peak remains partial. Generic prior adds 960 B; checkpoint/recovery redundancy is not hidden. SRAM feasibility and cadence feasibility remain open until all excluded costs and worst-case timing are measured and bound."
+    }
+  ],
+  "ledger_independent_arithmetic_B": {
+    "persistent": 6216,
+    "stream_scratch": 624,
+    "stream_total": 6840,
+    "fit_scratch": 2208,
+    "fit_total": 8424,
+    "query_scratch": 2352,
+    "query_total": 8568,
+    "maximum_serial_named_total": 8568,
+    "nominal_unallocated_to_10240": 1672,
+    "generic_full_prior_addition": 960,
+    "generic_prior_named_peak": 9528,
+    "generic_prior_nominal_unallocated": 712,
+    "stream_named_saving": 4760,
+    "fit_named_saving": 3488
+  },
+  "independent_checks": {
+    "seed": 271828,
+    "scalar_QR_cases": 32,
+    "dry_run_unchanged_and_replay_reference_bitwise_equal": true,
+    "max_relative_Gram_residual": 4.514276425727342e-16,
+    "joint_root_relative_Gram_residual": 7.655122248809079e-16,
+    "step_relative_error_against_dense_lstsq": 3.369731917771512e-15,
+    "two_query_covariance_relative_error": 7.518448584501465e-16,
+    "scope": "Finite binary64 scalar algorithm witnesses with fixed random seed, including zero rows/roots and a nondiagonal full prior; no C allocation, fault injection, actual feature generator or lifetime qualification."
+  },
+  "check_method": "Independent Python/NumPy binary64 scalar insertion; sizes 1,3,17,34 and eight cases each, including zero root and zero row. Compared dry-run candidate bytes and unchanged input with copied-factor and in-place scalar paths. Separate 34-feature,16-parameter joint augmented QR included a random full triangular prior; compared Gram identity, least-squares step and two-query covariance to dense calculations. Source proof was not edited.",
+  "remaining_gate": [
+    "Port exact row generator, all validations and scalar QR schedule in isolated C; prove/count all helper lifetimes.",
+    "Inject admission, mid-write, commit, duplicate, gap and reset faults with synchronized authority revocation; no ordinary retry after uncertain consumption.",
+    "Compare joint precision, gradient, cost, steps and transported covariance to dense reference with declared floating tolerances.",
+    "Bind compiled layout, full stack/library use, queues, ISR nesting, recovery storage, deadlines and CPU share before claiming ~10 KiB feasibility.",
+    "Independent optimization review and substantive-change re-review remain required."
+  ]
+}

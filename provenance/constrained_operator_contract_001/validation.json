@@ -1,0 +1,41 @@
+{
+  "status": "reviewed_conditional_contracts_finite_witnesses_passed_no_implementation_promotion",
+  "base_revision": "e6464caaae7599c4414c9219967489f840448e53",
+  "checks": {
+    "QR_sizes": 4,
+    "affine_joint_controls": 100,
+    "anticipated_nonfinite_rejections": 8,
+    "dense_joint_step_and_covariance_controls": 1,
+    "exact_local_feasibility_points": 33,
+    "frequency_identity_points": 200,
+    "monotone_family_floor_controls": 200,
+    "nonstationary_support_counterexample": 1,
+    "postwrite_fault_positions_quarantined_in_model": 764,
+    "preserved_Cayley_rejection": 1
+  },
+  "review_bindings_verified": 71,
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.constrained_operator_contract_001.check --out provenance/constrained_operator_contract_001/checks_r2.json",
+    "python3 -B -m experiments.architecture_reuse_001.gate",
+    "git diff --check"
+  ],
+  "independent_reproduction": "checks_r2.json exactly reproduced by integration reviewer",
+  "architecture_gate": {
+    "status": "reviewed_bindings_match",
+    "files": 55
+  },
+  "prior_shared_operator_substantive_bindings_unchanged": 17,
+  "proof_reviews": {
+    "P1": "p1_review_r2.json",
+    "P2": "p2_review_r2.json",
+    "P3": "p3_review_r1.json",
+    "P4": "p4_review_r1.json"
+  },
+  "revisions": {
+    "P1": "Removed unsupported minimal-storage assertion; original retained, fresh re-review accepted",
+    "P2": "Added candidate stationary/interior premise; original and counterexample retained, fresh re-review accepted"
+  },
+  "new_battery_fits": 0,
+  "new_production_bytes": 0,
+  "full_target_memory_or_timing_qualified": false
+}

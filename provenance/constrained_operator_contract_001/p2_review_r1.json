@@ -1,0 +1,92 @@
+{
+  "schema": "independent-proof-review-v1",
+  "proof": "specifications/constrained_operator_contract_001/P2.md",
+  "review_round": 1,
+  "reviewer": "independent fresh-context agent /root/constraint_p2_review",
+  "date": "2026-11-02",
+  "base_revision": "e6464caaae7599c4414c9219967489f840448e53",
+  "branch": "experiment/constrained-operator-contract-001",
+  "verdict": "revision_required",
+  "scope": "Individual conditional P2 mathematical and selection-contract review; P1 consulted for definitions only, not accepted by this review. No proof, candidate, estimator or production changes.",
+  "blocking_findings": [
+    {
+      "id": "P2-R1-01",
+      "severity": "premise_gap",
+      "section": "Conditional local uncertainty and fitted-query bounds",
+      "finding": "The affine fit bound explicitly assumes an interior direct minimizer but leaves candidate fit stationarity and support convexity unspecified. J1 stationarity inversion does not apply to an arbitrary support-constrained candidate fit. Preserving support alone does not establish the missing premise.",
+      "counterexample": {
+        "support": "[-1/10,1/10] union [3,31/10]",
+        "same_prior": "pi(theta)=7 theta^2/32",
+        "direct_residual": "3 theta/4",
+        "candidate_residual": "theta/4-4",
+        "direct_fit": "0 (interior)",
+        "candidate_constrained_global_fit": "3",
+        "P": "1",
+        "Phat": "1/2",
+        "A": "-1/2",
+        "b_at_direct_fit": "-1",
+        "displayed_upper_bound": "2",
+        "candidate_cost_at_3": "29/4",
+        "minimum_candidate_cost_in_reference_component": "3161/400"
+      },
+      "required_revision": "Explicitly assume the candidate is a stationary unconstrained quadratic optimum lying within the original support; alternatively state convex feasible support and prove the inequality using constrained optimality. Apply the same premise to the consequent affine fitted-query bound."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P2-R1-02",
+      "status": "verified_conditional",
+      "section": "Joint errors",
+      "finding": "Expanding (J+E)^T(r+e)-J^T r gives J^T e+E^T r+E^T e. Expanding candidate Gram precision gives J^T E+E^T J+E^T E. All state/nuisance and RC/H cross terms are retained, and unchanged prior cancels in score difference."
+    },
+    {
+      "id": "P2-R1-03",
+      "status": "verified_subject_to_P2-R1-01",
+      "section": "Affine fitted-query bound",
+      "finding": "With both stationary fits, z=-(I+A)^-1 b. Symmetric A with norm<=epsilon<1 implies inverse norm<=1/(1-epsilon). For affine qhat, qhat(thetahat)-q(theta*)=delta_q(theta*)+Ghat P^-1/2 z exactly. Triangle and Cauchy-Schwarz give (1); multiplying both query defect and derivative by the declared Lq gives the vector version. The named a_q is not a derived compressor budget."
+    },
+    {
+      "id": "P2-R1-04",
+      "status": "verified",
+      "section": "Covariance bound (2)",
+      "finding": "Let B=(I+A)^-1. Then ||B||<=1/(1-eA), ||B-I||<=eA/(1-eA). Expand covariance difference as T(B-I)T^T+TBD^T+DBT^T+DBD^T and apply submultiplicativity, producing exactly the numerator and denominator in (2). This is a common-anchor local GN statement; no fitted nonlinear covariance or posterior coverage follows."
+    },
+    {
+      "id": "P2-R1-05",
+      "status": "verified_conditional",
+      "section": "Nonlinear exact-Hessian alternative",
+      "finding": "Under the stated Hessian/segment smoothness and stationarity premises, integrating gradient difference gives Hbar d=-Delta g(theta*). Congruence by P0^-1/2 gives Hbar whitened >=m I, hence the claimed displacement bound. Integrating Dqhat along the same segment and using its stated uniform operator norm gives the scalar query consequence. This correctly requires the exact Hessian and does not substitute GN precision."
+    },
+    {
+      "id": "P2-R1-06",
+      "status": "verified_scope",
+      "section": "Selection protocol",
+      "finding": "Fixed W/factor/response-state ceilings, whole-support physical admission, joint root/ownership, signed and off-centre controls, full transport, predeclared unit scaling, Pareto reporting and held-out registration preserve the declared inference/resource scope. No new numeric approximation tolerance is allocated. Existing reused cases are appropriately regression rather than independent confirmation. Physical support proof and implementable resource accounting remain obligations."
+    },
+    {
+      "id": "P2-R1-07",
+      "status": "verified_scope",
+      "section": "Sustained use",
+      "finding": "B1 gives b=N delta/sqrt(N+lambda) with A=0, so a constant response defect can produce unbounded local-standard-deviation displacement while covariance agrees exactly. P2 correctly requires uniform history/prefix controls and separate rounding/evolution qualification, and does not reclassify deterministic bias as independent noise or certify aging/coverage from stationary approximation constraints."
+    }
+  ],
+  "verification": {
+    "method": "Independent matrix expansion, spectral inequalities, segment integration and exact rational constrained-support counterexample.",
+    "exact_counterexample_check": "Python fractions.Fraction assertions passed: P=1, Phat=1/2, A=-1/2, b=-1, bound=2, candidate fit=3, candidate interval costs 29/4<3161/400. Derivative theta/2-1 gives the claimed endpoint minima on both support components.",
+    "finite_estimator_experiments_run": false,
+    "tolerances_added": false
+  },
+  "sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "ae4ff8509b6b23dc169db92f6b3f0972bfeb6d49d0de56ad08f082fa4de791ba",
+    "PROJECT_STATE.json": "d6c0650fc2056dec7ab9c3e8e3a6084bb0ecd50ff549e2a53638a7d67775a2b8",
+    "specifications/constrained_operator_contract_001/P2.md": "7aabf13fc92a2f4b4fc561889039273eaac3343f93fc9ffb94a99271b830a4a5",
+    "specifications/constrained_operator_contract_001/P1.md": "a848e7444b1e9ca66ad54942128315c8620c20b3ecaa820f40e17c2355fe1140",
+    "specifications/symbolic_fixed_budget_001/J1.md": "dd446280a8b747f128af224054da0529a8dbb616c300c2623b1b82d229477dbc",
+    "specifications/symbolic_fixed_budget_001/B1.md": "1a1a8ecc24a873f0db936352286fbe045eb8d80d20e87c069de14981257b1ace"
+  },
+  "remaining_obligations": [
+    "Fresh individual re-review after the affine premise repair.",
+    "No certification of physical full-support approximations, complete target resources, lifetime rounding, health evolution or calibrated coverage follows from P2."
+  ]
+}
