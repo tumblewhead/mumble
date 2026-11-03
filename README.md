@@ -308,6 +308,11 @@ Four proofs received individual review, including fresh reviews of two correctio
 No estimator or default changed. Next validate the memory schedule in an isolated
 kernel and derive a different fixed-rank response family before another fit.
 
+The [next mathematical problem statement](specifications/next_history_representation_001/PROBLEM.md) is saved with the
+structural limit, fixed resource budgets, joint-inference requirements and resume
+context. See [the checkpoint](handoff/next_history_checkpoint.json) and
+[continuation handoff](handoff/CONTINUE.json). No new candidate is selected.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
