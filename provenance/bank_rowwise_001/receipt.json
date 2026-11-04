@@ -1,0 +1,78 @@
+{
+  "schema": "bank_rowwise_receipt_v1",
+  "branch": "experiment/bank-rowwise-001",
+  "base_revision": "bef6ef7",
+  "worktree": "/home/easy/proj/mumble/.worktrees/bank-rowwise",
+  "status": "reviewed_native_inference_integration_not_full_firmware",
+  "guide": "experiments/bank_rowwise_001/README.md",
+  "source_sha256": {
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/bank_rowwise_001/test_core.py": "e3c2e6ca2e76ec1328838f2d062c73a2d0b37445e2f8f832726119004d030114",
+    "experiments/bank_rowwise_001/backend.py": "4da59ddb3b3633b95e0d91b729ba76d8a5b2e01d3d9a485624c8a4d16c471d71",
+    "experiments/bank_rowwise_001/test_campaign.py": "9e8d43e2b9186f8ef146c33a4adac7b8f114da9a993f265150290c48af01fb4a",
+    "experiments/bank_rowwise_001/measure.py": "c056950c7fdeec4c98a9942f22917b1b2d7d2535e4e490cb6762b0e67aa0f3ef",
+    "experiments/bank_rowwise_001/core.c": "e8ba5e67a613b4384743ce84e669f15a421166f50fb1c4d12e412c492dd3ecbf",
+    "experiments/bank_rowwise_001/README.md": "e079fd76824cbc6ae57b5148f9386c8182e620991d8355ecd397839ca32e8178",
+    "experiments/foster_campaign_001/run.py": "580c4f9c4a5c354e2d123248dac60fa40201d39fb8061623f3ed876df105f554",
+    "experiments/foster_campaign_001/backend.py": "6f9f2ebdb48ec710f541ecccfb0d262faa442fbf95be3ce2c86aedf4c3ebef18",
+    "experiments/foster_campaign_001/compact.py": "fa6c2895f6e0321944e3fcdb6e144525ad4a3434f1a161cd5bff47935717b451",
+    "experiments/foster_campaign_001/distinct_backend.py": "669d6141ba67a363cc66d2c8a669aa217d3e7929da488dc6113282f521385785",
+    "experiments/foster_campaign_001/plot.py": "94b2295d01a0275c4811da91bd5a6de8d80939a4ea6d79bab409062ccd993132"
+  },
+  "reviews": [
+    "provenance/bank_rowwise_001/review_r1.json",
+    "provenance/bank_rowwise_001/review_r2.json",
+    "provenance/bank_rowwise_001/stack_review_probe003.json",
+    "provenance/bank_rowwise_001/stack_review.json",
+    "provenance/bank_rowwise_001/stack_review_r2.json"
+  ],
+  "tests": {
+    "passed": 13,
+    "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.bank_rowwise_001.test_core experiments.bank_rowwise_001.test_campaign -v"
+  },
+  "paired_campaign": "experiments/bank_rowwise_001/paired4h001",
+  "paired_result_receipt": "provenance/bank_rowwise_001/paired4h.json",
+  "target": {
+    "probe": "experiments/bank_rowwise_001/target_probe005",
+    "core_target": "cortex-m23",
+    "float_abi": "soft",
+    "emulator": "QEMU mps2-an505 Cortex-M33",
+    "compiler": "arm-none-eabi-gcc (Arch Repository) 16.2.0",
+    "artifacts_sha256": {
+      "fixture.h": "03ab5237dbd2ee42cf4420c0db2ae426ff34e128164e58b54330a022c8f74659",
+      "probe.c": "3856e10f7f983f07dd944ba092871832a59bcca0a2a3e94e52b7d6110dfcbad7",
+      "link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+      "probe.elf-probe.su": "676ba63f549a06ca36f292b03d70aa67a4a794beb81948f6f367d58ce37972e4",
+      "probe.map": "e75916f4eb8414ba802c707c976ab2495483a228d6f94cea4f321db2ff26ecfb",
+      "probe.elf": "2a82331911c457b668fa707d8ec310de82963c2d5d5a21a332fbeee8ffd1b132",
+      "measurement.json": "317e82e1729d098f3b45639c3cf97468e491fdf9d90c375fb494c6ffcf496c81"
+    },
+    "named_estimator_allocation_B": 8560,
+    "native_context_B": 2376,
+    "static_data_B": 296,
+    "static_bss_B": 8888,
+    "static_RAM_B": 9184,
+    "observed_stack_B": 632,
+    "observed_total_B": 9816,
+    "with_unproven_1024B_stack_reserve_B": 10208,
+    "scope": "Actual linked retained-history inference probe. Fixed prior/centre/tables inROM. Not fullstreaming/deviceallocation, worstcasestack, timing orM23hardwarevalidation."
+  },
+  "repairs": [
+    "Namespaced scratch step symbol after libc symbol interposition crash",
+    "Validated dtype/shape/finite buffers at Python/C boundary",
+    "Scalar-only interface estimates current point and validates fullSOC/H endpoint support",
+    "Shortened initialization config lifetime; immutable original configuration usesROM"
+  ],
+  "preserved": [
+    "Running h7-campaign checkout unchanged",
+    "Original reduced-bank approximation, prior, support and local-precision semantics",
+    "Earlier failed probe/precision results"
+  ],
+  "limits": [
+    "Host compatibility output still allocates covariance matrices forplots/checkpoints",
+    "Native sample-to-history generation/transaction, ISR/application queues andworst-case stack remain open",
+    "Observed stack not a uniform bound;1KiBreservationleavesonly32Bheadroom",
+    "Temperature/aging, lifetimefloatingpoint andcoverage remainunqualified"
+  ],
+  "next": "Port and qualify bounded sample-to-history generation/commit; measure its full call chain and resource margin. Preserve scalar query interface and reviewed source ownership; no mainline promotion yet."
+}

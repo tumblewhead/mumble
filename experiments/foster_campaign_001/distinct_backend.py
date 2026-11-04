@@ -20,6 +20,10 @@ from experiments.hysteresis_sensitivity_basis_001.basis import build as build_h
 
 MAP = 'experiments/distinct_bank_integration_001/map_n13e.json'
 DEPENDENCIES = [
+    'experiments/bank_rowwise_001/core.c',
+    'experiments/bank_rowwise_001/native.py',
+    'experiments/bank_rowwise_001/backend.py',
+    'experiments/bank_memory_001/scratch_kernel.c',
     'experiments/bank_memory_001/backend.py',
     'experiments/bank_memory_001/field.py',
     'experiments/bank_memory_001/qr.c',

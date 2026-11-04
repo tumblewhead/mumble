@@ -1,3 +1,13 @@
+# Native rowwise inference work branch
+
+The [native rowwise integration](experiments/bank_rowwise_001/README.md) replaces
+the rank3 dense solver with C rowwise QR and scalar readouts. Two paired four-hour
+runs agree to below8e-15 in final parameter-chart coordinates;13 tests pass.
+The linked M23-target inference probe measures9184B static SRAM plus632B exercised
+stack (9816B total), assuming fixed ROM configuration. Full streaming, platform
+memory and worst-case stack remain unqualified. Existing running campaigns stay
+in their original worktree. [Receipt](provenance/bank_rowwise_001/receipt.json).
+
 # Memory-reduction work branch
 
 The [smaller bank experiment](experiments/bank_memory_001/README.md) adds opt-in

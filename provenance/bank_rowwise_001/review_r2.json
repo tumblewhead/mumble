@@ -1,0 +1,63 @@
+{
+  "schema": "independent_optimization_review_v1",
+  "reviewer": "/root/rowwise_review",
+  "status": "accepted_for_experimental_host_integration",
+  "previous_review": "provenance/bank_rowwise_001/review_r1.json",
+  "previous_review_sha256": "4f10ac0b7ff3805d94dbb509211628933a8a9a69f5415ef88251e099b7831bdc",
+  "source_sha256": {
+    "experiments/bank_rowwise_001/core.c": "e8ba5e67a613b4384743ce84e669f15a421166f50fb1c4d12e412c492dd3ecbf",
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/bank_rowwise_001/backend.py": "4da59ddb3b3633b95e0d91b729ba76d8a5b2e01d3d9a485624c8a4d16c471d71",
+    "experiments/bank_rowwise_001/test_core.py": "e3c2e6ca2e76ec1328838f2d062c73a2d0b37445e2f8f832726119004d030114",
+    "experiments/bank_rowwise_001/test_campaign.py": "9e8d43e2b9186f8ef146c33a4adac7b8f114da9a993f265150290c48af01fb4a",
+    "experiments/foster_campaign_001/backend.py": "6f9f2ebdb48ec710f541ecccfb0d262faa442fbf95be3ce2c86aedf4c3ebef18",
+    "experiments/foster_campaign_001/compact.py": "fa6c2895f6e0321944e3fcdb6e144525ad4a3434f1a161cd5bff47935717b451",
+    "experiments/foster_campaign_001/distinct_backend.py": "669d6141ba67a363cc66d2c8a669aa217d3e7929da488dc6113282f521385785",
+    "experiments/foster_campaign_001/plot.py": "94b2295d01a0275c4811da91bd5a6de8d80939a4ea6d79bab409062ccd993132",
+    "experiments/foster_campaign_001/run.py": "580c4f9c4a5c354e2d123248dac60fa40201d39fb8061623f3ed876df105f554",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/bank_memory_001/field.py": "f9e77890bfb25996895db335cc6e2d7b943efac259609eae5a62d975b11dd423",
+    "experiments/bank_memory_001/backend.py": "b3227844cdff3f71575b28d931f5d8c80b676a89d850a4d7456ec18763f07692"
+  },
+  "changed_since_r1": [
+    "experiments/bank_rowwise_001/core.c",
+    "experiments/bank_rowwise_001/test_core.py",
+    "experiments/foster_campaign_001/plot.py"
+  ],
+  "scope": "Re-review endpoint support guard and new regression test; inspect added rowwise comparison plot dispatch.",
+  "finding": {
+    "id": "R3",
+    "problem": "A Q-only query must not bypass failed SOC or H endpoint support.",
+    "disposition": "fixed_and_rereviewed",
+    "inspection": "estimate computes the current tangent point, checks original support, then transported SOC in[0,1] and strict H endpoint support before scalar output. Reuses existing trial scratch; no extra persistent arrays or evidence modifications. C scalar interface explicitly requires successful estimate; Python scalar performs it."
+  },
+  "validation": {
+    "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.bank_rowwise_001.test_core experiments.bank_rowwise_001.test_campaign -v",
+    "passed": 13,
+    "additional_boundary_checks": {
+      "invalid_H_values_rejected_by_Q_only_scalar": [
+        -2,
+        -1,
+        1,
+        2,
+        "NaN"
+      ],
+      "invalid_SOC_charge_paths_rejected": [
+        -1,
+        1
+      ],
+      "valid_Q_readout_restored": true
+    },
+    "plot_dispatch": "Added small_bank/rowwise_bank pair triggers generic all-arms comparison renderer; colors already present."
+  },
+  "limits": [
+    "Conditional on serial execution, valid fixed-size C arrays and immutable calibration/projection tables; native API is not a hostile-memory boundary.",
+    "Finite tests and local solver agreement do not validate coverage, physical projection error, lifetime rounding, aging or temperature behavior.",
+    "The host campaign still owns response generation, observation staging, dense covariance plotting carrier and checkpoints.",
+    "Rebuilding at old anchor after a rejected refresh preserves represented evidence, but is not guaranteed bitwise equal to the earlier incrementally accumulated tangent.",
+    "No long sweep or firmware deployment qualification performed.",
+    "M23 footprint and four-hour comparison evidence are measured by parent and not independently reproduced in this review. New guard adds transport checks and may affect runtime/stack; remeasure target footprint against this core hash."
+  ],
+  "implementation_edits_by_reviewer": false
+}

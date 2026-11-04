@@ -142,6 +142,8 @@ class CBackend:
 
 def arm_kinds(settings):
     history=getattr(settings,'history','rolling')
+    if history=='compare-rowwise':return ['small_bank','rowwise_bank']
+    if history=='rowwise-bank':return ['rowwise_bank']
     if history=='compare-small-bank':return ['bank_tangent','small_bank']
     if history=='small-bank':return ['small_bank']
     if history=='compare-bank-tangent':return ['tangent64','bank_tangent']
@@ -158,6 +160,9 @@ def arm_kinds(settings):
 
 
 def make_backend(campaign,config,source,model_id,kind,rate,settings):
+    if kind=='rowwise_bank':
+        from experiments.bank_rowwise_001.backend import RowwiseBackend
+        return RowwiseBackend(campaign,config,source,model_id,rate,settings)
     if kind=='small_bank':
         from experiments.bank_memory_001.backend import SmallBackend
         return SmallBackend(campaign,config,source,model_id,rate,settings)

@@ -1,0 +1,197 @@
+{
+  "schema": "independent_target_footprint_review_v1",
+  "reviewer": "fresh-context agent /root/rowwise_stack_review",
+  "base_revision": "bef6ef7257b58bd040c48fbdbb182543144c07c6",
+  "branch": "experiment/bank-rowwise-001",
+  "status": "accepted_as_exercised_retained_history_inference_measurement_only",
+  "scope": "M23 soft-float code and actual linked newlib/libgcc executed on QEMU M33 mps2-an505. Review of allocation, linker layout, stack watermark and explicit exclusions; no complete firmware resource acceptance.",
+  "source_and_artifact_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "experiments/bank_rowwise_001/measure.py": "7ebfcf6f865eab51fe9ef110b485f03c3be0e6595a3d73b1a0b80dfced991c18",
+    "experiments/bank_rowwise_001/core.c": "83afc159c3875fa89468da58818ae171c35857721de7fdc0168666e345570d9d",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/bank_memory_001/MEMORY_PLAN.json": "83ca3549d0e9aeb4a0151cba7800fdb3eafaadd0f95fed1d2ab4a1a7189f479d",
+    "experiments/bank_rowwise_001/target_probe002/probe.c": "87fac9090b82990aaa697c98b767d756789076b42c48f00001fa8c71415412f3",
+    "experiments/bank_rowwise_001/target_probe002/fixture.h": "03ab5237dbd2ee42cf4420c0db2ae426ff34e128164e58b54330a022c8f74659",
+    "experiments/bank_rowwise_001/target_probe002/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/bank_rowwise_001/target_probe002/measurement.json": "05421e72adba6addc9872b3053284849a2232f2f179b33ce9cb821491f537d12",
+    "experiments/bank_rowwise_001/target_probe002/probe.elf": "f81adbdc31c5f3848cd86359ead24818c025a5ef36ab10046df1769ad4736a61",
+    "experiments/bank_rowwise_001/target_probe002/probe.map": "f4cde612d431414422d11398b4432e4f340e9a15332f87c8cb2155aad0e964bd",
+    "experiments/bank_rowwise_001/target_probe002/probe.elf-probe.su": "5691b86706496df4da54acaa55a62531c2ae02dae5aa806a9270f3f95ecb3e72",
+    "experiments/bank_rowwise_001/target_probe003/probe.c": "35cff445a3611afbf44fd0a9b19d6b36983061dbf0e18b1865ed65cf26c80e2c",
+    "experiments/bank_rowwise_001/target_probe003/fixture.h": "03ab5237dbd2ee42cf4420c0db2ae426ff34e128164e58b54330a022c8f74659",
+    "experiments/bank_rowwise_001/target_probe003/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/bank_rowwise_001/target_probe003/measurement.json": "2af6a2296dccd8abe95eaad9bfd6c657eeb5f254346d7e16da6faa6511c9ae1a",
+    "experiments/bank_rowwise_001/target_probe003/probe.elf": "cc4aee544f485cc24bc303c9c53b0c5f197fe0698ed0c7bf0e693dfae4b7b32f",
+    "experiments/bank_rowwise_001/target_probe003/probe.map": "a60b6e942696e946e8583c9872451479be566e0492a124e22be2bdb8333f4cf3",
+    "experiments/bank_rowwise_001/target_probe003/probe.elf-probe.su": "eb60bd524204270145fe917eee0f334fd56d88d416eb21a76f8dfc31f00f6b6d",
+    "experiments/bank_rowwise_001/target_probe004/probe.c": "2534ba3b0a14072d2a18d55a7e564d16b07dab17776f951ab395cf9f20b85b7e",
+    "experiments/bank_rowwise_001/target_probe004/fixture.h": "03ab5237dbd2ee42cf4420c0db2ae426ff34e128164e58b54330a022c8f74659",
+    "experiments/bank_rowwise_001/target_probe004/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/bank_rowwise_001/target_probe004/measurement.json": "4049c5c6031284de17eabeafc12a06ddfc8851228f027dfd7c43ac659f3f009a",
+    "experiments/bank_rowwise_001/target_probe004/probe.elf": "e20b7ad21300173e207c10e8318a70d4823e817b3720e09a4e20116f29de5ca6",
+    "experiments/bank_rowwise_001/target_probe004/probe.map": "182fbbf04848fa08d08f08b9a40e1834ba711970d28657e14cc2a6e7d5d1487c",
+    "experiments/bank_rowwise_001/target_probe004/probe.elf-probe.su": "350034564a608e9e376e1f7a14d697cffc254067600d47973ef77bba9ba35376"
+  },
+  "validation": {
+    "independent_reexecution_command": "qemu-system-arm -M mps2-an505 -nographic -semihosting-config enable=on,target=native -kernel experiments/bank_rowwise_001/target_probe004/probe.elf",
+    "independent_reexecution_output": "status=0\nallocation_B=8560\nstack_watermark_B=632\n",
+    "independent_reexecution_exit": 0,
+    "inspected": [
+      "arm-none-eabi-size -A probe.elf",
+      "arm-none-eabi-objdump -d probe.elf --disassemble=reset",
+      "arm-none-eabi-objdump -d probe.elf --disassemble=setup_model",
+      "probe.elf-probe.su",
+      "probe.map",
+      "core.c and included inference/QR source",
+      "measurement driver and prior conditional MEMORY_PLAN.json"
+    ],
+    "also_independently_reran_probe003": true,
+    "probe003_004_fixture_byte_identical": true
+  },
+  "accounting_B": {
+    "budget": 10240,
+    "bank_allocation": 8560,
+    "core_with_packed_QR_scratch_and_model": 2376,
+    "SRAM_data": 296,
+    "SRAM_bss": 8888,
+    "SRAM_static_total": 9184,
+    "bss_breakdown": {
+      "bank": 8560,
+      "measurement_globals": 12,
+      "alignment": 4,
+      "newlib___sf": 312
+    },
+    "data_breakdown": {
+      "newlib_impure_data": 288,
+      "newlib_impure_ptr": 4,
+      "alignment": 4
+    },
+    "FLASH_vectors": 28,
+    "size_summary_data_including_FLASH_vectors": 324,
+    "probe002_observed_stack": 680,
+    "probe002_static_plus_observed_stack": 10272,
+    "probe002_excess": 32,
+    "probe003_observed_stack": 632,
+    "probe003_static_plus_observed_stack": 10224,
+    "probe003_arithmetic_margin": 16,
+    "FLASH_text_rodata": 32992,
+    "FLASH_span_including_alignment_vectors_and_data_initializer": 33320,
+    "probe004_observed_stack": 632,
+    "probe004_static_plus_observed_stack": 9816,
+    "probe004_arithmetic_margin": 424,
+    "probe004_with_unverified_1024B_stack_reservation": 10208,
+    "probe004_margin_with_unverified_1024B_stack_reservation": 32,
+    "probe002_and003_static_total": 9592,
+    "probe002_and003_bank_allocation": 8968,
+    "probe004_removed_RAM_B": {
+      "fixed_original_prior_mean_and_scale": 256,
+      "fixed_centres": 40,
+      "unused_calibration_allowance_assumed_ROM_in_deployment": 112
+    }
+  },
+  "watermark_review": {
+    "mechanism": "Paints stack_top-16384 through current SP-64 with0xa5 after setup; after exercise scans upward to first changed byte and subtracts its address from stack_top.",
+    "caller_included": "reset includes inlined main_probe and has16B static frame; exercise32B frame and nested callee/library writes are included by measurement from stack_top.",
+    "paint_region": "0x30004000 through0x30007fb0, disjoint from static SRAM ending0x300023e0;64B gap below current caller SP protects the active frame. Gap gives a minimum measured extent, not missing added overhead on this632B witness.",
+    "library_included": "Actual v8-m.base/nofp newlib libm/libc and libgcc are linked, not host math stubs. Observed helper stack and608B newlib static state are accounted; linker alignment and measurement globals are also included.",
+    "adaptation": "Probe003 moves the48B temporary model into noinline setup_model before painting; bind copies its pointer/scalar fields into persistent core.m, whose pointees remain bank/FLASH objects. No dangling reference to the local model remains. Prior probe002 measurement retained. Probe004 additionally places original fixed prior and centres directly inFLASH and removes the unused calibration SRAM reservation; inference core, fixture values and exercised call sequence are unchanged.",
+    "excluded_phase": "Setup and final semihosting printing occur outside the painted exercise. setup_model has56B static frame and bind64B plus helpers; these are not independently watermarked here. Caller frame during inference is included.",
+    "not_upper_bound": "Watermark measures modified stack bytes, not minimum SP or every allocated byte; untouched slots or bytes equal to0xa5 can remain invisible. One fixture and repeated same fit do not bound all library branches or fault/control paths."
+  },
+  "path_coverage": {
+    "included": [
+      "initialize/rebuild from retained packed history",
+      "four fits with stop1 or2 required",
+      "reinitialization at fitted point",
+      "estimate and all16 scalar transport/variance queries",
+      "malformed candidate SOC1e20 rejection",
+      "invalid inference estimate refusal",
+      "explicit reconstruction at saved anchor"
+    ],
+    "not_established": [
+      "every18-halving line-search branch,60-round exhaustion or stop4",
+      "all supported off-centre parameter and libm special-value paths",
+      "append: linked out by garbage collection and never invoked",
+      "stream response generation and packed history insertion/commit",
+      "mid-write injected failures or hardware fault/ISR handling",
+      "root_row host compatibility API: linked out"
+    ]
+  },
+  "ROM_assumptions": [
+    "N13e map, knots and fixed projected map are const fixture objects inFLASH, verified by section addresses; no dynamic per-device SRAM replacement is budgeted.",
+    "History4760B and full response936B remain copied into working SRAM. Original prior256B and centres40B now remain constFLASH objects, with identical fixture bytes to probe003 and no statistical prior alteration.",
+    "Fixed pole-table storage needed by a future response generator is not instantiated by this inference-only image; MEMORY_PLAN requires fixed ROM placement or another312B SRAM.",
+    "Stream row272B, input40B and identity/status160B remain allocated reservations. Calibration112B is no longer charged to SRAM under a fixed-ROM configuration assumption; the inference-only probe does not instantiate that full calibration table or use a response generator.",
+    "A runtime-modifiable original diagonal prior requires256B additional SRAM; runtime centres add40B and runtime calibration adds112B. Together these undo408B savings. A generic packed prior instead of diagonal scales requires a separately audited representation and further memory.",
+    "The1024B reservation is only a planning allowance:9184+1024=10208B leaves32B, while actual unmeasured streaming/platform/interrupt costs remain unresolved."
+  ],
+  "findings": [
+    {
+      "id": "S1",
+      "severity": "informational",
+      "finding": "Default size data324B includes28B FLASH vectors. Actual static SRAM is9592B in probes002/003 and9184B in probe004.",
+      "disposition": "Independent section/map accounting supplied in this review."
+    },
+    {
+      "id": "S2",
+      "severity": "limitation",
+      "finding": "Probe004 total9816B is static SRAM plus observed modified-stack extent, with424B arithmetic margin.10208B with a hypothetical1024B stack reservation leaves32B; neither establishes a proven10KiB bound.",
+      "disposition": "Accepted only with exercised-path wording; blocks firmware-fit or worst-case-resource claims."
+    },
+    {
+      "id": "S3",
+      "severity": "limitation",
+      "finding": "The native append, response generator, transactional streaming schedule, ISR and complete device runtime are outside the measured exercise.",
+      "disposition": "Explicitly exclude them; complete native streaming/firmware fit remains open."
+    },
+    {
+      "id": "S4",
+      "severity": "limitation",
+      "finding": "M23 compile on M33 emulation gives no measured M23 cycle count or16MHz deadline evidence.",
+      "disposition": "Do not report target throughput or WCET."
+    },
+    {
+      "id": "S5",
+      "severity": "assumption",
+      "finding": "Probe004 removes408B of SRAM under fixed public-prior/centre/calibration ROM assumptions. Prior and centre FLASH placement is present in the ELF; full calibration table and pole table placement for streaming remain future obligations.",
+      "disposition": "Accepted for fixed-configuration inference scope; explicitly charge runtime configuration additions when applicable."
+    }
+  ],
+  "blocking_findings_for_narrow_measurement": [],
+  "blocking_obligations_for_full_resource_acceptance": [
+    "complete streaming response/row/commit implementation and lifetime audit",
+    "worst-case stack across startup, inference, streaming, recovery and required interrupt nesting",
+    "real platform linker/runtime, queue and reset/checkpoint resources",
+    "fixed-table placement verified for deployment configuration",
+    "actual M23 timing/deadline evidence"
+  ],
+  "implementation_edits_by_reviewer": false,
+  "reviewed_final_probe": "experiments/bank_rowwise_001/target_probe004",
+  "prior_review": "provenance/bank_rowwise_001/stack_review_probe003.json",
+  "prior_review_sha256": "53b94feb7f2590104215c329cdf47335da52aea113d2d22fee20a79886019c7c",
+  "adaptation_sequence": [
+    {
+      "probe": "002",
+      "change": "Initial measured inference with local model configuration surviving in exercise frame",
+      "static_B": 9592,
+      "observed_stack_B": 680,
+      "sum_B": 10272
+    },
+    {
+      "probe": "003",
+      "change": "Move bind model temporary to noinline setup phase before exercise",
+      "static_B": 9592,
+      "observed_stack_B": 632,
+      "sum_B": 10224
+    },
+    {
+      "probe": "004",
+      "change": "Use fixed original prior and centres directly inFLASH; drop unused SRAM calibration reservation under fixedROM assumption",
+      "static_B": 9184,
+      "observed_stack_B": 632,
+      "sum_B": 9816
+    }
+  ]
+}

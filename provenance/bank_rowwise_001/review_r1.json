@@ -1,0 +1,96 @@
+{
+  "schema": "independent_optimization_review_v1",
+  "reviewer": "fresh-context agent /root/rowwise_review",
+  "base_revision": "bef6ef7257b58bd040c48fbdbb182543144c07c6",
+  "branch": "experiment/bank-rowwise-001",
+  "status": "accepted_for_experimental_host_integration_after_repairs",
+  "source_sha256": {
+    "experiments/bank_rowwise_001/core.c": "83afc159c3875fa89468da58818ae171c35857721de7fdc0168666e345570d9d",
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/bank_rowwise_001/backend.py": "4da59ddb3b3633b95e0d91b729ba76d8a5b2e01d3d9a485624c8a4d16c471d71",
+    "experiments/bank_rowwise_001/test_core.py": "fe0d821f47f144cfbec54ad3352afd7d57946fc12be75824daca18f8562b39d6",
+    "experiments/bank_rowwise_001/test_campaign.py": "9e8d43e2b9186f8ef146c33a4adac7b8f114da9a993f265150290c48af01fb4a",
+    "experiments/foster_campaign_001/backend.py": "6f9f2ebdb48ec710f541ecccfb0d262faa442fbf95be3ce2c86aedf4c3ebef18",
+    "experiments/foster_campaign_001/compact.py": "fa6c2895f6e0321944e3fcdb6e144525ad4a3434f1a161cd5bff47935717b451",
+    "experiments/foster_campaign_001/distinct_backend.py": "669d6141ba67a363cc66d2c8a669aa217d3e7929da488dc6113282f521385785",
+    "experiments/foster_campaign_001/plot.py": "1c33f9e9c690d6638b5ed67ee4739185c993436636e20f517d48f70b993e9b4a",
+    "experiments/foster_campaign_001/run.py": "580c4f9c4a5c354e2d123248dac60fa40201d39fb8061623f3ed876df105f554",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/bank_memory_001/field.py": "f9e77890bfb25996895db335cc6e2d7b943efac259609eae5a62d975b11dd423",
+    "experiments/bank_memory_001/backend.py": "b3227844cdff3f71575b28d931f5d8c80b676a89d850a4d7456ec18763f07692"
+  },
+  "scope": [
+    "rank3 float64 analytic feature rows and full-bank transport",
+    "packed rowwise GN and scalar variance",
+    "fixed-anchor updates and original prior ownership",
+    "refresh failure recovery, quarantine and checkpoint replay",
+    "campaign mode/source binding integration"
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "high",
+      "file": "experiments/bank_rowwise_001/native.py",
+      "problem": "Python ctypes inputs were neither cast to float64 nor shape checked, allowing short or differently typed buffers to violate fixed native extents.",
+      "witness": "initialize accepted np.zeros(32,dtype=np.float32), a wrong coordinate shape with sufficient backing bytes to avoid an unsafe witness.",
+      "disposition": "fixed_and_rereviewed",
+      "repair": "Finite exact16 coordinate validation, float64 conversion, Nx34 row validation and copied dimension-checked prior. Targeted malformed inputs pass."
+    },
+    {
+      "id": "R2",
+      "severity": "high",
+      "file": "experiments/bank_rowwise_001/native.py",
+      "problem": "scalar() returned the anchor/current workspace point unless query() had already called estimate(), so the scalar-only readout was stale.",
+      "witness": {
+        "SOC_before_query": 0.5999682539682539,
+        "SOC_after_query": 0.6179209068528142,
+        "difference": -0.017952652884560272
+      },
+      "disposition": "fixed_and_rereviewed",
+      "repair": "scalar() syncs live model arrays and estimates before scalar transport; scalar-first parity test passes."
+    }
+  ],
+  "validation": {
+    "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.bank_rowwise_001.test_core experiments.bank_rowwise_001.test_campaign -v",
+    "passed": 12,
+    "test_count_note": "Includes four imported bank-memory fixture tests, four rowwise core tests and four campaign tests.",
+    "offcentre_independent_probe": {
+      "seed": 831,
+      "probes": 100,
+      "construction": "SOC uniform0.1..0.9; branch voltages uniform-0.02..0.02; eta uniform-4..4; ordered tau from fixed centres times exp(uniform-0.9..0.9); H log-rate offsets uniform-0.9..0.9; other coordinates at prior mean. Compare feature rows/J and direct C transport with existing SmallField reference.",
+      "feature_max_abs": 3.552713678800501e-15,
+      "Jacobian_max_abs": 3.552713678800501e-15,
+      "transport_max_abs": 1.509903313490213e-14
+    },
+    "injected_refresh_readout_failure": {
+      "record": 8208,
+      "candidate_readout_raises": "ValueError",
+      "old_anchor_array_exact": true,
+      "rebuilt_tangent_dense_step_parity": {
+        "rtol": 1e-07,
+        "atol": 1e-08
+      },
+      "published_current_prefix": true,
+      "execution": "tracking"
+    },
+    "algebra_inspection": "QR stacks original whitened prior [I,w] once with history feature residual/J rows. GN decrement is squared transformed residual excluding the orthogonal residual; derivative scaling and triangular covariance solve have correct orientation. Endpoint RC transport uses full13 poles, preserving free/forced response state."
+  },
+  "memory_review": {
+    "host_context_B": 2408,
+    "host_QR_included_B": 1504,
+    "history_B": 4760,
+    "host_context_plus_history_B": 7168,
+    "finding": "Core contains no heap, dense W-by-W factor copy, W-by16 cached Jacobian, normal matrix or full covariance. Host adapter explicitly allocates covariance-root output and inherits dense construction/checkpoint work.",
+    "target_footprint_reviewed": false,
+    "target_note": "Parent measures crosscompiled M23 layout and stack independently; no complete-device SRAM or WCET acceptance in this review."
+  },
+  "limits": [
+    "Conditional on serial execution, valid fixed-size C arrays and immutable calibration/projection tables; native API is not a hostile-memory boundary.",
+    "Finite tests and local solver agreement do not validate coverage, physical projection error, lifetime rounding, aging or temperature behavior.",
+    "The host campaign still owns response generation, observation staging, dense covariance plotting carrier and checkpoints.",
+    "Rebuilding at old anchor after a rejected refresh preserves represented evidence, but is not guaranteed bitwise equal to the earlier incrementally accumulated tangent.",
+    "No long sweep or firmware deployment qualification performed."
+  ],
+  "implementation_edits_by_reviewer": false
+}
