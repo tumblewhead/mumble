@@ -1,0 +1,132 @@
+{
+  "schema": "distinct_bank_symbolic_proof_review_v1",
+  "reviewer": "independent fresh-context agent /root/bank_u1_review",
+  "review_round": 1,
+  "source_revision": "738aa35b23433f7eebbfd8a29ba46d1733a160b3",
+  "branch": "experiment/distinct-bank-symbolic-001",
+  "scope": "Every substantive theorem, proof, bound, counterexample and qualification in U1, checked against J1 and P2; symbolic review only.",
+  "bindings": {
+    "specifications/distinct_bank_symbolic_001/U1.md": {
+      "sha256": "a0d8328358d2ae46de5230b1c33f5fa59bee6ba01394dfa52fd43f0d88c9a61e",
+      "bytes": 10958
+    },
+    "specifications/symbolic_fixed_budget_001/J1.md": {
+      "sha256": "dd446280a8b747f128af224054da0529a8dbb616c300c2623b1b82d229477dbc",
+      "bytes": 4591
+    },
+    "specifications/constrained_operator_contract_001/P2.md": {
+      "sha256": "867391b6e42044f3a7de15251217cabe2346105c2303d4504f53551ffa51cf69",
+      "bytes": 6778
+    }
+  },
+  "method": "Independent manual symbolic derivation, matrix-order checks, dimensions/count checks, and exact analytic counterexample evaluation. Filesystem tools used solely for reading and recording review; no source programs, simulations, fits or original code rerun.",
+  "checks": [
+    {
+      "id": "frozen_design_definition",
+      "status": "pass",
+      "reason": "With fixed design and quadratic prior precision H-Jhat^T W Jhat, subtracting the two normal equations yields -H^-1 Jhat^T W d. The stated H domination is exactly what the CS bound needs. Query bias is explicitly defined as its linear projection, not nonlinear fit or truth error."
+    },
+    {
+      "id": "cs_general_diagonal",
+      "status": "pass",
+      "reason": "Weighted Cauchy-Schwarz followed by v^T Jhat^T W Jhat v <= v^T H v = c^T C c gives the displayed bound; componentwise |d|<=epsilon gives the weighted envelope norm."
+    },
+    {
+      "id": "l1_general_diagonal",
+      "status": "pass",
+      "reason": "Each row contraction is at most sum_i |v_i| M_i. Multiplication by W_kk epsilon_k and summation yields the stated homoscedastic and general diagonal expressions."
+    },
+    {
+      "id": "weighted_cs_general_diagonal",
+      "status": "pass",
+      "reason": "Apply scalar Cauchy-Schwarz with nonnegative weights W_kk epsilon_k to row contractions. This yields exactly sqrt(v^T K_W v) sqrt(sum W_kk epsilon_k). The zero-envelope case is handled separately."
+    },
+    {
+      "id": "component_minimum_composition",
+      "status": "pass",
+      "reason": "All three upper bounds apply to each component projection. Triangle inequality permits summing their minima without independence. Taking the minimum with the total-envelope bound remains valid; no unjustified ordering of the two constructions is asserted."
+    },
+    {
+      "id": "moments_at_uncertain_final_query",
+      "status": "pass",
+      "reason": "For fixed e_kl, expanding the linear and quadratic envelope sums proves gamma^T s and gamma^T T gamma. Query-dependent envelopes require additional finite features or regeneration. Scalar counts L and L(L+1)/2 are correct."
+    },
+    {
+      "id": "weighted_gram_and_feature_contraction",
+      "status": "pass",
+      "reason": "Expanding epsilon proves K=sum gamma_l K_l; each symmetric p by p K_l has p(p+1)/2 entries. Substituting Jhat_k=f_k^T B gives B^T S_l B exactly and the stated L m(m+1)/2 scalar count. Past online-fit Jacobians do not generally equal final-query Jacobians."
+    },
+    {
+      "id": "full_score_identity_and_counterexample",
+      "status": "pass",
+      "reason": "Expanding (J+E)^T W(r+e)-J^T W r gives all three terms. For r=(theta,1), e=(0,a theta), direct cost has minimizer zero and candidate derivative is (1+a^2)theta+a, yielding -a/(1+a^2). At zero only E^T r=a survives."
+    },
+    {
+      "id": "nonlinear_branch_derivative",
+      "status": "pass",
+      "reason": "The derivative is the derivative at alpha=0 of the r+alpha e stationary branch under J1 hypotheses: derivative of score in alpha is J^T W e+E^T W r. It is not the finite-alpha displacement."
+    },
+    {
+      "id": "relative_joint_precision",
+      "status": "pass",
+      "reason": "Whitening Phat=P+Delta P yields I+A with eigenvalues in [1-eta,1+eta]. Congruence and positive-matrix inversion prove both displayed Loewner bounds. Requires P positive definite, implicit in P^-1/2 and inherited from P2."
+    },
+    {
+      "id": "weak_precision_growth_counterexample",
+      "status": "pass",
+      "reason": "With J=0 and constant E rows a, P=lambda and Delta P=n a^2, so whitened defect is n a^2/lambda. Fixed per-record derivative error alone cannot yield a duration-uniform relative precision bound."
+    },
+    {
+      "id": "support_and_coverage",
+      "status": "pass",
+      "reason": "Four plug-in marginal SDs do not provide deterministic joint support or physical coverage. Requiring separately justified joint support or a verified self-consistent enclosure correctly avoids circular certification."
+    },
+    {
+      "id": "exact_hessian_convexity",
+      "status": "pass",
+      "reason": "The norm condition implies H_exact >= (1-omega)P0. Integrating along a segment proves strict convexity for distinct points in the convex box. omega<1/2 is sufficient and acknowledged stronger than needed; GN alone does not supply the exact-Hessian premise."
+    },
+    {
+      "id": "existence_vs_uniqueness",
+      "status": "pass",
+      "reason": "Strict convexity implies at most one stationary point. Compactness and continuity give a constrained minimum. Strict lower-face negative and upper-face positive gradient signs give a feasible descent direction at every boundary point of a nondegenerate box, forcing the minimizer into the interior. The signs are extra hypotheses, not inferred from curvature."
+    },
+    {
+      "id": "integrated_hessian_query_bound_dependency",
+      "status": "pass",
+      "reason": "P2 integrates the candidate exact Hessian between certified stationary fits and bounds the resulting inverse in P0 coordinates; U1 preserves the full-score and connecting-segment premises and does not substitute GN curvature."
+    },
+    {
+      "id": "uncertainty_budget_and_transport",
+      "status": "pass",
+      "reason": "Mean transport error and fit movement are distinct from covariance. Packet correctly withholds physical confidence-interval claims absent noise/prior law, coverage analysis, conditioning events, and other errors."
+    },
+    {
+      "id": "ssr_and_model_check_law",
+      "status": "pass",
+      "reason": "For a correct fixed Gaussian mean the whitened residual norm is chi-square n. Projection after an unregularized fixed full-rank linear fit has rank n-p and chi-square n-p. Other fit/noise assumptions require other laws; unexcited alternatives cannot universally be detected."
+    },
+    {
+      "id": "lifetime_false_alarm_accounting",
+      "status": "pass",
+      "reason": "Union bound needs no independence. Constant per-check tail probability alone cannot establish an indefinite familywise guarantee; summable allocations or a valid sequential construction are sufficient approaches."
+    },
+    {
+      "id": "aging_arithmetic_and_duration_qualification",
+      "status": "pass",
+      "reason": "A bounded response envelope and bounded number of statistics do not bound accumulated score, precision, numerical error, or counters. Coherent defects are not independent fresh noise. Aging remains conditional on a joint evolution law; no lifetime or hardware certificate is inferred."
+    }
+  ],
+  "findings": [],
+  "blockers": [],
+  "verdict": "pass_conditional_symbolic_claims",
+  "limits": [
+    "Review accepts stated conditional mathematics only, not candidate feasibility, numerical allowances, empirical coverage, full SRAM, or lifetime performance.",
+    "Frozen-design exactness requires H to be the fixed-design objective Hessian including its unchanged quadratic prior; arbitrary exact nonlinear Hessians are not covered.",
+    "Weighted moments for general diagonal W require the corresponding observation weights; section 2 unweighted moments implement the stated homoscedastic formulas.",
+    "No manuscript edits made and no validation code was executed."
+  ],
+  "proof_modified": false,
+  "original_code_reruns": 0,
+  "new_fits": 0
+}

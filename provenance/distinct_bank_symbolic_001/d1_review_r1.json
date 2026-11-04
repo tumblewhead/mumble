@@ -1,0 +1,30 @@
+{
+  "schema": "individual_symbolic_proof_review_v1",
+  "reviewer": "fresh_individual_agent_bank_d1_review",
+  "source_revision": "738aa35b23433f7eebbfd8a29ba46d1733a160b3",
+  "packet": "specifications/distinct_bank_symbolic_001/D1.md",
+  "packet_sha256": "deb9ef15756202bfa70dec3f55106ff8c37a94c7feffcfb602fd0a4bc7058526",
+  "verdict": "accepted_conditional",
+  "blocking_findings": [],
+  "method": "Independent symbolic differentiation, integrating factors, change of variables and triangle inequalities; no supplied program, pickle, simulation or numerical certificate executed.",
+  "checks": [
+    {"claim": "D1.1 charge versus voltage dynamics", "result": "pass", "reason": "Differentiating q=Cv gives vdot=I/C-v/(RC)-(Cdot/C)v. With C=tauref*a/(Rref*r), the charge-continuity and voltage-state conventions differ exactly as stated."},
+    {"claim": "D1.1 reduced-time forced and free response", "result": "pass", "reason": "ds=a(s)deta changes the input to aI. Dividing charge by C(t) gives the Rref*r(t)/a(t) forced prefactor and b*r(t)*a(0)/(a(t)*r(0)) free prefactor. L1 kernel and supremum free defects imply the bound for finite transformed input norm. Parameter derivatives require fixed a,r and appropriate derivative certificates as stated."},
+    {"claim": "D1.2 exact constant-interval energy sensitivity", "result": "pass", "reason": "ell_E=g*ell and p_E=p*dt*g/ell give the stated Snew by the product rule using OLD Q and S. Temperature must be fixed over the interval."},
+    {"claim": "D1.2 rebasing and accumulation", "result": "pass_conditional", "reason": "Taylor's integral remainder gives half squared centre displacement times the uniform second derivative. Iteration of e_next=p*e+d proves the scalar accumulated error formula. Exact starting derivatives and explicit propagation of existing errors are necessary and acknowledged."},
+    {"claim": "D1.3 aging path counterexample", "result": "pass", "reason": "Integrating (tau0+alpha*s)^(-1) gives log((tau0+alpha*t)/tau0)/alpha, hence the power-law free response. Endpoint substitution generally differs; the positive-path premise is necessary."},
+    {"claim": "D1.3 missing mixed aging feature", "result": "pass", "reason": "Expansion of w(uhat+d+rho_u*a) contains d*rho_u*a*p'', independently of the multiplicative R drift. The stated omission is real; the displayed ellipsis must remain an incomplete expansion."},
+    {"claim": "D1.3 dynamical defect", "result": "pass", "reason": "Subtracting the physical ODE from the proposed-response equation gives edot=-lambda*e+r_dyn. Variation of constants and lambda>=lambda_min yield the stated exponential and D/lambda_min bounds for an absolutely continuous proposed response."},
+    {"claim": "D1.4 scope and full-model interface", "result": "pass", "reason": "The packet expressly leaves unknown hysteresis rates, physical aging adequacy, sensitivity envelopes, uncertainty and resources open; it does not promote the smaller supplied model."}
+  ],
+  "nonblocking_findings": [
+    {"id": "D1-N1", "location": "D1.2 accumulated rebase errors", "finding": "The displayed product of scalar p factors directly governs charge error, not the entire joint charge/sensitivity error vector. For fixed interval coefficients the joint transition is [[p,0],[p_E,p]]; centre shifts additionally couple Q to S.", "disposition": "Accepted as an explicit outstanding propagation obligation, not a completed joint sensitivity certificate. Future implementation/proof must use transition matrices or account for coupling as error injections."},
+    {"id": "D1-N2", "location": "D1.3 displayed aging expansion", "finding": "A rectangular first-order-in-d, second-order-in-rho_u*a expansion also includes d*(rho_u*a)^2*p'''/2 when that derivative exists. The packet's ellipsis permits this but the visible expression is not a complete rectangular Taylor polynomial.", "disposition": "Nonblocking because the argument only establishes the omitted d*rho_u*a*p'' term and explicitly rejects completeness. Higher-order use requires smoothness/piecewise knot handling and a declared truncation convention."}
+  ],
+  "limitations": [
+    "Acceptance concerns the hash-bound conditional algebra only.",
+    "No useful numerical derivative, aging-defect or cumulative likelihood allowance is established.",
+    "No original numerical output or coefficient certificate was verified.",
+    "No production change, coverage, physical aging adequacy or target-resource qualification follows."
+  ]
+}

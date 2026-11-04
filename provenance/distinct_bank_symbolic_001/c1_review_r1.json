@@ -1,0 +1,67 @@
+{
+  "review_id": "distinct_bank_symbolic_001_C1_r1",
+  "reviewer": "independent fresh-context agent bank_c1_review",
+  "review_date": "2026-11-04",
+  "source_revision": "738aa35b23433f7eebbfd8a29ba46d1733a160b3",
+  "branch": "experiment/distinct-bank-symbolic-001",
+  "verdict": "accept_conditional_mathematics",
+  "blocking_findings": [],
+  "source_bindings": {
+    "specifications/distinct_bank_symbolic_001/C1.md": "806c6cc36564584c73e9b40b860950af4f4932f2496b3cb35bb734360fdb4435",
+    "specifications/symbolic_fixed_budget_001/B1.md": "1a1a8ecc24a873f0db936352286fbe045eb8d80d20e87c069de14981257b1ace",
+    "specifications/constrained_operator_contract_001/P2.md": "867391b6e42044f3a7de15251217cabe2346105c2303d4504f53551ffa51cf69",
+    "specifications/constrained_operator_contract_001/P3.md": "427e1686bc19423d3b5192fdfec30cc4caffbe63eaed84d5f7376e8eb0f457cc"
+  },
+  "method": "Independent written algebra and scope review. Read repository instructions and current project context plus all three declared dependencies. No original code, simulation, fits, pickle, or history replay executed; no implementation or specification changed.",
+  "checks": [
+    {
+      "section": "C1.1",
+      "result": "pass",
+      "reason": "d_i^T c = z_i^T a-y_i and c^T(sum d_i d_i^T)c = sum r_i^2; rank deficiency and nonlinear a do not alter the identity. Conditional fixed-feature/data-adaptive and known-weight restrictions are explicit; prior ownership and joint boundary transport are separate."
+    },
+    {
+      "section": "C1.2",
+      "result": "pass",
+      "reason": "Substituting a0+T phi yields T^T z and shifted y-z^T a0. D=S(a-a0)=U phi requires T=S^-1 U. Scalar S=2 witness correctly refutes S U. Sampled SVD is explicitly not a global rank certificate."
+    },
+    {
+      "section": "C1.3",
+      "result": "pass",
+      "reason": "Free response error scales by incoming-state amplitude; bounded-support or tail control is required. Decay does not delete old cross moments. Unknown signed hysteresis rates, Q, amplitude and incoming state remain joint obligations."
+    },
+    {
+      "section": "C1.4",
+      "result": "pass",
+      "reason": "Binomial expansion gives exactly the displayed d+1 q-power coefficients. For exp(x-cq), fixing x and differentiating in c produces the invertible distinct-q Vandermonde matrix, proving arbitrarily large fixed-linear-feature rank; known c gives separability. No unrestricted nonlinear-statistic necessity theorem is asserted."
+    },
+    {
+      "section": "C1.5",
+      "result": "pass",
+      "reason": "Expansion gives r^T e+||e||^2/2. Entire-support potential bound implies both likelihood and normalizer ratios in [exp(-delta),exp(delta)], hence posterior density ratio in [exp(-2delta),exp(2delta)]. Same-prior/support and finite-normalizer premises suffice. Batch and replacement defects telescope/triangle-sum; rowwise bounds grow with N and do not certify derivatives or lifetime."
+    },
+    {
+      "section": "C1.6",
+      "result": "pass",
+      "reason": "V second derivative is 1+3 epsilon theta^2. New reference objective is strictly convex with stationarity (1+K)theta+epsilon theta^3=KM. For fixed positive epsilon,K and M tending to positive infinity its minimizer is asymptotic to (KM/epsilon)^(1/3), versus linear KM/(1+K) for the archive. Small local Hessian variation cannot certify later global shifts. Bounded battery-domain qualification is explicit."
+    },
+    {
+      "section": "C1.7",
+      "result": "pass",
+      "reason": "Packed binary64 root costs 8 W(W+1)/2=4760 bytes for W=34. Sixteen-dimensional root plus mean costs 1088+128=1216 bytes per component before weights/other fields. P3 named peak 8568 and generic-prior 9528 match cited dependency and retain its exclusions."
+    }
+  ],
+  "nonblocking_notes": [
+    {
+      "severity": "editorial",
+      "section": "C1.2",
+      "finding": "Heading \"scaling correction\" and \"This correction is necessary\" can imply an identified source error, whereas this review establishes only the algebraic requirement S^-1. Parent reports the incoming handoff already uses S^-1; that source was not independently inspected in this review.",
+      "requested_disposition": "Describe this as scaling verification/requirement unless an explicit erroneous source is identified. No mathematical change is needed."
+    }
+  ],
+  "acceptance_scope": "Accept only the stated conditional symbolic identities, sufficient constructions and counterexamples. No feasibility, physical accuracy, calibrated coverage, useful sustained inference, full-model approximation, cumulative floating-point or Cortex-M23 qualification is discharged.",
+  "required_followup": [
+    "Useful uniform full-model response, derivative and transported-query bounds on original support, including incoming-state tails.",
+    "Cumulative approximation/replacement/arithmetic error and qualified recovery/refusal rules.",
+    "Complete implementation lifecycle resource ledger and target validation before claiming bounded-memory deployment."
+  ]
+}

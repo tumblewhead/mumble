@@ -1,0 +1,96 @@
+{
+  "schema": "independent_symbolic_proof_review_v1",
+  "review_id": "distinct_bank_symbolic_001_b1_r1",
+  "reviewer": "fresh independent agent /root/bank_b1_review",
+  "date": "2026-11-04",
+  "source_revision": "738aa35b23433f7eebbfd8a29ba46d1733a160b3",
+  "packet": "specifications/distinct_bank_symbolic_001/B1.md",
+  "packet_sha256": "212363621775e0d8ec9b0aac1f8a2ca40033a913e1c87e6271cd343fad38d792",
+  "verdict": "accepted_conditional_symbolic_derivation",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "review_method": "Independent line-by-line mathematical derivation and boundary-case inspection. No original programs, optimizers, pickle inputs, battery fits, numerical sweeps or numerical certificate check were run. Python was used only to read metadata, hash source files and write this review.",
+  "checks": [
+    {
+      "claim": "Spline partition and edges",
+      "result": "accepted",
+      "reason": "For x in [-12,12], all nonzero translates are in -13..13; the omitted boundary translates at distance 2 have value and first two derivatives zero. On each unit cell the four cubic pieces sum to 1. C2 regularity and derivative sums follow; third derivatives require one-sided knot treatment."
+    },
+    {
+      "claim": "Chronological shared free/forced closure and origin",
+      "result": "accepted",
+      "reason": "Integrating each fixed-pole scalar ODE yields the stated affine recurrence for every nonnegative actual interval. Zero forced state and unit free state belong to the original boundary; later rests preserve carried xi. Unknown b is an independent amplitude. Constant current gives xi=I(1-phi), hence equilibrium follows from exact weight normalization."
+    },
+    {
+      "claim": "Shape and amplitude derivatives",
+      "result": "accepted",
+      "reason": "With fixed bank states, all query dependence is in w; b and R sensitivity and mixed products therefore follow exactly. The packet explicitly retains b terms, physical-coordinate chain rules, cross terms and origin restrictions."
+    },
+    {
+      "claim": "Monotonicity and bounded forced response",
+      "result": "accepted",
+      "reason": "Column kernel nonnegativity plus f(0)=1 and f(infinity)=0 proves 0<=f<=1 and unit kernel integral. Nonnegative spline mixing transfers these facts to every fixed query. Convolution then bounds the zero-forced-state response by Imax."
+    },
+    {
+      "claim": "Driven energy and storage",
+      "result": "accepted",
+      "reason": "For fixed u and positive R, stable L1 convolution and the Fourier inner-product identity give the stated finite-horizon zero-state supply inequality. Direct differentiation of R*x^T*P*x/2 yields supply minus R*x^T*(PL+LP)*x/2 under Pq=c. P existence, parameter switching and whole-cell passivity are expressly unclaimed."
+    },
+    {
+      "claim": "Exact derivative recursions",
+      "result": "accepted",
+      "reason": "Using du z=-z gives Pnext=z(P-Pprime); using dt z=q gives Qnext=Qprime-Q with q^a outside. R0=z and the same log-query recursion give kernel derivatives; the linear coefficient of R_m is (-1)^m, proving the t=0 limit (-1)^m q. Global spline derivatives stop at order 2."
+    },
+    {
+      "claim": "Finite-cell and coefficient uncertainty bounds",
+      "result": "accepted",
+      "reason": "Axis integration yields the center enclosure plus Lt*dt+Lu*du. Continuous piecewise derivatives are Lipschitz under bounded one-sided next derivatives. Knot partitioning is required and stated. Exact dependent column normalization is distinguished from interval containment of 1."
+    },
+    {
+      "claim": "Integral and supremum tails",
+      "result": "accepted",
+      "reason": "Integration by parts gives the displayed H_n formula. Differentiation locates each monomial-exponential maximum at max(T,n/r). Compact positive q support and bounded spline coefficients give valid uniform exact-plus-bank envelopes, including kernel L1 bounds and the physical-time cancellation."
+    },
+    {
+      "claim": "Nonnegative-kernel tail certificate",
+      "result": "accepted",
+      "reason": "After rates are reordered increasingly, factor out the slowest nonzero exponential. The positive leading lower bound dominates every negative faster term at T and thereafter. Exact preceding zeros, rate ordering, gaps and sign uncertainty requirements are correctly stated."
+    },
+    {
+      "claim": "Spectral polynomial and unbounded domain",
+      "result": "accepted",
+      "reason": "Real part of q/(q+i omega) is q^2/(q^2+omega^2), giving the displayed common-denominator polynomial of degree at most 12. Bernstein nonnegative coefficients suffice on finite intervals; y^12*N(1/y) is a polynomial on the compact reciprocal tail, with a sufficient check also at y=0. No necessity or finite termination claim is made."
+    },
+    {
+      "claim": "Uniform response bounds",
+      "result": "accepted",
+      "reason": "For k<=2, bounded kernels permit differentiating the fixed-input convolution and triangle inequality gives |b|E_k+R*Imax*K_k. The packet states the extra product rules needed when amplitudes depend on the queried coordinate and does not convert these response bounds into fitted uncertainty."
+    },
+    {
+      "claim": "Positive-bank center obstruction and interpolation limit",
+      "result": "accepted",
+      "reason": "Zero rate variance at an exactly reproduced center forces a single active distinct pole; nonnegative differentiable inactive weights have zero derivatives at the interior minimum. This precludes nonzero exact center sensitivity. The interpolation h^2/8 estimate is correctly an upper bound and not a universal lower gap."
+    },
+    {
+      "claim": "Shifted-bank counting",
+      "result": "accepted",
+      "reason": "N+max(k)-min(k) counts the containing integer interval. It equals the union count precisely when there are no index gaps; disjoint separated intervals have smaller union. Shift reuse remains conditional on common input and boundary origin and does not identify branch amplitudes."
+    }
+  ],
+  "limits": [
+    "No specific 13-by-27 A, coefficient values, rounding inputs or reported numerical checkpoint is certified.",
+    "Conditional M and E constraints are sufficient but no feasible candidate or numerical error tolerance is established.",
+    "No implementation, W<=34 fit, full memory fit, timing, lifetime, aging, calibrated coverage or production promotion is established.",
+    "This review accepts only the exact packet identified by its SHA256; substantive revisions require new independent review."
+  ],
+  "context_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "e7e90b497a9b52734f4eeff6f95639f4d2eafee3fa095fa9e4963e3fe4b3f9dc",
+    "PROJECT_STATE.json": "62133ebf050f99ecb5288e8756312a957bbbb356058906d958f3ecd75cfa9225",
+    "specifications/next_history_representation_001/PROBLEM.md": "2a763c085cc00678a06faae32e90851ad5d056cfd6a555f1f878073a150136fc",
+    "specifications/constrained_operator_contract_001/P1.md": "1f16ae3d7d157ed9a2cb52d8b847a3f3b165eca5bd4404fb6e1930afe1870aae",
+    "specifications/constrained_operator_contract_001/P4.md": "05373774e8cd2a8167f02adef5084766cd39683703fa062b7828b08aa720360d",
+    "specifications/rc_sensitivity_basis_001/P1.md": "51626356168d97be83c39ba625d9e6730a800efbafd1041095d81f9a54d9ccc9",
+    "specifications/rc_partition_repair_001/P4.md": "eac58b980a2c4e7d7e39651ebdfef17e1248e6f334c81ed22ee9d7cbe8a0df37"
+  }
+}

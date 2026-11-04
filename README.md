@@ -313,6 +313,13 @@ structural limit, fixed resource budgets, joint-inference requirements and resum
 context. See [the checkpoint](handoff/next_history_checkpoint.json) and
 [continuation handoff](handoff/CONTINUE.json). No new candidate is selected.
 
+The [distinct-pole symbolic reconstruction](provenance/distinct_bank_symbolic_001/README.md)
+places the supplied N13e study inside the full three-branch, unknown-hysteresis
+problem. Conditional bank/likelihood proofs are retained; score, aging, final-query
+statistics and Laplace-collapse claims receive explicit qualifications. Supplied
+numbers remain checkpoints; no original scripts or pickle were executed. Complete
+resource and cumulative-error closure remain open.
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,
