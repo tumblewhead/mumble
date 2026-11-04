@@ -203,7 +203,7 @@ def replay_binding(campaign, case):
         from .field_backend import DEPENDENCIES
         for name in ['experiments/foster_campaign_001/field_backend.py', *DEPENDENCIES]:
             expected[name]=plan['campaign_sources'][name]
-    tangent = plan['configuration'].get('history') in ('field-tangent','compare-tangent','tangent-h7','compare-h7')
+    tangent = plan['configuration'].get('history') in ('field-tangent','compare-tangent','tangent-h7','compare-h7','compare-bank-tangent')
     if tangent:
         from .tangent_backend import DEPENDENCIES as TANGENT_DEPENDENCIES
         for name in ['experiments/foster_campaign_001/tangent_backend.py', *TANGENT_DEPENDENCIES]:
@@ -213,7 +213,7 @@ def replay_binding(campaign, case):
         from .h7_backend import DEPENDENCIES as H7_DEPENDENCIES
         for name in H7_DEPENDENCIES:
             expected[name]=plan['campaign_sources'][name]
-    bank = plan['configuration'].get('history') in ('distinct-bank','compare-bank')
+    bank = plan['configuration'].get('history') in ('distinct-bank','compare-bank','bank-tangent','compare-bank-tangent')
     if bank:
         from .distinct_backend import DEPENDENCIES as BANK_DEPENDENCIES
         for name in BANK_DEPENDENCIES:expected[name]=plan['campaign_sources'][name]
@@ -314,7 +314,7 @@ def run_compact(out, campaign, config, model_id, scenario, cell, args):
     stream = StimulusStream(config, cell, scenario, settings)
     banks = {k: make_backend(campaign, config, source, model_id, k, rate,args) for k in kinds}
     stats = {k: dict(status='running', all=metrics(), current_nonzero=metrics(), current_zero=metrics(),
-                    outputs=0, stops={}, storage={**({} if k in ('tangent64','tangent_h7') else numeric_storage('float64' if k in ('field64','distinct_bank') else k)), **banks[k].storage()}) for k in kinds}
+                    outputs=0, stops={}, storage={**({} if k in ('tangent64','tangent_h7','bank_tangent') else numeric_storage('float64' if k in ('field64','distinct_bank') else k)), **banks[k].storage()}) for k in kinds}
     bins = {'plant': Bins(n, args.summary_bins, 25)}
     bins.update({k: Bins(n, args.summary_bins, len(TRACE_COLUMNS)+32+4) for k in kinds})
     interval = max(CHUNK, math.ceil(args.checkpoint_hours*3600*rate/CHUNK)*CHUNK)

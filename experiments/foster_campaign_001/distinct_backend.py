@@ -20,6 +20,8 @@ from experiments.hysteresis_sensitivity_basis_001.basis import build as build_h
 
 MAP = 'experiments/distinct_bank_integration_001/map_n13e.json'
 DEPENDENCIES = [
+    'experiments/foster_campaign_001/bank_tangent_backend.py',
+    'experiments/foster_campaign_001/tangent_backend.py',
     'experiments/foster_campaign_001/distinct_backend.py',
     'experiments/distinct_bank_integration_001/field.py', MAP,
     'experiments/rc_sensitivity_basis_001/basis.py',

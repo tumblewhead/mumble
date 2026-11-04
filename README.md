@@ -1,5 +1,9 @@
 # Current mainline baseline
 
+[Bank tangent comparisons](experiments/bank_tangent_campaign_001/README.md) now
+use `--history compare-bank-tangent` to compare the original-coordinate
+`tangent64` repair with the new bank in the same update architecture.
+
 The [distinct-bank campaign adapter](experiments/distinct_bank_campaign_001/README.md)
 now reuses the familiar runner through opt-in `--history distinct-bank` and
 `--history compare-bank`: parallel cases, independent load/noise seeds, compact

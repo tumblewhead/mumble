@@ -1,0 +1,51 @@
+{
+  "schema": "independent_review_v1",
+  "reviewer": "bank_tangent_review",
+  "status": "accepted_with_limits",
+  "source_revision": "7802fff0b16a22ea69ac258adc553dc72fa9abbb",
+  "reviewed_worktree_changes": {
+    "bank_tangent_backend.py": "1dc31b51b33e921f98b834ffe01fdbed4d51f9f7ed9b69bdc816063f03c61e82",
+    "backend.py": "d47212a09ce5fa8014e3d442c733eaa7c3a9857d94b8714ffcbc152769d07564",
+    "compact.py": "5c884ef1f75f74f5c7bbbc37d0d7b3106a816e919cc8610a0c685470095d4121",
+    "distinct_backend.py": "6cdde869b46ea8ff612ace6bb2cf900b6794efd3e7f8927caea48e4a0b0a0db1",
+    "plot.py": "bbc2ed78412ca46cb2e9e98b052e56e58e95e28377eeb8b9280329a08f3eb8d0",
+    "run.py": "97ceec5b3a254394e2390c15c1fdc33ad083ad40c6b694fbfef7b88c454bf27f"
+  },
+  "scope": [
+    "original-prior whitened augmented QR algebra",
+    "ordered observation ownership and no outgoing posterior feedback",
+    "checkpoint/replay",
+    "failure quarantine and recovery",
+    "source binding",
+    "default and legacy mode preservation"
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "blocking",
+      "finding": "Single bank-tangent initially omitted inherited tangent_backend.py from replay source binding.",
+      "disposition": "fixed before acceptance by adding tangent_backend.py to BANK_DEPENDENCIES; inspected current dependency and replay_binding flow."
+    }
+  ],
+  "validation": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.distinct_bank_integration_001.test_tangent_campaign",
+      "result": "4 tests passed in 3.597s; full/compact and nonzero checkpoint replay exact for both arms; dense normal equations, no outgoing feedback, fault quarantine tested."
+    },
+    {
+      "command": "Independent inline backend probe with fresh temporary binaries and public calibration from /tmp/banktangent001/calibration.json",
+      "result": "Passed post-field-commit projection failure quarantine; consumed96/published80 counters; blocked full_message/checkpoint; valid restore recovery; rejected scheduled full refit retains tangent; default field64, legacy compare-bank and new pair selection."
+    },
+    {
+      "command": "Attempt replay of older /tmp/banktangent001 smoke",
+      "result": "Correctly rejected changed distinct_backend.py source; fresh unit-test campaigns above subsequently passed."
+    }
+  ],
+  "algebra": "Anchor w0, A=[I,w0; R_field J,R_field phi] yields original prior ||w0+delta||^2 plus anchored likelihood; new rows append only new [rows J,rows phi]. Reporting uses w=w0-R^-1 b and transported prior_root R^-1. Full refresh rebuilds from original likelihood/prior without multiplying same-prefix posterior.",
+  "limits": [
+    "Dense desktop Python/NumPy reference; 94-wide field QR each block is not speed/M23 qualified.",
+    "Approximate response and local Gaussian uncertainty remain provisional; no coverage, aging or lifetime qualification.",
+    "Readout-domain failure is quarantined; this adapter does not implement native tangent emergency refit recovery.",
+    "Review covers recorded source hashes; substantive later edits require review."
+  ]
+}
