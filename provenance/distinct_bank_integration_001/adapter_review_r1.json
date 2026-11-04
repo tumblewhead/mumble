@@ -1,0 +1,145 @@
+{
+  "schema": "distinct_bank_adapter_review_v1",
+  "reviewer": "independent fresh-context bank_adapter_review agent; not implementation author",
+  "base_revision": "45fb0a8ee851502af4e226b91487bf6e4b356822",
+  "branch": "experiment/distinct-bank-integration-001",
+  "verdict": "accepted_for_scoped_desktop_integration_reference",
+  "scope": "Code/import and inherited layout review only. Runner, published fit results, test-suite completeness and final documentation require separate integration review.",
+  "findings": [],
+  "reviewed_obligations": [
+    {
+      "topic": "data-only import",
+      "disposition": "pass",
+      "evidence": "The 3400-byte input is SHA256 pinned before pickletools.genops. Selected payloads decode through struct.unpack only; no pickle load, eval, global lookup, REDUCE or BUILD executes. Exact JSON-decoder equality and four damaged-artifact rejections independently verified. This binds the repository hex to JSON, not an independent reconstruction of the inaccessible original conversation attachment."
+    },
+    {
+      "topic": "original map coefficients",
+      "disposition": "pass",
+      "evidence": "Stored binary64 uj, um, hu and A are preserved; hu=0.0833333333 and rounded spline centers are not replaced by ideal rationals. Neither column weights nor spline weights are renormalized. Sampled unity diagnostics are explicitly not uniform bounds."
+    },
+    {
+      "topic": "full stationary model",
+      "disposition": "pass",
+      "evidence": "Three RC branches each retain 13 free and 13 forced responses. Features carry independent incoming voltages and resistances, affine SOC/inverse Q/R0, unknown H and incoming hysteresis, plus both continuous hysteresis rates. Native TaylorH2 implementation remains unchanged. Partition and ordered-gap chart chain cover all 16 parameters; H gamma/Q coupling and incoming RC rate derivatives remain present."
+    },
+    {
+      "topic": "timing and ownership",
+      "disposition": "pass_for_single_synchronous_owner",
+      "evidence": "Bank ZOH advances before the corresponding voltage row, matching native charge/H timing. Actual zero and irregular dt are preserved, integer first/count enforces contiguous ownership, and explicit mismatched source is rejected. Omitting source uses the already bound object owner, as inherited API behavior. No merge, campaign checkpoint or asynchronous-commit claim is accepted."
+    },
+    {
+      "topic": "rejection atomicity",
+      "disposition": "pass_for_single_synchronous_owner",
+      "evidence": "Native state, bank state, likelihood root, count and noise are staged before commit. Eleven malformed/order/source input cases, injected QR exception and nonfinite QR result all preserve snapshots exactly."
+    },
+    {
+      "topic": "domain and endpoint",
+      "disposition": "pass",
+      "evidence": "Stationary 25C, bounded observation batches/current/dt/sigma, original five shape-coordinate box, incoming H and full charge-path support gates inherited. Distinct map retains [-1,1]. All 32 public physical-chart support corners independently admitted. Transport converts physical hysteresis back to bounded eta and differentiates H normalization."
+    },
+    {
+      "topic": "joint likelihood and derivatives",
+      "disposition": "pass",
+      "evidence": "One dense 94-feature QR retains every lifted cross term. Independent scalar ZOH rows, row-vs-root residual norm, chunk invariance and random off-centre full-chart/endpoint directional finite differences pass to stated floating-point tolerances."
+    },
+    {
+      "topic": "array ledger",
+      "disposition": "pass_as_payload_ledger_not_peak_SRAM",
+      "evidence": "Enumerated every direct retained NumPy array in adapter, HField inheritance and map; center/halfwidth aliases counted once. 85160 B retained arrays, 936 B response state, W94 and 35720 B packed factor. Legacy 9248 B dense root and 312 B native state are included. Scratch categories are indicative; Python/BLAS, metadata, complete solver/prior and stack remain excluded."
+    }
+  ],
+  "independent_probes": {
+    "execution": "Two inline python3 -B probes, fresh temporary builds through build_kernels; temporary directories removed automatically; no original remote experiment, sweep or fitting program executed.",
+    "seed": 733,
+    "exact_decode_json_equality": true,
+    "damaged_pickle_rejections": 4,
+    "public_support_corners_admitted": 32,
+    "random_derivative_cases": 8,
+    "directions_per_case": 4,
+    "directional_difference_epsilon": 1e-06,
+    "feature_directional_FD_max_abs_error": 5.0673627516317765e-09,
+    "endpoint_directional_FD_max_abs_error": 4.195601019385542e-10,
+    "scalar_ZOH_records": 139,
+    "scalar_ZOH_dt_values": [
+      0,
+      0.014285714285714285,
+      0.02857142857142857,
+      0.41,
+      1
+    ],
+    "scalar_ZOH_row_max_abs_error": 8.526512829121202e-13,
+    "zero_dt_bank_identity": true,
+    "chunk_size": 7,
+    "chunk_response_bitwise_equal": true,
+    "chunk_nll_abs_error": 2.801243681460619e-10,
+    "row_vs_root_squared_residual_abs_error": 4.3655745685100555e-11,
+    "rejected_batches_preserved_state": 11,
+    "QR_faults_preserved_state": 2,
+    "retained_numpy_arrays_B": 85160
+  },
+  "limitations": [
+    "W94/35720 B factor and 936 B response are over comparison budgets; no W34 or complete M23 feasibility claim.",
+    "Supplied map remains NUM evidence; no monotonicity/passivity/global approximation certificate validated.",
+    "No calibration, coverage, truth accuracy, indefinite history, aging, variable-temperature or campaign promotion accepted.",
+    "TaylorH2 approximation defects remain; finite derivative consistency establishes implementation consistency only.",
+    "Source review is bound to the listed bytes; substantive changes require independent re-review."
+  ],
+  "bindings": {
+    "experiments/distinct_bank_integration_001/field.py": {
+      "sha256": "8fe4a3edc24fa397b995f997156ce160e84b8adb959ecfddf7fcbd6a895b653e",
+      "bytes": 15200
+    },
+    "experiments/distinct_bank_integration_001/import_map.py": {
+      "sha256": "135432aceb8ef217faf5e41c5b81a9353c0fc5621ddd02005070956736f15b1d",
+      "bytes": 4670
+    },
+    "experiments/distinct_bank_integration_001/map_n13e.json": {
+      "sha256": "9be5c179151ccad728f92dfad9e212f9b6eef48d523781332ad37a500c654595",
+      "bytes": 11246
+    },
+    "experiments/distinct_bank_integration_001/map_n13e.hex": {
+      "sha256": "a2485c2f7cd257fef8191f65e25024328f415a7f30a4a4993139aa3b80f819fa",
+      "bytes": 8500
+    },
+    "experiments/distinct_bank_integration_001/import_receipt.json": {
+      "sha256": "c9c202b40de05dd35737fc9c1833e01ff985cdd410a08d0732934b2fe8db08b1",
+      "bytes": 1307
+    },
+    "specifications/distinct_bank_integration_001/README.md": {
+      "sha256": "520111ed02670319e89b90559a798ca75eab71af243481af541b47c8d3a18fd1",
+      "bytes": 2933
+    },
+    "experiments/hysteresis_sensitivity_basis_001/basis.py": {
+      "sha256": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca",
+      "bytes": 3441
+    },
+    "experiments/hysteresis_sensitivity_basis_001/response.c": {
+      "sha256": "f9860e2d1130ccb1e1426b08de5f2e1eeaf9d86b69f5683ab80a12a22f644db9",
+      "bytes": 4246
+    },
+    "experiments/rc_sensitivity_basis_001/basis.py": {
+      "sha256": "ebdb8f682cccff5efcbd8c16992c3a0a8f85b8d14376fdfa4f8eaa09ec76e587",
+      "bytes": 3178
+    },
+    "experiments/response_basis_attribution_001/basis.py": {
+      "sha256": "caa35271ebb8fb8680e5b3a455cf7125adf05059b58b1592005098d22c06544d",
+      "bytes": 5514
+    },
+    "experiments/hysteresis_refinement_001/field.py": {
+      "sha256": "95a71d8904e422a2c76823a16697b25e1dac7c93dff165bfd89db68483faf0e3",
+      "bytes": 8687
+    },
+    "experiments/joint_rate_history_001/field.py": {
+      "sha256": "c0b3ec633e06c38f85414286be219384daa6724e6518876f25c2ff89c7d021e9",
+      "bytes": 6989
+    },
+    "experiments/foster_uncertainty_audit_001/conditional_packet.py": {
+      "sha256": "fbd57fd38cf904eb1352cbaec73f2b61e5d4fee4ec47079086e0e0a0db1b2976",
+      "bytes": 4357
+    },
+    "provenance/rc_sensitivity_basis_001/full001_registration.json": {
+      "sha256": "a216df29cd2d76d2339e0032105c3dd3277e9b71daf9fa0092fcd1fa9ca7e50a",
+      "bytes": 37889
+    }
+  }
+}

@@ -320,6 +320,14 @@ statistics and Laplace-collapse claims receive explicit qualifications. Supplied
 numbers remain checkpoints; no original scripts or pickle were executed. Complete
 resource and cumulative-error closure remain open.
 
+The [distinct-bank integration reference](experiments/distinct_bank_integration_001/README.md)
+now uses the supplied N13e map with all16physical coordinates and native TaylorH2
+hysteresis. A512record stationary comparison converges in all three arms; finite
+checks cover chronology, joint likelihood and transport. The separate-bank layout
+is explicitly overbudget (W94,35720B factor,936B response). It is an experimental
+CLI, not a long-campaign mode or M23 candidate; see the
+[review and results](provenance/distinct_bank_integration_001/README.md).
+
 The supported desktop campaign uses the optimized C rolling estimator with
 bounded hysteresis, continuous physical parameters, and likelihood/state-transport
 history. It supports parallel cases, configurable sample rate, CC/CV cycles,

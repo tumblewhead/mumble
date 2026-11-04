@@ -1,0 +1,112 @@
+{
+  "review": "distinct_bank_integration_001 harness independent review r1",
+  "reviewer": "fresh-context bank_harness_review agent",
+  "verdict": "changes_requested_source_binding_only",
+  "revision": "45fb0a8ee851502af4e226b91487bf6e4b356822",
+  "scope": "Experimental stationary W94 desktop integration; no production campaign, M23, coverage or original remote experiments.",
+  "findings": [
+    {
+      "id": "HARNESS-R1-1",
+      "severity": "blocking_for_provenance_acceptance",
+      "location": "experiments/distinct_bank_integration_001/run.py:build_kernels/main source receipt",
+      "finding": "Fresh builds compile rc_sensitivity_basis_001/response.c and hysteresis_sensitivity_basis_001/response.c, but registration source hashes and final verification omit both actual helper C sources. Helper binary hashes do not bind their source. The Python module collector does not discover C files.",
+      "requested_change": "Record and verify identities of both helper C sources, preferably capture before compilation and verify immediately after and at completion. Preserve old runs and issue a fresh bound run.",
+      "status": "reported_to_parent_before_review_write"
+    }
+  ],
+  "accepted_observations": [
+    "public_registration reads only config/prior_mean/prior_root/center; fixture generator is used only in native observation synthesis. Both starts are public and original prior is reused unchanged.",
+    "Compressed cost/score/full Gauss-Newton precision contains one prior term plus the single joint voltage factor. Exact begins with one original prior and processes each observation once. No posterior reuse or independent-coordinate replacement.",
+    "Q/SOC readout uses the complete joint fitted root and analytic endpoint Jacobian, preserving cross covariance; uncertainty is explicitly provisional local curvature.",
+    "Exact-node native comparison includes nonzero incoming RC and hysteresis, zero/irregular dt, polarity changes, and a first-row pre/post-step separation witness. Chunking verifies state bitwise and likelihood to tolerance.",
+    "Six targeted tests verify complete 16-coordinate feature/endpoint directional finite differences at central and off-center probes, likelihood/score/precision parity, source/order rejection, invalid last-row transaction safety, and QR failure safety.",
+    "Direct, RC and H binaries are freshly built in new temporary directories; no historical ignored .so is loaded. Direct comparator has an explicit source snapshot/build receipt.",
+    "Source/sequence ownership is synchronous caller-supplied batch ownership, not authenticated intra-batch provenance, concurrency, or crash recovery. All reported physical/certification/resource limitations are appropriately narrow."
+  ],
+  "verification": {
+    "unittest": {
+      "command": "python3 -B -m unittest experiments.distinct_bank_integration_001.test_bank",
+      "passed": 6,
+      "exit_code": 0
+    },
+    "independent_cli": {
+      "command": "python3 -B experiments/distinct_bank_integration_001/run.py --records 512 --out /tmp/distinct-bank-review-r1-20261104-1749 --refit",
+      "exit_code": 0,
+      "records": 512,
+      "elapsed_s": 13.171428571428574,
+      "observation_sha256": "ed05f1f149f1e57b010b1f386b2f0b8c408018b65d7366dcc4c4486d5973b839",
+      "fit_statuses": {
+        "direct": "converged",
+        "distinct_bank": "converged",
+        "TaylorRC_TaylorH2": "converged"
+      },
+      "attempt_statuses": {
+        "direct": [
+          "converged",
+          "converged"
+        ],
+        "distinct_bank": [
+          "converged",
+          "converged"
+        ],
+        "TaylorRC_TaylorH2": [
+          "converged",
+          "converged"
+        ]
+      },
+      "artifacts": {
+        "registration.json": {
+          "bytes": 23004,
+          "sha256": "6191b89fc85c3a23eccc1134bd9143d5360dbee9f5afe066a4817e70eabef577"
+        },
+        "result.json": {
+          "bytes": 47942,
+          "sha256": "1e8c9eebc0b7c9048a8d9582f80973008556dbe634edd2d86cca3d9a5e101cfa"
+        },
+        "snapshot.npz": {
+          "bytes": 45465,
+          "sha256": "a5308820f88440ab64371841c7bbf3a341aa1adeab47fbdf9b6a2fad9a9cfb59"
+        }
+      }
+    }
+  },
+  "reviewed_source_bindings": {
+    "experiments/distinct_bank_integration_001/run.py": {
+      "bytes": 10099,
+      "sha256": "5140f56f793d63bb6f6f802cee6b9e27217835b6b2f45aa1c76784046f52272b"
+    },
+    "experiments/distinct_bank_integration_001/test_bank.py": {
+      "bytes": 7109,
+      "sha256": "709354bc1ac1927eccd43fa609910ec2dc19edb3765a27a1da1e5b76cca7248e"
+    },
+    "experiments/distinct_bank_integration_001/field.py": {
+      "bytes": 15200,
+      "sha256": "8fe4a3edc24fa397b995f997156ce160e84b8adb959ecfddf7fcbd6a895b653e"
+    },
+    "experiments/distinct_bank_integration_001/README.md": {
+      "bytes": 4331,
+      "sha256": "f8e941905dd7ad8e76467b135875856c95e4079c5b293ed3d253989c2ab370b2"
+    },
+    "specifications/distinct_bank_integration_001/README.md": {
+      "bytes": 2933,
+      "sha256": "520111ed02670319e89b90559a798ca75eab71af243481af541b47c8d3a18fd1"
+    },
+    "experiments/rc_sensitivity_basis_001/response.c": {
+      "bytes": 3363,
+      "sha256": "b6b83f78997026b0010a1691b1d8142a11ea92fa9247d9aa3e94f3d52f8b8b64"
+    },
+    "experiments/hysteresis_sensitivity_basis_001/response.c": {
+      "bytes": 4246,
+      "sha256": "f9860e2d1130ccb1e1426b08de5f2e1eeaf9d86b69f5683ab80a12a22f644db9"
+    },
+    "experiments/distinct_bank_integration_001/map_n13e.json": {
+      "bytes": 11246,
+      "sha256": "9be5c179151ccad728f92dfad9e212f9b6eef48d523781332ad37a500c654595"
+    },
+    "provenance/rc_sensitivity_basis_001/full001_registration.json": {
+      "bytes": 37889,
+      "sha256": "a216df29cd2d76d2339e0032105c3dd3277e9b71daf9fa0092fcd1fa9ca7e50a"
+    }
+  },
+  "source_binding_note": "Runner/test/field identities taken from independent-run registration; documentation and missing helper C hashes captured during review. Parent may issue revised source and fresh subsequent review."
+}
