@@ -1,0 +1,169 @@
+{
+  "schema": "sram_size_core_review_r1",
+  "reviewer": "independent fresh-context subagent sram_core_review",
+  "utc": "2026-11-04T18:55:16.284538+00:00",
+  "source_revision": "b495bdb71154306529954ac9ad0b98bd3f784d8a",
+  "status": "provisional_candidate_reviewed_with_required_followups; no promotion or complete memory qualification",
+  "scope": "Present tiny math, fixed degree12 cardinal Chebyshev projection, compact response15, serialized phi reuse, stream port, subtraction wrapper and size005 probe. Excludes later campaign/checkpoint integration and optional packed48.",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "6a05bca9d3f541ecfa6f49024fcad93eb45ac04b0f5889204585b4b22336fcb5",
+    "PROJECT_STATE.json": "a6cbff939a945a97e5f1e2f69ec68ba87844368d64089133717221d3eadf05a5",
+    "provenance/sram_size_001/design_review.json": "cf4ba0dfcf1fc780ed5c039c5d1b47a258a802788af751a1945638cb42727f13",
+    "experiments/sram_size_001/tiny_math.h": "b3c9925b5f934561324cd2cdd357e847c3268d6c82c7ae6495cd3eef3d1fceed",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/sram_size_001/soft_sub.c": "d6e63c1b5e0f29c14c97faf664fbf04d8eeb4dd1cf2d81a04dcb144233b6d39e",
+    "experiments/bank_rowwise_001/core.c": "e8ba5e67a613b4384743ce84e669f15a421166f50fb1c4d12e412c492dd3ecbf",
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/bank_memory_001/field.py": "eac4f761efb88ac7466ac7659e71b7023cf39bfab298476d23ddeb09485438a7",
+    "experiments/hysteresis_sensitivity_basis_001/response.c": "f9860e2d1130ccb1e1426b08de5f2e1eeaf9d86b69f5683ab80a12a22f644db9",
+    "experiments/sram_size_001/size005/measurement.json": "d353fdf05db76aa7b4667332a40833638b86f2e5da125177a7b6c5be68a07d94",
+    "experiments/sram_size_001/size005/tiny_cardinal/probe.elf": "c28031e332190579a6b5f5a31389f2d731cf555578f6c4fbdfb3a665ad96321d",
+    "experiments/sram_size_001/size005/tiny_cardinal/core.c": "0406ed1c2e53cd3e20bf43016b68d56e900ce83891fcbb94d981e92b16ea44e7",
+    "experiments/sram_size_001/size005/tiny_cardinal/probe.c": "19ae4e9b10bddad99b693195cf6bac01bf2afc5176f41ad4f8d0fe22aa156c97",
+    "experiments/sram_size_001/size005/tiny_cardinal/generation.json": "d337af2641aaa1d37df5a31427806e48b52bc460bf113063e0365ccce0d1ce05"
+  },
+  "implementation_edits_by_reviewer": false,
+  "algebra_and_alias_review": [
+    "Clenshaw derivative recurrence differentiates the represented degree12 polynomial exactly in real arithmetic. Coefficients arise from a square 13-node interpolation solve: no degree truncation, but coefficient generation and evaluation are rounded and must be identified in checkpoints.",
+    "Full RC endpoint transport still calls the direct13 cardinal weights; it does not incorrectly substitute V*P weights. V remains the fixed original observation projection.",
+    "Compact indices [18:24],[27:33],[36:39] map to [0:6],[6:12],[12:15]. H2 recursion needs old0, oldj and oldl only; mixed and pure second derivative recurrences match original response.c.",
+    "append reads phi while writing qr scratch only; history insertion destructively consumes phi second. Neither operation needs phi after insertion. Cost/fit/stream must remain serialized. No newly introduced scratch lifetime collision found.",
+    "Binary64 subtraction via sign flip and addition preserves finite-input subtraction under the same addition runtime. Linked disassembly contains the 16-byte wrapper calling __aeabi_dadd and no separate __aeabi_dsub/__subdf3 symbol; NaN payload preservation is not claimed."
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "required_before_campaign_acceptance",
+      "location": "experiments/sram_size_001/native.py:advance; inherited initialize/fit",
+      "finding": "A multirow advance may insert a prefix into history and mutate RC response before a later invalid row. The exception leaves field count and H/path state uncommitted. valid=0 refuses direct queries, but initialize can re-enable this inconsistent partial state. This is permitted only under the documented caller-quarantine contract, not safe recovery by refitting.",
+      "evidence": "Independent valid-row/invalid-temperature-row test observes history mutation, unchanged count, query refusal, then successful initialize.",
+      "required_disposition": "Campaign must irreversibly quarantine or discard the entire object after any native advance exception; alternatively enforce a sticky failure state at the adapter boundary. Test failed continuation and restore behavior. Do not treat initialize as recovery."
+    },
+    {
+      "id": "R2",
+      "severity": "required_before_memory_acceptance",
+      "location": "experiments/sram_size_001/measure.py:occupied",
+      "finding": "Summing six named section sizes can miss alignment gaps and allocated orphan sections. size005 currently has no such gap: _end 0x10006538 minus SRAM origin 0x10000000 equals25912B, matching its section sum. Thus no numeric undercount found for this artifact, but measurement is not general.",
+      "required_disposition": "Report actual allocated address span and all SHF_ALLOC sections/load segments, including any initializer storage, and separate stack reservation from a demonstrated bound."
+    },
+    {
+      "id": "R3",
+      "severity": "minor",
+      "location": "experiments/sram_size_001/tiny_math.h:tm_tanh",
+      "finding": "tm_tanh(-0.0) returns +0.0 unlike libm. No consequential estimator-state difference demonstrated.",
+      "required_disposition": "Preserve signed zero or explicitly record this numerical semantic difference; do not claim bitwise libm substitution."
+    },
+    {
+      "id": "R4",
+      "severity": "required_before_numerical_acceptance",
+      "location": "tiny_math.h and generated core",
+      "finding": "Current finite tests support an experimental candidate only. tm_scale and tm_nextup have intentionally narrow internal domains; tm_nextup is valid for actual positive finite cost magnitude calls, and tm_scale actual exponents lie in its handled range. The header alone does not fully document these preconditions. Local grids and this short stream cannot establish support-boundary equivalence, lifetime recurrence/QR error, calibrated widths or firmware timing.",
+      "required_disposition": "Document helper domains and complete independent threshold/adjacent-value, complete feature/transport Jacobian, low-noise/rest decision and cumulative controls from design review before larger claims."
+    },
+    {
+      "id": "R5",
+      "severity": "documentation",
+      "location": "generated core opening contract and scratch_kernel.c contract",
+      "finding": "Generated core retains blanket no-context-alias external-array wording from original while ingest deliberately consumes c->phi and probe initializes from c->anchor. The new ingest comment describes the actual safe alias but public/internal exceptions are not consolidated.",
+      "required_disposition": "State narrow supported internal aliases and serialized ownership explicitly; retain external nonalias requirements."
+    }
+  ],
+  "independent_controls": {
+    "stream": {
+      "libm": {
+        "n": 2540,
+        "state_max_abs_vs_original": 0.0,
+        "rc_free_max_abs": 1.7607443281164592e-16,
+        "rc_forced_max_abs": 1.4432899320127035e-15,
+        "history_max_abs": 0.7424166419280791,
+        "history_gram_max_abs": 4.231929779052734e-06,
+        "history_gram_relative_max": 1.161154001648176e-15
+      },
+      "tiny": {
+        "n": 2540,
+        "state_max_abs_vs_original": 0.0,
+        "rc_free_max_abs": 1.7607443281164592e-16,
+        "rc_forced_max_abs": 1.9984014443252818e-15,
+        "history_max_abs": 21.033632810577565,
+        "history_gram_max_abs": 1.049041748046875e-05,
+        "history_gram_relative_max": 2.8783535815504084e-15
+      }
+    },
+    "projection": {
+      "value_max_abs": 1.5543122344752192e-15,
+      "derivative_max_abs": 3.3889557826682903e-14
+    },
+    "partial_failure": {
+      "count_unchanged": true,
+      "history_mutated": true,
+      "valid_flag": 0,
+      "query_refused": true,
+      "initialize_can_reenable_partial_state": true
+    },
+    "helper_edges": [
+      {
+        "op": 0,
+        "x": "1.0",
+        "tiny": "2.7182818284590455",
+        "libm": "2.718281828459045"
+      },
+      {
+        "op": 4,
+        "x": "-0.0",
+        "tiny": "0.0",
+        "libm": "-0.0"
+      },
+      {
+        "op": 6,
+        "x": "1.0",
+        "tiny": "1.7182818284590455",
+        "libm": "1.718281828459045"
+      }
+    ],
+    "qr_prefixes": [
+      {
+        "n": 100,
+        "factor_max_abs": 1.2940156137112498e-14,
+        "gram_max_abs": 2.5579538487363607e-13
+      },
+      {
+        "n": 10000,
+        "factor_max_abs": 3.268496584496461e-13,
+        "gram_max_abs": 6.548361852765083e-11
+      },
+      {
+        "n": 100000,
+        "factor_max_abs": 6.0822458181064576e-12,
+        "gram_max_abs": 3.856257535517216e-09
+      }
+    ]
+  },
+  "control_interpretation": [
+    "2540 observations include zero/tiny/irregular actual dt and rests/sign flips. H/path agrees exactly in this fixture; RC difference below2e-15. History factor entries differ appreciably in nearly dependent directions; Gram difference divided by maximum Gram entry is1.16e-15 for libm port and2.88e-15 for tiny. This max-entry norm is not a weak-direction uncertainty bound.",
+    "Repeated four-column QR at100,10000,100000 rows compares identical tiny/libm operation loops. At100000 rows max Gram difference3.86e-9 on order1e5 diagonal; not a uniform or lifetime error bound.",
+    "Signed zero difference is the only classification/sign mismatch on tested NaN/infinity/negative/zero/min-subnormal/unit helper cases; exp(1) and expm1(1) differ by rounding as recorded.",
+    "Projected cardinal checks cover4001 uniform support points plus all supported nodes and adjacent representable values. No global approximation/passivity certificate is implied."
+  ],
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B /tmp/sram_core_review_r1.py",
+    "arm-none-eabi-readelf -SW experiments/sram_size_001/size005/tiny_cardinal/probe.elf",
+    "arm-none-eabi-nm -S experiments/sram_size_001/size005/tiny_cardinal/probe.elf",
+    "arm-none-eabi-objdump -d experiments/sram_size_001/size005/tiny_cardinal/probe.elf"
+  ],
+  "reproducible_control_script": "import sys, pathlib, tempfile, subprocess, ctypes as C, json, math\nimport numpy as np\nR=pathlib.Path.cwd();sys.path.insert(0,str(R))\nfrom experiments.bank_memory_001.test_memory import Tests\nfrom experiments.sram_size_001.native import Native,CardinalMap,projected_coefficients\nfrom experiments.bank_rowwise_001.native import ptr\nout={}\nwith tempfile.TemporaryDirectory(prefix='sram-review-') as temp:\n p=pathlib.Path(temp);Tests.setUpClass()\n try:\n  t=Tests();fields=[t.make(3) for _ in range(3)]\n  ns=[Native(fields[i],t.mean,t.L,p/str(i),math_kind=k,map_kind='cardinal',compact=True) for i,k in enumerate(['libm','tiny'])]\n  for n in ns:n.initialize(np.zeros(16))\n  # Public fixture, repeated with changing signs and actual irregular dt.\n  obs=np.tile(t.obs,(20,1));obs[:,0]=np.tile([0.,1e-10,.01,1/35,.2],len(obs)//5+1)[:len(obs)];obs[:,1]=np.tile([0.,.05,-.05,.2,-.2],len(obs)//5+1)[:len(obs)]\n  for first in range(0,len(obs),127):fields[2].update(first,obs[first:first+127])\n  for first in range(0,len(obs),127):\n   for n in ns:n.advance(first,obs[first:first+127])\n  idx=np.r_[18:24,27:33,36:39]\n  out['stream']={}\n  for label,f in zip(['libm','tiny'],fields):\n   out['stream'][label]={'n':len(obs),'state_max_abs_vs_original':float(abs(f.state[idx]-fields[2].state[idx]).max()),'rc_free_max_abs':float(abs(f.rc_free-fields[2].rc_free).max()),'rc_forced_max_abs':float(abs(f.rc_forced-fields[2].rc_forced).max()),'history_max_abs':float(abs(f.packed.values-fields[2].packed.values).max()),'history_gram_max_abs':float(abs(f.root.T@f.root-fields[2].root.T@fields[2].root).max()),'history_gram_relative_max':float(abs(f.root.T@f.root-fields[2].root.T@fields[2].root).max()/abs(fields[2].root.T@fields[2].root).max())}\n  # Fractional and node-adjacent projected value/derivative controls.\n  f=fields[0];cm=CardinalMap(f.map);u=np.r_[np.linspace(-1,1,4001),np.arange(-4,5)/4,np.nextafter(np.arange(-4,5)/4,np.inf),np.nextafter(np.arange(-4,5)/4,-np.inf)];u=u[abs(u)<=1]\n  a=projected_coefficients(f);out['projection']={'value_max_abs':float(abs(np.polynomial.chebyshev.chebval(u,a.T).T-cm.weights(u)@f.P.T).max()),'derivative_max_abs':float(abs(np.polynomial.chebyshev.chebval(u,np.polynomial.chebyshev.chebder(a.T)).T-cm.weights(u,1)@f.P.T).max())}\n  # Partial failure and explicit inference quarantine. Failure after successful first row.\n  n=ns[0];first=n.field.count;before=n.field.packed.values.copy();bad=obs[:2].copy();bad[1,2]=26\n  try:n.advance(first,bad)\n  except ValueError:pass\n  out['partial_failure']={'count_unchanged':n.field.count==first,'history_mutated':not np.array_equal(before,n.field.packed.values),'valid_flag':n.context.qr.lease.valid}\n  try:n.query();out['partial_failure']['query_refused']=False\n  except ValueError:out['partial_failure']['query_refused']=True\n  n.initialize(np.zeros(16));out['partial_failure']['initialize_can_reenable_partial_state']=bool(n.context.qr.lease.valid)\n finally:Tests.tearDownClass()\n # Helpers and cumulative QR compile tiny and libm identical loops.\n for kind in ['tiny','libm']:\n  src=p/(kind+'.c');src.write_text(('#include \"'+str(R/'experiments/sram_size_001/tiny_math.h')+'\"\\n' if kind=='tiny' else '#include <math.h>\\n')+'#define STORE_DOUBLE 1\\n#include \"'+str(R/'experiments/bank_memory_001/qr.c')+'\"\\ndouble test(unsigned op,double x,double y){switch(op){case 0:return exp(x);case 1:return log(x);case 2:return sqrt(x);case 3:return hypot(x,y);case 4:return tanh(x);case 5:return atanh(x);default:return expm1(x);}}\\nint repeated(double*r,unsigned n){for(unsigned i=0;i<n;i++){double row[4]={1.,1.+(i%3)*1e-8,(i%2?1.:-1.)*1e-6,.5};if(insert(r,4,row))return -1;}return 0;}\\n')\n  so=p/(kind+'.so');subprocess.run(['cc','-Os','-fPIC','-shared','-ffp-contract=off',str(src),'-lm','-o',str(so)],check=True);lib=C.CDLL(str(so));lib.test.argtypes=[C.c_uint,C.c_double,C.c_double];lib.test.restype=C.c_double;lib.repeated.argtypes=[C.POINTER(C.c_double),C.c_uint]\n  if kind=='tiny':tiny=lib\n  else:exact=lib\n out['helper_edges']=[]\n for op in range(7):\n  for x in [-math.inf,-1.,-0.,0.,5e-324,1.,math.inf,math.nan]:\n   a=tiny.test(op,x,0);b=exact.test(op,x,0)\n   same=(math.isnan(a) and math.isnan(b)) or a==b\n   if not same or (a==b==0 and math.copysign(1,a)!=math.copysign(1,b)):out['helper_edges'].append({'op':op,'x':str(x),'tiny':str(a),'libm':str(b)})\n out['qr_prefixes']=[]\n for n in [100,10000,100000]:\n  rs=[]\n  for lib in [tiny,exact]:\n   a=np.zeros(10);assert lib.repeated(ptr(a),n)==0;r=np.zeros((4,4));r[np.triu_indices(4)]=a;rs.append(r)\n  out['qr_prefixes'].append({'n':n,'factor_max_abs':float(abs(rs[0]-rs[1]).max()),'gram_max_abs':float(abs(rs[0].T@rs[0]-rs[1].T@rs[1]).max())})\n print(json.dumps(out,indent=2))\n pathlib.Path('/tmp/sram_core_review_r1_results.json').write_text(json.dumps(out,indent=2))\n",
+  "limits": [
+    "No10KiB total-memory fit: size005 has25912B allocated plus nominal1024B stack reservation, totaling26936B before missing platform scope.",
+    "No target execution or stack bound established by this review; disassembly inspection only.",
+    "Aging, temperature beyond25C, physical passivity, inherited rank3 fidelity/coverage and firmware readiness remain unqualified.",
+    "Source hashes bind this review to the present version. Subsequent packed48, campaign identity/restore and substantive math/representation changes require independent re-review."
+  ],
+  "concurrent_edit_hashes_not_acceptance": {
+    "experiments/sram_size_001/generate.py": "61ab16bd63bf1573ec6fa040140c3c171fefd8aa222146e686283d486697cc6f",
+    "experiments/sram_size_001/native.py": "55a9a98b285aa89ad769e49b71c75235773897717ffca61bcec2700d9b72725d",
+    "experiments/sram_size_001/measure.py": "91136ce945c62460427d83f57a38ee35e50603c29b17982c314e70be29633b01"
+  },
+  "hash_capture_caveat": "Parent edited generate.py/native.py/measure.py concurrently after initial reads and controls. Hashes for those paths were captured at receipt write and are separated as concurrent_edit_hashes_not_acceptance; they do not imply review of the added history48, poison, identity, or measurement revisions. Reviewed semantics are the pre-history_bits 42-line generate.py, 60-line native.py and 76-line measure.py printed at initial inspection. size005 generated core/probe/ELF are separately source-bound. tiny_math.h has changed after its recorded hash; revised helper must be re-reviewed."
+}

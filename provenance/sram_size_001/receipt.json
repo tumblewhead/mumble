@@ -1,0 +1,750 @@
+{
+  "schema": "sram_size_001_receipt_v1",
+  "base_revision": "b495bdb71154306529954ac9ad0b98bd3f784d8a",
+  "branch": "experiment/sram-size-001",
+  "status": "isolated_experimental_candidate_not_mainline_or_deployment",
+  "hardware": {
+    "cpu": "Cortex-M23 custom silicon16MHz",
+    "memory": "ALL instructions/constants/data/stack in SRAM",
+    "target_B": 10240
+  },
+  "source_sha256": {
+    "experiments/sram_size_001/checkpoints.py": "2cc2008424b2aeeecd7c9a725a511d6d2cfadac70cdce973c9bcbb8877cebdc4",
+    "experiments/sram_size_001/generate.py": "2822407251b5670bea7571046db9cfce7b529a1d4750cb74830c6574ef198714",
+    "experiments/sram_size_001/history48.h": "6c1324c1e3b024d28e0a1b992e653002f9369b00d5ea7ea8c3a12348c18f2217",
+    "experiments/sram_size_001/math_probe.c": "6b30e5452143acea60164a4c4e599858804b3b4f34afb2a77be2b33eef8744f7",
+    "experiments/sram_size_001/measure.py": "cac0774cabd6d4061e3edaa2757b70788f1ad916548b45622dbbdb59b64d7af0",
+    "experiments/sram_size_001/native.py": "65324cf120a6205afaef3e86e4127dd4ba50031bba07b60222faf3c0e7db3ad8",
+    "experiments/sram_size_001/soft_sub.c": "d6e63c1b5e0f29c14c97faf664fbf04d8eeb4dd1cf2d81a04dcb144233b6d39e",
+    "experiments/sram_size_001/stack.py": "887d04476f02697fb150e085fedb4996af5f4927e040f012ff5889075b76e9cb",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/sram_size_001/test_campaign.py": "c1d8662972929d1c4a917cfb3043d6958259bc0f4ce8c29bfd309714bc3aa9fe",
+    "experiments/sram_size_001/test_core.py": "ca159f2ffabdaac43129acf314e42661882cdd052dab9e6a2f8b6af84d0114da",
+    "experiments/sram_size_001/tiny_math.h": "d2fc9bb1b2269cdb841632d9c4f9dfd6ea29cabbdc7c7c5894ec464f17776f8c"
+  },
+  "tests": {
+    "log": {
+      "path": "provenance/sram_size_001/tests_final.txt",
+      "bytes": 4251,
+      "sha256": "a2fbc29e2cb9a51248ce37bdec44c50b263d3af09aa8c4e889da30d147b56ac0"
+    },
+    "executions_passed": 26,
+    "scope": "Candidate and original-core/campaign suites; includes repeated fixture checks. Full/compact equivalence and exact replay included."
+  },
+  "reviews": {
+    "design_review.json": {
+      "path": "provenance/sram_size_001/design_review.json",
+      "bytes": 15827,
+      "sha256": "cf4ba0dfcf1fc780ed5c039c5d1b47a258a802788af751a1945638cb42727f13"
+    },
+    "core_review_r1.json": {
+      "path": "provenance/sram_size_001/core_review_r1.json",
+      "bytes": 17194,
+      "sha256": "f23ca794d6f85dfcd8bb1ea9e3ee28cb0cd9a3f1c307143168b1e601bec2747c"
+    },
+    "core_review_r2.json": {
+      "path": "provenance/sram_size_001/core_review_r2.json",
+      "bytes": 14495,
+      "sha256": "1af25793068fc7873720fb4081ae8a8a4576d39c9c57f9569bec617b14da3911"
+    },
+    "storage_review_r1.json": {
+      "path": "provenance/sram_size_001/storage_review_r1.json",
+      "bytes": 12379,
+      "sha256": "4f285d4f4e2c5e177fd25d101648407008532395bfdbccefe1fe309a7851a260"
+    },
+    "cache_closure_review.json": {
+      "path": "provenance/sram_size_001/cache_closure_review.json",
+      "bytes": 5814,
+      "sha256": "15f840366b912c09c1875385c53897b8ee48e2aeefcb0051505ee891408df591"
+    }
+  },
+  "sizes": {
+    "clean_baseline_inference": {
+      "measurement": {
+        "path": "experiments/sram_size_001/size001/measurement.json",
+        "bytes": 6895,
+        "sha256": "9be20e9e5cda07c6a5bff1459ba135ad5ee35a4a81446700a4f201e0562b4386"
+      },
+      "result": {
+        "math": "libm",
+        "map": "spline",
+        "sections": {
+          ".vectors": 28,
+          ".text": 22708,
+          ".rodata": 4472,
+          ".data": 296,
+          ".bss": 8888,
+          ".comment": 60,
+          ".ARM.attributes": 50,
+          ".debug_loclists": 32339,
+          ".debug_rnglists": 2815,
+          ".debug_frame": 2196,
+          ".debug_info": 19445,
+          ".debug_abbrev": 6296,
+          ".debug_aranges": 680,
+          ".debug_line": 21050,
+          ".debug_str": 4191,
+          ".debug_line_str": 163
+        },
+        "allocated_sections_B": 36392,
+        "with_1024_stack_B": 37416,
+        "stack": "1024B reservation, not bound; final linked stack qualification pending",
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size001/libm_spline/probe.c",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size001/libm_spline/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size001/libm_spline/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size001/libm_spline/probe.elf"
+        ],
+        "sha256": "4c88c2204eb05851c1882cbfeb839afc8bdc8e050840b737c158df3fdea1154f"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size001/libm_spline/probe.elf",
+        "bytes": 127720,
+        "sha256": "4c88c2204eb05851c1882cbfeb839afc8bdc8e050840b737c158df3fdea1154f"
+      }
+    },
+    "native_stream_history48": {
+      "measurement": {
+        "path": "experiments/sram_size_001/size007/measurement.json",
+        "bytes": 2601,
+        "sha256": "8994256e52444dc69c927dcb4aaf68e87b4e13e28e98ab14521a0898ca6b7ddf"
+      },
+      "result": {
+        "math": "tiny",
+        "map": "cardinal",
+        "history_bits": 48,
+        "allocated": [
+          {
+            "name": ".vectors",
+            "bytes": 28,
+            "address": 268435456
+          },
+          {
+            "name": ".text",
+            "bytes": 17224,
+            "address": 268435484
+          },
+          {
+            "name": ".rodata",
+            "bytes": 1120,
+            "address": 268452712
+          },
+          {
+            "name": ".bss",
+            "bytes": 6928,
+            "address": 268453832
+          }
+        ],
+        "alignment_gaps_B": 4,
+        "sections": {
+          ".vectors": 28,
+          ".text": 17224,
+          ".rodata": 1120,
+          ".bss": 6928,
+          ".comment": 60,
+          ".ARM.attributes": 50,
+          ".debug_info": 10636,
+          ".debug_abbrev": 4357,
+          ".debug_loclists": 16732,
+          ".debug_aranges": 512,
+          ".debug_rnglists": 1361,
+          ".debug_line": 14705,
+          ".debug_str": 2651,
+          ".debug_frame": 612,
+          ".debug_line_str": 163
+        },
+        "allocated_sections_B": 25304,
+        "with_1024_stack_B": 26328,
+        "stack": "1024B reservation, not bound; final linked stack qualification pending",
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size007/tiny_cardinal/probe.c",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size007/tiny_cardinal/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size007/tiny_cardinal/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size007/tiny_cardinal/probe.elf"
+        ],
+        "sha256": "1e3e41dccce7ac21aa6100be33f4d70b3efd37dfab79ea5c8a19023119e15683"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size007/tiny_cardinal/probe.elf",
+        "bytes": 79204,
+        "sha256": "1e3e41dccce7ac21aa6100be33f4d70b3efd37dfab79ea5c8a19023119e15683"
+      }
+    },
+    "native_stream_history64": {
+      "measurement": {
+        "path": "experiments/sram_size_001/size008/measurement.json",
+        "bytes": 2601,
+        "sha256": "3636a968f22787fdd5d7ba02bb48e2cc6833b409f839906e5a901394e51f3c92"
+      },
+      "result": {
+        "math": "tiny",
+        "map": "cardinal",
+        "history_bits": 64,
+        "allocated": [
+          {
+            "name": ".vectors",
+            "bytes": 28,
+            "address": 268435456
+          },
+          {
+            "name": ".text",
+            "bytes": 16668,
+            "address": 268435484
+          },
+          {
+            "name": ".rodata",
+            "bytes": 1120,
+            "address": 268452152
+          },
+          {
+            "name": ".bss",
+            "bytes": 8112,
+            "address": 268453272
+          }
+        ],
+        "alignment_gaps_B": 0,
+        "sections": {
+          ".vectors": 28,
+          ".text": 16668,
+          ".rodata": 1120,
+          ".bss": 8112,
+          ".comment": 60,
+          ".ARM.attributes": 50,
+          ".debug_info": 10636,
+          ".debug_abbrev": 4357,
+          ".debug_loclists": 16732,
+          ".debug_aranges": 512,
+          ".debug_rnglists": 1361,
+          ".debug_line": 14705,
+          ".debug_str": 2651,
+          ".debug_frame": 612,
+          ".debug_line_str": 163
+        },
+        "allocated_sections_B": 25928,
+        "with_1024_stack_B": 26952,
+        "stack": "1024B reservation, not bound; final linked stack qualification pending",
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size008/tiny_cardinal/probe.c",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size008/tiny_cardinal/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size008/tiny_cardinal/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size008/tiny_cardinal/probe.elf"
+        ],
+        "sha256": "b23d92c9b076c193d2f8dc972cb753e58745edadb9e0689bc7265c1991689c29"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/size008/tiny_cardinal/probe.elf",
+        "bytes": 78472,
+        "sha256": "b23d92c9b076c193d2f8dc972cb753e58745edadb9e0689bc7265c1991689c29"
+      }
+    }
+  },
+  "campaigns": [
+    {
+      "history_bits": 48,
+      "summary": {
+        "path": "experiments/sram_size_001/campaign4h001/summary.json",
+        "bytes": 26962,
+        "sha256": "47523f4827049ed24ba577a74900a8a8d456d1746ab79a7d572c7627eed58b2d"
+      },
+      "plan": {
+        "path": "experiments/sram_size_001/campaign4h001/campaign_plan.json",
+        "bytes": 40480,
+        "sha256": "a0e390cf700ea4b50c34de16cf796457e9afe215f5642d64c40e898b65eed736"
+      },
+      "status": "completed",
+      "cases": [
+        {
+          "case": "case_0000",
+          "arms": {
+            "small_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 15.789708074956632,
+                "max_SOC_pp": 0.9473010617415345,
+                "joint_within_target": 44318,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 0,
+                "final_Q_percent": 0.027028509135296197,
+                "final_SOC_pp": 0.001545557650062257,
+                "Q_RMSE_percent": 0.43075495982576056,
+                "SOC_RMSE_pp": 0.08641086353011408,
+                "joint_within_target_fraction": 0.9848444444444444
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            },
+            "rowwise_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 15.789669114820414,
+                "max_SOC_pp": 0.9473010005426663,
+                "joint_within_target": 44318,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 0,
+                "final_Q_percent": 0.027036566188920474,
+                "final_SOC_pp": 0.001545893502019613,
+                "Q_RMSE_percent": 0.4307548401276041,
+                "SOC_RMSE_pp": 0.08641015169130539,
+                "joint_within_target_fraction": 0.9848444444444444
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            }
+          },
+          "final_chart_max_delta": 2.296337613394428e-06,
+          "final_Q_delta_percent": 8.054876512673328e-06,
+          "final_SOC_delta_pp": 3.358519573559704e-07
+        },
+        {
+          "case": "case_0001",
+          "arms": {
+            "small_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 14.888146306846028,
+                "max_SOC_pp": 0.8423692391557824,
+                "joint_within_target": 43169,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 41,
+                "final_Q_percent": -0.14568350619371673,
+                "final_SOC_pp": -0.00932089463632213,
+                "Q_RMSE_percent": 0.49097521568230756,
+                "SOC_RMSE_pp": 0.08812463001948623,
+                "joint_within_target_fraction": 0.9593111111111111
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            },
+            "rowwise_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 14.888156038466427,
+                "max_SOC_pp": 0.8423694690006367,
+                "joint_within_target": 43167,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 41,
+                "final_Q_percent": -0.1456803500869297,
+                "final_SOC_pp": -0.009321053470900953,
+                "Q_RMSE_percent": 0.4909793597700913,
+                "SOC_RMSE_pp": 0.08812486437552905,
+                "joint_within_target_fraction": 0.9592666666666667
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            }
+          },
+          "final_chart_max_delta": 1.1463618472262738e-06,
+          "final_Q_delta_percent": 3.1607114314617877e-06,
+          "final_SOC_delta_pp": -1.588345788228196e-07
+        }
+      ],
+      "binary": {
+        "path": "experiments/sram_size_001/campaign4h001/backend_sram/tiny_cardinal_1_48/rowwise.so",
+        "bytes": 25000,
+        "sha256": "6e8427a5e5e3798949a168db4f444a5ac790f970e93d77a27e94f42449591de8"
+      },
+      "build": {
+        "path": "experiments/sram_size_001/campaign4h001/backend_sram/tiny_cardinal_1_48/build.json",
+        "bytes": 2151,
+        "sha256": "29b65dbedd9275e3a7b3113df5d93360d87ccfb8b4a7490c75cc2c8c524f9d48"
+      }
+    },
+    {
+      "history_bits": 64,
+      "summary": {
+        "path": "experiments/sram_size_001/campaign4h64_002/summary.json",
+        "bytes": 26956,
+        "sha256": "1a2c5bdaf1aa88902de925602517246a644893894c7c9e2c94b2b621b31beef7"
+      },
+      "plan": {
+        "path": "experiments/sram_size_001/campaign4h64_002/campaign_plan.json",
+        "bytes": 40561,
+        "sha256": "51347bdb03f7bd637c9f7aae5c176315ca69bf7d173d0c083498fe9a310b8868"
+      },
+      "status": "completed",
+      "cases": [
+        {
+          "case": "case_0000",
+          "arms": {
+            "small_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 15.789708074956632,
+                "max_SOC_pp": 0.9473010617415345,
+                "joint_within_target": 44318,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 0,
+                "final_Q_percent": 0.027028509135296197,
+                "final_SOC_pp": 0.001545557650062257,
+                "Q_RMSE_percent": 0.43075495982576056,
+                "SOC_RMSE_pp": 0.08641086353011408,
+                "joint_within_target_fraction": 0.9848444444444444
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            },
+            "rowwise_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 15.789669114820414,
+                "max_SOC_pp": 0.947301001617773,
+                "joint_within_target": 44318,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 0,
+                "final_Q_percent": 0.0270286074195214,
+                "final_SOC_pp": 0.001545563203053657,
+                "Q_RMSE_percent": 0.4307547067319455,
+                "SOC_RMSE_pp": 0.08641085464088548,
+                "joint_within_target_fraction": 0.9848444444444444
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            }
+          },
+          "final_chart_max_delta": 1.1609549277480369e-06,
+          "final_Q_delta_percent": 9.825766871638422e-08,
+          "final_SOC_delta_pp": 5.552991400037399e-09
+        },
+        {
+          "case": "case_0001",
+          "arms": {
+            "small_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 14.888146306846028,
+                "max_SOC_pp": 0.8423692391557824,
+                "joint_within_target": 43169,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 41,
+                "final_Q_percent": -0.14568350619371673,
+                "final_SOC_pp": -0.00932089463632213,
+                "Q_RMSE_percent": 0.49097521568230756,
+                "SOC_RMSE_pp": 0.08812463001948623,
+                "joint_within_target_fraction": 0.9593111111111111
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            },
+            "rowwise_bank": {
+              "status": "completed",
+              "all": {
+                "outputs": 45000,
+                "max_Q_percent": 14.888156038466427,
+                "max_SOC_pp": 0.8423694690006367,
+                "joint_within_target": 43169,
+                "Q_3sd_misses": 0,
+                "SOC_3sd_misses": 41,
+                "final_Q_percent": -0.1456837130277333,
+                "final_SOC_pp": -0.009320907543663992,
+                "Q_RMSE_percent": 0.4909756970401683,
+                "SOC_RMSE_pp": 0.08812464673862973,
+                "joint_within_target_fraction": 0.9593111111111111
+              },
+              "field_history": {
+                "attempts": 239,
+                "accepted": 239,
+                "rejected": 0,
+                "last_rejection": null,
+                "last_attempt_record": 718912,
+                "last_accepted_record": 718912,
+                "accumulated_records": 720000,
+                "buffered_records": 0,
+                "status": "all_refreshes_accepted"
+              }
+            }
+          },
+          "final_chart_max_delta": 8.300563658636406e-07,
+          "final_Q_delta_percent": -2.071357749841818e-07,
+          "final_SOC_delta_pp": -1.2907341861989607e-08
+        }
+      ],
+      "binary": {
+        "path": "experiments/sram_size_001/campaign4h64_002/backend_sram/tiny_cardinal_1_64/rowwise.so",
+        "bytes": 24896,
+        "sha256": "238cd143e284fd60331a372106a8ffcaddbe247bfc6ae0ac4664275751d0b300"
+      },
+      "build": {
+        "path": "experiments/sram_size_001/campaign4h64_002/backend_sram/tiny_cardinal_1_64/build.json",
+        "bytes": 2157,
+        "sha256": "409902fbed92d2d2852737d303c251277e86582996a4b9a28765d4dbaced31be"
+      }
+    }
+  ],
+  "limitations": [
+    "Only stationary25C affine OCV3RC TaylorH2,16parameter original-prior model",
+    "Rank3 and cardinal physical approximation still lack validated coverage/passivity/uniform lifetime bounds",
+    "Packed48 is37significant binarydigits, not a proven nonaccumulating numerical scheme",
+    "Platform identity/sequence/normalization/scheduler/IRQ code and application integration remain outside measured code",
+    "1KiBstack is reservation;648B is exercised witness from separate M23-code/M33-QEMU probe, not a bound",
+    "Timing/cycles on16MHzM23 unqualified"
+  ],
+  "mainline_promoted": false,
+  "stack": {
+    "measurement": {
+      "path": "experiments/sram_size_001/stack003/measurement.json",
+      "bytes": 1395,
+      "sha256": "476d0cbcd11de370930e9f4963dee7c5dc5c5c6899c8803981bb7ef813606a5b"
+    },
+    "result": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/stack003/probe.c",
+        "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/stack003/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/stack003/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/stack003/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/stack003/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6912\nstack_watermark_B=648\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    },
+    "observed_B": 648,
+    "status": 0
+  },
+  "retained_checkpoint_refits": {
+    "artifact": {
+      "path": "experiments/sram_size_001/checkpoints002/results.json",
+      "bytes": 81739,
+      "sha256": "5ecd530e4858a729953e03eecb71e9ff6f7bfa57b58e453990126f3593e95d17"
+    },
+    "prefixes": 10,
+    "max_candidate_shift_reference_sd": 0.001040702031544318,
+    "controls": {
+      "libm_spline": {
+        "max_shift_reference_sd": 0.0,
+        "max_relative_sd_shift": 0.0
+      },
+      "tiny_spline": {
+        "max_shift_reference_sd": 4.9329371598251145e-11,
+        "max_relative_sd_shift": 1.021405182655144e-14
+      },
+      "libm_cardinal": {
+        "max_shift_reference_sd": 0.0010407020315921296,
+        "max_relative_sd_shift": 5.353987686307349e-05
+      },
+      "tiny_cardinal": {
+        "max_shift_reference_sd": 0.001040702031544318,
+        "max_relative_sd_shift": 5.353987686040895e-05
+      }
+    },
+    "scope": "Rebuild/refit same immutable history, prior, centres and incoming anchor under4maps/mathcontrols. Does NOT test72h native streaming or48bit accumulation."
+  },
+  "intermediate_failures": [
+    {
+      "path": "size002",
+      "status": "link_failed_LTO_removed_wrapper",
+      "repair": "marked ABIwrapper used and externally_visible"
+    },
+    {
+      "path": "compiler004/clang_oz.build.json",
+      "status": "no_lld_available",
+      "alternative": "Clang objects with GNUlinker were larger; rejected"
+    },
+    {
+      "path": "checkpoints001",
+      "status": "10prefixes_completed_then_case_summary_directory_glob_failed",
+      "repair": "case_[0-9][0-9][0-9][0-9] only;reruncomplete002"
+    },
+    {
+      "path": "stack001",
+      "status": "harness_required_convergence_after_added_arbitrary_voltage;returned4(no accepted convergence)",
+      "repair": "002firstexercisedknownconvergentretainedprefix;003alsoexercisespostingestrefitandcorrectfallbacktocurrentanchorwhenno_descent"
+    },
+    {
+      "path": "test_campaign_initial",
+      "status": "copiedfailureinjectiontargetedunusedupdateinsteadofnewadvance",
+      "repair": "injectatadvance;all26finaltests passed"
+    }
+  ],
+  "next": {
+    "target_gap_B": 16088,
+    "reason": "17224B instructionsection alone exceeds10240B total budget. Further exactscratchreuse insufficient.",
+    "experiments": [
+      "72hpairedhistory48vs64withidenticalstreamandpublicprior;keepuncertaintymissesvisible",
+      "Matrix-free jointsolve preserving objective with explicit solve-error bounds, record CPU/stack tradeoff",
+      "Smaller arithmetic representation with compensated accumulation; naivefloat32history remains rejected"
+    ]
+  },
+  "preliminary_artifacts": {
+    "math_grid001.json": "Exploratory earlier helper revision, superseded by final test grid; not a certificate for current source.",
+    "fixture_ablation001.json": "Earlier spline/cardinal fixture controls; current checkpoint study and test suite supersede."
+  },
+  "plots": {
+    "path": "experiments/sram_size_001/plots4h64/cases.json",
+    "status": "completed"
+  },
+  "remaining_resource_obstruction": {
+    "unique_software_binary64_helper_symbol_bytes": 4762,
+    "history48_bss_rodata_observed_stack_vectors_B": 8724,
+    "subtotal_without_other_instructions_B": 13486,
+    "scope": "Measured components of this implementation, not a universal lower bound for battery estimation. Even deleting all other instruction bytes would exceed10KiB. Shared helper aliases counted once by address."
+  },
+  "review_disposition": {
+    "status": "accepted_for_isolated_experiment_only",
+    "core": "core_review_r2.json closes numerical/core lifetime and size findings",
+    "storage": "storage_review_r1.json accepts local packed48 semantics; build-identity finding S1 is closed by cache_closure_review.json",
+    "concurrency": "Campaign jobs2 executed successfully; additional isolated four-process cache test was sandbox-blocked and produced no result",
+    "hash_caveat": "Earlier review1 files captured some hashes during edits. Current-source cache closure and core review2 are authoritative within their stated scopes.",
+    "remaining": "No uniform numerical/lifetime/coverage/passivity proof or deployment acceptance"
+  }
+}

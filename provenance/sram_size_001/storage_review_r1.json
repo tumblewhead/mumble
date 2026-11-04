@@ -1,0 +1,93 @@
+{
+  "schema": "sram_size_storage_review_r1",
+  "reviewer": "independent agent /root/sram_storage_review",
+  "utc": "2026-11-04T18:58:11.823114+00:00",
+  "source_revision": "b495bdb71154306529954ac9ad0b98bd3f784d8a",
+  "status": "packed48_local_semantics_accepted_for_isolated_experiment; source_bound_cache_acceptance_requires_fix",
+  "scope": "Optional packed48 storage, current generated history readers, native adapter, campaign prebuild and checkpoint/replay integration. No implementation edits.",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "6a05bca9d3f541ecfa6f49024fcad93eb45ac04b0f5889204585b4b22336fcb5",
+    "PROJECT_STATE.json": "a6cbff939a945a97e5f1e2f69ec68ba87844368d64089133717221d3eadf05a5",
+    "provenance/sram_size_001/design_review.json": "cf4ba0dfcf1fc780ed5c039c5d1b47a258a802788af751a1945638cb42727f13",
+    "provenance/sram_size_001/core_review_r1.json": "f23ca794d6f85dfcd8bb1ea9e3ee28cb0cd9a3f1c307143168b1e601bec2747c",
+    "specifications/optimization_contracts_001/README.md": "2a4a6b4bbb77a838111f6a3320003c93a994cbd13ff62def206a6a550b8ecc41",
+    "provenance/unified_sram_accounting_001/receipt.json": "d9b364b3e99d487d6e80282491bbe6d361fd7c10c9249abff3c625c6e42daf72",
+    "experiments/sram_size_001/history48.h": "6c1324c1e3b024d28e0a1b992e653002f9369b00d5ea7ea8c3a12348c18f2217",
+    "experiments/sram_size_001/generate.py": "2822407251b5670bea7571046db9cfce7b529a1d4750cb74830c6574ef198714",
+    "experiments/sram_size_001/native.py": "1edce8c61d6e912f441b0cccc53cb9d83780c42240a2ad60d590682ff2f5d0ca",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/bank_memory_001/field.py": "eac4f761efb88ac7466ac7659e71b7023cf39bfab298476d23ddeb09485438a7",
+    "experiments/bank_rowwise_001/backend.py": "a12ff6da22a1aa7a1bcae2bb9ce92d7f27d084ee0536c8f7b1f37f4be0c37b3f",
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/bank_rowwise_001/core.c": "e8ba5e67a613b4384743ce84e669f15a421166f50fb1c4d12e412c492dd3ecbf",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/foster_campaign_001/run.py": "cad137358a17d37adf6785a83d50d3543a76d80c7938180ccb17ba9d9b6629be",
+    "experiments/foster_campaign_001/compact.py": "8336e75e1446b90a66669deab533bf1348a85e5ed6c17999b406dbdee2ad7ef7",
+    "experiments/foster_campaign_001/bank_tangent_backend.py": "9202497e925ac3ddd97043dbda782a0d389f4df98f07374e02578854f5ab60e1",
+    "experiments/foster_campaign_001/distinct_backend.py": "669d6141ba67a363cc66d2c8a669aa217d3e7929da488dc6113282f521385785"
+  },
+  "reviewed_properties": [
+    "Packing retains binary64 sign and 11 exponent bits plus 36 explicit fraction bits: 37 significant bits for normal values, with smaller subnormal precision. Six-byte little-endian byte arrays require no double alignment. Calculation remains double.",
+    "Integer rounding formula implements nearest-even for finite positive and negative values, including carry into exponent and signed zero. C history insertion checks original hypot and every stored diagonal/offdiagonal after rounding, and rejects overflow. Python dense conversion rejects nonfinite input and overflow.",
+    "All currently present packed-history readers in generated cost_at and rebuild call history_get; no remaining raw history indexing or double-history read was found. Every nontrivial history QR write calls history_put. Tangent 17-column QR remains float64 by design.",
+    "Ingest consumes c->phi through tangent append before destructive history insertion. The two factors represent the same chronological observations but different storage arithmetic; no posterior is inserted as extra evidence. Full RC transport remains unprojected thirteen-pole state.",
+    "Packed48 dense checkpoint export followed by set_dense is exactly idempotent for finite stored values. Root setter delegates to set_dense. Original state, count, response, fixed anchor and tangent factor are all retained by inherited checkpoint arrays.",
+    "Configuration binds fixed V/P via parent digest and new math/map/storage choices plus SRAM source hashes. Replay binds SRAM binary and source identities along with original map and bank build. CardinalMap identifier is a semantic tag, not an actual SHA256; source and original map bindings provide additional identity.",
+    "run.py creates a new campaign directory and prebuilds the selected SRAM variant before process workers start. This avoids ordinary first-build worker races for supported campaign entrypoint. Standalone concurrent prepare calls have no independent lock/atomic publication contract.",
+    "Native advance now installs a sticky poisoned flag on any exception; all inherited initialize/fit/query/restore routes call overridden sync and cannot clear it. Campaign quarantine remains necessary to suppress already published carrier state."
+  ],
+  "findings": [
+    {
+      "id": "S1",
+      "severity": "required_before_source_bound_cache_acceptance",
+      "location": "experiments/sram_size_001/native.py:prepare",
+      "finding": "prepare trusts any existing rowwise.so solely by existence; neither generated source, transitive headers, build options nor artifact hash are validated. Later RowwiseBackend hashes current source bytes, allowing a reused build directory to associate stale compiled SRAM behavior with current source identity. Fresh run.py directories reduce exposure but reusable native adapter and source-edit reuse remain unsound.",
+      "evidence": "Independent temporary-directory control installs arbitrary bytes as rowwise.so without generation.json; prepare returns that directory successfully. A valid stale library would be loaded by the adapter.",
+      "required_disposition": "Add source/options/artifact receipt checks on reuse, and source stability checks during initial generation/build. Reject stale builds instead of silently relabeling; test missing/tampered receipt and binary, source mismatch, plus normal prebuilt worker reuse."
+    },
+    {
+      "id": "S2",
+      "severity": "documentation",
+      "location": "experiments/bank_rowwise_001/backend.py:storage",
+      "finding": "Storage scope string still says host owns response generation when the SRAM candidate uses native stream_row. Packed48 field precision reports uint8, which describes its byte container rather than 37-significant-bit history arithmetic.",
+      "required_disposition": "Make reported scope and history encoding explicit for SRAM candidate; keep total firmware and host-memory exclusions."
+    },
+    {
+      "id": "S3",
+      "severity": "limitation",
+      "location": "history48.h and acceptance claims",
+      "finding": "Finite rounding and short QR controls do not bound accumulation in weak directions, explain covariance coverage, or qualify indefinite storage. Dense checkpoint conversion temporarily allocates host matrices and is not target SRAM usage.",
+      "required_disposition": "Retain provisional numerical status and separate target-memory ledger. No decade, coverage, 10KiB or firmware-ready conclusion from these controls."
+    }
+  ],
+  "independent_controls": {
+    "rounding": {
+      "finite_inputs": 10085,
+      "c_integer_oracle_exact": true,
+      "includes": "positive/negative ties-even, signed zero, subnormal/normal transition and near-overflow",
+      "python_c_exact": true
+    },
+    "overflow": {
+      "python_rejects_positive_negative": true,
+      "c_return": -1
+    },
+    "qr1000": {
+      "max_factor_difference_vs_python_each_write_reference": 0.0
+    },
+    "cache": {
+      "unverified_existing_binary_accepted": true,
+      "generation_receipt_required": false
+    }
+  },
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B /tmp/sram_storage_review_r1.py"
+  ],
+  "reproducible_control_script": "import sys,pathlib,tempfile,subprocess,ctypes as C,struct,json,math\nimport numpy as np\nROOT=pathlib.Path.cwd();sys.path.insert(0,str(ROOT))\nfrom experiments.sram_size_001.native import Packed48,prepare\nout={}\ndef oracle(u):\n q,r=divmod(u,65536)\n return ((q+int(r>32768 or (r==32768 and q%2)))<<16)&((1<<64)-1)\nwith tempfile.TemporaryDirectory(prefix='storage-review-') as temp:\n p=pathlib.Path(temp);src=p/'probe.c';src.write_text('#include \"'+str(ROOT/'experiments/sram_size_001/history48.h')+'\"\\nvoid round48(const double*x,double*y,unsigned n){history_store a;for(unsigned i=0;i<n;i++){history_put(&a,0,x[i]);y[i]=history_get(&a,0);}}\\nint insert48(void*p,int n,double*x){return history_insert(p,n,x);}\\n')\n subprocess.run(['cc','-std=c11','-O2','-shared','-fPIC','-fno-fast-math','-ffp-contract=off',str(src),'-lm','-o',str(p/'probe.so')],check=True)\n lib=C.CDLL(str(p/'probe.so'));lib.round48.argtypes=[C.c_void_p,C.c_void_p,C.c_uint];lib.insert48.argtypes=[C.c_void_p,C.c_int,C.c_void_p]\n rng=np.random.default_rng(781);bits=rng.integers(0,2**64,size=10000,dtype=np.uint64);bits=bits[(bits>>52)&2047 !=2047]\n edge=[]\n for sign in [0,1<<63]:\n  for top in [0,1,2,0x000fffffffff,0x001000000000,0x3ff000000000,0x3ff000000001,0x7feffffffffe,0x7fefffffffff]:\n   for low in [0,32767,32768,32769,65535]:edge.append(sign|(top<<16)|low)\n bits=np.r_[bits,np.array(edge,dtype=np.uint64)];x=bits.view(np.float64);y=np.empty_like(x);lib.round48(x.ctypes.data,y.ctypes.data,len(x));expected=np.array([oracle(int(u)) for u in bits],dtype=np.uint64)\n assert np.array_equal(y.view(np.uint64),expected)\n out['rounding']={'finite_inputs':len(x),'c_integer_oracle_exact':True,'includes':'positive/negative ties-even, signed zero, subnormal/normal transition and near-overflow'}\n finite=np.isfinite(y);width=1\n class Original:\n  width=1\n  def dense(self):return np.array([[0.]])\n py=Packed48(Original())\n for a,b in zip(x[finite],y[finite]):\n  py.set_dense(np.array([[a]]));assert py.dense()[0,0].view(np.uint64)==b.view(np.uint64)\n out['rounding']['python_c_exact']=True\n for a in [np.finfo(float).max,-np.finfo(float).max]:\n  try:py.set_dense(np.array([[a]]));raise AssertionError('accepted overflow')\n  except ValueError:pass\n out['overflow']={'python_rejects_positive_negative':True}\n raw=np.zeros(6,dtype=np.uint8);row=np.array([np.finfo(float).max]);out['overflow']['c_return']=lib.insert48(raw.ctypes.data,1,row.ctypes.data);assert out['overflow']['c_return']==-1\n # All-writes QR reference uses libm math.hypot and integer oracle storage.\n def rounded(x):return struct.unpack('<d',struct.pack('<Q',oracle(struct.unpack('<Q',struct.pack('<d',x))[0])))[0]\n n=4;raw=np.zeros(6*n*(n+1)//2,dtype=np.uint8);r=np.zeros((n,n))\n for i in range(1000):\n  v=np.array([1.,1.+(i%3)*1e-8,(-1.)**i*1e-6,.5]);work=v.copy();assert lib.insert48(raw.ctypes.data,n,work.ctypes.data)==0\n  for j in range(n):\n   a,b=r[j,j],v[j];h=math.hypot(a,b)\n   if h==0:continue\n   c,s=a/h,b/h;r[j,j]=rounded(h)\n   for k in range(j+1,n):\n    old=r[j,k];vk=v[k];r[j,k]=rounded(c*old+s*vk);v[k]=c*vk-s*old\n packed=Packed48(Original());packed.width=n;packed.values=raw\n # math.hypot can differ from C libc hypot; report finite discrepancy instead of assuming exact.\n err=float(abs(packed.dense()-r).max());out['qr1000']={'max_factor_difference_vs_python_each_write_reference':err}\n # Existing arbitrary artifact is accepted without checking sources, generation or file validity.\n stale=p/'cache'/'tiny_cardinal_1_48';stale.mkdir(parents=True);(stale/'rowwise.so').write_bytes(b'not a library')\n got=prepare(p/'cache','tiny','cardinal',True,48);assert got==stale\n out['cache']={'unverified_existing_binary_accepted':True,'generation_receipt_required':False}\nprint(json.dumps(out,indent=2));pathlib.Path('/tmp/sram_storage_review_r1_results.json').write_text(json.dumps(out,indent=2))\n",
+  "limits": [
+    "Full compact replay and concurrent campaign acceptance tests are being run by parent; not independently rerun here.",
+    "Current sources reviewed only at these recorded hashes; later substantive repairs require re-review.",
+    "No cumulative error allowance, calibrated coverage, aging, ten-year performance, full-device memory fit or worst-case stack/cycle claim.",
+    "Nearest-even storage precision alone is not a joint uncertainty bound."
+  ]
+}

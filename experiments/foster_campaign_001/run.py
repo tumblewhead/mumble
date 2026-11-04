@@ -212,6 +212,10 @@ def parser():
                    help='joint-field (default) refreshes rolling belief; compare adds the original rolling arm; field-tangent selects the experimental native tangent; compare-tangent compares field and tangent; tangent-h7 enables RC5/H7 tangent; compare-h7 compares H5/H7 tangent; distinct-bank uses experimental stationary N13e RC/TaylorH2; compare-bank adds the mainline field control; bank-tangent uses original-origin bank updates; compare-bank-tangent compares with tangent64')
     p.add_argument('--field-refresh-seconds', type=float, default=60.,
                    help='field fit cadence, rounded up to a 16-record boundary; default 60s')
+    p.add_argument('--rowwise-implementation',choices=['baseline','sram'],default='baseline')
+    p.add_argument('--sram-math',choices=['libm','tiny'],default='tiny')
+    p.add_argument('--sram-map',choices=['spline','cardinal'],default='cardinal')
+    p.add_argument('--sram-history-bits',type=int,choices=[48,64],default=64)
     p.add_argument('--backend', choices=['c','python'], default='c', help='estimator implementation (default:c optimized; python retains reference)')
     p.add_argument('--sample-rate-hz', type=int, default=DEFAULT_RATE, help='integer sample rate >=1 Hz (default:%(default)s); dt=1/Fs seconds; window remains16records')
     p.add_argument('--cells', nargs='+', default=['B'])
@@ -263,6 +267,8 @@ def main():
         p.error('field history requires --backend c --hysteresis-chart bounded --encoding float64; use --history rolling for other backends/charts/encodings')
     if args.history in ('distinct-bank','compare-bank','bank-tangent','compare-bank-tangent','small-bank','compare-small-bank','rowwise-bank','compare-rowwise') and (args.temperature!='constant' or args.temperature_mean_c!=25.):
         p.error('distinct-bank requires --temperature constant --temperature-mean-c 25; variable-temperature history is not implemented')
+    if args.rowwise_implementation=='sram' and args.history not in ('rowwise-bank','compare-rowwise'):
+        p.error('SRAM candidate requires --history rowwise-bank or compare-rowwise')
     if args.history in ('rowwise-bank','compare-rowwise') and (args.bank_rank!=3 or args.bank_precision!='float64' or args.bank_center):
         p.error('rowwise requires --bank-rank 3 --bank-precision float64 without centering')
     if args.jobs < 1:
@@ -327,6 +333,10 @@ def main():
     if args.history in ('rowwise-bank','compare-rowwise'):
         from experiments.bank_rowwise_001.native import build
         build(out/'backend_rowwise')
+        if args.rowwise_implementation=='sram':
+            from experiments.sram_size_001.native import prepare as prepare_sram,DEPENDENCIES as SRAM_DEPENDENCIES
+            prepare_sram(out/'backend_sram',args.sram_math,args.sram_map,True,args.sram_history_bits)
+            sources += [ROOT/name for name in SRAM_DEPENDENCIES]
     for path in sources:
         target = out / 'source_snapshot' / path.relative_to(ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)

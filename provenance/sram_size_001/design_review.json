@@ -1,0 +1,199 @@
+{
+  "schema": "independent_optimization_design_review_v1",
+  "reviewer": "fresh-context agent /root/sram_design_review",
+  "base_revision": "b495bdb71154306529954ac9ad0b98bd3f784d8a",
+  "branch": "experiment/sram-size-001",
+  "status": "design_suitable_for_isolated_controls_only_acceptance_pending",
+  "scope": "Review of proposed small math and cardinal map; source inspection plus independent finite algebra/response controls. No candidate implementation, campaign, target build or uniform proof reviewed.",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "6a05bca9d3f541ecfa6f49024fcad93eb45ac04b0f5889204585b4b22336fcb5",
+    "PROJECT_STATE.json": "a6cbff939a945a97e5f1e2f69ec68ba87844368d64089133717221d3eadf05a5",
+    "experiments/bank_rowwise_001/core.c": "e8ba5e67a613b4384743ce84e669f15a421166f50fb1c4d12e412c492dd3ecbf",
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/bank_rowwise_001/measure.py": "c056950c7fdeec4c98a9942f22917b1b2d7d2535e4e490cb6762b0e67aa0f3ef",
+    "experiments/bank_memory_001/field.py": "f9e77890bfb25996895db335cc6e2d7b943efac259609eae5a62d975b11dd423",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/distinct_bank_integration_001/field.py": "8fe4a3edc24fa397b995f997156ce160e84b8adb959ecfddf7fcbd6a895b653e",
+    "experiments/distinct_bank_integration_001/map_n13e.json": "9be5c179151ccad728f92dfad9e212f9b6eef48d523781332ad37a500c654595",
+    "experiments/hysteresis_sensitivity_basis_001/response.c": "f9860e2d1130ccb1e1426b08de5f2e1eeaf9d86b69f5683ab80a12a22f644db9",
+    "experiments/hysteresis_sensitivity_basis_001/basis.py": "b9f3e7abe9e38c9b5aa29b51b3c87edd2ef1522df6808661cc84fe3e52dbf4ca",
+    "specifications/optimization_contracts_001/README.md": "2a4a6b4bbb77a838111f6a3320003c93a994cbd13ff62def206a6a550b8ecc41",
+    "provenance/bank_rowwise_001/review_r2.json": "76d3ad106779c255e4526810568b297d38df820aa67edf567c6a5130f77dc95e",
+    "provenance/bank_rowwise_001/stack_review_probe003.json": "53b94feb7f2590104215c329cdf47335da52aea113d2d22fee20a79886019c7c",
+    "provenance/bank_memory_001/review_r3.json": "09efba6c53f1ed64e0e46df40dfc9ae2db1de70c620e2ee51cee79748e4c03b8",
+    "provenance/unified_sram_accounting_001/receipt.json": "d9b364b3e99d487d6e80282491bbe6d361fd7c10c9249abff3c625c6e42daf72"
+  },
+  "classifications": {
+    "math_approximations": "Bounded numerical refinement requiring cumulative and decision tests, not exact libm substitution.",
+    "cardinal_map": "Changed physical response approximation on unchanged domain and poles; separate map/config identity required. Same retained13 poles does not preserve transported output.",
+    "fixed_projection": "Original V and P remain fixed; no repeated reprojecting of retained history. Original spline-trained SVD optimality does not transfer to cardinal weights.",
+    "lifetime_reuse": "Potential exact implementation refinements only after explicit alias/lifetime/failure contract and parity tests."
+  },
+  "design_findings": [
+    {
+      "id": "D1",
+      "severity": "required",
+      "finding": "History row generation depends on fixed pole recurrence and V, not spline weights. Therefore an unchanged history factor and carried response can supply common evidence to the two maps if poles,V,chronology,noise and arithmetic match. Recompute features,tangent factors,fits and transported queries for the candidate. An old fitted point or tangent factor cannot be silently relabeled as candidate state.",
+      "disposition": "Bind map,V,P,prior,centres and code identities in candidate checkpoints; preserve original evidence and hashes."
+    },
+    {
+      "id": "D2",
+      "severity": "required",
+      "finding": "Rank3 likelihood is row_full*V times P*w. Retain both original V and P and exact block ordering. P*w alone does not specify how new rows are generated. Full transport must use w directly, not V*P*w.",
+      "disposition": "Test projected feature and derivative identities and full13 transport separately."
+    },
+    {
+      "id": "D3",
+      "severity": "required",
+      "finding": "Cardinal interpolation is signed. Partition unity and node exactness do not imply positivity,passivity or a uniform response bound. Independent grid finds a negative full-cardinal free tail.",
+      "disposition": "Keep signed-map wording and explicit approximation status; do not inherit an N13e physical certificate."
+    },
+    {
+      "id": "D4",
+      "severity": "required",
+      "finding": "No moving projection avoids repeated representation loss, but rounded QR updates and pole-state recurrences still accumulate error. Systematically biased approximate hypot can make each rotation nonorthogonal; c*c+s*s error compounds even with float64 storage.",
+      "disposition": "Test long-prefix QR Gram/score distortion against frozen exact-math control, with repeated load and ill-conditioned correlated columns, not only one insertion or local scalar error."
+    },
+    {
+      "id": "D5",
+      "severity": "required",
+      "finding": "Use shared decay/forcing evaluation in future streaming: independently approximated exp(-dose) and -expm1(-dose) can break constant-current equilibrium. Using 1-exp loses tiny-dose forcing; switching to U+one*(I-U) changes finite arithmetic and needs a separately declared comparison.",
+      "disposition": "Test zero/tiny/large dose,zero-current rests,constant equilibrium and alternating current on actual sample intervals; preserve each chronological observation."
+    },
+    {
+      "id": "D6",
+      "severity": "required",
+      "finding": "Finite/range guards must precede float-to-integer range reduction and prevent unsupported exp/log/sqrt/atanh cases. Arbitrary clipping silently changes support. Existing guard semantics include strict positive exponentials, |u|<=1 and |h|<1; supported parameter amplitudes are not all confined by the RC log-offset box.",
+      "disposition": "Document each helper domain and failure result; preserve caller quarantine behavior. Test NaN,infinities,signed zero,subnormals,overflow and values adjacent to each guard."
+    },
+    {
+      "id": "D7",
+      "severity": "required",
+      "finding": "Approximate exp/log/tanh and analytic feature derivatives can cease to be derivatives of the implemented value map. Near |h|=1, atanh and 1/(1-h*h) amplify tiny discrepancies; log(1+x) cancellation matters.",
+      "disposition": "Independent derivative tests at nodes,adjacent representable points,domain edges and large |eta|, followed by full feature and transport Jacobian checks."
+    },
+    {
+      "id": "D8",
+      "severity": "required",
+      "finding": "Safe hypot scales by max(|a|,|b|), handles both-zero and rejects nonfinite input; naive sqrt(a*a+b*b) changes overflow/underflow behavior. Tiny error from a fixed approximate sqrt may systematically bias all QR diagonals.",
+      "disposition": "Measure hypot rotation norm and QR orthogonality/Gram error over scale-separated and near-subnormal inputs; keep accumulated bias distinct from local helper error."
+    },
+    {
+      "id": "D9",
+      "severity": "required",
+      "finding": "Replacing nextafter/ldexp should retain exact binary semantics of the stopping threshold and powers-of-two line search. Relative epsilon*mag is not generally one ULP. Cost/gradient margins close to thresholds can alter statuses despite small point differences.",
+      "disposition": "Test adjacent powers of two,zero,finite extremes and fit stop/rejection classifications; guard bit manipulations with documented binary64 assumptions."
+    }
+  ],
+  "cardinal_algebra": {
+    "definition": "x=4*u+6, w_j=product_(k!=j)(x-k)/product_(k!=j)(j-k), j=0..12; differentiate polynomial products directly.",
+    "node_handling": "Direct product value/derivative recurrence has no singularity at nodes. Avoid formula w_j*sum1/(u-u_k) there; special-case value alone loses derivative.",
+    "table_free_option": "Integer denominator (-1)^(12-j)*j!*(12-j)! fits signed32 for13 nodes. Compute value and derivative together; normalize once. This is a design option, not implemented/reviewed target code.",
+    "projection_option": "Accumulate3 projected values and3 derivatives while generating each cardinal weight; no13-element weight buffer required. Preserve declared summation order or classify rounding change.",
+    "exact_real_identities": [
+      "sum_j w_j=1",
+      "sum_j dw_j=0",
+      "w_j(u_k)=delta_jk",
+      "sum_j w_j*u_j^q=u^q for q=0..12"
+    ],
+    "support": "Only original u in[-1,1] is admitted; interpolation nodes extend to[-1.5,1.5]. No extrapolation qualification."
+  },
+  "independent_finite_controls": {
+    "command_environment": "OPENBLAS_NUM_THREADS=1 python3 -B; NumPy; no source changes or long campaigns",
+    "grid": "2001 uniform u points[-1,1]; dimensionless dose0 plus1200 geomspace points1e-6..1e4; nodes(-6..6)/4",
+    "construction": "Polynomial product differentiated recursively; exact exponential reference exp(-dose*exp(-u)); derivative reference dose*exp(-u)*reference. Full response exp(-dose*exp(-nodes))*weights. Rank3 uses weights*P.T*V.T from original projection(3).",
+    "cardinal_weight_sum_max_abs_error": 1.3322676295501878e-15,
+    "cardinal_derivative_sum_max_abs_error": 1.5992415725030185e-14,
+    "cardinal_weight_l1_max": 4.6199557818615835,
+    "cardinal_derivative_weight_l1_max": 81.8984126984127,
+    "P_absolute_row_sums": [
+      13.280194349004761,
+      6.899939012082717,
+      2.549163981758595
+    ],
+    "P_V_identity_max_error": 3.1086244689504383e-15,
+    "spline_full": {
+      "free_error_max": 7.605945870400171e-07,
+      "derivative_error_max": 1.0368762718676594e-05,
+      "minimum_free": 0.0,
+      "initial_unity_error_max": 4.617417559416026e-13
+    },
+    "cardinal_full": {
+      "free_error_max": 1.4873214076556725e-06,
+      "derivative_error_max": 3.268796932880532e-05,
+      "minimum_free": -1.4338744045626974e-06,
+      "initial_unity_error_max": 1.4432899320127035e-15
+    },
+    "spline_rank3": {
+      "free_error_max": 0.019960841521165132,
+      "derivative_error_max": 0.11794791125023696,
+      "minimum_free": -0.007697695501574986,
+      "initial_unity_error_max": 8.711749512335665e-05
+    },
+    "cardinal_rank3": {
+      "free_error_max": 0.019960883124758952,
+      "derivative_error_max": 0.11794804137297074,
+      "minimum_free": -0.007697903187337751,
+      "initial_unity_error_max": 8.711603538602564e-05
+    },
+    "interpretation": "Rank3 projection error dominates sampled full-map differences. Finite dimensionless witnesses only; no physical voltage,fitted parameter,coverage,uniform or lifetime claim."
+  },
+  "safe_exact_memory_candidates": [
+    {
+      "id": "M1",
+      "change": "Remove test-only retained history/response initializer fixtures from production link and load/init through declared production mechanism.",
+      "saving_B": 5696,
+      "condition": "Actual clean relink; existing43,576B minus fixture size is not a measured production image."
+    },
+    {
+      "id": "M2",
+      "change": "SRAM loader uses one initialized-data image rather than simultaneous LMA/VMA copies.",
+      "saving_B": 296,
+      "condition": "Linker/startup/reset contract must truly avoid duplicate storage; includes initialized-runtime library objects, not blanket removal."
+    },
+    {
+      "id": "M3",
+      "change": "Compact native response: retain12 TaylorH2 jet values and3 charge/path extrema, plus78 full-bank RC state values. Remove18 unused legacy RC and6 unused padded H doubles.",
+      "saving_B": 192,
+      "condition": "Use a new native schema with explicit converter; update all indices,restore,stream and transport together. H_KIND2 source evolves only first6 of each padded9; old legacy ABI remains unchanged."
+    },
+    {
+      "id": "M4",
+      "change": "Reuse core.phi[34] as serialized streaming row scratch between fits.",
+      "saving_B": 272,
+      "condition": "phi is unused by append; cost_at/rebuild require it. Do not stream concurrently with fit/query. Destructive history QR and tangent append need original row at each consumer, so reconstruct deterministically or sequence with explicit failure quarantine. Existing public no-context-alias preconditions must be revised before using internal aliases."
+    },
+    {
+      "id": "M5",
+      "change": "Remove host-only root_row/covariance publication and formatting through production linker garbage collection.",
+      "saving_B": null,
+      "condition": "Audit map after linking real roots. Probe already eliminates root_row, so do not double-count its hypothetical saving."
+    }
+  ],
+  "unsafe_lifetime_shortcuts": [
+    "Cannot union delta with phi or derivative scratch during line search: delta must survive every cost probe, which writes phi and derivative scratch.",
+    "Cannot union trial with phi: cost_at reads candidate trial while constructing phi feature by feature.",
+    "Cannot alias anchor and point: fixed-anchor tangent must retain anchor across estimates and rejected refresh recovery.",
+    "Cannot discard packed joint tangent/history cross terms or full13 transport simply because only SOC/Q scalar outputs are requested.",
+    "Cannot count a read-only constant table as free on this SRAM-only hardware; code size and soft-float helpers remain material."
+  ],
+  "required_targeted_controls": [
+    "Four-way ablation: original spline/libm, cardinal/libm, spline/smallmath, cardinal/smallmath; compare each to immutable original anchor and immediate parent.",
+    "Cardinal identity checks at all nodes and adjacent binary64 values; physical-domain endpoints; independent value and derivative calculations; check P*w and P*dw against matrix reference.",
+    "exp/log/sqrt/hypot/tanh/atanh exact-math grids near range-reduction boundaries,extremes,subnormals and support/failure decisions, with maximum absolute/relative errors separately.",
+    "Public response histories: rest,constant current,sign flips,pulses and irregular actual dt at nominal35Hz; test incoming-state carry and free/forced equilibrium as well as endpoint derivatives.",
+    "Fixed saved-history fits and scalar variances under both maps: cost,gradient,GN factor,convergence status,rejections,endpoint support,transport mean/Jacobian,Q/SOC widths and joint distortion. Rest/weak likelihood must remain included.",
+    "Cumulative QR and recurrence controls across growing prefixes,low noise and repeated inputs; compare against regenerated/direct exact-math controls from same observations, not posterior counted again as evidence.",
+    "Nonzero append,guard/failure quarantine,checkpoint continuation and source-identity mismatch tests; zero-row append alone does not validate new math in streaming.",
+    "Clean Cortex-M23 soft-float link: every loaded code/constant/data copy/alignment/runtime allocation, plus exercised and separately reserved stack. Record library symbols and missing full streaming/platform costs."
+  ],
+  "acceptance_limits": [
+    "No numeric error allowance invented; finite controls can establish experimental comparison but do not close cumulative physical/uncertainty budgets.",
+    "Inherited rank3 SOC misses,unqualified RC/EOD fidelity,temperature/aging limits and coverage gaps remain.",
+    "No10KiB total fit,firmware readiness,M23 timing or worst-case stack acceptance from this design review.",
+    "Candidate code and tests need independent implementation review; substantive later changes require re-review."
+  ],
+  "implementation_edits_by_reviewer": false
+}

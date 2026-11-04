@@ -1,0 +1,250 @@
+{
+  "schema": "sram_size_core_review_r2",
+  "reviewer": "independent fresh-context subagent sram_core_review; follow-up to core_review_r1",
+  "utc": "2026-11-04T18:59:17.884623+00:00",
+  "source_revision": "b495bdb71154306529954ac9ad0b98bd3f784d8a",
+  "source_sha256": {
+    "AGENTS.md": "844729e1d3384482e31ff2f0294ace12feb2cacbd9870a1f4dc65d19ca8b83d6",
+    "README.md": "6a05bca9d3f541ecfa6f49024fcad93eb45ac04b0f5889204585b4b22336fcb5",
+    "PROJECT_STATE.json": "a6cbff939a945a97e5f1e2f69ec68ba87844368d64089133717221d3eadf05a5",
+    "experiments/sram_size_001/native.py": "1edce8c61d6e912f441b0cccc53cb9d83780c42240a2ad60d590682ff2f5d0ca",
+    "experiments/sram_size_001/generate.py": "2822407251b5670bea7571046db9cfce7b529a1d4750cb74830c6574ef198714",
+    "experiments/sram_size_001/tiny_math.h": "d2fc9bb1b2269cdb841632d9c4f9dfd6ea29cabbdc7c7c5894ec464f17776f8c",
+    "experiments/sram_size_001/measure.py": "cac0774cabd6d4061e3edaa2757b70788f1ad916548b45622dbbdb59b64d7af0",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/sram_size_001/soft_sub.c": "d6e63c1b5e0f29c14c97faf664fbf04d8eeb4dd1cf2d81a04dcb144233b6d39e",
+    "experiments/bank_rowwise_001/core.c": "e8ba5e67a613b4384743ce84e669f15a421166f50fb1c4d12e412c492dd3ecbf",
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "provenance/sram_size_001/core_review_r1.json": "f23ca794d6f85dfcd8bb1ea9e3ee28cb0cd9a3f1c307143168b1e601bec2747c"
+  },
+  "sources_unchanged_between_initial_capture_and_review_end": true,
+  "status": "R1_R2_R3_R5_fixes_accepted_for_scoped_experimental_candidate; R4_domain_documentation_addressed_broader_numerical_qualification_open",
+  "scope": "Review current poison, signed-zero, explicit internal alias exceptions/self-anchor memmove and SRAM address accounting. Fresh 64-bit-history build/control only. Packed48 and integration assigned to separate sram_storage_review; no acceptance of those from this receipt.",
+  "implementation_edits_by_reviewer": false,
+  "prior_finding_dispositions": [
+    {
+      "id": "R1",
+      "status": "addressed",
+      "finding": "advance wraps all ordinary exceptions in a sticky poisoned=True state. sync refuses poisoned adapters; inherited initialize, fit, query, scalar, row, update, restore and further advance all reach this guard.",
+      "independent_evidence": "A valid row followed by invalid temperature mutates history while leaving count unchanged, clears native validity and sets poison. All eight named operations refuse afterward. Raw C API still requires documented caller quarantine, and direct field/context mutation is not a supported recovery API.",
+      "limit": "KeyboardInterrupt/process interruption and external raw state access are not transactional recovery mechanisms; concurrent/asynchronous use remains excluded."
+    },
+    {
+      "id": "R2",
+      "status": "addressed_for_current_linker_and_artifact",
+      "finding": "Measurement now enumerates every section whose address lies in declared SRAM and takes maximum endpoint minus SRAM origin, accounting for gaps. Fresh ELF inspection finds exactly four SHF_ALLOC sections in one LOAD segment; the measured span equals p_memsz=0x6548=25928B. No second initializer image exists in this link.",
+      "limit": "Parser uses SRAM address interval rather than ELF SHF_ALLOC flags; this is sufficient for the present one-region script and independently checked artifact, not a general multi-region loader audit. Stack1024 is an arithmetic allowance, not a proved bound or a linker-enforced1024-byte stack region. Platform, normalization, identity and transactional behavior remain external."
+    },
+    {
+      "id": "R3",
+      "status": "addressed",
+      "finding": "tm_tanh copies input sign bit into its nonnegative finite magnitude, preserving negative zero. Positive/negative zero and eight nonzero sign cases agree with libm in the targeted control."
+    },
+    {
+      "id": "R4",
+      "status": "domain_documentation_addressed_broader_qualification_open",
+      "finding": "Generated core now states tm_scale exponent domains[-1075,1024] for exp and[-17,0] for line search, and positive finite mag>=1/+infinity assumptions for tm_nextup. New compile-time binary64 size/mantissa assertion supports the declared platform assumption.",
+      "remaining": "This re-review does not close all design-review numerical acceptance work: threshold/adjacent-value and complete feature/transport Jacobians, low-noise/rest decision behavior, accumulated physical/uncertainty limits and lifetime coverage remain provisional. Earlier finite tests are not converted into uniform guarantees."
+    },
+    {
+      "id": "R5",
+      "status": "addressed",
+      "finding": "Generated leading contract explicitly permits initialize/fit inputs from own anchor/point, internal delta/trial outputs and serialized phi reuse. initialize now uses memmove for anchor copy, avoiding overlapping/self memcpy. Fresh direct C calls initialize from own anchor and own point both succeed.",
+      "reasoning": "evaluate consumes the supplied start before copying into point with memmove; rebuild only reads point. initialize then copies to anchor with memmove. append reads phi before destructive history insertion, and its temporary arrays are disjoint qr scratch. External array nonalias preconditions remain."
+    }
+  ],
+  "independent_controls": {
+    "self_alias_initialize": [
+      {
+        "initialize_from": "anchor",
+        "status": 0
+      },
+      {
+        "initialize_from": "point",
+        "status": 0
+      }
+    ],
+    "partial_failure": {
+      "poisoned": true,
+      "count_unchanged": true,
+      "history_mutated": true,
+      "valid": 0,
+      "refused": {
+        "initialize": true,
+        "fit": true,
+        "query": true,
+        "scalar": true,
+        "row": true,
+        "update": true,
+        "restore": true,
+        "advance": true
+      }
+    },
+    "tanh_signed_zero": {
+      "0.0": 1.0,
+      "-0.0": -1.0
+    },
+    "tanh_nonzero_sign_and_error": [
+      {
+        "x": -1e-300,
+        "value": -1e-300,
+        "libm": -1e-300
+      },
+      {
+        "x": -0.25,
+        "value": -0.24491866240370913,
+        "libm": -0.24491866240370913
+      },
+      {
+        "x": -1.0,
+        "value": -0.7615941559557649,
+        "libm": -0.7615941559557649
+      },
+      {
+        "x": -21.0,
+        "value": -1.0,
+        "libm": -1.0
+      },
+      {
+        "x": 1e-300,
+        "value": 1e-300,
+        "libm": 1e-300
+      },
+      {
+        "x": 0.25,
+        "value": 0.24491866240370913,
+        "libm": 0.24491866240370913
+      },
+      {
+        "x": 1.0,
+        "value": 0.7615941559557649,
+        "libm": 0.7615941559557649
+      },
+      {
+        "x": 21.0,
+        "value": 1.0,
+        "libm": 1.0
+      }
+    ]
+  },
+  "measurement": {
+    "results": [
+      {
+        "math": "tiny",
+        "map": "cardinal",
+        "history_bits": 64,
+        "allocated": [
+          {
+            "name": ".vectors",
+            "bytes": 28,
+            "address": 268435456
+          },
+          {
+            "name": ".text",
+            "bytes": 16668,
+            "address": 268435484
+          },
+          {
+            "name": ".rodata",
+            "bytes": 1120,
+            "address": 268452152
+          },
+          {
+            "name": ".bss",
+            "bytes": 8112,
+            "address": 268453272
+          }
+        ],
+        "alignment_gaps_B": 0,
+        "sections": {
+          ".vectors": 28,
+          ".text": 16668,
+          ".rodata": 1120,
+          ".bss": 8112,
+          ".comment": 60,
+          ".ARM.attributes": 50,
+          ".debug_info": 10636,
+          ".debug_abbrev": 4357,
+          ".debug_loclists": 16732,
+          ".debug_aranges": 512,
+          ".debug_rnglists": 1361,
+          ".debug_line": 14705,
+          ".debug_str": 2651,
+          ".debug_frame": 612,
+          ".debug_line_str": 163
+        },
+        "allocated_sections_B": 25928,
+        "with_1024_stack_B": 26952,
+        "stack": "1024B reservation, not bound; final linked stack qualification pending",
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/tmp/sram-core-review-r2-size/tiny_cardinal/probe.c",
+          "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/tmp/sram-core-review-r2-size/tiny_cardinal/link.ld",
+          "-Wl,--gc-sections,-Map=/tmp/sram-core-review-r2-size/tiny_cardinal/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/tmp/sram-core-review-r2-size/tiny_cardinal/probe.elf"
+        ],
+        "sha256": "b23d92c9b076c193d2f8dc972cb753e58745edadb9e0689bc7265c1991689c29"
+      }
+    ],
+    "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n"
+  },
+  "independent_elf_inspection": {
+    "command": "arm-none-eabi-readelf -SW and -lW /tmp/sram-core-review-r2-size/tiny_cardinal/probe.elf",
+    "SHF_ALLOC_sections": [
+      ".vectors",
+      ".text",
+      ".rodata",
+      ".bss"
+    ],
+    "LOAD_virtual_address": "0x10000000",
+    "LOAD_physical_address": "0x10000000",
+    "LOAD_file_size_B": 17816,
+    "LOAD_memory_size_B": 25928,
+    "alignment_gaps_B": 0,
+    "duplicate_initialized_runtime_copy": false
+  },
+  "build_artifact_sha256": {
+    "measurement.json": "da7aed9857ebe59dd8695ea8be929a210569aeb05ffeab3f86d99a6acf7c7d4b",
+    "tiny_cardinal/core.c": "a24b96757bcb2ae303b5ab4b5381b51bc2aafa025e481bea12783441da86080b",
+    "tiny_cardinal/probe.c": "aefe61eb26e65284459ee5ca5e1d6a976690d1a59061349baa18e6aac738801a",
+    "tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "tiny_cardinal/probe.elf": "b23d92c9b076c193d2f8dc972cb753e58745edadb9e0689bc7265c1991689c29"
+  },
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B /tmp/sram_core_review_r2.py",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.sram_size_001.measure --out /tmp/sram-core-review-r2-size --history-bits 64",
+    "arm-none-eabi-readelf -SW /tmp/sram-core-review-r2-size/tiny_cardinal/probe.elf",
+    "arm-none-eabi-readelf -lW /tmp/sram-core-review-r2-size/tiny_cardinal/probe.elf"
+  ],
+  "reproducible_control_script": "import sys,tempfile,ctypes as C,subprocess,json,math\nfrom pathlib import Path\nimport numpy as np\nsys.path.insert(0,str(Path.cwd()))\nfrom experiments.bank_memory_001.test_memory import Tests\nfrom experiments.sram_size_001.native import Native\nfrom experiments.bank_rowwise_001.native import ptr\nout={};Tests.setUpClass()\ntry:\n t=Tests()\n with tempfile.TemporaryDirectory(prefix='sram-core-r2-') as d:\n  n=Native(t.make(3),t.mean,t.L,d,'tiny','cardinal',True,64);n.initialize(np.zeros(16))\n  alias=[]\n  for array in ['anchor','point']:\n   status=n.lib.initialize(C.byref(n.context),ptr(n.field.packed.values),ptr(n.vector(array)));alias.append({'initialize_from':array,'status':status})\n  out['self_alias_initialize']=alias\n  n.advance(0,t.obs[:2]);state=n.snapshot().copy();before=n.field.packed.values.copy();first=n.count\n  rows=t.obs[:2].copy();rows[1,2]=26\n  try:n.advance(first,rows)\n  except ValueError:pass\n  out['partial_failure']={'poisoned':n.poisoned,'count_unchanged':n.count==first,'history_mutated':not np.array_equal(before,n.field.packed.values),'valid':n.context.qr.lease.valid,'refused':{}}\n  ops={'initialize':lambda:n.initialize(np.zeros(16)),'fit':lambda:n.fit(np.zeros(16)),'query':n.query,'scalar':lambda:n.scalar(5),'row':lambda:n.row(np.zeros(16),0),'update':lambda:n.update(np.zeros((1,34))),'restore':lambda:n.restore(state),'advance':lambda:n.advance(first,t.obs[:1])}\n  for name,fn in ops.items():\n   try:fn();out['partial_failure']['refused'][name]=False\n   except ValueError:out['partial_failure']['refused'][name]=True\n  so=Path(d)/'math.so';subprocess.run(['cc','-Os','-shared','-fPIC','-fno-fast-math','-ffp-contract=off','experiments/sram_size_001/math_probe.c','-o',str(so)],check=True)\n  lib=C.CDLL(str(so));lib.evaluate.argtypes=[C.c_uint,C.c_double,C.c_double];lib.evaluate.restype=C.c_double\n  out['tanh_signed_zero']={str(x):math.copysign(1,lib.evaluate(4,x,0)) for x in [0.,-0.]}\n  out['tanh_nonzero_sign_and_error']=[{'x':x,'value':lib.evaluate(4,x,0),'libm':math.tanh(x)} for x in [-1e-300,-.25,-1.,-21.,1e-300,.25,1.,21.]]\nfinally:Tests.tearDownClass()\nassert all(out['partial_failure']['refused'].values())\nassert out['partial_failure']['poisoned'] and out['partial_failure']['history_mutated'] and out['partial_failure']['count_unchanged'] and not out['partial_failure']['valid']\nassert all(a['status']==0 for a in out['self_alias_initialize'])\nassert out['tanh_signed_zero']=={'0.0':1.,'-0.0':-1.}\nPath('/tmp/sram_core_review_r2_results.json').write_text(json.dumps(out,indent=2));print(json.dumps(out,indent=2))\n",
+  "acceptance_limits": [
+    "This closes the identified core implementation fixes, not numerical/physical lifetime qualification or mainline promotion.",
+    "25928B static span plus1024B allowance is26952B; no10KiB total fit.",
+    "Native stationary VIT processing, history insertion, inference and scalar path are present in the link. Scheduling, normalization, identity/transaction and platform costs remain external.",
+    "Final stack probe is outside this review. No firmware readiness,16MHz timing or worst-case stack claim.",
+    "Packed48, checkpoint identity and campaign recovery/continuation require the separate storage/integration review."
+  ]
+}

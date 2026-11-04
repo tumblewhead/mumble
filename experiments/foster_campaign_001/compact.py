@@ -219,6 +219,9 @@ def replay_binding(campaign, case):
         for name in BANK_DEPENDENCIES:expected[name]=plan['campaign_sources'][name]
     name = 'experiments/foster_feedback_001/plant.py'
     expected[name] = reserved[name]
+    if plan['configuration'].get('rowwise_implementation')=='sram':
+        from experiments.sram_size_001.native import DEPENDENCIES as SRAM_DEPENDENCIES
+        for name in SRAM_DEPENDENCIES:expected[name]=plan['campaign_sources'][name]
     for name, value in expected.items():
         if identity(ROOT/name) != value:
             raise ValueError('Replay source differs from recorded run: '+name)
@@ -244,6 +247,10 @@ def replay_binding(campaign, case):
         result['small_qr64']=identity(campaign/'backend_small/qr_float64.so')
     if plan['configuration'].get('history') in ('rowwise-bank','compare-rowwise'):
         result['rowwise_binary']=identity(campaign/'backend_rowwise/rowwise.so')
+        cfg=plan['configuration']
+        if cfg.get('rowwise_implementation')=='sram':
+            variant=f"{cfg['sram_math']}_{cfg['sram_map']}_1_{cfg['sram_history_bits']}"
+            result['sram_binary']=identity(campaign/'backend_sram'/variant/'rowwise.so')
     return result
 
 

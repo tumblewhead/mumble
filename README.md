@@ -1,3 +1,12 @@
+# SRAM-only size candidate
+
+The [isolated SRAM-size experiment](experiments/sram_size_001/README.md) now links
+native stationary sample processing, history, joint refits and scalar readouts
+in25,304B, or26,328B with a provisional1KiB stack allowance. Code and tables count
+in SRAM. This remains above10KiB and excludes platform integration. The optional
+48-bit history candidate is locally testable; baseline defaults are unchanged.
+See the [receipt](provenance/sram_size_001/receipt.json) and independent reviews.
+
 # Hardware memory correction: SRAM-only
 
 The M23 hardware stores code and constants in SRAM too. The earlier9816B figure

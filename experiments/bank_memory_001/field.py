@@ -54,7 +54,8 @@ class SmallField:
     @root.setter
     def root(self,r):
         if r.shape!=(self.width,self.width):raise ValueError('factor shape')
-        self.packed.values[:]=r[np.triu_indices(self.width)]
+        if hasattr(self.packed,'set_dense'):self.packed.set_dense(r)
+        else:self.packed.values[:]=r[np.triu_indices(self.width)]
     @property
     def state(self):return self.base.state
     @property

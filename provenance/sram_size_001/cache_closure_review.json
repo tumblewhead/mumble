@@ -1,0 +1,78 @@
+{
+  "schema": "sram_cache_closure_review_v1",
+  "reviewer": "independent agent /root/sram_core_review",
+  "utc": "2026-11-04T19:12:39.730315+00:00",
+  "source_revision": "b495bdb71154306529954ac9ad0b98bd3f784d8a",
+  "source_sha256": {
+    "experiments/sram_size_001/native.py": "65324cf120a6205afaef3e86e4127dd4ba50031bba07b60222faf3c0e7db3ad8",
+    "experiments/bank_rowwise_001/backend.py": "8bc39de67b09c97c96782ff441b4835995949acc7e317918c8549577e4a8daf6",
+    "experiments/bank_rowwise_001/native.py": "f88f735374515a9d49dbd06a89edfd4e1ea948a6ab846fa909c683bbf226f3cc",
+    "experiments/sram_size_001/generate.py": "2822407251b5670bea7571046db9cfce7b529a1d4750cb74830c6574ef198714",
+    "experiments/sram_size_001/tiny_math.h": "d2fc9bb1b2269cdb841632d9c4f9dfd6ea29cabbdc7c7c5894ec464f17776f8c",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/sram_size_001/history48.h": "6c1324c1e3b024d28e0a1b992e653002f9369b00d5ea7ea8c3a12348c18f2217",
+    "experiments/sram_size_001/soft_sub.c": "d6e63c1b5e0f29c14c97faf664fbf04d8eeb4dd1cf2d81a04dcb144233b6d39e",
+    "experiments/bank_rowwise_001/core.c": "e8ba5e67a613b4384743ce84e669f15a421166f50fb1c4d12e412c492dd3ecbf",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/bank_memory_001/field.py": "eac4f761efb88ac7466ac7659e71b7023cf39bfab298476d23ddeb09485438a7",
+    "provenance/sram_size_001/storage_review_r1.json": "4f285d4f4e2c5e177fd25d101648407008532395bfdbccefe1fe309a7851a260",
+    "provenance/sram_size_001/receipt.json": "df78731d35c1f834c9e3ecb6ca5109b8372a68871ad5ec317691669d64d508e1"
+  },
+  "status": "S1_source_bound_cache_fix_accepted_by_source_inspection_under_frozen_source_contract",
+  "scope": "Narrow closure of storage_review_r1 S1 and subsequent after-lock/during-build source-stability concerns. Does not replace packed48 quantization review, campaign review, stack review or core numerical qualification. No implementation changes or new behavioral tests.",
+  "reviewed_control_flow": [
+    {
+      "check": "refresh_after_lock",
+      "status": "pass",
+      "evidence": "prepare recomputes all DEPENDENCIES hashes after exclusive flock and replaces expected.sources. A wait behind another cooperating builder cannot retain the pre-lock source snapshot."
+    },
+    {
+      "check": "reuse_receipt_and_actual_binary",
+      "status": "pass",
+      "evidence": "Existing binary requires build.json; configuration equality includes variant and dependency hashes; actual rowwise.so bytes are SHA256-checked against the saved artifact hash. Mismatch raises rather than silently rebuilding/relabeling."
+    },
+    {
+      "check": "new_build_source_stability",
+      "status": "pass",
+      "evidence": "After successful generate/compile, current dependency hashes must equal the after-lock snapshot before build.json is written. An unbound artifact left by failure is refused on the next prepare call."
+    },
+    {
+      "check": "reuse_and_new_build_final_stability",
+      "status": "pass",
+      "evidence": "Both paths rehash dependencies again immediately before leaving the lock; ordinary source edits during validation raise."
+    },
+    {
+      "check": "identity_from_validated_receipt",
+      "status": "pass",
+      "evidence": "Native.build_identity reads the validated build.json. RowwiseBackend.configuration_id uses its configuration.sources and binary_sha256 rather than freshly hashing possibly unrelated current source files. Parent configuration digest and explicit math/map/history_bits remain included."
+    },
+    {
+      "check": "cooperating_concurrent_builds",
+      "status": "pass",
+      "evidence": "Generation, compilation, receipt writing and cache validation are serialized by the same per-variant flock. Existing valid binaries are not replaced by prepare; this supports reading identity/loading after lock release for cooperating callers under the immutable artifact contract."
+    }
+  ],
+  "limitations": [
+    "Source inspection closure only, as requested; it does not claim new executed tampering/race tests. storage_review_r1 remains the authority for its quantization controls.",
+    "Build/source tree is assumed frozen for import/build/use, with non-adversarial cooperating cache users. Pre/post content hashes are not a transactional filesystem snapshot and cannot detect a source file changed then restored entirely between checks. Python module code already imported from an older revision is not rebound by hashing its current disk file.",
+    "Out-of-band deletion/replacement of manifests or binaries after lock release is outside the cooperating immutable cache contract. The review does not claim protection against arbitrary external writers.",
+    "Historical campaign manifests remain historical identities; later source fixes do not retroactively relabel their binaries or result provenance."
+  ],
+  "resource_subtotal_sanity": {
+    "components_B": {
+      "unique_binary64_helper_symbol_bytes": 4762,
+      "BSS": 6928,
+      "rodata": 1120,
+      "observed_stack": 648,
+      "vectors": 28
+    },
+    "non_helper_subtotal_B": 8724,
+    "total_B": 13486,
+    "matches_receipt": true,
+    "scope": "Arithmetic and wording checked only. This is a subtotal of measured components for this implementation, excluding other instructions. It is not a universal lower bound or a complete target-memory proof. The648-byte stack is an exercised witness, not a worst-case bound."
+  },
+  "implementation_edits_by_reviewer": false,
+  "new_behavioral_tests_run": false,
+  "remaining_blocking_defects_in_requested_scope": []
+}
