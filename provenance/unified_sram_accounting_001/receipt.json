@@ -1,0 +1,39 @@
+{
+  "schema": "unified_sram_accounting_v1",
+  "hardware_requirement": "All code, constants, tables, initialized data, working state and stack reside in SRAM; no ROM/flash capacity can be excluded from total.",
+  "artifact": "experiments/bank_rowwise_001/target_probe005/probe.elf",
+  "artifact_sha256": "2a82331911c457b668fa707d8ec310de82963c2d5d5a21a332fbeee8ffd1b132",
+  "scope": "Current M23-linked rank3 native inference probe, not complete streaming firmware or Python host campaign memory",
+  "current_link_bytes": {
+    "text_including_rodata": 33432,
+    "vectors": 28,
+    "alignment_before_text": 4,
+    "data_load_initializer_copy": 296,
+    "data_runtime": 296,
+    "bss": 8888,
+    "observed_stack": 632
+  },
+  "current_link_total_B": 43576,
+  "current_link_total_KiB": 42.5546875,
+  "previous_data_plus_stack_B": 9816,
+  "excluded_from_previous_B": 33760,
+  "fixture_only_B": {
+    "saved_history": 4760,
+    "saved_response": 936
+  },
+  "subtraction_only_estimate_without_saved_fixtures_B": 37880,
+  "estimate_scope": "Arithmetic subtraction only, not a clean production relink. Includes remaining probe harness; full native streaming and platform runtime still absent.",
+  "alternative_in_place_data": {
+    "section_payload_once_B": 43276,
+    "with_current4B_alignment_B": 43280,
+    "scope": "Possible SRAM-loader layout eliminating the296B data initializer duplicate; current reset/linker still uses two copies. Not implemented."
+  },
+  "limits": [
+    "Observed632Bstack is exercised watermark, not a worst-case bound",
+    "ELF debug/symbol/file-format overhead not loaded and excluded",
+    "Current link combines executable instructions and consttables in.text",
+    "No heap allocation budget assumed; full device runtime and streaming unknown",
+    "Earlier ROM-based9944/9816/10208B figures cannot support total10KiB feasibility on SRAM-only hardware"
+  ],
+  "next": "Use an all-SRAM total budget for every further optimization; measure clean production code/constant and library contributions before claiming target fit."
+}

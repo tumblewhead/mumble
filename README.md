@@ -1,3 +1,13 @@
+# Hardware memory correction: SRAM-only
+
+The M23 hardware stores code and constants in SRAM too. The earlier9816B figure
+covered writable data plus exercised stack only. The current native inference
+probe totals43576B (42.55KiB) including code/constants, both data-initializer and
+runtime copies, alignment and observed stack. Removing5696B of test-only saved
+history/state gives only a subtraction estimate, not a complete firmware build.
+Use the [corrected total-memory ledger](provenance/unified_sram_accounting_001/receipt.json)
+for subsequent planning; no10KiB total-memory fit has been established.
+
 # Native rowwise inference work branch
 
 The [native rowwise integration](experiments/bank_rowwise_001/README.md) replaces

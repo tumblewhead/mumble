@@ -1,0 +1,595 @@
+{
+  "schema": "bank_memory_72h_review_v1",
+  "source_directory": "/home/easy/proj/mumble/.worktrees/h7-campaign/experiments/foster_campaign_001/run_20261104_171712_648735",
+  "source_hashes": {
+    "summary.json": "cead8461b851b4870477cd3386f01a9f47dbf878a2d3fe39c65348d6911a074a",
+    "campaign_plan.json": "cf85a6f4ddcce0d86f37d3673145fba5991e5c999ca9e52c34f5701790c7ee27",
+    "manifest.json": "15210bb0646c47e39f8000e5e886109a62dd258920c672d083cb9f6a82731a69",
+    "calibration.json": "b1017e47d05b027e9fa4d75fe2a2903b404b68e67742a8ed72eec6022a809e7a"
+  },
+  "configuration": {
+    "bank_center": false,
+    "bank_rank": 3,
+    "bank_precision": "float64",
+    "jobs": 2,
+    "hours": 72.0,
+    "history": "compare-small-bank",
+    "field_refresh_seconds": 60.0,
+    "backend": "c",
+    "sample_rate_hz": 50,
+    "cells": [
+      "B"
+    ],
+    "cell_file": null,
+    "loads": [
+      "embedded"
+    ],
+    "current_a": 0.03,
+    "nominal_capacity_ah": 0.06,
+    "charge_c": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "discharge_c": [
+      0.2,
+      0.45,
+      0.7
+    ],
+    "charge_step_s": 900.0,
+    "discharge_step_s": 600.0,
+    "cv_voltage": 4.06,
+    "discharge_cutoff_v": 3.18,
+    "cycle_rest_s": 300.0,
+    "taper_end_c": 0.05,
+    "taper_hold_s": 30.0,
+    "cv_gain": 0.5,
+    "noise_v": [
+      0.002
+    ],
+    "seeds": [
+      1100,
+      1101
+    ],
+    "load_seeds": [
+      7
+    ],
+    "temperature": "constant",
+    "temperature_mean_c": 25.0,
+    "temperature_amplitude_c": 8.0,
+    "temperature_period_s": 3600.0,
+    "encoding": "float64",
+    "hysteresis_chart": "bounded",
+    "sample_csv": false,
+    "recording": "compact",
+    "summary_bins": 2000,
+    "checkpoint_hours": 3.0,
+    "no_plots": false,
+    "out": null
+  },
+  "cases": [
+    {
+      "directory": "case_0000",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1100,
+        "load_seed": 7
+      },
+      "source_hashes": {
+        "result.json": "70561c70f275f4ba8e2481986a62ea5ab20fb95b76d8a8cdf3d1726f3f3df576",
+        "plot_summary.npz": "e2ba002cb8eaafd5f2e70fe80a68b0106148831463c4c7a7705509366a4004d1",
+        "bank_tangent_message.npy": "20342696fe6ad17257f0c8b3417293e12f053c6c78b07f6dc7e52f93d05582a8",
+        "small_bank_message.npy": "f0e855d9615e2dc0253b224f7668fba514f8e9d63c744f2e61781582fb715a40"
+      },
+      "arms": {
+        "bank_tangent": {
+          "status": "completed",
+          "all": {
+            "outputs": 810000,
+            "max_Q_percent": 21.494739988854572,
+            "max_SOC_pp": 0.9420636281689654,
+            "joint_within_target": 809356,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 0.0010517515640851016,
+            "final_SOC_pp": 0.0004423572746881099,
+            "Q_RMSE_percent": 0.11398380948773439,
+            "SOC_RMSE_pp": 0.02058335583344976,
+            "joint_within_target_fraction": 0.999204938271605
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          },
+          "final_reference_parameter_error_percent": {
+            "Q_Ah": 0.0010517515640851016,
+            "R0_ohm": 1.0891047828004874,
+            "R1_ohm": -0.6085499745313139,
+            "tau1_s": 6.9782635978425045,
+            "R2_ohm": -0.8585094065573062,
+            "tau2_s": 0.9793209426629756,
+            "R3_ohm": -0.19998173487026927,
+            "tau3_s": 0.8807095508038598,
+            "H_V": -0.024304043722500612,
+            "gamma_plus": -0.027280884317937293,
+            "gamma_minus": 0.09925326621651465
+          },
+          "windows": [
+            {
+              "requested_hours": [
+                1,
+                24
+              ],
+              "first_output_hour": 1.0080888888888888,
+              "last_output_hour": 23.976000000000003,
+              "outputs": 258390,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.19894534208386716,
+                  "weighted_mean": 0.013165258872749776
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.11101154567466631,
+                  "weighted_mean": -0.0001226096490057685
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.10107124932856593,
+                  "weighted_mean": -0.0025123874225780403
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                24,
+                48
+              ],
+              "first_output_hour": 24.01208888888889,
+              "last_output_hour": 47.988,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.001495484523139634,
+                  "weighted_mean": -0.00027731080776869645
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.000510001201803334,
+                  "weighted_mean": 0.00014160050758621248
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.07054762300562345,
+                  "weighted_mean": -0.0009890174889714257
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                48,
+                72
+              ],
+              "first_output_hour": 48.02408888888889,
+              "last_output_hour": 72.0,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.0013650630875439163,
+                  "weighted_mean": 0.0006698038905059434
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.0006326709212661763,
+                  "weighted_mean": 0.0001898038329072508
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.03594628105929587,
+                  "weighted_mean": -6.001424567416363e-05
+                }
+              }
+            }
+          ],
+          "possible_SOC3SD_crossing_bin_hours": []
+        },
+        "small_bank": {
+          "status": "completed",
+          "all": {
+            "outputs": 810000,
+            "max_Q_percent": 15.789708074956632,
+            "max_SOC_pp": 0.9473010617415345,
+            "joint_within_target": 809318,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 0.0008730247085919629,
+            "final_SOC_pp": 0.00045062944498686086,
+            "Q_RMSE_percent": 0.10207419691159506,
+            "SOC_RMSE_pp": 0.02043165427105574,
+            "joint_within_target_fraction": 0.9991580246913581
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          },
+          "final_reference_parameter_error_percent": {
+            "Q_Ah": 0.0008730247085919629,
+            "R0_ohm": 0.19972254403268774,
+            "R1_ohm": -3.512736509062453,
+            "tau1_s": -2.0005036196997006,
+            "R2_ohm": 0.7245722602079008,
+            "tau2_s": -4.243118028678616,
+            "R3_ohm": 0.5941549806928847,
+            "tau3_s": 0.6306987076939441,
+            "H_V": -0.022503862866307678,
+            "gamma_plus": -0.038125041868763976,
+            "gamma_minus": 0.09264381744262806
+          },
+          "windows": [
+            {
+              "requested_hours": [
+                1,
+                24
+              ],
+              "first_output_hour": 1.0080888888888888,
+              "last_output_hour": 23.976000000000003,
+              "outputs": 258390,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.1954663129339007,
+                  "weighted_mean": 0.009818522070479131
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.1066993978441011,
+                  "weighted_mean": -8.340706078078142e-05
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.10570735268267129,
+                  "weighted_mean": -0.0025356045084248993
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                24,
+                48
+              ],
+              "first_output_hour": 24.01208888888889,
+              "last_output_hour": 47.988,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.001965422699956587,
+                  "weighted_mean": -0.0005310924461243827
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.0006624282641420898,
+                  "weighted_mean": 0.00018943276867178173
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.0877713203428776,
+                  "weighted_mean": -0.0009523109693130022
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                48,
+                72
+              ],
+              "first_output_hour": 48.02408888888889,
+              "last_output_hour": 72.0,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.0011806229421873482,
+                  "weighted_mean": 0.0004898094036566643
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.0006099463841696684,
+                  "weighted_mean": 0.00023596183846720715
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.052012327758532706,
+                  "weighted_mean": -2.7245534924246677e-05
+                }
+              }
+            }
+          ],
+          "possible_SOC3SD_crossing_bin_hours": []
+        }
+      },
+      "compression_shift_percent_of_truth": {
+        "Q_Ah": -0.00017872685549313871,
+        "R0_ohm": -0.8893822387677996,
+        "R1_ohm": -2.904186534531139,
+        "tau1_s": -8.978767217542206,
+        "R2_ohm": 1.583081666765207,
+        "tau2_s": -5.2224389713415915,
+        "R3_ohm": 0.794136715563154,
+        "tau3_s": -0.2500108431099157,
+        "H_V": 0.0018001808561929344,
+        "gamma_plus": -0.010844157550826683,
+        "gamma_minus": -0.006609448773886584
+      }
+    },
+    {
+      "directory": "case_0001",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1101,
+        "load_seed": 7
+      },
+      "source_hashes": {
+        "result.json": "89229a58c85aecb38ff4d7a124fcce4ad32e5cfc8b0f6d9eb5b02dea4dbfc5a4",
+        "plot_summary.npz": "56726a4c3591eaa90f7e4810a4d915b7d6b12b7474f5639bb32c95e77995812c",
+        "bank_tangent_message.npy": "9dddff8c6cd2ba124fbd56e718279ff606c0409e774795a52dfc1068bd22c291",
+        "small_bank_message.npy": "51ad5061d5751cf95b8dd951dc7c5e7d523ceeafdcf8d2eb898feb1ca5c16e52"
+      },
+      "arms": {
+        "bank_tangent": {
+          "status": "completed",
+          "all": {
+            "outputs": 810000,
+            "max_Q_percent": 15.101646386754375,
+            "max_SOC_pp": 0.8319991764684009,
+            "joint_within_target": 809328,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 0.0013031044109768075,
+            "final_SOC_pp": 0.00035064924102656825,
+            "Q_RMSE_percent": 0.10165303471871402,
+            "SOC_RMSE_pp": 0.01924302432542001,
+            "joint_within_target_fraction": 0.9991703703703704
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          },
+          "final_reference_parameter_error_percent": {
+            "Q_Ah": 0.0013031044109768075,
+            "R0_ohm": 0.27385586640225057,
+            "R1_ohm": 0.7719196823533059,
+            "tau1_s": 4.19454383333655,
+            "R2_ohm": 1.194474153674796,
+            "tau2_s": 3.931284118027034,
+            "R3_ohm": -1.2799583727675201,
+            "tau3_s": 1.0586154655677582,
+            "H_V": -0.030069935115595303,
+            "gamma_plus": -0.011843300720371097,
+            "gamma_minus": -0.09088607204360555
+          },
+          "windows": [
+            {
+              "requested_hours": [
+                1,
+                24
+              ],
+              "first_output_hour": 1.0080888888888888,
+              "last_output_hour": 23.976000000000003,
+              "outputs": 258390,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.42101563563939903,
+                  "weighted_mean": -0.03173975834356459
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.16561938942482035,
+                  "weighted_mean": 0.0020757833903727865
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.12591545856333042,
+                  "weighted_mean": 0.0017286769862644119
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                24,
+                48
+              ],
+              "first_output_hour": 24.01208888888889,
+              "last_output_hour": 47.988,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.0024394645442571417,
+                  "weighted_mean": -0.0015408826752870053
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.0009120367550297104,
+                  "weighted_mean": 0.0001034037813447057
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.055661795049566365,
+                  "weighted_mean": -5.369857523844053e-05
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                48,
+                72
+              ],
+              "first_output_hour": 48.02408888888889,
+              "last_output_hour": 72.0,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.0013313455108576733,
+                  "weighted_mean": 0.0003467342400865933
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.0004834731780312129,
+                  "weighted_mean": 6.741693923241169e-05
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.022341827642602397,
+                  "weighted_mean": -0.00023170856051314549
+                }
+              }
+            }
+          ],
+          "possible_SOC3SD_crossing_bin_hours": []
+        },
+        "small_bank": {
+          "status": "completed",
+          "all": {
+            "outputs": 810000,
+            "max_Q_percent": 14.888146306846028,
+            "max_SOC_pp": 0.8423692391557824,
+            "joint_within_target": 808169,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 41,
+            "final_Q_percent": 0.0011297942485555268,
+            "final_SOC_pp": 0.0003599006186183473,
+            "Q_RMSE_percent": 0.11647740171747704,
+            "SOC_RMSE_pp": 0.020819031488524296,
+            "joint_within_target_fraction": 0.9977395061728395
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          },
+          "final_reference_parameter_error_percent": {
+            "Q_Ah": 0.0011297942485555268,
+            "R0_ohm": -0.7218428402406829,
+            "R1_ohm": -1.256231426017762,
+            "tau1_s": -4.582638062957766,
+            "R2_ohm": 2.6206490746809363,
+            "tau2_s": -0.5562103022994092,
+            "R3_ohm": -0.6004633234200529,
+            "tau3_s": 0.8357226890992164,
+            "H_V": -0.02838735359387279,
+            "gamma_plus": -0.0224376442367058,
+            "gamma_minus": -0.09760139604985119
+          },
+          "windows": [
+            {
+              "requested_hours": [
+                1,
+                24
+              ],
+              "first_output_hour": 1.0080888888888888,
+              "last_output_hour": 23.976000000000003,
+              "outputs": 258390,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.5631964729548633,
+                  "weighted_mean": -0.04807360328288637
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.18783566517349692,
+                  "weighted_mean": 0.002433698327848459
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.12781448203424972,
+                  "weighted_mean": 0.0015381972515890359
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                24,
+                48
+              ],
+              "first_output_hour": 24.01208888888889,
+              "last_output_hour": 47.988,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.0026809919748349564,
+                  "weighted_mean": -0.001757169050655898
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.001024057278564694,
+                  "weighted_mean": 0.0001457253766175567
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.07026916023855634,
+                  "weighted_mean": -2.2005853573904805e-05
+                }
+              }
+            },
+            {
+              "requested_hours": [
+                48,
+                72
+              ],
+              "first_output_hour": 48.02408888888889,
+              "last_output_hour": 72.0,
+              "outputs": 269730,
+              "metrics": {
+                "Q_error_percent": {
+                  "max_abs": 0.0014268623756197307,
+                  "weighted_mean": 0.00017480455964452536
+                },
+                "SOC_error_pp": {
+                  "max_abs": 0.000524497314224881,
+                  "weighted_mean": 0.00011259815913895617
+                },
+                "V_truth_error_mV": {
+                  "max_abs": 0.03395632406011373,
+                  "weighted_mean": -0.00020154315560273045
+                }
+              }
+            }
+          ],
+          "possible_SOC3SD_crossing_bin_hours": [
+            [
+              3.6360888888888887,
+              3.672
+            ]
+          ]
+        }
+      },
+      "compression_shift_percent_of_truth": {
+        "Q_Ah": -0.00017331016242128072,
+        "R0_ohm": -0.9956987066429335,
+        "R1_ohm": -2.028151108371068,
+        "tau1_s": -8.777181896294316,
+        "R2_ohm": 1.4261749210061403,
+        "tau2_s": -4.487494420326444,
+        "R3_ohm": 0.6794950493474672,
+        "tau3_s": -0.22289277646854178,
+        "H_V": 0.0016825815217225149,
+        "gamma_plus": -0.010594343516334703,
+        "gamma_minus": -0.006715324006245638
+      }
+    }
+  ],
+  "limits": [
+    "Two noise realizations of one syntheticcell andload; notpopulationcoverage",
+    "Stationary25C, noaging",
+    "Gaussian widths excludeuniformprojection/modelbias",
+    "Assimilatedendpointvoltageerror isnotheld-outforecast/EODvalidation",
+    "Bin-window statistics below use whollycontainedcompactbins; boundarybins omitted"
+  ],
+  "conclusion": "No sustainedQ/SOCdegradation observedthrough72h. Allrefitsaccepted. Rank3 retainsknown earlySOCmisses andshowsconsistentRCshiftvsfullbank; nativeimplementationcomparison shouldpreserve thisbehavior, not beinterpreted asRCmodelrepair."
+}

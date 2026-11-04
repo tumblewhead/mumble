@@ -1,0 +1,277 @@
+{
+  "schema": "bank_rowwise_72h_review_v1",
+  "directory": "/home/easy/proj/mumble/.worktrees/bank-rowwise/experiments/foster_campaign_001/run_20261104_180857_043593",
+  "source_hashes": {
+    "summary.json": "149442f82b43043386a429d5ce6b477c9a7c3b14b84a633421bcf933b907b7cf",
+    "campaign_plan.json": "90d883add1307b14af5648e19e6e888aac1d77e94ff29734841686b5474b2d42",
+    "manifest.json": "9bd51f9cd188f1cc8adf2ee0fc78d7757b48271bbdb3a4b5156f39b14cc8c38d"
+  },
+  "configuration": {
+    "bank_center": false,
+    "bank_rank": 3,
+    "bank_precision": "float64",
+    "jobs": 2,
+    "hours": 72.0,
+    "history": "compare-rowwise",
+    "field_refresh_seconds": 60.0,
+    "backend": "c",
+    "sample_rate_hz": 50,
+    "cells": [
+      "B"
+    ],
+    "cell_file": null,
+    "loads": [
+      "embedded"
+    ],
+    "current_a": 0.03,
+    "nominal_capacity_ah": 0.06,
+    "charge_c": [
+      2.0,
+      1.0,
+      1.5
+    ],
+    "discharge_c": [
+      0.2,
+      0.45,
+      0.7
+    ],
+    "charge_step_s": 900.0,
+    "discharge_step_s": 600.0,
+    "cv_voltage": 4.06,
+    "discharge_cutoff_v": 3.18,
+    "cycle_rest_s": 300.0,
+    "taper_end_c": 0.05,
+    "taper_hold_s": 30.0,
+    "cv_gain": 0.5,
+    "noise_v": [
+      0.002
+    ],
+    "seeds": [
+      1100,
+      1101
+    ],
+    "load_seeds": [
+      7
+    ],
+    "temperature": "constant",
+    "temperature_mean_c": 25.0,
+    "temperature_amplitude_c": 8.0,
+    "temperature_period_s": 3600.0,
+    "encoding": "float64",
+    "hysteresis_chart": "bounded",
+    "sample_csv": false,
+    "recording": "compact",
+    "summary_bins": 2000,
+    "checkpoint_hours": 3.0,
+    "no_plots": false,
+    "out": null
+  },
+  "cases": [
+    {
+      "directory": "case_0000",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1100,
+        "load_seed": 7
+      },
+      "arms": {
+        "small_bank": {
+          "status": "completed",
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 15.789708074956632,
+            "max_SOC_pp": 0.9473010617415345,
+            "joint_within_target": 809318,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 0.0008730247085919629,
+            "final_SOC_pp": 0.00045062944498686086,
+            "Q_RMSE_percent": 0.10207419691159506,
+            "SOC_RMSE_pp": 0.02043165427105574,
+            "joint_within_target_fraction": 0.9991580246913581
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          }
+        },
+        "rowwise_bank": {
+          "status": "completed",
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 15.7897080749567,
+            "max_SOC_pp": 0.9473010617414901,
+            "joint_within_target": 809318,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "final_Q_percent": 0.0008730247085919629,
+            "final_SOC_pp": 0.00045062944498686086,
+            "Q_RMSE_percent": 0.10207419691159683,
+            "SOC_RMSE_pp": 0.020431654271057448,
+            "joint_within_target_fraction": 0.9991580246913581
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          }
+        }
+      },
+      "final_chart_max_abs_difference": 8.881784197001252e-16,
+      "final_covariance_max_abs_difference": 1.1275702593849246e-17,
+      "source_hashes": {
+        "result.json": "4046ab0565aaf70da0aa98acf06097725d16748d5dfcfb33665533924f3f6ddb",
+        "plot_summary.npz": "62da8db0d2e3cd3d66299b61e7134ffcf4ba16f67c6d83726a0e837f1a5d94b3",
+        "small_bank_message.npy": "f0e855d9615e2dc0253b224f7668fba514f8e9d63c744f2e61781582fb715a40",
+        "rowwise_bank_message.npy": "8e1be905fdb6866383e2bc72bb9e399fbf69dd37c9ff8eb77e009b74c6d67981",
+        "checkpoints/index.json": "5e248603055bc2e1e45ba4281459140f98f7dff913ab7a415ef3b09a22eb2ca6"
+      },
+      "compact_differences": {
+        "low": {
+          "chart_max_abs": 2.4713564528155985e-13,
+          "chart_sd_max_abs": 2.5979218776228663e-14,
+          "physical_parameters_max_abs_mixed_units": 1.8971491044794675e-12
+        },
+        "high": {
+          "chart_max_abs": 3.1796787425264483e-13,
+          "chart_sd_max_abs": 1.8540724511240114e-14,
+          "physical_parameters_max_abs_mixed_units": 2.093436535233195e-12
+        },
+        "mean": {
+          "chart_max_abs": 1.5476508963274682e-13,
+          "chart_sd_max_abs": 1.5709655798445965e-14,
+          "physical_parameters_max_abs_mixed_units": 8.562039965909207e-13
+        }
+      },
+      "checkpoints": {
+        "count": 25,
+        "hashes_verified": true,
+        "history_and_response_bitwise_identical": true
+      },
+      "old72h_reference_compact_exact": true,
+      "old72h_reference_final_message_exact": true,
+      "paired_compact_bin_ownership_exact": true
+    },
+    {
+      "directory": "case_0001",
+      "scenario": {
+        "cell": "B",
+        "load": "embedded",
+        "noise_v": 0.002,
+        "seed": 1101,
+        "load_seed": 7
+      },
+      "arms": {
+        "small_bank": {
+          "status": "completed",
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 14.888146306846028,
+            "max_SOC_pp": 0.8423692391557824,
+            "joint_within_target": 808169,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 41,
+            "final_Q_percent": 0.0011297942485555268,
+            "final_SOC_pp": 0.0003599006186183473,
+            "Q_RMSE_percent": 0.11647740171747704,
+            "SOC_RMSE_pp": 0.020819031488524296,
+            "joint_within_target_fraction": 0.9977395061728395
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          }
+        },
+        "rowwise_bank": {
+          "status": "completed",
+          "metrics": {
+            "outputs": 810000,
+            "max_Q_percent": 14.888146306845895,
+            "max_SOC_pp": 0.8423692391557713,
+            "joint_within_target": 808169,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 41,
+            "final_Q_percent": 0.0011297942485555268,
+            "final_SOC_pp": 0.0003599006186072451,
+            "Q_RMSE_percent": 0.1164774017174774,
+            "SOC_RMSE_pp": 0.02081903148852369,
+            "joint_within_target_fraction": 0.9977395061728395
+          },
+          "refresh": {
+            "attempts": 4308,
+            "accepted": 4308,
+            "rejected": 0,
+            "last_rejection": null,
+            "last_attempt_record": 12958464,
+            "last_accepted_record": 12958464,
+            "accumulated_records": 12960000,
+            "buffered_records": 0,
+            "status": "all_refreshes_accepted"
+          }
+        }
+      },
+      "final_chart_max_abs_difference": 6.661338147750939e-15,
+      "final_covariance_max_abs_difference": 6.938893903907228e-17,
+      "source_hashes": {
+        "result.json": "73445a1fb45f32ad41afe7fc581c18a2692d986b55db021d0876099f1758b6b4",
+        "plot_summary.npz": "6fd5a11b796a31c945445872d74f66ac533de77013561794b704d2ba895c3bce",
+        "small_bank_message.npy": "51ad5061d5751cf95b8dd951dc7c5e7d523ceeafdcf8d2eb898feb1ca5c16e52",
+        "rowwise_bank_message.npy": "b6427a4233fcf2d48c3563f2e95bd5e9a9100ad83983da388324912625992524",
+        "checkpoints/index.json": "1eef2683d42dda420a19f44c5b1ad969ea481d8e20babf734b707ba94ee6ad17"
+      },
+      "compact_differences": {
+        "low": {
+          "chart_max_abs": 4.756195437494171e-13,
+          "chart_sd_max_abs": 4.168887457467463e-14,
+          "physical_parameters_max_abs_mixed_units": 2.2097879082139116e-12
+        },
+        "high": {
+          "chart_max_abs": 2.9309887850104133e-13,
+          "chart_sd_max_abs": 1.0164091790443308e-13,
+          "physical_parameters_max_abs_mixed_units": 3.2152058793144533e-12
+        },
+        "mean": {
+          "chart_max_abs": 1.0058620603103918e-13,
+          "chart_sd_max_abs": 1.5154544286133387e-14,
+          "physical_parameters_max_abs_mixed_units": 6.732392421326949e-13
+        }
+      },
+      "checkpoints": {
+        "count": 25,
+        "hashes_verified": true,
+        "history_and_response_bitwise_identical": true
+      },
+      "old72h_reference_compact_exact": true,
+      "old72h_reference_final_message_exact": true,
+      "paired_compact_bin_ownership_exact": true
+    }
+  ],
+  "limits": [
+    "Compact-bin extrema/means do not establish bitwise equality of every original output",
+    "Two noise seeds of one stationary syntheticcell/load; notpopulationcoverage",
+    "Prior rank3modelbias/SOCmisses andfullfirmwarememoryobligations remain"
+  ],
+  "conclusion": "Native rowwise implementation preserves reduced-reference behavior through72h in these paired cases; proceed to bounded native sample-to-history generation/commit, not an accuracy retuning."
+}
