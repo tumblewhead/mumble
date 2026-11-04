@@ -142,6 +142,8 @@ class CBackend:
 
 def arm_kinds(settings):
     history=getattr(settings,'history','rolling')
+    if history=='distinct-bank':return ['distinct_bank']
+    if history=='compare-bank':return ['field64','distinct_bank']
     if history=='tangent-h7':return ['tangent_h7']
     if history=='compare-h7':return ['tangent64','tangent_h7']
     if history=='field-tangent':return ['tangent64']
@@ -152,6 +154,9 @@ def arm_kinds(settings):
 
 
 def make_backend(campaign,config,source,model_id,kind,rate,settings):
+    if kind=='distinct_bank':
+        from .distinct_backend import DistinctBackend
+        return DistinctBackend(campaign,config,source,model_id,rate,settings)
     if kind=='tangent_h7':
         from .h7_backend import H7Backend
         return H7Backend(campaign,config,source,model_id,rate,settings)

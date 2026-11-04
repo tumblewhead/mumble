@@ -1,0 +1,106 @@
+{
+  "schema": "independent_code_review_v1",
+  "reviewer": "fresh-context bank_campaign_review subagent",
+  "base_revision": "31d7a1ee74053628d198ac0bde538da7692f810c",
+  "branch": "experiment/distinct-bank-integration-001",
+  "verdict": "accepted_for_opt_in_stationary_desktop_comparator",
+  "material_blockers": [],
+  "findings": [],
+  "scope": "Campaign integration, ownership, transactional admission, native build/source binding, checkpoint/replay, modes/defaults and plotting. No new physical or lifetime proof reviewed.",
+  "reviewed_sources": {
+    "experiments/foster_campaign_001/backend.py": {
+      "bytes": 11326,
+      "sha256": "daf3d85e9ec8c6c104f8b8b0100bfcd57c5118e47bb735c5093ae931cd7e5c70"
+    },
+    "experiments/foster_campaign_001/field_backend.py": {
+      "bytes": 8999,
+      "sha256": "da1798427489e15364586e5f4da888343f2c0c77c2f07e5e739084d7820b2e84"
+    },
+    "experiments/foster_campaign_001/run.py": {
+      "bytes": 26305,
+      "sha256": "d9bd68e51f02824bc142abe7491c2a71d133ab04d2437bd5d0771bdeda676a62"
+    },
+    "experiments/foster_campaign_001/compact.py": {
+      "bytes": 24458,
+      "sha256": "3a3a10e9ab37e1cd9a1e2986d9cec1e22934fd9a38d8c903da6d3a8e04cc0004"
+    },
+    "experiments/foster_campaign_001/plot.py": {
+      "bytes": 18747,
+      "sha256": "7e6885611a55e5d87759f0dcaa489a17371d63f2bc5acbd8b2adb0fe713dfa4e"
+    },
+    "experiments/foster_campaign_001/distinct_backend.py": {
+      "bytes": 8207,
+      "sha256": "c8396f14959ac26c4932ad3f584ea0af034cabec360ffc197a469987c0c62e62"
+    },
+    "experiments/distinct_bank_integration_001/test_campaign.py": {
+      "bytes": 10825,
+      "sha256": "fd4ed6b098ffeeb93b790627a14d43ec4df47e354f0aede5e61f82b8a505922e"
+    },
+    "experiments/distinct_bank_integration_001/field.py": {
+      "bytes": 15200,
+      "sha256": "8fe4a3edc24fa397b995f997156ce160e84b8adb959ecfddf7fcbd6a895b653e"
+    },
+    "experiments/distinct_bank_campaign_001/README.md": {
+      "bytes": 4598,
+      "sha256": "0e0e2730e4f833b88bbccf8a5df7027cc5397b9fabd68bb46fab7c54735f32b8"
+    },
+    "experiments/foster_campaign_c_001/bridge.c": {
+      "bytes": 1566,
+      "sha256": "f630307721490d0d895aa0ca55bb4a3bcf2e49578aec0f24ae35b7fe099e99fb"
+    },
+    "experiments/foster_campaign_001/test_field_backend.py": {
+      "bytes": 7356,
+      "sha256": "e98cc725cf0e72642a598ad722c7a662c6da1e181c2c8dd2a2eb892ff3bfdc44"
+    },
+    "experiments/foster_campaign_001/test_field_default.py": {
+      "bytes": 3061,
+      "sha256": "4b10dc299ca8afcb46ba42a135e863ca83db2c4b443ecec7d3e02846352b1bc9"
+    },
+    "experiments/distinct_bank_integration_001/test_bank.py": {
+      "bytes": 7109,
+      "sha256": "709354bc1ac1927eccd43fa609910ec2dc19edb3765a27a1da1e5b76cca7248e"
+    }
+  },
+  "checks": {
+    "prior_and_ownership": "Compressed uses fixed public mean/root and identity prior precision once. Full history replaces, never multiplies, the same-prefix native distribution; native bridge enforces committed counters.",
+    "truth_separation": "Estimator constructors/objectives take calibration and indexed five-column observations. Truth is confined to existing synthesis, scoring and plots; no new truth import/access in bank backend.",
+    "temperature_and_support": "CLI rejects nonconstant/non25C before output creation; adapter rejects non25C before native mutation. Existing physical-path and full fixed log-shape support remain; no clipping or recentering.",
+    "transaction": "Backup includes native context, joint QR root, legacy H/path state, three free/forced banks, original-coordinate solver start, pending rows and audit. Tested later-chunk QR rollback and native partial-window rollback.",
+    "replay": "Checkpoint binds source/config/center/cadence/width/map. Replay binds campaign source dependencies, build receipt, copied map, native response binaries and host runtime. Nonzero checkpoint replay is bitwise exact in targeted fixture.",
+    "defaults_and_controls": "Default joint-field and existing control outputs unchanged; compare-bank selects mainline field64 plus distinct_bank on identical observations.",
+    "plots": "Individual and summary figures, per-parameter comparison pages, unique bank color and different bank/control summary linestyles verified.",
+    "source_and_build": "Bank helpers built before independent workers, source/map/binary identities verified on reuse, helper sources and map archived. Signed original map is not renormalized."
+  },
+  "tests": [
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.distinct_bank_integration_001.test_campaign experiments.distinct_bank_integration_001.test_bank experiments.foster_campaign_001.test_field_backend",
+      "passed": 21,
+      "elapsed_s": 18.608,
+      "note": "8 campaign + 6 bank + 7 legacy field tests; before final plot-only linestyle/assertion edit."
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_field_default",
+      "passed": 3,
+      "elapsed_s": 1.773
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 MPLCONFIGDIR=/tmp/mumble-review-mpl python3 -B -m unittest experiments.distinct_bank_integration_001.test_campaign.BankCampaignTests.test_checkpoint_plan_and_plots",
+      "passed": 1,
+      "elapsed_s": 13.175,
+      "note": "Final reviewed plot/test bytes, after linestyle/assertion adjustment."
+    },
+    {
+      "command": "OPENBLAS_NUM_THREADS=1 python3 -B -",
+      "stdin_reproducer": "import numpy as np\nfrom experiments.distinct_bank_integration_001.test_campaign import BankCampaignTests as T\nT.setUpClass()\ntry:\n    t=T();stream,banks,_=t.restore();bank=banks['distinct_bank']\n    before=bank.checkpoint_arrays();context=bytes(bank.context);counts=bank.counts()\n    first=stream.index;rows,_,_=stream.read(16)\n    bad=rows.copy();bad[1,0]=2.\n    try:bank.advance(first,bad)\n    except ValueError as exc:assert str(exc)=='C estimator status -2'\n    else:raise AssertionError('native row rejection missing')\n    assert bytes(bank.context)==context\n    for k,v in before.items():np.testing.assert_array_equal(bank.checkpoint_arrays()[k],v)\n    assert bank.counts()==counts\n    bank.advance(first,rows)\n    assert bank.counts()['retired_records']==first+16\nfinally:T.tearDownClass()\n",
+      "status": "passed",
+      "result": "Native row2 dt=2 caused status -2 after row1 acceptance; context/all checkpoint arrays/counters unchanged; retry accepted."
+    }
+  ],
+  "limits": [
+    "Supplied N13e map remains uncertified NUM; TaylorH2 approximation and stationary25C only.",
+    "W94/35720B packed factor/936B response plus rolling carrier and Python/native workspace remain over target; no M23 claim.",
+    "Local Gaussian widths lack deterministic approximation bias allowance or validated coverage; no lifetime/aging qualification.",
+    "Short deterministic integration checks do not establish long-campaign fit success or useful identification.",
+    "Compare-bank changes RC and H representations jointly, so results cannot isolate RC-only gains."
+  ]
+}

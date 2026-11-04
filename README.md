@@ -1,5 +1,12 @@
 # Current mainline baseline
 
+The [distinct-bank campaign adapter](experiments/distinct_bank_campaign_001/README.md)
+now reuses the familiar runner through opt-in `--history distinct-bank` and
+`--history compare-bank`: parallel cases, independent load/noise seeds, compact
+recording, full-state debug replay and individual/summary plots. It requires
+constant25C. W94 remains over budget, uncertainty is provisional, and long-run
+performance is not qualified. The default and mainline promotion are unchanged.
+
 Field-assisted estimation is now the desktop campaign default: the optimized C
 rolling estimator receives periodic joint-likelihood/state-transport refreshes.
 Use `--history compare` for both field and original rolling arms, or

@@ -61,10 +61,9 @@ class FieldBackend(CBackend):
         if config.get('hysteresis_chart')!='bounded':raise ValueError('field requires bounded chart')
         super().__init__(campaign,config,source,model_id,'float64',rate)
         self.mean,self.prior_root=prior(config)
-        binary=prepare_field(campaign)
-        self.field=Field(config,partition(self.mean)[1],1.,5,binary,source)
+        self.field=self._make_field(campaign,config,source)
         self.model=Model((campaign/'backend_c/estimator.so').resolve(),config)
-        self.objective=Compressed(self.field,self.mean,self.prior_root)
+        self.objective=self._make_objective()
         self.interval=max(16,math.ceil(settings.field_refresh_seconds*rate/16)*16)
         self.pending_rows=np.empty((BUFFER_RECORDS,5));self.buffered=0
         self.w=np.zeros(16)
@@ -73,6 +72,15 @@ class FieldBackend(CBackend):
                         max_abs_Q_replacement_percent=0.,max_abs_SOC_replacement_pp=0.)
         self.lib.campaign_replace_message.argtypes=[C.c_void_p,C.c_uint64,DP]
         self.lib.campaign_replace_message.restype=C.c_int
+
+    def _make_field(self,campaign,config,source):
+        return Field(config,partition(self.mean)[1],1.,5,prepare_field(campaign),source)
+
+    def _make_objective(self):
+        return Compressed(self.field,self.mean,self.prior_root)
+
+    def _transport(self,x):
+        return transported(self.field,x)
 
     def _flush_field(self):
         if self.buffered:
@@ -86,7 +94,7 @@ class FieldBackend(CBackend):
             diag=fit['diagnostic']
             if diag['stop'] not in ('GN_decrement_at_cost_roundoff','gradient'):
                 raise ValueError('field solve unresolved: '+diag['stop'])
-            end,D=transported(self.field,fit['x']);root=D@fit['root']
+            end,D=self._transport(fit['x']);root=D@fit['root']
             self.model.evaluate(end,np.empty((0,5)))
             _,_,P,_,_=self.objective(fit['w'])
             sign,logdet=np.linalg.slogdet(P)

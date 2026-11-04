@@ -27,7 +27,7 @@ from .telemetry import PARAMETERS, TRACE_COLUMNS, thermal, trace_row
 CHUNK = 8192  # Multiple of the unchanged 16-record estimation window.
 
 
-def storage_plan(hours, rate, bins, checkpoint_hours, arms, field_arms=0, h7_arms=0):
+def storage_plan(hours, rate, bins, checkpoint_hours, arms, field_arms=0, h7_arms=0, bank_arms=0):
     """Numeric sizing, not a compressed filesystem quota or runtime promise."""
     records = round(hours*3600*rate)
     interval = max(CHUNK, math.ceil(checkpoint_hours*3600*rate/CHUNK)*CHUNK)
@@ -38,6 +38,8 @@ def storage_plan(hours, rate, bins, checkpoint_hours, arms, field_arms=0, h7_arm
     field_bytes = field_arms*(82*82*8+111*8+16*8+4096*5*8+8192)  # dense checkpoint + bounded audit allowance
     if not 0<=h7_arms<=field_arms:raise ValueError("H7 arms must be included in field arms")
     field_bytes += h7_arms*((112*112-82*82+167-111)*8)
+    if not 0<=bank_arms<=field_arms-h7_arms:raise ValueError('bank arms must be separate field arms')
+    field_bytes += bank_arms*((94*94-82*82+117-111)*8)
     return dict(field_checkpoint_extra_B_per_checkpoint=field_bytes, records=records, summary_bin_hours=hours/min(records,bins),
                 summary_numeric_MB=summary_bytes/1e6, checkpoint_count=checkpoints,
                 checkpoint_interval_hours=interval/(3600*rate),
@@ -211,6 +213,10 @@ def replay_binding(campaign, case):
         from .h7_backend import DEPENDENCIES as H7_DEPENDENCIES
         for name in H7_DEPENDENCIES:
             expected[name]=plan['campaign_sources'][name]
+    bank = plan['configuration'].get('history') in ('distinct-bank','compare-bank')
+    if bank:
+        from .distinct_backend import DEPENDENCIES as BANK_DEPENDENCIES
+        for name in BANK_DEPENDENCIES:expected[name]=plan['campaign_sources'][name]
     name = 'experiments/foster_feedback_001/plant.py'
     expected[name] = reserved[name]
     for name, value in expected.items():
@@ -229,6 +235,10 @@ def replay_binding(campaign, case):
     if h7:
         result['h7_response_binary']=identity(campaign/'backend_h7/response.so')
         result['h7_tangent_binary']=identity(campaign/'backend_h7/tangent.so')
+    if bank:
+        result['bank_build']=identity(campaign/'backend_distinct/build.json')
+        result['bank_map']=identity(campaign/'backend_distinct/map_n13e.json')
+        for kind in ('rc','h'):result['bank_'+kind+'_binary']=identity(campaign/'backend_distinct'/kind/'response.so')
     return result
 
 
@@ -304,7 +314,7 @@ def run_compact(out, campaign, config, model_id, scenario, cell, args):
     stream = StimulusStream(config, cell, scenario, settings)
     banks = {k: make_backend(campaign, config, source, model_id, k, rate,args) for k in kinds}
     stats = {k: dict(status='running', all=metrics(), current_nonzero=metrics(), current_zero=metrics(),
-                    outputs=0, stops={}, storage={**({} if k in ('tangent64','tangent_h7') else numeric_storage('float64' if k=='field64' else k)), **banks[k].storage()}) for k in kinds}
+                    outputs=0, stops={}, storage={**({} if k in ('tangent64','tangent_h7') else numeric_storage('float64' if k in ('field64','distinct_bank') else k)), **banks[k].storage()}) for k in kinds}
     bins = {'plant': Bins(n, args.summary_bins, 25)}
     bins.update({k: Bins(n, args.summary_bins, len(TRACE_COLUMNS)+32+4) for k in kinds})
     interval = max(CHUNK, math.ceil(args.checkpoint_hours*3600*rate/CHUNK)*CHUNK)

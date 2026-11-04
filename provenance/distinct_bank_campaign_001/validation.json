@@ -1,0 +1,83 @@
+{
+  "schema": "distinct_bank_campaign_validation_v1",
+  "base_revision": "31d7a1e",
+  "status": "tests_and_independent_review_passed",
+  "test_suites": {
+    "experiments.distinct_bank_integration_001.test_campaign": 8,
+    "experiments.distinct_bank_integration_001.test_bank": 6,
+    "experiments.foster_campaign_001.test_field_backend": 7,
+    "experiments.foster_campaign_001.test_field_default": 3
+  },
+  "total_distinct_tests": 24,
+  "commands": [
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.distinct_bank_integration_001.test_campaign -v",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.distinct_bank_integration_001.test_bank experiments.foster_campaign_001.test_field_backend experiments.foster_campaign_001.test_field_default -v"
+  ],
+  "smoke": {
+    "path": "experiments/distinct_bank_campaign_001/smoke001",
+    "status": "completed",
+    "cases": 2,
+    "seconds_per_case": 36,
+    "jobs": 2,
+    "rate_Hz": 35,
+    "plots": {
+      "directory": "case_summary",
+      "status": "completed",
+      "included_cases": 2,
+      "skipped_cases": 0
+    },
+    "PNG_count": 32,
+    "refreshes": {
+      "case_0000": {
+        "field64": {
+          "attempts": 11,
+          "accepted": 11,
+          "rejected": 0
+        },
+        "distinct_bank": {
+          "attempts": 11,
+          "accepted": 11,
+          "rejected": 0
+        }
+      },
+      "case_0001": {
+        "field64": {
+          "attempts": 11,
+          "accepted": 11,
+          "rejected": 0
+        },
+        "distinct_bank": {
+          "attempts": 11,
+          "accepted": 11,
+          "rejected": 0
+        }
+      }
+    },
+    "bindings": {
+      "experiments/distinct_bank_campaign_001/smoke001/summary.json": {
+        "bytes": 29941,
+        "sha256": "a1a751975aad1208072f3efdecbbad70f040d6bfd0e8fe6c68b84f56df648c01"
+      },
+      "experiments/distinct_bank_campaign_001/smoke001/campaign_plan.json": {
+        "bytes": 38320,
+        "sha256": "e7918ae54157694e0981f5baacae3671c2ee8a40bb4f1dbc42ddfc3117340bfa"
+      },
+      "experiments/distinct_bank_campaign_001/smoke001/manifest.json": {
+        "bytes": 33154,
+        "sha256": "b6ad7b1a2c6c01f8a2eabcb379db0366966d1c0d75a0e64750291dfb7a29de8f"
+      },
+      "experiments/distinct_bank_campaign_001/smoke001/case_summary/cases.json": {
+        "bytes": 2929,
+        "sha256": "8e99aac3dfccc1bd622ad7635a602eb70716636646b76ffc402d0fe6faae73e9"
+      }
+    },
+    "post_smoke_change": "Bank summary overlay solid versus dashed field; standalone plot test repeated and passed; original source snapshot/plots preserved"
+  },
+  "limits": [
+    "Stationary25C only",
+    "No bias-aware interval/certificate",
+    "W94 overbudget comparator",
+    "No aging or long-duration qualification"
+  ],
+  "review": "provenance/distinct_bank_campaign_001/review_r1.json"
+}

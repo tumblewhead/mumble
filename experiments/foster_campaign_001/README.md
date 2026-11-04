@@ -1,3 +1,5 @@
+> Experimental `--history distinct-bank` and `--history compare-bank` now reuse this runner, compact recording, replay and plots for the N13e bank. **Requires `--temperature constant --temperature-mean-c 25`.** See the [bank campaign guide](../distinct_bank_campaign_001/README.md). The default stays unchanged.
+
 > Opt-in `--history tangent-h7` runs RC5/H7 with native tangent feedback. `--history compare-h7` compares H5 and H7 tangent arms, with compact recording, checkpoint replay and labeled plots. See the [integration guide](../h7_campaign_001/README.md). Start a fresh campaign; H5 checkpoints cannot supply omitted H7 coefficients.
 
 > Field-assisted estimation is now the default (`--history joint-field --encoding float64`). Use `--history compare` for field versus original rolling overlays, or `--history rolling --encoding both` for the original encoding comparison. The [720-hour review](../../provenance/rolling_field_720h_20261031/README.md) supports this promotion; low-noise uncertainty, aging and M23 deployment remain unqualified.
