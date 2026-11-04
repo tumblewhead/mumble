@@ -8,7 +8,7 @@ from .rate import LEGACY_RATE
 from .telemetry import PARAMETERS, TRACE_COLUMNS, STATES
 
 
-ARM_COLORS = dict(float64='#3165b4', float32='#dc7822', field64='#009E73', tangent64='#9b4db5', tangent_h7='#D55E00', distinct_bank='#CC79A7', bank_tangent='#0072B2')
+ARM_COLORS = dict(float64='#3165b4', float32='#dc7822', field64='#009E73', tangent64='#9b4db5', tangent_h7='#D55E00', distinct_bank='#CC79A7', bank_tangent='#0072B2', small_bank='#D55E00')
 
 def select_arms(result, arms=None):
     """Filter a view only; original evidence and arm metadata are unchanged."""
@@ -288,7 +288,7 @@ def render_summary(campaign, destination=None, start_hour=0., end_hour=None, *, 
         from .error_comparison import render_error_comparisons
         selected_reports=[r for r in reports if r['directory'] in {v['directory'] for v in included}]
         comparisons=[]
-        if any({'tangent64','bank_tangent'}<=r.get('arms',{}).keys() or {'field64','distinct_bank'}<=r.get('arms',{}).keys() or {'field64','tangent64'}<=r.get('arms',{}).keys() or {'tangent64','tangent_h7'}<=r.get('arms',{}).keys() for r in selected_reports):
+        if any({'bank_tangent','small_bank'}<=r.get('arms',{}).keys() or {'tangent64','bank_tangent'}<=r.get('arms',{}).keys() or {'field64','distinct_bank'}<=r.get('arms',{}).keys() or {'field64','tangent64'}<=r.get('arms',{}).keys() or {'tangent64','tangent_h7'}<=r.get('arms',{}).keys() for r in selected_reports):
             comparisons=render_error_comparisons(campaign,selected_reports,destination/'parameter_error_comparison',start_hour,end_hour)
         receipt = dict(status='completed' if included else 'no_plottable_cases',
                        parameter_error_comparison=comparisons,selected_arms=arms,selected_cases=cases,

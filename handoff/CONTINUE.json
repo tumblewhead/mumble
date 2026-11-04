@@ -1,24 +1,23 @@
 {
-  "schema": "distinct_bank_campaign_continue_v1",
+  "schema": "bank_memory_continue_v1",
   "worktree": "/home/easy/proj/mumble/.worktrees/h7-campaign",
-  "branch": "experiment/distinct-bank-integration-001",
-  "base_revision": "31d7a1e",
+  "branch": "experiment/bank-memory-001",
+  "base_revision": "84003cc",
   "read_first": [
     "AGENTS.md",
     "README.md",
     "PROJECT_STATE.json",
-    "experiments/bank_tangent_campaign_001/README.md",
-    "provenance/bank_tangent_campaign_001/review.json"
+    "experiments/bank_memory_001/README.md",
+    "provenance/bank_memory_001/receipt.json"
   ],
-  "current": "Bank tangent reference implemented and peer reviewed; original-origin QR, no rolling Gaussian feedback. Four-hour paired50Hz check completed,239/239refits perarm/case. D001 is older control.",
-  "command": "python3 -B -m experiments.foster_campaign_001.run --history compare-bank-tangent --hours 24 --sample-rate-hz 50 --jobs 2 --cells B --loads embedded --load-seeds 7 --seeds 1100 1101 --noise-v .002 --temperature constant --recording compact --summary-bins 2000 --checkpoint-hours 1",
+  "current": "Reduced stationary bankhistory runner and isolated native scratch prototype; rank3 andrank4 float64 tested through24h on two seeds. Float32 recurrent rounding drift rejected.",
+  "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.foster_campaign_001.run --history compare-small-bank --bank-rank 3 --bank-precision float64 --hours 72 --sample-rate-hz 50 --jobs 2 --cells B --loads embedded --load-seeds 7 --seeds 1100 1101 --noise-v .002 --temperature constant --recording compact --summary-bins 2000 --checkpoint-hours 3",
   "limitations": [
-    "Constant25C only; no aging",
-    "W94 factor35720B + response936B plus rolling carrier/buffers/workspace; not M23 qualified",
-    "Bank uses TaylorH2; comparison with mainline field changes H as well as RC",
-    "Local Gaussian uncertainty only; no deterministic bias-floor or global certificate",
-    "Short integration checks are not duration/performance qualification; inspect field_history rejections"
+    "Rank3factor4760B butdesktopnumericresident17176B plusworkspace;9944B native layout conditional",
+    "Rank3SOC41three-sigma misses inseed1101; projected kernels can have negative tails; uncertaintyprovisional",
+    "No aging,temperature,lifetime rounding,uniformbias,EOD ortargetcycles qualification",
+    "Unrelated provenance/sample_rate_study_001 remains untracked; preserve"
   ],
-  "next": "User rerun24h35/50/100Hz exploratory tangent64/bank_tangent comparison, then matched physical-time stimulus/noise and retirement-duration controls.",
-  "prior_handoff": "handoff/archive/CONTINUE_before_distinct_bank_campaign.json"
+  "next": "Inspect sustained RC/EOD fidelity and uncertainty ofrank3 vsrank4; port rowwise derivative/solver/scalar-query path with complete measured SRAM/stack/cycles and reviewed streaming ownership schedule. No lifetime/temperature/aging qualification.",
+  "prior_handoff": "handoff/archive/CONTINUE_before_bank_memory_001.json"
 }

@@ -1,0 +1,76 @@
+{
+  "schema": "bank_memory_scratch_independent_review_v1",
+  "reviewer": "fresh-context /root/scratch_review",
+  "status": "accepted_for_isolated_native_prototype_under_explicit_preconditions",
+  "scope": "Rowwise 16D GN rebuild, step and scalar local variance only; not campaign integration, complete P3 gate, target qualification or lifetime result.",
+  "base_revision": "84003ccfacdadf74fb31bf8ce410d6b7b1033b63",
+  "source_sha256": {
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/test_scratch.py": "9a14c8348420e724fd64b08f5cced269c061549288e746014c9b684ed689ab5c",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "specifications/constrained_operator_contract_001/P3.md": "427e1686bc19423d3b5192fdfec30cc4caffbe63eaed84d5f7376e8eb0f457cc"
+  },
+  "blocking_findings": [],
+  "algebra": {
+    "identity": "A=[I,anchor; U*J,U*phi]; streamed QR gives S^T*S=A^T*A in exact arithmetic. S=[R,c;0,rho] retains full joint P=R^T*R and score=R^T*c. Step solves R*delta=-c; variance solves R^T*y=query_gradient and returns y^T*y.",
+    "prior_scope": "The original prior must already be identity-whitened, with anchor its current residual and callback derivatives in the identical coordinates. Arbitrary prior roots are not implemented.",
+    "history_scope": "History is read-only and included once per reconstructed objective, alongside the original prior. No posterior from that history is added as independent evidence. Source ownership, chronology, physical state and derivative correctness are caller premises.",
+    "rounding_limit": "Exact algebra and tested tolerance parity do not establish bitwise dense equivalence, lifetime roundoff bounds, convergence, physical response accuracy or coverage."
+  },
+  "failure_and_leases": {
+    "confirmed": "Malformed width/null required input prevalidation rejects before mutation; occupied/exhausted lease refuses. Admitted rebuild revokes validity before clearing the root; detected finite/callback/QR failure leaves invalid state and releases ownership. Step/variance publish only finite complete outputs. Wrong owner/generation cannot release a lease.",
+    "semantics": "Generation increments per successful acquisition, including queries. Exhaustion refuses indefinitely. Prevalidation rejection retains an earlier valid result; admitted numerical failure quarantines it. No old-root rollback exists.",
+    "limits": "Lease is serialized ownership bookkeeping, not atomic synchronization, a retained-output handle, hardware-fault detector, durable publication or reset/recovery protocol. Query failure does not invalidate an otherwise valid root. No arbitrary context corruption protection is claimed."
+  },
+  "scratch_preconditions": [
+    "Context has correct alignment/full extent and starts all-zero; pointers have declared extents.",
+    "Caller input/output storage does not alias the context or one another.",
+    "Calls are serialized and no consumer retains pointers into scratch across calls.",
+    "Callback fills all16 derivative entries deterministically at the same parameter point, without reentry or mutation; width/history/phi/J describe the same represented likelihood.",
+    "The union is safe because fit row/derivative scratch is dead when solve scratch becomes live; each solve writes its dependencies before reading them."
+  ],
+  "memory": {
+    "measured_host_context_B": 1504,
+    "factor_B": 1224,
+    "scratch_union_B": 264,
+    "lease_B": 16,
+    "host_compiler": "cc (GCC)16.2.1 20260810; -std=c11 -O2 -Wall -Wextra -Werror -fno-fast-math -ffp-contract=off",
+    "host_own_stack_frames_B": {
+      "rebuild": 176,
+      "qr_insert": 96,
+      "step": 40,
+      "variance": 16
+    },
+    "known_host_rebuild_qr_frame_sum_B": 272,
+    "excluded": "External packed history, phi, anchor/current/trial parameter storage, derivative generator/state/workspace, query gradients, outputs, callback and libm call chains, caller stack, synchronization, queues, recovery, calibration/support metadata and platform costs.",
+    "qualification": "1504B is sizeof this host context including its16B registry, not total scratch/caller/solver SRAM. Stack frames are host own frames only, not a complete peak or M23 measurement. No10KiB, constant caller-resource, WCET or throughput claim.",
+    "callback_calls_per_rebuild": "W*(W+1)/2, up to4465 atW94; repeated derivative generation trades caller time for this context storage."
+  },
+  "validation": {
+    "supplied_command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.bank_memory_001.test_scratch -v",
+    "supplied_tests_passed": 2,
+    "independent_controls": [
+      "Direct full17x17 augmented Gram parity (precision,score,cost) at widths1,16,34,40,94; maximum absolute discrepancies respectively2.84e-14,9.09e-13,2.73e-12,4.55e-12,1.64e-11; all pass atol1e-10/rtol1e-12.",
+      "Bad width leaves entire valid context unchanged.",
+      "Nonfinite scalar-query gradient leaves sentinel output unchanged.",
+      "NaN history, infinite phi, NaN anchor, infinite derivative, finite product overflow and callback error each invalidate admitted rebuild, release owner and refuse both queries without output writes.",
+      "Generation UINT64_MAX refuses acquisition unchanged; wrong owner release refuses unchanged.",
+      "Independent ctypes layout confirms1224+264+16=1504B; GCC -fstack-usage provides own-frame measurements."
+    ],
+    "test_gaps": "Committed tests cover only two groups with one synthetic seed, three widths, one NaN callback case and partial lease checks. Additional review controls are finite witnesses, not persistent regression coverage. No target execution, realistic generator integration, full covariance/transport, generic prior, fault durability or lifetime arithmetic test."
+  },
+  "dispositions": [
+    {
+      "id": "S1",
+      "finding": "Required callback/init/alias contracts were implicit in initial source.",
+      "status": "resolved_by_author_documentation",
+      "evidence": "Current source header explicitly states aligned all-zero initialization, full extents/nonaliasing, same-point complete deterministic callback without reentry, identity-whitened prior and resource exclusions; no algorithm change."
+    }
+  ],
+  "acceptance_limits": [
+    "No campaign solver memory reduction has been demonstrated by this isolated file.",
+    "P3 two-pass history insertion, identity/reset ownership and complete lifecycle/stack/timing gates remain separate.",
+    "No physical accuracy, validated uncertainty, sustained-use stability or constant caller-resource conclusion."
+  ],
+  "implementation_edits_by_reviewer": false
+}

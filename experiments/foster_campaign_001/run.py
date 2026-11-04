@@ -105,7 +105,7 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
     backend_s={k:0. for k in kinds}
     max_outputs = (n + config['numerical']['block_records'] - 1) // config['numerical']['block_records']
     stats = {k: dict(status='running', all=metrics(), current_nonzero=metrics(), current_zero=metrics(),
-                    stops={}, outputs=0, storage={**({} if k in ('tangent64','tangent_h7','bank_tangent') else numeric_storage('float64' if k in ('field64','distinct_bank') else k)),**banks[k].storage()}) for k in kinds}
+                    stops={}, outputs=0, storage={**({} if k in ('tangent64','tangent_h7','bank_tangent','small_bank') else numeric_storage('float64' if k in ('field64','distinct_bank') else k)),**banks[k].storage()}) for k in kinds}
     arrays = {k: np.lib.format.open_memmap(out / (k+'_trace.npy'), mode='w+', dtype='float64',
                                          shape=(max_outputs, len(TRACE_COLUMNS))) for k in kinds}
     charts = {k: np.lib.format.open_memmap(out / (k+'_chart.npy'), mode='w+', dtype='float64',
@@ -203,9 +203,12 @@ def run_case(out, campaign, config, model_id, scenario, cell, args):
 
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--bank-center',action='store_true',help='Fixed public-prior centering of compressed rows')
+    p.add_argument('--bank-rank',type=int,choices=[3,4,5,6,13],default=4)
+    p.add_argument('--bank-precision',choices=['float32','float64'],default='float64')
     p.add_argument('--jobs', type=int, default=1, help='maximum independent case workers (default:1; native math threads:1 each)')
     p.add_argument('--hours', type=float, default=4.)
-    p.add_argument('--history', choices=['rolling','joint-field','compare','field-tangent','compare-tangent','tangent-h7','compare-h7','distinct-bank','compare-bank','bank-tangent','compare-bank-tangent'], default='joint-field',
+    p.add_argument('--history', choices=['rolling','joint-field','compare','field-tangent','compare-tangent','tangent-h7','compare-h7','distinct-bank','compare-bank','bank-tangent','compare-bank-tangent','small-bank','compare-small-bank'], default='joint-field',
                    help='joint-field (default) refreshes rolling belief; compare adds the original rolling arm; field-tangent selects the experimental native tangent; compare-tangent compares field and tangent; tangent-h7 enables RC5/H7 tangent; compare-h7 compares H5/H7 tangent; distinct-bank uses experimental stationary N13e RC/TaylorH2; compare-bank adds the mainline field control; bank-tangent uses original-origin bank updates; compare-bank-tangent compares with tangent64')
     p.add_argument('--field-refresh-seconds', type=float, default=60.,
                    help='field fit cadence, rounded up to a 16-record boundary; default 60s')
@@ -258,7 +261,7 @@ def main():
         p.error('finite positive --field-refresh-seconds required')
     if args.history!='rolling' and (args.backend!='c' or args.hysteresis_chart!='bounded' or args.encoding!='float64'):
         p.error('field history requires --backend c --hysteresis-chart bounded --encoding float64; use --history rolling for other backends/charts/encodings')
-    if args.history in ('distinct-bank','compare-bank','bank-tangent','compare-bank-tangent') and (args.temperature!='constant' or args.temperature_mean_c!=25.):
+    if args.history in ('distinct-bank','compare-bank','bank-tangent','compare-bank-tangent','small-bank','compare-small-bank') and (args.temperature!='constant' or args.temperature_mean_c!=25.):
         p.error('distinct-bank requires --temperature constant --temperature-mean-c 25; variable-temperature history is not implemented')
     if args.jobs < 1:
         p.error('--jobs must be a positive integer')
@@ -312,10 +315,13 @@ def main():
         from .h7_backend import prepare_h7, DEPENDENCIES as H7_DEPENDENCIES
         prepare_h7(out)
         sources += [ROOT/name for name in H7_DEPENDENCIES]
-    if args.history in ('distinct-bank','compare-bank','bank-tangent','compare-bank-tangent'):
+    if args.history in ('distinct-bank','compare-bank','bank-tangent','compare-bank-tangent','small-bank','compare-small-bank'):
         from .distinct_backend import prepare_distinct, DEPENDENCIES as BANK_DEPENDENCIES
         prepare_distinct(out)
         sources += [ROOT/name for name in BANK_DEPENDENCIES]
+    if args.history in ('small-bank','compare-small-bank'):
+        from experiments.bank_memory_001.field import Packed
+        Packed(1,out/'backend_small','float32');Packed(1,out/'backend_small','float64')
     for path in sources:
         target = out / 'source_snapshot' / path.relative_to(ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -340,9 +346,9 @@ def main():
     if args.recording == 'compact':
         from .compact import storage_plan
         print(json.dumps(dict(compact_storage_per_case=storage_plan(args.hours,args.sample_rate_hz,
-              args.summary_bins,args.checkpoint_hours,len(arm_kinds(args)),field_arms=sum(k in ('field64','tangent64','tangent_h7','distinct_bank','bank_tangent') for k in arm_kinds(args)),
+              args.summary_bins,args.checkpoint_hours,len(arm_kinds(args)),field_arms=sum(k in ('field64','tangent64','tangent_h7','distinct_bank','bank_tangent','small_bank') for k in arm_kinds(args)),
               h7_arms=sum(k=='tangent_h7' for k in arm_kinds(args)),
-              bank_arms=sum(k in ('distinct_bank','bank_tangent') for k in arm_kinds(args))))),flush=True)
+              bank_arms=sum(k in ('distinct_bank','bank_tangent','small_bank') for k in arm_kinds(args))))),flush=True)
     completed = {}
     for index, result in completed_cases(out, config, model_id, scenarios, definitions, args):
         case = out / ('case_%04d' % index)

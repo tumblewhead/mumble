@@ -1,0 +1,83 @@
+{
+  "status": "conditional_native_layout_not_complete_estimator_allocation",
+  "scope": "Stationary three-branch rank3 float64 UNcentered candidate, original diagonal public prior, serialized streaming/fitting/scalar queries, no full endpoint covariance retained",
+  "target_B": 10240,
+  "items_B": {
+    "packed_history_W34": 4760,
+    "full_current_response_state": 936,
+    "original_prior_mean_and_diagonal_scale": 256,
+    "response_centres_and_halfwidths": 80,
+    "calibration": 112,
+    "tangent_anchor": 128,
+    "feature_vector": 272,
+    "current_trial_step_vectors": 384,
+    "native_inference_factor_scratch_registry": 1504,
+    "one_input_record": 40,
+    "source_model_configuration_ids_counters_normalizer_status_allowance": 160,
+    "scalar_query_output_allowance": 16,
+    "unverified_stack_helpers_allowance": 1024,
+    "dedicated_stream_QR_row_W34": 272
+  },
+  "arithmetic_sum_B": 9944,
+  "unallocated_B": 296,
+  "ROM_assumptions": [
+    "N13e coefficient and knot tables",
+    "Fixed projection V/P tables and fixed Taylor-H projection constants",
+    "Code, not counted as SRAM; no flash-history storage proposed",
+    "312B fixed bank pole table for a fixed calibrated configuration; otherwise add312B SRAM and exceed target"
+  ],
+  "implemented": [
+    "4760B packed double history and1224B packed tangent in desktop candidate",
+    "Removed persistent W-by16 tangent derivative cache; regenerate at query/update",
+    "Isolated1504B C inference context including264B phase union and16B lease registry",
+    "Packed native QR insertion uses one double row and no heap allocation"
+  ],
+  "native_integration_required": [
+    "Replace Python dense nonlinear solver and root expansion with rowwise rebuild/step",
+    "Port scalar derivative emitter without full Jacobian or uncounted temporary arrays",
+    "Store original diagonal prior as16 scales; preserve full joint posterior factor",
+    "Replace2208B carrier/full endpoint covariance publication with scalar-query interface",
+    "Generate one evidence row at a time; current desktop stages multirow arrays",
+    "Restore current tangent by regeneration if a trial refit fails; no extra factor backup",
+    "Prove actual caller/feature/transport stack within1024B allowance and measure target cycles",
+    "Validate streaming row generation, two-pass insertion and in-place response commit schedule with explicit intermediate lifetimes; budget a staging buffer if necessary",
+    "Omit the identically-zero272B uncentered offset array; centered mode needs separate ROM/regeneration/storage allowance"
+  ],
+  "registry": {
+    "bytes": 16,
+    "fields": [
+      "generation:uint64",
+      "owner:uint32",
+      "valid:uint32"
+    ],
+    "owners": [
+      "idle",
+      "fit",
+      "query"
+    ],
+    "lifetime": "fit derivative16+augmented row17 and query triangular-solve16 share one264B union",
+    "assumptions": "Serialized owner; no ISR/thread access. Generation exhaustion refuses acquisition; stale release refused. Registry is not a lock, persistent journal, or a graph scheduler."
+  },
+  "tradeoffs": [
+    "Recompute derivatives O(W squared) callback calls per rebuild instead of retaining W-by16 cache; W34 calls595 times. Target deadline open.",
+    "Retain joint uncertainty; calculate requested scalar variance by triangular solve, no full inverse.",
+    "Tables move to ROM; SRAM-only working history unchanged.",
+    "Generic packed prior adds960B over diagonal scales and breaks this allocation.",
+    "W40 rank4 adds1800B history plus48B features and48B streaming row (1896B total), exceeding target in this layout.",
+    "Removing18 unused legacy RC states and6 H-padding slots could save192B exactly, but not credited before port/verification."
+  ],
+  "not_budgeted_or_qualified": [
+    "Application and ISR queues, nested interrupts, reset recovery/checkpoint redundancy, platform runtime",
+    "Actual target alignment/linker layout/stack, soft-float/libm code size or16MHz deadlines",
+    "Uniform projection/model-bias enclosure and lifetime rounding-error statistics",
+    "Temperature and aging extensions",
+    "The1024B allowance is a planning reservation, not a proven stack bound"
+  ],
+  "decision": "9944B is conditional arithmetic only after explicit streaming-row allocation and fixed pole-table ROM placement. Current runnable desktop candidate exceeds10KiB; complete target fit remains open.",
+  "phase_schedule_pending": {
+    "stream": "Dedicated272B QR row avoids aliasing tangent phi. For no full response duplicate, a future deterministic row generator must read old response, validate prospective values without mutation, run read-only QR prevalidation, replay insertion, then recompute/commit response in-place. Unexpected mid-write fault quarantines. No simultaneous query/ISR access. This is a proposed two-pass schedule, not implemented by current Packed.update or proven for its feature generator.",
+    "fit": "Read-only history, packed inference plus264B derivative/augmented-row union. Original tangent anchor retained; rejected trial can require deterministic rebuild. Current/trial/step384B remain live.",
+    "query": "After fit final readers finish, use one of the384B vector slots for scalar-query gradient, inference scratch128B for solve, and16B output. No cached full transport Jacobian/covariance.",
+    "blocking_resource_obligation": "If row/response generation needs a full936B stage, another Jacobian or more than1024B helper+stack allowance, this layout fails. No current implementation claim is made."
+  }
+}

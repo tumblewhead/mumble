@@ -1,0 +1,116 @@
+{
+  "schema": "bank_memory_independent_review_v1",
+  "reviewer": "fresh-context /root/memory_review",
+  "status": "changes_requested_for_native_boundary_and_memory_reporting",
+  "scope": "Independent algebra, implementation and resource review of isolated reduced-bank desktop experiment; no promotion or full10KiB acceptance",
+  "base_revision": "84003ccfacdadf74fb31bf8ce410d6b7b1033b63",
+  "source_bindings": {
+    "experiments/bank_memory_001/field.py": "2c787770642247df7de1cd980dc9f59f8bd510a67104253f73ece004af7acf1c",
+    "experiments/bank_memory_001/backend.py": "a5978ed52a09c473b3f4147117e796eb1a940a189e2f3d3af0257ca6608511e8",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/foster_campaign_001/bank_tangent_backend.py": "9202497e925ac3ddd97043dbda782a0d389f4df98f07374e02578854f5ab60e1",
+    "experiments/foster_campaign_001/run.py": "ab8264c30060c7c10a622de68dfd88aecf59f85e5cbb6140494bf30ac333b7dd",
+    "experiments/foster_campaign_001/compact.py": "6619743f01ea1d1dfcf176d3ee7832a01671ba8d2ef0d38e807ba1341fb67a59",
+    "experiments/foster_campaign_001/backend.py": "ff325b14d94b1d0be43bb5f95b38701f04318adaa2f6fe42c14be5feb8c6c7dd",
+    "experiments/foster_campaign_001/distinct_backend.py": "69c714429da322598a07d204aac859068932b4cb7e95af821cbe68e83b7a80c0"
+  },
+  "algebra": {
+    "projection": "G_ij=(1+sigma_i*sigma_j)/(sigma_i+sigma_j) is the integral Gram of exp(-t/sigma) and exp(-t/sigma)/sigma on t>=0. With LL^T=G, SVD of L^T weights chooses a fixed public-grid coefficient subspace. V=L^-T U_r and P=V^T G give rows XV and coefficients P phi. Joint QR retains all feature cross terms for the approximate likelihood.",
+    "conditioning": "G condition2.5042423656296924e12; sampled/truncated metric optimum is not a uniform derivative/likelihood/query certificate.",
+    "physical_transport": "SmallField delegates transport to full N13e baseline with original full13-pole response states. This is exact preservation relative to baseline, not exact physical truth or restored consistency between compressed likelihood and transport.",
+    "prior_ownership": "Original prior and fixed-origin joint factor retained; no posterior recycled as new evidence. LeanProjection recomputes derivative at fixed anchor instead of retaining derivative cache."
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "medium",
+      "location": "experiments/bank_memory_001/field.py:Packed.__init__/update",
+      "finding": "Arbitrary precision dtype accepted but C storage width depends only on literal float64; float16 produces a native buffer overrun. Short rows similarly allow native out-of-bounds reads. CLI guards do not make exposed ctypes wrapper safe.",
+      "required": "Validate width, supported float32/float64 precision and update row dimensions before native calls; test rejection.",
+      "disposition": "pending"
+    },
+    {
+      "id": "R2",
+      "severity": "medium",
+      "location": "experiments/bank_memory_001/backend.py:SmallBackend.storage",
+      "finding": "Storage report omits2208B Carrier,2048B dense prior and other retained host arrays; nominal ROM projection arrays also allocate host memory. Listed6980B rank5f32 subtotal is not complete persistent storage.",
+      "required": "Report named exclusions and actual retained numeric allocations; describe10KiB only as target or partial-schedule candidate.",
+      "disposition": "pending"
+    },
+    {
+      "id": "R3",
+      "severity": "limitation",
+      "finding": "Rank4/5/6 projected likelihood free kernels attain negative values on the independent public grid; physical monotonicity/passivity and uniform response/query bounds are not certified. Full-bank transport does not remove likelihood approximation error.",
+      "required": "State explicitly in report; do not claim physical closure, uncertainty coverage, or completed10KiB estimator.",
+      "disposition": "must remain explicit"
+    },
+    {
+      "id": "R4",
+      "severity": "limitation",
+      "finding": "Rank13 metric projection is not bitwise or coefficientwise identity under ill-conditioned floating arithmetic: max abs(PV-I)=1.748786e-5. Sampled kernel discrepancy is2.50071e-11.",
+      "required": "Treat rank13 as numerical control, not exact baseline identity; preserve approximation/rounding limitations.",
+      "disposition": "must remain explicit"
+    },
+    {
+      "id": "R5",
+      "severity": "resolved_by_inspection",
+      "finding": "run.py now prebuilds both packed precision libraries before parallel workers and compact replay binds both binaries. This avoids the ordinary same-campaign first-build race. Standalone concurrent construction with the same missing library remains outside this tested workflow.",
+      "disposition": "accepted for current runner"
+    }
+  ],
+  "independent_controls": {
+    "public_kernel_grid": {
+      "u": "201 points on[-1,1]",
+      "t": "0 plus1000 logspace points1e-5..1e3",
+      "rank4": {
+        "max_free_error": 0.004816370816017889,
+        "minimum_projected_free": -0.0037169522559496403,
+        "initial_unity_error": 8.709805296745667e-05
+      },
+      "rank5": {
+        "max_free_error": 0.001152681772937034,
+        "minimum_projected_free": -0.0009048548784073913,
+        "initial_unity_error": 3.0962801214324406e-07
+      },
+      "rank6": {
+        "max_free_error": 0.0002743615605689509,
+        "minimum_projected_free": -0.00019965702002385606,
+        "initial_unity_error": 3.092659248198901e-07
+      },
+      "scope": "Finite diagnostics only, dimensionless free-kernel response, not fitted battery errors"
+    },
+    "packed_qr": {
+      "fixture": "numpy default_rng127,1000x46 normal rows; insert one row at a time; relative Frobenius error of R^T R versus A^T A",
+      "float32": 8.231166148021945e-07,
+      "float64": 1.8171648560109486e-15,
+      "scope": "Finite benign control, no lifetime/stability certificate"
+    },
+    "checkpoint_transport": {
+      "fixture": "128 samples,dt0.02,periodic currents[.03,-.02,0,.04],25C,sigma.002,observations synthesized at public prior using existing direct model; checkpoint after64 and continue to128",
+      "rank": 5,
+      "precision": "float32",
+      "checkpoint_context_bitwise_equal": true,
+      "checkpoint_packed_factor_bitwise_equal": true,
+      "baseline_endpoint_bitwise_equal": true,
+      "baseline_transport_Jacobian_bitwise_equal": true
+    },
+    "memory": {
+      "rank5_f32_listed_persistent_subtotal_B": 6980,
+      "carrier_B": 2208,
+      "dense_prior_B": 2048,
+      "prior_mean_B": 128,
+      "sum_of_those_B": 11364,
+      "owned_numpy_numeric_arrays_B": 14772,
+      "owned_arrays_plus_carrier_B": 16980,
+      "query_dense_history_root_B": 16928,
+      "scope": "Traversal of owned ndarray buffers excludes alias duplicates,Python objects,transients,BLAS,stack; nominal ROM still resident host arrays. Not target SRAM measurement."
+    }
+  },
+  "acceptance_limits": [
+    "No complete10KiB implementation",
+    "No target stack or peak workspace certification",
+    "No coverage,aging,lifetime arithmetic or passive physical realization proof",
+    "Short finite controls do not substitute for matched outcomes or held-out validation"
+  ],
+  "implementation_edits_by_reviewer": false
+}

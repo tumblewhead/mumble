@@ -1,0 +1,24 @@
+{
+  "schema": "distinct_bank_campaign_continue_v1",
+  "worktree": "/home/easy/proj/mumble/.worktrees/h7-campaign",
+  "branch": "experiment/distinct-bank-integration-001",
+  "base_revision": "31d7a1e",
+  "read_first": [
+    "AGENTS.md",
+    "README.md",
+    "PROJECT_STATE.json",
+    "experiments/bank_tangent_campaign_001/README.md",
+    "provenance/bank_tangent_campaign_001/review.json"
+  ],
+  "current": "Bank tangent reference implemented and peer reviewed; original-origin QR, no rolling Gaussian feedback. Four-hour paired50Hz check completed,239/239refits perarm/case. D001 is older control.",
+  "command": "python3 -B -m experiments.foster_campaign_001.run --history compare-bank-tangent --hours 24 --sample-rate-hz 50 --jobs 2 --cells B --loads embedded --load-seeds 7 --seeds 1100 1101 --noise-v .002 --temperature constant --recording compact --summary-bins 2000 --checkpoint-hours 1",
+  "limitations": [
+    "Constant25C only; no aging",
+    "W94 factor35720B + response936B plus rolling carrier/buffers/workspace; not M23 qualified",
+    "Bank uses TaylorH2; comparison with mainline field changes H as well as RC",
+    "Local Gaussian uncertainty only; no deterministic bias-floor or global certificate",
+    "Short integration checks are not duration/performance qualification; inspect field_history rejections"
+  ],
+  "next": "User rerun24h35/50/100Hz exploratory tangent64/bank_tangent comparison, then matched physical-time stimulus/noise and retirement-duration controls.",
+  "prior_handoff": "handoff/archive/CONTINUE_before_distinct_bank_campaign.json"
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "bank_memory_independent_review_v2",
+  "reviewer": "fresh-context /root/memory_review, second review after requested repairs",
+  "status": "accepted_for_limited_desktop_experiment_not_promotion",
+  "previous_review": {
+    "path": "provenance/bank_memory_001/review.json",
+    "sha256": "549c123de70a12289b8b127edc359a72aeed4a403a167002ae466a85e9a30624",
+    "preserved_unchanged": true
+  },
+  "base_revision": "84003ccfacdadf74fb31bf8ce410d6b7b1033b63",
+  "source_bindings": {
+    "experiments/bank_memory_001/field.py": "2c787770642247df7de1cd980dc9f59f8bd510a67104253f73ece004af7acf1c",
+    "experiments/bank_memory_001/backend.py": "b3227844cdff3f71575b28d931f5d8c80b676a89d850a4d7456ec18763f07692",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/foster_campaign_001/bank_tangent_backend.py": "9202497e925ac3ddd97043dbda782a0d389f4df98f07374e02578854f5ab60e1",
+    "experiments/foster_campaign_001/run.py": "ab8264c30060c7c10a622de68dfd88aecf59f85e5cbb6140494bf30ac333b7dd",
+    "experiments/foster_campaign_001/compact.py": "6619743f01ea1d1dfcf176d3ee7832a01671ba8d2ef0d38e807ba1341fb67a59",
+    "experiments/foster_campaign_001/backend.py": "ff325b14d94b1d0be43bb5f95b38701f04318adaa2f6fe42c14be5feb8c6c7dd",
+    "experiments/foster_campaign_001/distinct_backend.py": "69c714429da322598a07d204aac859068932b4cb7e95af821cbe68e83b7a80c0",
+    "experiments/bank_memory_001/test_memory.py": "85843c7a05c5031077f7aff7b1840d4d49e44572806040c73364ff260f043738"
+  },
+  "dispositions": [
+    {
+      "id": "R1",
+      "status": "resolved",
+      "evidence": "Packed validates literal float32/float64 and positive Python integer width before native setup; update validates full two-dimensional finite rows before any C calls. Rejected precision and malformed/nonfinite row tests pass."
+    },
+    {
+      "id": "R2",
+      "status": "resolved",
+      "evidence": "SmallBackend.storage now separately reports Carrier, prior mean/root, total owned ndarray backing buffers and combined resident numeric storage; aliases are counted once and Carrier view excluded. Independent recursive traversal agrees exactly at17348B for rank5f32 with offset array."
+    },
+    {
+      "id": "R3",
+      "status": "retained_limitation",
+      "evidence": "Original public-grid negative projected free-kernel witnesses still apply to ranks4/5/6. Fixed public-prior residual centering does not alter this approximate physical response in exact arithmetic. No positivity/passivity/uniform query certificate accepted."
+    },
+    {
+      "id": "R4",
+      "status": "resolved_for_rank13_control_with_conditioning_limit_retained",
+      "evidence": "projection(13) now returns explicit identity V,P, so the control avoids the ill-conditioned full-rank inverse. Identity row/features/transport test passes bitwise. Reduced-rank Gram computation remains ill-conditioned and uncertified."
+    },
+    {
+      "id": "R5",
+      "status": "accepted_for_runner_workflow",
+      "evidence": "Both libraries are built before workers; compact replay binds both binary hashes. No claim for arbitrary concurrent standalone first construction."
+    }
+  ],
+  "centering_review": {
+    "equations": "Let e select the last coordinate, phi_last=1, e^T o=0, e^T J=0. A centered row is a_new=a+(a o)e^T; phi_new=phi-o, so a_new phi_new=a phi and a_new J=a J. A fixed invertible affine feature change therefore preserves exact-arithmetic residual, score and precision of the projected likelihood.",
+    "implementation": "offset derives only from public prior mean through the same fixed feature projection; offset[-1]=0. No observation/truth-dependent choice, no moving historical centre and no new independent evidence. Transport remains delegated to full baseline.",
+    "rounding": "Equivalent algebra does not prove equivalent finite-precision rounding or remove accumulated float32 drift. Campaign comparison remains necessary.",
+    "checkpoint": "Configuration binds center flag,prior/calibration,projection,rank and precision. Offset is deterministically reconstructed. Independent centered snapshot/restore/continuation passed bitwise at128 samples."
+  },
+  "independent_validation": {
+    "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.bank_memory_001.test_memory -v",
+    "status": "passed",
+    "tests": 10,
+    "test_breakdown": "4 new small-memory tests plus6 imported baseline bank tests",
+    "additional_control": {
+      "fixture": "Fresh backend build; rank5float32 centered;128samples at50Hz; public-prior synthetic direct observations; checkpoint after64; continue to128",
+      "context_bitwise_equal": true,
+      "packed_factor_bitwise_equal": true,
+      "feature_last": 1.0,
+      "offset_last": 0.0,
+      "last_feature_derivative_all_zero": true,
+      "owned_numpy_arrays_B": 15140,
+      "carrier_B": 2208,
+      "resident_numeric_B": 17348,
+      "storage_report_agrees_with_independent_recursive_traversal": true
+    },
+    "source_mismatch_control": "Initial attempt using sweep001 directory correctly rejected changed source bindings. Successful follow-up used a new temporary build; original campaign artifacts were not modified."
+  },
+  "remaining_limits": [
+    "R3 negative projected free responses and Gram condition2.50e12 remain explicit.",
+    "Actual persistent numeric host storage and query workspace exceed10KiB; no complete SRAM,stack,flash,cycle or Cortex-M23 acceptance.",
+    "Float32 campaign drift reported by parent is not repaired or certified by finite QR tests or exact centering algebra. Do not promote precision from these tests.",
+    "Sweep001 and follow-up results require their original source snapshots; changed code must not reinterpret their source identity.",
+    "No aging,lifetime arithmetic,validated probability coverage,passive physical closure or uniform likelihood/query error claim."
+  ],
+  "implementation_edits_by_reviewer": false
+}

@@ -68,7 +68,7 @@ class BankTangentBackend(TangentBackend):
         try:
             m=json.loads(a['metadata'].tobytes())
             if (m['configuration'],m['source'],m['model'],m['count'])!=(self.configuration_id,self.field.source,self.model_id,self.carrier.sequence):raise ValueError('bank tangent checkpoint identity')
-            for k,shape in dict(root=(94,94),state=self.field.state.shape,free=(3,13),forced=(3,13),projection=(305,)).items():
+            for k,shape in dict(root=(self.field.width,self.field.width),state=self.field.state.shape,free=(3,13),forced=(3,13),projection=(305,)).items():
                 if a[k].shape!=shape or not np.isfinite(a[k]).all():raise ValueError('bank tangent checkpoint arrays')
             if not math.isfinite(m['noise']):raise ValueError('normalizer')
             self.field.root=a['root'].copy();self.field._commit(a['state'].copy(),a['free'].copy(),a['forced'].copy(),m['count'],m['noise'])

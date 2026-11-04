@@ -1,3 +1,13 @@
+# Memory-reduction work branch
+
+The [smaller bank experiment](experiments/bank_memory_001/README.md) adds opt-in
+`compare-small-bank`: rank3/4 float64 history factors are4760/6560B versus35720B.
+Two24-hour paired cases and compact replay are tested; rank3 has41 transient SOC
+3SD misses in one seed. Float32 accumulated drift and is not recommended.
+A reviewed1504B native scratch prototype and conditional9944B whole-estimator
+layout guide the next port; the runnable desktop estimator still exceeds10KiB.
+Mainline defaults remain unchanged. See [evidence](provenance/bank_memory_001/receipt.json).
+
 # Current mainline baseline
 
 [Bank tangent comparisons](experiments/bank_tangent_campaign_001/README.md) now

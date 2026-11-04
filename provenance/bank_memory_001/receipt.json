@@ -1,0 +1,113 @@
+{
+  "schema": "bank_memory_receipt_v1",
+  "branch": "experiment/bank-memory-001",
+  "base_revision": "84003ccfacdadf74fb31bf8ce410d6b7b1033b63",
+  "status": "reviewed_experiment_no_promotion",
+  "guide": "experiments/bank_memory_001/README.md",
+  "source_sha256": {
+    "experiments/bank_memory_001/field.py": "f9e77890bfb25996895db335cc6e2d7b943efac259609eae5a62d975b11dd423",
+    "experiments/bank_memory_001/backend.py": "b3227844cdff3f71575b28d931f5d8c80b676a89d850a4d7456ec18763f07692",
+    "experiments/bank_memory_001/test_memory.py": "85843c7a05c5031077f7aff7b1840d4d49e44572806040c73364ff260f043738",
+    "experiments/bank_memory_001/test_scratch.py": "9a14c8348420e724fd64b08f5cced269c061549288e746014c9b684ed689ab5c",
+    "experiments/bank_memory_001/test_campaign.py": "f5148165913e9474fedf9775e8ee1774294ad699fca08e0b4a439853378c5738",
+    "experiments/bank_memory_001/profile.py": "03519b2f02ef9d6bfe46313bcafaf663647f953f336bbfc0aaa5e1747560ea78",
+    "experiments/bank_memory_001/summarize.py": "8c62eedfa7803c4b8843c022e8a887def5541d6595f9543b6ce315fb34d10914",
+    "experiments/bank_memory_001/qr.c": "e573009e7e951a8fde32180615e61f11a2e79ed1d8fc077a8efee2967695559c",
+    "experiments/bank_memory_001/scratch_kernel.c": "ffb67515ff7d2e35db56b32d2fcf2ace934080db52761d98d1c2337dadb35b9f",
+    "experiments/bank_memory_001/MEMORY_PLAN.json": "83ca3549d0e9aeb4a0151cba7800fdb3eafaadd0f95fed1d2ab4a1a7189f479d",
+    "experiments/bank_memory_001/README.md": "912f23ed405fb2c6403942880dfa1ff36f3988d05887c27fc7643a746256743f",
+    "experiments/foster_campaign_001/backend.py": "ff325b14d94b1d0be43bb5f95b38701f04318adaa2f6fe42c14be5feb8c6c7dd",
+    "experiments/foster_campaign_001/bank_tangent_backend.py": "9202497e925ac3ddd97043dbda782a0d389f4df98f07374e02578854f5ab60e1",
+    "experiments/foster_campaign_001/compact.py": "6619743f01ea1d1dfcf176d3ee7832a01671ba8d2ef0d38e807ba1341fb67a59",
+    "experiments/foster_campaign_001/distinct_backend.py": "69c714429da322598a07d204aac859068932b4cb7e95af821cbe68e83b7a80c0",
+    "experiments/foster_campaign_001/plot.py": "0e6638a63640ecdabf6884bedc5774a55b92ccb9b390f5934f2d5cd4f3b11488",
+    "experiments/foster_campaign_001/run.py": "9c94a02d20f65b4ab3dac3a749427f4b1e499136dedef4d4eb82fdf9b52ec45d"
+  },
+  "evidence": {
+    "review.json": "549c123de70a12289b8b127edc359a72aeed4a403a167002ae466a85e9a30624",
+    "review_r2.json": "d382bf9ce0048364f9e9cb088970ebb4a4ae5e31ece4e84ebf17520fed1ffefc",
+    "scratch_review.json": "f4e16b6e38e210bcb977f399ff572e8279f894635b02092a328dbda7037c2b3f",
+    "host_profile.json": "9bb08ab7c054141bd61d039b698061026ac5014c47fec4c249f33b022c14000f",
+    "projection_grid.json": "f347dbd49ec0f9763efc2ca751b63bcaeb8024ed3cb1e9df21785248f9c3ce4d",
+    "results.json": "7992c877373747b80b08b48e3697031e204723de0c768734b8e14b4f9aef3b7d",
+    "review_r3.json": "09efba6c53f1ed64e0e46df40dfc9ae2db1de70c620e2ee51cee79748e4c03b8",
+    "soc_miss_replay.json": "e9c3ac8c88f001759f136c0409c3805d9f6e027fb558e2d0cd10cfb187daf77c"
+  },
+  "results": "provenance/bank_memory_001/results.json",
+  "tests": {
+    "passed": 16,
+    "command": "OPENBLAS_NUM_THREADS=1 python3 -B -m unittest experiments.bank_memory_001.test_memory experiments.bank_memory_001.test_campaign experiments.bank_memory_001.test_scratch -v",
+    "controls": [
+      "packedQRvsdense",
+      "fixedpubliccenteringalgebra",
+      "rank13identity",
+      "fullcompactreplayparity",
+      "nooutgoingposteriorfeedback",
+      "failurequarantine",
+      "jointstepvariance",
+      "scratchlease"
+    ]
+  },
+  "experiments": {
+    "four_hour_paired_cases": 8,
+    "twenty_four_hour_paired_cases": 6,
+    "arms_per_case": 2,
+    "aggregate_simulated_arm_hours": 352,
+    "sample_rate_Hz": 50,
+    "temperature_C": 25,
+    "cell": "B",
+    "load": "embedded",
+    "load_seed": 7,
+    "noise_V": 0.002,
+    "noise_seeds": [
+      1100,
+      1101
+    ]
+  },
+  "findings": {
+    "recommended_precision": "float64",
+    "safer_comparison_rank": 4,
+    "target_memory_tradeoff_rank": 3,
+    "full_factor_B": 35720,
+    "rank3_factor_B": 4760,
+    "rank4_factor_B": 6560,
+    "rank3_actual_resident_numeric_B": 17176,
+    "rank3_query_dense_root_B": 9248,
+    "isolated_native_inference_context_B": 1504,
+    "registry_B": 16,
+    "conditional_future_native_B": 9944,
+    "complete10KiB_estimator": false,
+    "rank3_24h_Q_max_abs_percent": 0.0017619364592325049,
+    "rank3_24h_SOC_final_max_abs_pp": 0.0004551559435794772,
+    "rank3_SOC3SD_misses": [
+      0,
+      41
+    ],
+    "rank4_SOC3SD_misses": [
+      0,
+      0
+    ],
+    "centered_f32_Q_final_percent": [
+      -0.2051334809627492,
+      -0.20610092932644708
+    ],
+    "host_component_median_speedup_rank3": 1.640866452329209
+  },
+  "limitations": [
+    "Two synthetic stationary noise realizations do not establish coverage or representative population performance.",
+    "Projection changesRCestimates; no EODqualification, uniformbiasenclosure or transferredpassivitycertificate.",
+    "Repeatedfloat32storagefailed; float64lifetime roundingstillunqualified.",
+    "9944B isconditionalonly: nativefeaturegenerator/solver/streamschedule, stack,cyclesandapplicationresourcesopen.",
+    "No temperature/aging implementation; current runner is mixedPython/C."
+  ],
+  "next": [
+    "Use comparative long runs to assess rank3/rank4 RC/EODutility and uncertainty.",
+    "Integrate rowwise native derivatives/GN/scalar readout, then measure entire allocation/stack/16MHzcycles.",
+    "Close streaming stage/commit and model/roundingerror obligations before deployment."
+  ],
+  "unchanged": [
+    "Mainline branch/default estimator",
+    "Existing result files and hashes"
+  ],
+  "git_policy": "Source and small receipts only; generated runs/binaries/plots ignored"
+}
