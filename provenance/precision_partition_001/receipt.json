@@ -1,0 +1,625 @@
+{
+  "base_commit": "04141f8",
+  "branch": "experiment/precision-partition-001",
+  "outcome": "no_candidate_promoted",
+  "selected": "binary64_arithmetic_history48_local_collector",
+  "review_status": "complete",
+  "measurements": {
+    "final_mixed": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_double_QR_history48",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 10784,
+        ".rodata": 192,
+        ".bss": 4440,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 15791,
+        ".debug_abbrev": 6909,
+        ".debug_loclists": 23941,
+        ".debug_aranges": 768,
+        ".debug_rnglists": 2260,
+        ".debug_line": 23322,
+        ".debug_str": 3109,
+        ".debug_frame": 912,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "a093e2f8aac46eb3df8a1c3d3fca0069e48eab80a906199956701cc5692d948c",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 10784,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268446268
+        },
+        {
+          "name": ".bss",
+          "bytes": 4440,
+          "address": 268446464
+        }
+      ],
+      "static_B": 15448,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 16472,
+      "history_representation": "sqrt48",
+      "source_sha256": {
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4"
+      },
+      "source_revision": "04141f873fd94c2cf286caa22254042a2ea8414c"
+    },
+    "final_mixed_stack": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed_stack/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed_stack/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed_stack/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed_stack/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_double_QR_history48",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 11112,
+        ".rodata": 240,
+        ".bss": 4440,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 15791,
+        ".debug_abbrev": 6909,
+        ".debug_loclists": 23941,
+        ".debug_aranges": 768,
+        ".debug_rnglists": 2260,
+        ".debug_line": 23322,
+        ".debug_str": 3109,
+        ".debug_frame": 912,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "b89fa544bbb89c524c7701bdecf321625d1741111d0efdcec975f06440845e96",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_mixed_stack/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=4416\nstack_watermark_B=360\n",
+      "history_representation": "sqrt48",
+      "source_sha256": {
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4"
+      },
+      "source_revision": "04141f873fd94c2cf286caa22254042a2ea8414c"
+    },
+    "final_storage": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub"
+      ],
+      "execute": false,
+      "arithmetic": "double_arithmetic_float_response_storage_history48",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 9144,
+        ".rodata": 192,
+        ".bss": 4440,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 13192,
+        ".debug_abbrev": 5817,
+        ".debug_loclists": 17943,
+        ".debug_aranges": 672,
+        ".debug_rnglists": 1590,
+        ".debug_line": 16496,
+        ".debug_str": 2875,
+        ".debug_frame": 776,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "813411eb8f9c8f5ba4cf0da7938d634b9aab5a34041d9799466c3995aa94dfe6",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 9144,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268444628
+        },
+        {
+          "name": ".bss",
+          "bytes": 4440,
+          "address": 268444824
+        }
+      ],
+      "static_B": 13808,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 14832,
+      "history_representation": "sqrt48",
+      "source_sha256": {
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4"
+      },
+      "source_revision": "04141f873fd94c2cf286caa22254042a2ea8414c"
+    },
+    "final_storage_stack": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage_stack/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage_stack/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage_stack/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage_stack/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub"
+      ],
+      "execute": true,
+      "arithmetic": "double_arithmetic_float_response_storage_history48",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 10092,
+        ".rodata": 240,
+        ".bss": 4440,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 14697,
+        ".debug_abbrev": 6560,
+        ".debug_loclists": 19584,
+        ".debug_aranges": 736,
+        ".debug_rnglists": 1749,
+        ".debug_line": 18406,
+        ".debug_str": 2994,
+        ".debug_frame": 868,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "5453a09abd0eabedb25b948f1d15c79c6c1566643715913acd1914cc0108be1e",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_storage_stack/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=4416\nstack_watermark_B=432\n",
+      "history_representation": "sqrt48",
+      "source_sha256": {
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4"
+      },
+      "source_revision": "04141f873fd94c2cf286caa22254042a2ea8414c"
+    },
+    "final_gram": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_paired_Gram",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5230,
+        ".rodata": 192,
+        ".bss": 5484,
+        ".debug_info": 7037,
+        ".debug_abbrev": 3772,
+        ".debug_loclists": 9053,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1049,
+        ".debug_line": 10719,
+        ".debug_str": 1991,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "dfd3415ac4375e7431063ec9cf5c89caae4bce3f45d43df91963802e7ad00979",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5230,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268440716
+        },
+        {
+          "name": ".bss",
+          "bytes": 5484,
+          "address": 268440908
+        }
+      ],
+      "static_B": 10936,
+      "alignment_gaps_B": 2,
+      "with_1024_stack_B": 11960,
+      "history_representation": "normal_matrix_float_pairs",
+      "source_sha256": {
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4"
+      },
+      "source_revision": "04141f873fd94c2cf286caa22254042a2ea8414c"
+    },
+    "final_gram_stack": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram_stack/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram_stack/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram_stack/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram_stack/probe.elf"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_paired_Gram",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5564,
+        ".rodata": 240,
+        ".bss": 5484,
+        ".debug_info": 7037,
+        ".debug_abbrev": 3772,
+        ".debug_loclists": 9053,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1049,
+        ".debug_line": 10719,
+        ".debug_str": 1991,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "ed1c9f9d11de30839cad8dc0fcfab6b8bf87776b3b70f7683df21339a86dd047",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/final_gram_stack/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=5460\nstack_watermark_B=216\n",
+      "history_representation": "normal_matrix_float_pairs",
+      "source_sha256": {
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4"
+      },
+      "source_revision": "04141f873fd94c2cf286caa22254042a2ea8414c"
+    }
+  },
+  "tests": {
+    "expansion_parity_samples": 32768,
+    "lanes": {
+      "mixed_QR": {
+        "repetition": [
+          {
+            "updates": 1000000,
+            "information": 999999.999627471,
+            "relative_error": -3.725290076417309e-10
+          },
+          {
+            "updates": 10000000,
+            "information": 10000000.027473973,
+            "relative_error": 2.747397420677089e-09
+          },
+          {
+            "updates": 20000000,
+            "information": 20000000.02751208,
+            "relative_error": 1.3756040750934062e-09
+          }
+        ],
+        "weak_matrix": [
+          [
+            1.0,
+            1.000244140625
+          ],
+          [
+            1.000244140625,
+            1.0004883408546448
+          ]
+        ],
+        "weak_direction_energy": 0.0,
+        "weak_eigenvalues": [
+          0.0,
+          2.0004883408546448
+        ]
+      },
+      "paired_Gram": {
+        "repetition": [
+          {
+            "updates": 1000000,
+            "information": 1000000.0,
+            "relative_error": 0.0
+          },
+          {
+            "updates": 10000000,
+            "information": 10000000.0,
+            "relative_error": 0.0
+          },
+          {
+            "updates": 20000000,
+            "information": 20000000.0,
+            "relative_error": 0.0
+          }
+        ],
+        "weak_matrix": [
+          [
+            1.0,
+            1.000244140625
+          ],
+          [
+            1.000244140625,
+            1.00048828125
+          ]
+        ],
+        "weak_direction_energy": -5.960464477539063e-08,
+        "weak_eigenvalues": [
+          -2.979504776234876e-08,
+          2.0004883110450478
+        ]
+      }
+    },
+    "status": "diagnostic_not_promoted",
+    "scope": "20M repeated unit rows plus one nearly collinear row; paired Gram has rounded binary32 products. No full inference, coverage or indefinite certificate."
+  },
+  "stream": {
+    "samples": 32768,
+    "nominal_rate_Hz": 35,
+    "zero_dt_every": 11,
+    "comparisons_to_baseline": {
+      "mixed": {
+        "max_response_absolute_difference_mixed_units": 2.0813208937764394e-05,
+        "charge_difference_Ah": -4.306938183374666e-10,
+        "relative_Gram_Frobenius_difference": 5.1239308114114906e-06
+      },
+      "storage": {
+        "max_response_absolute_difference_mixed_units": 3.505871903908275e-05,
+        "charge_difference_Ah": -4.306938183374666e-10,
+        "relative_Gram_Frobenius_difference": 1.2269519661601918e-05
+      },
+      "gram": {
+        "max_response_absolute_difference_mixed_units": 2.0813208937764394e-05,
+        "charge_difference_Ah": -4.306938183374666e-10,
+        "relative_Gram_Frobenius_difference": 5.123753799133725e-06
+      }
+    },
+    "scope": "Same float-representable inputs to all lanes; configuration and recurrence precision differ; no parameter fits/coverage."
+  },
+  "tested_final_source_equivalence": {
+    "final_mixed": {
+      "tested_directory": "collector",
+      "normalized_sha256": {
+        "core.c": "9c90d663c3006b538d049d3ef0d846248fe8b55ca81a4bec5ed1d607129ba744",
+        "shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+        "shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+        "config.h": "df5a01e3ba17001b56ca2d3cff5a62369e6214f013a118dc2ecf229f979777f5"
+      }
+    },
+    "final_storage": {
+      "tested_directory": "storage003",
+      "normalized_sha256": {
+        "core.c": "572e5fecaa57ef34ee82a88ca0dd3b582fa5e5a31c886a3a4ee80c3c88f455a3",
+        "shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+        "shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+        "config.h": "df5a01e3ba17001b56ca2d3cff5a62369e6214f013a118dc2ecf229f979777f5"
+      }
+    },
+    "final_gram": {
+      "tested_directory": "gram",
+      "normalized_sha256": {
+        "core.c": "afdfde8b199012675ce1058ad8a5b6706ac6cdf83a8e44ea3a5c60b0da6937cb",
+        "shared_history.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+        "shared_math.h": "4e797d5ce56fa9c72ad7d2205bac8684a15a0a9cb8d1c1b4c6fdcbca6f5739f9",
+        "config.h": "df5a01e3ba17001b56ca2d3cff5a62369e6214f013a118dc2ecf229f979777f5"
+      }
+    }
+  },
+  "source_sha256": {
+    "experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+    "experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+    "experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+    "experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+    "experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4",
+    "experiments/precision_partition_001/README.md": "b12d77d1218d14eead3d37b002026b405415e87665330c66f8243a87cab38730"
+  },
+  "limits": [
+    "Numerical core only",
+    "Observed stack not worst-case",
+    "No fitted parameter or coverage qualification",
+    "No indefinite accumulation proof",
+    "Paired Gram rejected for negative information direction",
+    "No campaign or default profile changes"
+  ]
+}

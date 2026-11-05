@@ -1,0 +1,52 @@
+{
+  "reviewer": "independent_precision_review",
+  "status": "accepted_experiment_only_unchanged_defaults",
+  "scope": "mixed/storage-only generators, rejected paired Gram construction, finite controls, SRAM receipts and mathematical counterexample",
+  "source_sha256": {
+    "experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+    "experiments/precision_partition_001/measure.py": "1906aa16d42a4d93c03d492eb17214aa2f4cbd5b0e468dfb7e83ab31f804c54e",
+    "experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+    "experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+    "experiments/precision_partition_001/stream.py": "a5d4f33e030f4887b4b84c87e651ae3863f96b49c7357ea512cdb83f444435c4",
+    "experiments/precision_partition_001/README.md": "b12d77d1218d14eead3d37b002026b405415e87665330c66f8243a87cab38730"
+  },
+  "receipt_binding": {
+    "algorithm": "sha256 of json.dumps(receipt excluding only review_status, sort_keys=True, separators=(comma,colon)).encode()",
+    "sha256": "fbac80a3e130c75e2f90a4271ea32fd148a5364cdee74c5fc9a618470637a1bc",
+    "excluded_field": "review_status",
+    "reason": "author may replace pending review status after this review"
+  },
+  "verified": [
+    "all recorded source hashes match current files",
+    "six final ELF hashes match receipt",
+    "normalized generated core/config/history/math files equal previously tested versions",
+    "mixed/storage effective commands contain soft_sub.c and double-subtraction wrapper",
+    "final sizes and stack witness totals agree with README",
+    "storage target symbol census excludes float arithmetic helpers",
+    "stream.py preserves identical float-representable inputs across all four lanes and tests latched invalid-dt refusal"
+  ],
+  "independent_controls": {
+    "mixed": "4096 updates bitwise equal separate-buffer conversion+QR; UBSan passes",
+    "storage": "double-operand row formulas at zero dt and refusal pass UBSan",
+    "Gram": "single row independently returns exact negative energy -2^-24"
+  },
+  "proof_review": {
+    "status": "valid_under_stated_binary32_round_to_nearest_ties_even_assumption",
+    "reason": "For d=2^-12, (1+d)^2=1+2d+2^-24 lies exactly halfway between adjacent binary32 values; lower mantissa index is even, so product rounds down. Diagonal error is -d^2 and v=(-(1+d),1) therefore has energy -d^2. First pair_add cannot recover the rounded product residual."
+  },
+  "findings": [
+    {
+      "id": "P1",
+      "description": "Earlier receipt command omitted injected flags and hash list omitted paired_gram.h",
+      "disposition": "resolved in final measurement generator and six regenerated receipts"
+    }
+  ],
+  "remaining_blockers": [],
+  "limits": [
+    "acceptance applies only to isolated experiment and retaining existing binary64/history48 defaults",
+    "paired Gram rejected for indefinite information, not accepted as history replacement",
+    "no M23 cycle, worst-case stack, full firmware, fitted-parameter, uncertainty coverage or indefinite accumulation qualification",
+    "20M and32768 parent controls reviewed from source/evidence; not independently rerun"
+  ],
+  "decision": "Retain measured failed alternatives and counterexample; promote no precision candidate."
+}

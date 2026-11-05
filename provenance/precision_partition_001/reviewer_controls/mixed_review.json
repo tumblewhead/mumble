@@ -1,0 +1,31 @@
+{
+  "reviewer": "independent_precision_review",
+  "scope": "mixed precision generator and in-place row expansion only; compensated Gram not reviewed yet",
+  "source_revision": "04141f873fd94c2cf286caa22254042a2ea8414c",
+  "sha256": {
+    "experiments/precision_partition_001/build.py": "23e337b32aac1f18c4cd34b4288b1dd7c623cb33c6a234b398c94a81aef79292",
+    "experiments/precision_partition_001/measure.py": "80270fbdfff8c55b01658b875c3b080bcc2c2cf9c73ff896a7b0db537070eaec",
+    "experiments/precision_partition_001/collector/core.c": "7b82b2effd66fffcfc024ff39d9e760c520a5254bdf798c9ddf6af008913df01",
+    "experiments/precision_partition_001/collector/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "provenance/precision_partition_001/reviewer_controls/mixed_control.c": "92b9a102c8ba2fe716c77167e66ef373dbe928be30c197a6bde13a0e24b176a4"
+  },
+  "control": {
+    "command": "cc -O3 -fstrict-aliasing -fno-fast-math -ffp-contract=off -fsanitize=undefined provenance/precision_partition_001/reviewer_controls/mixed_control.c -lm -o /tmp/precision_mixed_review && /tmp/precision_mixed_review",
+    "status": "pass",
+    "updates": 4096,
+    "comparison": "bitwise response/history per update against separate binary64 row buffer",
+    "failure_controls": [
+      "invalid dt leaves state/history unchanged",
+      "latched invalid refuses subsequent valid input"
+    ]
+  },
+  "findings": [],
+  "assessment": "no mixed generator correctness blocker found in inspected scope",
+  "limits": [
+    "binary32 response/config errors remain",
+    "binary64 QR uses existing approximate history48 storage",
+    "no long-duration accuracy or uncertainty qualification",
+    "not a memory reduction versus existing binary64 collector",
+    "no review of compensated Gram yet"
+  ]
+}

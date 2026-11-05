@@ -1,0 +1,30 @@
+{
+  "scope": "mixed/storage-only and compensated normal-matrix precision experiments",
+  "status": "reviewed_as_unpromoted_diagnostics",
+  "sha256": {
+    "experiments/precision_partition_001/build.py": "04a81da8b359d584aa6dc41fd38c9cf20872c6e3594c1ec50726a3cfeec06bba",
+    "experiments/precision_partition_001/paired_gram.h": "e350e40b5ce7a7e6d155c3aae36335d71c8d061df2f363b6f398c0fe9688ceea",
+    "experiments/precision_partition_001/check.py": "353beba30265185998cbadaf167978e6c5a4aa888b7cc9461564cfdf44b0af05",
+    "experiments/precision_partition_001/storage003/core.c": "4aaac36382c40e1bd8c29c2b7afa13c6f843d402e5af3e60122b9cbecdaab19b",
+    "experiments/precision_partition_001/storage003/symbols.txt": "f13331b808d5e2a31c0db7d14c587450860ff58585353a95d19b2e416b407610",
+    "provenance/precision_partition_001/reviewer_controls/storage_control.c": "914c821fe71e01915ea7cd4c792d6dff6f56393ec60121a7713cc33ecda93f09",
+    "provenance/precision_partition_001/reviewer_controls/gram_control.c": "ea31e486e1af7fa861f9be5a704cef3ad88ad5fb24fdb27b1b6c4d52df36b7be"
+  },
+  "storage_review": {
+    "arithmetic": "source inspection and linked symbol census confirm double arithmetic, float storage/config/input; float comparisons/conversions retained",
+    "controls": "UBSan -O3: float-sensitive row coefficients match explicit binary64 formulas; reject latch passes",
+    "limits": "zero-dt arithmetic isolation only; no general parity or lifetime qualification"
+  },
+  "gram_review": {
+    "weak_direction_control": -5.960464477539063e-08,
+    "assessment": "reject for joint information storage: one exactly representable rank-one float input yields indefinite rounded-product normal matrix; compensated sums cannot restore lost product precision",
+    "repetition": "parent check001 reports exact 20M unit count; reviewed test source, not independently rerun"
+  },
+  "finding": {
+    "severity": "provenance",
+    "description": "recorded command omits injected soft_sub.c and linker wrapper; paired_gram.h absent from source hash list",
+    "disposition": "reported to author; correction pending"
+  },
+  "implementation_blockers": [],
+  "acceptance": "retain unchanged double baseline; all alternatives diagnostic only"
+}

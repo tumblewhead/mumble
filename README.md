@@ -1768,3 +1768,5 @@ prototype is recorded separately; original study outputs and numerical
 reference sources remain preserved.
 
 The [capability profile build](experiments/capability_profiles_001/README.md) now selects full, collector, SOC or all-readout numerical cores. Default binary64 sizes and parity are preserved. A binary32 collector measures9052B including observed stack but fails repeated-evidence accumulation and is not promoted. Shared-history placement is conditional on accessible retained SRAM.
+
+The [precision partition study](experiments/precision_partition_001/README.md) retains the current collector: mixed arithmetic grows to15808B including observed stack; float storage with double arithmetic reaches14240B. Paired-float Gram accumulation retains20M unit contributions but fails a rank-one positive-semidefiniteness control and is rejected. No defaults changed.
