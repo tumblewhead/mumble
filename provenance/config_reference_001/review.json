@@ -1,0 +1,122 @@
+{
+  "reviewer": "fresh-context config_reference_review",
+  "base_commit": "c432d91",
+  "decision": "accepted_isolated_pointer_block_under_documented_contract",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "issue": "const pointer does not enforce alias immutability or object lifetime",
+      "disposition": "README explicitly requires immutable config pointer members and pointee arrays, valid extents and lifetime, no mutable-response aliasing; rebuilt ABI callers only"
+    }
+  ],
+  "independent_checks": {
+    "generated_closure": "After reversing declared config layout/access/null-check changes and embedding baseline stream source, normalized baseline and pointer_block002 core sources are exactly equal.",
+    "host_full_features": {
+      "baseline": {
+        "bytes": 3458590,
+        "sha256": "a208ebe591b56a6b6a4ac6ae6808c18aecac874e07045e568d23220e23df5d4f"
+      },
+      "compact": {
+        "bytes": 3458590,
+        "sha256": "a208ebe591b56a6b6a4ac6ae6808c18aecac874e07045e568d23220e23df5d4f"
+      },
+      "invalid": {
+        "returncode": 0,
+        "output": "invalid_config_checks=161 failed_bind_unchanged=1 shared_config_identity=1\n"
+      }
+    },
+    "qemu_rerun": {
+      "baseline": "status=0 allocation_B=6896 stack_watermark_B=664",
+      "pointer_block": "status=0 allocation_B=6880 stack_watermark_B=680",
+      "matches_preserved_measurements": true
+    },
+    "artifact_checks": "All receipt source hashes and all three ELF hashes verified; section bytes plus alignment reconcile to reported spans."
+  },
+  "resource_conclusion": {
+    "static_saving_B": 24,
+    "observed_stack_increase_B": 16,
+    "paired_static_plus_observed_saving_B": 8,
+    "accounting": "text -4, rodata +4, BSS -16, alignment -8; config storage counted"
+  },
+  "limits": [
+    "Only pointer_block accepted for functional qualification; inline_block measured exploratory alternative",
+    "Caller ownership/lifetime assumptions are not runtime enforcement",
+    "Separate QEMU fixture stack is not universal bound or final silicon timing",
+    "No firmware-ready, lifetime coverage, Python ABI migration or mainline promotion claim"
+  ],
+  "hashes": {
+    "experiments/config_reference_001/README.md": "a2adf35338e18a5cf8dda641fe0db587ec7811b26aab8ed7ff56cff7ed11b8bd",
+    "experiments/config_reference_001/baseline/measurement.json": "051a6a4daaf7d3bceaa83c7744dab6924e15c40cf7f8913d57334e13cbda97cd",
+    "experiments/config_reference_001/baseline/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/config_reference_001/baseline/tiny_cardinal/core.c": "89e64295775479e8e01bab012ff2f7d789f74fecdff8c25b8e87134377790f62",
+    "experiments/config_reference_001/baseline/tiny_cardinal/generation.json": "59fcc3a77365c747a1174649df3def676e576ea0b376650a6aebf34b6c31ee15",
+    "experiments/config_reference_001/baseline/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/config_reference_001/baseline/tiny_cardinal/probe.c": "0f40f04fa311ea88cdec31bb066ac51304f92a010e882d65d10a2927661ea3a5",
+    "experiments/config_reference_001/baseline/tiny_cardinal/qr_generation.json": "c15ae2dd40061581d8851864252040df3408e4345da3b4f129fcab93705af190",
+    "experiments/config_reference_001/baseline/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/config_reference_001/baseline/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/config_reference_001/baseline/tiny_cardinal/sharing_generation.json": "598b88930c127eb33f5f3c7e66d850bf67ec0940a35ae03c7d55d1b527747600",
+    "experiments/config_reference_001/build.py": "95c7861f2628ff9a12e5d425e19cb977d373cfb4505e531154382f8d0d2d678d",
+    "experiments/config_reference_001/check.py": "391d6366a50e369ac8524822e48a4b814b596ced00d8c12d0bb6506dc0edf89b",
+    "experiments/config_reference_001/check001/baseline.c": "af84e8d4bd75210138644adffe839548cd76bb2019c95feabc79de82307c6aeb",
+    "experiments/config_reference_001/check001/compact.c": "2135b6c89e88041374b95072336bc96976db2c9ce2c7decb77bc38b740ebe838",
+    "experiments/config_reference_001/check001/result.json": "4d499263a58e848800a63dc9ca1f007c09d298ce9d09bffbb9847423eace2a16",
+    "experiments/config_reference_001/execution.py": "db142c83307111c17d887354a55db4309fedecb87daf25d2fc3b16bc7e283aa9",
+    "experiments/config_reference_001/inline_block002/measurement.json": "1cdd78f88b33d8bb135f121caa7fe553b72951b57bb70ac2ec6e7970fbc92b35",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/core.c": "a5bb0c7ee8fe29faf734d2ca3a07ff3f4d36fd22ea00f25d7dd84bfe1d80ab32",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/generation.json": "ec0ff2470cd90e3bea2bb2eac0cdf7e0520fae147702b7d6f31cf154bcd53919",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/probe.c": "6a681518362f0f5d607a3ec3af65af4357a0ef8ae7e66dde3270be277b3970b0",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/qr_generation.json": "8a9c88c97e5174f59a08012388f76973176cd667fe4e627960113858d6c361be",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/config_reference_001/inline_block002/tiny_cardinal/sharing_generation.json": "d8f8ccc72fcbaccde8d4a248dca63ed685c2909352583bf8fa907392b68cdfa8",
+    "experiments/config_reference_001/pointer_block002/measurement.json": "c65f393b6e5ce9238f60e02c949c04dac6647cf7949f2b3574a4cb5dd0a6331c",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/core.c": "a6e4825cf2a9433ff91755de8c6287c5e24ed3528dc000343f23879e16a18d1c",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/generation.json": "3871facaee99b61c498eb2429258a5334012227584ede5968c89fb432895dc17",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/probe.c": "52f18e3aec7965ac1f46246252022cf11a36b37042e0fb719ee347135979f839",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/qr_generation.json": "a02ce8339edb9d6f7d9f1587566fa90720872222cc7df48d215009f6fc9aac46",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/config_reference_001/pointer_block002/tiny_cardinal/sharing_generation.json": "de1bcace0ce0602e909fa82faa2762157022f89107ac3b616ade09ef7175b7be",
+    "experiments/config_reference_001/stack_baseline/core.c": "ba0bac9295fd2a43e5fb653f4afea91db33b59caf8186f2ed918be8a671b59b7",
+    "experiments/config_reference_001/stack_baseline/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/config_reference_001/stack_baseline/generation.json": "5d4c31981cbbd05efc3ffb8b50cb88b7c8d0156212450ab832d8379cd972df17",
+    "experiments/config_reference_001/stack_baseline/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/config_reference_001/stack_baseline/measurement.json": "3c3d5be7078512bdaef1f637995590d374f6886cf86a94756b9a51df549d368d",
+    "experiments/config_reference_001/stack_baseline/probe.c": "498f8e929753b380c0a54c33d8af816a437d3cfe53abf93c08f4653903a3558f",
+    "experiments/config_reference_001/stack_baseline/qr_generation.json": "1dd7e046e8113ceb1667e7fb87d69dd2876185935869bea79335e67a3efb3b8c",
+    "experiments/config_reference_001/stack_baseline/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/config_reference_001/stack_baseline/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/config_reference_001/stack_baseline/sharing_generation.json": "7416e52827816d6ce295aaa2658507189dcfbd5775ed59e85daa53231ac20f5c",
+    "experiments/config_reference_001/stack_inline_block/core.c": "6b53444a30f0ef2117f7a227df3869526398b55ffa32671f5706d95fe8962e8f",
+    "experiments/config_reference_001/stack_inline_block/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/config_reference_001/stack_inline_block/generation.json": "da6de958b66705942e635b6c35197dcc105de0fcf0ed54205e303632998f15fc",
+    "experiments/config_reference_001/stack_inline_block/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/config_reference_001/stack_inline_block/measurement.json": "e9aaf2072c39e727de792ad3d5d8e7789ae6477f0e8c9f0e3386be67cc793885",
+    "experiments/config_reference_001/stack_inline_block/probe.c": "541b777a011fa45e9f59a985ea0d3af3e4349edc2d4ff4ebf00610032690a5c3",
+    "experiments/config_reference_001/stack_inline_block/qr_generation.json": "23a6820149875aed0b4fd6b2c6b50942d1de3304093c3543c058859c10ef177b",
+    "experiments/config_reference_001/stack_inline_block/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/config_reference_001/stack_inline_block/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/config_reference_001/stack_inline_block/sharing_generation.json": "fefdff5f9eea81cab1d28ac160829b97d80cd92f73dc8f09da9b051d58c5c126",
+    "experiments/config_reference_001/stack_pointer_block/core.c": "ea50dc06f1b04976b43fc9834b6e6ddaf32f2989fe50ddb6a242c18fe72d8ffc",
+    "experiments/config_reference_001/stack_pointer_block/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/config_reference_001/stack_pointer_block/generation.json": "b5581a896962f08f267ccd04105841ff337ec0dc2d33fa05d5da60b22a7edcaf",
+    "experiments/config_reference_001/stack_pointer_block/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/config_reference_001/stack_pointer_block/measurement.json": "786e9f0b26a7dca01b73e5346655803d35ad516a80cda2e4d1760452c7d858d2",
+    "experiments/config_reference_001/stack_pointer_block/probe.c": "15e0711dd46905b35564c4b42da5dc560fe7c7588953dea6f5e50177f8f70949",
+    "experiments/config_reference_001/stack_pointer_block/qr_generation.json": "6f5ca0d7981956d60f6c59fd3d75f06001fc8983695bc415cfc076a0b39bb588",
+    "experiments/config_reference_001/stack_pointer_block/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/config_reference_001/stack_pointer_block/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/config_reference_001/stack_pointer_block/sharing_generation.json": "9b886607e98f744806b67a0980914986d90758262b203acb2f49d639b0c5f51c",
+    "experiments/config_reference_001/target.py": "debd7fe9f0bcbed7a60628b3472cd3bc80d2c4d0e73ab94a19268579aae183b9",
+    "provenance/config_reference_001/receipt.json": "8d529910f67023af82dfa75a72cb3bd50d446560475f587bed34ece9bb7ac5df",
+    "provenance/config_reference_001/reviewer_controls/baseline_full.c": "13cb09fa65ecb06f9babeb1793983bd986c02a4ade1d0938a8376ac96db264c9",
+    "provenance/config_reference_001/reviewer_controls/compact_full.c": "10fed1959b266c38151d1809c18915cca55347908e7a28ac703d64d251c70282",
+    "provenance/config_reference_001/reviewer_controls/invalid.c": "24bd4dac3475f1ed36239b65489dc1c28f000a5f3e21ccf3313ea47aeabcc9ed",
+    "provenance/config_reference_001/reviewer_controls/result.json": "7d404c020e34e17b094d88d62b6b517fac1e59be28c1d39098d12345a760645c"
+  }
+}

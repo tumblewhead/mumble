@@ -1,3 +1,11 @@
+# Shared configuration reference experiment
+
+The [configuration reference experiment](experiments/config_reference_001/README.md)
+saves 24 static bytes while adding 16 observed stack bytes: **8 bytes net** in
+the paired comparison. Static SRAM is 24672 bytes; provisional total with a
+1024-byte stack is 25696 bytes. Specialized ABI and immutable lifetime contract
+apply; campaign defaults remain unchanged.
+
 # Compact model metadata experiment
 
 The [metadata experiment](experiments/model_metadata_001/README.md) removes
