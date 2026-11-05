@@ -1,0 +1,116 @@
+{
+  "reviewer": "fresh-context response_base_review",
+  "base_commit": "773c98e",
+  "decision": "accepted_isolated_contiguous_under_documented_contract",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "issue": "C pointer arithmetic requires one underlying response array object; adjacent independent allocations do not suffice",
+      "disposition": "README explicitly requires single aligned live writable array of at least93 doubles, offsets0/15/54, noalias with core/history/config and lifetime through bound context."
+    },
+    {
+      "issue": "Response pointer validation domain and ABI narrow from three separately supplied arrays to one base",
+      "disposition": "README states arbitrary independent allocations unsupported, rebuild required, removed pointer arguments not independent validation inputs; bind checks null base before accesses."
+    }
+  ],
+  "independent_checks": {
+    "baseline": {
+      "bytes": 3458582,
+      "sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d",
+      "UBSan_stderr": ""
+    },
+    "contiguous": {
+      "bytes": 3458582,
+      "sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d",
+      "UBSan_stderr": ""
+    },
+    "closure": "Inverse layout, null checks and access substitutions yield exact generated baseline core after output-directory normalization.",
+    "qemu_and_invalid_rerun": {
+      "baseline": "status=0\nallocation_B=6880\nstack_watermark_B=680\n",
+      "baseline_invalid": "invalid_config_checks=159 failed_bind_unchanged=1 shared_config_identity=1\n",
+      "contiguous": "status=0\nallocation_B=6872\nstack_watermark_B=672\n",
+      "contiguous_invalid": "invalid_config_checks=159 failed_bind_unchanged=1 shared_config_identity=1\n"
+    }
+  },
+  "additional_checks": [
+    "Inspected full generated diff: only model layout, base null predicate and equivalent offset substitutions, plus directory paths.",
+    "Recompiled paired full94-feature controls with UBSan, surrounding response canaries intact; no sanitizer diagnostics.",
+    "Recompiled both invalid-binding controls under UBSan;159 rejections preserve bound context.",
+    "Reran both QEMU witnesses; matched stored statuses and680/672-byte stack watermarks.",
+    "Verified both size-image ELF hashes, receipt source hashes and section/alignment arithmetic."
+  ],
+  "resource_conclusion": {
+    "static_saving_B": 64,
+    "observed_stack_saving_B": 8,
+    "paired_static_plus_observed_saving_B": 72,
+    "candidate_static_B": 24608,
+    "candidate_static_plus_observed_B": 25280,
+    "candidate_with_provisional_1024_stack_B": 25632
+  },
+  "limits": [
+    "Acceptance requires stated immutable config, response extent/ownership/lifetime and rebuilt specialized ABI contracts.",
+    "Finite local controls and exact source closure do not establish physical coverage, aging or lifetime validity.",
+    "Stack is observed on separate QEMU fixture, not universal bound; no target silicon timing or complete firmware fit.",
+    "Mainline and campaign defaults remain unchanged."
+  ],
+  "hashes": {
+    "experiments/response_base_001/README.md": "1e9d30311051616393ecaa54de6c6bb32d6ef37e988cfe0e7e5415732cba3adf",
+    "experiments/response_base_001/baseline/measurement.json": "21b6492804c8867f45eef857fb7e57f87c0bdeb1b2da2652df1aa90297979581",
+    "experiments/response_base_001/baseline/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/response_base_001/baseline/tiny_cardinal/core.c": "7645e41774df71edd4d1d76311c941ab04eebc214d2f5a0a53bce840f9dbdc54",
+    "experiments/response_base_001/baseline/tiny_cardinal/generation.json": "743d743025bbb64e53db501a40e610707b61409430e8690dc15bd55c98cff789",
+    "experiments/response_base_001/baseline/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/response_base_001/baseline/tiny_cardinal/probe.c": "52f18e3aec7965ac1f46246252022cf11a36b37042e0fb719ee347135979f839",
+    "experiments/response_base_001/baseline/tiny_cardinal/qr_generation.json": "b28148bed5681a9d86cbc6873a6ee438282099a991987072d635057ea4413086",
+    "experiments/response_base_001/baseline/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/response_base_001/baseline/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/response_base_001/baseline/tiny_cardinal/sharing_generation.json": "072a8722a77e00b079697b2e0bd4aa92205c0b1611c335415575e4aed32a34be",
+    "experiments/response_base_001/baseline/tiny_cardinal/symbols.txt": "7b5b1d762e180bc8feac006019e2f1f5bc8caf0dc116f97ba8b2556025254ae8",
+    "experiments/response_base_001/build.py": "00c9ba47eaa6d4f8aec27ba6f20b05f376fec128bd1ba42c385d32b02c02bdde",
+    "experiments/response_base_001/check.py": "e90b940ec0f51d4422c632ed455efc05dd630456bb888191d60939bfa4c08636",
+    "experiments/response_base_001/check001/baseline_invalid.c": "625468dd377ff6937ac6fac642498801cb8a6ec8244cd786cb3c2ce2592b0389",
+    "experiments/response_base_001/check001/baseline_parity.c": "6c6029a5a5c0855f18ee14d053f222f4fb081095dea78b80d02b038bb4893434",
+    "experiments/response_base_001/check001/contiguous_invalid.c": "2a027cc2e0bf6481e865148e9f395b2a78132713825819a6f2daa77e0d4f6879",
+    "experiments/response_base_001/check001/contiguous_parity.c": "f76d5a1d83af0d06783da3519579ece13fc41c1e98f8c321b71122f2a2c12f03",
+    "experiments/response_base_001/check001/result.json": "87db26f93c26b56768405b4025951c29483cd1b56e72fcd503d6b4fb58e9a64a",
+    "experiments/response_base_001/contiguous/measurement.json": "694652b0c8525d16a42863daae58a732c4e1a7de7875c4b610a20265f46989f0",
+    "experiments/response_base_001/contiguous/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/response_base_001/contiguous/tiny_cardinal/core.c": "f5dbdaff276fdf979ca2db8912129983ce5d5f34916abed5d122de71519dd472",
+    "experiments/response_base_001/contiguous/tiny_cardinal/generation.json": "f4fc1328bee63ea914cfffb8879a3579247d81bc7b7fffa17203167bcc6d0af1",
+    "experiments/response_base_001/contiguous/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/response_base_001/contiguous/tiny_cardinal/probe.c": "40aa6c77c5b15419ea5f11de178620bba270de778957fed990639032e3277f5e",
+    "experiments/response_base_001/contiguous/tiny_cardinal/qr_generation.json": "18c74cd326cbd0863dc98164d12ef72e0ea2edb3348508ebf14bd3e0c24e824c",
+    "experiments/response_base_001/contiguous/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/response_base_001/contiguous/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/response_base_001/contiguous/tiny_cardinal/sharing_generation.json": "9d232289065358120fcb376e15c31aae562a9b3043e3038d01a3474c6d8f8fb8",
+    "experiments/response_base_001/contiguous/tiny_cardinal/symbols.txt": "2d1f02b642218490afa221bf267d2054761ed11c153784b855a7b52ea750fde6",
+    "experiments/response_base_001/execution.py": "db142c83307111c17d887354a55db4309fedecb87daf25d2fc3b16bc7e283aa9",
+    "experiments/response_base_001/invalid.c.in": "3791fd5620c66f82373c6af2c0081d82442e72334323efbe9416764f76fcafd5",
+    "experiments/response_base_001/parity.c.in": "226f886ae9b798ff7b862ac07dd23abac71b50ed45b03286285209bd343509e3",
+    "experiments/response_base_001/stack_baseline/core.c": "c341d7203f8d0c72fe05a0d3d4cdf23901ffc3a1ffca7bd80fa5b19e257590f6",
+    "experiments/response_base_001/stack_baseline/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/response_base_001/stack_baseline/generation.json": "a67189788f568f619af5b5763c7bcdc7bfa64ba90761d45a63ec4f837706652f",
+    "experiments/response_base_001/stack_baseline/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/response_base_001/stack_baseline/measurement.json": "93cc6684a30b98c8412a249eb40347e8e163a2370b62859446d0d68d8351d5da",
+    "experiments/response_base_001/stack_baseline/probe.c": "a5cbe1085455bb6c9ff2518bc5fcf33ce295527d873b340d9c8c1c6cd08362d2",
+    "experiments/response_base_001/stack_baseline/qr_generation.json": "6a5da222e2617e585adffabce7fb9a634fe05a8a3cd06974ef41d3ea5f5ad0f9",
+    "experiments/response_base_001/stack_baseline/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/response_base_001/stack_baseline/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/response_base_001/stack_baseline/sharing_generation.json": "e354595fdf42101b4a4f5fcf7ab1b9e943779917eef3a37f677395185092977e",
+    "experiments/response_base_001/stack_contiguous/core.c": "b60fb2294c9620dc97402048d4b314607b54237bf2b69abd4588648d2b6b0ffb",
+    "experiments/response_base_001/stack_contiguous/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/response_base_001/stack_contiguous/generation.json": "d158036138980ff6ca7dd32f90ff010eb29ba12d01aeec161a66f7c802e596ff",
+    "experiments/response_base_001/stack_contiguous/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/response_base_001/stack_contiguous/measurement.json": "5aa30db46539280aee88a7845250514599dc3562f73bacb0abd439018a162dab",
+    "experiments/response_base_001/stack_contiguous/probe.c": "645a71cd7e38afbcdcd108255a911d8d46e3db11ed09c8b091ecd998901d99cc",
+    "experiments/response_base_001/stack_contiguous/qr_generation.json": "0b7a315ecfeb73c1eff958fe7e684b35fc15b57ffce170acc1925d03b4d725be",
+    "experiments/response_base_001/stack_contiguous/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/response_base_001/stack_contiguous/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/response_base_001/stack_contiguous/sharing_generation.json": "3f2d831b28f9c49f504142756371592bae7c3a83daf3fcf38b34c45c06587487",
+    "experiments/response_base_001/target.py": "debd7fe9f0bcbed7a60628b3472cd3bc80d2c4d0e73ab94a19268579aae183b9",
+    "provenance/response_base_001/receipt.json": "4a0577d2f31fce8c928c54e952e79feeac01e21ae91329e6fafe456839cab241",
+    "provenance/response_base_001/reviewer_controls/baseline.c": "e57897a192c86d43637b11217a4f3f520c1ef74f2b040e047d2f0481d3ec6a7b",
+    "provenance/response_base_001/reviewer_controls/contiguous.c": "81a5864401a86243a6cb86e8ad16abd00be1bdee6063e52ce2dae514425bd95a",
+    "provenance/response_base_001/reviewer_controls/result.json": "7a004f47b771836fe31c3e5812056cd6574c2abee3ca0f7c7274d9c6ff88ccaa"
+  }
+}

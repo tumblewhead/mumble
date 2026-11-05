@@ -1,3 +1,11 @@
+# Contiguous response-state experiment
+
+The [response-base experiment](experiments/response_base_001/README.md) replaces
+three response pointers with one base and fixed offsets. It saves 64 static bytes
+and 8 observed stack bytes: **72 bytes combined**. Static SRAM is 24608 bytes;
+with a provisional 1024-byte stack, 25632 bytes. The specialized ABI requires a
+single writable 93-double response array. Campaign defaults remain unchanged.
+
 # Shared configuration reference experiment
 
 The [configuration reference experiment](experiments/config_reference_001/README.md)
