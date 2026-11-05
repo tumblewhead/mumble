@@ -1,0 +1,493 @@
+{
+  "schema": "qr_sharing_receipt_v1",
+  "baseline_revision": "1f2f04c",
+  "branch": "experiment/qr-sharing-001",
+  "selected": "shared_loop",
+  "status": "isolated_measured_candidate_not_promoted",
+  "static_saving_B": 352,
+  "observed_stack_saving_B": 32,
+  "static_plus_observed_stack_saving_B": 384,
+  "static_plus_provisional_1024_stack_B": 25704,
+  "variants": {
+    "shared_access": {
+      "static_B": 24680,
+      "text_B": 16704,
+      "with_provisional_1024_stack_B": 25704,
+      "elf_sha256": "1bb4016c91dfa9765ff1d4b5b0e9e715f8b1584688b96eb331f655570127bb7a",
+      "measurement": {
+        "path": "experiments/qr_sharing_001/target_access001/measurement.json",
+        "sha256": "8d0bad97793f6a00554526852f758b6a7110447805b5a4098f90c78b79cd1232"
+      }
+    },
+    "baseline": {
+      "static_B": 25032,
+      "text_B": 17056,
+      "with_provisional_1024_stack_B": 26056,
+      "elf_sha256": "d033f3561bdcc70a457f58e86088ae4f28e33afd56d2f7cbe2ff3152ff218bc2",
+      "measurement": {
+        "path": "experiments/qr_sharing_001/target_baseline001/measurement.json",
+        "sha256": "5c2e8ee56853b6fa09546ea7fa42817b9a493001e4135d76a9f863878b1ec20e"
+      }
+    },
+    "shared_loop": {
+      "static_B": 24680,
+      "text_B": 16704,
+      "with_provisional_1024_stack_B": 25704,
+      "elf_sha256": "1bb4016c91dfa9765ff1d4b5b0e9e715f8b1584688b96eb331f655570127bb7a",
+      "measurement": {
+        "path": "experiments/qr_sharing_001/target_loop001/measurement.json",
+        "sha256": "d81de72e121951e853d2e584f32e778cd9e9dc0ea565f7bb77982719ac5dfe65"
+      }
+    }
+  },
+  "stack_witnesses": {
+    "baseline": {
+      "measurement": {
+        "path": "experiments/qr_sharing_001/stack_baseline001/measurement.json",
+        "sha256": "3fb83c1cb684f9cc0f7bdee78d62d80620023c38103700103be2ce7433ad71f5"
+      },
+      "output": "status=0\nallocation_B=6912\nstack_watermark_B=696\n",
+      "returncode": 0
+    },
+    "shared_loop": {
+      "measurement": {
+        "path": "experiments/qr_sharing_001/stack_loop001/measurement.json",
+        "sha256": "74366cbbe1b812867af24e978576e5d7d09e9cf1377614ea349e016a67c0d93c"
+      },
+      "output": "status=0\nallocation_B=6912\nstack_watermark_B=664\n",
+      "returncode": 0
+    }
+  },
+  "direct_controls": {
+    "status": "pass",
+    "paired_insertions": 8920,
+    "matched_failures": 135,
+    "zero_row_cases": 660,
+    "quarantine": [
+      {
+        "variant": "baseline",
+        "poisoned": true,
+        "query_fit_advance_rejected": true
+      },
+      {
+        "variant": "shared_loop",
+        "poisoned": true,
+        "query_fit_advance_rejected": true
+      }
+    ],
+    "checks": [
+      "Every tested status, mutated factor byte and row byte identical",
+      "Canaries unchanged; history tested at byte-unaligned address",
+      "Widths0,1,2,3,17,34 and scales1e-300..1e300",
+      "NaN/Inf/DBL_MAX, overflow readback, skipped pivots and partial mutations",
+      "Named finite-to-infinity history48 rounding and late row overflow assertions"
+    ],
+    "gram": [
+      {
+        "width": 3,
+        "relative_gram_error": 2.793633130604035e-15
+      },
+      {
+        "width": 17,
+        "relative_gram_error": 2.6375391982493193e-15
+      },
+      {
+        "width": 34,
+        "relative_gram_error": 2.6200301651338824e-15
+      }
+    ],
+    "source_hashes": {
+      "host/baseline/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+      "host/baseline/core.c": "2137201c9f3836f3c645aae433774c22915678040a92853dff1b3acf371fae3c",
+      "host/baseline/rowwise.so": "ad8af18daa48b90e4c1181b57c7a66d49932f924def5b5d09d9592083b9a05c3",
+      "host/baseline/qr_probe.c": "bb5f6fe022c508604bce34757b43ccc2834a90b3d397a324f44fb4dc6ac40838",
+      "host/baseline/qr_probe.so": "0b7773d29d4b17ea1f75c1243b31d3930e4a99e7008ac491950af3062e9fa876",
+      "host/shared_loop/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+      "host/shared_loop/core.c": "413596c7436afec3739d053fd282b5e420738dbc121c09a270909213a8fd022e",
+      "host/shared_loop/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+      "host/shared_loop/rowwise.so": "f71d0fba7024c334402d5b58505299767c69d12614d5d6db7fa3c851109a77d2",
+      "host/shared_loop/qr_probe.c": "bb5f6fe022c508604bce34757b43ccc2834a90b3d397a324f44fb4dc6ac40838",
+      "host/shared_loop/qr_probe.so": "8e0ada9ba547abe2276550acc4914039bbb0e58e9ba35641f60ae248ad6de7f0"
+    }
+  },
+  "paired_streams": [
+    {
+      "case": "case_0000",
+      "records": 180000,
+      "hours": 1.0,
+      "stats": {
+        "baseline": {
+          "accepted": 59,
+          "rejected": 0,
+          "Q_3sd_misses": 0,
+          "SOC_3sd_misses": 0,
+          "max_chart_delta": 0.0,
+          "max_relative_sd_delta": 0.0
+        },
+        "shared_loop": {
+          "accepted": 59,
+          "rejected": 0,
+          "Q_3sd_misses": 0,
+          "SOC_3sd_misses": 0,
+          "max_chart_delta": 0.0,
+          "max_relative_sd_delta": 0.0,
+          "zero_sd_mismatches": 0
+        }
+      },
+      "final": {
+        "baseline": {
+          "end": [
+            0.8856142917532489,
+            0.00021100878718741196,
+            0.0007225751346306752,
+            0.0006754074000343117,
+            -0.5238573115271301,
+            -2.8703746000836343,
+            -2.1718695499388274,
+            -3.3533077046280826,
+            -2.9113766525893596,
+            -2.488753447979801,
+            -0.5427069690364013,
+            -2.1239444771018885,
+            1.6221314932693927,
+            -4.23864484058756,
+            1.7294634791250472,
+            2.234747180478643
+          ],
+          "sd": [
+            0.0007670889516286823,
+            5.233041948423111e-05,
+            4.2159198495208376e-05,
+            3.667406273514767e-05,
+            0.04013600785922607,
+            0.0027622520891295655,
+            0.07919510786481707,
+            0.2508013493953672,
+            0.4252146799634129,
+            0.05818519850268376,
+            0.1423672836254396,
+            0.04473490758392326,
+            0.04050435374336609,
+            0.07623113170104433,
+            0.07325714308660229,
+            0.0751930791748559
+          ]
+        },
+        "shared_loop": {
+          "end": [
+            0.8856142917532489,
+            0.00021100878718741196,
+            0.0007225751346306752,
+            0.0006754074000343117,
+            -0.5238573115271301,
+            -2.8703746000836343,
+            -2.1718695499388274,
+            -3.3533077046280826,
+            -2.9113766525893596,
+            -2.488753447979801,
+            -0.5427069690364013,
+            -2.1239444771018885,
+            1.6221314932693927,
+            -4.23864484058756,
+            1.7294634791250472,
+            2.234747180478643
+          ],
+          "sd": [
+            0.0007670889516286823,
+            5.233041948423111e-05,
+            4.2159198495208376e-05,
+            3.667406273514767e-05,
+            0.04013600785922607,
+            0.0027622520891295655,
+            0.07919510786481707,
+            0.2508013493953672,
+            0.4252146799634129,
+            0.05818519850268376,
+            0.1423672836254396,
+            0.04473490758392326,
+            0.04050435374336609,
+            0.07623113170104433,
+            0.07325714308660229,
+            0.0751930791748559
+          ]
+        }
+      }
+    },
+    {
+      "case": "case_0001",
+      "records": 180000,
+      "hours": 1.0,
+      "stats": {
+        "baseline": {
+          "accepted": 59,
+          "rejected": 0,
+          "Q_3sd_misses": 0,
+          "SOC_3sd_misses": 0,
+          "max_chart_delta": 0.0,
+          "max_relative_sd_delta": 0.0
+        },
+        "shared_loop": {
+          "accepted": 59,
+          "rejected": 0,
+          "Q_3sd_misses": 0,
+          "SOC_3sd_misses": 0,
+          "max_chart_delta": 0.0,
+          "max_relative_sd_delta": 0.0,
+          "zero_sd_mismatches": 0
+        }
+      },
+      "final": {
+        "baseline": {
+          "end": [
+            0.8868962550702533,
+            0.00019849927314696312,
+            0.000698835493306507,
+            0.0007224941975722342,
+            -0.574810346543119,
+            -2.872574372137098,
+            -2.1848059927493324,
+            -3.414368067352724,
+            -2.913298512190302,
+            -2.521147729795628,
+            -0.6571515711265561,
+            -2.0752606481719122,
+            1.5597901598303572,
+            -4.1080307466214245,
+            1.6013739715228097,
+            2.1474819696110106
+          ],
+          "sd": [
+            0.0010621193790399635,
+            5.112637773507323e-05,
+            4.296310555976012e-05,
+            3.603914432468629e-05,
+            0.04537771868986003,
+            0.0030698854618775276,
+            0.08180031313409636,
+            0.26012397100151746,
+            0.4401160411106211,
+            0.062271312557370125,
+            0.14011181992149255,
+            0.040462281967729614,
+            0.040139920127304135,
+            0.08630958766739086,
+            0.08300321972789419,
+            0.0796282958699811
+          ]
+        },
+        "shared_loop": {
+          "end": [
+            0.8868962550702533,
+            0.00019849927314696312,
+            0.000698835493306507,
+            0.0007224941975722342,
+            -0.574810346543119,
+            -2.872574372137098,
+            -2.1848059927493324,
+            -3.414368067352724,
+            -2.913298512190302,
+            -2.521147729795628,
+            -0.6571515711265561,
+            -2.0752606481719122,
+            1.5597901598303572,
+            -4.1080307466214245,
+            1.6013739715228097,
+            2.1474819696110106
+          ],
+          "sd": [
+            0.0010621193790399635,
+            5.112637773507323e-05,
+            4.296310555976012e-05,
+            3.603914432468629e-05,
+            0.04537771868986003,
+            0.0030698854618775276,
+            0.08180031313409636,
+            0.26012397100151746,
+            0.4401160411106211,
+            0.062271312557370125,
+            0.14011181992149255,
+            0.040462281967729614,
+            0.040139920127304135,
+            0.08630958766739086,
+            0.08300321972789419,
+            0.0796282958699811
+          ]
+        }
+      }
+    }
+  ],
+  "source": {
+    "README.md": {
+      "path": "experiments/qr_sharing_001/README.md",
+      "sha256": "281c4f0c7550bd6098c8b8b3de921fb26f0df3605548e9592fe546f4fcecb2a1"
+    },
+    "build.py": {
+      "path": "experiments/qr_sharing_001/build.py",
+      "sha256": "5a976fe95c150ad6a609897fa254e4df6c03d70acd5396aa57f50e23a6fa3934"
+    },
+    "qualify.py": {
+      "path": "experiments/qr_sharing_001/qualify.py",
+      "sha256": "d07d71a7d7215770c219044a2909fbbf1be5a44f0c5c8dce52b2fa1d8fbd4c59"
+    },
+    "receipt.py": {
+      "path": "experiments/qr_sharing_001/receipt.py",
+      "sha256": "52eb8fa77e53c1a76405d8e2c9fd15d93afa04e1f868786df4bad4a47d5575d8"
+    },
+    "shared_qr.h": {
+      "path": "experiments/qr_sharing_001/shared_qr.h",
+      "sha256": "1fd3e304becda949e5adb31a7ef1f7f2ee050e419b3de76513f5068202485fd5"
+    },
+    "stream_test.py": {
+      "path": "experiments/qr_sharing_001/stream_test.py",
+      "sha256": "8061746c0fc86c06b44a5766763f55f63ce902dac18a60be543edc0a5bdae613"
+    },
+    "target.py": {
+      "path": "experiments/qr_sharing_001/target.py",
+      "sha256": "0242b2e98bf1dad7d28024740db7934473c2923b8331254bb6f081815b5a1633"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "experiments/qr_sharing_001/target_access001/tiny_cardinal/shared_math.h",
+      "sha256": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_access001/tiny_cardinal/core.c",
+      "sha256": "8f05f870eea05dd91c247f2ea0fbc0ff454a2fef0b8d1996116f3060e82f0506"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_access001/tiny_cardinal/shared_history.h",
+      "sha256": "1a3f3dab244eba4f068babac4926ecb223528b1bb0e9cb5b48e1690ca33baa1f"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_access001/tiny_cardinal/config.h",
+      "sha256": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_access001/tiny_cardinal/probe.c",
+      "sha256": "aefe61eb26e65284459ee5ca5e1d6a976690d1a59061349baa18e6aac738801a"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_access001/tiny_cardinal/link.ld",
+      "sha256": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_baseline001/tiny_cardinal/shared_math.h",
+      "sha256": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_baseline001/tiny_cardinal/core.c",
+      "sha256": "4262c8b0aa0ca27cf6efd868b831ffcae62f0bcd16c76951bffd913075090545"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_baseline001/tiny_cardinal/config.h",
+      "sha256": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_baseline001/tiny_cardinal/probe.c",
+      "sha256": "aefe61eb26e65284459ee5ca5e1d6a976690d1a59061349baa18e6aac738801a"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_baseline001/tiny_cardinal/link.ld",
+      "sha256": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_loop001/tiny_cardinal/shared_math.h",
+      "sha256": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_loop001/tiny_cardinal/core.c",
+      "sha256": "45c42ef231801bc653b3b64c8a85b22dbc2e0eb87970e6d0a92a635a4dca130d"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_loop001/tiny_cardinal/shared_history.h",
+      "sha256": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_loop001/tiny_cardinal/config.h",
+      "sha256": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_loop001/tiny_cardinal/probe.c",
+      "sha256": "aefe61eb26e65284459ee5ca5e1d6a976690d1a59061349baa18e6aac738801a"
+    },
+    {
+      "path": "experiments/qr_sharing_001/target_loop001/tiny_cardinal/link.ld",
+      "sha256": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_baseline001/shared_math.h",
+      "sha256": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_baseline001/core.c",
+      "sha256": "f931dc9fec084f9bad92ac79f6046763af2782a79f428059cc3f45d27b8fa85f"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_baseline001/fixture.h",
+      "sha256": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_baseline001/probe.c",
+      "sha256": "9641905d151c143b53f28dbc1e46bb92a4ce05aca9a55d718930a513710d1392"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_baseline001/link.ld",
+      "sha256": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_baseline001/probe.elf",
+      "sha256": "5f8ab0cdbd91c0910786d82bd68aa4db0f346e89f49cd5a7dc5b655492deb642"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_loop001/shared_math.h",
+      "sha256": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_loop001/core.c",
+      "sha256": "0d77f79a497ffa11bd3c283daf23499dcf9256371beb99d3dbaa89ba97811751"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_loop001/shared_history.h",
+      "sha256": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_loop001/fixture.h",
+      "sha256": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_loop001/probe.c",
+      "sha256": "0445195abb030e60c9a3fd7f553d616b28d07d89ef82ca13ffd82868886ef402"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_loop001/link.ld",
+      "sha256": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stack_loop001/probe.elf",
+      "sha256": "0c2aaa34e2bd3e456280c745ae02c0e142a0c5d8e45f8017a936fa077acb8d62"
+    },
+    {
+      "path": "experiments/qr_sharing_001/qualification003/results.json",
+      "sha256": "6d74ba741f4ce0f08fd47b93d7ef42eb8fdbb88dd90eca9152de5be9d670966a"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stream1h001/results.json",
+      "sha256": "601fc0dd7c819cfb446ea7774479bbb74542d768a1eb5678754fe40f998388f8"
+    },
+    {
+      "path": "experiments/qr_sharing_001/stream1h001/source.json",
+      "sha256": "ef2a10294639e5c14fa0fe6f668f760c858dc405b9cfd29c84f1ad02239bf535"
+    }
+  ],
+  "reviews": [
+    "provenance/qr_sharing_001/review_r1.json"
+  ],
+  "limits": [
+    "Observed stack is not a worst-case bound",
+    "Mainline and campaign defaults unchanged",
+    "M23 instructions on M33 emulator are not target timing",
+    "Five independently tested rejected exceptional cases differ only in NaN sign/payload; finite components and status agree",
+    "One-hour50Hz controls do not qualify lifetime uncertainty or other sample rates"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "compile_command": [
+    "cc",
+    "-std=c11",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-fsanitize=address,undefined",
+    "provenance/qr_sharing_001/review_r1_probe.c",
+    "-lm",
+    "-o",
+    "/tmp/mumble-qr-review-probe"
+  ],
+  "run_command": "ASAN_OPTIONS=detect_leaks=0 /tmp/mumble-qr-review-probe",
+  "returncode": 0,
+  "stdout": "{\"cases\":4800,\"matched_rejections\":1299,\"nan_representation_only_differences\":5,\"finite_input_nan_only_differences\":0,\"all_non_nan_factor_and_scratch_bytes_match\":true}\n",
+  "stderr": "",
+  "source_sha256": "80055969d8ffbac3b72799ee16acf7fae1ac08d151181da638d7985010a9b111",
+  "scope": "Direct original and shared kernels, 4800 combinations across widths1,2,3,17,34,94; finite moderate/random-exponent, random-bit and exceptional inputs. Exact-sized heap allocations checked by ASan/UBSan. Leak checking disabled because runtime environment uses ptrace. Different NaN sign/payload bits in already-rejected state are classified separately; every other retained/scratch byte and status must match.",
+  "initial_strict_comparison": "First strict byte comparison rejected n17 mixed exceptional case trial54: original R[1]=-NaN, shared R[1]=+NaN, both status=-1. Comparator revised solely to classify pairs of NaNs on rejected cases; implementation unchanged."
+}

@@ -1,3 +1,10 @@
+# Shared QR experiment
+
+The [shared QR experiment](experiments/qr_sharing_001/README.md) saves352B static
+SRAM and32B observed stack versus the pole-sum baseline:384B combined on the
+paired target probe. Direct QR, failure/quarantine and two one-hour stream
+controls pass. Mainline and campaign defaults remain unchanged.
+
 # Calculation sharing experiment
 
 The [shared RC pole-sum experiment](experiments/calculation_sharing_001/README.md)
