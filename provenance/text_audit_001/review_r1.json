@@ -1,0 +1,143 @@
+{
+  "schema": "text_audit_independent_review_v1",
+  "reviewer": "fresh-context text_census_review agent",
+  "source_revision": "c2cb9fc79181a8242af9b9a3b27e1a92c4650924",
+  "status": "accepted_for_current_image_census_with_explicit_attribution_limits",
+  "scope": "Review of audit.py and current baseline/census; no estimator implementation changes or proposed optimization accepted. Parent roadmap/group report not yet reviewed.",
+  "hashes": {
+    "experiments/text_audit_001/audit.py": "629c399774246b0c6a84dfac2ab2e01106aa5e517aca5d7aba539090826f8614",
+    "experiments/text_audit_001/audit001/census.json": "2af3b8d5f2a88692416492399cd7e677de4da71288fe35a8f647b26d524364ee",
+    "experiments/text_audit_001/audit001/inline_addresses.txt": "e8991ccc70b8af3cca713c3642605bd436eab6402ab92136ba72f14824a4d4f9",
+    "experiments/text_audit_001/audit001/disassembly.txt": "2b99c66ad0b7223d78ea4bec2cb16d3d163018e7fb1bcd841c67fb50ab7a8d19",
+    "experiments/text_audit_001/baseline001/measurement.json": "2d4cc5037bf34c4ba35af7f2c2442a55e8cfa60af06e933fdc507087ed2ba15e",
+    "experiments/text_audit_001/baseline001/tiny_cardinal/probe.c": "aefe61eb26e65284459ee5ca5e1d6a976690d1a59061349baa18e6aac738801a",
+    "experiments/text_audit_001/baseline001/tiny_cardinal/core.c": "93b737b9a93bc0962ae47d4bd4f2d5b7c0a4169f7bd83b4524bb7f6d78b8e45f",
+    "experiments/text_audit_001/baseline001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/text_audit_001/baseline001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/text_audit_001/baseline001/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/sram_size_001/history48.h": "6c1324c1e3b024d28e0a1b992e653002f9369b00d5ea7ea8c3a12348c18f2217",
+    "experiments/sram_size_001/soft_sub.c": "d6e63c1b5e0f29c14c97faf664fbf04d8eeb4dd1cf2d81a04dcb144233b6d39e",
+    "provenance/shared_math_001/receipt.json": "788506cc5c42c68c6d76138a144a507822ec9786804962e30471f794b0ad24ba"
+  },
+  "elf_hashes": {
+    "original": "c288374972a0308991fea97795345e24e8331439f21a1ac57265e2908725f1d8",
+    "debug": "3d5ee2823c3bb49305a2e60bf2484773d7f28888d55d453e270a9de734e6510f"
+  },
+  "checks": {
+    "direct_elf32_section_header_parse": "PASS: identical complete SHF_ALLOC section set, type, flags, address, size, alignment and contents; NOBITS has layout only",
+    "allocated_sections": {
+      ".vectors": {
+        "type": 1,
+        "flags": 3,
+        "address": 268435456,
+        "bytes": 28,
+        "alignment": 4,
+        "sha256": "cd4c51e54335bfe358311d6f6b5f2f6f49b777cd466ad9443778b2ca4baf0f04"
+      },
+      ".text": {
+        "type": 1,
+        "flags": 6,
+        "address": 268435484,
+        "bytes": 17100,
+        "alignment": 4,
+        "sha256": "7c052d062f515f0197aa16d6ce84749ec41b0a1f31ba0851a3423b14f0dd0d5a"
+      },
+      ".rodata": {
+        "type": 1,
+        "flags": 2,
+        "address": 268452584,
+        "bytes": 1016,
+        "alignment": 8,
+        "sha256": "5ff4fd74f459dac07c578fd6371fc09d8c0c1c5fa0720882ca2bc016ecaf8e5d"
+      },
+      ".bss": {
+        "type": 8,
+        "flags": 3,
+        "address": 268453600,
+        "bytes": 6928,
+        "alignment": 8,
+        "sha256": null
+      }
+    },
+    "independent_rebuild_command": "python3 -B experiments/text_audit_001/audit.py --measurement experiments/text_audit_001/baseline001/measurement.json --out /tmp/mumble-text-audit-review-r1",
+    "replicated_fields": [
+      "text_B",
+      "symbols",
+      "symbol_unowned_B",
+      "overlapping_symbol_halfwords",
+      "inline_leaf_bytes",
+      "inline_paths",
+      "static_call_sites",
+      "debug_code_identity"
+    ],
+    "byte_set_reconciliation": {
+      "raw_symbol_name_extent_sum_B": 17608,
+      "same_extent_alias_duplicate_B": 512,
+      "deduplicated_extent_sum_B": 17096,
+      "overlap_B": 16,
+      "physical_symbol_union_B": 17080,
+      "unowned_text_B": 20,
+      "text_B": 17100
+    },
+    "compiler_binary64_helpers": {
+      "scope": "__aeabi_* plus eq/ne/ge/gt/le/lt df2 aliases; excludes project subtraction wrapper, clz and switch helper",
+      "deduplicated_nominal_extent_B": 4762,
+      "overlap_B": 16,
+      "physical_union_B": 4746,
+      "project_subtraction_wrapper_B": 16,
+      "physical_union_with_wrapper_B": 4762
+    },
+    "dwarf": {
+      "leaf_sum_B": 17100,
+      "reset_outer_frame_B": 3856,
+      "reset_leaf_B": 182,
+      "stream_row_leaf_inside_reset_B": 1450
+    }
+  },
+  "findings": [
+    {
+      "id": "R1-1",
+      "severity": "interpretation",
+      "status": "resolved_by_explicit_reconciliation",
+      "finding": "Same-address alias removal alone is insufficient: cdrcmple 32 B at 0x10003004 shares its final 16 B with cdcmpeq/cdcmple at 0x10003014. The union is 32 B, not 48 B. Compiler helpers are 4746 B; adding the separate 16 B project subtraction wrapper gives 4762 B."
+    },
+    {
+      "id": "R1-2",
+      "severity": "interpretation",
+      "status": "acceptable_with_limit",
+      "finding": "The audit assigns overlapping halfwords to the first nm size-ordered extent. Individual counted_text_B ownership in that tail is conventional; physical union is invariant. Exact-name aliases are grouped correctly. Twenty unowned bytes remain counted in total."
+    },
+    {
+      "id": "R1-3",
+      "severity": "interpretation",
+      "status": "acceptable_with_existing_limits",
+      "finding": "DWARF leaf attribution counts every halfword including padding/literals and may credit padding to the preceding source function. It partitions physical bytes but is not causal marginal code cost. reset 3856 B includes 1450 B stream_row plus other inlined work; reset leaf is only 182 B. Never add inline and physical-symbol totals."
+    },
+    {
+      "id": "R1-4",
+      "severity": "future_robustness",
+      "status": "nonblocking_for_verified_current_image",
+      "finding": "audit.py discovers allocated candidates by an SRAM address range rather than SHF_ALLOC and iterates original sections only. Direct independent ELF parsing verified the exact alloc set for this image. A reusable/general audit should compare both complete alloc-section sets and reject odd symbol boundaries before halfword accounting."
+    }
+  ],
+  "candidate_questions": [
+    {
+      "target": "core feature/transported",
+      "question": "Test explicitly shared full/projected basis and derivative primitives across feature and transported; compare complete linked image and scratch. Leaf totals show where to inspect, not predicted savings. Preserve endpoint full-bank transport and derivative/scaling semantics."
+    },
+    {
+      "target": "stream_row",
+      "question": "Consider compact common update helpers for repeated free/forced response and H-jet logic, with exact or bounded rounding analysis. Do not replace variable-dt propagation with a fixed 35 Hz transition."
+    },
+    {
+      "target": "qr_insert/history_insert",
+      "question": "Explore a shared rotation/update kernel with storage access kept specialized. Packed-history rounding on every write and finite-check/quarantine behavior must survive; adding abstraction can increase code."
+    }
+  ],
+  "limits": [
+    "No marginal saving established; each candidate needs separate paired relink, numerical obligations and independent review.",
+    "No runtime timing, worst-case stack, full platform memory, lifetime uncertainty or firmware readiness established.",
+    "No source truth or inference objective changes in this review."
+  ]
+}

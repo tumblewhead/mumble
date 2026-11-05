@@ -1,3 +1,11 @@
+# Linked text audit
+
+The [text audit and restructuring plan](experiments/text_audit_001/README.md)
+breaks the current 17,100 B instruction section into functions and shared
+operations. Total remains 26,096 B with a provisional 1 KiB stack allowance.
+No estimator behavior changed; RC evaluation reuse, QR sharing and triangular
+solve reuse are the next measured experiments.
+
 # Shared math experiment
 
 The [shared-math experiment](experiments/shared_math_001/README.md) compares

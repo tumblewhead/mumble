@@ -1,0 +1,101 @@
+{
+  "schema": "text_audit_independent_review_v1",
+  "round": 2,
+  "reviewer": "text_census_review agent; same independent reviewer as R1",
+  "source_revision": "c2cb9fc79181a8242af9b9a3b27e1a92c4650924",
+  "status": "accepted_as_current_image_census_and_proposed_experiment_plan",
+  "scope": "README, grouping generator, grouped receipt and full function census; no implementation optimization accepted.",
+  "hashes": {
+    "experiments/text_audit_001/README.md": "f8da8c2a999c56d7d266bbd4327016818eb5269bc7116a52ff3953937d9a5058",
+    "experiments/text_audit_001/summarize.py": "ee5a8af65615fd81ba838f2699bce3b5d069965ee60e8749815a946a6c427a87",
+    "provenance/text_audit_001/groups.json": "22a14087cfd129ecc501885a6c118159fff2e87c48143e78b67cf1398237a3c8",
+    "provenance/text_audit_001/CENSUS.md": "ebb8d12844df810614420ff6656e82ca822f0bac8c610156d8f534bb731ced6b",
+    "provenance/text_audit_001/census.json": "2af3b8d5f2a88692416492399cd7e677de4da71288fe35a8f647b26d524364ee",
+    "provenance/text_audit_001/review_r1.json": "56c129b853ffcf72077c8683cb33b7b48d3b1b5db018b304f57f970d14059b73",
+    "experiments/text_audit_001/baseline001/measurement.json": "2d4cc5037bf34c4ba35af7f2c2442a55e8cfa60af06e933fdc507087ed2ba15e",
+    "experiments/text_audit_001/baseline001/tiny_cardinal/core.c": "93b737b9a93bc0962ae47d4bd4f2d5b7c0a4169f7bd83b4524bb7f6d78b8e45f",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/sram_size_001/history48.h": "6c1324c1e3b024d28e0a1b992e653002f9369b00d5ea7ea8c3a12348c18f2217"
+  },
+  "checks": {
+    "reproduction_command": "python3 -B experiments/text_audit_001/summarize.py --census experiments/text_audit_001/audit001/census.json --measurement experiments/text_audit_001/baseline001/measurement.json --out /tmp/mumble-text-summary-review-r2",
+    "byte_identical_reproductions": [
+      "groups.json",
+      "census.json",
+      "CENSUS.md"
+    ],
+    "independent_group_check": "Each source function appears exactly once; recorded function values match census; each group sum and total independently recomputed.",
+    "text_B": 17100,
+    "static_B": 25072,
+    "with_provisional_1024_stack_B": 26096,
+    "arithmetic": {
+      "compiler_physical_union_B": 4746,
+      "project_subtraction_wrapper_B": 16,
+      "physical_union_with_wrapper_B": 4762,
+      "DWARF_group_B": 4772,
+      "DWARF_extra_padding_B": 10,
+      "extra_halfword_addresses": [
+        "0x10003042",
+        "0x10003056",
+        "0x1000306a",
+        "0x1000307e",
+        "0x100041aa"
+      ],
+      "missing_physical_bytes_from_DWARF_group": 0
+    },
+    "budget": {
+      "total_target_B": 10240,
+      "unchanged_nontext_and_provisional_stack_B": 8996,
+      "remaining_text_B": 1244,
+      "arithmetic_family_subtraction_only_total_B": 21334,
+      "interpretation": "Arithmetic-family subtraction is a thought experiment on fixed remaining bytes, not a measured build or a guaranteed lower bound after arbitrary restructuring."
+    },
+    "summary_guard": "PASS: independently changed census ELF SHA256 and measurement ELF SHA256 both raise ValueError before output directory creation."
+  },
+  "contracts": [
+    {
+      "id": "T1",
+      "status": "appropriate_proposed_boundary",
+      "source_basis": "feature(full=1) computes free/forced RC amplitude times cardinal pole basis and raw chart derivatives; transported accumulates that basis against full free_rc/forced_rc state and applies parameter scale once. Likelihood uses reduced projected basis.",
+      "obligations": "Keep full endpoint/reduced likelihood distinction, raw versus whitened gradient scaling, support checks and scratch alias lifetimes. Weighted feature-row combination reorders sums and needs numerical validation. H-weighted division is appropriately excluded."
+    },
+    {
+      "id": "T2",
+      "status": "appropriate_proposed_boundary",
+      "source_basis": "qr_insert and history_insert have matching Givens structure but different retained storage access and rounding. history_insert reads back rounded writes and checks finite values.",
+      "obligations": "Preserve every packed write and readback, update order, nonfinite failure, invalidation and packed indexing. Sharing must not count any observation twice."
+    },
+    {
+      "id": "T3",
+      "status": "appropriate_proposed_boundary",
+      "source_basis": "br_step back-substitutes R*y=-rhs and commits the output after finite scratch values; br_variance forward-solves transpose against gradient then forms squared norm. Both acquire/release scratch lease.",
+      "obligations": "Retain orientation, sign, whole joint factor and prior, failure behavior, scratch lease and output commitment. Proposed direction-aware loop remains unproved until implemented and checked."
+    },
+    {
+      "id": "T4",
+      "status": "appropriate_proposed_boundary",
+      "source_basis": "stream_row updates charge with I*dt/3600, decays fixed RC poles even at rest, updates H jets when I is nonzero, and assembles a scaled row. Source rejects invalid dt/current/temperature/sigma and invalidates on failure.",
+      "obligations": "Preserve actual intervals, order, carried state, rest RC evolution, finite/support checks and overlapping-copy semantics. Runtime arithmetic reuse is not automatically linked SRAM savings."
+    },
+    {
+      "id": "T5",
+      "status": "appropriate_proposed_boundary",
+      "source_basis": "Current image retains binary64 arithmetic throughout including packed-history computation; packed storage is not lower-precision arithmetic.",
+      "obligations": "Inventory all helper dependencies and compare complete linked builds; lower precision needs accumulated rounding and uncertainty obligations, not only point comparisons."
+    }
+  ],
+  "findings": [
+    {
+      "id": "R2-1",
+      "severity": "future_robustness",
+      "status": "resolved_for_current_image_by_reviewed_ELF_guard",
+      "finding": "summarize.py intentionally hardcodes current-image revision, physical helper totals and prose totals. It now requires both census ELF identity and measurement ELF identity to match the reviewed image, making the intended scope explicit. Independently tested mismatches in either input reject before output creation. This is a scope guard, not validation against maliciously edited input values."
+    }
+  ],
+  "required_corrections_for_current_receipt": [],
+  "limits": [
+    "The grouping is a functional source attribution convention, not marginal removable code cost.",
+    "Plans T1\u2013T5 have suitable boundary contracts but are not implementations, proofs of equivalence, accepted optimizations or predicted savings.",
+    "Provisional stack allowance, excluded platform code and unresolved firmware/lifetime/coverage qualification remain explicit."
+  ]
+}

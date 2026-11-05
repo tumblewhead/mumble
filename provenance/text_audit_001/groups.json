@@ -1,0 +1,165 @@
+{
+  "schema": "text_audit_groups_v1",
+  "source_revision": "c2cb9fc79181a8242af9b9a3b27e1a92c4650924",
+  "text_B": 17100,
+  "groups": [
+    {
+      "group": "Binary64 arithmetic runtime",
+      "bytes": 4772,
+      "functions": {
+        "__aeabi_dadd": 1460,
+        "__aeabi_ddiv": 1312,
+        "__aeabi_dmul": 1072,
+        "__gedf2": 190,
+        "__ledf2": 188,
+        "__eqdf2": 118,
+        "__aeabi_d2iz": 96,
+        "__aeabi_i2d": 78,
+        "__aeabi_ui2d": 62,
+        "__aeabi_dcmpun": 56,
+        "__aeabi_dcmple": 20,
+        "__aeabi_dcmpgt": 20,
+        "__aeabi_dcmpge": 20,
+        "__aeabi_cdrcmple": 18,
+        "__aeabi_dcmplt": 18,
+        "__wrap___aeabi_dsub": 16,
+        "__aeabi_cdcmple": 16,
+        "__aeabi_dcmpeq": 12
+      }
+    },
+    {
+      "group": "Model coefficients, support and endpoint transport",
+      "bytes": 4008,
+      "functions": {
+        "transported": 1514,
+        "feature": 1008,
+        "supported": 740,
+        "chart": 76,
+        "spline": 230,
+        "cardinal": 178,
+        "cheb": 114,
+        "dcheb": 76,
+        "emit": 72
+      }
+    },
+    {
+      "group": "Joint refit and scalar uncertainty",
+      "bytes": 2674,
+      "functions": {
+        "br_rebuild": 508,
+        "evaluate": 428,
+        "cost_at": 244,
+        "fit": 382,
+        "br_step": 220,
+        "br_variance": 288,
+        "estimate": 112,
+        "scalar": 72,
+        "append": 234,
+        "initialize": 186
+      }
+    },
+    {
+      "group": "Shared elementary math",
+      "bytes": 1720,
+      "functions": {
+        "tm_log": 420,
+        "tm_exp": 264,
+        "tm_hypot": 248,
+        "tm_tanh": 206,
+        "tm_atanh": 136,
+        "tm_sqrt": 124,
+        "sm_eval": 112,
+        "tm_expm1_reduced": 70,
+        "tm_scale": 70,
+        "tm_expm1": 50,
+        "tm_value": 12,
+        "tm_nextup": 8
+      }
+    },
+    {
+      "group": "Sample propagation",
+      "bytes": 1450,
+      "functions": {
+        "stream_row": 1450
+      }
+    },
+    {
+      "group": "History and local QR storage/update",
+      "bytes": 1128,
+      "functions": {
+        "qr_insert": 516,
+        "history_insert": 430,
+        "history_put": 126,
+        "history_get": 40,
+        "index_of": 16
+      }
+    },
+    {
+      "group": "Memory runtime",
+      "bytes": 572,
+      "functions": {
+        "memmove": 264,
+        "memcpy": 164,
+        "memset": 144
+      }
+    },
+    {
+      "group": "Ownership and interface checks",
+      "bytes": 510,
+      "functions": {
+        "bind": 234,
+        "br_acquire": 128,
+        "br_release": 70,
+        "ingest": 68,
+        "stream_ingest": 10
+      }
+    },
+    {
+      "group": "Entry and integer runtime",
+      "bytes": 266,
+      "functions": {
+        "reset": 182,
+        "fault": 4,
+        "__clzsi2": 60,
+        "__gnu_thumb1_case_uqi": 20
+      }
+    }
+  ],
+  "allocated": [
+    {
+      "name": ".vectors",
+      "bytes": 28,
+      "address": 268435456
+    },
+    {
+      "name": ".text",
+      "bytes": 17100,
+      "address": 268435484
+    },
+    {
+      "name": ".rodata",
+      "bytes": 1016,
+      "address": 268452584
+    },
+    {
+      "name": ".bss",
+      "bytes": 6928,
+      "address": 268453600
+    }
+  ],
+  "static_B": 25072,
+  "with_provisional_1024_stack_B": 26096,
+  "compiler_binary64_physical_union_B": 4746,
+  "compiler_binary64_plus_project_subtraction_wrapper_union_B": 4762,
+  "limits": [
+    "Symbol extents include embedded literal pools/padding, not only instructions.",
+    "DWARF inline leaf attribution is compiler metadata, not a unique causal source-code cost.",
+    "Do not add physical-symbol and inline-attribution tables: they partition the same bytes.",
+    "Static call-site counts are not runtime call counts or CPU profiles.",
+    "Removing a function does not necessarily save its reported bytes; relinking changes inlining and retained helpers."
+  ],
+  "inputs": {
+    "experiments/text_audit_001/audit001/census.json": "2af3b8d5f2a88692416492399cd7e677de4da71288fe35a8f647b26d524364ee",
+    "experiments/text_audit_001/baseline001/measurement.json": "2d4cc5037bf34c4ba35af7f2c2442a55e8cfa60af06e933fdc507087ed2ba15e"
+  }
+}
