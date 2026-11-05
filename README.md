@@ -1,3 +1,10 @@
+# Configuration-backed check reduction
+
+The [configuration-size experiment](experiments/config_size_001/README.md)
+removes one provably redundant finite check under validated immutable
+configuration, saving56B static. Observable-input static total:24712B.
+Mainline defaults unchanged; separate execution stack witness remains664B.
+
 # Observable-input footprint lane
 
 The [stream-size trials](experiments/stream_size_001/README.md) establish a
