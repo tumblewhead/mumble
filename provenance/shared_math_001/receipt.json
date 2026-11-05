@@ -1,0 +1,1317 @@
+{
+  "schema": "shared_math_experiment_v1",
+  "base_revision": "b2254a86c76cab57277e42af7c431c32a9f4d20f",
+  "branch": "experiment/shared-math-001",
+  "status": "isolated_candidate_measured_not_promoted",
+  "source": {
+    "experiments/shared_math_001/build.py": {
+      "path": "experiments/shared_math_001/build.py",
+      "bytes": 5219,
+      "sha256": "7eaf08d798474564f5faf7971812ee3705c3f8f84c127db74ab55e8ff4fd9f98"
+    },
+    "experiments/shared_math_001/run.py": {
+      "path": "experiments/shared_math_001/run.py",
+      "bytes": 3190,
+      "sha256": "ec0eeb25b87bb218e4c75631a72b4a5c27e06bbf942ac211ed5ffa9b6acde964"
+    },
+    "experiments/shared_math_001/qualify.py": {
+      "path": "experiments/shared_math_001/qualify.py",
+      "bytes": 3138,
+      "sha256": "8c72f51092e45956d7e1943538abf9c897710482c354bbca9e567096b50c5262"
+    },
+    "experiments/shared_math_001/stream_test.py": {
+      "path": "experiments/shared_math_001/stream_test.py",
+      "bytes": 3515,
+      "sha256": "410fe3325220b71b87ab22860012167f359908efd1cbaf63c8449704c9db5fce"
+    },
+    "experiments/shared_math_001/target.py": {
+      "path": "experiments/shared_math_001/target.py",
+      "bytes": 995,
+      "sha256": "0db85d8cf56d45970e85e45c2b4683149db56c5356738597fc8198d59ec07947"
+    }
+  },
+  "variants": {
+    "baseline": {
+      "static_B": 25928,
+      "with_provisional_1024_stack_B": 26952,
+      "math_grid": {
+        "exp": {
+          "max_relative": 2.220446049250313e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 1.8368893811580414e-15,
+          "max_ulp": 13.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 1.9740807692488546e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 1.0203227973520182e-15,
+          "max_ulp": 9.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 5.103556995675237e-16,
+          "max_ulp": 3.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.93898726494969,
+        "free_gradient_inf": 5.680685703260197e-07,
+        "free_GN_decrement_squared": 9.33778239840383e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/baseline/measurement.json",
+        "bytes": 2695,
+        "sha256": "116e6ff6b5a962c4eeba549e38d0b084bae7a186544a11caa5e20f2aa3c2302c"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/baseline/shared_math.h",
+        "bytes": 3412,
+        "sha256": "d2fc9bb1b2269cdb841632d9c4f9dfd6ea29cabbdc7c7c5894ec464f17776f8c"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/baseline/tiny_cardinal/probe.elf",
+        "bytes": 78472,
+        "sha256": "b23d92c9b076c193d2f8dc972cb753e58745edadb9e0689bc7265c1991689c29"
+      }
+    },
+    "bernstein": {
+      "static_B": 25968,
+      "with_provisional_1024_stack_B": 26992,
+      "math_grid": {
+        "exp": {
+          "max_relative": 6.174293055498131e-16,
+          "max_ulp": 4.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 1.2824237650183936e-15,
+          "max_ulp": 10.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 1.1666091327061224e-15,
+          "max_ulp": 6.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 6.592607826960215e-16,
+          "max_ulp": 5.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 1.2775970564564035e-15,
+          "max_ulp": 10.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.938987264949745,
+        "free_gradient_inf": 5.680689164947733e-07,
+        "free_GN_decrement_squared": 9.337782431805404e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/bernstein/measurement.json",
+        "bytes": 2699,
+        "sha256": "eb6fa6966e1a567ecf94738befd2bf1d408367ef74af7d0dcef3eb2f061853bf"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/bernstein/shared_math.h",
+        "bytes": 4003,
+        "sha256": "175c78169f97e6e4116e1a2be6dcac27245005f717852714e493795606e3fd7a"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/bernstein/tiny_cardinal/probe.elf",
+        "bytes": 78608,
+        "sha256": "d2b343a7a44e9808e90bba37d8f27064ccd14c7f50a865d297a1d08bc6298f9c"
+      }
+    },
+    "bernstein_seed": {
+      "static_B": 26232,
+      "with_provisional_1024_stack_B": 27256,
+      "math_grid": {
+        "exp": {
+          "max_relative": 6.174293055498131e-16,
+          "max_ulp": 4.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 1.2824237650183936e-15,
+          "max_ulp": 10.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 1.1666091327061224e-15,
+          "max_ulp": 6.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 6.592607826960215e-16,
+          "max_ulp": 5.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 1.2775970564564035e-15,
+          "max_ulp": 10.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.938987264949745,
+        "free_gradient_inf": 5.680689164947733e-07,
+        "free_GN_decrement_squared": 9.337782431805404e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/bernstein_seed/measurement.json",
+        "bytes": 2719,
+        "sha256": "c5d14deb1b42ab57ce3180bd894ce4326b9598f0e4962933a3e87706353bdd9b"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/bernstein_seed/shared_math.h",
+        "bytes": 4416,
+        "sha256": "a0090ce0505ff927c8b5c6b977d023faf3dc51f594c9686f871a2087faa8ff36"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/bernstein_seed/tiny_cardinal/probe.elf",
+        "bytes": 78940,
+        "sha256": "ec082940b485629cfb0bcde69a9ec640abfec0a76f752a488b2973668237661f"
+      }
+    },
+    "horner_seed": {
+      "static_B": 26152,
+      "with_provisional_1024_stack_B": 27176,
+      "math_grid": {
+        "exp": {
+          "max_relative": 2.220446049250313e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 2.5842723182698997e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 1.9740807692488546e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 4.356304786108972e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 5.103556995675237e-16,
+          "max_ulp": 3.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.93898726494982,
+        "free_gradient_inf": 5.680686928940938e-07,
+        "free_GN_decrement_squared": 9.337782433875646e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/horner_seed/measurement.json",
+        "bytes": 2707,
+        "sha256": "823825e9f2f08b135a1b1247e94751bc8b1714c93ffc4d53d419ed1692dcbd0d"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/horner_seed/shared_math.h",
+        "bytes": 4292,
+        "sha256": "cc96d6ff71302eeacc673f9f591f4f2f0c6bdf9a1e8d0b088c06268310612d63"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/horner_seed/tiny_cardinal/probe.elf",
+        "bytes": 78860,
+        "sha256": "5c1128de4d195572fa81841ca0c17298b7f37d63473d9b341f649cd51966becf"
+      }
+    },
+    "procedural": {
+      "static_B": 25960,
+      "with_provisional_1024_stack_B": 26984,
+      "math_grid": {
+        "exp": {
+          "max_relative": 2.220446049250313e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 7.368140888257498e-16,
+          "max_ulp": 6.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 3.720586543651216e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 8.190621572119158e-16,
+          "max_ulp": 5.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 6.902216074921736e-16,
+          "max_ulp": 6.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.93898726494983,
+        "free_gradient_inf": 5.680685513032038e-07,
+        "free_GN_decrement_squared": 9.337782356279044e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/procedural/measurement.json",
+        "bytes": 2703,
+        "sha256": "454e5b7d5d18a4bf285f99f6b658700c6c5ee5f37ee2c78184fa4a1e153e9160"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/procedural/shared_math.h",
+        "bytes": 3317,
+        "sha256": "00f08a33bb471c01f22f72d91c3b1ed81a5d79d9b2f635a6c186dc8d5b8f3dc7"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/procedural/tiny_cardinal/probe.elf",
+        "bytes": 78468,
+        "sha256": "641ae0341424b0bcd2ec511ab26245aead883ff441fc2fb9a01af6695c9565de"
+      }
+    },
+    "horner": {
+      "static_B": 25880,
+      "with_provisional_1024_stack_B": 26904,
+      "math_grid": {
+        "exp": {
+          "max_relative": 2.220446049250313e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 2.5842723182698997e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 1.9740807692488546e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 4.356304786108972e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 5.103556995675237e-16,
+          "max_ulp": 3.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.93898726494982,
+        "free_gradient_inf": 5.680686928940938e-07,
+        "free_GN_decrement_squared": 9.337782433875646e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/horner/measurement.json",
+        "bytes": 2687,
+        "sha256": "00a2e32bdf768189d16f944d319bc54453c68c7dced1093c69cb4b23a3deae18"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/horner/shared_math.h",
+        "bytes": 3872,
+        "sha256": "721d13378db17e112a5d8241154174667f2d8230fc0b42e068f364696e94afca"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/horner/tiny_cardinal/probe.elf",
+        "bytes": 78520,
+        "sha256": "8345026f5a0116215451b12b0f321b058ed8abc1349d4b15ed062d273db62071"
+      }
+    },
+    "procedural_shared": {
+      "static_B": 25720,
+      "with_provisional_1024_stack_B": 26744,
+      "math_grid": {
+        "exp": {
+          "max_relative": 2.220446049250313e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 7.368140888257498e-16,
+          "max_ulp": 6.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 3.720586543651216e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 8.190621572119158e-16,
+          "max_ulp": 5.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 6.902216074921736e-16,
+          "max_ulp": 6.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.93898726494983,
+        "free_gradient_inf": 5.680685513032038e-07,
+        "free_GN_decrement_squared": 9.337782356279044e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/procedural_shared/measurement.json",
+        "bytes": 2731,
+        "sha256": "2c20d24db904b1c0aee0f88c7be2ca8ede982144c91d54c701562af713cc051b"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/procedural_shared/shared_math.h",
+        "bytes": 3351,
+        "sha256": "ab40f34ae7af3630785ab3e75c274729ec7640055863b695002b05d8b206f962"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/procedural_shared/tiny_cardinal/probe.elf",
+        "bytes": 78284,
+        "sha256": "4a4ce5c50cfac31cba077704906220f8ea4d6de160090d44c3b4c0510ee2337a"
+      }
+    },
+    "bernstein_low": {
+      "static_B": 25936,
+      "with_provisional_1024_stack_B": 26960,
+      "math_grid": {
+        "exp": {
+          "max_relative": 4.705138769648908e-16,
+          "max_ulp": 3.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 2.5500906278126807e-15,
+          "max_ulp": 18.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 5.922242307746564e-16,
+          "max_ulp": 3.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 1.1513934024141474e-15,
+          "max_ulp": 10.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 2.8408241315931294e-15,
+          "max_ulp": 17.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.938987264949844,
+        "free_gradient_inf": 5.680687027692875e-07,
+        "free_GN_decrement_squared": 9.33778234847168e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/bernstein_low/measurement.json",
+        "bytes": 2715,
+        "sha256": "e74f874e25ad7a576f2411ad1a1636d48bb7b1a425b87450be1a7748768cc9b5"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/bernstein_low/shared_math.h",
+        "bytes": 3919,
+        "sha256": "0de71424a8c01bf2d1a2d10920f8302c5ef7d5cc2b7cce0056dcd68583407d51"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/bernstein_low/tiny_cardinal/probe.elf",
+        "bytes": 78576,
+        "sha256": "5535e2a942d30d7b3fc26d2ae0876d197c80382de5ad4920c07cfce24f9c887f"
+      }
+    },
+    "bernstein_medium": {
+      "static_B": 25872,
+      "with_provisional_1024_stack_B": 26896,
+      "math_grid": {
+        "exp": {
+          "max_relative": 9.44163447597265e-12,
+          "max_ulp": 60135.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 6.529103161114945e-10,
+          "max_ulp": 4627189.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 2.4195116939077716e-13,
+          "max_ulp": 1890.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 3.2698250675980213e-10,
+          "max_ulp": 2884227.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 2.5725397281462133e-10,
+          "max_ulp": 1733893.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.93898726476654,
+        "free_gradient_inf": 5.680692385933267e-07,
+        "free_GN_decrement_squared": 9.337782420174453e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/bernstein_medium/measurement.json",
+        "bytes": 2727,
+        "sha256": "6356439b6382feca966964d1504cb374d85a127ef2028708091d733d66025e36"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/bernstein_medium/shared_math.h",
+        "bytes": 3748,
+        "sha256": "6b582cbc5d5f001723595632501e34d29074ada34396d8fe269ba45a80597bbd"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/bernstein_medium/tiny_cardinal/probe.elf",
+        "bytes": 78512,
+        "sha256": "3138421dcdadebc382b3aa1ab91b195fdfe535caba1395a91c70d45547a8fee0"
+      }
+    },
+    "bernstein_small": {
+      "static_B": 25832,
+      "with_provisional_1024_stack_B": 26856,
+      "math_grid": {
+        "exp": {
+          "max_relative": 1.614495835960057e-07,
+          "max_ulp": 1028293431.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 3.7017988584051775e-06,
+          "max_ulp": 26234725559.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 9.566288378341061e-12,
+          "max_ulp": 74727.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 1.9193868127945917e-06,
+          "max_ulp": 16930408063.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 4.744523509577302e-09,
+          "max_ulp": 33324693.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.938985565008956,
+        "free_gradient_inf": 5.680557547669875e-07,
+        "free_GN_decrement_squared": 9.337175935507315e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/bernstein_small/measurement.json",
+        "bytes": 2723,
+        "sha256": "16c44e934b4ddb271a7a3a74ad03cd0ac06133614c774185dfaa56a2b8dbbd6e"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/bernstein_small/shared_math.h",
+        "bytes": 3664,
+        "sha256": "82136f51b5b4b202b636a31afb9b4c8fb8f68b3be74ba19befe79a0772cd39a5"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/bernstein_small/tiny_cardinal/probe.elf",
+        "bytes": 78472,
+        "sha256": "57698eb5c7985a341a20b92f72f004b6d8478c2fce953a7c6929330bfa7cdc92"
+      }
+    },
+    "procedural_horner": {
+      "static_B": 25704,
+      "with_provisional_1024_stack_B": 26728,
+      "math_grid": {
+        "exp": {
+          "max_relative": 2.220446049250313e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "expm1": {
+          "max_relative": 2.5842723182698997e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "log": {
+          "max_relative": 1.9740807692488546e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "sqrt": {
+          "max_relative": 2.2203075240082307e-16,
+          "max_ulp": 1.0,
+          "nonfinite": 0
+        },
+        "hypot": {
+          "max_relative": 3.0715150587028234e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "tanh": {
+          "max_relative": 4.356304786108972e-16,
+          "max_ulp": 2.0,
+          "nonfinite": 0
+        },
+        "atanh": {
+          "max_relative": 5.103556995675237e-16,
+          "max_ulp": 3.0,
+          "nonfinite": 0
+        }
+      },
+      "fixture_fit": {
+        "stop": "GN_decrement_at_cost_roundoff",
+        "rounds": 12,
+        "cost": 61.93898726494982,
+        "free_gradient_inf": 5.680686928940938e-07,
+        "free_GN_decrement_squared": 9.337782433875646e-14,
+        "domain_rejections": 0
+      },
+      "measurement": {
+        "path": "experiments/shared_math_001/attempt003/target/procedural_horner/measurement.json",
+        "bytes": 2731,
+        "sha256": "536e6aefdb0a6c994d7925dd213becd100303747b00507b8ca7f869e538e478c"
+      },
+      "source_header": {
+        "path": "experiments/shared_math_001/attempt003/host/procedural_horner/shared_math.h",
+        "bytes": 3250,
+        "sha256": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7"
+      },
+      "elf": {
+        "path": "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/attempt003/target/procedural_horner/tiny_cardinal/probe.elf",
+        "bytes": 78268,
+        "sha256": "c3ae11f20e82646f92420191f103a5a2ef8365d0452a985c31f8f76e9a7a171b"
+      }
+    }
+  },
+  "reviews": {
+    "provenance/shared_math_001/review_controls_r1.json": {
+      "path": "provenance/shared_math_001/review_controls_r1.json",
+      "bytes": 14985,
+      "sha256": "59ec586428a54a0e119f83acf2607b6c71f7cad7f2a8cf671f8f03c22ecdb86a"
+    },
+    "provenance/shared_math_001/review_controls_r1.py": {
+      "path": "provenance/shared_math_001/review_controls_r1.py",
+      "bytes": 4922,
+      "sha256": "daa1541e9c295901d5a0dfad30a1053a3595ca8bb6f5deba3ebfec4e6fea0767"
+    },
+    "provenance/shared_math_001/review_r1.json": {
+      "path": "provenance/shared_math_001/review_r1.json",
+      "bytes": 12616,
+      "sha256": "ff74dac1f26937ff07d2fddb6b9dbc9b8f009d7600c934ee879d5fcc740a8ab2"
+    },
+    "provenance/shared_math_001/review_controls_r2.py": {
+      "path": "provenance/shared_math_001/review_controls_r2.py",
+      "bytes": 5250,
+      "sha256": "ebc4560a7d0d105a20731cbd6055e76c13483c4930ce79659c398edb299d0889"
+    },
+    "provenance/shared_math_001/review_controls_r2.json": {
+      "path": "provenance/shared_math_001/review_controls_r2.json",
+      "bytes": 9205,
+      "sha256": "a047cbf063296fa7ac48e32e19fea7c8bb572d7c2e4fb47af825fe621f7c911c"
+    },
+    "provenance/shared_math_001/review_r2.json": {
+      "path": "provenance/shared_math_001/review_r2.json",
+      "bytes": 18478,
+      "sha256": "3cc6096af170ead3cd0c78d9e720c10503ea55970a206a01a27862c606e760a3"
+    },
+    "provenance/shared_math_001/closure_review.json": {
+      "path": "provenance/shared_math_001/closure_review.json",
+      "bytes": 5146,
+      "sha256": "ad552d38cd8f93ccb9ae2b710c37b736c6d4c0f888467cea29d320231a44df5c"
+    }
+  },
+  "target_budget_B": 10240,
+  "checkpoints": {
+    "artifact": {
+      "path": "experiments/shared_math_001/qualification001/checkpoints.json",
+      "bytes": 57779,
+      "sha256": "d85f1d4bb076c34ca767f4a0ca8cd8155d0ff17472d698d5b2e9a133640bc917"
+    },
+    "count": 10,
+    "scope": "common72hretainedhistory refits;not72hstream",
+    "max_reference_sd_shift": {
+      "baseline": 0.0,
+      "bernstein": 2.0879192279684606e-12,
+      "bernstein_small": 2.8122854731912675e-06,
+      "procedural_horner": 0.0
+    }
+  },
+  "target_execution": {
+    "baseline": {
+      "artifact": {
+        "path": "experiments/shared_math_001/qualification001/target/baseline/measurement.json",
+        "bytes": 1537,
+        "sha256": "7cc304a9b82d2720d7a4915808d3aeb4f8f9e957ae7a5b9b40f859037609d3a9"
+      },
+      "result": {
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/baseline/probe.c",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/baseline/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/baseline/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/baseline/probe.elf"
+        ],
+        "emulator": [
+          "qemu-system-arm",
+          "-M",
+          "mps2-an505",
+          "-nographic",
+          "-semihosting-config",
+          "enable=on,target=native",
+          "-kernel",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/baseline/probe.elf"
+        ],
+        "output": "status=0\nallocation_B=8096\nstack_watermark_B=608\n",
+        "returncode": 0,
+        "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+      }
+    },
+    "bernstein": {
+      "artifact": {
+        "path": "experiments/shared_math_001/qualification001/target/bernstein/measurement.json",
+        "bytes": 1542,
+        "sha256": "b6326b5928b1deab4d8f5905c80d3fe4bd759dadfd117561c9e6e8adf7069829"
+      },
+      "result": {
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/bernstein/probe.c",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/bernstein/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/bernstein/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/bernstein/probe.elf"
+        ],
+        "emulator": [
+          "qemu-system-arm",
+          "-M",
+          "mps2-an505",
+          "-nographic",
+          "-semihosting-config",
+          "enable=on,target=native",
+          "-kernel",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/bernstein/probe.elf"
+        ],
+        "output": "status=0\nallocation_B=8096\nstack_watermark_B=776\n",
+        "returncode": 0,
+        "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+      }
+    },
+    "procedural_horner": {
+      "artifact": {
+        "path": "experiments/shared_math_001/qualification001/target/procedural_horner/measurement.json",
+        "bytes": 1582,
+        "sha256": "cbd66fbbfa624b875cfd9aebcfdaa9cd729bdb899166eff92d17c68c97e139ee"
+      },
+      "result": {
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/procedural_horner/probe.c",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/procedural_horner/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/procedural_horner/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/procedural_horner/probe.elf"
+        ],
+        "emulator": [
+          "qemu-system-arm",
+          "-M",
+          "mps2-an505",
+          "-nographic",
+          "-semihosting-config",
+          "enable=on,target=native",
+          "-kernel",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/qualification001/target/procedural_horner/probe.elf"
+        ],
+        "output": "status=0\nallocation_B=8096\nstack_watermark_B=632\n",
+        "returncode": 0,
+        "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+      }
+    }
+  },
+  "history48": {
+    "size": {
+      "artifact": {
+        "path": "experiments/shared_math_001/target48_001/measurement.json",
+        "bytes": 2707,
+        "sha256": "3eb6dafe69dbc74ef4929a933a5ace3fd601d017c67b7e1912a63ad69f4aecb3"
+      },
+      "result": {
+        "results": [
+          {
+            "math": "tiny",
+            "map": "cardinal",
+            "history_bits": 48,
+            "allocated": [
+              {
+                "name": ".vectors",
+                "bytes": 28,
+                "address": 268435456
+              },
+              {
+                "name": ".text",
+                "bytes": 17100,
+                "address": 268435484
+              },
+              {
+                "name": ".rodata",
+                "bytes": 1016,
+                "address": 268452584
+              },
+              {
+                "name": ".bss",
+                "bytes": 6928,
+                "address": 268453600
+              }
+            ],
+            "alignment_gaps_B": 0,
+            "sections": {
+              ".vectors": 28,
+              ".text": 17100,
+              ".rodata": 1016,
+              ".bss": 6928,
+              ".comment": 60,
+              ".ARM.attributes": 50,
+              ".debug_info": 10636,
+              ".debug_abbrev": 4357,
+              ".debug_loclists": 16732,
+              ".debug_aranges": 512,
+              ".debug_rnglists": 1361,
+              ".debug_line": 14705,
+              ".debug_str": 2651,
+              ".debug_frame": 612,
+              ".debug_line_str": 163
+            },
+            "allocated_sections_B": 25072,
+            "with_1024_stack_B": 26096,
+            "stack": "1024B reservation, not bound; final linked stack qualification pending",
+            "command": [
+              "arm-none-eabi-gcc",
+              "-mcpu=cortex-m23",
+              "-mthumb",
+              "-mfloat-abi=soft",
+              "-std=c11",
+              "-Os",
+              "-flto",
+              "-fno-fast-math",
+              "-ffp-contract=off",
+              "-ffunction-sections",
+              "-fdata-sections",
+              "-fstack-usage",
+              "-nostartfiles",
+              "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/target48_001/tiny_cardinal/probe.c",
+              "/home/easy/proj/mumble/.worktrees/shared-math/experiments/sram_size_001/soft_sub.c",
+              "-Wl,--wrap=__aeabi_dsub",
+              "-T",
+              "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/target48_001/tiny_cardinal/link.ld",
+              "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/target48_001/tiny_cardinal/probe.map",
+              "-lm",
+              "-lc",
+              "-lgcc",
+              "-lnosys",
+              "-o",
+              "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/target48_001/tiny_cardinal/probe.elf"
+            ],
+            "sha256": "c288374972a0308991fea97795345e24e8331439f21a1ac57265e2908725f1d8"
+          }
+        ],
+        "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+        "shared_math_variant": "procedural_horner",
+        "history_bits": 48
+      }
+    },
+    "execution": {
+      "artifact": {
+        "path": "experiments/shared_math_001/stack48_001/measurement.json",
+        "bytes": 1500,
+        "sha256": "67215532d144158c2e52d4e794d3c1ccbfdcc40625904adad8a656dbcc0b7251"
+      },
+      "result": {
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/stack48_001/probe.c",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/stack48_001/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/stack48_001/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/stack48_001/probe.elf"
+        ],
+        "emulator": [
+          "qemu-system-arm",
+          "-M",
+          "mps2-an505",
+          "-nographic",
+          "-semihosting-config",
+          "enable=on,target=native",
+          "-kernel",
+          "/home/easy/proj/mumble/.worktrees/shared-math/experiments/shared_math_001/stack48_001/probe.elf"
+        ],
+        "output": "status=0\nallocation_B=6912\nstack_watermark_B=672\n",
+        "returncode": 0,
+        "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n",
+        "shared_math_variant": "procedural_horner",
+        "history_bits": 48
+      }
+    }
+  },
+  "stream": {
+    "artifact": {
+      "path": "experiments/shared_math_001/stream002/results.json",
+      "bytes": 5553,
+      "sha256": "37b5e74334b180594edfdb37253fa63a19128faf2d1beef104e37dd820e84278"
+    },
+    "results": [
+      {
+        "case": "case_0000",
+        "records": 720000,
+        "hours": 4.0,
+        "stats": {
+          "baseline": {
+            "accepted": 239,
+            "rejected": 0,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "max_chart_delta": 0.0,
+            "max_relative_sd_delta": 0.0
+          },
+          "procedural_horner": {
+            "accepted": 239,
+            "rejected": 0,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 0,
+            "max_chart_delta": 6.661338147750939e-13,
+            "max_relative_sd_delta": 1.321465159520585e-11,
+            "zero_sd_mismatches": 0
+          }
+        },
+        "final": {
+          "baseline": {
+            "end": [
+              0.691409439574439,
+              0.00026316728132476483,
+              0.0002104299960058019,
+              0.0003671181159574111,
+              0.584487027083168,
+              -2.869710818694936,
+              -2.3328837474145425,
+              -2.9930081829997945,
+              -3.160166872968092,
+              -2.502710669003002,
+              -0.5455179574873819,
+              -2.101792981758054,
+              1.6122113875720199,
+              -4.276983729520612,
+              1.7627282517778844,
+              2.247975895429622
+            ],
+            "sd": [
+              6.097290326961059e-05,
+              3.1628807205504535e-05,
+              9.099075889034435e-06,
+              6.634563282554593e-06,
+              0.014058485833833614,
+              0.0012233758737126047,
+              0.06746643963328276,
+              0.12001957439487643,
+              0.1778871136334954,
+              0.027546214592013382,
+              0.07437815362905567,
+              0.023956883532807997,
+              0.030642847247883385,
+              0.027469097807308582,
+              0.018401621130628345,
+              0.03582446209182538
+            ]
+          },
+          "procedural_horner": {
+            "end": [
+              0.6914094395744389,
+              0.0002631672813247597,
+              0.00021042999600580318,
+              0.0003671181159574128,
+              0.5844870270831594,
+              -2.869710818694936,
+              -2.332883747414542,
+              -2.993008182999813,
+              -3.160166872968127,
+              -2.502710669003009,
+              -0.5455179574874089,
+              -2.1017929817580416,
+              1.6122113875719923,
+              -4.276983729520596,
+              1.7627282517778735,
+              2.2479758954295996
+            ],
+            "sd": [
+              6.0972903269612866e-05,
+              3.162880720550498e-05,
+              9.099075889034549e-06,
+              6.634563282554411e-06,
+              0.014058485833833371,
+              0.001223375873712627,
+              0.06746643963328319,
+              0.1200195743948807,
+              0.17788711363349355,
+              0.027546214592013653,
+              0.07437815362905535,
+              0.023956883532807557,
+              0.030642847247883496,
+              0.02746909780730893,
+              0.01840162113062839,
+              0.035824462091825264
+            ]
+          }
+        }
+      },
+      {
+        "case": "case_0001",
+        "records": 720000,
+        "hours": 4.0,
+        "stats": {
+          "baseline": {
+            "accepted": 239,
+            "rejected": 0,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 41,
+            "max_chart_delta": 0.0,
+            "max_relative_sd_delta": 0.0
+          },
+          "procedural_horner": {
+            "accepted": 239,
+            "rejected": 0,
+            "Q_3sd_misses": 0,
+            "SOC_3sd_misses": 41,
+            "max_chart_delta": 9.5679020262196e-13,
+            "max_relative_sd_delta": 1.936895088761048e-12,
+            "zero_sd_mismatches": 0
+          }
+        },
+        "final": {
+          "baseline": {
+            "end": [
+              0.691187495913375,
+              0.0001922325223822358,
+              0.00021898748637968237,
+              0.0003825298148516519,
+              0.5673999449932887,
+              -2.871438967597699,
+              -2.2440148396685062,
+              -3.3067281442140994,
+              -3.0239745367724904,
+              -2.545251689819361,
+              -0.7324150899103035,
+              -2.040112623553364,
+              1.5527089783542602,
+              -4.235525187417168,
+              1.7370238519544534,
+              2.1747037206011726
+            ],
+            "sd": [
+              6.786602080211954e-05,
+              2.7942307521200336e-05,
+              1.3564850859612509e-05,
+              5.456112923262987e-06,
+              0.013531298070455996,
+              0.0012665705516762807,
+              0.056022409360585425,
+              0.1448804639913423,
+              0.27315021899756503,
+              0.034546894978204755,
+              0.07324835443854988,
+              0.01995134312785963,
+              0.02880945565345746,
+              0.028370105963513425,
+              0.018643172878889405,
+              0.03583578501813098
+            ]
+          },
+          "procedural_horner": {
+            "end": [
+              0.6911874959133747,
+              0.00019223252238223266,
+              0.00021898748637968327,
+              0.0003825298148516537,
+              0.5673999449932774,
+              -2.8714389675977006,
+              -2.2440148396685022,
+              -3.306728144214116,
+              -3.02397453677249,
+              -2.545251689819363,
+              -0.7324150899103162,
+              -2.0401126235533567,
+              1.5527089783542507,
+              -4.235525187417142,
+              1.737023851954437,
+              2.1747037206011486
+            ],
+            "sd": [
+              6.786602080212882e-05,
+              2.794230752120038e-05,
+              1.3564850859612562e-05,
+              5.45611292326289e-06,
+              0.013531298070457193,
+              0.0012665705516764526,
+              0.056022409360585175,
+              0.14488046399134502,
+              0.2731502189975676,
+              0.03454689497820489,
+              0.07324835443854925,
+              0.019951343127859282,
+              0.028809455653457286,
+              0.028370105963517033,
+              0.01864317287889153,
+              0.03583578501813471
+            ]
+          }
+        }
+      }
+    ],
+    "history_bits": 64,
+    "source_campaign": "/home/easy/proj/mumble/.worktrees/sram-size/experiments/sram_size_001/campaign4h64_002",
+    "scope": "freshcausalstream; originalprior;truthonlymetrics"
+  },
+  "iterations": [
+    "attempt001:allinitialvariantslarger;negativeevidencepreserved",
+    "attempt002:explicitsharingfinds208Bsavingvsbaseline",
+    "attempt003:reverseproceduralwins224Bvsbaseline;Bernstein_small96Bsavinghaslargerfunctionerror",
+    "stream001:zero/zeroSDreportingdefect;supersededbystream002withoutestimatorarithmeticchange"
+  ],
+  "limits": [
+    "AllSRAMcode/constants/data/stackcount;stillwellover10KiB",
+    "1024Bstackallowanceisnotabound;observedstackcomesfromseparatefixtureprobe",
+    "No uniform matherror/lifetime/coverage/correctrounding certificate",
+    "Currentsharedprimitivecovers5publicfunctions; winning sqrt/hypot unchanged",
+    "Allprimarycomparisons64bithistory;48bittargetbuild/probeisnotlongstreamqualification",
+    "Higherlevelplatformruntimecodeoutsideclean numericalkernel",
+    "Math speed/16MHzdeadline unqualified; SRAMpriority",
+    "Single-segmentBernsteinconstructs only; no exhaustive spline/knot search"
+  ],
+  "review_status": "independently_reviewed_isolated_experiment;no_deployment_or_uniform_error_acceptance"
+}

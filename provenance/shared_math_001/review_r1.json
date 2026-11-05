@@ -1,0 +1,218 @@
+{
+  "schema": "shared_math_001_independent_review_v1",
+  "reviewer": "fresh-context independent agent /root/shared_math_review",
+  "date_utc": "2026-11-05T04:52:49.122984+00:00",
+  "source_revision": "b2254a86c76cab57277e42af7c431c32a9f4d20f",
+  "scope": "Independent algebra, domain, source and linked-size review of five isolated shared-math variants. No implementation edits; no production acceptance.",
+  "decision": "accepted_for_isolated_comparison_only_no_size_improvement_found",
+  "source_and_evidence_sha256": {
+    "experiments/shared_math_001/build.py": "7eaf08d798474564f5faf7971812ee3705c3f8f84c127db74ab55e8ff4fd9f98",
+    "experiments/shared_math_001/run.py": "ec0eeb25b87bb218e4c75631a72b4a5c27e06bbf942ac211ed5ffa9b6acde964",
+    "experiments/sram_size_001/tiny_math.h": "d2fc9bb1b2269cdb841632d9c4f9dfd6ea29cabbdc7c7c5894ec464f17776f8c",
+    "experiments/sram_size_001/generate.py": "2822407251b5670bea7571046db9cfce7b529a1d4750cb74830c6574ef198714",
+    "experiments/sram_size_001/measure.py": "cac0774cabd6d4061e3edaa2757b70788f1ad916548b45622dbbdb59b64d7af0",
+    "experiments/sram_size_001/native.py": "65324cf120a6205afaef3e86e4127dd4ba50031bba07b60222faf3c0e7db3ad8",
+    "experiments/sram_size_001/soft_sub.c": "d6e63c1b5e0f29c14c97faf664fbf04d8eeb4dd1cf2d81a04dcb144233b6d39e",
+    "provenance/sram_size_001/receipt.json": "c05fd9a8d2e381fec9be648dd0f6a577286a66d896c286024f5b661cbb731ee1",
+    "experiments/shared_math_001/attempt001/results.json": "ba8f43eaec0a46d6706d3645979d66f9eaa1f1e6ddf4977d4d52e9eedb3bf842",
+    "provenance/shared_math_001/review_controls_r1.py": "daa1541e9c295901d5a0dfad30a1053a3595ca8bb6f5deba3ebfec4e6fea0767",
+    "provenance/shared_math_001/review_controls_r1.json": "59ec586428a54a0e119f83acf2607b6c71f7cad7f2a8cf671f8f03c22ecdb86a"
+  },
+  "algebra": {
+    "E": "sum(k=0..14,r^k/(k+1)!) approximates expm1(r)/r; multiplication by r supplies expm1. Procedural term recurrence multiplies by r/(k+1).",
+    "L": "sum(k=0..12,z^k/(2k+1)) approximates atanh(t)/t with z=t*t. Procedural term recurrence multiplies by z*(2k-1)/(2k+1). The log wrapper multiplies by 2*t and adds split n*ln(2).",
+    "bernstein": "Exact-rational affine power substitution and degree-n Bernstein conversion agree with independently expanded power coefficients for E, L and the unscaled sqrt seed polynomial. sqrt(2.5) coefficient scaling is rounded to double, so exact equality does not assert floating-point equivalence.",
+    "sqrt": "Seed is sqrt(2.5)*sum(k=0..7,binom(1/2,k)*u^k), u=(m-2.5)/2.5. Bernstein maps u in [-0.6,0.6] to (m-1)/3. Odd positive or negative exponent is reduced to an even exponent by doubling m and decrementing exponent; then 3 Newton steps and exponent/2 scaling are consistent. Subnormal preprocessing and output scaling are retained.",
+    "coefficient_storage": "Bernstein and Horner seed variants store 15+13+8 binary64 coefficients, 288 B payload. Bernstein without seed stores 224 B. Procedural variant has no coefficient LUT but still has scalar constants and core configuration tables.",
+    "finding": "No algebra defect found in reviewed generated sources."
+  },
+  "domains": {
+    "E": "exp reduction is approximately [-ln(2)/2,ln(2)/2]; direct expm1 uses |x|<0.5; tanh small branch uses 0<=2*|x|<0.5. All lie within the Bernstein interval [-0.5,0.5].",
+    "L": "log normalizes m approximately into [1/sqrt(2),sqrt(2)], hence |t|<=about0.171573; direct atanh small branch uses |x|<0.25. Both squares lie in [0,1/16].",
+    "sqrt": "Positive finite input after subnormal normalization yields m in [1,4); seed input is u in [-0.6,0.6). Existing NaN, negative, zero and infinity handling remains.",
+    "helpers": "tm_scale is a bounded internal helper, not a fully general ldexp implementation. tm_nextup assumes nonnegative finite cost and direction +infinity. These inherited caller contracts are not widened by this experiment."
+  },
+  "memory": {
+    "baseline": {
+      "allocated_span_B": 25928,
+      "delta_from_baseline_B": 0,
+      "with_provisional_1024_stack_B": 26952,
+      "sections_B": {
+        ".text": 16668,
+        ".rodata": 1120,
+        ".data": 0,
+        ".bss": 8112,
+        ".vectors": 28
+      },
+      "alignment_gap_B": 0,
+      "unique_double_helper_symbol_B": 4762,
+      "selected_compiler_static_frames_B": {
+        "tm_exp": 32,
+        "tm_log": 48,
+        "qr_insert": 144,
+        "reset": 280
+      },
+      "elf_sha256": "b23d92c9b076c193d2f8dc972cb753e58745edadb9e0689bc7265c1991689c29",
+      "header_sha256": "d2fc9bb1b2269cdb841632d9c4f9dfd6ea29cabbdc7c7c5894ec464f17776f8c",
+      "measurement_sha256": "f1bd6d7a19b7a5e4b50dad421b9b8e39aa927380c8f948ac794801cd825a9677"
+    },
+    "bernstein": {
+      "allocated_span_B": 25968,
+      "delta_from_baseline_B": 40,
+      "with_provisional_1024_stack_B": 26992,
+      "sections_B": {
+        ".text": 16588,
+        ".rodata": 1240,
+        ".data": 0,
+        ".bss": 8112,
+        ".vectors": 28
+      },
+      "alignment_gap_B": 0,
+      "unique_double_helper_symbol_B": 4762,
+      "selected_compiler_static_frames_B": {
+        "sm_eval": 168,
+        "tm_exp": 32,
+        "tm_log": 40,
+        "qr_insert": 144,
+        "reset": 280
+      },
+      "elf_sha256": "d2b343a7a44e9808e90bba37d8f27064ccd14c7f50a865d297a1d08bc6298f9c",
+      "header_sha256": "175c78169f97e6e4116e1a2be6dcac27245005f717852714e493795606e3fd7a",
+      "measurement_sha256": "2ae1effb56441418207820be36b05c40d2e1666fdf6360fea4e0fb8a2d16854f"
+    },
+    "bernstein_seed": {
+      "allocated_span_B": 26232,
+      "delta_from_baseline_B": 304,
+      "with_provisional_1024_stack_B": 27256,
+      "sections_B": {
+        ".text": 16784,
+        ".rodata": 1304,
+        ".data": 0,
+        ".bss": 8112,
+        ".vectors": 28
+      },
+      "alignment_gap_B": 4,
+      "unique_double_helper_symbol_B": 4762,
+      "selected_compiler_static_frames_B": {
+        "sm_eval": 160,
+        "tm_exp": 32,
+        "tm_log": 40,
+        "qr_insert": 160,
+        "reset": 280
+      },
+      "elf_sha256": "ec082940b485629cfb0bcde69a9ec640abfec0a76f752a488b2973668237661f",
+      "header_sha256": "a0090ce0505ff927c8b5c6b977d023faf3dc51f594c9686f871a2087faa8ff36",
+      "measurement_sha256": "2b3614c447a6ec700937d0171d5e117f5ba1cb1d5d6f0a20894b5a2fb7f5b535"
+    },
+    "horner_seed": {
+      "allocated_span_B": 26152,
+      "delta_from_baseline_B": 224,
+      "with_provisional_1024_stack_B": 27176,
+      "sections_B": {
+        ".text": 16704,
+        ".rodata": 1304,
+        ".data": 0,
+        ".bss": 8112,
+        ".vectors": 28
+      },
+      "alignment_gap_B": 4,
+      "unique_double_helper_symbol_B": 4762,
+      "selected_compiler_static_frames_B": {
+        "sm_eval": 24,
+        "tm_exp": 32,
+        "tm_log": 40,
+        "qr_insert": 160,
+        "reset": 280
+      },
+      "elf_sha256": "5c1128de4d195572fa81841ca0c17298b7f37d63473d9b341f649cd51966becf",
+      "header_sha256": "cc96d6ff71302eeacc673f9f591f4f2f0c6bdf9a1e8d0b088c06268310612d63",
+      "measurement_sha256": "ea0f90db568c2feec627867b6e2ebc9271f33cfe857568ae7e5db1e296317925"
+    },
+    "procedural": {
+      "allocated_span_B": 25960,
+      "delta_from_baseline_B": 32,
+      "with_provisional_1024_stack_B": 26984,
+      "sections_B": {
+        ".text": 16804,
+        ".rodata": 1016,
+        ".data": 0,
+        ".bss": 8112,
+        ".vectors": 28
+      },
+      "alignment_gap_B": 0,
+      "unique_double_helper_symbol_B": 4762,
+      "selected_compiler_static_frames_B": {
+        "tm_exp": 40,
+        "tm_log": 72,
+        "qr_insert": 144,
+        "reset": 280
+      },
+      "elf_sha256": "641ae0341424b0bcd2ec511ab26245aead883ff441fc2fb9a01af6695c9565de",
+      "header_sha256": "00f08a33bb471c01f22f72d91c3b1ed81a5d79d9b2f635a6c186dc8d5b8f3dc7",
+      "measurement_sha256": "a2755a705d803abca5342cde45bab897d5d43850546cc23c47322f09569ed970"
+    }
+  },
+  "memory_interpretation": [
+    "All allocated instruction, constant, vector and writable-state sections plus alignment are included in the SRAM address span. Current images have no .data payload; in-place initialized data is therefore not double-counted.",
+    "All variants retain 4762 B of unique software-double helper symbol ranges including comparison implementations and subtraction wrapper; aliases are merged by address interval. This is a symbol subset rather than an independent whole-program allocation, and is already included in .text.",
+    "The procedural variant is smallest among the new variants at 25960 B, but it is 32 B larger than baseline. Bernstein is +40 B, Horner+seed +224 B and Bernstein+seed +304 B. There is no measured SRAM improvement.",
+    "Bernstein sm_eval has a 120 B automatic array and compiler-reported frame 168 B (without seed) or160 B (with seed). Horner+seed frame is24 B. These are per-function frame figures, not maximum call-chain stack.",
+    "The common1024 B stack amount is an allowance, not variant-specific measured or proven stack. Original baseline stack observations cannot establish stack for new variants. Platform, interrupt, scheduling, persistence and application code remain excluded."
+  ],
+  "independent_controls": {
+    "command": "python3 -B provenance/shared_math_001/review_controls_r1.py",
+    "artifact": "provenance/shared_math_001/review_controls_r1.json",
+    "scope": "20000 deterministic random positive finite bit patterns plus exponent/subnormal/end-point neighbors for sqrt/log; arbitrary-scale hypot pairs; exp reduction and overflow/underflow boundary neighbors; wrapper branches, NaNs, infinities, poles and signed zeros.",
+    "classification_mismatches": 0,
+    "sqrt_max_observed_ulp_all_variants": 1,
+    "hypot_max_observed_ulp_all_variants": 2,
+    "signed_zero_checks": "All expm1/sqrt/tanh/atanh(-0) checks preserved -0.",
+    "exact_rational_bernstein_controls": [
+      true,
+      true,
+      true
+    ],
+    "limits": "Python host math references and deterministic finite samples; not correct-rounding proof, exhaustive domain bound, target execution or cycle measurement."
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "qualification",
+      "topic": "stack",
+      "finding": "New evaluators change local stack materially. Whole-link with1024B remains a provisional accounting comparison.",
+      "disposition": "Accept for isolated negative size comparison; require variant-specific target stack evidence or call-chain bounds before any resource qualification."
+    },
+    {
+      "id": "R2",
+      "severity": "qualification",
+      "topic": "test strength",
+      "finding": "run.py records one synthetic fixture and host math grids without acceptance thresholds; hypot grid fixes y=1 and does not cover general near-overflow/subnormal pairs. It does not execute new target math instructions.",
+      "disposition": "Independent boundary/random controls broaden host evidence; retain finite-grid, single-fixture and host-only limits. Require target execution, meaningful tolerances, readout/derivative and longer paired behavior controls before promoting any variant."
+    },
+    {
+      "id": "R3",
+      "severity": "interpretation",
+      "topic": "comparison confounding",
+      "finding": "Baseline E is degree12 (degree13 expm1), while new E is degree14 (degree15 expm1); baseline log L degree10 changes to degree12. Baseline-vs-shared differences therefore combine evaluation strategy and truncation degree.",
+      "disposition": "Do not attribute differences solely to sharing or Bernstein form. Bernstein+seed and Horner+seed use matched degrees and normalization, providing the direct evaluator control."
+    },
+    {
+      "id": "R4",
+      "severity": "interpretation",
+      "topic": "memory result",
+      "finding": "Every new variant enlarges the complete SRAM image and retains the same unique double-helper payload; table removal alone is insufficient for this implementation.",
+      "disposition": "Preserve as a negative local result. This neither proves a universal lower bound nor excludes different approximation families or data representations."
+    }
+  ],
+  "required_changes_before_this_narrow_acceptance": [],
+  "not_established": [
+    "uniform floating-point error bound",
+    "target runtime or energy benefit",
+    "whole-system stack bound",
+    "Cortex-M23 deployment readiness",
+    "10KiB fit",
+    "lifetime numerical stability or calibrated coverage",
+    "general superiority of any polynomial basis"
+  ],
+  "reviewed_result_scope": "Only attempt001 and source hashes recorded above. Substantive subsequent implementation changes require new independent review."
+}

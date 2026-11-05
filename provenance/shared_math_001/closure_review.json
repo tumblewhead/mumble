@@ -1,0 +1,82 @@
+{
+  "schema": "shared_math_001_closure_review_v1",
+  "reviewer": "independent reviewer /root/shared_math_review",
+  "date_utc": "2026-11-05T05:01:59.572069+00:00",
+  "decision": "accepted_for_isolated_experiment_reporting_and_preservation",
+  "scope": "Closure sanity review of completed stream002, history48 size/execution evidence, target.py wrapper, README and receipt; no implementation edits or broad tests.",
+  "source_revision": "b2254a86c76cab57277e42af7c431c32a9f4d20f",
+  "source_and_evidence_sha256": {
+    "README.md": "9250c5ce4af60abacc1052a79c4fe87199f3027a99988d2f685e3627417ba41b",
+    "experiments/shared_math_001/README.md": "5d736bbd7f8dd2aef6e379cdbe7a45d20f3ee70be5782620358f39f170c51544",
+    "experiments/shared_math_001/target.py": "0db85d8cf56d45970e85e45c2b4683149db56c5356738597fc8198d59ec07947",
+    "experiments/shared_math_001/stream_test.py": "410fe3325220b71b87ab22860012167f359908efd1cbaf63c8449704c9db5fce",
+    "experiments/shared_math_001/stream002/results.json": "37b5e74334b180594edfdb37253fa63a19128faf2d1beef104e37dd820e84278",
+    "experiments/shared_math_001/target48_001/measurement.json": "3eb6dafe69dbc74ef4929a933a5ace3fd601d017c67b7e1912a63ad69f4aecb3",
+    "experiments/shared_math_001/target48_001/tiny_cardinal/probe.elf": "c288374972a0308991fea97795345e24e8331439f21a1ac57265e2908725f1d8",
+    "experiments/shared_math_001/stack48_001/measurement.json": "67215532d144158c2e52d4e794d3c1ccbfdcc40625904adad8a656dbcc0b7251",
+    "experiments/shared_math_001/stack48_001/probe.elf": "a7c49eaa6a05ef87adf09f36aaa60c9288ec9b40354bce15cd748655c949ec17",
+    "provenance/shared_math_001/review_r2.json": "3cc6096af170ead3cd0c78d9e720c10503ea55970a206a01a27862c606e760a3"
+  },
+  "reviewed_receipt_snapshot_sha256": "ccd96a3b16e63da54f8c3a840115c2bcee8d629c0851b42492e36ec44ca86d93",
+  "receipt_hash_note": "Receipt snapshot precedes adding this closure review to its review index. Adding that index entry does not change reviewed numerical evidence.",
+  "receipt_artifact_hashes_verified": 51,
+  "r2_sources_unchanged": {
+    "experiments/shared_math_001/build.py": true,
+    "experiments/shared_math_001/run.py": true,
+    "experiments/shared_math_001/qualify.py": true,
+    "experiments/shared_math_001/stream_test.py": true,
+    "experiments/sram_size_001/tiny_math.h": true,
+    "experiments/sram_size_001/generate.py": true,
+    "experiments/sram_size_001/measure.py": true,
+    "experiments/sram_size_001/stack.py": true,
+    "experiments/sram_size_001/native.py": true,
+    "experiments/sram_size_001/soft_sub.c": true
+  },
+  "target_wrapper": "target.py selects the previously reviewed measure or stack module, forwards the requested variant and history precision to the unchanged generator, and labels the measurement. Both underlying drivers reject existing output roots. No new numerical implementation is introduced.",
+  "stream": {
+    "cases": 2,
+    "hours_per_case": 4,
+    "samples_per_case": 720000,
+    "rate_Hz": 50,
+    "history_bits": 64,
+    "accepted_per_arm_per_case": 239,
+    "rejected_per_arm_per_case": 0,
+    "max_chart_delta": 9.5679020262196e-13,
+    "max_relative_sd_delta_nonzero_reference": 1.321465159520585e-11,
+    "zero_sd_mismatches": 0,
+    "Q_3sd_misses_both_arms": [
+      0,
+      0
+    ],
+    "SOC_3sd_misses_both_arms": [
+      0,
+      41
+    ],
+    "identity_check": "Both stream binaries match their recorded hashes and their generated math headers match attempt003. The metric-fix source is unchanged from review_r2.",
+    "interpretation": "Completed matched causal stream control supports local numerical agreement; correlated misses are not population coverage or lifetime qualification."
+  },
+  "history48": {
+    "static_B": 25072,
+    "provisional_stack_allowance_B": 1024,
+    "total_with_allowance_B": 26096,
+    "saving_from_parent_48bit_B": 232,
+    "observed_stack_B": 672,
+    "target_execution_output": "status=0\nallocation_B=6912\nstack_watermark_B=672\n",
+    "target_execution_returncode": 0,
+    "interpretation": "232 B saving is supported for the same48-bit history configuration. Header is identical to reviewed winner. Separate target execution witness is not a worst-case stack bound or extended48-bit stream qualification."
+  },
+  "reporting": {
+    "readme": "Both README summaries and detailed experiment README agree with evidence and retain10KiB/platform/timing/lifetime limits. Detailed README explicitly separates64-bit paired streams from48-bit size/target probes.",
+    "receipt": "All51 recursively referenced path/hash artifacts verified. Variant savings, checkpoint scope, stream values, prior failures and remaining limitations agree with reviewed evidence.",
+    "prior_findings": "R2 stream-completion gap is now closed for the two stated four-hour64-bit cases. Other numerical/resource qualification limits remain unchanged.",
+    "required_corrections": []
+  },
+  "not_established": [
+    "10KiB target fit",
+    "firmware readiness",
+    "uniform numerical error bound",
+    "worst-case stack or target timing",
+    "long shared-math48-bit stream behavior",
+    "calibrated coverage or lifetime stability"
+  ]
+}

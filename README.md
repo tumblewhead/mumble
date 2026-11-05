@@ -1,3 +1,11 @@
+# Shared math experiment
+
+The [shared-math experiment](experiments/shared_math_001/README.md) compares
+Bernstein tables, shared Horner evaluation and generated coefficients. One shared
+reverse-series routine saves224B with64-bit history; the48-bit build totals26,096B
+including a provisional1KiB stack allowance. This remains above10KiB. Paired
+four-hour controls passed; baseline defaults remain unchanged.
+
 # SRAM-only size candidate
 
 The [isolated SRAM-size experiment](experiments/sram_size_001/README.md) now links
