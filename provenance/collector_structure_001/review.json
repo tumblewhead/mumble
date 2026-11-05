@@ -1,0 +1,41 @@
+{
+  "status": "passed_with_scope_limits",
+  "reviewed_base_commit": "6ec07a5",
+  "scope": "Independent peer review of subtraction sharing, union scratch reuse, uint64 and split-limb lazy RC reconstruction, final README and receipt. No implementation changes by reviewer.",
+  "blocking_findings": [],
+  "selected_variant": "combined",
+  "verified_budget": {
+    "static_B": 8596,
+    "observed_stack_B": 272,
+    "static_plus_observed_B": 8868,
+    "paired_saving_B": 864,
+    "with_provisional_1024_stack_B": 9620
+  },
+  "checks": {
+    "receipt_source_hashes": "all match",
+    "measurement_ELF_hashes": "11 match",
+    "static_allocated_spans": "all match",
+    "execution_status": "all executed receipts return 0 and print status=0",
+    "wrapper": "reviewed implementation, ARM disassembly and actual-libgcc 33024-pair qualification; finite/signed-zero bit semantics and NaN classification supported",
+    "union_scratch": "reviewed ownership and aliasing schedule; 10002 independent status/history-bit parity cases, 1242 rejections, with strict optimization and sanitizers",
+    "lazy_clocks": "11 independent boundary controls each pass; uint64 and limb forms preserve accepted tick intervals and reject unrepresentable inputs/overflow",
+    "documentation": "budget, preserved Q12 stall failure, no promotion, elapsed-time rounding and lazy-origin limitations correctly stated"
+  },
+  "independent_controls": "provenance/collector_structure_001/reviewer_controls/result.json",
+  "limits": [
+    "Subtraction NaN payload/sign and floating exception flags are not qualified",
+    "Union row is consumed scratch; diagnostics must copy features before conversion; rejected conversion may partially overwrite scratch",
+    "Lazy free reconstruction requires original all-ones free states and unchanged poles; arbitrary resumed free states require additional origin representation",
+    "Exact tick sums do not imply exact reconstructed free responses; split conversion can double-round",
+    "Stack witnesses are exercised M23 code under M33 QEMU, not worst-case stack or M23 timing",
+    "The selected collector inherits Q12 accumulation stalls and is not admitted for sustained inference or firmware"
+  ],
+  "reviewed_source_sha256": {
+    "experiments/collector_structure_001/soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+    "experiments/collector_structure_001/measure.py": "6567c2c1e7c1189b82f22940a7f15335c4a655ffeaf7cb6495bac2781e14b68a",
+    "experiments/collector_structure_001/check.py": "0e6fe1fd0e9bdf68c0b2a2dff5e2f953de59897e2f588fffbcf35d53fac00907",
+    "experiments/collector_structure_001/README.md": "6b2dd6fc70339e6109f0c3d25616897a4796caf2b6f92481905d336c04580183"
+  },
+  "receipt_sha256_excluding_review_status": "e874791f68385015f761d41edd210730b1e6c6cfa29cc7795a076c2acb3288c3",
+  "receipt_hash_canonicalization": "Parse JSON; remove top-level review_status; JSON dumps with sort_keys=True and separators=(comma,colon); UTF-8; SHA256"
+}

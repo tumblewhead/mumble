@@ -1772,3 +1772,5 @@ The [capability profile build](experiments/capability_profiles_001/README.md) no
 The [precision partition study](experiments/precision_partition_001/README.md) retains the current collector: mixed arithmetic grows to15808B including observed stack; float storage with double arithmetic reaches14240B. Paired-float Gram accumulation retains20M unit contributions but fails a rank-one positive-semidefiniteness control and is rejected. No defaults changed.
 
 The [integer QR comparison](experiments/integer_qr_001/README.md) implements digit-by-digit and CORDIC square-root updates. Collector probes measure10044B and9732B including observed stack, but both Q12 histories stall on repeated evidence. Neither is promoted; scaling/remainder preservation remains open.
+
+The [collector structure experiment](experiments/collector_structure_001/README.md) qualifies subtraction sharing and scratch reuse: 8596 B static plus 272 B observed stack, saving 864 B. Lazy free-state reconstruction loses on size. The Q12 history still stalls; production defaults are unchanged.

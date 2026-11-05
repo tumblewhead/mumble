@@ -1,0 +1,930 @@
+{
+  "base_commit": "6ec07a5",
+  "selected_research_variant": "combined",
+  "production_default_changed": false,
+  "Q12_stall_repaired": false,
+  "review_status": "complete",
+  "measurements": {
+    "baseline": {
+      "variant": "baseline",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/baseline/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/baseline/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/baseline/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/baseline/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5998,
+        ".rodata": 192,
+        ".bss": 3104,
+        ".debug_info": 8160,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 9413,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1083,
+        ".debug_line": 11078,
+        ".debug_str": 3374,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 536,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "ace4fa184e223e66495a1c18f0ff1b97ad53157170c0cf9e3635bb152ad9a4c3",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5998,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268441484
+        },
+        {
+          "name": ".bss",
+          "bytes": 3104,
+          "address": 268441676
+        }
+      ],
+      "static_B": 9324,
+      "alignment_gaps_B": 2,
+      "with_1024_stack_B": 10348,
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "ffde6c3c9d7e0081b0dba2752b4447e651ec0c7080663cf2803b8e55c0fd4f17"
+      }
+    },
+    "sub": {
+      "variant": "sub",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/sub/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/sub/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/sub/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/sub/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5276,
+        ".rodata": 192,
+        ".bss": 3104,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 7356,
+        ".debug_abbrev": 3802,
+        ".debug_loclists": 7097,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 821,
+        ".debug_line": 8680,
+        ".debug_str": 3352,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "e019f7389f5b28aab726a93bf2a1a0e459e6aa069d161b33b96a46fdf09168b5",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5276,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268440760
+        },
+        {
+          "name": ".bss",
+          "bytes": 3104,
+          "address": 268440952
+        }
+      ],
+      "static_B": 8600,
+      "alignment_gaps_B": 0,
+      "with_1024_stack_B": 9624,
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "ffde6c3c9d7e0081b0dba2752b4447e651ec0c7080663cf2803b8e55c0fd4f17"
+      }
+    },
+    "scratch": {
+      "variant": "scratch",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/scratch/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/scratch/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/scratch/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/scratch/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5994,
+        ".rodata": 192,
+        ".bss": 3104,
+        ".debug_info": 8160,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 9413,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1083,
+        ".debug_line": 11078,
+        ".debug_str": 3374,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 536,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "a2004cfe7b95a94fc085870adccaf08991d78efd30b9311b4ef25d7eaff8e832",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5994,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268441480
+        },
+        {
+          "name": ".bss",
+          "bytes": 3104,
+          "address": 268441672
+        }
+      ],
+      "static_B": 9320,
+      "alignment_gaps_B": 2,
+      "with_1024_stack_B": 10344,
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "ffde6c3c9d7e0081b0dba2752b4447e651ec0c7080663cf2803b8e55c0fd4f17"
+      }
+    },
+    "combined": {
+      "variant": "combined",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/combined/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/combined/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/combined/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/combined/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5272,
+        ".rodata": 192,
+        ".bss": 3104,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 7356,
+        ".debug_abbrev": 3802,
+        ".debug_loclists": 7097,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 821,
+        ".debug_line": 8680,
+        ".debug_str": 3352,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "a1d8629795ad34487a81a1bf5e813efaebed044f7bd09fe0be44d5b28a5fb7af",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5272,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268440756
+        },
+        {
+          "name": ".bss",
+          "bytes": 3104,
+          "address": 268440948
+        }
+      ],
+      "static_B": 8596,
+      "alignment_gaps_B": 0,
+      "with_1024_stack_B": 9620,
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "ffde6c3c9d7e0081b0dba2752b4447e651ec0c7080663cf2803b8e55c0fd4f17"
+      }
+    },
+    "stack_sub": {
+      "variant": "sub",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_sub/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_sub/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_sub/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_sub/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5592,
+        ".rodata": 240,
+        ".bss": 3104,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 7356,
+        ".debug_abbrev": 3802,
+        ".debug_loclists": 7097,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 821,
+        ".debug_line": 8680,
+        ".debug_str": 3352,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "7988fc7699e7d3eb94ddefcd3050b1fcc6eef88dc455e11c8b1197359eda080e",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_sub/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=3080\nstack_watermark_B=408\n",
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "2d29f68795744ba27d193aa879f61d8c8bb17022e3f34bcb855bcc8fb2666b35"
+      }
+    },
+    "stack_scratch": {
+      "variant": "scratch",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_scratch/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_scratch/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_scratch/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_scratch/probe.elf"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 6296,
+        ".rodata": 240,
+        ".bss": 3104,
+        ".debug_info": 8160,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 9413,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1083,
+        ".debug_line": 11078,
+        ".debug_str": 3374,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 536,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "98239948cc0604c6a1ffb978568df8aaac35ca6fc5c8dd72f24c2486cef24b3e",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_scratch/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=3080\nstack_watermark_B=272\n",
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "2d29f68795744ba27d193aa879f61d8c8bb17022e3f34bcb855bcc8fb2666b35"
+      }
+    },
+    "stack_combined": {
+      "variant": "combined",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_combined/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_combined/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_combined/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_combined/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5576,
+        ".rodata": 240,
+        ".bss": 3104,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 7356,
+        ".debug_abbrev": 3802,
+        ".debug_loclists": 7097,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 821,
+        ".debug_line": 8680,
+        ".debug_str": 3352,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "3eebe2296f1e59bf25dd333b403aa91ad6e670000d263e2de82078b73a2d655b",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_combined/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=3080\nstack_watermark_B=272\n",
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "2d29f68795744ba27d193aa879f61d8c8bb17022e3f34bcb855bcc8fb2666b35"
+      }
+    },
+    "lazy002": {
+      "variant": "lazy",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy002/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy002/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy002/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy002/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 10660,
+        ".rodata": 192,
+        ".bss": 2964,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 19129,
+        ".debug_abbrev": 8229,
+        ".debug_loclists": 23331,
+        ".debug_aranges": 928,
+        ".debug_rnglists": 2310,
+        ".debug_line": 23908,
+        ".debug_str": 4245,
+        ".debug_frame": 1084,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "0356f471b1af642f1deb4c67a992992cd244c4f841c3303f6f3837fe5c63e03a",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 10660,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268446144
+        },
+        {
+          "name": ".bss",
+          "bytes": 2964,
+          "address": 268446336
+        }
+      ],
+      "static_B": 13844,
+      "alignment_gaps_B": 0,
+      "with_1024_stack_B": 14868,
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "2d29f68795744ba27d193aa879f61d8c8bb17022e3f34bcb855bcc8fb2666b35"
+      }
+    },
+    "stack_lazy002": {
+      "variant": "lazy",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy002/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy002/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy002/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy002/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 10972,
+        ".rodata": 240,
+        ".bss": 2960,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 19129,
+        ".debug_abbrev": 8229,
+        ".debug_loclists": 23331,
+        ".debug_aranges": 928,
+        ".debug_rnglists": 2310,
+        ".debug_line": 23908,
+        ".debug_str": 4245,
+        ".debug_frame": 1084,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "28c7c8d5e1fddc77cf2dde88da8d51fd49b151958d7c6a1a72df108a6139f353",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy002/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=2936\nstack_watermark_B=288\n",
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "2d29f68795744ba27d193aa879f61d8c8bb17022e3f34bcb855bcc8fb2666b35"
+      }
+    },
+    "lazy_limb": {
+      "variant": "lazy_limb",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy_limb/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy_limb/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy_limb/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/lazy_limb/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5528,
+        ".rodata": 192,
+        ".bss": 2956,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 8725,
+        ".debug_abbrev": 4433,
+        ".debug_loclists": 7519,
+        ".debug_aranges": 544,
+        ".debug_rnglists": 913,
+        ".debug_line": 9428,
+        ".debug_str": 3405,
+        ".debug_frame": 568,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "bb970d9164258ed69b1b7143366ac95a8e1effd87085ebe8f0ccd226635a77da",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5528,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268441012
+        },
+        {
+          "name": ".bss",
+          "bytes": 2956,
+          "address": 268441204
+        }
+      ],
+      "static_B": 8704,
+      "alignment_gaps_B": 0,
+      "with_1024_stack_B": 9728,
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "6567c2c1e7c1189b82f22940a7f15335c4a655ffeaf7cb6495bac2781e14b68a",
+        "check.py": "0e6fe1fd0e9bdf68c0b2a2dff5e2f953de59897e2f588fffbcf35d53fac00907"
+      }
+    },
+    "stack_lazy_limb": {
+      "variant": "lazy_limb",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy_limb/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy_limb/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy_limb/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy_limb/probe.elf",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5844,
+        ".rodata": 240,
+        ".bss": 2956,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 8725,
+        ".debug_abbrev": 4433,
+        ".debug_loclists": 7519,
+        ".debug_aranges": 544,
+        ".debug_rnglists": 913,
+        ".debug_line": 9428,
+        ".debug_str": 3405,
+        ".debug_frame": 568,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "fda82deb4511f7735a45b987e6d8efd5fdb28fb08817243e3e2c550543cece44",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/stack_lazy_limb/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=2932\nstack_watermark_B=272\n",
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling",
+      "source_sha256": {
+        "soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+        "measure.py": "6567c2c1e7c1189b82f22940a7f15335c4a655ffeaf7cb6495bac2781e14b68a",
+        "check.py": "0e6fe1fd0e9bdf68c0b2a2dff5e2f953de59897e2f588fffbcf35d53fac00907"
+      }
+    }
+  },
+  "qualification": {
+    "transcripts": {
+      "baseline": {
+        "bytes": 88064,
+        "sha256": "6f3f9863f34dadc41855fdb8006449b3d61471bb6ab9b570d11d2d0ddd7bb496"
+      },
+      "sub": {
+        "bytes": 88064,
+        "sha256": "6f3f9863f34dadc41855fdb8006449b3d61471bb6ab9b570d11d2d0ddd7bb496"
+      },
+      "scratch": {
+        "bytes": 88064,
+        "sha256": "6f3f9863f34dadc41855fdb8006449b3d61471bb6ab9b570d11d2d0ddd7bb496"
+      },
+      "combined": {
+        "bytes": 88064,
+        "sha256": "6f3f9863f34dadc41855fdb8006449b3d61471bb6ab9b570d11d2d0ddd7bb496"
+      },
+      "lazy002": {
+        "bytes": 83072,
+        "sha256": "6983cd3954511ba50557cd9844dc62df038b5f31e4e1da9d8ae65f35640179a9"
+      }
+    },
+    "arm_subtraction": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-Os",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/check001/arm.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/soft_sub32.c",
+        "-Wl,--wrap=__aeabi_fsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/check001/link.ld",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/collector_structure_001/check001/arm.elf"
+      ],
+      "output": "PASS 33024 pairs\n",
+      "scope": "bit identity except NaN payload/sign; finite signed zeros, subnormals, infinity and NaN classification"
+    },
+    "lazy": "different approximation/layout, not parity-qualified",
+    "scope": "4096 samples, actual intervals incl zero dt; failure latch; no Q12 stall repair"
+  },
+  "source_sha256": {
+    "experiments/collector_structure_001/soft_sub32.c": "cce984bf85e2916c1e6bfc2051e841d2b7fa59f5d99057d8e4beae74f7d0ddff",
+    "experiments/collector_structure_001/measure.py": "6567c2c1e7c1189b82f22940a7f15335c4a655ffeaf7cb6495bac2781e14b68a",
+    "experiments/collector_structure_001/check.py": "0e6fe1fd0e9bdf68c0b2a2dff5e2f953de59897e2f588fffbcf35d53fac00907",
+    "experiments/collector_structure_001/README.md": "6b2dd6fc70339e6109f0c3d25616897a4796caf2b6f92481905d336c04580183"
+  },
+  "selected_static_B": 8596,
+  "selected_observed_stack_B": 272,
+  "selected_with_1024_stack_B": 9620,
+  "limits": [
+    "No long-run Q12 acceptance",
+    "No complete firmware/IPC budget",
+    "Observed stack only",
+    "No target cycle qualification",
+    "Lazy reconstruction rejected for size"
+  ]
+}
