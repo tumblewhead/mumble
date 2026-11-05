@@ -1,3 +1,10 @@
+# Calculation sharing experiment
+
+The [shared RC pole-sum experiment](experiments/calculation_sharing_001/README.md)
+saves40B static SRAM while adding24B observed stack: a16B improvement on the
+paired target probe. Two one-hour controls match exactly at checked endpoints
+and marginal uncertainties. Independently reviewed; mainline defaults unchanged.
+
 # Linked text audit
 
 The [text audit and restructuring plan](experiments/text_audit_001/README.md)

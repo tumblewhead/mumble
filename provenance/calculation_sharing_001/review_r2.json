@@ -1,0 +1,142 @@
+{
+  "review_id": "calculation_sharing_001_r2",
+  "reviewer": "independent fresh-context rc_coordinate_review agent",
+  "base_revision": "6c750cf722bb3f7d529cac4d3b97d4dbb4345b39",
+  "branch": "experiment/calculation-sharing-001",
+  "scope": "rc_coordinate_support only. Later tau-only or chart-sharing variants require separate review.",
+  "decision": "reject_as_total_memory_improvement_retain_as_behavior_preserving_measured_tradeoff",
+  "behavior_review": "No defect found in changed arithmetic, support classification, derivative scaling, failure handling or scratch ownership under the declared serialized fixed-model binary64 contract. This is limited review and tested parity, not a universal implementation proof.",
+  "findings": [
+    {
+      "id": "R2-1",
+      "severity": "blocking_for_memory_acceptance",
+      "finding": "Static saving40B is exceeded by48B observed stack increase. T1 total-SRAM improvement gate is not met.",
+      "baseline_static_B": 25072,
+      "candidate_static_B": 25032,
+      "baseline_observed_stack_B": 672,
+      "candidate_observed_stack_B": 720,
+      "baseline_static_plus_observed_B": 25744,
+      "candidate_static_plus_observed_B": 25752,
+      "net_observed_regression_B": 8,
+      "disposition": "Parent agrees to retain coordinate_support as measured nonwinner. Fixed1024B allowance totals26096/26056 are accounting with a common provisional reservation, not evidence that required stack is unchanged."
+    },
+    {
+      "id": "R2-2",
+      "severity": "information",
+      "finding": "supported recomputes each prefix: six ordered exponential evaluations instead of three on accepted queries. No speedup or target timing claim is supported.",
+      "disposition": "Record as computation-for-text tradeoff; preserve actual timing uncertainty."
+    }
+  ],
+  "algebra_and_operation_order": [
+    "For branch b, both versions compute t0=0 then t(k+1)=t(k)+exp(mean[8+2k]+scale[8+2k]*w[8+2k]) in increasing k through b, and u=log(t/center[b]). No sum reassociation or amplitude multiplication moves.",
+    "For supported branch j, the fresh prefix reproduces the same ordered recurrence as the original carried prefix. Earlier support rejection still exits before later branches. Nonfinite input/chart, q/SOC, log-coordinate and positive finite exponential checks are retained.",
+    "feature retains reduced/full pole selection and a*dv*exp(chart)/tau multiply-then-divide ordering. transported retains state-first13-pole sums and (bv*dvf+R*dff)*exp(chart)/tau, then original scaling exactly once.",
+    "Model, carried state, history ownership, uncertainty factor, prior, hysteresis and support domain are unchanged. The original supported-amplitude/zero-state regression is repaired by not changing amplitude/state operation order.",
+    "Math is the same custom deterministic binary64 exp/log without errno/global state. No concurrent mutation, alternate floating environment or target timing equivalence is claimed."
+  ],
+  "storage_and_link_review": {
+    "new_persistent_bytes": 0,
+    "new_scratch_aliases": false,
+    "local_storage": "tau is a caller-local scalar; helper writes only that scalar. No derivative scratch reuse or lifetime extension is introduced.",
+    "verified_tools": [
+      "arm-none-eabi-readelf -S",
+      "arm-none-eabi-nm -S",
+      "compiler .su files"
+    ],
+    "helper_symbol": {
+      "address": "0x100008a0",
+      "text_B": 100,
+      "stack_frame_B": 40
+    },
+    "candidate_allocated_B": {
+      "vectors": 28,
+      "text": 17056,
+      "rodata": 1016,
+      "bss": 6928,
+      "alignment": 4
+    },
+    "text_saving_B": 44,
+    "static_saving_B": 40,
+    "clean_image_local_stack_frames_B": {
+      "baseline": {
+        "supported": 64,
+        "transported": 176,
+        "feature": 136
+      },
+      "candidate": {
+        "supported": 64,
+        "transported": 168,
+        "feature": 144,
+        "rc_coordinate": 40
+      }
+    },
+    "stack_limit": "QEMU M33 executing M23-compiled probe; witness uses test fixtures and separate layout from clean size image. Watermark is observed, not a worst-case bound. Clean-image frames confirm nested helper cost; whole-program platform stack remains open."
+  },
+  "validation": {
+    "independent_probe": "provenance/calculation_sharing_001/review_r2_probe.json",
+    "independent_binary_payload_bytes": 21343904,
+    "independent_result": "byte_identical",
+    "support_probes": 2000,
+    "supported_cases": 828,
+    "full_and_reduced_feature_probes": 105984,
+    "endpoint_probes": 14904,
+    "scalar_probes": 29808,
+    "independent_cases": "343 combinations of just-outside/exact/just-inside/center support coordinates; randomized chart and exceptional finite/NaN/infinity inputs; zero/tiny/huge/signed/nonfinite carried RC states; full94/reduced34 features; valid/invalid coordinates and inference-valid flag; scalar value/variance sentinel behavior.",
+    "parent_direct_controls": {
+      "path": "experiments/calculation_sharing_001/qualification002/results.json",
+      "endpoint_cases": 4160,
+      "feature_cases": 8840,
+      "maximum_finite_difference_absolute_error": 4.130318309591985e-11,
+      "large_supported_amplitude_zero_state": "pass",
+      "lifecycle": "Three accepted query cycles then identical rejected fourth query; preserved baseline failure, not repaired availability."
+    },
+    "paired_streams": {
+      "path": "experiments/calculation_sharing_001/stream1h001/results.json",
+      "cases": 2,
+      "hours_each": 1,
+      "records_each": 180000,
+      "actual_rate_Hz": 50,
+      "maximum_chart_difference": 0,
+      "maximum_relative_sd_difference": 0,
+      "accepted_refreshes_each": 59,
+      "rejected_refreshes_each": 0,
+      "qualification": "Measured current endpoint and marginal widths on these streams; runner does not establish every internal state/root bitwise equality or calibrated coverage. Historical50Hz control is not nominal35Hz qualification."
+    },
+    "target_execution": "Both returned status0; observed stack672/720B."
+  },
+  "source_sha256": {
+    "experiments/calculation_sharing_001/build.py": "68034e8851c1809e523159667a054cca0310ab2d41f2fc1b719c63739b04619e",
+    "experiments/calculation_sharing_001/qualify.py": "2d1e087dd63dd9a32691bf812ad9fe46a65a83ebb9d60054a1acb4da8eccfae8",
+    "experiments/calculation_sharing_001/target.py": "7cb18c5d8151c37696c2f911c33f83055e553b5c2be4b26870983fed6b8d5a51",
+    "experiments/calculation_sharing_001/stream_test.py": "d62c9ecee0df471b4290bb321df155fe0d68d8db2360474d6cec07395f59330f",
+    "experiments/calculation_sharing_001/qualification002/results.json": "1ff5cb6798204f743fda660294a568248058e29a6703e8d1b9ac676e12664a6e",
+    "experiments/calculation_sharing_001/stream1h001/results.json": "ade3a992279a0adf51af8ecac251fccf86a64f9a8a8695114860b897ba984f9e",
+    "experiments/calculation_sharing_001/stream1h001/source.json": "ef2a10294639e5c14fa0fe6f668f760c858dc405b9cfd29c84f1ad02239bf535",
+    "provenance/calculation_sharing_001/review_r2_probe.c": "b1f0ca542f3667c9f82839150b1ef2deb44c2bcca9b38b5a3c1318a06da09ab2",
+    "provenance/calculation_sharing_001/review_r2_probe.json": "3ab7f83f9bfef0ba6a547ce5cd705e02992e0cc2a90ad7b57d23d2630657e74a",
+    "experiments/calculation_sharing_001/target_baseline001/measurement.json": "dbc4b2bd8335169f4c8d81c66c2ceb30dd45fd7509799dac3edb6908376b49c5",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/core.c": "1a05f7955aefd4438a634d3eeff78e2126be21539be3db92ef5d95b0850b167d",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/probe.elf": "c288374972a0308991fea97795345e24e8331439f21a1ac57265e2908725f1d8",
+    "experiments/calculation_sharing_001/target_coordinate_support001/measurement.json": "f253fb18c16638239b0271352f2cf227dbab564737b8d62ff00c9cbe1f7f4219",
+    "experiments/calculation_sharing_001/target_coordinate_support001/tiny_cardinal/core.c": "e1b4256cdd753eac5b7a1509393fbdb23dc34fa5c86c39ba63e321a9b7ca5ec2",
+    "experiments/calculation_sharing_001/target_coordinate_support001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/calculation_sharing_001/target_coordinate_support001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/calculation_sharing_001/target_coordinate_support001/tiny_cardinal/probe.elf": "075d9bbb08326c03210baa6b714083dc6054749b0197cec809feca9b17bf62fb",
+    "experiments/calculation_sharing_001/stack_baseline001/measurement.json": "de84c6f7e8da75474840d8d6734854f988542d24dc0d020b8d1bda61ad50302e",
+    "experiments/calculation_sharing_001/stack_baseline001/core.c": "b32978f95d4bd812f864ea78f1f2352e4f890141fab86b820e4b3f7eaa96ac65",
+    "experiments/calculation_sharing_001/stack_baseline001/probe.c": "23926f73d5c586d557fd36e9b91cdee6158431213977d3a1d1b98a429bb353e2",
+    "experiments/calculation_sharing_001/stack_baseline001/probe.elf": "a7c49eaa6a05ef87adf09f36aaa60c9288ec9b40354bce15cd748655c949ec17",
+    "experiments/calculation_sharing_001/stack_candidate001/measurement.json": "48ef184dbc0c5f7cd46b784a8e5a7b6db5dbcd2f621ff85299826fff0b6f50a0",
+    "experiments/calculation_sharing_001/stack_candidate001/core.c": "642cc6a681d264b62b0cc42b3c176de32bf0102df26b9d0a610ff09ff61a67a5",
+    "experiments/calculation_sharing_001/stack_candidate001/probe.c": "db08a79015ec4da5906566c99bc04007db34323e51e0680c5f9588999d4cef8d",
+    "experiments/calculation_sharing_001/stack_candidate001/probe.elf": "56283f094cec0c18fbfae04ca94e8fd23ab157e92941c21b50436179684fc9fb"
+  },
+  "limits": [
+    "No mainline, campaign-default or firmware promotion.",
+    "No total10KiB fit, worst-case stack/timing, lifetime numerical validity, physical support coverage, aging or uncertainty calibration claim.",
+    "No acceptance of other generated variants or subsequent build.py additions.",
+    "Original R1 evidence and all original generated outputs remain preserved."
+  ]
+}

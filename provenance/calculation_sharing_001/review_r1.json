@@ -1,0 +1,125 @@
+{
+  "review_id": "calculation_sharing_001_r1",
+  "reviewer": "independent fresh-context calculation_sharing_review agent",
+  "base_revision": "6c750cf",
+  "branch": "experiment/calculation-sharing-001",
+  "scope": "Initial feature_rows and feature_rows_shared candidates only; any later helper extraction requires fresh review.",
+  "decision": "reject_initial_weighted_feature_rows_as_behavior_preserving_optimization",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "blocking",
+      "location": "generated core.c transported RC branch -> feature finite checks",
+      "finding": "Amplitude-weighted full-bank coefficients and derivatives are now formed and checked before multiplication by carried RC state. This changes accepted finite input behavior: a zero carried state can make baseline endpoint and gradient zero while intermediate candidate feature derivatives overflow.",
+      "reproduction": {
+        "actual_config": true,
+        "setup": "bind and initialize zero history at original config anchor; legacy[0]=1; all free_rc/forced_rc entries zero; set point[7]=(709-config_mean[7])/config_scale[7]",
+        "baseline": {
+          "bind": 0,
+          "initialize": 0,
+          "supported": 0,
+          "transported": 0,
+          "gradient_all_finite": true,
+          "scalar": 0,
+          "value": 0,
+          "variance": 0
+        },
+        "feature_rows_shared": {
+          "bind": 0,
+          "initialize": 0,
+          "supported": 0,
+          "transported": -1,
+          "scalar": -1,
+          "variance_sentinel_unchanged": 456
+        },
+        "scope": "Direct assignment of supported query point after successful initialization; no claim that a normal physical stream reaches this point."
+      },
+      "disposition": "Parent notified and agreed to preserve initial variants as rejected; proposed shared helper retains original state-first accumulation."
+    },
+    {
+      "id": "R2",
+      "severity": "required_validation",
+      "finding": "Algebraic equality is not bitwise equality. Full-row accumulation reorders state/amplitude multiplication and adds zero derivatives. Uniform behavior and accumulated error are not established by the source identity.",
+      "disposition": "Run finite range/boundary and short paired stream controls for each revised candidate; do not infer lifetime bounds."
+    }
+  ],
+  "algebra_review": {
+    "full_bank_preserved": true,
+    "row_index": "3+(2*b+forced)*13+j with full=1 matches free/forced block b and 13 cardinal poles",
+    "raw_to_whitened_derivative": "feature gives raw chart derivative; transported final loop multiplies by scale exactly once",
+    "likelihood": "feature callers for likelihood retain full=0 reduced 3-pole projection",
+    "hysteresis": "unchanged; no H division introduced"
+  },
+  "lifetime_review": {
+    "result": "No overlap defect found for declared serialized current callers",
+    "argument": "transported only receives c->trial; c->point and externally owned carried responses are distinct. scratch.fit.d aliases scratch.y, but previous step has already copied y to delta. scalar transports before acquiring variance lease, and variance overwrites all y entries before root_row copies them. factor is separate and unchanged. Calls are serialized; no interrupt/concurrent ownership guarantee is added.",
+    "required_controls": [
+      "Repeated RC scalar/root_row calls then append/fit/estimate compared with baseline",
+      "Verify QR factor, anchor, point and model response unchanged by successful scalar query; scratch/trial may change",
+      "Invalid factor, unsupported chart, nonfinite carried state, invalid coordinate and sentinel output behavior"
+    ]
+  },
+  "linked_image_review": {
+    "tool": "arm-none-eabi-readelf -S and arm-none-eabi-nm -S",
+    "feature_symbols": [
+      "feature at 0x10000cc0 size 0x668"
+    ],
+    "transported_symbol": "transported.constprop.0 at 0x10001468 size 0x574",
+    "candidate_allocated_sections_B": {
+      "vectors": 28,
+      "text": 16872,
+      "rodata": 1016,
+      "bss": 6928
+    },
+    "candidate_alignment_gaps_B": 4,
+    "candidate_static_B": 24848,
+    "baseline_static_B": 25072,
+    "static_saving_B": 224,
+    "text_saving_B": 228,
+    "qualification": "One actual linked shared feature body confirmed. Saving does not overcome behavior regression; stack not reviewed as a bound."
+  },
+  "targeted_tests_required": [
+    "All RC coordinates at ordered-pole support interior and boundaries, zero/tiny/mixed signed carried states, full derivative and scalar-root comparisons",
+    "High finite free amplitude and resistance with zero/tiny state; preserve baseline successful/refused status",
+    "Repeated scalar and lifecycle controls described above",
+    "Target execution and observed stack plus short paired streams before any limited acceptance"
+  ],
+  "source_sha256": {
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/core.c": "1a05f7955aefd4438a634d3eeff78e2126be21539be3db92ef5d95b0850b167d",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/probe.elf": "c288374972a0308991fea97795345e24e8331439f21a1ac57265e2908725f1d8",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/calculation_sharing_001/target_rows001/tiny_cardinal/core.c": "5f8b3367afa913d9e3a541d72624cab9c83a0d0861f4d4bd426ef3a40d81a2c5",
+    "experiments/calculation_sharing_001/target_rows001/tiny_cardinal/probe.elf": "217959f40010b6b45918486df02297c6dd38d1e39b3ee7823736f328643ddb11",
+    "experiments/calculation_sharing_001/target_rows001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/calculation_sharing_001/target_rows001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/calculation_sharing_001/target_rows_shared001/tiny_cardinal/core.c": "73dcd0c0756021660829cb0c14d77f16445424733d67270c08050d5d58080ed0",
+    "experiments/calculation_sharing_001/target_rows_shared001/tiny_cardinal/probe.elf": "217959f40010b6b45918486df02297c6dd38d1e39b3ee7823736f328643ddb11",
+    "experiments/calculation_sharing_001/target_rows_shared001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/calculation_sharing_001/target_rows_shared001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "provenance/calculation_sharing_001/review_r1_repro.c": "4f22623957bc2f17611326b857d208ce73b11caea29b431f725b209c8e64ba1a"
+  },
+  "reproduction": {
+    "source": "provenance/calculation_sharing_001/review_r1_repro.c",
+    "compiler_flags": [
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ],
+    "macros": "CORE_PATH and CONFIG_PATH identify each preserved generated core.c/config.h; link -lm",
+    "executed_original_harnesses": [
+      "/tmp/calculation-review-r1/baseline.c",
+      "/tmp/calculation-review-r1/feature_rows_shared.c"
+    ]
+  },
+  "limits": [
+    "No lifetime numerical or uncertainty coverage qualification",
+    "No complete firmware, platform, worst-case timing or stack qualification",
+    "No production or campaign default promotion",
+    "This review rejects initial variants only and does not prejudge subsequent revised helper"
+  ]
+}

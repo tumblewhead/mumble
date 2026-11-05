@@ -1,0 +1,170 @@
+{
+  "review_id": "calculation_sharing_001_r3",
+  "reviewer": "independent fresh-context rc_tau_review agent",
+  "base_revision": "6c750cf722bb3f7d529cac4d3b97d4dbb4345b39",
+  "branch": "experiment/calculation-sharing-001",
+  "scope": "Final rc_tau_support variant only, 48-bit history. Other variants retain their own status.",
+  "decision": "accept_limited_measured_optimization_with_observed_stack_caveat",
+  "behavior_review": "No blocking algebra, operation-order, storage-lifetime or failure-contract defect found in the final extraction under serialized fixed-model deterministic binary64 execution. Finite targeted controls support this conclusion; they do not prove universal implementation equivalence.",
+  "findings": [
+    {
+      "id": "R3-1",
+      "severity": "scope_limit",
+      "finding": "Static saving is 40 B, but required stack is not established unchanged. The paired exercised watermark rises 24 B, leaving only 16 B improvement when combining clean static footprint with this observed stack witness.",
+      "disposition": "Accept only this measured narrow gain; distinguish the common provisional 1024 B accounting allowance from a proven stack bound."
+    },
+    {
+      "id": "R3-2",
+      "severity": "information",
+      "finding": "Accepted supported() calls recompute ordered prefixes: six exponentials rather than three in the pole-support loop. There is no speedup claim.",
+      "disposition": "Treat as computation-for-text tradeoff; target timing remains unmeasured."
+    },
+    {
+      "id": "R3-3",
+      "severity": "test_limit",
+      "finding": "The paired stream runner compares current endpoint coordinates and marginal standard deviations every 16 observations, not every internal state or full root matrix. Its historical workload is 50 Hz.",
+      "disposition": "Do not label these streams whole-state bitwise equivalence, nominal 35 Hz qualification or calibrated uncertainty coverage."
+    }
+  ],
+  "algebra_and_lifetime": [
+    "Generated core diff changes only a shared rc_tau helper and three call sites, plus generated include path. The helper computes tau=0 followed by ascending tau+=exp(chart(m,w,8+2*k)) through b. It has no stores outside its local variables.",
+    "feature and transported retain log(tau/center) at caller depth and preserve original derivative multiply-then-divide association. Reduced likelihood poles and all 13 endpoint poles are unchanged. State-first endpoint sums and amplitude placement preserve the R1 overflow-regression fix.",
+    "supported computes the same prefix sum in the same order for each branch; recomputation adds pure deterministic work without changing prefix values, rejection order or support bounds. Existing chart, finite, positive, q and SOC checks remain.",
+    "No persistent bytes, new scratch aliases, lease modifications, factor mutations, derivative caches or ownership changes are introduced. All pre-existing serialized/no-external-alias requirements remain. No concurrency or alternate floating environment equivalence is claimed.",
+    "Sample order, dt, carried physical responses, prior, likelihood evidence, uncertainty algebra and hysteresis are untouched; no truth enters inference."
+  ],
+  "memory_review": {
+    "independent_tools": [
+      "arm-none-eabi-readelf -SW",
+      "arm-none-eabi-nm -S",
+      "compiler .su files",
+      "QEMU rerun of both stack images"
+    ],
+    "candidate_allocated_sections_B": {
+      "vectors": 28,
+      "text": 17056,
+      "rodata": 1016,
+      "bss": 6928,
+      "alignment_gaps": 4
+    },
+    "baseline_static_B": 25072,
+    "candidate_static_B": 25032,
+    "static_saved_B": 40,
+    "baseline_observed_stack_B": 672,
+    "candidate_observed_stack_B": 696,
+    "observed_stack_increase_B": 24,
+    "baseline_static_plus_observed_B": 25744,
+    "candidate_static_plus_observed_B": 25728,
+    "static_plus_observed_saved_B": 16,
+    "baseline_with_fixed_provisional_1024_B": 26096,
+    "candidate_with_fixed_provisional_1024_B": 26056,
+    "helper": {
+      "symbol": "rc_tau",
+      "address": "0x100008a0",
+      "text_B": 56,
+      "local_stack_frame_B": 32,
+      "linked_copies": 1
+    },
+    "candidate_clean_local_frames_B": {
+      "supported": 64,
+      "transported": 176,
+      "feature": 136
+    },
+    "qualification": "Stack is a watermark from a fixture-bearing test image executing M23 code on M33 QEMU, combined with a separate clean static image for an observed resource comparison. Neither a whole-program worst-case bound nor a complete firmware footprint is established."
+  },
+  "validation": {
+    "independent_differential": {
+      "receipt": "provenance/calculation_sharing_001/review_r3_probe.json",
+      "method": "Inspected and reran preserved R2 source probe against final baseline/tau generated cores. The harness was reused, not independently redesigned.",
+      "bytes_each": 21343904,
+      "result": "byte_identical",
+      "support_probes": 2000,
+      "supported_cases": 828,
+      "feature_probes": 105984,
+      "endpoint_probes": 14904,
+      "scalar_probes": 29808,
+      "coverage": "343 combinations of support interior/boundary/exterior coordinates, randomized and exceptional chart inputs, zero/tiny/large/signed/nonfinite carried RC states, full/reduced features, invalid coordinates/inference flag, scalar variance and sentinels."
+    },
+    "independent_target": {
+      "receipt": "provenance/calculation_sharing_001/review_r3_target.json",
+      "both_status": 0,
+      "baseline_stack_B": 672,
+      "candidate_stack_B": 696
+    },
+    "parent_direct_controls": {
+      "receipt": "experiments/calculation_sharing_001/qualification_tau001/results.json",
+      "status": "pass",
+      "endpoint_cases": 4160,
+      "feature_cases": 8840,
+      "max_finite_difference_absolute_error": 4.130318309591985e-11,
+      "large_supported_amplitude_zero_state": "pass",
+      "lifecycle": "Three accepted paired query cycles then identical rejected fourth cycle. Preserves existing failure; does not repair availability."
+    },
+    "parent_paired_streams": {
+      "receipt": "experiments/calculation_sharing_001/stream_tau1h001/results.json",
+      "cases": 2,
+      "hours_each": 1,
+      "observations_each": 180000,
+      "rate_Hz": 50,
+      "history_bits": 48,
+      "maximum_chart_difference": 0,
+      "maximum_relative_sd_difference": 0,
+      "accepted_refreshes_each": 59,
+      "rejected_refreshes_each": 0,
+      "limits": "Endpoint/marginal-width parity on tested streams; no coverage/lifetime or whole-state proof."
+    }
+  },
+  "source_sha256": {
+    "experiments/calculation_sharing_001/build.py": "065df1b6c9a481eeb59f0dc7ced558af02f4131ae30a57c3d90a710c110b0f7f",
+    "experiments/calculation_sharing_001/qualify.py": "7e8448ec457d9355165abfae8b3c25352706ff5ea0f30e7ad7d0e49197f02f0b",
+    "experiments/calculation_sharing_001/target.py": "7cb18c5d8151c37696c2f911c33f83055e553b5c2be4b26870983fed6b8d5a51",
+    "experiments/calculation_sharing_001/stream_test.py": "99760d28913fec61d21489dc98dac1d7e296f352922e24aad22e16a90f4563eb",
+    "experiments/calculation_sharing_001/qualification_tau001/results.json": "5eca5d4484dffdf97b1dddfcd1549c9ac84924037d65241a847720ee093d8b96",
+    "experiments/calculation_sharing_001/stream_tau1h001/results.json": "9dfd235c7caae8aaf7d123a796a1cd8859db56629aa6bdc2b47370e7ee7726a8",
+    "experiments/calculation_sharing_001/stream_tau1h001/source.json": "ef2a10294639e5c14fa0fe6f668f760c858dc405b9cfd29c84f1ad02239bf535",
+    "experiments/calculation_sharing_001/target_baseline001/measurement.json": "dbc4b2bd8335169f4c8d81c66c2ceb30dd45fd7509799dac3edb6908376b49c5",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/core.c": "1a05f7955aefd4438a634d3eeff78e2126be21539be3db92ef5d95b0850b167d",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/calculation_sharing_001/target_baseline001/tiny_cardinal/probe.elf": "c288374972a0308991fea97795345e24e8331439f21a1ac57265e2908725f1d8",
+    "experiments/calculation_sharing_001/target_tau_support001/measurement.json": "2771d10be1d0d87a7b251755291e2682667126b4e7af6819ec56570a9489cc1b",
+    "experiments/calculation_sharing_001/target_tau_support001/tiny_cardinal/core.c": "324956c3537f3f0967d9d8f7fac22125758c5103d6260962fb39526f9163cdd3",
+    "experiments/calculation_sharing_001/target_tau_support001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/calculation_sharing_001/target_tau_support001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/calculation_sharing_001/target_tau_support001/tiny_cardinal/probe.elf": "d033f3561bdcc70a457f58e86088ae4f28e33afd56d2f7cbe2ff3152ff218bc2",
+    "experiments/calculation_sharing_001/stack_baseline001/measurement.json": "de84c6f7e8da75474840d8d6734854f988542d24dc0d020b8d1bda61ad50302e",
+    "experiments/calculation_sharing_001/stack_baseline001/core.c": "b32978f95d4bd812f864ea78f1f2352e4f890141fab86b820e4b3f7eaa96ac65",
+    "experiments/calculation_sharing_001/stack_baseline001/probe.c": "23926f73d5c586d557fd36e9b91cdee6158431213977d3a1d1b98a429bb353e2",
+    "experiments/calculation_sharing_001/stack_baseline001/probe.elf": "a7c49eaa6a05ef87adf09f36aaa60c9288ec9b40354bce15cd748655c949ec17",
+    "experiments/calculation_sharing_001/stack_tau_support001/measurement.json": "6e728e30b7aa756e5082ca2a9f97820c06684bb485d067cf23a02921b642ccba",
+    "experiments/calculation_sharing_001/stack_tau_support001/core.c": "2cb8ea74c96ce7df7526e3d803c749693e7cd5b20bbeb0d5c974db81f4026957",
+    "experiments/calculation_sharing_001/stack_tau_support001/probe.c": "85f6d4a298289eb2da4b40a68fbf343f02744ecb40b1550237c0b251760887af",
+    "experiments/calculation_sharing_001/stack_tau_support001/probe.elf": "5f8ab0cdbd91c0910786d82bd68aa4db0f346e89f49cd5a7dc5b655492deb642",
+    "provenance/calculation_sharing_001/review_r1.json": "f5e23affe7603079c559642fda0d094a01fe28ebb50c2bb565f5cf7b8f24bddd",
+    "provenance/calculation_sharing_001/review_r2.json": "e86f3c18cbba91b72f80a368699249adf91f28fdc46d37fec3732f2ffadf894e",
+    "provenance/calculation_sharing_001/review_r2_probe.c": "b1f0ca542f3667c9f82839150b1ef2deb44c2bcca9b38b5a3c1318a06da09ab2",
+    "provenance/calculation_sharing_001/review_r3_probe.json": "bcbcbdf96e162f7983399f7524c1f6a3870d164e919ea5b4d3ccf2f06d80a631",
+    "provenance/calculation_sharing_001/review_r3_target.json": "9530c889be54e3af66b6dd126f2aa17f77c2ded005aae017eefb85787861dd79",
+    "experiments/calculation_sharing_001/README.md": "95c3ef77530011a93166ec496054c75a017c63c5bfb0be586525c801b6ee0cfd",
+    "experiments/calculation_sharing_001/receipt.py": "d5da09e13c43347c03cf2691b7d778034045d28389d3e12a373da4f40df66f07",
+    "provenance/calculation_sharing_001/receipt.json": "8dfce9ee3ed14a8213ab12e24bf3fe170063d0f41057ba6066b87c66572df4f8",
+    "provenance/calculation_sharing_001/initial_driver_failure.json": "d1873c1173ad16d3fa70e6ac9d162390d1a4ecefa723d9b14e88169b63a4ad44",
+    "experiments/calculation_sharing_001/qualification001/failure.log": "054bc2856d302c16b74e9803fd338aa0ee44bc96dc54054db38328afd07f0ff4"
+  },
+  "limits": [
+    "No mainline/campaign-default/firmware promotion.",
+    "No 10 KiB total-memory fit, worst-case stack, timing, platform integration, lifetime numerical validity, aging or uncertainty calibration qualification.",
+    "Original rejected variants and reviews remain preserved.",
+    "This is a conventional numerical-core optimization review, not a proof of SCM, NAIA or D2/D2E."
+  ],
+  "reporting_review": {
+    "documents": [
+      "experiments/calculation_sharing_001/README.md",
+      "experiments/calculation_sharing_001/receipt.py",
+      "provenance/calculation_sharing_001/receipt.json"
+    ],
+    "result": "Resource table reconciles; static, observed-stack and provisional-reservation claims are distinguished. Mainline/default/target/uncertainty limitations are appropriate. Current lifecycle driver compares three accepted cycles and a fourth matched rejection; it does not certify availability. All embedded receipt path hashes independently verified.",
+    "initial_driver_limit": "Resolved documentation/provenance omission: initial generated host builds and original failure traceback are preserved; traceback confirms query failure after unconditional initialize(fit.w). Original Python driver revision remains explicitly unarchived. Current paired lifecycle controls establish matching final behavior; this review does not reconstruct or rerun the missing original driver.",
+    "initial_failure_record": "provenance/calculation_sharing_001/initial_driver_failure.json"
+  }
+}
