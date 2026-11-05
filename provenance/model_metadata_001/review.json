@@ -1,0 +1,102 @@
+{
+  "reviewer": "independent metadata_review agent",
+  "base_revision": "e464a0118d326ffdef62914e97f619be29c6c7c9",
+  "status": "accepted_with_specialized_ABI_scope",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "topic": "dead-field closure",
+      "disposition": "map, knots, hu appear only in declaration and bind checks in baseline generated core. Full cardinal path has no dependence; reduced path retains projected_map. Generated core diff has no arithmetic changes."
+    },
+    {
+      "topic": "ABI",
+      "disposition": "Intentional incompatible model/context layout. Both target and execution initializers map every retained field correctly. Existing ctypes adapters must not load compact candidate; docs explicitly exclude them."
+    },
+    {
+      "topic": "layout and footprint",
+      "disposition": "ARM assembly independently confirms model 48->28 B, core 2376->2360 B, core.m offset 2288 unchanged, core.cost 2336->2320, projected_map 20->12, legacy 32->16. Net static saving 16 B includes text increase and alignment changes; no complete SRAM or worst-case stack claim."
+    },
+    {
+      "topic": "test scope",
+      "disposition": "Parent test covers reduced rows; independent adaptation covers all 94 full rows. Documents now distinguish these. Scalar statuses/sentinels compared; universal success not claimed."
+    }
+  ],
+  "independent_checks": {
+    "reduced": {
+      "status": "pass",
+      "results": {
+        "baseline": {
+          "returncode": 0,
+          "bytes": 1308190,
+          "sha256": "8e38345a30501f689463423b39fbe9cf100e1ed7967bc09e11fc55c0aede5e83"
+        },
+        "compact": {
+          "returncode": 0,
+          "bytes": 1308190,
+          "sha256": "8e38345a30501f689463423b39fbe9cf100e1ed7967bc09e11fc55c0aede5e83"
+        }
+      },
+      "scope": "256 support/feature points,256 streamed samples,8refits,4096scalarqueries;finalhistory,response,jointfactor and7usedpointerrejections byte-identical"
+    },
+    "full": {
+      "baseline": {
+        "returncode": 0,
+        "bytes": 3458590,
+        "sha256": "a208ebe591b56a6b6a4ac6ae6808c18aecac874e07045e568d23220e23df5d4f"
+      },
+      "compact": {
+        "returncode": 0,
+        "bytes": 3458590,
+        "sha256": "a208ebe591b56a6b6a4ac6ae6808c18aecac874e07045e568d23220e23df5d4f"
+      }
+    },
+    "receipt_hashes_verified": true
+  },
+  "limits": [
+    "Finite controls and static dependency closure, not universal ABI compatibility.",
+    "Target stack receipts inspected, execution not independently repeated.",
+    "No timing, long-term accuracy, coverage, firmware readiness, mainline promotion or worst-case stack qualification."
+  ],
+  "sha256": {
+    "experiments/model_metadata_001/README.md": "5ad024bbdfb13c5b4366916de49fc964308f22457d3fb70bf66c4dff07edb6cf",
+    "experiments/model_metadata_001/baseline001/measurement.json": "76aafd0c4ee038830985bf014b75f57dfa202e7fb3c45c8eb5cf9d1e6a9e20d4",
+    "experiments/model_metadata_001/baseline001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/model_metadata_001/baseline001/tiny_cardinal/core.c": "edaf78c5e0ffc5cb7b6087e8df6eb4b02c0544a6a6f6e3cab593d4f5310f9533",
+    "experiments/model_metadata_001/baseline001/tiny_cardinal/probe.c": "d06c00d1158df5fae6441d63038ab010355bffe99467872b1aa0cca87a3df142",
+    "experiments/model_metadata_001/baseline001/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/model_metadata_001/baseline001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/model_metadata_001/build.py": "821c4b468ab8c57cab809e653eee6804a4d0937339c692e212cc662789c8982c",
+    "experiments/model_metadata_001/check.py": "9f54f22a8f4e51dd2dcb1622316a6a447ba34c0d05ce00b6f8eb46f445082eb6",
+    "experiments/model_metadata_001/check001/result.json": "4d499263a58e848800a63dc9ca1f007c09d298ce9d09bffbb9847423eace2a16",
+    "experiments/model_metadata_001/compact001/measurement.json": "8837eea714d168306196423a3114cb7105b3055ef2472f0400a5acf4ac8f257e",
+    "experiments/model_metadata_001/compact001/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/model_metadata_001/compact001/tiny_cardinal/core.c": "138888436d6ca5115207687fd8ed286cac339ff2c4e0f893955bc8d293794075",
+    "experiments/model_metadata_001/compact001/tiny_cardinal/probe.c": "0f40f04fa311ea88cdec31bb066ac51304f92a010e882d65d10a2927661ea3a5",
+    "experiments/model_metadata_001/compact001/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/model_metadata_001/compact001/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/model_metadata_001/execution.py": "b956742c1af0577445cf1586167a3836c15deae7a967b683e68b07748aa37c2e",
+    "experiments/model_metadata_001/stack_base001/core.c": "f3ae86f9db959ab7b377d0bfd07fd7b775d9d84144750a1290c2e266588c9d41",
+    "experiments/model_metadata_001/stack_base001/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/model_metadata_001/stack_base001/measurement.json": "ced8abebf4ce1dfe95fc3e199c0f5f45e42b7b67a799d0026b4119c47b6f4681",
+    "experiments/model_metadata_001/stack_base001/probe.c": "edfea486a8f688445b0979afafb753fca073f8d372dfa1540b7768bb0537d3ff",
+    "experiments/model_metadata_001/stack_base001/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/model_metadata_001/stack_base001/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/model_metadata_001/stack_compact001/core.c": "9cf3778f7c48942056c3eb7c8a7ece51ad1ef99c5e83db8600d1372f90a83696",
+    "experiments/model_metadata_001/stack_compact001/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/model_metadata_001/stack_compact001/measurement.json": "0ba495799d0e2ced22b00ffc305c286d6b8e7b406d1f0a84102f14738f1582a8",
+    "experiments/model_metadata_001/stack_compact001/probe.c": "0c89e9bac96c5453857c7df6aacec91fdf4de8070b1b7f01571caf152af11994",
+    "experiments/model_metadata_001/stack_compact001/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/model_metadata_001/stack_compact001/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/model_metadata_001/target.py": "b5f5f2c43f4917b3fa6ca436619aeba06c4164d6b77c16d91912028e5bef07c5",
+    "provenance/model_metadata_001/receipt.json": "121ceb0c4627059f48486e4a5d25d3d6acd65d91dd3269a903665612f172d6f4",
+    "provenance/model_metadata_001/reviewer_controls/README.txt": "6cae8a5ecd3f202e27c3f91fcc03ffd32ee9d25ea209107c9570cd082c74065f",
+    "provenance/model_metadata_001/reviewer_controls/baseline_full.c": "7dac05cdd53b6de2c2c3a76a0fdfc10cbc43c3fef1c58c1b464da7a19bb16714",
+    "provenance/model_metadata_001/reviewer_controls/compact_full.c": "3db7554c23aef74ceb3e0dfd0fa37c3d9beb1f4dcb0b20072ca13c5f8845a442",
+    "provenance/model_metadata_001/reviewer_controls/full_result.json": "5132df87e180a715994f02f16a6ba21f6f1387915e0db11936c53c3d6fcde015",
+    "provenance/model_metadata_001/reviewer_controls/layout_baseline.c": "3f8bab74090a0579bac35d8d8dfbdd5e6bb6cb4d2d82a948f8a6103cd61681fa",
+    "provenance/model_metadata_001/reviewer_controls/layout_baseline.s": "6be11eeb7376b6873eac8812a64ecbce03cad885c0855eebd26ba0d94ba0b158",
+    "provenance/model_metadata_001/reviewer_controls/layout_compact.c": "de4fd8d22d2913f15323c1c735f001d0fbcb16f64a20ff125818182970299042",
+    "provenance/model_metadata_001/reviewer_controls/layout_compact.s": "62b7f45c7735b77c4f71c38f80ae8a375f9981209e6dcabb5393e83f36dab056",
+    "provenance/model_metadata_001/reviewer_controls/result.json": "4d499263a58e848800a63dc9ca1f007c09d298ce9d09bffbb9847423eace2a16"
+  }
+}

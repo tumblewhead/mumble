@@ -1,3 +1,10 @@
+# Compact model metadata experiment
+
+The [metadata experiment](experiments/model_metadata_001/README.md) removes
+three obsolete spline fields, saving16B static overall (24696B total). Its
+specialized C ABI requires rebuilt callers; existing ctypes layouts are
+incompatible. Mainline/campaign defaults remain unchanged.
+
 # Configuration-backed check reduction
 
 The [configuration-size experiment](experiments/config_size_001/README.md)
