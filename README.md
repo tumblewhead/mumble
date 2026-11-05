@@ -1,3 +1,11 @@
+# Constant layout and codec study
+
+The [layout study](experiments/constant_layout_study_001/README.md) compares13
+arrangements, multiple lossless codecs, bounded blocks and exact coefficient
+formats. Original byte order wins for the tested LZ codecs; projection tables
+compress poorly. No new estimator variant is selected; the static baseline
+remains24608 bytes. Stream-only savings are not linked-image savings.
+
 # Shared segmented constant-block experiment
 
 The [shared-block trial](experiments/shared_constant_block_001/README.md) pools

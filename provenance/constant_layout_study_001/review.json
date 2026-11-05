@@ -1,0 +1,59 @@
+{
+  "reviewer": "independent_agent_layout_study_review",
+  "base_commit": "665a99b",
+  "status": "accepted_offline_comparative_study_only",
+  "scope": [
+    "Reference codec correctness and serialized metadata accounting",
+    "Exact reconstruction of linked constant envelope and coefficient layouts",
+    "Bounded-block representation and LZSS access statistics",
+    "Documentation limits and no implementation promotion"
+  ],
+  "controls": {
+    "script": "provenance/constant_layout_study_001/reviewer_controls/check.py",
+    "result": "provenance/constant_layout_study_001/reviewer_controls/result_final_access.json",
+    "codec_and_layout_cases": 96,
+    "independent_block_cases": 384,
+    "full_final_result_reproduction": "byte_exact",
+    "partition_20B_span_directory_reconstruction": "exact",
+    "coefficient_formats_serialized_reconstruction": "exact",
+    "float32_coefficient_error_reproduction": "exact",
+    "LZSS_access_statistics": "independently_parsed_and_reconstructed"
+  },
+  "commands": [
+    "python3 -B provenance/constant_layout_study_001/reviewer_controls/check.py provenance/constant_layout_study_001/result.json",
+    "python3 -B -m experiments.constant_layout_study_001.study --elf experiments/shared_constant_block_001/baseline/tiny_cardinal/probe.elf --out provenance/constant_layout_study_001/reviewer_controls/reproduction_final",
+    "cmp provenance/constant_layout_study_001/result.json provenance/constant_layout_study_001/reviewer_controls/reproduction_final/result.json"
+  ],
+  "findings": [
+    {
+      "issue": "Exponent-format check initially reused encoder count/minimum exponent/width",
+      "disposition": "Fixed to parse serialized header; independently rechecked exact reconstruction"
+    },
+    {
+      "issue": "Partition span descriptors modeled rather than produced by study runner",
+      "disposition": "Reviewer independently serialized 20B descriptor block and reconstructed complete1642B envelope; documentation calls overhead modeled"
+    },
+    {
+      "issue": "Projection-table dominance wording could imply majority of full envelope",
+      "disposition": "Clarified to numerical tables"
+    }
+  ],
+  "open_blocking_findings": [],
+  "limits": [
+    "Trusted generated codec data only; not malformed-input parser qualification",
+    "No native decoder code, access rewriting, relocation, runtime/stack, cycle or firmware feasibility measurement",
+    "Directory comparison costs are specified choices rather than universal lower bounds",
+    "Byte entropy is fitted zero-order diagnostic, not universal lower bound",
+    "Float32 figures characterize coefficient rounding only, not estimator error or accepted optimization"
+  ],
+  "sha256": {
+    "experiments/constant_layout_study_001/README.md": "aaa4ad5296602994a2a78bba3e944fea4049acb4582b43596bafaadb6b02c920",
+    "experiments/constant_layout_study_001/codecs.py": "0ddaecd4c89dc8dea3b7934b58bcbf332cb5b02ed174a6bd7b6bd8b6ac43ef1d",
+    "experiments/constant_layout_study_001/study.py": "e221c692f737df05c0381f70a47e8ff021f3a91bbfa2b1cfa9943888ce518880",
+    "provenance/constant_layout_study_001/receipt.json": "eb7cf2894b0d8fa4420949e7ca957d1dea6ccdd2cc91fbf443a5cb48ad1e1233",
+    "provenance/constant_layout_study_001/result.json": "92b42d05ca48a6e18a7e29d212a2444374bf2bf69b83483353e696beb754bf4c",
+    "provenance/constant_layout_study_001/reviewer_controls/check.py": "dc73cb7511c0fd91971c6450c55aa135596e0978aac3b13a6b1383b8a028781d",
+    "provenance/constant_layout_study_001/reviewer_controls/result_final_access.json": "e5b3873f8ecba32a406bcd68e33ac118069f4a464aff3462237a7056a37f6a3b",
+    "provenance/constant_layout_study_001/reviewer_controls/reproduction_final/result.json": "92b42d05ca48a6e18a7e29d212a2444374bf2bf69b83483353e696beb754bf4c"
+  }
+}
