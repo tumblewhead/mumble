@@ -1,0 +1,62 @@
+{
+  "schema": "triangular_sharing_independent_review_v1",
+  "reviewer": "fresh_context_tri_review",
+  "base_revision": "4d1564020d3394915674c9f34fd2f51a0da438f3",
+  "status": "accepted_isolated_observed_8B_gain",
+  "findings": [
+    {
+      "id": "algebra",
+      "disposition": "accepted_by_inspection",
+      "detail": "Step solves R y = -b in descending i with ascending j; variance solves R^T y = gradient in ascending i/j then sums y_i squared. Packed index and floating operation order are unchanged."
+    },
+    {
+      "id": "failure_sequence",
+      "disposition": "accepted_by_inspection",
+      "detail": "Step checks each stored y immediately and aborts at first nonfinite value. Variance completes all substitutions and square accumulations before its existing final nonfinite-total rejection. Output writes, acquire/release and caller pointer checks remain outside helper and unchanged. No new scratch or persistent state."
+    },
+    {
+      "id": "resources",
+      "disposition": "observed_gate_pass",
+      "detail": "Static 24680 to 24672 B. Existing baseline and new candidate target probes both return 0 with 664 B observed stack; combined 25344 to 25336 B is an 8 B improvement. Do not reject for stack growth on this witness."
+    },
+    {
+      "id": "qualification",
+      "disposition": "accepted_targeted_controls",
+      "detail": "Reviewed and independently reran check.py: 1000 paired solves, 20 matched failures, max residual 7.390171765402668e-16. Additional independent probe covered every diagonal position with zero, NaN, +/-Inf and finite 1e-310 (division overflow): 160 paired solves, 96 matched failures. Outputs remained sentinel on all failures; scratch and output arrays matched with NaN-aware equality."
+    }
+  ],
+  "limitations": [
+    "Observed stack is not worst-case stack.",
+    "M23 instructions executed on M33 QEMU are not target timing.",
+    "Direct equality is NaN-aware numeric equality, not a universal NaN payload or signed-zero bit-identity claim. No long-stream control run for this extraction.",
+    "Inherited disjoint external-array and serialized-owner contract applies.",
+    "Eight byte gain does not establish complete firmware fit, lifetime rounding or calibrated coverage."
+  ],
+  "artifacts": {
+    "experiments/triangular_sharing_001/build.py": "66079630bda41f387bc693c3ac3fb9787c5de590e83cfeff548acbde68edba7a",
+    "experiments/triangular_sharing_001/target.py": "0242b2e98bf1dad7d28024740db7934473c2923b8331254bb6f081815b5a1633",
+    "experiments/triangular_sharing_001/baseline001/measurement.json": "c961d0e377361317275a6863984cf8276bc03484010c9fab2cdcaa245fbcebbe",
+    "experiments/triangular_sharing_001/target001/measurement.json": "17c04048dbc52af0d162d6d85cd16c5ec69a968c9b7d7dae4d595ea1f61fe2c6",
+    "experiments/triangular_sharing_001/stack001/measurement.json": "5564ce29af38ef952112da0f4344edfb23d9bdf130de1eff5c9e0bc159b4e038",
+    "experiments/qr_sharing_001/stack_loop001/measurement.json": "74366cbbe1b812867af24e978576e5d7d09e9cf1377614ea349e016a67c0d93c",
+    "experiments/triangular_sharing_001/baseline001/tiny_cardinal/core.c": "b099eddb85ec75bb114deb060423f13ac7469ec326114f034013dbca6d2886c4",
+    "experiments/triangular_sharing_001/target001/tiny_cardinal/core.c": "02d8501b594e5cf0009f3a095587ff53701e2d9e67f687943a63cfe47fa6cab5",
+    "experiments/triangular_sharing_001/stack001/core.c": "57c5a131251353c1fecb1b2fe95f19d7ff0928193c2beb9164657f05de1339d7",
+    "experiments/triangular_sharing_001/stack001/probe.elf": "42ab1105f9c628077a1382bd2a495606e430d03428a869265a57cc930d7039cd",
+    "experiments/triangular_sharing_001/check.py": "856a067d8d632a7fef9230afa930c1feac7e21a3c56e81bf74a561015378d1ef",
+    "experiments/triangular_sharing_001/check001/result.json": "ebd8e95b41b40aae9f2d477a597b82de8002e6ce5923201a5cd409e3f4248573",
+    "experiments/triangular_sharing_001/README.md": "fd74e7e56e5c958e66229630bd43b0f0f07a61ca9175b53ae3c382818ca08324",
+    "provenance/triangular_sharing_001/receipt.json": "f80efcc178e90ef4a8397933d74666c2b2df0d4eff81086658394bedfc962259"
+  },
+  "independent_rerun": {
+    "path": "/tmp/triangular_review_check001/result.json",
+    "result": {
+      "status": "pass",
+      "paired_solves": 1000,
+      "matched_failures": 20,
+      "max_relative_residual": 7.390171765402668e-16
+    },
+    "additional_paired_solves": 160,
+    "additional_matched_failures": 96
+  }
+}
