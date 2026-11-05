@@ -1,0 +1,733 @@
+{
+  "base_commit": "751a5ff",
+  "selected": "combined_scalar",
+  "review_status": "complete",
+  "static_saving_B": 168,
+  "observed_stack_increase_B": 16,
+  "paired_observed_saving_B": 152,
+  "static_B": 24400,
+  "provisional_1024stack_total_B": 25424,
+  "measurements": {
+    "baseline": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16652,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 948,
+              "address": 268452136
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453088
+            }
+          ],
+          "alignment_gaps_B": 4,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16652,
+            ".rodata": 948,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24568,
+          "with_1024_stack_B": 25592,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/baseline/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/baseline/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/baseline/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/baseline/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "fcf8424ed8a3a55ebb7488284f850c1d87313ae0c9d468dfe2e516d8c470289d"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "baseline",
+      "lane": "physical"
+    },
+    "hys_scalar": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16524,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 948,
+              "address": 268452008
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268452960
+            }
+          ],
+          "alignment_gaps_B": 4,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16524,
+            ".rodata": 948,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24440,
+          "with_1024_stack_B": 25464,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_scalar/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_scalar/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_scalar/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_scalar/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "df88ff5eedef31e6b528741655b7e1055fe0ad0d7f99df637093c89baeeeee7e"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "hys_scalar",
+      "lane": "physical"
+    },
+    "hys_pair": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16656,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 948,
+              "address": 268452144
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453096
+            }
+          ],
+          "alignment_gaps_B": 8,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16656,
+            ".rodata": 948,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24576,
+          "with_1024_stack_B": 25600,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_pair/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_pair/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_pair/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/hys_pair/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "87909cdf1b2eb334ef7eb0aa81f806677d70a1acbf2247209f3ff6d3326ee8f3"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "hys_pair",
+      "lane": "physical"
+    },
+    "exp_chart": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16644,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 948,
+              "address": 268452128
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453080
+            }
+          ],
+          "alignment_gaps_B": 4,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16644,
+            ".rodata": 948,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24560,
+          "with_1024_stack_B": 25584,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/exp_chart/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/exp_chart/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/exp_chart/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/exp_chart/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "94b00d5ad8a33010a1959d6890a6fb6008d3860d336ac9b0979a60fcb646a26f"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "exp_chart",
+      "lane": "physical"
+    },
+    "combined_scalar": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16480,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 948,
+              "address": 268451968
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268452920
+            }
+          ],
+          "alignment_gaps_B": 8,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16480,
+            ".rodata": 948,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24400,
+          "with_1024_stack_B": 25424,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/combined_scalar/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/combined_scalar/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/combined_scalar/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/combined_scalar/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "4eda51250599f9f7845e634bb07218d35fd672a34dd32a8982523924a975a409"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "combined_scalar",
+      "lane": "physical"
+    }
+  },
+  "stack": {
+    "baseline": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_baseline/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_baseline/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_baseline/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_baseline/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_baseline/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=664\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    },
+    "hys_scalar": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_scalar/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_scalar/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_scalar/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_scalar/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_scalar/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=680\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    },
+    "hys_pair": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_pair/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_pair/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_pair/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_pair/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_hys_pair/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=704\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    },
+    "exp_chart": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_exp_chart/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_exp_chart/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_exp_chart/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_exp_chart/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_exp_chart/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=672\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    },
+    "combined_scalar": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_combined_scalar/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_combined_scalar/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_combined_scalar/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_combined_scalar/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/coordinate_sharing_001/stack_combined_scalar/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=680\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    }
+  },
+  "checks": {
+    "status": "pass",
+    "results": {
+      "baseline": {
+        "parity": {
+          "bytes": 3458582,
+          "sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d"
+        },
+        "invalid": {
+          "bytes": 75,
+          "sha256": "d03254f74eb411bebef26f939ed7d57b65465a88148a6ee5a67488f310c0968b",
+          "output": "invalid_config_checks=159 failed_bind_unchanged=1 shared_config_identity=1\n"
+        },
+        "numeric": {
+          "bytes": 322584,
+          "sha256": "92cbd8d78bf370e37b2926ab340c6146b0a94cf3c0220d5299c65e8679df368a"
+        }
+      },
+      "hys_scalar": {
+        "parity": {
+          "bytes": 3458582,
+          "sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d"
+        },
+        "invalid": {
+          "bytes": 75,
+          "sha256": "d03254f74eb411bebef26f939ed7d57b65465a88148a6ee5a67488f310c0968b",
+          "output": "invalid_config_checks=159 failed_bind_unchanged=1 shared_config_identity=1\n"
+        },
+        "numeric": {
+          "bytes": 322584,
+          "sha256": "92cbd8d78bf370e37b2926ab340c6146b0a94cf3c0220d5299c65e8679df368a"
+        }
+      },
+      "hys_pair": {
+        "parity": {
+          "bytes": 3458582,
+          "sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d"
+        },
+        "invalid": {
+          "bytes": 75,
+          "sha256": "d03254f74eb411bebef26f939ed7d57b65465a88148a6ee5a67488f310c0968b",
+          "output": "invalid_config_checks=159 failed_bind_unchanged=1 shared_config_identity=1\n"
+        },
+        "numeric": {
+          "bytes": 322584,
+          "sha256": "92cbd8d78bf370e37b2926ab340c6146b0a94cf3c0220d5299c65e8679df368a"
+        }
+      },
+      "exp_chart": {
+        "parity": {
+          "bytes": 3458582,
+          "sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d"
+        },
+        "invalid": {
+          "bytes": 75,
+          "sha256": "d03254f74eb411bebef26f939ed7d57b65465a88148a6ee5a67488f310c0968b",
+          "output": "invalid_config_checks=159 failed_bind_unchanged=1 shared_config_identity=1\n"
+        },
+        "numeric": {
+          "bytes": 322584,
+          "sha256": "92cbd8d78bf370e37b2926ab340c6146b0a94cf3c0220d5299c65e8679df368a"
+        }
+      },
+      "combined_scalar": {
+        "parity": {
+          "bytes": 3458582,
+          "sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d"
+        },
+        "invalid": {
+          "bytes": 75,
+          "sha256": "d03254f74eb411bebef26f939ed7d57b65465a88148a6ee5a67488f310c0968b",
+          "output": "invalid_config_checks=159 failed_bind_unchanged=1 shared_config_identity=1\n"
+        },
+        "numeric": {
+          "bytes": 322584,
+          "sha256": "92cbd8d78bf370e37b2926ab340c6146b0a94cf3c0220d5299c65e8679df368a"
+        }
+      }
+    },
+    "scope": "Also4096samples32refits512scalarqueryattemptsacross32frames,projectedmap257pointsand34featurerows64points;256 support probes,94feature rows,256samples,8refits,4096scalarqueries,finalhistory,response,jointfactor;159invalidbindings preserve bound core;UBSan clean"
+  },
+  "limits": [
+    "separate fixture stack observation is not worstcasebound",
+    "nohardwaretimingmeasurement",
+    "ABI andcampaign unchanged",
+    "float32candidate notincluded"
+  ],
+  "source_sha256": {
+    "experiments/coordinate_sharing_001/README.md": "9a9a6b3035486a1841d72c168461560134f427de24e0bfdbd043356d70c582bf",
+    "experiments/coordinate_sharing_001/build.py": "d2a18bceb17eed87d2f65aefa5279b47344266504756035d5187628a513b35d1",
+    "experiments/coordinate_sharing_001/check.py": "a172158831fc0f8cc5e941e6d7c69f99ae5ad79d9f26a584eb6ba1769ae8c280",
+    "experiments/coordinate_sharing_001/execution.py": "db142c83307111c17d887354a55db4309fedecb87daf25d2fc3b16bc7e283aa9",
+    "experiments/coordinate_sharing_001/target.py": "debd7fe9f0bcbed7a60628b3472cd3bc80d2c4d0e73ab94a19268579aae183b9"
+  }
+}

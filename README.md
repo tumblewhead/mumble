@@ -1,3 +1,11 @@
+# Coordinate-sharing experiment
+
+The [shared-coordinate trial](experiments/coordinate_sharing_001/README.md) selects
+shared hysteresis-coordinate and exponential-chart helpers. Static SRAM is24400
+bytes, with680 bytes of observed fixture stack:152 bytes saved in the paired
+comparison. Exact parity and support/transport controls apply; float32 coefficients
+are not included. Campaign defaults remain unchanged.
+
 # Constant-storage experiment
 
 The [storage trial](experiments/constant_storage_001/README.md) selects exact

@@ -1,0 +1,42 @@
+{
+  "command": [
+    "arm-none-eabi-gcc",
+    "-mcpu=cortex-m23",
+    "-mthumb",
+    "-mfloat-abi=soft",
+    "-std=c11",
+    "-Os",
+    "-flto",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fstack-usage",
+    "-nostartfiles",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/stack/probe.c",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+    "-Wl,--wrap=__aeabi_dsub",
+    "-T",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/stack/link.ld",
+    "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/stack/probe.map",
+    "-lm",
+    "-lc",
+    "-lgcc",
+    "-lnosys",
+    "-o",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/stack/probe.elf"
+  ],
+  "emulator": [
+    "qemu-system-arm",
+    "-M",
+    "mps2-an505",
+    "-nographic",
+    "-semihosting-config",
+    "enable=on,target=native",
+    "-kernel",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/stack/probe.elf"
+  ],
+  "output": "status=0\nallocation_B=6872\nstack_watermark_B=680\n",
+  "returncode": 0,
+  "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+}

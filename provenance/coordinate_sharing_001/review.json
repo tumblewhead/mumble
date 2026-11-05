@@ -1,0 +1,61 @@
+{
+  "status": "accepted_isolated_measured_exact_refinement",
+  "reviewer": "independent coordinate_sharing_review agent",
+  "base_revision": "751a5ff",
+  "selected": "combined_scalar",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "minor",
+      "finding": "Initial numeric-control scope misstated scalar attempt count.",
+      "disposition": "Fixed in check002 and final documentation; original records retained. Actual count is 16 attempts across each of32 frames,512 total."
+    }
+  ],
+  "source_reasoning": [
+    "Baseline generated C equals previous accepted byte_indices C after absolute include-path normalization.",
+    "Scalar hysteresis helper preserves ordered chart subtraction and log expression, j restricted to0 or1; exp helper preserves each of9 exact exp(chart) expressions. No new persistent cache, mutation, alias, support threshold or float32 conversion.",
+    "Pair helper writes distinct local doubles; rejected for increased combined memory.",
+    "Helpers rely on existing immutable valid configuration and serialized/no-alias contract; equivalence excludes observable errno/floating-exception environment and rejected NaN payload bits."
+  ],
+  "independent_controls": {
+    "host": "provenance/coordinate_sharing_001/reviewer_controls/check/result.json",
+    "host_result": "All five measured variants have identical parity3458582B, numeric322584B and invalid75B transcript hashes; UBSan clean.",
+    "edges": "provenance/coordinate_sharing_001/reviewer_controls/edge_result.json",
+    "edges_result": "240 coordinate sweeps plus30 constructed hysteresis-boundary probes; successful supported inputs exercise16 transported values/derivatives. Extremes, signed zero, infinities and NaN included. All five variants identical381880B transcript; UBSan clean.",
+    "target": "provenance/coordinate_sharing_001/reviewer_controls/target/measurement.json",
+    "stack": "provenance/coordinate_sharing_001/reviewer_controls/stack/measurement.json",
+    "selected_static_B": 24400,
+    "selected_observed_stack_B": 680,
+    "selected_static_plus_observed_B": 25080,
+    "baseline_static_plus_observed_B": 25232,
+    "paired_saving_B": 152
+  },
+  "commands": [
+    "cc -O2 -fno-fast-math -ffp-contract=off -fsanitize=undefined <reviewer_controls/*_edges.c> -lm -o <output>; execute output and compare stdout hashes",
+    "python3 -B -m experiments.coordinate_sharing_001.check --out provenance/coordinate_sharing_001/reviewer_controls/check",
+    "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.coordinate_sharing_001.target --variant combined_scalar --out provenance/coordinate_sharing_001/reviewer_controls/target",
+    "python3 -B -m experiments.coordinate_sharing_001.execution --variant combined_scalar --out provenance/coordinate_sharing_001/reviewer_controls/stack"
+  ],
+  "limits": [
+    "Finite host controls and source analysis do not qualify lifetime accuracy or calibrated coverage.",
+    "M23-target code runs on M33 QEMU; stack watermark is observed fixture maximum, not uniform target stack bound or timing.",
+    "Code/constants/I/O/alignment counted, but platform services omitted;10KiB unmet and firmware readiness not established.",
+    "Mainline/campaign defaults and ABI unchanged; inherited history48 and stationary model limitations remain."
+  ],
+  "sha256": {
+    "README.md": "3ef2f824ac76866f4bc017901264094d4b307591e7de0c4be0cef1ef440dbfc5",
+    "PROJECT_STATE.json": "b5f9a0d5e9fb333ada8c4d5779cf89b708024dc189d4679c1a7fb02b5c005b02",
+    "provenance/coordinate_sharing_001/receipt.json": "78f14f914074e18a43218602cf305d0e1a5dc975a41bfec68855afc14cdf7856",
+    "experiments/coordinate_sharing_001/README.md": "9a9a6b3035486a1841d72c168461560134f427de24e0bfdbd043356d70c582bf",
+    "experiments/coordinate_sharing_001/build.py": "d2a18bceb17eed87d2f65aefa5279b47344266504756035d5187628a513b35d1",
+    "experiments/coordinate_sharing_001/check.py": "a172158831fc0f8cc5e941e6d7c69f99ae5ad79d9f26a584eb6ba1769ae8c280",
+    "experiments/coordinate_sharing_001/target.py": "debd7fe9f0bcbed7a60628b3472cd3bc80d2c4d0e73ab94a19268579aae183b9",
+    "experiments/coordinate_sharing_001/execution.py": "db142c83307111c17d887354a55db4309fedecb87daf25d2fc3b16bc7e283aa9",
+    "experiments/coordinate_sharing_001/combined_scalar/tiny_cardinal/core.c": "b45ff7b33a4a4335c3b52d1ff2c48badc35dbfa28aeea8828547dad18faf2617",
+    "experiments/coordinate_sharing_001/baseline/tiny_cardinal/core.c": "db5aae81f51e403b5348adedfc622040b188141f46d914a7b20670d253e003f7",
+    "provenance/coordinate_sharing_001/reviewer_controls/edge_result.json": "c6d8b0ee05743e91818a99e9d004b392c81e3440c3831380446f0d528817fd84",
+    "provenance/coordinate_sharing_001/reviewer_controls/check/result.json": "3c6080881a5ca967d62f86bb93a99167eb1a30c365926f04e509d4611dde4eaa",
+    "provenance/coordinate_sharing_001/reviewer_controls/target/measurement.json": "e243ef5807cbc0cf7fd0d79714db8f53c6112e0901a2f3b999a28d8cc2d134b7",
+    "provenance/coordinate_sharing_001/reviewer_controls/stack/measurement.json": "bb30f288da3c1ab42e4aa7add8a50a9c07eb2bc7820bfc956bbdd7da471896eb"
+  }
+}

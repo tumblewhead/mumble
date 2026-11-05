@@ -1,0 +1,83 @@
+{
+  "results": [
+    {
+      "math": "tiny",
+      "map": "cardinal",
+      "history_bits": 48,
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 16480,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 948,
+          "address": 268451968
+        },
+        {
+          "name": ".bss",
+          "bytes": 6936,
+          "address": 268452920
+        }
+      ],
+      "alignment_gaps_B": 8,
+      "sections": {
+        ".vectors": 28,
+        ".text": 16480,
+        ".rodata": 948,
+        ".bss": 6936,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 10636,
+        ".debug_abbrev": 4357,
+        ".debug_loclists": 16732,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1361,
+        ".debug_line": 14705,
+        ".debug_str": 2651,
+        ".debug_frame": 612,
+        ".debug_line_str": 163
+      },
+      "allocated_sections_B": 24400,
+      "with_1024_stack_B": 25424,
+      "stack": "1024B reservation, not bound; final linked stack qualification pending",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/target/tiny_cardinal/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/target/tiny_cardinal/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/target/tiny_cardinal/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/coordinate_sharing_001/reviewer_controls/target/tiny_cardinal/probe.elf"
+      ],
+      "sha256": "4eda51250599f9f7845e634bb07218d35fd672a34dd32a8982523924a975a409"
+    }
+  ],
+  "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+  "variant": "combined_scalar",
+  "lane": "physical"
+}
