@@ -1,0 +1,133 @@
+{
+  "status": "approved_for_bounded_kernel_experiment_only",
+  "reviewer": "independent_integer_review_agent",
+  "source_revision_before_experiment": "d4d12a9c0f00fc6a0f1727b429f80b2f770ec170",
+  "kernel_sha256": "650aa849d2577462bef7043931e60fc517b8cf09677e509520d41624cc97ff3e",
+  "scope": [
+    "kernel.h integer range, sqrt and ratio arithmetic, CORDIC gain and rotation",
+    "run.py evidence scope; integrate.py fixed-point range, Q12/Q16 decode and quantization arithmetic; integrated long-run accuracy not qualified",
+    "stream.py uses separate float response feature generation and double-accumulated outer products for aggregate Gram comparison; no weak-direction or fitted-state claim"
+  ],
+  "resolved_findings": [
+    {
+      "problem": "digit rotation normalized by rounded storage norm doubles trailing energy for small pivot",
+      "input": {
+        "R": [
+          1,
+          1000000,
+          0
+        ],
+        "row": [
+          1,
+          -1000000
+        ]
+      },
+      "original_output": [
+        1,
+        0,
+        2000000
+      ],
+      "corrected_output": [
+        1,
+        0,
+        1414212
+      ],
+      "resolution": "16-guard-bit norm used for Q30 ratios, storage norm rounded separately"
+    },
+    {
+      "problem": "CORDIC rotates nonempty history for zero input row and creates spurious rank",
+      "input": {
+        "R": [
+          1,
+          1000000,
+          0
+        ],
+        "row": [
+          0,
+          0
+        ]
+      },
+      "original_output": [
+        1,
+        1000000,
+        18
+      ],
+      "corrected_output": [
+        1,
+        1000000,
+        0
+      ],
+      "resolution": "b==0 skips rotation exactly"
+    },
+    {
+      "problem": "float addition of0.5 can perturb integral large raw values and double-round values nearhalf",
+      "resolution": "truncate then inspect exact fractional remainder, adjusting integer by1 at half-away threshold",
+      "controls": "61086 signed finite float samples including boundary neighborhoods match independent nearest-half-away reference under UBSan and float-cast-overflow sanitizer"
+    }
+  ],
+  "controls": {
+    "ubsan": "both variants pass; -fsanitize=undefined -fno-sanitize-recover=all",
+    "random_insert_cases_each": 3000,
+    "boundary_insert_cases_each": 2401,
+    "prevalidation_and_bad_dimensions": true,
+    "zero_row_identity": true,
+    "exact_python_guarded_sqrt_cases": 100000,
+    "exact_python_q30_ratio_cases": 100000,
+    "sqrt_domain": "random uint64 plus small values and UINT64_MAX neighborhood",
+    "implementation_edited_by_reviewer": false,
+    "adapter_conversion": {
+      "status": "passed",
+      "conversion_cases": 61086,
+      "source_sha256": "f08fd55aab56ce88fcf5fb14b64d4933906bf3541971e4d6b2bd58d5f14c0cf9"
+    },
+    "q12_scalar_stall": {
+      "digit": {
+        "before": 16777472,
+        "after": 16777472,
+        "row_raw": 4096,
+        "status": 0,
+        "fixed_point": true
+      },
+      "cordic": {
+        "before": 16718191,
+        "after": 16718191,
+        "row_raw": 4096,
+        "status": 0,
+        "fixed_point": true
+      }
+    }
+  },
+  "range_reasoning": [
+    "a,b bounded by 2^29 makes a*a+b*b <=2^59 in uint64",
+    "guarded sqrt is <=2^46 on insertion domain; remainder and trial root fit uint64",
+    "ratio numerator <= guarded denominator; fractional division uses remainder <2^46",
+    "Q30 rotation coefficient products/sums stay below2^61",
+    "CORDIC Q16 internal vectors stay below2^48 using conservative shift-growth bound; gain split product stays below2^62",
+    "all negative shifts are explicit truncation, no signed-left-shift dependence"
+  ],
+  "limitations": [
+    "Not full collector or firmware approval; no target cycles or lifetime/cumulative accuracy certificate",
+    "CORDIC small pivot retains angular quantization: counterexample corrected output [1,-22,1414214]",
+    "Digit guard-to-storage norm rounds twice; not asserted equal to directly nearest exact norm in every case",
+    "Fixed range has no rescaling; errors may partially mutate factor and require caller invalidation",
+    "A finite square-root factor implies PSD Gram but does not establish calibrated weak-direction information",
+    "Trigonometric API reuse is future work only",
+    "Q12 factors at20million unit rows are exact update fixed points (both return success unchanged); future identical contributions are indefinitely discarded"
+  ],
+  "commands": [
+    "python3 provenance/integer_qr_001/reviewer_controls/corrected_check.py",
+    "python3 provenance/integer_qr_001/reviewer_controls/guard_check.py",
+    "python3 provenance/integer_qr_001/reviewer_controls/conversion_check.py"
+  ],
+  "cordic_gain_check": {
+    "inverse_gain_Q30_nearest": 652032874,
+    "constant_in_source": 652032874
+  },
+  "source_sha256": {
+    "kernel.h": "650aa849d2577462bef7043931e60fc517b8cf09677e509520d41624cc97ff3e",
+    "run.py": "6d4189b6ec5dcd65dc9981a8868318479f8d457f9d80011fc17ee1cc4335ce5a",
+    "integrate.py": "f08fd55aab56ce88fcf5fb14b64d4933906bf3541971e4d6b2bd58d5f14c0cf9",
+    "stream.py": "53d4f155cf97a38a25f5f55d8248959fcf1a922fa9d1827aa0fdea45f716c4f6"
+  },
+  "decision": "No promotion: corrected bounded arithmetic is reviewable, but Q12 histories permanently lose repeated scalar unit contributions at observed fixed points"
+}

@@ -1,0 +1,697 @@
+{
+  "base_commit": "d4d12a9",
+  "outcome": "both_implemented_no_promotion",
+  "review_status": "complete",
+  "kernel_Q16": {
+    "records": {
+      "digit": {
+        "small_pivot": {
+          "factor_raw": [
+            1,
+            0,
+            1414212
+          ],
+          "trailing_energy_relative_error": -2.2095280000078432e-06
+        },
+        "cases": {
+          "varied": {
+            "relative_Gram_error": 5.506901276432923e-05,
+            "host_seconds_including_ctypes": 0.01996778999455273,
+            "min_diagonal": 12.673416137695312
+          },
+          "weak": {
+            "relative_Gram_error": 1.6516772647849688e-06,
+            "host_seconds_including_ctypes": 0.013348734006285667,
+            "min_diagonal": 1.52587890625e-05
+          },
+          "rest": {
+            "relative_Gram_error": 0.0,
+            "host_seconds_including_ctypes": 4.6129003749229014e-05,
+            "min_diagonal": 0.0
+          }
+        },
+        "repeated": [
+          {
+            "updates": 100000,
+            "status": 0,
+            "factor_raw": 20724320,
+            "relative_information_error": 1.6527771948826597e-06,
+            "host_seconds": 0.008590700002969243
+          },
+          {
+            "updates": 1000000,
+            "status": 0,
+            "factor_raw": 65533902,
+            "relative_information_error": -6.402485407797087e-05,
+            "host_seconds": 0.08147860299504828
+          },
+          {
+            "updates": 20000000,
+            "status": 0,
+            "factor_raw": 293004402,
+            "relative_information_error": -0.0005560732519067635,
+            "host_seconds": 1.5008234359993367
+          }
+        ],
+        "sections": {
+          ".vectors": 28,
+          ".text": 1250,
+          ".bss": 2656,
+          ".ARM.attributes": 46,
+          ".comment": 30,
+          ".debug_line": 358,
+          ".debug_line_str": 151,
+          ".debug_info": 1123,
+          ".debug_abbrev": 384,
+          ".debug_aranges": 64,
+          ".debug_str": 1697,
+          ".debug_loclists": 360,
+          ".debug_rnglists": 34,
+          ".debug_frame": 52
+        },
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-Os",
+          "-flto",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/digit/probe.c",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/digit/link.ld",
+          "-Wl,--gc-sections",
+          "-lgcc",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/digit/probe.elf"
+        ],
+        "elf_sha256": "484e4bfe02bee97242541a8bb54fc8cf2562cf61338020373a674b9da043e5e8",
+        "stack_reports": {
+          "probe.elf.ltrans0.ltrans.su": "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/digit/probe.c:5:6:reset\t160\tstatic\n/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/digit/probe.c:6:6:fault\t0\tstatic\n"
+        }
+      },
+      "cordic": {
+        "small_pivot": {
+          "factor_raw": [
+            1,
+            -22,
+            1414214
+          ],
+          "trailing_energy_relative_error": 6.191399999355696e-07
+        },
+        "cases": {
+          "varied": {
+            "relative_Gram_error": 5.5609715587947644e-05,
+            "host_seconds_including_ctypes": 0.02027608099160716,
+            "min_diagonal": 12.67340087890625
+          },
+          "weak": {
+            "relative_Gram_error": 1.7518681486379193e-06,
+            "host_seconds_including_ctypes": 0.012386065995087847,
+            "min_diagonal": 1.52587890625e-05
+          },
+          "rest": {
+            "relative_Gram_error": 0.0,
+            "host_seconds_including_ctypes": 4.610899486579001e-05,
+            "min_diagonal": 0.0
+          }
+        },
+        "repeated": [
+          {
+            "updates": 100000,
+            "status": 0,
+            "factor_raw": 20724215,
+            "relative_information_error": -8.480236341701364e-06,
+            "host_seconds": 0.004072527997777797
+          },
+          {
+            "updates": 1000000,
+            "status": 0,
+            "factor_raw": 65530614,
+            "relative_information_error": -0.00016436092159799465,
+            "host_seconds": 0.026464651004062034
+          },
+          {
+            "updates": 20000000,
+            "status": 0,
+            "factor_raw": 292670478,
+            "relative_information_error": -0.002832818162295969,
+            "host_seconds": 0.3268672440026421
+          }
+        ],
+        "sections": {
+          ".vectors": 28,
+          ".text": 978,
+          ".bss": 2656,
+          ".ARM.attributes": 46,
+          ".comment": 30,
+          ".debug_line": 359,
+          ".debug_line_str": 151,
+          ".debug_info": 1123,
+          ".debug_abbrev": 384,
+          ".debug_aranges": 64,
+          ".debug_str": 1697,
+          ".debug_loclists": 360,
+          ".debug_rnglists": 34,
+          ".debug_frame": 52
+        },
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-Os",
+          "-flto",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/cordic/probe.c",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/cordic/link.ld",
+          "-Wl,--gc-sections",
+          "-lgcc",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/cordic/probe.elf"
+        ],
+        "elf_sha256": "e976d40dbd6d95fb0ef453d5e50ab2a13bacf643ad740f5c1814e7338eebc361",
+        "stack_reports": {
+          "probe.elf.ltrans0.ltrans.su": "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/kernel.h:32:16:iq_gain\t32\tstatic\n/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/cordic/probe.c:5:6:reset\t104\tstatic\n/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/attempt003/cordic/probe.c:6:6:fault\t0\tstatic\n"
+        }
+      }
+    },
+    "scope": "Q16 bounded kernel only; no rescaling, complete collector, M23 timing, lifetime guarantee or trig API",
+    "source_sha256": {
+      "kernel.h": "650aa849d2577462bef7043931e60fc517b8cf09677e509520d41624cc97ff3e",
+      "run.py": "d45a0720dec4d00664abe51a81f322b07bb0c4c1666cc15babeca550572152f9",
+      "integrate.py": "a575826e4ae35417de8fb35238e8f9d20171303bc752ffda77ed9f8332c17cb9"
+    }
+  },
+  "kernel_Q12": {
+    "fraction_bits": 12,
+    "records": {
+      "digit": {
+        "small_pivot": {
+          "factor_raw": [
+            1,
+            0,
+            1414212
+          ],
+          "trailing_energy_relative_error": -2.2095280000078432e-06
+        },
+        "cases": {
+          "varied": {
+            "relative_Gram_error": 0.002110872032229267,
+            "host_seconds_including_ctypes": 0.02026069899147842,
+            "min_diagonal": 12.663818359375
+          },
+          "weak": {
+            "relative_Gram_error": 0.00011851487316876641,
+            "host_seconds_including_ctypes": 0.014495196999632753,
+            "min_diagonal": 0.0
+          },
+          "rest": {
+            "relative_Gram_error": 0.0,
+            "host_seconds_including_ctypes": 5.276199954096228e-05,
+            "min_diagonal": 0.0
+          }
+        },
+        "repeated": [
+          {
+            "updates": 100000,
+            "status": 0,
+            "factor_raw": 1296657,
+            "relative_information_error": 0.0021444413954019304,
+            "host_seconds": 0.007580638004583307
+          },
+          {
+            "updates": 1000000,
+            "status": 0,
+            "factor_raw": 4038256,
+            "relative_information_error": -0.02799656858825683,
+            "host_seconds": 0.06988989798992407
+          },
+          {
+            "updates": 20000000,
+            "status": 0,
+            "factor_raw": 16777472,
+            "relative_information_error": -0.16111359980468754,
+            "host_seconds": 1.256067611000617
+          }
+        ],
+        "sections": {
+          ".vectors": 28,
+          ".text": 1250,
+          ".bss": 2656,
+          ".ARM.attributes": 46,
+          ".comment": 30,
+          ".debug_line": 358,
+          ".debug_line_str": 151,
+          ".debug_info": 1123,
+          ".debug_abbrev": 384,
+          ".debug_aranges": 64,
+          ".debug_str": 1697,
+          ".debug_loclists": 360,
+          ".debug_rnglists": 34,
+          ".debug_frame": 52
+        },
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-Os",
+          "-flto",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/digit/probe.c",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/digit/link.ld",
+          "-Wl,--gc-sections",
+          "-lgcc",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/digit/probe.elf"
+        ],
+        "elf_sha256": "484e4bfe02bee97242541a8bb54fc8cf2562cf61338020373a674b9da043e5e8",
+        "stack_reports": {
+          "probe.elf.ltrans0.ltrans.su": "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/digit/probe.c:5:6:reset\t160\tstatic\n/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/digit/probe.c:6:6:fault\t0\tstatic\n"
+        }
+      },
+      "cordic": {
+        "small_pivot": {
+          "factor_raw": [
+            1,
+            -22,
+            1414214
+          ],
+          "trailing_energy_relative_error": 6.191399999355696e-07
+        },
+        "cases": {
+          "varied": {
+            "relative_Gram_error": 0.0021199495729399237,
+            "host_seconds_including_ctypes": 0.020351303988718428,
+            "min_diagonal": 12.663818359375
+          },
+          "weak": {
+            "relative_Gram_error": 0.00011851487316876641,
+            "host_seconds_including_ctypes": 0.01253697600623127,
+            "min_diagonal": 0.0
+          },
+          "rest": {
+            "relative_Gram_error": 0.0,
+            "host_seconds_including_ctypes": 4.69599908683449e-05,
+            "min_diagonal": 0.0
+          }
+        },
+        "repeated": [
+          {
+            "updates": 100000,
+            "status": 0,
+            "factor_raw": 1296644,
+            "relative_information_error": 0.00212434693336494,
+            "host_seconds": 0.004069895992870443
+          },
+          {
+            "updates": 1000000,
+            "status": 0,
+            "factor_raw": 4038019,
+            "relative_information_error": -0.02811065647834543,
+            "host_seconds": 0.026287963992217556
+          },
+          {
+            "updates": 20000000,
+            "status": 0,
+            "factor_raw": 16718191,
+            "relative_information_error": -0.1670313170180291,
+            "host_seconds": 0.3276302400045097
+          }
+        ],
+        "sections": {
+          ".vectors": 28,
+          ".text": 978,
+          ".bss": 2656,
+          ".ARM.attributes": 46,
+          ".comment": 30,
+          ".debug_line": 359,
+          ".debug_line_str": 151,
+          ".debug_info": 1123,
+          ".debug_abbrev": 384,
+          ".debug_aranges": 64,
+          ".debug_str": 1697,
+          ".debug_loclists": 360,
+          ".debug_rnglists": 34,
+          ".debug_frame": 52
+        },
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-Os",
+          "-flto",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/cordic/probe.c",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/cordic/link.ld",
+          "-Wl,--gc-sections",
+          "-lgcc",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/cordic/probe.elf"
+        ],
+        "elf_sha256": "e976d40dbd6d95fb0ef453d5e50ab2a13bacf643ad740f5c1814e7338eebc361",
+        "stack_reports": {
+          "probe.elf.ltrans0.ltrans.su": "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/kernel.h:32:16:iq_gain\t32\tstatic\n/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/cordic/probe.c:5:6:reset\t104\tstatic\n/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/q12_long/cordic/probe.c:6:6:fault\t0\tstatic\n"
+        }
+      }
+    },
+    "scope": "Fixed-scale bounded kernel only; no rescaling, complete collector, M23 timing, lifetime guarantee or trig API",
+    "source_sha256": {
+      "kernel.h": "650aa849d2577462bef7043931e60fc517b8cf09677e509520d41624cc97ff3e",
+      "run.py": "6d4189b6ec5dcd65dc9981a8868318479f8d457f9d80011fc17ee1cc4335ce5a",
+      "integrate.py": "f08fd55aab56ce88fcf5fb14b64d4933906bf3541971e4d6b2bd58d5f14c0cf9",
+      "stream.py": "53d4f155cf97a38a25f5f55d8248959fcf1a922fa9d1827aa0fdea45f716c4f6"
+    }
+  },
+  "integrated": {
+    "reviewed_digit": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_digit/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_digit/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_digit/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_digit/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 6262,
+        ".rodata": 192,
+        ".bss": 3104,
+        ".debug_info": 8160,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 9413,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1083,
+        ".debug_line": 11077,
+        ".debug_str": 3374,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 536,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "fc08db7087a40fdd1908cb3859fc45372229d86b0e7365c48b36b12d32e5d931",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 6262,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268441748
+        },
+        {
+          "name": ".bss",
+          "bytes": 3104,
+          "address": 268441940
+        }
+      ],
+      "static_B": 9588,
+      "alignment_gaps_B": 2,
+      "with_1024_stack_B": 10612,
+      "fraction_bits": 12,
+      "kernel": "digit",
+      "qualification": "bounded size probe only; no complete campaign or rescaling"
+    },
+    "reviewed_cordic": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_cordic/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_cordic/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_cordic/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_cordic/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5998,
+        ".rodata": 192,
+        ".bss": 3104,
+        ".debug_info": 8160,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 9413,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1083,
+        ".debug_line": 11078,
+        ".debug_str": 3374,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 536,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "ace4fa184e223e66495a1c18f0ff1b97ad53157170c0cf9e3635bb152ad9a4c3",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5998,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268441484
+        },
+        {
+          "name": ".bss",
+          "bytes": 3104,
+          "address": 268441676
+        }
+      ],
+      "static_B": 9324,
+      "alignment_gaps_B": 2,
+      "with_1024_stack_B": 10348,
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling"
+    },
+    "reviewed_stack_digit": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_digit/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_digit/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_digit/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_digit/probe.elf"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 6588,
+        ".rodata": 240,
+        ".bss": 3104,
+        ".debug_info": 8160,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 9413,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1083,
+        ".debug_line": 11077,
+        ".debug_str": 3374,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 536,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "74ec9208fd7ecb9a93da1987b8a46030da88b2574abfa2ca5e966df1a12b9612",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_digit/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=3080\nstack_watermark_B=456\n",
+      "fraction_bits": 12,
+      "kernel": "digit",
+      "qualification": "bounded size probe only; no complete campaign or rescaling"
+    },
+    "reviewed_stack_cordic": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_cordic/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_cordic/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_cordic/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_cordic/probe.elf"
+      ],
+      "execute": true,
+      "arithmetic": "float_response_fixed_integer_history",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 6312,
+        ".rodata": 240,
+        ".bss": 3104,
+        ".debug_info": 8160,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 9413,
+        ".debug_aranges": 512,
+        ".debug_rnglists": 1083,
+        ".debug_line": 11078,
+        ".debug_str": 3374,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 536,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "ff7cbbfcf59b3e87d6e0a0154196d738c40e041c088f566c8c94246ba789de58",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/integer_qr_001/reviewed_stack_cordic/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=3080\nstack_watermark_B=408\n",
+      "fraction_bits": 12,
+      "kernel": "cordic",
+      "qualification": "bounded size probe only; no complete campaign or rescaling"
+    }
+  },
+  "integrated_stream": {
+    "digit": {
+      "relative_Gram_error": 3.857909771866765e-06,
+      "samples": 4096,
+      "scope": "Float-generated features vs accumulated integer history, no fitted parameter/coverage claims"
+    },
+    "cordic": {
+      "relative_Gram_error": 3.863757715047989e-06,
+      "samples": 4096,
+      "scope": "Float-generated features vs accumulated integer history, no fitted parameter/coverage claims"
+    }
+  },
+  "source_sha256": {
+    "experiments/integer_qr_001/kernel.h": "650aa849d2577462bef7043931e60fc517b8cf09677e509520d41624cc97ff3e",
+    "experiments/integer_qr_001/run.py": "6d4189b6ec5dcd65dc9981a8868318479f8d457f9d80011fc17ee1cc4335ce5a",
+    "experiments/integer_qr_001/integrate.py": "f08fd55aab56ce88fcf5fb14b64d4933906bf3541971e4d6b2bd58d5f14c0cf9",
+    "experiments/integer_qr_001/stream.py": "53d4f155cf97a38a25f5f55d8248959fcf1a922fa9d1827aa0fdea45f716c4f6",
+    "experiments/integer_qr_001/README.md": "36e99955e328a6c028d905adad0c59b93ffa66ae759d7be558ced6c476d092c4"
+  },
+  "limits": [
+    "No target cycle certificate",
+    "No complete firmware budget",
+    "Q12 permanent scalar accumulation stalls",
+    "No fitted parameter/coverage qualification",
+    "No trig API yet"
+  ]
+}
