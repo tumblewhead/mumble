@@ -1,0 +1,550 @@
+{
+  "base_commit": "28270c6",
+  "retained_implementation": "bbe8a8f_uncompressed_response_base",
+  "decision": "reject_four_linked_candidates",
+  "review_status": "complete",
+  "measurements": {
+    "baseline": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16660,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 984,
+              "address": 268452144
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453128
+            }
+          ],
+          "alignment_gaps_B": 0,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16660,
+            ".rodata": 984,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24608,
+          "with_1024_stack_B": 25632,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/baseline/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/baseline/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/baseline/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/baseline/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "349015393ebc43ce1b986c36fd5a18d8661589458c5e670a341f3409037cab6c"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "baseline",
+      "lane": "physical"
+    },
+    "raw": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 17004,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 929,
+              "address": 268452488
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453424
+            }
+          ],
+          "alignment_gaps_B": 7,
+          "sections": {
+            ".vectors": 28,
+            ".text": 17004,
+            ".rodata": 929,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24904,
+          "with_1024_stack_B": 25928,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "6abf6adc1b98f8f2357d1ae0db1e15442c33da51c235fe66299610e74b8872eb"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "raw",
+      "lane": "physical",
+      "codec": {
+        "tables_bytes": 936,
+        "literal_values": 0,
+        "uncompressed_bytes": 936,
+        "encoded_blob_bytes": 853,
+        "descriptor_bytes": 12,
+        "rules": 9,
+        "offsets": [
+          0,
+          16,
+          32,
+          37,
+          76,
+          115
+        ]
+      }
+    },
+    "plane": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 17004,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 966,
+              "address": 268452488
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453456
+            }
+          ],
+          "alignment_gaps_B": 2,
+          "sections": {
+            ".vectors": 28,
+            ".text": 17004,
+            ".rodata": 966,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24936,
+          "with_1024_stack_B": 25960,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "84630e82be8bee94fa10e48ca863c1bad5fd3498fdd3899ac0621fdd70e53d4e"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "plane",
+      "lane": "physical",
+      "codec": {
+        "tables_bytes": 936,
+        "literal_values": 0,
+        "uncompressed_bytes": 936,
+        "encoded_blob_bytes": 890,
+        "descriptor_bytes": 12,
+        "rules": 6,
+        "offsets": [
+          0,
+          16,
+          32,
+          37,
+          76,
+          115
+        ]
+      }
+    },
+    "raw_literals": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 17236,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 1011,
+              "address": 268452720
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453736
+            }
+          ],
+          "alignment_gaps_B": 5,
+          "sections": {
+            ".vectors": 28,
+            ".text": 17236,
+            ".rodata": 1011,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 25216,
+          "with_1024_stack_B": 26240,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw_literals/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw_literals/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw_literals/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/raw_literals/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "ecc77fdd6559ecc0abfe8af603363ce66756a50fb29a71f6ee2c8781f44ea93e"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "raw_literals",
+      "lane": "physical",
+      "codec": {
+        "tables_bytes": 936,
+        "literal_values": 15,
+        "uncompressed_bytes": 1056,
+        "encoded_blob_bytes": 935,
+        "descriptor_bytes": 12,
+        "rules": 9,
+        "offsets": [
+          0,
+          16,
+          32,
+          37,
+          76,
+          115
+        ]
+      }
+    },
+    "plane_literals": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 17236,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 1064,
+              "address": 268452720
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453784
+            }
+          ],
+          "alignment_gaps_B": 0,
+          "sections": {
+            ".vectors": 28,
+            ".text": 17236,
+            ".rodata": 1064,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 25264,
+          "with_1024_stack_B": 26288,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane_literals/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane_literals/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane_literals/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/shared_constant_block_001/plane_literals/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "8e4b0c1d6ffc4e72f789df69343d038a6ebec592ca146a95b54fef9aa5323f22"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "plane_literals",
+      "lane": "physical",
+      "codec": {
+        "tables_bytes": 936,
+        "literal_values": 15,
+        "uncompressed_bytes": 1056,
+        "encoded_blob_bytes": 988,
+        "descriptor_bytes": 12,
+        "rules": 6,
+        "offsets": [
+          0,
+          16,
+          32,
+          37,
+          76,
+          115
+        ]
+      }
+    }
+  },
+  "qualification": {
+    "status": "pass",
+    "results": {
+      "baseline": {
+        "bytes": 114410,
+        "sha256": "1aca9fd847dd4647fc5eebf5988864247b780b42bb2ee869cc0765a9efeea185"
+      },
+      "raw": {
+        "bytes": 114410,
+        "sha256": "1aca9fd847dd4647fc5eebf5988864247b780b42bb2ee869cc0765a9efeea185"
+      },
+      "plane": {
+        "bytes": 114410,
+        "sha256": "1aca9fd847dd4647fc5eebf5988864247b780b42bb2ee869cc0765a9efeea185"
+      },
+      "raw_literals": {
+        "bytes": 114410,
+        "sha256": "1aca9fd847dd4647fc5eebf5988864247b780b42bb2ee869cc0765a9efeea185"
+      },
+      "plane_literals": {
+        "bytes": 114410,
+        "sha256": "1aca9fd847dd4647fc5eebf5988864247b780b42bb2ee869cc0765a9efeea185"
+      }
+    },
+    "scope": "117 constants exact;each pooled literal bitchecked;8 support probes,94feature rows,8samples,1refit,128scalarqueries,finalhistory,response,jointfactor and common null rejections;UBSan clean"
+  },
+  "full_envelope": {
+    "source_elf": "experiments/shared_constant_block_001/baseline/tiny_cardinal/probe.elf",
+    "rodata_bytes": 984,
+    "literal_data_bytes": 658,
+    "total_raw_bytes": 1642,
+    "segments": 30,
+    "padding_bytes": 6,
+    "encodings": {
+      "raw": {
+        "blob_bytes": 1360,
+        "offset_length_directory_B": 120,
+        "payload_plus_directory_B": 1480,
+        "rules": 11
+      },
+      "plane": {
+        "blob_bytes": 1466,
+        "offset_length_directory_B": 120,
+        "payload_plus_directory_B": 1586,
+        "rules": 11
+      }
+    },
+    "scope": "offline compression only;4B directory provides uint16 decoded offset and length per segment;original addresses,decoder,access rewriting and scratch excluded. Literal pools include addresses and padding."
+  },
+  "limits": [
+    "full1642B envelope offline only;not executable replacement",
+    "no stack qualification for losing candidates",
+    "trusted immutable littleendian binary64 grammar",
+    "targeted lossless parity,not statistical coverage"
+  ],
+  "source_sha256": {
+    "experiments/shared_constant_block_001/README.md": "625b50495c7aae01cef3cdc67b88523f91e6e77bde7193bd3e153821134963d4",
+    "experiments/shared_constant_block_001/audit.py": "7563b1ce44512a14218e19d0a9a59915553b6ca8b3eb8cb224fc32896aa8adaa",
+    "experiments/shared_constant_block_001/build.py": "1987242b935fd6489c534d7232c46665cd8286d5bb808a747378322c016a9704",
+    "experiments/shared_constant_block_001/check.py": "56b6fc0886aceba9fad37e24a2e19ca458d5240db20dc367ca97f685f5b7c11f",
+    "experiments/shared_constant_block_001/execution.py": "db142c83307111c17d887354a55db4309fedecb87daf25d2fc3b16bc7e283aa9",
+    "experiments/shared_constant_block_001/target.py": "debd7fe9f0bcbed7a60628b3472cd3bc80d2c4d0e73ab94a19268579aae183b9"
+  }
+}

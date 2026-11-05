@@ -1,3 +1,11 @@
+# Shared segmented constant-block experiment
+
+The [shared-block trial](experiments/shared_constant_block_001/README.md) pools
+six tables and optionally numerical literals into one dictionary/payload. Linked
+images grow296–656B. A separate offline compression of the entire1642-byte
+constant envelope saves162B after segment descriptors, before decoder/access
+costs. The24608-byte uncompressed baseline remains selected.
+
 # Lossless codebook experiment
 
 The [constant-codebook trials](experiments/constant_codebook_001/README.md) tested
