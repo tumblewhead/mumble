@@ -1,0 +1,94 @@
+{
+  "reviewer": "independent fresh-context architectural measurement reviewer",
+  "base_commit": "c2c8b27dd077e64fcf447aa488c92ed707c83ca1",
+  "decision": "accept_limited_architectural_size_measurement",
+  "implementation_edited_by_reviewer": false,
+  "scope": "Numerical always-on partitions and measured footprint, not an equivalent full estimator or a deployed two-processor system.",
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "medium",
+      "finding": "QEMU semihost success alone did not test printed exercise status.",
+      "disposition": "Fixed: execute runner requires status=0; all independent exercise outputs were already status=0."
+    },
+    {
+      "id": "R2",
+      "severity": "medium",
+      "finding": "Initial predictor test only checked success despite a parity comment.",
+      "disposition": "Fixed: final test compares all 16 output values to original full transport helpers; independent rerun passes."
+    },
+    {
+      "id": "R3",
+      "severity": "scope",
+      "finding": "Collector excludes local-factor updates and inference checks; predictions write incrementally and harness can read stale values after failure.",
+      "disposition": "README explicitly limits failure equivalence, requires caller status gating, and identifies synthetic harness rather than application protocol."
+    }
+  ],
+  "independent_controls": {
+    "static_B": {
+      "collector": 13528,
+      "soc": 13864,
+      "predictor": 17720
+    },
+    "observed_stack_B": {
+      "collector": 424,
+      "soc": 440,
+      "predictor": 464
+    },
+    "allocation_B": {
+      "collector": 4808,
+      "soc": 4816,
+      "predictor": 5192
+    },
+    "host_result": {
+      "prediction_sha256": {
+        "full": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718",
+        "predictor": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718"
+      },
+      "status": "pass",
+      "results": {
+        "full": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "collector": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "soc": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "predictor": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        }
+      },
+      "scope": "512 valid ordered samples;history andresponse checkpoints every32 identical tofullsolver;negative-dt rejection andpoisonedstreamrefusal preserve buffers. Not equivalent inference-failure gating;noactualIPC."
+    },
+    "source_extraction": "Asserted stream_row identical modulo core type and validity-field renaming; shared math/history headers byte-identical; chart/hys_coordinate/exp_chart/cardinal/spline/rc_tau/supported/transported identical modulo core type.",
+    "resource_audit": "Linked vectors, text, rodata, BSS and alignment count in local SRAM. Soft double runtime included. 3570B history,744B response,272B row,40B input and160B unused identity reservation included; no local uncertainty factor or solver scratch. No initialized .data section in these images.",
+    "commands": "python3 -B -m experiments.two_processor_size_001.measure --variant {collector,soc,predictor} --out provenance/two_processor_size_001/reviewer_controls/{variant}; repeat --execute into stack_{variant}; python3 -B -m experiments.two_processor_size_001.check --out provenance/two_processor_size_001/reviewer_controls/check"
+  },
+  "limits": [
+    "Stack is exercised M23 code on M33 QEMU, not worst-case or hardware timing.",
+    "Only 512 valid ordered samples and one invalid-dt/quarantine control; no long-run approximation qualification.",
+    "One final 16-coordinate point transport comparison and SOC formula check; no validated uncertainty.",
+    "No IPC, snapshots, asynchronous host installation, origin recovery, host memory image or shared-SRAM implementation.",
+    "Validated immutable configuration, nonaliasing live arrays and serialized ownership remain caller contracts.",
+    "Every variant exceeds 10240B even before full platform integration."
+  ],
+  "reviewed_sha256": {
+    "experiments/two_processor_size_001/build.py": "2e5e95be3f2d06206cf60d1ff91a095c4f9e62fd68c6a1dd9acbeaf35afa199b",
+    "experiments/two_processor_size_001/measure.py": "e0f4be91b6da9a0b7b61c760593fed1cf8c223b476ed64e6867b6067e5b5f7ee",
+    "experiments/two_processor_size_001/check.py": "c1370fff220ed84e1c19052ac056c494dfe2bde807029de94682ead7be4234bd",
+    "experiments/two_processor_size_001/README.md": "833fe58a3d2436ddf0e4e30a5e22c3c6fa961761b8bab1abce21caf84335112b",
+    "provenance/two_processor_size_001/reviewer_controls/collector/measurement.json": "5528260db53127641e041f0b238ca1c37d68067cbd91a9dbf4adb39682b6a0ca",
+    "provenance/two_processor_size_001/reviewer_controls/soc/measurement.json": "e00b2e22896ec2dd26d2576864a924307ddd5c16b0080193a53a07bf246d0ada",
+    "provenance/two_processor_size_001/reviewer_controls/predictor/measurement.json": "20d3218b1f526a7568154eff3b290e4e68fcf8f82576cc165456c75fe58828ce",
+    "provenance/two_processor_size_001/reviewer_controls/stack_predictor/measurement.json": "97582ae9769809de8a487291adcc18dc01a31652e81b1e83a4f1e9e615892d30",
+    "provenance/two_processor_size_001/reviewer_controls/stack_collector/measurement.json": "60262733b72e6dd25137337011cfe215c9ff423e27d8ae7bfd94892d3a843e5c",
+    "provenance/two_processor_size_001/reviewer_controls/stack_soc/measurement.json": "a375a89a8d895f6f4c4c66dff7438661b29415e8240d1504d7101b0961c529b9",
+    "provenance/two_processor_size_001/reviewer_controls/check/result.json": "7d1753e1f2b7a5b2e8026ace3a00f0ccce46ed20ee5b57f7d1155be8105cf464"
+  }
+}

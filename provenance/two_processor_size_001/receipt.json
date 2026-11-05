@@ -1,0 +1,537 @@
+{
+  "base_commit": "c2c8b27",
+  "outcome": "measurement_only_no_10KiB_fit",
+  "review_status": "complete",
+  "full": {
+    "results": [
+      {
+        "math": "tiny",
+        "map": "cardinal",
+        "history_bits": 48,
+        "allocated": [
+          {
+            "name": ".vectors",
+            "bytes": 28,
+            "address": 268435456
+          },
+          {
+            "name": ".text",
+            "bytes": 16480,
+            "address": 268435484
+          },
+          {
+            "name": ".rodata",
+            "bytes": 948,
+            "address": 268451968
+          },
+          {
+            "name": ".bss",
+            "bytes": 6936,
+            "address": 268452920
+          }
+        ],
+        "alignment_gaps_B": 8,
+        "sections": {
+          ".vectors": 28,
+          ".text": 16480,
+          ".rodata": 948,
+          ".bss": 6936,
+          ".comment": 60,
+          ".ARM.attributes": 50,
+          ".debug_info": 10636,
+          ".debug_abbrev": 4357,
+          ".debug_loclists": 16732,
+          ".debug_aranges": 512,
+          ".debug_rnglists": 1361,
+          ".debug_line": 14705,
+          ".debug_str": 2651,
+          ".debug_frame": 612,
+          ".debug_line_str": 163
+        },
+        "allocated_sections_B": 24400,
+        "with_1024_stack_B": 25424,
+        "stack": "1024B reservation, not bound; final linked stack qualification pending",
+        "command": [
+          "arm-none-eabi-gcc",
+          "-mcpu=cortex-m23",
+          "-mthumb",
+          "-mfloat-abi=soft",
+          "-std=c11",
+          "-Os",
+          "-flto",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-nostartfiles",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/full/tiny_cardinal/probe.c",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+          "-Wl,--wrap=__aeabi_dsub",
+          "-T",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/full/tiny_cardinal/link.ld",
+          "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/full/tiny_cardinal/probe.map",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-lnosys",
+          "-o",
+          "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/full/tiny_cardinal/probe.elf"
+        ],
+        "sha256": "4eda51250599f9f7845e634bb07218d35fd672a34dd32a8982523924a975a409"
+      }
+    ],
+    "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+    "variant": "combined_scalar",
+    "lane": "physical"
+  },
+  "full_stack_reference": "provenance/coordinate_sharing_001/receipt.json",
+  "measurements": {
+    "collector": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/collector/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/collector/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/collector/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/collector/probe.elf"
+      ],
+      "execute": false,
+      "sections": {
+        ".vectors": 28,
+        ".text": 8276,
+        ".rodata": 368,
+        ".bss": 4856,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "e0c54e43439c138a07e2ba25b05ce1d4eddc667dca388c7ddf1a15a38e5fbc64",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 8276,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 368,
+          "address": 268443760
+        },
+        {
+          "name": ".bss",
+          "bytes": 4856,
+          "address": 268444128
+        }
+      ],
+      "static_B": 13528,
+      "alignment_gaps_B": 0,
+      "with_1024_stack_B": 14552
+    },
+    "soc": {
+      "variant": "soc",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/soc/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/soc/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/soc/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/soc/probe.elf"
+      ],
+      "execute": false,
+      "sections": {
+        ".vectors": 28,
+        ".text": 8576,
+        ".rodata": 368,
+        ".bss": 4888,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "8578bb27c950abe749e5bbec675c639c279ef6cf2270e9d9df6eeb3404ed14ca",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 8576,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 368,
+          "address": 268444064
+        },
+        {
+          "name": ".bss",
+          "bytes": 4888,
+          "address": 268444432
+        }
+      ],
+      "static_B": 13864,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 14888
+    },
+    "predictor": {
+      "variant": "predictor",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/predictor/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/predictor/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/predictor/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/predictor/probe.elf"
+      ],
+      "execute": false,
+      "sections": {
+        ".vectors": 28,
+        ".text": 11688,
+        ".rodata": 624,
+        ".bss": 5376,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 10303,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 15796,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 1341,
+        ".debug_line": 13938,
+        ".debug_str": 2549,
+        ".debug_frame": 560,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "2cba96dd02b3d59cdd32ce6565fe3d0fa3a083d3f97e2b69598fdcbfda8cc856",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 11688,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 624,
+          "address": 268447176
+        },
+        {
+          "name": ".bss",
+          "bytes": 5376,
+          "address": 268447800
+        }
+      ],
+      "static_B": 17720,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 18744
+    }
+  },
+  "stack": {
+    "collector": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_collector/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_collector/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_collector/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_collector/probe.elf"
+      ],
+      "execute": true,
+      "sections": {
+        ".vectors": 28,
+        ".text": 8660,
+        ".rodata": 416,
+        ".bss": 4856,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "0b6b3470d133830c511dd08d2091619c47b73aeebed74553be9adf4fafa4235f",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_collector/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=4808\nstack_watermark_B=424\n"
+    },
+    "soc": {
+      "variant": "soc",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_soc/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_soc/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_soc/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_soc/probe.elf"
+      ],
+      "execute": true,
+      "sections": {
+        ".vectors": 28,
+        ".text": 9060,
+        ".rodata": 416,
+        ".bss": 4888,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "e6a18e284f3dcad7eba0b008a82d868e2f06b7a14d2a8fdd1f19b621568a419e",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_soc/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=4816\nstack_watermark_B=440\n"
+    },
+    "predictor": {
+      "variant": "predictor",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_predictor/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_predictor/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_predictor/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_predictor/probe.elf"
+      ],
+      "execute": true,
+      "sections": {
+        ".vectors": 28,
+        ".text": 12104,
+        ".rodata": 672,
+        ".bss": 5376,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 10303,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 15796,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 1341,
+        ".debug_line": 13938,
+        ".debug_str": 2549,
+        ".debug_frame": 560,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "06d31a87203290835ade038a655af005ada2c2fdea1e06aee0fa8b1efde8c084",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/two_processor_size_001/stack_predictor/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=5192\nstack_watermark_B=464\n"
+    }
+  },
+  "check": {
+    "prediction_sha256": {
+      "full": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718",
+      "predictor": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718"
+    },
+    "status": "pass",
+    "results": {
+      "full": {
+        "bytes": 71080,
+        "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+      },
+      "collector": {
+        "bytes": 71080,
+        "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+      },
+      "soc": {
+        "bytes": 71080,
+        "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+      },
+      "predictor": {
+        "bytes": 71080,
+        "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+      }
+    },
+    "scope": "512 valid ordered samples;history andresponse checkpoints every32 identical tofullsolver;negative-dt rejection andpoisonedstreamrefusal preserve buffers. Not equivalent inference-failure gating;noactualIPC."
+  },
+  "limits": [
+    "noIPC_snapshot_recoveryimplementation",
+    "hostSRAMinaccessibleassumedforlocalbudgets",
+    "stationary25C_affineOCVscope",
+    "stackobservednotworstcase",
+    "noinferenceuncertaintyincollectororpointpredictors"
+  ],
+  "source_sha256": {
+    "experiments/two_processor_size_001/README.md": "833fe58a3d2436ddf0e4e30a5e22c3c6fa961761b8bab1abce21caf84335112b",
+    "experiments/two_processor_size_001/build.py": "2e5e95be3f2d06206cf60d1ff91a095c4f9e62fd68c6a1dd9acbeaf35afa199b",
+    "experiments/two_processor_size_001/check.py": "c1370fff220ed84e1c19052ac056c494dfe2bde807029de94682ead7be4234bd",
+    "experiments/two_processor_size_001/measure.py": "e0f4be91b6da9a0b7b61c760593fed1cf8c223b476ed64e6867b6067e5b5f7ee"
+  }
+}

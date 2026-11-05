@@ -1,3 +1,10 @@
+# Two-processor numerical partition measurements
+
+The [partition study](experiments/two_processor_size_001/README.md) measures
+collector-only13528B static, collector+SOC13864B and full point-predictor17720B.
+With observed stack these become13952/14304/18184B, before actual IPC/recovery.
+No split yet fits10KiB; the full estimator remains the unchanged baseline.
+
 # Coordinate-sharing experiment
 
 The [shared-coordinate trial](experiments/coordinate_sharing_001/README.md) selects

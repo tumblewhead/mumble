@@ -1,0 +1,74 @@
+{
+  "variant": "predictor",
+  "command": [
+    "arm-none-eabi-gcc",
+    "-mcpu=cortex-m23",
+    "-mthumb",
+    "-mfloat-abi=soft",
+    "-std=c11",
+    "-Os",
+    "-flto",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fstack-usage",
+    "-nostartfiles",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/two_processor_size_001/reviewer_controls/predictor/probe.c",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+    "-Wl,--wrap=__aeabi_dsub",
+    "-T",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/two_processor_size_001/reviewer_controls/predictor/link.ld",
+    "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/two_processor_size_001/reviewer_controls/predictor/probe.map",
+    "-lm",
+    "-lc",
+    "-lgcc",
+    "-lnosys",
+    "-o",
+    "/home/easy/proj/mumble/.worktrees/qr-sharing/provenance/two_processor_size_001/reviewer_controls/predictor/probe.elf"
+  ],
+  "execute": false,
+  "sections": {
+    ".vectors": 28,
+    ".text": 11688,
+    ".rodata": 624,
+    ".bss": 5376,
+    ".comment": 60,
+    ".ARM.attributes": 50,
+    ".debug_info": 10303,
+    ".debug_abbrev": 4156,
+    ".debug_loclists": 15796,
+    ".debug_aranges": 480,
+    ".debug_rnglists": 1341,
+    ".debug_line": 13938,
+    ".debug_str": 2549,
+    ".debug_frame": 560,
+    ".debug_line_str": 163
+  },
+  "elf_sha256": "2cba96dd02b3d59cdd32ce6565fe3d0fa3a083d3f97e2b69598fdcbfda8cc856",
+  "allocated": [
+    {
+      "name": ".vectors",
+      "bytes": 28,
+      "address": 268435456
+    },
+    {
+      "name": ".text",
+      "bytes": 11688,
+      "address": 268435484
+    },
+    {
+      "name": ".rodata",
+      "bytes": 624,
+      "address": 268447176
+    },
+    {
+      "name": ".bss",
+      "bytes": 5376,
+      "address": 268447800
+    }
+  ],
+  "static_B": 17720,
+  "alignment_gaps_B": 4,
+  "with_1024_stack_B": 18744
+}
