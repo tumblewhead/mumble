@@ -1,3 +1,10 @@
+# Observable-input footprint lane
+
+The [stream-size trials](experiments/stream_size_001/README.md) establish a
+separate five-input/two-output volatile harness:24768B static, including synthetic
+interface slots. Historical24672B results remain unchanged. Three stream rewrites
+were larger and rejected. Stack has not been remeasured for this harness.
+
 # Shared QR experiment
 
 The [shared QR experiment](experiments/qr_sharing_001/README.md) saves352B static

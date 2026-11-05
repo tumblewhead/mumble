@@ -1,0 +1,347 @@
+{
+  "schema": 1,
+  "reviewer": "fresh-context independent stream_size_review agent",
+  "base_revision": "59c3e56d50b84b7e75f2f99f5184f23f7cb6fdbb",
+  "status": "accepted_measurement_and_rejection_only",
+  "source_sha256": {
+    "experiments/stream_size_001/build.py": "782509db784e760e73e128b1bed3976ed566e1bad68577e2d1a2bd4cf4635730",
+    "experiments/stream_size_001/target.py": "5839508f82fee32339c8e682a40321c4aed4204e3df5ca853083f75d521be2b2",
+    "experiments/sram_size_001/measure.py": "cac0774cabd6d4061e3edaa2757b70788f1ad916548b45622dbbdb59b64d7af0",
+    "experiments/sram_size_001/stream.c": "67e814c3d06ec6eb8a701a928ba52ea87e45dfe3cc8f8f9e7020a424caca9a1d",
+    "experiments/triangular_sharing_001/build.py": "66079630bda41f387bc693c3ac3fb9787c5de590e83cfeff548acbde68edba7a",
+    "experiments/stream_size_001/README.md": "474fc14fc52ddf3a5f6f5252f95d15aa75e87655cbc01a4895afd22c778f2ee6",
+    "provenance/stream_size_001/receipt.json": "0b847e3e502092bdf950fa6d6e6de7a5436ceda19b8ee798646348d51eee86cf"
+  },
+  "reproduced": {
+    "legacy": {
+      "static_B": 24672,
+      "text_B": 16696,
+      "bss_B": 6928,
+      "alignment_gap_B": 4,
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 16696,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 1016,
+          "address": 268452184
+        },
+        {
+          "name": ".bss",
+          "bytes": 6928,
+          "address": 268453200
+        }
+      ],
+      "independent_elf_sha256": "f960a372ffa0fc6b1bcfafe981f1bfcf9c7367ab41d837af08b84bae378f3b10",
+      "original_measurement_sha256": "1b243e18b4ee60f2c787b378f057f112a4176a4ae4ca05beac1e1c4d70fc5f36",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/tmp/stream_review_legacy/tiny_cardinal/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/tmp/stream_review_legacy/tiny_cardinal/link.ld",
+        "-Wl,--gc-sections,-Map=/tmp/stream_review_legacy/tiny_cardinal/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/tmp/stream_review_legacy/tiny_cardinal/probe.elf"
+      ]
+    },
+    "physical": {
+      "static_B": 24768,
+      "text_B": 16744,
+      "bss_B": 6976,
+      "alignment_gap_B": 4,
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 16744,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 1016,
+          "address": 268452232
+        },
+        {
+          "name": ".bss",
+          "bytes": 6976,
+          "address": 268453248
+        }
+      ],
+      "independent_elf_sha256": "135888ff31104f75df7dbcfe0592100edc19a8e02aaa1a9ce7cc1b8c4d946151",
+      "original_measurement_sha256": "3d6740ff61151968e036462bdc3f6d43f86f2c511216cc57d6f2f23369c14bfe",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/tmp/stream_review_physical/tiny_cardinal/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/tmp/stream_review_physical/tiny_cardinal/link.ld",
+        "-Wl,--gc-sections,-Map=/tmp/stream_review_physical/tiny_cardinal/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/tmp/stream_review_physical/tiny_cardinal/probe.elf"
+      ]
+    },
+    "serial": {
+      "static_B": 24776,
+      "text_B": 16752,
+      "bss_B": 6976,
+      "alignment_gap_B": 4,
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 16752,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 1016,
+          "address": 268452240
+        },
+        {
+          "name": ".bss",
+          "bytes": 6976,
+          "address": 268453256
+        }
+      ],
+      "independent_elf_sha256": "d2153578459735b3e9041b031e6ec57629b18bf2f535372c58e1d4353ffa6614",
+      "original_measurement_sha256": "41ec216b19eff914cfef7a36a069f9a384d613a8ec56e3b2656641839b2db9d9",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/tmp/stream_review_serial/tiny_cardinal/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/tmp/stream_review_serial/tiny_cardinal/link.ld",
+        "-Wl,--gc-sections,-Map=/tmp/stream_review_serial/tiny_cardinal/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/tmp/stream_review_serial/tiny_cardinal/probe.elf"
+      ]
+    },
+    "pointer_projection": {
+      "static_B": 24792,
+      "text_B": 16768,
+      "bss_B": 6976,
+      "alignment_gap_B": 4,
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 16768,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 1016,
+          "address": 268452256
+        },
+        {
+          "name": ".bss",
+          "bytes": 6976,
+          "address": 268453272
+        }
+      ],
+      "independent_elf_sha256": "d3c8e80e428cc5e367767ccbf2327b8ae59ce4459c43dc5bb8f1626cb84dc87f",
+      "original_measurement_sha256": "bf93010eb55fa50c2612569d99b829e0b615657520c5d9299ad760f4d0dc2a5e",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/tmp/stream_review_pointer_projection/tiny_cardinal/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/tmp/stream_review_pointer_projection/tiny_cardinal/link.ld",
+        "-Wl,--gc-sections,-Map=/tmp/stream_review_pointer_projection/tiny_cardinal/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/tmp/stream_review_pointer_projection/tiny_cardinal/probe.elf"
+      ]
+    },
+    "memset_clear": {
+      "static_B": 24808,
+      "text_B": 16788,
+      "bss_B": 6976,
+      "alignment_gap_B": 0,
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 16788,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 1016,
+          "address": 268452272
+        },
+        {
+          "name": ".bss",
+          "bytes": 6976,
+          "address": 268453288
+        }
+      ],
+      "independent_elf_sha256": "94c8ab0dff2e54aa8e669e58ee0a1a109252f4d76b26e355556f575f5dd0d664",
+      "original_measurement_sha256": "050abee8cc3a0bde6641e30c855a7425ce18e040c1665f277fb1ece896479451",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/tmp/stream_review_memset_clear/tiny_cardinal/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/tmp/stream_review_memset_clear/tiny_cardinal/link.ld",
+        "-Wl,--gc-sections,-Map=/tmp/stream_review_memset_clear/tiny_cardinal/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/tmp/stream_review_memset_clear/tiny_cardinal/probe.elf"
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "informational",
+      "finding": "Legacy has only volatile current; dt, temperature, voltage and sigma are constants. Scalar result storage is not explicitly volatile. Physical lane makes all five sample inputs and both scalar outputs volatile. Legacy source remains unchanged.",
+      "disposition": "Accept separate harness lane; no retrospective correction of legacy results."
+    },
+    {
+      "id": "R2",
+      "severity": "informational",
+      "finding": "Physical lane adds 48 B text and 48 B synthetic interface BSS, totaling 96 B over legacy. Serial projection adds another 8 B text/static.",
+      "disposition": "Reject serial candidate at size gate; functional, stack and timing qualification is unnecessary for rejection and was not performed."
+    },
+    {
+      "id": "R3",
+      "severity": "limitation",
+      "finding": "readelf -SW confirms all allocated sections in this physical ELF are vectors, text, rodata and bss; occupied address span includes 4 B alignment. No data initializer copy is present in this ELF.",
+      "disposition": "Accept complete static allocation claim for this linked image only."
+    },
+    {
+      "id": "R4",
+      "severity": "limitation",
+      "finding": "Physical lane is a synthetic link-retention harness, with zero-initialized volatile input slots and no actual sample delivery. It does not validate real-time streaming, state/identity integration, platform code, stack bound, timing or firmware readiness. Temperature remains restricted to 25 C by the kernel.",
+      "disposition": "Retain explicit limitations; 1024 B stack addition is provisional and historical stack watermark must not be presented as newly measured here."
+    },
+    {
+      "id": "R5",
+      "severity": "informational",
+      "finding": "Independent fresh builds reproduce pointer projection 24792 B (+24) and memset clear 24808 B (+40). Generated source diffs match the named local rewrites.",
+      "disposition": "Both rejected at static screen; no numerical equivalence or runtime qualification accepted."
+    },
+    {
+      "id": "R6",
+      "severity": "minor_resolved",
+      "finding": "Initial README misstated memset text as 16784 B; actual 16788 B is +44 text with 4 B less alignment, yielding +40 static.",
+      "disposition": "Parent corrected README to 16788 B and refreshed its receipt hash; independently checked final hashes."
+    },
+    {
+      "id": "R7",
+      "severity": "informational",
+      "finding": "Final README clearly limits physical lane to synthetic link probe, excludes actual sample supply and firmware qualification, and does not transfer historical stack witness. Receipt preserves all original build hashes.",
+      "disposition": "Documentation accepted for measurement and candidate rejection scope; external ArghtOS source interpretation is outside this numerical review."
+    }
+  ],
+  "prior_review_sha256": "98b3dea76ee3316047a9d0490c82076932ac6af3f37454be4aabb4ce137edd66"
+}
