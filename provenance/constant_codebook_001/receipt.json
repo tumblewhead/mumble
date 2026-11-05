@@ -1,0 +1,802 @@
+{
+  "base_commit": "bbe8a8f",
+  "decision": "reject_all_compressed_candidates_retain_uncompressed_baseline",
+  "review_status": "complete",
+  "measurements": {
+    "baseline": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16660,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 984,
+              "address": 268452144
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453128
+            }
+          ],
+          "alignment_gaps_B": 0,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16660,
+            ".rodata": 984,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24608,
+          "with_1024_stack_B": 25632,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/baseline/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/baseline/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/baseline/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/baseline/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "349015393ebc43ce1b986c36fd5a18d8661589458c5e670a341f3409037cab6c"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "baseline",
+      "lane": "physical"
+    },
+    "raw": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16980,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 940,
+              "address": 268452464
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453408
+            }
+          ],
+          "alignment_gaps_B": 4,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16980,
+            ".rodata": 940,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24888,
+          "with_1024_stack_B": 25912,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/raw002/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/raw002/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/raw002/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/raw002/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "7db109ad5cfcdf6f7493e94a65b791bb695040e432e618a2780fae5d7e6498a3"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "raw",
+      "lane": "physical",
+      "codec": {
+        "mean": {
+          "original": 128,
+          "encoded": 114,
+          "rules": 2
+        },
+        "scale": {
+          "original": 128,
+          "encoded": 87,
+          "rules": 10
+        },
+        "center": {
+          "original": 40,
+          "encoded": 42,
+          "rules": 0
+        },
+        "P": {
+          "original": 312,
+          "encoded": 314,
+          "rules": 0
+        },
+        "V": {
+          "original": 312,
+          "encoded": 314,
+          "rules": 0
+        }
+      }
+    },
+    "plane": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16988,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 940,
+              "address": 268452472
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453416
+            }
+          ],
+          "alignment_gaps_B": 4,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16988,
+            ".rodata": 940,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24896,
+          "with_1024_stack_B": 25920,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/plane002/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/plane002/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/plane002/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/plane002/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "d2bde17b44bfbb2029529b28821af0d66aa5f01f2bef032aed5fd2164631541c"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "plane",
+      "lane": "physical",
+      "codec": {
+        "mean": {
+          "original": 128,
+          "encoded": 112,
+          "rules": 3
+        },
+        "scale": {
+          "original": 128,
+          "encoded": 102,
+          "rules": 4
+        },
+        "center": {
+          "original": 40,
+          "encoded": 40,
+          "rules": 1
+        },
+        "P": {
+          "original": 312,
+          "encoded": 314,
+          "rules": 0
+        },
+        "V": {
+          "original": 312,
+          "encoded": 306,
+          "rules": 2
+        }
+      }
+    },
+    "xorplane": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 17020,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 932,
+              "address": 268452504
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453440
+            }
+          ],
+          "alignment_gaps_B": 4,
+          "sections": {
+            ".vectors": 28,
+            ".text": 17020,
+            ".rodata": 932,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24920,
+          "with_1024_stack_B": 25944,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/xorplane002/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/xorplane002/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/xorplane002/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/xorplane002/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "445f4dff26185128ec49ed21a10e8d7078e7ba0aeb36d9ecd5d51613f42b0e32"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "xorplane",
+      "lane": "physical",
+      "codec": {
+        "mean": {
+          "original": 128,
+          "encoded": 116,
+          "rules": 4
+        },
+        "scale": {
+          "original": 128,
+          "encoded": 83,
+          "rules": 8
+        },
+        "center": {
+          "original": 40,
+          "encoded": 42,
+          "rules": 0
+        },
+        "P": {
+          "original": 312,
+          "encoded": 313,
+          "rules": 1
+        },
+        "V": {
+          "original": 312,
+          "encoded": 309,
+          "rules": 2
+        }
+      }
+    },
+    "word": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16736,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 912,
+              "address": 268452224
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453136
+            }
+          ],
+          "alignment_gaps_B": 4,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16736,
+            ".rodata": 912,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24616,
+          "with_1024_stack_B": 25640,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "bc8e0662fe46c4e6cca2e9b9c8c64cc3b1d95cc6e97dbad6c4a4899d7446f9c9"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "word",
+      "lane": "physical"
+    },
+    "word_inline": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16748,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 912,
+              "address": 268452232
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268453144
+            }
+          ],
+          "alignment_gaps_B": 0,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16748,
+            ".rodata": 912,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24624,
+          "with_1024_stack_B": 25648,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word_inline/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word_inline/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word_inline/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/word_inline/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "bb2ada562e6de78b517e4fb8e141be4d3e38f84c534f161769fdf22a3c822ca1"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "word_inline",
+      "lane": "physical"
+    }
+  },
+  "stack_witnesses": {
+    "baseline": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_baseline/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_baseline/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_baseline/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_baseline/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_baseline/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=672\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    },
+    "word": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=680\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    },
+    "word_inline": {
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word_inline/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word_inline/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word_inline/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word_inline/probe.elf"
+      ],
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/constant_codebook_001/stack_word_inline/probe.elf"
+      ],
+      "output": "status=0\nallocation_B=6872\nstack_watermark_B=680\n",
+      "returncode": 0,
+      "scope": "Target execution witness for final candidate. Fixtures are test-only;\nuse measure.py's separate clean image for size. M23 code on M33 QEMU, not timing.\n"
+    }
+  },
+  "qualification": {
+    "check001": {
+      "status": "pass",
+      "results": {
+        "baseline": {
+          "bytes": 3459502,
+          "sha256": "f3bfbd64fd4f5c497df27d1cd7daf8eee042b8fa2724b102d4fbb3fb4750bea7"
+        },
+        "raw": {
+          "bytes": 3459502,
+          "sha256": "f3bfbd64fd4f5c497df27d1cd7daf8eee042b8fa2724b102d4fbb3fb4750bea7"
+        },
+        "plane": {
+          "bytes": 3459502,
+          "sha256": "f3bfbd64fd4f5c497df27d1cd7daf8eee042b8fa2724b102d4fbb3fb4750bea7"
+        },
+        "xorplane": {
+          "bytes": 3459502,
+          "sha256": "f3bfbd64fd4f5c497df27d1cd7daf8eee042b8fa2724b102d4fbb3fb4750bea7"
+        },
+        "word": {
+          "bytes": 3459502,
+          "sha256": "f3bfbd64fd4f5c497df27d1cd7daf8eee042b8fa2724b102d4fbb3fb4750bea7"
+        }
+      },
+      "scope": "115 binary64 constants exact;256 support probes,94 feature rows,256 samples,8refits,4096scalarqueries,finalhistory,response,jointfactor and common null rejections;UBSan clean"
+    },
+    "check002": {
+      "status": "pass",
+      "results": {
+        "baseline": {
+          "bytes": 438106,
+          "sha256": "b13099470c524b2e25ce2190c2a906a5cf6ac1bb12d509153c117c0fb1afcbd9"
+        },
+        "raw": {
+          "bytes": 438106,
+          "sha256": "b13099470c524b2e25ce2190c2a906a5cf6ac1bb12d509153c117c0fb1afcbd9"
+        },
+        "plane": {
+          "bytes": 438106,
+          "sha256": "b13099470c524b2e25ce2190c2a906a5cf6ac1bb12d509153c117c0fb1afcbd9"
+        },
+        "xorplane": {
+          "bytes": 438106,
+          "sha256": "b13099470c524b2e25ce2190c2a906a5cf6ac1bb12d509153c117c0fb1afcbd9"
+        },
+        "word": {
+          "bytes": 438106,
+          "sha256": "b13099470c524b2e25ce2190c2a906a5cf6ac1bb12d509153c117c0fb1afcbd9"
+        },
+        "word_inline": {
+          "bytes": 438106,
+          "sha256": "b13099470c524b2e25ce2190c2a906a5cf6ac1bb12d509153c117c0fb1afcbd9"
+        }
+      },
+      "scope": "115 binary64 constants exact;32 support probes,94 feature rows,32 samples,1refit,512scalarqueries,finalhistory,response,jointfactor and common null rejections;UBSan clean"
+    }
+  },
+  "limits": [
+    "no literal-pool rewriting",
+    "trusted immutable grammar,not untrusted parser",
+    "little-endian IEEE binary64",
+    "BPE stack not measured;static already loses",
+    "no long-run statistical claims;lossless parity only",
+    "current check.py bounded32sample revision;original256sample sources preserved in check001"
+  ],
+  "source_sha256": {
+    "experiments/constant_codebook_001/README.md": "f855a035c6ea3798c81aa0212e1fb7ee58addd896ba283b12ba8f943be69da8b",
+    "experiments/constant_codebook_001/build.py": "44df82a7d9932277ef531c88e88bff60999be907006db2454e188934083723c5",
+    "experiments/constant_codebook_001/check.py": "4d6134fde283a54c4f05d9c9aabb6258a739074438f064db03ed41fbc60024af",
+    "experiments/constant_codebook_001/codec.py": "8c46a0057a78550ddec5453a21dfaf37d25baafe65c70bceeea03c52f0d465f1",
+    "experiments/constant_codebook_001/decoder.c.in": "ed23dbad9f3ac0e70c66d82eb63e66e18a77f388a653914130544ac0619321d4",
+    "experiments/constant_codebook_001/execution.py": "db142c83307111c17d887354a55db4309fedecb87daf25d2fc3b16bc7e283aa9",
+    "experiments/constant_codebook_001/target.py": "debd7fe9f0bcbed7a60628b3472cd3bc80d2c4d0e73ab94a19268579aae183b9"
+  },
+  "generated_test_sources_sha256": {
+    "experiments/constant_codebook_001/check001/baseline.c": "11d7de7e2bf82bbfce424e17e19730ff9921cd8203e66404bcda83d01db5273f",
+    "experiments/constant_codebook_001/check001/plane.c": "e75a26d3057f4bbba4def00df708a72bc64fe6de4789d6e201d58715d4fe78dc",
+    "experiments/constant_codebook_001/check001/raw.c": "23c79c9d74b882a6b658fd173497672c8e17568e1f679795567beb545b208df5",
+    "experiments/constant_codebook_001/check001/word.c": "fc7951282b5f62940ad4ac641392d82ad81158b7605cf9c4af1cad612abc52c7",
+    "experiments/constant_codebook_001/check001/xorplane.c": "9dbee04e450c07bd39a7758b264ef200278c6225da5d54c553e5b5d4b2739996",
+    "experiments/constant_codebook_001/check002/baseline.c": "39cbf99f5133db02b9bf9882b769a1e9c3f67ef7dec250ccbd2901c5da70a843",
+    "experiments/constant_codebook_001/check002/plane.c": "080daf0a0e7e5781d9ee470a02de8deed3717eec8085aa1a164e9913c1bc0d7e",
+    "experiments/constant_codebook_001/check002/raw.c": "2f9ddb4256cd6b510025075e14470edfaf40844e97f8bbeb5f04820f6ecb3902",
+    "experiments/constant_codebook_001/check002/word.c": "f3fd7615fbe1243697280876271b564af37605ca86b5a0bbba3b1ea67a5e8982",
+    "experiments/constant_codebook_001/check002/word_inline.c": "9286a7c89cc7a2bed96ad82995e04787657981b5b2bb578d10a0bebd483de120",
+    "experiments/constant_codebook_001/check002/xorplane.c": "a62353c4e0b122312913a4d656bc89731276953a647217fe28b0fb5ce654d0d2"
+  }
+}

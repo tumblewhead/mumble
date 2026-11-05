@@ -1,3 +1,10 @@
+# Lossless codebook experiment
+
+The [constant-codebook trials](experiments/constant_codebook_001/README.md) tested
+byte pairs, byte planes, XOR preprocessing and exact repeated-value dictionaries.
+All five increase linked static SRAM; the uncompressed 24608-byte baseline stays
+selected. This is evidence against these encodings, not a change to campaign defaults.
+
 # Contiguous response-state experiment
 
 The [response-base experiment](experiments/response_base_001/README.md) replaces

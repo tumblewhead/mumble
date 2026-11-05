@@ -1,0 +1,230 @@
+{
+  "reviewer": "fresh-context constant_codebook_review",
+  "base_commit": "bbe8a8f",
+  "decision": "accept_measured_rejection_of_all_five_candidates_retain_uncompressed_baseline",
+  "blocking_findings": [],
+  "findings": [
+    {
+      "issue": "Initial V pointer transformation missed no-space declarations.",
+      "disposition": "Fixed whitespace-tolerant regex; asserts exactly two stream signatures. Successful *002 source inspected; initial attempts preserved."
+    },
+    {
+      "issue": "Decoding requires trusted intact grammar and valid bounds, not arbitrary encoded inputs.",
+      "disposition": "README explicitly limits endian/binary64, extent, indices, immutable lifetime and rebuilt ABI; no parser authentication claimed."
+    },
+    {
+      "issue": "Numeric equality dictionary is not general bit-preserving encoding for signed zero or NaNs.",
+      "disposition": "Generator now asserts finite positive scales and exactly five unique values; README restricts dictionary accordingly."
+    }
+  ],
+  "correctness_argument": [
+    "Every grammar replacement token is absent from original bytes and previous rules. Its children are literals or earlier tokens, so dependency descent terminates. Additive subtree lengths make skipping and branch selection exact for valid offsets.",
+    "Byte-plane address inversion and preceding-word XOR prefix restore original eight bytes. memcpy avoids double alias/alignment violations for the byte blobs under little-endian IEEE binary64.",
+    "Generated core diffs preserve original numerical operators/order, state mutations and evidence flow while replacing constant loads. Existing valid accesses fit generated extents.",
+    "Word lookup restores finite positive scale values exactly; generated scale indices stay below five. No heap or permanent decoded cache is introduced."
+  ],
+  "independent_checks": {
+    "compiled_decoders": {
+      "raw": {
+        "arrays": 33,
+        "scalar_reads": 2063,
+        "exact": true
+      },
+      "plane": {
+        "arrays": 33,
+        "scalar_reads": 2063,
+        "exact": true
+      },
+      "xorplane": {
+        "arrays": 33,
+        "scalar_reads": 2063,
+        "exact": true
+      }
+    },
+    "word_scale_bits_UBSan": {
+      "baseline": {
+        "bytes": 128,
+        "sha256": "2f0108a763bfc6a1947e1f6480a21690a9b217ddc440d8c9deb43a642169d3bc",
+        "UBSan_stderr": ""
+      },
+      "word": {
+        "bytes": 128,
+        "sha256": "2f0108a763bfc6a1947e1f6480a21690a9b217ddc440d8c9deb43a642169d3bc",
+        "UBSan_stderr": ""
+      },
+      "word_inline": {
+        "bytes": 128,
+        "sha256": "2f0108a763bfc6a1947e1f6480a21690a9b217ddc440d8c9deb43a642169d3bc",
+        "UBSan_stderr": ""
+      }
+    },
+    "inspection": [
+      "Read AGENTS, project README/state, response-base specification/review and optimization contracts.",
+      "Inspected generated BPE and word source diffs; reviewed final finite-positive generator assertion and two-signature substitution assertion.",
+      "Verified all six size ELF hashes against measurement receipts; checked allocated address span, section sum and alignment arithmetic.",
+      "Verified receipt source and generated test hashes.",
+      "Reviewed full and bounded parity receipts; did not independently rerun long transcripts or QEMU witnesses."
+    ]
+  },
+  "resource_conclusion": {
+    "static_B": {
+      "baseline": 24608,
+      "raw": 24888,
+      "plane": 24896,
+      "xorplane": 24920,
+      "word": 24616,
+      "word_inline": 24624
+    },
+    "static_regression_B": {
+      "raw": 280,
+      "plane": 288,
+      "xorplane": 312,
+      "word": 8,
+      "word_inline": 16
+    },
+    "reported_separate_observed_stack_B": {
+      "baseline": 672,
+      "word": 680,
+      "word_inline": 680
+    },
+    "word_static_plus_observed_regression_B": {
+      "word": 16,
+      "word_inline": 24
+    }
+  },
+  "limits": [
+    "All five tested candidates lose linked static SRAM; this is not a general impossibility claim about compression.",
+    "Executable literal pools were not rewritten.",
+    "BPE stack remains unmeasured, so no complete candidate runtime-memory comparison is asserted.",
+    "Finite parity and restricted representation arguments do not establish physical accuracy, coverage, aging, lifetime or firmware qualification.",
+    "Observed QEMU stack is not a universal bound or silicon timing result; mainline and campaign defaults stay unchanged."
+  ],
+  "hashes": {
+    "experiments/constant_codebook_001/README.md": "f855a035c6ea3798c81aa0212e1fb7ee58addd896ba283b12ba8f943be69da8b",
+    "experiments/constant_codebook_001/baseline/measurement.json": "d6b8e2ea27e2bc7745f0d85165a64fef46110eef146c090ca386c5663fb2a2b3",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/config.h": "937bd0d9bddaaafff12fa46fe7535e53ca411b9031f6f08dab606c559644ec30",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/core.c": "72c42f6acd6c3e100904ac04d1af6985c29a102de048a77b257e2f25f456c738",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/generation.json": "7728ae61dbf3fbd80908ea986fbb0a03bce76e9e82dbdc4cadd620ffa4217c02",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/probe.c": "40aa6c77c5b15419ea5f11de178620bba270de778957fed990639032e3277f5e",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/qr_generation.json": "fb113993e63e4621fd2153418ff71006d63ab8494d67bd328880c1315319e214",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/sharing_generation.json": "15855e34b99c8b6df2ef640501dd9a9db8ad4cc4dde1bc20a04985339e729c3e",
+    "experiments/constant_codebook_001/baseline/tiny_cardinal/symbols.txt": "2d1f02b642218490afa221bf267d2054761ed11c153784b855a7b52ea750fde6",
+    "experiments/constant_codebook_001/build.py": "44df82a7d9932277ef531c88e88bff60999be907006db2454e188934083723c5",
+    "experiments/constant_codebook_001/check.py": "4d6134fde283a54c4f05d9c9aabb6258a739074438f064db03ed41fbc60024af",
+    "experiments/constant_codebook_001/check001/baseline.c": "11d7de7e2bf82bbfce424e17e19730ff9921cd8203e66404bcda83d01db5273f",
+    "experiments/constant_codebook_001/check001/plane.c": "e75a26d3057f4bbba4def00df708a72bc64fe6de4789d6e201d58715d4fe78dc",
+    "experiments/constant_codebook_001/check001/raw.c": "23c79c9d74b882a6b658fd173497672c8e17568e1f679795567beb545b208df5",
+    "experiments/constant_codebook_001/check001/result.json": "c81988a3e1b15461a99351632c4d26d3773749165ea764295aa01703be560d04",
+    "experiments/constant_codebook_001/check001/word.c": "fc7951282b5f62940ad4ac641392d82ad81158b7605cf9c4af1cad612abc52c7",
+    "experiments/constant_codebook_001/check001/xorplane.c": "9dbee04e450c07bd39a7758b264ef200278c6225da5d54c553e5b5d4b2739996",
+    "experiments/constant_codebook_001/check002/baseline.c": "39cbf99f5133db02b9bf9882b769a1e9c3f67ef7dec250ccbd2901c5da70a843",
+    "experiments/constant_codebook_001/check002/plane.c": "080daf0a0e7e5781d9ee470a02de8deed3717eec8085aa1a164e9913c1bc0d7e",
+    "experiments/constant_codebook_001/check002/raw.c": "2f9ddb4256cd6b510025075e14470edfaf40844e97f8bbeb5f04820f6ecb3902",
+    "experiments/constant_codebook_001/check002/result.json": "6eec9f310169dfe14020c666285c57b084a2c696f0903adfabc9d29d3771013d",
+    "experiments/constant_codebook_001/check002/word.c": "f3fd7615fbe1243697280876271b564af37605ca86b5a0bbba3b1ea67a5e8982",
+    "experiments/constant_codebook_001/check002/word_inline.c": "9286a7c89cc7a2bed96ad82995e04787657981b5b2bb578d10a0bebd483de120",
+    "experiments/constant_codebook_001/check002/xorplane.c": "a62353c4e0b122312913a4d656bc89731276953a647217fe28b0fb5ce654d0d2",
+    "experiments/constant_codebook_001/codec.py": "8c46a0057a78550ddec5453a21dfaf37d25baafe65c70bceeea03c52f0d465f1",
+    "experiments/constant_codebook_001/decoder.c.in": "ed23dbad9f3ac0e70c66d82eb63e66e18a77f388a653914130544ac0619321d4",
+    "experiments/constant_codebook_001/execution.py": "db142c83307111c17d887354a55db4309fedecb87daf25d2fc3b16bc7e283aa9",
+    "experiments/constant_codebook_001/plane002/measurement.json": "7a56c35263f69455f531c4dc985932a194d6cf8e05d2464539e05157c03d72ae",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/codec.json": "43c21841c5393ee13f48a3f859f692a7c36c4079bae00bdc17257a085e038821",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/config.h": "a43f4249bf4286b103e091894df46d81bc428cc5d55f130bc2a0675209f46378",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/core.c": "f63e696be39fd504940520a17705d39b09d88d517a48eb312714af98013bef0f",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/generation.json": "06d07ea9c8eef6efc0e7b6c4cb33ec98c9feb43e4a8041f0e156da1481de3a39",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/probe.c": "40aa6c77c5b15419ea5f11de178620bba270de778957fed990639032e3277f5e",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/qr_generation.json": "4f14589cdb9774f02f2984820adb795ea5c3905b423665cd2e6ee6014149f6cb",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/sharing_generation.json": "d09356c9b80b721c8c970f5bd1f8cdfdf169d385fd2982056c3981483b7a7ab3",
+    "experiments/constant_codebook_001/plane002/tiny_cardinal/symbols.txt": "497f2f436a3884855bc507b17e86dab3c5b0448ab4bf8150af3aa998924a0c7d",
+    "experiments/constant_codebook_001/raw002/measurement.json": "45d89a828d91dea60cf0e0eb10298c8cea6d3481d9a5696525961690ec4da1ea",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/codec.json": "7e307f04103f9bf6be47a030ce7a91e42d6c761b83fe09070fd13b7fae2ce68f",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/config.h": "bc135b4dc4ab69991794ca7b6617ad176c0be2fc309579e1818cb30c12c3740b",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/core.c": "0579731f06e2e2c0367422ed2f8d2b3b734e829844c03e8aba7afd3ea472fd85",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/generation.json": "b32b4599722aae0fa181c72a603dea29636f9adcbf5cb84a74a933435a1d4282",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/probe.c": "40aa6c77c5b15419ea5f11de178620bba270de778957fed990639032e3277f5e",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/qr_generation.json": "3326f80bb4dc7ea17dc7e5e5c76e31c2cc8a4adfdfeb68977f9554c0f280e860",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/sharing_generation.json": "666c78dee219c2d04d2da4d2bcf288c946f9671fa19e11655d0294fddf13bd4c",
+    "experiments/constant_codebook_001/raw002/tiny_cardinal/symbols.txt": "48e8176a11988d0d171d30ca7c39aa24619aa73152cf194899b4b28bc1b7373a",
+    "experiments/constant_codebook_001/stack_baseline/core.c": "6eb27a888e1d490e2b47c42f5b6075b4652b234a8fd29e97fe40791a623f3723",
+    "experiments/constant_codebook_001/stack_baseline/fixture.h": "43898fedb678cfc665018e5b803633d1bcefa9745ae68e3e686259956619719b",
+    "experiments/constant_codebook_001/stack_baseline/generation.json": "da684d4540cafdf84bcd9a80222c2ad3b7647dd873930e72a5582acbca90e2d0",
+    "experiments/constant_codebook_001/stack_baseline/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/constant_codebook_001/stack_baseline/measurement.json": "48343a6958150e74118f84a59bbb4a1817bb4014c42d459c1748d792088ba13e",
+    "experiments/constant_codebook_001/stack_baseline/probe.c": "f468f4bd7c576780a9a4c12a7e98f8bd040c0414397b88c8d2c57acdbc813562",
+    "experiments/constant_codebook_001/stack_baseline/qr_generation.json": "7db63f5ba28da7232ce53105e95bce7869590995fde38edec80586a986d1448b",
+    "experiments/constant_codebook_001/stack_baseline/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/stack_baseline/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/stack_baseline/sharing_generation.json": "07632bab8ad804628dd597b4fc9e3ee0c9c00a72592f66337b07c7bdc840d8ef",
+    "experiments/constant_codebook_001/stack_word/core.c": "ee6d82117e2024717985793d750ef808378335640ae27a2f834378c8e70b9ce6",
+    "experiments/constant_codebook_001/stack_word/fixture.h": "8c2e8ab03aea3c48825908b42711d4b55aca20523f2c26502dc2cacf0bedc120",
+    "experiments/constant_codebook_001/stack_word/generation.json": "dbe5c4feb37a9fdbfe0d10cff279c75a55f4df0b3c213b35c0064e6b0738861c",
+    "experiments/constant_codebook_001/stack_word/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/constant_codebook_001/stack_word/measurement.json": "456a8722cc262b022bcfcddd11e5ca6d75dcfdf99f5554ac658b1d4e95d869b6",
+    "experiments/constant_codebook_001/stack_word/probe.c": "00a705e3dd19fedbf2293192b3662656d70a3cbc5298b23ce080d6f323b9ccfa",
+    "experiments/constant_codebook_001/stack_word/qr_generation.json": "d666ac8e974f24cd4daaacfcf62af055cdfea1b3073302c7ec32f776a1687059",
+    "experiments/constant_codebook_001/stack_word/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/stack_word/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/stack_word/sharing_generation.json": "233cff59119f1043bac14f65a2e8aab1f7d575b24ccebc8f6bf4e767ecfb8e14",
+    "experiments/constant_codebook_001/stack_word_inline/core.c": "90187d526d4b61bab4e07ec0a4d7673fdb08edbfae48978293966a6b1e441b35",
+    "experiments/constant_codebook_001/stack_word_inline/fixture.h": "8c2e8ab03aea3c48825908b42711d4b55aca20523f2c26502dc2cacf0bedc120",
+    "experiments/constant_codebook_001/stack_word_inline/generation.json": "622aa80504c8ff1404948227a1e2c2a08e4438ea0ba4a96993d88b35a86ef2cc",
+    "experiments/constant_codebook_001/stack_word_inline/link.ld": "85843ab5dc89ab1d4af43ae0d005e523c908c35dde5b292420e622d0657b0c95",
+    "experiments/constant_codebook_001/stack_word_inline/measurement.json": "5fbaab1ca2de72423ab177b0cd01540c64bca19e2695a862041b81375ed7c151",
+    "experiments/constant_codebook_001/stack_word_inline/probe.c": "8ed7a57fb3c87593dc78a1f7c4e8f42831a300d4e547a043db01c989afe630db",
+    "experiments/constant_codebook_001/stack_word_inline/qr_generation.json": "97f478303e58c8ed83e69e65ced92601df76affb3e79230380fc0101c66c3218",
+    "experiments/constant_codebook_001/stack_word_inline/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/stack_word_inline/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/stack_word_inline/sharing_generation.json": "972f516faef501ce1b2bb9c3b8b3fc6a421a531777ca9b7f4ea88d4e87ec7366",
+    "experiments/constant_codebook_001/target.py": "debd7fe9f0bcbed7a60628b3472cd3bc80d2c4d0e73ab94a19268579aae183b9",
+    "experiments/constant_codebook_001/word/measurement.json": "69396a953da863461490e34b921a300eff522a980c19b2c4eb596c5eef91f928",
+    "experiments/constant_codebook_001/word/tiny_cardinal/config.h": "4a8ce76a7ea599de7ba650e28dc3e1fbca2076f049b40fc0bcc57b17219b453b",
+    "experiments/constant_codebook_001/word/tiny_cardinal/core.c": "97056a5eef6e115579363195ab131ef5cfb0773cbcad5b45615a9705d3a44341",
+    "experiments/constant_codebook_001/word/tiny_cardinal/generation.json": "c93412a3f388748a8e402a9c351616857f31c5bb958e19464fc807d329ed053f",
+    "experiments/constant_codebook_001/word/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/constant_codebook_001/word/tiny_cardinal/probe.c": "40aa6c77c5b15419ea5f11de178620bba270de778957fed990639032e3277f5e",
+    "experiments/constant_codebook_001/word/tiny_cardinal/qr_generation.json": "3638861b4036fc8073cba30fc8638976f561c0c1894e17b86dd2f20c2c96307e",
+    "experiments/constant_codebook_001/word/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/word/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/word/tiny_cardinal/sharing_generation.json": "835ee5a087e721b0417d88b4931fc78366df662e6b099e20ade6ec961ab1c4b8",
+    "experiments/constant_codebook_001/word/tiny_cardinal/symbols.txt": "652fea955105fba8f23d0b0c0b6cdfe3a31cbae3081cf8359dcce1c5163a45b5",
+    "experiments/constant_codebook_001/word_inline/measurement.json": "694a7122564e0d7fba7d8a9233844efd026418bb1c3236b3bb7984924051c0d1",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/config.h": "4a8ce76a7ea599de7ba650e28dc3e1fbca2076f049b40fc0bcc57b17219b453b",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/core.c": "091dbe66cddeab4a57ea948839059f517a23bb81a05f10b8058fe100938300a9",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/generation.json": "48ee19fbb406b91c3ce4e582e66ee2d75d2fbf72ae38cccf7d755bec13c5f2a4",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/probe.c": "40aa6c77c5b15419ea5f11de178620bba270de778957fed990639032e3277f5e",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/qr_generation.json": "54e36c2a87c98ecca180e3bcf1550cc83610290086eac44cf4bd0dec2909bd01",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/sharing_generation.json": "a8e78c6c013028ce3fb5c95956f49933f0972940b73944900c0af95656be32ad",
+    "experiments/constant_codebook_001/word_inline/tiny_cardinal/symbols.txt": "802943fba2470385f38b50c00407840500e6e4ebd2bd41059de508af31ad1504",
+    "experiments/constant_codebook_001/xorplane002/measurement.json": "2e0a7bfc1d3e95c25bdaf15c31df59aa981ded142c643aad0b5b1788595bbd63",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/codec.json": "283715828f883a095218c6ad206a1199006cb13178be641ee223b2ab9580857d",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/config.h": "3e66e6dc4d346fb2c19eaf2f3a0263ee0bdf00a6bae25148ceb61ee4baa64611",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/core.c": "ab2f3982f5c4d162cf3638e22e3c1cfa488437d22ee27ee8c1ab1215ccb0c961",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/generation.json": "82f7c7912df64807fe34f663818e7d009f91fe8490097675c1e650fbf537a10e",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/link.ld": "f2fa64b8da421da9e4beb119f42517763c0c6ebefa7c41103b78810e5fb10d91",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/probe.c": "40aa6c77c5b15419ea5f11de178620bba270de778957fed990639032e3277f5e",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/qr_generation.json": "fd1c3aa112209cfd5e815558f005668cc64f49d5229718bc0495d0a155f3f270",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/shared_history.h": "31930a6fc045264efa6cc056a4f24ed5feeb96e218734c6b7ad373b108643a4f",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/shared_math.h": "c086b82c69e33663f9512e6d4c9138a3214a0021e252d19fc112aae191b2b3e7",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/sharing_generation.json": "0283f140e8adfb33d443bdcc8c4889155e6bf0837d8a20e5fa3d013740f18a07",
+    "experiments/constant_codebook_001/xorplane002/tiny_cardinal/symbols.txt": "54d9c4c2e5d088cd37ecf979b4dfdae6abd3c0825d31f263bd0a402fad333fd8",
+    "provenance/constant_codebook_001/receipt.json": "003203607b877dfbee26b0fb63d636fbf29c9e5ebfad437a42b7b925ec912c02",
+    "provenance/constant_codebook_001/reviewer_controls/baseline_scale.c": "a99c3570760e48e871bf799b5730690e3076a01ce5404b9e3b77577e6244b6e2",
+    "provenance/constant_codebook_001/reviewer_controls/decode_check.py": "7d09766988be7bd822867b0fab8700a879f259a75ce582899e66f086916eac94",
+    "provenance/constant_codebook_001/reviewer_controls/decode_result.json": "86a83d4be4152da72e801fcd886e53895e93b14d274ee5e4c9d201d55b6c363e",
+    "provenance/constant_codebook_001/reviewer_controls/scale_result.json": "3056ab8619474ff683f9812c5886ed6d240005a99ec8155476716a78223ca3e8",
+    "provenance/constant_codebook_001/reviewer_controls/word_inline_scale.c": "3cd7b38b23ccabf9c5da388db222b9d96350f8a544d1f82a9a538488a4e7c6f7",
+    "provenance/constant_codebook_001/reviewer_controls/word_scale.c": "7d9d93f5906224396d16f89c956bc44b071d6b8b1eaec101896d405b4a6bf758"
+  }
+}
