@@ -1,0 +1,292 @@
+{
+  "reviewer": "independent capability_review agent",
+  "status": "accepted_scoped_build_interface_and_rejected_float_trial",
+  "source_revision": "3f4b733a773baa5d5643a52f5f8cb3ce5db7656e",
+  "blocking_findings": [],
+  "dispositions": [
+    {
+      "finding": "Custom fsqrt collided with GNU libc declaration",
+      "resolution": "All float helpers now use cp32_ namespace; host GNU default qualification compiles successfully."
+    }
+  ],
+  "reviewed_contracts": [
+    "Double profiles preserve prior numerical helpers and bit-identical generated configuration arrays.",
+    "Float trial changes recurrence, QR, history, configuration and interfaces; rejected for sustained accumulation.",
+    "Shared history remains required SRAM; local accounting excludes explicitly reported external_history_B. Placement is conditional on retained accessible coherent SRAM; setup is new-origin initialization only.",
+    "No mainline change, inference qualification, worst-case stack, IPC, timing or firmware readiness claim."
+  ],
+  "independent_controls": {
+    "double_profile_parity": {
+      "prediction_sha256": {
+        "full": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718",
+        "predictor": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718"
+      },
+      "status": "pass",
+      "results": {
+        "full": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "collector": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "soc": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "predictor": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        }
+      },
+      "scope": "512 valid ordered samples;history andresponse checkpoints every32 identical tofullsolver;negative-dt rejection andpoisonedstreamrefusal preserve buffers. Not equivalent inference-failure gating;noactualIPC."
+    },
+    "precision_samples": 4096,
+    "precision_status": "UBSan passed including invalid dt and latched refusal",
+    "stress_20M_result_exactly_matches": "experiments/capability_profiles_001/stress004/result.json",
+    "stress": {
+      "repeated_evidence": {
+        "float_shared_math": [
+          {
+            "samples": 1,
+            "factor": 1.0,
+            "represented_information": 1.0,
+            "relative_information_error": 0.0,
+            "first_stall": 0
+          },
+          {
+            "samples": 10,
+            "factor": 3.1622776985168457,
+            "represented_information": 10.000000242536998,
+            "relative_information_error": 2.4253699937304418e-08,
+            "first_stall": 0
+          },
+          {
+            "samples": 100,
+            "factor": 10.0,
+            "represented_information": 100.0,
+            "relative_information_error": 0.0,
+            "first_stall": 0
+          },
+          {
+            "samples": 1000,
+            "factor": 31.622806549072266,
+            "represented_information": 1000.0018940400478,
+            "relative_information_error": 1.8940400476896713e-06,
+            "first_stall": 0
+          },
+          {
+            "samples": 10000,
+            "factor": 100.00189971923828,
+            "represented_information": 10000.37994745659,
+            "relative_information_error": 3.799474565902017e-05,
+            "first_stall": 0
+          },
+          {
+            "samples": 100000,
+            "factor": 316.214599609375,
+            "represented_information": 99991.67300611734,
+            "relative_information_error": -8.326993882656897e-05,
+            "first_stall": 0
+          },
+          {
+            "samples": 1000000,
+            "factor": 995.028076171875,
+            "represented_information": 990080.8723703027,
+            "relative_information_error": -0.009919127629697377,
+            "first_stall": 0
+          },
+          {
+            "samples": 10000000,
+            "factor": 2364.826904296875,
+            "represented_information": 5592406.287286341,
+            "relative_information_error": -0.4407593712713659,
+            "first_stall": 5378752
+          },
+          {
+            "samples": 20000000,
+            "factor": 2364.826904296875,
+            "represented_information": 5592406.287286341,
+            "relative_information_error": -0.720379685635683,
+            "first_stall": 5378752
+          }
+        ],
+        "float_libm": [
+          {
+            "samples": 1,
+            "factor": 1.0,
+            "represented_information": 1.0,
+            "relative_information_error": 0.0,
+            "first_stall": 0
+          },
+          {
+            "samples": 10,
+            "factor": 3.162277936935425,
+            "represented_information": 10.000001750428567,
+            "relative_information_error": 1.7504285665381758e-07,
+            "first_stall": 0
+          },
+          {
+            "samples": 100,
+            "factor": 10.000001907348633,
+            "represented_information": 100.0000381469763,
+            "relative_information_error": 3.8146976288899737e-07,
+            "first_stall": 0
+          },
+          {
+            "samples": 1000,
+            "factor": 31.62275505065918,
+            "represented_information": 999.9986369939907,
+            "relative_information_error": -1.363006009391654e-06,
+            "first_stall": 0
+          },
+          {
+            "samples": 10000,
+            "factor": 100.00004577636719,
+            "represented_information": 10000.009155275533,
+            "relative_information_error": 9.155275533245799e-07,
+            "first_stall": 0
+          },
+          {
+            "samples": 100000,
+            "factor": 316.2250061035156,
+            "represented_information": 99998.2544851685,
+            "relative_information_error": -1.7455148315081992e-05,
+            "first_stall": 0
+          },
+          {
+            "samples": 1000000,
+            "factor": 999.3363647460938,
+            "represented_information": 998673.1699039377,
+            "relative_information_error": -0.0013268300960622703,
+            "first_stall": 0
+          },
+          {
+            "samples": 10000000,
+            "factor": 3438.11474609375,
+            "represented_information": 11820633.007307291,
+            "relative_information_error": 0.18206330073072907,
+            "first_stall": 0
+          },
+          {
+            "samples": 20000000,
+            "factor": 4096.0,
+            "represented_information": 16777216.0,
+            "relative_information_error": -0.16113920000000004,
+            "first_stall": 12694699
+          }
+        ],
+        "double48": [
+          {
+            "samples": 1,
+            "factor": 1.0,
+            "represented_information": 1.0,
+            "relative_information_error": 0.0,
+            "first_stall": 0
+          },
+          {
+            "samples": 10,
+            "factor": 3.162277660157997,
+            "represented_information": 9.999999999934337,
+            "relative_information_error": -6.566303056843026e-12,
+            "first_stall": 0
+          },
+          {
+            "samples": 100,
+            "factor": 10.000000000116415,
+            "represented_information": 100.0000000023283,
+            "relative_information_error": 2.3283153183228933e-11,
+            "first_stall": 0
+          },
+          {
+            "samples": 1000,
+            "factor": 31.62277660239488,
+            "represented_information": 1000.000000044973,
+            "relative_information_error": 4.4973136326120766e-11,
+            "first_stall": 0
+          },
+          {
+            "samples": 10000,
+            "factor": 99.99999999720603,
+            "represented_information": 9999.999999441206,
+            "relative_information_error": -5.587930118622353e-11,
+            "first_stall": 0
+          },
+          {
+            "samples": 100000,
+            "factor": 316.2277659587562,
+            "represented_information": 99999.99996326589,
+            "relative_information_error": -3.673411574922625e-10,
+            "first_stall": 0
+          },
+          {
+            "samples": 1000000,
+            "factor": 999.9999998137355,
+            "represented_information": 999999.999627471,
+            "relative_information_error": -3.725290076417309e-10,
+            "first_stall": 0
+          },
+          {
+            "samples": 10000000,
+            "factor": 3162.277664512396,
+            "represented_information": 10000000.027473973,
+            "relative_information_error": 2.747397420677089e-09,
+            "first_stall": 0
+          },
+          {
+            "samples": 20000000,
+            "factor": 4472.135958075523,
+            "represented_information": 20000000.02751208,
+            "relative_information_error": 1.3756040750934062e-09,
+            "first_stall": 0
+          }
+        ]
+      },
+      "sampled_math": {
+        "exp": {
+          "max_ulp": 1,
+          "finite_classification_mismatches": 0
+        },
+        "expm1": {
+          "max_ulp": 2,
+          "finite_classification_mismatches": 0
+        },
+        "sqrt": {
+          "max_ulp": 1,
+          "finite_classification_mismatches": 0
+        }
+      },
+      "status": "diagnostic",
+      "scope": "One-column history insertion, identical unit observations, exact information=n. This isolates accumulation; not full battery qualification. Sampled math is not an exhaustive bound."
+    },
+    "shared_soc_rebuild": {
+      "local_static_B": 10312,
+      "external_history_B": 3570
+    },
+    "float_soc_execution": {
+      "status": 0,
+      "allocation_B": 3084,
+      "observed_stack_B": 248
+    }
+  },
+  "limitations": [
+    "Independent stream rerun used4096 samples; author131072-sample result inspected.",
+    "Math samples do not establish exhaustive error bounds.",
+    "One-column repeated-evidence counterexample is an accumulator control, not a battery trajectory.",
+    "No shared-address execution or hardware access validation."
+  ],
+  "source_sha256": {
+    "experiments/capability_profiles_001/README.md": "625f8ec2cd97540f53b1a218fb3a365b0a566f59e00b73e0688b717153120d54",
+    "experiments/capability_profiles_001/build.py": "3aea570b2ff8e5677c27e5b932b66bf6698b5e8a69b0e4eb6994307e2015d3b4",
+    "experiments/capability_profiles_001/compile.py": "093a679bee37d2ebdb4565755a80f7b7e106eecdfdb48d1383163950b77e0827",
+    "experiments/capability_profiles_001/math32.h": "4e797d5ce56fa9c72ad7d2205bac8684a15a0a9cb8d1c1b4c6fdcbca6f5739f9",
+    "experiments/capability_profiles_001/measure.py": "a18426fc8fe02fa26c61ac27ce60ffc35e51c761bf6851bc266a3ec5069e71fa",
+    "experiments/capability_profiles_001/qualify.py": "9e4bb45de23c63a7408234f9ec6c73a3a8b1c48f8c9db9d1a291cb040eb5ef97",
+    "experiments/capability_profiles_001/stress.py": "59f2b125697ad97b288d5b0f060fdaa09f6b382b33863c3547f17624f12c39c2"
+  },
+  "evidence_sha256": {
+    "experiments/capability_profiles_001/check002/result.json": "328bbc0f0010cc7f0f6aceea6dd6d3f5f2091f85449883f7d21315e88fa6ced1",
+    "experiments/capability_profiles_001/stress004/result.json": "d01ae29911284c887a6124e5c90c4455f3e8ac1c0b9fdf74444342eb6bde64b5"
+  }
+}

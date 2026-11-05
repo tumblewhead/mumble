@@ -1766,3 +1766,5 @@ The original study release manifest is preserved in
 import adapted documentation and verification-helper paths. The later bounded
 prototype is recorded separately; original study outputs and numerical
 reference sources remain preserved.
+
+The [capability profile build](experiments/capability_profiles_001/README.md) now selects full, collector, SOC or all-readout numerical cores. Default binary64 sizes and parity are preserved. A binary32 collector measures9052B including observed stack but fails repeated-evidence accumulation and is not promoted. Shared-history placement is conditional on accessible retained SRAM.

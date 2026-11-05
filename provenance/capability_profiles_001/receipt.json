@@ -1,0 +1,1237 @@
+{
+  "base_commit": "3f4b733",
+  "branch": "experiment/capability-profiles-001",
+  "selected_arithmetic": "double",
+  "selected_history_placement": "local",
+  "four_profile_builds": "exact_previous_sizes_and_parity",
+  "float_trial_status": "rejected_for_sustained_history_accumulation",
+  "shared_history_status": "conditional_on_unconfirmed_hardware_access_no_IPC",
+  "measurements": {
+    "baseline/full": {
+      "results": [
+        {
+          "math": "tiny",
+          "map": "cardinal",
+          "history_bits": 48,
+          "allocated": [
+            {
+              "name": ".vectors",
+              "bytes": 28,
+              "address": 268435456
+            },
+            {
+              "name": ".text",
+              "bytes": 16480,
+              "address": 268435484
+            },
+            {
+              "name": ".rodata",
+              "bytes": 948,
+              "address": 268451968
+            },
+            {
+              "name": ".bss",
+              "bytes": 6936,
+              "address": 268452920
+            }
+          ],
+          "alignment_gaps_B": 8,
+          "sections": {
+            ".vectors": 28,
+            ".text": 16480,
+            ".rodata": 948,
+            ".bss": 6936,
+            ".comment": 60,
+            ".ARM.attributes": 50,
+            ".debug_info": 10636,
+            ".debug_abbrev": 4357,
+            ".debug_loclists": 16732,
+            ".debug_aranges": 512,
+            ".debug_rnglists": 1361,
+            ".debug_line": 14705,
+            ".debug_str": 2651,
+            ".debug_frame": 612,
+            ".debug_line_str": 163
+          },
+          "allocated_sections_B": 24400,
+          "with_1024_stack_B": 25424,
+          "stack": "1024B reservation, not bound; final linked stack qualification pending",
+          "command": [
+            "arm-none-eabi-gcc",
+            "-mcpu=cortex-m23",
+            "-mthumb",
+            "-mfloat-abi=soft",
+            "-std=c11",
+            "-Os",
+            "-flto",
+            "-fno-fast-math",
+            "-ffp-contract=off",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fstack-usage",
+            "-nostartfiles",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/full/tiny_cardinal/probe.c",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+            "-Wl,--wrap=__aeabi_dsub",
+            "-T",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/full/tiny_cardinal/link.ld",
+            "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/full/tiny_cardinal/probe.map",
+            "-lm",
+            "-lc",
+            "-lgcc",
+            "-lnosys",
+            "-o",
+            "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/full/tiny_cardinal/probe.elf"
+          ],
+          "sha256": "4eda51250599f9f7845e634bb07218d35fd672a34dd32a8982523924a975a409"
+        }
+      ],
+      "scope": "Clean numerical stream/inference image: code, constants, in-place data and BSS all SRAM.\nNative stationary VIT stream/QR/refit/scalar path; platform scheduling, normalization, identity/transaction code remain external. No saved observations or history in image.\n",
+      "variant": "combined_scalar",
+      "lane": "physical"
+    },
+    "baseline/collector": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/collector/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/collector/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/collector/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/collector/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "double",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 8276,
+        ".rodata": 368,
+        ".bss": 4856,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "e0c54e43439c138a07e2ba25b05ce1d4eddc667dca388c7ddf1a15a38e5fbc64",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 8276,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 368,
+          "address": 268443760
+        },
+        {
+          "name": ".bss",
+          "bytes": 4856,
+          "address": 268444128
+        }
+      ],
+      "static_B": 13528,
+      "alignment_gaps_B": 0,
+      "with_1024_stack_B": 14552
+    },
+    "baseline/soc": {
+      "variant": "soc",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/soc/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/soc/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/soc/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/soc/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "double",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 8576,
+        ".rodata": 368,
+        ".bss": 4888,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "8578bb27c950abe749e5bbec675c639c279ef6cf2270e9d9df6eeb3404ed14ca",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 8576,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 368,
+          "address": 268444064
+        },
+        {
+          "name": ".bss",
+          "bytes": 4888,
+          "address": 268444432
+        }
+      ],
+      "static_B": 13864,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 14888
+    },
+    "baseline/predictor": {
+      "variant": "predictor",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/predictor/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/predictor/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/predictor/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/baseline/predictor/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "double",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 11688,
+        ".rodata": 624,
+        ".bss": 5376,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 10303,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 15796,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 1341,
+        ".debug_line": 13938,
+        ".debug_str": 2549,
+        ".debug_frame": 560,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "2cba96dd02b3d59cdd32ce6565fe3d0fa3a083d3f97e2b69598fdcbfda8cc856",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 11688,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 624,
+          "address": 268447176
+        },
+        {
+          "name": ".bss",
+          "bytes": 5376,
+          "address": 268447800
+        }
+      ],
+      "static_B": 17720,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 18744
+    },
+    "float_final/collector": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_final/collector/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_final/collector/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_final/collector/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_final/collector/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "float",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5486,
+        ".rodata": 192,
+        ".bss": 3104,
+        ".debug_info": 7037,
+        ".debug_abbrev": 3772,
+        ".debug_loclists": 9053,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1049,
+        ".debug_line": 10719,
+        ".debug_str": 1991,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "e26c3ae55c5af9bee39fb3689dd41e08343e877b42a743cac22973a337c75b08",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5486,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268440972
+        },
+        {
+          "name": ".bss",
+          "bytes": 3104,
+          "address": 268441164
+        }
+      ],
+      "static_B": 8812,
+      "alignment_gaps_B": 2,
+      "with_1024_stack_B": 9836
+    },
+    "float_soc/soc": {
+      "variant": "soc",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc/soc/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc/soc/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc/soc/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc/soc/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "float",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5674,
+        ".rodata": 192,
+        ".bss": 3120,
+        ".debug_info": 7037,
+        ".debug_abbrev": 3772,
+        ".debug_loclists": 9053,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1049,
+        ".debug_line": 10719,
+        ".debug_str": 1991,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "a2507d6a47d4a5718d991af671d63125ffdec3a1b3ed75a3b69604777d6d84a2",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 5674,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 192,
+          "address": 268441160
+        },
+        {
+          "name": ".bss",
+          "bytes": 3120,
+          "address": 268441352
+        }
+      ],
+      "static_B": 9016,
+      "alignment_gaps_B": 2,
+      "with_1024_stack_B": 10040
+    },
+    "float_stack/collector": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_stack/collector/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_stack/collector/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_stack/collector/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_stack/collector/probe.elf"
+      ],
+      "execute": true,
+      "arithmetic": "float",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 5816,
+        ".rodata": 240,
+        ".bss": 3104,
+        ".debug_info": 7037,
+        ".debug_abbrev": 3772,
+        ".debug_loclists": 9053,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1049,
+        ".debug_line": 10719,
+        ".debug_str": 1991,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "96d897b40610a576b34a23f8dbb8dc482658b5a6413196660e5ff571f2e918bd",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_stack/collector/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=3080\nstack_watermark_B=240\n"
+    },
+    "float_soc_stack/soc": {
+      "variant": "soc",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc_stack/soc/probe.c",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc_stack/soc/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc_stack/soc/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc_stack/soc/probe.elf"
+      ],
+      "execute": true,
+      "arithmetic": "float",
+      "history_placement": "local",
+      "external_history_B": 0,
+      "sections": {
+        ".vectors": 28,
+        ".text": 6108,
+        ".rodata": 240,
+        ".bss": 3120,
+        ".debug_info": 7037,
+        ".debug_abbrev": 3772,
+        ".debug_loclists": 9053,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1049,
+        ".debug_line": 10719,
+        ".debug_str": 1991,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_frame": 484,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "c29a6fd382d513a3d62184add010a70deb3c192eeb40cfe49d4e2016a7cb13ae",
+      "emulator": [
+        "qemu-system-arm",
+        "-M",
+        "mps2-an505",
+        "-nographic",
+        "-semihosting-config",
+        "enable=on,target=native",
+        "-kernel",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/float_soc_stack/soc/probe.elf"
+      ],
+      "returncode": 0,
+      "output": "status=0\nallocation_B=3084\nstack_watermark_B=248\n"
+    },
+    "shared_trial/collector": {
+      "variant": "collector",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_trial/collector/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_trial/collector/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_trial/collector/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_trial/collector/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "double",
+      "history_placement": "shared",
+      "external_history_B": 3570,
+      "sections": {
+        ".shared_history": 3570,
+        ".vectors": 28,
+        ".text": 8300,
+        ".rodata": 368,
+        ".bss": 1280,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "d3718fb895fa190cbd21f6a59d1f6aaf0ea89e2950dca45357c6ecdc6b3bacac",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 8300,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 368,
+          "address": 268443784
+        },
+        {
+          "name": ".bss",
+          "bytes": 1280,
+          "address": 268444152
+        }
+      ],
+      "static_B": 9976,
+      "alignment_gaps_B": 0,
+      "with_1024_stack_B": 11000
+    },
+    "shared_soc/soc": {
+      "variant": "soc",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_soc/soc/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_soc/soc/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_soc/soc/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_soc/soc/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "double",
+      "history_placement": "shared",
+      "external_history_B": 3570,
+      "sections": {
+        ".shared_history": 3570,
+        ".vectors": 28,
+        ".text": 8600,
+        ".rodata": 368,
+        ".bss": 1312,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 9660,
+        ".debug_abbrev": 3758,
+        ".debug_loclists": 15514,
+        ".debug_aranges": 448,
+        ".debug_rnglists": 1280,
+        ".debug_line": 13546,
+        ".debug_str": 2522,
+        ".debug_frame": 520,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "d8a09bf768bee78ae1f271d8f85c99b1828e6dde0c066490cc9101665a3ac919",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 8600,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 368,
+          "address": 268444088
+        },
+        {
+          "name": ".bss",
+          "bytes": 1312,
+          "address": 268444456
+        }
+      ],
+      "static_B": 10312,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 11336
+    },
+    "shared_predictor/predictor": {
+      "variant": "predictor",
+      "command": [
+        "arm-none-eabi-gcc",
+        "-mcpu=cortex-m23",
+        "-mthumb",
+        "-mfloat-abi=soft",
+        "-std=c11",
+        "-Os",
+        "-flto",
+        "-fno-fast-math",
+        "-ffp-contract=off",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fstack-usage",
+        "-nostartfiles",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_predictor/predictor/probe.c",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/sram_size_001/soft_sub.c",
+        "-Wl,--wrap=__aeabi_dsub",
+        "-T",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_predictor/predictor/link.ld",
+        "-Wl,--gc-sections,-Map=/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_predictor/predictor/probe.map",
+        "-lm",
+        "-lc",
+        "-lgcc",
+        "-lnosys",
+        "-o",
+        "/home/easy/proj/mumble/.worktrees/qr-sharing/experiments/capability_profiles_001/shared_predictor/predictor/probe.elf"
+      ],
+      "execute": false,
+      "arithmetic": "double",
+      "history_placement": "shared",
+      "external_history_B": 3570,
+      "sections": {
+        ".shared_history": 3570,
+        ".vectors": 28,
+        ".text": 11704,
+        ".rodata": 624,
+        ".bss": 1800,
+        ".comment": 60,
+        ".ARM.attributes": 50,
+        ".debug_info": 10303,
+        ".debug_abbrev": 4156,
+        ".debug_loclists": 15796,
+        ".debug_aranges": 480,
+        ".debug_rnglists": 1341,
+        ".debug_line": 13938,
+        ".debug_str": 2549,
+        ".debug_frame": 560,
+        ".debug_line_str": 163
+      },
+      "elf_sha256": "c3190712ab3cc985d427e314f83e981299696592fad21fe32d973a802645b811",
+      "allocated": [
+        {
+          "name": ".vectors",
+          "bytes": 28,
+          "address": 268435456
+        },
+        {
+          "name": ".text",
+          "bytes": 11704,
+          "address": 268435484
+        },
+        {
+          "name": ".rodata",
+          "bytes": 624,
+          "address": 268447192
+        },
+        {
+          "name": ".bss",
+          "bytes": 1800,
+          "address": 268447816
+        }
+      ],
+      "static_B": 14160,
+      "alignment_gaps_B": 4,
+      "with_1024_stack_B": 15184
+    }
+  },
+  "finite_stream_diagnostic": {
+    "samples": 131072,
+    "duration_s": 2621.44,
+    "status": "finite_diagnostic_complete_not_long_run_qualification",
+    "stream_sha256": {
+      "double": "74d45f442b56ddbb5089acd977dbfb3bf065c0a0596158b8d6277cad695befd1",
+      "float": "83a6be30fd0429e2230a0ee773db13bb485385a323e9da371cbacb5ddd95f6b9"
+    },
+    "double_profile_parity": {
+      "prediction_sha256": {
+        "full": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718",
+        "predictor": "7e05ce2d9e6b6b835936ed6d7a92e538920cf08d067e11f274406cc286367718"
+      },
+      "status": "pass",
+      "results": {
+        "full": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "collector": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "soc": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        },
+        "predictor": {
+          "bytes": 71080,
+          "sha256": "3d3b4dae9407f535172512aff50403a3c7281f019eee85972992c700089b984c"
+        }
+      },
+      "scope": "512 valid ordered samples;history andresponse checkpoints every32 identical tofullsolver;negative-dt rejection andpoisonedstreamrefusal preserve buffers. Not equivalent inference-failure gating;noactualIPC."
+    },
+    "checkpoints": [
+      {
+        "relative_Gram_Frobenius": 2.8405450869587694e-05,
+        "fixed_direction_energy_relative_error": 3.589603082565507e-05
+      },
+      {
+        "relative_Gram_Frobenius": 2.7333135849459138e-05,
+        "fixed_direction_energy_relative_error": 3.330497216202932e-05
+      },
+      {
+        "relative_Gram_Frobenius": 2.2838114199456217e-05,
+        "fixed_direction_energy_relative_error": 3.17641762700438e-05
+      },
+      {
+        "relative_Gram_Frobenius": 1.5206298874547959e-05,
+        "fixed_direction_energy_relative_error": 1.191661334620786e-05
+      },
+      {
+        "relative_Gram_Frobenius": 2.0724569120608893e-05,
+        "fixed_direction_energy_relative_error": 1.881439386364203e-05
+      },
+      {
+        "relative_Gram_Frobenius": 1.9021773281096013e-05,
+        "fixed_direction_energy_relative_error": 2.8879826520555874e-05
+      },
+      {
+        "relative_Gram_Frobenius": 1.9085669308017075e-05,
+        "fixed_direction_energy_relative_error": 5.0342770340550125e-05
+      },
+      {
+        "relative_Gram_Frobenius": 4.910471222844496e-06,
+        "fixed_direction_energy_relative_error": 1.1261684958352447e-05
+      },
+      {
+        "relative_Gram_Frobenius": 9.232525013820344e-06,
+        "fixed_direction_energy_relative_error": 3.40970385837025e-06
+      },
+      {
+        "relative_Gram_Frobenius": 8.924363572274229e-06,
+        "fixed_direction_energy_relative_error": 5.802978246216561e-05
+      },
+      {
+        "relative_Gram_Frobenius": 1.684062665255177e-05,
+        "fixed_direction_energy_relative_error": 1.3817234028934422e-05
+      },
+      {
+        "relative_Gram_Frobenius": 1.1667200416928084e-05,
+        "fixed_direction_energy_relative_error": 8.513289406764102e-07
+      },
+      {
+        "relative_Gram_Frobenius": 3.07151866470414e-05,
+        "fixed_direction_energy_relative_error": 0.00010246764222465732
+      },
+      {
+        "relative_Gram_Frobenius": 3.1461675644562395e-05,
+        "fixed_direction_energy_relative_error": 4.980387687247845e-05
+      },
+      {
+        "relative_Gram_Frobenius": 2.272898264924323e-05,
+        "fixed_direction_energy_relative_error": 1.4608768932555805e-05
+      },
+      {
+        "relative_Gram_Frobenius": 8.433712290756897e-06,
+        "fixed_direction_energy_relative_error": 3.907670010017128e-06
+      },
+      {
+        "relative_Gram_Frobenius": 5.747506778599576e-05,
+        "fixed_direction_energy_relative_error": 0.00013339218062624614
+      },
+      {
+        "relative_Gram_Frobenius": 2.5788534540001304e-05,
+        "fixed_direction_energy_relative_error": 9.580477139903287e-05
+      },
+      {
+        "relative_Gram_Frobenius": 3.216053297700376e-05,
+        "fixed_direction_energy_relative_error": 0.00016537623606915908
+      },
+      {
+        "relative_Gram_Frobenius": 3.1386960449953124e-05,
+        "fixed_direction_energy_relative_error": 0.00011935952709207776
+      },
+      {
+        "relative_Gram_Frobenius": 3.088583381473129e-05,
+        "fixed_direction_energy_relative_error": 0.00017547526399397384
+      },
+      {
+        "relative_Gram_Frobenius": 2.4437787734188138e-05,
+        "fixed_direction_energy_relative_error": 0.0001665673051678418
+      },
+      {
+        "relative_Gram_Frobenius": 5.6887588952585044e-05,
+        "fixed_direction_energy_relative_error": 0.0002516375479673094
+      },
+      {
+        "relative_Gram_Frobenius": 2.9453147982168312e-05,
+        "fixed_direction_energy_relative_error": 0.00022886084444428967
+      },
+      {
+        "relative_Gram_Frobenius": 6.328353513439767e-05,
+        "fixed_direction_energy_relative_error": 7.293918516859677e-05
+      },
+      {
+        "relative_Gram_Frobenius": 5.130228647221034e-05,
+        "fixed_direction_energy_relative_error": 5.605249671958301e-05
+      },
+      {
+        "relative_Gram_Frobenius": 0.00018660099700243188,
+        "fixed_direction_energy_relative_error": 0.0005613268778544844
+      },
+      {
+        "relative_Gram_Frobenius": 0.00013951417178259865,
+        "fixed_direction_energy_relative_error": 0.0004488727869569331
+      },
+      {
+        "relative_Gram_Frobenius": 0.00010413905148127926,
+        "fixed_direction_energy_relative_error": 0.00036241925158131405
+      },
+      {
+        "relative_Gram_Frobenius": 0.00019357723211770806,
+        "fixed_direction_energy_relative_error": 0.0004680111714641111
+      },
+      {
+        "relative_Gram_Frobenius": 7.66526657089162e-05,
+        "fixed_direction_energy_relative_error": 1.9549134179674965e-05
+      },
+      {
+        "relative_Gram_Frobenius": 0.00017830863642632227,
+        "fixed_direction_energy_relative_error": 0.000359790831306106
+      }
+    ],
+    "max_response_absolute_difference": 3.4945747135500804e-05,
+    "max_charge_Ah_absolute_difference": 4.1384306845944265e-09,
+    "final_charge_Ah_difference": 2.716209224472863e-09,
+    "float_min_diagonal": 0.32425662875175476,
+    "scope": "Binary32 trial changes config, interfaces, recurrence, QR and history. No fitting, uncertainty, weak-direction guarantee, long-duration or physical-accuracy acceptance."
+  },
+  "accumulation_and_math": {
+    "repeated_evidence": {
+      "float_shared_math": [
+        {
+          "samples": 1,
+          "factor": 1.0,
+          "represented_information": 1.0,
+          "relative_information_error": 0.0,
+          "first_stall": 0
+        },
+        {
+          "samples": 10,
+          "factor": 3.1622776985168457,
+          "represented_information": 10.000000242536998,
+          "relative_information_error": 2.4253699937304418e-08,
+          "first_stall": 0
+        },
+        {
+          "samples": 100,
+          "factor": 10.0,
+          "represented_information": 100.0,
+          "relative_information_error": 0.0,
+          "first_stall": 0
+        },
+        {
+          "samples": 1000,
+          "factor": 31.622806549072266,
+          "represented_information": 1000.0018940400478,
+          "relative_information_error": 1.8940400476896713e-06,
+          "first_stall": 0
+        },
+        {
+          "samples": 10000,
+          "factor": 100.00189971923828,
+          "represented_information": 10000.37994745659,
+          "relative_information_error": 3.799474565902017e-05,
+          "first_stall": 0
+        },
+        {
+          "samples": 100000,
+          "factor": 316.214599609375,
+          "represented_information": 99991.67300611734,
+          "relative_information_error": -8.326993882656897e-05,
+          "first_stall": 0
+        },
+        {
+          "samples": 1000000,
+          "factor": 995.028076171875,
+          "represented_information": 990080.8723703027,
+          "relative_information_error": -0.009919127629697377,
+          "first_stall": 0
+        },
+        {
+          "samples": 10000000,
+          "factor": 2364.826904296875,
+          "represented_information": 5592406.287286341,
+          "relative_information_error": -0.4407593712713659,
+          "first_stall": 5378752
+        },
+        {
+          "samples": 20000000,
+          "factor": 2364.826904296875,
+          "represented_information": 5592406.287286341,
+          "relative_information_error": -0.720379685635683,
+          "first_stall": 5378752
+        }
+      ],
+      "float_libm": [
+        {
+          "samples": 1,
+          "factor": 1.0,
+          "represented_information": 1.0,
+          "relative_information_error": 0.0,
+          "first_stall": 0
+        },
+        {
+          "samples": 10,
+          "factor": 3.162277936935425,
+          "represented_information": 10.000001750428567,
+          "relative_information_error": 1.7504285665381758e-07,
+          "first_stall": 0
+        },
+        {
+          "samples": 100,
+          "factor": 10.000001907348633,
+          "represented_information": 100.0000381469763,
+          "relative_information_error": 3.8146976288899737e-07,
+          "first_stall": 0
+        },
+        {
+          "samples": 1000,
+          "factor": 31.62275505065918,
+          "represented_information": 999.9986369939907,
+          "relative_information_error": -1.363006009391654e-06,
+          "first_stall": 0
+        },
+        {
+          "samples": 10000,
+          "factor": 100.00004577636719,
+          "represented_information": 10000.009155275533,
+          "relative_information_error": 9.155275533245799e-07,
+          "first_stall": 0
+        },
+        {
+          "samples": 100000,
+          "factor": 316.2250061035156,
+          "represented_information": 99998.2544851685,
+          "relative_information_error": -1.7455148315081992e-05,
+          "first_stall": 0
+        },
+        {
+          "samples": 1000000,
+          "factor": 999.3363647460938,
+          "represented_information": 998673.1699039377,
+          "relative_information_error": -0.0013268300960622703,
+          "first_stall": 0
+        },
+        {
+          "samples": 10000000,
+          "factor": 3438.11474609375,
+          "represented_information": 11820633.007307291,
+          "relative_information_error": 0.18206330073072907,
+          "first_stall": 0
+        },
+        {
+          "samples": 20000000,
+          "factor": 4096.0,
+          "represented_information": 16777216.0,
+          "relative_information_error": -0.16113920000000004,
+          "first_stall": 12694699
+        }
+      ],
+      "double48": [
+        {
+          "samples": 1,
+          "factor": 1.0,
+          "represented_information": 1.0,
+          "relative_information_error": 0.0,
+          "first_stall": 0
+        },
+        {
+          "samples": 10,
+          "factor": 3.162277660157997,
+          "represented_information": 9.999999999934337,
+          "relative_information_error": -6.566303056843026e-12,
+          "first_stall": 0
+        },
+        {
+          "samples": 100,
+          "factor": 10.000000000116415,
+          "represented_information": 100.0000000023283,
+          "relative_information_error": 2.3283153183228933e-11,
+          "first_stall": 0
+        },
+        {
+          "samples": 1000,
+          "factor": 31.62277660239488,
+          "represented_information": 1000.000000044973,
+          "relative_information_error": 4.4973136326120766e-11,
+          "first_stall": 0
+        },
+        {
+          "samples": 10000,
+          "factor": 99.99999999720603,
+          "represented_information": 9999.999999441206,
+          "relative_information_error": -5.587930118622353e-11,
+          "first_stall": 0
+        },
+        {
+          "samples": 100000,
+          "factor": 316.2277659587562,
+          "represented_information": 99999.99996326589,
+          "relative_information_error": -3.673411574922625e-10,
+          "first_stall": 0
+        },
+        {
+          "samples": 1000000,
+          "factor": 999.9999998137355,
+          "represented_information": 999999.999627471,
+          "relative_information_error": -3.725290076417309e-10,
+          "first_stall": 0
+        },
+        {
+          "samples": 10000000,
+          "factor": 3162.277664512396,
+          "represented_information": 10000000.027473973,
+          "relative_information_error": 2.747397420677089e-09,
+          "first_stall": 0
+        },
+        {
+          "samples": 20000000,
+          "factor": 4472.135958075523,
+          "represented_information": 20000000.02751208,
+          "relative_information_error": 1.3756040750934062e-09,
+          "first_stall": 0
+        }
+      ]
+    },
+    "sampled_math": {
+      "exp": {
+        "max_ulp": 1,
+        "finite_classification_mismatches": 0
+      },
+      "expm1": {
+        "max_ulp": 2,
+        "finite_classification_mismatches": 0
+      },
+      "sqrt": {
+        "max_ulp": 1,
+        "finite_classification_mismatches": 0
+      }
+    },
+    "status": "diagnostic",
+    "scope": "One-column history insertion, identical unit observations, exact information=n. This isolates accumulation; not full battery qualification. Sampled math is not an exhaustive bound."
+  },
+  "review_status": "complete",
+  "source_sha256": {
+    "experiments/capability_profiles_001/measure.py": "a18426fc8fe02fa26c61ac27ce60ffc35e51c761bf6851bc266a3ec5069e71fa",
+    "experiments/capability_profiles_001/build.py": "3aea570b2ff8e5677c27e5b932b66bf6698b5e8a69b0e4eb6994307e2015d3b4",
+    "experiments/capability_profiles_001/math32.h": "4e797d5ce56fa9c72ad7d2205bac8684a15a0a9cb8d1c1b4c6fdcbca6f5739f9",
+    "experiments/capability_profiles_001/compile.py": "093a679bee37d2ebdb4565755a80f7b7e106eecdfdb48d1383163950b77e0827",
+    "experiments/capability_profiles_001/qualify.py": "9e4bb45de23c63a7408234f9ec6c73a3a8b1c48f8c9db9d1a291cb040eb5ef97",
+    "experiments/capability_profiles_001/stress.py": "59f2b125697ad97b288d5b0f060fdaa09f6b382b33863c3547f17624f12c39c2",
+    "experiments/capability_profiles_001/README.md": "625f8ec2cd97540f53b1a218fb3a365b0a566f59e00b73e0688b717153120d54"
+  },
+  "limits": [
+    "Numerical cores, not complete firmware",
+    "Observed stack only; no timing qualification",
+    "No full fitting or coverage comparison for float trial",
+    "No shared hardware validation or shared stack witness",
+    "No long-run campaign changed"
+  ],
+  "review": "provenance/capability_profiles_001/review.json",
+  "unsupported_configuration_checks": "all+float, full+shared, shared+execute reject before output creation"
+}
