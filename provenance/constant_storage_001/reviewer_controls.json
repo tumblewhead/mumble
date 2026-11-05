@@ -1,0 +1,115 @@
+{
+  "reviewer": "independent constant_storage_review agent",
+  "numeric_command": "OPENBLAS_NUM_THREADS=1 python3 -B -m experiments.constant_storage_001.numeric_check --out /tmp/constant_storage_review_numeric",
+  "numeric": {
+    "status": "measured_not_long_run_qualified",
+    "all_statuses_equal": true,
+    "accepted_refits": {
+      "byte_indices": 3,
+      "f32_coefficients": 3
+    },
+    "successful_scalar_queries": 464,
+    "max_map_abs_delta": [
+      3.6315008111742486e-08,
+      2.6803883668158335e-08
+    ],
+    "max_feature_value_delta": 3.566830511503305e-09,
+    "max_feature_derivative_delta": 3.496278178083401e-08,
+    "max_scalar_value_delta_per_coordinate": [
+      2.7242375022495935e-10,
+      1.1247107249440919e-11,
+      8.083632775744004e-12,
+      1.2806512187518715e-10,
+      2.4388282306479162e-09,
+      2.788170139211843e-09,
+      1.1561710699936611e-08,
+      1.2341275557048448e-08,
+      2.9558073766366988e-08,
+      7.236925725351284e-09,
+      2.6392660057439343e-08,
+      3.057490216562542e-08,
+      2.0267617362179635e-08,
+      9.906298004125347e-10,
+      1.4790120239638327e-09,
+      2.294758605358993e-09
+    ],
+    "max_scalar_variance_delta_per_coordinate": [
+      7.97237791191549e-13,
+      1.3627796091948599e-15,
+      1.0165241407382123e-15,
+      1.8184680988125347e-13,
+      1.775867786157903e-10,
+      1.5771930983454752e-10,
+      9.421812219301273e-10,
+      1.8699841258795757e-09,
+      8.217850566705209e-10,
+      2.387687797478222e-09,
+      6.906346494695015e-09,
+      3.3668232368722073e-09,
+      1.2307303953740245e-08,
+      1.7579548927670885e-11,
+      7.703154780713817e-11,
+      1.907666802303254e-10
+    ],
+    "carried_response_exact": true,
+    "rounding_only_bounds": {
+      "composed_VP_abs_bound_per_sum_amplitude": 2.7103292931390967e-07,
+      "composed_VP_du_bound_per_sum_amplitude": 4.1027326731584305e-07,
+      "P_map_abs_per_coordinate": [
+        3.634381280229129e-08,
+        2.479857288679721e-08,
+        3.30928504277715e-09
+      ],
+      "P_du_abs_per_coordinate": [
+        2.9404308419279106e-09,
+        2.680389846503975e-08,
+        8.933674952513015e-09
+      ],
+      "V_abs_per_coordinate_per_max_state": [
+        1.9249240328382457e-08,
+        7.440279295532065e-08,
+        2.3166687753740922e-07
+      ],
+      "assumptions": "|u|<=1;Chebyshev |T_j|<=1,|Tprime_j|<=j^2;fixed-coefficient rounding in exact arithmetic;not runtime roundoff or accumulated history bias"
+    },
+    "stream_seconds": 81.92,
+    "scope": "synthetic numerical control at50Hz,not plant accuracy or calibrated coverage;32refits;P/Vbothrounded once;history48unchanged"
+  },
+  "numeric_array_sha256": {
+    "byte_indices": "0c55311f5a7dfe7c40f1762d836bf538750371a0efec9458137360030744d8a2",
+    "f32_coefficients": "86782e314528ac274e9f0296632f68a73f5920a971e0e15a98f4ee8c390329e7"
+  },
+  "independent_template_compilation": {
+    "flags": [
+      "-O2",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ],
+    "variants": [
+      "baseline",
+      "byte_indices",
+      "f32_coefficients"
+    ],
+    "all_exit_codes": 0,
+    "baseline_byte_parity_sha256": "f984ac07e3b205259cf2918349e56344573f6d554e9c0603e9a22a1cba968b4d",
+    "parity_bytes": 3458582,
+    "all_invalid_sha256": "d03254f74eb411bebef26f939ed7d57b65465a88148a6ee5a67488f310c0968b",
+    "invalid_bytes": 75
+  },
+  "independent_target_rebuild": {
+    "command": "python3 -B -m experiments.constant_storage_001.target --variant byte_indices --out /tmp/constant_storage_review_byte_target",
+    "static_B": 24568,
+    "provisional_total_B": 25592
+  },
+  "qemu_rerun": {
+    "all_exit_codes": 0,
+    "all_statuses": 0,
+    "allocation_B": 6872,
+    "observed_stack_B": {
+      "baseline": 672,
+      "byte_indices": 664,
+      "f32_coefficients": 664
+    }
+  },
+  "alignment_correction": "Earlier informal no-gap observation was mistaken: byte_indices and f32_coefficients each have4B inter-section gap; baseline has0. Reported static totals include these gaps."
+}

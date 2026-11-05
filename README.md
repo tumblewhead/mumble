@@ -1,3 +1,11 @@
+# Constant-storage experiment
+
+The [storage trial](experiments/constant_storage_001/README.md) selects exact
+byte-sized index tables:24568 static bytes and664 observed stack bytes, saving
+48 bytes in the paired comparison. Float32 coefficient storage reaches24424
+static bytes but remains provisional pending long-run/error-budget qualification.
+Campaign defaults remain unchanged.
+
 # Constant layout and codec study
 
 The [layout study](experiments/constant_layout_study_001/README.md) compares13
