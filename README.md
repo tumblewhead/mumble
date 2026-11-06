@@ -1,3 +1,76 @@
+# Current mainline baseline
+
+Field-assisted estimation is now the desktop campaign default: the optimized C
+rolling estimator receives periodic joint-likelihood/state-transport refreshes.
+Use `--history compare` for both field and original rolling arms, or
+`--history rolling` for the original control. See the
+[promotion receipt](provenance/field_mainline_20261031/receipt.json) and
+[720-hour review](provenance/rolling_field_720h_20261031/README.md).
+Low-noise uncertainty, aging and M23 deployment remain unqualified.
+
+The supported desktop campaign uses the optimized C rolling estimator with
+bounded hysteresis, continuous physical parameters, and likelihood/state-transport
+history. It supports parallel cases, configurable sample rate, CC/CV cycles,
+physical telemetry, and individual plots plus labeled all-arm overlays.
+See the [campaign guide](experiments/foster_campaign_001/README.md).
+For long runs, add `--recording compact`: bounded 2,000-bin plots, event summaries,
+and full-state local replay checkpoints replace full trajectories. Explicit
+`--debug-start-hour` / `--debug-stop-hour` flags on the replay tool recover a
+selected interval. See the [recording qualification](provenance/compact_campaign_6000h/README.md)
+for recording controls. The field comparison has stationary-cell evidence across
+eight 720-hour cases; 6,000-hour inference is not qualified.
+
+
+```sh
+python3 -B -m experiments.foster_campaign_001.run \
+  --hours 4 --jobs 4 --sample-rate-hz 50 --cells A \
+  --loads charge-discharge --seeds 1000 1001 1002 1003
+```
+
+The original rolling mode and its encoding controls remain available. Generated
+campaign data stay local; promotion includes source, tests and small receipts.
+The [field guide](experiments/rolling_joint_field_001/README.md) describes refresh
+failures, checkpoint replay and resource limits. Field inference remains a
+Python/C desktop implementation and exceeds the M23 SRAM target.
+
+
+## Qualified integration after the field baseline
+
+The field estimator remains the default (`--history joint-field`, C backend,
+float64 encoding, bounded hysteresis, nominal 35 Hz). This integration brings
+forward the tested runner improvements and explicit comparison modes developed
+since `311218a`; it does not select a new approximation silently.
+
+| Capability | How to select it | Status |
+|---|---|---|
+| Original-origin tangent and fused native updates | `--history field-tangent` or `compare-tangent` | Opt-in desktop reference; comparison is field64 + tangent64 |
+| H7 tangent with transaction containment | `--history tangent-h7` or `compare-h7` | Opt-in; uncertainty limitations remain |
+| Distinct-pole and reduced-bank histories | `--history distinct-bank`, `bank-tangent`, `small-bank`, or their compare modes | Stationary 25 C research references |
+| Native rowwise solver | `--history rowwise-bank` or `compare-rowwise` | Explicit rank3, float64, no centering; paired 72-hour equivalence evidence |
+| Reviewed full-core size optimizations | `experiments.coordinate_sharing_001` | Separate native build; not a replacement for campaign ABI |
+| Four capability partitions | `experiments.capability_profiles_001` | Numerical builds; require application ownership/recovery contracts |
+
+Compact recording, bounded plots, labeled overlays, parameter-error plots, replay,
+parallel cases, independent load/noise seeds and configurable sample rate remain
+available. Historical checkpoints require their original source/runtime binding;
+this integration does not bypass stale-checkpoint checks.
+
+The low-precision/paired-Gram/integer-history trials and unsuccessful constant
+compression studies remain archived as research. They are **not promoted** to
+campaign defaults. In particular, the small Q12 collector still loses repeated
+evidence; its sub-10KiB numerical footprint is not deployment qualification.
+Full all-SRAM accounting includes executable code and constants as well as data
+and stack. No aging, lifetime, calibrated-coverage or complete-firmware claim is
+added by this merge.
+
+See the [integration report](provenance/qualified_mainline_001/README.md) for the
+selection, validation and merge receipt. Existing per-experiment receipts preserve
+their historical scope and hashes.
+
+---
+
+## Historical research notes
+
 # Two-processor numerical partition measurements
 
 The [partition study](experiments/two_processor_size_001/README.md) measures

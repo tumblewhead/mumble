@@ -112,7 +112,7 @@ python3 -B -m experiments.foster_campaign_001.run \
   --history compare-tangent --recording compact
 ```
 
-`compare-tangent` runs rolling, existing field and native tangent together.
+`compare-tangent` now runs existing field (`field64`) and native tangent (`tangent64`) together. Use `--history rolling` separately for the rolling control.
 `field-tangent` selects only the new arm. All existing load, noise, rate, recording
 and debug replay flags apply. Use a new output directory for every run. Replay
 remains bound to the exact source, binary and runtime used for that run.

@@ -1,0 +1,38 @@
+{
+  "previous_main": "311218af167acad715e3738015c34568a62c3f98",
+  "experiment_tip": "fdc605e86a2fd8d035ea7506db2dae6055cf250d",
+  "status": "qualified_for_mainline",
+  "review_status": "complete",
+  "default_history": "joint-field",
+  "default_encoding": "float64",
+  "default_backend": "c",
+  "default_sample_rate_Hz": 35,
+  "tests": {
+    "tangent": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_field_default experiments.field_tangent_native_001.test_native experiments.field_tangent_native_001.test_fused experiments.foster_campaign_001.test_fused_backend experiments.h7_campaign_001.test_native experiments.h7_campaign_001.test_campaign experiments.h7_transaction_status_001.test_transactions experiments.h7_transaction_status_001.test_recording experiments.hysteresis_refinement_001.test_field experiments.foster_campaign_001.test_tangent_backend",
+      "tests": 101,
+      "status": "passed",
+      "output_sha256": "2e3ee94d597a439ff7863d93d490da9e0b3b8ae57ed8cbb1c0e3858f7375252e"
+    },
+    "bank": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.distinct_bank_integration_001.test_bank experiments.distinct_bank_integration_001.test_campaign experiments.distinct_bank_integration_001.test_tangent_campaign experiments.bank_memory_001.test_memory experiments.bank_memory_001.test_campaign experiments.bank_memory_001.test_scratch experiments.bank_rowwise_001.test_core experiments.bank_rowwise_001.test_campaign",
+      "tests": 47,
+      "status": "passed",
+      "output_sha256": "8f712a95c039c014845cfface47cfed764daaa3c2deee9039f2efdcdc0283df8"
+    },
+    "runner": {
+      "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 -B -m unittest experiments.foster_campaign_001.test_workload experiments.foster_campaign_001.test_plot_summary experiments.foster_campaign_001.test_parameter_errors experiments.foster_campaign_001.test_field_backend experiments.foster_campaign_001.test_evidence experiments.foster_campaign_001.test_compact_workload experiments.foster_campaign_001.test_compact experiments.foster_campaign_001.test_campaign experiments.sram_size_001.test_campaign experiments.sram_size_001.test_core",
+      "tests": 65,
+      "status": "passed",
+      "output_sha256": "45a212aae71200f0d68ecad8a9d0b3b371fba64b55e8e33ea5c0d30fd372648f"
+    }
+  },
+  "total_tests": 213,
+  "native": "provenance/qualified_mainline_001/native.json",
+  "builds": "provenance/qualified_mainline_001/builds.json",
+  "source_manifest": "provenance/qualified_mainline_001/source_manifest.json",
+  "source_manifest_sha256": "193fa60491bbad50463397055c19bbe4e45de514ea22581954ae28b8348febdc",
+  "merge_policy": "fast_forward_after_independent_review",
+  "new_bulk_run_artifacts": false,
+  "remote_push_requested_this_turn": false
+}

@@ -1,5 +1,14 @@
 # Native rowwise solver and scalar readouts
 
+
+> Mainline integration note: the 9,816 B figure below is historical data/stack
+> accounting with code and constants outside that SRAM budget. It is **not** a
+> complete footprint for the all-SRAM M23. See the all-SRAM accounting in
+> [the subsequent size study](../sram_size_001/README.md).
+> The [paired 72-hour receipt](../../provenance/bank_rowwise_72h_001/receipt.json)
+> extends the earlier four-hour comparison below; it establishes numerical
+> equivalence to the reduced representation, not improved physical accuracy.
+
 Branch `experiment/bank-rowwise-001` is isolated in `.worktrees/bank-rowwise`.
 The earlier running campaign in `.worktrees/h7-campaign` is unchanged.
 
